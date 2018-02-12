@@ -50,7 +50,6 @@ StructuredValueImpl::~StructuredValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -79,7 +78,7 @@ std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredValue();
+	return FUMLPackageImpl::eInstance()->getStructuredValue_EClass();
 }
 
 //*********************************

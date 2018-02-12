@@ -38,7 +38,6 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -67,7 +66,7 @@ std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy();
+	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy_EClass();
 }
 
 //*********************************

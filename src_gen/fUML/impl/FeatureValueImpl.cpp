@@ -50,7 +50,6 @@ FeatureValueImpl::~FeatureValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FeatureValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -92,7 +91,7 @@ std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFeatureValue();
+	return FUMLPackageImpl::eInstance()->getFeatureValue_EClass();
 }
 
 //*********************************
@@ -207,11 +206,11 @@ boost::any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
 			return getFeature(); //142
-		case FUMLPackage::FEATUREVALUE_POSITION:
+		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
 			return getPosition(); //141
-		case FUMLPackage::FEATUREVALUE_VALUES:
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
 			return getValues(); //140
 	}
 	return boost::any();
@@ -221,14 +220,14 @@ void FeatureValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _feature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
 			setFeature(_feature); //142
 			break;
 		}
-		case FUMLPackage::FEATUREVALUE_POSITION:
+		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = boost::any_cast<int>(newValue);

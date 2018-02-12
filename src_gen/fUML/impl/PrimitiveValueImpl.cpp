@@ -44,7 +44,6 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PrimitiveValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -75,7 +74,7 @@ std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getPrimitiveValue();
+	return FUMLPackageImpl::eInstance()->getPrimitiveValue_EClass();
 }
 
 //*********************************
@@ -129,7 +128,7 @@ boost::any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //150
 	}
 	return boost::any();
@@ -139,7 +138,7 @@ void PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);

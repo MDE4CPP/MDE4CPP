@@ -44,7 +44,6 @@ ReclassifyObjectActionActivationImpl::~ReclassifyObjectActionActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ReclassifyObjectActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -96,7 +95,7 @@ std::shared_ptr<ecore::EObject>  ReclassifyObjectActionActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReclassifyObjectActionActivation();
+	return FUMLPackageImpl::eInstance()->getReclassifyObjectActionActivation_EClass();
 }
 
 //*********************************
@@ -128,21 +127,21 @@ boost::any ReclassifyObjectActionActivationImpl::eGet(int featureID, bool resolv
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //1077
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 			return getGroup(); //1073
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
 			return getHeldTokens(); //1072
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //1071
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //1074
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //1070
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //1076
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //1075
 	}
 	return boost::any();
@@ -152,28 +151,28 @@ void ReclassifyObjectActionActivationImpl::eSet(int featureID, boost::any newVal
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = boost::any_cast<bool>(newValue);
 			setFiring(_firing); //1077
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setGroup(_group); //1073
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setNode(_node); //1074
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = boost::any_cast<bool>(newValue);

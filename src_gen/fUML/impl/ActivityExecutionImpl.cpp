@@ -63,7 +63,6 @@ ActivityExecutionImpl::~ActivityExecutionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -130,7 +129,7 @@ std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityExecution();
+	return FUMLPackageImpl::eInstance()->getActivityExecution_EClass();
 }
 
 //*********************************
@@ -256,19 +255,19 @@ boost::any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEXECUTION_ACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
 			return getActivationGroup(); //576
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 			return getContext(); //574
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //570
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //571
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //573
-		case FUMLPackage::EXECUTION_PARAMETERVALUES:
+		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
 			return getParameterValues(); //575
-		case FUMLPackage::OBJECT_TYPES:
+		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
 			return getTypes(); //572
 	}
 	return boost::any();
@@ -278,28 +277,28 @@ void ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEXECUTION_ACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setActivationGroup(_activationGroup); //576
 			break;
 		}
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
 			setContext(_context); //574
 			break;
 		}
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //571
 			break;
 		}
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);

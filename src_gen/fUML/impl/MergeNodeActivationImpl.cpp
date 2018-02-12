@@ -42,7 +42,6 @@ MergeNodeActivationImpl::~MergeNodeActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete MergeNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -90,7 +89,7 @@ std::shared_ptr<ecore::EObject>  MergeNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getMergeNodeActivation();
+	return FUMLPackageImpl::eInstance()->getMergeNodeActivation_EClass();
 }
 
 //*********************************
@@ -122,17 +121,17 @@ boost::any MergeNodeActivationImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 			return getGroup(); //623
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
 			return getHeldTokens(); //622
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //621
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //624
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //620
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //625
 	}
 	return boost::any();
@@ -142,21 +141,21 @@ void MergeNodeActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setGroup(_group); //623
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setNode(_node); //624
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = boost::any_cast<bool>(newValue);

@@ -60,7 +60,6 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredActivityNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -120,7 +119,7 @@ std::shared_ptr<ecore::EObject>  StructuredActivityNodeActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation();
+	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation_EClass();
 }
 
 //*********************************
@@ -383,23 +382,23 @@ boost::any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolv
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
 			return getActivationGroup(); //718
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //717
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 			return getGroup(); //713
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
 			return getHeldTokens(); //712
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //711
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //714
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //710
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //716
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //715
 	}
 	return boost::any();
@@ -409,35 +408,35 @@ void StructuredActivityNodeActivationImpl::eSet(int featureID, boost::any newVal
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setActivationGroup(_activationGroup); //718
 			break;
 		}
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = boost::any_cast<bool>(newValue);
 			setFiring(_firing); //717
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setGroup(_group); //713
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setNode(_node); //714
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = boost::any_cast<bool>(newValue);

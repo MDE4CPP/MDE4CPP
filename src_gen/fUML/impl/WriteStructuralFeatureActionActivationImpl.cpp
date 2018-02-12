@@ -46,7 +46,6 @@ WriteStructuralFeatureActionActivationImpl::~WriteStructuralFeatureActionActivat
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete WriteStructuralFeatureActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -98,7 +97,7 @@ std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionActivationImpl::cop
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getWriteStructuralFeatureActionActivation();
+	return FUMLPackageImpl::eInstance()->getWriteStructuralFeatureActionActivation_EClass();
 }
 
 //*********************************
@@ -135,21 +134,21 @@ boost::any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //1017
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 			return getGroup(); //1013
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
 			return getHeldTokens(); //1012
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //1011
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //1014
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //1010
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //1016
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //1015
 	}
 	return boost::any();
@@ -159,28 +158,28 @@ void WriteStructuralFeatureActionActivationImpl::eSet(int featureID, boost::any 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = boost::any_cast<bool>(newValue);
 			setFiring(_firing); //1017
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setGroup(_group); //1013
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setNode(_node); //1014
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = boost::any_cast<bool>(newValue);

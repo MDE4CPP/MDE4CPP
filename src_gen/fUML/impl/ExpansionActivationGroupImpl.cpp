@@ -46,7 +46,6 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExpansionActivationGroup "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -100,7 +99,7 @@ std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup();
+	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup_EClass();
 }
 
 //*********************************
@@ -141,17 +140,17 @@ boost::any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
 			return getActivityExecution(); //752
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
 			return getContainingNodeActivation(); //753
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EDGEINSTANCES:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_EDGEINSTANCES:
 			return getEdgeInstances(); //750
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_NODEACTIVATIONS:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_NODEACTIVATIONS:
 			return getNodeActivations(); //751
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
 			return getRegionActivation(); //755
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_SUSPENDEDACTIVATIONS:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
 			return getSuspendedActivations(); //754
 	}
 	return boost::any();
@@ -161,21 +160,21 @@ void ExpansionActivationGroupImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityExecution> _activityExecution = boost::any_cast<std::shared_ptr<fUML::ActivityExecution>>(newValue);
 			setActivityExecution(_activityExecution); //752
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = boost::any_cast<std::shared_ptr<fUML::StructuredActivityNodeActivation>>(newValue);
 			setContainingNodeActivation(_containingNodeActivation); //753
 			break;
 		}
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = boost::any_cast<std::shared_ptr<fUML::ExpansionRegionActivation>>(newValue);

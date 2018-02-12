@@ -42,7 +42,6 @@ ForkedTokenImpl::~ForkedTokenImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ForkedToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -78,7 +77,7 @@ std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getForkedToken();
+	return FUMLPackageImpl::eInstance()->getForkedToken_EClass();
 }
 
 //*********************************
@@ -180,15 +179,15 @@ boost::any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
 			return getBaseToken(); //552
-		case FUMLPackage::FORKEDTOKEN_BASETOKENISWITHDRAWN:
+		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
 			return isBaseTokenIsWithdrawn(); //554
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 			return getHolder(); //550
-		case FUMLPackage::FORKEDTOKEN_REMAININGOFFERSCOUNT:
+		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
 			return getRemainingOffersCount(); //553
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 			return isWithdrawn(); //551
 	}
 	return boost::any();
@@ -198,35 +197,35 @@ void ForkedTokenImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Token> _baseToken = boost::any_cast<std::shared_ptr<fUML::Token>>(newValue);
 			setBaseToken(_baseToken); //552
 			break;
 		}
-		case FUMLPackage::FORKEDTOKEN_BASETOKENISWITHDRAWN:
+		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
 			// BOOST CAST
 			bool _baseTokenIsWithdrawn = boost::any_cast<bool>(newValue);
 			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //554
 			break;
 		}
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
 			setHolder(_holder); //550
 			break;
 		}
-		case FUMLPackage::FORKEDTOKEN_REMAININGOFFERSCOUNT:
+		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
 			// BOOST CAST
 			int _remainingOffersCount = boost::any_cast<int>(newValue);
 			setRemainingOffersCount(_remainingOffersCount); //553
 			break;
 		}
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = boost::any_cast<bool>(newValue);

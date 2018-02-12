@@ -41,7 +41,6 @@ ValueImpl::~ValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -70,7 +69,7 @@ std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValue();
+	return FUMLPackageImpl::eInstance()->getValue_EClass();
 }
 
 //*********************************

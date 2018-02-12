@@ -71,7 +71,6 @@ ObjectActivationImpl::~ObjectActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -126,7 +125,7 @@ std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectActivation();
+	return FUMLPackageImpl::eInstance()->getObjectActivation_EClass();
 }
 
 //*********************************
@@ -316,13 +315,13 @@ boost::any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_CLASSIFIERBEHAVIOREXECUTIONS:
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return getClassifierBehaviorExecutions(); //473
-		case FUMLPackage::OBJECTACTIVATION_EVENTPOOL:
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
 			return getEventPool(); //471
-		case FUMLPackage::OBJECTACTIVATION_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
 			return getObject(); //472
-		case FUMLPackage::OBJECTACTIVATION_WAITINGEVENTACCEPTERS:
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
 			return getWaitingEventAccepters(); //470
 	}
 	return boost::any();
@@ -332,7 +331,7 @@ void ObjectActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _object = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);

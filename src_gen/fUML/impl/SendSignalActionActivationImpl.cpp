@@ -44,7 +44,6 @@ SendSignalActionActivationImpl::~SendSignalActionActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SendSignalActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -96,7 +95,7 @@ std::shared_ptr<ecore::EObject>  SendSignalActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSendSignalActionActivation();
+	return FUMLPackageImpl::eInstance()->getSendSignalActionActivation_EClass();
 }
 
 //*********************************
@@ -133,21 +132,21 @@ boost::any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, boo
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //807
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 			return getGroup(); //803
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
 			return getHeldTokens(); //802
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //801
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //804
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //800
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //806
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //805
 	}
 	return boost::any();
@@ -157,28 +156,28 @@ void SendSignalActionActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = boost::any_cast<bool>(newValue);
 			setFiring(_firing); //807
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setGroup(_group); //803
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setNode(_node); //804
 			break;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = boost::any_cast<bool>(newValue);

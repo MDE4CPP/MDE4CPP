@@ -54,7 +54,6 @@ ExecutionFactoryL1Impl::~ExecutionFactoryL1Impl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionFactoryL1 "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -104,7 +103,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryL1Impl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactoryL1();
+	return FUMLPackageImpl::eInstance()->getExecutionFactoryL1_EClass();
 }
 
 //*********************************
@@ -121,38 +120,38 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisito
 		std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
 
     switch (element->eClass()->getClassifierID()) {
-		case uml::UmlPackage::LITERALBOOLEAN:
+		case uml::UmlPackage::LITERALBOOLEAN_ECLASS:
 		{
 				visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
 				break;
 		}
 
-		case uml::UmlPackage::LITERALSTRING:
+		case uml::UmlPackage::LITERALSTRING_ECLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALNULL:
+		case uml::UmlPackage::LITERALNULL_ECLASS:
 		{
 			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
 			break;
 		}
-		case uml::UmlPackage::INSTANCEVALUE:
+		case uml::UmlPackage::INSTANCEVALUE_ECLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL:
+		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALINTEGER:
+		case uml::UmlPackage::LITERALINTEGER_ECLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALREAL:
+		case uml::UmlPackage::LITERALREAL_ECLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
 			break;
@@ -191,13 +190,13 @@ boost::any ExecutionFactoryL1Impl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_BUILTINTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
 			return getBuiltInTypes(); //73
-		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
 			return getLocus(); //70
-		case FUMLPackage::EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
 			return getPrimitiveBehaviorPrototypes(); //72
-		case FUMLPackage::EXECUTIONFACTORY_STRATEGIES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
 			return getStrategies(); //71
 	}
 	return boost::any();
@@ -207,7 +206,7 @@ void ExecutionFactoryL1Impl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);

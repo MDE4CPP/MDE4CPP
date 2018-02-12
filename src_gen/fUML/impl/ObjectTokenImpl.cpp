@@ -41,7 +41,6 @@ ObjectTokenImpl::~ObjectTokenImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -81,7 +80,7 @@ std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectToken();
+	return FUMLPackageImpl::eInstance()->getObjectToken_EClass();
 }
 
 //*********************************
@@ -137,11 +136,11 @@ boost::any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 			return getHolder(); //540
-		case FUMLPackage::OBJECTTOKEN_VALUE:
+		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
 			return getValue(); //542
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 			return isWithdrawn(); //541
 	}
 	return boost::any();
@@ -151,21 +150,21 @@ void ObjectTokenImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
 			setHolder(_holder); //540
 			break;
 		}
-		case FUMLPackage::OBJECTTOKEN_VALUE:
+		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Value> _value = boost::any_cast<std::shared_ptr<fUML::Value>>(newValue);
 			setValue(_value); //542
 			break;
 		}
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = boost::any_cast<bool>(newValue);

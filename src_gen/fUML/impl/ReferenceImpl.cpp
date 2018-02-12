@@ -59,7 +59,6 @@ ReferenceImpl::~ReferenceImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -90,7 +89,7 @@ std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReference();
+	return FUMLPackageImpl::eInstance()->getReference_EClass();
 }
 
 //*********************************
@@ -129,7 +128,7 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool isEqual = false;
-	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE) {
+	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE_ECLASS) {
 		auto other = std::dynamic_pointer_cast<Reference>(otherValue);
 		if (this->getReferent() == nullptr) {
 			isEqual = other->getReferent() == nullptr;
@@ -227,7 +226,7 @@ boost::any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
 			return getReferent(); //120
 	}
 	return boost::any();
@@ -237,7 +236,7 @@ void ReferenceImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _referent = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);

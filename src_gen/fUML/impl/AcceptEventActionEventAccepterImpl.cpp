@@ -38,7 +38,6 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptEventActionEventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -69,7 +68,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() cons
 
 std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getAcceptEventActionEventAccepter();
+	return FUMLPackageImpl::eInstance()->getAcceptEventActionEventAccepter_EClass();
 }
 
 //*********************************
@@ -110,7 +109,7 @@ boost::any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve,
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
 			return getActionActivation(); //1110
 	}
 	return boost::any();
@@ -120,7 +119,7 @@ void AcceptEventActionEventAccepterImpl::eSet(int featureID, boost::any newValue
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionActivation>>(newValue);

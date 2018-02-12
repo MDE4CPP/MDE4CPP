@@ -39,7 +39,6 @@ TokenSetImpl::~TokenSetImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TokenSet "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -71,7 +70,7 @@ std::shared_ptr<ecore::EObject>  TokenSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getTokenSet();
+	return FUMLPackageImpl::eInstance()->getTokenSet_EClass();
 }
 
 //*********************************
@@ -109,7 +108,7 @@ boost::any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKENSET_TOKENS:
+		case FUMLPackage::TOKENSET_EREFERENCE_TOKENS:
 			return getTokens(); //740
 	}
 	return boost::any();

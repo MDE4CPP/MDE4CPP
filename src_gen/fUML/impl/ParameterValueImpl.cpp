@@ -46,7 +46,6 @@ ParameterValueImpl::~ParameterValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ParameterValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -87,7 +86,7 @@ std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getParameterValue();
+	return FUMLPackageImpl::eInstance()->getParameterValue_EClass();
 }
 
 //*********************************
@@ -135,9 +134,9 @@ boost::any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PARAMETERVALUE_PARAMETER:
+		case FUMLPackage::PARAMETERVALUE_EREFERENCE_PARAMETER:
 			return getParameter(); //390
-		case FUMLPackage::PARAMETERVALUE_VALUES:
+		case FUMLPackage::PARAMETERVALUE_EREFERENCE_VALUES:
 			return getValues(); //391
 	}
 	return boost::any();
@@ -147,7 +146,7 @@ void ParameterValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PARAMETERVALUE_PARAMETER:
+		case FUMLPackage::PARAMETERVALUE_EREFERENCE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Parameter> _parameter = boost::any_cast<std::shared_ptr<uml::Parameter>>(newValue);

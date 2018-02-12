@@ -45,7 +45,6 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete UnlimitedNaturalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -77,7 +76,7 @@ std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue();
+	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue_EClass();
 }
 
 //*********************************
@@ -103,7 +102,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 		//generated from body annotation
 	bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS)
     {
 		std::shared_ptr<fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<UnlimitedNaturalValue>(otherValue);
         isEqual = (unValue->getValue() == this->getValue());
@@ -162,9 +161,9 @@ boost::any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //160
-		case FUMLPackage::UNLIMITEDNATURALVALUE_VALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //161
 	}
 	return boost::any();
@@ -174,14 +173,14 @@ void UnlimitedNaturalValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //160
 			break;
 		}
-		case FUMLPackage::UNLIMITEDNATURALVALUE_VALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = boost::any_cast<int>(newValue);

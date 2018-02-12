@@ -46,7 +46,6 @@ RealValueImpl::~RealValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RealValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -78,7 +77,7 @@ std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRealValue();
+	return FUMLPackageImpl::eInstance()->getRealValue_EClass();
 }
 
 //*********************************
@@ -103,7 +102,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//generated from body annotation
 		bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE_ECLASS)
     {
 		std::shared_ptr<RealValue> otherRealValue = std::dynamic_pointer_cast<RealValue>(otherValue);
         isEqual = (otherRealValue->getValue() == this->getValue());
@@ -156,9 +155,9 @@ boost::any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //190
-		case FUMLPackage::REALVALUE_VALUE:
+		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //191
 	}
 	return boost::any();
@@ -168,14 +167,14 @@ void RealValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //190
 			break;
 		}
-		case FUMLPackage::REALVALUE_VALUE:
+		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			float _value = boost::any_cast<float>(newValue);

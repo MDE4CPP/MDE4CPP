@@ -86,7 +86,6 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionFactory "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -136,7 +135,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactory();
+	return FUMLPackageImpl::eInstance()->getExecutionFactory_EClass();
 }
 
 //*********************************
@@ -389,13 +388,13 @@ boost::any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_BUILTINTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
 			return getBuiltInTypes(); //13
-		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
 			return getLocus(); //10
-		case FUMLPackage::EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
 			return getPrimitiveBehaviorPrototypes(); //12
-		case FUMLPackage::EXECUTIONFACTORY_STRATEGIES:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
 			return getStrategies(); //11
 	}
 	return boost::any();
@@ -405,7 +404,7 @@ void ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);

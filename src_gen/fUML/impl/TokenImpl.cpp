@@ -40,7 +40,6 @@ TokenImpl::~TokenImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Token "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -72,7 +71,7 @@ std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getToken();
+	return FUMLPackageImpl::eInstance()->getToken_EClass();
 }
 
 //*********************************
@@ -175,9 +174,9 @@ boost::any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 			return getHolder(); //530
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 			return isWithdrawn(); //531
 	}
 	return boost::any();
@@ -187,14 +186,14 @@ void TokenImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_HOLDER:
+		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
 			setHolder(_holder); //530
 			break;
 		}
-		case FUMLPackage::TOKEN_WITHDRAWN:
+		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = boost::any_cast<bool>(newValue);

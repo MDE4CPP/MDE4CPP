@@ -39,7 +39,6 @@ ValuesImpl::~ValuesImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Values "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -71,7 +70,7 @@ std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValues();
+	return FUMLPackageImpl::eInstance()->getValues_EClass();
 }
 
 //*********************************
@@ -109,7 +108,7 @@ boost::any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::VALUES_VALUES:
+		case FUMLPackage::VALUES_EREFERENCE_VALUES:
 			return getValues(); //690
 	}
 	return boost::any();

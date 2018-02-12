@@ -51,7 +51,6 @@ OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OpaqueBehaviorExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -110,7 +109,7 @@ std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOpaqueBehaviorExecution();
+	return FUMLPackageImpl::eInstance()->getOpaqueBehaviorExecution_EClass();
 }
 
 //*********************************
@@ -187,17 +186,17 @@ boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 			return getContext(); //404
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //400
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //401
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //403
-		case FUMLPackage::EXECUTION_PARAMETERVALUES:
+		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
 			return getParameterValues(); //405
-		case FUMLPackage::OBJECT_TYPES:
+		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
 			return getTypes(); //402
 	}
 	return boost::any();
@@ -207,21 +206,21 @@ void OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
 			setContext(_context); //404
 			break;
 		}
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //401
 			break;
 		}
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);

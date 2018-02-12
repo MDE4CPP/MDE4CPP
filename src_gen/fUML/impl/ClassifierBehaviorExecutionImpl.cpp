@@ -50,7 +50,6 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -85,7 +84,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution();
+	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution_EClass();
 }
 
 //*********************************
@@ -163,11 +162,11 @@ boost::any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
 			return getClassifier(); //461
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
 			return getExecution(); //460
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //462
 	}
 	return boost::any();
@@ -177,21 +176,21 @@ void ClassifierBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _classifier = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
 			setClassifier(_classifier); //461
 			break;
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _execution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
 			setExecution(_execution); //460
 			break;
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);

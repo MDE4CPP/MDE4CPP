@@ -34,7 +34,6 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FIFOGetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -63,7 +62,7 @@ std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFIFOGetNextEventStrategy();
+	return FUMLPackageImpl::eInstance()->getFIFOGetNextEventStrategy_EClass();
 }
 
 //*********************************

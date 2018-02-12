@@ -69,7 +69,6 @@ ObjectImpl::~ObjectImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -119,7 +118,7 @@ std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObject();
+	return FUMLPackageImpl::eInstance()->getObject_EClass();
 }
 
 //*********************************
@@ -247,13 +246,13 @@ boost::any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //370
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //371
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //373
-		case FUMLPackage::OBJECT_TYPES:
+		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
 			return getTypes(); //372
 	}
 	return boost::any();
@@ -263,14 +262,14 @@ void ObjectImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //371
 			break;
 		}
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);

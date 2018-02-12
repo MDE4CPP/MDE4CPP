@@ -46,7 +46,6 @@ IntegerValueImpl::~IntegerValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -78,7 +77,7 @@ std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getIntegerValue();
+	return FUMLPackageImpl::eInstance()->getIntegerValue_EClass();
 }
 
 //*********************************
@@ -104,7 +103,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 		bool isEqual = false;
 
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE_ECLASS)
     {
 		std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
         isEqual = (otherIntegerValue->getValue() == this->getValue());
@@ -158,9 +157,9 @@ boost::any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //180
-		case FUMLPackage::INTEGERVALUE_VALUE:
+		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //181
 	}
 	return boost::any();
@@ -170,14 +169,14 @@ void IntegerValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //180
 			break;
 		}
-		case FUMLPackage::INTEGERVALUE_VALUE:
+		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = boost::any_cast<int>(newValue);

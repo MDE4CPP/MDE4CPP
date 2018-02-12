@@ -34,7 +34,6 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FirstChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -63,7 +62,7 @@ std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFirstChoiceStrategy();
+	return FUMLPackageImpl::eInstance()->getFirstChoiceStrategy_EClass();
 }
 
 //*********************************

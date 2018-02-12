@@ -52,7 +52,6 @@ CompoundValueImpl::~CompoundValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -91,7 +90,7 @@ std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCompoundValue();
+	return FUMLPackageImpl::eInstance()->getCompoundValue_EClass();
 }
 
 //*********************************
@@ -256,7 +255,7 @@ boost::any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //130
 	}
 	return boost::any();

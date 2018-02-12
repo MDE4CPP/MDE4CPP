@@ -52,7 +52,6 @@ ExecutorImpl::~ExecutorImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Executor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -83,7 +82,7 @@ std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutor();
+	return FUMLPackageImpl::eInstance()->getExecutor_EClass();
 }
 
 //*********************************
@@ -173,7 +172,7 @@ boost::any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_LOCUS:
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
 			return getLocus(); //20
 	}
 	return boost::any();
@@ -183,7 +182,7 @@ void ExecutorImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_LOCUS:
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);

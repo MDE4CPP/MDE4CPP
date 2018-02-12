@@ -40,7 +40,6 @@ ExtensionalValueListImpl::~ExtensionalValueListImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValueList "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -79,7 +78,7 @@ std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExtensionalValueList();
+	return FUMLPackageImpl::eInstance()->getExtensionalValueList_EClass();
 }
 
 //*********************************
@@ -140,9 +139,9 @@ boost::any ExtensionalValueListImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //220
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //221
 	}
 	return boost::any();
@@ -152,7 +151,7 @@ void ExtensionalValueListImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);

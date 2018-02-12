@@ -42,7 +42,6 @@ LiteralUnlimitedNaturalEvaluationImpl::~LiteralUnlimitedNaturalEvaluationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralUnlimitedNaturalEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -75,7 +74,7 @@ std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalEvaluationImpl::copy() c
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralUnlimitedNaturalEvaluation();
+	return FUMLPackageImpl::eInstance()->getLiteralUnlimitedNaturalEvaluation_EClass();
 }
 
 //*********************************
@@ -118,9 +117,9 @@ boost::any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID, bool resol
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_LOCUS:
+		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
 			return getLocus(); //311
-		case FUMLPackage::EVALUATION_SPECIFICATION:
+		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 			return getSpecification(); //310
 	}
 	return boost::any();
@@ -130,14 +129,14 @@ void LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, boost::any newVa
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_LOCUS:
+		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //311
 			break;
 		}
-		case FUMLPackage::EVALUATION_SPECIFICATION:
+		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);

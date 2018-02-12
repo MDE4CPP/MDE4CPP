@@ -46,7 +46,6 @@ ClauseActivationImpl::~ClauseActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClauseActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -79,7 +78,7 @@ std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClauseActivation();
+	return FUMLPackageImpl::eInstance()->getClauseActivation_EClass();
 }
 
 //*********************************
@@ -171,9 +170,9 @@ boost::any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
 			return getClause(); //700
-		case FUMLPackage::CLAUSEACTIVATION_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
 			return getConditionalNodeActivation(); //701
 	}
 	return boost::any();
@@ -183,14 +182,14 @@ void ClauseActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Clause> _clause = boost::any_cast<std::shared_ptr<uml::Clause>>(newValue);
 			setClause(_clause); //700
 			break;
 		}
-		case FUMLPackage::CLAUSEACTIVATION_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = boost::any_cast<std::shared_ptr<fUML::ConditionalNodeActivation>>(newValue);

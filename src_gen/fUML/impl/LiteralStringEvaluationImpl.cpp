@@ -42,7 +42,6 @@ LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralStringEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -75,7 +74,7 @@ std::shared_ptr<ecore::EObject>  LiteralStringEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralStringEvaluation();
+	return FUMLPackageImpl::eInstance()->getLiteralStringEvaluation_EClass();
 }
 
 //*********************************
@@ -118,9 +117,9 @@ boost::any LiteralStringEvaluationImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_LOCUS:
+		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
 			return getLocus(); //291
-		case FUMLPackage::EVALUATION_SPECIFICATION:
+		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 			return getSpecification(); //290
 	}
 	return boost::any();
@@ -130,14 +129,14 @@ void LiteralStringEvaluationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_LOCUS:
+		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //291
 			break;
 		}
-		case FUMLPackage::EVALUATION_SPECIFICATION:
+		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);

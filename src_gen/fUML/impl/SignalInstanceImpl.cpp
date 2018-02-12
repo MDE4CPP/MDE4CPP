@@ -40,7 +40,6 @@ SignalInstanceImpl::~SignalInstanceImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SignalInstance "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -79,7 +78,7 @@ std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSignalInstance();
+	return FUMLPackageImpl::eInstance()->getSignalInstance_EClass();
 }
 
 //*********************************
@@ -120,9 +119,9 @@ boost::any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //450
-		case FUMLPackage::SIGNALINSTANCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
 			return getType(); //451
 	}
 	return boost::any();
@@ -132,7 +131,7 @@ void SignalInstanceImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::SIGNALINSTANCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _type = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);

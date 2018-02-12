@@ -55,7 +55,6 @@ EnumerationValueImpl::~EnumerationValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -88,7 +87,7 @@ std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEnumerationValue();
+	return FUMLPackageImpl::eInstance()->getEnumerationValue_EClass();
 }
 
 //*********************************
@@ -193,9 +192,9 @@ boost::any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
 			return getLiteral(); //330
-		case FUMLPackage::ENUMERATIONVALUE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 			return getType(); //331
 	}
 	return boost::any();
@@ -205,14 +204,14 @@ void EnumerationValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::EnumerationLiteral> _literal = boost::any_cast<std::shared_ptr<uml::EnumerationLiteral>>(newValue);
 			setLiteral(_literal); //330
 			break;
 		}
-		case FUMLPackage::ENUMERATIONVALUE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Enumeration> _type = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);

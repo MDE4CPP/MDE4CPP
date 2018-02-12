@@ -67,7 +67,6 @@ LocusImpl::~LocusImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -124,7 +123,7 @@ std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLocus();
+	return FUMLPackageImpl::eInstance()->getLocus_EClass();
 }
 
 //*********************************
@@ -289,11 +288,11 @@ boost::any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOCUS_EXECUTOR:
+		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
 			return getExecutor(); //00
-		case FUMLPackage::LOCUS_EXTENSIONALVALUES:
+		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
 			return getExtensionalValues(); //02
-		case FUMLPackage::LOCUS_FACTORY:
+		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
 			return getFactory(); //01
 	}
 	return boost::any();
@@ -303,14 +302,14 @@ void LocusImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOCUS_EXECUTOR:
+		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Executor> _executor = boost::any_cast<std::shared_ptr<fUML::Executor>>(newValue);
 			setExecutor(_executor); //00
 			break;
 		}
-		case FUMLPackage::LOCUS_FACTORY:
+		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExecutionFactory> _factory = boost::any_cast<std::shared_ptr<fUML::ExecutionFactory>>(newValue);

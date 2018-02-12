@@ -33,7 +33,6 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -62,7 +61,7 @@ std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSemanticStrategy();
+	return FUMLPackageImpl::eInstance()->getSemanticStrategy_EClass();
 }
 
 //*********************************

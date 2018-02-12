@@ -11,93 +11,93 @@ using namespace fUML;
 
 FUMLFactoryImpl::FUMLFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionActivation", FUMLPackage::ACCEPTEVENTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionEventAccepter", FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityEdgeInstance", FUMLPackage::ACTIVITYEDGEINSTANCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityExecution", FUMLPackage::ACTIVITYEXECUTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNodeActivation", FUMLPackage::ACTIVITYFINALNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityNodeActivationGroup", FUMLPackage::ACTIVITYNODEACTIVATIONGROUP));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNodeActivation", FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueActionActivation", FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BooleanValue", FUMLPackage::BOOLEANVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorActionActivation", FUMLPackage::CALLBEHAVIORACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationActionActivation", FUMLPackage::CALLOPERATIONACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNodeActivation", FUMLPackage::CENTRALBUFFERNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecution", FUMLPackage::CLASSIFIERBEHAVIOREXECUTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClauseActivation", FUMLPackage::CLAUSEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationActionActivation", FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureActionActivation", FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNodeActivation", FUMLPackage::CONDITIONALNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ControlToken", FUMLPackage::CONTROLTOKEN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkActionActivation", FUMLPackage::CREATELINKACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectActionActivation", FUMLPackage::CREATEOBJECTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNodeActivation", FUMLPackage::DATASTORENODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataValue", FUMLPackage::DATAVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNodeActivation", FUMLPackage::DECISIONNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkActionActivation", FUMLPackage::DESTROYLINKACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectActionActivation", FUMLPackage::DESTROYOBJECTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DispatchStrategy", FUMLPackage::DISPATCHSTRATEGY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationValue", FUMLPackage::ENUMERATIONVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Executor", FUMLPackage::EXECUTOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegionActivation", FUMLPackage::EXPANSIONREGIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionalValueList", FUMLPackage::EXTENSIONALVALUELIST));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FIFOGetNextEventStrategy", FUMLPackage::FIFOGETNEXTEVENTSTRATEGY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FeatureValue", FUMLPackage::FEATUREVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FirstChoiceStrategy", FUMLPackage::FIRSTCHOICESTRATEGY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNodeActivation", FUMLPackage::FLOWFINALNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNodeActivation", FUMLPackage::FORKNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkedToken", FUMLPackage::FORKEDTOKEN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNodeActivation", FUMLPackage::INITIALNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InputPinActivation", FUMLPackage::INPUTPINACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValueEvaluation", FUMLPackage::INSTANCEVALUEEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("IntegerValue", FUMLPackage::INTEGERVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNodeActivation", FUMLPackage::JOINNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Link", FUMLPackage::LINK));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBooleanEvaluation", FUMLPackage::LITERALBOOLEANEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralIntegerEvaluation", FUMLPackage::LITERALINTEGEREVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNullEvaluation", FUMLPackage::LITERALNULLEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralRealEvaluation", FUMLPackage::LITERALREALEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralStringEvaluation", FUMLPackage::LITERALSTRINGEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNaturalEvaluation", FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Locus", FUMLPackage::LOCUS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNodeActivation", FUMLPackage::LOOPNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNodeActivation", FUMLPackage::MERGENODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Object", FUMLPackage::OBJECT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectActivation", FUMLPackage::OBJECTACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectToken", FUMLPackage::OBJECTTOKEN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Offer", FUMLPackage::OFFER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPinActivation", FUMLPackage::OUTPUTPINACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterValue", FUMLPackage::PARAMETERVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentActionActivation", FUMLPackage::READEXTENTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectActionActivation", FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkActionActivation", FUMLPackage::READLINKACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfActionActivation", FUMLPackage::READSELFACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureActionActivation", FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RealValue", FUMLPackage::REALVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectActionActivation", FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinitionBasedDispatchStrategy", FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceActionActivation", FUMLPackage::REDUCEACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Reference", FUMLPackage::REFERENCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueActivation", FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalActionActivation", FUMLPackage::SENDSIGNALACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SignalInstance", FUMLPackage::SIGNALINSTANCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorActionActivation", FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorActionActivation", FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StringValue", FUMLPackage::STRINGVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNodeActivation", FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityActionActivation", FUMLPackage::TESTIDENTITYACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TokenSet", FUMLPackage::TOKENSET));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UnlimitedNaturalValue", FUMLPackage::UNLIMITEDNATURALVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificActionActivation", FUMLPackage::VALUESPECIFICACTIONACTIVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Values", FUMLPackage::VALUES));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionActivation", FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionEventAccepter", FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityEdgeInstance", FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityExecution", FUMLPackage::ACTIVITYEXECUTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNodeActivation", FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityNodeActivationGroup", FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNodeActivation", FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueActionActivation", FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("BooleanValue", FUMLPackage::BOOLEANVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorActionActivation", FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationActionActivation", FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNodeActivation", FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecution", FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClauseActivation", FUMLPackage::CLAUSEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationActionActivation", FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureActionActivation", FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNodeActivation", FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ControlToken", FUMLPackage::CONTROLTOKEN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkActionActivation", FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectActionActivation", FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNodeActivation", FUMLPackage::DATASTORENODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DataValue", FUMLPackage::DATAVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNodeActivation", FUMLPackage::DECISIONNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkActionActivation", FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectActionActivation", FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DispatchStrategy", FUMLPackage::DISPATCHSTRATEGY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationValue", FUMLPackage::ENUMERATIONVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Executor", FUMLPackage::EXECUTOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegionActivation", FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionalValueList", FUMLPackage::EXTENSIONALVALUELIST_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FIFOGetNextEventStrategy", FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FeatureValue", FUMLPackage::FEATUREVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FirstChoiceStrategy", FUMLPackage::FIRSTCHOICESTRATEGY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNodeActivation", FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNodeActivation", FUMLPackage::FORKNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ForkedToken", FUMLPackage::FORKEDTOKEN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNodeActivation", FUMLPackage::INITIALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InputPinActivation", FUMLPackage::INPUTPINACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValueEvaluation", FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("IntegerValue", FUMLPackage::INTEGERVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNodeActivation", FUMLPackage::JOINNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Link", FUMLPackage::LINK_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBooleanEvaluation", FUMLPackage::LITERALBOOLEANEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralIntegerEvaluation", FUMLPackage::LITERALINTEGEREVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNullEvaluation", FUMLPackage::LITERALNULLEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralRealEvaluation", FUMLPackage::LITERALREALEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralStringEvaluation", FUMLPackage::LITERALSTRINGEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNaturalEvaluation", FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Locus", FUMLPackage::LOCUS_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNodeActivation", FUMLPackage::LOOPNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNodeActivation", FUMLPackage::MERGENODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Object", FUMLPackage::OBJECT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectActivation", FUMLPackage::OBJECTACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectToken", FUMLPackage::OBJECTTOKEN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Offer", FUMLPackage::OFFER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPinActivation", FUMLPackage::OUTPUTPINACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterValue", FUMLPackage::PARAMETERVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentActionActivation", FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectActionActivation", FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkActionActivation", FUMLPackage::READLINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfActionActivation", FUMLPackage::READSELFACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureActionActivation", FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RealValue", FUMLPackage::REALVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectActionActivation", FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinitionBasedDispatchStrategy", FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceActionActivation", FUMLPackage::REDUCEACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Reference", FUMLPackage::REFERENCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueActivation", FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalActionActivation", FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SignalInstance", FUMLPackage::SIGNALINSTANCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorActionActivation", FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorActionActivation", FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StringValue", FUMLPackage::STRINGVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNodeActivation", FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityActionActivation", FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TokenSet", FUMLPackage::TOKENSET_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("UnlimitedNaturalValue", FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificActionActivation", FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Values", FUMLPackage::VALUES_ECLASS));
 }
 
 FUMLFactoryImpl::~FUMLFactoryImpl()
@@ -117,157 +117,157 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 {
 	switch(classID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<AcceptEventActionActivation>(this->createAcceptEventActionActivation());
 			
 		}
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS:
 		{
 				return std::shared_ptr<AcceptEventActionEventAccepter>(this->createAcceptEventActionEventAccepter());
 			
 		}
-		case FUMLPackage::ACTIVITYEDGEINSTANCE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS:
 		{
 				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance());
 			
 		}
-		case FUMLPackage::ACTIVITYEXECUTION:
+		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
 		{
 				return std::shared_ptr<ActivityExecution>(this->createActivityExecution());
 			
 		}
-		case FUMLPackage::ACTIVITYFINALNODEACTIVATION:
+		case FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation());
 			
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS:
 		{
 				return std::shared_ptr<ActivityNodeActivationGroup>(this->createActivityNodeActivationGroup());
 			
 		}
-		case FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION:
+		case FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation());
 			
 		}
-		case FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION:
+		case FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation());
 			
 		}
-		case FUMLPackage::BOOLEANVALUE:
+		case FUMLPackage::BOOLEANVALUE_ECLASS:
 		{
 				return std::shared_ptr<BooleanValue>(this->createBooleanValue());
 			
 		}
-		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION:
+		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<CallBehaviorActionActivation>(this->createCallBehaviorActionActivation());
 			
 		}
-		case FUMLPackage::CALLOPERATIONACTIONACTIVATION:
+		case FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<CallOperationActionActivation>(this->createCallOperationActionActivation());
 			
 		}
-		case FUMLPackage::CENTRALBUFFERNODEACTIVATION:
+		case FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<CentralBufferNodeActivation>(this->createCentralBufferNodeActivation());
 			
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS:
 		{
 				return std::shared_ptr<ClassifierBehaviorExecution>(this->createClassifierBehaviorExecution());
 			
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS:
 		{
 				return std::shared_ptr<ClassifierBehaviorExecutionActivity>(this->createClassifierBehaviorExecutionActivity());
 			
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS:
 		{
 				return std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1>(this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1());
 			
 		}
-		case FUMLPackage::CLAUSEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ClauseActivation>(this->createClauseActivation());
 			
 		}
-		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION:
+		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ClearAssociationActionActivation>(this->createClearAssociationActionActivation());
 			
 		}
-		case FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION:
+		case FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation());
 			
 		}
-		case FUMLPackage::CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ConditionalNodeActivation>(this->createConditionalNodeActivation());
 			
 		}
-		case FUMLPackage::CONTROLTOKEN:
+		case FUMLPackage::CONTROLTOKEN_ECLASS:
 		{
 				return std::shared_ptr<ControlToken>(this->createControlToken());
 			
 		}
-		case FUMLPackage::CREATELINKACTIONACTIVATION:
+		case FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<CreateLinkActionActivation>(this->createCreateLinkActionActivation());
 			
 		}
-		case FUMLPackage::CREATEOBJECTACTIONACTIVATION:
+		case FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<CreateObjectActionActivation>(this->createCreateObjectActionActivation());
 			
 		}
-		case FUMLPackage::DATASTORENODEACTIVATION:
+		case FUMLPackage::DATASTORENODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<DataStoreNodeActivation>(this->createDataStoreNodeActivation());
 			
 		}
-		case FUMLPackage::DATAVALUE:
+		case FUMLPackage::DATAVALUE_ECLASS:
 		{
 				return std::shared_ptr<DataValue>(this->createDataValue());
 			
 		}
-		case FUMLPackage::DECISIONNODEACTIVATION:
+		case FUMLPackage::DECISIONNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<DecisionNodeActivation>(this->createDecisionNodeActivation());
 			
 		}
-		case FUMLPackage::DESTROYLINKACTIONACTIVATION:
+		case FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<DestroyLinkActionActivation>(this->createDestroyLinkActionActivation());
 			
 		}
-		case FUMLPackage::DESTROYOBJECTACTIONACTIVATION:
+		case FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<DestroyObjectActionActivation>(this->createDestroyObjectActionActivation());
 			
 		}
-		case FUMLPackage::DISPATCHSTRATEGY:
+		case FUMLPackage::DISPATCHSTRATEGY_ECLASS:
 		{
 				return std::shared_ptr<DispatchStrategy>(this->createDispatchStrategy());
 			
 		}
-		case FUMLPackage::ENUMERATIONVALUE:
+		case FUMLPackage::ENUMERATIONVALUE_ECLASS:
 		{
 				return std::shared_ptr<EnumerationValue>(this->createEnumerationValue());
 			
 		}
-		case FUMLPackage::EVENTDISPATCHLOOP:
+		case FUMLPackage::EVENTDISPATCHLOOP_ECLASS:
 		{
 				return std::shared_ptr<EventDispatchLoop>(this->createEventDispatchLoop());
 			
 		}
-		case FUMLPackage::EXECUTIONFACTORYL1:
+		case FUMLPackage::EXECUTIONFACTORYL1_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -280,7 +280,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 				return std::shared_ptr<ExecutionFactoryL1>(this->createExecutionFactoryL1_in_Locus(castedContainer));
 			}
 		}
-		case FUMLPackage::EXECUTIONFACTORYL2:
+		case FUMLPackage::EXECUTIONFACTORYL2_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -293,7 +293,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 				return std::shared_ptr<ExecutionFactoryL2>(this->createExecutionFactoryL2_in_Locus(castedContainer));
 			}
 		}
-		case FUMLPackage::EXECUTIONFACTORYL3:
+		case FUMLPackage::EXECUTIONFACTORYL3_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -306,272 +306,272 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 				return std::shared_ptr<ExecutionFactoryL3>(this->createExecutionFactoryL3_in_Locus(castedContainer));
 			}
 		}
-		case FUMLPackage::EXECUTOR:
+		case FUMLPackage::EXECUTOR_ECLASS:
 		{
 				return std::shared_ptr<Executor>(this->createExecutor());
 			
 		}
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS:
 		{
 				return std::shared_ptr<ExpansionActivationGroup>(this->createExpansionActivationGroup());
 			
 		}
-		case FUMLPackage::EXPANSIONNODEACTIVATION:
+		case FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ExpansionNodeActivation>(this->createExpansionNodeActivation());
 			
 		}
-		case FUMLPackage::EXPANSIONREGIONACTIVATION:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ExpansionRegionActivation>(this->createExpansionRegionActivation());
 			
 		}
-		case FUMLPackage::EXTENSIONALVALUELIST:
+		case FUMLPackage::EXTENSIONALVALUELIST_ECLASS:
 		{
 				return std::shared_ptr<ExtensionalValueList>(this->createExtensionalValueList());
 			
 		}
-		case FUMLPackage::FIFOGETNEXTEVENTSTRATEGY:
+		case FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_ECLASS:
 		{
 				return std::shared_ptr<FIFOGetNextEventStrategy>(this->createFIFOGetNextEventStrategy());
 			
 		}
-		case FUMLPackage::FEATUREVALUE:
+		case FUMLPackage::FEATUREVALUE_ECLASS:
 		{
 				return std::shared_ptr<FeatureValue>(this->createFeatureValue());
 			
 		}
-		case FUMLPackage::FIRSTCHOICESTRATEGY:
+		case FUMLPackage::FIRSTCHOICESTRATEGY_ECLASS:
 		{
 				return std::shared_ptr<FirstChoiceStrategy>(this->createFirstChoiceStrategy());
 			
 		}
-		case FUMLPackage::FLOWFINALNODEACTIVATION:
+		case FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<FlowFinalNodeActivation>(this->createFlowFinalNodeActivation());
 			
 		}
-		case FUMLPackage::FORKNODEACTIVATION:
+		case FUMLPackage::FORKNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ForkNodeActivation>(this->createForkNodeActivation());
 			
 		}
-		case FUMLPackage::FORKEDTOKEN:
+		case FUMLPackage::FORKEDTOKEN_ECLASS:
 		{
 				return std::shared_ptr<ForkedToken>(this->createForkedToken());
 			
 		}
-		case FUMLPackage::INITIALNODEACTIVATION:
+		case FUMLPackage::INITIALNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<InitialNodeActivation>(this->createInitialNodeActivation());
 			
 		}
-		case FUMLPackage::INPUTPINACTIVATION:
+		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation());
 			
 		}
-		case FUMLPackage::INSTANCEVALUEEVALUATION:
+		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<InstanceValueEvaluation>(this->createInstanceValueEvaluation());
 			
 		}
-		case FUMLPackage::INTEGERVALUE:
+		case FUMLPackage::INTEGERVALUE_ECLASS:
 		{
 				return std::shared_ptr<IntegerValue>(this->createIntegerValue());
 			
 		}
-		case FUMLPackage::JOINNODEACTIVATION:
+		case FUMLPackage::JOINNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<JoinNodeActivation>(this->createJoinNodeActivation());
 			
 		}
-		case FUMLPackage::LINK:
+		case FUMLPackage::LINK_ECLASS:
 		{
 				return std::shared_ptr<Link>(this->createLink());
 			
 		}
-		case FUMLPackage::LITERALBOOLEANEVALUATION:
+		case FUMLPackage::LITERALBOOLEANEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralBooleanEvaluation>(this->createLiteralBooleanEvaluation());
 			
 		}
-		case FUMLPackage::LITERALINTEGEREVALUATION:
+		case FUMLPackage::LITERALINTEGEREVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralIntegerEvaluation>(this->createLiteralIntegerEvaluation());
 			
 		}
-		case FUMLPackage::LITERALNULLEVALUATION:
+		case FUMLPackage::LITERALNULLEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralNullEvaluation>(this->createLiteralNullEvaluation());
 			
 		}
-		case FUMLPackage::LITERALREALEVALUATION:
+		case FUMLPackage::LITERALREALEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralRealEvaluation>(this->createLiteralRealEvaluation());
 			
 		}
-		case FUMLPackage::LITERALSTRINGEVALUATION:
+		case FUMLPackage::LITERALSTRINGEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralStringEvaluation>(this->createLiteralStringEvaluation());
 			
 		}
-		case FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION:
+		case FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_ECLASS:
 		{
 				return std::shared_ptr<LiteralUnlimitedNaturalEvaluation>(this->createLiteralUnlimitedNaturalEvaluation());
 			
 		}
-		case FUMLPackage::LOCUS:
+		case FUMLPackage::LOCUS_ECLASS:
 		{
 				return std::shared_ptr<Locus>(this->createLocus());
 			
 		}
-		case FUMLPackage::LOOPNODEACTIVATION:
+		case FUMLPackage::LOOPNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<LoopNodeActivation>(this->createLoopNodeActivation());
 			
 		}
-		case FUMLPackage::MERGENODEACTIVATION:
+		case FUMLPackage::MERGENODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<MergeNodeActivation>(this->createMergeNodeActivation());
 			
 		}
-		case FUMLPackage::OBJECT:
+		case FUMLPackage::OBJECT_ECLASS:
 		{
 				return std::shared_ptr<Object>(this->createObject());
 			
 		}
-		case FUMLPackage::OBJECTACTIVATION:
+		case FUMLPackage::OBJECTACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ObjectActivation>(this->createObjectActivation());
 			
 		}
-		case FUMLPackage::OBJECTTOKEN:
+		case FUMLPackage::OBJECTTOKEN_ECLASS:
 		{
 				return std::shared_ptr<ObjectToken>(this->createObjectToken());
 			
 		}
-		case FUMLPackage::OFFER:
+		case FUMLPackage::OFFER_ECLASS:
 		{
 				return std::shared_ptr<Offer>(this->createOffer());
 			
 		}
-		case FUMLPackage::OUTPUTPINACTIVATION:
+		case FUMLPackage::OUTPUTPINACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation());
 			
 		}
-		case FUMLPackage::PARAMETERVALUE:
+		case FUMLPackage::PARAMETERVALUE_ECLASS:
 		{
 				return std::shared_ptr<ParameterValue>(this->createParameterValue());
 			
 		}
-		case FUMLPackage::READEXTENTACTIONACTIVATION:
+		case FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReadExtentActionActivation>(this->createReadExtentActionActivation());
 			
 		}
-		case FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION:
+		case FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation());
 			
 		}
-		case FUMLPackage::READLINKACTIONACTIVATION:
+		case FUMLPackage::READLINKACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReadLinkActionActivation>(this->createReadLinkActionActivation());
 			
 		}
-		case FUMLPackage::READSELFACTIONACTIVATION:
+		case FUMLPackage::READSELFACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReadSelfActionActivation>(this->createReadSelfActionActivation());
 			
 		}
-		case FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION:
+		case FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation());
 			
 		}
-		case FUMLPackage::REALVALUE:
+		case FUMLPackage::REALVALUE_ECLASS:
 		{
 				return std::shared_ptr<RealValue>(this->createRealValue());
 			
 		}
-		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION:
+		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation());
 			
 		}
-		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY:
+		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS:
 		{
 				return std::shared_ptr<RedefinitionBasedDispatchStrategy>(this->createRedefinitionBasedDispatchStrategy());
 			
 		}
-		case FUMLPackage::REDUCEACTIONACTIVATION:
+		case FUMLPackage::REDUCEACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ReduceActionActivation>(this->createReduceActionActivation());
 			
 		}
-		case FUMLPackage::REFERENCE:
+		case FUMLPackage::REFERENCE_ECLASS:
 		{
 				return std::shared_ptr<Reference>(this->createReference());
 			
 		}
-		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION:
+		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation());
 			
 		}
-		case FUMLPackage::SENDSIGNALACTIONACTIVATION:
+		case FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<SendSignalActionActivation>(this->createSendSignalActionActivation());
 			
 		}
-		case FUMLPackage::SIGNALINSTANCE:
+		case FUMLPackage::SIGNALINSTANCE_ECLASS:
 		{
 				return std::shared_ptr<SignalInstance>(this->createSignalInstance());
 			
 		}
-		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION:
+		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation());
 			
 		}
-		case FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION:
+		case FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation());
 			
 		}
-		case FUMLPackage::STRINGVALUE:
+		case FUMLPackage::STRINGVALUE_ECLASS:
 		{
 				return std::shared_ptr<StringValue>(this->createStringValue());
 			
 		}
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation());
 			
 		}
-		case FUMLPackage::TESTIDENTITYACTIONACTIVATION:
+		case FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<TestIdentityActionActivation>(this->createTestIdentityActionActivation());
 			
 		}
-		case FUMLPackage::TOKENSET:
+		case FUMLPackage::TOKENSET_ECLASS:
 		{
 				return std::shared_ptr<TokenSet>(this->createTokenSet());
 			
 		}
-		case FUMLPackage::UNLIMITEDNATURALVALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS:
 		{
 				return std::shared_ptr<UnlimitedNaturalValue>(this->createUnlimitedNaturalValue());
 			
 		}
-		case FUMLPackage::VALUESPECIFICACTIONACTIVATION:
+		case FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS:
 		{
 				return std::shared_ptr<ValueSpecificActionActivation>(this->createValueSpecificActionActivation());
 			
 		}
-		case FUMLPackage::VALUES:
+		case FUMLPackage::VALUES_ECLASS:
 		{
 				return std::shared_ptr<Values>(this->createValues());
 			

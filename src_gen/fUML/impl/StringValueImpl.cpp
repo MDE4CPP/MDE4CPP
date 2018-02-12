@@ -45,7 +45,6 @@ StringValueImpl::~StringValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StringValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -77,7 +76,7 @@ std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStringValue();
+	return FUMLPackageImpl::eInstance()->getStringValue_EClass();
 }
 
 //*********************************
@@ -152,9 +151,9 @@ boost::any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //170
-		case FUMLPackage::STRINGVALUE_VALUE:
+		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //171
 	}
 	return boost::any();
@@ -164,14 +163,14 @@ void StringValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //170
 			break;
 		}
-		case FUMLPackage::STRINGVALUE_VALUE:
+		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = boost::any_cast<std::string>(newValue);

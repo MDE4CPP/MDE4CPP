@@ -68,7 +68,6 @@ ExecutionImpl::~ExecutionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Execution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -129,7 +128,7 @@ std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecution();
+	return FUMLPackageImpl::eInstance()->getExecution_EClass();
 }
 
 //*********************************
@@ -263,17 +262,17 @@ boost::any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 			return getContext(); //384
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //380
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //381
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //383
-		case FUMLPackage::EXECUTION_PARAMETERVALUES:
+		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
 			return getParameterValues(); //385
-		case FUMLPackage::OBJECT_TYPES:
+		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
 			return getTypes(); //382
 	}
 	return boost::any();
@@ -283,21 +282,21 @@ void ExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_CONTEXT:
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
 			setContext(_context); //384
 			break;
 		}
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //381
 			break;
 		}
-		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);

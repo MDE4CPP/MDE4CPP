@@ -33,7 +33,6 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventDispatchLoop "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -62,7 +61,7 @@ std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEventDispatchLoop();
+	return FUMLPackageImpl::eInstance()->getEventDispatchLoop_EClass();
 }
 
 //*********************************

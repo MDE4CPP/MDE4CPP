@@ -33,7 +33,6 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticVisitor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -62,7 +61,7 @@ std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSemanticVisitor();
+	return FUMLPackageImpl::eInstance()->getSemanticVisitor_EClass();
 }
 
 //*********************************

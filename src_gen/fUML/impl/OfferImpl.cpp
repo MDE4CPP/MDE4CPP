@@ -39,7 +39,6 @@ OfferImpl::~OfferImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Offer "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -71,7 +70,7 @@ std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOffer();
+	return FUMLPackageImpl::eInstance()->getOffer_EClass();
 }
 
 //*********************************
@@ -201,7 +200,7 @@ boost::any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OFFER_OFFEREDTOKENS:
+		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
 			return getOfferedTokens(); //520
 	}
 	return boost::any();

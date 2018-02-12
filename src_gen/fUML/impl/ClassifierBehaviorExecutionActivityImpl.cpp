@@ -33,7 +33,6 @@ ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImp
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecutionActivity "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -62,7 +61,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivityImpl::copy()
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity();
+	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity_EClass();
 }
 
 //*********************************

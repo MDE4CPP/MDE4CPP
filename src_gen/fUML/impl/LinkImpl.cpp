@@ -48,7 +48,6 @@ LinkImpl::~LinkImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Link "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -89,7 +88,7 @@ std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLink();
+	return FUMLPackageImpl::eInstance()->getLink_EClass();
 }
 
 //*********************************
@@ -179,11 +178,11 @@ boost::any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //320
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //321
-		case FUMLPackage::LINK_TYPE:
+		case FUMLPackage::LINK_EREFERENCE_TYPE:
 			return getType(); //322
 	}
 	return boost::any();
@@ -193,14 +192,14 @@ void LinkImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //321
 			break;
 		}
-		case FUMLPackage::LINK_TYPE:
+		case FUMLPackage::LINK_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);

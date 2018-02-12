@@ -45,7 +45,6 @@ BooleanValueImpl::~BooleanValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BooleanValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -77,7 +76,7 @@ std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getBooleanValue();
+	return FUMLPackageImpl::eInstance()->getBooleanValue_EClass();
 }
 
 //*********************************
@@ -102,7 +101,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//generated from body annotation
 		bool isEqual = false;
 
-	if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::BOOLEANVALUE)
+	if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::BOOLEANVALUE_ECLASS)
     {
 		std::shared_ptr<BooleanValue> otherBooleanValue = std::dynamic_pointer_cast<BooleanValue>(otherValue);
     	isEqual = otherBooleanValue->isValue() == this->isValue();
@@ -159,9 +158,9 @@ boost::any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //200
-		case FUMLPackage::BOOLEANVALUE_VALUE:
+		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
 			return isValue(); //201
 	}
 	return boost::any();
@@ -171,14 +170,14 @@ void BooleanValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //200
 			break;
 		}
-		case FUMLPackage::BOOLEANVALUE_VALUE:
+		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			bool _value = boost::any_cast<bool>(newValue);

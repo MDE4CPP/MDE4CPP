@@ -42,7 +42,6 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -71,7 +70,7 @@ std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDispatchStrategy();
+	return FUMLPackageImpl::eInstance()->getDispatchStrategy_EClass();
 }
 
 //*********************************

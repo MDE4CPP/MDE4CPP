@@ -50,7 +50,6 @@ DataValueImpl::~DataValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -89,7 +88,7 @@ std::shared_ptr<ecore::EObject>  DataValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDataValue();
+	return FUMLPackageImpl::eInstance()->getDataValue_EClass();
 }
 
 //*********************************
@@ -147,9 +146,9 @@ boost::any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //340
-		case FUMLPackage::DATAVALUE_TYPE:
+		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
 			return getType(); //341
 	}
 	return boost::any();
@@ -159,7 +158,7 @@ void DataValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::DATAVALUE_TYPE:
+		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DataType> _type = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
