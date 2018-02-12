@@ -56,11 +56,6 @@ bool [packageName/]::isInited = false;
 
 [packageName/]::~[packageName/]()
 {
-	[anEPackage.eAllContents(EClass)->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EClass).eAttributes->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EClass).eReferences->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EClass).eOperations->sortedBy(name).generateDeletePrivatePackageMember()/]
 }
 
 [anEPackage.name.concat('Package').toUpperFirst()/]* [packageName/]::create()
@@ -94,13 +89,25 @@ void [packageName/]::createPackageContents()
 
 	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+	create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+[/for]
+
+	createPackageEDataTypes(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+}
+
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+void [packageName/]::create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
 	[aClass.generateClassCreation()/]
 	[aClass.eAttributes->sortedBy(name).generateAttributeCreation()/]
 	[aClass.eReferences->sortedBy(name).generateReferenceCreation()/]
 	[aClass.eOperations->sortedBy(name).generateOperationCreation()/]
+}
 [/for]
 
+void [packageName/]::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
 	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeCreation()/]
 }
 
@@ -121,15 +128,25 @@ void [packageName/]::initializePackageContents()
 	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
 
  	// Initialize classes and features; add operations and parameters
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+	initialize[aClass.name.toUpperFirst()/]Content();
+[/for]
+
+	initializePackageEDataTypes();
+}
+
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	// Begin Class [aClass.name.toUpperFirst()/]
+void [packageName/]::initialize[aClass.name.toUpperFirst()/]Content()
+{
 	[aClass.generateClassInit()/]
 	[aClass.eAttributes->sortedBy(name).generateAttributeInitialization()/]
 	[aClass.eReferences->sortedBy(name).generateReferenceInitialization()/]
 	[aClass.eOperations->sortedBy(name).generateOperationInitialization()/]
-	// End Class [aClass.name.toUpperFirst()/]
+}
 [/for]
 
+void [packageName/]::initializePackageEDataTypes()
+{
 	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
 }
 

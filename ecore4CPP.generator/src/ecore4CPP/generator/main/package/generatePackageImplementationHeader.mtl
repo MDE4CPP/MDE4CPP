@@ -82,8 +82,22 @@ namespace [anEPackage.name/]
 			virtual void init();
 
 		public:
-			void initializePackageContents();
 			void createPackageContents();
+			void initializePackageContents();
+
+		private:
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+			void create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+[/for]
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+			void initialize[aClass.name.toUpperFirst()/]Content();
+[/for]
+			void initializePackageEDataTypes();
+
+
+
 [if anEPackage.name.equalsIgnoreCase('ecore')]
 	
 	//prevent from hiding functions

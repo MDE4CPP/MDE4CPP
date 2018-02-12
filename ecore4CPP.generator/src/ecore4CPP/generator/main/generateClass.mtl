@@ -38,8 +38,7 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 */]
 
 [template public generateClassCreation(aEClass : EClass)]
-[aEClass.getClassMemberName()/] = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [aEClass.getStaticAttributeIDName()/]);
-
+[aEClass.getClassMemberName()/] = factory->createEClass_in_EPackage(package, [aEClass.getStaticAttributeIDName()/]);
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]
