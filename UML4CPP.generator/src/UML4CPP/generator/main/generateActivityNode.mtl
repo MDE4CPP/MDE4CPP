@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
-[memberName(anActivityNode)/] = uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(anActivityNode)/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [memberName(anActivityNode)/]->setName("[anActivityNode.name/]");
 [anActivityNode.generateActivityNodeSpecial()/]
 [/template]
@@ -46,28 +46,28 @@
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
 [if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [elseif (pin.oclIsKindOf(InputPin))]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
 [if (pin.oclIsKindOf(InputPin))]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [else]
 //TODO: check containment type!
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(pin)/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [memberName(pin)/]->setName("[pin.name/]");
 
 [/template]
 
 [template public generateOperation(operation : Operation)]
-[memberName(operation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([operation.owner.oclAsType(NamedElement).memberName()/]); //TODO: check if used 
+[memberName(operation)/] = factory->createOperation_in_Class([operation.owner.oclAsType(NamedElement).memberName()/]); //TODO: check if used 
 [memberName(operation)/]->setName("[operation.name/]");
 
 [/template]

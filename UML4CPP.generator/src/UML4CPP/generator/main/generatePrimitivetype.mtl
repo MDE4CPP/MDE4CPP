@@ -17,7 +17,6 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generatePrimitiveTypeCreation(aPrimitiveType : PrimitiveType)]
-[aPrimitiveType.memberName()/] = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
+[aPrimitiveType.memberName()/] = factory->createPrimitiveType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
 [aPrimitiveType.memberName()/]->setName("[aPrimitiveType.name/]");
-
 [/template]

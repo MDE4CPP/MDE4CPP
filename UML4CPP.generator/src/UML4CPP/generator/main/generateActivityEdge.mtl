@@ -18,7 +18,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
-[memberName(anActivityEdge)/] = uml::UmlFactory::eInstance()->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.oclAsType(NamedElement).memberName()/]);
+[memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.oclAsType(NamedElement).memberName()/]);
 [memberName(anActivityEdge)/]->setName("[anActivityEdge.name/]");
 
 [/template]

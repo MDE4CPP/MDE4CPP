@@ -24,7 +24,7 @@ virtual public uml::ProfileImpl
 virtual public uml::PackageImpl
 [/template]
 
-[template public generatePackageImplHeader(aPackage : Package)]
+[template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
@@ -34,18 +34,19 @@ virtual public uml::PackageImpl
 [else]
 #include "uml/impl/PackageImpl.hpp"	
 [/if]
+#include "uml/UmlFactory.hpp"
 
 namespace [aPackage.name/]
 {
-	class [aPackage.name.toUpperFirst().concat('PackageImpl')/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
+	class [packageName/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
 	{
 			friend class [aPackage.name.toUpperFirst().concat('Package')/];
 			// Constructor
-			[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			[packageName/]();
 
 		public:
 			// destructor
-			virtual ~[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			virtual ~[packageName/]();
 
 			//getter for the ownedMember
 			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generateGetter(true)/]
@@ -65,6 +66,24 @@ namespace [aPackage.name/]
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 [endGuard(aPackage,'MetaModelPackageImpl')/]

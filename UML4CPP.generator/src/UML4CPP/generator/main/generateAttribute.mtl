@@ -81,16 +81,15 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 [/template]
 
 [comment MetaModel Package/]
-[template public generateAttributeCreation(aProperty : Property)]
+[template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.class.oclIsUndefined())]
-[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Class([aProperty.class.memberName()/]);
+[aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
 [else][if (not aProperty.interface.oclIsUndefined())]
-[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Interface([aProperty.interface.memberName()/]);
+[aProperty.memberName()/] = factory->createProperty_in_Interface([aProperty.interface.memberName()/]);
 [/if][/if]
 [/template]
 
 [template public generateAttributeInitialization(aProperty : Property)]
-// property [aProperty.name/]
 [aProperty.memberName()/]->setName("[aProperty.name/]");
 [aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
@@ -98,7 +97,6 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
-
 [/template]
 
 [template public addInterfaceAttribute(aProperty : Property, aClass : Class)]

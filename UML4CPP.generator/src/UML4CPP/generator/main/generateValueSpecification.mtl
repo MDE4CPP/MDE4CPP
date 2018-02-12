@@ -17,11 +17,9 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
-[aValueSpecification.memberName()/] = uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
+[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
 [if (aValueSpecification.oclIsKindOf(LiteralSpecification))]
-[aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);
-[/if]
-
+[aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);[/if]
 [/template]
 
 [template public generateLiteralValue( aLiteralspec : LiteralSpecification) ? (oclIsKindOf(LiteralInteger))]

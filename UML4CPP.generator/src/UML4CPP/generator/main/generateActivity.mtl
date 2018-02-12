@@ -18,7 +18,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityCreation(anActivity : Activity)]
-[memberName(anActivity)/] = uml::UmlFactory::eInstance()->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
+[memberName(anActivity)/] = factory->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
 [anActivity.ownedParameter.generateParameterCreation()/]
 
 [/template]

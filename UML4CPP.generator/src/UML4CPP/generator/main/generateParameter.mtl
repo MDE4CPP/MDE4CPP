@@ -16,10 +16,10 @@
 
 [import UML4CPP::generator::main::helper /]
 
-[template public generateParameterCreation(aParameter : Parameter)]
+[template public generateParameterCreation(aParameter : Parameter) post(trim())]
 [if(aParameter.owner.oclIsKindOf(Operation))]
-[memberName(aParameter)/] = uml::UmlFactory::eInstance()->createParameter_in_Operation([aParameter.owner.oclAsType(NamedElement).memberName()/]);
-[else][memberName(aParameter)/] = uml::UmlFactory::eInstance()->createParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(aParameter)/] = factory->createParameter_in_Operation([aParameter.owner.oclAsType(NamedElement).memberName()/]);
+[else][memberName(aParameter)/] = factory->createParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [/template]
 
@@ -30,5 +30,4 @@
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
-
 [/template]

@@ -38,28 +38,20 @@ static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOpe
 [/template]
 
 [template public generateClassCreation(aClass : Class)]
-[memberName(aClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+[memberName(aClass)/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+[if (aClass.ownedRule->size() > 0)]
 
 //constraints
-[aClass.ownedRule.generateConstraintCreation()/]
-
+[for (aConstraint : Constraint | aClass.ownedRule) separator('\n')]
+[aConstraint.generateConstraintCreation()/]
+[/for][/if]
 [/template]
 
 [template public generateClassInitialization(aClass : Class)]
 [memberName(aClass)/]->setName("[aClass.name/]");
 [memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
-
-//constraints
-[aClass.ownedRule.generateConstraintCreation()/]
-
-[aClass.initSuperTypes()/]
-
-[/template]
-
-[template public initSuperTypes(aClass : Class)]
-[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
 gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.packageGetter(aClass)/]);
 gen->setGeneral([superClass.packageGetter(aClass)/]);
 [/for]
-
 [/template]

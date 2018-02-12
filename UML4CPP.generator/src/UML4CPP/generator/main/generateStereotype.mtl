@@ -29,19 +29,18 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [/template]
 
 [template public generateStereotypeCreation(aStereotype : Stereotype)]
-[aStereotype.memberName()/] = uml::UmlFactory::eInstance()->createStereotype_in_Package([aStereotype.ancestors(Package)->first().memberName()/]);
+[aStereotype.memberName()/] = factory->createStereotype_in_Package([aStereotype.ancestors(Package)->first().memberName()/]);
 [aStereotype.memberName()/]->setName("[aStereotype.name/]");
 [aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
 [/template]
 
 [template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name='UML'))))]
-[for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-//apply Stereotype	[stereo.name/]
+[for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 {
-[stereo.generateCppType()/] stereo([stereo.creatorFunction()/]);
-[for (prop : Property | stereo.allAttributes()) separator ('\n')][if(not aElement.getValue(stereo, prop.name).oclIsUndefined())][prop.generateAttributeSetting(aElement, stereo)/][/if][/for]
-[aElement.oclAsType(NamedElement).memberName()/]->applyStereotype(stereo);
-
+	//apply Stereotype	[stereo.name/]
+	[stereo.generateCppType()/] stereo([stereo.creatorFunction()/]);
+	[for (prop : Property | stereo.allAttributes()) separator ('\n')][if(not aElement.getValue(stereo, prop.name).oclIsUndefined())][prop.generateAttributeSetting(aElement, stereo)/][/if][/for]
+	[aElement.oclAsType(NamedElement).memberName()/]->applyStereotype(stereo);
 }
 [/for]
 [/template]

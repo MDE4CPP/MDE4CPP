@@ -102,32 +102,31 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [sParameter.type.packageGetter(sParameter)/][/for]
 [/template]
 
-[template public generateOperationCreation(aOperation : Operation) ]
+[template public generateOperationCreation(aOperation : Operation) post(trim())]
 [if (not aOperation.class.oclIsUndefined())]
-[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([memberName(aOperation.class)/]);
+[memberName(aOperation)/] = factory->createOperation_in_Class([memberName(aOperation.class)/]);
 [elseif (not aOperation.interface.oclIsUndefined())]
-[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Interface([memberName(aOperation.interface)/]);
+[memberName(aOperation)/] = factory->createOperation_in_Interface([memberName(aOperation.interface)/]);
 [/if]
 [aOperation.ownedParameter.generateParameterCreation()/]
-
 [/template]
 
-[template public initalizeOperation(aOperation : Operation) ]
-// operation [aOperation.name/]
+[template public initalizeOperation(aOperation : Operation)]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
 [for (beh : Behavior | aOperation.method) separator ('\n')]
 [memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
 
-[aOperation.ownedParameter.generateParameterInitialization()/]
+[for (anOwnedParameter : Parameter | aOperation.ownedParameter) separator ('\n')]
+[anOwnedParameter.generateParameterInitialization()/]
+[/for]
+[/template]
+
+[template public generateDependencyCreation(aDependency : Dependency)]
+[memberName(aDependency)/] = factory->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
 
 [/template]
 
-[template public generateDependencyCreation(aDependency : Dependency) ]
-[memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
-
-[/template]
-
-[template public generateDependencyInitialization(aDependency : Dependency) ]
+[template public generateDependencyInitialization(aDependency : Dependency)]
 [memberName(aDependency)/]->setName("[aDependency.name/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
