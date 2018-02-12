@@ -14,7 +14,12 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
 	* create file gradle.properties
 		* create entry: make_parallel_jobs=number
 		* number ... count of parallel build jobs
-  * MinGW with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
+  * MinGW:
+	* for building 32 bit applications: (choose one)
+		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
+		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = i686 during installation
+	* for building 64 bit applications:
+		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = x86_64 during installation
   * CMake
   	
 2. checkout a repository with one of the following options:
