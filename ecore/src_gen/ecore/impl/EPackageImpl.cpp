@@ -15,11 +15,7 @@
 
 #include "ecore/ENamedElement.hpp"
 
-#include "ecore/EOperation.hpp"
-
 #include "ecore/EPackage.hpp"
-
-#include "ecore/EParameter.hpp"
 
 
 using namespace ecore;
@@ -67,7 +63,6 @@ EPackageImpl::~EPackageImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EPackage "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -142,7 +137,7 @@ std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
 
 std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEPackage();
+	return EcorePackageImpl::eInstance()->getEPackage_EClass();
 }
 
 //*********************************
@@ -171,37 +166,6 @@ std::string EPackageImpl::getNsURI() const
 //*********************************
 // Operations
 //*********************************
-void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	internalAddEParameter(owner, type, name);
-	//end of body
-}
-
-void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper) 
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	auto p = internalAddEParameter(owner, type, name);
-p->setLowerBound(lower);
-p->setUpperBound(upper);
-	//end of body
-}
-
-std::shared_ptr<ecore::EParameter> EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered) 
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	auto p = internalAddEParameter(owner, type, name);
-p->setLowerBound(lower);
-p->setUpperBound(upper);
-p->setUnique(isUnique);
-p->setOrdered(isOrdered);
-return p;
-	//end of body
-}
-
 std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name)  const 
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -215,17 +179,6 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
         }
     }
     return std::shared_ptr<ecore::EClassifier>();
-	//end of body
-}
-
-std::shared_ptr<ecore::EParameter> EPackageImpl::internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	    std::shared_ptr<EParameter> p(EcoreFactory::eInstance()->createEParameter_in_EOperation(owner));
-    p->setEType(type);
-    p->setName(name);
-    return p;
 	//end of body
 }
 
@@ -284,21 +237,21 @@ boost::any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //120
-		case EcorePackage::EPACKAGE_ECLASSIFIERS:
+		case EcorePackage::EPACKAGE_EREFERENCE_ECLASSIFIERS:
 			return getEClassifiers(); //125
-		case EcorePackage::EPACKAGE_EFACTORYINSTANCE:
+		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
 			return getEFactoryInstance(); //124
-		case EcorePackage::EPACKAGE_ESUBPACKAGES:
+		case EcorePackage::EPACKAGE_EREFERENCE_ESUBPACKAGES:
 			return getESubpackages(); //126
-		case EcorePackage::EPACKAGE_ESUPERPACKAGE:
+		case EcorePackage::EPACKAGE_EREFERENCE_ESUPERPACKAGE:
 			return getESuperPackage(); //127
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //121
-		case EcorePackage::EPACKAGE_NSPREFIX:
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
 			return getNsPrefix(); //123
-		case EcorePackage::EPACKAGE_NSURI:
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
 			return getNsURI(); //122
 	}
 	return boost::any();
@@ -308,28 +261,28 @@ void EPackageImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EPACKAGE_EFACTORYINSTANCE:
+		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = boost::any_cast<std::shared_ptr<ecore::EFactory>>(newValue);
 			setEFactoryInstance(_eFactoryInstance); //124
 			break;
 		}
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //121
 			break;
 		}
-		case EcorePackage::EPACKAGE_NSPREFIX:
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
 		{
 			// BOOST CAST
 			std::string _nsPrefix = boost::any_cast<std::string>(newValue);
 			setNsPrefix(_nsPrefix); //123
 			break;
 		}
-		case EcorePackage::EPACKAGE_NSURI:
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
 		{
 			// BOOST CAST
 			std::string _nsURI = boost::any_cast<std::string>(newValue);

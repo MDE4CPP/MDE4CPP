@@ -43,7 +43,6 @@ ETypeParameterImpl::~ETypeParameterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ETypeParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -91,7 +90,7 @@ std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
 
 std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getETypeParameter();
+	return EcorePackageImpl::eInstance()->getETypeParameter_EClass();
 }
 
 //*********************************
@@ -129,11 +128,11 @@ boost::any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //510
-		case EcorePackage::ETYPEPARAMETER_EBOUNDS:
+		case EcorePackage::ETYPEPARAMETER_EREFERENCE_EBOUNDS:
 			return getEBounds(); //512
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //511
 	}
 	return boost::any();
@@ -143,7 +142,7 @@ void ETypeParameterImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);

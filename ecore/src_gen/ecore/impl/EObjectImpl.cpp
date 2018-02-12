@@ -44,7 +44,6 @@ EObjectImpl::~EObjectImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EObject "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -75,7 +74,7 @@ std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEObject();
+	return EcorePackageImpl::eInstance()->getEObject_EClass();
 }
 
 //*********************************
@@ -202,7 +201,7 @@ boost::any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOBJECT_ECONTAINER:
+		case EcorePackage::EOBJECT_EREFERENCE_ECONTAINER:
 			return eContainer(); //100
 	}
 	return boost::any();

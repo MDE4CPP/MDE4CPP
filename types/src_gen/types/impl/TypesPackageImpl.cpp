@@ -6,6 +6,7 @@
 #include "ecore/EDataType.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
 
 //metamodel factory
@@ -24,13 +25,6 @@ TypesPackageImpl::TypesPackageImpl()
 
 TypesPackageImpl::~TypesPackageImpl()
 {
-	
-	booleanEDataType.reset();
-	integerEDataType.reset();
-	realEDataType.reset();
-	stringEDataType.reset();
-	unlimitedNaturalEDataType.reset();
-	
 }
 
 TypesPackage* TypesPackageImpl::create()
@@ -65,11 +59,17 @@ void TypesPackageImpl::createPackageContents()
 	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
 
-	booleanEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BOOLEAN);
-	integerEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTEGER);
-	realEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REAL);
-	stringEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRING);
-	unlimitedNaturalEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), UNLIMITEDNATURAL);
+	createPackageEDataTypes(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+}
+
+
+void TypesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_boolean_EDataType = factory->createEDataType_in_EPackage(package, BOOLEAN_EDATATYPE);
+	m_integer_EDataType = factory->createEDataType_in_EPackage(package, INTEGER_EDATATYPE);
+	m_real_EDataType = factory->createEDataType_in_EPackage(package, REAL_EDATATYPE);
+	m_string_EDataType = factory->createEDataType_in_EPackage(package, STRING_EDATATYPE);
+	m_unlimitedNatural_EDataType = factory->createEDataType_in_EPackage(package, UNLIMITEDNATURAL_EDATATYPE);
 	
 }
 
@@ -88,53 +88,51 @@ void TypesPackageImpl::initializePackageContents()
 	
 	// Add supertypes to classes
 	
-	std::shared_ptr<ecore::EOperation> op;
-	std::shared_ptr<ecore::EAttribute> attr;
-	std::shared_ptr<ecore::EReference> ref;
 
  	// Initialize classes and features; add operations and parameters
 
-	booleanEDataType->setInstanceClass(nullptr);
-	booleanEDataType->setName("Boolean");
-	booleanEDataType->setSerializable(true);
-	integerEDataType->setInstanceClass(nullptr);
-	integerEDataType->setName("Integer");
-	integerEDataType->setSerializable(true);
-	realEDataType->setInstanceClass(nullptr);
-	realEDataType->setName("Real");
-	realEDataType->setSerializable(true);
-	stringEDataType->setInstanceClass(nullptr);
-	stringEDataType->setName("String");
-	stringEDataType->setSerializable(true);
-	unlimitedNaturalEDataType->setInstanceClass(nullptr);
-	unlimitedNaturalEDataType->setName("UnlimitedNatural");
-	unlimitedNaturalEDataType->setSerializable(true);
+	initializePackageEDataTypes();
+}
+
+
+void TypesPackageImpl::initializePackageEDataTypes()
+{
+	m_boolean_EDataType->setInstanceClass(nullptr);
+	m_boolean_EDataType->setName("Boolean");
+	m_boolean_EDataType->setSerializable(true);
+	m_integer_EDataType->setInstanceClass(nullptr);
+	m_integer_EDataType->setName("Integer");
+	m_integer_EDataType->setSerializable(true);
+	m_real_EDataType->setInstanceClass(nullptr);
+	m_real_EDataType->setName("Real");
+	m_real_EDataType->setSerializable(true);
+	m_string_EDataType->setInstanceClass(nullptr);
+	m_string_EDataType->setName("String");
+	m_string_EDataType->setSerializable(true);
+	m_unlimitedNatural_EDataType->setInstanceClass(nullptr);
+	m_unlimitedNatural_EDataType->setName("UnlimitedNatural");
+	m_unlimitedNatural_EDataType->setSerializable(true);
 	
 }
 
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean_EDataType() const
 {
-	assert(booleanEDataType);
-	return booleanEDataType;
+	return m_boolean_EDataType;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getInteger() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getInteger_EDataType() const
 {
-	assert(integerEDataType);
-	return integerEDataType;
+	return m_integer_EDataType;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getReal() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getReal_EDataType() const
 {
-	assert(realEDataType);
-	return realEDataType;
+	return m_real_EDataType;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getString() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getString_EDataType() const
 {
-	assert(stringEDataType);
-	return stringEDataType;
+	return m_string_EDataType;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getUnlimitedNatural() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getUnlimitedNatural_EDataType() const
 {
-	assert(unlimitedNaturalEDataType);
-	return unlimitedNaturalEDataType;
+	return m_unlimitedNatural_EDataType;
 }
 

@@ -168,7 +168,6 @@ EClassImpl::~EClassImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EClass "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -296,7 +295,7 @@ std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
 
 std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEClass();
+	return EcorePackageImpl::eInstance()->getEClass_EClass();
 }
 
 //*********************************
@@ -633,55 +632,55 @@ boost::any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_ABSTRACT:
+		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
 			return isAbstract(); //29
-		case EcorePackage::ECLASSIFIER_CLASSIFIERID:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
 			return getClassifierID(); //25
-		case EcorePackage::ECLASSIFIER_DEFAULTVALUE:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
 			return getDefaultValue(); //24
-		case EcorePackage::ECLASS_EALLATTRIBUTES:
+		case EcorePackage::ECLASS_EREFERENCE_EALLATTRIBUTES:
 			return getEAllAttributes(); //213
-		case EcorePackage::ECLASS_EALLCONTAINMENTS:
+		case EcorePackage::ECLASS_EREFERENCE_EALLCONTAINMENTS:
 			return getEAllContainments(); //217
-		case EcorePackage::ECLASS_EALLGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_EREFERENCE_EALLGENERICSUPERTYPES:
 			return getEAllGenericSuperTypes(); //224
-		case EcorePackage::ECLASS_EALLOPERATIONS:
+		case EcorePackage::ECLASS_EREFERENCE_EALLOPERATIONS:
 			return getEAllOperations(); //218
-		case EcorePackage::ECLASS_EALLREFERENCES:
+		case EcorePackage::ECLASS_EREFERENCE_EALLREFERENCES:
 			return getEAllReferences(); //214
-		case EcorePackage::ECLASS_EALLSTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES:
 			return getEAllStructuralFeatures(); //219
-		case EcorePackage::ECLASS_EALLSUPERTYPES:
+		case EcorePackage::ECLASS_EREFERENCE_EALLSUPERTYPES:
 			return getEAllSuperTypes(); //220
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //20
-		case EcorePackage::ECLASS_EATTRIBUTES:
+		case EcorePackage::ECLASS_EREFERENCE_EATTRIBUTES:
 			return getEAttributes(); //216
-		case EcorePackage::ECLASS_EGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_EREFERENCE_EGENERICSUPERTYPES:
 			return getEGenericSuperTypes(); //223
-		case EcorePackage::ECLASS_EIDATTRIBUTE:
+		case EcorePackage::ECLASS_EREFERENCE_EIDATTRIBUTE:
 			return getEIDAttribute(); //221
-		case EcorePackage::ECLASS_EOPERATIONS:
+		case EcorePackage::ECLASS_EREFERENCE_EOPERATIONS:
 			return getEOperations(); //212
-		case EcorePackage::ECLASSIFIER_EPACKAGE:
+		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
 			return getEPackage(); //27
-		case EcorePackage::ECLASS_EREFERENCES:
+		case EcorePackage::ECLASS_EREFERENCE_EREFERENCES:
 			return getEReferences(); //215
-		case EcorePackage::ECLASS_ESTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_EREFERENCE_ESTRUCTURALFEATURES:
 			return getEStructuralFeatures(); //222
-		case EcorePackage::ECLASS_ESUPERTYPES:
+		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
 			return getESuperTypes(); //211
-		case EcorePackage::ECLASSIFIER_ETYPEPARAMETERS:
+		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
 			return getETypeParameters(); //28
-		case EcorePackage::ECLASSIFIER_INSTANCECLASS:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
 			return getInstanceClass(); //23
-		case EcorePackage::ECLASSIFIER_INSTANCECLASSNAME:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
 			return getInstanceClassName(); //22
-		case EcorePackage::ECLASSIFIER_INSTANCETYPENAME:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
 			return getInstanceTypeName(); //26
-		case EcorePackage::ECLASS_INTERFACE:
+		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
 			return isInterface(); //210
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //21
 	}
 	return boost::any();
@@ -691,49 +690,49 @@ void EClassImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_ABSTRACT:
+		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
 		{
 			// BOOST CAST
 			bool _abstract = boost::any_cast<bool>(newValue);
 			setAbstract(_abstract); //29
 			break;
 		}
-		case EcorePackage::ECLASSIFIER_EPACKAGE:
+		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
 			setEPackage(_ePackage); //27
 			break;
 		}
-		case EcorePackage::ECLASSIFIER_INSTANCECLASS:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
 		{
 			// BOOST CAST
 			void *  _instanceClass = boost::any_cast<void * >(newValue);
 			setInstanceClass(_instanceClass); //23
 			break;
 		}
-		case EcorePackage::ECLASSIFIER_INSTANCECLASSNAME:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
 		{
 			// BOOST CAST
 			std::string _instanceClassName = boost::any_cast<std::string>(newValue);
 			setInstanceClassName(_instanceClassName); //22
 			break;
 		}
-		case EcorePackage::ECLASSIFIER_INSTANCETYPENAME:
+		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
 		{
 			// BOOST CAST
 			std::string _instanceTypeName = boost::any_cast<std::string>(newValue);
 			setInstanceTypeName(_instanceTypeName); //26
 			break;
 		}
-		case EcorePackage::ECLASS_INTERFACE:
+		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
 			bool _interface = boost::any_cast<bool>(newValue);
 			setInterface(_interface); //210
 			break;
 		}
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);

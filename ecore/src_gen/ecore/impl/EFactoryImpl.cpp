@@ -46,7 +46,6 @@ EFactoryImpl::~EFactoryImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EFactory "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -85,7 +84,7 @@ std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEFactory();
+	return EcorePackageImpl::eInstance()->getEFactory_EClass();
 }
 
 //*********************************
@@ -143,9 +142,9 @@ boost::any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //70
-		case EcorePackage::EFACTORY_EPACKAGE:
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
 			return getEPackage(); //71
 	}
 	return boost::any();
@@ -155,7 +154,7 @@ void EFactoryImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EFACTORY_EPACKAGE:
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);

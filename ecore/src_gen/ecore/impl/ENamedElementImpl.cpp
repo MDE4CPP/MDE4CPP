@@ -36,7 +36,6 @@ ENamedElementImpl::~ENamedElementImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ENamedElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -74,7 +73,7 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getENamedElement();
+	return EcorePackageImpl::eInstance()->getENamedElement_EClass();
 }
 
 //*********************************
@@ -115,9 +114,9 @@ boost::any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //90
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //91
 	}
 	return boost::any();
@@ -127,7 +126,7 @@ void ENamedElementImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);

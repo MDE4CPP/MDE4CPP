@@ -35,7 +35,6 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EStringToStringMapEntry "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -68,7 +67,7 @@ std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEStringToStringMapEntry();
+	return EcorePackageImpl::eInstance()->getEStringToStringMapEntry_EClass();
 }
 
 //*********************************
@@ -119,11 +118,11 @@ boost::any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOBJECT_ECONTAINER:
+		case EcorePackage::EOBJECT_EREFERENCE_ECONTAINER:
 			return eContainer(); //480
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_KEY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
 			return getKey(); //481
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_VALUE:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
 			return getValue(); //482
 	}
 	return boost::any();
@@ -133,14 +132,14 @@ void EStringToStringMapEntryImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_KEY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
 		{
 			// BOOST CAST
 			std::string _key = boost::any_cast<std::string>(newValue);
 			setKey(_key); //481
 			break;
 		}
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_VALUE:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = boost::any_cast<std::string>(newValue);

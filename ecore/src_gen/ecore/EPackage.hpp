@@ -55,17 +55,7 @@ namespace ecore
 
 namespace ecore 
 {
-	class EOperation;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
-	class EParameter;
 }
 
 // base class includes
@@ -102,17 +92,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
-			
-			
-			
-			
 			/*!
 			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  = 0;
-			
-			
 			
 			
 			//*********************************

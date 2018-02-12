@@ -39,7 +39,6 @@ EModelElementImpl::~EModelElementImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EModelElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -78,7 +77,7 @@ std::shared_ptr<ecore::EObject>  EModelElementImpl::copy() const
 
 std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEModelElement();
+	return EcorePackageImpl::eInstance()->getEModelElement_EClass();
 }
 
 //*********************************
@@ -130,7 +129,7 @@ boost::any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //80
 	}
 	return boost::any();

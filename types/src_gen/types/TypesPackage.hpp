@@ -52,17 +52,17 @@ namespace types
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-			static const int BOOLEAN = 0;
-			static const int INTEGER = 1;
-			static const int REAL = 2;
-			static const int STRING = 3;
-			static const int UNLIMITEDNATURAL = 4;
+			static const int BOOLEAN_EDATATYPE = 0;
+			static const int INTEGER_EDATATYPE = 1;
+			static const int REAL_EDATATYPE = 2;
+			static const int STRING_EDATATYPE = 3;
+			static const int UNLIMITEDNATURAL_EDATATYPE = 4;
 			
-			virtual std::shared_ptr<ecore::EDataType> getBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getInteger() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getReal() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getString() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getBoolean_EDataType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getInteger_EDataType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getReal_EDataType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getString_EDataType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_EDataType() const = 0;
 			
 
 			//Singleton Instance and Getter

@@ -78,7 +78,6 @@ EOperationImpl::~EOperationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EOperation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -179,7 +178,7 @@ std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
 
 std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEOperation();
+	return EcorePackageImpl::eInstance()->getEOperation_EClass();
 }
 
 //*********************************
@@ -297,37 +296,37 @@ boost::any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //110
-		case EcorePackage::EOPERATION_ECONTAININGCLASS:
+		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
 			return getEContainingClass(); //1111
-		case EcorePackage::EOPERATION_EEXCEPTIONS:
+		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
 			return getEExceptions(); //1114
-		case EcorePackage::EOPERATION_EGENERICEXCEPTIONS:
+		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
 			return getEGenericExceptions(); //1115
-		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
 			return getEGenericType(); //119
-		case EcorePackage::EOPERATION_EPARAMETERS:
+		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
 			return getEParameters(); //1113
-		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 			return getEType(); //118
-		case EcorePackage::EOPERATION_ETYPEPARAMETERS:
+		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
 			return getETypeParameters(); //1112
-		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 			return getLowerBound(); //114
-		case EcorePackage::ETYPEDELEMENT_MANY:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
 			return isMany(); //116
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //111
-		case EcorePackage::EOPERATION_OPERATIONID:
+		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
 			return getOperationID(); //1110
-		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 			return isOrdered(); //112
-		case EcorePackage::ETYPEDELEMENT_REQUIRED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
 			return isRequired(); //117
-		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 			return isUnique(); //113
-		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 			return getUpperBound(); //115
 	}
 	return boost::any();
@@ -337,49 +336,49 @@ void EOperationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
 			setEGenericType(_eGenericType); //119
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
 			setEType(_eType); //118
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 		{
 			// BOOST CAST
 			int _lowerBound = boost::any_cast<int>(newValue);
 			setLowerBound(_lowerBound); //114
 			break;
 		}
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //111
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 		{
 			// BOOST CAST
 			bool _ordered = boost::any_cast<bool>(newValue);
 			setOrdered(_ordered); //112
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 		{
 			// BOOST CAST
 			bool _unique = boost::any_cast<bool>(newValue);
 			setUnique(_unique); //113
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			int _upperBound = boost::any_cast<int>(newValue);

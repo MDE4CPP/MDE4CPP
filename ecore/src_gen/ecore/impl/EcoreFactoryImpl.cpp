@@ -10,21 +10,21 @@ using namespace ecore;
 
 EcoreFactoryImpl::EcoreFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("EAnnotation", EcorePackage::EANNOTATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EAttribute", EcorePackage::EATTRIBUTE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EClass", EcorePackage::ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EDataType", EcorePackage::EDATATYPE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EEnum", EcorePackage::EENUM));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EEnumLiteral", EcorePackage::EENUMLITERAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EFactory", EcorePackage::EFACTORY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EGenericType", EcorePackage::EGENERICTYPE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EObject", EcorePackage::EOBJECT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EOperation", EcorePackage::EOPERATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EPackage", EcorePackage::EPACKAGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EParameter", EcorePackage::EPARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EReference", EcorePackage::EREFERENCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EStringToStringMapEntry", EcorePackage::ESTRINGTOSTRINGMAPENTRY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ETypeParameter", EcorePackage::ETYPEPARAMETER));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EAnnotation", EcorePackage::EANNOTATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EAttribute", EcorePackage::EATTRIBUTE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EClass", EcorePackage::ECLASS_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EDataType", EcorePackage::EDATATYPE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EEnum", EcorePackage::EENUM_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EEnumLiteral", EcorePackage::EENUMLITERAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EFactory", EcorePackage::EFACTORY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EGenericType", EcorePackage::EGENERICTYPE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EObject", EcorePackage::EOBJECT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EOperation", EcorePackage::EOPERATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EPackage", EcorePackage::EPACKAGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EParameter", EcorePackage::EPARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EReference", EcorePackage::EREFERENCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EStringToStringMapEntry", EcorePackage::ESTRINGTOSTRINGMAPENTRY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ETypeParameter", EcorePackage::ETYPEPARAMETER_ECLASS));
 }
 
 EcoreFactoryImpl::~EcoreFactoryImpl()
@@ -44,7 +44,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 {
 	switch(classID)
 	{
-		case EcorePackage::EANNOTATION:
+		case EcorePackage::EANNOTATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -57,7 +57,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EAnnotation>(this->createEAnnotation_in_EModelElement(castedContainer));
 			}
 		}
-		case EcorePackage::EATTRIBUTE:
+		case EcorePackage::EATTRIBUTE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -70,7 +70,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EAttribute>(this->createEAttribute_in_EContainingClass(castedContainer));
 			}
 		}
-		case EcorePackage::ECLASS:
+		case EcorePackage::ECLASS_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -83,7 +83,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EClass>(this->createEClass_in_EPackage(castedContainer));
 			}
 		}
-		case EcorePackage::EDATATYPE:
+		case EcorePackage::EDATATYPE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -96,7 +96,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EDataType>(this->createEDataType_in_EPackage(castedContainer));
 			}
 		}
-		case EcorePackage::EENUM:
+		case EcorePackage::EENUM_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EEnum>(this->createEEnum_in_EPackage(castedContainer));
 			}
 		}
-		case EcorePackage::EENUMLITERAL:
+		case EcorePackage::EENUMLITERAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -122,22 +122,22 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EEnumLiteral>(this->createEEnumLiteral_in_EEnum(castedContainer));
 			}
 		}
-		case EcorePackage::EFACTORY:
+		case EcorePackage::EFACTORY_ECLASS:
 		{
 				return std::shared_ptr<EFactory>(this->createEFactory());
 			
 		}
-		case EcorePackage::EGENERICTYPE:
+		case EcorePackage::EGENERICTYPE_ECLASS:
 		{
 				return std::shared_ptr<EGenericType>(this->createEGenericType());
 			
 		}
-		case EcorePackage::EOBJECT:
+		case EcorePackage::EOBJECT_ECLASS:
 		{
 				return std::shared_ptr<EObject>(this->createEObject());
 			
 		}
-		case EcorePackage::EOPERATION:
+		case EcorePackage::EOPERATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EOperation>(this->createEOperation_in_EContainingClass(castedContainer));
 			}
 		}
-		case EcorePackage::EPACKAGE:
+		case EcorePackage::EPACKAGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EPackage>(this->createEPackage_in_ESuperPackage(castedContainer));
 			}
 		}
-		case EcorePackage::EPARAMETER:
+		case EcorePackage::EPARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EParameter>(this->createEParameter_in_EOperation(castedContainer));
 			}
 		}
-		case EcorePackage::EREFERENCE:
+		case EcorePackage::EREFERENCE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -189,12 +189,12 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 				return std::shared_ptr<EReference>(this->createEReference_in_EContainingClass(castedContainer));
 			}
 		}
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ECLASS:
 		{
 				return std::shared_ptr<EStringToStringMapEntry>(this->createEStringToStringMapEntry());
 			
 		}
-		case EcorePackage::ETYPEPARAMETER:
+		case EcorePackage::ETYPEPARAMETER_ECLASS:
 		{
 				return std::shared_ptr<ETypeParameter>(this->createETypeParameter());
 			

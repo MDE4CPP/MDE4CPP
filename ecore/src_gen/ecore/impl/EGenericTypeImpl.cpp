@@ -65,7 +65,6 @@ EGenericTypeImpl::~EGenericTypeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EGenericType "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -130,7 +129,7 @@ std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
 
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEGenericType();
+	return EcorePackageImpl::eInstance()->getEGenericType_EClass();
 }
 
 //*********************************
@@ -220,19 +219,19 @@ boost::any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
 			return getEClassifier(); //506
-		case EcorePackage::EOBJECT_ECONTAINER:
+		case EcorePackage::EOBJECT_EREFERENCE_ECONTAINER:
 			return eContainer(); //500
-		case EcorePackage::EGENERICTYPE_ELOWERBOUND:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ELOWERBOUND:
 			return getELowerBound(); //504
-		case EcorePackage::EGENERICTYPE_ERAWTYPE:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ERAWTYPE:
 			return getERawType(); //503
-		case EcorePackage::EGENERICTYPE_ETYPEARGUMENTS:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEARGUMENTS:
 			return getETypeArguments(); //502
-		case EcorePackage::EGENERICTYPE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
 			return getETypeParameter(); //505
-		case EcorePackage::EGENERICTYPE_EUPPERBOUND:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_EUPPERBOUND:
 			return getEUpperBound(); //501
 	}
 	return boost::any();
@@ -242,28 +241,28 @@ void EGenericTypeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EClassifier> _eClassifier = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
 			setEClassifier(_eClassifier); //506
 			break;
 		}
-		case EcorePackage::EGENERICTYPE_ELOWERBOUND:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ELOWERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eLowerBound = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
 			setELowerBound(_eLowerBound); //504
 			break;
 		}
-		case EcorePackage::EGENERICTYPE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = boost::any_cast<std::shared_ptr<ecore::ETypeParameter>>(newValue);
 			setETypeParameter(_eTypeParameter); //505
 			break;
 		}
-		case EcorePackage::EGENERICTYPE_EUPPERBOUND:
+		case EcorePackage::EGENERICTYPE_EREFERENCE_EUPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eUpperBound = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);

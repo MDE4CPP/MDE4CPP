@@ -42,7 +42,6 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EEnumLiteral "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -95,7 +94,7 @@ std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEEnumLiteral();
+	return EcorePackageImpl::eInstance()->getEEnumLiteral_EClass();
 }
 
 //*********************************
@@ -166,17 +165,17 @@ boost::any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //60
-		case EcorePackage::EENUMLITERAL_EENUM:
+		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
 			return getEEnum(); //65
-		case EcorePackage::EENUMLITERAL_INSTANCE:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
 			return getInstance(); //63
-		case EcorePackage::EENUMLITERAL_LITERAL:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 			return getLiteral(); //64
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //61
-		case EcorePackage::EENUMLITERAL_VALUE:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
 			return getValue(); //62
 	}
 	return boost::any();
@@ -186,28 +185,28 @@ void EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUMLITERAL_INSTANCE:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
 			boost::any _instance = boost::any_cast<boost::any>(newValue);
 			setInstance(_instance); //63
 			break;
 		}
-		case EcorePackage::EENUMLITERAL_LITERAL:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::string _literal = boost::any_cast<std::string>(newValue);
 			setLiteral(_literal); //64
 			break;
 		}
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //61
 			break;
 		}
-		case EcorePackage::EENUMLITERAL_VALUE:
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = boost::any_cast<int>(newValue);

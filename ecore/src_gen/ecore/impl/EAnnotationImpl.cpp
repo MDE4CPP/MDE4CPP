@@ -63,7 +63,6 @@ EAnnotationImpl::~EAnnotationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EAnnotation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -137,7 +136,7 @@ std::shared_ptr<ecore::EObject>  EAnnotationImpl::copy() const
 
 std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEAnnotation();
+	return EcorePackageImpl::eInstance()->getEAnnotation_EClass();
 }
 
 //*********************************
@@ -212,17 +211,17 @@ boost::any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_CONTENTS:
+		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
 			return getContents(); //14
-		case EcorePackage::EANNOTATION_DETAILS:
+		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
 			return getDetails(); //12
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //10
-		case EcorePackage::EANNOTATION_EMODELELEMENT:
+		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
 			return getEModelElement(); //13
-		case EcorePackage::EANNOTATION_REFERENCES:
+		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
 			return getReferences(); //15
-		case EcorePackage::EANNOTATION_SOURCE:
+		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
 			return getSource(); //11
 	}
 	return boost::any();
@@ -232,14 +231,14 @@ void EAnnotationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_EMODELELEMENT:
+		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EModelElement> _eModelElement = boost::any_cast<std::shared_ptr<ecore::EModelElement>>(newValue);
 			setEModelElement(_eModelElement); //13
 			break;
 		}
-		case EcorePackage::EANNOTATION_SOURCE:
+		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::string _source = boost::any_cast<std::string>(newValue);

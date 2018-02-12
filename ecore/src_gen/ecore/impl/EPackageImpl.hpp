@@ -62,23 +62,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual void addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EParameter> addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EParameter> internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
 			
 			
 			

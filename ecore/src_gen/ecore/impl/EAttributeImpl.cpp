@@ -46,7 +46,6 @@ EAttributeImpl::~EAttributeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EAttribute "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -123,7 +122,7 @@ std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEAttribute();
+	return EcorePackageImpl::eInstance()->getEAttribute_EClass();
 }
 
 //*********************************
@@ -174,49 +173,49 @@ boost::any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_CHANGEABLE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
 			return isChangeable(); //010
-		case EcorePackage::ESTRUCTURALFEATURE_CONTAINERCLASS:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CONTAINERCLASS:
 			return getContainerClass(); //018
-		case EcorePackage::ESTRUCTURALFEATURE_DEFAULTVALUE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE:
 			return getDefaultValue(); //014
-		case EcorePackage::ESTRUCTURALFEATURE_DEFAULTVALUELITERAL:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
 			return getDefaultValueLiteral(); //013
-		case EcorePackage::ESTRUCTURALFEATURE_DERIVED:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
 			return isDerived(); //016
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //00
-		case EcorePackage::EATTRIBUTE_EATTRIBUTETYPE:
+		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
 			return getEAttributeType(); //021
-		case EcorePackage::ESTRUCTURALFEATURE_ECONTAININGCLASS:
+		case EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS:
 			return getEContainingClass(); //019
-		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
 			return getEGenericType(); //09
-		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 			return getEType(); //08
-		case EcorePackage::ESTRUCTURALFEATURE_FEATUREID:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID:
 			return getFeatureID(); //017
-		case EcorePackage::EATTRIBUTE_ID:
+		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
 			return isID(); //020
-		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 			return getLowerBound(); //04
-		case EcorePackage::ETYPEDELEMENT_MANY:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
 			return isMany(); //06
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //01
-		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 			return isOrdered(); //02
-		case EcorePackage::ETYPEDELEMENT_REQUIRED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
 			return isRequired(); //07
-		case EcorePackage::ESTRUCTURALFEATURE_TRANSIENT:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
 			return isTransient(); //012
-		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 			return isUnique(); //03
-		case EcorePackage::ESTRUCTURALFEATURE_UNSETTABLE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
 			return isUnsettable(); //015
-		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 			return getUpperBound(); //05
-		case EcorePackage::ESTRUCTURALFEATURE_VOLATILE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
 			return isVolatile(); //011
 	}
 	return boost::any();
@@ -226,98 +225,98 @@ void EAttributeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_CHANGEABLE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
 		{
 			// BOOST CAST
 			bool _changeable = boost::any_cast<bool>(newValue);
 			setChangeable(_changeable); //010
 			break;
 		}
-		case EcorePackage::ESTRUCTURALFEATURE_DEFAULTVALUELITERAL:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
 		{
 			// BOOST CAST
 			std::string _defaultValueLiteral = boost::any_cast<std::string>(newValue);
 			setDefaultValueLiteral(_defaultValueLiteral); //013
 			break;
 		}
-		case EcorePackage::ESTRUCTURALFEATURE_DERIVED:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
 		{
 			// BOOST CAST
 			bool _derived = boost::any_cast<bool>(newValue);
 			setDerived(_derived); //016
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
 			setEGenericType(_eGenericType); //09
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
 			setEType(_eType); //08
 			break;
 		}
-		case EcorePackage::EATTRIBUTE_ID:
+		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
 		{
 			// BOOST CAST
 			bool _iD = boost::any_cast<bool>(newValue);
 			setID(_iD); //020
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 		{
 			// BOOST CAST
 			int _lowerBound = boost::any_cast<int>(newValue);
 			setLowerBound(_lowerBound); //04
 			break;
 		}
-		case EcorePackage::ENAMEDELEMENT_NAME:
+		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //01
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 		{
 			// BOOST CAST
 			bool _ordered = boost::any_cast<bool>(newValue);
 			setOrdered(_ordered); //02
 			break;
 		}
-		case EcorePackage::ESTRUCTURALFEATURE_TRANSIENT:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
 		{
 			// BOOST CAST
 			bool _transient = boost::any_cast<bool>(newValue);
 			setTransient(_transient); //012
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 		{
 			// BOOST CAST
 			bool _unique = boost::any_cast<bool>(newValue);
 			setUnique(_unique); //03
 			break;
 		}
-		case EcorePackage::ESTRUCTURALFEATURE_UNSETTABLE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
 		{
 			// BOOST CAST
 			bool _unsettable = boost::any_cast<bool>(newValue);
 			setUnsettable(_unsettable); //015
 			break;
 		}
-		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			int _upperBound = boost::any_cast<int>(newValue);
 			setUpperBound(_upperBound); //05
 			break;
 		}
-		case EcorePackage::ESTRUCTURALFEATURE_VOLATILE:
+		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
 		{
 			// BOOST CAST
 			bool _volatile = boost::any_cast<bool>(newValue);
