@@ -19,6 +19,7 @@
 
 #include "ecoreReflection/EcorePackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
+#include "uml/UmlFactory.hpp"
 
 namespace Ecore
 {
@@ -817,6 +818,24 @@ namespace Ecore
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 #endif /* end of include guard: ECORE_METAMODELPACKAGEIMPL_HPP */
