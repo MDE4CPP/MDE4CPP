@@ -36,7 +36,7 @@ void StereotypeStorage::applyStereotype(uml::Element *_element, std::shared_ptr<
 		if (prop != nullptr)
 		{
 			//check if it is an extension association
-			if (prop->getAssociation()->eClass() == uml::UmlPackage::eInstance()->getEClass_Extension())
+			if (prop->getAssociation()->eClass() == uml::UmlPackage::eInstance()->getExtension_EClass())
 			{
 				//check type of the property
 				if (_element->eClass()->getName() == prop->getType()->getName())
