@@ -29,10 +29,11 @@
 
 #include "ecore/EPackage.hpp"
 
-namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
-	class [elements.name/];[/for]
-
+namespace [anEPackage.eClass().ePackage.name/] 
+{
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
+	class [elements.name/];
+[/for]
 }
 
 [comment namespace /]

@@ -29,16 +29,8 @@
 #include "[anEPackage.name/]/impl/[packageName/].hpp"
 
 //metametamodel classes
-#include "ecore/EAttribute.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
-
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"
 [/for]
 
 // metametamodel factory
