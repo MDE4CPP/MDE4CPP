@@ -16,7 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 
-[query public getMetaMetaModelClasses(anEPackage : EPackage) : Set(EClassifier) = OrderedSet{anEPackage.eClassifiers.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eOperations.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eOperations.eParameters.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eAttributes.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eReferences.eClass()}->flatten()->selectByKind(EClass)->sortedBy(name)/]
+[query public getMetaMetaModelClasses(anEPackage : EPackage) : Set(EClassifier) = OrderedSet{anEPackage.eClassifiers.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eOperations.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eOperations.eParameters.eType.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eOperations.eParameters.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eAttributes.eClass(), anEPackage.eClassifiers->selectByKind(EClass).eReferences.eClass()}->flatten()->selectByKind(EClass)->sortedBy(name)/]
 
 [template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
 [anENamedElement.getClassMemberName()/].reset();
