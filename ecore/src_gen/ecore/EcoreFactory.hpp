@@ -47,7 +47,6 @@ namespace ecore
 	class ETypeParameter;
 	class ETypedElement;
 	class EcorePackage;
-	class EcoreFactory;
 }
 
 namespace ecore 

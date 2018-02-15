@@ -23,10 +23,20 @@
 
 #include <cassert>
 
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
+
 #include "types/TypesPackage.hpp"
+
+namespace types 
+{
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace types
 {

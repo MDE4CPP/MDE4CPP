@@ -2,6 +2,28 @@
 #include "ecore/EcorePackage.hpp"
 
 
+
+#include "ecore/impl/EAnnotationImpl.hpp"
+#include "ecore/impl/EAttributeImpl.hpp"
+#include "ecore/impl/EClassImpl.hpp"
+#include "ecore/impl/EClassifierImpl.hpp"
+#include "ecore/impl/EDataTypeImpl.hpp"
+#include "ecore/impl/EEnumImpl.hpp"
+#include "ecore/impl/EEnumLiteralImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
+#include "ecore/impl/EGenericTypeImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
+#include "ecore/impl/ENamedElementImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EOperationImpl.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
+#include "ecore/impl/EParameterImpl.hpp"
+#include "ecore/impl/EReferenceImpl.hpp"
+#include "ecore/impl/EStringToStringMapEntryImpl.hpp"
+#include "ecore/impl/EStructuralFeatureImpl.hpp"
+#include "ecore/impl/ETypeParameterImpl.hpp"
+#include "ecore/impl/ETypedElementImpl.hpp"
+
 using namespace ecore;
 
 //*********************************
@@ -10,21 +32,21 @@ using namespace ecore;
 
 EcoreFactoryImpl::EcoreFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("EAnnotation", EcorePackage::EANNOTATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EAttribute", EcorePackage::EATTRIBUTE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EClass", EcorePackage::ECLASS_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EDataType", EcorePackage::EDATATYPE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EEnum", EcorePackage::EENUM_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EEnumLiteral", EcorePackage::EENUMLITERAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EFactory", EcorePackage::EFACTORY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EGenericType", EcorePackage::EGENERICTYPE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EObject", EcorePackage::EOBJECT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EOperation", EcorePackage::EOPERATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EPackage", EcorePackage::EPACKAGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EParameter", EcorePackage::EPARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EReference", EcorePackage::EREFERENCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EStringToStringMapEntry", EcorePackage::ESTRINGTOSTRINGMAPENTRY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ETypeParameter", EcorePackage::ETYPEPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("EAnnotation", EcorePackage::EANNOTATION_ECLASS));
+	m_idMap.insert(std::make_pair("EAttribute", EcorePackage::EATTRIBUTE_ECLASS));
+	m_idMap.insert(std::make_pair("EClass", EcorePackage::ECLASS_ECLASS));
+	m_idMap.insert(std::make_pair("EDataType", EcorePackage::EDATATYPE_ECLASS));
+	m_idMap.insert(std::make_pair("EEnum", EcorePackage::EENUM_ECLASS));
+	m_idMap.insert(std::make_pair("EEnumLiteral", EcorePackage::EENUMLITERAL_ECLASS));
+	m_idMap.insert(std::make_pair("EFactory", EcorePackage::EFACTORY_ECLASS));
+	m_idMap.insert(std::make_pair("EGenericType", EcorePackage::EGENERICTYPE_ECLASS));
+	m_idMap.insert(std::make_pair("EObject", EcorePackage::EOBJECT_ECLASS));
+	m_idMap.insert(std::make_pair("EOperation", EcorePackage::EOPERATION_ECLASS));
+	m_idMap.insert(std::make_pair("EPackage", EcorePackage::EPACKAGE_ECLASS));
+	m_idMap.insert(std::make_pair("EParameter", EcorePackage::EPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("EReference", EcorePackage::EREFERENCE_ECLASS));
+	m_idMap.insert(std::make_pair("EStringToStringMapEntry", EcorePackage::ESTRINGTOSTRINGMAPENTRY_ECLASS));
+	m_idMap.insert(std::make_pair("ETypeParameter", EcorePackage::ETYPEPARAMETER_ECLASS));
 }
 
 EcoreFactoryImpl::~EcoreFactoryImpl()

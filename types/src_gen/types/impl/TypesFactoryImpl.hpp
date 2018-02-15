@@ -23,8 +23,11 @@
 
 #include "ecore/impl/EFactoryImpl.hpp"
 
-
 #include "types/TypesFactory.hpp"
+
+namespace types 
+{
+}
 
 namespace types 
 {

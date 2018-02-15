@@ -22,11 +22,10 @@
 //#include "util/ProfileCallCount.hpp"
 
 #include "ecore/EPackage.hpp"
-#include "ecore/EcoreFactory.hpp"
 
-namespace types 
+namespace ecore 
 {
-	class TypesPackage;
+	class EDataType;
 }
 
 namespace types 

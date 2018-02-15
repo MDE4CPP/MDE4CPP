@@ -23,28 +23,38 @@
 
 #include <cassert>
 
-#include "ecore/impl/EAnnotationImpl.hpp"
-#include "ecore/impl/EAttributeImpl.hpp"
-#include "ecore/impl/EClassImpl.hpp"
-#include "ecore/impl/EClassifierImpl.hpp"
-#include "ecore/impl/EDataTypeImpl.hpp"
-#include "ecore/impl/EEnumImpl.hpp"
-#include "ecore/impl/EEnumLiteralImpl.hpp"
-#include "ecore/impl/EFactoryImpl.hpp"
-#include "ecore/impl/EGenericTypeImpl.hpp"
-#include "ecore/impl/EModelElementImpl.hpp"
-#include "ecore/impl/ENamedElementImpl.hpp"
-#include "ecore/impl/EObjectImpl.hpp"
-#include "ecore/impl/EOperationImpl.hpp"
-#include "ecore/impl/EPackageImpl.hpp"
-#include "ecore/impl/EParameterImpl.hpp"
-#include "ecore/impl/EReferenceImpl.hpp"
-#include "ecore/impl/EStringToStringMapEntryImpl.hpp"
-#include "ecore/impl/EStructuralFeatureImpl.hpp"
-#include "ecore/impl/ETypeParameterImpl.hpp"
-#include "ecore/impl/ETypedElementImpl.hpp"
-
 #include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
+
+
+namespace ecore 
+{	class EAnnotation;
+	class EAttribute;
+	class EClass;
+	class EClassifier;
+	class EDataType;
+	class EEnum;
+	class EEnumLiteral;
+	class EFactory;
+	class EGenericType;
+	class EModelElement;
+	class ENamedElement;
+	class EObject;
+	class EOperation;
+	class EPackage;
+	class EParameter;
+	class EReference;
+	class EStringToStringMapEntry;
+	class EStructuralFeature;
+	class ETypeParameter;
+	class ETypedElement;
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace ecore
 {

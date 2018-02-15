@@ -28,7 +28,6 @@
 namespace types 
 {
 	class TypesPackage;
-	class TypesFactory;
 }
 
 namespace types 
