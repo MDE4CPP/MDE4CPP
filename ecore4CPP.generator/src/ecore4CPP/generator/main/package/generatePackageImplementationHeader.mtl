@@ -29,15 +29,24 @@
 #include <cassert>
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
-[/for]
-
 #include "ecore/EcorePackage.hpp"
-[if (not(anEPackage.name = 'ecore') )]
 #include "ecore/impl/EPackageImpl.hpp"
+
+[if (not(anEPackage.name = 'ecore') )]
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 [/if]
+
+namespace [anEPackage.name/] 
+{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace [anEPackage.name/]
 {

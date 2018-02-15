@@ -24,11 +24,13 @@
 #include "ecore/impl/EFactoryImpl.hpp"
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
-[/for]
-
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
+
+namespace [anEPackage.name/] 
+{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+
+}
 
 [comment namespace /]
 namespace [anEPackage.name/] 

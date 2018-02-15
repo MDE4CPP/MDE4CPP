@@ -37,6 +37,10 @@
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
 
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[/for]
+
 //metamodel factory
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
 

@@ -29,6 +29,11 @@
 [if(anEPackage.name = 'uml')]
 #include "uml/impl/ElementImpl.hpp"
 [/if]
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[/for]
+
 [comment namespace /]
 using namespace [anEPackage.name/];
 
@@ -39,7 +44,7 @@ using namespace [anEPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	m_idMap.insert(std::pair<std::string,unsigned int>("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
+	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 }
 

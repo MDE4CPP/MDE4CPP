@@ -50,9 +50,9 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]
-static const int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
-static const int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
-static const int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
 [/template]
 
 [template public initSuperTypes(aEClass : EClass)]
