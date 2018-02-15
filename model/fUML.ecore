@@ -135,7 +135,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Executor">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/Object.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/Evaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Object.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" lowerBound="1" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -196,7 +196,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionFactoryL1" eSuperTypes="#//ExecutionFactory">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralNull.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralBooleanEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralStringEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralNullEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/InstanceValueEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralUnlimitedNaturalEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralIntegerEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralRealEvaluation.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralNull.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="#//SemanticVisitor">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -207,7 +207,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionFactoryL2" eSuperTypes="#//ExecutionFactoryL1">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &lt;uml/Activity.hpp>&#xD;&#xA;#include &lt;fuml/FUMLFactory.hpp>&#xD;&#xA;#include &lt;uml/ActivityParameterNode.hpp>&#xD;&#xA;#include &lt;uml/InitialNode.hpp>&#xD;&#xA;#include &lt;uml/ActivityFinalNode.hpp>&#xD;&#xA;#include &lt;uml/FlowFinalNode.hpp>&#xD;&#xA;#include &lt;uml/JoinNode.hpp>&#xD;&#xA;#include &lt;uml/MergeNode.hpp>&#xD;&#xA;#include &lt;uml/ForkNode.hpp>&#xD;&#xA;#include &lt;uml/DecisionNode.hpp>&#xD;&#xA;#include &lt;uml/InputPin.hpp>&#xD;&#xA;#include &lt;uml/OutputPin.hpp>&#xD;&#xA;#include &lt;uml/CallBehaviorAction.hpp>&#xD;&#xA;#include &lt;uml/CallOperationAction.hpp>&#xD;&#xA;#include &lt;uml/SendSignalAction.hpp>&#xD;&#xA;#include &lt;uml/ReadSelfAction.hpp>&#xD;&#xA;#include &lt;uml/TestIdentityAction.hpp>&#xD;&#xA;#include &lt;uml/ValueSpecificationAction.hpp>&#xD;&#xA;#include &lt;uml/CreateObjectAction.hpp>&#xD;&#xA;#include &lt;uml/DestroyObjectAction.hpp>&#xD;&#xA;#include &lt;uml/ReadStructuralFeatureAction.hpp>&#xD;&#xA;#include &lt;uml/ClearStructuralFeatureAction.hpp>&#xD;&#xA;#include &lt;uml/AddStructuralFeatureValueAction.hpp>&#xD;&#xA;#include &lt;uml/RemoveStructuralFeatureValueAction.hpp>&#xD;&#xA;#include &lt;uml/ReadLinkAction.hpp>&#xD;&#xA;#include &lt;uml/ClearAssociationAction.hpp>&#xD;&#xA;#include &lt;uml/CreateLinkAction.hpp>&#xD;&#xA;#include &lt;uml/DestroyLinkAction.hpp>&#xD;&#xA;#include &quot;uml/FlowFinalNode.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityFinalNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityParameterNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/AddStructuralFeatureValueActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/CallBehaviorActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/CallOperationActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ClearAssociationActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/CreateLinkActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ClearStructuralFeatureActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/CreateObjectActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/DecisionNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/DestroyLinkActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/DestroyObjectActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/FlowFinalNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ForkNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/InitialNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/InputPinActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/JoinNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/MergeNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/OutputPinActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReadLinkActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReadSelfActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReadStructuralFeatureActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/RemoveStructuralFeatureValueActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/SendSignalActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/TestIdentityActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ValueSpecificActionActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/Activity.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityFinalNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;&#xD;&#xA;#include &quot;uml/AddStructuralFeatureValueAction.hpp&quot;&#xD;&#xA;#include &quot;uml/CallBehaviorAction.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ClearAssociationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ClearStructuralFeatureAction.hpp&quot;&#xD;&#xA;#include &quot;uml/CreateLinkAction.hpp&quot;&#xD;&#xA;#include &quot;uml/CreateObjectAction.hpp&quot;&#xD;&#xA;#include &quot;uml/DecisionNode.hpp&quot;&#xD;&#xA;#include &quot;uml/DestroyLinkAction.hpp&quot;&#xD;&#xA;#include &quot;uml/DestroyObjectAction.hpp&quot;&#xD;&#xA;#include &quot;uml/FlowFinalNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ForkNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InitialNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/JoinNode.hpp&quot;&#xD;&#xA;#include &quot;uml/MergeNode.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadLinkAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadStructuralFeatureAction.hpp&quot;&#xD;&#xA;#include &quot;uml/RemoveStructuralFeatureValueAction.hpp&quot;&#xD;&#xA;#include &quot;uml/SendSignalAction.hpp&quot;&#xD;&#xA;#include &quot;uml/TestIdentityAction.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecificationAction.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="#//SemanticVisitor">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -218,11 +218,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionFactoryL3" eSuperTypes="#//ExecutionFactoryL2">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &lt;uml/ConditionalNode.hpp>&#xD;&#xA;#include &lt;fuml/FUMLFactory.hpp>&#xD;&#xA;#include &lt;uml/LoopNode.hpp>&#xD;&#xA;#include &lt;uml/ExpansionRegion.hpp>&#xD;&#xA;#include &lt;uml/ReadExtentAction.hpp>&#xD;&#xA;#include &lt;uml/ReadIsClassifiedObjectAction.hpp>&#xD;&#xA;#include &lt;uml/ReclassifyObjectAction.hpp>&#xD;&#xA;#include &lt;uml/StartObjectBehaviorAction.hpp>&#xD;&#xA;#include &lt;uml/StartClassifierBehaviorAction.hpp>&#xD;&#xA;#include &lt;uml/AcceptEventAction.hpp>&#xD;&#xA;#include &lt;uml/ReduceAction.hpp>&#xD;&#xA;#include &lt;uml/DataStoreNode.hpp>&#xD;&#xA;#include &lt;fuml/DataStoreNodeActivation.hpp>&#xD;&#xA;#include &quot;uml/ExpansionNode.hpp&quot;&#xD;&#xA;#include &lt;uml/UmlPackage.hpp>"/>
+      <details key="includes" value="#include &quot;fUML/AcceptEventActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ConditionalNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/DataStoreNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExpansionNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExpansionRegionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/LoopNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReadExtentActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReadIsClassifiedObjectActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReclassifyObjectActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ReduceActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/StartClassifierBehaviorActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/StartObjectBehaviorActionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/StructuredActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/AcceptEventAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ConditionalNode.hpp&quot;&#xD;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ExpansionNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ExpansionRegion.hpp&quot;&#xD;&#xA;#include &quot;uml/LoopNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadExtentAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadIsClassifiedObjectAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ReclassifyObjectAction.hpp&quot;&#xD;&#xA;#include &quot;uml/ReduceAction.hpp&quot;&#xD;&#xA;#include &quot;uml/StartClassifierBehaviorAction.hpp&quot;&#xD;&#xA;#include &quot;uml/StartObjectBehaviorAction.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlPackage.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="#//SemanticVisitor">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;fUML::SemanticVisitor> visitor = ExecutionFactoryL2Impl::instantiateVisitor(element);&#xD;&#xA;&#xD;&#xA;    if(!visitor) {&#xD;&#xA;&#xD;&#xA;        switch (element->eClass()->getClassifierID()) {&#xD;&#xA;            case uml::UmlPackage::CONDITIONALNODE_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createConditionalNodeActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::LOOPNODE_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::EXPANSIONREGION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createExpansionRegionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createStructuredActivityNodeActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::EXPANSIONNODE_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createExpansionNodeActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::READEXTENTACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createReadExtentActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::RECLASSIFYOBJECTACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createReclassifyObjectActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::ACCEPTEVENTACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createAcceptEventActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::REDUCEACTION_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createReduceActionActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            case uml::UmlPackage::DATASTORENODE_ECLASS: {&#xD;&#xA;                visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(&#xD;&#xA;                        FUMLFactory::eInstance()->createDataStoreNodeActivation());&#xD;&#xA;                break;&#xD;&#xA;            }&#xD;&#xA;            default: {&#xD;&#xA;                std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; - Unknown visitor type&quot; &lt;&lt; std::endl;&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    &#xD;&#xA;    return visitor;"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;fUML::SemanticVisitor> visitor = ExecutionFactoryL2Impl::instantiateVisitor(element);&#xD;&#xA;&#xD;&#xA;&#x9;if(!visitor) &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;switch (element->eClass()->getClassifierID()) &#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::CONDITIONALNODE_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::LOOPNODE_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::EXPANSIONREGION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::EXPANSIONNODE_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::READEXTENTACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::RECLASSIFYOBJECTACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::ACCEPTEVENTACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::REDUCEACTION_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;case uml::UmlPackage::DATASTORENODE_ECLASS: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;visitor = std::shared_ptr&lt;fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;default: &#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; - Unknown visitor type&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;return visitor;"/>
       </eAnnotations>
       <eParameters name="element" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Element"/>
     </eOperations>
@@ -262,7 +262,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructuredValue" abstract="true" eSuperTypes="#//Value">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Slot.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;&#xD;&#xA;"/>
+      <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xD;&#xA;#include &quot;uml/Slot.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="retrieveFeatureValue" ordered="false" lowerBound="1" eType="#//FeatureValue">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
@@ -435,7 +435,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/IntegerValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -458,7 +458,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -481,7 +481,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Literalinteger.hpp&quot;&#xD;&#xA;#include &lt;cstdio>&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;"/>
+      <details key="includes" value="#include &lt;cstdio>&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Literalinteger.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -504,7 +504,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &lt;sstream>&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;"/>
+      <details key="includes" value="#include &lt;sstream>&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -527,7 +527,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -588,7 +588,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralEvaluation" abstract="true" eSuperTypes="#//Evaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/ValueSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getType" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//PrimitiveType">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -599,7 +599,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceValueEvaluation" eSuperTypes="#//Evaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xD;&#xA;#include &quot;uml/DataType.hpp&quot;&#xD;&#xA;#include &quot;fuml/Object.hpp&quot;&#xD;&#xA;#include &quot;uml/Slot.hpp&quot;&#xD;&#xA;#include &quot;fuml/Value.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;&#xD;&#xA;#include &quot;uml/Enumeration.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/DataValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/EnumerationValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Executor.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Object.hpp&quot;&#xD;&#xA;#include &quot;fUML/Reference.hpp&quot;&#xD;&#xA;#include &quot;fUML/Value.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/DataType.hpp&quot;&#xD;&#xA;#include &quot;uml/Enumeration.hpp&quot;&#xD;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Slot.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -609,7 +609,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralBooleanEvaluation" eSuperTypes="#//LiteralEvaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/BooleanValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -619,7 +619,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralIntegerEvaluation" eSuperTypes="#//LiteralEvaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/IntegerValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -636,7 +636,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralStringEvaluation" eSuperTypes="#//LiteralEvaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/StringValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -646,7 +646,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralRealEvaluation" eSuperTypes="#//LiteralEvaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/RealValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -656,7 +656,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralUnlimitedNaturalEvaluation" eSuperTypes="#//LiteralEvaluation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/UnlimitedNaturalValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="evaluate" ordered="false" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -693,7 +693,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationValue" eSuperTypes="#//Value">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;#include &quot;fuml/EnumerationValue.hpp&quot;&#xD;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xD;&#xA;#include &quot;uml/Enumeration.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/EnumerationValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Enumeration.hpp&quot;&#xD;&#xA;#include &quot;uml/EnumerationLiteral.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceSpecification.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -744,6 +744,9 @@
         eType="ecore:EClass ../../uml/model/uml.ecore#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DispatchStrategy" eSuperTypes="#//SemanticStrategy">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="dispatch" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return object->getLocus()->getFactory()->createExecution(this->retrieveMethod(object,operation),object);"/>
@@ -785,7 +788,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//ExtensionalValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/DispatchStrategy.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="startBehavior" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -937,7 +940,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;fuml/ClassifierBehaviorExecution.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ClassifierBehaviorExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="startBehavior" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1006,7 +1009,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="FIFOGetNextEventStrategy" eSuperTypes="#//GetNextEventStrategy"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNodeActivationGroup">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityNodeActivationGroup.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityParameterNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fuml/ControlNodeActivation.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;fuml/ActivityEdgeInstance.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityParameterNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ActivityEdgeInstance.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityNodeActivationGroup.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityParameterNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ControlNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ControlNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xD;&#xA;#include &quot;fUML/PinActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="run" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1197,6 +1200,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Token" abstract="true">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fuml/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
       <details key="shared_from_this" value="true"/>
     </eAnnotations>
     <eOperations name="transfer" ordered="false" lowerBound="1" eType="#//Token">
@@ -1308,7 +1312,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityExecution" eSuperTypes="#//Execution">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &lt;uml/ParameterDirectionKind.hpp>&#xD;&#xA;#include &lt;fuml/ParameterValue.hpp>&#xD;&#xA;#include &quot;fuml/ForkedToken.hpp&quot;&#xD;&#xA;#include &lt;fuml/Execution.hpp>&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Object.hpp&quot;&#xD;&#xA;#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;uml/Activity.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityParameterNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ForkedToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xD;&#xA;#include &quot;fUML/Object.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Activity.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="execute" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1331,7 +1335,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNodeActivation" abstract="true"
       eSuperTypes="#//SemanticVisitor">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityNodeActivation.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;ecore/EClass.hpp&quot;"/>
+      <details key="includes" value="#include &quot;ecore/EClass.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;"/>
       <details key="shared_from_this" value="true"/>
     </eAnnotations>
     <eOperations name="run" ordered="false" lowerBound="1">
@@ -1482,7 +1486,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ObjectNodeActivation" abstract="true"
       eSuperTypes="#//ActivityNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/Token.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/Token.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="countOfferedValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1548,11 +1552,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityParameterNodeActivation" eSuperTypes="#//ObjectNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ForkedToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityParameterNode.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="fire" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="if (this->getNode()->getIncoming()->size() == 0) &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Input activity parameter node &quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Parameter> parameter = (std::dynamic_pointer_cast&lt;uml::ActivityParameterNode>(this->getNode()))->getParameter();&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;ParameterValue> parameterValue = this->getActivityExecution()->getParameterValue(parameter);&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;if (parameterValue != nullptr) &#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Parameter has &quot;&lt;&lt; parameterValue->getValues()->size() &lt;&lt; &quot; value(s).&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;&#x9;Bag&lt;Value>* valueList = parameterValue->getValues().get();&#xD;&#xA;&#x9;&#x9;&#x9;auto factory = fUML::FUMLFactory::eInstance();&#xD;&#xA;            const auto size = valueList->size();&#xD;&#xA;            std::shared_ptr&lt;Value> value;&#xD;&#xA;&#x9;&#x9;&#x9;for (int i = 0; i&lt; size; i++)&#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;                value = (*valueList)[i];&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ObjectToken> token = factory->createObjectToken();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;token->setValue(value);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;this->addToken(token);&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;this->sendUnofferedTokens();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;else &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Output activity parameter node &quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&lt;&lt; this->getNode()->getName() + &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;this->addTokens(incomingTokens);&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::ForkedToken> forkToken = std::dynamic_pointer_cast&lt;fUML::ForkedToken>((*incomingTokens)[0]);&#xD;&#xA;&#x9;&#x9;if (forkToken != nullptr) &#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;forkToken->getBaseToken()->setHolder(shared_from_this());&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}"/>
+        <details key="body" value="if (this->getNode()->getIncoming()->size() == 0) &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Input activity parameter node &quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Parameter> parameter = (std::dynamic_pointer_cast&lt;uml::ActivityParameterNode>(this->getNode()))->getParameter();&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;ParameterValue> parameterValue = this->getActivityExecution()->getParameterValue(parameter);&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;if (parameterValue != nullptr) &#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Parameter has &quot;&lt;&lt; parameterValue->getValues()->size() &lt;&lt; &quot; value(s).&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;&#x9;Bag&lt;Value>* valueList = parameterValue->getValues().get();&#xD;&#xA;&#x9;&#x9;&#x9;auto factory = fUML::FUMLFactory::eInstance();&#xD;&#xA;            const auto size = valueList->size();&#xD;&#xA;            std::shared_ptr&lt;Value> value;&#xD;&#xA;&#x9;&#x9;&#x9;for (unsigned int i = 0; i&lt; size; i++)&#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;                value = (*valueList)[i];&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ObjectToken> token = factory->createObjectToken();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;token->setValue(value);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;this->addToken(token);&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;this->sendUnofferedTokens();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;else &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt; &quot;[fire] Output activity parameter node &quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&lt;&lt; this->getNode()->getName() + &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;this->addTokens(incomingTokens);&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::ForkedToken> forkToken = std::dynamic_pointer_cast&lt;fUML::ForkedToken>((*incomingTokens)[0]);&#xD;&#xA;&#x9;&#x9;if (forkToken != nullptr) &#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;forkToken->getBaseToken()->setHolder(shared_from_this());&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}"/>
       </eAnnotations>
       <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Token"/>
     </eOperations>
@@ -1584,7 +1588,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForkNodeActivation" eSuperTypes="#//ControlNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include&quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ForkedToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include&quot;uml/ActivityNode.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="fire" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1600,7 +1604,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitialNodeActivation" eSuperTypes="#//ControlNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="fire" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1611,7 +1615,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DecisionNodeActivation" eSuperTypes="#//ControlNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/DecisionNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/Token.hpp&quot;&#xD;&#xA;#include &quot;uml/ObjectFlow.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;&#xD;&#xA;#include &quot;fuml/ObjectToken.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/Executor.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/Token.hpp&quot;&#xD;&#xA;#include &quot;fUML/Value.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/DecisionNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ObjectFlow.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getDecisionValues" ordered="false" upperBound="-1" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1682,7 +1686,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityFinalNodeActivation" eSuperTypes="#//ControlNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExpansionActivationGroup.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExpansionRegionActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/StructuredActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="fire" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1846,7 +1850,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionActivation" abstract="true" eSuperTypes="#//ActivityNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xD;&#xA;#include &quot;iterator&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;fuml/PinActivation.hpp&quot;&#xD;&#xA;#include &quot;fuml/FeatureValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/Link.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;&#xD;&#xA;"/>
+      <details key="includes" value="#include &lt;iterator>&#xD;&#xA;#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/Executor.hpp&quot;&#xD;&#xA;#include &quot;fUML/FeatureValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/ForkNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Link.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/PinActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/DataStoreNode.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="isFirng" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2000,7 +2004,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallBehaviorActionActivation" eSuperTypes="#//CallActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/CallBehaviorAction.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/CallBehaviorAction.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2010,7 +2014,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallOperationActionActivation" eSuperTypes="#//CallActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/Execution.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Reference.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2158,6 +2162,9 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataStoreNodeActivation" eSuperTypes="#//CentralBufferNodeActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fuml/Value.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="int i = ObjectNodeActivationImpl::removeToken(token);&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;if (this->isRunning()) {&#xD;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Token> copied_token = std::dynamic_pointer_cast&lt;Token>(token->copy());&#xD;&#xA;&#x9;&#x9;&#x9;ObjectNodeActivationImpl::addToken(copied_token);&#xD;&#xA;&#x9;&#x9;&#x9;this->sendUnofferedTokens();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;return i;"/>
