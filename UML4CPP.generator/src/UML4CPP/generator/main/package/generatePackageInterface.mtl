@@ -28,27 +28,17 @@ virtual public uml::Package
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
- 
-#include "uml/Factory.hpp"
 [if (aPackage.oclIsKindOf(Profile))]
 #include "uml/Profile.hpp"
 [else]
 #include "uml/Package.hpp"	
 [/if]
 
-namespace [aPackage.name/] 
-{
-[for (elements : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Activity))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-	class [elements.name.toUpperFirst()/];[/for]
-
-	class [packageName/];
-}
-
 namespace uml 
 {
-[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	class [nE.name/];[/for]
-
+[for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
+	class [nE.name/];
+[/for]
 }
 
 [comment namespace /]

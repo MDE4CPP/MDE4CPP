@@ -30,25 +30,26 @@
 [import UML4CPP::generator::main::helper /]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()}->flatten() /]
+[query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
+								aPackage.allOwnedElements().eClass(), 
+								aPackage.allOwnedElements()->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.allOwnedElements()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.allOwnedElements()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.allOwnedElements()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(FunctionBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass()
+							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
 
-//metamodel classes
-#include "uml/Constraint.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/FunctionBehavior.hpp"
-#include "uml/Generalization.hpp"
-#include "uml/Interface.hpp"
-#include "uml/OpaqueExpression.hpp"
-#include "uml/Operation.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Property.hpp"
-#include "uml/Stereotype.hpp"
+//meta meta model classes
+[for (nE : EClass | aPackage.getMetaMetaModelIncludes())]
+#include "[nE.ePackage.name/]/[nE.name/].hpp"
+[/for]
 
-[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[nE.ePackage.name/]/[nE.name/].hpp"[/for]
+//meta meta model factory
+#include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.toUpperFirst().concat('Factory')/].hpp"
 
 //metamodel factory
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
