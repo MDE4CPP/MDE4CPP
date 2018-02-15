@@ -24,9 +24,10 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <memory>
+#include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************

@@ -6,6 +6,7 @@
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 #include "util/stereotypestorage.hpp"
+#include "uml/Property.hpp"
 
 //Forward declaration includes
 #include "uml/Class.hpp"

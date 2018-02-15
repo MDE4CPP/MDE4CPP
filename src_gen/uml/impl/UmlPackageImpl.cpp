@@ -9,6 +9,8 @@
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
 
+// metametamodel factory
+#include "ecore/EcoreFactory.hpp"
 //metamodel factory
 #include "uml/UmlFactory.hpp"
 

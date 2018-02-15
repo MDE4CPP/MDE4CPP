@@ -272,7 +272,6 @@ namespace uml
 	class WriteStructuralFeatureAction;
 	class WriteVariableAction;
 	class UmlPackage;
-	class UmlFactory;
 }
 
 namespace uml 

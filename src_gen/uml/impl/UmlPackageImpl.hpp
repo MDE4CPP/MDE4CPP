@@ -23,255 +23,264 @@
 
 #include <cassert>
 
-#include "uml/impl/AbstractionImpl.hpp"
-#include "uml/impl/AcceptCallActionImpl.hpp"
-#include "uml/impl/AcceptEventActionImpl.hpp"
-#include "uml/impl/ActionImpl.hpp"
-#include "uml/impl/ActionExecutionSpecificationImpl.hpp"
-#include "uml/impl/ActionInputPinImpl.hpp"
-#include "uml/impl/ActivityImpl.hpp"
-#include "uml/impl/ActivityContentImpl.hpp"
-#include "uml/impl/ActivityEdgeImpl.hpp"
-#include "uml/impl/ActivityFinalNodeImpl.hpp"
-#include "uml/impl/ActivityGroupImpl.hpp"
-#include "uml/impl/ActivityNodeImpl.hpp"
-#include "uml/impl/ActivityParameterNodeImpl.hpp"
-#include "uml/impl/ActivityPartitionImpl.hpp"
-#include "uml/impl/ActorImpl.hpp"
-#include "uml/impl/AddStructuralFeatureValueActionImpl.hpp"
-#include "uml/impl/AddVariableValueActionImpl.hpp"
-#include "uml/impl/AnyReceiveEventImpl.hpp"
-#include "uml/impl/ArtifactImpl.hpp"
-#include "uml/impl/AssociationImpl.hpp"
-#include "uml/impl/AssociationClassImpl.hpp"
-#include "uml/impl/BehaviorImpl.hpp"
-#include "uml/impl/BehaviorExecutionSpecificationImpl.hpp"
-#include "uml/impl/BehavioralFeatureImpl.hpp"
-#include "uml/impl/BehavioredClassifierImpl.hpp"
-#include "uml/impl/BroadcastSignalActionImpl.hpp"
-#include "uml/impl/CallActionImpl.hpp"
-#include "uml/impl/CallBehaviorActionImpl.hpp"
-#include "uml/impl/CallEventImpl.hpp"
-#include "uml/impl/CallOperationActionImpl.hpp"
-#include "uml/impl/CentralBufferNodeImpl.hpp"
-#include "uml/impl/ChangeEventImpl.hpp"
-#include "uml/impl/ClassImpl.hpp"
-#include "uml/impl/ClassifierImpl.hpp"
-#include "uml/impl/ClassifierTemplateParameterImpl.hpp"
-#include "uml/impl/ClauseImpl.hpp"
-#include "uml/impl/ClearAssociationActionImpl.hpp"
-#include "uml/impl/ClearStructuralFeatureActionImpl.hpp"
-#include "uml/impl/ClearVariableActionImpl.hpp"
-#include "uml/impl/CollaborationImpl.hpp"
-#include "uml/impl/CollaborationUseImpl.hpp"
-#include "uml/impl/CombinedFragmentImpl.hpp"
-#include "uml/impl/CommentImpl.hpp"
-#include "uml/impl/CommunicationPathImpl.hpp"
-#include "uml/impl/ComponentImpl.hpp"
-#include "uml/impl/ComponentRealizationImpl.hpp"
-#include "uml/impl/ConditionalNodeImpl.hpp"
-#include "uml/impl/ConnectableElementImpl.hpp"
-#include "uml/impl/ConnectableElementTemplateParameterImpl.hpp"
-#include "uml/impl/ConnectionPointReferenceImpl.hpp"
-#include "uml/impl/ConnectorImpl.hpp"
-#include "uml/impl/ConnectorEndImpl.hpp"
-#include "uml/impl/ConsiderIgnoreFragmentImpl.hpp"
-#include "uml/impl/ConstraintImpl.hpp"
-#include "uml/impl/ContinuationImpl.hpp"
-#include "uml/impl/ControlFlowImpl.hpp"
-#include "uml/impl/ControlNodeImpl.hpp"
-#include "uml/impl/CreateLinkActionImpl.hpp"
-#include "uml/impl/CreateLinkObjectActionImpl.hpp"
-#include "uml/impl/CreateObjectActionImpl.hpp"
-#include "uml/impl/DataStoreNodeImpl.hpp"
-#include "uml/impl/DataTypeImpl.hpp"
-#include "uml/impl/DecisionNodeImpl.hpp"
-#include "uml/impl/DependencyImpl.hpp"
-#include "uml/impl/DeployedArtifactImpl.hpp"
-#include "uml/impl/DeploymentImpl.hpp"
-#include "uml/impl/DeploymentSpecificationImpl.hpp"
-#include "uml/impl/DeploymentTargetImpl.hpp"
-#include "uml/impl/DestroyLinkActionImpl.hpp"
-#include "uml/impl/DestroyObjectActionImpl.hpp"
-#include "uml/impl/DestructionOccurrenceSpecificationImpl.hpp"
-#include "uml/impl/DeviceImpl.hpp"
-#include "uml/impl/DirectedRelationshipImpl.hpp"
-#include "uml/impl/DurationImpl.hpp"
-#include "uml/impl/DurationConstraintImpl.hpp"
-#include "uml/impl/DurationIntervalImpl.hpp"
-#include "uml/impl/DurationObservationImpl.hpp"
-#include "uml/impl/ElementImpl.hpp"
-#include "uml/impl/ElementImportImpl.hpp"
-#include "uml/impl/EncapsulatedClassifierImpl.hpp"
-#include "uml/impl/EnumerationImpl.hpp"
-#include "uml/impl/EnumerationLiteralImpl.hpp"
-#include "uml/impl/EventImpl.hpp"
-#include "uml/impl/ExceptionHandlerImpl.hpp"
-#include "uml/impl/ExecutableNodeImpl.hpp"
-#include "uml/impl/ExecutionEnvironmentImpl.hpp"
-#include "uml/impl/ExecutionOccurrenceSpecificationImpl.hpp"
-#include "uml/impl/ExecutionSpecificationImpl.hpp"
-#include "uml/impl/ExpansionNodeImpl.hpp"
-#include "uml/impl/ExpansionRegionImpl.hpp"
-#include "uml/impl/ExpressionImpl.hpp"
-#include "uml/impl/ExtendImpl.hpp"
-#include "uml/impl/ExtensionImpl.hpp"
-#include "uml/impl/ExtensionEndImpl.hpp"
-#include "uml/impl/ExtensionPointImpl.hpp"
-#include "uml/impl/FactoryImpl.hpp"
-#include "uml/impl/FeatureImpl.hpp"
-#include "uml/impl/FinalNodeImpl.hpp"
-#include "uml/impl/FinalStateImpl.hpp"
-#include "uml/impl/FlowFinalNodeImpl.hpp"
-#include "uml/impl/ForkNodeImpl.hpp"
-#include "uml/impl/FunctionBehaviorImpl.hpp"
-#include "uml/impl/GateImpl.hpp"
-#include "uml/impl/GeneralOrderingImpl.hpp"
-#include "uml/impl/GeneralizationImpl.hpp"
-#include "uml/impl/GeneralizationSetImpl.hpp"
-#include "uml/impl/ImageImpl.hpp"
-#include "uml/impl/IncludeImpl.hpp"
-#include "uml/impl/InformationFlowImpl.hpp"
-#include "uml/impl/InformationItemImpl.hpp"
-#include "uml/impl/InitialNodeImpl.hpp"
-#include "uml/impl/InputPinImpl.hpp"
-#include "uml/impl/InstanceSpecificationImpl.hpp"
-#include "uml/impl/InstanceValueImpl.hpp"
-#include "uml/impl/InteractionImpl.hpp"
-#include "uml/impl/InteractionConstraintImpl.hpp"
-#include "uml/impl/InteractionFragmentImpl.hpp"
-#include "uml/impl/InteractionOperandImpl.hpp"
-#include "uml/impl/InteractionUseImpl.hpp"
-#include "uml/impl/InterfaceImpl.hpp"
-#include "uml/impl/InterfaceRealizationImpl.hpp"
-#include "uml/impl/InterruptibleActivityRegionImpl.hpp"
-#include "uml/impl/IntervalImpl.hpp"
-#include "uml/impl/IntervalConstraintImpl.hpp"
-#include "uml/impl/InvocationActionImpl.hpp"
-#include "uml/impl/JoinNodeImpl.hpp"
-#include "uml/impl/LifelineImpl.hpp"
-#include "uml/impl/LinkActionImpl.hpp"
-#include "uml/impl/LinkEndCreationDataImpl.hpp"
-#include "uml/impl/LinkEndDataImpl.hpp"
-#include "uml/impl/LinkEndDestructionDataImpl.hpp"
-#include "uml/impl/LiteralBooleanImpl.hpp"
-#include "uml/impl/LiteralIntegerImpl.hpp"
-#include "uml/impl/LiteralNullImpl.hpp"
-#include "uml/impl/LiteralRealImpl.hpp"
-#include "uml/impl/LiteralSpecificationImpl.hpp"
-#include "uml/impl/LiteralStringImpl.hpp"
-#include "uml/impl/LiteralUnlimitedNaturalImpl.hpp"
-#include "uml/impl/LoopNodeImpl.hpp"
-#include "uml/impl/ManifestationImpl.hpp"
-#include "uml/impl/MergeNodeImpl.hpp"
-#include "uml/impl/MessageImpl.hpp"
-#include "uml/impl/MessageEndImpl.hpp"
-#include "uml/impl/MessageEventImpl.hpp"
-#include "uml/impl/MessageOccurrenceSpecificationImpl.hpp"
-#include "uml/impl/ModelImpl.hpp"
-#include "uml/impl/MultiplicityElementImpl.hpp"
-#include "uml/impl/NamedElementImpl.hpp"
-#include "uml/impl/NamespaceImpl.hpp"
-#include "uml/impl/NodeImpl.hpp"
-#include "uml/impl/ObjectImpl.hpp"
-#include "uml/impl/ObjectFlowImpl.hpp"
-#include "uml/impl/ObjectNodeImpl.hpp"
-#include "uml/impl/ObservationImpl.hpp"
-#include "uml/impl/OccurrenceSpecificationImpl.hpp"
-#include "uml/impl/OpaqueActionImpl.hpp"
-#include "uml/impl/OpaqueBehaviorImpl.hpp"
-#include "uml/impl/OpaqueExpressionImpl.hpp"
-#include "uml/impl/OperationImpl.hpp"
-#include "uml/impl/OperationTemplateParameterImpl.hpp"
-#include "uml/impl/OutputPinImpl.hpp"
-#include "uml/impl/PackageImpl.hpp"
-#include "uml/impl/PackageImportImpl.hpp"
-#include "uml/impl/PackageMergeImpl.hpp"
-#include "uml/impl/PackageableElementImpl.hpp"
-#include "uml/impl/ParameterImpl.hpp"
-#include "uml/impl/ParameterSetImpl.hpp"
-#include "uml/impl/ParameterableElementImpl.hpp"
-#include "uml/impl/PartDecompositionImpl.hpp"
-#include "uml/impl/PinImpl.hpp"
-#include "uml/impl/PortImpl.hpp"
-#include "uml/impl/PrimitiveTypeImpl.hpp"
-#include "uml/impl/ProfileImpl.hpp"
-#include "uml/impl/ProfileApplicationImpl.hpp"
-#include "uml/impl/PropertyImpl.hpp"
-#include "uml/impl/ProtocolConformanceImpl.hpp"
-#include "uml/impl/ProtocolStateMachineImpl.hpp"
-#include "uml/impl/ProtocolTransitionImpl.hpp"
-#include "uml/impl/PseudostateImpl.hpp"
-#include "uml/impl/QualifierValueImpl.hpp"
-#include "uml/impl/RaiseExceptionActionImpl.hpp"
-#include "uml/impl/ReadExtentActionImpl.hpp"
-#include "uml/impl/ReadIsClassifiedObjectActionImpl.hpp"
-#include "uml/impl/ReadLinkActionImpl.hpp"
-#include "uml/impl/ReadLinkObjectEndActionImpl.hpp"
-#include "uml/impl/ReadLinkObjectEndQualifierActionImpl.hpp"
-#include "uml/impl/ReadSelfActionImpl.hpp"
-#include "uml/impl/ReadStructuralFeatureActionImpl.hpp"
-#include "uml/impl/ReadVariableActionImpl.hpp"
-#include "uml/impl/RealizationImpl.hpp"
-#include "uml/impl/ReceptionImpl.hpp"
-#include "uml/impl/ReclassifyObjectActionImpl.hpp"
-#include "uml/impl/RedefinableElementImpl.hpp"
-#include "uml/impl/RedefinableTemplateSignatureImpl.hpp"
-#include "uml/impl/ReduceActionImpl.hpp"
-#include "uml/impl/RegionImpl.hpp"
-#include "uml/impl/RelationshipImpl.hpp"
-#include "uml/impl/RemoveStructuralFeatureValueActionImpl.hpp"
-#include "uml/impl/RemoveVariableValueActionImpl.hpp"
-#include "uml/impl/ReplyActionImpl.hpp"
-#include "uml/impl/SendObjectActionImpl.hpp"
-#include "uml/impl/SendSignalActionImpl.hpp"
-#include "uml/impl/SequenceNodeImpl.hpp"
-#include "uml/impl/SignalImpl.hpp"
-#include "uml/impl/SignalEventImpl.hpp"
-#include "uml/impl/SlotImpl.hpp"
-#include "uml/impl/StartClassifierBehaviorActionImpl.hpp"
-#include "uml/impl/StartObjectBehaviorActionImpl.hpp"
-#include "uml/impl/StateImpl.hpp"
-#include "uml/impl/StateInvariantImpl.hpp"
-#include "uml/impl/StateMachineImpl.hpp"
-#include "uml/impl/StereotypeImpl.hpp"
-#include "uml/impl/StringExpressionImpl.hpp"
-#include "uml/impl/StructuralFeatureImpl.hpp"
-#include "uml/impl/StructuralFeatureActionImpl.hpp"
-#include "uml/impl/StructuredActivityNodeImpl.hpp"
-#include "uml/impl/StructuredClassifierImpl.hpp"
-#include "uml/impl/SubstitutionImpl.hpp"
-#include "uml/impl/TemplateBindingImpl.hpp"
-#include "uml/impl/TemplateParameterImpl.hpp"
-#include "uml/impl/TemplateParameterSubstitutionImpl.hpp"
-#include "uml/impl/TemplateSignatureImpl.hpp"
-#include "uml/impl/TemplateableElementImpl.hpp"
-#include "uml/impl/TestIdentityActionImpl.hpp"
-#include "uml/impl/TimeConstraintImpl.hpp"
-#include "uml/impl/TimeEventImpl.hpp"
-#include "uml/impl/TimeExpressionImpl.hpp"
-#include "uml/impl/TimeIntervalImpl.hpp"
-#include "uml/impl/TimeObservationImpl.hpp"
-#include "uml/impl/TransitionImpl.hpp"
-#include "uml/impl/TriggerImpl.hpp"
-#include "uml/impl/TypeImpl.hpp"
-#include "uml/impl/TypedElementImpl.hpp"
-#include "uml/impl/UnmarshallActionImpl.hpp"
-#include "uml/impl/UsageImpl.hpp"
-#include "uml/impl/UseCaseImpl.hpp"
-#include "uml/impl/ValuePinImpl.hpp"
-#include "uml/impl/ValueSpecificationImpl.hpp"
-#include "uml/impl/ValueSpecificationActionImpl.hpp"
-#include "uml/impl/VariableImpl.hpp"
-#include "uml/impl/VariableActionImpl.hpp"
-#include "uml/impl/VertexImpl.hpp"
-#include "uml/impl/WriteLinkActionImpl.hpp"
-#include "uml/impl/WriteStructuralFeatureActionImpl.hpp"
-#include "uml/impl/WriteVariableActionImpl.hpp"
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
+
 #include "uml/UmlPackage.hpp"
+
+namespace uml 
+{	class Abstraction;
+	class AcceptCallAction;
+	class AcceptEventAction;
+	class Action;
+	class ActionExecutionSpecification;
+	class ActionInputPin;
+	class Activity;
+	class ActivityContent;
+	class ActivityEdge;
+	class ActivityFinalNode;
+	class ActivityGroup;
+	class ActivityNode;
+	class ActivityParameterNode;
+	class ActivityPartition;
+	class Actor;
+	class AddStructuralFeatureValueAction;
+	class AddVariableValueAction;
+	class AnyReceiveEvent;
+	class Artifact;
+	class Association;
+	class AssociationClass;
+	class Behavior;
+	class BehaviorExecutionSpecification;
+	class BehavioralFeature;
+	class BehavioredClassifier;
+	class BroadcastSignalAction;
+	class CallAction;
+	class CallBehaviorAction;
+	class CallEvent;
+	class CallOperationAction;
+	class CentralBufferNode;
+	class ChangeEvent;
+	class Class;
+	class Classifier;
+	class ClassifierTemplateParameter;
+	class Clause;
+	class ClearAssociationAction;
+	class ClearStructuralFeatureAction;
+	class ClearVariableAction;
+	class Collaboration;
+	class CollaborationUse;
+	class CombinedFragment;
+	class Comment;
+	class CommunicationPath;
+	class Component;
+	class ComponentRealization;
+	class ConditionalNode;
+	class ConnectableElement;
+	class ConnectableElementTemplateParameter;
+	class ConnectionPointReference;
+	class Connector;
+	class ConnectorEnd;
+	class ConsiderIgnoreFragment;
+	class Constraint;
+	class Continuation;
+	class ControlFlow;
+	class ControlNode;
+	class CreateLinkAction;
+	class CreateLinkObjectAction;
+	class CreateObjectAction;
+	class DataStoreNode;
+	class DataType;
+	class DecisionNode;
+	class Dependency;
+	class DeployedArtifact;
+	class Deployment;
+	class DeploymentSpecification;
+	class DeploymentTarget;
+	class DestroyLinkAction;
+	class DestroyObjectAction;
+	class DestructionOccurrenceSpecification;
+	class Device;
+	class DirectedRelationship;
+	class Duration;
+	class DurationConstraint;
+	class DurationInterval;
+	class DurationObservation;
+	class Element;
+	class ElementImport;
+	class EncapsulatedClassifier;
+	class Enumeration;
+	class EnumerationLiteral;
+	class Event;
+	class ExceptionHandler;
+	class ExecutableNode;
+	class ExecutionEnvironment;
+	class ExecutionOccurrenceSpecification;
+	class ExecutionSpecification;
+	class ExpansionNode;
+	class ExpansionRegion;
+	class Expression;
+	class Extend;
+	class Extension;
+	class ExtensionEnd;
+	class ExtensionPoint;
+	class Factory;
+	class Feature;
+	class FinalNode;
+	class FinalState;
+	class FlowFinalNode;
+	class ForkNode;
+	class FunctionBehavior;
+	class Gate;
+	class GeneralOrdering;
+	class Generalization;
+	class GeneralizationSet;
+	class Image;
+	class Include;
+	class InformationFlow;
+	class InformationItem;
+	class InitialNode;
+	class InputPin;
+	class InstanceSpecification;
+	class InstanceValue;
+	class Interaction;
+	class InteractionConstraint;
+	class InteractionFragment;
+	class InteractionOperand;
+	class InteractionUse;
+	class Interface;
+	class InterfaceRealization;
+	class InterruptibleActivityRegion;
+	class Interval;
+	class IntervalConstraint;
+	class InvocationAction;
+	class JoinNode;
+	class Lifeline;
+	class LinkAction;
+	class LinkEndCreationData;
+	class LinkEndData;
+	class LinkEndDestructionData;
+	class LiteralBoolean;
+	class LiteralInteger;
+	class LiteralNull;
+	class LiteralReal;
+	class LiteralSpecification;
+	class LiteralString;
+	class LiteralUnlimitedNatural;
+	class LoopNode;
+	class Manifestation;
+	class MergeNode;
+	class Message;
+	class MessageEnd;
+	class MessageEvent;
+	class MessageOccurrenceSpecification;
+	class Model;
+	class MultiplicityElement;
+	class NamedElement;
+	class Namespace;
+	class Node;
+	class Object;
+	class ObjectFlow;
+	class ObjectNode;
+	class Observation;
+	class OccurrenceSpecification;
+	class OpaqueAction;
+	class OpaqueBehavior;
+	class OpaqueExpression;
+	class Operation;
+	class OperationTemplateParameter;
+	class OutputPin;
+	class Package;
+	class PackageImport;
+	class PackageMerge;
+	class PackageableElement;
+	class Parameter;
+	class ParameterSet;
+	class ParameterableElement;
+	class PartDecomposition;
+	class Pin;
+	class Port;
+	class PrimitiveType;
+	class Profile;
+	class ProfileApplication;
+	class Property;
+	class ProtocolConformance;
+	class ProtocolStateMachine;
+	class ProtocolTransition;
+	class Pseudostate;
+	class QualifierValue;
+	class RaiseExceptionAction;
+	class ReadExtentAction;
+	class ReadIsClassifiedObjectAction;
+	class ReadLinkAction;
+	class ReadLinkObjectEndAction;
+	class ReadLinkObjectEndQualifierAction;
+	class ReadSelfAction;
+	class ReadStructuralFeatureAction;
+	class ReadVariableAction;
+	class Realization;
+	class Reception;
+	class ReclassifyObjectAction;
+	class RedefinableElement;
+	class RedefinableTemplateSignature;
+	class ReduceAction;
+	class Region;
+	class Relationship;
+	class RemoveStructuralFeatureValueAction;
+	class RemoveVariableValueAction;
+	class ReplyAction;
+	class SendObjectAction;
+	class SendSignalAction;
+	class SequenceNode;
+	class Signal;
+	class SignalEvent;
+	class Slot;
+	class StartClassifierBehaviorAction;
+	class StartObjectBehaviorAction;
+	class State;
+	class StateInvariant;
+	class StateMachine;
+	class Stereotype;
+	class StringExpression;
+	class StructuralFeature;
+	class StructuralFeatureAction;
+	class StructuredActivityNode;
+	class StructuredClassifier;
+	class Substitution;
+	class TemplateBinding;
+	class TemplateParameter;
+	class TemplateParameterSubstitution;
+	class TemplateSignature;
+	class TemplateableElement;
+	class TestIdentityAction;
+	class TimeConstraint;
+	class TimeEvent;
+	class TimeExpression;
+	class TimeInterval;
+	class TimeObservation;
+	class Transition;
+	class Trigger;
+	class Type;
+	class TypedElement;
+	class UnmarshallAction;
+	class Usage;
+	class UseCase;
+	class ValuePin;
+	class ValueSpecification;
+	class ValueSpecificationAction;
+	class Variable;
+	class VariableAction;
+	class Vertex;
+	class WriteLinkAction;
+	class WriteStructuralFeatureAction;
+	class WriteVariableAction;
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace uml
 {

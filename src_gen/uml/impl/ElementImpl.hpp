@@ -31,6 +31,7 @@
 #include "uml/impl/ObjectImpl.hpp"
 
 #include "util/stereotypestorage.hpp"
+#include "uml/Property.hpp"
 
 
 //*********************************

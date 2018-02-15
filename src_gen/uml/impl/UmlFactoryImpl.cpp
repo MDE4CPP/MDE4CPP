@@ -4,6 +4,253 @@
 #include "ecore/EClass.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
+
+#include "uml/impl/AbstractionImpl.hpp"
+#include "uml/impl/AcceptCallActionImpl.hpp"
+#include "uml/impl/AcceptEventActionImpl.hpp"
+#include "uml/impl/ActionImpl.hpp"
+#include "uml/impl/ActionExecutionSpecificationImpl.hpp"
+#include "uml/impl/ActionInputPinImpl.hpp"
+#include "uml/impl/ActivityImpl.hpp"
+#include "uml/impl/ActivityContentImpl.hpp"
+#include "uml/impl/ActivityEdgeImpl.hpp"
+#include "uml/impl/ActivityFinalNodeImpl.hpp"
+#include "uml/impl/ActivityGroupImpl.hpp"
+#include "uml/impl/ActivityNodeImpl.hpp"
+#include "uml/impl/ActivityParameterNodeImpl.hpp"
+#include "uml/impl/ActivityPartitionImpl.hpp"
+#include "uml/impl/ActorImpl.hpp"
+#include "uml/impl/AddStructuralFeatureValueActionImpl.hpp"
+#include "uml/impl/AddVariableValueActionImpl.hpp"
+#include "uml/impl/AnyReceiveEventImpl.hpp"
+#include "uml/impl/ArtifactImpl.hpp"
+#include "uml/impl/AssociationImpl.hpp"
+#include "uml/impl/AssociationClassImpl.hpp"
+#include "uml/impl/BehaviorImpl.hpp"
+#include "uml/impl/BehaviorExecutionSpecificationImpl.hpp"
+#include "uml/impl/BehavioralFeatureImpl.hpp"
+#include "uml/impl/BehavioredClassifierImpl.hpp"
+#include "uml/impl/BroadcastSignalActionImpl.hpp"
+#include "uml/impl/CallActionImpl.hpp"
+#include "uml/impl/CallBehaviorActionImpl.hpp"
+#include "uml/impl/CallEventImpl.hpp"
+#include "uml/impl/CallOperationActionImpl.hpp"
+#include "uml/impl/CentralBufferNodeImpl.hpp"
+#include "uml/impl/ChangeEventImpl.hpp"
+#include "uml/impl/ClassImpl.hpp"
+#include "uml/impl/ClassifierImpl.hpp"
+#include "uml/impl/ClassifierTemplateParameterImpl.hpp"
+#include "uml/impl/ClauseImpl.hpp"
+#include "uml/impl/ClearAssociationActionImpl.hpp"
+#include "uml/impl/ClearStructuralFeatureActionImpl.hpp"
+#include "uml/impl/ClearVariableActionImpl.hpp"
+#include "uml/impl/CollaborationImpl.hpp"
+#include "uml/impl/CollaborationUseImpl.hpp"
+#include "uml/impl/CombinedFragmentImpl.hpp"
+#include "uml/impl/CommentImpl.hpp"
+#include "uml/impl/CommunicationPathImpl.hpp"
+#include "uml/impl/ComponentImpl.hpp"
+#include "uml/impl/ComponentRealizationImpl.hpp"
+#include "uml/impl/ConditionalNodeImpl.hpp"
+#include "uml/impl/ConnectableElementImpl.hpp"
+#include "uml/impl/ConnectableElementTemplateParameterImpl.hpp"
+#include "uml/impl/ConnectionPointReferenceImpl.hpp"
+#include "uml/impl/ConnectorImpl.hpp"
+#include "uml/impl/ConnectorEndImpl.hpp"
+#include "uml/impl/ConsiderIgnoreFragmentImpl.hpp"
+#include "uml/impl/ConstraintImpl.hpp"
+#include "uml/impl/ContinuationImpl.hpp"
+#include "uml/impl/ControlFlowImpl.hpp"
+#include "uml/impl/ControlNodeImpl.hpp"
+#include "uml/impl/CreateLinkActionImpl.hpp"
+#include "uml/impl/CreateLinkObjectActionImpl.hpp"
+#include "uml/impl/CreateObjectActionImpl.hpp"
+#include "uml/impl/DataStoreNodeImpl.hpp"
+#include "uml/impl/DataTypeImpl.hpp"
+#include "uml/impl/DecisionNodeImpl.hpp"
+#include "uml/impl/DependencyImpl.hpp"
+#include "uml/impl/DeployedArtifactImpl.hpp"
+#include "uml/impl/DeploymentImpl.hpp"
+#include "uml/impl/DeploymentSpecificationImpl.hpp"
+#include "uml/impl/DeploymentTargetImpl.hpp"
+#include "uml/impl/DestroyLinkActionImpl.hpp"
+#include "uml/impl/DestroyObjectActionImpl.hpp"
+#include "uml/impl/DestructionOccurrenceSpecificationImpl.hpp"
+#include "uml/impl/DeviceImpl.hpp"
+#include "uml/impl/DirectedRelationshipImpl.hpp"
+#include "uml/impl/DurationImpl.hpp"
+#include "uml/impl/DurationConstraintImpl.hpp"
+#include "uml/impl/DurationIntervalImpl.hpp"
+#include "uml/impl/DurationObservationImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
+#include "uml/impl/ElementImportImpl.hpp"
+#include "uml/impl/EncapsulatedClassifierImpl.hpp"
+#include "uml/impl/EnumerationImpl.hpp"
+#include "uml/impl/EnumerationLiteralImpl.hpp"
+#include "uml/impl/EventImpl.hpp"
+#include "uml/impl/ExceptionHandlerImpl.hpp"
+#include "uml/impl/ExecutableNodeImpl.hpp"
+#include "uml/impl/ExecutionEnvironmentImpl.hpp"
+#include "uml/impl/ExecutionOccurrenceSpecificationImpl.hpp"
+#include "uml/impl/ExecutionSpecificationImpl.hpp"
+#include "uml/impl/ExpansionNodeImpl.hpp"
+#include "uml/impl/ExpansionRegionImpl.hpp"
+#include "uml/impl/ExpressionImpl.hpp"
+#include "uml/impl/ExtendImpl.hpp"
+#include "uml/impl/ExtensionImpl.hpp"
+#include "uml/impl/ExtensionEndImpl.hpp"
+#include "uml/impl/ExtensionPointImpl.hpp"
+#include "uml/impl/FactoryImpl.hpp"
+#include "uml/impl/FeatureImpl.hpp"
+#include "uml/impl/FinalNodeImpl.hpp"
+#include "uml/impl/FinalStateImpl.hpp"
+#include "uml/impl/FlowFinalNodeImpl.hpp"
+#include "uml/impl/ForkNodeImpl.hpp"
+#include "uml/impl/FunctionBehaviorImpl.hpp"
+#include "uml/impl/GateImpl.hpp"
+#include "uml/impl/GeneralOrderingImpl.hpp"
+#include "uml/impl/GeneralizationImpl.hpp"
+#include "uml/impl/GeneralizationSetImpl.hpp"
+#include "uml/impl/ImageImpl.hpp"
+#include "uml/impl/IncludeImpl.hpp"
+#include "uml/impl/InformationFlowImpl.hpp"
+#include "uml/impl/InformationItemImpl.hpp"
+#include "uml/impl/InitialNodeImpl.hpp"
+#include "uml/impl/InputPinImpl.hpp"
+#include "uml/impl/InstanceSpecificationImpl.hpp"
+#include "uml/impl/InstanceValueImpl.hpp"
+#include "uml/impl/InteractionImpl.hpp"
+#include "uml/impl/InteractionConstraintImpl.hpp"
+#include "uml/impl/InteractionFragmentImpl.hpp"
+#include "uml/impl/InteractionOperandImpl.hpp"
+#include "uml/impl/InteractionUseImpl.hpp"
+#include "uml/impl/InterfaceImpl.hpp"
+#include "uml/impl/InterfaceRealizationImpl.hpp"
+#include "uml/impl/InterruptibleActivityRegionImpl.hpp"
+#include "uml/impl/IntervalImpl.hpp"
+#include "uml/impl/IntervalConstraintImpl.hpp"
+#include "uml/impl/InvocationActionImpl.hpp"
+#include "uml/impl/JoinNodeImpl.hpp"
+#include "uml/impl/LifelineImpl.hpp"
+#include "uml/impl/LinkActionImpl.hpp"
+#include "uml/impl/LinkEndCreationDataImpl.hpp"
+#include "uml/impl/LinkEndDataImpl.hpp"
+#include "uml/impl/LinkEndDestructionDataImpl.hpp"
+#include "uml/impl/LiteralBooleanImpl.hpp"
+#include "uml/impl/LiteralIntegerImpl.hpp"
+#include "uml/impl/LiteralNullImpl.hpp"
+#include "uml/impl/LiteralRealImpl.hpp"
+#include "uml/impl/LiteralSpecificationImpl.hpp"
+#include "uml/impl/LiteralStringImpl.hpp"
+#include "uml/impl/LiteralUnlimitedNaturalImpl.hpp"
+#include "uml/impl/LoopNodeImpl.hpp"
+#include "uml/impl/ManifestationImpl.hpp"
+#include "uml/impl/MergeNodeImpl.hpp"
+#include "uml/impl/MessageImpl.hpp"
+#include "uml/impl/MessageEndImpl.hpp"
+#include "uml/impl/MessageEventImpl.hpp"
+#include "uml/impl/MessageOccurrenceSpecificationImpl.hpp"
+#include "uml/impl/ModelImpl.hpp"
+#include "uml/impl/MultiplicityElementImpl.hpp"
+#include "uml/impl/NamedElementImpl.hpp"
+#include "uml/impl/NamespaceImpl.hpp"
+#include "uml/impl/NodeImpl.hpp"
+#include "uml/impl/ObjectImpl.hpp"
+#include "uml/impl/ObjectFlowImpl.hpp"
+#include "uml/impl/ObjectNodeImpl.hpp"
+#include "uml/impl/ObservationImpl.hpp"
+#include "uml/impl/OccurrenceSpecificationImpl.hpp"
+#include "uml/impl/OpaqueActionImpl.hpp"
+#include "uml/impl/OpaqueBehaviorImpl.hpp"
+#include "uml/impl/OpaqueExpressionImpl.hpp"
+#include "uml/impl/OperationImpl.hpp"
+#include "uml/impl/OperationTemplateParameterImpl.hpp"
+#include "uml/impl/OutputPinImpl.hpp"
+#include "uml/impl/PackageImpl.hpp"
+#include "uml/impl/PackageImportImpl.hpp"
+#include "uml/impl/PackageMergeImpl.hpp"
+#include "uml/impl/PackageableElementImpl.hpp"
+#include "uml/impl/ParameterImpl.hpp"
+#include "uml/impl/ParameterSetImpl.hpp"
+#include "uml/impl/ParameterableElementImpl.hpp"
+#include "uml/impl/PartDecompositionImpl.hpp"
+#include "uml/impl/PinImpl.hpp"
+#include "uml/impl/PortImpl.hpp"
+#include "uml/impl/PrimitiveTypeImpl.hpp"
+#include "uml/impl/ProfileImpl.hpp"
+#include "uml/impl/ProfileApplicationImpl.hpp"
+#include "uml/impl/PropertyImpl.hpp"
+#include "uml/impl/ProtocolConformanceImpl.hpp"
+#include "uml/impl/ProtocolStateMachineImpl.hpp"
+#include "uml/impl/ProtocolTransitionImpl.hpp"
+#include "uml/impl/PseudostateImpl.hpp"
+#include "uml/impl/QualifierValueImpl.hpp"
+#include "uml/impl/RaiseExceptionActionImpl.hpp"
+#include "uml/impl/ReadExtentActionImpl.hpp"
+#include "uml/impl/ReadIsClassifiedObjectActionImpl.hpp"
+#include "uml/impl/ReadLinkActionImpl.hpp"
+#include "uml/impl/ReadLinkObjectEndActionImpl.hpp"
+#include "uml/impl/ReadLinkObjectEndQualifierActionImpl.hpp"
+#include "uml/impl/ReadSelfActionImpl.hpp"
+#include "uml/impl/ReadStructuralFeatureActionImpl.hpp"
+#include "uml/impl/ReadVariableActionImpl.hpp"
+#include "uml/impl/RealizationImpl.hpp"
+#include "uml/impl/ReceptionImpl.hpp"
+#include "uml/impl/ReclassifyObjectActionImpl.hpp"
+#include "uml/impl/RedefinableElementImpl.hpp"
+#include "uml/impl/RedefinableTemplateSignatureImpl.hpp"
+#include "uml/impl/ReduceActionImpl.hpp"
+#include "uml/impl/RegionImpl.hpp"
+#include "uml/impl/RelationshipImpl.hpp"
+#include "uml/impl/RemoveStructuralFeatureValueActionImpl.hpp"
+#include "uml/impl/RemoveVariableValueActionImpl.hpp"
+#include "uml/impl/ReplyActionImpl.hpp"
+#include "uml/impl/SendObjectActionImpl.hpp"
+#include "uml/impl/SendSignalActionImpl.hpp"
+#include "uml/impl/SequenceNodeImpl.hpp"
+#include "uml/impl/SignalImpl.hpp"
+#include "uml/impl/SignalEventImpl.hpp"
+#include "uml/impl/SlotImpl.hpp"
+#include "uml/impl/StartClassifierBehaviorActionImpl.hpp"
+#include "uml/impl/StartObjectBehaviorActionImpl.hpp"
+#include "uml/impl/StateImpl.hpp"
+#include "uml/impl/StateInvariantImpl.hpp"
+#include "uml/impl/StateMachineImpl.hpp"
+#include "uml/impl/StereotypeImpl.hpp"
+#include "uml/impl/StringExpressionImpl.hpp"
+#include "uml/impl/StructuralFeatureImpl.hpp"
+#include "uml/impl/StructuralFeatureActionImpl.hpp"
+#include "uml/impl/StructuredActivityNodeImpl.hpp"
+#include "uml/impl/StructuredClassifierImpl.hpp"
+#include "uml/impl/SubstitutionImpl.hpp"
+#include "uml/impl/TemplateBindingImpl.hpp"
+#include "uml/impl/TemplateParameterImpl.hpp"
+#include "uml/impl/TemplateParameterSubstitutionImpl.hpp"
+#include "uml/impl/TemplateSignatureImpl.hpp"
+#include "uml/impl/TemplateableElementImpl.hpp"
+#include "uml/impl/TestIdentityActionImpl.hpp"
+#include "uml/impl/TimeConstraintImpl.hpp"
+#include "uml/impl/TimeEventImpl.hpp"
+#include "uml/impl/TimeExpressionImpl.hpp"
+#include "uml/impl/TimeIntervalImpl.hpp"
+#include "uml/impl/TimeObservationImpl.hpp"
+#include "uml/impl/TransitionImpl.hpp"
+#include "uml/impl/TriggerImpl.hpp"
+#include "uml/impl/TypeImpl.hpp"
+#include "uml/impl/TypedElementImpl.hpp"
+#include "uml/impl/UnmarshallActionImpl.hpp"
+#include "uml/impl/UsageImpl.hpp"
+#include "uml/impl/UseCaseImpl.hpp"
+#include "uml/impl/ValuePinImpl.hpp"
+#include "uml/impl/ValueSpecificationImpl.hpp"
+#include "uml/impl/ValueSpecificationActionImpl.hpp"
+#include "uml/impl/VariableImpl.hpp"
+#include "uml/impl/VariableActionImpl.hpp"
+#include "uml/impl/VertexImpl.hpp"
+#include "uml/impl/WriteLinkActionImpl.hpp"
+#include "uml/impl/WriteStructuralFeatureActionImpl.hpp"
+#include "uml/impl/WriteVariableActionImpl.hpp"
+
 using namespace uml;
 
 //*********************************
@@ -12,201 +259,201 @@ using namespace uml;
 
 UmlFactoryImpl::UmlFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("Abstraction", UmlPackage::ABSTRACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptCallAction", UmlPackage::ACCEPTCALLACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventAction", UmlPackage::ACCEPTEVENTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActionExecutionSpecification", UmlPackage::ACTIONEXECUTIONSPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActionInputPin", UmlPackage::ACTIONINPUTPIN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Activity", UmlPackage::ACTIVITY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNode", UmlPackage::ACTIVITYFINALNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNode", UmlPackage::ACTIVITYPARAMETERNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityPartition", UmlPackage::ACTIVITYPARTITION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Actor", UmlPackage::ACTOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Artifact", UmlPackage::ARTIFACT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Association", UmlPackage::ASSOCIATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AssociationClass", UmlPackage::ASSOCIATIONCLASS_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BehaviorExecutionSpecification", UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BroadcastSignalAction", UmlPackage::BROADCASTSIGNALACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorAction", UmlPackage::CALLBEHAVIORACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallEvent", UmlPackage::CALLEVENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationAction", UmlPackage::CALLOPERATIONACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNode", UmlPackage::CENTRALBUFFERNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ChangeEvent", UmlPackage::CHANGEEVENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Class", UmlPackage::CLASS_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierTemplateParameter", UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Clause", UmlPackage::CLAUSE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationAction", UmlPackage::CLEARASSOCIATIONACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureAction", UmlPackage::CLEARSTRUCTURALFEATUREACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearVariableAction", UmlPackage::CLEARVARIABLEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Collaboration", UmlPackage::COLLABORATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CollaborationUse", UmlPackage::COLLABORATIONUSE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CombinedFragment", UmlPackage::COMBINEDFRAGMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Comment", UmlPackage::COMMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CommunicationPath", UmlPackage::COMMUNICATIONPATH_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Component", UmlPackage::COMPONENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ComponentRealization", UmlPackage::COMPONENTREALIZATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNode", UmlPackage::CONDITIONALNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectableElementTemplateParameter", UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectionPointReference", UmlPackage::CONNECTIONPOINTREFERENCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Connector", UmlPackage::CONNECTOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectorEnd", UmlPackage::CONNECTOREND_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConsiderIgnoreFragment", UmlPackage::CONSIDERIGNOREFRAGMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Constraint", UmlPackage::CONSTRAINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Continuation", UmlPackage::CONTINUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ControlFlow", UmlPackage::CONTROLFLOW_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkAction", UmlPackage::CREATELINKACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkObjectAction", UmlPackage::CREATELINKOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectAction", UmlPackage::CREATEOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNode", UmlPackage::DATASTORENODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataType", UmlPackage::DATATYPE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNode", UmlPackage::DECISIONNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Dependency", UmlPackage::DEPENDENCY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Deployment", UmlPackage::DEPLOYMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DeploymentSpecification", UmlPackage::DEPLOYMENTSPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkAction", UmlPackage::DESTROYLINKACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectAction", UmlPackage::DESTROYOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestructionOccurrenceSpecification", UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Device", UmlPackage::DEVICE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Duration", UmlPackage::DURATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationConstraint", UmlPackage::DURATIONCONSTRAINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationInterval", UmlPackage::DURATIONINTERVAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationObservation", UmlPackage::DURATIONOBSERVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ElementImport", UmlPackage::ELEMENTIMPORT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Enumeration", UmlPackage::ENUMERATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationLiteral", UmlPackage::ENUMERATIONLITERAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExceptionHandler", UmlPackage::EXCEPTIONHANDLER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionEnvironment", UmlPackage::EXECUTIONENVIRONMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionOccurrenceSpecification", UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNode", UmlPackage::EXPANSIONNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegion", UmlPackage::EXPANSIONREGION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Expression", UmlPackage::EXPRESSION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Extend", UmlPackage::EXTEND_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Extension", UmlPackage::EXTENSION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionEnd", UmlPackage::EXTENSIONEND_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionPoint", UmlPackage::EXTENSIONPOINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Factory", UmlPackage::FACTORY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FinalState", UmlPackage::FINALSTATE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNode", UmlPackage::FLOWFINALNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNode", UmlPackage::FORKNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FunctionBehavior", UmlPackage::FUNCTIONBEHAVIOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Gate", UmlPackage::GATE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralOrdering", UmlPackage::GENERALORDERING_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Generalization", UmlPackage::GENERALIZATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralizationSet", UmlPackage::GENERALIZATIONSET_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Image", UmlPackage::IMAGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Include", UmlPackage::INCLUDE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InformationFlow", UmlPackage::INFORMATIONFLOW_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InformationItem", UmlPackage::INFORMATIONITEM_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNode", UmlPackage::INITIALNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InputPin", UmlPackage::INPUTPIN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceSpecification", UmlPackage::INSTANCESPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValue", UmlPackage::INSTANCEVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interaction", UmlPackage::INTERACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionConstraint", UmlPackage::INTERACTIONCONSTRAINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionOperand", UmlPackage::INTERACTIONOPERAND_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionUse", UmlPackage::INTERACTIONUSE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interface", UmlPackage::INTERFACE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InterfaceRealization", UmlPackage::INTERFACEREALIZATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InterruptibleActivityRegion", UmlPackage::INTERRUPTIBLEACTIVITYREGION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interval", UmlPackage::INTERVAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("IntervalConstraint", UmlPackage::INTERVALCONSTRAINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNode", UmlPackage::JOINNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Lifeline", UmlPackage::LIFELINE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndCreationData", UmlPackage::LINKENDCREATIONDATA_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndData", UmlPackage::LINKENDDATA_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndDestructionData", UmlPackage::LINKENDDESTRUCTIONDATA_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBoolean", UmlPackage::LITERALBOOLEAN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralInteger", UmlPackage::LITERALINTEGER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNull", UmlPackage::LITERALNULL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralReal", UmlPackage::LITERALREAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralString", UmlPackage::LITERALSTRING_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNatural", UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNode", UmlPackage::LOOPNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Manifestation", UmlPackage::MANIFESTATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNode", UmlPackage::MERGENODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Message", UmlPackage::MESSAGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MessageOccurrenceSpecification", UmlPackage::MESSAGEOCCURRENCESPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Model", UmlPackage::MODEL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Node", UmlPackage::NODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Object", UmlPackage::OBJECT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectFlow", UmlPackage::OBJECTFLOW_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OccurrenceSpecification", UmlPackage::OCCURRENCESPECIFICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueAction", UmlPackage::OPAQUEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueBehavior", UmlPackage::OPAQUEBEHAVIOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueExpression", UmlPackage::OPAQUEEXPRESSION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Operation", UmlPackage::OPERATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OperationTemplateParameter", UmlPackage::OPERATIONTEMPLATEPARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPin", UmlPackage::OUTPUTPIN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Package", UmlPackage::PACKAGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PackageImport", UmlPackage::PACKAGEIMPORT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PackageMerge", UmlPackage::PACKAGEMERGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Parameter", UmlPackage::PARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterSet", UmlPackage::PARAMETERSET_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PartDecomposition", UmlPackage::PARTDECOMPOSITION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Port", UmlPackage::PORT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PrimitiveType", UmlPackage::PRIMITIVETYPE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Profile", UmlPackage::PROFILE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProfileApplication", UmlPackage::PROFILEAPPLICATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Property", UmlPackage::PROPERTY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolConformance", UmlPackage::PROTOCOLCONFORMANCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolStateMachine", UmlPackage::PROTOCOLSTATEMACHINE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolTransition", UmlPackage::PROTOCOLTRANSITION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Pseudostate", UmlPackage::PSEUDOSTATE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("QualifierValue", UmlPackage::QUALIFIERVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RaiseExceptionAction", UmlPackage::RAISEEXCEPTIONACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentAction", UmlPackage::READEXTENTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectAction", UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkAction", UmlPackage::READLINKACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndAction", UmlPackage::READLINKOBJECTENDACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndQualifierAction", UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfAction", UmlPackage::READSELFACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureAction", UmlPackage::READSTRUCTURALFEATUREACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadVariableAction", UmlPackage::READVARIABLEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Realization", UmlPackage::REALIZATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Reception", UmlPackage::RECEPTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectAction", UmlPackage::RECLASSIFYOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinableTemplateSignature", UmlPackage::REDEFINABLETEMPLATESIGNATURE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceAction", UmlPackage::REDUCEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Region", UmlPackage::REGION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueAction", UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveVariableValueAction", UmlPackage::REMOVEVARIABLEVALUEACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReplyAction", UmlPackage::REPLYACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendObjectAction", UmlPackage::SENDOBJECTACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalAction", UmlPackage::SENDSIGNALACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SequenceNode", UmlPackage::SEQUENCENODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Signal", UmlPackage::SIGNAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SignalEvent", UmlPackage::SIGNALEVENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Slot", UmlPackage::SLOT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorAction", UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorAction", UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("State", UmlPackage::STATE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StateInvariant", UmlPackage::STATEINVARIANT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StateMachine", UmlPackage::STATEMACHINE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Stereotype", UmlPackage::STEREOTYPE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StringExpression", UmlPackage::STRINGEXPRESSION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNode", UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Substitution", UmlPackage::SUBSTITUTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateBinding", UmlPackage::TEMPLATEBINDING_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameter", UmlPackage::TEMPLATEPARAMETER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameterSubstitution", UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateSignature", UmlPackage::TEMPLATESIGNATURE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityAction", UmlPackage::TESTIDENTITYACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeConstraint", UmlPackage::TIMECONSTRAINT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeEvent", UmlPackage::TIMEEVENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeExpression", UmlPackage::TIMEEXPRESSION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeInterval", UmlPackage::TIMEINTERVAL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeObservation", UmlPackage::TIMEOBSERVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Transition", UmlPackage::TRANSITION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Trigger", UmlPackage::TRIGGER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UnmarshallAction", UmlPackage::UNMARSHALLACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Usage", UmlPackage::USAGE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UseCase", UmlPackage::USECASE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValuePin", UmlPackage::VALUEPIN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificationAction", UmlPackage::VALUESPECIFICATIONACTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Variable", UmlPackage::VARIABLE_ECLASS));
+	m_idMap.insert(std::make_pair("Abstraction", UmlPackage::ABSTRACTION_ECLASS));
+	m_idMap.insert(std::make_pair("AcceptCallAction", UmlPackage::ACCEPTCALLACTION_ECLASS));
+	m_idMap.insert(std::make_pair("AcceptEventAction", UmlPackage::ACCEPTEVENTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ActionExecutionSpecification", UmlPackage::ACTIONEXECUTIONSPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("ActionInputPin", UmlPackage::ACTIONINPUTPIN_ECLASS));
+	m_idMap.insert(std::make_pair("Activity", UmlPackage::ACTIVITY_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityFinalNode", UmlPackage::ACTIVITYFINALNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityParameterNode", UmlPackage::ACTIVITYPARAMETERNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityPartition", UmlPackage::ACTIVITYPARTITION_ECLASS));
+	m_idMap.insert(std::make_pair("Actor", UmlPackage::ACTOR_ECLASS));
+	m_idMap.insert(std::make_pair("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT_ECLASS));
+	m_idMap.insert(std::make_pair("Artifact", UmlPackage::ARTIFACT_ECLASS));
+	m_idMap.insert(std::make_pair("Association", UmlPackage::ASSOCIATION_ECLASS));
+	m_idMap.insert(std::make_pair("AssociationClass", UmlPackage::ASSOCIATIONCLASS_ECLASS));
+	m_idMap.insert(std::make_pair("BehaviorExecutionSpecification", UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("BroadcastSignalAction", UmlPackage::BROADCASTSIGNALACTION_ECLASS));
+	m_idMap.insert(std::make_pair("CallBehaviorAction", UmlPackage::CALLBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::make_pair("CallEvent", UmlPackage::CALLEVENT_ECLASS));
+	m_idMap.insert(std::make_pair("CallOperationAction", UmlPackage::CALLOPERATIONACTION_ECLASS));
+	m_idMap.insert(std::make_pair("CentralBufferNode", UmlPackage::CENTRALBUFFERNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ChangeEvent", UmlPackage::CHANGEEVENT_ECLASS));
+	m_idMap.insert(std::make_pair("Class", UmlPackage::CLASS_ECLASS));
+	m_idMap.insert(std::make_pair("ClassifierTemplateParameter", UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("Clause", UmlPackage::CLAUSE_ECLASS));
+	m_idMap.insert(std::make_pair("ClearAssociationAction", UmlPackage::CLEARASSOCIATIONACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ClearStructuralFeatureAction", UmlPackage::CLEARSTRUCTURALFEATUREACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ClearVariableAction", UmlPackage::CLEARVARIABLEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("Collaboration", UmlPackage::COLLABORATION_ECLASS));
+	m_idMap.insert(std::make_pair("CollaborationUse", UmlPackage::COLLABORATIONUSE_ECLASS));
+	m_idMap.insert(std::make_pair("CombinedFragment", UmlPackage::COMBINEDFRAGMENT_ECLASS));
+	m_idMap.insert(std::make_pair("Comment", UmlPackage::COMMENT_ECLASS));
+	m_idMap.insert(std::make_pair("CommunicationPath", UmlPackage::COMMUNICATIONPATH_ECLASS));
+	m_idMap.insert(std::make_pair("Component", UmlPackage::COMPONENT_ECLASS));
+	m_idMap.insert(std::make_pair("ComponentRealization", UmlPackage::COMPONENTREALIZATION_ECLASS));
+	m_idMap.insert(std::make_pair("ConditionalNode", UmlPackage::CONDITIONALNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ConnectableElementTemplateParameter", UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("ConnectionPointReference", UmlPackage::CONNECTIONPOINTREFERENCE_ECLASS));
+	m_idMap.insert(std::make_pair("Connector", UmlPackage::CONNECTOR_ECLASS));
+	m_idMap.insert(std::make_pair("ConnectorEnd", UmlPackage::CONNECTOREND_ECLASS));
+	m_idMap.insert(std::make_pair("ConsiderIgnoreFragment", UmlPackage::CONSIDERIGNOREFRAGMENT_ECLASS));
+	m_idMap.insert(std::make_pair("Constraint", UmlPackage::CONSTRAINT_ECLASS));
+	m_idMap.insert(std::make_pair("Continuation", UmlPackage::CONTINUATION_ECLASS));
+	m_idMap.insert(std::make_pair("ControlFlow", UmlPackage::CONTROLFLOW_ECLASS));
+	m_idMap.insert(std::make_pair("CreateLinkAction", UmlPackage::CREATELINKACTION_ECLASS));
+	m_idMap.insert(std::make_pair("CreateLinkObjectAction", UmlPackage::CREATELINKOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("CreateObjectAction", UmlPackage::CREATEOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("DataStoreNode", UmlPackage::DATASTORENODE_ECLASS));
+	m_idMap.insert(std::make_pair("DataType", UmlPackage::DATATYPE_ECLASS));
+	m_idMap.insert(std::make_pair("DecisionNode", UmlPackage::DECISIONNODE_ECLASS));
+	m_idMap.insert(std::make_pair("Dependency", UmlPackage::DEPENDENCY_ECLASS));
+	m_idMap.insert(std::make_pair("Deployment", UmlPackage::DEPLOYMENT_ECLASS));
+	m_idMap.insert(std::make_pair("DeploymentSpecification", UmlPackage::DEPLOYMENTSPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("DestroyLinkAction", UmlPackage::DESTROYLINKACTION_ECLASS));
+	m_idMap.insert(std::make_pair("DestroyObjectAction", UmlPackage::DESTROYOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("DestructionOccurrenceSpecification", UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("Device", UmlPackage::DEVICE_ECLASS));
+	m_idMap.insert(std::make_pair("Duration", UmlPackage::DURATION_ECLASS));
+	m_idMap.insert(std::make_pair("DurationConstraint", UmlPackage::DURATIONCONSTRAINT_ECLASS));
+	m_idMap.insert(std::make_pair("DurationInterval", UmlPackage::DURATIONINTERVAL_ECLASS));
+	m_idMap.insert(std::make_pair("DurationObservation", UmlPackage::DURATIONOBSERVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ElementImport", UmlPackage::ELEMENTIMPORT_ECLASS));
+	m_idMap.insert(std::make_pair("Enumeration", UmlPackage::ENUMERATION_ECLASS));
+	m_idMap.insert(std::make_pair("EnumerationLiteral", UmlPackage::ENUMERATIONLITERAL_ECLASS));
+	m_idMap.insert(std::make_pair("ExceptionHandler", UmlPackage::EXCEPTIONHANDLER_ECLASS));
+	m_idMap.insert(std::make_pair("ExecutionEnvironment", UmlPackage::EXECUTIONENVIRONMENT_ECLASS));
+	m_idMap.insert(std::make_pair("ExecutionOccurrenceSpecification", UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("ExpansionNode", UmlPackage::EXPANSIONNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ExpansionRegion", UmlPackage::EXPANSIONREGION_ECLASS));
+	m_idMap.insert(std::make_pair("Expression", UmlPackage::EXPRESSION_ECLASS));
+	m_idMap.insert(std::make_pair("Extend", UmlPackage::EXTEND_ECLASS));
+	m_idMap.insert(std::make_pair("Extension", UmlPackage::EXTENSION_ECLASS));
+	m_idMap.insert(std::make_pair("ExtensionEnd", UmlPackage::EXTENSIONEND_ECLASS));
+	m_idMap.insert(std::make_pair("ExtensionPoint", UmlPackage::EXTENSIONPOINT_ECLASS));
+	m_idMap.insert(std::make_pair("Factory", UmlPackage::FACTORY_ECLASS));
+	m_idMap.insert(std::make_pair("FinalState", UmlPackage::FINALSTATE_ECLASS));
+	m_idMap.insert(std::make_pair("FlowFinalNode", UmlPackage::FLOWFINALNODE_ECLASS));
+	m_idMap.insert(std::make_pair("ForkNode", UmlPackage::FORKNODE_ECLASS));
+	m_idMap.insert(std::make_pair("FunctionBehavior", UmlPackage::FUNCTIONBEHAVIOR_ECLASS));
+	m_idMap.insert(std::make_pair("Gate", UmlPackage::GATE_ECLASS));
+	m_idMap.insert(std::make_pair("GeneralOrdering", UmlPackage::GENERALORDERING_ECLASS));
+	m_idMap.insert(std::make_pair("Generalization", UmlPackage::GENERALIZATION_ECLASS));
+	m_idMap.insert(std::make_pair("GeneralizationSet", UmlPackage::GENERALIZATIONSET_ECLASS));
+	m_idMap.insert(std::make_pair("Image", UmlPackage::IMAGE_ECLASS));
+	m_idMap.insert(std::make_pair("Include", UmlPackage::INCLUDE_ECLASS));
+	m_idMap.insert(std::make_pair("InformationFlow", UmlPackage::INFORMATIONFLOW_ECLASS));
+	m_idMap.insert(std::make_pair("InformationItem", UmlPackage::INFORMATIONITEM_ECLASS));
+	m_idMap.insert(std::make_pair("InitialNode", UmlPackage::INITIALNODE_ECLASS));
+	m_idMap.insert(std::make_pair("InputPin", UmlPackage::INPUTPIN_ECLASS));
+	m_idMap.insert(std::make_pair("InstanceSpecification", UmlPackage::INSTANCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("InstanceValue", UmlPackage::INSTANCEVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("Interaction", UmlPackage::INTERACTION_ECLASS));
+	m_idMap.insert(std::make_pair("InteractionConstraint", UmlPackage::INTERACTIONCONSTRAINT_ECLASS));
+	m_idMap.insert(std::make_pair("InteractionOperand", UmlPackage::INTERACTIONOPERAND_ECLASS));
+	m_idMap.insert(std::make_pair("InteractionUse", UmlPackage::INTERACTIONUSE_ECLASS));
+	m_idMap.insert(std::make_pair("Interface", UmlPackage::INTERFACE_ECLASS));
+	m_idMap.insert(std::make_pair("InterfaceRealization", UmlPackage::INTERFACEREALIZATION_ECLASS));
+	m_idMap.insert(std::make_pair("InterruptibleActivityRegion", UmlPackage::INTERRUPTIBLEACTIVITYREGION_ECLASS));
+	m_idMap.insert(std::make_pair("Interval", UmlPackage::INTERVAL_ECLASS));
+	m_idMap.insert(std::make_pair("IntervalConstraint", UmlPackage::INTERVALCONSTRAINT_ECLASS));
+	m_idMap.insert(std::make_pair("JoinNode", UmlPackage::JOINNODE_ECLASS));
+	m_idMap.insert(std::make_pair("Lifeline", UmlPackage::LIFELINE_ECLASS));
+	m_idMap.insert(std::make_pair("LinkEndCreationData", UmlPackage::LINKENDCREATIONDATA_ECLASS));
+	m_idMap.insert(std::make_pair("LinkEndData", UmlPackage::LINKENDDATA_ECLASS));
+	m_idMap.insert(std::make_pair("LinkEndDestructionData", UmlPackage::LINKENDDESTRUCTIONDATA_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralBoolean", UmlPackage::LITERALBOOLEAN_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralInteger", UmlPackage::LITERALINTEGER_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralNull", UmlPackage::LITERALNULL_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralReal", UmlPackage::LITERALREAL_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralString", UmlPackage::LITERALSTRING_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralUnlimitedNatural", UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS));
+	m_idMap.insert(std::make_pair("LoopNode", UmlPackage::LOOPNODE_ECLASS));
+	m_idMap.insert(std::make_pair("Manifestation", UmlPackage::MANIFESTATION_ECLASS));
+	m_idMap.insert(std::make_pair("MergeNode", UmlPackage::MERGENODE_ECLASS));
+	m_idMap.insert(std::make_pair("Message", UmlPackage::MESSAGE_ECLASS));
+	m_idMap.insert(std::make_pair("MessageOccurrenceSpecification", UmlPackage::MESSAGEOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("Model", UmlPackage::MODEL_ECLASS));
+	m_idMap.insert(std::make_pair("Node", UmlPackage::NODE_ECLASS));
+	m_idMap.insert(std::make_pair("Object", UmlPackage::OBJECT_ECLASS));
+	m_idMap.insert(std::make_pair("ObjectFlow", UmlPackage::OBJECTFLOW_ECLASS));
+	m_idMap.insert(std::make_pair("OccurrenceSpecification", UmlPackage::OCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::make_pair("OpaqueAction", UmlPackage::OPAQUEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("OpaqueBehavior", UmlPackage::OPAQUEBEHAVIOR_ECLASS));
+	m_idMap.insert(std::make_pair("OpaqueExpression", UmlPackage::OPAQUEEXPRESSION_ECLASS));
+	m_idMap.insert(std::make_pair("Operation", UmlPackage::OPERATION_ECLASS));
+	m_idMap.insert(std::make_pair("OperationTemplateParameter", UmlPackage::OPERATIONTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("OutputPin", UmlPackage::OUTPUTPIN_ECLASS));
+	m_idMap.insert(std::make_pair("Package", UmlPackage::PACKAGE_ECLASS));
+	m_idMap.insert(std::make_pair("PackageImport", UmlPackage::PACKAGEIMPORT_ECLASS));
+	m_idMap.insert(std::make_pair("PackageMerge", UmlPackage::PACKAGEMERGE_ECLASS));
+	m_idMap.insert(std::make_pair("Parameter", UmlPackage::PARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("ParameterSet", UmlPackage::PARAMETERSET_ECLASS));
+	m_idMap.insert(std::make_pair("PartDecomposition", UmlPackage::PARTDECOMPOSITION_ECLASS));
+	m_idMap.insert(std::make_pair("Port", UmlPackage::PORT_ECLASS));
+	m_idMap.insert(std::make_pair("PrimitiveType", UmlPackage::PRIMITIVETYPE_ECLASS));
+	m_idMap.insert(std::make_pair("Profile", UmlPackage::PROFILE_ECLASS));
+	m_idMap.insert(std::make_pair("ProfileApplication", UmlPackage::PROFILEAPPLICATION_ECLASS));
+	m_idMap.insert(std::make_pair("Property", UmlPackage::PROPERTY_ECLASS));
+	m_idMap.insert(std::make_pair("ProtocolConformance", UmlPackage::PROTOCOLCONFORMANCE_ECLASS));
+	m_idMap.insert(std::make_pair("ProtocolStateMachine", UmlPackage::PROTOCOLSTATEMACHINE_ECLASS));
+	m_idMap.insert(std::make_pair("ProtocolTransition", UmlPackage::PROTOCOLTRANSITION_ECLASS));
+	m_idMap.insert(std::make_pair("Pseudostate", UmlPackage::PSEUDOSTATE_ECLASS));
+	m_idMap.insert(std::make_pair("QualifierValue", UmlPackage::QUALIFIERVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("RaiseExceptionAction", UmlPackage::RAISEEXCEPTIONACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadExtentAction", UmlPackage::READEXTENTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadIsClassifiedObjectAction", UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadLinkAction", UmlPackage::READLINKACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadLinkObjectEndAction", UmlPackage::READLINKOBJECTENDACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadLinkObjectEndQualifierAction", UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadSelfAction", UmlPackage::READSELFACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadStructuralFeatureAction", UmlPackage::READSTRUCTURALFEATUREACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadVariableAction", UmlPackage::READVARIABLEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("Realization", UmlPackage::REALIZATION_ECLASS));
+	m_idMap.insert(std::make_pair("Reception", UmlPackage::RECEPTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReclassifyObjectAction", UmlPackage::RECLASSIFYOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("RedefinableTemplateSignature", UmlPackage::REDEFINABLETEMPLATESIGNATURE_ECLASS));
+	m_idMap.insert(std::make_pair("ReduceAction", UmlPackage::REDUCEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("Region", UmlPackage::REGION_ECLASS));
+	m_idMap.insert(std::make_pair("RemoveStructuralFeatureValueAction", UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("RemoveVariableValueAction", UmlPackage::REMOVEVARIABLEVALUEACTION_ECLASS));
+	m_idMap.insert(std::make_pair("ReplyAction", UmlPackage::REPLYACTION_ECLASS));
+	m_idMap.insert(std::make_pair("SendObjectAction", UmlPackage::SENDOBJECTACTION_ECLASS));
+	m_idMap.insert(std::make_pair("SendSignalAction", UmlPackage::SENDSIGNALACTION_ECLASS));
+	m_idMap.insert(std::make_pair("SequenceNode", UmlPackage::SEQUENCENODE_ECLASS));
+	m_idMap.insert(std::make_pair("Signal", UmlPackage::SIGNAL_ECLASS));
+	m_idMap.insert(std::make_pair("SignalEvent", UmlPackage::SIGNALEVENT_ECLASS));
+	m_idMap.insert(std::make_pair("Slot", UmlPackage::SLOT_ECLASS));
+	m_idMap.insert(std::make_pair("StartClassifierBehaviorAction", UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::make_pair("StartObjectBehaviorAction", UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::make_pair("State", UmlPackage::STATE_ECLASS));
+	m_idMap.insert(std::make_pair("StateInvariant", UmlPackage::STATEINVARIANT_ECLASS));
+	m_idMap.insert(std::make_pair("StateMachine", UmlPackage::STATEMACHINE_ECLASS));
+	m_idMap.insert(std::make_pair("Stereotype", UmlPackage::STEREOTYPE_ECLASS));
+	m_idMap.insert(std::make_pair("StringExpression", UmlPackage::STRINGEXPRESSION_ECLASS));
+	m_idMap.insert(std::make_pair("StructuredActivityNode", UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS));
+	m_idMap.insert(std::make_pair("Substitution", UmlPackage::SUBSTITUTION_ECLASS));
+	m_idMap.insert(std::make_pair("TemplateBinding", UmlPackage::TEMPLATEBINDING_ECLASS));
+	m_idMap.insert(std::make_pair("TemplateParameter", UmlPackage::TEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::make_pair("TemplateParameterSubstitution", UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ECLASS));
+	m_idMap.insert(std::make_pair("TemplateSignature", UmlPackage::TEMPLATESIGNATURE_ECLASS));
+	m_idMap.insert(std::make_pair("TestIdentityAction", UmlPackage::TESTIDENTITYACTION_ECLASS));
+	m_idMap.insert(std::make_pair("TimeConstraint", UmlPackage::TIMECONSTRAINT_ECLASS));
+	m_idMap.insert(std::make_pair("TimeEvent", UmlPackage::TIMEEVENT_ECLASS));
+	m_idMap.insert(std::make_pair("TimeExpression", UmlPackage::TIMEEXPRESSION_ECLASS));
+	m_idMap.insert(std::make_pair("TimeInterval", UmlPackage::TIMEINTERVAL_ECLASS));
+	m_idMap.insert(std::make_pair("TimeObservation", UmlPackage::TIMEOBSERVATION_ECLASS));
+	m_idMap.insert(std::make_pair("Transition", UmlPackage::TRANSITION_ECLASS));
+	m_idMap.insert(std::make_pair("Trigger", UmlPackage::TRIGGER_ECLASS));
+	m_idMap.insert(std::make_pair("UnmarshallAction", UmlPackage::UNMARSHALLACTION_ECLASS));
+	m_idMap.insert(std::make_pair("Usage", UmlPackage::USAGE_ECLASS));
+	m_idMap.insert(std::make_pair("UseCase", UmlPackage::USECASE_ECLASS));
+	m_idMap.insert(std::make_pair("ValuePin", UmlPackage::VALUEPIN_ECLASS));
+	m_idMap.insert(std::make_pair("ValueSpecificationAction", UmlPackage::VALUESPECIFICATIONACTION_ECLASS));
+	m_idMap.insert(std::make_pair("Variable", UmlPackage::VARIABLE_ECLASS));
 }
 
 UmlFactoryImpl::~UmlFactoryImpl()
