@@ -2,15 +2,6 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-if(UNIX AND NOT APPLE)
-    # for Linux, BSD, Solaris, Minix
-	SET(CMAKE_C_COMPILER "gcc")
-	SET(CMAKE_CXX_COMPILER "g++")
-else()
-   SET(CMAKE_C_COMPILER "gcc.exe")
-   SET(CMAKE_CXX_COMPILER "g++.exe")
-endif()
-
 PROJECT(pluginFramework)
 
 IF(NOT CMAKE_BUILD_TYPE) 
