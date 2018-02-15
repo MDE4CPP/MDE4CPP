@@ -5,10 +5,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "uml/Class.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/ClassifierBehaviorExecution.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/Behavior.hpp"
-#include "fuml/ClassifierBehaviorExecution.hpp"
+#include "uml/Class.hpp"
 
 //Forward declaration includes
 #include "uml/Class.hpp"

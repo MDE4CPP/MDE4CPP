@@ -6,6 +6,9 @@
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "fuml/Execution.hpp"
+#include "fuml/Reference.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/Property.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"

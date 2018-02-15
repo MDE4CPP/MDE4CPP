@@ -29,17 +29,19 @@
 
 #include "fUML/impl/ExecutionImpl.hpp"
 
-
-#include "uml/Parameter.hpp"
-#include <uml/ParameterDirectionKind.hpp>
-#include <fuml/ParameterValue.hpp>
-#include "fuml/ForkedToken.hpp"
-#include <fuml/Execution.hpp>
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/Object.hpp"
-#include "fuml/Execution.hpp"
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ActivityParameterNodeActivation.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/Object.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityParameterNode.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
 
 
 //*********************************

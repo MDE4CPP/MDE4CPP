@@ -30,10 +30,11 @@
 #include "fUML/impl/PrimitiveValueImpl.hpp"
 
 #include "fuml/FUMLFactory.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/Class.hpp"
 #include "uml/LiteralBoolean.hpp"
-#include "uml/Type.hpp"
 #include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 //*********************************

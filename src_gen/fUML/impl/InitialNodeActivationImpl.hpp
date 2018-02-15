@@ -29,6 +29,7 @@
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
 
+#include "fuml/ControlToken.hpp"
 #include "fuml/FUMLFactory.hpp"
 
 

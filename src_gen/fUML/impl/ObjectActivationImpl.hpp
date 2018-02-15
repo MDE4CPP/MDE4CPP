@@ -30,10 +30,10 @@
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-#include "uml/Class.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/ClassifierBehaviorExecution.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/Behavior.hpp"
-#include "fuml/ClassifierBehaviorExecution.hpp"
+#include "uml/Class.hpp"
 
 
 //*********************************

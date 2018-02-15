@@ -29,8 +29,9 @@
 
 #include "fUML/impl/CallActionActivationImpl.hpp"
 
-#include "uml/CallBehaviorAction.hpp"
+#include "fUML/ExecutionFactory.hpp"
 #include "uml/Behavior.hpp"
+#include "uml/CallBehaviorAction.hpp"
 
 
 //*********************************

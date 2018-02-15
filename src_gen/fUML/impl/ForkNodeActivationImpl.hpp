@@ -29,8 +29,9 @@
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
 
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include"uml/ActivityNode.hpp"
-#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************

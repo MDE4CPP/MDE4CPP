@@ -5,11 +5,13 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "uml/UmlFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/IntegerValue.hpp"
+#include "uml/Class.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
-#include "uml/Type.hpp"
 #include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
 #include "uml/PrimitiveType.hpp"

@@ -5,8 +5,9 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "uml/CallBehaviorAction.hpp"
+#include "fUML/ExecutionFactory.hpp"
 #include "uml/Behavior.hpp"
+#include "uml/CallBehaviorAction.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"

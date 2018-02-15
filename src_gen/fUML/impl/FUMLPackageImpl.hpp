@@ -23,124 +23,133 @@
 
 #include <cassert>
 
-#include "fUML/impl/AcceptEventActionActivationImpl.hpp"
-#include "fUML/impl/AcceptEventActionEventAccepterImpl.hpp"
-#include "fUML/impl/ActionActivationImpl.hpp"
-#include "fUML/impl/ActivityEdgeInstanceImpl.hpp"
-#include "fUML/impl/ActivityExecutionImpl.hpp"
-#include "fUML/impl/ActivityFinalNodeActivationImpl.hpp"
-#include "fUML/impl/ActivityNodeActivationImpl.hpp"
-#include "fUML/impl/ActivityNodeActivationGroupImpl.hpp"
-#include "fUML/impl/ActivityParameterNodeActivationImpl.hpp"
-#include "fUML/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
-#include "fUML/impl/BooleanValueImpl.hpp"
-#include "fUML/impl/CallActionActivationImpl.hpp"
-#include "fUML/impl/CallBehaviorActionActivationImpl.hpp"
-#include "fUML/impl/CallOperationActionActivationImpl.hpp"
-#include "fUML/impl/CentralBufferNodeActivationImpl.hpp"
-#include "fUML/impl/ChoiceStrategyImpl.hpp"
-#include "fUML/impl/ClassifierBehaviorExecutionImpl.hpp"
-#include "fUML/impl/ClassifierBehaviorExecutionActivityImpl.hpp"
-#include "fUML/impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.hpp"
-#include "fUML/impl/ClauseActivationImpl.hpp"
-#include "fUML/impl/ClearAssociationActionActivationImpl.hpp"
-#include "fUML/impl/ClearStructuralFeatureActionActivationImpl.hpp"
-#include "fUML/impl/CompoundValueImpl.hpp"
-#include "fUML/impl/ConditionalNodeActivationImpl.hpp"
-#include "fUML/impl/ControlNodeActivationImpl.hpp"
-#include "fUML/impl/ControlTokenImpl.hpp"
-#include "fUML/impl/CreateLinkActionActivationImpl.hpp"
-#include "fUML/impl/CreateObjectActionActivationImpl.hpp"
-#include "fUML/impl/DataStoreNodeActivationImpl.hpp"
-#include "fUML/impl/DataValueImpl.hpp"
-#include "fUML/impl/DecisionNodeActivationImpl.hpp"
-#include "fUML/impl/DestroyLinkActionActivationImpl.hpp"
-#include "fUML/impl/DestroyObjectActionActivationImpl.hpp"
-#include "fUML/impl/DispatchStrategyImpl.hpp"
-#include "fUML/impl/EnumerationValueImpl.hpp"
-#include "fUML/impl/EvaluationImpl.hpp"
-#include "fUML/impl/EventAccepterImpl.hpp"
-#include "fUML/impl/EventDispatchLoopImpl.hpp"
-#include "fUML/impl/ExecutionImpl.hpp"
-#include "fUML/impl/ExecutionFactoryImpl.hpp"
-#include "fUML/impl/ExecutionFactoryL1Impl.hpp"
-#include "fUML/impl/ExecutionFactoryL2Impl.hpp"
-#include "fUML/impl/ExecutionFactoryL3Impl.hpp"
-#include "fUML/impl/ExecutorImpl.hpp"
-#include "fUML/impl/ExpansionActivationGroupImpl.hpp"
-#include "fUML/impl/ExpansionNodeActivationImpl.hpp"
-#include "fUML/impl/ExpansionRegionActivationImpl.hpp"
-#include "fUML/impl/ExtensionalValueImpl.hpp"
-#include "fUML/impl/ExtensionalValueListImpl.hpp"
-#include "fUML/impl/FIFOGetNextEventStrategyImpl.hpp"
-#include "fUML/impl/FeatureValueImpl.hpp"
-#include "fUML/impl/FirstChoiceStrategyImpl.hpp"
-#include "fUML/impl/FlowFinalNodeActivationImpl.hpp"
-#include "fUML/impl/ForkNodeActivationImpl.hpp"
-#include "fUML/impl/ForkedTokenImpl.hpp"
-#include "fUML/impl/GetNextEventStrategyImpl.hpp"
-#include "fUML/impl/InitialNodeActivationImpl.hpp"
-#include "fUML/impl/InputPinActivationImpl.hpp"
-#include "fUML/impl/InstanceValueEvaluationImpl.hpp"
-#include "fUML/impl/IntegerValueImpl.hpp"
-#include "fUML/impl/InvocationActionActivationImpl.hpp"
-#include "fUML/impl/JoinNodeActivationImpl.hpp"
-#include "fUML/impl/LinkImpl.hpp"
-#include "fUML/impl/LinkActionActivationImpl.hpp"
-#include "fUML/impl/LiteralBooleanEvaluationImpl.hpp"
-#include "fUML/impl/LiteralEvaluationImpl.hpp"
-#include "fUML/impl/LiteralIntegerEvaluationImpl.hpp"
-#include "fUML/impl/LiteralNullEvaluationImpl.hpp"
-#include "fUML/impl/LiteralRealEvaluationImpl.hpp"
-#include "fUML/impl/LiteralStringEvaluationImpl.hpp"
-#include "fUML/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
-#include "fUML/impl/LocusImpl.hpp"
-#include "fUML/impl/LoopNodeActivationImpl.hpp"
-#include "fUML/impl/MergeNodeActivationImpl.hpp"
-#include "fUML/impl/ObjectImpl.hpp"
-#include "fUML/impl/ObjectActivationImpl.hpp"
-#include "fUML/impl/ObjectNodeActivationImpl.hpp"
-#include "fUML/impl/ObjectTokenImpl.hpp"
-#include "fUML/impl/OfferImpl.hpp"
-#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "fUML/impl/OutputPinActivationImpl.hpp"
-#include "fUML/impl/ParameterValueImpl.hpp"
-#include "fUML/impl/PinActivationImpl.hpp"
-#include "fUML/impl/PrimitiveValueImpl.hpp"
-#include "fUML/impl/ReadExtentActionActivationImpl.hpp"
-#include "fUML/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
-#include "fUML/impl/ReadLinkActionActivationImpl.hpp"
-#include "fUML/impl/ReadSelfActionActivationImpl.hpp"
-#include "fUML/impl/ReadStructuralFeatureActionActivationImpl.hpp"
-#include "fUML/impl/RealValueImpl.hpp"
-#include "fUML/impl/ReclassifyObjectActionActivationImpl.hpp"
-#include "fUML/impl/RedefinitionBasedDispatchStrategyImpl.hpp"
-#include "fUML/impl/ReduceActionActivationImpl.hpp"
-#include "fUML/impl/ReferenceImpl.hpp"
-#include "fUML/impl/RemoveStructuralFeatureValueActivationImpl.hpp"
-#include "fUML/impl/SemanticStrategyImpl.hpp"
-#include "fUML/impl/SemanticVisitorImpl.hpp"
-#include "fUML/impl/SendSignalActionActivationImpl.hpp"
-#include "fUML/impl/SignalInstanceImpl.hpp"
-#include "fUML/impl/StartClassifierBehaviorActionActivationImpl.hpp"
-#include "fUML/impl/StartObjectBehaviorActionActivationImpl.hpp"
-#include "fUML/impl/StringValueImpl.hpp"
-#include "fUML/impl/StructuralFeatureActionActivationImpl.hpp"
-#include "fUML/impl/StructuredActivityNodeActivationImpl.hpp"
-#include "fUML/impl/StructuredValueImpl.hpp"
-#include "fUML/impl/TestIdentityActionActivationImpl.hpp"
-#include "fUML/impl/TokenImpl.hpp"
-#include "fUML/impl/TokenSetImpl.hpp"
-#include "fUML/impl/UnlimitedNaturalValueImpl.hpp"
-#include "fUML/impl/ValueImpl.hpp"
-#include "fUML/impl/ValueSpecificActionActivationImpl.hpp"
-#include "fUML/impl/ValuesImpl.hpp"
-#include "fUML/impl/WriteLinkActionActivationImpl.hpp"
-#include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
+
 #include "fUML/FUMLPackage.hpp"
+
+namespace fUML 
+{	class AcceptEventActionActivation;
+	class AcceptEventActionEventAccepter;
+	class ActionActivation;
+	class ActivityEdgeInstance;
+	class ActivityExecution;
+	class ActivityFinalNodeActivation;
+	class ActivityNodeActivation;
+	class ActivityNodeActivationGroup;
+	class ActivityParameterNodeActivation;
+	class AddStructuralFeatureValueActionActivation;
+	class BooleanValue;
+	class CallActionActivation;
+	class CallBehaviorActionActivation;
+	class CallOperationActionActivation;
+	class CentralBufferNodeActivation;
+	class ChoiceStrategy;
+	class ClassifierBehaviorExecution;
+	class ClassifierBehaviorExecutionActivity;
+	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1;
+	class ClauseActivation;
+	class ClearAssociationActionActivation;
+	class ClearStructuralFeatureActionActivation;
+	class CompoundValue;
+	class ConditionalNodeActivation;
+	class ControlNodeActivation;
+	class ControlToken;
+	class CreateLinkActionActivation;
+	class CreateObjectActionActivation;
+	class DataStoreNodeActivation;
+	class DataValue;
+	class DecisionNodeActivation;
+	class DestroyLinkActionActivation;
+	class DestroyObjectActionActivation;
+	class DispatchStrategy;
+	class EnumerationValue;
+	class Evaluation;
+	class EventAccepter;
+	class EventDispatchLoop;
+	class Execution;
+	class ExecutionFactory;
+	class ExecutionFactoryL1;
+	class ExecutionFactoryL2;
+	class ExecutionFactoryL3;
+	class Executor;
+	class ExpansionActivationGroup;
+	class ExpansionNodeActivation;
+	class ExpansionRegionActivation;
+	class ExtensionalValue;
+	class ExtensionalValueList;
+	class FIFOGetNextEventStrategy;
+	class FeatureValue;
+	class FirstChoiceStrategy;
+	class FlowFinalNodeActivation;
+	class ForkNodeActivation;
+	class ForkedToken;
+	class GetNextEventStrategy;
+	class InitialNodeActivation;
+	class InputPinActivation;
+	class InstanceValueEvaluation;
+	class IntegerValue;
+	class InvocationActionActivation;
+	class JoinNodeActivation;
+	class Link;
+	class LinkActionActivation;
+	class LiteralBooleanEvaluation;
+	class LiteralEvaluation;
+	class LiteralIntegerEvaluation;
+	class LiteralNullEvaluation;
+	class LiteralRealEvaluation;
+	class LiteralStringEvaluation;
+	class LiteralUnlimitedNaturalEvaluation;
+	class Locus;
+	class LoopNodeActivation;
+	class MergeNodeActivation;
+	class Object;
+	class ObjectActivation;
+	class ObjectNodeActivation;
+	class ObjectToken;
+	class Offer;
+	class OpaqueBehaviorExecution;
+	class OutputPinActivation;
+	class ParameterValue;
+	class PinActivation;
+	class PrimitiveValue;
+	class ReadExtentActionActivation;
+	class ReadIsClassifiedObjectActionActivation;
+	class ReadLinkActionActivation;
+	class ReadSelfActionActivation;
+	class ReadStructuralFeatureActionActivation;
+	class RealValue;
+	class ReclassifyObjectActionActivation;
+	class RedefinitionBasedDispatchStrategy;
+	class ReduceActionActivation;
+	class Reference;
+	class RemoveStructuralFeatureValueActivation;
+	class SemanticStrategy;
+	class SemanticVisitor;
+	class SendSignalActionActivation;
+	class SignalInstance;
+	class StartClassifierBehaviorActionActivation;
+	class StartObjectBehaviorActionActivation;
+	class StringValue;
+	class StructuralFeatureActionActivation;
+	class StructuredActivityNodeActivation;
+	class StructuredValue;
+	class TestIdentityActionActivation;
+	class Token;
+	class TokenSet;
+	class UnlimitedNaturalValue;
+	class Value;
+	class ValueSpecificActionActivation;
+	class Values;
+	class WriteLinkActionActivation;
+	class WriteStructuralFeatureActionActivation;
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace fUML
 {

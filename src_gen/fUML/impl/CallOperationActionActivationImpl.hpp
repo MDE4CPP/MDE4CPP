@@ -30,6 +30,9 @@
 #include "fUML/impl/CallActionActivationImpl.hpp"
 
 #include "fuml/Execution.hpp"
+#include "fuml/Reference.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/Property.hpp"
 
 
 //*********************************

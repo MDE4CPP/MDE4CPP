@@ -29,11 +29,13 @@
 
 #include "fUML/impl/PrimitiveValueImpl.hpp"
 
-#include "fuml/FUMLFactory.hpp"
-#include "uml/UmlFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/IntegerValue.hpp"
+#include "uml/Class.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
-#include "uml/Type.hpp"
 #include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 //*********************************

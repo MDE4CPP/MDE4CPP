@@ -29,6 +29,7 @@
 
 #include "fUML/impl/EvaluationImpl.hpp"
 
+#include "fUML/ExecutionFactory.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"

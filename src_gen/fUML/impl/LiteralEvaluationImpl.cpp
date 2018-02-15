@@ -5,6 +5,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/ExecutionFactory.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"

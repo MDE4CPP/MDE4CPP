@@ -30,8 +30,11 @@
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-#include "fuml/Object.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/Evaluation.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Object.hpp"
 
 
 //*********************************

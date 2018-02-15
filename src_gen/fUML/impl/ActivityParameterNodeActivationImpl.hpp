@@ -29,9 +29,13 @@
 
 #include "fUML/impl/ObjectNodeActivationImpl.hpp"
 
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityParameterNode.hpp"
-#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************

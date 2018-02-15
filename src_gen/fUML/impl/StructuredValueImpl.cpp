@@ -5,15 +5,15 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/Slot.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
-#include "uml/NamedElement.hpp"
 #include "uml/InstanceSpecification.hpp"
-
-#include "fuml/FUMLFactory.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Slot.hpp"
 #include "uml/StructuralFeature.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 //Forward declaration includes

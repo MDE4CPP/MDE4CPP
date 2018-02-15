@@ -5,9 +5,13 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityParameterNode.hpp"
-#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -130,7 +134,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 			auto factory = fUML::FUMLFactory::eInstance();
             const auto size = valueList->size();
             std::shared_ptr<Value> value;
-			for (int i = 0; i< size; i++)
+			for (unsigned int i = 0; i< size; i++)
 			{
                 value = (*valueList)[i];
 				std::shared_ptr<ObjectToken> token = factory->createObjectToken();

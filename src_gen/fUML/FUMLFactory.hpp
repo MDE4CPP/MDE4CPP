@@ -141,7 +141,6 @@ namespace fUML
 	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
 	class FUMLPackage;
-	class FUMLFactory;
 }
 
 namespace fUML 

@@ -29,18 +29,22 @@
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
 
-#include "uml/DecisionNode.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/ParameterValue.hpp"
+#include "fUML/Token.hpp"
+#include "fUML/Value.hpp"
+#include "uml/ActivityEdge.hpp"
 #include "uml/Behavior.hpp"
+#include "uml/DecisionNode.hpp"
+#include "uml/ObjectFlow.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
 #include "uml/UmlFactory.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/ParameterValue.hpp"
-#include "fuml/Token.hpp"
-#include "uml/ObjectFlow.hpp"
-#include "uml/ActivityEdge.hpp"
 #include "uml/ValueSpecification.hpp"
-#include "fuml/ObjectToken.hpp"
 
 
 //*********************************

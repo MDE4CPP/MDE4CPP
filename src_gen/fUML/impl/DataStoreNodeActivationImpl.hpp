@@ -29,6 +29,7 @@
 
 #include "fUML/impl/CentralBufferNodeActivationImpl.hpp"
 
+#include "fuml/Value.hpp"
 
 
 //*********************************

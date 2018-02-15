@@ -29,6 +29,7 @@
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
 
+#include "fuml/StringValue.hpp"
 #include "fuml/FUMLFactory.hpp"
 #include "uml/LiteralString.hpp"
 

@@ -30,6 +30,9 @@
 
 #include "ecore/impl/EObjectImpl.hpp"
 
+#include "fuml/ControlToken.hpp"
+#include "fuml/ExecutionFactory.hpp"
+#include "fuml/Locus.hpp"
 
 
 //*********************************

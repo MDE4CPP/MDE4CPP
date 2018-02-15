@@ -29,7 +29,9 @@
 
 #include "fUML/impl/ExtensionalValueImpl.hpp"
 
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/DispatchStrategy.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"

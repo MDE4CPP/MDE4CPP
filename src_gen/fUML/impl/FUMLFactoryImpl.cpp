@@ -3,6 +3,122 @@
 
 #include "ecore/EClass.hpp"
 
+
+#include "fUML/impl/AcceptEventActionActivationImpl.hpp"
+#include "fUML/impl/AcceptEventActionEventAccepterImpl.hpp"
+#include "fUML/impl/ActionActivationImpl.hpp"
+#include "fUML/impl/ActivityEdgeInstanceImpl.hpp"
+#include "fUML/impl/ActivityExecutionImpl.hpp"
+#include "fUML/impl/ActivityFinalNodeActivationImpl.hpp"
+#include "fUML/impl/ActivityNodeActivationImpl.hpp"
+#include "fUML/impl/ActivityNodeActivationGroupImpl.hpp"
+#include "fUML/impl/ActivityParameterNodeActivationImpl.hpp"
+#include "fUML/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
+#include "fUML/impl/BooleanValueImpl.hpp"
+#include "fUML/impl/CallActionActivationImpl.hpp"
+#include "fUML/impl/CallBehaviorActionActivationImpl.hpp"
+#include "fUML/impl/CallOperationActionActivationImpl.hpp"
+#include "fUML/impl/CentralBufferNodeActivationImpl.hpp"
+#include "fUML/impl/ChoiceStrategyImpl.hpp"
+#include "fUML/impl/ClassifierBehaviorExecutionImpl.hpp"
+#include "fUML/impl/ClassifierBehaviorExecutionActivityImpl.hpp"
+#include "fUML/impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.hpp"
+#include "fUML/impl/ClauseActivationImpl.hpp"
+#include "fUML/impl/ClearAssociationActionActivationImpl.hpp"
+#include "fUML/impl/ClearStructuralFeatureActionActivationImpl.hpp"
+#include "fUML/impl/CompoundValueImpl.hpp"
+#include "fUML/impl/ConditionalNodeActivationImpl.hpp"
+#include "fUML/impl/ControlNodeActivationImpl.hpp"
+#include "fUML/impl/ControlTokenImpl.hpp"
+#include "fUML/impl/CreateLinkActionActivationImpl.hpp"
+#include "fUML/impl/CreateObjectActionActivationImpl.hpp"
+#include "fUML/impl/DataStoreNodeActivationImpl.hpp"
+#include "fUML/impl/DataValueImpl.hpp"
+#include "fUML/impl/DecisionNodeActivationImpl.hpp"
+#include "fUML/impl/DestroyLinkActionActivationImpl.hpp"
+#include "fUML/impl/DestroyObjectActionActivationImpl.hpp"
+#include "fUML/impl/DispatchStrategyImpl.hpp"
+#include "fUML/impl/EnumerationValueImpl.hpp"
+#include "fUML/impl/EvaluationImpl.hpp"
+#include "fUML/impl/EventAccepterImpl.hpp"
+#include "fUML/impl/EventDispatchLoopImpl.hpp"
+#include "fUML/impl/ExecutionImpl.hpp"
+#include "fUML/impl/ExecutionFactoryImpl.hpp"
+#include "fUML/impl/ExecutionFactoryL1Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL2Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL3Impl.hpp"
+#include "fUML/impl/ExecutorImpl.hpp"
+#include "fUML/impl/ExpansionActivationGroupImpl.hpp"
+#include "fUML/impl/ExpansionNodeActivationImpl.hpp"
+#include "fUML/impl/ExpansionRegionActivationImpl.hpp"
+#include "fUML/impl/ExtensionalValueImpl.hpp"
+#include "fUML/impl/ExtensionalValueListImpl.hpp"
+#include "fUML/impl/FIFOGetNextEventStrategyImpl.hpp"
+#include "fUML/impl/FeatureValueImpl.hpp"
+#include "fUML/impl/FirstChoiceStrategyImpl.hpp"
+#include "fUML/impl/FlowFinalNodeActivationImpl.hpp"
+#include "fUML/impl/ForkNodeActivationImpl.hpp"
+#include "fUML/impl/ForkedTokenImpl.hpp"
+#include "fUML/impl/GetNextEventStrategyImpl.hpp"
+#include "fUML/impl/InitialNodeActivationImpl.hpp"
+#include "fUML/impl/InputPinActivationImpl.hpp"
+#include "fUML/impl/InstanceValueEvaluationImpl.hpp"
+#include "fUML/impl/IntegerValueImpl.hpp"
+#include "fUML/impl/InvocationActionActivationImpl.hpp"
+#include "fUML/impl/JoinNodeActivationImpl.hpp"
+#include "fUML/impl/LinkImpl.hpp"
+#include "fUML/impl/LinkActionActivationImpl.hpp"
+#include "fUML/impl/LiteralBooleanEvaluationImpl.hpp"
+#include "fUML/impl/LiteralEvaluationImpl.hpp"
+#include "fUML/impl/LiteralIntegerEvaluationImpl.hpp"
+#include "fUML/impl/LiteralNullEvaluationImpl.hpp"
+#include "fUML/impl/LiteralRealEvaluationImpl.hpp"
+#include "fUML/impl/LiteralStringEvaluationImpl.hpp"
+#include "fUML/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
+#include "fUML/impl/LocusImpl.hpp"
+#include "fUML/impl/LoopNodeActivationImpl.hpp"
+#include "fUML/impl/MergeNodeActivationImpl.hpp"
+#include "fUML/impl/ObjectImpl.hpp"
+#include "fUML/impl/ObjectActivationImpl.hpp"
+#include "fUML/impl/ObjectNodeActivationImpl.hpp"
+#include "fUML/impl/ObjectTokenImpl.hpp"
+#include "fUML/impl/OfferImpl.hpp"
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "fUML/impl/OutputPinActivationImpl.hpp"
+#include "fUML/impl/ParameterValueImpl.hpp"
+#include "fUML/impl/PinActivationImpl.hpp"
+#include "fUML/impl/PrimitiveValueImpl.hpp"
+#include "fUML/impl/ReadExtentActionActivationImpl.hpp"
+#include "fUML/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
+#include "fUML/impl/ReadLinkActionActivationImpl.hpp"
+#include "fUML/impl/ReadSelfActionActivationImpl.hpp"
+#include "fUML/impl/ReadStructuralFeatureActionActivationImpl.hpp"
+#include "fUML/impl/RealValueImpl.hpp"
+#include "fUML/impl/ReclassifyObjectActionActivationImpl.hpp"
+#include "fUML/impl/RedefinitionBasedDispatchStrategyImpl.hpp"
+#include "fUML/impl/ReduceActionActivationImpl.hpp"
+#include "fUML/impl/ReferenceImpl.hpp"
+#include "fUML/impl/RemoveStructuralFeatureValueActivationImpl.hpp"
+#include "fUML/impl/SemanticStrategyImpl.hpp"
+#include "fUML/impl/SemanticVisitorImpl.hpp"
+#include "fUML/impl/SendSignalActionActivationImpl.hpp"
+#include "fUML/impl/SignalInstanceImpl.hpp"
+#include "fUML/impl/StartClassifierBehaviorActionActivationImpl.hpp"
+#include "fUML/impl/StartObjectBehaviorActionActivationImpl.hpp"
+#include "fUML/impl/StringValueImpl.hpp"
+#include "fUML/impl/StructuralFeatureActionActivationImpl.hpp"
+#include "fUML/impl/StructuredActivityNodeActivationImpl.hpp"
+#include "fUML/impl/StructuredValueImpl.hpp"
+#include "fUML/impl/TestIdentityActionActivationImpl.hpp"
+#include "fUML/impl/TokenImpl.hpp"
+#include "fUML/impl/TokenSetImpl.hpp"
+#include "fUML/impl/UnlimitedNaturalValueImpl.hpp"
+#include "fUML/impl/ValueImpl.hpp"
+#include "fUML/impl/ValueSpecificActionActivationImpl.hpp"
+#include "fUML/impl/ValuesImpl.hpp"
+#include "fUML/impl/WriteLinkActionActivationImpl.hpp"
+#include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
+
 using namespace fUML;
 
 //*********************************
@@ -11,93 +127,93 @@ using namespace fUML;
 
 FUMLFactoryImpl::FUMLFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionActivation", FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventActionEventAccepter", FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityEdgeInstance", FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityExecution", FUMLPackage::ACTIVITYEXECUTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNodeActivation", FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityNodeActivationGroup", FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNodeActivation", FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueActionActivation", FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BooleanValue", FUMLPackage::BOOLEANVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorActionActivation", FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationActionActivation", FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNodeActivation", FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecution", FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClauseActivation", FUMLPackage::CLAUSEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationActionActivation", FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureActionActivation", FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNodeActivation", FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ControlToken", FUMLPackage::CONTROLTOKEN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkActionActivation", FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectActionActivation", FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNodeActivation", FUMLPackage::DATASTORENODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataValue", FUMLPackage::DATAVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNodeActivation", FUMLPackage::DECISIONNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkActionActivation", FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectActionActivation", FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DispatchStrategy", FUMLPackage::DISPATCHSTRATEGY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationValue", FUMLPackage::ENUMERATIONVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Executor", FUMLPackage::EXECUTOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegionActivation", FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionalValueList", FUMLPackage::EXTENSIONALVALUELIST_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FIFOGetNextEventStrategy", FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FeatureValue", FUMLPackage::FEATUREVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FirstChoiceStrategy", FUMLPackage::FIRSTCHOICESTRATEGY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNodeActivation", FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNodeActivation", FUMLPackage::FORKNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkedToken", FUMLPackage::FORKEDTOKEN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNodeActivation", FUMLPackage::INITIALNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InputPinActivation", FUMLPackage::INPUTPINACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValueEvaluation", FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("IntegerValue", FUMLPackage::INTEGERVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNodeActivation", FUMLPackage::JOINNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Link", FUMLPackage::LINK_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBooleanEvaluation", FUMLPackage::LITERALBOOLEANEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralIntegerEvaluation", FUMLPackage::LITERALINTEGEREVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNullEvaluation", FUMLPackage::LITERALNULLEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralRealEvaluation", FUMLPackage::LITERALREALEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralStringEvaluation", FUMLPackage::LITERALSTRINGEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNaturalEvaluation", FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Locus", FUMLPackage::LOCUS_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNodeActivation", FUMLPackage::LOOPNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNodeActivation", FUMLPackage::MERGENODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Object", FUMLPackage::OBJECT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectActivation", FUMLPackage::OBJECTACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectToken", FUMLPackage::OBJECTTOKEN_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Offer", FUMLPackage::OFFER_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPinActivation", FUMLPackage::OUTPUTPINACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterValue", FUMLPackage::PARAMETERVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentActionActivation", FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectActionActivation", FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkActionActivation", FUMLPackage::READLINKACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfActionActivation", FUMLPackage::READSELFACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureActionActivation", FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RealValue", FUMLPackage::REALVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectActionActivation", FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinitionBasedDispatchStrategy", FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceActionActivation", FUMLPackage::REDUCEACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Reference", FUMLPackage::REFERENCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueActivation", FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalActionActivation", FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SignalInstance", FUMLPackage::SIGNALINSTANCE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorActionActivation", FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorActionActivation", FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StringValue", FUMLPackage::STRINGVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNodeActivation", FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityActionActivation", FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TokenSet", FUMLPackage::TOKENSET_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UnlimitedNaturalValue", FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificActionActivation", FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Values", FUMLPackage::VALUES_ECLASS));
+	m_idMap.insert(std::make_pair("AcceptEventActionActivation", FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("AcceptEventActionEventAccepter", FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityEdgeInstance", FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityExecution", FUMLPackage::ACTIVITYEXECUTION_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityFinalNodeActivation", FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityNodeActivationGroup", FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS));
+	m_idMap.insert(std::make_pair("ActivityParameterNodeActivation", FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("AddStructuralFeatureValueActionActivation", FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("BooleanValue", FUMLPackage::BOOLEANVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("CallBehaviorActionActivation", FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("CallOperationActionActivation", FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("CentralBufferNodeActivation", FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ClassifierBehaviorExecution", FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS));
+	m_idMap.insert(std::make_pair("ClassifierBehaviorExecutionActivity", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS));
+	m_idMap.insert(std::make_pair("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1", FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS));
+	m_idMap.insert(std::make_pair("ClauseActivation", FUMLPackage::CLAUSEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ClearAssociationActionActivation", FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ClearStructuralFeatureActionActivation", FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ConditionalNodeActivation", FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ControlToken", FUMLPackage::CONTROLTOKEN_ECLASS));
+	m_idMap.insert(std::make_pair("CreateLinkActionActivation", FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("CreateObjectActionActivation", FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("DataStoreNodeActivation", FUMLPackage::DATASTORENODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("DataValue", FUMLPackage::DATAVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("DecisionNodeActivation", FUMLPackage::DECISIONNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("DestroyLinkActionActivation", FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("DestroyObjectActionActivation", FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("DispatchStrategy", FUMLPackage::DISPATCHSTRATEGY_ECLASS));
+	m_idMap.insert(std::make_pair("EnumerationValue", FUMLPackage::ENUMERATIONVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_ECLASS));
+	m_idMap.insert(std::make_pair("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_ECLASS));
+	m_idMap.insert(std::make_pair("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_ECLASS));
+	m_idMap.insert(std::make_pair("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_ECLASS));
+	m_idMap.insert(std::make_pair("Executor", FUMLPackage::EXECUTOR_ECLASS));
+	m_idMap.insert(std::make_pair("ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS));
+	m_idMap.insert(std::make_pair("ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ExpansionRegionActivation", FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ExtensionalValueList", FUMLPackage::EXTENSIONALVALUELIST_ECLASS));
+	m_idMap.insert(std::make_pair("FIFOGetNextEventStrategy", FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_ECLASS));
+	m_idMap.insert(std::make_pair("FeatureValue", FUMLPackage::FEATUREVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("FirstChoiceStrategy", FUMLPackage::FIRSTCHOICESTRATEGY_ECLASS));
+	m_idMap.insert(std::make_pair("FlowFinalNodeActivation", FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ForkNodeActivation", FUMLPackage::FORKNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ForkedToken", FUMLPackage::FORKEDTOKEN_ECLASS));
+	m_idMap.insert(std::make_pair("InitialNodeActivation", FUMLPackage::INITIALNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("InputPinActivation", FUMLPackage::INPUTPINACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("InstanceValueEvaluation", FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("IntegerValue", FUMLPackage::INTEGERVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("JoinNodeActivation", FUMLPackage::JOINNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("Link", FUMLPackage::LINK_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralBooleanEvaluation", FUMLPackage::LITERALBOOLEANEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralIntegerEvaluation", FUMLPackage::LITERALINTEGEREVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralNullEvaluation", FUMLPackage::LITERALNULLEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralRealEvaluation", FUMLPackage::LITERALREALEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralStringEvaluation", FUMLPackage::LITERALSTRINGEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("LiteralUnlimitedNaturalEvaluation", FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_ECLASS));
+	m_idMap.insert(std::make_pair("Locus", FUMLPackage::LOCUS_ECLASS));
+	m_idMap.insert(std::make_pair("LoopNodeActivation", FUMLPackage::LOOPNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("MergeNodeActivation", FUMLPackage::MERGENODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("Object", FUMLPackage::OBJECT_ECLASS));
+	m_idMap.insert(std::make_pair("ObjectActivation", FUMLPackage::OBJECTACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ObjectToken", FUMLPackage::OBJECTTOKEN_ECLASS));
+	m_idMap.insert(std::make_pair("Offer", FUMLPackage::OFFER_ECLASS));
+	m_idMap.insert(std::make_pair("OutputPinActivation", FUMLPackage::OUTPUTPINACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ParameterValue", FUMLPackage::PARAMETERVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("ReadExtentActionActivation", FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadIsClassifiedObjectActionActivation", FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadLinkActionActivation", FUMLPackage::READLINKACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadSelfActionActivation", FUMLPackage::READSELFACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("ReadStructuralFeatureActionActivation", FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("RealValue", FUMLPackage::REALVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("ReclassifyObjectActionActivation", FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("RedefinitionBasedDispatchStrategy", FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS));
+	m_idMap.insert(std::make_pair("ReduceActionActivation", FUMLPackage::REDUCEACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("Reference", FUMLPackage::REFERENCE_ECLASS));
+	m_idMap.insert(std::make_pair("RemoveStructuralFeatureValueActivation", FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("SendSignalActionActivation", FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("SignalInstance", FUMLPackage::SIGNALINSTANCE_ECLASS));
+	m_idMap.insert(std::make_pair("StartClassifierBehaviorActionActivation", FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("StartObjectBehaviorActionActivation", FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("StringValue", FUMLPackage::STRINGVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("StructuredActivityNodeActivation", FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("TestIdentityActionActivation", FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("TokenSet", FUMLPackage::TOKENSET_ECLASS));
+	m_idMap.insert(std::make_pair("UnlimitedNaturalValue", FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS));
+	m_idMap.insert(std::make_pair("ValueSpecificActionActivation", FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS));
+	m_idMap.insert(std::make_pair("Values", FUMLPackage::VALUES_ECLASS));
 }
 
 FUMLFactoryImpl::~FUMLFactoryImpl()

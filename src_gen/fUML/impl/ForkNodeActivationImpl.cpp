@@ -5,8 +5,9 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include"uml/ActivityNode.hpp"
-#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"

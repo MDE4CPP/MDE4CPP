@@ -29,6 +29,7 @@
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
 
+#include "fuml/BooleanValue.hpp"
 #include "fuml/FUMLFactory.hpp"
 #include "uml/LiteralBoolean.hpp"
 

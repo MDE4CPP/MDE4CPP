@@ -5,6 +5,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/ControlToken.hpp"
 #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes

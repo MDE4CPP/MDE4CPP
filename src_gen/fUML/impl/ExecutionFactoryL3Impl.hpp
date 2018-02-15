@@ -29,21 +29,33 @@
 
 #include "fUML/impl/ExecutionFactoryL2Impl.hpp"
 
-#include <uml/ConditionalNode.hpp>
-#include <fuml/FUMLFactory.hpp>
-#include <uml/LoopNode.hpp>
-#include <uml/ExpansionRegion.hpp>
-#include <uml/ReadExtentAction.hpp>
-#include <uml/ReadIsClassifiedObjectAction.hpp>
-#include <uml/ReclassifyObjectAction.hpp>
-#include <uml/StartObjectBehaviorAction.hpp>
-#include <uml/StartClassifierBehaviorAction.hpp>
-#include <uml/AcceptEventAction.hpp>
-#include <uml/ReduceAction.hpp>
-#include <uml/DataStoreNode.hpp>
-#include <fuml/DataStoreNodeActivation.hpp>
+#include "fUML/AcceptEventActionActivation.hpp"
+#include "fUML/ConditionalNodeActivation.hpp"
+#include "fUML/DataStoreNodeActivation.hpp"
+#include "fUML/ExpansionNodeActivation.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/LoopNodeActivation.hpp"
+#include "fUML/ReadExtentActionActivation.hpp"
+#include "fUML/ReadIsClassifiedObjectActionActivation.hpp"
+#include "fUML/ReclassifyObjectActionActivation.hpp"
+#include "fUML/ReduceActionActivation.hpp"
+#include "fUML/StartClassifierBehaviorActionActivation.hpp"
+#include "fUML/StartObjectBehaviorActionActivation.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
+#include "uml/AcceptEventAction.hpp"
+#include "uml/ConditionalNode.hpp"
+#include "uml/DataStoreNode.hpp"
 #include "uml/ExpansionNode.hpp"
-#include <uml/UmlPackage.hpp>
+#include "uml/ExpansionRegion.hpp"
+#include "uml/LoopNode.hpp"
+#include "uml/ReadExtentAction.hpp"
+#include "uml/ReadIsClassifiedObjectAction.hpp"
+#include "uml/ReclassifyObjectAction.hpp"
+#include "uml/ReduceAction.hpp"
+#include "uml/StartClassifierBehaviorAction.hpp"
+#include "uml/StartObjectBehaviorAction.hpp"
+#include "uml/UmlPackage.hpp"
 
 
 //*********************************

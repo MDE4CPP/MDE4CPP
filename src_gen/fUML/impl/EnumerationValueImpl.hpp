@@ -29,13 +29,14 @@
 
 #include "fUML/impl/ValueImpl.hpp"
 
-#include "uml/UmlFactory.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "fuml/EnumerationValue.hpp"
-#include "uml/EnumerationLiteral.hpp"
+#include "fUML/EnumerationValue.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
 #include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 //*********************************

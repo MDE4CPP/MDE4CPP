@@ -29,15 +29,15 @@
 
 #include "fUML/impl/ValueImpl.hpp"
 
-#include "uml/InstanceValue.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/Slot.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
-#include "uml/NamedElement.hpp"
 #include "uml/InstanceSpecification.hpp"
-
-#include "fuml/FUMLFactory.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Slot.hpp"
 #include "uml/StructuralFeature.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 

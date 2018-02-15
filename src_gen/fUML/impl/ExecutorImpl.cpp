@@ -5,8 +5,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/Object.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/Evaluation.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Object.hpp"
 
 //Forward declaration includes
 #include "uml/Behavior.hpp"

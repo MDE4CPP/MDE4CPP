@@ -5,21 +5,26 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <iterator>
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
+#include "fUML/ControlToken.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/FeatureValue.hpp"
+#include "fUML/ForkNodeActivation.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Link.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/PinActivation.hpp"
 #include "uml/Action.hpp"
 #include "uml/ActivityNode.hpp"
-#include "uml/OutputPin.hpp"
-#include "iterator"
-#include "uml/InputPin.hpp"
-#include "fuml/PinActivation.hpp"
-#include "fuml/FeatureValue.hpp"
-#include "fuml/Link.hpp"
-#include "uml/LiteralBoolean.hpp"
-#include "uml/UmlFactory.hpp"
-
-#include "fuml/FUMLFactory.hpp"
 #include "uml/Behavior.hpp"
-
-
+#include "uml/DataStoreNode.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"

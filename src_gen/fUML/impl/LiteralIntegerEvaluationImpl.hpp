@@ -29,6 +29,7 @@
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
 
+#include "fuml/IntegerValue.hpp"
 #include "fuml/FUMLFactory.hpp"
 #include "uml/LiteralInteger.hpp"
 

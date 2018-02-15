@@ -29,8 +29,9 @@
 
 #include "fUML/impl/ActivityNodeActivationImpl.hpp"
 
-#include "fuml/Token.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/Token.hpp"
 
 
 //*********************************

@@ -29,6 +29,7 @@
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
 
+#include "fuml/UnlimitedNaturalValue.hpp"
 #include "fuml/FUMLFactory.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
 

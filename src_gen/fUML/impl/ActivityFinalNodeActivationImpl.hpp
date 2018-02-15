@@ -29,8 +29,12 @@
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
 
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ExpansionActivationGroup.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
 #include "uml/ActivityNode.hpp"
-#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************

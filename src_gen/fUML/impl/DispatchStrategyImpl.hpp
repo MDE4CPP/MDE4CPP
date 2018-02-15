@@ -29,6 +29,8 @@
 
 #include "fUML/impl/SemanticStrategyImpl.hpp"
 
+#include "fuml/ExecutionFactory.hpp"
+#include "fuml/Locus.hpp"
 
 
 //*********************************
