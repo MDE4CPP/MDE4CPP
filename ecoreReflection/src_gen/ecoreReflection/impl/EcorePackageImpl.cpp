@@ -1,17 +1,6 @@
 #include "ecoreReflection/impl/EcorePackageImpl.hpp"
 
-//metamodel classes
-#include "uml/Constraint.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/FunctionBehavior.hpp"
-#include "uml/Generalization.hpp"
-#include "uml/Interface.hpp"
-#include "uml/OpaqueExpression.hpp"
-#include "uml/Operation.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Property.hpp"
-#include "uml/Stereotype.hpp"
-
+//meta meta model classes
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
 #include "uml/ClassifierTemplateParameter.hpp"
@@ -26,6 +15,10 @@
 #include "uml/RedefinableTemplateSignature.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "uml/TemplateParameterSubstitution.hpp"
+
+//meta meta model factory
+#include "uml/UmlFactory.hpp"
+
 //metamodel factory
 
 //depending model packages

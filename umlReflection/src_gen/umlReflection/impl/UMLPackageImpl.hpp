@@ -16,10 +16,17 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
-
 #include "umlReflection/UMLPackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
-#include "uml/UmlFactory.hpp"
+namespace uml
+{
+	class InstanceValue;
+	class LiteralBoolean;
+	class LiteralInteger;
+	class LiteralUnlimitedNatural;
+	class OpaqueExpression;
+	class UmlFactory;
+}
 
 namespace UML
 {

@@ -1,20 +1,13 @@
 #include "primitivetypesReflection/impl/PrimitiveTypesPackageImpl.hpp"
 
-//metamodel classes
-#include "uml/Constraint.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/FunctionBehavior.hpp"
-#include "uml/Generalization.hpp"
-#include "uml/Interface.hpp"
-#include "uml/OpaqueExpression.hpp"
-#include "uml/Operation.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Property.hpp"
-#include "uml/Stereotype.hpp"
-
+//meta meta model classes
 #include "uml/Comment.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/ProfileApplication.hpp"
+
+//meta meta model factory
+#include "uml/UmlFactory.hpp"
+
 //metamodel factory
 
 //depending model packages

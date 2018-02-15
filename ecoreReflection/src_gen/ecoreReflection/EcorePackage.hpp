@@ -16,51 +16,17 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
- 
-#include "uml/Factory.hpp"
 #include "uml/Package.hpp"	
-
-namespace Ecore 
-{
-	class EAnnotation;
-	class EAttribute;
-	class EClass;
-	class EClassifier;
-	class EDataType;
-	class EEnum;
-	class EEnumLiteral;
-	class EFactory;
-	class EGenericType;
-	class EModelElement;
-	class ENamedElement;
-	class EObject;
-	class EOperation;
-	class EPackage;
-	class EParameter;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EStructuralFeature;
-	class ETypeParameter;
-	class ETypedElement;
-	class EcorePackage;
-}
 
 namespace uml 
 {
 	class Association;
 	class Class;
-	class ClassifierTemplateParameter;
-	class Generalization;
-	class LiteralInteger;
-	class LiteralUnlimitedNatural;
 	class Operation;
 	class Parameter;
 	class PrimitiveType;
-	class ProfileApplication;
 	class Property;
 	class RedefinableTemplateSignature;
-	class TemplateBinding;
-	class TemplateParameterSubstitution;
 }
 
 namespace Ecore 

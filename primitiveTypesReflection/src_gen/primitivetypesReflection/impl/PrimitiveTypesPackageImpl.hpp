@@ -16,10 +16,12 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
-
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
-#include "uml/UmlFactory.hpp"
+namespace uml
+{
+	class UmlFactory;
+}
 
 namespace PrimitiveTypes
 {

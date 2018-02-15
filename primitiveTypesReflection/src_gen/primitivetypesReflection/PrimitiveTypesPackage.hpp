@@ -16,21 +16,11 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
- 
-#include "uml/Factory.hpp"
 #include "uml/Package.hpp"	
-
-namespace PrimitiveTypes 
-{
-
-	class PrimitiveTypesPackage;
-}
 
 namespace uml 
 {
-	class Comment;
 	class PrimitiveType;
-	class ProfileApplication;
 }
 
 namespace PrimitiveTypes 
