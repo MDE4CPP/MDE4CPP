@@ -39,8 +39,14 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -92,6 +98,16 @@ IF(UNIX AND NOT APPLE)
 	ELSE()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
+[/for]
+	ENDIF()
+ELSEIF(APPLE)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.dylib ${MDE4CPP_HOME}/application/bin)
+[/for]
+	ELSE()
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].dylib ${MDE4CPP_HOME}/application/bin)
 [/for]
 	ENDIF()
 ELSE()
