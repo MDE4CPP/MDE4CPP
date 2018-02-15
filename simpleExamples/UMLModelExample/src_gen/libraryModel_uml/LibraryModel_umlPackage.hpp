@@ -16,28 +16,12 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
- 
-#include "uml/Factory.hpp"
 #include "uml/Package.hpp"	
-
-namespace LibraryModel_uml 
-{
-	class Author;
-	class Book;
-	class Library;
-	class NamedModelElement;
-	class Picture;
-	class LibraryModel_umlPackage;
-}
 
 namespace uml 
 {
 	class Association;
 	class Class;
-	class Generalization;
-	class LiteralInteger;
-	class LiteralUnlimitedNatural;
-	class PackageImport;
 	class Property;
 }
 

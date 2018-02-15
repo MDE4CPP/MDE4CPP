@@ -16,10 +16,15 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
-
 #include "CalcModel/CalcModelPackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
-#include "uml/UmlFactory.hpp"
+namespace uml
+{
+	class LiteralBoolean;
+	class LiteralInteger;
+	class LiteralString;
+	class UmlFactory;
+}
 
 namespace CalcModel
 {

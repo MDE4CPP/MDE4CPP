@@ -23,15 +23,24 @@
 
 #include <cassert>
 
-#include "libraryModel_ecore/impl/AuthorImpl.hpp"
-#include "libraryModel_ecore/impl/BookImpl.hpp"
-#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
-#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
-#include "libraryModel_ecore/impl/PictureImpl.hpp"
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
+
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
+
+namespace libraryModel_ecore 
+{	class Author;
+	class Book;
+	class LibraryModel;
+	class NamedElement;
+	class Picture;
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace libraryModel_ecore
 {

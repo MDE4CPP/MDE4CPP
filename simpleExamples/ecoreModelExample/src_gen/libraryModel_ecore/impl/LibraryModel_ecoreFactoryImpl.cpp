@@ -3,6 +3,13 @@
 
 #include "ecore/EClass.hpp"
 
+
+#include "libraryModel_ecore/impl/AuthorImpl.hpp"
+#include "libraryModel_ecore/impl/BookImpl.hpp"
+#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
+#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
+#include "libraryModel_ecore/impl/PictureImpl.hpp"
+
 using namespace libraryModel_ecore;
 
 //*********************************
@@ -11,11 +18,11 @@ using namespace libraryModel_ecore;
 
 LibraryModel_ecoreFactoryImpl::LibraryModel_ecoreFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("Author", LibraryModel_ecorePackage::AUTHOR_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Book", LibraryModel_ecorePackage::BOOK_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LibraryModel", LibraryModel_ecorePackage::LIBRARYMODEL_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("NamedElement", LibraryModel_ecorePackage::NAMEDELEMENT_ECLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Picture", LibraryModel_ecorePackage::PICTURE_ECLASS));
+	m_idMap.insert(std::make_pair("Author", LibraryModel_ecorePackage::AUTHOR_ECLASS));
+	m_idMap.insert(std::make_pair("Book", LibraryModel_ecorePackage::BOOK_ECLASS));
+	m_idMap.insert(std::make_pair("LibraryModel", LibraryModel_ecorePackage::LIBRARYMODEL_ECLASS));
+	m_idMap.insert(std::make_pair("NamedElement", LibraryModel_ecorePackage::NAMEDELEMENT_ECLASS));
+	m_idMap.insert(std::make_pair("Picture", LibraryModel_ecorePackage::PICTURE_ECLASS));
 }
 
 LibraryModel_ecoreFactoryImpl::~LibraryModel_ecoreFactoryImpl()

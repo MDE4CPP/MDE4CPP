@@ -22,15 +22,13 @@
 //#include "util/ProfileCallCount.hpp"
 
 #include "ecore/EPackage.hpp"
-#include "ecore/EcoreFactory.hpp"
 
-namespace libraryModel_ecore 
-{	class Author;
-	class Book;
-	class LibraryModel;
-	class NamedElement;
-	class Picture;
-	class LibraryModel_ecorePackage;
+namespace ecore 
+{
+	class EAttribute;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace libraryModel_ecore 
@@ -58,9 +56,9 @@ namespace libraryModel_ecore
 
 			// Begin Class Author
 			//Class and Feature IDs 
-			static const int AUTHOR_ECLASS = 1;
-			static const int AUTHOR_ECLASS_FEATURE_COUNT = 1;
-			static const int AUTHOR_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int AUTHOR_ECLASS = 1;
+			static const unsigned int AUTHOR_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int AUTHOR_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
@@ -75,9 +73,9 @@ namespace libraryModel_ecore
 
 			// Begin Class Book
 			//Class and Feature IDs 
-			static const int BOOK_ECLASS = 0;
-			static const int BOOK_ECLASS_FEATURE_COUNT = 4;
-			static const int BOOK_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int BOOK_ECLASS = 0;
+			static const unsigned int BOOK_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int BOOK_ECLASS_OPERATION_COUNT = 0;
 			
 			static const int BOOK_EREFERENCE_AUTHORS = 01;
 			static const int BOOK_EREFERENCE_LIBRARY = 02;
@@ -98,9 +96,9 @@ namespace libraryModel_ecore
 
 			// Begin Class LibraryModel
 			//Class and Feature IDs 
-			static const int LIBRARYMODEL_ECLASS = 2;
-			static const int LIBRARYMODEL_ECLASS_FEATURE_COUNT = 2;
-			static const int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int LIBRARYMODEL_ECLASS = 2;
+			static const unsigned int LIBRARYMODEL_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 0;
 			
 			static const int LIBRARYMODEL_EREFERENCE_AUTHORS = 21;
 			static const int LIBRARYMODEL_EREFERENCE_BOOK = 20;
@@ -119,9 +117,9 @@ namespace libraryModel_ecore
 
 			// Begin Class NamedElement
 			//Class and Feature IDs 
-			static const int NAMEDELEMENT_ECLASS = 3;
-			static const int NAMEDELEMENT_ECLASS_FEATURE_COUNT = 1;
-			static const int NAMEDELEMENT_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int NAMEDELEMENT_ECLASS = 3;
+			static const unsigned int NAMEDELEMENT_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int NAMEDELEMENT_ECLASS_OPERATION_COUNT = 0;
 			static const int NAMEDELEMENT_EATTRIBUTE_NAME = 30;
 			
 			
@@ -138,9 +136,9 @@ namespace libraryModel_ecore
 
 			// Begin Class Picture
 			//Class and Feature IDs 
-			static const int PICTURE_ECLASS = 4;
-			static const int PICTURE_ECLASS_FEATURE_COUNT = 3;
-			static const int PICTURE_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int PICTURE_ECLASS = 4;
+			static const unsigned int PICTURE_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int PICTURE_ECLASS_OPERATION_COUNT = 0;
 			static const int PICTURE_EATTRIBUTE_PAGENUMBER = 42;
 			
 			static const int PICTURE_EREFERENCE_BOOK = 41;

@@ -16,15 +16,7 @@
 #include <memory>
 #include "abstractDataTypes/SubsetUnion.hpp"
 
- 
-#include "uml/Factory.hpp"
 #include "uml/Package.hpp"	
-
-namespace CalcModel 
-{
-	class PrimeChecker;
-	class CalcModelPackage;
-}
 
 namespace uml 
 {
@@ -40,15 +32,11 @@ namespace uml
 	class ForkNode;
 	class FunctionBehavior;
 	class InputPin;
-	class LiteralBoolean;
-	class LiteralInteger;
-	class LiteralString;
 	class MergeNode;
 	class ObjectFlow;
 	class Operation;
 	class OutputPin;
 	class Parameter;
-	class ProfileApplication;
 	class Property;
 }
 

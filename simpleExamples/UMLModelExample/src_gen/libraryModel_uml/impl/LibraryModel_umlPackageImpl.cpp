@@ -1,24 +1,18 @@
 #include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
 
-//metamodel classes
-#include "uml/Constraint.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/FunctionBehavior.hpp"
-#include "uml/Generalization.hpp"
-#include "uml/Interface.hpp"
-#include "uml/OpaqueExpression.hpp"
-#include "uml/Operation.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Property.hpp"
-#include "uml/Stereotype.hpp"
-
+//meta meta model classes
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
 #include "uml/Generalization.hpp"
 #include "uml/LiteralInteger.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
 #include "uml/PackageImport.hpp"
+#include "uml/PrimitiveType.hpp"
 #include "uml/Property.hpp"
+
+//meta meta model factory
+#include "uml/UmlFactory.hpp"
+
 //metamodel factory
 #include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
 

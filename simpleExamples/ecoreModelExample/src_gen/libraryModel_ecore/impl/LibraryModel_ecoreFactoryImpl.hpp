@@ -23,13 +23,15 @@
 
 #include "ecore/impl/EFactoryImpl.hpp"
 
-#include "libraryModel_ecore/impl/AuthorImpl.hpp"
-#include "libraryModel_ecore/impl/BookImpl.hpp"
-#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
-#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
-#include "libraryModel_ecore/impl/PictureImpl.hpp"
-
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
+
+namespace libraryModel_ecore 
+{	class Author;
+	class Book;
+	class LibraryModel;
+	class NamedElement;
+	class Picture;
+}
 
 namespace libraryModel_ecore 
 {

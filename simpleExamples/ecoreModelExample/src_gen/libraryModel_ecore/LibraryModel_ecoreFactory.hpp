@@ -32,7 +32,6 @@ namespace libraryModel_ecore
 	class NamedElement;
 	class Picture;
 	class LibraryModel_ecorePackage;
-	class LibraryModel_ecoreFactory;
 }
 
 namespace libraryModel_ecore 
