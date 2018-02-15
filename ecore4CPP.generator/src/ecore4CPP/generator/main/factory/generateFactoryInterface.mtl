@@ -32,7 +32,6 @@ namespace [anEPackage.name/]
 	class [elements.name/];[/for]
 
 	class [anEPackage.name.toUpperFirst().concat('Package')/];
-	class [packageName/];
 }
 
 [comment namespace /]
