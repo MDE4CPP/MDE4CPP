@@ -41,6 +41,8 @@
 #include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
+// metametamodel factory
+#include "[anEPackage.eClass().ePackage.name/]/[anEPackage.eClass().ePackage.name.toUpperFirst().concat('Factory')/].hpp"
 //metamodel factory
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
