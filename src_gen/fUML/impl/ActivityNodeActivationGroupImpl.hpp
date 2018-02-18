@@ -38,6 +38,7 @@
 #include "fUML/ControlNodeActivation.hpp"
 #include "fUML/ExecutionFactory.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 #include "fUML/Locus.hpp"
 #include "fUML/PinActivation.hpp"
 #include "uml/Action.hpp"

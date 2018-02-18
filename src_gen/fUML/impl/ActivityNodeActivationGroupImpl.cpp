@@ -13,6 +13,7 @@
 #include "fUML/ControlNodeActivation.hpp"
 #include "fUML/ExecutionFactory.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 #include "fUML/Locus.hpp"
 #include "fUML/PinActivation.hpp"
 #include "uml/Action.hpp"
@@ -312,22 +313,19 @@ std::shared_ptr<Bag<fUML::ActivityParameterNodeActivation> > ActivityNodeActivat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<ActivityParameterNodeActivation> > parameterNodeActivations(new Bag<ActivityParameterNodeActivation>());
+		std::shared_ptr<Bag<ActivityParameterNodeActivation> > parameterNodeActivations(new Bag<ActivityParameterNodeActivation>());
 	std::shared_ptr<Bag<ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
-    for (unsigned int i = 0; i < nodeActivations->size(); i++)
-    {
-    	std::shared_ptr<ActivityNodeActivation> activation = nodeActivations->at(i);
-    	std::shared_ptr<ActivityParameterNodeActivation> paraActivation = std::dynamic_pointer_cast<ActivityParameterNodeActivation>(activation);
-        if (paraActivation != nullptr)
-        {
-            if (activation->getIncomingEdges()->size() > 0)
-            {
-                parameterNodeActivations->push_back(paraActivation);
-            }
-        }
-    }
-
-    return parameterNodeActivations;
+	for (std::shared_ptr<ActivityNodeActivation> activation : *nodeActivations)
+	{
+		if (activation->eClass() == fUML::FUMLPackage::eInstance()->getActivityParameterNodeActivation_EClass())
+		{
+			if (activation->getIncomingEdges()->size() > 0)
+			{
+				parameterNodeActivations->push_back(std::dynamic_pointer_cast<ActivityParameterNodeActivation>(activation));
+			}
+		}
+	}
+	return parameterNodeActivations;
 	//end of body
 }
 
