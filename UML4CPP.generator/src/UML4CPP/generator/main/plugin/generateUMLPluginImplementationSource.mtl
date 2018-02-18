@@ -20,6 +20,9 @@
 [template public generateUMLPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
+
+[defineDebugMacro()/]
+
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Factory.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 

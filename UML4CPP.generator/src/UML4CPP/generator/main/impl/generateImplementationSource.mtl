@@ -24,8 +24,10 @@
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-
 #include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
+
+[defineDebugMacro()/]
+
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
