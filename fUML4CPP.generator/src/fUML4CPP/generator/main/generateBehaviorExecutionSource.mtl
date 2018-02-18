@@ -29,7 +29,17 @@
 #include <memory>
 #include <cassert>
 
+#include "abstractDataTypes/SubsetUnion.hpp" 
 #include "fUML/ParameterValue.hpp"
+
+[if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
+[let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
+	[if (fb._body->asOrderedSet()->size() = 2)]
+//Included from function behavior "[fb.name/]"
+[fb._body->asOrderedSet()->at(2)/]
+	[/if]
+[/let]
+[/if]
 
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
