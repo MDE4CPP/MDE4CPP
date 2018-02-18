@@ -65,8 +65,8 @@ SET(SOURCE_FILES
 [for (aBehavior : OpaqueBehavior | aPackage.getOpaqueBehaviors()->sortedBy(name))]
 	[aBehavior.name.toUpperFirst()/]Execution.cpp
 [/for]
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
-[if (not aCOA.hasCOAAMethod())][aCOA.name.toUpperFirst()/]Execution.cpp[/if]
+[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name)->select(not hasCOAAMethod()))]
+	[aCOA.name.toUpperFirst()/]Execution.cpp
 [/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Execution.cpp
