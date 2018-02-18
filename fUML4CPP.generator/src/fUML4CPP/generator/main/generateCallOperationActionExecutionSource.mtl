@@ -30,6 +30,7 @@
 #include <memory>
 #include <cassert>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ParameterValue.hpp"
 
 [if (not (operation.method->asOrderedSet()->first().oclIsUndefined()))]
