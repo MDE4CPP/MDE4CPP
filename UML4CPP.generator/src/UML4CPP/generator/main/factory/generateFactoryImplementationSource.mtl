@@ -90,7 +90,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	if (nullptr != [containmentProperty.name.toLowerFirst()/])
 [/if]
 	{
-		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[containerProperty.GetterName()/]()->push_back(element);
+		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper > 1)][containerProperty.GetterName()/]()->push_back(element)[else][containerProperty.SetterName()/](element)[/if];
 	}
 	return element;
 }
