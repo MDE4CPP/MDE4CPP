@@ -71,9 +71,6 @@ SET(SOURCE_FILES
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Execution.cpp
 [/for]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity)->sortedBy(name))]
-	[act.name.toUpperFirst()/]Execution.cpp
-[/for]
 [if (buildLibrary)]
 	[packageName.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]
