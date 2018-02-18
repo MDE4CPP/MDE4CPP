@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::generateType /]
 
 [template public generateClassifierExecutionHeader(aClassifier : Classifier, aPackage :Package) {
-	className : String = aClassifier.name.toUpperFirst().concat('Execution'); 
+	className : String = executionClassName(); 
 	pointerName : String = pointerName(aPackage);
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]

@@ -21,7 +21,7 @@
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 
 [template public generateClassifierExecutionSource(aClassifier : Classifier, aPackage:Package) {
-	className : String = aClassifier.name.toUpperFirst().concat('Execution'); 
+	className : String = executionClassName(); 
 	pointerName : String = pointerName(aPackage);
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
