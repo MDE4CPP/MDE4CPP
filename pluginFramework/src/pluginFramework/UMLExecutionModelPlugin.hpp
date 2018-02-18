@@ -13,13 +13,14 @@
 
 #include "boost/any.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "uml/Element.hpp"
 
 class UMLExecutionModelPlugin: public MDE4CPPPlugin
 {
 	public:
 		virtual ~UMLExecutionModelPlugin(){}
 
-		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
+		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element = nullptr) = 0;
 };
 
 #endif
