@@ -8,9 +8,14 @@
 #ifndef PLUGINFRAMEWORK_ECOREMODELPLUGIN_HPP
 #define PLUGINFRAMEWORK_ECOREMODELPLUGIN_HPP
 
+#include <memory>
 #include "pluginFramework/MDE4CPPPlugin.hpp"
-#include "ecore/EFactory.hpp"
-#include "ecore/EPackage.hpp"
+
+namespace ecore
+{
+	class EFactory;
+	class EPackage;
+}
 
 class EcoreModelPlugin: public MDE4CPPPlugin
 {

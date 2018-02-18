@@ -7,7 +7,17 @@
 
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#define MAX_CHAR 260
+typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
+
 #include <iostream>
+#include <dirent.h>
 
 #ifdef __linux__
 

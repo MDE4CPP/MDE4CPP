@@ -8,21 +8,9 @@
 #ifndef PLUGINFRAMEWORK_PLUGINFRAMEWORK_HPP
 #define PLUGINFRAMEWORK_PLUGINFRAMEWORK_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
+#include <memory>
 
-#include <map>
-#include <string>
-#include <vector>
-
-#include "boost/shared_ptr.hpp"
-#include "pluginFramework/MDE4CPPPlugin.hpp"
-
-#define MAX_CHAR 260
-typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
+class MDE4CPPPlugin;
 
 class PluginFramework
 {

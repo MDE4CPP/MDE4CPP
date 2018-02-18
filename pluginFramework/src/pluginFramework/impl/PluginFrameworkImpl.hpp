@@ -8,22 +8,11 @@
 #ifndef PLUGINFRAMEWORK_PLUGINFRAMEWORKIMPL_HPP
 #define PLUGINFRAMEWORK_PLUGINFRAMEWORKIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-
-#include <dirent.h>
 #include <map>
-#include <string>
 #include <vector>
 
-#include "boost/shared_ptr.hpp"
-#include "pluginFramework/pluginFramework.hpp"
-
-#define MAX_CHAR 260
-typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "pluginFramework/PluginFramework.hpp"
 
 class PluginFrameworkImpl : virtual public PluginFramework
 {
@@ -33,7 +22,6 @@ class PluginFrameworkImpl : virtual public PluginFramework
 		static PluginFramework* create();
 
 	public:
-
 		virtual ~PluginFrameworkImpl();
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByName(const std::string name) const;
 		virtual void clear();

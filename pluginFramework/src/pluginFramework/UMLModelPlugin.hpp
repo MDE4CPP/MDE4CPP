@@ -8,9 +8,14 @@
 #ifndef PLUGINFRAMEWORK_UMLMODELPLUGIN_HPP
 #define PLUGINFRAMEWORK_UMLMODELPLUGIN_HPP
 
+#include <memory>
 #include "pluginFramework/MDE4CPPPlugin.hpp"
-#include "uml/Factory.hpp"
-#include "uml/Package.hpp"
+
+namespace uml
+{
+	class Factory;
+	class Package;
+}
 
 class UMLModelPlugin: public MDE4CPPPlugin
 {

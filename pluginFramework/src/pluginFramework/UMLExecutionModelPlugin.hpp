@@ -13,7 +13,11 @@
 
 #include "boost/any.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
-#include "uml/Element.hpp"
+
+namespace uml
+{
+	class Element;
+}
 
 class UMLExecutionModelPlugin: public MDE4CPPPlugin
 {
