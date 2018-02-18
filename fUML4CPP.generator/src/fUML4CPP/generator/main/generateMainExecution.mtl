@@ -22,6 +22,9 @@
 
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
+
+[defineDebugMacro()/]
+
 #include <iostream>
 #include <memory>
 #include <vector>

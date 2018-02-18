@@ -25,6 +25,9 @@ pointerName : String = if (aPackage.name = aClassifier.namespace.ns()) then aCla
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+
+[defineDebugMacro()/]
+
 #include <iostream>
 #include <memory>
 

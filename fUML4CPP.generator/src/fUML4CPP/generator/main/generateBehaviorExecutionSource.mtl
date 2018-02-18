@@ -22,6 +22,9 @@
 
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+
+[defineDebugMacro()/]
+
 #include <iostream>
 #include <memory>
 #include <cassert>

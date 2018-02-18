@@ -23,6 +23,11 @@
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/impl/[packageName/].hpp"
+
+[defineDebugMacro()/]
+
+#include <iostream>
+
 [generateMainIncludes()/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
 [generateActivityRelatedIncludes(act, aPackage)/]

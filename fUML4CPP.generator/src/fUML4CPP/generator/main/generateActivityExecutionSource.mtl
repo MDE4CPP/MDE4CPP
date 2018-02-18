@@ -26,6 +26,8 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
+[defineDebugMacro()/]
+
 #include <cassert>
 #include <iostream>
 #include <memory>

@@ -23,6 +23,9 @@
 [template public generateCallOperationActionExecutionSource(anCallOperationAction : CallOperationAction, aPackage :Package){ className : String = anCallOperationAction.name.toUpperFirst().concat('Execution'); }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+
+[defineDebugMacro()/]
+
 #include <iostream>
 #include <memory>
 #include <cassert>
