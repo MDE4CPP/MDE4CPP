@@ -27,10 +27,6 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 
 #define [aActivity.name.toUpperCase()/] 1
 #include "fUML/impl/ActivityExecutionImpl.hpp"
-[for ( par : Parameter | aActivity.ownedParameter)]
-[par.generateParameterInclude(aPackage)/]
-[/for]
-#include "abstractDataTypes/SubsetUnion.hpp"
 
 namespace [aPackage.name/] 
 {
@@ -38,7 +34,7 @@ namespace [aPackage.name/]
 	{
 		public:
 		    [className/](const [className/] &obj);
-		    //constructor52
+		    //constructor
 		    [className/]();
 		    //destructor
 		    virtual ~[className/]();

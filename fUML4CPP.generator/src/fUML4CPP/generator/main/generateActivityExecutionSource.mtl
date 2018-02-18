@@ -33,6 +33,7 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 #include <memory>
 #include <vector>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ActivityParameterNodeActivation.hpp"
 #include "fUML/ActivityNodeActivationGroup.hpp"
 #include "fUML/DispatchStrategy.hpp"
@@ -48,6 +49,10 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 #include "uml/Activity.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/FunctionBehavior.hpp"
+
+[for ( par : Parameter | aActivity.ownedParameter->asOrderedSet())]
+[par.generateParameterInclude(aPackage)/]
+[/for]
 
 [if (aActivity.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
