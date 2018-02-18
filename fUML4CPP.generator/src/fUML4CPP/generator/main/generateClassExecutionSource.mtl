@@ -26,11 +26,7 @@ pointerName : String = aClass.name.toUpperFirst();
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
-[defineDebugMacro()/]
-
-#include <iostream>
-#include <memory>
-#include <cassert>
+#include "[aClass.getNearestPackage().name/]/[pointerName/].hpp"
 
 using namespace [aPackage.name/];
 

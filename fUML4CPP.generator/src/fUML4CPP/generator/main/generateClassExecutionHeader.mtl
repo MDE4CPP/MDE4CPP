@@ -21,9 +21,13 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass,'Execution')/]
 
+#include "abstractDataTypes/Bag.hpp"
 #include "fUML/impl/ObjectImpl.hpp"
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aClass.getNearestPackage().name/]/[pointerName/].hpp"
+
+namespace [aClass.getNearestPackage().name/]
+{
+	class [aClass.name.toUpperFirst()/];
+}
 
 namespace [aPackage.name/] 
 {
