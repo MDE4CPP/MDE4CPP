@@ -57,7 +57,8 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 			parameterList->push_back([par.name/]);
 [/for]
-			boost::any result = executionPlugin->executeActivity("[aOperation.method->filter(Activity)->asOrderedSet()->first().name/]", parameterList);
+			struct null_deleter{void operator()(void const *) const {} };
+			boost::any result = executionPlugin->executeActivity("[aOperation.method->filter(Activity)->asOrderedSet()->first().name/]", parameterList, std::shared_ptr<[aOperation.class.name.toUpperFirst()/]>(this, null_deleter()));
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = boost::any_cast<[aOperation.generateCppType()/]>(result);
