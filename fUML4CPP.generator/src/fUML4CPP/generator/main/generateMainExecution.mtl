@@ -138,8 +138,8 @@ int main()
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Factory.hpp"
 [/if]
 
-[for ( par : Parameter | anActivity->asOrderedSet()->first().ownedParameter)]
-[par.generateParameterInclude(aPackage)/]
+[for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
+[type.generateTypeInclude(aPackage)/]
 [/for]
 
 [/template]
@@ -164,7 +164,7 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[if(par.supportedTypes())]
+[if(par.type.supportedTypes())]
 [par.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
 [par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
@@ -188,7 +188,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>(
 std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.packageGetter()/]);
 [par.generateOutputParameter()/]
-[if(par.supportedTypes())]
+[if(par.type.supportedTypes())]
 [par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
 [par.name/]UmlLinker->setLocus(locus);

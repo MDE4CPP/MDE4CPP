@@ -21,9 +21,9 @@
 [query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 
-[query public supportedTypes(par : Parameter) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') /]
+[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
 
-[query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not supportedTypes())->asSet()->size()>0 /]
+[query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not type.supportedTypes())->asSet()->size()>0 /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.ownedElement->filter(Class), 
@@ -42,11 +42,11 @@
 //Here some additional info that might help you to find it: [par/]
 [/template]
 
-[template public generateInputParameter(par : Parameter, index:Integer) ? (not par.supportedTypes()) ]
+[template public generateInputParameter(par : Parameter, index:Integer) ? (not par.type.supportedTypes()) ]
 std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at([index/])->getValues()->front());
 [/template]
 
-[template public generateInputParameter(par : Parameter, index:Integer) ? (par.supportedTypes())]
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.type.supportedTypes())]
 std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(inputParameters->at([index/])->getValues()->front());
 [/template]
 
@@ -60,11 +60,11 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value = std::dynamic_poi
 #error Output parameter [par.name/] doesn't have a type set. Fix the model and generate the code again.
 [/template]
 
-[template public generateOutputParameter(par : Parameter) ? (par.supportedTypes())]
+[template public generateOutputParameter(par : Parameter) ? (par.type.supportedTypes())]
 std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory::eInstance()->create[par.type.name/]Value());
 [/template]
 
-[template public generateOutputParameter(par : Parameter) ? (not par.supportedTypes())]
+[template public generateOutputParameter(par : Parameter) ? (not par.type.supportedTypes())]
 [if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
@@ -73,11 +73,11 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(n
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
-[template public generateParameterInclude(par : Parameter, aPackage : Package) ? (not par.supportedTypes())]
-#include "[par.type.getNearestPackage().name/]/[par.type.name/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[par.type.name/]Execution.hpp"
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (not supportedTypes())]
+#include "[type.getNearestPackage().name/]/[type.name/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[type.name/]Execution.hpp"
 [/template]
 
-[template public generateParameterInclude(par : Parameter, aPackage : Package) ? (par.supportedTypes())]
-#include "fUML/[par.type.name/]Value.hpp"
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
+#include "fUML/[type.name/]Value.hpp"
 [/template]

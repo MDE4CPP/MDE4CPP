@@ -28,7 +28,6 @@
 
 #include <iostream>
 #include <memory>
-#include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ParameterValue.hpp"
@@ -55,8 +54,8 @@
 [/if]
 // [anCallOperationAction.operation.ownedParameter->first().type.name/] is not a pointer
 [/if]
-[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-[par.generateParameterInclude(aPackage)/]
+[for (type : Type | anCallOperationAction.operation.ownedParameter.type->asOrderedSet()->sortedBy(name))]
+[type.generateTypeInclude(aPackage)/]
 [/for]
 
 #include "[anCallOperationAction.target.type.getNearestPackage().name/]/[anCallOperationAction.target.type.name/].hpp"

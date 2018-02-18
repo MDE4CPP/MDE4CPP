@@ -56,8 +56,8 @@
 [if (anOpaqueBehavior.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
 [/if]
-[for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
-[par.generateParameterInclude(aPackage)/]
+[for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
+[type.generateTypeInclude(aPackage)/]
 [/for]
 
 using namespace [aPackage.name/];
@@ -93,7 +93,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 
-	[if (not par.supportedTypes())]
+	[if (not par.type.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
 	assert([par.name/] != nullptr);
 	[else]
@@ -143,7 +143,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	//set return / out parameters
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
     [par.generateOutputParameter()/]
-	[if (not par.supportedTypes())]
+	[if (not par.type.supportedTypes())]
 	[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
     [par.name/]UmlLinker->setLocus(this->getLocus());
     [par.name/]Value->setReferent([par.name/]UmlLinker);
@@ -155,10 +155,10 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
 	//set InOut parameters
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->asOrderedSet()->select(direction = ParameterDirectionKind::inout)->sortedBy(name))]
-	[if (par.direction <> ParameterDirectionKind::inout or not par.supportedTypes())]
+	[if (par.direction <> ParameterDirectionKind::inout or not par.type.supportedTypes())]
 	[par.generateOutputParameter()/]
 	[/if]
-	[if (not par.supportedTypes())]
+	[if (not par.type.supportedTypes())]
 	//Pointer type
 	[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
     [par.name/]UmlLinker->setLocus(this->getLocus());
