@@ -27,6 +27,7 @@
 [defineDebugMacro()/]
 
 #include <iostream>
+#include "uml/Element.hpp"
 
 [generateMainIncludes()/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
