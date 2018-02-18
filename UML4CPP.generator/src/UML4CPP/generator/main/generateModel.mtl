@@ -37,6 +37,7 @@ virtual public uml::Class
 #include <string>
 #include <vector>
 
+[includeAbstractDataTypes()/]
 #include "boost/any.hpp"
 #include "boost/shared_ptr.hpp"
 
