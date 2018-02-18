@@ -26,6 +26,8 @@
 [generateMainIncludes()/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
 [generateActivityRelatedIncludes(act, aPackage)/]
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
 using namespace [aPackage.name/];
@@ -57,7 +59,7 @@ std::string [packageName/]::eNS_PREFIX()
 }
 
 
-boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList)
+boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element)
 {
 
 	[generateLocusInitialization()/]
@@ -66,7 +68,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 	if (activityName.compare("[act.name/]") == 0)
 	{
 		[act.generateParameterFromAny(aPackage)/]
-		[act.generateStartActivityExecution(aPackage)/]   
+		[act.generateStartActivityExecution(aPackage, true)/]   
 		[act.generateReturnParameter(aPackage)/]
 	}
 [/for]
