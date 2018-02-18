@@ -16,7 +16,10 @@
  
 [import UML4CPP::generator::main::helper /]
 
-[template public generateBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
+[template public generateBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package) {
+	className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution');
+}]
+
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anOpaqueBehavior,'Execution')/]
 
