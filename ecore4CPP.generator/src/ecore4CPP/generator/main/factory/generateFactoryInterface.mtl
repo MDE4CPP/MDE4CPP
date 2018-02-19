@@ -22,6 +22,7 @@
 [file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 
+#include <map>
 #include <memory>
 
 #include "ecore/EFactory.hpp"

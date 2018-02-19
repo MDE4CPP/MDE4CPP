@@ -27,10 +27,11 @@
 [file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
+[if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
 #include <map>
-#include <string>
-#include <vector>
+[/if]
 #include <memory>
+#include <string>
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
