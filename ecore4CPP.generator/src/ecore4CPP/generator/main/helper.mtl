@@ -119,11 +119,13 @@
 #ifndef [namedelement.name.concat(sufix).concat('_hpp').toUpperCase()/]
 #define [namedelement.name.concat(sufix).concat('_hpp').toUpperCase()/]
 [/if]
+[/template]
 
+[template public defineDebugMacros(namedelement : ENamedElement)]
 #ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_MESSAGE(a) /**/
 #else
-    #define DEBUG_MESSAGE(a) a
+	#define DEBUG_MESSAGE(a) a
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON

@@ -26,6 +26,9 @@
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
 [file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aClass.ePackage.name/]/impl/[className.concat('.hpp')/]"
+
+[defineDebugMacros()/]
+
 #include <iostream>
 #include <cassert>
 

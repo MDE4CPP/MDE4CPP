@@ -20,6 +20,7 @@
 [template public generateEcorePluginImplSource(aPackage : EPackage) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.name/]/impl/[packageName/].hpp"
+
 #include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Factory.hpp"
 #include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 
