@@ -32,7 +32,6 @@
 [/if]
 #include <memory>
 #include <string>
-#include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/any.hpp"

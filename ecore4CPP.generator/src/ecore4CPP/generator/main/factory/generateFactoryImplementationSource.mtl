@@ -20,6 +20,9 @@
 [template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
 [file (anEPackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[anEPackage.name/]/impl/[className/].hpp"
+
+#include <cassert>
+
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [if (not(anEPackage.name = 'ecore'))]

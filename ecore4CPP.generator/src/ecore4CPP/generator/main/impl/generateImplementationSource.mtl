@@ -29,8 +29,8 @@
 
 [defineDebugMacros()/]
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
