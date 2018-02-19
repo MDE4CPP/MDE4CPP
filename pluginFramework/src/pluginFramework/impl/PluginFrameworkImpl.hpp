@@ -11,7 +11,6 @@
 #include <map>
 #include <vector>
 
-#include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "pluginFramework/PluginFramework.hpp"
 
 class PluginFrameworkImpl : virtual public PluginFramework

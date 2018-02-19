@@ -25,6 +25,8 @@ typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
 	#include <windows.h>
 #endif
 
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+
 PluginFrameworkImpl::PluginFrameworkImpl()
 {
 	initialize();

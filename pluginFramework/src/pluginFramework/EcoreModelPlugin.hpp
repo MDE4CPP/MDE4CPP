@@ -9,6 +9,7 @@
 #define PLUGINFRAMEWORK_ECOREMODELPLUGIN_HPP
 
 #include <memory>
+
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 
 namespace ecore
