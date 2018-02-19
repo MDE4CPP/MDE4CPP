@@ -125,90 +125,95 @@ std::shared_ptr<fUML::Execution> CallOperationActionActivationImpl::getCallExecu
 	//generated from body annotation
 		std::shared_ptr<fUML::Execution> execution = nullptr;
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction> (this->getNode());
-    if(action != nullptr)
-    {
+	if(action != nullptr)
+	{
+		//Pin name
+		std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
+		std::string name = targetPin->getName();
 
-			//Pin name
-			std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
-			std::string name = targetPin->getName();
+		std::shared_ptr<fUML::Value> target = nullptr;
+		std::string attributeName = "";
 
-			std::shared_ptr<fUML::Value> target = nullptr;
-			std::string attributeName = "";
-
-			if(name.empty())
+		if(name.empty() || name.find("self") == 0)
+		{
+			std::shared_ptr<fUML::Object> context = this->getActivityExecution()->getContext();
+			if(nullptr != context)
 			{
-				//std::shared_ptr<uml::Classifier> context = action->getContext();
+				execution = context->dispatch(action->getOperation());
 			}
-			else if(name.find("self.") == 0){
-				attributeName = name.substr (5, std::string::npos);
-
-				std::shared_ptr<uml::Classifier> context = action->getContext();
-	      std::shared_ptr<Bag<uml::Property> > attributes = context->getAllAttributes();
-				std::shared_ptr<uml::Property> attribute = nullptr;
-				
-				for(unsigned int i=0; i<attributes->size(); i++)
+		}
+//		else if(name.find("self") == 0)
+//		{
+//			std::cout << "starts with" << std::endl;
+//			attributeName = name.substr (5, std::string::npos);
+//
+//			std::shared_ptr<uml::Classifier> context = action->getContext();
+//			std::shared_ptr<Bag<uml::Property> > attributes = context->getAllAttributes();
+//			std::shared_ptr<uml::Property> attribute = nullptr;
+//
+//			for(unsigned int i=0; i<attributes->size(); i++)
+//			{
+//				if((*attributes)[i]->getName() == attributeName)
+//				{
+//					attribute = (*attributes)[i];
+//					break;
+//				}
+//			}
+//
+//			if(nullptr == attribute)
+//			{
+//				std::cerr << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
+//				exit(EXIT_FAILURE);
+//			}
+//			else
+//			{
+//				DEBUG_MESSAGE(std::cout << "Self attribute found for the target pin" <<std::endl;)
+//			}
+//		}
+		else
+		{
+			std::shared_ptr<uml::InputPin> t = action->getTarget();
+			if(nullptr==t)
+			{
+				std::cerr << "[getCallExecution] Target is null" << std::endl;
+			}
+			else
+			{
+				std::shared_ptr<fUML::PinActivation> pa = this->retrievePinActivation(t);
+				if(nullptr==pa)
 				{
-					if((*attributes)[i]->getName() == attributeName){
-						attribute = (*attributes)[i];
-						break;
-					}
-				}
-
-				if(nullptr == attribute)
-				{
-					std::cout << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
-					exit(EXIT_FAILURE);
+					std::cerr << "[getCallExecution] PinActivation is null" << std::endl;
 				}
 				else
 				{
-					DEBUG_MESSAGE(std::cout << "Self attribute found for the target pin" <<std::endl;)
+					std::shared_ptr<Bag<fUML::Token> > unofferedTokens = pa->getUnofferedTokens();
+					if(nullptr == unofferedTokens)
+					{
+						std::cerr << "[getCallExecution] UnofferedTokens are null" << std::endl;
+					}
+					else
+					{
+						std::shared_ptr<fUML::Token> firstToken = unofferedTokens->front();
+						if(nullptr==firstToken)
+						{
+							std::cerr << "[getCallExecution] FirstToken is null" << std::endl;
+						}
+						else
+						{
+							target  = firstToken->getValue();
+						}
+					}
 				}
-				
 			}
-			else{
-                std::shared_ptr<uml::InputPin > t = action->getTarget();
-                if(nullptr==t)
-                {
-                    std::cerr<< "[getCallExecution] Target is null" << std::endl;
-                }
-                else
-                {
-                    std::shared_ptr<fUML::PinActivation> pa = this->retrievePinActivation(t);
-                    if(nullptr==pa)
-                    {
-                        std::cerr<< "[getCallExecution] PinActivation is null" << std::endl;
-                    }
-                    else
-                    {
-                        std::shared_ptr<Bag<fUML::Token> > unofferedTokens = pa->getUnofferedTokens();
-                        if(nullptr == unofferedTokens)
-                        {
-                            std::cerr<< "[getCallExecution] UnofferedTokens are null" << std::endl;
-                        }
-                        else
-                        {
-                            std::shared_ptr<fUML::Token> firstToken = unofferedTokens->front();
-                            if(nullptr==firstToken)
-                            {
-                                std::cerr<< "[getCallExecution] FirstToken is null" << std::endl;
-                            }
-                            else
-                            {
-                                target  = firstToken->getValue();
-                            }
-                        }
 
-                    }
-                }
+			std::shared_ptr<fUML::Reference> ref = std::dynamic_pointer_cast<fUML::Reference>(target);
+			if(nullptr != ref)
+			{
+				execution = ref->dispatch(action->getOperation());
 			}
-			
-    	std::shared_ptr<fUML::Reference> ref = std::dynamic_pointer_cast<fUML::Reference>(target);
-        if(nullptr != ref)
-        {
-            execution = ref->dispatch(action->getOperation());
-        }
-    }
-    return execution;
+		}
+	}
+	return execution;
 	//end of body
 }
 

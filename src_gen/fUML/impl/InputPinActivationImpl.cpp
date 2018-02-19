@@ -110,16 +110,18 @@ bool InputPinActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	bool ready = ActivityNodeActivationImpl::isReady();
-
-    if (ready) 
-    {
-        int totalValueCount = this->countUnofferedTokens() + this->countOfferedValues();
-        int minimum = std::dynamic_pointer_cast<uml::Pin>(this->getNode())->getLower();
-        ready = (totalValueCount >= minimum);
-    }
-
-    return ready;
+		bool ready = ActivityNodeActivationImpl::isReady();
+	if (getNode()->getName().find("self") == 0)
+	{
+		return true;
+	}
+	if (ready) 
+	{
+		int totalValueCount = this->countUnofferedTokens() + this->countOfferedValues();
+		int minimum = std::dynamic_pointer_cast<uml::Pin>(this->getNode())->getLower();
+		ready = (totalValueCount >= minimum);	
+	}
+	return ready;
 	//end of body
 }
 
