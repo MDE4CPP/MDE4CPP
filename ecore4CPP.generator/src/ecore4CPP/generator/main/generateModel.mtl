@@ -33,8 +33,17 @@
 #include <memory>
 #include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
+[if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
 #include "boost/any.hpp"
+[/if]
+#include "abstractDataTypes/SubsetUnion.hpp"
+
+[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+namespace boost
+{
+	class any;
+}
+[/if]
 
 //*********************************
 // generated Includes

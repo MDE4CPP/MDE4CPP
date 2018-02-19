@@ -32,6 +32,9 @@
 #include <cassert>
 #include <iostream>
 
+[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+#include "boost/any.hpp"
+[/if]
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "[aClass.ePackage.name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"

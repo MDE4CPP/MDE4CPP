@@ -204,3 +204,5 @@ std::string
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
 [anEClassifier.name/]
 [/template]
+
+[query public requiresAny(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then true else (name = 'EEnumerator' or name = 'EDiagnosticChain' or name = 'EJavaObject') endif/]
