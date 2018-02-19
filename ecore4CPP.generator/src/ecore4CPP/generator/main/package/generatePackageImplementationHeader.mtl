@@ -26,8 +26,6 @@
 [file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'PackageImpl')/]
 
-#include <cassert>
-
 [comment  Generate Includes for the Factory/]
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"

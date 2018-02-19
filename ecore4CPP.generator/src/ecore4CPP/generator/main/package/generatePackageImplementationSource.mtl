@@ -28,6 +28,8 @@
 [file (anEPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[anEPackage.name/]/impl/[packageName/].hpp"
 
+#include <cassert>
+
 //metametamodel classes
 [for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
 #include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"
