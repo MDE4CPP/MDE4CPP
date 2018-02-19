@@ -44,11 +44,16 @@
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
+[if (cOpSet.target.name.startsWith('self'))]
 [if (cOpSet.target.name.startsWith('self.'))]
 #include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name/].hpp"
 [/if]
-#include "[cOpSet.owner.owner.oclAsType(Classifier).getNearestPackage().name/]/[cOpSet.owner.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[cOpSet.owner.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().name/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+[else]
+#include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name.toUpperFirst()/]Execution.hpp"
+[/if]
 [/if]
 [/let]
 [/if]
@@ -105,7 +110,11 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
-	std::shared_ptr<[cOpSet.owner.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.owner.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.owner.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution>(this->getContext())->getUmlValue();
+[if (cOpSet.target.name.startsWith('self'))]
+	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution>(this->getContext())->getUmlValue();
+[else]
+	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name.toUpperFirst()/]Execution>(this->getContext())->getUmlValue();
+[/if]
     assert(target != nullptr);
 	[/for]
 	[/if]
@@ -120,15 +129,19 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
 [/if]
-	if (target != nullptr[if (target.name.startsWith('self.'))] && subtarget != nullptr[/if])
+[if (target.name.startsWith('self.'))]
+	if (target != nullptr && subtarget != nullptr)
 	{
+[/if]
 	[let retPar : Set(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))->asSet()]
 	[if(not retPar->isEmpty())][if (not retPar->asOrderedSet()->first().oclIsInvalid())]		[retPar.name/] = [/if][/if][/let]  [if (target.name.startsWith('self.'))]subtarget[else]target[/if]->[cOpSet.operation.name/]([for (sParameter : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.name/][/for]);
+[if (cOpSet.target.name.startsWith('self.'))]
 	}
 	else
 	{
 		std::cerr << "attribute [cOpSet.target.name/] is not set" << std::endl;
 	}
+[/if]
 	[/for]
 	[else]
 		[if (anOpaqueBehavior.getAppliedStereotype('setBehaviour').oclIsUndefined() )]
