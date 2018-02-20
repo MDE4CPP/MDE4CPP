@@ -73,7 +73,7 @@
 */]
 [query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
 [query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
-[query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
+[query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset() and (isUnion() or subsetIsUnion())/]
 [query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
 
 [query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]

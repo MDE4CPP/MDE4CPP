@@ -53,19 +53,19 @@ _[anEReference.name/]) [abstractSufix(impl)/];
 [/template]
 
 [template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
-[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
+[if(eReference.isSubsetUnion())]
 	/*SubsetUnion*/
 	m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising shared pointer SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
 	#endif
-	[elseif(eReference.oclAsType(EModelElement).hasSubset())]
+	[elseif(eReference.hasSubset())]
 	/*Subset*/
 	m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising shared pointer Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
 	#endif
-	[elseif(eReference.oclAsType(EModelElement).isUnion())]
+	[elseif(eReference.isUnion())]
 	/*Union*/
 	m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType()/]>());
 		#ifdef SHOW_SUBSET_UNION
@@ -78,13 +78,13 @@ _[anEReference.name/]) [abstractSufix(impl)/];
 [/template]
 
 [template public InitReferences(eReference : EReference)? (not(eReference.upperBound=1))]
-[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
+[if(eReference.isSubsetUnion())]
 	/*SubsetUnion*/
 	m_[eReference.name/]->initSubsetUnion([generateSubsetElements(eReference)/]);
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
 	#endif
-[elseif(eReference.oclAsType(EModelElement).hasSubset())]
+[elseif(eReference.hasSubset())]
 	/*Subset*/
 	m_[eReference.name/]->initSubset([generateSubsetElements(eReference)/]);
 	#ifdef SHOW_SUBSET_UNION
