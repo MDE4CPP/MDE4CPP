@@ -140,6 +140,7 @@ int main()
 [if (anActivity.ownedParameter->asSet()->parametersArePointers())]
 #include "fuml/Reference.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Factory.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
 [/if]
 
 [for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]

@@ -35,7 +35,7 @@ namespace [aPackage.name/]
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 
-			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element);
+			virtual boost::any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element);
 	};
 }
 [endGuard(aPackage,'ExecPluginImpl')/]
