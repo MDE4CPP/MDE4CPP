@@ -2,10 +2,14 @@
 #define UTIL_REGISTRY_HPP
 
 #include <map>
+#include <memory>
 #include <string>
 
-#include "ecore/EPackage.hpp"
-#include "ecore/EFactory.hpp"
+namespace ecore
+{
+	class EFactory;
+	class EPackage;
+}
 
 namespace util
 {

@@ -1,5 +1,7 @@
 #include "util/ProfileCallCount.hpp"
 
+#include <iostream>
+
 using namespace callDebugCount;
 
 ProfileCallCount* ProfileCallCount::instance = nullptr;

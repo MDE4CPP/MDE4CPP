@@ -2,7 +2,6 @@
 #define UTIL_PROFILE_CALL_COUNT_HPP
 
 #include <map>
-#include <iostream>
 
 namespace callDebugCount
 {

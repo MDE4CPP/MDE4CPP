@@ -1,5 +1,8 @@
 #include "util/registry.hpp"
 
+#include "ecore/EPackage.hpp"
+#include "ecore/EFactory.hpp"
+
 using namespace util;
 
 Registry::Registry()

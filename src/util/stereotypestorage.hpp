@@ -1,36 +1,36 @@
 #ifndef UTIL_STEREOTYPESTORAGE_HPP
 #define UTIL_STEREOTYPESTORAGE_HPP
 
-#ifdef NDEBUG
-#define DEBUG_MESSAGE(a) /**/
-#else
-#define DEBUG_MESSAGE(a) a
-#endif
-
 #include <map>
+#include <memory>
 #include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "uml/Stereotype.hpp"
+template<class T> class Bag;
+
+namespace uml
+{
+	class Element;
+	class Stereotype;
+}
 
 namespace util
 {
 	class StereotypeStorage
 	{
 		public:
-			static StereotypeStorage* eInstance();
+			static std::shared_ptr<StereotypeStorage> eInstance();
 
-			void applyStereotype(uml::Element* _element, std::shared_ptr<uml::Stereotype> stereotype);
-			std::shared_ptr<uml::Stereotype> getAppliedStereotype(uml::Element * _element, std::string qualifiedName);
-			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(uml::Element * _element);
-			bool isStereotypeApplied(uml::Element * _element, std::shared_ptr<uml::Stereotype> _stereotype);
-			void unapplyStereotype(uml::Element * _element, std::shared_ptr<uml::Stereotype> _stereotype);
+			void applyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
+			std::shared_ptr<uml::Stereotype> getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName);
+			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(std::shared_ptr<uml::Element> element);
+			bool isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
+			void unapplyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
 
 		private:
 			StereotypeStorage();
 
-			static StereotypeStorage * m_instance;
-			std::map<uml::Element *, std::shared_ptr<Bag<uml::Stereotype>>> m_stereotypeApplicationMap;
+			static std::shared_ptr<StereotypeStorage> m_instance;
+			std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>> m_stereotypeApplicationMap;
 	};
 }
 #endif
