@@ -90,7 +90,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     DEBUG_MESSAGE(std::cout<<"__________________________" << std::endl;)
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-   	[par.generateCppType()/] [par.name/][if (par.direction = ParameterDirectionKind::out)](new [if (par.upper > 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper > 1)]>[/if]())[/if];
+   	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper > 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper > 1)]>[/if]())[/if];
 	[/for]
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]

@@ -172,7 +172,7 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 [if(par.type.supportedTypes())]
 [par.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-[par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 
 [/for]
