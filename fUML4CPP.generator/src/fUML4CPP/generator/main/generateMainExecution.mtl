@@ -31,9 +31,12 @@
 #include <omp.h>
 
 [generateMainIncludes()/]
-[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 [generateActivityRelatedIncludes(act, aPackage)/]
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).namespace.ns()/]Factory.hpp"
 [/let]
 [else]
 //No main activity found (place one activity as child of the module to set it as a main activity).
@@ -49,11 +52,12 @@ int main()
 
 	[generateLocusInitialization()/]
 
-	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
+	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
-	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+	[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 	[act.generateParameterInstances(aPackage)/]
-	[act.generateStartActivityExecution(aPackage, false)/]   
+	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.ns()/]::[act.owner.oclAsType(Classifier).namespace.ns().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
+	[act.generateStartActivityExecution(aPackage, true)/]   
 	[/let]
 
 	if(nullptr == resultPList)
