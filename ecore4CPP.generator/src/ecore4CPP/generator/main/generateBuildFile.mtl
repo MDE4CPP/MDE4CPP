@@ -56,6 +56,8 @@ SET(SOURCE_FILES
 	impl/[packageName.toUpperFirst()/]FactoryImpl.cpp
 	[packageName.toUpperFirst()/]Factory.cpp
 	impl/[packageName.toUpperFirst()/]PackageImpl.cpp
+	impl/[packageName.toUpperFirst()/]PackageImpl_Creation.cpp
+	impl/[packageName.toUpperFirst()/]PackageImpl_Initialization.cpp
 	[packageName.toUpperFirst()/]Package.cpp
 	impl/[packageName.toUpperFirst()/]PluginImpl.cpp
 	[packageName.toUpperFirst()/]Plugin.cpp
