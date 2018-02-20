@@ -166,7 +166,7 @@ float
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EEList')]
-std::vector
+Bag
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EDate')]
@@ -182,7 +182,7 @@ boost::any
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'ETreeIterator')]
-std::vector
+Bag
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaClass')]
