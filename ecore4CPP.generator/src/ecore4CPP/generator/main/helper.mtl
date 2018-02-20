@@ -196,7 +196,9 @@
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
 template<class T> class Bag;
+[if (anEClass.eReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
 template<class T, class ... U> class Subset;
+[/if]
 [if (anEClass.eReferences->select(isSubsetUnion())->size() > 0)]
 template<class T, class ... U> class SubsetUnion;
 [/if]
@@ -206,7 +208,9 @@ template<class T> class Union;[/if]
 
 [template public generateAbstractDataTypesIncludes(anEClass : EClass)]
 #include "abstractDataTypes/Bag.hpp"
+[if (anEClass.eAllReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
 #include "abstractDataTypes/Subset.hpp"
+[/if]
 [if (anEClass.eAllReferences->select(isSubsetUnion())->size() > 0)]
 #include "abstractDataTypes/SubsetUnion.hpp"
 [/if]
