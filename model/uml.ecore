@@ -1262,7 +1262,7 @@
       <details key="documentation" value="An Element is a constituent of a model. As such, it has the capability of owning other Elements.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
     </eAnnotations>
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;util/stereotypestorage.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xD;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="has_owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
