@@ -39,9 +39,13 @@ std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [/template]
 
 [template public generateCppType(aParameter : Parameter)]
+[generateCppType(true)/]
+[/template]
+
+[template public generateCppType(aParameter : Parameter, useReference : Boolean)]
 [if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if][else]
-[if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if (aParameter.upper <> 1)]>>[/if][/if]
+[if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
 [/template]
 
 [template public generateCppType(aType : Type)]
