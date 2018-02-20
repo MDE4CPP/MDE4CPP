@@ -195,7 +195,9 @@
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
+[if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
 template<class T> class Bag;
+[/if]
 [if (anEClass.eReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
 template<class T, class ... U> class Subset;
 [/if]
@@ -207,7 +209,9 @@ template<class T> class Union;[/if]
 [/template]
 
 [template public generateAbstractDataTypesIncludes(anEClass : EClass)]
+[if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
+[/if]
 [if (anEClass.eAllReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
 #include "abstractDataTypes/Subset.hpp"
 [/if]
@@ -221,3 +225,5 @@ template<class T> class Union;[/if]
 [template public generateAbstractDataTypesIncludes(anEPackage : EPackage)]
 #include "abstractDataTypes/SubsetUnion.hpp"
 [/template]
+
+[query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
