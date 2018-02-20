@@ -30,6 +30,7 @@
 
 #include <cassert>
 
+[generateAbstractDataTypesIncludes()/]
 //metametamodel classes
 [for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
 #include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"

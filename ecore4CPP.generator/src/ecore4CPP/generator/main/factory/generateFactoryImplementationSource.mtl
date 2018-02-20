@@ -23,6 +23,7 @@
 
 #include <cassert>
 
+[generateAbstractDataTypesIncludes()/]
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [if (not(anEPackage.name = 'ecore'))]

@@ -194,3 +194,20 @@
 [query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '_'.concat(aOperation.singlemultipleParameter()) else '' endif /]
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
 
+[template public generateAbstractDataTypesForwardDeclaration(aClass : EClass)]
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T> class Union;
+template<class T, class ... U> class SubsetUnion;
+[/template]
+
+[template public generateAbstractDataTypesIncludes(aneClass : EClass)]
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+[/template]
+
+[template public generateAbstractDataTypesIncludes(anEPackage : EPackage)]
+#include "abstractDataTypes/SubsetUnion.hpp"
+[/template]
