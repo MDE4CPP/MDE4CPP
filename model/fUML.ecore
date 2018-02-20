@@ -745,7 +745,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DispatchStrategy" eSuperTypes="#//SemanticStrategy">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
+      <details key="includes" value="#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="dispatch" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
