@@ -200,7 +200,8 @@ template<class T, class ... U> class Subset;
 [if (anEClass.eReferences->select(isSubsetUnion())->size() > 0)]
 template<class T, class ... U> class SubsetUnion;
 [/if]
-template<class T> class Union;
+[if (anEClass.eReferences->select(isUnion() and not isSubsetUnion())->size() > 0)]
+template<class T> class Union;[/if]
 [/template]
 
 [template public generateAbstractDataTypesIncludes(anEClass : EClass)]
@@ -209,7 +210,8 @@ template<class T> class Union;
 [if (anEClass.eAllReferences->select(isSubsetUnion())->size() > 0)]
 #include "abstractDataTypes/SubsetUnion.hpp"
 [/if]
-#include "abstractDataTypes/Union.hpp"
+[if (anEClass.eAllReferences->select(isUnion() and not isSubsetUnion())->size() > 0)]
+#include "abstractDataTypes/Union.hpp"[/if]
 [/template]
 
 [template public generateAbstractDataTypesIncludes(anEPackage : EPackage)]
