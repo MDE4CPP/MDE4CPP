@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include "uml/Package.hpp"

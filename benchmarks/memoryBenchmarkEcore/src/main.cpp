@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/impl/EcoreFactoryImpl.hpp"
 #include "ecore/EcorePackage.hpp"

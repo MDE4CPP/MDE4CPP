@@ -27,6 +27,7 @@ SOFTWARE.
 
 #include <iostream>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include "uml/Class.hpp"
