@@ -1,0 +1,53 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+}
+apply plugin: 'base' 
+
+description 'Build tasks for project: FUMLMultiplePins'
+
+task buildFUMLMultiplePins(dependsOn: ['generateFUMLMultiplePins', 'compileFUMLMultiplePins']) {
+	group 'FUMLMultiplePins'
+	description 'build FUMLMultiplePins'
+}
+
+task compileFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'FUMLMultiplePins'
+	description 'compile FUMLMultiplePins'
+
+	projectFolder = file("./src_gen/FUMLMultiplePins")
+}
+
+task generateFUMLMultiplePins(type: JavaExec) {
+	group 'FUMLMultiplePins'
+	description 'generate C++ code of FUMLMultiplePins.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "FUMLMultiplePins.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/FUMLMultiplePins.uml")
+	outputs.dir file("src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
+			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
+		}
+	}
+}
+
+compileFUMLMultiplePins.mustRunAfter generateFUMLMultiplePins
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/FUMLMultiplePins/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+
+	def cmakeFolderExec = file('./src_gen/FUMLMultiplePinsExec/.cmake/')
+	if(cmakeFolderExec.exists()) {
+    	delete cmakeFolderExec.absolutePath
+   		println "deleting folder " + cmakeFolderExec.absolutePath
+	}
+}
