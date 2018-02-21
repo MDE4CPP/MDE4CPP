@@ -21,6 +21,10 @@
 
 #include "fUML/ExpansionNodeActivation.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/Token.hpp"
@@ -106,9 +110,6 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegi
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -119,6 +120,22 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegi
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -192,6 +209,10 @@ std::shared_ptr< Bag<fUML::TokenSet> > ExpansionRegionActivationImpl::getInputTo
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > ExpansionRegionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> ExpansionRegionActivationImpl::eContainer() const
@@ -207,7 +228,7 @@ boost::any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS:
-			return getActivationGroups(); //7610
+			return getActivationGroups(); //7612
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //767
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
@@ -217,13 +238,17 @@ boost::any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //761
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS:
-			return getInputExpansionTokens(); //769
+			return getInputExpansionTokens(); //7611
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //768
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS:
-			return getInputTokens(); //768
+			return getInputTokens(); //7610
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //764
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //760
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //769
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //766
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:

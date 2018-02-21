@@ -13,6 +13,10 @@
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/StructuredActivityNodeActivation.hpp"
@@ -77,9 +81,6 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -105,6 +106,22 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 	
@@ -166,6 +183,10 @@ std::shared_ptr< Bag<fUML::Values> > LoopNodeActivationImpl::getBodyOutputLists(
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > LoopNodeActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::eContainer() const
@@ -181,9 +202,9 @@ boost::any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
-			return getActivationGroup(); //728
+			return getActivationGroup(); //7210
 		case FUMLPackage::LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS:
-			return getBodyOutputLists(); //729
+			return getBodyOutputLists(); //7211
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //727
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
@@ -192,10 +213,14 @@ boost::any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			return getHeldTokens(); //722
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //721
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //728
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //724
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //720
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //729
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //726
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
@@ -212,7 +237,7 @@ void LoopNodeActivationImpl::eSet(int featureID, boost::any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setActivationGroup(_activationGroup); //728
+			setActivationGroup(_activationGroup); //7210
 			break;
 		}
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:

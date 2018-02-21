@@ -17,6 +17,10 @@
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/SignalInstance.hpp"
@@ -79,9 +83,6 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -92,6 +93,22 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -151,6 +168,10 @@ void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Acc
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > AcceptEventActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::eContainer() const
@@ -166,7 +187,7 @@ boost::any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
-			return getEventAccepter(); //1098
+			return getEventAccepter(); //10910
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //1097
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
@@ -175,16 +196,20 @@ boost::any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bo
 			return getHeldTokens(); //1092
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //1091
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //1098
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //1094
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //1090
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //1099
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //1096
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //1095
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
-			return isWaiting(); //1099
+			return isWaiting(); //10911
 	}
 	return boost::any();
 }
@@ -197,7 +222,7 @@ void AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>(newValue);
-			setEventAccepter(_eventAccepter); //1098
+			setEventAccepter(_eventAccepter); //10910
 			break;
 		}
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
@@ -232,7 +257,7 @@ void AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
 		{
 			// BOOST CAST
 			bool _waiting = boost::any_cast<bool>(newValue);
-			setWaiting(_waiting); //1099
+			setWaiting(_waiting); //10911
 			break;
 		}
 	}

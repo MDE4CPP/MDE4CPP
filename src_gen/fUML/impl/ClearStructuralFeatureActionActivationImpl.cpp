@@ -13,6 +13,10 @@
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/StructuralFeatureActionActivation.hpp"
@@ -70,9 +74,6 @@ ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivati
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -83,6 +84,22 @@ ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivati
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -113,6 +130,10 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > ClearStructuralFeatureActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionActivationImpl::eContainer() const
@@ -135,10 +156,14 @@ boost::any ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool 
 			return getHeldTokens(); //1002
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //1001
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //1008
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //1004
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //1000
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //1009
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //1006
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:

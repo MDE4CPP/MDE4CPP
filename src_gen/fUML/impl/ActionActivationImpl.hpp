@@ -176,14 +176,21 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::PinActivation> > getPinActivation() const ;
+			virtual std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > getInputPinActivation() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > getOutputPinActivation() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

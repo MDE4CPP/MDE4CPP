@@ -484,8 +484,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation_in_ActionActivation(castedContainer));
+			}
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
 		{
@@ -574,8 +582,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::OUTPUTPINACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation_in_ActionActivation(castedContainer));
+			}
 		}
 		case FUMLPackage::PARAMETERVALUE_ECLASS:
 		{
@@ -1004,6 +1020,17 @@ std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation() 
 	std::shared_ptr<InputPinActivation> element(new InputPinActivationImpl());
 	return element;
 }
+std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const
+{
+	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(par_actionActivation));
+	if(auto wp = par_actionActivation.lock())
+	{
+			wp->getInputPinActivation()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<InstanceValueEvaluation> FUMLFactoryImpl::createInstanceValueEvaluation() const
 {
 	std::shared_ptr<InstanceValueEvaluation> element(new InstanceValueEvaluationImpl());
@@ -1094,6 +1121,17 @@ std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation(
 	std::shared_ptr<OutputPinActivation> element(new OutputPinActivationImpl());
 	return element;
 }
+std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const
+{
+	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(par_actionActivation));
+	if(auto wp = par_actionActivation.lock())
+	{
+			wp->getOutputPinActivation()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ParameterValue> FUMLFactoryImpl::createParameterValue() const
 {
 	std::shared_ptr<ParameterValue> element(new ParameterValueImpl());

@@ -49,6 +49,10 @@ namespace fUML
 			friend class FUMLFactoryImpl;
 			PinActivationImpl();
 
+			//Additional constructors for the containments back reference
+			PinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
+
+
 
 
 		public:
@@ -78,7 +82,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActionActivation > getActionActivation() const ;
+			virtual std::weak_ptr<fUML::ActionActivation > getActionActivation() const ;
 			
 			/*!
 			 */

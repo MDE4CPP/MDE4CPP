@@ -49,6 +49,10 @@ namespace fUML
 			friend class FUMLFactoryImpl;
 			InputPinActivationImpl();
 
+			//Additional constructors for the containments back reference
+			InputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
+
+
 
 
 		public:

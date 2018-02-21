@@ -13,7 +13,11 @@
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
 #include "fUML/InvocationActionActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
 
 #include "fUML/PinActivation.hpp"
 
@@ -70,9 +74,6 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalA
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -83,6 +84,22 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalA
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -118,6 +135,10 @@ void SendSignalActionActivationImpl::doAction()
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > SendSignalActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::eContainer() const
@@ -140,10 +161,14 @@ boost::any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, boo
 			return getHeldTokens(); //802
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //801
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //808
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //804
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //800
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //809
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //806
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:

@@ -47,6 +47,16 @@ OutputPinActivationImpl::~OutputPinActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation)
+			:OutputPinActivationImpl()
+			{
+			    m_actionActivation = par_actionActivation;
+			}
+
+
+
+
 
 
 OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl & obj):OutputPinActivationImpl()
@@ -116,6 +126,10 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 
 std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
 {
+	if(auto wp = m_actionActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

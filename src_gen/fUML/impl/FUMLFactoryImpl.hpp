@@ -264,6 +264,9 @@ namespace fUML
 			virtual std::shared_ptr<InitialNodeActivation> createInitialNodeActivation() const ;
 			
 			virtual std::shared_ptr<InputPinActivation> createInputPinActivation() const ;
+			//Add containing object
+			virtual std::shared_ptr<InputPinActivation> createInputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const ;
+			
 			
 			virtual std::shared_ptr<InstanceValueEvaluation> createInstanceValueEvaluation() const ;
 			
@@ -300,6 +303,9 @@ namespace fUML
 			virtual std::shared_ptr<Offer> createOffer() const ;
 			
 			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation() const ;
+			//Add containing object
+			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const ;
+			
 			
 			virtual std::shared_ptr<ParameterValue> createParameterValue() const ;
 			

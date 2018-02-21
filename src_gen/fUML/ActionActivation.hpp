@@ -66,12 +66,22 @@ namespace uml
 
 namespace fUML 
 {
+	class InputPinActivation;
+}
+
+namespace fUML 
+{
 	class Link;
 }
 
 namespace uml 
 {
 	class OutputPin;
+}
+
+namespace fUML 
+{
+	class OutputPinActivation;
 }
 
 namespace uml 
@@ -222,7 +232,12 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::PinActivation> > getPinActivation() const = 0;
+			virtual std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > getInputPinActivation() const = 0;
+			
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > getOutputPinActivation() const = 0;
+			
 			
 			
 
@@ -240,14 +255,22 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::PinActivation> > m_pinActivation;
+			std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > m_inputPinActivation;
+			/*!
+			 */
+			std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > m_outputPinActivation;
+			/*!
+			 */
+			std::shared_ptr<Union<fUML::PinActivation> > m_pinActivation;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};

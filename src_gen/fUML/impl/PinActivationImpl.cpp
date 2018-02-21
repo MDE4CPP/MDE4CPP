@@ -51,6 +51,16 @@ PinActivationImpl::~PinActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation)
+			:PinActivationImpl()
+			{
+			    m_actionActivation = par_actionActivation;
+			}
+
+
+
+
 
 
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivationImpl()
@@ -167,7 +177,7 @@ std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActionActivation > PinActivationImpl::getActionActivation() const
+std::weak_ptr<fUML::ActionActivation > PinActivationImpl::getActionActivation() const
 {
 //assert(m_actionActivation);
     return m_actionActivation;
@@ -184,6 +194,10 @@ void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::ActionActivati
 
 std::shared_ptr<ecore::EObject> PinActivationImpl::eContainer() const
 {
+	if(auto wp = m_actionActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

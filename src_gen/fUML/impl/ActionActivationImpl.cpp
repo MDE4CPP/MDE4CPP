@@ -39,9 +39,13 @@
 
 #include "uml/InputPin.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
 #include "fUML/Link.hpp"
 
 #include "uml/OutputPin.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
 
 #include "uml/Pin.hpp"
 
@@ -67,11 +71,47 @@ ActionActivationImpl::ActionActivationImpl()
 	// Reference Members
 	//*********************************
 	//References
-		m_pinActivation.reset(new Bag<fUML::PinActivation>());
+		/*Subset*/
+		m_inputPinActivation.reset(new Subset<fUML::InputPinActivation, fUML::PinActivation >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inputPinActivation - Subset<fUML::InputPinActivation, fUML::PinActivation >()" << std::endl;
+		#endif
+	
+	
+
+		/*Subset*/
+		m_outputPinActivation.reset(new Subset<fUML::OutputPinActivation, fUML::PinActivation >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_outputPinActivation - Subset<fUML::OutputPinActivation, fUML::PinActivation >()" << std::endl;
+		#endif
+	
+	
+
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::PinActivation>()" << std::endl;
+		#endif
 	
 	
 
 	//Init references
+		/*Subset*/
+		m_inputPinActivation->initSubset(m_pinActivation);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inputPinActivation - Subset<fUML::InputPinActivation, fUML::PinActivation >(m_pinActivation)" << std::endl;
+		#endif
+	
+	
+
+		/*Subset*/
+		m_outputPinActivation->initSubset(m_pinActivation);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_outputPinActivation - Subset<fUML::OutputPinActivation, fUML::PinActivation >(m_pinActivation)" << std::endl;
+		#endif
+	
+	
+
 	
 	
 }
@@ -107,9 +147,6 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -120,6 +157,22 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -178,9 +231,29 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->getPinActivation()->push_back(pinActivation);
-    struct null_deleter{void operator()(void const *) const { } };
-    pinActivation->setActionActivation(std::shared_ptr<ActionActivation>(this, null_deleter()));
+	    pinActivation->setActionActivation(std::dynamic_pointer_cast<fUML::ActionActivation>(shared_from_this()));
+
+	switch(pinActivation->eClass()->getClassifierID())
+	{
+		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
+		{
+			std::shared_ptr<fUML::InputPinActivation> inPinActivation= std::dynamic_pointer_cast<InputPinActivation> (pinActivation);
+			this->getInputPinActivation()->push_back(inPinActivation);
+			break;
+		}
+
+		case FUMLPackage::OUTPUTPINACTIVATION_ECLASS:
+		{
+			std::shared_ptr<fUML::OutputPinActivation> outPinActivation= std::dynamic_pointer_cast<OutputPinActivation> (pinActivation);
+			this->getOutputPinActivation()->push_back(outPinActivation);
+			break;
+		}
+		default:
+		{
+			throw "ActionActivationImpl::addPinActivation: unknown pin type.";
+			break;
+		}
+	}
 	//end of body
 }
 
@@ -325,7 +398,7 @@ bool ActionActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::Action> actionNode = std::dynamic_pointer_cast<uml::Action>(this->getNode());
+		std::shared_ptr<uml::Action> actionNode = std::dynamic_pointer_cast<uml::Action>(this->getNode());
     bool ready = false;
     if(actionNode != nullptr)
     {
@@ -342,10 +415,10 @@ bool ActionActivationImpl::isReady()
          //Have all Inputpin an Activation?
          if(ready)
          {
-        	 std::shared_ptr<Bag<uml::InputPin> > list = actionNode->getInput();
-             //list->removeAll(nullptr); TODO
-             ready = std::all_of(list->begin(),list->end(),[this](std::shared_ptr<uml::InputPin> pin){return this->retrievePinActivation(pin)->isReady();});
+        	 std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > activations = this->getInputPinActivation();
+             ready = std::all_of(activations->begin(),activations->end(),[this]( std::shared_ptr<fUML::InputPinActivation> pin){return pin->isReady();});
          }
+
     }
     else
     {
@@ -461,21 +534,19 @@ void ActionActivationImpl::sendOffers()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast <uml::Action>(this->getNode());
-
-    // *** Send offers from all output pins concurrently. ***
-	std::shared_ptr<Bag<uml::OutputPin> > outputPinList = action->getOutput();
-    for(std::shared_ptr<uml::OutputPin> outputPin: *outputPinList)
-    {
-    	std::shared_ptr<PinActivation> pinActivation = this->retrievePinActivation(outputPin);
-        pinActivation->sendUnofferedTokens();
-    }
+	    // *** Send offers from all output pins concurrently. ***
+	std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > outputPins=this->getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> pin: *outputPins)
+	{
+		pin->sendUnofferedTokens();
+	}
 
     // Send offers on all outgoing control flows.
     if (!this->getOutgoingEdges()->empty()) {
     	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
         tokens->push_back(std::shared_ptr<Token>(fUML::FUMLFactory::eInstance()->createControlToken()));
         this->addTokens(tokens);
+        //front ok - because of adding anonymus fork node instead of multiple outgoing edges
         this->getOutgoingEdges()->front()->sendOffer(tokens);
     }
 	//end of body
@@ -485,7 +556,7 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
+		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
 
     if(action != nullptr)
     {
@@ -507,12 +578,11 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens()
     // *** Fire all input pins concurrently. ***
     if(action != nullptr)
     {
-    	std::shared_ptr<Bag<uml::InputPin> > inputList = action->getInput();
-        for (std::shared_ptr<uml::InputPin> pin : *inputList)
+    	std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > inputPinActivations = this->getInputPinActivation();
+        for (std::shared_ptr<fUML::InputPinActivation> pinActivation : *inputPinActivations)
         {
-            if(pin!=nullptr)
+            if(pinActivation!=nullptr)
 			{
-            	std::shared_ptr<PinActivation> pinActivation = this->retrievePinActivation(pin);
             	std::shared_ptr<Bag<Token> > tokens = pinActivation->takeOfferedTokens();
             	pinActivation->fire(tokens);
             	offeredTokens->insert(offeredTokens->end(), tokens->begin(), tokens->end());
@@ -586,16 +656,30 @@ bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Value> 
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<fUML::PinActivation> > ActionActivationImpl::getPinActivation() const
+std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > ActionActivationImpl::getInputPinActivation() const
 {
 
-    return m_pinActivation;
+    return m_inputPinActivation;
 }
+
+
+std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > ActionActivationImpl::getOutputPinActivation() const
+{
+
+    return m_outputPinActivation;
+}
+
+
+
 
 
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > ActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> ActionActivationImpl::eContainer() const
@@ -618,10 +702,14 @@ boost::any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType
 			return getHeldTokens(); //782
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //781
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //788
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //784
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //780
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //789
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //786
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:

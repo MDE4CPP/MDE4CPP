@@ -194,6 +194,8 @@ namespace fUML
 			
 			virtual std::shared_ptr<ecore::EAttribute> getActionActivation_EAttribute_firing() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_inputPinActivation() const ;
+			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_outputPinActivation() const ;
 			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_pinActivation() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance() const ;
@@ -1760,6 +1762,7 @@ namespace fUML
 			std::shared_ptr<ecore::EReference> m_token_EReference_holder = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityNodeActivation_EReference_incomingEdges = nullptr;
 			std::shared_ptr<ecore::EReference> m_expansionRegionActivation_EReference_inputExpansionTokens = nullptr;
+			std::shared_ptr<ecore::EReference> m_actionActivation_EReference_inputPinActivation = nullptr;
 			std::shared_ptr<ecore::EReference> m_expansionRegionActivation_EReference_inputTokens = nullptr;
 			std::shared_ptr<ecore::EReference> m_enumerationValue_EReference_literal = nullptr;
 			std::shared_ptr<ecore::EReference> m_executionFactory_EReference_locus = nullptr;
@@ -1774,6 +1777,7 @@ namespace fUML
 			std::shared_ptr<ecore::EReference> m_offer_EReference_offeredTokens = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityEdgeInstance_EReference_offers = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityNodeActivation_EReference_outgoingEdges = nullptr;
+			std::shared_ptr<ecore::EReference> m_actionActivation_EReference_outputPinActivation = nullptr;
 			std::shared_ptr<ecore::EReference> m_parameterValue_EReference_parameter = nullptr;
 			std::shared_ptr<ecore::EReference> m_execution_EReference_parameterValues = nullptr;
 			std::shared_ptr<ecore::EReference> m_actionActivation_EReference_pinActivation = nullptr;

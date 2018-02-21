@@ -83,7 +83,9 @@ namespace fUML
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

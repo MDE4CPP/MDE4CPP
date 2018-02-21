@@ -49,6 +49,16 @@ InputPinActivationImpl::~InputPinActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			InputPinActivationImpl::InputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation)
+			:InputPinActivationImpl()
+			{
+			    m_actionActivation = par_actionActivation;
+			}
+
+
+
+
 
 
 InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & obj):InputPinActivationImpl()
@@ -129,7 +139,7 @@ void InputPinActivationImpl::recieveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    this->getActionActivation()->recieveOffer();
+	this->getActionActivation().lock()->recieveOffer();
 	//end of body
 }
 
@@ -144,6 +154,10 @@ void InputPinActivationImpl::recieveOffer()
 
 std::shared_ptr<ecore::EObject> InputPinActivationImpl::eContainer() const
 {
+	if(auto wp = m_actionActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

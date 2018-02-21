@@ -47,6 +47,10 @@ namespace fUML
 			friend class FUMLFactoryImpl;
 			OutputPinActivationImpl();
 
+			//Additional constructors for the containments back reference
+			OutputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
+
+
 
 
 		public:

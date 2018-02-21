@@ -17,6 +17,10 @@
 
 #include "fUML/Execution.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/Token.hpp"
@@ -76,9 +80,6 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 
 	//Clone references with containment (deep copy)
 
@@ -89,6 +90,22 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 }
@@ -128,6 +145,10 @@ void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Execu
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > ReduceActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::eContainer() const
@@ -143,7 +164,7 @@ boost::any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
-			return getCurrentExecution(); //1058
+			return getCurrentExecution(); //10510
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //1057
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
@@ -152,10 +173,14 @@ boost::any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool co
 			return getHeldTokens(); //1052
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //1051
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //1058
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //1054
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //1050
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //1059
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //1056
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
@@ -172,7 +197,7 @@ void ReduceActionActivationImpl::eSet(int featureID, boost::any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _currentExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
-			setCurrentExecution(_currentExecution); //1058
+			setCurrentExecution(_currentExecution); //10510
 			break;
 		}
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:

@@ -56,7 +56,17 @@ namespace fUML
 
 namespace fUML 
 {
+	class InputPinActivation;
+}
+
+namespace fUML 
+{
 	class InvocationActionActivation;
+}
+
+namespace fUML 
+{
+	class OutputPinActivation;
 }
 
 namespace fUML 
@@ -147,7 +157,9 @@ namespace fUML
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};

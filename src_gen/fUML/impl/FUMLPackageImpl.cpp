@@ -206,6 +206,8 @@ void FUMLPackageImpl::createActionActivationContent(std::shared_ptr<ecore::EPack
 	m_actionActivation_EClass = factory->createEClass_in_EPackage(package, ACTIONACTIVATION_ECLASS);
 	m_actionActivation_EAttribute_firing = factory->createEAttribute_in_EContainingClass(m_actionActivation_EClass, ACTIONACTIVATION_EATTRIBUTE_FIRING);
 	
+	m_actionActivation_EReference_inputPinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_EClass, ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION);
+	m_actionActivation_EReference_outputPinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_EClass, ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION);
 	m_actionActivation_EReference_pinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_EClass, ACTIONACTIVATION_EREFERENCE_PINACTIVATION);
 	
 	m_actionActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance = factory->createEOperation_in_EContainingClass(m_actionActivation_EClass, ACTIONACTIVATION_EOPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE);
@@ -1883,6 +1885,56 @@ void FUMLPackageImpl::initializeActionActivationContent()
 		}
 	}
 	
+	m_actionActivation_EReference_inputPinActivation->setName("inputPinActivation");
+	m_actionActivation_EReference_inputPinActivation->setEType(getInputPinActivation_EClass());
+	m_actionActivation_EReference_inputPinActivation->setLowerBound(0);
+	m_actionActivation_EReference_inputPinActivation->setUpperBound(-1);
+	m_actionActivation_EReference_inputPinActivation->setTransient(false);
+	m_actionActivation_EReference_inputPinActivation->setVolatile(false);
+	m_actionActivation_EReference_inputPinActivation->setChangeable(true);
+	m_actionActivation_EReference_inputPinActivation->setUnsettable(false);
+	m_actionActivation_EReference_inputPinActivation->setUnique(true);
+	m_actionActivation_EReference_inputPinActivation->setDerived(false);
+	m_actionActivation_EReference_inputPinActivation->setOrdered(false);
+	m_actionActivation_EReference_inputPinActivation->setContainment(false);
+	m_actionActivation_EReference_inputPinActivation->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_actionActivation_EReference_inputPinActivation->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_actionActivation_EReference_inputPinActivation->setEOpposite(otherEnd);
+	    }
+	}
+	m_actionActivation_EReference_outputPinActivation->setName("outputPinActivation");
+	m_actionActivation_EReference_outputPinActivation->setEType(getOutputPinActivation_EClass());
+	m_actionActivation_EReference_outputPinActivation->setLowerBound(0);
+	m_actionActivation_EReference_outputPinActivation->setUpperBound(-1);
+	m_actionActivation_EReference_outputPinActivation->setTransient(false);
+	m_actionActivation_EReference_outputPinActivation->setVolatile(false);
+	m_actionActivation_EReference_outputPinActivation->setChangeable(true);
+	m_actionActivation_EReference_outputPinActivation->setUnsettable(false);
+	m_actionActivation_EReference_outputPinActivation->setUnique(true);
+	m_actionActivation_EReference_outputPinActivation->setDerived(false);
+	m_actionActivation_EReference_outputPinActivation->setOrdered(false);
+	m_actionActivation_EReference_outputPinActivation->setContainment(false);
+	m_actionActivation_EReference_outputPinActivation->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_actionActivation_EReference_outputPinActivation->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_actionActivation_EReference_outputPinActivation->setEOpposite(otherEnd);
+	    }
+	}
 	m_actionActivation_EReference_pinActivation->setName("pinActivation");
 	m_actionActivation_EReference_pinActivation->setEType(getPinActivation_EClass());
 	m_actionActivation_EReference_pinActivation->setLowerBound(0);
@@ -1894,7 +1946,7 @@ void FUMLPackageImpl::initializeActionActivationContent()
 	m_actionActivation_EReference_pinActivation->setUnique(true);
 	m_actionActivation_EReference_pinActivation->setDerived(false);
 	m_actionActivation_EReference_pinActivation->setOrdered(false);
-	m_actionActivation_EReference_pinActivation->setContainment(false);
+	m_actionActivation_EReference_pinActivation->setContainment(true);
 	m_actionActivation_EReference_pinActivation->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
@@ -1902,7 +1954,7 @@ void FUMLPackageImpl::initializeActionActivationContent()
 		{
 			m_actionActivation_EReference_pinActivation->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getPinActivation_EReference_actionActivation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_actionActivation_EReference_pinActivation->setEOpposite(otherEnd);
@@ -7959,7 +8011,7 @@ void FUMLPackageImpl::initializePinActivationContent()
 		{
 			m_pinActivation_EReference_actionActivation->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getActionActivation_EReference_pinActivation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_pinActivation_EReference_actionActivation->setEOpposite(otherEnd);
@@ -9583,6 +9635,14 @@ std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getActionActivation_EAttribu
 	return m_actionActivation_EAttribute_firing;
 }
 
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_inputPinActivation() const
+{
+	return m_actionActivation_EReference_inputPinActivation;
+}
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_outputPinActivation() const
+{
+	return m_actionActivation_EReference_outputPinActivation;
+}
 std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_pinActivation() const
 {
 	return m_actionActivation_EReference_pinActivation;

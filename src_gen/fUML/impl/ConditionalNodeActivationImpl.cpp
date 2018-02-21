@@ -17,6 +17,10 @@
 
 #include "fUML/ClauseActivation.hpp"
 
+#include "fUML/InputPinActivation.hpp"
+
+#include "fUML/OutputPinActivation.hpp"
+
 #include "fUML/PinActivation.hpp"
 
 #include "fUML/StructuredActivityNodeActivation.hpp"
@@ -86,9 +90,6 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
-
 	std::shared_ptr< Bag<uml::Clause> > _selectedClauses = obj.getSelectedClauses();
 	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
 
@@ -117,6 +118,22 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
 	
@@ -179,6 +196,10 @@ std::shared_ptr< Bag<uml::Clause> > ConditionalNodeActivationImpl::getSelectedCl
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation> > ConditionalNodeActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<ecore::EObject> ConditionalNodeActivationImpl::eContainer() const
@@ -194,9 +215,9 @@ boost::any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
-			return getActivationGroup(); //738
+			return getActivationGroup(); //7310
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
-			return getClauseActivations(); //739
+			return getClauseActivations(); //7311
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 			return isFiring(); //737
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
@@ -205,16 +226,20 @@ boost::any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool
 			return getHeldTokens(); //732
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
 			return getIncomingEdges(); //731
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+			return getInputPinActivation(); //738
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 			return getNode(); //734
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
 			return getOutgoingEdges(); //730
+		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+			return getOutputPinActivation(); //739
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
 			return getPinActivation(); //736
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 			return isRunning(); //735
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
-			return getSelectedClauses(); //7310
+			return getSelectedClauses(); //7312
 	}
 	return boost::any();
 }
@@ -227,7 +252,7 @@ void ConditionalNodeActivationImpl::eSet(int featureID, boost::any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setActivationGroup(_activationGroup); //738
+			setActivationGroup(_activationGroup); //7310
 			break;
 		}
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
