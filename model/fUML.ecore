@@ -1715,7 +1715,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructuredActivityNodeActivation" eSuperTypes="#//ActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuredActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuredActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="doStructuredActivity" ordered="false">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2014,7 +2014,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallBehaviorActionActivation" eSuperTypes="#//CallActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/CallBehaviorAction.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/CallBehaviorAction.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2024,7 +2024,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallOperationActionActivation" eSuperTypes="#//CallActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Reference.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+      <details key="includes" value="#include &quot;fuml/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Reference.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="getCallExecution" ordered="false" lowerBound="1" eType="#//Execution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
