@@ -1317,7 +1317,7 @@
         <details key="documentation" value="Applies the specified stereotype to this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;util::StereotypeStorage::eInstance()->applyStereotype(std::shared_ptr&lt;Element>(this, null_deleter()),stereotype);&#xD;&#xA;&#x9;return nullptr;"/>
+        <details key="body" value="util::StereotypeStorage::eInstance()->applyStereotype(getThisElementPtr(), stereotype);&#xD;&#xA;&#x9;return nullptr;"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1365,7 +1365,7 @@
         <details key="documentation" value="Retrieves the stereotype with the specified qualified name that is applied to this element, or null if no such stereotype is  applied."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;return util::StereotypeStorage::eInstance()->getAppliedStereotype(std::shared_ptr&lt;Element>(this, null_deleter()),qualifiedName);"/>
+        <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), qualifiedName);"/>
       </eAnnotations>
       <eParameters name="qualifiedName" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1378,7 +1378,7 @@
         <details key="documentation" value="Retrieves the stereotypes that are applied to this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;return util::StereotypeStorage::eInstance()->getAppliedStereotypes(std::shared_ptr&lt;Element>(this, null_deleter()));"/>
+        <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotypes(getThisElementPtr());"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAppliedSubstereotype" ordered="false" eType="#//Stereotype">
@@ -1501,7 +1501,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="struct null_deleter{void operator()(void const *) const {}};&#xD;&#xA;&#x9;std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(std::shared_ptr&lt;Element>(this, null_deleter()), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return boost::any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return boost::any();"/>
+        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return boost::any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return boost::any();"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1554,7 +1554,7 @@
         <details key="documentation" value="Determines whether the specified stereotype is applied to this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="struct null_deleter{void operator()(void const *) const {}};&#xD;&#xA;&#x9;return util::StereotypeStorage::eInstance()->isStereotypeApplied(std::shared_ptr&lt;Element>(this, null_deleter()), stereotype);"/>
+        <details key="body" value="return util::StereotypeStorage::eInstance()->isStereotypeApplied(getThisElementPtr(), stereotype);"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
