@@ -16,6 +16,7 @@
 
 [import ecore4CPP::generator::main::generateAttribute /]
 [import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
 [import ecore4CPP::generator::main::generateUnion /]

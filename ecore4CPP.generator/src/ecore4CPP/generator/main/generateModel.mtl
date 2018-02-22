@@ -15,6 +15,7 @@
 [module generateModel('http://www.eclipse.org/emf/2002/Ecore')]
  
 [import ecore4CPP::generator::main::generateAttribute/]
+[import ecore4CPP::generator::main::generateClass/]
 [import ecore4CPP::generator::main::generateOperation/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateUnion /]
@@ -142,7 +143,7 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			//*********************************
 			[aClass.generateUnionGetterDeclaretaion(false)/]
 
-			[aClass.generateEContainerOperation(false)/] 
+			[aClass.generateEContainerOperation(false)/]
 	};
 
 }
