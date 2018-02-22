@@ -48,6 +48,7 @@
 #include "[nE.ePackage.name/]/[nE.name/].hpp"
 [/for]
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 //meta meta model factory
 #include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.toUpperFirst().concat('Factory')/].hpp"
 
