@@ -39,11 +39,6 @@
 #include "ecore/impl/EObjectImpl.hpp"
 [/if]
 
-[if (aClass.hasKey('includes'))]
-[aClass.valueKey('includes')/]
-[/if]
-
-
 //*********************************
 [comment namespace /]
 namespace [aClass.ePackage.name/] 
