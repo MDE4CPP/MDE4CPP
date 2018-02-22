@@ -212,13 +212,13 @@ template<class T> class Union;[/if]
 [if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
 [/if]
-[if (anEClass.eAllReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
+[if (anEClass.eAllReferences->select((hasSubset() and not isSubsetUnion()) or eOpposite.existsAndIsSubet())->size() > 0)]
 #include "abstractDataTypes/Subset.hpp"
 [/if]
-[if (anEClass.eAllReferences->select(isSubsetUnion())->size() > 0)]
+[if (anEClass.eAllReferences->select(isSubsetUnion()or eOpposite.existsAndIsSubetUnion())->size() > 0)]
 #include "abstractDataTypes/SubsetUnion.hpp"
 [/if]
-[if (anEClass.eAllReferences->select(isUnion() and not isSubsetUnion())->size() > 0)]
+[if (anEClass.eAllReferences->select((isUnion() and not isSubsetUnion()) or eOpposite.existsAndIsUnion())->size() > 0)]
 #include "abstractDataTypes/Union.hpp"[/if]
 [/template]
 
@@ -226,4 +226,7 @@ template<class T> class Union;[/if]
 #include "abstractDataTypes/SubsetUnion.hpp"
 [/template]
 
+[query private existsAndIsSubet(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.hasSubset() and not isSubsetUnion() endif/]
+[query private existsAndIsSubetUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isSubsetUnion() endif/]
+[query private existsAndIsUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isUnion() and not isSubsetUnion() endif/]
 [query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
