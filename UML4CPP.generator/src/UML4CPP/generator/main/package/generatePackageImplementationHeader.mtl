@@ -27,12 +27,14 @@ virtual public uml::PackageImpl
 [template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
+
 #include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
 [if (aPackage.oclIsKindOf(Profile))]
 #include "uml/impl/ProfileImpl.hpp"
 [else]
 #include "uml/impl/PackageImpl.hpp"	
 [/if]
+
 namespace uml
 {
 [for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(ValueSpecification)-aPackage.allOwnedElements()->filter(Slot)).eClass()}->flatten()->sortedBy(name))]

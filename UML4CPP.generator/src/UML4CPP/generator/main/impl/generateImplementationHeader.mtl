@@ -31,24 +31,28 @@ virtual public uml::ClassImpl
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
-#include <functional>
-
-//*********************************
-// generated Includes
 
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
-[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
-
-[if (aClass.superClass->isEmpty())]
+[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
+[/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
 #include "uml/impl/ClassImpl.hpp"
-[/if]
-[if (aClass.oclIsKindOf(Stereotype))]
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
 #include "uml/impl/StereotypeImpl.hpp"
 [/if]
 #include "uml/Property.hpp"
-#include "boost/any.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace [aPackage.name/]
@@ -62,7 +66,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
-			friend class [aClass.getNearestPackage().name.concat('FactoryImpl').toUpperFirst()/];
+			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
 			//constructor
 			[className/]();
 

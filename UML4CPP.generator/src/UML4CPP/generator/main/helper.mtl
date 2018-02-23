@@ -141,10 +141,6 @@
 #endif
 [/template]
 
-[template public includeAbstractDataTypes(namedelement : NamedElement)]
-#include "abstractDataTypes/SubsetUnion.hpp"
-[/template]
-
 [template public generateGetter(anElement : NamedElement,impl : Boolean)]
 virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSufix(impl)/];
 
@@ -173,4 +169,16 @@ std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.memberName()/
 
 [template public genParameterTypeList(anOperation : Operation)]
 [for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][sParameter.type.name/][/for]
+[/template]
+
+[template public generateAbstractDataTypesForwardDeclaration(aClass : Class)]
+[if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+template<class T> class Bag;
+[/if]
+[/template]
+
+[template public generateAbstractDataTypesIncludes(aClass : Class)]
+[if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+#include "abstractDataTypes/Bag.hpp"
+[/if]
 [/template]

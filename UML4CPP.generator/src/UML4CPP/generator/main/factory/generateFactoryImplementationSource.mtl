@@ -22,7 +22,14 @@
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[className/].hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
+
+#include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
+
+[comment  Generate Includes for the Factory/]
+[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(myQualifiedName()))]
+#include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[/for]
 
 using namespace [aPackage.name/];
 
@@ -68,7 +75,6 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className)
 		//invoke the creator function
         return iter->second();
     }
-
     return nullptr;
 }
 

@@ -33,13 +33,7 @@ virtual public uml::Class
 [file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-#include <map>
-#include <string>
-#include <vector>
-
-[includeAbstractDataTypes()/]
-#include "boost/any.hpp"
-#include "boost/shared_ptr.hpp"
+[generateAbstractDataTypesForwardDeclaration()/]
 
 [if (not aClass.owner.ownedElement->filter(Usage)->isEmpty())]
 //********************
@@ -50,53 +44,40 @@ virtual public uml::Class
 [/if]
 [/for]
 [/if]
-//Forward Declaration for used types
-[for (element : Class| aClass.includes()->asOrderedSet()->filter(Class)->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
-{
-	class [element.name.toUpperFirst()/];
-}
-[/for]
 
-[for (element : Interface | aClass.includes()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->size() > 0)]
+//Forward Declaration for used types
+[for (element : Classifier | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
 	class [element.name.toUpperFirst()/];
 }
 [/for]
+[/if]
 
 // base class includes
-[for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+#include "uml/Class.hpp"
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+#include "uml/Stereotype.hpp"
+[else]
+[for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+[/if]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
-[for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[anInterfaceRealization.supplier.getNearestPackage().name/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
-
-// End: Interface realization
-[/if]
-[if (aClass.superClass->isEmpty())]
-#include "uml/Class.hpp"
-[/if]
-
-[if (aClass.oclIsKindOf(Stereotype))]
-#include "uml/Stereotype.hpp"
-[/if]
-// enum includes
-[for (elements : Enumeration| aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
-
-[for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() >= 2)]
-//Included from operation "[aOperation.name/]"
-[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(2)/]
-[/if]
-
-[/if]
+[for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[anInterfaceRealization.supplier.getNearestPackage().ns()/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"
 [/for]
-//*********************************
+[/if]
+
+[if (aClass.includes()->selectByKind(Enumeration)->size() > 0)]
+// enum includes
+[for (elements : Enumeration | aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+[/if]
 
 namespace [aPackage.name/]
 {
