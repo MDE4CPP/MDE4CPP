@@ -30,7 +30,7 @@
 template <class T> 
 class Bag;
 
-namespace [aClassifier.getNearestPackage().name/]
+namespace [aClassifier.getNearestPackage().ns()/]
 {
 	class [aClassifier.name.toUpperFirst()/];
 }

@@ -28,7 +28,7 @@
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
 #include "abstractDataTypes/Bag.hpp"
-#include "[aClassifier.getNearestPackage().name/]/[aClassifier.name.toUpperFirst()/].hpp"
+#include "[aClassifier.getNearestPackage().ns()/]/[aClassifier.name.toUpperFirst()/].hpp"
 
 using namespace [aPackage.name/];
 

@@ -37,7 +37,7 @@
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
-#include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
 #include "[aPackage.getPackageName()/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
 [/if]
 [/let]
@@ -45,6 +45,7 @@
 
 [if (anCallOperationAction.operation.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
+#include "fUML/FUMLFactory.hpp"
 [else]
 // [anCallOperationAction.operation.class.name.toUpperFirst()/] <- Class name
 // [anCallOperationAction.operation.name/] <- Operation name
@@ -90,7 +91,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     DEBUG_MESSAGE(std::cout<<"__________________________" << std::endl;)
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-   	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper > 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper > 1)]>[/if]())[/if];
+   	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper <> 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper <> 1)]>[/if]())[/if];
 	[/for]
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]

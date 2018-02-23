@@ -48,12 +48,12 @@
 [if (not cOpSet.oclIsUndefined())]
 [if (cOpSet.target.name.startsWith('self'))]
 [if (cOpSet.target.name.startsWith('self.'))]
-#include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name/].hpp"
 [/if]
-#include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().name/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
 [else]
-#include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
@@ -94,7 +94,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
-   	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper > 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper > 1)]>[/if]())[/if];
+   	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper <> 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper <> 1)]>[/if]())[/if];
 	[/for]
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]

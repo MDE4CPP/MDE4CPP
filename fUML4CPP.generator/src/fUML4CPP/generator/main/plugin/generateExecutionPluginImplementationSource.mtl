@@ -26,6 +26,7 @@
 
 [defineDebugMacro()/]
 
+#include <cassert>
 #include <iostream>
 #include "boost/any.hpp"
 #include "uml/Activity.hpp"
@@ -73,7 +74,7 @@ boost::any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activi
 	[generateLocusInitialization()/]
 
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
-	if (activity == [act.getNearestPackage().myName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
+	if (activity == [act.getNearestPackage().ns()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
 	{
 		[act.generateParameterFromAny(aPackage)/]
 		[act.generateStartActivityExecution(aPackage, true)/]   

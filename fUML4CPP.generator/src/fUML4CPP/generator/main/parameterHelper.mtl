@@ -74,7 +74,7 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(n
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (not supportedTypes())]
-#include "[type.getNearestPackage().name/]/[type.name/].hpp"
+#include "[type.getNearestPackage().ns()/]/[type.name/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[type.name/]Execution.hpp"
 [/template]
 
