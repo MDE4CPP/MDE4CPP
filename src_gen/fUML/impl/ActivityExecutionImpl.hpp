@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYEXECUTIONACTIVITYEXECUTIONIMPL_HPP
 #define FUML_ACTIVITYEXECUTIONACTIVITYEXECUTIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,21 +14,6 @@
 #include "../ActivityExecution.hpp"
 
 #include "fUML/impl/ExecutionImpl.hpp"
-
-#include "fUML/ActivityExecution.hpp"
-#include "fUML/ActivityParameterNodeActivation.hpp"
-#include "fUML/Execution.hpp"
-#include "fUML/ForkedToken.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Locus.hpp"
-#include "fUML/Object.hpp"
-#include "fUML/ObjectToken.hpp"
-#include "fUML/ParameterValue.hpp"
-#include "uml/Activity.hpp"
-#include "uml/ActivityParameterNode.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -55,6 +26,7 @@ namespace fUML
 
 		private:    
 			ActivityExecutionImpl& operator=(ActivityExecutionImpl const&) = delete;
+			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -119,4 +91,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYEXECUTIONACTIVITYEXECUTIONIMPL_HPP */
-

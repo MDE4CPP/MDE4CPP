@@ -7,20 +7,6 @@
 #ifndef FUML_COMPOUNDVALUECOMPOUNDVALUEIMPL_HPP
 #define FUML_COMPOUNDVALUECOMPOUNDVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,13 +14,6 @@
 #include "../CompoundValue.hpp"
 
 #include "fUML/impl/StructuredValueImpl.hpp"
-
-#include "uml/Classifier.hpp"
-#include <fuml/FUMLFactory.hpp>
-#include <cstdio>
-
-#include "uml/StructuralFeature.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -47,6 +26,7 @@ namespace fUML
 
 		private:    
 			CompoundValueImpl& operator=(CompoundValueImpl const&) = delete;
+			virtual std::shared_ptr<CompoundValue> getThisCompoundValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -97,7 +77,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::FeatureValue> > getFeatureValues() const ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue>> getFeatureValues() const ;
 			
 							
 			
@@ -120,4 +100,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_COMPOUNDVALUECOMPOUNDVALUEIMPL_HPP */
-

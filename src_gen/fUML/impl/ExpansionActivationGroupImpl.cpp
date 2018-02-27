@@ -1,7 +1,25 @@
 #include "fUML/impl/ExpansionActivationGroupImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -49,6 +67,27 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::ActivityExecution > par_activityExecution)
+			:ExpansionActivationGroupImpl()
+			{
+			    m_activityExecution = par_activityExecution;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation)
+			:ExpansionActivationGroupImpl()
+			{
+			    m_containingNodeActivation = par_containingNodeActivation;
+			}
+
+
+
+
 
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj):ExpansionActivationGroupImpl()
@@ -66,7 +105,7 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 	m_regionActivation  = obj.getRegionActivation();
 
-	std::shared_ptr< Bag<fUML::ActivityNodeActivation> > _suspendedActivations = obj.getSuspendedActivations();
+	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _suspendedActivations = obj.getSuspendedActivations();
 	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
@@ -128,8 +167,39 @@ void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Exp
 //*********************************
 
 
+std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr()
+{
+	if(auto wp = m_activityExecution.lock())
+	{
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > anExpansionActivationGroup = wp->getActivationGroup();
+		if (anExpansionActivationGroup.get() == this)
+		{
+			return std::dynamic_pointer_cast<ExpansionActivationGroup>(anExpansionActivationGroup );
+		}
+	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > anExpansionActivationGroup = wp->getActivationGroup();
+		if (anExpansionActivationGroup.get() == this)
+		{
+			return std::dynamic_pointer_cast<ExpansionActivationGroup>(anExpansionActivationGroup );
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ExpansionActivationGroup>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
 {
+	if(auto wp = m_activityExecution.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

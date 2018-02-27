@@ -7,20 +7,6 @@
 #ifndef FUML_DATAVALUEDATAVALUEIMPL_HPP
 #define FUML_DATAVALUEDATAVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,14 +14,6 @@
 #include "../DataValue.hpp"
 
 #include "fUML/impl/CompoundValueImpl.hpp"
-
-#include "fuml/DataValue.hpp"
-#include "uml/UmlFactory.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/CompoundValue.hpp"
-#include "uml/DataType.hpp"
-#include "uml/Classifier.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,6 +26,7 @@ namespace fUML
 
 		private:    
 			DataValueImpl& operator=(DataValueImpl const&) = delete;
+			virtual std::shared_ptr<DataValue> getThisDataValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -108,4 +87,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_DATAVALUEDATAVALUEIMPL_HPP */
-

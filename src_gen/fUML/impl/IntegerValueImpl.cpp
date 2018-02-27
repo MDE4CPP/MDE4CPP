@@ -1,7 +1,24 @@
 #include "fUML/impl/IntegerValueImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -146,6 +163,11 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<IntegerValue>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> IntegerValueImpl::eContainer() const
 {
 	return nullptr;

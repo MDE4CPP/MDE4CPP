@@ -7,20 +7,6 @@
 #ifndef FUML_LITERALNULLEVALUATIONLITERALNULLEVALUATIONIMPL_HPP
 #define FUML_LITERALNULLEVALUATIONLITERALNULLEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../LiteralNullEvaluation.hpp"
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			LiteralNullEvaluationImpl& operator=(LiteralNullEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<LiteralNullEvaluation> getThisLiteralNullEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -91,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LITERALNULLEVALUATIONLITERALNULLEVALUATIONIMPL_HPP */
-

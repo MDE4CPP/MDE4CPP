@@ -7,20 +7,6 @@
 #ifndef FUML_TOKENTOKENIMPL_HPP
 #define FUML_TOKENTOKENIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,11 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fuml/ControlToken.hpp"
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/Locus.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -47,6 +28,7 @@ virtual public Token
 
 		private:    
 			TokenImpl& operator=(TokenImpl const&) = delete;
+			virtual std::shared_ptr<Token> getThisTokenPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -127,4 +109,3 @@ virtual public Token
 	};
 }
 #endif /* end of include guard: FUML_TOKENTOKENIMPL_HPP */
-

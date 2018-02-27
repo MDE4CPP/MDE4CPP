@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTOREXECUTORIMPL_HPP
 #define FUML_EXECUTOREXECUTORIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,13 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fUML/Evaluation.hpp"
-#include "fUML/Execution.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Object.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -49,6 +28,7 @@ virtual public Executor
 
 		private:    
 			ExecutorImpl& operator=(ExecutorImpl const&) = delete;
+			virtual std::shared_ptr<Executor> getThisExecutorPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -113,4 +93,3 @@ virtual public Executor
 	};
 }
 #endif /* end of include guard: FUML_EXECUTOREXECUTORIMPL_HPP */
-

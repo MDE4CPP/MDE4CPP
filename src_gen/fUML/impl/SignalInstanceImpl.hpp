@@ -7,20 +7,6 @@
 #ifndef FUML_SIGNALINSTANCESIGNALINSTANCEIMPL_HPP
 #define FUML_SIGNALINSTANCESIGNALINSTANCEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../SignalInstance.hpp"
 
 #include "fUML/impl/CompoundValueImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			SignalInstanceImpl& operator=(SignalInstanceImpl const&) = delete;
+			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -94,4 +79,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_SIGNALINSTANCESIGNALINSTANCEIMPL_HPP */
-

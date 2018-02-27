@@ -1,7 +1,24 @@
 #include "fUML/impl/TokenImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -117,7 +134,7 @@ std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityN
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    std::shared_ptr<fUML::Token> token = shared_from_this();
+	std::shared_ptr<fUML::Token> token = getThisTokenPtr();
     if (!this->isWithdrawn())
     {
         this->withdraw();
@@ -134,14 +151,14 @@ void TokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		if (!this->isWithdrawn()) 
+	if (!this->isWithdrawn()) 
 	{
 		std::shared_ptr<fUML::ActivityNodeActivation> holder = this->getHolder().lock();
         this->setHolder(nullptr);
 		this->setWithdrawn(true);
 		if (holder)
 		{
-			holder->removeToken(shared_from_this());
+			holder->removeToken(getThisTokenPtr());
 		}
     }
 	//end of body
@@ -165,6 +182,11 @@ void TokenImpl::setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder)
 //*********************************
 
 
+std::shared_ptr<Token> TokenImpl::getThisTokenPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Token>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
 {
 	return nullptr;

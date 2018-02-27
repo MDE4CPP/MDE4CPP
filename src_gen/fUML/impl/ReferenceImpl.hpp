@@ -7,20 +7,6 @@
 #ifndef FUML_REFERENCEREFERENCEIMPL_HPP
 #define FUML_REFERENCEREFERENCEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../Reference.hpp"
 
 #include "fUML/impl/StructuredValueImpl.hpp"
-
-#include <uml/Classifier.hpp>
-    #include "fuml/FUMLFactory.hpp"
-    #include "uml/Class.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,6 +26,7 @@ namespace fUML
 
 		private:    
 			ReferenceImpl& operator=(ReferenceImpl const&) = delete;
+			virtual std::shared_ptr<Reference> getThisReferencePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -141,4 +123,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_REFERENCEREFERENCEIMPL_HPP */
-

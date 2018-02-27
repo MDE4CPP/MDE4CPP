@@ -7,20 +7,7 @@
 #ifndef FUMLFACTORY_HPP
 #define FUMLFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
+#include <map>
 #include <memory>
 
 #include "ecore/EFactory.hpp"
@@ -165,28 +152,58 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<AcceptEventActionActivation> createAcceptEventActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<AcceptEventActionActivation> createAcceptEventActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<AcceptEventActionEventAccepter> createAcceptEventActionEventAccepter() const = 0;
 			
 			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ActivityExecution> createActivityExecution() const = 0;
 			
 			virtual std::shared_ptr<ActivityFinalNodeActivation> createActivityFinalNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActivityFinalNodeActivation> createActivityFinalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ActivityNodeActivationGroup> createActivityNodeActivationGroup() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::ActivityExecution > par_activityExecution) const = 0;
+			
+			//Add containing object
+			virtual std::shared_ptr<ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation) const = 0;
+			
 			
 			virtual std::shared_ptr<ActivityParameterNodeActivation> createActivityParameterNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActivityParameterNodeActivation> createActivityParameterNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<AddStructuralFeatureValueActionActivation> createAddStructuralFeatureValueActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<AddStructuralFeatureValueActionActivation> createAddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<BooleanValue> createBooleanValue() const = 0;
 			
 			virtual std::shared_ptr<CallBehaviorActionActivation> createCallBehaviorActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<CallBehaviorActionActivation> createCallBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<CallOperationActionActivation> createCallOperationActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<CallOperationActionActivation> createCallOperationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<CentralBufferNodeActivation> createCentralBufferNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<CentralBufferNodeActivation> createCentralBufferNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ClassifierBehaviorExecution> createClassifierBehaviorExecution() const = 0;
 			
@@ -197,26 +214,53 @@ namespace fUML
 			virtual std::shared_ptr<ClauseActivation> createClauseActivation() const = 0;
 			
 			virtual std::shared_ptr<ClearAssociationActionActivation> createClearAssociationActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ClearAssociationActionActivation> createClearAssociationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ClearStructuralFeatureActionActivation> createClearStructuralFeatureActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ClearStructuralFeatureActionActivation> createClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ConditionalNodeActivation> createConditionalNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ConditionalNodeActivation> createConditionalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ControlToken> createControlToken() const = 0;
 			
 			virtual std::shared_ptr<CreateLinkActionActivation> createCreateLinkActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<CreateLinkActionActivation> createCreateLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<CreateObjectActionActivation> createCreateObjectActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<CreateObjectActionActivation> createCreateObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<DataStoreNodeActivation> createDataStoreNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<DataStoreNodeActivation> createDataStoreNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<DataValue> createDataValue() const = 0;
 			
 			virtual std::shared_ptr<DecisionNodeActivation> createDecisionNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<DecisionNodeActivation> createDecisionNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<DestroyLinkActionActivation> createDestroyLinkActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<DestroyLinkActionActivation> createDestroyLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<DestroyObjectActionActivation> createDestroyObjectActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<DestroyObjectActionActivation> createDestroyObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<DispatchStrategy> createDispatchStrategy() const = 0;
 			
@@ -242,10 +286,22 @@ namespace fUML
 			virtual std::shared_ptr<Executor> createExecutor() const = 0;
 			
 			virtual std::shared_ptr<ExpansionActivationGroup> createExpansionActivationGroup() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ExpansionActivationGroup> createExpansionActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::ActivityExecution > par_activityExecution) const = 0;
+			
+			//Add containing object
+			virtual std::shared_ptr<ExpansionActivationGroup> createExpansionActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation) const = 0;
+			
 			
 			virtual std::shared_ptr<ExpansionNodeActivation> createExpansionNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ExpansionNodeActivation> createExpansionNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ExpansionRegionActivation> createExpansionRegionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ExpansionRegionActivation> createExpansionRegionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ExtensionalValueList> createExtensionalValueList() const = 0;
 			
@@ -256,16 +312,28 @@ namespace fUML
 			virtual std::shared_ptr<FirstChoiceStrategy> createFirstChoiceStrategy() const = 0;
 			
 			virtual std::shared_ptr<FlowFinalNodeActivation> createFlowFinalNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<FlowFinalNodeActivation> createFlowFinalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ForkNodeActivation> createForkNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ForkNodeActivation> createForkNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ForkedToken> createForkedToken() const = 0;
 			
 			virtual std::shared_ptr<InitialNodeActivation> createInitialNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<InitialNodeActivation> createInitialNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<InputPinActivation> createInputPinActivation() const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InputPinActivation> createInputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const = 0;
+			
+			//Add containing object
+			virtual std::shared_ptr<InputPinActivation> createInputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
 			
 			
 			virtual std::shared_ptr<InstanceValueEvaluation> createInstanceValueEvaluation() const = 0;
@@ -273,6 +341,9 @@ namespace fUML
 			virtual std::shared_ptr<IntegerValue> createIntegerValue() const = 0;
 			
 			virtual std::shared_ptr<JoinNodeActivation> createJoinNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<JoinNodeActivation> createJoinNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<Link> createLink() const = 0;
 			
@@ -291,8 +362,14 @@ namespace fUML
 			virtual std::shared_ptr<Locus> createLocus() const = 0;
 			
 			virtual std::shared_ptr<LoopNodeActivation> createLoopNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LoopNodeActivation> createLoopNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<MergeNodeActivation> createMergeNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<MergeNodeActivation> createMergeNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<Object> createObject() const = 0;
 			
@@ -306,50 +383,95 @@ namespace fUML
 			//Add containing object
 			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const = 0;
 			
+			//Add containing object
+			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ParameterValue> createParameterValue() const = 0;
 			
 			virtual std::shared_ptr<ReadExtentActionActivation> createReadExtentActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReadExtentActionActivation> createReadExtentActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> createReadIsClassifiedObjectActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> createReadIsClassifiedObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ReadLinkActionActivation> createReadLinkActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReadLinkActionActivation> createReadLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ReadSelfActionActivation> createReadSelfActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReadSelfActionActivation> createReadSelfActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> createReadStructuralFeatureActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> createReadStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<RealValue> createRealValue() const = 0;
 			
 			virtual std::shared_ptr<ReclassifyObjectActionActivation> createReclassifyObjectActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReclassifyObjectActionActivation> createReclassifyObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy() const = 0;
 			
 			virtual std::shared_ptr<ReduceActionActivation> createReduceActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ReduceActionActivation> createReduceActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<Reference> createReference() const = 0;
 			
 			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> createRemoveStructuralFeatureValueActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> createRemoveStructuralFeatureValueActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<SendSignalActionActivation> createSendSignalActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<SendSignalActionActivation> createSendSignalActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<SignalInstance> createSignalInstance() const = 0;
 			
 			virtual std::shared_ptr<StartClassifierBehaviorActionActivation> createStartClassifierBehaviorActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<StartClassifierBehaviorActionActivation> createStartClassifierBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<StartObjectBehaviorActionActivation> createStartObjectBehaviorActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<StartObjectBehaviorActionActivation> createStartObjectBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<StringValue> createStringValue() const = 0;
 			
 			virtual std::shared_ptr<StructuredActivityNodeActivation> createStructuredActivityNodeActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<StructuredActivityNodeActivation> createStructuredActivityNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<TestIdentityActionActivation> createTestIdentityActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<TestIdentityActionActivation> createTestIdentityActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<TokenSet> createTokenSet() const = 0;
 			
 			virtual std::shared_ptr<UnlimitedNaturalValue> createUnlimitedNaturalValue() const = 0;
 			
 			virtual std::shared_ptr<ValueSpecificActionActivation> createValueSpecificActionActivation() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ValueSpecificActionActivation> createValueSpecificActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
+			
 			
 			virtual std::shared_ptr<Values> createValues() const = 0;
 			
@@ -359,4 +481,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUMLFACTORY_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_SENDSIGNALACTIONACTIVATIONSENDSIGNALACTIONACTIVATIONIMPL_HPP
 #define FUML_SENDSIGNALACTIONACTIVATIONSENDSIGNALACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../SendSignalActionActivation.hpp"
 
 #include "fUML/impl/InvocationActionActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			SendSignalActionActivationImpl& operator=(SendSignalActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<SendSignalActionActivation> getThisSendSignalActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			SendSignalActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			SendSignalActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -77,7 +66,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -93,4 +82,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_SENDSIGNALACTIONACTIVATIONSENDSIGNALACTIONACTIVATIONIMPL_HPP */
-

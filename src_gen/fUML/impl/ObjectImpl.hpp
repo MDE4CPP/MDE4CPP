@@ -7,20 +7,6 @@
 #ifndef FUML_OBJECTOBJECTIMPL_HPP
 #define FUML_OBJECTOBJECTIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,14 +14,6 @@
 #include "../Object.hpp"
 
 #include "fUML/impl/ExtensionalValueImpl.hpp"
-
-#include "fUML/DispatchStrategy.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Classifier.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,6 +26,7 @@ namespace fUML
 
 		private:    
 			ObjectImpl& operator=(ObjectImpl const&) = delete;
+			virtual std::shared_ptr<Object> getThisObjectPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -109,7 +88,7 @@ namespace fUML
 			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const ;
 			
 							
 			
@@ -132,4 +111,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_OBJECTOBJECTIMPL_HPP */
-

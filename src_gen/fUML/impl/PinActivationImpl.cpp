@@ -1,7 +1,25 @@
 #include "fUML/impl/PinActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -62,6 +80,17 @@ PinActivationImpl::~PinActivationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:PinActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
+
 
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivationImpl()
 {
@@ -78,12 +107,12 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -192,9 +221,42 @@ void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::ActionActivati
 //*********************************
 
 
+std::shared_ptr<PinActivation> PinActivationImpl::getThisPinActivationPtr()
+{
+	if(auto wp = m_actionActivation.lock())
+	{
+		std::shared_ptr<Union<fUML::PinActivation>> ownersPinActivationList = wp->getPinActivation();
+		for (std::shared_ptr<fUML::PinActivation> anPinActivation : *ownersPinActivationList)
+		{
+			if (anPinActivation.get() == this)
+			{
+				return anPinActivation ;
+			}
+		}
+	}
+
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersPinActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anPinActivation : *ownersPinActivationList)
+		{
+			if (anPinActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<PinActivation>(anPinActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<PinActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> PinActivationImpl::eContainer() const
 {
 	if(auto wp = m_actionActivation.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_group.lock())
 	{
 		return wp;
 	}

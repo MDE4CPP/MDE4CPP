@@ -1,10 +1,29 @@
 #include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/Subset.hpp"
 #include "fuml/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Parameter.hpp"
@@ -69,7 +88,7 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
@@ -174,6 +193,11 @@ void OpaqueBehaviorExecutionImpl::execute()
 //*********************************
 
 
+std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<OpaqueBehaviorExecution>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
 {
 	return nullptr;

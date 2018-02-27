@@ -33,6 +33,8 @@ SET(SOURCE_FILES
 	impl/FUMLFactoryImpl.cpp
 	FUMLFactory.cpp
 	impl/FUMLPackageImpl.cpp
+	impl/FUMLPackageImpl_Creation.cpp
+	impl/FUMLPackageImpl_Initialization.cpp
 	FUMLPackage.cpp
 	impl/FUMLPluginImpl.cpp
 	FUMLPlugin.cpp

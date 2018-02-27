@@ -7,28 +7,14 @@
 #ifndef FUML_PINACTIVATION_HPP
 #define FUML_PINACTIVATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -89,6 +75,10 @@ namespace fUML
 
 			PinActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
 
+			//Additional constructors for the containments back reference
+
+			PinActivation(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
@@ -143,9 +133,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_PINACTIVATION_HPP */
-

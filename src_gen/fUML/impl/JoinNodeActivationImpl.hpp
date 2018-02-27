@@ -7,20 +7,6 @@
 #ifndef FUML_JOINNODEACTIVATIONJOINNODEACTIVATIONIMPL_HPP
 #define FUML_JOINNODEACTIVATIONJOINNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../JoinNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			JoinNodeActivationImpl& operator=(JoinNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			JoinNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			JoinNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -91,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_JOINNODEACTIVATIONJOINNODEACTIVATIONIMPL_HPP */
-

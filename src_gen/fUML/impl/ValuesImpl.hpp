@@ -7,20 +7,6 @@
 #ifndef FUML_VALUESVALUESIMPL_HPP
 #define FUML_VALUESVALUESIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public Values
 
 		private:    
 			ValuesImpl& operator=(ValuesImpl const&) = delete;
+			virtual std::shared_ptr<Values> getThisValuesPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -70,7 +55,7 @@ virtual public Values
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
+			virtual std::shared_ptr<Bag<fUML::Value>> getValues() const ;
 			
 							
 			
@@ -93,4 +78,3 @@ virtual public Values
 	};
 }
 #endif /* end of include guard: FUML_VALUESVALUESIMPL_HPP */
-

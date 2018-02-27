@@ -1,7 +1,24 @@
 #include "fUML/impl/FIFOGetNextEventStrategyImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -82,6 +99,11 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 //*********************************
 
 
+std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<FIFOGetNextEventStrategy>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::eContainer() const
 {
 	return nullptr;

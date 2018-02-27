@@ -1,10 +1,29 @@
 #include "fUML/impl/ActivityNodeActivationGroupImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ActivityEdgeInstance.hpp"
 #include "fUML/ActivityNodeActivation.hpp"
 #include "fUML/ActivityNodeActivationGroup.hpp"
@@ -93,6 +112,27 @@ ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::ActivityExecution > par_activityExecution)
+			:ActivityNodeActivationGroupImpl()
+			{
+			    m_activityExecution = par_activityExecution;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation)
+			:ActivityNodeActivationGroupImpl()
+			{
+			    m_containingNodeActivation = par_containingNodeActivation;
+			}
+
+
+
+
 
 
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj):ActivityNodeActivationGroupImpl()
@@ -108,7 +148,7 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 
 	m_containingNodeActivation  = obj.getContainingNodeActivation();
 
-	std::shared_ptr< Bag<fUML::ActivityNodeActivation> > _suspendedActivations = obj.getSuspendedActivations();
+	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _suspendedActivations = obj.getSuspendedActivations();
 	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
@@ -171,8 +211,7 @@ void ActivityNodeActivationGroupImpl::addEdgeInstance(std::shared_ptr<fUML::Acti
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	instance->setGroup(std::shared_ptr<ActivityNodeActivationGroup>(this, null_deleter()));
+	instance->setGroup(getThisActivityNodeActivationGroupPtr());
     this->getEdgeInstances()->push_back(instance);
 	//end of body
 }
@@ -181,8 +220,7 @@ void ActivityNodeActivationGroupImpl::addNodeActivation(std::shared_ptr<fUML::Ac
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	activation->setGroup(std::shared_ptr<ActivityNodeActivationGroup>(this, null_deleter()));
+	activation->setGroup(getThisActivityNodeActivationGroupPtr());
     this->getNodeActivations()->push_back(activation);
 	//end of body
 }
@@ -290,9 +328,10 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationGroupImpl::g
 		std::shared_ptr<ActivityNodeActivation> activation = nullptr;
 
 	std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin> (node);
-    if ((this->getContainingNodeActivation() != nullptr) && (pin != nullptr))
+	auto containingNodeActivation=this->getContainingNodeActivation().lock();
+    if ((containingNodeActivation) && (pin))
     {
-        activation = this->getContainingNodeActivation()->retrievePinActivation(pin);
+        activation = containingNodeActivation->retrievePinActivation(pin);
     }
 
     if (activation == nullptr) 
@@ -370,7 +409,7 @@ void ActivityNodeActivationGroupImpl::resume(std::shared_ptr<fUML::ActivityNodeA
     }
     if (!this->isSuspended()) 
     {
-    	std::shared_ptr<StructuredActivityNodeActivation> containingNodeActivation = this->getContainingNodeActivation();
+    	std::shared_ptr<StructuredActivityNodeActivation> containingNodeActivation = this->getContainingNodeActivation().lock();
         if (containingNodeActivation != nullptr) 
         {
             containingNodeActivation->resume();
@@ -383,10 +422,28 @@ std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationGroupImpl::retrie
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<ActivityExecution> activityExecution = this->getActivityExecution();
-    if (activityExecution == nullptr) 
+		std::shared_ptr<ActivityExecution> activityExecution = this->getActivityExecution().lock();
+    if (!activityExecution)
     {
-        activityExecution = this->getContainingNodeActivation()->getGroup()->retrieveActivityExecution();
+    	auto activation=this->getContainingNodeActivation().lock();
+    	if(activation)
+    	{
+    		auto group=activation->getGroup().lock();
+    		if(group)
+    		{
+    			activityExecution = group->retrieveActivityExecution();
+    		}
+    		else
+    		{
+                DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<std::endl;)
+                throw "invalid group";
+    		}
+    	}
+		else
+		{
+            DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<<std::endl;)
+            throw "invalid activation";
+		}
     }
     return activityExecution;
 	//end of body
@@ -487,7 +544,7 @@ void ActivityNodeActivationGroupImpl::suspend(std::shared_ptr<fUML::ActivityNode
 
     if (!this->isSuspended()) 
     {
-    	std::shared_ptr<StructuredActivityNodeActivation> containingNodeActivation = this->getContainingNodeActivation();
+    	std::shared_ptr<StructuredActivityNodeActivation> containingNodeActivation = this->getContainingNodeActivation().lock();
         if (containingNodeActivation != nullptr)
         {
             containingNodeActivation->suspend();
@@ -517,7 +574,7 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActivityExecution > ActivityNodeActivationGroupImpl::getActivityExecution() const
+std::weak_ptr<fUML::ActivityExecution > ActivityNodeActivationGroupImpl::getActivityExecution() const
 {
 
     return m_activityExecution;
@@ -527,7 +584,7 @@ void ActivityNodeActivationGroupImpl::setActivityExecution(std::shared_ptr<fUML:
     m_activityExecution = _activityExecution;
 }
 
-std::shared_ptr<fUML::StructuredActivityNodeActivation > ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
+std::weak_ptr<fUML::StructuredActivityNodeActivation > ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
 {
 
     return m_containingNodeActivation;
@@ -537,21 +594,21 @@ void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::shared_pt
     m_containingNodeActivation = _containingNodeActivation;
 }
 
-std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > ActivityNodeActivationGroupImpl::getEdgeInstances() const
+std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> ActivityNodeActivationGroupImpl::getEdgeInstances() const
 {
 
     return m_edgeInstances;
 }
 
 
-std::shared_ptr< Bag<fUML::ActivityNodeActivation> > ActivityNodeActivationGroupImpl::getNodeActivations() const
+std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getNodeActivations() const
 {
 
     return m_nodeActivations;
 }
 
 
-std::shared_ptr< Bag<fUML::ActivityNodeActivation> > ActivityNodeActivationGroupImpl::getSuspendedActivations() const
+std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getSuspendedActivations() const
 {
 
     return m_suspendedActivations;
@@ -563,8 +620,39 @@ std::shared_ptr< Bag<fUML::ActivityNodeActivation> > ActivityNodeActivationGroup
 //*********************************
 
 
+std::shared_ptr<ActivityNodeActivationGroup> ActivityNodeActivationGroupImpl::getThisActivityNodeActivationGroupPtr()
+{
+	if(auto wp = m_activityExecution.lock())
+	{
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > anActivityNodeActivationGroup = wp->getActivationGroup();
+		if (anActivityNodeActivationGroup.get() == this)
+		{
+			return anActivityNodeActivationGroup ;
+		}
+	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > anActivityNodeActivationGroup = wp->getActivationGroup();
+		if (anActivityNodeActivationGroup.get() == this)
+		{
+			return anActivityNodeActivationGroup ;
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityNodeActivationGroup>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityNodeActivationGroupImpl::eContainer() const
 {
+	if(auto wp = m_activityExecution.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

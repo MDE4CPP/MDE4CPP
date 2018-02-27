@@ -7,20 +7,6 @@
 #ifndef FUML_OBJECTNODEACTIVATIONOBJECTNODEACTIVATIONIMPL_HPP
 #define FUML_OBJECTNODEACTIVATIONOBJECTNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../ObjectNodeActivation.hpp"
 
 #include "fUML/impl/ActivityNodeActivationImpl.hpp"
-
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/ObjectToken.hpp"
-#include "fUML/Token.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,10 +26,15 @@ namespace fUML
 
 		private:    
 			ObjectNodeActivationImpl& operator=(ObjectNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ObjectNodeActivation> getThisObjectNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ObjectNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -142,4 +128,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_OBJECTNODEACTIVATIONOBJECTNODEACTIVATIONIMPL_HPP */
-

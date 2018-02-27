@@ -7,20 +7,6 @@
 #ifndef FUML_PARAMETERVALUEPARAMETERVALUEIMPL_HPP
 #define FUML_PARAMETERVALUEPARAMETERVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,9 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,6 +28,7 @@ virtual public ParameterValue
 
 		private:    
 			ParameterValueImpl& operator=(ParameterValueImpl const&) = delete;
+			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -78,7 +62,7 @@ virtual public ParameterValue
 			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
+			virtual std::shared_ptr<Bag<fUML::Value>> getValues() const ;
 			
 							
 			
@@ -101,4 +85,3 @@ virtual public ParameterValue
 	};
 }
 #endif /* end of include guard: FUML_PARAMETERVALUEPARAMETERVALUEIMPL_HPP */
-

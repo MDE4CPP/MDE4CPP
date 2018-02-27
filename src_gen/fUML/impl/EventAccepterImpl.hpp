@@ -7,20 +7,6 @@
 #ifndef FUML_EVENTACCEPTEREVENTACCEPTERIMPL_HPP
 #define FUML_EVENTACCEPTEREVENTACCEPTERIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public EventAccepter
 
 		private:    
 			EventAccepterImpl& operator=(EventAccepterImpl const&) = delete;
+			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -97,4 +82,3 @@ virtual public EventAccepter
 	};
 }
 #endif /* end of include guard: FUML_EVENTACCEPTEREVENTACCEPTERIMPL_HPP */
-

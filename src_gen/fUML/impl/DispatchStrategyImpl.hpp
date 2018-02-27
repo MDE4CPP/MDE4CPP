@@ -7,20 +7,6 @@
 #ifndef FUML_DISPATCHSTRATEGYDISPATCHSTRATEGYIMPL_HPP
 #define FUML_DISPATCHSTRATEGYDISPATCHSTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,10 +14,6 @@
 #include "../DispatchStrategy.hpp"
 
 #include "fUML/impl/SemanticStrategyImpl.hpp"
-
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/Locus.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +26,7 @@ namespace fUML
 
 		private:    
 			DispatchStrategyImpl& operator=(DispatchStrategyImpl const&) = delete;
+			virtual std::shared_ptr<DispatchStrategy> getThisDispatchStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -101,4 +84,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_DISPATCHSTRATEGYDISPATCHSTRATEGYIMPL_HPP */
-

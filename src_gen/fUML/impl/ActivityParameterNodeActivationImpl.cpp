@@ -1,7 +1,25 @@
 #include "fUML/impl/ActivityParameterNodeActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -52,6 +70,16 @@ ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityParameterNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj):ActivityParameterNodeActivationImpl()
@@ -67,12 +95,12 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -153,7 +181,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>((*incomingTokens)[0]);
 		if (forkToken != nullptr) 
 		{
-			forkToken->getBaseToken()->setHolder(shared_from_this());
+			forkToken->getBaseToken()->setHolder(getThisActivityParameterNodeActivationPtr());
 		}
 	}
 	//end of body
@@ -168,8 +196,28 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 //*********************************
 
 
+std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersActivityParameterNodeActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anActivityParameterNodeActivation : *ownersActivityParameterNodeActivationList)
+		{
+			if (anActivityParameterNodeActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<ActivityParameterNodeActivation>(anActivityParameterNodeActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityParameterNodeActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

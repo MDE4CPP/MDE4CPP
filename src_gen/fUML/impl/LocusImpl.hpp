@@ -7,20 +7,6 @@
 #ifndef FUML_LOCUSLOCUSIMPL_HPP
 #define FUML_LOCUSLOCUSIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,18 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "uml/Classifier.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/Class.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/ExtensionalValue.hpp"
-#include "fuml/Executor.hpp"
-#include "fuml/Object.hpp"
-#include "fuml/Execution.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -54,6 +28,7 @@ virtual public Locus
 
 		private:    
 			LocusImpl& operator=(LocusImpl const&) = delete;
+			virtual std::shared_ptr<Locus> getThisLocusPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -115,7 +90,7 @@ virtual public Locus
 			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor_executor) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const ;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue>> getExtensionalValues() const ;
 			
 			/*!
 			 */
@@ -145,4 +120,3 @@ virtual public Locus
 	};
 }
 #endif /* end of include guard: FUML_LOCUSLOCUSIMPL_HPP */
-

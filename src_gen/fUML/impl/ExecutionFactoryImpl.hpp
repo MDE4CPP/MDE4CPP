@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTIONFACTORYEXECUTIONFACTORYIMPL_HPP
 #define FUML_EXECUTIONFACTORYEXECUTIONFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,15 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fuml/fUMLPackage.hpp"
-#include "uml/OpaqueBehavior.hpp"
-#include "fuml/OpaqueBehaviorExecution.hpp"
-#include "fuml/Value.hpp"
-#include "fuml/Evaluation.hpp"
-#include "uml/Element.hpp"
-#include "uml/ValueSpecification.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -51,6 +28,7 @@ virtual public ExecutionFactory
 
 		private:    
 			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&) = delete;
+			virtual std::shared_ptr<ExecutionFactory> getThisExecutionFactoryPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -121,7 +99,7 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::PrimitiveType> > getBuiltInTypes() const ;
+			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
 			
 			/*!
 			 */
@@ -132,11 +110,11 @@ virtual public ExecutionFactory
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > getPrimitiveBehaviorPrototypes() const ;
+			virtual std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SemanticStrategy> > getStrategies() const ;
+			virtual std::shared_ptr<Bag<fUML::SemanticStrategy>> getStrategies() const ;
 			
 							
 			
@@ -159,4 +137,3 @@ virtual public ExecutionFactory
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYEXECUTIONFACTORYIMPL_HPP */
-

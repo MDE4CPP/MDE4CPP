@@ -7,20 +7,6 @@
 #ifndef FUML_PINACTIVATIONPINACTIVATIONIMPL_HPP
 #define FUML_PINACTIVATIONPINACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,10 +14,6 @@
 #include "../PinActivation.hpp"
 
 #include "fUML/impl/ObjectNodeActivationImpl.hpp"
-
-#include "uml/ActivityNode.hpp"
-#include "uml/Pin.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +26,7 @@ namespace fUML
 
 		private:    
 			PinActivationImpl& operator=(PinActivationImpl const&) = delete;
+			virtual std::shared_ptr<PinActivation> getThisPinActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -51,6 +34,10 @@ namespace fUML
 
 			//Additional constructors for the containments back reference
 			PinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
+
+
+			//Additional constructors for the containments back reference
+			PinActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 
 
@@ -108,4 +95,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_PINACTIVATIONPINACTIVATIONIMPL_HPP */
-

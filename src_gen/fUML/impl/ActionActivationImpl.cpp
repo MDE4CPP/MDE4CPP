@@ -1,11 +1,31 @@
 #include "fUML/impl/ActionActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include <iterator>
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ActivityExecution.hpp"
 #include "fUML/ActivityNodeActivation.hpp"
 #include "fUML/ControlToken.hpp"
@@ -124,6 +144,16 @@ ActionActivationImpl::~ActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActionActivationImpl::ActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):ActionActivationImpl()
@@ -139,12 +169,12 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -231,7 +261,7 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    pinActivation->setActionActivation(std::dynamic_pointer_cast<fUML::ActionActivation>(shared_from_this()));
+	pinActivation->setActionActivation(getThisActionActivationPtr());
 
 	switch(pinActivation->eClass()->getClassifierID())
 	{
@@ -281,7 +311,7 @@ void ActionActivationImpl::createNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
+		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
 
     //createinputpin activation
 	std::shared_ptr<Bag<uml::ActivityNode> > inputPinNodes(new Bag<uml::ActivityNode>());
@@ -300,12 +330,6 @@ void ActionActivationImpl::createNodeActivations()
     			DEBUG_MESSAGE(std::cout<<"Warning! Found null Input pin"<<std::endl;)
     		}
     	}
-    }
-    this->getGroup()->createNodeActivations(inputPinNodes);
-
-    for(std::shared_ptr<uml::ActivityNode> node : *inputPinNodes)
-    {
-        this->addPinActivation(std::dynamic_pointer_cast<PinActivation> (this->getGroup()->getNodeActivation(node)));
     }
 
     //create outputpin activation
@@ -327,11 +351,22 @@ void ActionActivationImpl::createNodeActivations()
     	}
     }
 
-    this->getGroup()->createNodeActivations(outputPinNodes);
-
-    for(std::shared_ptr<uml::ActivityNode> node : *outputPinNodes)
+    auto group = this->getGroup().lock();
+    if(group )
     {
-        this->addPinActivation(std::dynamic_pointer_cast<PinActivation> (this->getGroup()->getNodeActivation(node)));
+    	group->createNodeActivations(inputPinNodes);
+
+		for(std::shared_ptr<uml::ActivityNode> node : *inputPinNodes)
+		{
+			this->addPinActivation(std::dynamic_pointer_cast<PinActivation> (group->getNodeActivation(node)));
+		}
+
+		group->createNodeActivations(outputPinNodes);
+
+		for(std::shared_ptr<uml::ActivityNode> node : *outputPinNodes)
+		{
+			this->addPinActivation(std::dynamic_pointer_cast<PinActivation> (group->getNodeActivation(node)));
+		}
     }
 	//end of body
 }
@@ -656,14 +691,14 @@ bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Value> 
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > ActionActivationImpl::getInputPinActivation() const
+std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation>> ActionActivationImpl::getInputPinActivation() const
 {
 
     return m_inputPinActivation;
 }
 
 
-std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > ActionActivationImpl::getOutputPinActivation() const
+std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation>> ActionActivationImpl::getOutputPinActivation() const
 {
 
     return m_outputPinActivation;
@@ -676,14 +711,34 @@ std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > Action
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > ActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> ActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<ActionActivation> ActionActivationImpl::getThisActionActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersActionActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anActionActivation : *ownersActionActivationList)
+		{
+			if (anActionActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<ActionActivation>(anActionActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActionActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

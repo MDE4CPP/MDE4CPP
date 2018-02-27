@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYFINALNODEACTIVATIONACTIVITYFINALNODEACTIVATIONIMPL_HPP
 #define FUML_ACTIVITYFINALNODEACTIVATIONACTIVITYFINALNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,14 +14,6 @@
 #include "../ActivityFinalNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-#include "fUML/ActivityExecution.hpp"
-#include "fUML/ExpansionActivationGroup.hpp"
-#include "fUML/ExpansionRegionActivation.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/StructuredActivityNodeActivation.hpp"
-#include "uml/ActivityNode.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,10 +26,15 @@ namespace fUML
 
 		private:    
 			ActivityFinalNodeActivationImpl& operator=(ActivityFinalNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ActivityFinalNodeActivation> getThisActivityFinalNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityFinalNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -97,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYFINALNODEACTIVATIONACTIVITYFINALNODEACTIVATIONIMPL_HPP */
-

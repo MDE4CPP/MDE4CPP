@@ -7,20 +7,6 @@
 #ifndef FUML_EVALUATIONEVALUATIONIMPL_HPP
 #define FUML_EVALUATIONEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../Evaluation.hpp"
 
 #include "fUML/impl/SemanticVisitorImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			EvaluationImpl& operator=(EvaluationImpl const&) = delete;
+			virtual std::shared_ptr<Evaluation> getThisEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -105,4 +90,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EVALUATIONEVALUATIONIMPL_HPP */
-

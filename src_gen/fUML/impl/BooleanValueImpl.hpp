@@ -7,20 +7,6 @@
 #ifndef FUML_BOOLEANVALUEBOOLEANVALUEIMPL_HPP
 #define FUML_BOOLEANVALUEBOOLEANVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,14 +14,6 @@
 #include "../BooleanValue.hpp"
 
 #include "fUML/impl/PrimitiveValueImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/LiteralBoolean.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Type.hpp"
-#include "uml/UmlFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,6 +26,7 @@ namespace fUML
 
 		private:    
 			BooleanValueImpl& operator=(BooleanValueImpl const&) = delete;
+			virtual std::shared_ptr<BooleanValue> getThisBooleanValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -113,4 +92,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_BOOLEANVALUEBOOLEANVALUEIMPL_HPP */
-

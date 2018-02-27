@@ -7,28 +7,14 @@
 #ifndef FUML_ACTIVITYEDGEINSTANCE_HPP
 #define FUML_ACTIVITYEDGEINSTANCE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -81,6 +67,10 @@ namespace fUML
 			ActivityEdgeInstance(){}
 
 
+			//Additional constructors for the containments back reference
+
+			ActivityEdgeInstance(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
@@ -131,14 +121,14 @@ namespace fUML
 			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge_edge) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const = 0;
+			virtual std::weak_ptr<fUML::ActivityNodeActivationGroup > getGroup() const = 0;
 			
 			/*!
 			 */
 			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Offer>> getOffers() const = 0;
 			
 			/*!
 			 */
@@ -170,10 +160,10 @@ namespace fUML
 			std::shared_ptr<uml::ActivityEdge > m_edge;
 			/*!
 			 */
-			std::shared_ptr<fUML::ActivityNodeActivationGroup > m_group;
+			std::weak_ptr<fUML::ActivityNodeActivationGroup > m_group;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::Offer> > m_offers;
+			std::shared_ptr<Bag<fUML::Offer>> m_offers;
 			/*!
 			 */
 			std::shared_ptr<fUML::ActivityNodeActivation > m_source;
@@ -188,9 +178,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_ACTIVITYEDGEINSTANCE_HPP */
-

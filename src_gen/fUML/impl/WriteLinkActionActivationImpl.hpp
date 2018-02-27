@@ -7,20 +7,6 @@
 #ifndef FUML_WRITELINKACTIONACTIVATIONWRITELINKACTIONACTIVATIONIMPL_HPP
 #define FUML_WRITELINKACTIONACTIVATIONWRITELINKACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../WriteLinkActionActivation.hpp"
 
 #include "fUML/impl/LinkActionActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			WriteLinkActionActivationImpl& operator=(WriteLinkActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			WriteLinkActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			WriteLinkActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -73,7 +62,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -89,4 +78,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_WRITELINKACTIONACTIVATIONWRITELINKACTIONACTIVATIONIMPL_HPP */
-

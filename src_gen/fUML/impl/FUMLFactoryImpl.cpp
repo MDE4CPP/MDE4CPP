@@ -1,4 +1,8 @@
 #include "fUML/impl/FUMLFactoryImpl.hpp"
+
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EClass.hpp"
@@ -235,8 +239,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<AcceptEventActionActivation>(this->createAcceptEventActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<AcceptEventActionActivation>(this->createAcceptEventActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS:
 		{
@@ -245,8 +257,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
 		{
@@ -255,23 +275,69 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ActivityNodeActivationGroup>(this->createActivityNodeActivationGroup());
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//ActivityNodeActivationGroup has activityExecution as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityExecution>(container);
+						return this->createActivityNodeActivationGroup_in_ActivityExecution(castedContainer);
+					}
+					//ActivityNodeActivationGroup has containingNodeActivation as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::StructuredActivityNodeActivation>(container);
+						return this->createActivityNodeActivationGroup_in_ContainingNodeActivation(castedContainer);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
+			}
 		}
 		case FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::BOOLEANVALUE_ECLASS:
 		{
@@ -280,18 +346,42 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<CallBehaviorActionActivation>(this->createCallBehaviorActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<CallBehaviorActionActivation>(this->createCallBehaviorActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<CallOperationActionActivation>(this->createCallOperationActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<CallOperationActionActivation>(this->createCallOperationActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<CentralBufferNodeActivation>(this->createCentralBufferNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<CentralBufferNodeActivation>(this->createCentralBufferNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS:
 		{
@@ -315,18 +405,42 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ClearAssociationActionActivation>(this->createClearAssociationActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ClearAssociationActionActivation>(this->createClearAssociationActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ConditionalNodeActivation>(this->createConditionalNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ConditionalNodeActivation>(this->createConditionalNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CONTROLTOKEN_ECLASS:
 		{
@@ -335,18 +449,42 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<CreateLinkActionActivation>(this->createCreateLinkActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<CreateLinkActionActivation>(this->createCreateLinkActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<CreateObjectActionActivation>(this->createCreateObjectActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<CreateObjectActionActivation>(this->createCreateObjectActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::DATASTORENODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<DataStoreNodeActivation>(this->createDataStoreNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<DataStoreNodeActivation>(this->createDataStoreNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::DATAVALUE_ECLASS:
 		{
@@ -355,18 +493,42 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::DECISIONNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<DecisionNodeActivation>(this->createDecisionNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<DecisionNodeActivation>(this->createDecisionNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<DestroyLinkActionActivation>(this->createDestroyLinkActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<DestroyLinkActionActivation>(this->createDestroyLinkActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<DestroyObjectActionActivation>(this->createDestroyObjectActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<DestroyObjectActionActivation>(this->createDestroyObjectActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::DISPATCHSTRATEGY_ECLASS:
 		{
@@ -429,18 +591,56 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ExpansionActivationGroup>(this->createExpansionActivationGroup());
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//ExpansionActivationGroup has activityExecution as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityExecution>(container);
+						return this->createExpansionActivationGroup_in_ActivityExecution(castedContainer);
+					}
+					//ExpansionActivationGroup has containingNodeActivation as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::StructuredActivityNodeActivation>(container);
+						return this->createExpansionActivationGroup_in_ContainingNodeActivation(castedContainer);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
+			}
 		}
 		case FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ExpansionNodeActivation>(this->createExpansionNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ExpansionNodeActivation>(this->createExpansionNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ExpansionRegionActivation>(this->createExpansionRegionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ExpansionRegionActivation>(this->createExpansionRegionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::EXTENSIONALVALUELIST_ECLASS:
 		{
@@ -464,13 +664,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<FlowFinalNodeActivation>(this->createFlowFinalNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<FlowFinalNodeActivation>(this->createFlowFinalNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::FORKNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ForkNodeActivation>(this->createForkNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ForkNodeActivation>(this->createForkNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::FORKEDTOKEN_ECLASS:
 		{
@@ -479,8 +695,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::INITIALNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<InitialNodeActivation>(this->createInitialNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<InitialNodeActivation>(this->createInitialNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
 		{
@@ -490,9 +714,23 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
-				assert(castedContainer);
-				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation_in_ActionActivation(castedContainer));
+				switch(referenceID)
+				{
+					//InputPinActivation has actionActivation as a containment
+					case  FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
+						return this->createInputPinActivation_in_ActionActivation(castedContainer);
+					}
+					//InputPinActivation has group as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+						return this->createInputPinActivation_in_Group(castedContainer);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
 			}
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
@@ -507,8 +745,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::JOINNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<JoinNodeActivation>(this->createJoinNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<JoinNodeActivation>(this->createJoinNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::LINK_ECLASS:
 		{
@@ -552,13 +798,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::LOOPNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<LoopNodeActivation>(this->createLoopNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<LoopNodeActivation>(this->createLoopNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::MERGENODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<MergeNodeActivation>(this->createMergeNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<MergeNodeActivation>(this->createMergeNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::OBJECT_ECLASS:
 		{
@@ -588,9 +850,23 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
-				assert(castedContainer);
-				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation_in_ActionActivation(castedContainer));
+				switch(referenceID)
+				{
+					//OutputPinActivation has actionActivation as a containment
+					case  FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
+						return this->createOutputPinActivation_in_ActionActivation(castedContainer);
+					}
+					//OutputPinActivation has group as a containment
+					case  FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+						return this->createOutputPinActivation_in_Group(castedContainer);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
 			}
 		}
 		case FUMLPackage::PARAMETERVALUE_ECLASS:
@@ -600,28 +876,68 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReadExtentActionActivation>(this->createReadExtentActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReadExtentActionActivation>(this->createReadExtentActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::READLINKACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReadLinkActionActivation>(this->createReadLinkActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReadLinkActionActivation>(this->createReadLinkActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::READSELFACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReadSelfActionActivation>(this->createReadSelfActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReadSelfActionActivation>(this->createReadSelfActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::REALVALUE_ECLASS:
 		{
@@ -630,8 +946,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS:
 		{
@@ -640,8 +964,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::REDUCEACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ReduceActionActivation>(this->createReduceActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ReduceActionActivation>(this->createReduceActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::REFERENCE_ECLASS:
 		{
@@ -650,13 +982,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<SendSignalActionActivation>(this->createSendSignalActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<SendSignalActionActivation>(this->createSendSignalActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::SIGNALINSTANCE_ECLASS:
 		{
@@ -665,13 +1013,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::STRINGVALUE_ECLASS:
 		{
@@ -680,13 +1044,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<TestIdentityActionActivation>(this->createTestIdentityActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<TestIdentityActionActivation>(this->createTestIdentityActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::TOKENSET_ECLASS:
 		{
@@ -700,8 +1080,16 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS:
 		{
+			if (nullptr == container)
+			{
 				return std::shared_ptr<ValueSpecificActionActivation>(this->createValueSpecificActionActivation());
-			
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ValueSpecificActionActivation>(this->createValueSpecificActionActivation_in_Group(castedContainer));
+			}
 		}
 		case FUMLPackage::VALUES_ECLASS:
 		{
@@ -762,6 +1150,17 @@ std::shared_ptr<AcceptEventActionActivation> FUMLFactoryImpl::createAcceptEventA
 	std::shared_ptr<AcceptEventActionActivation> element(new AcceptEventActionActivationImpl());
 	return element;
 }
+std::shared_ptr<AcceptEventActionActivation> FUMLFactoryImpl::createAcceptEventActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<AcceptEventActionEventAccepter> FUMLFactoryImpl::createAcceptEventActionEventAccepter() const
 {
 	std::shared_ptr<AcceptEventActionEventAccepter> element(new AcceptEventActionEventAccepterImpl());
@@ -772,6 +1171,17 @@ std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstanc
 	std::shared_ptr<ActivityEdgeInstance> element(new ActivityEdgeInstanceImpl());
 	return element;
 }
+std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getEdgeInstances()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ActivityExecution> FUMLFactoryImpl::createActivityExecution() const
 {
 	std::shared_ptr<ActivityExecution> element(new ActivityExecutionImpl());
@@ -782,21 +1192,76 @@ std::shared_ptr<ActivityFinalNodeActivation> FUMLFactoryImpl::createActivityFina
 	std::shared_ptr<ActivityFinalNodeActivation> element(new ActivityFinalNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<ActivityFinalNodeActivation> FUMLFactoryImpl::createActivityFinalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ActivityFinalNodeActivationImpl> element(new ActivityFinalNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ActivityNodeActivationGroup> FUMLFactoryImpl::createActivityNodeActivationGroup() const
 {
 	std::shared_ptr<ActivityNodeActivationGroup> element(new ActivityNodeActivationGroupImpl());
 	return element;
 }
+std::shared_ptr<ActivityNodeActivationGroup> FUMLFactoryImpl::createActivityNodeActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::ActivityExecution > par_activityExecution) const
+{
+	std::shared_ptr<ActivityNodeActivationGroupImpl> element(new ActivityNodeActivationGroupImpl(par_activityExecution));
+	if(auto wp = par_activityExecution.lock())
+	{
+			wp->setActivationGroup(element);
+	}
+	return element;
+	
+}
+
+std::shared_ptr<ActivityNodeActivationGroup> FUMLFactoryImpl::createActivityNodeActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation) const
+{
+	std::shared_ptr<ActivityNodeActivationGroupImpl> element(new ActivityNodeActivationGroupImpl(par_containingNodeActivation));
+	if(auto wp = par_containingNodeActivation.lock())
+	{
+			wp->setActivationGroup(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ActivityParameterNodeActivation> FUMLFactoryImpl::createActivityParameterNodeActivation() const
 {
 	std::shared_ptr<ActivityParameterNodeActivation> element(new ActivityParameterNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<ActivityParameterNodeActivation> FUMLFactoryImpl::createActivityParameterNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<AddStructuralFeatureValueActionActivation> FUMLFactoryImpl::createAddStructuralFeatureValueActionActivation() const
 {
 	std::shared_ptr<AddStructuralFeatureValueActionActivation> element(new AddStructuralFeatureValueActionActivationImpl());
 	return element;
 }
+std::shared_ptr<AddStructuralFeatureValueActionActivation> FUMLFactoryImpl::createAddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<BooleanValue> FUMLFactoryImpl::createBooleanValue() const
 {
 	std::shared_ptr<BooleanValue> element(new BooleanValueImpl());
@@ -807,16 +1272,49 @@ std::shared_ptr<CallBehaviorActionActivation> FUMLFactoryImpl::createCallBehavio
 	std::shared_ptr<CallBehaviorActionActivation> element(new CallBehaviorActionActivationImpl());
 	return element;
 }
+std::shared_ptr<CallBehaviorActionActivation> FUMLFactoryImpl::createCallBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<CallBehaviorActionActivationImpl> element(new CallBehaviorActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<CallOperationActionActivation> FUMLFactoryImpl::createCallOperationActionActivation() const
 {
 	std::shared_ptr<CallOperationActionActivation> element(new CallOperationActionActivationImpl());
 	return element;
 }
+std::shared_ptr<CallOperationActionActivation> FUMLFactoryImpl::createCallOperationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<CallOperationActionActivationImpl> element(new CallOperationActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<CentralBufferNodeActivation> FUMLFactoryImpl::createCentralBufferNodeActivation() const
 {
 	std::shared_ptr<CentralBufferNodeActivation> element(new CentralBufferNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<CentralBufferNodeActivation> FUMLFactoryImpl::createCentralBufferNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<CentralBufferNodeActivationImpl> element(new CentralBufferNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ClassifierBehaviorExecution> FUMLFactoryImpl::createClassifierBehaviorExecution() const
 {
 	std::shared_ptr<ClassifierBehaviorExecution> element(new ClassifierBehaviorExecutionImpl());
@@ -842,16 +1340,49 @@ std::shared_ptr<ClearAssociationActionActivation> FUMLFactoryImpl::createClearAs
 	std::shared_ptr<ClearAssociationActionActivation> element(new ClearAssociationActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ClearAssociationActionActivation> FUMLFactoryImpl::createClearAssociationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ClearAssociationActionActivationImpl> element(new ClearAssociationActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ClearStructuralFeatureActionActivation> FUMLFactoryImpl::createClearStructuralFeatureActionActivation() const
 {
 	std::shared_ptr<ClearStructuralFeatureActionActivation> element(new ClearStructuralFeatureActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ClearStructuralFeatureActionActivation> FUMLFactoryImpl::createClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ClearStructuralFeatureActionActivationImpl> element(new ClearStructuralFeatureActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ConditionalNodeActivation> FUMLFactoryImpl::createConditionalNodeActivation() const
 {
 	std::shared_ptr<ConditionalNodeActivation> element(new ConditionalNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<ConditionalNodeActivation> FUMLFactoryImpl::createConditionalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ConditionalNodeActivationImpl> element(new ConditionalNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ControlToken> FUMLFactoryImpl::createControlToken() const
 {
 	std::shared_ptr<ControlToken> element(new ControlTokenImpl());
@@ -862,16 +1393,49 @@ std::shared_ptr<CreateLinkActionActivation> FUMLFactoryImpl::createCreateLinkAct
 	std::shared_ptr<CreateLinkActionActivation> element(new CreateLinkActionActivationImpl());
 	return element;
 }
+std::shared_ptr<CreateLinkActionActivation> FUMLFactoryImpl::createCreateLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<CreateLinkActionActivationImpl> element(new CreateLinkActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<CreateObjectActionActivation> FUMLFactoryImpl::createCreateObjectActionActivation() const
 {
 	std::shared_ptr<CreateObjectActionActivation> element(new CreateObjectActionActivationImpl());
 	return element;
 }
+std::shared_ptr<CreateObjectActionActivation> FUMLFactoryImpl::createCreateObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<CreateObjectActionActivationImpl> element(new CreateObjectActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<DataStoreNodeActivation> FUMLFactoryImpl::createDataStoreNodeActivation() const
 {
 	std::shared_ptr<DataStoreNodeActivation> element(new DataStoreNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<DataStoreNodeActivation> FUMLFactoryImpl::createDataStoreNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<DataValue> FUMLFactoryImpl::createDataValue() const
 {
 	std::shared_ptr<DataValue> element(new DataValueImpl());
@@ -882,16 +1446,49 @@ std::shared_ptr<DecisionNodeActivation> FUMLFactoryImpl::createDecisionNodeActiv
 	std::shared_ptr<DecisionNodeActivation> element(new DecisionNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<DecisionNodeActivation> FUMLFactoryImpl::createDecisionNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<DestroyLinkActionActivation> FUMLFactoryImpl::createDestroyLinkActionActivation() const
 {
 	std::shared_ptr<DestroyLinkActionActivation> element(new DestroyLinkActionActivationImpl());
 	return element;
 }
+std::shared_ptr<DestroyLinkActionActivation> FUMLFactoryImpl::createDestroyLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<DestroyLinkActionActivationImpl> element(new DestroyLinkActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<DestroyObjectActionActivation> FUMLFactoryImpl::createDestroyObjectActionActivation() const
 {
 	std::shared_ptr<DestroyObjectActionActivation> element(new DestroyObjectActionActivationImpl());
 	return element;
 }
+std::shared_ptr<DestroyObjectActionActivation> FUMLFactoryImpl::createDestroyObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<DestroyObjectActionActivationImpl> element(new DestroyObjectActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<DispatchStrategy> FUMLFactoryImpl::createDispatchStrategy() const
 {
 	std::shared_ptr<DispatchStrategy> element(new DispatchStrategyImpl());
@@ -965,16 +1562,60 @@ std::shared_ptr<ExpansionActivationGroup> FUMLFactoryImpl::createExpansionActiva
 	std::shared_ptr<ExpansionActivationGroup> element(new ExpansionActivationGroupImpl());
 	return element;
 }
+std::shared_ptr<ExpansionActivationGroup> FUMLFactoryImpl::createExpansionActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::ActivityExecution > par_activityExecution) const
+{
+	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(par_activityExecution));
+	if(auto wp = par_activityExecution.lock())
+	{
+			wp->setActivationGroup(element);
+	}
+	return element;
+	
+}
+
+std::shared_ptr<ExpansionActivationGroup> FUMLFactoryImpl::createExpansionActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation) const
+{
+	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(par_containingNodeActivation));
+	if(auto wp = par_containingNodeActivation.lock())
+	{
+			wp->setActivationGroup(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ExpansionNodeActivation> FUMLFactoryImpl::createExpansionNodeActivation() const
 {
 	std::shared_ptr<ExpansionNodeActivation> element(new ExpansionNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<ExpansionNodeActivation> FUMLFactoryImpl::createExpansionNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ExpansionNodeActivationImpl> element(new ExpansionNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ExpansionRegionActivation> FUMLFactoryImpl::createExpansionRegionActivation() const
 {
 	std::shared_ptr<ExpansionRegionActivation> element(new ExpansionRegionActivationImpl());
 	return element;
 }
+std::shared_ptr<ExpansionRegionActivation> FUMLFactoryImpl::createExpansionRegionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ExpansionRegionActivationImpl> element(new ExpansionRegionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ExtensionalValueList> FUMLFactoryImpl::createExtensionalValueList() const
 {
 	std::shared_ptr<ExtensionalValueList> element(new ExtensionalValueListImpl());
@@ -1000,11 +1641,33 @@ std::shared_ptr<FlowFinalNodeActivation> FUMLFactoryImpl::createFlowFinalNodeAct
 	std::shared_ptr<FlowFinalNodeActivation> element(new FlowFinalNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<FlowFinalNodeActivation> FUMLFactoryImpl::createFlowFinalNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<FlowFinalNodeActivationImpl> element(new FlowFinalNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ForkNodeActivation> FUMLFactoryImpl::createForkNodeActivation() const
 {
 	std::shared_ptr<ForkNodeActivation> element(new ForkNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<ForkNodeActivation> FUMLFactoryImpl::createForkNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ForkNodeActivationImpl> element(new ForkNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ForkedToken> FUMLFactoryImpl::createForkedToken() const
 {
 	std::shared_ptr<ForkedToken> element(new ForkedTokenImpl());
@@ -1015,6 +1678,17 @@ std::shared_ptr<InitialNodeActivation> FUMLFactoryImpl::createInitialNodeActivat
 	std::shared_ptr<InitialNodeActivation> element(new InitialNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<InitialNodeActivation> FUMLFactoryImpl::createInitialNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<InitialNodeActivationImpl> element(new InitialNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation() const
 {
 	std::shared_ptr<InputPinActivation> element(new InputPinActivationImpl());
@@ -1026,6 +1700,17 @@ std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation_in
 	if(auto wp = par_actionActivation.lock())
 	{
 			wp->getInputPinActivation()->push_back(element);
+	}
+	return element;
+	
+}
+
+std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
 	}
 	return element;
 	
@@ -1046,6 +1731,17 @@ std::shared_ptr<JoinNodeActivation> FUMLFactoryImpl::createJoinNodeActivation() 
 	std::shared_ptr<JoinNodeActivation> element(new JoinNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<JoinNodeActivation> FUMLFactoryImpl::createJoinNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<JoinNodeActivationImpl> element(new JoinNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<Link> FUMLFactoryImpl::createLink() const
 {
 	std::shared_ptr<Link> element(new LinkImpl());
@@ -1091,11 +1787,33 @@ std::shared_ptr<LoopNodeActivation> FUMLFactoryImpl::createLoopNodeActivation() 
 	std::shared_ptr<LoopNodeActivation> element(new LoopNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<LoopNodeActivation> FUMLFactoryImpl::createLoopNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<LoopNodeActivationImpl> element(new LoopNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<MergeNodeActivation> FUMLFactoryImpl::createMergeNodeActivation() const
 {
 	std::shared_ptr<MergeNodeActivation> element(new MergeNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<MergeNodeActivation> FUMLFactoryImpl::createMergeNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<MergeNodeActivationImpl> element(new MergeNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<Object> FUMLFactoryImpl::createObject() const
 {
 	std::shared_ptr<Object> element(new ObjectImpl());
@@ -1132,6 +1850,17 @@ std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation_
 	
 }
 
+std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ParameterValue> FUMLFactoryImpl::createParameterValue() const
 {
 	std::shared_ptr<ParameterValue> element(new ParameterValueImpl());
@@ -1142,26 +1871,81 @@ std::shared_ptr<ReadExtentActionActivation> FUMLFactoryImpl::createReadExtentAct
 	std::shared_ptr<ReadExtentActionActivation> element(new ReadExtentActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReadExtentActionActivation> FUMLFactoryImpl::createReadExtentActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReadExtentActionActivationImpl> element(new ReadExtentActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ReadIsClassifiedObjectActionActivation> FUMLFactoryImpl::createReadIsClassifiedObjectActionActivation() const
 {
 	std::shared_ptr<ReadIsClassifiedObjectActionActivation> element(new ReadIsClassifiedObjectActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReadIsClassifiedObjectActionActivation> FUMLFactoryImpl::createReadIsClassifiedObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ReadLinkActionActivation> FUMLFactoryImpl::createReadLinkActionActivation() const
 {
 	std::shared_ptr<ReadLinkActionActivation> element(new ReadLinkActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReadLinkActionActivation> FUMLFactoryImpl::createReadLinkActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReadLinkActionActivationImpl> element(new ReadLinkActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ReadSelfActionActivation> FUMLFactoryImpl::createReadSelfActionActivation() const
 {
 	std::shared_ptr<ReadSelfActionActivation> element(new ReadSelfActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReadSelfActionActivation> FUMLFactoryImpl::createReadSelfActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReadSelfActionActivationImpl> element(new ReadSelfActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<ReadStructuralFeatureActionActivation> FUMLFactoryImpl::createReadStructuralFeatureActionActivation() const
 {
 	std::shared_ptr<ReadStructuralFeatureActionActivation> element(new ReadStructuralFeatureActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReadStructuralFeatureActionActivation> FUMLFactoryImpl::createReadStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReadStructuralFeatureActionActivationImpl> element(new ReadStructuralFeatureActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<RealValue> FUMLFactoryImpl::createRealValue() const
 {
 	std::shared_ptr<RealValue> element(new RealValueImpl());
@@ -1172,6 +1956,17 @@ std::shared_ptr<ReclassifyObjectActionActivation> FUMLFactoryImpl::createReclass
 	std::shared_ptr<ReclassifyObjectActionActivation> element(new ReclassifyObjectActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReclassifyObjectActionActivation> FUMLFactoryImpl::createReclassifyObjectActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReclassifyObjectActionActivationImpl> element(new ReclassifyObjectActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<RedefinitionBasedDispatchStrategy> FUMLFactoryImpl::createRedefinitionBasedDispatchStrategy() const
 {
 	std::shared_ptr<RedefinitionBasedDispatchStrategy> element(new RedefinitionBasedDispatchStrategyImpl());
@@ -1182,6 +1977,17 @@ std::shared_ptr<ReduceActionActivation> FUMLFactoryImpl::createReduceActionActiv
 	std::shared_ptr<ReduceActionActivation> element(new ReduceActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ReduceActionActivation> FUMLFactoryImpl::createReduceActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<Reference> FUMLFactoryImpl::createReference() const
 {
 	std::shared_ptr<Reference> element(new ReferenceImpl());
@@ -1192,11 +1998,33 @@ std::shared_ptr<RemoveStructuralFeatureValueActivation> FUMLFactoryImpl::createR
 	std::shared_ptr<RemoveStructuralFeatureValueActivation> element(new RemoveStructuralFeatureValueActivationImpl());
 	return element;
 }
+std::shared_ptr<RemoveStructuralFeatureValueActivation> FUMLFactoryImpl::createRemoveStructuralFeatureValueActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<RemoveStructuralFeatureValueActivationImpl> element(new RemoveStructuralFeatureValueActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<SendSignalActionActivation> FUMLFactoryImpl::createSendSignalActionActivation() const
 {
 	std::shared_ptr<SendSignalActionActivation> element(new SendSignalActionActivationImpl());
 	return element;
 }
+std::shared_ptr<SendSignalActionActivation> FUMLFactoryImpl::createSendSignalActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<SendSignalActionActivationImpl> element(new SendSignalActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<SignalInstance> FUMLFactoryImpl::createSignalInstance() const
 {
 	std::shared_ptr<SignalInstance> element(new SignalInstanceImpl());
@@ -1207,11 +2035,33 @@ std::shared_ptr<StartClassifierBehaviorActionActivation> FUMLFactoryImpl::create
 	std::shared_ptr<StartClassifierBehaviorActionActivation> element(new StartClassifierBehaviorActionActivationImpl());
 	return element;
 }
+std::shared_ptr<StartClassifierBehaviorActionActivation> FUMLFactoryImpl::createStartClassifierBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<StartClassifierBehaviorActionActivationImpl> element(new StartClassifierBehaviorActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<StartObjectBehaviorActionActivation> FUMLFactoryImpl::createStartObjectBehaviorActionActivation() const
 {
 	std::shared_ptr<StartObjectBehaviorActionActivation> element(new StartObjectBehaviorActionActivationImpl());
 	return element;
 }
+std::shared_ptr<StartObjectBehaviorActionActivation> FUMLFactoryImpl::createStartObjectBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<StartObjectBehaviorActionActivationImpl> element(new StartObjectBehaviorActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<StringValue> FUMLFactoryImpl::createStringValue() const
 {
 	std::shared_ptr<StringValue> element(new StringValueImpl());
@@ -1222,11 +2072,33 @@ std::shared_ptr<StructuredActivityNodeActivation> FUMLFactoryImpl::createStructu
 	std::shared_ptr<StructuredActivityNodeActivation> element(new StructuredActivityNodeActivationImpl());
 	return element;
 }
+std::shared_ptr<StructuredActivityNodeActivation> FUMLFactoryImpl::createStructuredActivityNodeActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<StructuredActivityNodeActivationImpl> element(new StructuredActivityNodeActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<TestIdentityActionActivation> FUMLFactoryImpl::createTestIdentityActionActivation() const
 {
 	std::shared_ptr<TestIdentityActionActivation> element(new TestIdentityActionActivationImpl());
 	return element;
 }
+std::shared_ptr<TestIdentityActionActivation> FUMLFactoryImpl::createTestIdentityActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<TestIdentityActionActivationImpl> element(new TestIdentityActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<TokenSet> FUMLFactoryImpl::createTokenSet() const
 {
 	std::shared_ptr<TokenSet> element(new TokenSetImpl());
@@ -1242,6 +2114,17 @@ std::shared_ptr<ValueSpecificActionActivation> FUMLFactoryImpl::createValueSpeci
 	std::shared_ptr<ValueSpecificActionActivation> element(new ValueSpecificActionActivationImpl());
 	return element;
 }
+std::shared_ptr<ValueSpecificActionActivation> FUMLFactoryImpl::createValueSpecificActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
+{
+	std::shared_ptr<ValueSpecificActionActivationImpl> element(new ValueSpecificActionActivationImpl(par_group));
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	return element;
+	
+}
+
 std::shared_ptr<Values> FUMLFactoryImpl::createValues() const
 {
 	std::shared_ptr<Values> element(new ValuesImpl());

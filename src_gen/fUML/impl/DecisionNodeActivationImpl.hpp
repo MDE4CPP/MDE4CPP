@@ -7,20 +7,6 @@
 #ifndef FUML_DECISIONNODEACTIVATIONDECISIONNODEACTIVATIONIMPL_HPP
 #define FUML_DECISIONNODEACTIVATIONDECISIONNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,24 +14,6 @@
 #include "../DecisionNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-#include "fUML/Executor.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Locus.hpp"
-#include "fUML/ObjectToken.hpp"
-#include "fUML/ParameterValue.hpp"
-#include "fUML/Token.hpp"
-#include "fUML/Value.hpp"
-#include "uml/ActivityEdge.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/DecisionNode.hpp"
-#include "uml/ObjectFlow.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/ValueSpecification.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -58,10 +26,15 @@ namespace fUML
 
 		private:    
 			DecisionNodeActivationImpl& operator=(DecisionNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<DecisionNodeActivation> getThisDecisionNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			DecisionNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			DecisionNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -154,4 +127,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_DECISIONNODEACTIVATIONDECISIONNODEACTIVATIONIMPL_HPP */
-

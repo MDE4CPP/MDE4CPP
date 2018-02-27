@@ -1,7 +1,25 @@
 #include "fUML/impl/ActivityEdgeInstanceImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -67,6 +85,16 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityEdgeInstanceImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
@@ -82,7 +110,7 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImp
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::Offer> > _offers = obj.getOffers();
+	std::shared_ptr<Bag<fUML::Offer>> _offers = obj.getOffers();
 	m_offers.reset(new Bag<fUML::Offer>(*(obj.getOffers().get())));
 
 	m_source  = obj.getSource();
@@ -246,7 +274,7 @@ void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
     m_edge = _edge;
 }
 
-std::shared_ptr<fUML::ActivityNodeActivationGroup > ActivityEdgeInstanceImpl::getGroup() const
+std::weak_ptr<fUML::ActivityNodeActivationGroup > ActivityEdgeInstanceImpl::getGroup() const
 {
 //assert(m_group);
     return m_group;
@@ -256,7 +284,7 @@ void ActivityEdgeInstanceImpl::setGroup(std::shared_ptr<fUML::ActivityNodeActiva
     m_group = _group;
 }
 
-std::shared_ptr< Bag<fUML::Offer> > ActivityEdgeInstanceImpl::getOffers() const
+std::shared_ptr<Bag<fUML::Offer>> ActivityEdgeInstanceImpl::getOffers() const
 {
 
     return m_offers;
@@ -288,8 +316,28 @@ void ActivityEdgeInstanceImpl::setTarget(std::shared_ptr<fUML::ActivityNodeActiv
 //*********************************
 
 
+std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> ownersActivityEdgeInstanceList = wp->getEdgeInstances();
+		for (std::shared_ptr<fUML::ActivityEdgeInstance> anActivityEdgeInstance : *ownersActivityEdgeInstanceList)
+		{
+			if (anActivityEdgeInstance.get() == this)
+			{
+				return anActivityEdgeInstance ;
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityEdgeInstance>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

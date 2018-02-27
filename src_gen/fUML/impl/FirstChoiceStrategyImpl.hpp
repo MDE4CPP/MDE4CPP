@@ -7,20 +7,6 @@
 #ifndef FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP
 #define FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../FirstChoiceStrategy.hpp"
 
 #include "fUML/impl/ChoiceStrategyImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&) = delete;
+			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -91,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP */
-

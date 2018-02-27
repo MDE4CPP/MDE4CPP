@@ -7,20 +7,6 @@
 #ifndef FUML_LITERALUNLIMITEDNATURALEVALUATIONLITERALUNLIMITEDNATURALEVALUATIONIMPL_HPP
 #define FUML_LITERALUNLIMITEDNATURALEVALUATIONLITERALUNLIMITEDNATURALEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../LiteralUnlimitedNaturalEvaluation.hpp"
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
-
-#include "fuml/UnlimitedNaturalValue.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "uml/LiteralUnlimitedNatural.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,6 +26,7 @@ namespace fUML
 
 		private:    
 			LiteralUnlimitedNaturalEvaluationImpl& operator=(LiteralUnlimitedNaturalEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -94,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LITERALUNLIMITEDNATURALEVALUATIONLITERALUNLIMITEDNATURALEVALUATIONIMPL_HPP */
-

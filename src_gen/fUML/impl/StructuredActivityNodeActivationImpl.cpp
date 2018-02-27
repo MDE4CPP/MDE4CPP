@@ -1,11 +1,31 @@
 #include "fUML/impl/StructuredActivityNodeActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "fuml/FUMLFactory.hpp"
+#include "fuml/ObjectToken.hpp"
 #include "uml/StructuredActivityNode.hpp"
 #include "uml/Action.hpp"
 #include "uml/ActivityNode.hpp"
@@ -67,6 +87,16 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:StructuredActivityNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj):StructuredActivityNodeActivationImpl()
@@ -82,12 +112,12 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -174,13 +204,12 @@ void StructuredActivityNodeActivationImpl::createNodeActivations()
 	//generated from body annotation
 	ActionActivationImpl::createNodeActivations();
 
-    this->setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
-    struct null_deleter{void operator()(void const *) const { } };
-    this->getActivationGroup()->setContainingNodeActivation(std::shared_ptr<StructuredActivityNodeActivation>(this, null_deleter()));
+	this->setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
+	this->getActivationGroup()->setContainingNodeActivation(getThisStructuredActivityNodeActivationPtr());
 
-    std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
-    std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
-    this->getActivationGroup()->createNodeActivations(nodes);
+	std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
+	std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
+	this->getActivationGroup()->createNodeActivations(nodes);
 	//end of body
 }
 
@@ -385,14 +414,34 @@ void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fU
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > StructuredActivityNodeActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> StructuredActivityNodeActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersStructuredActivityNodeActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anStructuredActivityNodeActivation : *ownersStructuredActivityNodeActivationList)
+		{
+			if (anStructuredActivityNodeActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<StructuredActivityNodeActivation>(anStructuredActivityNodeActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<StructuredActivityNodeActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> StructuredActivityNodeActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

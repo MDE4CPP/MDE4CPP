@@ -1,10 +1,29 @@
 #include "fUML/impl/ActivityExecutionImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ActivityExecution.hpp"
 #include "fUML/ActivityParameterNodeActivation.hpp"
 #include "fUML/Execution.hpp"
@@ -83,7 +102,7 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
@@ -145,19 +164,19 @@ void ActivityExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity> (this->getTypes()->front());
+		std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity> (this->getTypes()->front());
 
     if(activity != nullptr)
     {
         DEBUG_MESSAGE(std::cout<<"[execute] Activity " << activity->getName()<< "..."<<std::endl;)
         DEBUG_MESSAGE(std::cout<<"[event] Execute activity=" + activity->getName()<<std::endl;)
 
-        this->setActivationGroup(std::shared_ptr<ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
-        struct null_deleter{void operator()(void const *) const { } };
-        this->getActivationGroup()->setActivityExecution(std::shared_ptr<ActivityExecution>(this, null_deleter()));
+		std::shared_ptr<ActivityExecution> thisPtr=getThisActivityExecutionPtr();
+
+		std::shared_ptr<fUML::ActivityNodeActivationGroup> newActivationGroup=fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup_in_ActivityExecution(thisPtr);
         std::shared_ptr<Bag<uml::ActivityNode> > nodes = activity->getNode();
 		std::shared_ptr<Bag<uml::ActivityEdge> > edges = activity->getEdge();
-        this->getActivationGroup()->activate(nodes, edges);
+		newActivationGroup->activate(nodes, edges);
 
         DEBUG_MESSAGE(std::cout<<"[execute] Getting output parameter node activations..."<<std::endl;)
 
@@ -208,6 +227,7 @@ void ActivityExecutionImpl::execute()
         DEBUG_MESSAGE(std::cout<<"[execute] Activity " << activity->getName()<< " completed."<<std::endl;)
         //TODO: which elements connected to the activity can be safely cleaned up here?
     }
+
 	//end of body
 }
 
@@ -245,6 +265,11 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::ActivityNod
 //*********************************
 
 
+std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityExecution>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityExecutionImpl::eContainer() const
 {
 	return nullptr;

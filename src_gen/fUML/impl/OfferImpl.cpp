@@ -1,7 +1,25 @@
 #include "fUML/impl/OfferImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -53,7 +71,7 @@ OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<fUML::Token> > _offeredTokens = obj.getOfferedTokens();
+	std::shared_ptr<Bag<fUML::Token>> _offeredTokens = obj.getOfferedTokens();
 	m_offeredTokens.reset(new Bag<fUML::Token>(*(obj.getOfferedTokens().get())));
 
 
@@ -176,7 +194,7 @@ std::shared_ptr<Bag<fUML::Token> > OfferImpl::retrieveOfferedTokens()
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<fUML::Token> > OfferImpl::getOfferedTokens() const
+std::shared_ptr<Bag<fUML::Token>> OfferImpl::getOfferedTokens() const
 {
 
     return m_offeredTokens;
@@ -188,6 +206,11 @@ std::shared_ptr< Bag<fUML::Token> > OfferImpl::getOfferedTokens() const
 //*********************************
 
 
+std::shared_ptr<Offer> OfferImpl::getThisOfferPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Offer>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> OfferImpl::eContainer() const
 {
 	return nullptr;

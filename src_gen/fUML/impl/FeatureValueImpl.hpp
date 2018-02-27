@@ -7,20 +7,6 @@
 #ifndef FUML_FEATUREVALUEFEATUREVALUEIMPL_HPP
 #define FUML_FEATUREVALUEFEATUREVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,11 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-#include "uml/StructuralFeature.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -47,6 +28,7 @@ virtual public FeatureValue
 
 		private:    
 			FeatureValueImpl& operator=(FeatureValueImpl const&) = delete;
+			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -92,7 +74,7 @@ virtual public FeatureValue
 			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
+			virtual std::shared_ptr<Bag<fUML::Value>> getValues() const ;
 			
 							
 			
@@ -115,4 +97,3 @@ virtual public FeatureValue
 	};
 }
 #endif /* end of include guard: FUML_FEATUREVALUEFEATUREVALUEIMPL_HPP */
-

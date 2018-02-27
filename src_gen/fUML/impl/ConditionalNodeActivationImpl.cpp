@@ -1,7 +1,26 @@
 #include "fUML/impl/ConditionalNodeActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -67,6 +86,16 @@ ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ConditionalNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj):ConditionalNodeActivationImpl()
@@ -82,15 +111,15 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<uml::Clause> > _selectedClauses = obj.getSelectedClauses();
+	std::shared_ptr<Bag<uml::Clause>> _selectedClauses = obj.getSelectedClauses();
 	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
 
 
@@ -179,14 +208,14 @@ void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  cla
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<fUML::ClauseActivation> > ConditionalNodeActivationImpl::getClauseActivations() const
+std::shared_ptr<Bag<fUML::ClauseActivation>> ConditionalNodeActivationImpl::getClauseActivations() const
 {
 
     return m_clauseActivations;
 }
 
 
-std::shared_ptr< Bag<uml::Clause> > ConditionalNodeActivationImpl::getSelectedClauses() const
+std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
 {
 
     return m_selectedClauses;
@@ -196,14 +225,34 @@ std::shared_ptr< Bag<uml::Clause> > ConditionalNodeActivationImpl::getSelectedCl
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > ConditionalNodeActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> ConditionalNodeActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersConditionalNodeActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anConditionalNodeActivation : *ownersConditionalNodeActivationList)
+		{
+			if (anConditionalNodeActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<ConditionalNodeActivation>(anConditionalNodeActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ConditionalNodeActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ConditionalNodeActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

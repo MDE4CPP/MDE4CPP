@@ -7,20 +7,6 @@
 #ifndef FUML_CHOICESTRATEGYCHOICESTRATEGYIMPL_HPP
 #define FUML_CHOICESTRATEGYCHOICESTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../ChoiceStrategy.hpp"
 
 #include "fUML/impl/SemanticStrategyImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			ChoiceStrategyImpl& operator=(ChoiceStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ChoiceStrategy> getThisChoiceStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -95,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_CHOICESTRATEGYCHOICESTRATEGYIMPL_HPP */
-

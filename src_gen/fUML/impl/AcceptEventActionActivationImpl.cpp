@@ -1,7 +1,26 @@
 #include "fUML/impl/AcceptEventActionActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -57,6 +76,16 @@ AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:AcceptEventActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj):AcceptEventActionActivationImpl()
@@ -75,12 +104,12 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -168,14 +197,34 @@ void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Acc
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > AcceptEventActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> AcceptEventActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersAcceptEventActionActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anAcceptEventActionActivation : *ownersAcceptEventActionActivationList)
+		{
+			if (anAcceptEventActionActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<AcceptEventActionActivation>(anAcceptEventActionActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<AcceptEventActionActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

@@ -1,7 +1,25 @@
 #include "fUML/impl/ExecutionFactoryImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -110,15 +128,15 @@ ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):Exe
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::PrimitiveType> > _builtInTypes = obj.getBuiltInTypes();
+	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
 	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
 	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
-	std::shared_ptr< Bag<fUML::SemanticStrategy> > _strategies = obj.getStrategies();
+	std::shared_ptr<Bag<fUML::SemanticStrategy>> _strategies = obj.getStrategies();
 	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
@@ -336,7 +354,7 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::PrimitiveType> > ExecutionFactoryImpl::getBuiltInTypes() const
+std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
 {
 
     return m_builtInTypes;
@@ -353,14 +371,14 @@ void ExecutionFactoryImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
     m_locus = _locus;
 }
 
-std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
+std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
 {
 
     return m_primitiveBehaviorPrototypes;
 }
 
 
-std::shared_ptr< Bag<fUML::SemanticStrategy> > ExecutionFactoryImpl::getStrategies() const
+std::shared_ptr<Bag<fUML::SemanticStrategy>> ExecutionFactoryImpl::getStrategies() const
 {
 
     return m_strategies;
@@ -372,6 +390,19 @@ std::shared_ptr< Bag<fUML::SemanticStrategy> > ExecutionFactoryImpl::getStrategi
 //*********************************
 
 
+std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr()
+{
+	if(auto wp = m_locus.lock())
+	{
+		std::shared_ptr<fUML::ExecutionFactory > anExecutionFactory = wp->getFactory();
+		if (anExecutionFactory.get() == this)
+		{
+			return anExecutionFactory ;
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ExecutionFactory>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ExecutionFactoryImpl::eContainer() const
 {
 	if(auto wp = m_locus.lock())

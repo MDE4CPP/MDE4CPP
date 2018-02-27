@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYEDGEINSTANCEACTIVITYEDGEINSTANCEIMPL_HPP
 #define FUML_ACTIVITYEDGEINSTANCEACTIVITYEDGEINSTANCEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,9 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
- #include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,10 +28,15 @@ virtual public ActivityEdgeInstance
 
 		private:    
 			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&) = delete;
+			virtual std::shared_ptr<ActivityEdgeInstance> getThisActivityEdgeInstancePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityEdgeInstanceImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -102,14 +90,14 @@ virtual public ActivityEdgeInstance
 			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge_edge) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
+			virtual std::weak_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
 			
 			/*!
 			 */
 			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const ;
+			virtual std::shared_ptr<Bag<fUML::Offer>> getOffers() const ;
 			
 			/*!
 			 */
@@ -146,4 +134,3 @@ virtual public ActivityEdgeInstance
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYEDGEINSTANCEACTIVITYEDGEINSTANCEIMPL_HPP */
-

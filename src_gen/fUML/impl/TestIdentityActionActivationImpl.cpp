@@ -1,7 +1,26 @@
 #include "fUML/impl/TestIdentityActionActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -51,6 +70,16 @@ TestIdentityActionActivationImpl::~TestIdentityActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:TestIdentityActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj):TestIdentityActionActivationImpl()
@@ -66,12 +95,12 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIde
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -130,14 +159,34 @@ std::shared_ptr<ecore::EClass> TestIdentityActionActivationImpl::eStaticClass() 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > TestIdentityActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> TestIdentityActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersTestIdentityActionActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anTestIdentityActionActivation : *ownersTestIdentityActionActivationList)
+		{
+			if (anTestIdentityActionActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<TestIdentityActionActivation>(anTestIdentityActionActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<TestIdentityActionActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> TestIdentityActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

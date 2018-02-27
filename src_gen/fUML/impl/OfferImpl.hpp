@@ -7,20 +7,6 @@
 #ifndef FUML_OFFEROFFERIMPL_HPP
 #define FUML_OFFEROFFERIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public Offer
 
 		private:    
 			OfferImpl& operator=(OfferImpl const&) = delete;
+			virtual std::shared_ptr<Offer> getThisOfferPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -90,7 +75,7 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Token> > getOfferedTokens() const ;
+			virtual std::shared_ptr<Bag<fUML::Token>> getOfferedTokens() const ;
 			
 							
 			
@@ -113,4 +98,3 @@ virtual public Offer
 	};
 }
 #endif /* end of include guard: FUML_OFFEROFFERIMPL_HPP */
-

@@ -7,28 +7,14 @@
 #ifndef FUML_FEATUREVALUE_HPP
 #define FUML_FEATUREVALUE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -109,7 +95,7 @@ namespace fUML
 			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Value>> getValues() const = 0;
 			
 			
 
@@ -130,7 +116,7 @@ namespace fUML
 			std::shared_ptr<uml::StructuralFeature > m_feature;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::Value> > m_values;
+			std::shared_ptr<Bag<fUML::Value>> m_values;
 			
 
 		public:
@@ -139,9 +125,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_FEATUREVALUE_HPP */
-

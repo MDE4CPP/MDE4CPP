@@ -1,7 +1,25 @@
 #include "fUML/impl/ActivityNodeActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -85,6 +103,16 @@ ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActivityNodeActivationImpl::ActivityNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj):ActivityNodeActivationImpl()
@@ -99,12 +127,12 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -154,8 +182,7 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityE
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	edge->setTarget(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+	edge->setTarget(getThisActivityNodeActivationPtr());
     this->getIncomingEdges()->push_back(edge);
 	//end of body
 }
@@ -164,12 +191,11 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityE
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	 if (edge->getSource().get() != this)
-    {
-		struct null_deleter{void operator()(void const *) const { } };
-    	edge->setSource(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
-    }
-    this->getOutgoingEdges()->push_back(edge);
+	if (edge->getSource().get() != this)
+	{
+		edge->setSource(getThisActivityNodeActivationPtr());
+	}
+	this->getOutgoingEdges()->push_back(edge);
 	//end of body
 }
 
@@ -199,13 +225,12 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 		token->withdraw();
 		token = std::dynamic_pointer_cast<Token>(token->copy());
 	}
-	//struct null_deleter{void operator()(void const *) const { } };
-	token->setHolder(shared_from_this());
-    token->setWithdrawn(false);
+	token->setHolder(getThisActivityNodeActivationPtr());
+	token->setWithdrawn(false);
 
 	DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<token->getValue()<<std::endl;)
-   
-    this->getHeldTokens()->push_back(token);
+
+	this->getHeldTokens()->push_back(token);
 	//end of body
 }
 
@@ -256,7 +281,19 @@ std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivity
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return this->getGroup()->retrieveActivityExecution();
+	
+	auto group=this->getGroup().lock();
+	if(group)
+	{
+		return group->retrieveActivityExecution();
+	}
+	else
+	{
+		std::cout << __PRETTY_FUNCTION__  << std::endl;
+		throw "empty group!";
+	}
+
+	return std::shared_ptr<fUML::ActivityExecution>();
 	//end of body
 }
 
@@ -280,14 +317,14 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNod
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
-    if (node == this->getNode()) 
-    {
-        struct null_deleter{void operator()(void const *) const { } };
-        activation = std::shared_ptr<ActivityNodeActivation>(this, null_deleter());
-    }
-
-    return activation;
+	if (node == this->getNode())
+	{
+		return getThisActivityNodeActivationPtr();
+	}
+	else
+	{
+		return nullptr;
+	}
 	//end of body
 }
 
@@ -412,8 +449,16 @@ void ActivityNodeActivationImpl::resume()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	this->getGroup()->resume(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+		auto group=this->getGroup().lock();
+	if(group)
+	{
+		group->resume(getThisActivityNodeActivationPtr());
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout<<"empty group"<<std::endl;)
+	}
+
 	//end of body
 }
 
@@ -463,8 +508,15 @@ void ActivityNodeActivationImpl::suspend()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	this->getGroup()->suspend(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+		auto group=this->getGroup().lock();
+	if(group)
+	{
+		group->suspend(getThisActivityNodeActivationPtr());
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout<<"empty group"<<std::endl;)
+	}
 	//end of body
 }
 
@@ -513,7 +565,7 @@ this->setRunning(false);
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActivityNodeActivationGroup > ActivityNodeActivationImpl::getGroup() const
+std::weak_ptr<fUML::ActivityNodeActivationGroup > ActivityNodeActivationImpl::getGroup() const
 {
 //assert(m_group);
     return m_group;
@@ -523,14 +575,14 @@ void ActivityNodeActivationImpl::setGroup(std::shared_ptr<fUML::ActivityNodeActi
     m_group = _group;
 }
 
-std::shared_ptr< Bag<fUML::Token> > ActivityNodeActivationImpl::getHeldTokens() const
+std::shared_ptr<Bag<fUML::Token>> ActivityNodeActivationImpl::getHeldTokens() const
 {
 
     return m_heldTokens;
 }
 
 
-std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > ActivityNodeActivationImpl::getIncomingEdges() const
+std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> ActivityNodeActivationImpl::getIncomingEdges() const
 {
 
     return m_incomingEdges;
@@ -547,7 +599,7 @@ void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _nod
     m_node = _node;
 }
 
-std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > ActivityNodeActivationImpl::getOutgoingEdges() const
+std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> ActivityNodeActivationImpl::getOutgoingEdges() const
 {
 
     return m_outgoingEdges;
@@ -559,8 +611,28 @@ std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > ActivityNodeActivationImpl::g
 //*********************************
 
 
+std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersActivityNodeActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anActivityNodeActivation : *ownersActivityNodeActivationList)
+		{
+			if (anActivityNodeActivation.get() == this)
+			{
+				return anActivityNodeActivation ;
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityNodeActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

@@ -7,20 +7,6 @@
 #ifndef FUML_OPAQUEBEHAVIOREXECUTIONOPAQUEBEHAVIOREXECUTIONIMPL_HPP
 #define FUML_OPAQUEBEHAVIOREXECUTIONOPAQUEBEHAVIOREXECUTIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,13 +14,6 @@
 #include "../OpaqueBehaviorExecution.hpp"
 
 #include "fUML/impl/ExecutionImpl.hpp"
-
-#include "fuml/ParameterValue.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-#include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -47,6 +26,7 @@ namespace fUML
 
 		private:    
 			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&) = delete;
+			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -100,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_OPAQUEBEHAVIOREXECUTIONOPAQUEBEHAVIOREXECUTIONIMPL_HPP */
-

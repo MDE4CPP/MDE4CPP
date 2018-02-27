@@ -1,7 +1,25 @@
 #include "fUML/impl/TokenSetImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -53,7 +71,7 @@ TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj):TokenSetImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<fUML::Token> > _tokens = obj.getTokens();
+	std::shared_ptr<Bag<fUML::Token>> _tokens = obj.getTokens();
 	m_tokens.reset(new Bag<fUML::Token>(*(obj.getTokens().get())));
 
 
@@ -84,7 +102,7 @@ std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<fUML::Token> > TokenSetImpl::getTokens() const
+std::shared_ptr<Bag<fUML::Token>> TokenSetImpl::getTokens() const
 {
 
     return m_tokens;
@@ -96,6 +114,11 @@ std::shared_ptr< Bag<fUML::Token> > TokenSetImpl::getTokens() const
 //*********************************
 
 
+std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<TokenSet>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> TokenSetImpl::eContainer() const
 {
 	return nullptr;

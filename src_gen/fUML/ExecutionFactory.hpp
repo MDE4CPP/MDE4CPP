@@ -7,28 +7,14 @@
 #ifndef FUML_EXECUTIONFACTORY_HPP
 #define FUML_EXECUTIONFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -179,7 +165,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::PrimitiveType> > getBuiltInTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;
 			
 			/*!
 			 */
@@ -190,11 +176,11 @@ namespace fUML
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > getPrimitiveBehaviorPrototypes() const = 0;
+			virtual std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SemanticStrategy> > getStrategies() const = 0;
+			virtual std::shared_ptr<Bag<fUML::SemanticStrategy>> getStrategies() const = 0;
 			
 			
 
@@ -209,16 +195,16 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<uml::PrimitiveType> > m_builtInTypes;
+			std::shared_ptr<Bag<uml::PrimitiveType>> m_builtInTypes;
 			/*!
 			 */
 			std::weak_ptr<fUML::Locus > m_locus;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > m_primitiveBehaviorPrototypes;
+			std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> m_primitiveBehaviorPrototypes;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::SemanticStrategy> > m_strategies;
+			std::shared_ptr<Bag<fUML::SemanticStrategy>> m_strategies;
 			
 
 		public:
@@ -227,9 +213,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORY_HPP */
-

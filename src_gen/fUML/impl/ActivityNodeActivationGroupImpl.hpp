@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP
 #define FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,25 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fUML/ActivityEdgeInstance.hpp"
-#include "fUML/ActivityNodeActivation.hpp"
-#include "fUML/ActivityNodeActivationGroup.hpp"
-#include "fUML/ActivityParameterNodeActivation.hpp"
-#include "fUML/ControlNodeActivation.hpp"
-#include "fUML/ControlNodeActivation.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/Locus.hpp"
-#include "fUML/PinActivation.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityEdge.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/Class.hpp"
-#include "uml/InputPin.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -61,10 +28,19 @@ virtual public ActivityNodeActivationGroup
 
 		private:    
 			ActivityNodeActivationGroupImpl& operator=(ActivityNodeActivationGroupImpl const&) = delete;
+			virtual std::shared_ptr<ActivityNodeActivationGroup> getThisActivityNodeActivationGroupPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationGroupImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::ActivityExecution > par_activityExecution);
+
+
+			//Additional constructors for the containments back reference
+			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation);
+
 
 
 
@@ -155,29 +131,29 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityExecution > getActivityExecution() const ;
+			virtual std::weak_ptr<fUML::ActivityExecution > getActivityExecution() const ;
 			
 			/*!
 			 */
 			virtual void setActivityExecution(std::shared_ptr<fUML::ActivityExecution> _activityExecution_activityExecution) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::StructuredActivityNodeActivation > getContainingNodeActivation() const ;
+			virtual std::weak_ptr<fUML::StructuredActivityNodeActivation > getContainingNodeActivation() const ;
 			
 			/*!
 			 */
 			virtual void setContainingNodeActivation(std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation_containingNodeActivation) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getEdgeInstances() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getEdgeInstances() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getNodeActivations() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityNodeActivation>> getNodeActivations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getSuspendedActivations() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityNodeActivation>> getSuspendedActivations() const ;
 			
 							
 			
@@ -200,4 +176,3 @@ virtual public ActivityNodeActivationGroup
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP */
-

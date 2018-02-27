@@ -1,7 +1,25 @@
 #include "fUML/impl/ExecutionImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -86,7 +104,7 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
@@ -238,7 +256,7 @@ void ExecutionImpl::setContext(std::shared_ptr<fUML::Object> _context)
     m_context = _context;
 }
 
-std::shared_ptr< Bag<fUML::ParameterValue> > ExecutionImpl::getParameterValues() const
+std::shared_ptr<Bag<fUML::ParameterValue>> ExecutionImpl::getParameterValues() const
 {
 
     return m_parameterValues;
@@ -250,6 +268,11 @@ std::shared_ptr< Bag<fUML::ParameterValue> > ExecutionImpl::getParameterValues()
 //*********************************
 
 
+std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Execution>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
 {
 	return nullptr;

@@ -7,20 +7,6 @@
 #ifndef FUML_CLASSIFIERBEHAVIOREXECUTIONACTIVITYCLASSIFIERBEHAVIOREXECUTIONACTIVITYIMPL_HPP
 #define FUML_CLASSIFIERBEHAVIOREXECUTIONACTIVITYCLASSIFIERBEHAVIOREXECUTIONACTIVITYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public ClassifierBehaviorExecutionActivity
 
 		private:    
 			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&) = delete;
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -89,4 +74,3 @@ virtual public ClassifierBehaviorExecutionActivity
 	};
 }
 #endif /* end of include guard: FUML_CLASSIFIERBEHAVIOREXECUTIONACTIVITYCLASSIFIERBEHAVIOREXECUTIONACTIVITYIMPL_HPP */
-

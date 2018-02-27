@@ -1,7 +1,25 @@
 #include "fUML/impl/ClassifierBehaviorExecutionImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -150,6 +168,11 @@ void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::
 //*********************************
 
 
+std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ClassifierBehaviorExecution>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionImpl::eContainer() const
 {
 	return nullptr;

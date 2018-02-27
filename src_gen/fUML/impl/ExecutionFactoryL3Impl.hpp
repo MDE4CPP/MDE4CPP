@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTIONFACTORYL3EXECUTIONFACTORYL3IMPL_HPP
 #define FUML_EXECUTIONFACTORYL3EXECUTIONFACTORYL3IMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,35 +14,6 @@
 #include "../ExecutionFactoryL3.hpp"
 
 #include "fUML/impl/ExecutionFactoryL2Impl.hpp"
-
-#include "fUML/AcceptEventActionActivation.hpp"
-#include "fUML/ConditionalNodeActivation.hpp"
-#include "fUML/DataStoreNodeActivation.hpp"
-#include "fUML/ExpansionNodeActivation.hpp"
-#include "fUML/ExpansionRegionActivation.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/LoopNodeActivation.hpp"
-#include "fUML/ReadExtentActionActivation.hpp"
-#include "fUML/ReadIsClassifiedObjectActionActivation.hpp"
-#include "fUML/ReclassifyObjectActionActivation.hpp"
-#include "fUML/ReduceActionActivation.hpp"
-#include "fUML/StartClassifierBehaviorActionActivation.hpp"
-#include "fUML/StartObjectBehaviorActionActivation.hpp"
-#include "fUML/StructuredActivityNodeActivation.hpp"
-#include "uml/AcceptEventAction.hpp"
-#include "uml/ConditionalNode.hpp"
-#include "uml/DataStoreNode.hpp"
-#include "uml/ExpansionNode.hpp"
-#include "uml/ExpansionRegion.hpp"
-#include "uml/LoopNode.hpp"
-#include "uml/ReadExtentAction.hpp"
-#include "uml/ReadIsClassifiedObjectAction.hpp"
-#include "uml/ReclassifyObjectAction.hpp"
-#include "uml/ReduceAction.hpp"
-#include "uml/StartClassifierBehaviorAction.hpp"
-#include "uml/StartObjectBehaviorAction.hpp"
-#include "uml/UmlPackage.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -69,6 +26,7 @@ namespace fUML
 
 		private:    
 			ExecutionFactoryL3Impl& operator=(ExecutionFactoryL3Impl const&) = delete;
+			virtual std::shared_ptr<ExecutionFactoryL3> getThisExecutionFactoryL3Ptr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -122,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYL3EXECUTIONFACTORYL3IMPL_HPP */
-

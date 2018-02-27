@@ -7,20 +7,6 @@
 #ifndef FUML_OBJECTTOKENOBJECTTOKENIMPL_HPP
 #define FUML_OBJECTTOKENOBJECTTOKENIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,9 +14,6 @@
 #include "../ObjectToken.hpp"
 
 #include "fUML/impl/TokenImpl.hpp"
-
- #include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -43,6 +26,7 @@ namespace fUML
 
 		private:    
 			ObjectTokenImpl& operator=(ObjectTokenImpl const&) = delete;
+			virtual std::shared_ptr<ObjectToken> getThisObjectTokenPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -103,4 +87,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_OBJECTTOKENOBJECTTOKENIMPL_HPP */
-

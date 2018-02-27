@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIONACTIVATIONACTIONACTIVATIONIMPL_HPP
 #define FUML_ACTIONACTIVATIONACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,28 +14,6 @@
 #include "../ActionActivation.hpp"
 
 #include "fUML/impl/ActivityNodeActivationImpl.hpp"
-
-#include <iterator>
-#include "fUML/ActivityExecution.hpp"
-#include "fUML/ActivityNodeActivation.hpp"
-#include "fUML/ControlToken.hpp"
-#include "fUML/Executor.hpp"
-#include "fUML/FeatureValue.hpp"
-#include "fUML/ForkNodeActivation.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Link.hpp"
-#include "fUML/Locus.hpp"
-#include "fUML/ObjectToken.hpp"
-#include "fUML/PinActivation.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/DataStoreNode.hpp"
-#include "uml/LiteralBoolean.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/UmlFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -62,10 +26,15 @@ namespace fUML
 
 		private:    
 			ActionActivationImpl& operator=(ActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ActionActivation> getThisActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -176,11 +145,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation > > getInputPinActivation() const ;
+			virtual std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation>> getInputPinActivation() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation > > getOutputPinActivation() const ;
+			virtual std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation>> getOutputPinActivation() const ;
 			
 			
 							
@@ -190,7 +159,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -206,4 +175,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ACTIONACTIVATIONACTIONACTIVATIONIMPL_HPP */
-

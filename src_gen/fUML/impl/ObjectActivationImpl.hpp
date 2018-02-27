@@ -7,20 +7,6 @@
 #ifndef FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP
 #define FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,12 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-#include "fUML/ClassifierBehaviorExecution.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/Class.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,6 +28,7 @@ virtual public ObjectActivation
 
 		private:    
 			ObjectActivationImpl& operator=(ObjectActivationImpl const&) = delete;
+			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -110,11 +91,11 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const ;
+			virtual std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> getClassifierBehaviorExecutions() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SignalInstance> > getEventPool() const ;
+			virtual std::shared_ptr<Bag<fUML::SignalInstance>> getEventPool() const ;
 			
 			/*!
 			 */
@@ -125,7 +106,7 @@ virtual public ObjectActivation
 			virtual void setObject(std::shared_ptr<fUML::Object> _object_object) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const ;
+			virtual std::shared_ptr<Bag<fUML::EventAccepter>> getWaitingEventAccepters() const ;
 			
 							
 			
@@ -148,4 +129,3 @@ virtual public ObjectActivation
 	};
 }
 #endif /* end of include guard: FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_DATASTORENODEACTIVATIONDATASTORENODEACTIVATIONIMPL_HPP
 #define FUML_DATASTORENODEACTIVATIONDATASTORENODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,9 +14,6 @@
 #include "../DataStoreNodeActivation.hpp"
 
 #include "fUML/impl/CentralBufferNodeActivationImpl.hpp"
-
-#include "fuml/Value.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -43,10 +26,15 @@ namespace fUML
 
 		private:    
 			DataStoreNodeActivationImpl& operator=(DataStoreNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<DataStoreNodeActivation> getThisDataStoreNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			DataStoreNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			DataStoreNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -96,4 +84,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_DATASTORENODEACTIVATIONDATASTORENODEACTIVATIONIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_LITERALBOOLEANEVALUATIONLITERALBOOLEANEVALUATIONIMPL_HPP
 #define FUML_LITERALBOOLEANEVALUATIONLITERALBOOLEANEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../LiteralBooleanEvaluation.hpp"
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
-
-#include "fuml/BooleanValue.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "uml/LiteralBoolean.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,6 +26,7 @@ namespace fUML
 
 		private:    
 			LiteralBooleanEvaluationImpl& operator=(LiteralBooleanEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -94,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LITERALBOOLEANEVALUATIONLITERALBOOLEANEVALUATIONIMPL_HPP */
-

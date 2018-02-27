@@ -7,28 +7,18 @@
 #ifndef FUML_OBJECTACTIVATION_HPP
 #define FUML_OBJECTACTIVATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
@@ -141,11 +131,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const = 0;
+			virtual std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> getClassifierBehaviorExecutions() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SignalInstance> > getEventPool() const = 0;
+			virtual std::shared_ptr<Bag<fUML::SignalInstance>> getEventPool() const = 0;
 			
 			/*!
 			 */
@@ -156,7 +146,7 @@ namespace fUML
 			virtual void setObject(std::shared_ptr<fUML::Object> _object_object) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const = 0;
+			virtual std::shared_ptr<Bag<fUML::EventAccepter>> getWaitingEventAccepters() const = 0;
 			
 			
 
@@ -171,16 +161,16 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > m_classifierBehaviorExecutions;
+			std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> m_classifierBehaviorExecutions;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::SignalInstance> > m_eventPool;
+			std::shared_ptr<Bag<fUML::SignalInstance>> m_eventPool;
 			/*!
 			 */
 			std::shared_ptr<fUML::Object > m_object;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::EventAccepter> > m_waitingEventAccepters;
+			std::shared_ptr<Bag<fUML::EventAccepter>> m_waitingEventAccepters;
 			
 
 		public:
@@ -189,9 +179,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_OBJECTACTIVATION_HPP */
-

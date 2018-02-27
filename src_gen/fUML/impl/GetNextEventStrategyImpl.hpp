@@ -7,20 +7,6 @@
 #ifndef FUML_GETNEXTEVENTSTRATEGYGETNEXTEVENTSTRATEGYIMPL_HPP
 #define FUML_GETNEXTEVENTSTRATEGYGETNEXTEVENTSTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../GetNextEventStrategy.hpp"
 
 #include "fUML/impl/SemanticStrategyImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&) = delete;
+			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -91,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_GETNEXTEVENTSTRATEGYGETNEXTEVENTSTRATEGYIMPL_HPP */
-

@@ -1,7 +1,24 @@
 #include "fUML/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -106,6 +123,11 @@ std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<LiteralUnlimitedNaturalEvaluation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalEvaluationImpl::eContainer() const
 {
 	return nullptr;

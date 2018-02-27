@@ -1,4 +1,5 @@
 #include "fUML/impl/FUMLPluginImpl.hpp"
+
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 

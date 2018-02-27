@@ -7,20 +7,6 @@
 #ifndef FUML_INITIALNODEACTIVATIONINITIALNODEACTIVATIONIMPL_HPP
 #define FUML_INITIALNODEACTIVATIONINITIALNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,10 +14,6 @@
 #include "../InitialNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-#include "fuml/ControlToken.hpp"
-#include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -44,10 +26,15 @@ namespace fUML
 
 		private:    
 			InitialNodeActivationImpl& operator=(InitialNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<InitialNodeActivation> getThisInitialNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			InitialNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			InitialNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -93,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_INITIALNODEACTIVATIONINITIALNODEACTIVATIONIMPL_HPP */
-

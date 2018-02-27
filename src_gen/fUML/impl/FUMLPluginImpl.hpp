@@ -7,20 +7,6 @@
 #ifndef FUMLPLUGINIMPL_HPP
 #define FUMLPLUGINIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "fUML/FUMLPlugin.hpp"
 
 namespace fUML 
@@ -40,4 +26,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUMLPLUGINIMPL_HPP */
-

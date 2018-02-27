@@ -1,11 +1,31 @@
 #include "fUML/impl/CallBehaviorActionActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "fUML/ExecutionFactory.hpp"
+#include "fUML/Locus.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/CallBehaviorAction.hpp"
 
@@ -56,6 +76,16 @@ CallBehaviorActionActivationImpl::~CallBehaviorActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:CallBehaviorActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBehaviorActionActivationImpl & obj):CallBehaviorActionActivationImpl()
@@ -71,12 +101,12 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBeh
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -166,14 +196,34 @@ std::shared_ptr<fUML::Execution> CallBehaviorActionActivationImpl::getCallExecut
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > CallBehaviorActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> CallBehaviorActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<CallBehaviorActionActivation> CallBehaviorActionActivationImpl::getThisCallBehaviorActionActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersCallBehaviorActionActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anCallBehaviorActionActivation : *ownersCallBehaviorActionActivationList)
+		{
+			if (anCallBehaviorActionActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<CallBehaviorActionActivation>(anCallBehaviorActionActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<CallBehaviorActionActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> CallBehaviorActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

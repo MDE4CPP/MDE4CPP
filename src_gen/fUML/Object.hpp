@@ -7,28 +7,14 @@
 #ifndef FUML_OBJECT_HPP
 #define FUML_OBJECT_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -169,7 +155,7 @@ namespace fUML
 			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
 			
 			
 
@@ -187,7 +173,7 @@ namespace fUML
 			std::shared_ptr<fUML::ObjectActivation > m_objectActivation;
 			/*!
 			 */
-			std::shared_ptr< Bag<uml::Classifier> > m_types;
+			std::shared_ptr<Bag<uml::Classifier>> m_types;
 			
 
 		public:
@@ -196,9 +182,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_OBJECT_HPP */
-

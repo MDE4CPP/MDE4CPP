@@ -1,7 +1,25 @@
 #include "fUML/impl/ActivityFinalNodeActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -51,6 +69,16 @@ ActivityFinalNodeActivationImpl::~ActivityFinalNodeActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityFinalNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityFinalNodeActivationImpl & obj):ActivityFinalNodeActivationImpl()
@@ -65,12 +93,12 @@ ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityF
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -113,26 +141,35 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 
     if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
     {
-		auto this_group = this->getGroup();
-		auto activityExecution = this_group->getActivityExecution();
-		if (activityExecution != nullptr) 
-        {
-            activityExecution->terminate();
-        }
-        else if (this_group->getContainingNodeActivation() != nullptr)
-        {
-            this_group->getContainingNodeActivation()->terminateAll();
-        }
-        else 
-        {
-        	std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this_group);
-        	if (group != nullptr) 
-        	{
-        		group->getRegionActivation()->terminate();
-        	}
-        	        
-        }
+		auto this_group = this->getGroup().lock();
+		if(this_group )
+		{
+			auto activityExecution = this_group->getActivityExecution().lock();
+			if (activityExecution)
+			{
+				activityExecution->terminate();
+			}
+			else if (this_group->getContainingNodeActivation().lock())
+			{
+				auto activation= this_group->getContainingNodeActivation().lock();
+				if(activation)
+				{
+					activation->terminateAll();
+				}
+			}
+			else
+			{
+				std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this_group);
+				if (group != nullptr)
+				{
+					group->getRegionActivation()->terminate();
+				}
+
+			}
+		}
     }
+
+
 	//end of body
 }
 
@@ -145,8 +182,28 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 //*********************************
 
 
+std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersActivityFinalNodeActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anActivityFinalNodeActivation : *ownersActivityFinalNodeActivationList)
+		{
+			if (anActivityFinalNodeActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<ActivityFinalNodeActivation>(anActivityFinalNodeActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ActivityFinalNodeActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ActivityFinalNodeActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

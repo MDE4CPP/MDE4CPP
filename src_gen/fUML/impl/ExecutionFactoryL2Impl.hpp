@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTIONFACTORYL2EXECUTIONFACTORYL2IMPL_HPP
 #define FUML_EXECUTIONFACTORYL2EXECUTIONFACTORYL2IMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,64 +14,6 @@
 #include "../ExecutionFactoryL2.hpp"
 
 #include "fUML/impl/ExecutionFactoryL1Impl.hpp"
-
-#include "fUML/ActivityExecution.hpp"
-#include "fUML/ActivityFinalNodeActivation.hpp"
-#include "fUML/ActivityParameterNodeActivation.hpp"
-#include "fUML/AddStructuralFeatureValueActionActivation.hpp"
-#include "fUML/CallBehaviorActionActivation.hpp"
-#include "fUML/CallOperationActionActivation.hpp"
-#include "fUML/ClearAssociationActionActivation.hpp"
-#include "fUML/CreateLinkActionActivation.hpp"
-#include "fUML/ClearStructuralFeatureActionActivation.hpp"
-#include "fUML/CreateObjectActionActivation.hpp"
-#include "fUML/DecisionNodeActivation.hpp"
-#include "fUML/DestroyLinkActionActivation.hpp"
-#include "fUML/DestroyObjectActionActivation.hpp"
-#include "fUML/FlowFinalNodeActivation.hpp"
-#include "fUML/ForkNodeActivation.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/InitialNodeActivation.hpp"
-#include "fUML/InputPinActivation.hpp"
-#include "fUML/JoinNodeActivation.hpp"
-#include "fUML/MergeNodeActivation.hpp"
-#include "fUML/OutputPinActivation.hpp"
-#include "fUML/ReadLinkActionActivation.hpp"
-#include "fUML/ReadSelfActionActivation.hpp"
-#include "fUML/ReadStructuralFeatureActionActivation.hpp"
-#include "fUML/RemoveStructuralFeatureValueActivation.hpp"
-#include "fUML/SendSignalActionActivation.hpp"
-#include "fUML/TestIdentityActionActivation.hpp"
-#include "fUML/ValueSpecificActionActivation.hpp"
-#include "uml/Activity.hpp"
-#include "uml/ActivityFinalNode.hpp"
-#include "uml/ActivityParameterNode.hpp"
-#include "uml/AddStructuralFeatureValueAction.hpp"
-#include "uml/CallBehaviorAction.hpp"
-#include "uml/CallOperationAction.hpp"
-#include "uml/ClearAssociationAction.hpp"
-#include "uml/ClearStructuralFeatureAction.hpp"
-#include "uml/CreateLinkAction.hpp"
-#include "uml/CreateObjectAction.hpp"
-#include "uml/DecisionNode.hpp"
-#include "uml/DestroyLinkAction.hpp"
-#include "uml/DestroyObjectAction.hpp"
-#include "uml/FlowFinalNode.hpp"
-#include "uml/ForkNode.hpp"
-#include "uml/InitialNode.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/JoinNode.hpp"
-#include "uml/MergeNode.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/ReadLinkAction.hpp"
-#include "uml/ReadSelfAction.hpp"
-#include "uml/ReadStructuralFeatureAction.hpp"
-#include "uml/RemoveStructuralFeatureValueAction.hpp"
-#include "uml/SendSignalAction.hpp"
-#include "uml/TestIdentityAction.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/ValueSpecificationAction.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -98,6 +26,7 @@ namespace fUML
 
 		private:    
 			ExecutionFactoryL2Impl& operator=(ExecutionFactoryL2Impl const&) = delete;
+			virtual std::shared_ptr<ExecutionFactoryL2> getThisExecutionFactoryL2Ptr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -151,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYL2EXECUTIONFACTORYL2IMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP
 #define FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,27 +14,6 @@
 #include "../InstanceValueEvaluation.hpp"
 
 #include "fUML/impl/EvaluationImpl.hpp"
-
-#include "fUML/DataValue.hpp"
-#include "fUML/EnumerationValue.hpp"
-#include "fUML/Execution.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/Executor.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Object.hpp"
-#include "fUML/Reference.hpp"
-#include "fUML/Value.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/Class.hpp"
-#include "uml/Classifier.hpp"
-#include "uml/DataType.hpp"
-#include "uml/Enumeration.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/Slot.hpp"
-#include "uml/StructuralFeature.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -61,6 +26,7 @@ namespace fUML
 
 		private:    
 			InstanceValueEvaluationImpl& operator=(InstanceValueEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<InstanceValueEvaluation> getThisInstanceValueEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -110,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP */
-

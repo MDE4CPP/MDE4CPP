@@ -7,20 +7,6 @@
 #ifndef FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP
 #define FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../ForkNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-#include "fUML/ForkedToken.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include"uml/ActivityNode.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,10 +26,15 @@ namespace fUML
 
 		private:    
 			ForkNodeActivationImpl& operator=(ForkNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ForkNodeActivation> getThisForkNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ForkNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ForkNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -98,4 +84,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP */
-

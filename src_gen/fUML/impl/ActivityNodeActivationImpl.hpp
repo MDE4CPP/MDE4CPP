@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYNODEACTIVATIONACTIVITYNODEACTIVATIONIMPL_HPP
 #define FUML_ACTIVITYNODEACTIVATIONACTIVITYNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,13 +14,6 @@
 #include "../ActivityNodeActivation.hpp"
 
 #include "fUML/impl/SemanticVisitorImpl.hpp"
-
-#include "ecore/EClass.hpp"
-#include "fuml/ActivityNodeActivation.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/ActivityEdge.hpp"
-#include "uml/Class.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -47,10 +26,15 @@ namespace fUML
 
 		private:    
 			ActivityNodeActivationImpl& operator=(ActivityNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ActivityNodeActivation> getThisActivityNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -181,18 +165,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
+			virtual std::weak_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
 			
 			/*!
 			 */
 			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Token> > getHeldTokens() const ;
+			virtual std::shared_ptr<Bag<fUML::Token>> getHeldTokens() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getIncomingEdges() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getIncomingEdges() const ;
 			
 			/*!
 			 */
@@ -203,7 +187,7 @@ namespace fUML
 			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node_node) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getOutgoingEdges() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getOutgoingEdges() const ;
 			
 							
 			
@@ -226,4 +210,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYNODEACTIVATIONACTIVITYNODEACTIVATIONIMPL_HPP */
-

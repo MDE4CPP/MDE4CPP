@@ -1,7 +1,24 @@
 #include "fUML/impl/FirstChoiceStrategyImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -89,6 +106,11 @@ int FirstChoiceStrategyImpl::choose(int size)
 //*********************************
 
 
+std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<FirstChoiceStrategy>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::eContainer() const
 {
 	return nullptr;

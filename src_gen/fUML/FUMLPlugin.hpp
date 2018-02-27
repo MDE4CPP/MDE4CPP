@@ -7,20 +7,6 @@
 #ifndef FUMLPLUGIN_HPP
 #define FUMLPLUGIN_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace fUML
@@ -46,4 +32,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUMLPLUGIN_HPP */
-

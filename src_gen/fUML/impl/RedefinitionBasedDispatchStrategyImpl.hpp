@@ -7,20 +7,6 @@
 #ifndef FUML_REDEFINITIONBASEDDISPATCHSTRATEGYREDEFINITIONBASEDDISPATCHSTRATEGYIMPL_HPP
 #define FUML_REDEFINITIONBASEDDISPATCHSTRATEGYREDEFINITIONBASEDDISPATCHSTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,12 +14,6 @@
 #include "../RedefinitionBasedDispatchStrategy.hpp"
 
 #include "fUML/impl/DispatchStrategyImpl.hpp"
-
-#include "uml/NamedElement.hpp"
-#include "uml/Class.hpp"
-#include "uml/Operation.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -46,6 +26,7 @@ namespace fUML
 
 		private:    
 			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&) = delete;
+			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -99,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_REDEFINITIONBASEDDISPATCHSTRATEGYREDEFINITIONBASEDDISPATCHSTRATEGYIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_CLAUSEACTIVATIONCLAUSEACTIVATIONIMPL_HPP
 #define FUML_CLAUSEACTIVATIONCLAUSEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public ClauseActivation
 
 		private:    
 			ClauseActivationImpl& operator=(ClauseActivationImpl const&) = delete;
+			virtual std::shared_ptr<ClauseActivation> getThisClauseActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -131,4 +116,3 @@ virtual public ClauseActivation
 	};
 }
 #endif /* end of include guard: FUML_CLAUSEACTIVATIONCLAUSEACTIVATIONIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_FORKEDTOKENFORKEDTOKENIMPL_HPP
 #define FUML_FORKEDTOKENFORKEDTOKENIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,9 +14,6 @@
 #include "../ForkedToken.hpp"
 
 #include "fUML/impl/TokenImpl.hpp"
-
- 
-
 
 //*********************************
 namespace fUML 
@@ -43,6 +26,7 @@ namespace fUML
 
 		private:    
 			ForkedTokenImpl& operator=(ForkedTokenImpl const&) = delete;
+			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -127,4 +111,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_FORKEDTOKENFORKEDTOKENIMPL_HPP */
-

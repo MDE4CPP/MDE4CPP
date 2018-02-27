@@ -7,20 +7,6 @@
 #ifndef FUML_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP
 #define FUML_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +28,7 @@ virtual public EventDispatchLoop
 
 		private:    
 			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&) = delete;
+			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -89,4 +74,3 @@ virtual public EventDispatchLoop
 	};
 }
 #endif /* end of include guard: FUML_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP */
-

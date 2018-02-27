@@ -1,7 +1,24 @@
 #include "fUML/impl/ControlTokenImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -113,6 +130,11 @@ bool ControlTokenImpl::isControl()
 //*********************************
 
 
+std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<ControlToken>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 {
 	return nullptr;

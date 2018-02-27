@@ -7,20 +7,6 @@
 #ifndef FUML_LINKLINKIMPL_HPP
 #define FUML_LINKLINKIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,10 +14,6 @@
 #include "../Link.hpp"
 
 #include "fUML/impl/ExtensionalValueImpl.hpp"
-
-#include "uml/Property.hpp"
-#include "uml/Association.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -44,6 +26,7 @@ namespace fUML
 
 		private:    
 			LinkImpl& operator=(LinkImpl const&) = delete;
+			virtual std::shared_ptr<Link> getThisLinkPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -112,4 +95,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LINKLINKIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_STRUCTUREDACTIVITYNODEACTIVATIONSTRUCTUREDACTIVITYNODEACTIVATIONIMPL_HPP
 #define FUML_STRUCTUREDACTIVITYNODEACTIVATIONSTRUCTUREDACTIVITYNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,14 +14,6 @@
 #include "../StructuredActivityNodeActivation.hpp"
 
 #include "fUML/impl/ActionActivationImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-#include "uml/StructuredActivityNode.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -48,10 +26,15 @@ namespace fUML
 
 		private:    
 			StructuredActivityNodeActivationImpl& operator=(StructuredActivityNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<StructuredActivityNodeActivation> getThisStructuredActivityNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredActivityNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -142,7 +125,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -158,4 +141,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_STRUCTUREDACTIVITYNODEACTIVATIONSTRUCTUREDACTIVITYNODEACTIVATIONIMPL_HPP */
-

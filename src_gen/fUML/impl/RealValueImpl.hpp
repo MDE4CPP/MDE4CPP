@@ -7,20 +7,6 @@
 #ifndef FUML_REALVALUEREALVALUEIMPL_HPP
 #define FUML_REALVALUEREALVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,15 +14,6 @@
 #include "../RealValue.hpp"
 
 #include "fUML/impl/PrimitiveValueImpl.hpp"
-
-#include <sstream>
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/LiteralReal.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/Type.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -49,6 +26,7 @@ namespace fUML
 
 		private:    
 			RealValueImpl& operator=(RealValueImpl const&) = delete;
+			virtual std::shared_ptr<RealValue> getThisRealValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -114,4 +92,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_REALVALUEREALVALUEIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTIONFACTORYL1EXECUTIONFACTORYL1IMPL_HPP
 #define FUML_EXECUTIONFACTORYL1EXECUTIONFACTORYL1IMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,24 +14,6 @@
 #include "../ExecutionFactoryL1.hpp"
 
 #include "fUML/impl/ExecutionFactoryImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-#include "fUML/LiteralBooleanEvaluation.hpp"
-#include "fUML/LiteralStringEvaluation.hpp"
-#include "fUML/LiteralNullEvaluation.hpp"
-#include "fUML/InstanceValueEvaluation.hpp"
-#include "fUML/LiteralUnlimitedNaturalEvaluation.hpp"
-#include "fUML/LiteralIntegerEvaluation.hpp"
-#include "fUML/LiteralRealEvaluation.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/LiteralBoolean.hpp"
-#include "uml/LiteralInteger.hpp"
-#include "uml/LiteralNull.hpp"
-#include "uml/LiteralReal.hpp"
-#include "uml/LiteralString.hpp"
-#include "uml/LiteralUnlimitedNatural.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -58,6 +26,7 @@ namespace fUML
 
 		private:    
 			ExecutionFactoryL1Impl& operator=(ExecutionFactoryL1Impl const&) = delete;
+			virtual std::shared_ptr<ExecutionFactoryL1> getThisExecutionFactoryL1Ptr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -111,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYL1EXECUTIONFACTORYL1IMPL_HPP */
-

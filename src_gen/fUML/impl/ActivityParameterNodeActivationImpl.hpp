@@ -7,20 +7,6 @@
 #ifndef FUML_ACTIVITYPARAMETERNODEACTIVATIONACTIVITYPARAMETERNODEACTIVATIONIMPL_HPP
 #define FUML_ACTIVITYPARAMETERNODEACTIVATIONACTIVITYPARAMETERNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,15 +14,6 @@
 #include "../ActivityParameterNodeActivation.hpp"
 
 #include "fUML/impl/ObjectNodeActivationImpl.hpp"
-
-#include "fUML/ActivityExecution.hpp"
-#include "fUML/ForkedToken.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/ObjectToken.hpp"
-#include "fUML/ParameterValue.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/ActivityParameterNode.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -49,10 +26,15 @@ namespace fUML
 
 		private:    
 			ActivityParameterNodeActivationImpl& operator=(ActivityParameterNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ActivityParameterNodeActivation> getThisActivityParameterNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityParameterNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -102,4 +84,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYPARAMETERNODEACTIVATIONACTIVITYPARAMETERNODEACTIVATIONIMPL_HPP */
-

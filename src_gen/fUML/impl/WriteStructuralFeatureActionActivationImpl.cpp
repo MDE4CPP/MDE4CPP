@@ -1,7 +1,26 @@
 #include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -53,6 +72,16 @@ WriteStructuralFeatureActionActivationImpl::~WriteStructuralFeatureActionActivat
 }
 
 
+//Additional constructor for the containments back reference
+			WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:WriteStructuralFeatureActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj):WriteStructuralFeatureActionActivationImpl()
@@ -68,12 +97,12 @@ WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivati
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -137,14 +166,34 @@ int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::V
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation> > WriteStructuralFeatureActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> WriteStructuralFeatureActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
+std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr()
+{
+	if(auto wp = m_group.lock())
+	{
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersWriteStructuralFeatureActionActivationList = wp->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> anWriteStructuralFeatureActionActivation : *ownersWriteStructuralFeatureActionActivationList)
+		{
+			if (anWriteStructuralFeatureActionActivation.get() == this)
+			{
+				return std::dynamic_pointer_cast<WriteStructuralFeatureActionActivation>(anWriteStructuralFeatureActionActivation );
+			}
+		}
+	}
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<WriteStructuralFeatureActionActivation>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

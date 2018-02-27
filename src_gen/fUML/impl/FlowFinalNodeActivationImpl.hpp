@@ -7,20 +7,6 @@
 #ifndef FUML_FLOWFINALNODEACTIVATIONFLOWFINALNODEACTIVATIONIMPL_HPP
 #define FUML_FLOWFINALNODEACTIVATIONFLOWFINALNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../FlowFinalNodeActivation.hpp"
 
 #include "fUML/impl/ControlNodeActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			FlowFinalNodeActivationImpl& operator=(FlowFinalNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<FlowFinalNodeActivation> getThisFlowFinalNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			FlowFinalNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			FlowFinalNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -87,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_FLOWFINALNODEACTIVATIONFLOWFINALNODEACTIVATIONIMPL_HPP */
-

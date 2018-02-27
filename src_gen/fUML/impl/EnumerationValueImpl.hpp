@@ -7,20 +7,6 @@
 #ifndef FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP
 #define FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,16 +14,6 @@
 #include "../EnumerationValue.hpp"
 
 #include "fUML/impl/ValueImpl.hpp"
-
-#include "fUML/EnumerationValue.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Enumeration.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/UmlFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -50,6 +26,7 @@ namespace fUML
 
 		private:    
 			EnumerationValueImpl& operator=(EnumerationValueImpl const&) = delete;
+			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -129,4 +106,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP */
-

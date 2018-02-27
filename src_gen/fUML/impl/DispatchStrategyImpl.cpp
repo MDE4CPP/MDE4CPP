@@ -1,10 +1,28 @@
 #include "fUML/impl/DispatchStrategyImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/Bag.hpp"
 #include "fuml/ExecutionFactory.hpp"
 #include "fuml/Locus.hpp"
 
@@ -115,6 +133,11 @@ std::string DispatchStrategyImpl::retrieveName()
 //*********************************
 
 
+std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<DispatchStrategy>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> DispatchStrategyImpl::eContainer() const
 {
 	return nullptr;

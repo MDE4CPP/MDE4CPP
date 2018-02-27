@@ -7,20 +7,6 @@
 #ifndef FUML_CENTRALBUFFERNODEACTIVATIONCENTRALBUFFERNODEACTIVATIONIMPL_HPP
 #define FUML_CENTRALBUFFERNODEACTIVATIONCENTRALBUFFERNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../CentralBufferNodeActivation.hpp"
 
 #include "fUML/impl/ObjectNodeActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			CentralBufferNodeActivationImpl& operator=(CentralBufferNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<CentralBufferNodeActivation> getThisCentralBufferNodeActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			CentralBufferNodeActivationImpl();
+
+			//Additional constructors for the containments back reference
+			CentralBufferNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -91,4 +80,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_CENTRALBUFFERNODEACTIVATIONCENTRALBUFFERNODEACTIVATIONIMPL_HPP */
-

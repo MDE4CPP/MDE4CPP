@@ -7,20 +7,6 @@
 #ifndef FUML_PRIMITIVEVALUEPRIMITIVEVALUEIMPL_HPP
 #define FUML_PRIMITIVEVALUEPRIMITIVEVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,12 +14,6 @@
 #include "../PrimitiveValue.hpp"
 
 #include "fUML/impl/ValueImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Classifier.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -46,6 +26,7 @@ namespace fUML
 
 		private:    
 			PrimitiveValueImpl& operator=(PrimitiveValueImpl const&) = delete;
+			virtual std::shared_ptr<PrimitiveValue> getThisPrimitiveValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -102,4 +83,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_PRIMITIVEVALUEPRIMITIVEVALUEIMPL_HPP */
-

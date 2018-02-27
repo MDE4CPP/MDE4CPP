@@ -7,20 +7,6 @@
 #ifndef FUML_CALLBEHAVIORACTIONACTIVATIONCALLBEHAVIORACTIONACTIVATIONIMPL_HPP
 #define FUML_CALLBEHAVIORACTIONACTIVATIONCALLBEHAVIORACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../CallBehaviorActionActivation.hpp"
 
 #include "fUML/impl/CallActionActivationImpl.hpp"
-
-#include "fUML/ExecutionFactory.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/CallBehaviorAction.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,10 +26,15 @@ namespace fUML
 
 		private:    
 			CallBehaviorActionActivationImpl& operator=(CallBehaviorActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<CallBehaviorActionActivation> getThisCallBehaviorActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			CallBehaviorActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			CallBehaviorActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -80,7 +66,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -96,4 +82,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_CALLBEHAVIORACTIONACTIVATIONCALLBEHAVIORACTIONACTIVATIONIMPL_HPP */
-

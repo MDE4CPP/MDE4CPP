@@ -1,7 +1,25 @@
 #include "fUML/impl/ObjectImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -87,7 +105,7 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
@@ -160,9 +178,8 @@ std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Opera
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
 	static std::shared_ptr<DispatchStrategy> strategy = std::dynamic_pointer_cast<DispatchStrategy>(this->getLocus()->getFactory()->getStrategy("dispatch"));
-	return strategy->dispatch(std::shared_ptr<Object>(this, null_deleter()), operation);
+	return strategy->dispatch(getThisObjectPtr(), operation);
 	//end of body
 }
 
@@ -192,8 +209,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 	if(this->getObjectActivation() == nullptr)
     {
         this->setObjectActivation(std::shared_ptr<ObjectActivation>(fUML::FUMLFactory::eInstance()->createObjectActivation()));
-        struct null_deleter{void operator()(void const *) const { } };
-        this->getObjectActivation()->setObject(std::shared_ptr<Object>(this, null_deleter()));
+        this->getObjectActivation()->setObject(getThisObjectPtr());
     }
 
     this->getObjectActivation()->startBehavior(classifier, inputs);
@@ -224,7 +240,7 @@ void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _ob
     m_objectActivation = _objectActivation;
 }
 
-std::shared_ptr< Bag<uml::Classifier> > ObjectImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
 
     return m_types;
@@ -236,6 +252,11 @@ std::shared_ptr< Bag<uml::Classifier> > ObjectImpl::getTypes() const
 //*********************************
 
 
+std::shared_ptr<Object> ObjectImpl::getThisObjectPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Object>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
 {
 	return nullptr;

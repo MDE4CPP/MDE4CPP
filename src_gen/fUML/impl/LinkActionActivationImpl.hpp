@@ -7,20 +7,6 @@
 #ifndef FUML_LINKACTIONACTIVATIONLINKACTIONACTIVATIONIMPL_HPP
 #define FUML_LINKACTIONACTIVATIONLINKACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../LinkActionActivation.hpp"
 
 #include "fUML/impl/ActionActivationImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,10 +26,15 @@ namespace fUML
 
 		private:    
 			LinkActionActivationImpl& operator=(LinkActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			LinkActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -85,7 +74,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -101,4 +90,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LINKACTIONACTIVATIONLINKACTIONACTIVATIONIMPL_HPP */
-

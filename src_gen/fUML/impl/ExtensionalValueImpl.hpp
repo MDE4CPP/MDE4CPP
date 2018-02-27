@@ -7,20 +7,6 @@
 #ifndef FUML_EXTENSIONALVALUEEXTENSIONALVALUEIMPL_HPP
 #define FUML_EXTENSIONALVALUEEXTENSIONALVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,9 +14,6 @@
 #include "../ExtensionalValue.hpp"
 
 #include "fUML/impl/CompoundValueImpl.hpp"
-
-#include "fuml/FUMLFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -43,6 +26,7 @@ namespace fUML
 
 		private:    
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&) = delete;
+			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -99,4 +83,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EXTENSIONALVALUEEXTENSIONALVALUEIMPL_HPP */
-

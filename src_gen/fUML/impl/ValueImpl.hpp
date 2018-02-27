@@ -7,20 +7,6 @@
 #ifndef FUML_VALUEVALUEIMPL_HPP
 #define FUML_VALUEVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,9 +14,6 @@
 #include "../Value.hpp"
 
 #include "fUML/impl/SemanticVisitorImpl.hpp"
-
-#include <uml/Classifier.hpp>
-
 
 //*********************************
 namespace fUML 
@@ -43,6 +26,7 @@ namespace fUML
 
 		private:    
 			ValueImpl& operator=(ValueImpl const&) = delete;
+			virtual std::shared_ptr<Value> getThisValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -112,4 +96,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_VALUEVALUEIMPL_HPP */
-

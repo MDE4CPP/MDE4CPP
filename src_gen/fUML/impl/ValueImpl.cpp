@@ -1,11 +1,29 @@
 #include "fUML/impl/ValueImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include <uml/Classifier.hpp>
+#include "abstractDataTypes/Subset.hpp"
+#include "uml/Classifier.hpp"
 
 //Forward declaration includes
 #include "uml/Classifier.hpp"
@@ -169,6 +187,11 @@ std::string ValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<Value> ValueImpl::getThisValuePtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Value>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> ValueImpl::eContainer() const
 {
 	return nullptr;

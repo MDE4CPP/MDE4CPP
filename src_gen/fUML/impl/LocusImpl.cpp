@@ -1,7 +1,25 @@
 #include "fUML/impl/LocusImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -137,7 +155,7 @@ void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		value->setLocus(shared_from_this());
+	value->setLocus(getThisLocusPtr());
 	this->getExtensionalValues()->push_back(value);
 	//end of body
 }
@@ -146,8 +164,8 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		this->setExecutor(executor);
-	this->getExecutor()->setLocus(shared_from_this());
+	this->setExecutor(executor);
+	this->getExecutor()->setLocus(getThisLocusPtr());
 	//end of body
 }
 
@@ -155,8 +173,8 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		this->setFactory(factory);
-	this->getFactory()->setLocus(shared_from_this());
+	this->setFactory(factory);
+	this->getFactory()->setLocus(getThisLocusPtr());
 	//end of body
 }
 
@@ -254,7 +272,7 @@ void LocusImpl::setExecutor(std::shared_ptr<fUML::Executor> _executor)
     m_executor = _executor;
 }
 
-std::shared_ptr< Bag<fUML::ExtensionalValue> > LocusImpl::getExtensionalValues() const
+std::shared_ptr<Bag<fUML::ExtensionalValue>> LocusImpl::getExtensionalValues() const
 {
 
     return m_extensionalValues;
@@ -276,6 +294,11 @@ void LocusImpl::setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory)
 //*********************************
 
 
+std::shared_ptr<Locus> LocusImpl::getThisLocusPtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<Locus>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> LocusImpl::eContainer() const
 {
 	return nullptr;

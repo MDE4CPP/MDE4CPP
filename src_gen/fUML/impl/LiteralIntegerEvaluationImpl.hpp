@@ -7,20 +7,6 @@
 #ifndef FUML_LITERALINTEGEREVALUATIONLITERALINTEGEREVALUATIONIMPL_HPP
 #define FUML_LITERALINTEGEREVALUATIONLITERALINTEGEREVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,11 +14,6 @@
 #include "../LiteralIntegerEvaluation.hpp"
 
 #include "fUML/impl/LiteralEvaluationImpl.hpp"
-
-#include "fuml/IntegerValue.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "uml/LiteralInteger.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -45,6 +26,7 @@ namespace fUML
 
 		private:    
 			LiteralIntegerEvaluationImpl& operator=(LiteralIntegerEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<LiteralIntegerEvaluation> getThisLiteralIntegerEvaluationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -94,4 +76,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_LITERALINTEGEREVALUATIONLITERALINTEGEREVALUATIONIMPL_HPP */
-

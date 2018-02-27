@@ -7,28 +7,14 @@
 #ifndef FUML_LOCUS_HPP
 #define FUML_LOCUS_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -76,7 +62,7 @@ namespace fUML
 	/*!
 	 */
 	class Locus : virtual public ecore::EObject 
-, public std::enable_shared_from_this<Locus>
+
 	{
 		public:
  			Locus(const Locus &) {}
@@ -140,7 +126,7 @@ namespace fUML
 			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor_executor) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const = 0;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue>> getExtensionalValues() const = 0;
 			
 			/*!
 			 */
@@ -165,7 +151,7 @@ namespace fUML
 			std::shared_ptr<fUML::Executor > m_executor;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::ExtensionalValue> > m_extensionalValues;
+			std::shared_ptr<Bag<fUML::ExtensionalValue>> m_extensionalValues;
 			/*!
 			 */
 			std::shared_ptr<fUML::ExecutionFactory > m_factory;
@@ -177,9 +163,8 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_LOCUS_HPP */
-

@@ -7,28 +7,14 @@
 #ifndef FUML_EXPANSIONREGIONACTIVATION_HPP
 #define FUML_EXPANSIONREGIONACTIVATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
@@ -150,15 +136,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > getActivationGroups() const = 0;
+			virtual std::shared_ptr<Bag<fUML::ExpansionActivationGroup>> getActivationGroups() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputExpansionTokens() const = 0;
+			virtual std::shared_ptr<Bag<fUML::TokenSet>> getInputExpansionTokens() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputTokens() const = 0;
+			virtual std::shared_ptr<Bag<fUML::TokenSet>> getInputTokens() const = 0;
 			
 			
 
@@ -173,13 +159,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > m_activationGroups;
+			std::shared_ptr<Bag<fUML::ExpansionActivationGroup>> m_activationGroups;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::TokenSet> > m_inputExpansionTokens;
+			std::shared_ptr<Bag<fUML::TokenSet>> m_inputExpansionTokens;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::TokenSet> > m_inputTokens;
+			std::shared_ptr<Bag<fUML::TokenSet>> m_inputTokens;
 			
 
 		public:
@@ -188,11 +174,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const = 0;
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const = 0;
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 	};
 
 }
 #endif /* end of include guard: FUML_EXPANSIONREGIONACTIVATION_HPP */
-

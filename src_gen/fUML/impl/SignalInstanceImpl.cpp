@@ -1,7 +1,25 @@
 #include "fUML/impl/SignalInstanceImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -107,6 +125,11 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 //*********************************
 
 
+std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<SignalInstance>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> SignalInstanceImpl::eContainer() const
 {
 	return nullptr;

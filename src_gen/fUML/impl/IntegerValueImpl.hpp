@@ -7,20 +7,6 @@
 #ifndef FUML_INTEGERVALUEINTEGERVALUEIMPL_HPP
 #define FUML_INTEGERVALUEINTEGERVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,15 +14,6 @@
 #include "../IntegerValue.hpp"
 
 #include "fUML/impl/PrimitiveValueImpl.hpp"
-
-#include <cstdio>
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Literalinteger.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Type.hpp"
-#include "uml/UmlFactory.hpp"
-
 
 //*********************************
 namespace fUML 
@@ -49,6 +26,7 @@ namespace fUML
 
 		private:    
 			IntegerValueImpl& operator=(IntegerValueImpl const&) = delete;
+			virtual std::shared_ptr<IntegerValue> getThisIntegerValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -114,4 +92,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_INTEGERVALUEINTEGERVALUEIMPL_HPP */
-

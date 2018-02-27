@@ -7,20 +7,6 @@
 #ifndef FUML_CALLACTIONACTIVATIONCALLACTIONACTIVATIONIMPL_HPP
 #define FUML_CALLACTIONACTIVATIONCALLACTIONACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,17 +14,6 @@
 #include "../CallActionActivation.hpp"
 
 #include "fUML/impl/InvocationActionActivationImpl.hpp"
-
-#include "fuml/Execution.hpp"
-#include "fuml/ParameterValue.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/CallAction.hpp"
-#include "uml/Behavior.hpp"
-#include "fuml/FUMLFactory.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -51,10 +26,15 @@ namespace fUML
 
 		private:    
 			CallActionActivationImpl& operator=(CallActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			CallActionActivationImpl();
+
+			//Additional constructors for the containments back reference
+			CallActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -93,7 +73,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Execution> > getCallExecutions() const ;
+			virtual std::shared_ptr<Bag<fUML::Execution>> getCallExecutions() const ;
 			
 							
 			
@@ -102,7 +82,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<fUML::PinActivation> > getPinActivation() const ; 
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -118,4 +98,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_CALLACTIONACTIVATIONCALLACTIONACTIVATIONIMPL_HPP */
-

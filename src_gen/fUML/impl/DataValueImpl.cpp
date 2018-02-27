@@ -1,7 +1,25 @@
 #include "fUML/impl/DataValueImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -134,6 +152,11 @@ void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 //*********************************
 
 
+std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr()
+{
+	struct null_deleter{void operator()(void const *) const {}};
+	return std::shared_ptr<DataValue>(this, null_deleter());
+}
 std::shared_ptr<ecore::EObject> DataValueImpl::eContainer() const
 {
 	return nullptr;

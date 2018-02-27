@@ -7,20 +7,6 @@
 #ifndef FUML_STRUCTUREDVALUESTRUCTUREDVALUEIMPL_HPP
 #define FUML_STRUCTUREDVALUESTRUCTUREDVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,18 +14,6 @@
 #include "../StructuredValue.hpp"
 
 #include "fUML/impl/ValueImpl.hpp"
-
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Classifier.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/NamedElement.hpp"
-#include "uml/Slot.hpp"
-#include "uml/StructuralFeature.hpp"
-#include "uml/UmlFactory.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -52,6 +26,7 @@ namespace fUML
 
 		private:    
 			StructuredValueImpl& operator=(StructuredValueImpl const&) = delete;
+			virtual std::shared_ptr<StructuredValue> getThisStructuredValuePtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -117,4 +92,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_STRUCTUREDVALUESTRUCTUREDVALUEIMPL_HPP */
-

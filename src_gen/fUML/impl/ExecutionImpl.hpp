@@ -7,20 +7,6 @@
 #ifndef FUML_EXECUTIONEXECUTIONIMPL_HPP
 #define FUML_EXECUTIONEXECUTIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,17 +14,6 @@
 #include "../Execution.hpp"
 
 #include "fUML/impl/ObjectImpl.hpp"
-
-#include <uml/Parameter.hpp>
-#include <uml/ParameterDirectionKind.hpp>
-#include <fuml/ParameterValue.hpp>
-#include "uml/Behavior.hpp"
-#include "uml/Classifier.hpp"
-#include "fuml/FUMLFactory.hpp"
-
-#include "fuml/impl/ObjectImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -51,6 +26,7 @@ namespace fUML
 
 		private:    
 			ExecutionImpl& operator=(ExecutionImpl const&) = delete;
+			virtual std::shared_ptr<Execution> getThisExecutionPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -112,7 +88,7 @@ namespace fUML
 			virtual void setContext(std::shared_ptr<fUML::Object> _context_context) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ParameterValue> > getParameterValues() const ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue>> getParameterValues() const ;
 			
 							
 			
@@ -135,4 +111,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONEXECUTIONIMPL_HPP */
-

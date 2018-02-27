@@ -7,20 +7,6 @@
 #ifndef FUML_FIFOGETNEXTEVENTSTRATEGYFIFOGETNEXTEVENTSTRATEGYIMPL_HPP
 #define FUML_FIFOGETNEXTEVENTSTRATEGYFIFOGETNEXTEVENTSTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../FIFOGetNextEventStrategy.hpp"
 
 #include "fUML/impl/GetNextEventStrategyImpl.hpp"
-
-
 
 //*********************************
 namespace fUML 
@@ -42,6 +26,7 @@ namespace fUML
 
 		private:    
 			FIFOGetNextEventStrategyImpl& operator=(FIFOGetNextEventStrategyImpl const&) = delete;
+			virtual std::shared_ptr<FIFOGetNextEventStrategy> getThisFIFOGetNextEventStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
@@ -87,4 +72,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUML_FIFOGETNEXTEVENTSTRATEGYFIFOGETNEXTEVENTSTRATEGYIMPL_HPP */
-
