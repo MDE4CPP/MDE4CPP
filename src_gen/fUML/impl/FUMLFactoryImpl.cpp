@@ -263,29 +263,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//ActivityEdgeInstance has group as a containment
-					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
-						return this->createActivityEdgeInstance_in_Group(castedContainer);
-					}
-					//ActivityEdgeInstance has source as a containment
-					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(container);
-						return this->createActivityEdgeInstance_in_Source(castedContainer);
-					}
-					//ActivityEdgeInstance has target as a containment
-					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(container);
-						return this->createActivityEdgeInstance_in_Target(castedContainer);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
@@ -734,23 +714,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//InputPinActivation has actionActivation as a containment
-					case  FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
-						return this->createInputPinActivation_in_ActionActivation(castedContainer);
-					}
-					//InputPinActivation has group as a containment
-					case  FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
-						return this->createInputPinActivation_in_Group(castedContainer);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
@@ -870,23 +836,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//OutputPinActivation has actionActivation as a containment
-					case  FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActionActivation>(container);
-						return this->createOutputPinActivation_in_ActionActivation(castedContainer);
-					}
-					//OutputPinActivation has group as a containment
-					case  FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP: 
-					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
-						return this->createOutputPinActivation_in_Group(castedContainer);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::PARAMETERVALUE_ECLASS:
@@ -1197,28 +1149,6 @@ std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstanc
 	if(auto wp = par_group.lock())
 	{
 			wp->getEdgeInstances()->push_back(element);
-	}
-	return element;
-	
-}
-
-std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstance_in_Source(std::weak_ptr<fUML::ActivityNodeActivation > par_source) const
-{
-	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(par_source, FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE));
-	if(auto wp = par_source.lock())
-	{
-			wp->getOutgoingEdges()->push_back(element);
-	}
-	return element;
-	
-}
-
-std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstance_in_Target(std::weak_ptr<fUML::ActivityNodeActivation > par_target) const
-{
-	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(par_target, FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET));
-	if(auto wp = par_target.lock())
-	{
-			wp->getIncomingEdges()->push_back(element);
 	}
 	return element;
 	
@@ -1736,17 +1666,6 @@ std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation() 
 	std::shared_ptr<InputPinActivation> element(new InputPinActivationImpl());
 	return element;
 }
-std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const
-{
-	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(par_actionActivation));
-	if(auto wp = par_actionActivation.lock())
-	{
-			wp->getInputPinActivation()->push_back(element);
-	}
-	return element;
-	
-}
-
 std::shared_ptr<InputPinActivation> FUMLFactoryImpl::createInputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
 {
 	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(par_group));
@@ -1881,17 +1800,6 @@ std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation(
 	std::shared_ptr<OutputPinActivation> element(new OutputPinActivationImpl());
 	return element;
 }
-std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const
-{
-	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(par_actionActivation));
-	if(auto wp = par_actionActivation.lock())
-	{
-			wp->getOutputPinActivation()->push_back(element);
-	}
-	return element;
-	
-}
-
 std::shared_ptr<OutputPinActivation> FUMLFactoryImpl::createOutputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const
 {
 	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(par_group));

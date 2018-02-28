@@ -96,34 +96,6 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 
 
 
-//Additional constructor for the containments back reference
-			ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivation > par_ActivityNodeActivation, const int reference_id)
-			:ActivityEdgeInstanceImpl()
-			{
-				switch(reference_id)
-				{	
-				case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
-					 m_source = par_ActivityNodeActivation;
-					 return;
-				case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
-					 m_target = par_ActivityNodeActivation;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
-
-
 
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
 {
@@ -358,16 +330,6 @@ std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityE
 			}
 		}
 	}
-
-	if(auto wp = m_source.lock())
-	{
-		return nullptr;
-	}
-	if(auto wp = m_target.lock())
-	{
-		return nullptr;
-	}
-
 	struct null_deleter{void operator()(void const *) const {}};
 	return std::shared_ptr<ActivityEdgeInstance>(this, null_deleter());
 }
@@ -377,16 +339,6 @@ std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
 	{
 		return wp;
 	}
-
-	if(auto wp = m_source.lock())
-	{
-		return wp;
-	}
-	if(auto wp = m_target.lock())
-	{
-		return wp;
-	}
-
 	return nullptr;
 }
 

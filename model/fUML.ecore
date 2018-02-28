@@ -2659,7 +2659,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="for (unsigned int i = 0; i &lt; activations->size(); i++)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = activations->at(i);&#xD;&#xA;        activation->run();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Checking for enabled nodes...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ActivityNodeActivation> > enabledActivations(new Bag&lt;ActivityNodeActivation>());&#xD;&#xA;&#xD;&#xA;    for (unsigned int i = 0; i &lt; activations->size(); i++)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = activations->at(i);&#xD;&#xA;&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Checking node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;        const int class_id = activation->eClass()->getClassifierID();&#xD;&#xA;        if(class_id == fUML::FUMLPackage::ACTIONACTIVATION_ECLASS ||  class_id == fUML::FUMLPackage::CONTROLNODEACTIVATION_ECLASS || class_id ==fUML::FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS )&#xD;&#xA;        {&#xD;&#xA;        &#x9;std::shared_ptr&lt;Bag&lt;fUML::ActivityEdgeInstance> > edges = activation->getIncomingEdges();&#xD;&#xA;            bool isEnabled = this->checkIncomingEdges(edges, activations);&#xD;&#xA;&#xD;&#xA;            // For an action activation, also consider incoming edges to&#xD;&#xA;            // input pins&#xD;&#xA;            if (isEnabled &amp;&amp; class_id == fUML::FUMLPackage::ACTIONACTIVATION_ECLASS)&#xD;&#xA;            {&#xD;&#xA;            &#x9;std::shared_ptr&lt;uml::Action> action = std::dynamic_pointer_cast&lt;uml::Action>(activation->getNode());&#xD;&#xA;                if(action != nullptr)&#xD;&#xA;                {&#xD;&#xA;                &#x9;std::shared_ptr&lt;Bag&lt;uml::InputPin> > inputPins = action->getInput();&#xD;&#xA;                    unsigned int j = 0;&#xD;&#xA;                    while ((j &lt; inputPins->size()) &amp;&amp; isEnabled)&#xD;&#xA;                    {&#xD;&#xA;                    &#x9;std::shared_ptr&lt;uml::InputPin> inputPin = inputPins->at(j);&#xD;&#xA;                        std::shared_ptr&lt;ActionActivation> actionActivation = std::dynamic_pointer_cast&lt;ActionActivation>(activation);&#xD;&#xA;                    &#x9;std::shared_ptr&lt;Bag&lt;ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();&#xD;&#xA;                        isEnabled = this->checkIncomingEdges(inputEdges, activations);&#xD;&#xA;                        j = j + 1;&#xD;&#xA;                    }&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            if (isEnabled) &#xD;&#xA;            {&#xD;&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt; &quot; is enabled.&quot;&lt;&lt;std::endl;)&#xD;&#xA;                enabledActivations->push_back(activation);&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] &quot; &lt;&lt; enabledActivations->size() &lt;&lt; &quot; node(s) is/are enabled.&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    // *** Send offers to all enabled nodes concurrently. ***&#xD;&#xA;    std::vector&lt;std::shared_ptr&lt;ActivityNodeActivation>>::iterator i;&#xD;&#xA;    for (i = enabledActivations->begin(); i != enabledActivations->end(); ++i) &#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = std::dynamic_pointer_cast&lt;ActivityNodeActivation> (*i);&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Sending offer to node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        activation->recieveOffer();&#xD;&#xA;    }"/>
+            value="for (unsigned int i = 0; i &lt; activations->size(); i++)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = activations->at(i);&#xD;&#xA;        activation->run();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Checking for enabled nodes...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ActivityNodeActivation> > enabledActivations(new Bag&lt;ActivityNodeActivation>());&#xD;&#xA;&#xD;&#xA;    for (unsigned int i = 0; i &lt; activations->size(); i++)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = activations->at(i);&#xD;&#xA;&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Checking node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;        const int class_id = activation->eClass()->getClassifierID();&#xD;&#xA;        if(!(class_id == fUML::FUMLPackage::INPUTPINACTIVATION_ECLASS ||  class_id == fUML::FUMLPackage::OUTPUTPINACTIVATION_ECLASS || class_id ==fUML::FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS))&#xD;&#xA;        {&#xD;&#xA;        &#x9;std::shared_ptr&lt;Bag&lt;fUML::ActivityEdgeInstance> > edges = activation->getIncomingEdges();&#xD;&#xA;            bool isEnabled = this->checkIncomingEdges(edges, activations);&#xD;&#xA;&#xD;&#xA;            // For an action activation, also consider incoming edges to&#xD;&#xA;            // input pins&#xD;&#xA;            if (isEnabled)&#xD;&#xA;            {&#xD;&#xA;            &#x9;std::shared_ptr&lt;uml::Action> action = std::dynamic_pointer_cast&lt;uml::Action>(activation->getNode());&#xD;&#xA;                if(action != nullptr)&#xD;&#xA;                {&#xD;&#xA;                &#x9;std::shared_ptr&lt;Bag&lt;uml::InputPin> > inputPins = action->getInput();&#xD;&#xA;                    unsigned int j = 0;&#xD;&#xA;                    while ((j &lt; inputPins->size()) &amp;&amp; isEnabled)&#xD;&#xA;                    {&#xD;&#xA;                    &#x9;std::shared_ptr&lt;uml::InputPin> inputPin = inputPins->at(j);&#xD;&#xA;                        std::shared_ptr&lt;ActionActivation> actionActivation = std::dynamic_pointer_cast&lt;ActionActivation>(activation);&#xD;&#xA;                    &#x9;std::shared_ptr&lt;Bag&lt;ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();&#xD;&#xA;                        isEnabled = this->checkIncomingEdges(inputEdges, activations);&#xD;&#xA;                        j = j + 1;&#xD;&#xA;                    }&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            if (isEnabled) &#xD;&#xA;            {&#xD;&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt; &quot; is enabled.&quot;&lt;&lt;std::endl;)&#xD;&#xA;                enabledActivations->push_back(activation);&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] &quot; &lt;&lt; enabledActivations->size() &lt;&lt; &quot; node(s) is/are enabled.&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    // *** Send offers to all enabled nodes concurrently. ***&#xD;&#xA;    std::vector&lt;std::shared_ptr&lt;ActivityNodeActivation>>::iterator i;&#xD;&#xA;    for (i = enabledActivations->begin(); i != enabledActivations->end(); ++i) &#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = std::dynamic_pointer_cast&lt;ActivityNodeActivation> (*i);&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[run] Sending offer to node &quot; &lt;&lt; activation->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        activation->recieveOffer();&#xD;&#xA;    }"/>
       </eAnnotations>
       <eParameters
           name="activations"
@@ -3055,14 +3055,28 @@
         ordered="false"
         lowerBound="1"
         eType="#//ActivityNodeActivation"
-        eOpposite="#//ActivityNodeActivation/outgoingEdges"/>
+        eOpposite="#//ActivityNodeActivation/outgoingEdges">
+      <eAnnotations
+          source="http://sse.tu-ilmenau.de/codegen">
+        <details
+            key="AggregationKind"
+            value="shared"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="target"
         ordered="false"
         lowerBound="1"
         eType="#//ActivityNodeActivation"
-        eOpposite="#//ActivityNodeActivation/incomingEdges"/>
+        eOpposite="#//ActivityNodeActivation/incomingEdges">
+      <eAnnotations
+          source="http://sse.tu-ilmenau.de/codegen">
+        <details
+            key="AggregationKind"
+            value="shared"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="offers"
@@ -3819,7 +3833,6 @@
         ordered="false"
         upperBound="-1"
         eType="#//ActivityEdgeInstance"
-        containment="true"
         eOpposite="#//ActivityEdgeInstance/source"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
@@ -3827,7 +3840,6 @@
         ordered="false"
         upperBound="-1"
         eType="#//ActivityEdgeInstance"
-        containment="true"
         eOpposite="#//ActivityEdgeInstance/target"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
@@ -5116,7 +5128,6 @@
         ordered="false"
         upperBound="-1"
         eType="#//PinActivation"
-        containment="true"
         eOpposite="#//PinActivation/actionActivation">
       <eAnnotations
           source="union"/>
@@ -5322,7 +5333,14 @@
         name="actionActivation"
         ordered="false"
         eType="#//ActionActivation"
-        eOpposite="#//ActionActivation/pinActivation"/>
+        eOpposite="#//ActionActivation/pinActivation">
+      <eAnnotations
+          source="http://sse.tu-ilmenau.de/codegen">
+        <details
+            key="AggregationKind"
+            value="shared"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers
       xsi:type="ecore:EClass"

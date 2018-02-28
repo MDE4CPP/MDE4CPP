@@ -470,14 +470,14 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::ActivityNode
         DEBUG_MESSAGE(std::cout<<"[run] Checking node " << activation->getNode()->getName()<< "..."<<std::endl;)
 
         const int class_id = activation->eClass()->getClassifierID();
-        if(class_id == fUML::FUMLPackage::ACTIONACTIVATION_ECLASS ||  class_id == fUML::FUMLPackage::CONTROLNODEACTIVATION_ECLASS || class_id ==fUML::FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION_ECLASS )
+        if(!(class_id == fUML::FUMLPackage::INPUTPINACTIVATION_ECLASS ||  class_id == fUML::FUMLPackage::OUTPUTPINACTIVATION_ECLASS || class_id ==fUML::FUMLPackage::EXPANSIONNODEACTIVATION_ECLASS))
         {
         	std::shared_ptr<Bag<fUML::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
             bool isEnabled = this->checkIncomingEdges(edges, activations);
 
             // For an action activation, also consider incoming edges to
             // input pins
-            if (isEnabled && class_id == fUML::FUMLPackage::ACTIONACTIVATION_ECLASS)
+            if (isEnabled)
             {
             	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
                 if(action != nullptr)

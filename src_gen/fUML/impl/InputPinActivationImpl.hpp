@@ -33,10 +33,6 @@ namespace fUML
 			InputPinActivationImpl();
 
 			//Additional constructors for the containments back reference
-			InputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
-
-
-			//Additional constructors for the containments back reference
 			InputPinActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 

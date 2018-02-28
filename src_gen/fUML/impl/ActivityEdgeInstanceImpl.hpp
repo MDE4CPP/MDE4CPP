@@ -38,13 +38,6 @@ virtual public ActivityEdgeInstance
 			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 
-			//Additional constructors for the containments back reference
-			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivation > par_ActivityNodeActivation, const int reference_id);
-
-
-			//Additional constructors for the containments back reference
-
-
 
 
 		public:

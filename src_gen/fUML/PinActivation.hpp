@@ -71,14 +71,6 @@ namespace fUML
 			PinActivation(){}
 
 
-			//Additional constructors for the containments back reference
-
-			PinActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
-
-			//Additional constructors for the containments back reference
-
-			PinActivation(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
-
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 

@@ -71,13 +71,6 @@ namespace fUML
 
 			ActivityEdgeInstance(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
-			//Additional constructors for the containments back reference
-
-			ActivityEdgeInstance(std::weak_ptr<fUML::ActivityNodeActivation > par_ActivityNodeActivation, const int reference_id);
-
-			//Additional constructors for the containments back reference
-
-
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 

@@ -33,10 +33,6 @@ namespace fUML
 			OutputPinActivationImpl();
 
 			//Additional constructors for the containments back reference
-			OutputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation);
-
-
-			//Additional constructors for the containments back reference
 			OutputPinActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 

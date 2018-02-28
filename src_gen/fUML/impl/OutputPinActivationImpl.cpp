@@ -66,17 +66,6 @@ OutputPinActivationImpl::~OutputPinActivationImpl()
 
 
 //Additional constructor for the containments back reference
-			OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::ActionActivation > par_actionActivation)
-			:OutputPinActivationImpl()
-			{
-			    m_actionActivation = par_actionActivation;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
 			OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
 			:OutputPinActivationImpl()
 			{
@@ -103,7 +92,13 @@ OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl &
 
 	m_group  = obj.getGroup();
 
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
+
 	m_node  = obj.getNode();
+
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -115,22 +110,6 @@ OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl &
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdgesList = obj.getIncomingEdges();
-	for(std::shared_ptr<fUML::ActivityEdgeInstance> _incomingEdges : *_incomingEdgesList)
-	{
-		this->getIncomingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_incomingEdges->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_incomingEdges" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdgesList = obj.getOutgoingEdges();
-	for(std::shared_ptr<fUML::ActivityEdgeInstance> _outgoingEdges : *_outgoingEdgesList)
-	{
-		this->getOutgoingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_outgoingEdges->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outgoingEdges" << std::endl;
 	#endif
 
 }
@@ -165,18 +144,6 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 
 std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr()
 {
-	if(auto wp = m_actionActivation.lock())
-	{
-		std::shared_ptr<Union<fUML::PinActivation>> ownersOutputPinActivationList = wp->getPinActivation();
-		for (std::shared_ptr<fUML::PinActivation> anOutputPinActivation : *ownersOutputPinActivationList)
-		{
-			if (anOutputPinActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<OutputPinActivation>(anOutputPinActivation );
-			}
-		}
-	}
-
 	if(auto wp = m_group.lock())
 	{
 		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersOutputPinActivationList = wp->getNodeActivations();
@@ -193,11 +160,6 @@ std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinAc
 }
 std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
 {
-	if(auto wp = m_actionActivation.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_group.lock())
 	{
 		return wp;

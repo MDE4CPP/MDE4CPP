@@ -162,12 +162,6 @@ namespace fUML
 			//Add containing object
 			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
 			
-			//Add containing object
-			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Source(std::weak_ptr<fUML::ActivityNodeActivation > par_source) const = 0;
-			
-			//Add containing object
-			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Target(std::weak_ptr<fUML::ActivityNodeActivation > par_target) const = 0;
-			
 			
 			virtual std::shared_ptr<ActivityExecution> createActivityExecution() const = 0;
 			
@@ -336,9 +330,6 @@ namespace fUML
 			
 			virtual std::shared_ptr<InputPinActivation> createInputPinActivation() const = 0;
 			//Add containing object
-			virtual std::shared_ptr<InputPinActivation> createInputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const = 0;
-			
-			//Add containing object
 			virtual std::shared_ptr<InputPinActivation> createInputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
 			
 			
@@ -386,9 +377,6 @@ namespace fUML
 			virtual std::shared_ptr<Offer> createOffer() const = 0;
 			
 			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation() const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation_in_ActionActivation(std::weak_ptr<fUML::ActionActivation > par_actionActivation) const = 0;
-			
 			//Add containing object
 			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const = 0;
 			
