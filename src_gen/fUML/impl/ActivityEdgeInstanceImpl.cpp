@@ -96,6 +96,34 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::ActivityNodeActivation > par_ActivityNodeActivation, const int reference_id)
+			:ActivityEdgeInstanceImpl()
+			{
+				switch(reference_id)
+				{	
+				case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
+					 m_source = par_ActivityNodeActivation;
+					 return;
+				case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
+					 m_target = par_ActivityNodeActivation;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
 
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
 {
@@ -196,16 +224,17 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tok
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	 std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
+		 std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     this->getOffers()->push_back(offer);
-    if(nullptr == this->getTarget())
+    auto target = this->getTarget().lock();
+    if(nullptr == target )
     {
         std::cout << "[sendOffer] The edge does not have a target" << std::endl;
     }
     else
     {
-        this->getTarget()->recieveOffer();
+    	target->recieveOffer();
     }
 	//end of body
 }
@@ -291,7 +320,7 @@ std::shared_ptr<Bag<fUML::Offer>> ActivityEdgeInstanceImpl::getOffers() const
 }
 
 
-std::shared_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getSource() const
+std::weak_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
@@ -301,7 +330,7 @@ void ActivityEdgeInstanceImpl::setSource(std::shared_ptr<fUML::ActivityNodeActiv
     m_source = _source;
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getTarget() const
+std::weak_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
@@ -329,6 +358,16 @@ std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityE
 			}
 		}
 	}
+
+	if(auto wp = m_source.lock())
+	{
+		return nullptr;
+	}
+	if(auto wp = m_target.lock())
+	{
+		return nullptr;
+	}
+
 	struct null_deleter{void operator()(void const *) const {}};
 	return std::shared_ptr<ActivityEdgeInstance>(this, null_deleter());
 }
@@ -338,6 +377,16 @@ std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_source.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_target.lock())
+	{
+		return wp;
+	}
+
 	return nullptr;
 }
 

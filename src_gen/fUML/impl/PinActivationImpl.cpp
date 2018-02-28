@@ -107,13 +107,7 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
 	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -125,6 +119,22 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdgesList = obj.getIncomingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _incomingEdges : *_incomingEdgesList)
+	{
+		this->getIncomingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_incomingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_incomingEdges" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdgesList = obj.getOutgoingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _outgoingEdges : *_outgoingEdgesList)
+	{
+		this->getOutgoingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_outgoingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outgoingEdges" << std::endl;
 	#endif
 
 }
@@ -208,7 +218,7 @@ std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens()
 //*********************************
 std::weak_ptr<fUML::ActionActivation > PinActivationImpl::getActionActivation() const
 {
-//assert(m_actionActivation);
+
     return m_actionActivation;
 }
 void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation)

@@ -161,6 +161,12 @@ namespace fUML
 			//Add containing object
 			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group) const ;
 			
+			//Add containing object
+			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Source(std::weak_ptr<fUML::ActivityNodeActivation > par_source) const ;
+			
+			//Add containing object
+			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance_in_Target(std::weak_ptr<fUML::ActivityNodeActivation > par_target) const ;
+			
 			
 			virtual std::shared_ptr<ActivityExecution> createActivityExecution() const ;
 			

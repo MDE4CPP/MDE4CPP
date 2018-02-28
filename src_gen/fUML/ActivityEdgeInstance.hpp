@@ -71,6 +71,13 @@ namespace fUML
 
 			ActivityEdgeInstance(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
+			//Additional constructors for the containments back reference
+
+			ActivityEdgeInstance(std::weak_ptr<fUML::ActivityNodeActivation > par_ActivityNodeActivation, const int reference_id);
+
+			//Additional constructors for the containments back reference
+
+
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
@@ -132,14 +139,14 @@ namespace fUML
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation > getSource() const = 0;
+			virtual std::weak_ptr<fUML::ActivityNodeActivation > getSource() const = 0;
 			
 			/*!
 			 */
 			virtual void setSource(std::shared_ptr<fUML::ActivityNodeActivation> _source_source) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation > getTarget() const = 0;
+			virtual std::weak_ptr<fUML::ActivityNodeActivation > getTarget() const = 0;
 			
 			/*!
 			 */
@@ -166,10 +173,10 @@ namespace fUML
 			std::shared_ptr<Bag<fUML::Offer>> m_offers;
 			/*!
 			 */
-			std::shared_ptr<fUML::ActivityNodeActivation > m_source;
+			std::weak_ptr<fUML::ActivityNodeActivation > m_source;
 			/*!
 			 */
-			std::shared_ptr<fUML::ActivityNodeActivation > m_target;
+			std::weak_ptr<fUML::ActivityNodeActivation > m_target;
 			
 
 		public:

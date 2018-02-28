@@ -2971,7 +2971,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value=" std::shared_ptr&lt;Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());&#xD;&#xA;    offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());&#xD;&#xA;    this->getOffers()->push_back(offer);&#xD;&#xA;    if(nullptr == this->getTarget())&#xD;&#xA;    {&#xD;&#xA;        std::cout &lt;&lt; &quot;[sendOffer] The edge does not have a target&quot; &lt;&lt; std::endl;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        this->getTarget()->recieveOffer();&#xD;&#xA;    }"/>
+            value="&#x9; std::shared_ptr&lt;Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());&#xD;&#xA;    offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());&#xD;&#xA;    this->getOffers()->push_back(offer);&#xD;&#xA;    auto target = this->getTarget().lock();&#xD;&#xA;    if(nullptr == target )&#xD;&#xA;    {&#xD;&#xA;        std::cout &lt;&lt; &quot;[sendOffer] The edge does not have a target&quot; &lt;&lt; std::endl;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;target->recieveOffer();&#xD;&#xA;    }"/>
       </eAnnotations>
       <eParameters
           name="tokens"
@@ -3054,13 +3054,15 @@
         name="source"
         ordered="false"
         lowerBound="1"
-        eType="#//ActivityNodeActivation"/>
+        eType="#//ActivityNodeActivation"
+        eOpposite="#//ActivityNodeActivation/outgoingEdges"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="target"
         ordered="false"
         lowerBound="1"
-        eType="#//ActivityNodeActivation"/>
+        eType="#//ActivityNodeActivation"
+        eOpposite="#//ActivityNodeActivation/incomingEdges"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="offers"
@@ -3537,7 +3539,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="&#x9;if (tokens->size() > 0) &#xD;&#xA;&#x9;{&#xD;&#xA;        // *** Send all outgoing offers concurrently. ***&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();&#xD;&#xA;        for(std::shared_ptr&lt;ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)&#xD;&#xA;        {&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xD;&#xA;&#x9;&#x9;&#x9;if(nullptr == outgoingEdge->getTarget()){&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Target is NULL for edge: &quot; &lt;&lt; outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;else if(nullptr == outgoingEdge->getTarget()->getNode())&#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Node is NULL for target on edge: &quot; &lt;&lt;  outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;}else{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;[sendOffers] Sending offer to &quot; &lt;&lt; outgoingEdge->getTarget()->getNode()->getName() &lt;&lt; &quot;.&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;)&#xD;&#xA;            outgoingEdge->sendOffer(tokens);&#xD;&#xA;        }&#xD;&#xA;    }"/>
+            value="&#x9;&#x9;if (tokens->size() > 0) &#xD;&#xA;&#x9;{&#xD;&#xA;        // *** Send all outgoing offers concurrently. ***&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();&#xD;&#xA;        for(std::shared_ptr&lt;ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)&#xD;&#xA;        {&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;auto target=outgoingEdge->getTarget().lock();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if(!target){&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Target is NULL for edge: &quot; &lt;&lt; outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(! (target->getNode()))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Node is NULL for target on edge: &quot; &lt;&lt;  outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;[sendOffers] Sending offer to &quot; &lt;&lt; target->getNode()->getName() &lt;&lt; &quot;.&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;)&#xD;&#xA;            outgoingEdge->sendOffer(tokens);&#xD;&#xA;        }&#xD;&#xA;    }"/>
       </eAnnotations>
       <eParameters
           name="tokens"
@@ -3588,7 +3590,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="if (edge->getSource().get() != this)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;edge->setSource(getThisActivityNodeActivationPtr());&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;this->getOutgoingEdges()->push_back(edge);"/>
+            value="&#x9;if (edge->getSource().lock().get() != this)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;edge->setSource(getThisActivityNodeActivationPtr());&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;this->getOutgoingEdges()->push_back(edge);"/>
       </eAnnotations>
       <eParameters
           name="edge"
@@ -3604,7 +3606,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="edge->setTarget(getThisActivityNodeActivationPtr());&#xD;&#xA;    this->getIncomingEdges()->push_back(edge);"/>
+            value="&#x9;if (edge->getTarget().lock().get() != this)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;edge->setTarget(getThisActivityNodeActivationPtr());&#xD;&#xA;&#x9;}&#xD;&#xA;    this->getIncomingEdges()->push_back(edge);"/>
       </eAnnotations>
       <eParameters
           name="edge"
@@ -3643,7 +3645,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="return (edgeInstances->getSource().get() ==this);"/>
+            value="return (edgeInstances->getSource().lock().get() ==this);"/>
       </eAnnotations>
       <eParameters
           name="edgeInstances"
@@ -3816,13 +3818,17 @@
         name="outgoingEdges"
         ordered="false"
         upperBound="-1"
-        eType="#//ActivityEdgeInstance"/>
+        eType="#//ActivityEdgeInstance"
+        containment="true"
+        eOpposite="#//ActivityEdgeInstance/source"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="incomingEdges"
         ordered="false"
         upperBound="-1"
-        eType="#//ActivityEdgeInstance"/>
+        eType="#//ActivityEdgeInstance"
+        containment="true"
+        eOpposite="#//ActivityEdgeInstance/target"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="heldTokens"
@@ -4994,7 +5000,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="    ActivityNodeActivationImpl::run();&#xD;&#xA;&#xD;&#xA;    if (!this->getOutgoingEdges()->empty()) {&#xD;&#xA;        this->getOutgoingEdges()->front()->getTarget()->run();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    this->setFiring( false);"/>
+            value="&#x9;    ActivityNodeActivationImpl::run();&#xD;&#xA;&#xD;&#xA;    if (!this->getOutgoingEdges()->empty()) {&#xD;&#xA;    &#x9;auto target=this->getOutgoingEdges()->front()->getTarget().lock();&#xD;&#xA;    &#x9;if(target)&#xD;&#xA;    &#x9;{&#xD;&#xA;    &#x9;&#x9;target->run();&#xD;&#xA;    &#x9;}&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    this->setFiring( false);"/>
       </eAnnotations>
     </eOperations>
     <eOperations
@@ -5033,7 +5039,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="    ActivityNodeActivationImpl::terminate();&#xD;&#xA;&#xD;&#xA;    if (!this->getOutgoingEdges()->empty()) {&#xD;&#xA;        this->getOutgoingEdges()->front()->getTarget()->terminate();&#xD;&#xA;    }"/>
+            value="&#x9;    ActivityNodeActivationImpl::terminate();&#xD;&#xA;&#xD;&#xA;    if (!this->getOutgoingEdges()->empty())&#xD;&#xA;    {&#xD;&#xA;    &#x9;auto target=this->getOutgoingEdges()->front()->getTarget().lock();&#xD;&#xA;    &#x9;if(target)&#xD;&#xA;    &#x9;{&#xD;&#xA;    &#x9;&#x9;target->terminate();&#xD;&#xA;    &#x9;}&#xD;&#xA;    }&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations
@@ -5079,7 +5085,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="std::shared_ptr&lt;ActivityNodeActivation> forkNodeActivation;&#xD;&#xA;&#xD;&#xA;    if (this->getOutgoingEdges()->empty()) &#xD;&#xA;    {&#xD;&#xA;        forkNodeActivation = fUML::FUMLFactory::eInstance()->createForkNodeActivation();&#xD;&#xA;        std::shared_ptr&lt;ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());&#xD;&#xA;        ActivityNodeActivationImpl::addOutgoingEdge(newEdge);&#xD;&#xA;        forkNodeActivation->addIncomingEdge(newEdge);&#xD;&#xA;        edge->setSource(forkNodeActivation);&#xD;&#xA;    } &#xD;&#xA;    else &#xD;&#xA;    {&#xD;&#xA;        forkNodeActivation = this->getOutgoingEdges()->front()->getTarget();&#xD;&#xA;    }&#xD;&#xA;    &#xD;&#xA;    forkNodeActivation->addOutgoingEdge(edge);"/>
+            value="&#x9;std::shared_ptr&lt;ActivityNodeActivation> forkNodeActivation;&#xD;&#xA;&#xD;&#xA;    if (this->getOutgoingEdges()->empty()) &#xD;&#xA;    {&#xD;&#xA;        forkNodeActivation = fUML::FUMLFactory::eInstance()->createForkNodeActivation();&#xD;&#xA;        std::shared_ptr&lt;ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());&#xD;&#xA;        ActivityNodeActivationImpl::addOutgoingEdge(newEdge);&#xD;&#xA;        forkNodeActivation->addIncomingEdge(newEdge);&#xD;&#xA;        edge->setSource(forkNodeActivation);&#xD;&#xA;    } &#xD;&#xA;    else &#xD;&#xA;    {&#xD;&#xA;        forkNodeActivation = this->getOutgoingEdges()->front()->getTarget().lock();&#xD;&#xA;    }&#xD;&#xA;    &#xD;&#xA;    forkNodeActivation->addOutgoingEdge(edge);"/>
       </eAnnotations>
       <eParameters
           name="edge"
@@ -5096,7 +5102,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="    bool isSource = false;&#xD;&#xA;    if (this->getOutgoingEdges()->size() > 0) {&#xD;&#xA;        isSource = this->getOutgoingEdges()->at(0)->getTarget()->isSourceFor(edgeInstance);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isSource;"/>
+            value="&#x9;    bool isSource = false;&#xD;&#xA;    if (this->getOutgoingEdges()->size() > 0)&#xD;&#xA;    {&#xD;&#xA;    &#x9;auto target=this->getOutgoingEdges()->at(0)->getTarget().lock();&#xD;&#xA;    &#x9;if(target)&#xD;&#xA;    &#x9;{&#xD;&#xA;    &#x9;&#x9;isSource = target->isSourceFor(edgeInstance);&#xD;&#xA;    &#x9;}&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isSource;"/>
       </eAnnotations>
       <eParameters
           name="edgeInstance"
@@ -5315,7 +5321,6 @@
         xsi:type="ecore:EReference"
         name="actionActivation"
         ordered="false"
-        lowerBound="1"
         eType="#//ActionActivation"
         eOpposite="#//ActionActivation/pinActivation"/>
   </eClassifiers>

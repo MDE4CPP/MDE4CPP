@@ -169,13 +169,7 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
 	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -188,6 +182,14 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdgesList = obj.getIncomingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _incomingEdges : *_incomingEdgesList)
+	{
+		this->getIncomingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_incomingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_incomingEdges" << std::endl;
+	#endif
 	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
 	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
 	{
@@ -195,6 +197,14 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdgesList = obj.getOutgoingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _outgoingEdges : *_outgoingEdgesList)
+	{
+		this->getOutgoingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_outgoingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outgoingEdges" << std::endl;
 	#endif
 	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
 	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
@@ -238,7 +248,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<ActivityNodeActivation> forkNodeActivation;
+		std::shared_ptr<ActivityNodeActivation> forkNodeActivation;
 
     if (this->getOutgoingEdges()->empty()) 
     {
@@ -250,7 +260,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
     } 
     else 
     {
-        forkNodeActivation = this->getOutgoingEdges()->front()->getTarget();
+        forkNodeActivation = this->getOutgoingEdges()->front()->getTarget().lock();
     }
     
     forkNodeActivation->addOutgoingEdge(edge);
@@ -483,9 +493,14 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstanc
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    bool isSource = false;
-    if (this->getOutgoingEdges()->size() > 0) {
-        isSource = this->getOutgoingEdges()->at(0)->getTarget()->isSourceFor(edgeInstance);
+		    bool isSource = false;
+    if (this->getOutgoingEdges()->size() > 0)
+    {
+    	auto target=this->getOutgoingEdges()->at(0)->getTarget().lock();
+    	if(target)
+    	{
+    		isSource = target->isSourceFor(edgeInstance);
+    	}
     }
 
     return isSource;
@@ -555,10 +570,14 @@ void ActionActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    ActivityNodeActivationImpl::run();
+		    ActivityNodeActivationImpl::run();
 
     if (!this->getOutgoingEdges()->empty()) {
-        this->getOutgoingEdges()->front()->getTarget()->run();
+    	auto target=this->getOutgoingEdges()->front()->getTarget().lock();
+    	if(target)
+    	{
+    		target->run();
+    	}
     }
 
     this->setFiring( false);
@@ -660,11 +679,17 @@ void ActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    ActivityNodeActivationImpl::terminate();
+		    ActivityNodeActivationImpl::terminate();
 
-    if (!this->getOutgoingEdges()->empty()) {
-        this->getOutgoingEdges()->front()->getTarget()->terminate();
+    if (!this->getOutgoingEdges()->empty())
+    {
+    	auto target=this->getOutgoingEdges()->front()->getTarget().lock();
+    	if(target)
+    	{
+    		target->terminate();
+    	}
     }
+
 	//end of body
 }
 

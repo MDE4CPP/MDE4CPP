@@ -127,13 +127,7 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
 	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -146,6 +140,28 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdgesList = obj.getIncomingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _incomingEdges : *_incomingEdgesList)
+	{
+		this->getIncomingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_incomingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_incomingEdges" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdgesList = obj.getOutgoingEdges();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _outgoingEdges : *_outgoingEdgesList)
+	{
+		this->getOutgoingEdges()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_outgoingEdges->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outgoingEdges" << std::endl;
+	#endif
+
+	
+	
+
+	
+	
 
 	
 	
@@ -182,7 +198,10 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityE
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	edge->setTarget(getThisActivityNodeActivationPtr());
+		if (edge->getTarget().lock().get() != this)
+	{
+		edge->setTarget(getThisActivityNodeActivationPtr());
+	}
     this->getIncomingEdges()->push_back(edge);
 	//end of body
 }
@@ -191,7 +210,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityE
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if (edge->getSource().get() != this)
+		if (edge->getSource().lock().get() != this)
 	{
 		edge->setSource(getThisActivityNodeActivationPtr());
 	}
@@ -364,7 +383,7 @@ bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return (edgeInstances->getSource().get() ==this);
+	return (edgeInstances->getSource().lock().get() ==this);
 	//end of body
 }
 
@@ -480,23 +499,29 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		if (tokens->size() > 0) 
+			if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
 		std::shared_ptr<Bag<ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
         for(std::shared_ptr<ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
         {
 			DEBUG_MESSAGE(
-			if(nullptr == outgoingEdge->getTarget()){
-				std::cerr << "[sendOffers] Target is NULL for edge: " << outgoingEdge->getEdge()->getName() << std::endl;
-			}
-			else if(nullptr == outgoingEdge->getTarget()->getNode())
-			{
-				std::cerr << "[sendOffers] Node is NULL for target on edge: " <<  outgoingEdge->getEdge()->getName() << std::endl;
-			}else{
-				std::cout << "[sendOffers] Sending offer to " << outgoingEdge->getTarget()->getNode()->getName() << "."
-						  << std::endl;
-			}
+				auto target=outgoingEdge->getTarget().lock();
+				if(!target){
+					std::cerr << "[sendOffers] Target is NULL for edge: " << outgoingEdge->getEdge()->getName() << std::endl;
+				}
+				else
+				{
+					if(! (target->getNode()))
+					{
+						std::cerr << "[sendOffers] Node is NULL for target on edge: " <<  outgoingEdge->getEdge()->getName() << std::endl;
+					}
+					else
+					{
+						std::cout << "[sendOffers] Sending offer to " << target->getNode()->getName() << "."
+							  << std::endl;
+					}
+				}
 			)
             outgoingEdge->sendOffer(tokens);
         }

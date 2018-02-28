@@ -263,9 +263,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
-				assert(castedContainer);
-				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance_in_Group(castedContainer));
+				switch(referenceID)
+				{
+					//ActivityEdgeInstance has group as a containment
+					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+						return this->createActivityEdgeInstance_in_Group(castedContainer);
+					}
+					//ActivityEdgeInstance has source as a containment
+					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(container);
+						return this->createActivityEdgeInstance_in_Source(castedContainer);
+					}
+					//ActivityEdgeInstance has target as a containment
+					case  FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(container);
+						return this->createActivityEdgeInstance_in_Target(castedContainer);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
 			}
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
@@ -1177,6 +1197,28 @@ std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstanc
 	if(auto wp = par_group.lock())
 	{
 			wp->getEdgeInstances()->push_back(element);
+	}
+	return element;
+	
+}
+
+std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstance_in_Source(std::weak_ptr<fUML::ActivityNodeActivation > par_source) const
+{
+	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(par_source, FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE));
+	if(auto wp = par_source.lock())
+	{
+			wp->getOutgoingEdges()->push_back(element);
+	}
+	return element;
+	
+}
+
+std::shared_ptr<ActivityEdgeInstance> FUMLFactoryImpl::createActivityEdgeInstance_in_Target(std::weak_ptr<fUML::ActivityNodeActivation > par_target) const
+{
+	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(par_target, FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET));
+	if(auto wp = par_target.lock())
+	{
+			wp->getIncomingEdges()->push_back(element);
 	}
 	return element;
 	
