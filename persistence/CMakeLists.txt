@@ -8,8 +8,6 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
 
 PROJECT(persistence)
 
@@ -18,8 +16,14 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -38,56 +42,64 @@ SET(SOURCE_FILES
 	xml/XMLLoadHandler.cpp
 	xml/XMLSaveHandler.cpp
 	xml/xerces/DOMPrintErrorHandler.cpp
-  xml/xerces/DOMPrintFilter.cpp
-  xml/xerces/DOMTreeErrorReporter.cpp
-  xml/xerces/WStr.cpp
-  xml/xerces/XStr.cpp
+	xml/xerces/DOMPrintFilter.cpp
+	xml/xerces/DOMTreeErrorReporter.cpp
+	xml/xerces/WStr.cpp
+	xml/xerces/XStr.cpp
 )
 
 INCLUDE_DIRECTORIES(
-  base
-  xml
-  interface
-	$ENV{MDE4CPP_HOME}/application/include
-	$ENV{MDE4CPP_HOME}/application/include/abstractDataTypes
-	$ENV{MDE4CPP_HOME}/application/include/ecore
-	$ENV{MDE4CPP_HOME}/application/include/types
-	$ENV{MDE4CPP_HOME}/application/include/PluginFramework
+	../
+ 	$ENV{MDE4CPP_HOME}/application/include
 )
 
-FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-SET(DEBUG_LIBRARIES ${ECORE_DEBUG})
-FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-SET(RELEASE_LIBRARIES ${ECORE_RELEASE})
+# Apple specific stuff
+if(APPLE)
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+endif(APPLE)
 
-FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-SET(DEBUG_LIBRARIES ${DEBUG_LIBRARIES} ${TYPES_DEBUG})
-FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-SET(RELEASE_LIBRARIES ${RELEASE_LIBRARIES} ${TYPES_RELEASE})
+IF(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	ELSE()
+	ENDIF()
+ELSEIF(APPLE)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	ELSE()
+	ENDIF()
+ELSE()
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(XERCES_DEBUG xerces-c ${MDE4CPP_HOME}/application/lib)
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(XERCES_RELEASE xerces-c ${MDE4CPP_HOME}/application/lib)
+	ENDIF()
+ENDIF()
 
-FIND_LIBRARY(XERCES_DEBUG xerces-c ${MDE4CPP_HOME}/application/lib)
-MESSAGE("-- Found xerces-c library (Debug): " ${XERCES_DEBUG})
-FIND_LIBRARY(XERCES_RELEASE xerces-c ${MDE4CPP_HOME}/application/lib)
-MESSAGE("-- Found xerces-c library (Release): " ${XERCES_RELEASE})
-
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-
-#ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-	debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${XERCES_DEBUG}
-)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-	${XERCES_RELEASE}
-)
+
+IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 	
+		debug ${ECORE_DEBUG}
+		debug ${TYPES_DEBUG}
+		debug ${PLUGINFRAMEWORK_DEBUG}
+		debug ${XERCES_DEBUG}
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${PLUGINFRAMEWORK_RELEASE}
+		optimized ${ECORE_RELEASE}
+		optimized ${TYPES_RELEASE}
+		optimized ${PLUGINFRAMEWORK_RELEASE}
+		optimized ${XERCES_RELEASE}
+	)
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
