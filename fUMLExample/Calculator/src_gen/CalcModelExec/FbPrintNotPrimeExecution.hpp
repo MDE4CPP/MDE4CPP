@@ -14,10 +14,11 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "SubsetUnion.hpp" 
+
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp" 
 
 //Included from function behavior "fbPrintNotPrime"
 #include <iostream>

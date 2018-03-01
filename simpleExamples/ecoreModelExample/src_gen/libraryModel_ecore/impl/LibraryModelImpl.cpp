@@ -1,14 +1,15 @@
-#include "LibraryModelImpl.hpp"
+#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "LibraryModel_ecorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "Author.hpp"
+#include "libraryModel_ecore/Author.hpp"
 
-#include "Book.hpp"
+#include "libraryModel_ecore/Book.hpp"
 
 
 using namespace libraryModel_ecore;
@@ -47,7 +48,6 @@ LibraryModelImpl::~LibraryModelImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LibraryModel "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -97,7 +97,7 @@ std::shared_ptr<ecore::EObject>  LibraryModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LibraryModelImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getLibraryModel();
+	return LibraryModel_ecorePackageImpl::eInstance()->getLibraryModel_EClass();
 }
 
 //*********************************
@@ -130,17 +130,29 @@ std::shared_ptr< Bag<libraryModel_ecore::Book> > LibraryModelImpl::getBook() con
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LibraryModelImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LibraryModelImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LibraryModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::LIBRARYMODEL_AUTHORS:
+		case LibraryModel_ecorePackage::LIBRARYMODEL_EREFERENCE_AUTHORS:
 			return getAuthors(); //21
-		case LibraryModel_ecorePackage::LIBRARYMODEL_BOOK:
+		case LibraryModel_ecorePackage::LIBRARYMODEL_EREFERENCE_BOOK:
 			return getBook(); //20
 	}
 	return boost::any();
+}
+
+void LibraryModelImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

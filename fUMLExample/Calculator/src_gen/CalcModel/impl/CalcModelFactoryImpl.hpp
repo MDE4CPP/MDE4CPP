@@ -14,14 +14,17 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "CheckIfPrimeImpl.hpp"
-#include "PrimeCheckerImpl.hpp"
 
-#include "impl/FactoryImpl.hpp"
-#include "CalcModelFactory.hpp"
 #include <functional>
+
+#include "CalcModel/impl/CheckIfPrimeImpl.hpp"
+#include "CalcModel/impl/PrimeCheckerImpl.hpp"
+
+#include "uml/impl/FactoryImpl.hpp"
+#include "CalcModel/CalcModelFactory.hpp"
+
 
 namespace CalcModel 
 {

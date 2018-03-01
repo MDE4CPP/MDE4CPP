@@ -19,7 +19,9 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
-#include "LibraryModel_ecorePlugin.hpp"
+//#include "util/ProfileCallCount.hpp"
+
+#include "libraryModel_ecore/LibraryModel_ecorePlugin.hpp"
 
 namespace libraryModel_ecore 
 {

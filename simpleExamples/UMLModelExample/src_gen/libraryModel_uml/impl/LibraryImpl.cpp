@@ -1,9 +1,9 @@
 
-#include "LibraryImpl.hpp"
-#include "LibraryModel_umlPackageImpl.hpp"
-#include "Class.hpp"
-#include "Author.hpp"
-#include "Book.hpp"
+#include "LibraryModel_uml/impl/LibraryImpl.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
+#include "uml/Class.hpp"
+#include "LibraryModel_uml/Author.hpp"
+#include "LibraryModel_uml/Book.hpp"
 
 using namespace LibraryModel_uml;
 using boost::any_cast;

@@ -1,7 +1,7 @@
 
-#include "PictureImpl.hpp"
-#include "LibraryModel_umlPackageImpl.hpp"
-#include "Class.hpp"
+#include "LibraryModel_uml/impl/PictureImpl.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
+#include "uml/Class.hpp"
 
 using namespace LibraryModel_uml;
 using boost::any_cast;

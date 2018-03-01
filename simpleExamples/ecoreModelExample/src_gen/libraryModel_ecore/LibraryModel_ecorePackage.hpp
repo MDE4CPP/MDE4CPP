@@ -19,16 +19,16 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
+//#include "util/ProfileCallCount.hpp"
 
-namespace libraryModel_ecore 
-{	class Author;
-	class Book;
-	class LibraryModel;
-	class NamedElement;
-	class Picture;
-	class LibraryModel_ecorePackage;
+#include "ecore/EPackage.hpp"
+
+namespace ecore 
+{
+	class EAttribute;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace libraryModel_ecore 
@@ -56,14 +56,15 @@ namespace libraryModel_ecore
 
 			// Begin Class Author
 			//Class and Feature IDs 
-			static const int AUTHOR = 1;
-			static const int AUTHOR_FEATURE_COUNT = 1;
-			static const int AUTHOR_OPERATION_COUNT = 0;
+			static const unsigned int AUTHOR_ECLASS = 1;
+			static const unsigned int AUTHOR_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int AUTHOR_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAuthor() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getAuthor_EClass() const = 0;
+			
 			
 			
 			
@@ -72,21 +73,22 @@ namespace libraryModel_ecore
 
 			// Begin Class Book
 			//Class and Feature IDs 
-			static const int BOOK = 0;
-			static const int BOOK_FEATURE_COUNT = 4;
-			static const int BOOK_OPERATION_COUNT = 0;
+			static const unsigned int BOOK_ECLASS = 0;
+			static const unsigned int BOOK_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int BOOK_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int BOOK_AUTHORS = 01;
-			static const int BOOK_LIBRARY = 02;
-			static const int BOOK_PICTURES = 03;
+			static const int BOOK_EREFERENCE_AUTHORS = 01;
+			static const int BOOK_EREFERENCE_LIBRARY = 02;
+			static const int BOOK_EREFERENCE_PICTURES = 03;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBook() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getBook_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getBook_Authors() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBook_Library() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBook_Pictures() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_authors() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_library() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_pictures() const = 0;
 			
 			
 			// End Class Book
@@ -94,19 +96,20 @@ namespace libraryModel_ecore
 
 			// Begin Class LibraryModel
 			//Class and Feature IDs 
-			static const int LIBRARYMODEL = 2;
-			static const int LIBRARYMODEL_FEATURE_COUNT = 2;
-			static const int LIBRARYMODEL_OPERATION_COUNT = 0;
+			static const unsigned int LIBRARYMODEL_ECLASS = 2;
+			static const unsigned int LIBRARYMODEL_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int LIBRARYMODEL_AUTHORS = 21;
-			static const int LIBRARYMODEL_BOOK = 20;
+			static const int LIBRARYMODEL_EREFERENCE_AUTHORS = 21;
+			static const int LIBRARYMODEL_EREFERENCE_BOOK = 20;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLibraryModel() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLibraryModel_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLibraryModel_Authors() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLibraryModel_Book() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_authors() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_book() const = 0;
 			
 			
 			// End Class LibraryModel
@@ -114,16 +117,17 @@ namespace libraryModel_ecore
 
 			// Begin Class NamedElement
 			//Class and Feature IDs 
-			static const int NAMEDELEMENT = 3;
-			static const int NAMEDELEMENT_FEATURE_COUNT = 1;
-			static const int NAMEDELEMENT_OPERATION_COUNT = 0;
-			static const int NAMEDELEMENT_NAME = 30;
+			static const unsigned int NAMEDELEMENT_ECLASS = 3;
+			static const unsigned int NAMEDELEMENT_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int NAMEDELEMENT_ECLASS_OPERATION_COUNT = 0;
+			static const int NAMEDELEMENT_EATTRIBUTE_NAME = 30;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_Name() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getNamedElement_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_EAttribute_name() const = 0;
 			
 			
 			
@@ -132,19 +136,20 @@ namespace libraryModel_ecore
 
 			// Begin Class Picture
 			//Class and Feature IDs 
-			static const int PICTURE = 4;
-			static const int PICTURE_FEATURE_COUNT = 3;
-			static const int PICTURE_OPERATION_COUNT = 0;
-			static const int PICTURE_PAGENUMBER = 42;
+			static const unsigned int PICTURE_ECLASS = 4;
+			static const unsigned int PICTURE_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int PICTURE_ECLASS_OPERATION_COUNT = 0;
+			static const int PICTURE_EATTRIBUTE_PAGENUMBER = 42;
 			
-			static const int PICTURE_BOOK = 41;
+			static const int PICTURE_EREFERENCE_BOOK = 41;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPicture() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getPicture_PageNumber() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getPicture_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPicture_Book() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getPicture_EAttribute_pageNumber() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getPicture_EReference_book() const = 0;
 			
 			
 			// End Class Picture

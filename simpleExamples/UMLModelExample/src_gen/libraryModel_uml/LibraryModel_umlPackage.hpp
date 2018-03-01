@@ -14,30 +14,15 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
- 
-#include "Factory.hpp"
-#include "Package.hpp"	
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-namespace LibraryModel_uml 
-{
-	class Author;
-	class Book;
-	class Library;
-	class NamedModelElement;
-	class Picture;
-	class LibraryModel_umlPackage;
-}
+#include "uml/Package.hpp"	
 
 namespace uml 
 {
-	class PackageImport;
-	class Property;
-	class LiteralInteger;
-	class Generalization;
-	class Class;
 	class Association;
-	class LiteralUnlimitedNatural;
+	class Class;
+	class Property;
 }
 
 namespace LibraryModel_uml 
@@ -68,9 +53,9 @@ namespace LibraryModel_uml
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Author() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Book() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_authors() = 0;
-			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_book() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_books() = 0;
+			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Library() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_authors() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_books() = 0;

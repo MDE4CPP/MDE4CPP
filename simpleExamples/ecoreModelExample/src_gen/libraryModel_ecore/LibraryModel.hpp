@@ -19,11 +19,15 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
-#include <string>
+//#include "util/ProfileCallCount.hpp"
+
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
+#include <memory>
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -44,7 +48,7 @@ namespace libraryModel_ecore
 
 // enum includes
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
 //*********************************
 namespace libraryModel_ecore 
@@ -52,6 +56,7 @@ namespace libraryModel_ecore
 	/*!
 	 */
 	class LibraryModel : virtual public ecore::EObject 
+
 	{
 		public:
  			LibraryModel(const LibraryModel &) {}
@@ -109,7 +114,9 @@ namespace libraryModel_ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

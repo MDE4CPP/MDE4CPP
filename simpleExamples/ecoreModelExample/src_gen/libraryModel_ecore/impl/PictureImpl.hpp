@@ -19,15 +19,15 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../Picture.hpp"
 
-#include "impl/NamedElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
 
 
 
@@ -97,6 +97,9 @@ namespace libraryModel_ecore
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

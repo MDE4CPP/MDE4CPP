@@ -19,15 +19,19 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
-#include "impl/EFactoryImpl.hpp"
+//#include "util/ProfileCallCount.hpp"
 
-#include "AuthorImpl.hpp"
-#include "BookImpl.hpp"
-#include "LibraryModelImpl.hpp"
-#include "NamedElementImpl.hpp"
-#include "PictureImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
 
-#include "LibraryModel_ecoreFactory.hpp"
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
+
+namespace libraryModel_ecore 
+{	class Author;
+	class Book;
+	class LibraryModel;
+	class NamedElement;
+	class Picture;
+}
 
 namespace libraryModel_ecore 
 {
@@ -46,7 +50,8 @@ namespace libraryModel_ecore
 			virtual ~LibraryModel_ecoreFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions
@@ -56,6 +61,7 @@ namespace libraryModel_ecore
 			//Add containing object
 			virtual std::shared_ptr<Book> createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const ;
 			
+			
 			virtual std::shared_ptr<LibraryModel> createLibraryModel() const ;
 			
 			virtual std::shared_ptr<NamedElement> createNamedElement() const ;
@@ -63,6 +69,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<Picture> createPicture() const ;
 			//Add containing object
 			virtual std::shared_ptr<Picture> createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const ;
+			
 			
 			
 

@@ -1,5 +1,5 @@
-#include "CalcModelPackage.hpp"
-#include "impl/CalcModelPackageImpl.hpp"
+#include "CalcModel/CalcModelPackage.hpp"
+#include "CalcModel/impl/CalcModelPackageImpl.hpp"
 
 using namespace CalcModel;
 

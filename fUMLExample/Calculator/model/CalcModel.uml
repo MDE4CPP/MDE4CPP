@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
   <packagedElement xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _7Bd8gYyFEeaE8Ot-1J8eNg _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _zBMTEI7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg">
-    <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="ActInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
+    <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="actInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_We8DcIx0EeazCdUXohZ79Q" target="_Vf7dgIx0EeazCdUXohZ79Q" source="_QJrKgIx0EeazCdUXohZ79Q">
       <guard xmi:type="uml:LiteralBoolean" xmi:id="_We8qgIx0EeazCdUXohZ79Q" name="_To_ActivityFinal1_guard" value="true"/>
       <weight xmi:type="uml:LiteralInteger" xmi:id="_We9RkIx0EeazCdUXohZ79Q" name="_To_ActivityFinal1_weight"/>
@@ -52,16 +52,16 @@
     <edge xmi:type="uml:ControlFlow" xmi:id="_sxrVcI7UEeajycJcSh2X6Q" target="_-az8EIxzEeazCdUXohZ79Q" source="_8C8QUIx0EeazCdUXohZ79Q">
       <guard xmi:type="uml:LiteralBoolean" xmi:id="_3PLPEI7UEeajycJcSh2X6Q" name="isNotFinishedGuard" value="true"/>
     </edge>
-    <node xmi:type="uml:DecisionNode" xmi:id="_7XVkAIxzEeazCdUXohZ79Q" name="divides" incoming="_MAdiII7UEeajycJcSh2X6Q" outgoing="_ZZjacIx0EeazCdUXohZ79Q _xEha8Ix0EeazCdUXohZ79Q" decisionInputFlow="_MAdiII7UEeajycJcSh2X6Q"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_7XVkAIxzEeazCdUXohZ79Q" name="dn_divides" incoming="_MAdiII7UEeajycJcSh2X6Q" outgoing="_ZZjacIx0EeazCdUXohZ79Q _xEha8Ix0EeazCdUXohZ79Q" decisionInputFlow="_MAdiII7UEeajycJcSh2X6Q"/>
     <node xmi:type="uml:MergeNode" xmi:id="_-az8EIxzEeazCdUXohZ79Q" name="Merge" incoming="_VwIh4I7TEeajycJcSh2X6Q _sxrVcI7UEeajycJcSh2X6Q" outgoing="_3a3-MI7TEeajycJcSh2X6Q"/>
     <node xmi:type="uml:CallBehaviorAction" xmi:id="_QJrKgIx0EeazCdUXohZ79Q" name="cbaPrintNotPrime2" incoming="_WsgDgI7TEeajycJcSh2X6Q" outgoing="_We8DcIx0EeazCdUXohZ79Q" behavior="_4BcRIIxxEeazCdUXohZ79Q"/>
     <node xmi:type="uml:ActivityFinalNode" xmi:id="_Vf7dgIx0EeazCdUXohZ79Q" name="ActivityFinal1" incoming="_We8DcIx0EeazCdUXohZ79Q"/>
     <node xmi:type="uml:CallBehaviorAction" xmi:id="_Yq_EQIx0EeazCdUXohZ79Q" name="cbaPrintNotPrime" incoming="_ZZjacIx0EeazCdUXohZ79Q" outgoing="_c7yLEIx0EeazCdUXohZ79Q" behavior="_4BcRIIxxEeazCdUXohZ79Q"/>
     <node xmi:type="uml:ActivityFinalNode" xmi:id="_bDbiUIx0EeazCdUXohZ79Q" name="ActivityFinal2" incoming="_c7yLEIx0EeazCdUXohZ79Q"/>
-    <node xmi:type="uml:CallOperationAction" xmi:id="_fCIMgIx0EeazCdUXohZ79Q" name="next_call" incoming="_xEha8Ix0EeazCdUXohZ79Q" outgoing="_Tvp9QIx1EeazCdUXohZ79Q" operation="_UtQZgIxrEeazCdUXohZ79Q">
-      <target xmi:id="_fCKowIx0EeazCdUXohZ79Q" name="target" incoming="_5hS4II7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
+    <node xmi:type="uml:CallOperationAction" xmi:id="_fCIMgIx0EeazCdUXohZ79Q" name="coaNext" incoming="_xEha8Ix0EeazCdUXohZ79Q" outgoing="_Tvp9QIx1EeazCdUXohZ79Q" operation="_UtQZgIxrEeazCdUXohZ79Q">
+      <target xmi:id="_fCKowIx0EeazCdUXohZ79Q" name="target_Next_Call" incoming="_5hS4II7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
-    <node xmi:type="uml:DecisionNode" xmi:id="_8C8QUIx0EeazCdUXohZ79Q" name="isNotFinished" incoming="_j5U0sI7UEeajycJcSh2X6Q" outgoing="_P49YgIx1EeazCdUXohZ79Q _sxrVcI7UEeajycJcSh2X6Q" decisionInputFlow="_j5U0sI7UEeajycJcSh2X6Q"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_8C8QUIx0EeazCdUXohZ79Q" name="dn_isNotFinished" incoming="_j5U0sI7UEeajycJcSh2X6Q" outgoing="_P49YgIx1EeazCdUXohZ79Q _sxrVcI7UEeajycJcSh2X6Q" decisionInputFlow="_j5U0sI7UEeajycJcSh2X6Q"/>
     <node xmi:type="uml:CallBehaviorAction" xmi:id="_PBb6oIx1EeazCdUXohZ79Q" name="cbaPrintIsPrime" incoming="_P49YgIx1EeazCdUXohZ79Q" outgoing="_S_DmwIx1EeazCdUXohZ79Q" behavior="_3KBg8IxxEeazCdUXohZ79Q"/>
     <node xmi:type="uml:ActivityFinalNode" xmi:id="_SI3loIx1EeazCdUXohZ79Q" name="ActivityFinal3" incoming="_S_DmwIx1EeazCdUXohZ79Q"/>
     <node xmi:type="uml:ActivityParameterNode" xmi:id="_7Bd8gYyFEeaE8Ot-1J8eNg" name="primeChecker" outgoing="_yeMecIyGEeaffY4wOnNpKQ" type="_As0b8IxpEeazCdUXohZ79Q" parameter="_7Bd8gIyFEeaE8Ot-1J8eNg">
@@ -73,27 +73,27 @@
       <result xmi:id="_0LbcII7SEeaDf9S-W91Htg" name="isOdd" outgoing="_PQBq4I7TEeajycJcSh2X6Q">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </result>
-      <target xmi:id="_fMouMIyGEeaffY4wOnNpKQ" name="target" incoming="_409ogI7REeaDf9S-W91Htg" type="_As0b8IxpEeazCdUXohZ79Q"/>
+      <target xmi:id="_fMouMIyGEeaffY4wOnNpKQ" name="target_isOdd" incoming="_409ogI7REeaDf9S-W91Htg" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
     <node xmi:type="uml:CallOperationAction" xmi:id="_LYTdUI7REeaDf9S-W91Htg" name="coaDivides" incoming="_3a3-MI7TEeajycJcSh2X6Q" operation="_uxuS4IxpEeazCdUXohZ79Q">
       <result xmi:id="_iIHdII7REeaDf9S-W91Htg" name="isDivisible" outgoing="_MAdiII7UEeajycJcSh2X6Q">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </result>
-      <target xmi:id="_REVMAI7REeaDf9S-W91Htg" name="target" incoming="_41ErUI7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
+      <target xmi:id="_REVMAI7REeaDf9S-W91Htg" name="target_Divides" incoming="_41ErUI7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
     <node xmi:type="uml:CallOperationAction" xmi:id="_MUDT4I7REeaDf9S-W91Htg" name="coaIsNotFinished" incoming="_Tvp9QIx1EeazCdUXohZ79Q" operation="_FtjmYIxzEeazCdUXohZ79Q">
       <result xmi:id="_eLsD0I7REeaDf9S-W91Htg" name="isNotFinished" outgoing="_j5U0sI7UEeajycJcSh2X6Q">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </result>
-      <target xmi:id="_RV6EMI7REeaDf9S-W91Htg" name="target" incoming="_7bKj0I7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
+      <target xmi:id="_RV6EMI7REeaDf9S-W91Htg" name="target_IsNotFinished" incoming="_7bKj0I7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
     <node xmi:type="uml:ForkNode" xmi:id="_zBMTEI7REeaDf9S-W91Htg" name="Fork1" incoming="_yeMecIyGEeaffY4wOnNpKQ" outgoing="_409ogI7REeaDf9S-W91Htg _41ErUI7TEeajycJcSh2X6Q _5hS4II7TEeajycJcSh2X6Q _7bKj0I7TEeajycJcSh2X6Q"/>
-    <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q" decisionInputFlow="_PQBq4I7TEeajycJcSh2X6Q"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="dn_IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q" decisionInputFlow="_PQBq4I7TEeajycJcSh2X6Q"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_As0b8IxpEeazCdUXohZ79Q" name="PrimeChecker">
     <ownedAttribute xmi:id="_d2XO4IxyEeazCdUXohZ79Q" name="number">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_gmTxgIxzEeazCdUXohZ79Q" value="8191"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_gmTxgIxzEeazCdUXohZ79Q" value="524287"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_5YSS0IxyEeazCdUXohZ79Q" name="divider">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -159,6 +159,7 @@
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
+  <packagedElement xmi:type="uml:ChangeEvent" xmi:id="_ez5VsN_vEeexC-rsnTgvBg" name="ChangeEvent1"/>
   <profileApplication xmi:id="_unVHIIxxEeazCdUXohZ79Q">
     <eAnnotations xmi:id="_unbNwIxxEeazCdUXohZ79Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/UML2.profile.uml#_On7PcOmLEeC7Uf0JLQQJUg"/>

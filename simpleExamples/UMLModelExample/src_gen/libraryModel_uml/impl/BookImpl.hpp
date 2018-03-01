@@ -14,16 +14,17 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+
+#include <functional>
 
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../Book.hpp"
-#include <functional>
-#include "impl/NamedModelElementImpl.hpp"
-#include "Property.hpp"
+#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
+#include "uml/Property.hpp"
 #include "boost/any.hpp"
 
 //*********************************

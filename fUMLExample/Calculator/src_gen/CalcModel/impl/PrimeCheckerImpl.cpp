@@ -1,7 +1,7 @@
 
-#include "PrimeCheckerImpl.hpp"
-#include "CalcModelPackageImpl.hpp"
-#include "Class.hpp"
+#include "CalcModel/impl/PrimeCheckerImpl.hpp"
+#include "CalcModel/impl/CalcModelPackageImpl.hpp"
+#include "uml/Class.hpp"
 
 using namespace CalcModel;
 using boost::any_cast;

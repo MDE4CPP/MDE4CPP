@@ -31,9 +31,6 @@ SET(SOURCE_FILES
 
 INCLUDE_DIRECTORIES(
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/types
 )
 
 FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)

@@ -19,18 +19,28 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
 
-#include "AuthorImpl.hpp"
-#include "BookImpl.hpp"
-#include "LibraryModelImpl.hpp"
-#include "NamedElementImpl.hpp"
-#include "PictureImpl.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
 
-#include "LibraryModel_ecorePackage.hpp"
-#include "LibraryModel_ecorePackage.hpp"
-#include "EcorePackage.hpp"
-#include "impl/EPackageImpl.hpp"
+#include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
+
+namespace libraryModel_ecore 
+{	class Author;
+	class Book;
+	class LibraryModel;
+	class NamedElement;
+	class Picture;
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
+
 
 namespace libraryModel_ecore
 {
@@ -48,7 +58,8 @@ namespace libraryModel_ecore
 
 			// Begin Class Author
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAuthor() const ;
+			virtual std::shared_ptr<ecore::EClass> getAuthor_EClass() const ;
+			
 			
 			
 			
@@ -56,29 +67,32 @@ namespace libraryModel_ecore
 
 			// Begin Class Book
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBook() const ;
+			virtual std::shared_ptr<ecore::EClass> getBook_EClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getBook_Authors() const ;
-			virtual std::shared_ptr<ecore::EReference> getBook_Library() const ;
-			virtual std::shared_ptr<ecore::EReference> getBook_Pictures() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_authors() const ;
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_library() const ;
+			virtual std::shared_ptr<ecore::EReference> getBook_EReference_pictures() const ;
 			
 			
 			// End Class Book
 
 			// Begin Class LibraryModel
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLibraryModel() const ;
+			virtual std::shared_ptr<ecore::EClass> getLibraryModel_EClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getLibraryModel_Authors() const ;
-			virtual std::shared_ptr<ecore::EReference> getLibraryModel_Book() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_authors() const ;
+			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_book() const ;
 			
 			
 			// End Class LibraryModel
 
 			// Begin Class NamedElement
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNamedElement() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_Name() const ;
+			virtual std::shared_ptr<ecore::EClass> getNamedElement_EClass() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_EAttribute_name() const ;
 			
 			
 			
@@ -86,10 +100,11 @@ namespace libraryModel_ecore
 
 			// Begin Class Picture
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPicture() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getPicture_PageNumber() const ;
+			virtual std::shared_ptr<ecore::EClass> getPicture_EClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPicture_Book() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getPicture_EAttribute_pageNumber() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getPicture_EReference_book() const ;
 			
 			
 			// End Class Picture
@@ -97,11 +112,22 @@ namespace libraryModel_ecore
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> authorEClass = nullptr;
-			std::shared_ptr<ecore::EClass> bookEClass = nullptr;
-			std::shared_ptr<ecore::EClass> libraryModelEClass = nullptr;
-			std::shared_ptr<ecore::EClass> namedElementEClass = nullptr;
-			std::shared_ptr<ecore::EClass> pictureEClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_author_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_book_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_libraryModel_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_namedElement_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_picture_EClass = nullptr;
+			
+			
+			std::shared_ptr<ecore::EAttribute> m_namedElement_EAttribute_name = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_picture_EAttribute_pageNumber = nullptr;
+			
+			std::shared_ptr<ecore::EReference> m_book_EReference_authors = nullptr;
+			std::shared_ptr<ecore::EReference> m_libraryModel_EReference_authors = nullptr;
+			std::shared_ptr<ecore::EReference> m_libraryModel_EReference_book = nullptr;
+			std::shared_ptr<ecore::EReference> m_picture_EReference_book = nullptr;
+			std::shared_ptr<ecore::EReference> m_book_EReference_library = nullptr;
+			std::shared_ptr<ecore::EReference> m_book_EReference_pictures = nullptr;
 			
 			
 
@@ -115,8 +141,26 @@ namespace libraryModel_ecore
 			virtual void init();
 
 		public:
-			void initializePackageContents();
 			void createPackageContents();
+			void initializePackageContents();
+
+		private:
+			void createAuthorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createBookContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createLibraryModelContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createNamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPictureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+
+			void initializeAuthorContent();
+			void initializeBookContent();
+			void initializeLibraryModelContent();
+			void initializeNamedElementContent();
+			void initializePictureContent();
+			void initializePackageEDataTypes();
+
+
+
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECOREPACKAGEIMPL_HPP */

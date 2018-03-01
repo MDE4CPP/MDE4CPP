@@ -1,17 +1,19 @@
 
 #include <iostream>
-#include "LibraryModel_ecoreFactory.hpp"
-#include "LibraryModel_ecorePackage.hpp"
 
-#include "Book.hpp"
-#include "Author.hpp"
-#include "LibraryModel.hpp"
-#include "NamedElement.hpp"
-#include "Picture.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
+#include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
+
+#include "libraryModel_ecore/Book.hpp"
+#include "libraryModel_ecore/Author.hpp"
+#include "libraryModel_ecore/LibraryModel.hpp"
+#include "libraryModel_ecore/NamedElement.hpp"
+#include "libraryModel_ecore/Picture.hpp"
 
 // Start of user code includes 
 // You may manually edit additional includes, won't be overwritten upon generation.
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 // End of user code
 
 using namespace libraryModel_ecore;

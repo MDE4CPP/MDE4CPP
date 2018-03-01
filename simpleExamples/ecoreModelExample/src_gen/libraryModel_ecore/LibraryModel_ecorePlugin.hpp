@@ -19,7 +19,9 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
-#include "EcoreModelPlugin.hpp"
+//#include "util/ProfileCallCount.hpp"
+
+#include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace libraryModel_ecore
 {

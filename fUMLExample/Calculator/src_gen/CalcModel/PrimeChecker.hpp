@@ -14,25 +14,22 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include <boost/any.hpp>
-#include "boost/shared_ptr.hpp"
-#include <string>
+
 #include <map>
+#include <string>
 #include <vector>
+
+#include "boost/any.hpp"
+#include "boost/shared_ptr.hpp"
 
 //Forward Declaration for used types
 
 
-namespace PrimitiveTypes 
-{
-	class Boolean;
-}
-
 // base class includes
 
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
 // enum includes
 
@@ -87,7 +84,7 @@ namespace CalcModel
 			// Members
 			//*********************************
 			int m_divider= 3 /*defined default value*/;
-			int m_number= 8191 /*defined default value*/;
+			int m_number= 524287 /*defined default value*/;
 			
 	
 	};

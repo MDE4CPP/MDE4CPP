@@ -26,21 +26,21 @@ SOFTWARE.
  */
 
 #include <iostream>
-using namespace std;
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/UmlFactory.hpp"
-#include "UmlPackage.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/Class.hpp"
 #include "uml/Model.hpp"
 #include "uml/Operation.hpp"
 #include "uml/InstanceSpecification.hpp"
 
-#include "umlReflection/UMLPackage.hpp"
-
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 
 #include "UmlReflection/UMLPackage.hpp"
+
+using namespace std;
 
 int main()
 {
@@ -57,7 +57,7 @@ int main()
     c->setName("Class1");
 //
     //use Metamodel to create a Class
-    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass()->getName(), p, package->TYPE_PACKAGE);
+    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass_EClass()->getName(), p, package->TYPE_EREFERENCE_PACKAGE);
 //
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
@@ -80,7 +80,7 @@ int main()
     for(std::shared_ptr<uml::PackageableElement>it : *elements)
     {
         // optional type check using UML Metamodel
-        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass();
+        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass_EClass();
         if(it->eClass() == uc->eClass())
         {
             cout << it->getName() << " is a Class"<< endl;

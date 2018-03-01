@@ -1,18 +1,19 @@
-#include "BookImpl.hpp"
+#include "libraryModel_ecore/impl/BookImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "LibraryModel_ecorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "Author.hpp"
+#include "libraryModel_ecore/Author.hpp"
 
-#include "LibraryModel.hpp"
+#include "libraryModel_ecore/LibraryModel.hpp"
 
-#include "NamedElement.hpp"
+#include "libraryModel_ecore/NamedElement.hpp"
 
-#include "Picture.hpp"
+#include "libraryModel_ecore/Picture.hpp"
 
 
 using namespace libraryModel_ecore;
@@ -55,7 +56,6 @@ BookImpl::~BookImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Book "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject>  BookImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BookImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getBook();
+	return LibraryModel_ecorePackageImpl::eInstance()->getBook_EClass();
 }
 
 //*********************************
@@ -153,21 +153,51 @@ std::shared_ptr< Bag<libraryModel_ecore::Picture> > BookImpl::getPictures() cons
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> BookImpl::eContainer() const
+{
+	if(auto wp = m_library.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BookImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any BookImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //00
-		case LibraryModel_ecorePackage::BOOK_AUTHORS:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_AUTHORS:
 			return getAuthors(); //01
-		case LibraryModel_ecorePackage::BOOK_LIBRARY:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
 			return getLibrary(); //02
-		case LibraryModel_ecorePackage::BOOK_PICTURES:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_PICTURES:
 			return getPictures(); //03
 	}
 	return boost::any();
+}
+
+void BookImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _Name = boost::any_cast<std::string>(newValue);
+			setName(_Name); //00
+			break;
+		}
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
+		{
+			// BOOST CAST
+			std::shared_ptr<libraryModel_ecore::LibraryModel> _library = boost::any_cast<std::shared_ptr<libraryModel_ecore::LibraryModel>>(newValue);
+			setLibrary(_library); //02
+			break;
+		}
+	}
 }
