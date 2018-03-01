@@ -195,7 +195,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 				
 				[/if]
 				[for(aBackReference : EReference | ref->sortedBy(name))]
-					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create(_type_name, handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/])) ;			
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create(_type_name, handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
 				[/for]
 			[else]
 					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>( factory->create(_type_name) ); 
@@ -210,7 +210,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 				
 				[/if]
 				[for(aBackReference : EReference | ref->sortedBy(name))]
-					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create("[aEClass.name/]", handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/])) ;			
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create("[aEClass.name/]", handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
 				[/for]
 			[else]
 					[aReference.name/] = factory->create[aEClass.name/]() ; 
@@ -257,7 +257,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 	switch(featureID)
 	{
 	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
-		case [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/]:
+		case [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/]:
 		{
 		[if (aReference.upperBound = 1)]
 			if (references.size() == 1)
@@ -307,7 +307,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 [comment]
 // Attributes that are from type EJavaClass (void*) has not to export to xml. 
 [/comment]
-		if ( this->eIsSet(package->get[aAttribute.memberName()/]()) )
+		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
 		{
 			handler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() );
 		}
