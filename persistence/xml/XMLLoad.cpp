@@ -5,7 +5,7 @@
  *      Author: Alexander
  */
 
-#include "XMLLoad.hpp"
+#include "persistence/xml/XMLLoad.hpp"
 
 namespace persistence
 {

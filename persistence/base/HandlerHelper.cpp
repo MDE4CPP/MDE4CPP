@@ -5,7 +5,7 @@
  *      Author: Alexander
  */
 
-#include "HandlerHelper.hpp"
+#include "persistence/base/HandlerHelper.hpp"
 
 #include <sstream> // used for extractType()
 

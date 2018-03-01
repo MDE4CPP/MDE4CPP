@@ -10,8 +10,8 @@
 
 #include "persistence/base/Persistence.hpp"
 
-#include "EObject.hpp"
-#include "EPackage.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
 
 //#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
 #include <string>

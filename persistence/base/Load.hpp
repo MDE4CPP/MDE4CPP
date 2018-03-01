@@ -20,13 +20,13 @@
 #include <exception>
 
 //#include "ExtendedMetaData.hpp"
-#include "LoadHandler.hpp"
+#include "persistence/base/LoadHandler.hpp"
 
-#include "EObject.hpp"
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
-#include "EStructuralFeature.hpp"
-#include "EReference.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/EReference.hpp"
 
 #include <boost/any.hpp>
 

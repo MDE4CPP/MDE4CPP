@@ -25,7 +25,6 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pluginFramework/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
@@ -33,6 +32,7 @@
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/persistence}&quot;"/>
 								</option>
 								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.763883767" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_WIN32=1"/>

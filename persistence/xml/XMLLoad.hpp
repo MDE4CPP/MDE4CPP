@@ -8,8 +8,8 @@
 #ifndef XMLLOAD_HPP_
 #define XMLLOAD_HPP_
 
-#include "Load.hpp"
-#include "XMLLoadHandler.hpp"
+#include "persistence/base/Load.hpp"
+#include "persistence/xml/XMLLoadHandler.hpp"
 
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOM.hpp>

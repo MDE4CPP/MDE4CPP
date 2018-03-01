@@ -17,8 +17,8 @@
 #define MSG_ERROR(a) std::cout<<"| ERROR    | "<<a<<std::endl
 #define MSG_FLF __FILE__<<":"<<__LINE__<<" "<<__FUNCTION__<<"() "
 
-#include "XLoadHandler.hpp"
-#include "HandlerHelper.hpp"
+#include "persistence/interface/XLoadHandler.hpp"
+#include "persistence/base/HandlerHelper.hpp"
 
 #include <map>
 #include <list>
@@ -28,8 +28,8 @@
 
 #include "boost/exception/to_string.hpp"
 
-#include "EObject.hpp"
-#include "EStructuralFeature.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 namespace persistence
 {

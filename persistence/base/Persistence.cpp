@@ -5,9 +5,9 @@
  *      Author: Alexander
  */
 
-#include "Persistence.hpp"
-#include "Load.hpp"
-#include "Save.hpp"
+#include "persistence/base/Persistence.hpp"
+#include "persistence/base/Load.hpp"
+#include "persistence/base/Save.hpp"
 
 using namespace std;
 

@@ -5,11 +5,11 @@
  *      Author: Alexander
  */
 
-#include "Load.hpp"
+#include "persistence/base/Load.hpp"
 
-#include "PluginFramework.hpp"
-#include "MDE4CPPPlugin.hpp"
-#include "EcoreModelPlugin.hpp"
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace persistence
 {

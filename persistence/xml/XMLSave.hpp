@@ -8,8 +8,8 @@
 #ifndef XMLSAVE_HPP_
 #define XMLSAVE_HPP_
 
-#include "Save.hpp"
-#include "XMLSaveHandler.hpp"
+#include "persistence/base/Save.hpp"
+#include "persistence/xml/XMLSaveHandler.hpp"
 
 #include <string>
 

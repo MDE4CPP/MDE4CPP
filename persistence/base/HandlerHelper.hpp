@@ -22,14 +22,14 @@
 #include <set>
 #include <tuple>
 
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "ENamedElement.hpp"
-#include "EObject.hpp"
-#include "EPackage.hpp"
-#include "EStructuralFeature.hpp"
-#include "EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/ENamedElement.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 namespace persistence
 {

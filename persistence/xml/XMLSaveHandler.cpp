@@ -5,7 +5,7 @@
  *      Author: Alexander
  */
 
-#include "XMLSaveHandler.hpp"
+#include "persistence/xml/XMLSaveHandler.hpp"
 
 #include <sstream> // used for addReferences()
 #include <boost/algorithm/string.hpp> // used for string splitting

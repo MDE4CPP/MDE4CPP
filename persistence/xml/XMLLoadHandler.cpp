@@ -5,7 +5,7 @@
  *      Author: Alexander
  */
 
-#include "XMLLoadHandler.hpp"
+#include "persistence/xml/XMLLoadHandler.hpp"
 
 #include <sstream> // used for getLevel()
 #include <boost/algorithm/string.hpp> // used for string splitting

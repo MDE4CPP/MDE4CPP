@@ -5,12 +5,12 @@
  *      Author: Alexander
  */
 
-#include "XMLPersistence.hpp"
-#include "Load.hpp"
-#include "Save.hpp"
+#include "persistence/xml/XMLPersistence.hpp"
+#include "persistence/base/Load.hpp"
+#include "persistence/base/Save.hpp"
 //#include "JSONSave.hpp"
-#include "XMLSave.hpp"
-#include "XMLLoad.hpp"
+#include "persistence/xml/XMLSave.hpp"
+#include "persistence/xml/XMLLoad.hpp"
 
 namespace persistence
 {

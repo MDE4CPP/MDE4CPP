@@ -8,8 +8,8 @@
 #ifndef XMLLoadHandler_HPP_
 #define XMLLoadHandler_HPP_
 
-#include "LoadHandler.hpp"
-#include "HandlerHelper.hpp"
+#include "persistence/base/LoadHandler.hpp"
+#include "persistence/base/HandlerHelper.hpp"
 
 #include <map>
 #include <list>
@@ -26,8 +26,8 @@
 
 #include "boost/exception/to_string.hpp"
 
-#include "EObject.hpp"
-#include "EStructuralFeature.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 namespace persistence
 {

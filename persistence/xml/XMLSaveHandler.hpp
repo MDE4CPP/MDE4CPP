@@ -8,8 +8,8 @@
 #ifndef XMLSaveHandler_HPP_
 #define XMLSaveHandler_HPP_
 
-#include "SaveHandler.hpp"
-#include "HandlerHelper.hpp"
+#include "persistence/base/SaveHandler.hpp"
+#include "persistence/base/HandlerHelper.hpp"
 
 #include <map>
 #include <list>
@@ -26,7 +26,7 @@
 
 #include "boost/exception/to_string.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
 namespace persistence
 {

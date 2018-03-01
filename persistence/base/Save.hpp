@@ -21,10 +21,10 @@
 #include <iostream>
 #include <string>
 
-#include "EObject.hpp"
-#include "EPackage.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
 
-#include "SaveHandler.hpp"
+#include "persistence/base/SaveHandler.hpp"
 
 namespace persistence
 {

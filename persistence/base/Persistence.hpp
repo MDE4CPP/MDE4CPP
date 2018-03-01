@@ -17,8 +17,8 @@
 #define MSG_ERROR(a) std::cout<<"| ERROR    | "<<a<<std::endl
 #define MSG_FLF __FILE__<<":"<<__LINE__<<" "<<__FUNCTION__<<"() "
 
-#include "EObject.hpp"
-#include "EPackage.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
 
 //#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
 #include <string>
