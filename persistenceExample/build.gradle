@@ -1,74 +1,21 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+}
+apply plugin: 'base' 
+
 description 'Example collection'
 
-task buildPersistenceExample(dependsOn: ['compilePersistenceExample']) {
-	group 'Examples'
-	description 'build Persistence example application in debug and release'	
-}
-task buildPersistenceExampleDebug(dependsOn: ['compilePersistenceExampleDebug']) {
-	group 'Examples'
-	description 'build Persistence example application in debug'	
-}
-task buildPersistenceExampleRelease(dependsOn: ['compilePersistenceExampleRelease']) {
-	group 'Examples'
-	description 'build Persistence example application in release'	
+task compilePersistenceExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Examples"
+	description "compile Persistence"
+
+	projectFolder = file("./src")
 }
 
-task compilePersistenceExample(dependsOn: ['compilePersistenceExampleDebug', 'compilePersistenceExampleRelease']) {
-	group 'Examples'
-	description 'compile Persistence example in debug and release'
-}
-task compilePersistenceExampleDebug {
-	group 'Examples'
-	description 'compile Persistence example in Debug'
-
-	def folder = new File(file('./.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir '.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src").absolutePath
-		}
-		exec {
-			workingDir '.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
+clean.doFirst {
+	def cmakeFolder = file("./src/.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
 	}
 }
-task compilePersistenceExampleRelease {
-	group 'Examples'
-	description 'compile Persistence example in Release'
-
-	def folder = new File(file('./.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir '.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src").absolutePath
-		}
-		exec {
-			workingDir '.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-
