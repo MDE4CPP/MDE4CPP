@@ -1,16 +1,16 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['benchmarks:buildBenchmarks', 'simpleExamples:buildSimpleExamples', 'fumlExample:Calculator:buildCalcModel']) {
+task buildAllExamples(dependsOn: ['benchmarks:buildBenchmarks', 'simpleExamples:buildSimpleExamples', 'fumlExample:Calculator:buildCalcModel', 'persistenceExample:buildPersistenceExample']) {
 	group 'Examples'
 	description 'build all example applications in debug and release'	
 }
 
-task buildAllExamplesDebug(dependsOn: ['benchmarks:buildBenchmarksDebug', 'simpleExamples:buildSimpleExamplesDebug', 'fumlExample:Calculator:buildCalcModelDebug']) {
+task buildAllExamplesDebug(dependsOn: ['benchmarks:buildBenchmarksDebug', 'simpleExamples:buildSimpleExamplesDebug', 'fumlExample:Calculator:buildCalcModelDebug', 'persistenceExample:buildPersistenceExampleDebug']) {
 	group 'Examples'
 	description 'build all example applications in debug'	
 }
 
-task buildAllExamplesRelease(dependsOn: ['benchmarks:buildBenchmarksRelease', 'simpleExamples:buildSimpleExamplesRelease', 'fumlExample:Calculator:buildCalcModelRelease']) {
+task buildAllExamplesRelease(dependsOn: ['benchmarks:buildBenchmarksRelease', 'simpleExamples:buildSimpleExamplesRelease', 'fumlExample:Calculator:buildCalcModelRelease', 'persistenceExample:buildPersistenceExampleRelease']) {
 	group 'Examples'
 	description 'build all example applications in release'	
 }
