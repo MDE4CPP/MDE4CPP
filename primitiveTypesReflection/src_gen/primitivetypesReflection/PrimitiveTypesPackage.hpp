@@ -14,22 +14,13 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
- 
-#include "Factory.hpp"
-#include "Package.hpp"	
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-namespace PrimitiveTypes 
-{
-
-	class PrimitiveTypesPackage;
-}
+#include "uml/Package.hpp"	
 
 namespace uml 
 {
-	class Comment;
 	class PrimitiveType;
-	class ProfileApplication;
 }
 
 namespace PrimitiveTypes 

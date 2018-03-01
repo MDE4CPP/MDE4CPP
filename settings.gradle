@@ -1,1 +1,1 @@
-include 'ecoreReflection', 'ecoreReflection:model', 'primitiveTypesReflection', 'primitiveTypesReflection:model', 'umlReflection', 'umlReflection:model'
+include 'abstractDataTypes', 'pluginFramework', 'ecoreReflection', 'primitiveTypesReflection', 'umlReflection'

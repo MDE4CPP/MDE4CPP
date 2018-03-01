@@ -14,10 +14,16 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 #include "ecoreReflection/EcorePackage.hpp"
-#include "impl/PackageImpl.hpp"	
+#include "uml/impl/PackageImpl.hpp"	
+namespace uml
+{
+	class LiteralInteger;
+	class LiteralUnlimitedNatural;
+	class UmlFactory;
+}
 
 namespace Ecore
 {
@@ -177,6 +183,11 @@ namespace Ecore
 			virtual std::shared_ptr<uml::Class> get_Ecore_EEList_E();
 			virtual std::shared_ptr<uml::RedefinableTemplateSignature> get_Ecore_EEList_RedefinableTemplateSignature();
 			virtual std::shared_ptr<uml::Class> get_Ecore_EEnum();
+			virtual std::shared_ptr<uml::Class> get_Ecore_EEnumLiteral();
+			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_eEnum();
+			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_instance();
+			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_literal();
+			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_value();
 			virtual std::shared_ptr<uml::Property> get_Ecore_EEnum_eLiterals();
 			virtual std::shared_ptr<uml::Operation> get_Ecore_EEnum_getEEnumLiteralByLiteral_EString();
 			virtual std::shared_ptr<uml::Parameter> get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal();
@@ -187,11 +198,6 @@ namespace Ecore
 			virtual std::shared_ptr<uml::Operation> get_Ecore_EEnum_getEEnumLiteral_EString();
 			virtual std::shared_ptr<uml::Parameter> get_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name();
 			virtual std::shared_ptr<uml::Parameter> get_Ecore_EEnum_getEEnumLiteral_EString_return();
-			virtual std::shared_ptr<uml::Class> get_Ecore_EEnumLiteral();
-			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_eEnum();
-			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_instance();
-			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_literal();
-			virtual std::shared_ptr<uml::Property> get_Ecore_EEnumLiteral_value();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EEnumerator();
 			virtual std::shared_ptr<uml::Class> get_Ecore_EFactory();
 			virtual std::shared_ptr<uml::Operation> get_Ecore_EFactory_convertToString_EDataType_EJavaObject();
@@ -221,15 +227,15 @@ namespace Ecore
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EIntegerObject();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EInvocationTargetException();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EJavaClass();
-			virtual std::shared_ptr<uml::Class> get_Ecore_EJavaClass_T();
 			virtual std::shared_ptr<uml::RedefinableTemplateSignature> get_Ecore_EJavaClass_RedefinableTemplateSignature();
+			virtual std::shared_ptr<uml::Class> get_Ecore_EJavaClass_T();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EJavaObject();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_ELong();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_ELongObject();
 			virtual std::shared_ptr<uml::PrimitiveType> get_Ecore_EMap();
 			virtual std::shared_ptr<uml::Class> get_Ecore_EMap_K();
-			virtual std::shared_ptr<uml::Class> get_Ecore_EMap_V();
 			virtual std::shared_ptr<uml::RedefinableTemplateSignature> get_Ecore_EMap_RedefinableTemplateSignature();
+			virtual std::shared_ptr<uml::Class> get_Ecore_EMap_V();
 			virtual std::shared_ptr<uml::Class> get_Ecore_EModelElement();
 			virtual std::shared_ptr<uml::Property> get_Ecore_EModelElement_eAnnotations();
 			virtual std::shared_ptr<uml::Operation> get_Ecore_EModelElement_getEAnnotation_EString();
@@ -544,6 +550,15 @@ namespace Ecore
 			std::shared_ptr<uml::Class> ecore_EEList_E = nullptr;
 			std::shared_ptr<uml::RedefinableTemplateSignature> ecore_EEList_RedefinableTemplateSignature = nullptr;
 			std::shared_ptr<uml::Class> ecore_EEnum = nullptr;
+			std::shared_ptr<uml::Class> ecore_EEnumLiteral = nullptr;
+			std::shared_ptr<uml::Property> ecore_EEnumLiteral_eEnum = nullptr;
+			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = nullptr;
+			std::shared_ptr<uml::Property> ecore_EEnumLiteral_instance = nullptr;
+			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = nullptr;
+			std::shared_ptr<uml::Property> ecore_EEnumLiteral_literal = nullptr;
+			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = nullptr;
+			std::shared_ptr<uml::Property> ecore_EEnumLiteral_value = nullptr;
+			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = nullptr;
 			std::shared_ptr<uml::Property> ecore_EEnum_eLiterals = nullptr;
 			std::shared_ptr<uml::LiteralInteger> ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> ecore_EEnum_eLiterals_upperValue_LiteralUnlimitedNatural_Ecore_EEnum_eLiterals = nullptr;
@@ -562,15 +577,6 @@ namespace Ecore
 			std::shared_ptr<uml::LiteralInteger> ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name = nullptr;
 			std::shared_ptr<uml::Parameter> ecore_EEnum_getEEnumLiteral_EString_return = nullptr;
 			std::shared_ptr<uml::LiteralInteger> ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return = nullptr;
-			std::shared_ptr<uml::Class> ecore_EEnumLiteral = nullptr;
-			std::shared_ptr<uml::Property> ecore_EEnumLiteral_eEnum = nullptr;
-			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = nullptr;
-			std::shared_ptr<uml::Property> ecore_EEnumLiteral_instance = nullptr;
-			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = nullptr;
-			std::shared_ptr<uml::Property> ecore_EEnumLiteral_literal = nullptr;
-			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = nullptr;
-			std::shared_ptr<uml::Property> ecore_EEnumLiteral_value = nullptr;
-			std::shared_ptr<uml::LiteralInteger> ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_EEnumerator = nullptr;
 			std::shared_ptr<uml::Class> ecore_EFactory = nullptr;
 			std::shared_ptr<uml::Operation> ecore_EFactory_convertToString_EDataType_EJavaObject = nullptr;
@@ -614,15 +620,15 @@ namespace Ecore
 			std::shared_ptr<uml::PrimitiveType> ecore_EIntegerObject = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_EInvocationTargetException = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_EJavaClass = nullptr;
-			std::shared_ptr<uml::Class> ecore_EJavaClass_T = nullptr;
 			std::shared_ptr<uml::RedefinableTemplateSignature> ecore_EJavaClass_RedefinableTemplateSignature = nullptr;
+			std::shared_ptr<uml::Class> ecore_EJavaClass_T = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_EJavaObject = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_ELong = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_ELongObject = nullptr;
 			std::shared_ptr<uml::PrimitiveType> ecore_EMap = nullptr;
 			std::shared_ptr<uml::Class> ecore_EMap_K = nullptr;
-			std::shared_ptr<uml::Class> ecore_EMap_V = nullptr;
 			std::shared_ptr<uml::RedefinableTemplateSignature> ecore_EMap_RedefinableTemplateSignature = nullptr;
+			std::shared_ptr<uml::Class> ecore_EMap_V = nullptr;
 			std::shared_ptr<uml::Class> ecore_EModelElement = nullptr;
 			std::shared_ptr<uml::Property> ecore_EModelElement_eAnnotations = nullptr;
 			std::shared_ptr<uml::LiteralInteger> ecore_EModelElement_eAnnotations_lowerValue_LiteralInteger_Ecore_EModelElement_eAnnotations = nullptr;
@@ -816,6 +822,24 @@ namespace Ecore
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 #endif /* end of include guard: ECORE_METAMODELPACKAGEIMPL_HPP */

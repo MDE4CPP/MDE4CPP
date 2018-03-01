@@ -1,77 +1,20 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: EcoreReflection'
 
 task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
 	group 'EcoreReflection'
-	description 'build EcoreReflection in debug and release'
-}
-task buildEcoreReflectionDebug(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionDebug']) {
-	group 'EcoreReflection'
-	description 'build EcoreReflection in debug'
-}
-task buildEcoreReflectionRelease(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionRelease']) {
-	group 'EcoreReflection'
-	description 'build EcoreReflection in release'
+	description 'build EcoreReflection'
 }
 
-task compileEcoreReflection(dependsOn: ['compileEcoreReflectionDebug', 'compileEcoreReflectionRelease']) {
+task compileEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'EcoreReflection'
-	description 'compile EcoreReflection in debug and release'
-}
-task compileEcoreReflectionDebug {
-	group 'EcoreReflection'
-	description 'compile EcoreReflection in Debug'
+	description 'compile EcoreReflection'
 
-	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/EcoreReflection").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-task compileEcoreReflectionRelease {
-	group 'EcoreReflection'
-	description 'compile EcoreReflection in Release'
-
-	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/EcoreReflection/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/EcoreReflection").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/EcoreReflection/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
+	projectFolder = file("./src_gen/EcoreReflection")
 }
 
 task generateEcoreReflection(type: JavaExec) {
@@ -94,9 +37,6 @@ task generateEcoreReflection(type: JavaExec) {
 }
 
 compileEcoreReflection.mustRunAfter generateEcoreReflection
-compileEcoreReflectionDebug.mustRunAfter generateEcoreReflection
-compileEcoreReflectionRelease.mustRunAfter generateEcoreReflection
-
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')

@@ -2,98 +2,6 @@ apply plugin: 'base'
 
 description 'Common collection'
 
-task buildReflectionModels(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflection', 'primitiveTypesReflection:buildPrimitivetypesReflection', 'umlReflection:buildUmlReflection']) {
-	group 'reflection models'
-	description 'generate and compile reflection models in debug and release'
-}
-task buildReflectionModelsDebug(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionDebug', 'primitiveTypesReflection:buildPrimitivetypesReflectionDebug', 'umlReflection:buildUmlReflectionDebug']) {
-	group 'reflection models'
-	description 'generate and compile reflection models in debug'
-}
-task buildReflectionModelsRelease(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionRelease', 'primitiveTypesReflection:buildPrimitivetypesReflectionRelease', 'umlReflection:buildUmlReflectionRelease']) {
-	group 'reflection models'
-	description 'generate and compile reflection models in release'
-}
-
-tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflection')
-tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflection')
-
-tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionDebug')
-tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionDebug')
-
-tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionRelease')
-tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionRelease')
-
-task compilePluginFramework(dependsOn: ['compilePluginFrameworkDebug', 'compilePluginFrameworkRelease']) {
-	group 'PluginFramework'
-	description 'compile PluginFramework in Debug and Release'
-}
-task compilePluginFrameworkDebug {
-	group 'PluginFramework'
-	description 'compile PluginFramework in Debug'
-
-	def folder = new File(file('./pluginFramework/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'pluginFramework/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./pluginFramework").absolutePath
-		}
-		exec {
-			workingDir 'pluginFramework/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-task compilePluginFrameworkRelease {
-	group 'PluginFramework'
-	description 'compile PluginFramework in Release'
-
-	def folder = new File(file('./pluginFramework/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'pluginFramework/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./pluginFramework").absolutePath
-		}
-		exec {
-			workingDir 'pluginFramework/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-
-task deliverAbstractDataTypes(type: Copy) {
-	group 'abstractDataTypes'
-	description 'deliver abstract data types header to %MDE4CPP_HOME%/application/include/abstractDataTypes'
-	from "abstractDataTypes"
-	into System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
-	include "**/*.hpp"
-	exclude "build", ".gradle"
-	inputs.dir file("abstractDataTypes/.")
-	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes")
-}
-
 task deliverPersistence(type: Copy) {
   group 'Persistence'
 	description 'deliver persistence header to %MDE4CPP_HOME%/application/include/persistence'
@@ -166,14 +74,5 @@ task compilePersistenceRelease {
 				commandLine 'cmd', '/c', 'mingw32-make install' 
 			}
 		}
-	}
-}
-
-
-clean.doFirst {
-	def cmakeFolder = file('./pluginFramework/.cmake')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
 	}
 }

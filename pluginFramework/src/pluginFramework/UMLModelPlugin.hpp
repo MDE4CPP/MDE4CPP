@@ -5,12 +5,18 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef UMLMODELPLUGIN_HPP_
-#define UMLMODELPLUGIN_HPP_
+#ifndef PLUGINFRAMEWORK_UMLMODELPLUGIN_HPP
+#define PLUGINFRAMEWORK_UMLMODELPLUGIN_HPP
 
-#include "MDE4CPPPlugin.hpp"
-#include "Factory.hpp"
-#include "Package.hpp"
+#include <memory>
+
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+
+namespace uml
+{
+	class Factory;
+	class Package;
+}
 
 class UMLModelPlugin: public MDE4CPPPlugin
 {

@@ -1,0 +1,21 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+}
+apply plugin: "base"
+
+description "Build task for project: pluginFramework"
+
+task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "pluginFramework"
+	description "compile pluginFramework"
+
+	projectFolder = file("./src/pluginFramework")
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./src/pluginFramework/.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
