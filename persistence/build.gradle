@@ -1,0 +1,35 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+}
+apply plugin: 'base' 
+
+description 'Common collection'
+
+task deliverPersistence(type: Copy) {
+	group 'Persistence'
+	description 'deliver persistence header to %MDE4CPP_HOME%/application/include/persistence'
+	from (".") {
+		include "interface/*.hpp"
+		include "base/Persistence.hpp"
+		include "xml/XMLPersistence.hpp"
+	}
+	exclude "build", ".gradle"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence"
+	inputs.dir file(".")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
+}
+
+task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Persistence"
+	description "compile Persistence"
+
+	projectFolder = file(".")
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
