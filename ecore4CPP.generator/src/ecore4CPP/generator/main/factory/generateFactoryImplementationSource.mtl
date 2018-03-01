@@ -19,12 +19,24 @@
 
 [template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
 [file (anEPackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
-#include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[anEPackage.name/]/impl/[className/].hpp"
+
+#include <cassert>
+
+[generateAbstractDataTypesIncludes()/]
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [if (not(anEPackage.name = 'ecore'))]
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 [/if]
+
+[if(anEPackage.name = 'uml')]
+#include "uml/impl/ElementImpl.hpp"
+[/if]
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+[/for]
 
 [comment namespace /]
 using namespace [anEPackage.name/];
@@ -36,7 +48,7 @@ using namespace [anEPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("[aClass.generateTypeClass()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
+	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 }
 
@@ -53,37 +65,115 @@ using namespace [anEPackage.name/];
 // creators
 //*********************************
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class) const
+std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
+{
+	switch(classID)
+	{
+	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+		case [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]:
+		{
+[if(ref->size()>0)]
+			if (nullptr == container)
+			{
+[/if]
+				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]());
+[if(ref->size()>0)]			}
+			else
+			{
+[/if]
+				[if(ref->size()>1)]
+				switch(referenceID)
+				{
+					[for(aReference:EReference | ref->sortedBy(name))]
+					//[aClass.name/] has [aReference.name/] as a containment
+					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
+						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
+					}
+					[/for]
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
+				[elseif(ref->size()=1)]
+				auto castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
+				assert(castedContainer);
+				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
+				[/if]
+			[if(ref->size()>0)]}[/if]
+		}
+	[/let]
+	[/for]
+	default:
+	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << classID <<" not found" << std::endl;
+	}
+	return nullptr;
+}
+
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
 {
-	//TODO: still two times run through map
-	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
-	
-	std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> _createdObject;
-	if(iter != m_creatorMap.end())
+	auto iter = m_idMap.find(_className);
+	if(iter != m_idMap.end())
     {
-		//invoke the creator function
-        return std::shared_ptr<ecore::EObject>(iter->second());
+		//get the ID
+        unsigned int id = iter->second;
+		return create(id);
     }
 
     return nullptr;
 }
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-[aClass.generateTypeClass()/]* [className/]::create[aClass.name/] () const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container, const unsigned int referenceID) const
 {
-	return new [aClass.name.toUpperFirst()/]Impl();
+	auto iter = m_idMap.find(_className);
+	if(iter != m_idMap.end())
+    {
+		//get the ID
+        unsigned int id = iter->second;
+		return create(id, _container, referenceID);
+    }
+
+    return nullptr;
 }
+
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
+{
+	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl());
+	return element;
+}
+[let ref : OrderedSet(EReference) = aClass.getAllContainers()]
+[for(aReference:EReference | ref->sortedBy(name))]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const
+{
+	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, false)/]
+}
+[if(aClass.getClassifierIDName().size() > 0)]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID) const
+{
+	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, true)/]
+}[/if]
+
+[/for]
+[/let]
 [/for]
 
 std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
@@ -91,4 +181,34 @@ std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/
 	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
 }
 [/file]
+[/template]
+
+[template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage, addID : Boolean)]
+[if(ref->select(eType = aReference.eType)->size()>1)]
+std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]));
+[else]
+std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
+[/if]
+[if(addID)]
+element->set[anEClass.getClassifierIDName()/]ID(classID);
+[/if]
+[if(not aReference.eOpposite.name.oclIsUndefined())]
+[let r : EReference = findLowerSubset(aReference.eType.oclAsType(EClass), anEClass, aReference.eOpposite)]
+[if(aReference.isBackReference())]
+if(auto wp = par_[aReference.name/].lock())
+{
+[else]
+if(nullptr != par_[aReference.name/])
+{
+[/if]
+[if(r.upperBound <> 1)]
+		[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->get[r.name.toUpperFirst()/]()->push_back(element);
+[else]
+		[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->set[r.name.toUpperFirst()/](element);
+[/if]
+}
+[/let]
+[/if]    
+return element;
+
 [/template]

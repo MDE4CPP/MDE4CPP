@@ -14,12 +14,14 @@
  */]
 [module generateType( 'http://www.eclipse.org/emf/2002/Ecore')]
 
-[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
-[query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
+[import ecore4CPP::generator::main::helper /]
 
-[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+
+[template public generateParameterList(aOperation:EOperation) post(trim())]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerate())) separator (',')]
+[sParameter.generateParameterType()/] [sParameter.name/][/for]
+[/template]
+
 
 [template public generateCppType(anEDataType : EGenericType)]
 [if (anEDataType.oclIsUndefined())]
@@ -41,10 +43,6 @@ boost::any[else]
 [anEDataType.transformType()/][/if]
 [/template]
 
-[template public generateTypeClass(anEDataType : EClass)]
-[anEDataType.name/]
-[/template]
-
 [template public generateParameterType(eParameter : EParameter)]
 [if (not(eParameter.upperBound = 1))]
 std::shared_ptr<Bag<[eParameter.eGenericType.generateCppType()/]> > [elseif (not eParameter.eType.oclIsKindOf(EDataType))]
@@ -52,7 +50,7 @@ std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
 [eParameter.eGenericType.generateCppType()/] [/if]
 [/template]
 
-[template public generateOperationType(eOperation : EOperation)]
+[template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
 [if (not eOperation.eGenericType.oclIsKindOf(EDataType))]
 std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
@@ -60,12 +58,9 @@ std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
 std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
 [eOperation.eGenericType.generateCppType()/] [/if]
 
-[comment]std::shared_ptr<std::vector<[if (not eOperation.eGenericType.oclIsKindOf(EDataType))]std::shared_ptr<[/if][eOperation.eGenericType.generateCppType()/][if (not eOperation.eGenericType.oclIsKindOf(EDataType))]>[/if]>>[elseif ((not eOperation.eType.oclIsUndefined()) and (not eOperation.eType.oclIsKindOf(EDataType)))]
-std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
-[eOperation.eGenericType.generateCppType()/] [/if][/comment]
 [/template]
 
-[template public generateReferenceType(eReference : EReference)]
+[template public generateReferenceType(eReference : EReference) post(trim())]
 [generateReferenceType(true)/]
 [/template]
 
@@ -85,19 +80,33 @@ std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
 m_[m.oclAsType(EReference).name/][/for][/let]
 [/template]
 
-[template public generateReferenceType(eReference : EReference, pointer : Boolean)]
+[template public generateReferenceType(eReference : EReference, pointer : Boolean) post(trim())]
 [if (eReference.upperBound = 1)]
-[if(pointer)]std::shared_ptr<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if][else]
-[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
-		[if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] > [if(pointer)]>[/if]
-[elseif(eReference.oclAsType(EModelElement).hasSubset())]
-		[if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] > [if(pointer)]>[/if]
-	[elseif(eReference.oclAsType(EModelElement).isUnion())]
-		[if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType()/]> [if(pointer)]>[/if][else]
-	[if(pointer)]std::shared_ptr<[/if] Bag<[eReference.eGenericType.generateCppType()/]> [if(pointer)]>[/if]
+	[if(pointer)][eReference.pointertype()/]<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if]
+[else]
+	[if(eReference.isSubsetUnion())]
+		[if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
+	[elseif(eReference.hasSubset())]
+		[if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
+	[elseif(eReference.isUnion())]
+		[if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
+	[else]
+		[if(pointer)]std::shared_ptr<[/if]Bag<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
 	[/if]
 [/if]
 [/template]
+
+[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey('AggregationKind')) then aReference.valueKey('AggregationKind')='shared' else false endif/]
+[query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
+
+[template public pointertype(aReference : EReference) post(trim())]
+[if(isBackReference())]
+std::weak_ptr
+[else]
+std::shared_ptr
+[/if]
+[/template]
+
 
 [template public generateReferenceTypeBag(eReference : EReference)]
 [if (not(eReference.upperBound = 1))]
@@ -160,7 +169,7 @@ float
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EEList')]
-std::vector
+Bag
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EDate')]
@@ -176,7 +185,7 @@ boost::any
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'ETreeIterator')]
-std::vector
+Bag
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaClass')]
@@ -198,3 +207,5 @@ std::string
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
 [anEClassifier.name/]
 [/template]
+
+[query public requiresAny(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then true else (name = 'EEnumerator' or name = 'EDiagnosticChain' or name = 'EJavaObject') endif/]

@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [**
- * Helper for finding hidden functions
+ * Helper for finding hidden functions (currently unused)
 */]
 [query public getSuperClassOperations(aOperation : EOperation) : Set(EOperation) = aOperation.eContainingClass.eAllOperations->select(not (aOperation.eContainingClass = eContainingClass))->flatten() /]
 [query public hasOverrideInClass(aOperation : EOperation, aClass: EClass) : Boolean = aClass.eOperations->forAll(op | op.isOverrideOf(aOperation) ) /]
@@ -31,29 +31,28 @@
 [query public getOverideSuffix(aOperation : EOperation) : String = if aOperation.isOverride() then 'override' else '' endif  /]
 
 
-[**
- * The documentation of the template generateOperation.
- * @param anEOperation
- */]
-[template public generateOperationDecl(aOperation : EOperation, impl: Boolean)]
-[if (((impl or (not hasImplOnly())) and (not ignore())))]
-[aOperation.generateDokumentation()/] 
-virtual [aOperation.generateOperationType()/] [aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
-[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the model factory
+*/]
+
+[template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
+[if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
+[anEOperation.generateDokumentation()/] 
+virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
 
 
 
 [/template]
 
-
-[template public generateOperationImplementation(aOperation : EOperation) ? (not ignore())]
+[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
 [comment[aOperation.generateDokumentation()/] 
-[aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
-[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if]
+[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
 {
 [if (hasKey('body'))]
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	[valueKey('body')/]
+	//end of body
 [else]
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -61,56 +60,41 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([for (sParamete
 }
 [/template]
 
-[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.operationNumberNameUpper()/] = [aOperation.getOperationID()/];
+
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the metamodel package
+*/]
+
+[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.getMemberNameUpperFirst()).concat('()') endif/]
+
+[template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
+[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
 
 [/template]
 
-[template public generateOperationCreation(aOperation : EOperation) ? ( not hasImplOnly()) ]
-createEOperation([aOperation.eContainingClass.classNameMember()/], [operationNumberNameUpper(aOperation)/]);
+[template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
+[anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
+[anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
+[anEOperation.getClassMemberName()/]->setLowerBound([anEOperation.lowerBound/]);
+[anEOperation.getClassMemberName()/]->setUpperBound([anEOperation.upperBound/]);
+[anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
+[anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
 
-[/template]
-
-[template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.operationNumberName()/]() const [abstractSufix(impl)/];
-
-[/template]
-
-[query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
-
-[template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
-std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
+[for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
 {
-	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.classNameMember()/]->getEOperations()->at([aOperation.listNumber()/]));
+	std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
+	parameter->setName("[anEParameter.name/]");
+	parameter->setEType([anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]);
+	parameter->setLowerBound(0);
+	parameter->setUpperBound(1);
+	parameter->setUnique(true);
+	parameter->setOrdered(true);
 }
+[/for]
 
 [/template]
 
-[template public generateOperationInitialization(aOperation : EOperation)? ( not hasImplOnly() )]
-op = initEOperation([aOperation.packageGetter()/],[aOperation.eType.simpleDatatypeGetter(aOperation)/], "[aOperation.name.toString()/]", [aOperation.lowerBound/], [aOperation.upperBound/], [aOperation.unique.toString()/],[aOperation.ordered.toString()/] );
-[aOperation.eParameters.generateAddParemeter()/]
+[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOperationID()/];
 
 [/template]
-
-
-[template public generateAddParemeter(aParameter : EParameter)]
-addEParameter(op ,[aParameter.eType.simpleDatatypeGetter(aParameter.eOperation)/]  , "[aParameter.name/]",0,1, true,true);
-
-[/template]
-
-[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.name).concat('()') endif/]
-
- 
-[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(operationNumberName()).concat('()') /]
-
-
-[query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
-
-[query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '__'.concat(aOperation.singlemultipleParameter()) else '' endif /]
-
-[query public operationNumberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toUpperFirst().concat('___'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
-[query public operationNumberNameUpper(aOperation : EOperation) : String = aOperation.operationNumberName().toUpperCase() /]
-
-
-
-

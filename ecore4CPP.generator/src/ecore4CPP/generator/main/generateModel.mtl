@@ -15,9 +15,11 @@
 [module generateModel('http://www.eclipse.org/emf/2002/Ecore')]
  
 [import ecore4CPP::generator::main::generateAttribute/]
+[import ecore4CPP::generator::main::generateClass/]
 [import ecore4CPP::generator::main::generateOperation/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
 [query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
@@ -26,12 +28,25 @@
 [file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-#include <string>
+[if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
+[/if]
+#include <memory>
+#include <string>
+
+[if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
 #include "boost/any.hpp"
+[/if]
+
+// forward declarations
+[generateAbstractDataTypesForwardDeclaration()/]
+
+[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+namespace boost
+{
+	class any;
+}
+[/if]
 
 //*********************************
 // generated Includes
@@ -46,20 +61,19 @@ namespace [element.ePackage.name/]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
 [for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 [/if]
 
 //*********************************
-[comment namespace /]
 namespace [aClass.ePackage.name/] 
 {
 	[aClass.generateDokumentation()/]
@@ -67,17 +81,34 @@ namespace [aClass.ePackage.name/]
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
-[/if]
+[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
 	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
 			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
-	
+
 		protected:
 			[aClass.name.toUpperFirst()/](){}
 
+			[if(aClass.containsContainerAttribute())]
+
+			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+			//Additional constructors for the containments back reference
+
+			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+					[/if]
+			[else]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+			[/if]
+			[/for]
+			[/let]
+			[/if]
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~[aClass.name.toUpperFirst()/]() {}
@@ -85,32 +116,34 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations.generateOperationDecl(false)/]
+			[aClass.eOperations->sortedBy(name).generateOperationDecl(false)/]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes.generateAttributeAccessorsDecl(false)/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(false)/]
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences.generateReferenceDecl(false)/]
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(false)/]
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			[aClass.eAttributes.generateAttributeProtectedMember()/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeProtectedMember()/]
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			[aClass.eReferences.generateProtectedReference()/]
+			[aClass.eReferences->sortedBy(name).generateProtectedReference()/]
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			[aClass.generateUnionGetterDeclaretaion(false)/] 
+			[aClass.generateUnionGetterDeclaretaion(false)/]
+
+			[aClass.generateEContainerOperation(false)/]
 	};
 
 }

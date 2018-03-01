@@ -18,42 +18,42 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and (aAttribute.upperBound = 1)/]
-[query public hasGetter(aAttribute : EAttribute) : EBoolean = true or hasKey('getterbody') /]
+[query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and (anEAttribute.upperBound = 1)/]
+[query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey('getterbody') /]
 
 [***###########################################################################################
  * Section for model and class implementation of an Attribute
  */]
 
-[template public generateAttributeAccessorsDecl(aAttribute : EAttribute, impl : Boolean)]
-[aAttribute.generateAttributeGetterDecleration(impl)/]
-[aAttribute.generateAttributeSetterDecleration(impl)/]
+[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
+[anEAttribute.generateAttributeGetterDecleration(impl)/]
+[anEAttribute.generateAttributeSetterDecleration(impl)/]
 [/template]
 
-[template public generateAttributeProtectedMember(aAttribute : EAttribute)]
-[aAttribute.generateDokumentation()/] 
-[if (not(aAttribute.upperBound = 1))]
-[aAttribute.generateAttributeType()/] m_[aAttribute.name/]; [else]
-[aAttribute.generateAttributeType()/] m_[aAttribute.name/] [if (aAttribute.defaultValueLiteral->notEmpty())]= [if (aAttribute.eType.oclIsTypeOf(EEnum))][aAttribute.eType.name/]::[aAttribute.defaultValueLiteral.toUpperCase()/] [else] [aAttribute.defaultValueLiteral/][/if][/if];
+[template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
+[anEAttribute.generateDokumentation()/] 
+[if (not(anEAttribute.upperBound = 1))]
+[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; [else]
+[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [if (anEAttribute.defaultValueLiteral->notEmpty())]= [if (anEAttribute.eType.oclIsTypeOf(EEnum))][anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/] [else] [anEAttribute.defaultValueLiteral/][/if][/if];
 [/if]
 [/template]
 
-[template public generateAttributeInit(aAttribute : EAttribute) ? (not(aAttribute.upperBound = 1))]
-m_[aAttribute.name/].reset(new Bag<[aAttribute.eGenericType.generateCppType()/]>());
+[template public generateAttributeInit(anEAttribute : EAttribute) ? (not(anEAttribute.upperBound = 1))]
+m_[anEAttribute.name/].reset(new Bag<[anEAttribute.eGenericType.generateCppType()/]>());
 [/template]
 
-[template public generateAttributeGetterDecleration(aAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
-[aAttribute.generateDokumentation()/] 
-virtual [if (aAttribute.eType.oclIsKindOf(EDataType))]
-[aAttribute.generateAttributeType()/] [else]
-std::shared_ptr<[aAttribute.generateAttributeType()/]> [/if]
- [aAttribute.GetterName()/]() const [abstractSufix(impl)/];
+[template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
+[anEAttribute.generateDokumentation()/] 
+virtual [if (anEAttribute.eType.oclIsKindOf(EDataType))]
+[anEAttribute.generateAttributeType()/] [else]
+std::shared_ptr<[anEAttribute.generateAttributeType()/]> [/if]
+ [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
 
 [/template]
 
-[template public generateAttributeSetterDecleration(aAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
-[aAttribute.generateDokumentation()/] 
-virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])[abstractSufix(impl)/]; 
+[template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
+[anEAttribute.generateDokumentation()/] 
+virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])[abstractSufix(impl)/]; 
 
 
 [/template]
@@ -61,47 +61,55 @@ virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _
 [***
  * Section for the Attribute cpp implementation
 */]
-[template public generateAttributeGetterImplementationCpp(aAttribute : EAttribute)? (hasGetter())]
-[aAttribute.generateAttributeType()/] [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.GetterName()/]() const 
+[template public generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
+[anEAttribute.generateAttributeType()/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
-	return m_[aAttribute.name/];
+	return m_[anEAttribute.name/];
 }
 [/template]
 
-[template public generateAttributeSetterImplementationCpp(aAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
-void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
+[template public generateAttributeSetterImplementationCpp(anEAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])
 {
-	m_[aAttribute.name/] = _[aAttribute.name/];
+	m_[anEAttribute.name/] = _[anEAttribute.name/];
 } 
 [/template]
+
 
 [***###########################################################################################
  * Section for creating the Attribute elements in the metamodel package
 */]
 
-[template public generateAttributeInitialization(aAttribute : EAttribute)]
-initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], nullptr, [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
-[/template]
-
-[template public generateStaticAttributeID(aAttribute : EAttribute)]
-static const int [aAttribute.memberNameUpper()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
+[template public generateAttributeCreation(anEAttribute : EAttribute)]
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
 
 [/template]
 
-[template public generateAttributeGetter(aAttribute : EAttribute,impl : Boolean) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttribute.memberName()/]() const [abstractSufix(impl)/];
-
-[/template]
-
-[template public generateAttributeGetterImpl(aAttribute : EAttribute)]
-std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> [aAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aAttribute.memberName()/]() const
+[template public generateAttributeInitialization(anEAttribute : EAttribute)]
+[anEAttribute.getClassMemberName()/] = [anEAttribute.packageGetter()/];
+[anEAttribute.getClassMemberName()/]->setName("[anEAttribute.name/]");
+[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+[anEAttribute.getClassMemberName()/]->setLowerBound([anEAttribute.lowerBound/]);
+[anEAttribute.getClassMemberName()/]->setUpperBound([anEAttribute.upperBound/]);
+[anEAttribute.getClassMemberName()/]->setTransient([anEAttribute.transient.toString()/]);
+[anEAttribute.getClassMemberName()/]->setVolatile([anEAttribute.volatile.toString()/]);
+[anEAttribute.getClassMemberName()/]->setChangeable([anEAttribute.changeable.toString()/]);
+[anEAttribute.getClassMemberName()/]->setUnsettable([anEAttribute.unsettable.toString()/]);
+[anEAttribute.getClassMemberName()/]->setUnique([anEAttribute.unique.toString()/]);
+[anEAttribute.getClassMemberName()/]->setDerived([anEAttribute.derived.toString()/]);
+[anEAttribute.getClassMemberName()/]->setOrdered([anEAttribute.ordered.toString()/]);
+[anEAttribute.getClassMemberName()/]->setID([anEAttribute.iD.toString()/]);
 {
-	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aAttribute)/]>([aAttribute.eContainingClass.classNameMember()/]->getEStructuralFeatures()->at([aAttribute.listNumber()/]));
+	std::string defaultValue = "[anEAttribute.defaultValueLiteral/]";
+	if (!defaultValue.empty())
+	{
+	   [anEAttribute.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
+	}
 }
 
 [/template]
 
-[template public generateAttributeCreation(aAttribute : EAttribute)]
-createEAttribute([aAttribute.eContainingClass.classNameMember()/], [aAttribute.memberNameUpper()/]);
+[template public generateStaticAttributeID(anEAttribute : EAttribute)]
+static const int [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.eContainingClass.getClassifierID()/][anEAttribute.getFeatureID()/];
 
 [/template]
