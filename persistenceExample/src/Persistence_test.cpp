@@ -8,6 +8,7 @@
 #ifdef NDEBUG
 #define MSG_DEBUG(a) /**/
 #else
+#include <iostream>
 #define MSG_DEBUG(a) std::cout<<"| DEBUG    | "<<a<<std::endl
 #endif
 #define MSG_WARNING(a) std::cout<<"| WARNING  | "<<a<<std::endl
@@ -16,12 +17,14 @@
 
 #include <omp.h>
 #include <stdlib.h>
+#include <string>
+#include <memory>
 
 #include "persistence/xml/XMLPersistence.hpp"
 #include "TestModel.hpp"
 
-#include "EPackage.hpp"
-#include "EObject.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EObject.hpp"
 
 int main ()
 {

@@ -8,9 +8,9 @@
 #ifndef _TESTMODEL_HPP_
 #define _TESTMODEL_HPP_
 
-#include "EcoreFactory.hpp"
-#include "EcorePackage.hpp"
-#include "impl/EcoreFactoryImpl.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
