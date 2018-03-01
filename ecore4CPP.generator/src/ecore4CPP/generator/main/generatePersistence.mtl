@@ -1,0 +1,383 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePersistence('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+
+
+[template public generatePersistenceNSPath(path : EBoolean)]
+[if(path)]persistence/interface[else]persistence::interface[/if]
+[/template]
+
+[template public generatePersistenceInclude(aClass : EClass) ]
+#include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
+#include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
+#include <exception> // used in Persistence
+[/template]
+
+[template public generatePersistenceDecl(aClass : EClass, impl : Boolean) ]
+[generatePersistenceLoadDecl(aClass, impl)/]
+[generatePersistenceResolveReferenceDecl(aClass, impl)/]
+[generatePersistenceSaveDecl(aClass, impl)/]
+[/template]
+
+[template public generatePersistenceLoadDecl(aClass: EClass, impl : EBoolean)]
+virtual void load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> handler) [abstractSufix(impl)/];
+[/template]
+[template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
+virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
+[/template]
+[template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
+virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> handler) const [abstractSufix(impl)/];
+[/template]
+
+
+[template public generatePersistenceImpl(aClass : EClass) ]
+[generatePersistenceLoadImpl(aClass)/]
+
+[generatePersistenceResolveReferenceImpl(aClass)/]
+
+[generatePersistenceSaveImpl(aClass)/]
+[/template]
+
+[template public generatePersistenceLoadImpl(aClass: EClass)]
+void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> handler)
+{
+	try
+	{
+		// get EcoreFactory
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'EcoreFactory')/]> factory = [needNamespace(aClass.ePackage, 'EcoreFactory')/]::eInstance();
+		
+		//
+		// Set Attributes
+		//
+		// Get list of current Node Attributes	
+		std::map<std::string, std::string> attr_list = handler->getAttributeList();
+		
+		std::map<std::string, std::string>::const_iterator iter;
+	
+	[for (aAttribute : EAttribute | aClass.eAllAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	  [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
+	[comment]
+	// Attributes that are from type EJavaClass (void*) has not to export to xml. 
+	[/comment]
+		[if (not(aAttribute.upperBound = 1))]
+		//handler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() ); // upperBound != 1 so [aAttribute.GetterName()/]() is a list/bag/union
+		// TODO needs an implementation to set list of strings to this attribute
+		std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " needs an implementation to set list of strings to this attribute." << std::endl; 
+		[else]
+		iter = attr_list.find("[aAttribute.name/]");
+		if ( iter != attr_list.end() )
+		{
+		  [if (generateType(aAttribute.eType) = 'bool')]
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'int'))]
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'long'))]
+			// this attribute is a 'long'
+			long value;
+			std::istringstream ( iter->second ) >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'float'))]
+			// this attribute is a 'float'
+			float value;
+			std::istringstream ( iter->second ) >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'double'))]
+			// this attribute is a 'double'
+			double value;
+			std::istringstream ( iter->second ) >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'char'))]
+			// this attribute is a 'char'
+			char value;
+			std::istringstream ( iter->second ) >> value;
+		  [elseif ((generateType(aAttribute.eType) = 'std::string'))]
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+		  [else]
+			// TODO this attribute has a non handle type
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of '[aAttribute.name/]'" << " [aAttribute.eType/]" << std::endl; 
+			value = "";
+		  [/if]
+			this->[aAttribute.SetterName()/](value);
+		}
+		[/if]
+	  [/if]
+	[/for]
+		//
+		// Set References (containment == false)
+		//
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass(); // get MetaClass
+	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+		iter = attr_list.find("[aReference.name/]");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to handler's list
+			handler->addUnresolvedReference(iter->second, handler->getCurrentObject(), metaClass->getEStructuralFeature("[aReference.name/]")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	[/for]
+	
+		//
+		// Create new objects (from references (containment == true))
+		//
+		int numNodes = handler->getNumOfChildNodes();
+[comment]
+		std::cout << handler->getLevel() << "<" << metaClass->getName() << " ";
+	
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'ENamedElement')/]> _[aClass.name/] = std::dynamic_pointer_cast<[needNamespace(aClass.ePackage, 'ENamedElement')/]>(handler->getCurrentObject());
+		if(_[aClass.name/])
+		{
+			std::cout << "name='"<< _[aClass.name/]->getName() << "'";
+		}
+		std::cout << ">" << std::endl;
+		std::cout << handler->getLevel() << "-NumNodes: " << numNodes << std::endl;
+[/comment]
+		std::string nodeName;
+		for(int ii = 0; ii < numNodes; ii++)
+		{
+			nodeName = handler->getNextNodeName();
+[comment]
+			std::cout << handler->getLevel() << "-Child: "<< nodeName << " " << ii+1 << "/" << numNodes << std::endl;
+[/comment]
+	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+			if ( nodeName.compare("[aReference.name/]") == 0 )
+			{
+	  [if (aReference.upperBound = 1)]
+				/* 
+				 * Create and load '[aReference.name/]'
+				 */
+				std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/];
+	
+				// 1. Create new Object '[aReference.name/]' with Factory and set Container to Object 'this.
+		[let aEClass : EClass = aReference.eType.oclAsType(EClass)]
+				[aReference.name/] = factory->create[aEClass.name/]() ; 
+				
+				// 1.x Insert '[aReference.name/]' to corresponding container's reference
+				this->[aReference.SetterName()/]([aReference.name/]);
+		[/let]
+	  [else]
+				/* 
+				 * Create and load '[aReference.name/]'
+				 */
+				std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/];
+	
+				// 1. Create new Object '[aReference.name/]' with Factory and set Container to Object 'this.
+				attr_list = handler->getAttributeList();
+				iter = attr_list.find("xsi:type");
+				if ( iter != attr_list.end() )
+				{
+					std::string _type = iter->second;
+					size_t const double_dot = _type.find(L':', 0);
+					std::string _type_ns = _type.substr(0, double_dot); // TODO '_type_ns' is not used in this case
+					std::string _type_name = _type.substr(double_dot + 1);
+		  [let aEClass : EClass = aReference.eType.oclAsType(EClass)]
+			[let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
+			[if(ref->size() > 0)]
+				[if(ref->size() > 1)]
+					// TODO here are multiple containers of same object. Check this!
+					std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " '[aReference.name/]' has more then one back-reference Object." << std::endl;
+				
+				[/if]
+				[for(aBackReference : EReference | ref->sortedBy(name))]
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create(_type_name, handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/])) ;			
+				[/for]
+			[else]
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>( factory->create(_type_name) ); 
+			[/if]
+				}
+				else
+				{
+			[if(ref->size() > 0)]
+				[if(ref->size() > 1)]
+					// TODO here are multiple containers of same object. Check this!
+					std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " '[aReference.name/]' has more then one back-reference Object." << std::endl;
+				
+				[/if]
+				[for(aBackReference : EReference | ref->sortedBy(name))]
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create("[aEClass.name/]", handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/])) ;			
+				[/for]
+			[else]
+					[aReference.name/] = factory->create[aEClass.name/]() ; 
+			[/if]
+				}
+			[if(ref->size() = 0)]
+				// 1.x Insert '[aReference.name/]' to corresponding container's reference
+				[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
+				list_[aReference.name/]->push_back([aReference.name/]);
+			[/if]
+			[/let]
+		  [/let]
+	  [/if]
+				
+				// 2. Report Handler to set '[aReference.name/]' as new current Object.
+				handler->setCurrentObject([aReference.name/]);
+	
+				// 3. Call recursively '[aReference.name/].load().
+				[aReference.name/]->load(handler);
+	
+				// 4. Add '[aReference.name/]' to Handler's internal Map, that is used for resolving references.
+				handler->addToMap([aReference.name/]);
+			}
+	[/for]
+	
+			// Report Handler to set 'this' as new current Object.
+			handler->release();
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+}
+[/template]
+
+[template public generatePersistenceResolveReferenceImpl(aClass: EClass)]
+void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
+{
+	switch(featureID)
+	{
+	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+		case [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.memberNameUpper()/]:
+		{
+		[if (aReference.upperBound = 1)]
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/] = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType()/]>( references.front() );
+
+				// Add object by calling eSet() 
+				eSet(featureID, _[aReference.name/]);
+			}
+			
+		[else]
+			std::shared_ptr< Bag<[aReference.eGenericType.generateCppType()/]> > _[aReference.name/] = [aReference.GetterName()/]();
+			while ( references.size() > 0 )
+			{
+				std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _r = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType()/]>( references.front() );
+				assert(_r);
+				if (_r != nullptr){
+					_[aReference.name/]->push_back(_r);
+					references.pop_front();
+				}				
+			}
+		[/if]
+			break;
+		}
+	[/for]
+	}
+}
+[/template]
+
+[template public generatePersistenceSaveImpl(aClass: EClass)]
+void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> handler) const
+{
+	try
+	{
+		// get EcorePackage
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'EcorePackage')/]> package = [needNamespace(aClass.ePackage, 'EcorePackage')/]::eInstance();	
+		
+		// get MetaClass
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass();
+		
+		//
+		// Add attributes
+		//
+[for (aAttribute : EAttribute | aClass.eAllAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+  [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
+[comment]
+// Attributes that are from type EJavaClass (void*) has not to export to xml. 
+[/comment]
+		if ( this->eIsSet(package->get[aAttribute.memberName()/]()) )
+		{
+			handler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() );
+		}
+  [else]
+		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
+  [/if]
+[/for]
+
+		//
+		// Add references
+		//
+[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
+	[if (aReference.upperBound = 1)]
+		handler->addReference("[aReference.name/]", this->[aReference.GetterName()/]());
+	[else]
+		handler->addReferences("[aReference.name/]", this->[aReference.GetterName()/]());
+	[/if]
+[/for]
+
+		//
+		// Add new tags (from references)
+		//
+
+[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+		// Save '[aReference.name/]'
+	[if (aReference.upperBound = 1)]
+		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
+		if ( [aReference.name/] != nullptr) 
+		{
+			std::shared_ptr<[needNamespace(aClass.ePackage, 'EStructuralFeature')/]> esf = metaClass->getEStructuralFeature( "[aReference.name/]" ); // TODO use id instead of string to return ESF
+
+	[else]
+		[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
+		if ( list_[aReference.name/]->size() != 0) 
+		{
+			std::shared_ptr<[needNamespace(aClass.ePackage, 'EStructuralFeature')/]> esf = metaClass->getEStructuralFeature( "[aReference.name/]" ); // TODO use id instead of string to return ESF
+	
+			for ( std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *list_[aReference.name/] ) 
+			{
+	[/if]
+				// 1. Create and add Node-Element to model-tree
+				handler->createAndAddElement( "[aReference.name/]" );
+	
+				if([aReference.name/]->eClass() != esf->getEType())
+				{
+					// 1.x Set Attribute "xsi:type" to the specific Class-Type
+					handler->addAttribute( "xsi:type", handler->extractType([aReference.name/]) );
+				}
+	
+				// 2. Recursive call of save()
+				[aReference.name/]->save( handler );
+				
+				// 3. Tell handler for stepping to previous level
+				handler->release(); 
+	[if (aReference.upperBound = 1)]
+		}
+	[else]
+			}
+		}
+	[/if]
+[/for]
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " << "Exception occurred" << std::endl;
+	}
+}
+[/template]
+

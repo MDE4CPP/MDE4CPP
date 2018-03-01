@@ -47,3 +47,33 @@ virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const
 [aReference.generateDokumentation()/]
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
+
+[template public generateEContainerOperation(aClass : EClass, impl : EBoolean)]
+virtual std::shared_ptr<ecore::EObject> eContainer() const [abstractSufix(impl)/];
+[/template]
+
+[template public generateEContainerOperationCPP(aClass: EClass)]
+std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() const
+{
+[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
+	if(auto wp = m_[multipleRef.name/].lock())
+	{
+		return wp;
+	}
+		[/for]
+	[/if]
+	[else]
+	if(auto wp = m_[aReference.name/].lock())
+	{
+		return wp;
+	}
+	[/if]
+[/for]
+[/let]
+	return nullptr;
+}
+[/template]

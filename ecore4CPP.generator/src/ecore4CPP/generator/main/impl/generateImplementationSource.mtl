@@ -17,6 +17,7 @@
 [import ecore4CPP::generator::main::generateAttribute/]
 [import ecore4CPP::generator::main::generateClass/]
 [import ecore4CPP::generator::main::generateOperation/]
+[import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
 [import ecore4CPP::generator::main::generateType/]
@@ -234,5 +235,11 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 [aClass.generateeGetImpl()/]
 
 [aClass.generateeSetImpl()/]
+
+//*********************************
+// Persistence Functions
+//*********************************
+[aClass.generatePersistenceImpl()/]
+
 [/file]
 [/template]
