@@ -22,9 +22,9 @@
 #include <string>
 #include <set>
 #include <exception>
-#include "boost/exception/to_string.hpp"
 
-#include "SubsetUnion.hpp"
+#include "boost/exception/to_string.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 namespace ecore
 {
