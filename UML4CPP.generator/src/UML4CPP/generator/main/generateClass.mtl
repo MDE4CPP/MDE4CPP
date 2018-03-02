@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateGetThisPtr(aClass : Class)]
-virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual std::shared_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyGetterName()/]();
 virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
