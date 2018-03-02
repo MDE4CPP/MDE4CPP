@@ -51,8 +51,10 @@
 #include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
+#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Package.hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
+#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
