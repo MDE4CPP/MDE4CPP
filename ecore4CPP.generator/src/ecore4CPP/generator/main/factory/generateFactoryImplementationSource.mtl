@@ -158,7 +158,8 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
 {
-	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl());
+	std::shared_ptr<[aClass.name.toUpperFirst()/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
+	element->[generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
 [let ref : OrderedSet(EReference) = aClass.getAllContainers()]
