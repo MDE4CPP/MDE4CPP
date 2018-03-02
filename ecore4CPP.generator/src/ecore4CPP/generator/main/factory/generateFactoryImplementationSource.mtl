@@ -14,6 +14,7 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
@@ -87,7 +88,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 				{
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
-					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]: 
+					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
 						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
@@ -208,7 +209,8 @@ if(nullptr != par_[aReference.name/])
 [/if]
 }
 [/let]
-[/if]    
+[/if]
+element->[generateGetThisPtrPropertySetterName()/](element);
 return element;
 
 [/template]

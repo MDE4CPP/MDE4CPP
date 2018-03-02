@@ -188,7 +188,8 @@ using namespace [aClass.ePackage.name/];
 
 std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->[generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
 
