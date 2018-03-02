@@ -113,7 +113,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 		  [else]
 			// TODO this attribute has a non handle type
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of '[aAttribute.name/]'" << " [aAttribute.eType/]" << std::endl; 
-			value = "";
+			 [aAttribute.generateAttributeType()/] value;
 		  [/if]
 			this->[aAttribute.SetterName()/](value);
 		}
