@@ -233,11 +233,11 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	
 				// 4. Add '[aReference.name/]' to Handler's internal Map, that is used for resolving references.
 				handler->addToMap([aReference.name/]);
+
+				// Report Handler to set 'this' as new current Object.
+				handler->release();
 			}
 	[/for]
-	
-			// Report Handler to set 'this' as new current Object.
-			handler->release();
 		}
 	}
 	catch (std::exception& e)
