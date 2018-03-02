@@ -45,6 +45,8 @@
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/ForkNode.hpp"
+#include "uml/Activity.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -241,15 +243,41 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<ActivityNodeActivation> forkNodeActivation;
+	std::shared_ptr<ActivityNodeActivation> forkNodeActivation;
 
     if (this->getOutgoingEdges()->empty()) 
     {
-        forkNodeActivation = fUML::FUMLFactory::eInstance()->createForkNodeActivation();
-        std::shared_ptr<ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());
-        ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
-        forkNodeActivation->addIncomingEdge(newEdge);
-        edge->setSource(forkNodeActivation);
+    	//Create anonymousFork
+
+    	std::shared_ptr<uml::Activity> activity; // need Activity 2 create anonymousFork
+    	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+
+    	auto group=this->getGroup().lock();
+    	if(group)
+    	{
+    		auto execution = group->getActivityExecution().lock();
+    		if(execution)
+    		{
+    	    	activity= std::dynamic_pointer_cast<uml::Activity>(execution ->getBehavior());
+    		}
+    	}
+
+    	if(activity)
+    	{
+			std::shared_ptr<uml::ForkNode> newForkNode = factory->createForkNode_in_Activity(activity);
+			newForkNode->setName(this->getNode()->getName()+"anonymousFork");
+
+			forkNodeActivation = this->getGroup().lock()->createNodeActivation(newForkNode);
+
+			std::shared_ptr<ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());
+			ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
+			forkNodeActivation->addIncomingEdge(newEdge);
+			edge->setSource(forkNodeActivation);
+    	}
+    	else
+    	{
+			throw "ActionActivationImpl::addOutgoingEdge: unknown Activity to create anonymousFork.";
+    	}
     } 
     else 
     {
