@@ -70,6 +70,7 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory:
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/]));
+[par.name/]UmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]UmlLinker);
 [/template]
 
 

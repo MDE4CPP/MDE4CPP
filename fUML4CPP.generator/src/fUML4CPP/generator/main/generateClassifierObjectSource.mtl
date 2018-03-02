@@ -59,7 +59,8 @@ using namespace [aPackage.name/];
 
 std::shared_ptr<ecore::EObject> [className/]::copy()
 {
-	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->setThis[className/]Ptr(element);
 	return element;
 }
 
@@ -81,6 +82,11 @@ void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
 void [className/]::setUmlValues(std::shared_ptr<Bag<[pointerName/]>> _element)
 {
 	m_umlValues = _element;
+}
+
+void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
+{
+	setThisObjectPtr(thisObjectPtr);
 }
 [/file]
 [/template]

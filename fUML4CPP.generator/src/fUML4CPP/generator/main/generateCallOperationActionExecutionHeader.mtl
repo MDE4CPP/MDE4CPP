@@ -27,7 +27,7 @@
 
 namespace [aPackage.name/] 
 {
-	class [className/] : public fUML::OpaqueBehaviorExecutionImpl 
+	class [className/] : virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -38,6 +38,7 @@ namespace [aPackage.name/]
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<[className/]> thisExecutionPtr);
 		};
 }
 

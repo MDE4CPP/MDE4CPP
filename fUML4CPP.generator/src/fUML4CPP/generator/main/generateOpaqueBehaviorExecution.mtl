@@ -36,7 +36,8 @@
 
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+std::shared_ptr<[anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
 [memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
 [memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus().lock());
 factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
@@ -63,7 +64,8 @@ std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInst
 
 [/for]
 
-std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
+std::shared_ptr<[aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
+[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
 [memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
 [memberName(aCallOperationAction)/]Execution->setLocus(factory->getLocus().lock());
 factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);

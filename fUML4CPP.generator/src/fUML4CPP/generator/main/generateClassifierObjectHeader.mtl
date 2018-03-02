@@ -37,7 +37,7 @@ namespace [aClassifier.getNearestPackage().ns()/]
 
 namespace [aPackage.name/] 
 {
-	class [className/] : public fUML::ObjectImpl 
+	class [className/] : virtual public fUML::ObjectImpl 
 	{
 		public:
 		    //constructors
@@ -54,6 +54,7 @@ namespace [aPackage.name/]
 			std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
 			void setUmlValue(std::shared_ptr<[pointerName/]>);
 			void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
+			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
