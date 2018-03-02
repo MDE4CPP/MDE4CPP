@@ -31,6 +31,7 @@
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp" 
+#include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //OpaqueBehaviourExecutions

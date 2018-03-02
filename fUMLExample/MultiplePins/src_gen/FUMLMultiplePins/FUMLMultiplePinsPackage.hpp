@@ -12,12 +12,11 @@ namespace uml
 {
 	class Activity;
 	class ActivityFinalNode;
+	class ActivityParameterNode;
 	class CallOperationAction;
 	class Class;
-	class ControlFlow;
 	class DecisionNode;
 	class FunctionBehavior;
-	class InitialNode;
 	class InputPin;
 	class MergeNode;
 	class ObjectFlow;
@@ -45,7 +44,7 @@ namespace fUMLMultiplePins
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::ControlFlow> get_CF_fUMLMultiplePins_TestClass_TestMultiplePinsInitial1_fUMLMultiplePins_TestClass_TestMultiplePinsdo1_call() = 0;
+			virtual std::shared_ptr<uml::InputPin> get_InputPin_do1_callinput_1() = 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_do1_callself() = 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_doAll_callparam_0() = 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_doAll_callparam_1() = 0;
@@ -90,6 +89,7 @@ namespace fUMLMultiplePins
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_fUMLMultiplePins_TestClass_TestMultiplePinsMerge7_InputPin_doAll_callparam_7() = 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_fUMLMultiplePins_TestClass_TestMultiplePinsMerge8_InputPin_doAll_callparam_8() = 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_fUMLMultiplePins_TestClass_TestMultiplePinsMerge9_InputPin_doAll_callparam_9() = 0;
+			virtual std::shared_ptr<uml::ObjectFlow> get_OF_fUMLMultiplePins_TestClass_TestMultiplePinsstartParam_InputPin_do1_callinput_1() = 0;
 			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_do1_callparam_0() = 0;
 			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_do1_callparam_1() = 0;
 			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_do1_callparam_2() = 0;
@@ -114,7 +114,6 @@ namespace fUMLMultiplePins
 			virtual std::shared_ptr<uml::Activity> get_fUMLMultiplePins_TestClass_TestMultiplePins() = 0;
 			virtual std::shared_ptr<uml::ActivityFinalNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsActivityFinal1() = 0;
 			virtual std::shared_ptr<uml::DecisionNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsDecision1() = 0;
-			virtual std::shared_ptr<uml::InitialNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsInitial1() = 0;
 			virtual std::shared_ptr<uml::MergeNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsMerge0() = 0;
 			virtual std::shared_ptr<uml::MergeNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsMerge1() = 0;
 			virtual std::shared_ptr<uml::MergeNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsMerge2() = 0;
@@ -128,17 +127,19 @@ namespace fUMLMultiplePins
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_TestMultiplePins_fUMLMultiplePins_TestClass_TestMultiplePins_startParam() = 0;
 			virtual std::shared_ptr<uml::CallOperationAction> get_fUMLMultiplePins_TestClass_TestMultiplePinsdo1_call() = 0;
 			virtual std::shared_ptr<uml::CallOperationAction> get_fUMLMultiplePins_TestClass_TestMultiplePinsdoAll_call() = 0;
-			virtual std::shared_ptr<uml::Operation> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_0() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_1() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_2() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_3() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_4() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_5() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_6() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_7() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_8() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_9() = 0;
+			virtual std::shared_ptr<uml::ActivityParameterNode> get_fUMLMultiplePins_TestClass_TestMultiplePinsstartParam() = 0;
+			virtual std::shared_ptr<uml::Operation> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_input_1() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_0() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_1() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_2() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_3() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_4() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_5() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_6() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_7() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_8() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_do1_TestClass_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_do1_param_9() = 0;
 			virtual std::shared_ptr<uml::Operation> get_fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_0() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_1() = 0;
@@ -151,6 +152,7 @@ namespace fUMLMultiplePins
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_8() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_9() = 0;
 			virtual std::shared_ptr<uml::FunctionBehavior> get_fUMLMultiplePins_TestClass_fbDo1() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_input_1() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_param_0() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_param_1() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_param_2() = 0;

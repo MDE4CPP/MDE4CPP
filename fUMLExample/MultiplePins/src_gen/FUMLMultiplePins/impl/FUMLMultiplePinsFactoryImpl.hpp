@@ -7,10 +7,13 @@
 #ifndef FUMLMULTIPLEPINS_FACTORYIMPL_HPP
 #define FUMLMULTIPLEPINS_FACTORYIMPL_HPP
 
-#include <map>
+#include <functional>
+
+#include "fUMLMultiplePins/impl/TestClassImpl.hpp"
 
 #include "uml/impl/FactoryImpl.hpp"
 #include "fUMLMultiplePins/FUMLMultiplePinsFactory.hpp"
+
 
 namespace fUMLMultiplePins 
 {

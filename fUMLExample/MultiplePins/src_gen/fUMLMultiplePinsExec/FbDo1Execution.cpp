@@ -11,14 +11,15 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
-#include "uml/Behavior.hpp"
 
 
 #include "fUMLMultiplePins/TestClass.hpp"
 #include "fUMLMultiplePinsExec/TestClassExecution.hpp"
 
+#include "fUML/Reference.hpp"
+#include "fUMLMultiplePins/TestClass.hpp"
+#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
 #include "fUML/IntegerValue.hpp"
 
 using namespace fUMLMultiplePins;
@@ -47,6 +48,7 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
     DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
 
+   	std::shared_ptr<fUMLMultiplePins::TestClass> input_1;
    	int param_0;
    	int param_1;
    	int param_2;
@@ -58,6 +60,10 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
    	int param_8;
    	int param_9;
 
+    std::shared_ptr<fUML::Reference> input_1Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at(0)->getValues()->front());
+
+	input_1 = std::dynamic_pointer_cast<TestClassExecution>(input_1Value->getReferent())->getUmlValue();
+	assert(input_1 != nullptr);
 
 	//Call Operation action target
 	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassExecution>(this->getContext())->getUmlValue();
@@ -67,7 +73,7 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
     //Start ---------------------------
 	
 	//Calling the associated operation.
-	target->do1(param_0,param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+	target->do1(input_1,param_0,param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
     //End -----------------------------
 
 	//set return / out parameters

@@ -7,14 +7,30 @@
 #ifndef FUMLMULTIPLEPINS_TESTCLASS__HPP
 #define FUMLMULTIPLEPINS_TESTCLASS__HPP
 
+#include <map>
+#include <string>
+#include <vector>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "boost/shared_ptr.hpp"
 
+//Forward Declaration for used types
+namespace fUMLMultiplePins 
+{
+	class TestClass;
+}
 
 
 // base class includes
+
 #include "uml/Class.hpp"
 
+// enum includes
 
+
+
+//*********************************
 
 namespace fUMLMultiplePins
 {
@@ -38,7 +54,7 @@ namespace fUMLMultiplePins
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void do1( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 )  = 0;
+			virtual void do1( std::shared_ptr<fUMLMultiplePins::TestClass> input_1,int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 )  = 0;
 			virtual void doAll( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 )  = 0;
 			
 			

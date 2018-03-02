@@ -6,16 +6,9 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 
-#include <iostream>
-
-
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "fUMLMultiplePins/impl/fUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Activity.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
-
-
 
 using namespace fUMLMultiplePins;
 using boost::any_cast;

@@ -6,17 +6,9 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 
-#include <iostream>
-
-
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "fUMLMultiplePins/impl/fUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Class.hpp"
-
-
-
-
+#include "fUMLMultiplePins/TestClass.hpp"
 
 using namespace fUMLMultiplePins;
 using boost::any_cast;
@@ -55,13 +47,14 @@ std::shared_ptr<uml::Class> TestClassImpl::getMetaClass()
 //*********************************
 // Operations
 //*********************************
-void TestClassImpl::do1(int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9)
+void TestClassImpl::do1(std::shared_ptr<fUMLMultiplePins::TestClass> input_1,int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9)
 {
 
 	// Implemented as Function behaviour fbDo1
 
 std::cout << "init" << std::endl;
-param_0=0;
+input_1=0;
+
 
 }
 

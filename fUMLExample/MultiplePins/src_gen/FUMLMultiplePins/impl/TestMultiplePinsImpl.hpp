@@ -6,21 +6,17 @@
 
 #ifndef FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
 #define FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
+#include <functional>
+
+//*********************************
+// generated Includes
 
 //Model includes
 #include "../TestMultiplePins.hpp"
+
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
-
-namespace boost
-{
-	class any;
-}
-
-namespace uml
-{
-	class Property;
-}
+#include "boost/any.hpp"
 
 //*********************************
 namespace fUMLMultiplePins

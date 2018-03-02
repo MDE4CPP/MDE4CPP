@@ -6,21 +6,17 @@
 
 #ifndef FUMLMULTIPLEPINS_TESTCLASS_TESTCLASSIMPL_HPP
 #define FUMLMULTIPLEPINS_TESTCLASS_TESTCLASSIMPL_HPP
+#include <functional>
+
+//*********************************
+// generated Includes
 
 //Model includes
 #include "../TestClass.hpp"
+
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
-
-namespace boost
-{
-	class any;
-}
-
-namespace uml
-{
-	class Property;
-}
+#include "boost/any.hpp"
 
 //*********************************
 namespace fUMLMultiplePins
@@ -44,7 +40,7 @@ namespace fUMLMultiplePins
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void do1( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
+			virtual void do1( std::shared_ptr<fUMLMultiplePins::TestClass> input_1,int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
 			virtual void doAll( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
 			
 			

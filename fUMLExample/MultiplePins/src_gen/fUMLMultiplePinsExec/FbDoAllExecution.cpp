@@ -11,9 +11,7 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
-#include "uml/Behavior.hpp"
 
 
 #include "fUMLMultiplePins/TestClass.hpp"
