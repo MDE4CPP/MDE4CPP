@@ -32,7 +32,7 @@
 #include "uml/CallAction.hpp"
 #include "uml/Behavior.hpp"
 #include "fuml/FUMLFactory.hpp"
-
+#include "fuml/ObjectToken.hpp"
 
 //Forward declaration includes
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -184,7 +184,7 @@ void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Execution> callExecution = this->getCallExecution();
+		std::shared_ptr<Execution> callExecution = this->getCallExecution();
 
     if (callExecution != nullptr)
     {
@@ -192,22 +192,31 @@ void CallActionActivationImpl::doAction()
 
         std::shared_ptr<uml::CallAction> callAction = std::dynamic_pointer_cast<uml::CallAction> (this->getNode());
         std::shared_ptr<Bag<uml::InputPin> > argumentPins = callAction->getArgument();
-        std::shared_ptr<Bag<uml::OutputPin> > resultPins = callAction->getResult();
+        std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation>> inputActivationList=this->getInputPinActivation();
 
-        int pinNumber = 0;
+        unsigned int pinNumber = 0;
         std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
         std::shared_ptr<Bag<uml::Parameter> > parameterList = beh->getOwnedParameter();
         for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
         {
-            if (parameter->getDirection() == uml::ParameterDirectionKind::IN
-                    || parameter->getDirection() == uml::ParameterDirectionKind::INOUT) 
+        	uml::ParameterDirectionKind direction=parameter->getDirection();
+            if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
             {
             	std::shared_ptr<ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
 
-                //copy tokenlist
-                auto tl = this->takeTokens(argumentPins->at(pinNumber));
-                parameterValue->getValues()->insert(std::end(*parameterValue->getValues()), tl->begin(), tl->end());
+                std::shared_ptr<Bag<Value> > values = parameterValue->getValues();
+                std::shared_ptr<fUML::InputPinActivation> activation =inputActivationList->at(pinNumber);
+            	std::shared_ptr<Bag<Token> > tokenList = activation->takeUnofferedTokens();
+            	for(std::shared_ptr<Token> token : *tokenList)
+                {
+                	std::shared_ptr<Value> value = token->getValue();
+                    if(value != nullptr)
+                    {
+                    	DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
+                        values->push_back(value);
+                    }
+                }
                 callExecution->setParameterValue(parameterValue);
                 pinNumber++;
             }
@@ -215,25 +224,37 @@ void CallActionActivationImpl::doAction()
 
         callExecution->execute();
 
+
+        std::shared_ptr<Bag<uml::OutputPin> > resultPins = callAction->getResult();
         std::shared_ptr<Bag<ParameterValue> > outputParameterValues = callExecution->getOutputParameterValues();
+        std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation>> outputActivationList=this->getOutputPinActivation();
         pinNumber = 0;
         parameterList = callExecution->getBehavior()->getOwnedParameter();
         for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
         {
-            if ((parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
-                    || (parameter->getDirection() == uml::ParameterDirectionKind::OUT)
-                    || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN)) 
+            if (!(parameter->getDirection() == uml::ParameterDirectionKind::IN))
             {
                 for (std::shared_ptr<ParameterValue> outputParameterValue : *outputParameterValues)
                 {
                     if (outputParameterValue->getParameter() == parameter)
                     {
-                    	std::shared_ptr<uml::OutputPin> resultPin = resultPins->at(pinNumber);
-                    	std::shared_ptr<Bag<fUML::Value> > values = outputParameterValue->getValues();
-                        this->putTokens(resultPin, values);
-                    }
-                }
-                pinNumber = pinNumber + 1;
+    					std::shared_ptr<fUML::OutputPinActivation> resultPinActivation = outputActivationList->at(pinNumber);
+        				std::shared_ptr<Bag<fUML::Value> > values = outputParameterValue->getValues();
+
+        				for (std::shared_ptr<Value> value : *values)
+        			    {
+        					DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
+
+        					std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+        					token->setValue(value);
+
+        					resultPinActivation->addToken(token);
+        					ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< resultPinActivation->getNode()->getQualifiedName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) <<";DIRECTION:add"<<std::endl;)
+        			    }
+            			pinNumber++;
+        				break;
+        			}
+        		}
             }
         }
 

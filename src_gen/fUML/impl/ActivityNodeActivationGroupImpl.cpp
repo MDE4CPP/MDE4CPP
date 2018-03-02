@@ -262,7 +262,7 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml
                    << edge->getTarget()->getName()
                    << "."<<std::endl;)
 
-        std::shared_ptr<ActivityEdgeInstance> edgeInstance(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());
+        std::shared_ptr<ActivityEdgeInstance> edgeInstance=fUML::FUMLFactory::eInstance()->createActivityEdgeInstance();
         edgeInstance->setEdge(edge);
 
         this->addEdgeInstance(edgeInstance);
@@ -325,7 +325,7 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationGroupImpl::g
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<ActivityNodeActivation> activation = nullptr;
+	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
 
 	std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin> (node);
 	auto containingNodeActivation=this->getContainingNodeActivation().lock();
@@ -337,9 +337,11 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationGroupImpl::g
     if (activation == nullptr) 
     {
         unsigned int i = 0;
-        while ((activation == nullptr) && (i < this->getNodeActivations()->size())) 
+        std::shared_ptr<Bag<fUML::ActivityNodeActivation>> nodeActivations=this->getNodeActivations();
+        unsigned int nodeActivationsSize= nodeActivations->size();
+        while ((!activation) && (i < nodeActivationsSize))
         {
-            activation = this->getNodeActivations()->at(i)->getNodeActivation(node);
+        	activation = nodeActivations->at(i)->getNodeActivation(node);
             i = i + 1;
         }
     }
