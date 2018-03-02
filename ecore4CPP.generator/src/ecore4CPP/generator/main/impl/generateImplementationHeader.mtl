@@ -56,11 +56,11 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 
 		private:    
 			[className/]& operator=([className/] const&) = delete;
-			[aClass.generateGetThisPtr()/]
 
 		protected:
 			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
+			[aClass.generateGetThisPtr()/]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) ]
@@ -118,6 +118,9 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 
 		protected:
 			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
+
+		private:
+			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 	};
 }
 [endGuard(className)/]

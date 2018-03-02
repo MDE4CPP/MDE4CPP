@@ -63,65 +63,27 @@ std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() 
 [/template]
 
 [template public generateGetThisPtr(aClass : EClass)]
-virtual std::shared_ptr<[aClass.name/]> getThis[aClass.name/]Ptr();
+virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
 [template public generateGetThisPtrCPP(aClass: EClass)]
-std::shared_ptr<[aClass.name/]> [aClass.name.toUpperFirst()/]Impl::getThis[aClass.name/]Ptr()
+std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
 {
-[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
-[if(ref->select(eType.name = aReference.eType.name)->size() > 1 )]
-	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
-		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	if(auto wp = m_[multipleRef.name/].lock())
-	{
-		[if (aReference.eOpposite.upperBound = 1)]
-		[aReference.eOpposite.generateReferenceType()/] an[aClass.name/] = wp->[aReference.eOpposite.GetterName()/]();
-		if (an[aClass.name/].get() == this)
-		{
-			return [if(not (aClass = aReference.eOpposite.eType))]std::dynamic_pointer_cast<[aClass.name/]>([/if]an[aClass.name/] [if(not (aClass = aReference.eOpposite.eType))])[/if];
-		}
-	[else]
-		[aReference.eOpposite.generateReferenceType()/] owners[aClass.name/]List = wp->[aReference.eOpposite.GetterName()/]();
-		for (std::shared_ptr<[aReference.eOpposite.eGenericType.generateCppType()/]> an[aClass.name/] : *owners[aClass.name/]List)
-		{
-			if (an[aClass.name/].get() == this)
-			{
-				return [if(not (aClass = aReference.eOpposite.eType))]std::dynamic_pointer_cast<[aClass.name/]>([/if]an[aClass.name/] [if(not (aClass = aReference.eOpposite.eType))])[/if];
-			}
-		}
-	[/if]
-	}
-		[/for]
-	[/if]
-[else]
-	if(auto wp = m_[aReference.name/].lock())
-	{
-	[if (aReference.eOpposite.upperBound = 1)]
-		[aReference.eOpposite.generateReferenceType()/] an[aClass.name/] = wp->[aReference.eOpposite.GetterName()/]();
-		if (an[aClass.name/].get() == this)
-		{
-			return [if(not (aClass = aReference.eOpposite.eType))]std::dynamic_pointer_cast<[aClass.name/]>([/if]an[aClass.name/] [if(not (aClass = aReference.eOpposite.eType))])[/if];
-		}
-	[else]
-		[aReference.eOpposite.generateReferenceType()/] owners[aClass.name/]List = wp->[aReference.eOpposite.GetterName()/]();
-		for (std::shared_ptr<[aReference.eOpposite.eGenericType.generateCppType()/]> an[aClass.name/] : *owners[aClass.name/]List)
-		{
-			if (an[aClass.name/].get() == this)
-			{
-				return [if(not (aClass = aReference.eOpposite.eType))]std::dynamic_pointer_cast<[aClass.name/]>([/if]an[aClass.name/] [if(not (aClass = aReference.eOpposite.eType))])[/if];
-			}
-		}
-	[/if]
-	}
-[/if]
-[/for]
-[/let]
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<[aClass.name/]>(this, null_deleter());
+	return m_[generateGetThisPtrPropertyName()/].lock();
+}
+void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+{
+	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+	[for (superClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+	[/for]	
 }
 [/template]
+
+[query public generateGetThisPtrPropertyName(anEClass : EClass) : String = 'this'.concat(anEClass.name.toUpperFirst()).concat('Ptr')/]
+[query public generateGetThisPtrPropertySetterName(anEClass : EClass) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+[query public generateGetThisPtrPropertyGetterName(anEClass : EClass) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
 
 [***###########################################################################################
  * Section for creating the Attribute elements in the metamodel package

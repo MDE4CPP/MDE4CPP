@@ -14,6 +14,7 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
@@ -87,7 +88,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 				{
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
-					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]: 
+					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
 						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
@@ -157,7 +158,8 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
 {
-	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl());
+	std::shared_ptr<[aClass.name.toUpperFirst()/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
+	element->[generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
 [let ref : OrderedSet(EReference) = aClass.getAllContainers()]
@@ -208,7 +210,8 @@ if(nullptr != par_[aReference.name/])
 [/if]
 }
 [/let]
-[/if]    
+[/if]
+element->[generateGetThisPtrPropertySetterName()/](element);
 return element;
 
 [/template]
