@@ -516,6 +516,7 @@ public class Generate extends AbstractAcceleoGenerator {
 				String patternUMLImpl = "generateImpl";
 				String patternRsrc = "rsrc%3A";
 				String patternFUMLExecution = "Execution";
+				String patternFUMLObject = "Object";
 				String patternFUMLparamHelper = "parameterHelper";
 				String rsrc = "rsrc:";
 				String prefixFUML = rsrc + "fUML4CPP/generator/main/";
@@ -549,7 +550,7 @@ public class Generate extends AbstractAcceleoGenerator {
         				{
         					uriString = uriString.replace(startFUMLPath, rsrc);
         				}
-        				else if ((uriString.contains(patternFUMLExecution) || uriString.contains(patternFUMLparamHelper)) && !uriString.contains(patternFUMLPlugin))
+        				else if ((uriString.contains(patternFUMLExecution) || uriString.contains(patternFUMLObject) ||uriString.contains(patternFUMLparamHelper)) && !uriString.contains(patternFUMLPlugin))
         				{
         					if (uriString.startsWith(patternCD))
     						{

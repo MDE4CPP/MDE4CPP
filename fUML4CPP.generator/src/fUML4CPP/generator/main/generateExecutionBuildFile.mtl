@@ -69,7 +69,7 @@ SET(SOURCE_FILES
 	[aCOA.name.toUpperFirst()/]Execution.cpp
 [/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Execution.cpp
+	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 [if (buildLibrary)]
 	[packageName.concat('ExecPlugin.cpp')/]

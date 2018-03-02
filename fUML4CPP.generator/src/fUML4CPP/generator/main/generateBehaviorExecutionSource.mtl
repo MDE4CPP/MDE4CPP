@@ -51,10 +51,10 @@
 #include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name/].hpp"
 [/if]
 #include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [else]
 #include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name.toUpperFirst()/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 [/if]
 [/let]
@@ -101,7 +101,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 
 	[if (not par.type.supportedTypes())]
-	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
@@ -113,9 +113,9 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 [if (cOpSet.target.name.startsWith('self'))]
-	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
-	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name.toUpperFirst()/]Execution>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [/if]
     assert(target != nullptr);
 	[/for]

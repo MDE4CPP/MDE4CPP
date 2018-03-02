@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateClassifierExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helper /]
@@ -20,8 +20,8 @@
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 
-[template public generateClassifierExecutionSource(aClassifier : Classifier, aPackage:Package) {
-	className : String = executionClassName(); 
+[template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
+	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]

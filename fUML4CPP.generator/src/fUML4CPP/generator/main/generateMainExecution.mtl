@@ -35,7 +35,7 @@
 [let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 [generateActivityRelatedIncludes(act, aPackage)/]
 [if (act.owner.oclIsKindOf(Classifier))]
-#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).namespace.ns()/]Factory.hpp"
 [/if]
@@ -208,7 +208,7 @@ pList->push_back([par.name/]P);
 
 [/for]
 [if (objectUsed)]
-std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution());
+std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object());
 object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.ns()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
 object->setLocus(locus);
 [/if]

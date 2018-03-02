@@ -35,7 +35,7 @@
 [generateMainIncludes()/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
 [generateActivityRelatedIncludes(act, aPackage)/]
-#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Execution.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
@@ -111,7 +111,7 @@ assert(ret != nullptr);
 return ret->getValue();
 [else]
 std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
-std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Execution>([par.name/]Value->getReferent());
+std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
 return [par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]();
 [/if]
 [/let]

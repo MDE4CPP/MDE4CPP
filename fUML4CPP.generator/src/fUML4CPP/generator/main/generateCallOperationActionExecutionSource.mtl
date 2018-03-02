@@ -38,7 +38,7 @@
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 #include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
-#include "[aPackage.getPackageName()/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Object.hpp"
 [/if]
 [/let]
 [/if][/if]
@@ -61,7 +61,7 @@
 [/for]
 
 #include "[anCallOperationAction.target.type.getNearestPackage().name/]/[anCallOperationAction.target.type.name/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name/]Object.hpp"
  
 using namespace [aPackage.name/];
 
@@ -97,14 +97,14 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
-	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 	[/for]
 
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name/]Execution>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name/]Object>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation

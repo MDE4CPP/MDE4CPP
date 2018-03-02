@@ -12,14 +12,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateClassifierExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateType /]
 
-[template public generateClassifierExecutionHeader(aClassifier : Classifier, aPackage :Package) {
-	className : String = executionClassName(); 
+[template public generateClassifierObjectHeader(aClassifier : Classifier, aPackage :Package) {
+	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
@@ -60,6 +60,6 @@ namespace [aPackage.name/]
 			std::shared_ptr<Bag<[pointerName/]>> m_umlValues = nullptr;
 	};
 }
-[endGuard(aClassifier,'Execution')/]
+[endGuard(aClassifier,'Object')/]
 [/file]
 [/template]

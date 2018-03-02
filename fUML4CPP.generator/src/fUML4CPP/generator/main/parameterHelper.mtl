@@ -20,6 +20,7 @@
 
 [query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
+[query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
 
@@ -68,14 +69,14 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory:
 [if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
-std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Execution([par.name.toLowerFirst()/]));
+std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/]));
 [/template]
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (not supportedTypes())]
 #include "[type.getNearestPackage().ns()/]/[type.name/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[type.name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
