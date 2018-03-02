@@ -55,11 +55,11 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 
 		private:    
 			[className/]& operator=([className/] const&) = delete;
-			[aClass.generateGetThisPtr()/]
 
 		protected:
 			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
+			[aClass.generateGetThisPtr()/]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) ]

@@ -75,6 +75,9 @@ std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl
 void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
 {
 	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+	[for (superClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+	[/for]	
 }
 [/template]
 
