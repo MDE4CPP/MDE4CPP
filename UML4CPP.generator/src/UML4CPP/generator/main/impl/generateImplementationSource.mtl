@@ -15,6 +15,7 @@
 [module generateImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSetGet /]
 [import UML4CPP::generator::main::generateType /]
@@ -120,5 +121,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 // Structural Feature Getter/Setter
 //*********************************
 [aClass.generateeGetSetImpl()/]
+
+[aClass.generateGetThisPtrCPP()/]
 [/file]
 [/template]

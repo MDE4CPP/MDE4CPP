@@ -18,6 +18,35 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
+[template public generateGetThisPtr(aClass : Class)]
+virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
+[/template]
+
+[template public generateGetThisPtrCPP(aClass: Class)]
+std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
+{
+	return m_[generateGetThisPtrPropertyName()/].lock();
+}
+void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+{
+	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
+	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+[/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+	setThisClassPtr([aClass.generateGetThisPtrPropertyName()/]);
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
+[/if]
+}
+[/template]
+
+[query public generateGetThisPtrPropertyName(aClass : Class) : String = 'this'.concat(aClass.name.toUpperFirst()).concat('Ptr')/]
+[query public generateGetThisPtrPropertySetterName(aClass : Class) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+[query public generateGetThisPtrPropertyGetterName(aClass : Class) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+
+
 [template public generateClassCreate(aClass : Class,impl : Boolean) ? (aClass.isAbstract=false)]
 virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())]

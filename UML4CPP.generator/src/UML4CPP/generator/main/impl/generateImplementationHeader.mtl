@@ -15,6 +15,7 @@
 [module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSetGet /]
 [import UML4CPP::generator::main::generateType /]
@@ -69,6 +70,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
 			//constructor
 			[className/]();
+			[aClass.generateGetThisPtr()/]
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
@@ -107,6 +109,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[aClass.generateeGetSetDel(true)/]
 		
 		private:
+			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 			[aClass.generateGetSetMemeberInit()/]
 	};
 }
