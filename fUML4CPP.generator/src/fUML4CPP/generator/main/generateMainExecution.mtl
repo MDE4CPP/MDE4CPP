@@ -209,7 +209,7 @@ pList->push_back([par.name/]P);
 [/for]
 [if (objectUsed)]
 std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object());
-object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Ptr(object);
+object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]ObjectPtr(object);
 object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.ns()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
 object->setLocus(locus);
 [/if]
