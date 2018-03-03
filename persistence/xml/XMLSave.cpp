@@ -6,12 +6,17 @@
  */
 
 #include "persistence/xml/XMLSave.hpp"
-//#include "ExtendedMetaData.hpp"
 
-namespace persistence
-{
-namespace xml
-{
+
+#include "persistence/xml/XMLSaveHandler.hpp"
+#include "xerces/DOMPrintErrorHandler.hpp"
+#include "xerces/DOMPrintFilter.hpp"
+#include "xerces/DOMTreeErrorReporter.hpp"
+#include "xercesc/framework/StdOutFormatTarget.hpp"
+#include "xercesc/util/OutOfMemoryException.hpp"
+
+using namespace persistence::xml;
+
 XMLSave::XMLSave ()
 {
 	m_handler.reset( new persistence::xml::XMLSaveHandler() );
@@ -203,6 +208,3 @@ bool XMLSave::write ( const std::string &filename )
 	}
 	return true;
 }
-
-} /* namespace xml */
-} /* namespace persistence */
