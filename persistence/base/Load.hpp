@@ -5,41 +5,43 @@
  *      Author: Alexander
  */
 
-#ifndef LOAD_HPP_
-#define LOAD_HPP_
+#ifndef PERSISTENCE_BASE_LOAD_HPP
+#define PERSISTENCE_BASE_LOAD_HPP
 
-#include <exception>
+#include <memory>
 
-//#include "ExtendedMetaData.hpp"
-#include "persistence/base/LoadHandler.hpp"
-
-#include "ecore/EObject.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EStructuralFeature.hpp"
-#include "ecore/EReference.hpp"
-
-#include <boost/any.hpp>
+namespace ecore
+{
+	class EObject;
+}
 
 namespace persistence
 {
-namespace base
+	namespace base
+	{
+		class LoadHandler;
+	}
+}
+
+namespace persistence
 {
-class Load
-{
-public:
-	Load ();
-	virtual ~Load ();
+	namespace base
+	{
+		class Load
+		{
+			public:
+				Load();
+				virtual ~Load();
 
-	std::shared_ptr<ecore::EObject> load ( const std::string &filename );
+				std::shared_ptr<ecore::EObject> load(const std::string &filename);
 
-protected:
-	std::shared_ptr<persistence::base::LoadHandler> m_handler;
+			protected:
+				std::shared_ptr<persistence::base::LoadHandler> m_handler;
 
-	virtual bool read ( const std::string &filename ) = 0;
-};
+				virtual bool read(const std::string &filename) = 0;
+		};
 
-} /* namespace base */
+	} /* namespace base */
 } /* namespace persistence */
 
 #endif /* LOAD_HPP_ */
