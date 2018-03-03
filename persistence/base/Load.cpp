@@ -65,6 +65,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 			std::shared_ptr<ecore::EPackage> pck_root = factory->createEPackage();
 
 			m_handler->setCurrentObject(pck_root);
+			m_handler->getNextNodeName();
 
 			// Start loading process by calling load() on root object
 			pck_root->load(m_handler);
