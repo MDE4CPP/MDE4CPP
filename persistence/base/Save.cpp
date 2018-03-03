@@ -7,6 +7,8 @@
 
 #include "persistence/base/Save.hpp"
 
+#include "ecore/EClass.hpp"
+
 namespace persistence
 {
 namespace base

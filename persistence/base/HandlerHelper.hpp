@@ -5,39 +5,31 @@
  *      Author: Alexander
  */
 
-#ifndef HandlerHelper_HPP_
-#define HandlerHelper_HPP_
+#ifndef PERSISTENCE_BASE_HANDLERHELPER_HPP
+#define PERSISTENCE_BASE_HANDLERHELPER_HPP
 
-#include <list>
-#include <string>
-#include <set>
-#include <tuple>
+#include <memory>
 
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/ENamedElement.hpp"
-#include "ecore/EObject.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EStructuralFeature.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+namespace ecore
+{
+	class EObject;
+}
 
 namespace persistence
 {
-namespace base
-{
-class HandlerHelper
-{
-public:
-	HandlerHelper ();
-	virtual ~HandlerHelper ();
+	namespace base
+	{
+		class HandlerHelper
+		{
+			public:
+				HandlerHelper();
+				virtual ~HandlerHelper();
 
-	static std::string extractType ( const std::shared_ptr<ecore::EObject> obj, std::string prefix );
-	static std::string extractReference ( const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-			std::string prefix );
-};
+				static std::string extractType(const std::shared_ptr<ecore::EObject> obj, std::string prefix);
+				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix);
+		};
 
-} /* namespace base */
+	} /* namespace base */
 } /* namespace persistence */
 
 #endif /* HandlerHelper_HPP_ */

@@ -18,16 +18,21 @@
 
 #include <sstream> // used for extractType()
 
-namespace persistence
-{
-namespace base
-{
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/ENamedElement.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
+//#include "ecore/EStructuralFeature.hpp"
 
-HandlerHelper::HandlerHelper ()
+using namespace persistence::base;
+
+HandlerHelper::HandlerHelper()
 {
 }
 
-HandlerHelper::~HandlerHelper ()
+HandlerHelper::~HandlerHelper()
 {
 }
 
@@ -38,12 +43,12 @@ HandlerHelper::~HandlerHelper ()
  * ::ecorecpp::mapping::type_traits::string_t serializer::get_type(EObject_ptr obj) const
  *
  */
-std::string HandlerHelper::extractType ( const std::shared_ptr<ecore::EObject> obj, std::string prefix )
+std::string HandlerHelper::extractType(const std::shared_ptr<ecore::EObject> obj, std::string prefix)
 {
 	std::stringstream ss;
 	std::shared_ptr<ecore::EClass> metaClass = obj->eClass();
 
-	if ( !prefix.empty() )
+	if (!prefix.empty())
 	{
 		ss << prefix << ":" << metaClass->getName();
 	}
@@ -61,28 +66,28 @@ std::string HandlerHelper::extractType ( const std::shared_ptr<ecore::EObject> o
  * ::ecorecpp::mapping::type_traits::string_t serializer::get_reference(EObject_ptr from, EObject_ptr to) const
  *
  */
-std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-		std::string prefix )
+std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
+	std::string prefix)
 {
 	std::stringstream ref;
 	std::list<std::shared_ptr<ecore::EObject> > to_antecessors;
 	std::shared_ptr<ecore::EObject> antecessor = toObject; //pre-init antecessor
 
-	if ( !toObject )
+	if (!toObject)
 	{
-		MSG_ERROR( MSG_FLF << " Given Parameter 'toObject' is nullptr." );
+		MSG_ERROR(MSG_FLF << " Given Parameter 'toObject' is nullptr.");
 		return ref.str();
 	}
 
-	while ( antecessor )
+	while (antecessor)
 	{
-		to_antecessors.push_back( antecessor );
+		to_antecessors.push_back(antecessor);
 		antecessor = to_antecessors.back()->eContainer();
 	}
 
-	std::shared_ptr<ecore::EPackage> rootPkg = std::dynamic_pointer_cast<ecore::EPackage>( to_antecessors.back() );
+	std::shared_ptr<ecore::EPackage> rootPkg = std::dynamic_pointer_cast<ecore::EPackage>(to_antecessors.back());
 
-	if ( rootPkg )
+	if (rootPkg)
 	{
 		// This case is used for ecore-models
 
@@ -90,30 +95,30 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 		to_antecessors.pop_back();
 
 		// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
-		if ( rootObject != rootPkg ) // TODO check if works correct (not tested yet)
+		if (rootObject != rootPkg) // TODO check if works correct (not tested yet)
 		{
-			ref << extractType( toObject, prefix ) << " " << rootPkg->getNsURI();
+			ref << extractType(toObject, prefix) << " " << rootPkg->getNsURI();
 		}
 
 		ref << "#/";
 
 		// Add Package name(s) and Class/Enum/EDataType name to 'value'
-		while ( to_antecessors.size() > 0 )
+		while (to_antecessors.size() > 0)
 		{
-			std::shared_ptr<ecore::ENamedElement> to_antecessors_back = std::dynamic_pointer_cast<ecore::ENamedElement>( to_antecessors.back() );
-			std::shared_ptr<ecore::EAnnotation> to_antecessors_back_annotation = std::dynamic_pointer_cast<ecore::EAnnotation>( to_antecessors.back() );
+			std::shared_ptr<ecore::ENamedElement> to_antecessors_back = std::dynamic_pointer_cast<ecore::ENamedElement>(to_antecessors.back());
+			std::shared_ptr<ecore::EAnnotation> to_antecessors_back_annotation = std::dynamic_pointer_cast<ecore::EAnnotation>(to_antecessors.back());
 
-			if ( to_antecessors_back != nullptr )
+			if (to_antecessors_back != nullptr)
 			{
 				ref << "/" << to_antecessors_back->getName();
 			}
-			else if ( to_antecessors_back_annotation != nullptr )
+			else if (to_antecessors_back_annotation != nullptr)
 			{
 				ref << "/" << "%" << to_antecessors_back_annotation->getSource() << "%";
 			}
 			else
 			{
-				MSG_ERROR( MSG_FLF << "During casting Object of type '" << to_antecessors.back()->eClass()->getName() << "' to 'ENamedElement'." );
+				MSG_ERROR(MSG_FLF << "During casting Object of type '" << to_antecessors.back()->eClass()->getName() << "' to 'ENamedElement'.");
 			}
 			to_antecessors.pop_back();
 		}
@@ -158,18 +163,18 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 #endif
 	else
 	{
-		std::shared_ptr<ecore::EClassifier> clsObj = std::dynamic_pointer_cast<ecore::EClassifier>( toObject );
-		if ( clsObj )
+		std::shared_ptr<ecore::EClassifier> clsObj = std::dynamic_pointer_cast<ecore::EClassifier>(toObject);
+		if (clsObj)
 		{
 			// This case is used for Class/Enum/EDataType that are not contained within a Package
 			std::weak_ptr<ecore::EPackage> dPck = clsObj->getEPackage();
 
-			if ( auto ePck = dPck.lock() )
+			if (auto ePck = dPck.lock())
 			{
 				// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
-				if ( rootObject != ePck ) // TODO check if works correct (not tested yet)
+				if (rootObject != ePck) // TODO check if works correct (not tested yet)
 				{
-					ref << extractType( toObject, prefix ) << " " << ePck->getNsURI();
+					ref << extractType(toObject, prefix) << " " << ePck->getNsURI();
 				}
 			}
 			ref << "#/";
@@ -177,12 +182,9 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 		}
 		else
 		{
-			MSG_WARNING( MSG_FLF << "Given Object's type '" << toObject->eClass()->getName() << "' is not 'EClassifier'." );
+			MSG_WARNING(MSG_FLF << "Given Object's type '" << toObject->eClass()->getName() << "' is not 'EClassifier'.");
 		}
 	}
 
 	return ref.str();
 }
-
-} /* namespace base */
-} /* namespace persistence */

@@ -7,6 +7,9 @@
 
 #include "persistence/base/Load.hpp"
 
+#include "ecore/EClass.hpp"
+#include "ecore/EClassifier.hpp"
+
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "pluginFramework/EcoreModelPlugin.hpp"
