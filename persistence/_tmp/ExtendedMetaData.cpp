@@ -9,7 +9,6 @@
 
 using namespace persistence;
 
-
 //static initialization
 
 const std::string ExtendedMetaData::ANNOTATION_URI = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";

@@ -5,8 +5,8 @@
  *      Author: Alexander
  */
 
-#ifndef XSTR_HPP_
-#define XSTR_HPP_
+#ifndef PERSISTENCE_XML_XERCES_XSTR_HPP
+#define PERSISTENCE_XML_XERCES_XSTR_HPP
 
 #include <xercesc/util/XercesDefs.hpp>
 #include <xercesc/util/XMLString.hpp>
@@ -22,27 +22,27 @@ XERCES_CPP_NAMESPACE_USE
 // ---------------------------------------------------------------------------
 class XStr
 {
-public:
-    // -----------------------------------------------------------------------
-    //  Constructors and Destructor
-    // -----------------------------------------------------------------------
-    XStr(const char* const toTranscode);
-    XStr(const std::string& str);
-    ~XStr();
+	public:
+		// -----------------------------------------------------------------------
+		//  Constructors and Destructor
+		// -----------------------------------------------------------------------
+		XStr(const char* const toTranscode);
+		XStr(const std::string& str);
+		~XStr();
 
-    // -----------------------------------------------------------------------
-    //  Getter methods
-    // -----------------------------------------------------------------------
-    const XMLCh* unicodeForm() const;
+		// -----------------------------------------------------------------------
+		//  Getter methods
+		// -----------------------------------------------------------------------
+		const XMLCh* unicodeForm() const;
 
-private :
-    // -----------------------------------------------------------------------
-    //  Private data members
-    //
-    //  fUnicodeForm
-    //      This is the Unicode XMLCh format of the string.
-    // -----------------------------------------------------------------------
-    XMLCh*   fUnicodeForm;
+	private:
+		// -----------------------------------------------------------------------
+		//  Private data members
+		//
+		//  fUnicodeForm
+		//      This is the Unicode XMLCh format of the string.
+		// -----------------------------------------------------------------------
+		XMLCh* fUnicodeForm;
 };
 
-#endif /* XSTR_HPP_ */
+#endif

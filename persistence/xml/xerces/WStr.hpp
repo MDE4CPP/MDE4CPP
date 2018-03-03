@@ -5,8 +5,8 @@
  *      Author: Alexander
  */
 
-#ifndef WSTR_HPP_
-#define WSTR_HPP_
+#ifndef PERSISTENCE_XML_XERCES_WSTR_HPP
+#define PERSISTENCE_XML_XERCES_WSTR_HPP
 
 #include <xercesc/util/XercesDefs.hpp>
 #include <xercesc/util/XMLString.hpp>
@@ -22,27 +22,27 @@ XERCES_CPP_NAMESPACE_USE
 // ---------------------------------------------------------------------------
 class WStr
 {
-public:
-	// -----------------------------------------------------------------------
-	//  Constructors and Destructor
-	// -----------------------------------------------------------------------
-	WStr ( const XMLCh* const toTranscode );
-	WStr ( const WStr& other );
-	~WStr ();
+	public:
+		// -----------------------------------------------------------------------
+		//  Constructors and Destructor
+		// -----------------------------------------------------------------------
+		WStr(const XMLCh* const toTranscode);
+		WStr(const WStr& other);
+		~WStr();
 
-	// -----------------------------------------------------------------------
-	//  Getter methods
-	// -----------------------------------------------------------------------
-	const std::string unicodeForm () const;
+		// -----------------------------------------------------------------------
+		//  Getter methods
+		// -----------------------------------------------------------------------
+		const std::string unicodeForm() const;
 
-private:
-	// -----------------------------------------------------------------------
-	//  Private data members
-	//
-	//  m_local
-	//      This is the string of the Unicode XMLCh format.
-	// -----------------------------------------------------------------------
-	char* m_local;
+	private:
+		// -----------------------------------------------------------------------
+		//  Private data members
+		//
+		//  m_local
+		//      This is the string of the Unicode XMLCh format.
+		// -----------------------------------------------------------------------
+		char* m_local;
 };
 
 #endif /* WSTR_HPP_ */

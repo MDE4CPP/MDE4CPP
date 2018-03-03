@@ -7,7 +7,6 @@
 
 #include "XStr.hpp"
 
-
 XStr::XStr(const char* const toTranscode)
 {
     // Call the private transcoding method
@@ -24,9 +23,7 @@ XStr::~XStr ()
     XMLString::release(&fUnicodeForm);
 }
 
-
 const XMLCh* XStr::unicodeForm() const
 {
 	return fUnicodeForm;
 }
-

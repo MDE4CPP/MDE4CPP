@@ -13,18 +13,18 @@
 
 namespace persistence
 {
-namespace json
-{
-class JSONSave : public persistence::base::Save
-{
-public:
-	virtual ~JSONSave ();
-	JSONSave ();
+	namespace json
+	{
+		class JSONSave: public persistence::base::Save
+		{
+			public:
+				virtual ~JSONSave();
+				JSONSave();
 
-private:
-	bool write ( const std::string &filename );
-};
-} /* base */
+			private:
+				bool write(const std::string &filename);
+		};
+	} /* base */
 } /* namespace persistence */
 
 #endif /* JSONSAVE_HPP_ */
