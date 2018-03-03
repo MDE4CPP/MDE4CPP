@@ -32,6 +32,7 @@
 [if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
 #include <map>
 [/if]
+#include <list>
 #include <memory>
 #include <string>
 
