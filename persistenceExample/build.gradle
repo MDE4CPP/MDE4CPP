@@ -5,7 +5,7 @@ apply plugin: 'base'
 
 description 'Example collection'
 
-task compilePersistenceExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compileExamplePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Examples"
 	description "compile Persistence"
 
