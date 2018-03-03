@@ -7,13 +7,10 @@
 
 #include "persistence/xml/XMLLoad.hpp"
 
-#include "xercesc/dom/DOMException.hpp"
+#include "persistence/xml/XMLLoadHandler.hpp"
 #include "xercesc/util/OutOfMemoryException.hpp"
 
-namespace persistence
-{
-namespace xml
-{
+using namespace persistence::xml;
 
 XMLLoad::XMLLoad ()
 {
@@ -126,6 +123,3 @@ bool XMLLoad::read ( const std::string &filename )
 
 	return ((errorsOccured == false) && (m_errReporter->getSawErrors() == false));
 }
-}
-/* namespace xml */
-} /* namespace persistence */
