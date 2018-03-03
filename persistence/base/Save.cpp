@@ -8,11 +8,11 @@
 #include "persistence/base/Save.hpp"
 
 #include "ecore/EClass.hpp"
+#include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
+#include "persistence/base/SaveHandler.hpp"
 
-namespace persistence
-{
-namespace base
-{
+using namespace persistence::base;
 
 Save::Save ()
 {
@@ -41,6 +41,3 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	// Call write() method in corresponding derived class
 	return write( filename );
 }
-
-} /* namespace base */
-} /* namespace persistence */
