@@ -49,7 +49,6 @@ namespace persistence
 
 				DOMDocument *m_doc;
 				DOMElement *m_currentElement;
-				std::list<DOMNode *> m_currentElements;
 
 				void addChild(DOMElement *parent_elem, DOMElement *child_elem);
 		};
