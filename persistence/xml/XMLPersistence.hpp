@@ -5,36 +5,37 @@
  *      Author: Alexander
  */
 
-#ifndef XMLPersistence_HPP_
-#define XMLPersistence_HPP_
+#ifndef PERSISTENCE_XML_XMLPersistence_HPP
+#define PERSISTENCE_XML_XMLPersistence_HPP
 
 #include "persistence/base/Persistence.hpp"
 
-#include "ecore/EObject.hpp"
-#include "ecore/EPackage.hpp"
-
-//#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
 #include <string>
-#include <iostream>
+
+namespace ecore
+{
+	class EObject;
+	class EPackage;
+}
 
 namespace persistence
 {
-namespace xml
-{
+	namespace xml
+	{
 
-class XMLPersistence : persistence::base::Persistence
-{
-public:
-	XMLPersistence ();
-	virtual ~XMLPersistence ();
+		class XMLPersistence: persistence::base::Persistence
+		{
+			public:
+				XMLPersistence();
+				virtual ~XMLPersistence();
 
-	std::shared_ptr<ecore::EObject> load ( const std::string &filename );
-	bool save ( const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage );
+				std::shared_ptr<ecore::EObject> load(const std::string &filename);
+				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage);
 
-private:
+			private:
 
-};
-} /* namespace xml */
+		};
+	} /* namespace xml */
 } /* namespace persistence */
 
-#endif /* XMLPersistence_HPP_ */
+#endif
