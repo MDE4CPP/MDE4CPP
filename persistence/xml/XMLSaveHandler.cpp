@@ -9,11 +9,16 @@
 
 #include <sstream> // used for addReferences()
 #include <boost/algorithm/string.hpp> // used for string splitting
+#include "ecore/EObject.hpp"
+#include "persistence/base/HandlerHelper.hpp"
 
-namespace persistence
-{
-namespace xml
-{
+#include "xerces/XStr.hpp"
+#include "xerces/WStr.hpp"
+#include "xercesc/dom/DOMException.hpp"
+#include "xercesc/util/OutOfMemoryException.hpp"
+
+using namespace persistence::xml;
+
 XMLSaveHandler::XMLSaveHandler ()
 {
 	m_doc = nullptr;
@@ -169,7 +174,3 @@ void XMLSaveHandler::release ()
 		m_currentElement = (DOMElement*) m_currentElement->getParentNode();
 	}
 }
-
-} /* namespace xml */
-} /* namespace persistence */
-
