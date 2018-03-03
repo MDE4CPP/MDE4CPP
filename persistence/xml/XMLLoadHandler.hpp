@@ -5,8 +5,8 @@
  *      Author: Alexander
  */
 
-#ifndef XMLLoadHandler_HPP_
-#define XMLLoadHandler_HPP_
+#ifndef PERSISTENCE_XML_XMLLOADHANDLER_HPP
+#define PERSISTENCE_XML_XMLLOADHANDLER_HPP
 
 #include "persistence/base/LoadHandler.hpp"
 #include "persistence/base/HandlerHelper.hpp"
@@ -14,45 +14,34 @@
 #include <map>
 #include <list>
 #include <string>
-#include <set>
-#include <exception>
 
-#include <xercesc/dom/DOM.hpp>
-#include <xercesc/dom/DOMException.hpp>
-#include <xercesc/util/OutOfMemoryException.hpp>
-
-#include "xerces/XStr.hpp"
-#include "xerces/WStr.hpp"
-
-#include "boost/exception/to_string.hpp"
-
-#include "ecore/EObject.hpp"
-#include "ecore/EStructuralFeature.hpp"
+#include "xercesc/dom/DOM.hpp"
+XERCES_CPP_NAMESPACE_USE
 
 namespace persistence
 {
-namespace xml
-{
-class XMLLoadHandler : public persistence::base::LoadHandler
-{
-public:
-	XMLLoadHandler ();
-	~XMLLoadHandler ();
+	namespace xml
+	{
+		class XMLLoadHandler: public persistence::base::LoadHandler
+		{
+			public:
+				XMLLoadHandler();
+				~XMLLoadHandler();
 
-	DOMDocument *getDOMDocument ();
-	void setDOMDocument ( DOMDocument * doc );
+				DOMDocument* getDOMDocument();
+				void setDOMDocument(DOMDocument* doc);
 
-	unsigned int getNumOfChildNodes ();
-	std::string getNextNodeName ();
-	std::map<std::string, std::string> getAttributeList ();
+				unsigned int getNumOfChildNodes();
+				std::string getNextNodeName();
+				std::map<std::string, std::string> getAttributeList();
 
-private:
-	DOMDocument *m_doc;
-	DOMElement *m_currentElement;
-	std::list<DOMNode *> m_currentElements;
-};
+			private:
+				DOMDocument* m_doc;
+				DOMElement* m_currentElement;
+				std::list<DOMNode*> m_currentElements;
+		};
 
-} /* namespace xml */
+	} /* namespace xml */
 } /* namespace persistence */
 
-#endif /* XMLLoadHandler_HPP_ */
+#endif

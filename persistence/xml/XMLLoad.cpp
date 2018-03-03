@@ -7,6 +7,9 @@
 
 #include "persistence/xml/XMLLoad.hpp"
 
+#include "xercesc/dom/DOMException.hpp"
+#include "xercesc/util/OutOfMemoryException.hpp"
+
 namespace persistence
 {
 namespace xml

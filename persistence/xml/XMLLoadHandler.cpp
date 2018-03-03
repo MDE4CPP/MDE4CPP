@@ -10,6 +10,15 @@
 #include <sstream> // used for getLevel()
 #include <boost/algorithm/string.hpp> // used for string splitting
 
+
+#include "boost/exception/to_string.hpp"
+
+#include "ecore/EObject.hpp"
+#include "ecore/EStructuralFeature.hpp"
+
+#include "xerces/XStr.hpp"
+#include "xerces/WStr.hpp"
+
 namespace persistence
 {
 namespace xml
