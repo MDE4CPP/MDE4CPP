@@ -2780,7 +2780,7 @@
       <eParameters name="property" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Element may be created from a Factory. A Factory is an instance of the MOF Factory class. A Factory creates&#xD;&#xA;instances of the types in a Package.&#xD;&#xA;&#xD;&#xA;&lt;span style=&quot;background-color:#FF8000&quot;>This Element was merged from mof::Reflection package.&lt;/span>"/>
     </eAnnotations>
