@@ -5,128 +5,106 @@
  *      Author: Alexander P.
  */
 
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#include <iostream>
-#define MSG_DEBUG(a) std::cout<<"| DEBUG    | "<<a<<std::endl
-#endif
-#define MSG_WARNING(a) std::cout<<"| WARNING  | "<<a<<std::endl
-#define MSG_ERROR(a) std::cout<<"| ERROR    | "<<a<<std::endl
-#define MSG_FLF __FILE__<<":"<<__LINE__<<" "<<__FUNCTION__<<"() "
-
-#include <omp.h>
-#include <stdlib.h>
-#include <string>
 #include <memory>
-
-#include "persistence/xml/XMLPersistence.hpp"
-#include "TestModel.hpp"
+#include <iostream>
+#include <omp.h>
+#include <string>
 
 #include "ecore/EPackage.hpp"
 #include "ecore/EObject.hpp"
+#include "persistence/xml/XMLPersistence.hpp"
+#include "TestModel.hpp"
 
-int main ()
+void performReadAndWrite(std::string loadPath, std::string savePath)
 {
 	try
 	{
-		// Set OpenMP number of threads
-		omp_set_num_threads( 1 );
-
-		// Set filename with path
-		std::string filename = "_tmp/UniModel.ecore";
-		std::string filename2 = "_tmp/UniModel_out.ecore";
-		std::string filename3 = "_tmp/xmi.ecore";
-		std::string filename4 = "_tmp/xmi_out.ecore";
-
-		// Get MetaPackage
-		MSG_DEBUG( "Get 'myEcoreMetaMetaPackage'" );
-		std::shared_ptr<ecore::EPackage> myEcoreMetaMetaPackage = testmodel::TestModel::getMetaMetaPackage();
-		if ( myEcoreMetaMetaPackage == 0 )
+		// Perform load()
+		MSG_DEBUG("Start load() of 'myEcoreTestSaveMetaModel'");
+		persistence::xml::XMLPersistence myPersistence;
+		std::shared_ptr<ecore::EObject> myEcoreTestLoadMetaModel = myPersistence.load(loadPath);
+		if (myEcoreTestLoadMetaModel != nullptr)
 		{
-			MSG_ERROR( MSG_FLF << "'myEcoreMetaMetaPackage' is empty" );
-			return 0;
+			MSG_DEBUG("Successful load() of model from '" << loadPath << "'");
+		}
+		else
+		{
+			MSG_ERROR(MSG_FLF << "During load() of model from '" << loadPath << "'");
+		}
+
+		// Perform save()
+		MSG_DEBUG("Start save() of 'myEcoreTestLoadMetaModel'");
+
+		if (myPersistence.save(savePath, myEcoreTestLoadMetaModel, testmodel::TestModel::getMetaMetaPackage()))
+		{
+			MSG_DEBUG("Successful save() of model to '" << savePath << "'");
+		}
+		else
+		{
+			MSG_ERROR(MSG_FLF << "During save() of model to '" << savePath << "'");
+		}
+	}
+	catch (std::exception &e)
+	{
+		MSG_ERROR(MSG_FLF << e.what());
+	}
+}
+
+void performUniModelTest()
+{
+	// Set filename with path
+	std::string filename = "_tmp/UniModel.ecore";
+	std::string filename2 = "_tmp/UniModel_out.ecore";
+	try
+	{
+		// Get MetaPackage
+		MSG_DEBUG("Get 'myEcoreMetaMetaPackage'");
+		std::shared_ptr<ecore::EPackage> myEcoreMetaMetaPackage = testmodel::TestModel::getMetaMetaPackage();
+		if (myEcoreMetaMetaPackage == 0)
+		{
+			MSG_ERROR(MSG_FLF << "'myEcoreMetaMetaPackage' is empty");
+			return;
 		}
 
 		// Create Save-Model
-		MSG_DEBUG( "Create 'myEcoreTestSaveMetaModel'" );
+		MSG_DEBUG("Create 'myEcoreTestSaveMetaModel'");
 		std::shared_ptr<ecore::EObject> myEcoreTestSaveMetaModel = testmodel::TestModel::createEcoreTestMetaModel();
-		if ( myEcoreTestSaveMetaModel == 0 )
+		if (myEcoreTestSaveMetaModel == 0)
 		{
-			MSG_ERROR( MSG_FLF << "'myEcoreTestSaveMetaModel' is empty" );
-			return 0;
+			MSG_ERROR(MSG_FLF << "'myEcoreTestSaveMetaModel' is empty");
+			return;
 		}
-		// Create Load-Model
-		MSG_DEBUG( "Create 'myEcoreTestLoadMetaModel'" );
-		std::shared_ptr<ecore::EObject> myEcoreTestLoadMetaModel;
-
-		// Crete persistence object
-		persistence::xml::XMLPersistence myPersistence;
 
 		// Perform save()
-		MSG_DEBUG( "Start save() of 'myEcoreTestSaveMetaModel'");
-
-		if ( myPersistence.save( filename, myEcoreTestSaveMetaModel, myEcoreMetaMetaPackage ) )
+		MSG_DEBUG("Start save() of 'myEcoreTestSaveMetaModel'");
+		// Crete persistence object
+		persistence::xml::XMLPersistence myPersistence;
+		if (myPersistence.save(filename, myEcoreTestSaveMetaModel, myEcoreMetaMetaPackage))
 		{
 
-			MSG_DEBUG( "Successful save() 'myEcoreTestSaveMetaModel' to '" << filename.c_str() << "'");
+			MSG_DEBUG("Successful save() 'myEcoreTestSaveMetaModel' to '" << filename.c_str() << "'");
 		}
 		else
 		{
-			MSG_ERROR( MSG_FLF << "During save() of 'myEcoreTestSaveMetaModel'");
-		}
-
-		// Perform load()
-		MSG_DEBUG( "Start load() of 'myEcoreTestSaveMetaModel'");
-		myEcoreTestLoadMetaModel = myPersistence.load( filename );
-		if ( myEcoreTestLoadMetaModel != nullptr )
-		{
-			MSG_DEBUG( "Successful load() of 'myEcoreTestLoadMetaModel' from '" << filename << "'");
-		}
-		else
-		{
-			MSG_ERROR( MSG_FLF << "During load() of 'myEcoreTestLoadMetaModel'");
-		}
-
-		// Perform save() again
-		MSG_DEBUG( "Start save() of 'myEcoreTestLoadMetaModel'");
-
-		if ( myPersistence.save( filename2, myEcoreTestLoadMetaModel, myEcoreMetaMetaPackage ) )
-		{
-			MSG_DEBUG( "Successful save() 'myEcoreTestSaveMetaModel' to '" << filename2 << "'");
-		}
-		else
-		{
-			MSG_ERROR( MSG_FLF << "During save() of 'myEcoreTestLoadMetaModel'");
-		}
-
-		// Perform load() on unknown model
-		MSG_DEBUG( "Start load() of 'myEcoreTestSaveMetaModel'" );
-		myEcoreTestLoadMetaModel = myPersistence.load( filename3 );
-		if ( myEcoreTestLoadMetaModel != nullptr )
-		{
-			MSG_DEBUG( "Successful load() of 'myEcoreTestLoadMetaModel' from '" << filename3 << "'" );
-		}
-		else
-		{
-			MSG_ERROR( MSG_FLF << "During load() of 'myEcoreTestLoadMetaModel'" );
-		}
-
-		// Perform save() again
-		MSG_DEBUG( "Start save() of 'myEcoreTestLoadMetaModel'" );
-
-		if ( myPersistence.save( filename4, myEcoreTestLoadMetaModel, myEcoreMetaMetaPackage ) )
-		{
-			MSG_DEBUG( "Successful save() 'myEcoreTestSaveMetaModel' to '" << filename4 << "'" );
-		}
-		else
-		{
-			MSG_ERROR( MSG_FLF << "During save() of 'myEcoreTestLoadMetaModel'" );
+			MSG_ERROR(MSG_FLF << "During save() of 'myEcoreTestSaveMetaModel'");
 		}
 	}
-	catch ( std::exception &e )
+	catch (std::exception &e)
 	{
-		MSG_ERROR( MSG_FLF << e.what() );
+		MSG_ERROR(MSG_FLF << e.what());
 	}
+
+	performReadAndWrite(filename, filename2);
+}
+
+int main()
+{
+	// Set OpenMP number of threads
+	omp_set_num_threads(1);
+
+	performUniModelTest();
+	performReadAndWrite("_tmp/ecore.ecore", "_tmp/ecore_out.ecore");
+	performReadAndWrite("_tmp/types.ecore", "_tmp/types_out.ecore");
+
 	return 0;
 }
