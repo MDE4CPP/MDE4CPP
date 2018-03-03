@@ -5,34 +5,34 @@
  *      Author: Alexander
  */
 
-#ifndef PERSISTENCE_HPP_
-#define PERSISTENCE_HPP_
+#ifndef PERSISTENCE_BASE_PERSISTENCE_HPP_
+#define PERSISTENCE_BASE_PERSISTENCE_HPP_
 
-#include "ecore/EObject.hpp"
-#include "ecore/EPackage.hpp"
-
-//#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
+#include <memory>
 #include <string>
-#include <set>
-#include <iostream>
 
+namespace ecore
+{
+	class EObject;
+	class EPackage;
+}
 namespace persistence
 {
-namespace base
-{
-class Persistence
-{
-public:
-	Persistence ();
-	virtual ~Persistence ();
+	namespace base
+	{
+		class Persistence
+		{
+			public:
+				Persistence();
+				virtual ~Persistence();
 
-	virtual std::shared_ptr<ecore::EObject> load ( const std::string &filename ) = 0;
-	virtual bool save ( const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage ) = 0;
+				virtual std::shared_ptr<ecore::EObject> load(const std::string &filename) = 0;
+				virtual bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage) = 0;
 
-protected:
-	bool isValidFile ( const std::string &filename );
-};
-} /* namespace base */
+			protected:
+				bool isValidFile(const std::string &filename);
+		};
+	} /* namespace base */
 } /* namespace persistence */
 
 #endif /* PERSISTENCE_HPP_ */

@@ -6,25 +6,23 @@
  */
 
 #include "persistence/base/Persistence.hpp"
-#include "persistence/base/Load.hpp"
-#include "persistence/base/Save.hpp"
 
-using namespace std;
+#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
+#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
 
-namespace persistence
-{
-namespace base
-{
+#include <iostream>
 
-Persistence::Persistence ()
+using namespace persistence::base;
+
+Persistence::Persistence()
 {
 }
 
-Persistence::~Persistence ()
+Persistence::~Persistence()
 {
 }
 
-bool Persistence::isValidFile ( const std::string& filename )
+bool Persistence::isValidFile(const std::string& filename)
 {
 	//boost::filesystem::path file( filename );
 	// TODO needs implementation
@@ -33,5 +31,3 @@ bool Persistence::isValidFile ( const std::string& filename )
 	return true;
 }
 
-} /* namespace base */
-} /* namespace persistence */
