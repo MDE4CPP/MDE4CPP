@@ -25,6 +25,21 @@
  * Section for model and class implementation of an Attribute
  */]
 
+[template public generateDefaultValue(anEAttribute : EAttribute) post (trim())]
+[if (anEAttribute.defaultValueLiteral->notEmpty())]
+	[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+		= [anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/] 
+	[else] 
+		= [anEAttribute.defaultValueLiteral/]
+	[/if]
+[else]
+	[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+	[else]
+		= [anEAttribute.eType.getDefaultValue()/]
+	[/if]
+[/if]
+[/template]
+
 [template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
@@ -34,7 +49,7 @@
 [anEAttribute.generateDokumentation()/] 
 [if (not(anEAttribute.upperBound = 1))]
 [anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; [else]
-[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [if (anEAttribute.defaultValueLiteral->notEmpty())]= [if (anEAttribute.eType.oclIsTypeOf(EEnum))][anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/] [else] [anEAttribute.defaultValueLiteral/][/if][/if];
+[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [generateDefaultValue()/];
 [/if]
 [/template]
 
