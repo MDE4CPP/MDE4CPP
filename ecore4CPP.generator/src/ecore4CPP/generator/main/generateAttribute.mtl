@@ -25,18 +25,15 @@
  * Section for model and class implementation of an Attribute
  */]
 
+[query public getDefaultValue(anEAttribute : EAttribute) : String = if (defaultValueLiteral->notEmpty()) then defaultValueLiteral else eType.getDefaultValue() endif/]
+
 [template public generateDefaultValue(anEAttribute : EAttribute) post (trim())]
-[if (anEAttribute.defaultValueLiteral->notEmpty())]
-	[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+	[if (anEAttribute.defaultValueLiteral->notEmpty())]
 		= [anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/] 
-	[else] 
-		= [anEAttribute.defaultValueLiteral/]
 	[/if]
 [else]
-	[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
-	[else]
-		= [anEAttribute.eType.getDefaultValue()/]
-	[/if]
+	= [anEAttribute.getDefaultValue()/]
 [/if]
 [/template]
 

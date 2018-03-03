@@ -15,6 +15,7 @@
 [module generateStructuralFeatureSetGet('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::generateAttribute /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::generateReference /]
 
@@ -23,6 +24,10 @@
 */]
 [template public generateeGetDel(aClass : EClass,impl : Boolean)]
 virtual boost::any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
+[/template]
+
+[template public generateeIsSetDel(aClass : EClass,impl : Boolean)]
+virtual bool internalEIsSet(int featureID) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeSetDel(aClass : EClass,impl : Boolean)]
@@ -40,6 +45,20 @@ boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, boo
 	[/for]
 	}
 	return boost::any();
+}
+[/template]
+
+[template public generateeIsSetImpl(aClass : EClass)]
+bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	[for (struct : EStructuralFeature | aClass.eAllStructuralFeatures->asOrderedSet()->sortedBy(name))]
+		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
+			return [struct.generateComparison()/]; //[aClass.getClassifierID()/][struct.getFeatureID()/]
+	[/for]
+	}
+	return false;
 }
 [/template]
 
@@ -63,4 +82,16 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::an
 [/for]
 	}
 }
+[/template]
+
+[template public generateComparison(anStructFeature : EStructuralFeature) ? (oclIsKindOf(EAttribute) and not eType.requiresAny())]
+[anStructFeature.GetterName()/]() != [anStructFeature.oclAsType(EAttribute).getDefaultValue()/]
+[/template]
+
+[template public generateComparison(anStructFeature : EStructuralFeature) ? (not oclIsKindOf(EAttribute) and not eType.requiresAny())]
+[anStructFeature.GetterName()/]()[if (anStructFeature.oclIsKindOf(EReference))][if(anStructFeature.oclAsType(EReference).isBackReference())].lock()[/if][/if] != [anStructFeature.eType.getDefaultValue()/]
+[/template]
+
+[template public generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]
+![anStructFeature.GetterName()/]().empty()
 [/template]

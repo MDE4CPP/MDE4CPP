@@ -105,9 +105,6 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			[aClass.generateeGetDel(true)/]
-			[aClass.generateeSetDel(true)/]
 
 			[aClass.generateEContainerOperation(true)/] 
 			
@@ -118,6 +115,9 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 
 		protected:
 			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
+			[aClass.generateeGetDel(true)/]
+			[aClass.generateeIsSetDel(true)/]
+			[aClass.generateeSetDel(true)/]
 
 		private:
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
