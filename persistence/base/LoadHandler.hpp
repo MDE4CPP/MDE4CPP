@@ -54,6 +54,7 @@ namespace persistence
 				std::string extractType(std::shared_ptr<ecore::EObject> obj) const;
 
 				void addToMap(std::shared_ptr<ecore::EObject> object);
+				void addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects);
 
 				void setCurrentObject(std::shared_ptr<ecore::EObject> object);
 				std::shared_ptr<ecore::EObject> getCurrentObject();

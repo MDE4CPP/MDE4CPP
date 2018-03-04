@@ -9,6 +9,7 @@
 #define PERSISTENCE_BASE_HANDLERHELPER_HPP
 
 #include <memory>
+#include <list>
 
 namespace ecore
 {
@@ -27,6 +28,7 @@ namespace persistence
 
 				static std::string extractType(const std::shared_ptr<ecore::EObject> obj, std::string prefix);
 				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix);
+				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix, std::list<std::shared_ptr<ecore::EObject>> m_currentObjects);
 		};
 
 	} /* namespace base */

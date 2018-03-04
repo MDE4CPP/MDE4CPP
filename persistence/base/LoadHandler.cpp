@@ -60,10 +60,23 @@ std::shared_ptr<ecore::EObject> LoadHandler::getObjectByRef(std::string ref)
 	return tmp;
 }
 
+
 void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object)
 {
-	std::string ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+	addToMap(object, true);
+}
 
+void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects)
+{
+	std::string ref = "";
+	if (useCurrentObjects)
+	{
+		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects);
+	}
+	else
+	{
+		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+	}
 	if (!ref.empty())
 	{
 		if (m_refToObject_map.find(ref) == m_refToObject_map.end())
@@ -72,6 +85,19 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object)
 			m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(ref, object));
 
 			MSG_DEBUG("Add to map: '" << ref << "'");
+		}
+
+		int index = ref.find(" ");
+		if (index != std::string::npos)
+		{
+			std::string ref2 = ref.substr(index+1, ref.size());
+			if (m_refToObject_map.find(ref2) == m_refToObject_map.end())
+			{
+				// ref not found in map, so insert
+				m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(ref2, object));
+
+				MSG_DEBUG("Add to map: '" << ref2 << "'");
+			}
 		}
 	}
 }

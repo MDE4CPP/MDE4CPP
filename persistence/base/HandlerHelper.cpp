@@ -23,8 +23,10 @@
 #include "ecore/EClassifier.hpp"
 #include "ecore/ENamedElement.hpp"
 #include "ecore/EObject.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EPackage.hpp"
-//#include "ecore/EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "abstractDataTypes/Union.hpp"
 
 using namespace persistence::base;
 
@@ -59,6 +61,19 @@ std::string HandlerHelper::extractType(const std::shared_ptr<ecore::EObject> obj
 	return ss.str();
 }
 
+std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
+	std::string prefix)
+{
+	std::list<std::shared_ptr<ecore::EObject>> list;
+	std::shared_ptr<ecore::EObject> antecessor = toObject; //pre-init antecessor
+	while (antecessor)
+	{
+		list.push_front(antecessor);
+		antecessor = list.front()->eContainer();
+	}
+	return extractReference(toObject, rootObject, prefix, list);
+}
+
 /*
  * This API is adapted to API in Project emf4cpp.
  *
@@ -67,11 +82,9 @@ std::string HandlerHelper::extractType(const std::shared_ptr<ecore::EObject> obj
  *
  */
 std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-	std::string prefix)
+	std::string prefix, std::list<std::shared_ptr<ecore::EObject>> currentObjects)
 {
 	std::stringstream ref;
-	std::list<std::shared_ptr<ecore::EObject> > to_antecessors;
-	std::shared_ptr<ecore::EObject> antecessor = toObject; //pre-init antecessor
 
 	if (!toObject)
 	{
@@ -79,20 +92,17 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		return ref.str();
 	}
 
-	while (antecessor)
+	if (currentObjects.size() == 0)
 	{
-		to_antecessors.push_back(antecessor);
-		antecessor = to_antecessors.back()->eContainer();
+		std::cerr << "no current object" << std::endl;
+		throw "no current object";
 	}
 
-	std::shared_ptr<ecore::EPackage> rootPkg = std::dynamic_pointer_cast<ecore::EPackage>(to_antecessors.back());
+	std::shared_ptr<ecore::EPackage> rootPkg = std::dynamic_pointer_cast<ecore::EPackage>(currentObjects.front());
 
 	if (rootPkg)
 	{
 		// This case is used for ecore-models
-
-		// Remove root Package from 'to_antecessors' because it is not used in reference name
-		to_antecessors.pop_back();
 
 		// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
 		if (rootObject != rootPkg) // TODO check if works correct (not tested yet)
@@ -103,10 +113,14 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		ref << "#/";
 
 		// Add Package name(s) and Class/Enum/EDataType name to 'value'
-		while (to_antecessors.size() > 0)
+		std::list<std::shared_ptr<ecore::EObject>>::iterator iter = currentObjects.begin();
+		std::list<std::shared_ptr<ecore::EObject>>::iterator endIter = currentObjects.end();
+		iter++; // Remove root Package from 'to_antecessors' because it is not used in reference name
+		while (iter != endIter)
 		{
-			std::shared_ptr<ecore::ENamedElement> to_antecessors_back = std::dynamic_pointer_cast<ecore::ENamedElement>(to_antecessors.back());
-			std::shared_ptr<ecore::EAnnotation> to_antecessors_back_annotation = std::dynamic_pointer_cast<ecore::EAnnotation>(to_antecessors.back());
+			std::shared_ptr<ecore::EObject> obj = *iter;
+			std::shared_ptr<ecore::ENamedElement> to_antecessors_back = std::dynamic_pointer_cast<ecore::ENamedElement>(obj);
+			std::shared_ptr<ecore::EAnnotation> to_antecessors_back_annotation = std::dynamic_pointer_cast<ecore::EAnnotation>(obj);
 
 			if (to_antecessors_back != nullptr)
 			{
@@ -118,9 +132,53 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 			}
 			else
 			{
-				MSG_ERROR(MSG_FLF << "During casting Object of type '" << to_antecessors.back()->eClass()->getName() << "' to 'ENamedElement'.");
+				MSG_ERROR(MSG_FLF << "During casting Object of type '" << obj->eClass()->getName() << "' to 'ENamedElement'.");
 			}
-			to_antecessors.pop_back();
+			iter++;
+		}
+
+		std::shared_ptr<ecore::EClass> classObj = std::dynamic_pointer_cast<ecore::EClass>(currentObjects.back()->eContainer());
+		std::shared_ptr<ecore::ENamedElement> targetObj = std::dynamic_pointer_cast<ecore::ENamedElement>(toObject);
+		if (classObj && targetObj)
+		{
+			if (targetObj->getName().compare("behavioredClassifier") == 0)
+			{
+
+				int count = 0;
+				int meetingIndex = 0;
+
+				std::shared_ptr<Bag<ecore::EStructuralFeature>> structFeastureList = classObj->getEStructuralFeatures();
+				for (std::shared_ptr<ecore::EStructuralFeature> structFeat : *structFeastureList)
+				{
+					if (structFeat->getName() == targetObj->getName())
+					{
+						count++;
+					}
+
+					if (structFeat == toObject)
+					{
+						meetingIndex = count;
+					}
+				}
+
+				std::shared_ptr<Bag<ecore::EOperation>> operationList = classObj->getEOperations();
+				for (std::shared_ptr<ecore::EOperation> operatation : *operationList)
+				{
+					if (operatation->getName() == targetObj->getName())
+					{
+						count++;
+					}
+
+					if (operatation == toObject)
+					{
+						meetingIndex = count;
+					}
+				}
+				if (count > 1 && meetingIndex != 0)
+				{
+					ref << "." << meetingIndex;
+				}
+			}
 		}
 	}
 #if 0

@@ -111,9 +111,6 @@ void Load::readDataTypes(std::shared_ptr<ecore::EPackage> package)
 	{
 		// Filter only EDataType objects and add to handler's internal map
 		std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
-		if (_metaClass->getName().compare("EDataType") == 0)
-		{
-			m_handler->addToMap(eClassifier); // TODO add default parameter force=true to addToMap()
-		}
+		m_handler->addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
 	}
 }
