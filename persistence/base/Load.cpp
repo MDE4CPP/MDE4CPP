@@ -70,17 +70,8 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 			// Start loading process by calling load() on root object
 			pck_root->load(m_handler);
 
-			// Add EClassifiers of package to map if not already in // TODO this sequence should not necessary, because Handlers should use PluginFramework to find correct objects and types
-			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
-			for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
-			{
-				// Filter only EDataType objects and add to handler's internal map
-				std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
-				if (_metaClass->getName().compare("EDataType") == 0)
-				{
-					m_handler->addToMap(eClassifier); // TODO add default parameter force=true to addToMap()
-				}
-			}
+			readDataTypes(package);
+			readDataTypes("types");
 
 			// Resolve unresolved references that are stored during loading
 			m_handler->resolveReferences();
@@ -95,4 +86,34 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 	}
 
 	return retvalue;
+}
+
+void Load::readDataTypes(const std::string prefix)
+{
+	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(prefix);
+
+	if (plugin)
+	{
+		std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
+		std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
+		readDataTypes(package);
+	}
+}
+
+void Load::readDataTypes(std::shared_ptr<ecore::EPackage> package)
+{
+
+
+	// Add EClassifiers of package to map if not already in // TODO this sequence should not necessary, because Handlers should use PluginFramework to find correct objects and types
+	std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
+	for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
+	{
+		// Filter only EDataType objects and add to handler's internal map
+		std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
+		if (_metaClass->getName().compare("EDataType") == 0)
+		{
+			m_handler->addToMap(eClassifier); // TODO add default parameter force=true to addToMap()
+		}
+	}
 }
