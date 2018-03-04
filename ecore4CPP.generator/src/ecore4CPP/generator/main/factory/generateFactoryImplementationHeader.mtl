@@ -63,8 +63,6 @@ namespace [anEPackage.name/]
 		private:
 			static [anEPackage.name.toUpperFirst().concat('Factory')/]* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 [endGuard(anEPackage,'FactoryImpl')/]
