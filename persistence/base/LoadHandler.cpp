@@ -68,14 +68,20 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object)
 
 void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects)
 {
+	std::shared_ptr<ecore::ENamedElement> namedElement = std::dynamic_pointer_cast<ecore::ENamedElement>(object);
+	if (namedElement == nullptr)
+	{
+		return;
+	}
+
 	std::string ref = "";
 	if (useCurrentObjects)
 	{
-		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects);
+		ref = persistence::base::HandlerHelper::extractReference(namedElement, m_rootObject, m_rootPrefix, m_currentObjects);
 	}
 	else
 	{
-		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+		ref = persistence::base::HandlerHelper::extractReference(namedElement, m_rootObject, m_rootPrefix);
 	}
 	if (!ref.empty())
 	{
@@ -87,7 +93,7 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 			MSG_DEBUG("Add to map: '" << ref << "'");
 		}
 
-		int index = ref.find(" ");
+		unsigned int index = ref.find(" ");
 		if (index != std::string::npos)
 		{
 			std::string ref2 = ref.substr(index+1, ref.size());
