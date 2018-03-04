@@ -84,8 +84,14 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::an
 }
 [/template]
 
-[template public generateComparison(anStructFeature : EStructuralFeature) ? (oclIsKindOf(EAttribute) and not eType.requiresAny())]
+[template public generateComparison(anStructFeature : EStructuralFeature) ? (oclIsKindOf(EAttribute) and not eType.requiresAny()) post (trim())]
+[if (anStructFeature.upperBound <> 1)]
+![anStructFeature.GetterName()/]()->empty()
+[elseif (eType.oclIsKindOf(EEnum))]
+true
+[else]
 [anStructFeature.GetterName()/]() != [anStructFeature.oclAsType(EAttribute).getDefaultValue()/]
+[/if]
 [/template]
 
 [template public generateComparison(anStructFeature : EStructuralFeature) ? (not oclIsKindOf(EAttribute) and not eType.requiresAny())]
