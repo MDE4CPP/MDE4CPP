@@ -126,6 +126,11 @@ std::string LoadHandler::getLevel()
 
 void LoadHandler::handleChild(std::shared_ptr<ecore::EObject> object)
 {
+	if (object == nullptr)
+	{
+		return;
+	}
+
 	m_level++;
 	m_currentObjects.push_back(object);
 
