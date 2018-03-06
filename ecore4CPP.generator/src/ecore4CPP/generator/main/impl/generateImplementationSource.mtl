@@ -47,6 +47,8 @@
 [/if]
 
 //Forward declaration includes
+[generatePersistenceInclude()/]
+
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
 [/for]

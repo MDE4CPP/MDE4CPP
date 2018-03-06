@@ -22,9 +22,22 @@
 [if(path)]persistence/interface[else]persistence::interface[/if]
 [/template]
 
+[template public generatePersistenceForwardDeclarations(aClass : EClass) ]
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+[/template]
+
 [template public generatePersistenceInclude(aClass : EClass) ]
 #include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
+#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
 #include <exception> // used in Persistence
 [/template]
 

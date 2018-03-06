@@ -50,10 +50,10 @@ namespace boost
 }
 [/if]
 
-[generatePersistenceInclude()/]
-
 //*********************************
 // generated Includes
+
+[generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
