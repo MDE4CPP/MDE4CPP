@@ -15,6 +15,7 @@ using namespace persistence::xml;
 XMLLoad::XMLLoad()
 {
 	m_handler.reset(new persistence::xml::XMLLoadHandler());
+	m_handler->setThisPtr(m_handler);
 
 	m_DoNamespaces = false;
 	m_DoSchema = false;
@@ -58,6 +59,7 @@ XMLLoad::~XMLLoad()
 {
 	if (m_handler)
 	{
+		m_handler->setThisPtr(nullptr);
 		m_handler.reset();
 	}
 	XMLPlatformUtils::Terminate();

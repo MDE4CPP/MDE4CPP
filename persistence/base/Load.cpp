@@ -7,6 +7,7 @@
 
 #include "persistence/base/Load.hpp"
 
+#include "abstractDataTypes/Bag.hpp"
 #include "boost/any.hpp"
 
 #include "ecore/EClass.hpp"
@@ -64,7 +65,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 			//std::shared_ptr<ecore::EPackage> pck_root = std::dynamic_pointer_cast<ecore::EPackage>(factory->create(std::dynamic_pointer_cast<ecore::EClass>(package->getEClassifier("EPackage"))) ); // TODO Not supported yet
 			std::shared_ptr<ecore::EPackage> pck_root = factory->createEPackage();
 
-			m_handler->setCurrentObject(pck_root);
+			m_handler->handleChild(pck_root);
 			m_handler->getNextNodeName();
 
 			// Start loading process by calling load() on root object
@@ -72,6 +73,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 
 			readDataTypes(package);
 			readDataTypes("types");
+			readDataTypes("UML");
 
 			// Resolve unresolved references that are stored during loading
 			m_handler->resolveReferences();

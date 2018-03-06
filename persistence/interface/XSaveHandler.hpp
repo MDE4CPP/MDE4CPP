@@ -22,7 +22,7 @@
 #include <memory>
 #include <string>
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/exception/to_string.hpp"
 
 namespace ecore

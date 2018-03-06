@@ -56,7 +56,7 @@ namespace persistence
 				void addToMap(std::shared_ptr<ecore::EObject> object);
 				void addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects);
 
-				void setCurrentObject(std::shared_ptr<ecore::EObject> object);
+				void handleChild(std::shared_ptr<ecore::EObject> object);
 				std::shared_ptr<ecore::EObject> getCurrentObject();
 
 				void release();
@@ -69,6 +69,8 @@ namespace persistence
 
 				void resolveReferences();
 
+				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
+
 			protected:
 				int m_level;
 
@@ -79,6 +81,8 @@ namespace persistence
 
 				std::map<std::string, std::shared_ptr<ecore::EObject>> m_refToObject_map;
 				std::list<persistence::base::UnresolvedReference> m_unresolvedReferences;
+
+				std::shared_ptr<LoadHandler> m_thisPtr;
 		};
 	} /* namespace base */
 } /* namespace persistence */

@@ -17,6 +17,7 @@
 #define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
 #define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
 
+#include <iostream>
 #include <map>
 #include <memory>
 #include <string>
@@ -41,7 +42,7 @@ namespace persistence
 				}
 				virtual std::string getLevel() = 0;
 				virtual void addToMap(std::shared_ptr<ecore::EObject> object) = 0;
-				virtual void setCurrentObject(std::shared_ptr<ecore::EObject> object) = 0;
+				virtual void handleChild(std::shared_ptr<ecore::EObject> object) = 0;
 				virtual std::shared_ptr<ecore::EObject> getCurrentObject() = 0;
 
 				virtual void release() = 0;
