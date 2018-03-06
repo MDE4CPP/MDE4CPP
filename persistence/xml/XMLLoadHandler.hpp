@@ -34,6 +34,7 @@ namespace persistence
 				unsigned int getNumOfChildNodes();
 				std::string getNextNodeName();
 				std::map<std::string, std::string> getAttributeList();
+				virtual std::string getCurrentXSITypeName();
 
 			private:
 				DOMDocument* m_doc;

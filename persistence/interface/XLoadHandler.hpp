@@ -50,6 +50,7 @@ namespace persistence
 				virtual unsigned int getNumOfChildNodes() = 0;
 				virtual std::string getNextNodeName() = 0;
 				virtual std::map<std::string, std::string> getAttributeList() = 0;
+				virtual std::string getCurrentXSITypeName() = 0;
 
 				virtual void addUnresolvedReference(const std::string &name, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf) = 0;
 		};

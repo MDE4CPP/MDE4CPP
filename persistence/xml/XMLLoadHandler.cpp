@@ -165,5 +165,32 @@ std::map<std::string, std::string> XMLLoadHandler::getAttributeList ()
 	return attributeList;
 }
 
+std::string XMLLoadHandler::getCurrentXSITypeName ()
+{
+	DOMAttr *pAttributeNode;
+	std::string aName;
+
+	DOMNamedNodeMap *pAttributes = m_currentElement->getAttributes();
+	const XMLSize_t nSize = pAttributes->getLength();
+
+	for ( XMLSize_t i = 0; i < nSize; ++i )
+	{
+		pAttributeNode = (DOMAttr*) pAttributes->item( i );
+		// get attribute name
+		aName = W( pAttributeNode->getName() );
+
+		if (aName == "xsi:type")
+		{
+			std::string _type = W(pAttributeNode->getValue());
+			size_t const double_dot = _type.find(L':', 0);
+			std::string _type_ns = _type.substr(0, double_dot); // TODO '_type_ns' is not used in this case
+			std::string _type_name = _type.substr(double_dot + 1);
+			return _type_name;
+		}
+	}
+
+	return "";
+}
+
 } /* namespace xml */
 } /* namespace persistence */
