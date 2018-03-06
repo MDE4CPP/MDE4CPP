@@ -98,6 +98,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 
 [query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey('AggregationKind')) then aReference.valueKey('AggregationKind')='shared' else false endif/]
 [query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
+[query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 
 [template public pointertype(aReference : EReference) post(trim())]
 [if(isBackReference())]
