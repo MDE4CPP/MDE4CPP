@@ -327,7 +327,11 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 	[if (aReference.upperBound = 1)]
 		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]());
 	[else]
-		saveHandler->addReferences("[aReference.name/]", this->[aReference.GetterName()/]());
+		std::shared_ptr<Bag<[aReference.eType.generateType()/]>> list_[aReference.name/] = this->[aReference.GetterName()/]();
+		for ([aReference.generateReferenceTypeBag()/] object : *list_[aReference.name/])
+		{ 
+			saveHandler->addReference("[aReference.name/]", object);
+		}
 	[/if]
 [/for]
 
