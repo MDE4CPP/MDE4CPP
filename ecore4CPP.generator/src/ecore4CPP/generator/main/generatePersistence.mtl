@@ -48,13 +48,13 @@ namespace persistence
 [/template]
 
 [template public generatePersistenceLoadDecl(aClass: EClass, impl : EBoolean)]
-virtual void load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> handler) [abstractSufix(impl)/];
+virtual void load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler) [abstractSufix(impl)/];
 [/template]
 [template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
 virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
 [/template]
 [template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
-virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> handler) const [abstractSufix(impl)/];
+virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
 [/template]
 
 
@@ -67,7 +67,7 @@ virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHand
 [/template]
 
 [template public generatePersistenceLoadImpl(aClass: EClass)]
-void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> handler)
+void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler)
 {
 	try
 	{
@@ -78,7 +78,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 		// Set Attributes
 		//
 		// Get list of current Node Attributes	
-		std::map<std::string, std::string> attr_list = handler->getAttributeList();
+		std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 		
 		std::map<std::string, std::string>::const_iterator iter;
 	
@@ -88,7 +88,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	// Attributes that are from type EJavaClass (void*) has not to export to xml. 
 	[/comment]
 		[if (not(aAttribute.upperBound = 1))]
-		//handler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() ); // upperBound != 1 so [aAttribute.GetterName()/]() is a list/bag/union
+		//loadHandler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() ); // upperBound != 1 so [aAttribute.GetterName()/]() is a list/bag/union
 		// TODO needs an implementation to set list of strings to this attribute
 		std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " needs an implementation to set list of strings to this attribute." << std::endl; 
 		[else]
@@ -141,32 +141,32 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 		iter = attr_list.find("[aReference.name/]");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to handler's list
-			handler->addUnresolvedReference(iter->second, handler->getCurrentObject(), metaClass->getEStructuralFeature("[aReference.name/]")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("[aReference.name/]")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	[/for]
 	
 		//
 		// Create new objects (from references (containment == true))
 		//
-		int numNodes = handler->getNumOfChildNodes();
+		int numNodes = loadHandler->getNumOfChildNodes();
 [comment]
-		std::cout << handler->getLevel() << "<" << metaClass->getName() << " ";
+		std::cout << loadHandler->getLevel() << "<" << metaClass->getName() << " ";
 	
-		std::shared_ptr<[needNamespace(aClass.ePackage, 'ENamedElement')/]> _[aClass.name/] = std::dynamic_pointer_cast<[needNamespace(aClass.ePackage, 'ENamedElement')/]>(handler->getCurrentObject());
+		std::shared_ptr<[needNamespace(aClass.ePackage, 'ENamedElement')/]> _[aClass.name/] = std::dynamic_pointer_cast<[needNamespace(aClass.ePackage, 'ENamedElement')/]>(loadHandler->getCurrentObject());
 		if(_[aClass.name/])
 		{
 			std::cout << "name='"<< _[aClass.name/]->getName() << "'";
 		}
 		std::cout << ">" << std::endl;
-		std::cout << handler->getLevel() << "-NumNodes: " << numNodes << std::endl;
+		std::cout << loadHandler->getLevel() << "-NumNodes: " << numNodes << std::endl;
 [/comment]
 		std::string nodeName;
 		for(int ii = 0; ii < numNodes; ii++)
 		{
-			nodeName = handler->getNextNodeName();
+			nodeName = loadHandler->getNextNodeName();
 [comment]
-			std::cout << handler->getLevel() << "-Child: "<< nodeName << " " << ii+1 << "/" << numNodes << std::endl;
+			std::cout << loadHandler->getLevel() << "-Child: "<< nodeName << " " << ii+1 << "/" << numNodes << std::endl;
 [/comment]
 	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			if ( nodeName.compare("[aReference.name/]") == 0 )
@@ -191,7 +191,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 				std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/];
 	
 				// 1. Create new Object '[aReference.name/]' with Factory and set Container to Object 'this.
-				attr_list = handler->getAttributeList();
+				attr_list = loadHandler->getAttributeList();
 				iter = attr_list.find("xsi:type");
 				if ( iter != attr_list.end() )
 				{
@@ -208,7 +208,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 				
 				[/if]
 				[for(aBackReference : EReference | ref->sortedBy(name))]
-					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create(_type_name, handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create(_type_name, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
 				[/for]
 			[else]
 					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>( factory->create(_type_name) ); 
@@ -223,7 +223,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 				
 				[/if]
 				[for(aBackReference : EReference | ref->sortedBy(name))]
-					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create("[aEClass.name/]", handler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
+					[aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>(factory->create("[aEClass.name/]", loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/])) ;			
 				[/for]
 			[else]
 					[aReference.name/] = factory->create[aEClass.name/]() ; 
@@ -239,16 +239,16 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	  [/if]
 				
 				// 2. Report Handler to set '[aReference.name/]' as new current Object.
-				handler->setCurrentObject([aReference.name/]);
+				loadHandler->setCurrentObject([aReference.name/]);
 	
 				// 3. Call recursively '[aReference.name/].load().
-				[aReference.name/]->load(handler);
+				[aReference.name/]->load(loadHandler);
 	
 				// 4. Add '[aReference.name/]' to Handler's internal Map, that is used for resolving references.
-				handler->addToMap([aReference.name/]);
+				loadHandler->addToMap([aReference.name/]);
 
 				// Report Handler to set 'this' as new current Object.
-				handler->release();
+				loadHandler->release();
 			}
 	[/for]
 		}
@@ -302,7 +302,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 [/template]
 
 [template public generatePersistenceSaveImpl(aClass: EClass)]
-void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> handler) const
+void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
 {
 	try
 	{
@@ -322,7 +322,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 [/comment]
 		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
 		{
-			handler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() );
+			saveHandler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() );
 		}
   [else]
 		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
@@ -334,9 +334,9 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		//
 [for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
 	[if (aReference.upperBound = 1)]
-		handler->addReference("[aReference.name/]", this->[aReference.GetterName()/]());
+		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]());
 	[else]
-		handler->addReferences("[aReference.name/]", this->[aReference.GetterName()/]());
+		saveHandler->addReferences("[aReference.name/]", this->[aReference.GetterName()/]());
 	[/if]
 [/for]
 
@@ -362,19 +362,19 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 			{
 	[/if]
 				// 1. Create and add Node-Element to model-tree
-				handler->createAndAddElement( "[aReference.name/]" );
+				saveHandler->createAndAddElement( "[aReference.name/]" );
 	
 				if([aReference.name/]->eClass() != esf->getEType())
 				{
 					// 1.x Set Attribute "xsi:type" to the specific Class-Type
-					handler->addAttribute( "xsi:type", handler->extractType([aReference.name/]) );
+					saveHandler->addAttribute( "xsi:type", saveHandler->extractType([aReference.name/]) );
 				}
 	
 				// 2. Recursive call of save()
-				[aReference.name/]->save( handler );
+				[aReference.name/]->save( saveHandler );
 				
-				// 3. Tell handler for stepping to previous level
-				handler->release(); 
+				// 3. Tell saveHandler for stepping to previous level
+				saveHandler->release(); 
 	[if (aReference.upperBound = 1)]
 		}
 	[else]
