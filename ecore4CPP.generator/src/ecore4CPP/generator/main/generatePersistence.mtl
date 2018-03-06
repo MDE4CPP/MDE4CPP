@@ -239,16 +239,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	  [/if]
 				
 				// 2. Report Handler to set '[aReference.name/]' as new current Object.
-				loadHandler->setCurrentObject([aReference.name/]);
-	
-				// 3. Call recursively '[aReference.name/].load().
-				[aReference.name/]->load(loadHandler);
-	
-				// 4. Add '[aReference.name/]' to Handler's internal Map, that is used for resolving references.
-				loadHandler->addToMap([aReference.name/]);
-
-				// Report Handler to set 'this' as new current Object.
-				loadHandler->release();
+				loadHandler->handleChild([aReference.name/]);
 			}
 	[/for]
 		}
