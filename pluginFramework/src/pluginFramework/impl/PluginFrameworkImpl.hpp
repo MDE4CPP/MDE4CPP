@@ -23,6 +23,7 @@ class PluginFrameworkImpl : virtual public PluginFramework
 	public:
 		virtual ~PluginFrameworkImpl();
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByName(const std::string name) const;
+		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByUri(const std::string uri) const;
 		virtual void clear();
 
 	protected:
@@ -35,7 +36,9 @@ class PluginFrameworkImpl : virtual public PluginFramework
 		virtual void loadLibrary(std::string libraryPath);
 
 	private:
-		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_pluginMap;
+		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_mapPluginName;
+		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_mapPluginUri;
+
 		bool m_debugMode;
 		std::string m_endingDebug;
 		std::string m_endingRelease;
