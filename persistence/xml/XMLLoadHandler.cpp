@@ -18,6 +18,7 @@
 
 #include "xerces/XStr.hpp"
 #include "xerces/WStr.hpp"
+#include "xercesc/dom/DOMNamedNodeMap.hpp"
 
 namespace persistence
 {
@@ -63,7 +64,17 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 		assert( m_currentElement );
 	}
 
-	m_rootPrefix = "ecore"; // TODO get correct prefix from document
+	std::string rootTagName = W(m_currentElement->getTagName());
+	std::cout << "rootTagName:  " <<  rootTagName << std::endl;
+	int index = rootTagName.find(':');
+	if (index != std::string::npos)
+	{
+		m_rootPrefix = rootTagName.substr(0, index);
+	}
+	else
+	{
+		MSG_ERROR(MSG_FLF << " root prefix could not be selected from root tag name '" << rootTagName << "'");
+	}
 
 	if ( m_currentElement->getNodeType() == DOMNode::ELEMENT_NODE )
 	{
