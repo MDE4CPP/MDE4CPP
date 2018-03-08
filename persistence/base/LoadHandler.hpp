@@ -18,6 +18,7 @@
 namespace ecore
 {
 	class EObject;
+	class EPackage;
 	class EStructuralFeature;
 }
 
@@ -75,6 +76,7 @@ namespace persistence
 				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
 				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
+				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package);
 
 			protected:
 				int m_level;

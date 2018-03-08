@@ -16,7 +16,6 @@
 #include "ecore/EStructuralFeature.hpp"
 #include "persistence/base/HandlerHelper.hpp"
 
-#include "pluginFramework/EcoreModelPlugin.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "pluginFramework/PluginFramework.hpp"
 
@@ -307,17 +306,21 @@ void LoadHandler::loadTypes(const std::string& name)
 		std::string nsURI = name.substr(indexStartUri+1, indexEndUri-indexStartUri-1);
 		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByUri(nsURI);
-		std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
-		if (ecorePlugin)
+		if (plugin)
 		{
-			std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
-			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
-			for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
-			{
-				// Filter only EDataType objects and add to handler's internal map
-				std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
-				addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
-			}
+			loadTypes(plugin->getEPackage());
+
 		}
+	}
+}
+
+void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package)
+{
+	std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
+	for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
+	{
+		// Filter only EDataType objects and add to handler's internal map
+		std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
+		addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
 	}
 }

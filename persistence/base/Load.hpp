@@ -40,8 +40,6 @@ namespace persistence
 				std::shared_ptr<persistence::base::LoadHandler> m_handler;
 
 				virtual bool read(const std::string &filename) = 0;
-				virtual void readDataTypes(std::shared_ptr<ecore::EPackage> package);
-				virtual void readDataTypes(const std::string prefix);
 		};
 
 	} /* namespace base */
