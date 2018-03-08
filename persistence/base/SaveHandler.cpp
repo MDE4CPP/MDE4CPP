@@ -62,6 +62,10 @@ std::string SaveHandler::extractType(std::shared_ptr<ecore::EObject> obj) const
 
 void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired)
 {
+	if (object == nullptr)
+	{
+		return;
+	}
 
 	// 1. Create and add Node-Element to model-tree
 	createAndAddElement(tagName);
