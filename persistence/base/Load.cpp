@@ -16,11 +16,14 @@
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
 
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "persistence/base/LoadHandler.hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLModelPlugin.hpp"
 
 using namespace persistence::base;
 
@@ -34,60 +37,62 @@ Load::~Load()
 
 std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 {
-	std::shared_ptr<ecore::EObject> retvalue = nullptr;
-	std::string prefix;
-
 	MSG_DEBUG("Reading file '" << filename << "'");
+	std::shared_ptr<ecore::EObject> rootElement = nullptr;
 
 	if (read(filename) == false)
 	{
 		MSG_ERROR(MSG_FLF <<" Occurred during reading file.");
-		retvalue = nullptr;
+		rootElement = nullptr;
 	}
 	else
 	{
 		MSG_DEBUG("Reading file successfully.");
 
 		// Use PluginFramework to create factory and package by given prefix (eg. ecore, uml,...)
-		prefix = m_handler->getPrefix();
+		std::string prefix = m_handler->getPrefix();
+		std::string rootName = m_handler->getRootName();
 
 		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(prefix);
+		std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
 
-		if (plugin && (prefix.compare("ecore") == 0))
+		if (ecorePlugin && (prefix.compare("ecore") == 0))
 		{
-			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
-			std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
 			//std::shared_ptr<ecore::EFactory> factory = ecorePlugin->getFactory(); // TODO get Factory of ecorePlugin
-			std::shared_ptr<ecore::EcoreFactory> factory = std::dynamic_pointer_cast<ecore::EcoreFactory>(ecorePlugin->getFactory())->eInstance();
-
-			// Create root object of model
-			//std::shared_ptr<ecore::EPackage> pck_root = std::dynamic_pointer_cast<ecore::EPackage>(factory->create(std::dynamic_pointer_cast<ecore::EClass>(package->getEClassifier("EPackage"))) ); // TODO Not supported yet
-			std::shared_ptr<ecore::EPackage> pck_root = factory->createEPackage();
-
-			m_handler->handleChild(pck_root);
-			m_handler->getNextNodeName();
-
-			// Start loading process by calling load() on root object
-			pck_root->load(m_handler);
-
-			readDataTypes(package);
-			readDataTypes("types");
-			readDataTypes("UML");
-
-			// Resolve unresolved references that are stored during loading
-			m_handler->resolveReferences();
-
-			// cast root object to EObject
-			retvalue = std::dynamic_pointer_cast<ecore::EObject>(pck_root);
+			std::shared_ptr<ecore::EcoreFactory> factory = std::dynamic_pointer_cast<ecore::EcoreFactory>(ecorePlugin->getFactory());
+			rootElement = factory->create(rootName);
+		}
+		else if (ecorePlugin && (prefix.compare("uml") == 0))
+		{
+			//std::shared_ptr<ecore::EFactory> factory = ecorePlugin->getFactory(); // TODO get Factory of ecorePlugin
+			std::shared_ptr<uml::UmlFactory> factory = std::dynamic_pointer_cast<uml::UmlFactory>(ecorePlugin->getFactory());
+			rootElement = factory->create(rootName);
 		}
 		else
 		{
 			MSG_ERROR(MSG_FLF << " Given Plugin name '" << prefix << "' is not supported or not found by PluginFramework");
+			return rootElement;
 		}
+
+		// Create root object of model
+		m_handler->handleChild(rootElement);
+		m_handler->getNextNodeName();
+
+		// Start loading process by calling load() on root object
+		rootElement->load(m_handler);
+
+		std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
+		readDataTypes(package);
+		readDataTypes("types");
+		readDataTypes("uml");
+
+		// Resolve unresolved references that are stored during loading
+		m_handler->resolveReferences();
+
 	}
 
-	return retvalue;
+	return rootElement;
 }
 
 void Load::readDataTypes(const std::string prefix)
