@@ -66,10 +66,11 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 
 	std::string rootTagName = W(m_currentElement->getTagName());
 	std::cout << "rootTagName:  " <<  rootTagName << std::endl;
-	int index = rootTagName.find(':');
+	unsigned int index = rootTagName.find(':');
 	if (index != std::string::npos)
 	{
 		m_rootPrefix = rootTagName.substr(0, index);
+		m_rootName = rootTagName.substr(index+1, rootTagName.size()-index);
 	}
 	else
 	{

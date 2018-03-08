@@ -114,6 +114,11 @@ std::string LoadHandler::getPrefix()
 	return m_rootPrefix;
 }
 
+std::string LoadHandler::getRootName()
+{
+	return m_rootName;
+}
+
 std::string LoadHandler::getLevel()
 {
 	std::stringstream ss;

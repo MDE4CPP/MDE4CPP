@@ -50,6 +50,7 @@ namespace persistence
 
 				std::string getLevel();
 				std::string getPrefix();
+				virtual std::string getRootName();
 
 				std::string extractType(std::shared_ptr<ecore::EObject> obj) const;
 
@@ -79,6 +80,7 @@ namespace persistence
 				std::list<std::shared_ptr<ecore::EObject> > m_currentObjects;
 
 				std::string m_rootPrefix;
+				std::string m_rootName;
 
 				std::map<std::string, std::shared_ptr<ecore::EObject>> m_refToObject_map;
 				std::list<persistence::base::UnresolvedReference> m_unresolvedReferences;
