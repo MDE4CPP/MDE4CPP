@@ -323,9 +323,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 			{
 				// Cast object to correct type
 				std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/] = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType()/]>( references.front() );
-
-				// Add object by calling eSet() 
-				eSet(featureID, _[aReference.name/]);
+				[aReference.SetterName()/](_[aReference.name/]);
 			}
 			
 		[else]
