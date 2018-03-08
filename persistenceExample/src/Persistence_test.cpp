@@ -10,12 +10,22 @@
 #include <omp.h>
 #include <string>
 
+#ifdef NDEBUG
+#define MSG_DEBUG(a) /**/
+#else
+#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
+#endif
+#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
+#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
+#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+
 #include "ecore/EPackage.hpp"
 #include "ecore/EObject.hpp"
 #include "persistence/xml/XMLPersistence.hpp"
+#include "uml/UmlPackage.hpp"
 #include "TestModel.hpp"
 
-void performReadAndWrite(std::string loadPath, std::string savePath)
+void performReadAndWrite(std::string loadPath, std::string savePath, std::shared_ptr<ecore::EPackage> package)
 {
 	try
 	{
@@ -35,7 +45,7 @@ void performReadAndWrite(std::string loadPath, std::string savePath)
 		// Perform save()
 		MSG_DEBUG("Start save() of 'myEcoreTestLoadMetaModel'");
 
-		if (myPersistence.save(savePath, myEcoreTestLoadMetaModel, testmodel::TestModel::getMetaMetaPackage()))
+		if (myPersistence.save(savePath, myEcoreTestLoadMetaModel, package))
 		{
 			MSG_DEBUG("Successful save() of model to '" << savePath << "'");
 		}
@@ -94,7 +104,7 @@ void performUniModelTest()
 		MSG_ERROR(MSG_FLF << e.what());
 	}
 
-	performReadAndWrite(filename, filename2);
+	performReadAndWrite(filename, filename2, testmodel::TestModel::getMetaMetaPackage());
 }
 
 int main()
@@ -103,8 +113,11 @@ int main()
 	omp_set_num_threads(1);
 
 	performUniModelTest();
-	performReadAndWrite("_tmp/ecore.ecore", "_tmp/ecore_out.ecore");
-	performReadAndWrite("_tmp/types.ecore", "_tmp/types_out.ecore");
+//	performReadAndWrite("_tmp/ecore.ecore", "_tmp/ecore_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite("_tmp/types.ecore", "_tmp/types_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite("_tmp/uml.ecore", "_tmp/uml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite("_tmp/fuml.ecore", "_tmp/fuml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite("_tmp/test.uml", "_tmp/test_out.uml", uml::UmlPackage::eInstance());
 
 	return 0;
 }

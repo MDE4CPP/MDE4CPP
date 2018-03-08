@@ -19,6 +19,8 @@
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
 
+#include "uml/UmlPackage.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 
 using namespace testmodel;
