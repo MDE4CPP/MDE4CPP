@@ -42,12 +42,16 @@ namespace persistence
 
 				void addReference(const std::string &name, std::shared_ptr<ecore::EObject> object);
 				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
-
+				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired);
 				virtual void release() = 0;
+				virtual void setThisPtr(std::shared_ptr<SaveHandler> thisPtr);
 
 			protected:
 				std::shared_ptr<ecore::EObject> m_rootObject;
 				std::string m_rootPrefix;
+
+			private:
+				std::shared_ptr<SaveHandler> m_thisPtr;
 		};
 	} /* namespace base */
 } /* namespace persistence */

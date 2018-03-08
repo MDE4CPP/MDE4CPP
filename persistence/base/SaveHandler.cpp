@@ -58,3 +58,28 @@ std::string SaveHandler::extractType(std::shared_ptr<ecore::EObject> obj) const
 {
 	return persistence::base::HandlerHelper::extractType(obj, m_rootPrefix);
 }
+
+
+void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired)
+{
+
+	// 1. Create and add Node-Element to model-tree
+	createAndAddElement(tagName);
+
+	if(typeRequired)
+	{
+		// 1.x Set Attribute "xsi:type" to the specific Class-Type
+		addAttribute("xsi:type", extractType(object));
+	}
+
+	// 2. Recursive call of save()
+	object->save(m_thisPtr);
+
+	// 3. Tell saveHandler for stepping to previous level
+	release();
+}
+
+void SaveHandler::setThisPtr(std::shared_ptr<SaveHandler> thisPtr)
+{
+	m_thisPtr = thisPtr;
+}

@@ -19,7 +19,8 @@ using namespace persistence::xml;
 
 XMLSave::XMLSave ()
 {
-	m_handler.reset( new persistence::xml::XMLSaveHandler() );
+	m_handler.reset(new persistence::xml::XMLSaveHandler());
+	m_handler->setThisPtr(m_handler);
 	m_XPathExpression = 0;
 
 	// options for DOMLSSerializer's features
@@ -50,6 +51,7 @@ XMLSave::~XMLSave ()
 {
 	if ( m_handler )
 	{
+		m_handler->setThisPtr(nullptr);
 		m_handler.reset();
 	}
 	XMLPlatformUtils::Terminate();

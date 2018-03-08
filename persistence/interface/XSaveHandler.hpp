@@ -57,6 +57,7 @@ namespace persistence
 
 				virtual void addReference(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
 				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
+				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired) = 0;
 
 				template<typename T>
 				void addReferences(const std::string &name, std::shared_ptr<Bag<T> > objects)
