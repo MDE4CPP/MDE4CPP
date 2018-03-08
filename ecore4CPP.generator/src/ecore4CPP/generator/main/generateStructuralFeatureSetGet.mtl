@@ -43,7 +43,8 @@ boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, boo
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 			return [struct.GetterName()/](); //[aClass.getClassifierID()/][struct.getFeatureID()/]
 	[/for]
-	}[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+	}
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 [elseif (aClass.eSuperTypes->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::internalEIsSet(featureID);
