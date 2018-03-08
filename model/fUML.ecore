@@ -1780,7 +1780,7 @@
           eType="#//ExtensionalValue"/>
       <eParameters
           name="end"
-          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+          eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
     </eOperations>
     <eOperations
         name="addTo">
@@ -1801,7 +1801,7 @@
           eType="#//ExtensionalValue"/>
       <eParameters
           name="end"
-          eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+          eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
     </eOperations>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
@@ -5726,7 +5726,7 @@
         name="removeToken"
         ordered="false"
         lowerBound="1"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt">
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations
           source="http://sse.tu-ilmenau.de/codegen">
         <details
