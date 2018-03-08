@@ -72,6 +72,8 @@ namespace persistence
 				void resolveReferences();
 
 				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
+				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
+				virtual void loadTypes(const std::string& name);
 
 			protected:
 				int m_level;

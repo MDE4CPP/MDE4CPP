@@ -8,10 +8,17 @@
 #include "persistence/base/LoadHandler.hpp"
 
 #include <sstream> // used for getLevel()
+#include "abstractDataTypes/Bag.hpp"
 #include "boost/algorithm/string.hpp" // used for string splitting
+#include "ecore/EClassifier.hpp"
 #include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "persistence/base/HandlerHelper.hpp"
+
+#include "pluginFramework/EcoreModelPlugin.hpp"
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "pluginFramework/PluginFramework.hpp"
 
 using namespace persistence::base;
 
@@ -217,30 +224,18 @@ void LoadHandler::resolveReferences()
 		std::shared_ptr<ecore::EObject> object = uref.eObject;
 		std::shared_ptr<ecore::EStructuralFeature> esf = uref.eStructuralFeature;
 
-		std::list<std::shared_ptr<ecore::EObject> > references;
-		std::shared_ptr<ecore::EObject> resolved_object;
+		std::list<std::shared_ptr<ecore::EObject>> references;
 
 		try
 		{
 			if (esf->getUpperBound() == 1)
 			{
 				// EStructuralFeature is a single object
-
-				resolved_object = this->getObjectByRef(name);
-				//assert(resolved_object);
-				if (resolved_object)
-				{
-					references.push_back(resolved_object);
-
-					// Call resolveReferences() of corresponding 'object'
-					object->resolveReferences(esf->getFeatureID(), references);
-					//object->eSet(esf, resolved_object); // use eSet() instead resolveReferences()
-				}
+				solve(name, references, object, esf);
 			}
 			else
 			{
 				// EStructuralFeature is a list of objects
-
 				std::list<std::string> _strs;
 				std::string _tmpStr;
 
@@ -250,11 +245,7 @@ void LoadHandler::resolveReferences()
 					_tmpStr = _strs.front();
 					if (std::string::npos != _tmpStr.find("#//"))
 					{
-						resolved_object = this->getObjectByRef(_tmpStr);
-						if (resolved_object)
-						{
-							references.push_back(resolved_object);
-						}
+						solve(_tmpStr, references, object, esf);
 					}
 					_strs.pop_front();
 				}
@@ -272,4 +263,55 @@ void LoadHandler::resolveReferences()
 void LoadHandler::setThisPtr(std::shared_ptr<LoadHandler> thisPtr)
 {
 	m_thisPtr = thisPtr;
+}
+
+void LoadHandler::solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf)
+{
+	bool found = false;
+	bool libraryLoaded = false;
+
+	while (!found)
+	{
+		std::shared_ptr<ecore::EObject> resolved_object = this->getObjectByRef(name);
+		if (resolved_object)
+		{
+			references.push_back(resolved_object);
+			// Call resolveReferences() of corresponding 'object'
+			object->resolveReferences(esf->getFeatureID(), references);
+			found = true;
+		}
+		else
+		{
+			if (libraryLoaded)
+			{
+				return;
+			}
+			loadTypes(name);
+			libraryLoaded = true;
+		}
+	}
+}
+
+void LoadHandler::loadTypes(const std::string& name)
+{
+	unsigned int indexStartUri = name.find(" ");
+	unsigned int indexEndUri = name.find("#");
+	if (indexStartUri != std::string::npos)
+	{
+		std::string nsURI = name.substr(indexStartUri+1, indexEndUri-indexStartUri-1);
+		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByUri(nsURI);
+		std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
+		if (ecorePlugin)
+		{
+			std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
+			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
+			for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
+			{
+				// Filter only EDataType objects and add to handler's internal map
+				std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
+				addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
+			}
+		}
+	}
 }

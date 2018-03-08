@@ -84,8 +84,6 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 
 		std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
 		readDataTypes(package);
-		readDataTypes("types");
-		readDataTypes("uml");
 
 		// Resolve unresolved references that are stored during loading
 		m_handler->resolveReferences();
