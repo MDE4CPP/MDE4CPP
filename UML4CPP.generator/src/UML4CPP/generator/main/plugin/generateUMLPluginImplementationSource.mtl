@@ -39,6 +39,16 @@ using namespace [aPackage.name/];
 {
 }
 
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+{
+	return getFactory()->create(name);
+}
+
+std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
+{
+	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+}
+
 std::shared_ptr<uml::Factory> [packageName/]::getFactory()
 {
 	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
