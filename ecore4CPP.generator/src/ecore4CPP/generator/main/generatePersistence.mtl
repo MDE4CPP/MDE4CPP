@@ -315,7 +315,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 {
 	switch(featureID)
 	{
-	[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 		case [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/]:
 		{
 		[if (aReference.upperBound = 1)]
@@ -340,10 +340,17 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 				}				
 			}
 		[/if]
-			break;
+			return;
 		}
 	[/for]
 	}
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+[else]
+	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[ClassWithNamespace(aClass,sClass)/]Impl::resolveReferences(featureID, references);
+	[/for]
+[/if]
 }
 [/template]
 
@@ -361,7 +368,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		//
 		// Add attributes
 		//
-[for (aAttribute : EAttribute | aClass.eAllAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aAttribute : EAttribute | aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
   [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
 [comment]
 // Attributes that are from type EJavaClass (void*) has not to export to xml. 
@@ -378,7 +385,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		//
 		// Add references
 		//
-[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
+[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
 	[if (aReference.upperBound = 1)]
 		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);
 	[else]
@@ -394,7 +401,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		// Add new tags (from references)
 		//
 
-[for (aReference : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 		// Save '[aReference.name/]'
 	[if (aReference.upperBound = 1)]
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
@@ -432,6 +439,13 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		}
 	[/if]
 [/for]
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+		ecore::EObjectImpl::save(saveHandler);
+[else]
+	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+		[ClassWithNamespace(aClass,sClass)/]Impl::save(saveHandler);
+	[/for]
+[/if]
 	}
 	catch (std::exception& e)
 	{
