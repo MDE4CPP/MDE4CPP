@@ -136,6 +136,19 @@ std::string LoadHandler::getLevel()
 	return ss.str();
 }
 
+void LoadHandler::handleRoot(std::shared_ptr<ecore::EObject> object)
+{
+	if (object == nullptr)
+	{
+		return;
+	}
+	m_level++;
+	m_currentObjects.push_back(object);
+	m_rootObject = object;
+	getNextNodeName();
+	object->load(m_thisPtr);
+}
+
 void LoadHandler::handleChild(std::shared_ptr<ecore::EObject> object)
 {
 	if (object == nullptr)
@@ -146,16 +159,9 @@ void LoadHandler::handleChild(std::shared_ptr<ecore::EObject> object)
 	m_level++;
 	m_currentObjects.push_back(object);
 
-	if (m_rootObject == nullptr)
-	{
-		m_rootObject = object;
-	}
-	else
-	{
-		object->load(m_thisPtr); // call recursively 'object.load().
-		addToMap(object);	// add 'object' to loadHandler's internal Map, that is used for resolving references.
-		release(); // report loadHandler to set 'this' as new current Object.
-	}
+	object->load(m_thisPtr); // call recursively 'object.load().
+	addToMap(object);	// add 'object' to loadHandler's internal Map, that is used for resolving references.
+	release(); // report loadHandler to set 'this' as new current Object.
 }
 
 std::shared_ptr<ecore::EObject> LoadHandler::getCurrentObject()

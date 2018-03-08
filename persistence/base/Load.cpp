@@ -76,11 +76,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 		}
 
 		// Create root object of model
-		m_handler->handleChild(rootElement);
-		m_handler->getNextNodeName();
-
-		// Start loading process by calling load() on root object
-		rootElement->load(m_handler);
+		m_handler->handleRoot(rootElement);
 
 		std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
 		readDataTypes(package);

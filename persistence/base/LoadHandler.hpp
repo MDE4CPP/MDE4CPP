@@ -57,6 +57,7 @@ namespace persistence
 				void addToMap(std::shared_ptr<ecore::EObject> object);
 				void addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects);
 
+				void handleRoot(std::shared_ptr<ecore::EObject> object);
 				void handleChild(std::shared_ptr<ecore::EObject> object);
 				std::shared_ptr<ecore::EObject> getCurrentObject();
 
