@@ -246,7 +246,7 @@ bool [aClass.name.concat('Impl')/]::loadContainmentReference(std::string nodeNam
 			if (typeName.empty())
 			{
 	[let aEClass : EClass = aReference.eType.oclAsType(EClass)]
-		[let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
+		[let ref : OrderedSet(EReference) = aEClass.getAllContainers()->select(eType = aClass)]
 			[if (not aReference.hasAbstractType())]
 				typeName = "[aEClass.name/]";
 			[else]
@@ -260,7 +260,7 @@ bool [aClass.name.concat('Impl')/]::loadContainmentReference(std::string nodeNam
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " '[aReference.name/]' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> [aReference.name/];
-			[for(aBackReference : EReference | ref->sortedBy(name)->first()->asSet())]
+			[for(aBackReference : EReference | ref->select(eType = aClass)->sortedBy(name))]
 				[aReference.name/] = [if (aEClass.ePackage = aClass.ePackage)]modelFactory[else][aEClass.ePackage.name/]::[aEClass.ePackage.name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
 			[/for]
 			[else]
