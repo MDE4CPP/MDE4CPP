@@ -22,7 +22,7 @@ Save::~Save ()
 {
 }
 
-bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage )
+bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode)
 {
 	std::shared_ptr<ecore::EClass> metaClass = model->eClass();
 
@@ -30,6 +30,7 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	MSG_DEBUG( "metaMetaPck-NS: " << metaMetaPackage->getNsPrefix() );
 	MSG_DEBUG( "metaMetaPck-Uri: " << metaMetaPackage->getNsURI() );
 
+	m_handler->setIsXSIMode(xsiMode);
 	m_handler->createRootNode( metaMetaPackage->getNsPrefix(), metaClass->getName(), metaMetaPackage->getNsURI() );
 	m_handler->setRootObject( model );
 

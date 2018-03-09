@@ -35,7 +35,7 @@ namespace persistence
 				Save();
 				virtual ~Save();
 
-				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage);
+				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true);
 
 			protected:
 				std::shared_ptr<persistence::base::SaveHandler> m_handler;

@@ -25,6 +25,7 @@ LoadHandler::LoadHandler()
 {
 	m_rootObject = nullptr;
 	m_level = -1;
+	m_isXSIMode = true;
 }
 
 LoadHandler::~LoadHandler()
@@ -80,8 +81,12 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 		return;
 	}
 
-	std::string ref = "";
-	if (useCurrentObjects)
+	std::string ref = getCurrentXMIID();
+	if (!ref.empty())
+	{
+		// do nothing here
+	}
+	else if (useCurrentObjects)
 	{
 		ref = persistence::base::HandlerHelper::extractReference(namedElement, m_rootObject, m_rootPrefix, m_currentObjects);
 	}

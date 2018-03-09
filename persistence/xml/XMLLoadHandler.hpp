@@ -35,6 +35,7 @@ namespace persistence
 				std::string getNextNodeName();
 				std::map<std::string, std::string> getAttributeList();
 				virtual std::string getCurrentXSITypeName();
+				virtual std::string getCurrentXMIID();
 
 			private:
 				DOMDocument* m_doc;

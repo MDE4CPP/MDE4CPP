@@ -71,6 +71,10 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 	{
 		m_rootPrefix = rootTagName.substr(0, index);
 		m_rootName = rootTagName.substr(index+1, rootTagName.size()-index);
+
+		std::string id = W(m_currentElement->getAttribute(X("xmi:id")));
+		std::cout << "root has xmi:id " << id << std::endl;
+		m_isXSIMode = id.empty();
 	}
 	else
 	{
@@ -191,13 +195,38 @@ std::string XMLLoadHandler::getCurrentXSITypeName ()
 		// get attribute name
 		aName = W( pAttributeNode->getName() );
 
-		if (aName == "xsi:type")
+		if (aName == "xsi:type" or aName == "xmi:type")
 		{
 			std::string _type = W(pAttributeNode->getValue());
 			size_t const double_dot = _type.find(L':', 0);
 			std::string _type_ns = _type.substr(0, double_dot); // TODO '_type_ns' is not used in this case
 			std::string _type_name = _type.substr(double_dot + 1);
 			return _type_name;
+		}
+	}
+
+	return "";
+}
+
+
+std::string XMLLoadHandler::getCurrentXMIID()
+{
+	DOMAttr *pAttributeNode;
+	std::string aName;
+
+	DOMNamedNodeMap *pAttributes = m_currentElement->getAttributes();
+	const XMLSize_t nSize = pAttributes->getLength();
+
+	for ( XMLSize_t i = 0; i < nSize; ++i )
+	{
+		pAttributeNode = (DOMAttr*) pAttributes->item( i );
+		// get attribute name
+		aName = W( pAttributeNode->getName() );
+
+		if (aName == "xmi:id")
+		{
+			std::string id = W(pAttributeNode->getValue());
+			return id;
 		}
 	}
 

@@ -30,7 +30,7 @@ namespace persistence
 				virtual ~XMLPersistence();
 
 				std::shared_ptr<ecore::EObject> load(const std::string &filename);
-				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage);
+				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true);
 
 			private:
 

@@ -19,6 +19,7 @@ using namespace persistence::base;
 SaveHandler::SaveHandler()
 {
 	m_rootObject = nullptr;
+	m_isXSIMode = true;
 }
 
 SaveHandler::~SaveHandler()
@@ -70,10 +71,22 @@ void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, con
 	// 1. Create and add Node-Element to model-tree
 	createAndAddElement(tagName);
 
+	if (!m_isXSIMode)
+	{
+		addAttribute("xmi:id", "0");
+	}
+
 	if(typeRequired)
 	{
 		// 1.x Set Attribute "xsi:type" to the specific Class-Type
-		addAttribute("xsi:type", extractType(object));
+		if (m_isXSIMode)
+		{
+			addAttribute("xsi:type", extractType(object));
+		}
+		else
+		{
+			addAttribute("xmi:type", extractType(object));
+		}
 	}
 
 	// 2. Recursive call of save()
@@ -86,4 +99,9 @@ void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, con
 void SaveHandler::setThisPtr(std::shared_ptr<SaveHandler> thisPtr)
 {
 	m_thisPtr = thisPtr;
+}
+
+void SaveHandler::setIsXSIMode(bool value)
+{
+	m_isXSIMode = value;
 }

@@ -45,6 +45,7 @@ namespace persistence
 				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired);
 				virtual void release() = 0;
 				virtual void setThisPtr(std::shared_ptr<SaveHandler> thisPtr);
+				virtual void setIsXSIMode(bool value);
 
 			protected:
 				std::shared_ptr<ecore::EObject> m_rootObject;
@@ -52,6 +53,7 @@ namespace persistence
 
 			private:
 				std::shared_ptr<SaveHandler> m_thisPtr;
+				bool m_isXSIMode;
 		};
 	} /* namespace base */
 } /* namespace persistence */

@@ -77,6 +77,7 @@ namespace persistence
 				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
 				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package);
+				virtual std::string getCurrentXMIID() = 0;
 
 			protected:
 				int m_level;
@@ -91,6 +92,7 @@ namespace persistence
 				std::list<persistence::base::UnresolvedReference> m_unresolvedReferences;
 
 				std::shared_ptr<LoadHandler> m_thisPtr;
+				bool m_isXSIMode;
 		};
 	} /* namespace base */
 } /* namespace persistence */
