@@ -144,7 +144,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::an
 [if (anStructFeature.upperBound <> 1)]
 ![anStructFeature.GetterName()/]()->empty()
 [elseif (eType.oclIsKindOf(EEnum))]
-true
+m_[anStructFeature.name/] ![anStructFeature.oclAsType(EAttribute).generateDefaultValue()/];
 [else]
 [anStructFeature.GetterName()/]() != [anStructFeature.oclAsType(EAttribute).getDefaultValue()/]
 [/if]
