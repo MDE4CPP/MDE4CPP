@@ -196,7 +196,7 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 //
 void [aClass.name.concat('Impl')/]::loadNonContainmentReferences(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 	try
 	{
@@ -235,7 +235,7 @@ void [aClass.name.concat('Impl')/]::loadNonContainmentReferences(std::shared_ptr
 	
 bool [aClass.name.concat('Impl')/]::loadContainmentReference(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory)
 {
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->sortedBy(name)]
 [if (refList->size() > 0)]
 	try
 	{
@@ -322,7 +322,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 {
 	switch(featureID)
 	{
-	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 		case [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aReference.getStaticAttributeIDName()/]:
 		{
 		[if (aReference.upperBound = 1)]
@@ -380,7 +380,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 [/for]
 
 		// Add references
-[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.transient = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
+[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
 	[if (aReference.upperBound = 1)]
 		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);
 	[else]
@@ -396,7 +396,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 		// Add new tags (from references)
 		//
 		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass();
-[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true) and (eRef.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 		// Save '[aReference.name/]'
 	[if (aReference.upperBound = 1)]
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
