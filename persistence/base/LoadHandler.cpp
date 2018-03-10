@@ -152,8 +152,15 @@ void LoadHandler::handleChild(std::shared_ptr<ecore::EObject> object)
 	m_level++;
 	m_currentObjects.push_back(object);
 
+	if (!m_isXSIMode)
+	{
+		addToMap(object);	// add 'object' to loadHandler's internal Map, that is used for resolving references.
+	}
 	object->load(m_thisPtr); // call recursively 'object.load().
-	addToMap(object);	// add 'object' to loadHandler's internal Map, that is used for resolving references.
+	if (m_isXSIMode)
+	{
+		addToMap(object);	// add 'object' to loadHandler's internal Map, that is used for resolving references.
+	}
 	release(); // report loadHandler to set 'this' as new current Object.
 }
 
