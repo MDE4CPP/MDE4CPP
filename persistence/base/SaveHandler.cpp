@@ -82,7 +82,15 @@ void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, con
 
 	if (!m_isXSIMode)
 	{
-		addAttribute("xmi:id", "0");
+		auto iter = m_refToObject_map.find(object);
+		if (iter != m_refToObject_map.end())
+		{
+			addAttribute("xmi:id", iter->second);
+		}
+		else
+		{
+			std::cout << "id not found for tag name '" << tagName << "'" << std::endl;
+		}
 	}
 
 	if(typeRequired)
@@ -117,5 +125,11 @@ void SaveHandler::setIsXSIMode(bool value)
 
 void SaveHandler::setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap)
 {
-	m_refToObject_map = typesMap;
+	std::map<std::string, std::shared_ptr<ecore::EObject>>::iterator iter = typesMap.begin();
+	std::map<std::string, std::shared_ptr<ecore::EObject>>::iterator end = typesMap.end();
+	while (iter != end)
+	{
+		m_refToObject_map.insert(std::pair<std::shared_ptr<ecore::EObject>, std::string>(iter->second, iter->first));
+		iter++;
+	}
 }
