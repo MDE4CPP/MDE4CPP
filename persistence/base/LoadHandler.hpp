@@ -62,7 +62,7 @@ namespace persistence
 				void handleChild(std::shared_ptr<ecore::EObject> object);
 				std::shared_ptr<ecore::EObject> getCurrentObject();
 
-				void release();
+				virtual void release();
 
 				virtual unsigned int getNumOfChildNodes() = 0;
 				virtual std::string getNextNodeName() = 0;
