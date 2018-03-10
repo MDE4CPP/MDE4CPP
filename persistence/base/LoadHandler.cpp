@@ -48,9 +48,13 @@ std::shared_ptr<ecore::EObject> LoadHandler::getObjectByRef(std::string ref)
 		else
 		{
 			size_t double_dot = ref.find("#//", 0);
-			std::string _ref_prefix = ref.substr(0, double_dot); // TODO '_ref_prefix' is not used in this case
-			std::string _ref_name = ref.substr(double_dot);
-
+			std::string _ref_prefix = "";
+			std::string _ref_name = "";
+			if (double_dot != std::string::npos)
+			{
+				std::string _ref_prefix = ref.substr(0, double_dot); // TODO '_ref_prefix' is not used in this case
+				std::string _ref_name = ref.substr(double_dot);
+			}
 			if (m_refToObject_map.find(_ref_name) != m_refToObject_map.end())
 			{
 				// found
