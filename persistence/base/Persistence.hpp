@@ -8,6 +8,7 @@
 #ifndef PERSISTENCE_BASE_PERSISTENCE_HPP_
 #define PERSISTENCE_BASE_PERSISTENCE_HPP_
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -31,6 +32,7 @@ namespace persistence
 
 			protected:
 				bool isValidFile(const std::string &filename);
+				std::map<std::string, std::shared_ptr<ecore::EObject>> m_refToObject_map;
 
 		};
 	} /* namespace base */

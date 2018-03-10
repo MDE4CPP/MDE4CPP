@@ -329,3 +329,8 @@ void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package)
 		addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
 	}
 }
+
+std::map<std::string, std::shared_ptr<ecore::EObject>> LoadHandler::getTypesMap()
+{
+	return m_refToObject_map;
+}

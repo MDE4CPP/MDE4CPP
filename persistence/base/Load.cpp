@@ -70,3 +70,8 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 		return rootElement;
 	}
 }
+
+std::map<std::string, std::shared_ptr<ecore::EObject>> Load::getTypesMap()
+{
+	return m_handler->getTypesMap();
+}

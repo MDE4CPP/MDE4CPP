@@ -8,6 +8,7 @@
 #ifndef PERSISTENCE_BASE_SAVE_HPP
 #define PERSISTENCE_BASE_SAVE_HPP
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -36,6 +37,7 @@ namespace persistence
 				virtual ~Save();
 
 				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true);
+				virtual void setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap);
 
 			protected:
 				std::shared_ptr<persistence::base::SaveHandler> m_handler;

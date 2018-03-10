@@ -114,3 +114,8 @@ void SaveHandler::setIsXSIMode(bool value)
 {
 	m_isXSIMode = value;
 }
+
+void SaveHandler::setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap)
+{
+	m_refToObject_map = typesMap;
+}

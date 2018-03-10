@@ -42,3 +42,8 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	// Call write() method in corresponding derived class
 	return write( filename );
 }
+
+void Save::setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap)
+{
+	m_handler->setTypesMap(typesMap);
+}

@@ -78,6 +78,7 @@ namespace persistence
 				virtual void loadTypes(const std::string& name);
 				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package);
 				virtual std::string getCurrentXMIID() = 0;
+				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getTypesMap();
 
 			protected:
 				int m_level;

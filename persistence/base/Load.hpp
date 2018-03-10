@@ -8,6 +8,7 @@
 #ifndef PERSISTENCE_BASE_LOAD_HPP
 #define PERSISTENCE_BASE_LOAD_HPP
 
+#include <map>
 #include <memory>
 
 namespace ecore
@@ -35,6 +36,7 @@ namespace persistence
 				virtual ~Load();
 
 				std::shared_ptr<ecore::EObject> load(const std::string &filename);
+				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getTypesMap();
 
 			protected:
 				std::shared_ptr<persistence::base::LoadHandler> m_handler;

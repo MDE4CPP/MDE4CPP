@@ -47,7 +47,9 @@ std::shared_ptr<ecore::EObject> XMLPersistence::load(const std::string& filename
 
 	std::shared_ptr<persistence::xml::XMLLoad> xmlLoad(new persistence::xml::XMLLoad());
 
-	return xmlLoad->load(filename);
+	std::shared_ptr<ecore::EObject> object = xmlLoad->load(filename);
+	m_refToObject_map = xmlLoad->getTypesMap();
+	return object;
 }
 
 bool XMLPersistence::save(const std::string& filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode)
@@ -61,6 +63,6 @@ bool XMLPersistence::save(const std::string& filename, std::shared_ptr<ecore::EO
 	MSG_DEBUG("Save as XML-File");
 
 	std::shared_ptr<persistence::xml::XMLSave> xmlSave(new persistence::xml::XMLSave());
-
+	xmlSave->setTypesMap(m_refToObject_map);
 	return xmlSave->save(filename, model, metaMetaPackage, xsiMode);
 }
