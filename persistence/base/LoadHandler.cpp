@@ -10,6 +10,7 @@
 #include <sstream> // used for getLevel()
 #include "abstractDataTypes/Bag.hpp"
 #include "boost/algorithm/string.hpp" // used for string splitting
+#include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
@@ -79,24 +80,19 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object)
 
 void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects)
 {
-	std::shared_ptr<ecore::ENamedElement> namedElement = std::dynamic_pointer_cast<ecore::ENamedElement>(object);
-	if (namedElement == nullptr)
-	{
-		return;
-	}
 
-	std::string ref = getCurrentXMIID();
-	if (!ref.empty())
+	std::string ref = "";
+	if (useCurrentObjects)
 	{
-		// do nothing here
-	}
-	else if (useCurrentObjects)
-	{
-		ref = persistence::base::HandlerHelper::extractReference(namedElement, m_rootObject, m_rootPrefix, m_currentObjects);
+		ref = getCurrentXMIID();
+		if (ref.empty())
+		{
+			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects);
+		}
 	}
 	else
 	{
-		ref = persistence::base::HandlerHelper::extractReference(namedElement, m_rootObject, m_rootPrefix);
+		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
 	}
 	if (!ref.empty())
 	{
@@ -105,21 +101,10 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 			// ref not found in map, so insert
 			m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(ref, object));
 
-			MSG_DEBUG("Add to map: '" << ref << "'");
+			MSG_DEBUG("Add to map: '" << ref << "'  eClass: '" << object->eClass()->getName() << "'");
 		}
 
-		unsigned int index = ref.find(" ");
-		if (index != std::string::npos)
-		{
-			std::string ref2 = ref.substr(index+1, ref.size());
-			if (m_refToObject_map.find(ref2) == m_refToObject_map.end())
-			{
-				// ref not found in map, so insert
-				m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(ref2, object));
 
-				MSG_DEBUG("Add to map: '" << ref2 << "'");
-			}
-		}
 	}
 }
 /**/
