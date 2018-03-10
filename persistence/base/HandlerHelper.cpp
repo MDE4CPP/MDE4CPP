@@ -27,6 +27,7 @@
 #include "ecore/EPackage.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "uml/NamedElement.hpp"
 
 using namespace persistence::base;
 
@@ -240,7 +241,16 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		}
 		else
 		{
-			MSG_WARNING(MSG_FLF << "Given Object's type '" << toObject->eClass()->getName() << "' is not 'EClassifier'.");
+			std::shared_ptr<uml::NamedElement> obj = std::dynamic_pointer_cast<uml::NamedElement>(toObject);
+			if (obj)
+			{
+				ref << "#/";
+				ref << "/" << obj->getName();
+			}
+			else
+			{
+				MSG_WARNING(MSG_FLF << "Given Object's type '" << toObject->eClass()->getName() << "' is not 'EClassifier'.");
+			}
 		}
 	}
 
