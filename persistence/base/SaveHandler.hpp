@@ -11,6 +11,7 @@
 #include "persistence/interface/XSaveHandler.hpp"
 
 #include <string>
+#include "abstractDataTypes/Bag.hpp"
 
 namespace ecore
 {
@@ -54,6 +55,7 @@ namespace persistence
 			private:
 				std::shared_ptr<SaveHandler> m_thisPtr;
 				bool m_isXSIMode;
+				std::shared_ptr<Bag<ecore::EObject>> m_savedObjects;
 		};
 	} /* namespace base */
 } /* namespace persistence */

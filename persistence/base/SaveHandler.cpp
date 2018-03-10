@@ -20,6 +20,7 @@ SaveHandler::SaveHandler()
 {
 	m_rootObject = nullptr;
 	m_isXSIMode = true;
+	m_savedObjects.reset(new Bag<ecore::EObject>());
 }
 
 SaveHandler::~SaveHandler()
@@ -67,6 +68,14 @@ void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, con
 	{
 		return;
 	}
+
+
+	if (m_savedObjects->find(object) != -1)
+	{
+		return;
+	}
+
+	m_savedObjects->push_back(object);
 
 	// 1. Create and add Node-Element to model-tree
 	createAndAddElement(tagName);
