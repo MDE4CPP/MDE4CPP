@@ -14,6 +14,7 @@
  */]
 [module generatePersistence('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::generateAttribute /]
 [import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
@@ -158,6 +159,15 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 			// this attribute is a 'std::string'
 			std::string value;
 			value = iter->second;
+		  [elseif (aAttribute.eType.oclIsKindOf(EEnum))]
+			[aAttribute.generateAttributeType()/] value [aAttribute.generateDefaultValue()/];
+			std::string literal = iter->second;
+[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
+if (literal == "[aLiteral.name/]")
+			{
+				value = [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/];
+			}
+[/for]
 		  [else]
 			// TODO this attribute has a non handle type
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of '[aAttribute.name/]'" << " [aAttribute.eType/]" << std::endl; 
