@@ -50,7 +50,16 @@ void SaveHandler::addReference(const std::string &name, std::shared_ptr<ecore::E
 {
 	if (object)
 	{
-		std::string ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+		std::string ref = "";
+		auto iter = m_refToObject_map.find(object);
+		if (iter != m_refToObject_map.end())
+		{
+			ref = iter->second;
+		}
+		else
+		{
+			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+		}
 
 		addAttribute(name, ref);
 	}
