@@ -112,7 +112,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 
 void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
-[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound=1)->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 	try
 	{
@@ -123,11 +123,6 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 	[comment]
 	// Attributes that are from type EJavaClass (void*) has not to export to xml. 
 	[/comment]
-		[if (not(aAttribute.upperBound = 1))]
-		//loadHandler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() ); // upperBound != 1 so [aAttribute.GetterName()/]() is a list/bag/union
-		// TODO needs an implementation to set list of strings to this attribute
-		std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " needs an implementation to set list of strings to this attribute." << std::endl; 
-		[else]
 		iter = attr_list.find("[aAttribute.name/]");
 		if ( iter != attr_list.end() )
 		{
@@ -175,7 +170,6 @@ if (literal == "[aLiteral.name/]")
 		  [/if]
 			this->[aAttribute.SetterName()/](value);
 		}
-		[/if]
 	  [/if]
 	[/for]
 	}
@@ -227,8 +221,6 @@ void [aClass.name.concat('Impl')/]::loadNonContainmentReferences(std::shared_ptr
 			{
 				setType(type);
 			}
-
-			std::cout << "TYPE: " << m_type << std::endl;
 		}
 		[/if]
 	[/for]
@@ -257,6 +249,35 @@ void [aClass.name.concat('Impl')/]::loadNonContainmentReferences(std::shared_ptr
 	
 bool [aClass.name.concat('Impl')/]::loadContainmentReference(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory)
 {
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->asOrderedSet()->sortedBy(name)]
+[if (attrList->size() > 0)]
+	try
+	{
+[for (anAttribute : EAttribute | attrList) separator ('\n')]
+		if (nodeName.compare("[anAttribute.name/]") == 0)
+		{
+	[if (anAttribute.eType.name = 'String')]
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			[anAttribute.generateAttributeType()/] list_[anAttribute.name/] = this->[anAttribute.GetterName()/]();
+			list_[anAttribute.name/]->push_back(value);
+	[else]
+			std::cout << "| ERROR    | unhandled attribute with upperbound <> 1" << std::endl;
+	[/if]
+			return true;
+		}
+[/for]
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+[/if]
+[/let]
+
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->sortedBy(name)]
 [if (refList->size() > 0)]
 	try
@@ -404,6 +425,11 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 			}
 [/for]
 			saveHandler->addAttribute("[aAttribute.name/]", literal);
+	[elseif (aAttribute.upperBound <> 1)]
+			for (std::shared_ptr<[aAttribute.eType.transformType()/]> value : *m_[aAttribute.name/])
+			{
+				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType = 'String' or aAttribute.eType = 'EString'))]boost::to_string([/if]*value[if (not (aAttribute.eType = 'String' or aAttribute.eType = 'EString'))])[/if]);
+			}
 	[else]
 			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());
 	[/if]
