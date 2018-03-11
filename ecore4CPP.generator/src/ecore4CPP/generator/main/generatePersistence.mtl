@@ -394,7 +394,19 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 [/comment]
 		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
 		{
-			saveHandler->addAttribute( "[aAttribute.name/]", this->[aAttribute.GetterName()/]() );
+	[if (aAttribute.eType.oclIsKindOf(EEnum))]
+			[aAttribute.generateAttributeType()/] value = this->[aAttribute.GetterName()/]();
+			std::string literal = "";
+		[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
+if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
+			{
+				literal = "[aLiteral.name/]";
+			}
+[/for]
+			saveHandler->addAttribute("[aAttribute.name/]", literal);
+	[else]
+			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());
+	[/if]
 		}
   [else]
 		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
