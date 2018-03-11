@@ -53,12 +53,12 @@ namespace persistence
 			protected:
 				std::shared_ptr<ecore::EObject> m_rootObject;
 				std::string m_rootPrefix;
+				std::map<std::shared_ptr<ecore::EObject>, std::string> m_refToObject_map;
 
 			private:
 				std::shared_ptr<SaveHandler> m_thisPtr;
 				bool m_isXSIMode;
 				std::shared_ptr<Bag<ecore::EObject>> m_savedObjects;
-				std::map<std::shared_ptr<ecore::EObject>, std::string> m_refToObject_map;
 		};
 	} /* namespace base */
 } /* namespace persistence */
