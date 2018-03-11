@@ -219,10 +219,10 @@ void [aClass.name.concat('Impl')/]::loadNonContainmentReferences(std::shared_ptr
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("[aReference.name/]")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
-		[if (aReference.name = 'type')]
+		[if (aReference.name = 'type' and aReference.eType.name = 'Type')]
 		else
 		{
-			std::shared_ptr<uml::Type> type = std::dynamic_pointer_cast<uml::Type>(loadHandler->handleType([aClass.generateGetThisPtrPropertyGetterName()/]()));
+			std::shared_ptr<uml::Type> type = std::dynamic_pointer_cast<uml::Type>(loadHandler->checkNodeType([aClass.generateGetThisPtrPropertyGetterName()/]()));
 			if (type)
 			{
 				setType(type);
