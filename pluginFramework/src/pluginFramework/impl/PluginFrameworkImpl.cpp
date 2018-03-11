@@ -196,7 +196,7 @@ std::shared_ptr<MDE4CPPPlugin> PluginFrameworkImpl::findPluginByUri(const std::s
 	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_mapPluginUri.find(uri);
 
 	std::shared_ptr<MDE4CPPPlugin> pluginObject;
-	if(iter != m_mapPluginName.end())
+	if(iter != m_mapPluginUri.end())
 	{
 		return iter->second;
 	}
