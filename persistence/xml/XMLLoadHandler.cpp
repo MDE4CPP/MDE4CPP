@@ -20,10 +20,7 @@
 #include "xerces/WStr.hpp"
 #include "xercesc/dom/DOMNamedNodeMap.hpp"
 
-namespace persistence
-{
-namespace xml
-{
+using namespace persistence::xml;
 
 XMLLoadHandler::XMLLoadHandler ()
 {
@@ -293,6 +290,3 @@ std::shared_ptr<std::string> XMLLoadHandler::getChildText()
 	std::shared_ptr<std::string> valuePtr(new std::string(value));
 	return valuePtr;
 }
-
-} /* namespace xml */
-} /* namespace persistence */
