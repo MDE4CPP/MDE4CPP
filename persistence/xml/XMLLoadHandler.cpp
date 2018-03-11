@@ -233,5 +233,59 @@ std::string XMLLoadHandler::getCurrentXMIID()
 	return "";
 }
 
+std::shared_ptr<ecore::EObject> XMLLoadHandler::checkNodeType(std::shared_ptr<ecore::EObject> object)
+{
+	DOMNodeList* dom = m_currentElement->getChildNodes();
+	const XMLSize_t size = dom->getLength();
+
+	for (XMLSize_t i=0; i<size; i++)
+	{
+		DOMNode* node = dom->item(i);
+		std::string nodeName = W(node->getNodeName());
+		if (nodeName == "type")
+		{
+			std::string type = "";
+			std::string href = "";
+			DOMNamedNodeMap* attrListNode = node->getAttributes();
+			const XMLSize_t sizeAttrList = attrListNode->getLength();
+
+			for (XMLSize_t i = 0; i < sizeAttrList; ++i)
+			{
+				DOMAttr* attributeNode = (DOMAttr*) attrListNode->item( i );
+				// get attribute name
+				std::string aName = W( attributeNode->getName() );
+
+				if (aName == "xmi:type")
+				{
+					type = W(attributeNode->getValue());
+				}
+				if (aName == "href")
+				{
+					href = W(attributeNode->getValue());
+				}
+			}
+
+			type = type + " " + href;
+			auto iter = m_refToObject_map.find(type);
+			if (iter != m_refToObject_map.end())
+			{
+				return iter->second;
+			}
+			else
+			{
+
+
+				loadTypes(type);
+				auto iter = m_refToObject_map.find(type);
+				if (iter != m_refToObject_map.end())
+				{
+					return iter->second;
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+
 } /* namespace xml */
 } /* namespace persistence */
