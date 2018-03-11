@@ -142,7 +142,16 @@ void XMLSaveHandler::addReferences ( const std::string &name, std::shared_ptr<ec
 {
 	try
 	{
-		std::string ref = persistence::base::HandlerHelper::extractReference( object, m_rootObject, m_rootPrefix );
+		std::string ref = "";
+		auto iter = m_refToObject_map.find(object);
+		if (iter != m_refToObject_map.end())
+		{
+			ref = iter->second;
+		}
+		else
+		{
+			ref = persistence::base::HandlerHelper::extractReference( object, m_rootObject, m_rootPrefix );
+		}
 
 		std::stringstream ss;
 		std::string tmpStr = W( m_currentElement->getAttribute(X( name )) );
