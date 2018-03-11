@@ -287,5 +287,12 @@ std::shared_ptr<ecore::EObject> XMLLoadHandler::checkNodeType(std::shared_ptr<ec
 	return nullptr;
 }
 
+std::shared_ptr<std::string> XMLLoadHandler::getChildText()
+{
+	std::string value = W(m_currentElement->getTextContent());
+	std::shared_ptr<std::string> valuePtr(new std::string(value));
+	return valuePtr;
+}
+
 } /* namespace xml */
 } /* namespace persistence */

@@ -195,3 +195,11 @@ void XMLSaveHandler::addTypeReference(const std::string& href, const std::string
 	addAttribute("xmi:type", xmitype);
 	release();
 }
+
+
+void XMLSaveHandler::addAttributeAsNode(const std::string& name, const std::string& value)
+{
+	createAndAddElement(name);
+	m_currentElement->setTextContent(X(value));
+	release();
+}

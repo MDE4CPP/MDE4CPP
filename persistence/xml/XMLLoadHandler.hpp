@@ -37,6 +37,7 @@ namespace persistence
 				virtual std::string getCurrentXSITypeName();
 				virtual std::string getCurrentXMIID();
 				virtual std::shared_ptr<ecore::EObject> checkNodeType(std::shared_ptr<ecore::EObject> object);
+				virtual std::shared_ptr<std::string> getChildText();
 
 			private:
 				DOMDocument* m_doc;

@@ -54,6 +54,7 @@ namespace persistence
 				}
 				virtual void addAttribute(const std::string &name, bool value) = 0;
 				virtual void addAttribute(const std::string &name, const std::string& value) = 0;
+				virtual void addAttributeAsNode(const std::string& name, const std::string& value) = 0;
 
 				virtual void addReference(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
 				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;

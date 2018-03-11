@@ -45,6 +45,7 @@ namespace persistence
 
 				void release();
 				virtual void addTypeReference(const std::string& href, const std::string& xmitype);
+				virtual void addAttributeAsNode(const std::string& name, const std::string& value);
 
 			private:
 
