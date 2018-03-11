@@ -177,3 +177,12 @@ void XMLSaveHandler::release ()
 		m_currentElement = (DOMElement*) m_currentElement->getParentNode();
 	}
 }
+
+
+void XMLSaveHandler::addTypeReference(const std::string& href, const std::string& xmitype)
+{
+	createAndAddElement("type");
+	addAttribute("href", href);
+	addAttribute("xmi:type", xmitype);
+	release();
+}

@@ -61,7 +61,24 @@ void SaveHandler::addReference(const std::string &name, std::shared_ptr<ecore::E
 			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
 		}
 
-		addAttribute(name, ref);
+		if (!m_isXSIMode && name == "type")
+		{
+			unsigned index = ref.find(" ");
+			if (index != std::string::npos)
+			{
+				std::string href = ref.substr(index+1, name.size()-index-1);
+				std::string xmitype = ref.substr(0, index);
+				addTypeReference(href, xmitype);
+			}
+			else
+			{
+				addAttribute(name, ref);
+			}
+		}
+		else
+		{
+			addAttribute(name, ref);
+		}
 	}
 }
 

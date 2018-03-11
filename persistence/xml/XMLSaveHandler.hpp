@@ -44,6 +44,7 @@ namespace persistence
 				void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object);
 
 				void release();
+				virtual void addTypeReference(const std::string& href, const std::string& xmitype);
 
 			private:
 
