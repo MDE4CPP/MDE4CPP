@@ -9,16 +9,22 @@
 
 #include <sstream> // used for getLevel()
 #include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "boost/algorithm/string.hpp" // used for string splitting
 #include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
 #include "ecore/EStructuralFeature.hpp"
+#include "uml/Class.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Package.hpp"
 #include "persistence/base/HandlerHelper.hpp"
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 #include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/EcoreModelPlugin.hpp"
+#include "pluginFramework/UMLModelPlugin.hpp"
 
 using namespace persistence::base;
 
@@ -309,7 +315,17 @@ void LoadHandler::loadTypes(const std::string& name)
 		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByUri(nsURI);
 		if (plugin)
 		{
-			loadTypes(plugin->getEPackage());
+			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
+			if (ecorePlugin)
+			{
+				loadTypes(ecorePlugin->getEPackage());
+				return;
+			}
+			std::shared_ptr<UMLModelPlugin> umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin);
+			if (umlPlugin)
+			{
+				loadTypes(umlPlugin->getPackage(), umlPlugin->eNS_URI());
+			}
 
 		}
 	}
@@ -326,6 +342,41 @@ void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package)
 	}
 }
 
+void LoadHandler::loadTypes(std::shared_ptr<uml::Package> package, std::string uri)
+{
+	std::shared_ptr<Bag<uml::NamedElement>> memberList = package->getMember();
+	for (std::shared_ptr<uml::NamedElement> member : *memberList)
+	{
+		// Filter only EDataType objects and add to handler's internal map
+		std::string metaClassName = "";
+		std::shared_ptr<ecore::EClass> ecoreMetaClass = member->eClass();
+		if (ecoreMetaClass)
+		{
+			auto x = ecoreMetaClass->getEPackage().lock();
+			if (x)
+			{
+				metaClassName = x->getName() + ":" + ecoreMetaClass->getName();
+			}
+			else
+			{
+				metaClassName = ecoreMetaClass->getName();
+			}
+		}
+		else
+		{
+			std::shared_ptr<uml::Class> metaClass = member->getMetaClass();
+			if (metaClass == nullptr)
+			{
+				metaClassName = metaClass->getName();
+			}
+		}
+
+		std::string ref = metaClassName + " " + uri + "#" + member->getName();
+		m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(ref, member));
+
+		MSG_DEBUG("Add to map: '" << ref << "'");
+	}
+}
 std::map<std::string, std::shared_ptr<ecore::EObject>> LoadHandler::getTypesMap()
 {
 	return m_refToObject_map;

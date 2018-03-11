@@ -22,6 +22,11 @@ namespace ecore
 	class EStructuralFeature;
 }
 
+namespace uml
+{
+	class Package;
+}
+
 namespace persistence
 {
 	namespace base
@@ -77,6 +82,7 @@ namespace persistence
 				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
 				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package);
+				virtual void loadTypes(std::shared_ptr<uml::Package> package, std::string uri);
 				virtual std::string getCurrentXMIID() = 0;
 				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getTypesMap();
 
