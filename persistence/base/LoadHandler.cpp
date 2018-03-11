@@ -255,7 +255,7 @@ void LoadHandler::resolveReferences()
 				while (_strs.size() > 0)
 				{
 					_tmpStr = _strs.front();
-					if (std::string::npos != _tmpStr.find("#//"))
+					if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
 					{
 						solve(_tmpStr, references, object, esf);
 					}
