@@ -7,10 +7,19 @@
 
 #include "persistence/xml/XMLLoadHandler.hpp"
 
+#ifdef NDEBUG
+#define MSG_DEBUG(a) /**/
+#else
+#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
+#endif
+#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
+#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
+#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+
+#include <iostream>
 #include <sstream> // used for getLevel()
-#include <boost/algorithm/string.hpp> // used for string splitting
 
-
+#include "boost/algorithm/string.hpp" // used for string splitting
 #include "boost/exception/to_string.hpp"
 
 #include "ecore/EObject.hpp"

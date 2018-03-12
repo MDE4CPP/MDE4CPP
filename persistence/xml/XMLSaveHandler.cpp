@@ -7,8 +7,19 @@
 
 #include "persistence/xml/XMLSaveHandler.hpp"
 
+#ifdef NDEBUG
+#define MSG_DEBUG(a) /**/
+#else
+#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
+#endif
+#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
+#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
+#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+
+#include <iostream>
 #include <sstream> // used for addReferences()
-#include <boost/algorithm/string.hpp> // used for string splitting
+
+#include "boost/algorithm/string.hpp" // used for string splitting
 #include "ecore/EObject.hpp"
 #include "persistence/base/HandlerHelper.hpp"
 
@@ -140,6 +151,11 @@ void XMLSaveHandler::addAttribute ( const std::string& name, const std::string& 
 
 void XMLSaveHandler::addReferences ( const std::string &name, std::shared_ptr<ecore::EObject> object )
 {
+	if (object == nullptr)
+	{
+		std::cerr << "XMLSaveHandler::addReferences called with object == nullptr" << std::endl;
+		return;
+	}
 	try
 	{
 		std::string ref = "";

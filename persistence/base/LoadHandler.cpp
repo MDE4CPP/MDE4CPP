@@ -7,7 +7,18 @@
 
 #include "persistence/base/LoadHandler.hpp"
 
+#ifdef NDEBUG
+#define MSG_DEBUG(a) /**/
+#else
+#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
+#endif
+#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
+#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
+#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+
+#include <iostream>
 #include <sstream> // used for getLevel()
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "boost/algorithm/string.hpp" // used for string splitting
