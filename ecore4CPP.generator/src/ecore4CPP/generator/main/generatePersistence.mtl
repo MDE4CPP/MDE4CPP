@@ -69,6 +69,9 @@ virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[n
 [/template]
 [template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
+[if (impl)]
+virtual void saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
+[/if]
 [/template]
 
 
@@ -406,9 +409,14 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 {
 	try
 	{
+		saveSubsetMembers(saveHandler);
+
 		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();	
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
+[if (attrList->size() > 0)]
+ 
 		// Add attributes
-[for (aAttribute : EAttribute | aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aAttribute : EAttribute | attrList) separator ('\n')]
   [if (aAttribute.eType.oclIsKindOf(EDataType) and not(aAttribute.eType.name = 'EJavaClass'))]
 [comment]
 // Attributes that are from type EJavaClass (void*) has not to export to xml. 
@@ -437,10 +445,12 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
   [else]
 		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
   [/if]
-[/for]
+[/for][/if][/let]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)]
+[if (refList->size() > 0)]
 
 		// Add references
-[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name))]
+[for (aReference : EReference | refList)]
 	[if (aReference.upperBound = 1)]
 		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);
 	[else]
@@ -450,13 +460,16 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 			saveHandler->addReferences("[aReference.name/]", object);
 		}
 	[/if]
-[/for]
+[/for][/if][/let]
+
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
+[if (refList->size() > 0)]
 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass();
-[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aReference : EReference | refList) separator ('\n')]
 		// Save '[aReference.name/]'
 	[if (aReference.upperBound = 1)]
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
@@ -471,15 +484,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
 		}
 	[/if]
-[/for]
-
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-		ecore::EObjectImpl::save(saveHandler);
-[else]
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-		[ClassWithNamespace(aClass,sClass)/]Impl::save(saveHandler);
-	[/for]
-[/if]
+[/for][/if][/let]
 	}
 	catch (std::exception& e)
 	{
@@ -489,6 +494,46 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 	{
 		std::cout << "| ERROR    | " << "Exception occurred" << std::endl;
 	}
+
+	[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+	ecore::EObjectImpl::save(saveHandler);
+	[else]
+	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[ClassWithNamespace(aClass,sClass)/]Impl::save(saveHandler);
+	[/for]
+	[/if]
+}
+
+void [aClass.name.concat('Impl')/]::saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
+{
+[let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
+[if (refList->size() > 0)]
+	std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();	
+
+[for (aReference : EReference | refList) separator ('\n')]
+	// Save '[aReference.name/]'
+	[if (aReference.upperBound = 1)]
+	[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
+	if ([aReference.name/] != nullptr)
+	{
+		saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+	}
+	[else]
+	for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *this->[aReference.GetterName()/]()) 
+	{
+		saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+	}
+	[/if]
+[/for]
+[/if][/let]
+
+[let superClass : OrderedSet(EClass) = aClass.eSuperTypes]
+[if (superClass->size() > 0)]
+[for (sClass : EClass | superClass)]
+	[ClassWithNamespace(aClass,sClass)/]Impl::saveSubsetMembers(saveHandler);
+[/for]
+[/if]
+[/let]
 }
 [/template]
 
