@@ -17,13 +17,13 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateUMLPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
+[template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
 
 [defineDebugMacro()/]
 
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Factory.hpp"
+[if (not packOnly)]#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Factory.hpp"[/if]
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 
 using namespace [aPackage.name/];
@@ -40,18 +40,18 @@ using namespace [aPackage.name/];
 }
 
 std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
-{
-	return getFactory()->create(name);
+{		
+	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name)[/if];
 }
 
 std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
 {
-	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+	return nullptr;// [aPackage.name.toUpperFirst()/]Package::eInstance();
 }
 
 std::shared_ptr<uml::Factory> [packageName/]::getFactory()
 {
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
+	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()[/if];
 }
 
 std::shared_ptr<uml::Package> [packageName/]::getPackage()
