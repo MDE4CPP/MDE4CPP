@@ -70,7 +70,6 @@ virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[n
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
 [if (impl)]
 virtual void saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
-virtual void saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
 [/if]
 [/template]
 
@@ -367,7 +366,6 @@ ecore::EObjectImpl::saveContent(saveHandler);
 [template public generatePersistenceSaveImpl(aClass: EClass)]
 void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
 {
-	saveSubsetMembers(saveHandler);
 	saveContent(saveHandler);
 
 	[aClass.generateSuperTypesCalling(aClass.eSuperTypes->asSet())/]
@@ -377,7 +375,27 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 {
 	try
 	{
-		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();	
+		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();
+
+[let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
+[if (refList->size() > 0)]
+[for (aReference : EReference | refList) separator ('\n')]
+		// Save '[aReference.name/]'
+		[if (aReference.upperBound = 1)]
+		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
+		if ([aReference.name/] != nullptr)
+		{
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+		}
+		[else]
+		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *this->[aReference.GetterName()/]()) 
+		{
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+		}
+		[/if]
+[/for]
+[/if][/let]
+	
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
  
@@ -456,42 +474,6 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 	{
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " << "Exception occurred" << std::endl;
-	}
-}
-
-void [aClass.name.concat('Impl')/]::saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
-{
-[let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
-[if (refList->size() > 0)]
-	std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();	
-
-[for (aReference : EReference | refList) separator ('\n')]
-	// Save '[aReference.name/]'
-	[if (aReference.upperBound = 1)]
-	[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
-	if ([aReference.name/] != nullptr)
-	{
-		saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
-	}
-	[else]
-	for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *this->[aReference.GetterName()/]()) 
-	{
-		saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
-	}
-	[/if]
-[/for]
-[/if][/let]
-
-[let superClass : OrderedSet(EClass) = aClass.eSuperTypes]
-[if (superClass->size() > 0)]
-[for (sClass : EClass | superClass)]
-	[ClassWithNamespace(aClass,sClass)/]Impl::saveSubsetMembers(saveHandler);
-[/for]
-[/if]
-[/let]
 }
 [/template]
 
