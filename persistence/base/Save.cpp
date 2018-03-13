@@ -42,8 +42,8 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	MSG_DEBUG( "metaMetaPck-Uri: " << metaMetaPackage->getNsURI() );
 
 	m_handler->setIsXSIMode(xsiMode);
-	m_handler->createRootNode( metaMetaPackage->getNsPrefix(), metaClass->getName(), metaMetaPackage->getNsURI() );
 	m_handler->setRootObject( model );
+	m_handler->createRootNode( metaMetaPackage->getNsPrefix(), metaClass->getName(), metaMetaPackage->getNsURI() );
 
 	MSG_DEBUG( m_handler->extractType( model ) );
 
