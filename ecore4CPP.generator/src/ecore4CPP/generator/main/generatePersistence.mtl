@@ -69,6 +69,7 @@ virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[n
 [template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
 [if (impl)]
+virtual void saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
 virtual void saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
 [/if]
 [/template]
@@ -351,13 +352,31 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 }
 [/template]
 
+[template private generateSuperTypesCalling(aClass : EClass, classList : Set(EClass))]
+[for (sClass : EClass | classList->removeAll(classList.eAllSuperTypes)->asOrderedSet()->sortedBy(name))]
+[ClassWithNamespace(aClass,sClass)/]Impl::saveContent(saveHandler);
+[/for]
+
+[if (classList.eSuperTypes->size() > 0)]
+[aClass.generateSuperTypesCalling(classList.eSuperTypes->asSet())/]
+[else]
+ecore::EObjectImpl::saveContent(saveHandler);
+[/if]
+[/template]
+
 [template public generatePersistenceSaveImpl(aClass: EClass)]
 void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
 {
+	saveSubsetMembers(saveHandler);
+	saveContent(saveHandler);
+
+	[aClass.generateSuperTypesCalling(aClass.eSuperTypes->asSet())/]
+}
+
+void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
+{
 	try
 	{
-		saveSubsetMembers(saveHandler);
-
 		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();	
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
@@ -441,14 +460,6 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 	{
 		std::cout << "| ERROR    | " << "Exception occurred" << std::endl;
 	}
-
-	[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-	ecore::EObjectImpl::save(saveHandler);
-	[else]
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-	[ClassWithNamespace(aClass,sClass)/]Impl::save(saveHandler);
-	[/for]
-	[/if]
 }
 
 void [aClass.name.concat('Impl')/]::saveSubsetMembers(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
