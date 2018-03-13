@@ -156,6 +156,12 @@ void LoadHandler::handleRoot(std::shared_ptr<ecore::EObject> object)
 	m_currentObjects.push_back(object);
 	m_rootObject = object;
 	getNextNodeName();
+	if (!m_isXSIMode)
+	{
+		m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(getCurrentXMIID(), m_rootObject));
+	}
+
+
 	object->load(m_thisPtr);
 }
 
