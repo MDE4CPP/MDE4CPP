@@ -71,7 +71,6 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 	}
 
 	std::string rootTagName = W(m_currentElement->getTagName());
-	std::cout << "rootTagName:  " <<  rootTagName << std::endl;
 	unsigned int index = rootTagName.find(':');
 	if (index != std::string::npos)
 	{
@@ -79,7 +78,6 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 		m_rootName = rootTagName.substr(index+1, rootTagName.size()-index);
 
 		std::string id = W(m_currentElement->getAttribute(X("xmi:id")));
-		std::cout << "root has xmi:id " << id << std::endl;
 		m_isXSIMode = id.empty();
 	}
 	else

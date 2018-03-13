@@ -60,7 +60,6 @@ void SaveHandler::addReference(const std::string &name, std::shared_ptr<ecore::E
 {
 	if (object == nullptr)
 	{
-		std::cerr << "SaveHandler::addReference called with object == nullptr" << std::endl;
 		return;
 	}
 
