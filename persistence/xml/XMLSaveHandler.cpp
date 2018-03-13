@@ -82,6 +82,19 @@ bool XMLSaveHandler::createRootNode ( const std::string& name, const std::string
 			m_currentElement->setAttribute(X("xmi:version"), X("2.0"));
 			m_currentElement->setAttribute(X("xmlns:xmi"), X("http://www.omg.org/XMI"));
 			m_currentElement->setAttribute(X("xmlns:xsi"), X("http://www.w3.org/2001/XMLSchema-instance"));
+
+			if (!m_isXSIMode && m_rootObject != nullptr)
+			{
+				auto iter = m_refToObject_map.find(m_rootObject);
+				if (iter != m_refToObject_map.end())
+				{
+					addAttribute("xmi:id", iter->second);
+				}
+				else
+				{
+					std::cout << "id not found for root element" << std::endl;
+				}
+			}
 		}
 		catch ( const OutOfMemoryException& )
 		{
