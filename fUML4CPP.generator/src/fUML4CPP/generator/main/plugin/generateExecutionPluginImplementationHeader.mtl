@@ -36,6 +36,7 @@ namespace [aPackage.name/]
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
 			virtual boost::any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element);
 	};
 }

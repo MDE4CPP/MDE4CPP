@@ -72,6 +72,10 @@ std::string [packageName/]::eNS_PREFIX()
 	return "[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
 }
 
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+{		
+	return nullptr;
+}
 
 boost::any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element)
 {
