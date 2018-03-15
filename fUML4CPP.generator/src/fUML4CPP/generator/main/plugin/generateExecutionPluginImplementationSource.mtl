@@ -52,6 +52,11 @@ using namespace [aPackage.name/];
 {
 }
 
+std::string [packageName/]::eclipseURI()
+{
+	return "";
+}
+
 std::string [packageName/]::eNAME()
 {
 	return "[aPackage.name/]Exec";
