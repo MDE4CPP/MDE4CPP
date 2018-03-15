@@ -60,9 +60,7 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 		std::string prefix = m_handler->getPrefix();
 		std::string rootName = m_handler->getRootName();
 
-		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(prefix);
-
+		std::shared_ptr<MDE4CPPPlugin> plugin = PluginFramework::eInstance()->findPluginByName(prefix);
 		if (!plugin)
 		{
 			MSG_ERROR(MSG_FLF << " Given Plugin name '" << prefix << "' is not supported or not found by PluginFramework");
@@ -72,9 +70,6 @@ std::shared_ptr<ecore::EObject> Load::load(const std::string &filename)
 		// Create root object of model
 		std::shared_ptr<ecore::EObject> rootElement = plugin->create(rootName);
 		m_handler->handleRoot(rootElement);
-
-		std::shared_ptr<ecore::EPackage> package = plugin->getEPackage();
-		m_handler->loadTypes(package);
 
 		// Resolve unresolved references that are stored during loading
 		m_handler->resolveReferences();
