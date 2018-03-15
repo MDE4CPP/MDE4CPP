@@ -328,8 +328,7 @@ void LoadHandler::loadTypes(const std::string& name)
 	if (indexStartUri != std::string::npos)
 	{
 		std::string nsURI = name.substr(indexStartUri+1, indexEndUri-indexStartUri-1);
-		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByUri(nsURI);
+		std::shared_ptr<MDE4CPPPlugin> plugin = PluginFramework::eInstance()->findPluginByUri(nsURI);
 		if (plugin)
 		{
 			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
@@ -341,7 +340,7 @@ void LoadHandler::loadTypes(const std::string& name)
 			std::shared_ptr<UMLModelPlugin> umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin);
 			if (umlPlugin)
 			{
-				loadTypes(umlPlugin->getPackage(), umlPlugin->eNS_URI());
+				loadTypes(umlPlugin->getPackage(), nsURI);
 			}
 
 		}
