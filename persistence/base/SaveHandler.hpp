@@ -49,6 +49,8 @@ namespace persistence
 				virtual void setIsXSIMode(bool value);
 				virtual void setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap);
 				virtual void addTypeReference(const std::string& href, const std::string& xmitype) = 0;
+				virtual std::string getVersion();
+				virtual std::string getXmlnsXMI();
 
 			protected:
 				std::shared_ptr<ecore::EObject> m_rootObject;

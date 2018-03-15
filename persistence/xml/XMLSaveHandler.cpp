@@ -79,8 +79,8 @@ bool XMLSaveHandler::createRootNode ( const std::string& name, const std::string
 			doctype ); 	                		// document type object (DTD).
 
 			m_currentElement = m_doc->getDocumentElement(); // get root element
-			m_currentElement->setAttribute(X("xmi:version"), X("2.0"));
-			m_currentElement->setAttribute(X("xmlns:xmi"), X("http://www.omg.org/XMI"));
+			m_currentElement->setAttribute(X("xmi:version"), X(getVersion()));
+			m_currentElement->setAttribute(X("xmlns:xmi"), X(getXmlnsXMI()));
 			m_currentElement->setAttribute(X("xmlns:xsi"), X("http://www.w3.org/2001/XMLSchema-instance"));
 
 			if (!m_isXSIMode && m_rootObject != nullptr)

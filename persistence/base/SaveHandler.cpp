@@ -174,3 +174,27 @@ void SaveHandler::setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObje
 		iter++;
 	}
 }
+
+std::string SaveHandler::getVersion()
+{
+	if (m_isXSIMode)
+	{
+		return "2.0";
+	}
+	else
+	{
+		return "20131001";
+	}
+}
+
+std::string SaveHandler::getXmlnsXMI()
+{
+	if (m_isXSIMode)
+	{
+		return "http://www.omg.org/XMI";
+	}
+	else
+	{
+		return "http://www.omg.org/spec/XMI/20131001";
+	}
+}
