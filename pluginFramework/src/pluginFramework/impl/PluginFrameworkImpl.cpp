@@ -167,6 +167,11 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 		std::shared_ptr<MDE4CPPPlugin> plugin = startFunction();
 		m_mapPluginName.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
 		m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNS_URI(), plugin));
+		std::string eclipseURI = plugin->eclipseURI();
+		if (!eclipseURI.empty())
+		{
+			m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(eclipseURI, plugin));
+		}
 
 		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
 	}

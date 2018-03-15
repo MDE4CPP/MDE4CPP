@@ -22,6 +22,7 @@ class MDE4CPPPlugin
 	public:
 		virtual ~MDE4CPPPlugin(){}
 
+		virtual std::string eclipseURI() = 0;
 		virtual std::string eNAME() = 0;
 		virtual std::string eNS_URI() = 0;
 		virtual std::string eNS_PREFIX() = 0;
