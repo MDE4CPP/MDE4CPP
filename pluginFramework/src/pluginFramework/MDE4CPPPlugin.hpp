@@ -28,7 +28,6 @@ class MDE4CPPPlugin
 		virtual std::string eNS_PREFIX() = 0;
 
 		virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
-		virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
 };
 
 #endif
