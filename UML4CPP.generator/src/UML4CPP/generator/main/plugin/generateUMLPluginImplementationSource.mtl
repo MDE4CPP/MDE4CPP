@@ -44,11 +44,6 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
 	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name)[/if];
 }
 
-std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
-{
-	return nullptr;// [aPackage.name.toUpperFirst()/]Package::eInstance();
-}
-
 std::shared_ptr<uml::Factory> [packageName/]::getFactory()
 {
 	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()[/if];
