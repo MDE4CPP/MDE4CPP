@@ -30,6 +30,7 @@ namespace [aPackage.name/]
 			[aPackage.name.toUpperFirst()/]PluginImpl();
 			virtual ~[aPackage.name.toUpperFirst()/]PluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();

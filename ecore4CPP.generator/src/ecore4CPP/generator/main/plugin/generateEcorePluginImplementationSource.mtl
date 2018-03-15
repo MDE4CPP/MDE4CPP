@@ -53,6 +53,11 @@ std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
 	return [aPackage.name.toUpperFirst()/]Package::eInstance();
 }
 
+std::string [packageName/]::eclipseURI()
+{
+	return "[getEclipseURI()/]";
+}
+
 std::string [packageName/]::eNAME()
 {
 	return "[aPackage.name/]";
@@ -69,3 +74,6 @@ std::string [packageName/]::eNS_PREFIX()
 }
 [/file]
 [/template]
+
+[query private hasEclipseURI(aPackage : EPackage) : Boolean = if (hasSourceGen()) then SourceGen().details->select(key = 'eclipseURI')->notEmpty() else false endif/]
+[query private getEclipseURI(aPackage : EPackage) : String = if (hasEclipseURI()) then SourceGen().details->select(key = 'eclipseURI')->first().value else '' endif/]
