@@ -1,7 +1,6 @@
 
 #include <iostream>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 

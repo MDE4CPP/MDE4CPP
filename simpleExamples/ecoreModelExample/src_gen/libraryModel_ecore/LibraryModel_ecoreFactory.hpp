@@ -7,20 +7,7 @@
 #ifndef LIBRARYMODEL_ECOREFACTORY_HPP
 #define LIBRARYMODEL_ECOREFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
+#include <map>
 #include <memory>
 
 #include "ecore/EFactory.hpp"
@@ -77,4 +64,3 @@ namespace libraryModel_ecore
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECOREFACTORY_HPP */
-

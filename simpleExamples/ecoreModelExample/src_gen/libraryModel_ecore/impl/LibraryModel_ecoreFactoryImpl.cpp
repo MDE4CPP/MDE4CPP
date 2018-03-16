@@ -1,4 +1,8 @@
 #include "libraryModel_ecore/impl/LibraryModel_ecoreFactoryImpl.hpp"
+
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 
 #include "ecore/EClass.hpp"
@@ -134,12 +138,14 @@ std::shared_ptr<ecore::EObject> LibraryModel_ecoreFactoryImpl::create(std::strin
 
 std::shared_ptr<Author> LibraryModel_ecoreFactoryImpl::createAuthor() const
 {
-	std::shared_ptr<Author> element(new AuthorImpl());
+	std::shared_ptr<AuthorImpl> element(new AuthorImpl());
+	element->setThisAuthorPtr(element);
 	return element;
 }
 std::shared_ptr<Book> LibraryModel_ecoreFactoryImpl::createBook() const
 {
-	std::shared_ptr<Book> element(new BookImpl());
+	std::shared_ptr<BookImpl> element(new BookImpl());
+	element->setThisBookPtr(element);
 	return element;
 }
 std::shared_ptr<Book> LibraryModel_ecoreFactoryImpl::createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const
@@ -149,23 +155,27 @@ std::shared_ptr<Book> LibraryModel_ecoreFactoryImpl::createBook_in_Library(std::
 	{
 			wp->getBook()->push_back(element);
 	}
+	element->setThisBookPtr(element);
 	return element;
 	
 }
 
 std::shared_ptr<LibraryModel> LibraryModel_ecoreFactoryImpl::createLibraryModel() const
 {
-	std::shared_ptr<LibraryModel> element(new LibraryModelImpl());
+	std::shared_ptr<LibraryModelImpl> element(new LibraryModelImpl());
+	element->setThisLibraryModelPtr(element);
 	return element;
 }
 std::shared_ptr<NamedElement> LibraryModel_ecoreFactoryImpl::createNamedElement() const
 {
-	std::shared_ptr<NamedElement> element(new NamedElementImpl());
+	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl());
+	element->setThisNamedElementPtr(element);
 	return element;
 }
 std::shared_ptr<Picture> LibraryModel_ecoreFactoryImpl::createPicture() const
 {
-	std::shared_ptr<Picture> element(new PictureImpl());
+	std::shared_ptr<PictureImpl> element(new PictureImpl());
+	element->setThisPicturePtr(element);
 	return element;
 }
 std::shared_ptr<Picture> LibraryModel_ecoreFactoryImpl::createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const
@@ -175,6 +185,7 @@ std::shared_ptr<Picture> LibraryModel_ecoreFactoryImpl::createPicture_in_Book(st
 	{
 			wp->getPictures()->push_back(element);
 	}
+	element->setThisPicturePtr(element);
 	return element;
 	
 }
