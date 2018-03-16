@@ -26,6 +26,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/EcorePackageImpl.cpp
 	EcorePackage.cpp
+	impl/EcorePluginImpl.cpp
+	EcorePlugin.cpp
 	${MDE4CPP_HOME}/application/include/util/util.cpp
 	${MDE4CPP_HOME}/application/include/util/registry.cpp
 	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp

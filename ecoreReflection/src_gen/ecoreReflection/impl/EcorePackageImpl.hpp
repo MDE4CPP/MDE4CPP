@@ -7,17 +7,9 @@
 #ifndef ECORE_METAMODELPACKAGEIMPL_HPP
 #define ECORE_METAMODELPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
 #include "ecoreReflection/EcorePackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
+
 namespace uml
 {
 	class LiteralInteger;

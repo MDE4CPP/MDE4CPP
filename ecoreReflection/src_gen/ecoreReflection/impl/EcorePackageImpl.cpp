@@ -16,6 +16,7 @@
 #include "uml/TemplateBinding.hpp"
 #include "uml/TemplateParameterSubstitution.hpp"
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
