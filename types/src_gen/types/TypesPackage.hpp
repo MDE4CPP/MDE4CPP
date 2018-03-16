@@ -7,20 +7,6 @@
 #ifndef TYPESPACKAGE_HPP
 #define TYPESPACKAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -72,4 +58,3 @@ namespace types
 	};
 }
 #endif /* end of include guard: TYPESPACKAGE_HPP */
-

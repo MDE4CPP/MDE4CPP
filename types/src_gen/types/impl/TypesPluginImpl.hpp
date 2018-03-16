@@ -7,20 +7,6 @@
 #ifndef TYPESPLUGINIMPL_HPP
 #define TYPESPLUGINIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "types/TypesPlugin.hpp"
 
 namespace types 
@@ -31,13 +17,14 @@ namespace types
 			TypesPluginImpl();
 			virtual ~TypesPluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 		
-			virtual std::shared_ptr<ecore::EFactory> getFactory();
-			virtual std::shared_ptr<ecore::EPackage> getPackage();
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
+			virtual std::shared_ptr<ecore::EFactory> getEFactory();
+			virtual std::shared_ptr<ecore::EPackage> getEPackage();
 	};
 }
 #endif /* end of include guard: TYPESPLUGINIMPL_HPP */
-

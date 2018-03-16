@@ -1,4 +1,5 @@
 #include "types/impl/TypesPluginImpl.hpp"
+
 #include "types/TypesFactory.hpp"
 #include "types/TypesPackage.hpp"
 
@@ -15,14 +16,25 @@ TypesPluginImpl::~TypesPluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EFactory> TypesPluginImpl::getFactory()
+
+std::shared_ptr<ecore::EObject> TypesPluginImpl::create(const std::string& name)
+{
+	return TypesFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EFactory> TypesPluginImpl::getEFactory()
 {
 	return TypesFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> TypesPluginImpl::getPackage()
+std::shared_ptr<ecore::EPackage> TypesPluginImpl::getEPackage()
 {
 	return TypesPackage::eInstance();
+}
+
+std::string TypesPluginImpl::eclipseURI()
+{
+	return "";
 }
 
 std::string TypesPluginImpl::eNAME()

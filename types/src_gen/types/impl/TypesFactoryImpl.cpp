@@ -1,4 +1,8 @@
 #include "types/impl/TypesFactoryImpl.hpp"
+
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "types/TypesPackage.hpp"
 
 #include "ecore/EClass.hpp"

@@ -17,7 +17,7 @@ std::shared_ptr<TypesPackage>TypesPackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(TypesPackageImpl::create());
-		std::dynamic_pointer_cast<TypesPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<TypesPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

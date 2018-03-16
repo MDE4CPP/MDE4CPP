@@ -7,22 +7,6 @@
 #ifndef TYPESPACKAGEIMPL_HPP
 #define TYPESPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <cassert>
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -79,10 +63,10 @@ namespace types
 			bool isInitialized = false;
  			bool isCreated = false;
 
-			virtual void init();
+			virtual void init(std::shared_ptr<ecore::EPackage> package);
 
 		public:
-			void createPackageContents();
+			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
 
 		private:
@@ -95,4 +79,3 @@ namespace types
 	};
 }
 #endif /* end of include guard: TYPESPACKAGEIMPL_HPP */
-

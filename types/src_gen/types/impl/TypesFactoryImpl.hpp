@@ -7,20 +7,6 @@
 #ifndef TYPESFACTORYIMPL_HPP
 #define TYPESFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "types/TypesFactory.hpp"
@@ -59,9 +45,6 @@ namespace types
 		private:
 			static TypesFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: TYPESFACTORYIMPL_HPP */
-
