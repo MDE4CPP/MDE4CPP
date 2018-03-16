@@ -7,26 +7,20 @@
 #ifndef CALCMODEL_PRIMECHECKER_PRIMECHECKERIMPL_HPP
 #define CALCMODEL_PRIMECHECKER_PRIMECHECKERIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-#include <functional>
-
-//*********************************
-// generated Includes
-
 //Model includes
 #include "../PrimeChecker.hpp"
-
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
-#include "boost/any.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace CalcModel
@@ -41,6 +35,8 @@ namespace CalcModel
 			friend class CalcModelFactoryImpl;
 			//constructor
 			PrimeCheckerImpl();
+			virtual std::shared_ptr<PrimeChecker> getThisPrimeCheckerPtr();
+			virtual void setThisPrimeCheckerPtr(std::weak_ptr<PrimeChecker> thisPrimeCheckerPtr);
 
 
 		public:
@@ -79,6 +75,7 @@ namespace CalcModel
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 		
 		private:
+			std::weak_ptr<PrimeChecker> m_thisPrimeCheckerPtr;
 			std::map<std::string,std::function<boost::any()>> m_getterMap;
 			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;

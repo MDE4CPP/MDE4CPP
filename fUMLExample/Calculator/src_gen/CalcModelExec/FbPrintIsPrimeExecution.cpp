@@ -1,9 +1,22 @@
 #include "CalcModelExec/FbPrintIsPrimeExecution.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <cassert>
 #include <iostream>
 #include <memory>
-#include <cassert>
 
+#include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+
+//Included from function behavior "fbPrintIsPrime"
+#include <iostream>
 
 
 
@@ -24,7 +37,8 @@ FbPrintIsPrimeExecution::FbPrintIsPrimeExecution(const FbPrintIsPrimeExecution &
 
 std::shared_ptr<ecore::EObject> FbPrintIsPrimeExecution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FbPrintIsPrimeExecution(*this));
+	std::shared_ptr<FbPrintIsPrimeExecution> element(new FbPrintIsPrimeExecution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -46,4 +60,9 @@ void FbPrintIsPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >
 
 	//set InOut parameters
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB fbPrintIsPrime ends its execution ^^^^^" << std::endl;)
+}
+
+void FbPrintIsPrimeExecution::setThisExecutionPtr(std::weak_ptr<FbPrintIsPrimeExecution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

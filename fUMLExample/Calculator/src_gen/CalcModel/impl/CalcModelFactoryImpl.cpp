@@ -1,6 +1,11 @@
 #include "CalcModel/impl/CalcModelFactoryImpl.hpp"
 #include "CalcModel/CalcModelPackage.hpp"
+
+#include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
+
+#include "CalcModel/impl/CheckIfPrimeImpl.hpp"
+#include "CalcModel/impl/PrimeCheckerImpl.hpp"
 
 using namespace CalcModel;
 
@@ -45,18 +50,19 @@ std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::string _classNam
 		//invoke the creator function
         return iter->second();
     }
-
     return nullptr;
 }
 
 std::shared_ptr<CalcModel::CheckIfPrime> CalcModelFactoryImpl::createCheckIfPrime ()
 {
-	std::shared_ptr<CalcModel::CheckIfPrime> element(new CheckIfPrimeImpl());
+	std::shared_ptr<CalcModel::CheckIfPrimeImpl> element(new CheckIfPrimeImpl());
+	element->setThisCheckIfPrimePtr(element);
 	return element;
 }
 std::shared_ptr<CalcModel::PrimeChecker> CalcModelFactoryImpl::createPrimeChecker ()
 {
-	std::shared_ptr<CalcModel::PrimeChecker> element(new PrimeCheckerImpl());
+	std::shared_ptr<CalcModel::PrimeCheckerImpl> element(new PrimeCheckerImpl());
+	element->setThisPrimeCheckerPtr(element);
 	return element;
 }
 

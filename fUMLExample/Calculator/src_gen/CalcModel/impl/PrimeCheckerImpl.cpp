@@ -1,7 +1,30 @@
-
 #include "CalcModel/impl/PrimeCheckerImpl.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "CalcModel/impl/CalcModelPackageImpl.hpp"
 #include "uml/Class.hpp"
+
+
+
+
+
+
+//Included from operation "printIsPrime"
+#include <iostream>
+
+//Included from operation "printNotPrime"
+#include <iostream>
+
 
 using namespace CalcModel;
 using boost::any_cast;
@@ -161,4 +184,14 @@ void PrimeCheckerImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<PrimeChecker> PrimeCheckerImpl::getThisPrimeCheckerPtr()
+{
+	return m_thisPrimeCheckerPtr.lock();
+}
+void PrimeCheckerImpl::setThisPrimeCheckerPtr(std::weak_ptr<PrimeChecker> thisPrimeCheckerPtr)
+{
+	m_thisPrimeCheckerPtr = thisPrimeCheckerPtr;
+	setThisClassPtr(thisPrimeCheckerPtr);
 }

@@ -25,6 +25,7 @@
 #include "uml/ProfileApplication.hpp"
 #include "uml/Property.hpp"
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 

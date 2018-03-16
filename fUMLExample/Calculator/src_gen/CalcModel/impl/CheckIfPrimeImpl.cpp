@@ -1,8 +1,21 @@
-
 #include "CalcModel/impl/CheckIfPrimeImpl.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "CalcModel/impl/CalcModelPackageImpl.hpp"
 #include "uml/Activity.hpp"
 #include "CalcModel/PrimeChecker.hpp"
+
+
 
 using namespace CalcModel;
 using boost::any_cast;
@@ -80,4 +93,14 @@ void CheckIfPrimeImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<CheckIfPrime> CheckIfPrimeImpl::getThisCheckIfPrimePtr()
+{
+	return m_thisCheckIfPrimePtr.lock();
+}
+void CheckIfPrimeImpl::setThisCheckIfPrimePtr(std::weak_ptr<CheckIfPrime> thisCheckIfPrimePtr)
+{
+	m_thisCheckIfPrimePtr = thisCheckIfPrimePtr;
+	setThisClassPtr(thisCheckIfPrimePtr);
 }

@@ -6,16 +6,6 @@
 
 #ifndef CALCMODEL_METAMODELPACKAGE_HPP
 #define CALCMODEL_METAMODELPACKAGE_HPP
-
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
 #include "uml/Package.hpp"	
 
 namespace uml 

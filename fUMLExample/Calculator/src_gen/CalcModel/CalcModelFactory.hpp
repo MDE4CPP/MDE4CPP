@@ -7,16 +7,6 @@
 #ifndef CALCMODEL_FACTORY_HPP
 #define CALCMODEL_FACTORY_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "uml/Factory.hpp"
 
 namespace CalcModel 

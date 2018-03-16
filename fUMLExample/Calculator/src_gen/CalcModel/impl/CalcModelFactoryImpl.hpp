@@ -7,24 +7,10 @@
 #ifndef CALCMODEL_FACTORYIMPL_HPP
 #define CALCMODEL_FACTORYIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
-#include <functional>
-
-#include "CalcModel/impl/CheckIfPrimeImpl.hpp"
-#include "CalcModel/impl/PrimeCheckerImpl.hpp"
+#include <map>
 
 #include "uml/impl/FactoryImpl.hpp"
 #include "CalcModel/CalcModelFactory.hpp"
-
 
 namespace CalcModel 
 {
