@@ -328,22 +328,29 @@ void LoadHandler::loadTypes(const std::string& name)
 	if (indexStartUri != std::string::npos)
 	{
 		std::string nsURI = name.substr(indexStartUri+1, indexEndUri-indexStartUri-1);
-
-		std::shared_ptr<MDE4CPPPlugin> plugin = PluginFramework::eInstance()->findPluginByUri(nsURI);
-		if (plugin)
+		unsigned int index = nsURI.find("file:/");
+		if (index == 0)
 		{
-			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
-			if (ecorePlugin)
+			loadTypesFromFile(nsURI);
+		}
+		else
+		{
+			std::shared_ptr<MDE4CPPPlugin> plugin = PluginFramework::eInstance()->findPluginByUri(nsURI);
+			if (plugin)
 			{
-				loadTypes(ecorePlugin->getEPackage(), nsURI);
-				return;
-			}
-			std::shared_ptr<UMLModelPlugin> umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin);
-			if (umlPlugin)
-			{
-				loadTypes(umlPlugin->getPackage(), nsURI);
-			}
+				std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
+				if (ecorePlugin)
+				{
+					loadTypes(ecorePlugin->getEPackage(), nsURI);
+					return;
+				}
+				std::shared_ptr<UMLModelPlugin> umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin);
+				if (umlPlugin)
+				{
+					loadTypes(umlPlugin->getPackage(), nsURI);
+				}
 
+			}
 		}
 	}
 }

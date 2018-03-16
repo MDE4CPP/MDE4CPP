@@ -22,9 +22,13 @@
 #include "boost/algorithm/string.hpp" // used for string splitting
 #include "boost/exception/to_string.hpp"
 
+#include "ecore/EClass.hpp"
 #include "ecore/EObject.hpp"
+#include "ecore/EPackage.hpp"
 #include "ecore/EStructuralFeature.hpp"
-
+#include "persistence/xml/XMLPersistence.hpp"
+#include "uml/Class.hpp"
+#include "uml/Package.hpp"
 #include "xerces/XStr.hpp"
 #include "xerces/WStr.hpp"
 #include "xercesc/dom/DOMNamedNodeMap.hpp"
@@ -296,4 +300,67 @@ std::shared_ptr<std::string> XMLLoadHandler::getChildText()
 	std::string value = W(m_currentElement->getTextContent());
 	std::shared_ptr<std::string> valuePtr(new std::string(value));
 	return valuePtr;
+}
+
+
+void XMLLoadHandler::loadTypesFromFile(const std::string& name)
+{
+	XMLPersistence* persistence = new XMLPersistence();
+	persistence->load(name);
+	std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap = persistence->getObjectReferenceMap();
+
+	std::map<std::string, std::shared_ptr<ecore::EObject>>::iterator iter = typesMap.begin();
+	std::map<std::string, std::shared_ptr<ecore::EObject>>::iterator end = typesMap.end();
+	while (iter != end)
+	{
+		std::string objectKey = iter->first;
+		if (objectKey.find(" ") == std::string::npos)
+		{
+			std::shared_ptr<ecore::EObject> object = iter->second;
+			std::string metaClassName = "";
+			std::shared_ptr<ecore::EClass> ecoreMetaClass = object->eClass();
+			if (ecoreMetaClass)
+			{
+				auto x = ecoreMetaClass->getEPackage().lock();
+				if (x)
+				{
+					metaClassName = x->getName() + ":" + ecoreMetaClass->getName();
+				}
+				else
+				{
+					metaClassName = ecoreMetaClass->getName();
+				}
+			}
+			else
+			{
+				std::shared_ptr<uml::NamedElement> umlElement = std::dynamic_pointer_cast<uml::NamedElement>(object);
+				if (umlElement)
+				{
+					std::shared_ptr<uml::Class> umlMetaClass = umlElement->getMetaClass();
+					if (umlMetaClass == nullptr)
+					{
+						auto x = umlMetaClass->getPackage().lock();
+						if (x)
+						{
+							metaClassName = x->getName() + ":" + umlMetaClass->getName();
+						}
+						else
+						{
+							metaClassName = umlMetaClass->getName();
+						}
+					}
+				}
+			}
+
+			std::string key = metaClassName + " " + name + "#" + objectKey;
+			if (m_refToObject_map.find(key) == m_refToObject_map.end())
+			{
+				m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(key, iter->second));
+				MSG_DEBUG("Add to map: '" << ref << "'");
+			}
+		}
+		iter++;
+	}
+
+	delete(persistence);
 }

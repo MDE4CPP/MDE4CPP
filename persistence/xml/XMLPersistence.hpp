@@ -23,7 +23,7 @@ namespace persistence
 	namespace xml
 	{
 
-		class XMLPersistence: persistence::base::Persistence
+		class XMLPersistence: virtual public persistence::base::Persistence
 		{
 			public:
 				XMLPersistence();

@@ -81,6 +81,7 @@ namespace persistence
 				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
 				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
+				virtual void loadTypesFromFile(const std::string& name) = 0;
 				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri);
 				virtual void loadTypes(std::shared_ptr<uml::Package> package, const std::string& uri);
 				virtual std::string getCurrentXMIID() = 0;
