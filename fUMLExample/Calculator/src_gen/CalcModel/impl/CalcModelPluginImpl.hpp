@@ -7,16 +7,6 @@
 #ifndef CALCMODEL_PLUGINIMPL_HPP
 #define CALCMODEL_PLUGINIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "CalcModel/CalcModelPlugin.hpp"
 
 namespace CalcModel 
@@ -27,10 +17,12 @@ namespace CalcModel
 			CalcModelPluginImpl();
 			virtual ~CalcModelPluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
-		
+	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
 			virtual std::shared_ptr<uml::Factory> getFactory();
 			virtual std::shared_ptr<uml::Package> getPackage();
 	};

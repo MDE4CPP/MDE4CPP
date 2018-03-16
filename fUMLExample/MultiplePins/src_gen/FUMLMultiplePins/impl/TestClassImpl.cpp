@@ -6,9 +6,18 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "fUMLMultiplePins/impl/fUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Class.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
+
+
+
+
 
 using namespace fUMLMultiplePins;
 using boost::any_cast;
@@ -106,4 +115,14 @@ void TestClassImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<TestClass> TestClassImpl::getThisTestClassPtr()
+{
+	return m_thisTestClassPtr.lock();
+}
+void TestClassImpl::setThisTestClassPtr(std::weak_ptr<TestClass> thisTestClassPtr)
+{
+	m_thisTestClassPtr = thisTestClassPtr;
+	setThisClassPtr(thisTestClassPtr);
 }

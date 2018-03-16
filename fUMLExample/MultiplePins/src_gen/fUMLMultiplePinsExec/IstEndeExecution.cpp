@@ -11,7 +11,9 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
 
 
 
@@ -35,7 +37,8 @@ IstEndeExecution::IstEndeExecution(const IstEndeExecution &obj)
 
 std::shared_ptr<ecore::EObject> IstEndeExecution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new IstEndeExecution(*this));
+	std::shared_ptr<IstEndeExecution> element(new IstEndeExecution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -72,4 +75,9 @@ else
 
 	//set InOut parameters
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB istEnde ends its execution ^^^^^" << std::endl;)
+}
+
+void IstEndeExecution::setThisExecutionPtr(std::weak_ptr<IstEndeExecution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

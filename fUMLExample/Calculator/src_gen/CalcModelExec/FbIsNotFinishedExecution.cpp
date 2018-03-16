@@ -1,12 +1,23 @@
 #include "CalcModelExec/FbIsNotFinishedExecution.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <cassert>
 #include <iostream>
 #include <memory>
-#include <cassert>
 
+#include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+
 
 #include "CalcModel/PrimeChecker.hpp"
-#include "CalcModelExec/PrimeCheckerExecution.hpp"
+#include "CalcModelExec/PrimeCheckerObject.hpp"
 
 #include "fUML/BooleanValue.hpp"
 
@@ -27,7 +38,8 @@ FbIsNotFinishedExecution::FbIsNotFinishedExecution(const FbIsNotFinishedExecutio
 
 std::shared_ptr<ecore::EObject> FbIsNotFinishedExecution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FbIsNotFinishedExecution(*this));
+	std::shared_ptr<FbIsNotFinishedExecution> element(new FbIsNotFinishedExecution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -40,14 +52,14 @@ void FbIsNotFinishedExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> 
 
 
 	//Call Operation action target
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerObject>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //Body of the Opaquebehavior
     //Start ---------------------------
 	
 	//Calling the associated operation.
- isNotFinished =   target->isNotFinished();
+			isNotFinished = target->isNotFinished();
     //End -----------------------------
 
 	//set return / out parameters
@@ -57,4 +69,9 @@ void FbIsNotFinishedExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> 
 
 	//set InOut parameters
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB fbIsNotFinished ends its execution ^^^^^" << std::endl;)
+}
+
+void FbIsNotFinishedExecution::setThisExecutionPtr(std::weak_ptr<FbIsNotFinishedExecution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

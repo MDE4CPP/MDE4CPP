@@ -11,11 +11,13 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
 
 
 #include "fUMLMultiplePins/TestClass.hpp"
-#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
+#include "fUMLMultiplePinsExec/TestClassObject.hpp"
 
 #include "fUML/IntegerValue.hpp"
 
@@ -36,7 +38,8 @@ FbDoAllExecution::FbDoAllExecution(const FbDoAllExecution &obj)
 
 std::shared_ptr<ecore::EObject> FbDoAllExecution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FbDoAllExecution(*this));
+	std::shared_ptr<FbDoAllExecution> element(new FbDoAllExecution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -88,7 +91,7 @@ void FbDoAllExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputP
 	param_9 = param_9Value->getValue();
 
 	//Call Operation action target
-	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassObject>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //Body of the Opaquebehavior
@@ -132,4 +135,9 @@ void FbDoAllExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputP
  	param_9Value->setValue(param_9);
     //outputParameters->push_back(inputParameters->at(9));
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB fbDoAll ends its execution ^^^^^" << std::endl;)
+}
+
+void FbDoAllExecution::setThisExecutionPtr(std::weak_ptr<FbDoAllExecution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

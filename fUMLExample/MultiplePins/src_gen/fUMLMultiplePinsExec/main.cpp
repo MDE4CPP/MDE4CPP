@@ -49,10 +49,10 @@
 #include "fUMLMultiplePins/fUMLMultiplePinsPackage.hpp"
 
 #include "fUMLMultiplePins/TestClass.hpp"
-#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
+#include "fUMLMultiplePinsExec/TestClassObject.hpp"
 
 
-#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
+#include "fUMLMultiplePinsExec/TestClassObject.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
 #include "fUMLMultiplePins/fUMLMultiplePinsFactory.hpp"
 
@@ -85,17 +85,20 @@ int main()
 	
 	
 	std::shared_ptr<TestClass> element = fUMLMultiplePins::FUMLMultiplePinsFactory::eInstance()->createTestClass();
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> fUMLMultiplePins_TestClass_fbDo1Execution(new fUMLMultiplePins::FbDo1Execution());
+	std::shared_ptr<fUMLMultiplePins::FbDo1Execution> fUMLMultiplePins_TestClass_fbDo1Execution(new fUMLMultiplePins::FbDo1Execution());
+	fUMLMultiplePins_TestClass_fbDo1Execution->setThisExecutionPtr(fUMLMultiplePins_TestClass_fbDo1Execution);
 	fUMLMultiplePins_TestClass_fbDo1Execution->getTypes()->push_back(fUMLMultiplePins::FUMLMultiplePinsPackage::eInstance()->get_fUMLMultiplePins_TestClass_fbDo1());
 	fUMLMultiplePins_TestClass_fbDo1Execution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(fUMLMultiplePins_TestClass_fbDo1Execution);
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> fUMLMultiplePins_TestClass_fbDoAllExecution(new fUMLMultiplePins::FbDoAllExecution());
+	std::shared_ptr<fUMLMultiplePins::FbDoAllExecution> fUMLMultiplePins_TestClass_fbDoAllExecution(new fUMLMultiplePins::FbDoAllExecution());
+	fUMLMultiplePins_TestClass_fbDoAllExecution->setThisExecutionPtr(fUMLMultiplePins_TestClass_fbDoAllExecution);
 	fUMLMultiplePins_TestClass_fbDoAllExecution->getTypes()->push_back(fUMLMultiplePins::FUMLMultiplePinsPackage::eInstance()->get_fUMLMultiplePins_TestClass_fbDoAll());
 	fUMLMultiplePins_TestClass_fbDoAllExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(fUMLMultiplePins_TestClass_fbDoAllExecution);
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> fUMLMultiplePins_TestClass_istEndeExecution(new fUMLMultiplePins::IstEndeExecution());
+	std::shared_ptr<fUMLMultiplePins::IstEndeExecution> fUMLMultiplePins_TestClass_istEndeExecution(new fUMLMultiplePins::IstEndeExecution());
+	fUMLMultiplePins_TestClass_istEndeExecution->setThisExecutionPtr(fUMLMultiplePins_TestClass_istEndeExecution);
 	fUMLMultiplePins_TestClass_istEndeExecution->getTypes()->push_back(fUMLMultiplePins::FUMLMultiplePinsPackage::eInstance()->get_fUMLMultiplePins_TestClass_istEnde());
 	fUMLMultiplePins_TestClass_istEndeExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(fUMLMultiplePins_TestClass_istEndeExecution);
@@ -109,13 +112,15 @@ int main()
 	std::shared_ptr<fUML::ParameterValue> startParamP(fumlFac->createParameterValue());
 	startParamP->setParameter(fUMLMultiplePins::FUMLMultiplePinsPackage::eInstance()->get_fUMLMultiplePins_TestClass_TestMultiplePins_fUMLMultiplePins_TestClass_TestMultiplePins_startParam());
 	std::shared_ptr<fUML::Reference> startParamValue(fUML::FUMLFactory::eInstance()->createReference());
-	std::shared_ptr<TestClassExecution> startParamUmlLinker(new TestClassExecution(startParam));
+	std::shared_ptr<TestClassObject> startParamUmlLinker(new TestClassObject(startParam));
+	startParamUmlLinker->setThisTestClassObjectPtr(startParamUmlLinker);
 	startParamUmlLinker->setLocus(locus);
 	startParamValue->setReferent(startParamUmlLinker);
 	startParamP->getValues()->push_back(startParamValue);
 	pList->push_back(startParamP);
 	
-	std::shared_ptr<TestClassExecution> object(new TestClassExecution());
+	std::shared_ptr<TestClassObject> object(new TestClassObject());
+	object->setThisTestClassObjectPtr(object);
 	object->setUmlValue(std::dynamic_pointer_cast<fUMLMultiplePins::TestClass>(element));
 	object->setLocus(locus);
 	std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute(fUMLMultiplePins::FUMLMultiplePinsPackage::eInstance()->get_fUMLMultiplePins_TestClass_TestMultiplePins(), object, pList);

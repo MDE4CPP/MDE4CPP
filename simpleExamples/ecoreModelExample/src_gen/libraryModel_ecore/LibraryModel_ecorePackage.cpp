@@ -17,7 +17,7 @@ std::shared_ptr<LibraryModel_ecorePackage>LibraryModel_ecorePackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(LibraryModel_ecorePackageImpl::create());
-		std::dynamic_pointer_cast<LibraryModel_ecorePackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<LibraryModel_ecorePackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

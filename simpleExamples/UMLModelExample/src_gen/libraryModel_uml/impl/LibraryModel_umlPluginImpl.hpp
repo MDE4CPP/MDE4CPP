@@ -7,16 +7,6 @@
 #ifndef LIBRARYMODEL_UML_PLUGINIMPL_HPP
 #define LIBRARYMODEL_UML_PLUGINIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "LibraryModel_uml/LibraryModel_umlPlugin.hpp"
 
 namespace LibraryModel_uml 
@@ -27,10 +17,12 @@ namespace LibraryModel_uml
 			LibraryModel_umlPluginImpl();
 			virtual ~LibraryModel_umlPluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
-		
+	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
 			virtual std::shared_ptr<uml::Factory> getFactory();
 			virtual std::shared_ptr<uml::Package> getPackage();
 	};

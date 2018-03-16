@@ -7,32 +7,28 @@
 #ifndef CALCMODEL_PRIMECHECKER_EXECUTION_HPP
 #define CALCMODEL_PRIMECHECKER_EXECUTION_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "fUML/impl/ObjectImpl.hpp"
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "CalcModel/PrimeChecker.hpp"
+
+template <class T> 
+class Bag;
+
+namespace CalcModel
+{
+	class PrimeChecker;
+}
 
 namespace CalcModel 
 {
-	class PrimeCheckerExecution : public fUML::ObjectImpl 
+	class PrimeCheckerObject : virtual public fUML::ObjectImpl 
 	{
 		public:
 		    //constructors
-		    PrimeCheckerExecution(PrimeCheckerExecution &obj);
-		    PrimeCheckerExecution(std::shared_ptr<PrimeChecker>);
-		    PrimeCheckerExecution(std::shared_ptr<Bag<PrimeChecker>>);
-		 	PrimeCheckerExecution();
+		    PrimeCheckerObject(PrimeCheckerObject &obj);
+		    PrimeCheckerObject(std::shared_ptr<PrimeChecker>);
+		    PrimeCheckerObject(std::shared_ptr<Bag<PrimeChecker>>);
+		 	PrimeCheckerObject();
 		    //destructor
-		    virtual ~PrimeCheckerExecution();
+		    virtual ~PrimeCheckerObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
@@ -40,10 +36,11 @@ namespace CalcModel
 			std::shared_ptr<Bag<PrimeChecker>> getUmlValues() const;
 			void setUmlValue(std::shared_ptr<PrimeChecker>);
 			void setUmlValues(std::shared_ptr<Bag<PrimeChecker>>);;
+			virtual void setThisPrimeCheckerObjectPtr(std::weak_ptr<PrimeCheckerObject> thisObjectPtr);
 		
 		protected:
 			std::shared_ptr<PrimeChecker> m_umlValue = nullptr;
 			std::shared_ptr<Bag<PrimeChecker>> m_umlValues = nullptr;
 	};
 }
-#endif /* end of include guard: CALCMODEL_PRIMECHECKER_EXECUTION_HPP */
+#endif /* end of include guard: CALCMODEL_PRIMECHECKER_OBJECT_HPP */

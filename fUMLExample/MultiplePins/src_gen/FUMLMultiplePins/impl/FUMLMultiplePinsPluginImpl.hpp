@@ -17,10 +17,12 @@ namespace fUMLMultiplePins
 			FUMLMultiplePinsPluginImpl();
 			virtual ~FUMLMultiplePinsPluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
-		
+	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
 			virtual std::shared_ptr<uml::Factory> getFactory();
 			virtual std::shared_ptr<uml::Package> getPackage();
 	};

@@ -30,11 +30,7 @@ SET(SOURCE_FILES
 	FbNextExecution.cpp
 	FbPrintIsPrimeExecution.cpp
 	FbPrintNotPrimeExecution.cpp
-
-
-
-
-	PrimeCheckerExecution.cpp
+	PrimeCheckerObject.cpp
 	main.cpp
 )
 

@@ -27,7 +27,7 @@ SET(SOURCE_FILES
 	FbDo1Execution.cpp
 	FbDoAllExecution.cpp
 	IstEndeExecution.cpp
-	TestClassExecution.cpp
+	TestClassObject.cpp
 	main.cpp
 )
 

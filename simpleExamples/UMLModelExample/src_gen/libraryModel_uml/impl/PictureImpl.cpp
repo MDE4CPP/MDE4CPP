@@ -1,7 +1,20 @@
-
 #include "LibraryModel_uml/impl/PictureImpl.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
 #include "uml/Class.hpp"
+
+
 
 using namespace LibraryModel_uml;
 using boost::any_cast;
@@ -92,4 +105,14 @@ void PictureImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<Picture> PictureImpl::getThisPicturePtr()
+{
+	return m_thisPicturePtr.lock();
+}
+void PictureImpl::setThisPicturePtr(std::weak_ptr<Picture> thisPicturePtr)
+{
+	m_thisPicturePtr = thisPicturePtr;
+	setThisNamedModelElementPtr(thisPicturePtr);
 }

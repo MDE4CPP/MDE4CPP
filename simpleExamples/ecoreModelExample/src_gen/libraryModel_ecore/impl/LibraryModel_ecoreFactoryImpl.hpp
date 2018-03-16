@@ -7,20 +7,6 @@
 #ifndef LIBRARYMODEL_ECOREFACTORYIMPL_HPP
 #define LIBRARYMODEL_ECOREFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
@@ -79,9 +65,6 @@ namespace libraryModel_ecore
 		private:
 			static LibraryModel_ecoreFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECOREFACTORYIMPL_HPP */
-

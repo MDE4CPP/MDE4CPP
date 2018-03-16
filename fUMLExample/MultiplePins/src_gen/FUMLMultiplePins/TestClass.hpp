@@ -7,13 +7,8 @@
 #ifndef FUMLMULTIPLEPINS_TESTCLASS__HPP
 #define FUMLMULTIPLEPINS_TESTCLASS__HPP
 
-#include <map>
-#include <string>
-#include <vector>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
-#include "boost/shared_ptr.hpp"
+
 
 //Forward Declaration for used types
 namespace fUMLMultiplePins 
@@ -21,16 +16,10 @@ namespace fUMLMultiplePins
 	class TestClass;
 }
 
-
 // base class includes
-
 #include "uml/Class.hpp"
 
-// enum includes
 
-
-
-//*********************************
 
 namespace fUMLMultiplePins
 {

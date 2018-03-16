@@ -19,16 +19,16 @@ namespace fUMLMultiplePins
 
 namespace fUMLMultiplePins 
 {
-	class TestClassExecution : public fUML::ObjectImpl 
+	class TestClassObject : virtual public fUML::ObjectImpl 
 	{
 		public:
 		    //constructors
-		    TestClassExecution(TestClassExecution &obj);
-		    TestClassExecution(std::shared_ptr<TestClass>);
-		    TestClassExecution(std::shared_ptr<Bag<TestClass>>);
-		 	TestClassExecution();
+		    TestClassObject(TestClassObject &obj);
+		    TestClassObject(std::shared_ptr<TestClass>);
+		    TestClassObject(std::shared_ptr<Bag<TestClass>>);
+		 	TestClassObject();
 		    //destructor
-		    virtual ~TestClassExecution();
+		    virtual ~TestClassObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
@@ -36,10 +36,11 @@ namespace fUMLMultiplePins
 			std::shared_ptr<Bag<TestClass>> getUmlValues() const;
 			void setUmlValue(std::shared_ptr<TestClass>);
 			void setUmlValues(std::shared_ptr<Bag<TestClass>>);;
+			virtual void setThisTestClassObjectPtr(std::weak_ptr<TestClassObject> thisObjectPtr);
 		
 		protected:
 			std::shared_ptr<TestClass> m_umlValue = nullptr;
 			std::shared_ptr<Bag<TestClass>> m_umlValues = nullptr;
 	};
 }
-#endif /* end of include guard: FUMLMULTIPLEPINS_TESTCLASS_EXECUTION_HPP */
+#endif /* end of include guard: FUMLMULTIPLEPINS_TESTCLASS_OBJECT_HPP */

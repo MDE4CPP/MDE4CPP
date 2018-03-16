@@ -7,43 +7,14 @@
 #ifndef CALCMODEL_PRIMECHECKER__HPP
 #define CALCMODEL_PRIMECHECKER__HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include <map>
-#include <string>
-#include <vector>
-
-#include "boost/any.hpp"
-#include "boost/shared_ptr.hpp"
-
-//Forward Declaration for used types
 
 
 // base class includes
-
 #include "uml/Class.hpp"
 
-// enum includes
 
-
-
-
-
-//Included from operation "printIsPrime"
-#include <iostream>
-
-//Included from operation "printNotPrime"
-#include <iostream>
-
-//*********************************
 
 namespace CalcModel
 {

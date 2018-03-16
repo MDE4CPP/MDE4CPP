@@ -22,6 +22,11 @@ FUMLMultiplePinsPluginImpl::~FUMLMultiplePinsPluginImpl()
 {
 }
 
+std::shared_ptr<ecore::EObject> FUMLMultiplePinsPluginImpl::create(const std::string& name)
+{		
+	return FUMLMultiplePinsFactory::eInstance()->create(name);
+}
+
 std::shared_ptr<uml::Factory> FUMLMultiplePinsPluginImpl::getFactory()
 {
 	return FUMLMultiplePinsFactory::eInstance();
@@ -30,6 +35,11 @@ std::shared_ptr<uml::Factory> FUMLMultiplePinsPluginImpl::getFactory()
 std::shared_ptr<uml::Package> FUMLMultiplePinsPluginImpl::getPackage()
 {
 	return FUMLMultiplePinsPackage::eInstance();
+}
+
+std::string FUMLMultiplePinsPluginImpl::eclipseURI()
+{
+	return "";
 }
 
 std::string FUMLMultiplePinsPluginImpl::eNAME()

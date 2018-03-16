@@ -11,7 +11,7 @@
 
 namespace fUMLMultiplePins 
 {
-	class FbDo1Execution : public fUML::OpaqueBehaviorExecutionImpl 
+	class FbDo1Execution: virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -22,6 +22,7 @@ namespace fUMLMultiplePins
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<FbDo1Execution> thisExecutionPtr);
 	};
 }
 #endif /* end of include guard: FUMLMULTIPLEPINS_TESTCLASS_FBDO1_EXECUTION_HPP */

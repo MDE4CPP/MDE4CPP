@@ -6,17 +6,21 @@
 
 #ifndef FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
 #define FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
-#include <functional>
-
-//*********************************
-// generated Includes
 
 //Model includes
 #include "../TestMultiplePins.hpp"
-
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
-#include "boost/any.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace fUMLMultiplePins
@@ -31,6 +35,8 @@ namespace fUMLMultiplePins
 			friend class FUMLMultiplePinsFactoryImpl;
 			//constructor
 			TestMultiplePinsImpl();
+			virtual std::shared_ptr<TestMultiplePins> getThisTestMultiplePinsPtr();
+			virtual void setThisTestMultiplePinsPtr(std::weak_ptr<TestMultiplePins> thisTestMultiplePinsPtr);
 
 
 		public:
@@ -59,6 +65,7 @@ namespace fUMLMultiplePins
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 		
 		private:
+			std::weak_ptr<TestMultiplePins> m_thisTestMultiplePinsPtr;
 			std::map<std::string,std::function<boost::any()>> m_getterMap;
 			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;

@@ -1,6 +1,14 @@
 #include "LibraryModel_uml/impl/LibraryModel_umlFactoryImpl.hpp"
 #include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
+
+#include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
+
+#include "LibraryModel_uml/impl/AuthorImpl.hpp"
+#include "LibraryModel_uml/impl/BookImpl.hpp"
+#include "LibraryModel_uml/impl/LibraryImpl.hpp"
+#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
+#include "LibraryModel_uml/impl/PictureImpl.hpp"
 
 using namespace LibraryModel_uml;
 
@@ -48,60 +56,67 @@ std::shared_ptr<uml::Element> LibraryModel_umlFactoryImpl::create(std::string _c
 		//invoke the creator function
         return iter->second();
     }
-
     return nullptr;
 }
 
 std::shared_ptr<LibraryModel_uml::Author> LibraryModel_umlFactoryImpl::createAuthor ()
 {
-	std::shared_ptr<LibraryModel_uml::Author> element(new AuthorImpl());
+	std::shared_ptr<LibraryModel_uml::AuthorImpl> element(new AuthorImpl());
+	element->setThisAuthorPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Author> LibraryModel_umlFactoryImpl::createAuthor_in_Library(std::shared_ptr<LibraryModel_uml::Library> library)
 {
-	std::shared_ptr<LibraryModel_uml::Author> element(new AuthorImpl());
+	std::shared_ptr<LibraryModel_uml::AuthorImpl> element(new AuthorImpl());
 	if (nullptr != library)
 	{
 		library->getAuthors()->push_back(element);
 	}
+	element->setThisAuthorPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Book> LibraryModel_umlFactoryImpl::createBook ()
 {
-	std::shared_ptr<LibraryModel_uml::Book> element(new BookImpl());
+	std::shared_ptr<LibraryModel_uml::BookImpl> element(new BookImpl());
+	element->setThisBookPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Book> LibraryModel_umlFactoryImpl::createBook_in_Library(std::shared_ptr<LibraryModel_uml::Library> library)
 {
-	std::shared_ptr<LibraryModel_uml::Book> element(new BookImpl());
+	std::shared_ptr<LibraryModel_uml::BookImpl> element(new BookImpl());
 	if (nullptr != library)
 	{
 		library->getBooks()->push_back(element);
 	}
+	element->setThisBookPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Library> LibraryModel_umlFactoryImpl::createLibrary ()
 {
-	std::shared_ptr<LibraryModel_uml::Library> element(new LibraryImpl());
+	std::shared_ptr<LibraryModel_uml::LibraryImpl> element(new LibraryImpl());
+	element->setThisLibraryPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::NamedModelElement> LibraryModel_umlFactoryImpl::createNamedModelElement ()
 {
-	std::shared_ptr<LibraryModel_uml::NamedModelElement> element(new NamedModelElementImpl());
+	std::shared_ptr<LibraryModel_uml::NamedModelElementImpl> element(new NamedModelElementImpl());
+	element->setThisNamedModelElementPtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Picture> LibraryModel_umlFactoryImpl::createPicture ()
 {
-	std::shared_ptr<LibraryModel_uml::Picture> element(new PictureImpl());
+	std::shared_ptr<LibraryModel_uml::PictureImpl> element(new PictureImpl());
+	element->setThisPicturePtr(element);
 	return element;
 }
 std::shared_ptr<LibraryModel_uml::Picture> LibraryModel_umlFactoryImpl::createPicture_in_Book(std::shared_ptr<LibraryModel_uml::Book> book)
 {
-	std::shared_ptr<LibraryModel_uml::Picture> element(new PictureImpl());
+	std::shared_ptr<LibraryModel_uml::PictureImpl> element(new PictureImpl());
 	if (nullptr != book)
 	{
 		book->getPictures()->push_back(element);
 	}
+	element->setThisPicturePtr(element);
 	return element;
 }
 

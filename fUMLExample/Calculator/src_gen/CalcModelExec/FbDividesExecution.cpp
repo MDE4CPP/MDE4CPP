@@ -1,12 +1,23 @@
 #include "CalcModelExec/FbDividesExecution.hpp"
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <cassert>
 #include <iostream>
 #include <memory>
-#include <cassert>
 
+#include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+
 
 #include "CalcModel/PrimeChecker.hpp"
-#include "CalcModelExec/PrimeCheckerExecution.hpp"
+#include "CalcModelExec/PrimeCheckerObject.hpp"
 
 #include "fUML/BooleanValue.hpp"
 
@@ -27,7 +38,8 @@ FbDividesExecution::FbDividesExecution(const FbDividesExecution &obj)
 
 std::shared_ptr<ecore::EObject> FbDividesExecution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FbDividesExecution(*this));
+	std::shared_ptr<FbDividesExecution> element(new FbDividesExecution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -40,14 +52,14 @@ void FbDividesExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inpu
 
 
 	//Call Operation action target
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerObject>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //Body of the Opaquebehavior
     //Start ---------------------------
 	
 	//Calling the associated operation.
- isDivisible =   target->divides();
+			isDivisible = target->divides();
     //End -----------------------------
 
 	//set return / out parameters
@@ -57,4 +69,9 @@ void FbDividesExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inpu
 
 	//set InOut parameters
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB fbDivides ends its execution ^^^^^" << std::endl;)
+}
+
+void FbDividesExecution::setThisExecutionPtr(std::weak_ptr<FbDividesExecution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

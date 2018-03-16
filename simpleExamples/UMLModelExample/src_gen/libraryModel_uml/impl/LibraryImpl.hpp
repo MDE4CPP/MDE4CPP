@@ -7,26 +7,20 @@
 #ifndef LIBRARYMODEL_UML_LIBRARY_LIBRARYIMPL_HPP
 #define LIBRARYMODEL_UML_LIBRARY_LIBRARYIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-#include <functional>
-
-//*********************************
-// generated Includes
-
 //Model includes
 #include "../Library.hpp"
-
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
-#include "boost/any.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace LibraryModel_uml
@@ -41,6 +35,8 @@ namespace LibraryModel_uml
 			friend class LibraryModel_umlFactoryImpl;
 			//constructor
 			LibraryImpl();
+			virtual std::shared_ptr<Library> getThisLibraryPtr();
+			virtual void setThisLibraryPtr(std::weak_ptr<Library> thisLibraryPtr);
 
 
 		public:
@@ -73,6 +69,7 @@ namespace LibraryModel_uml
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 		
 		private:
+			std::weak_ptr<Library> m_thisLibraryPtr;
 			std::map<std::string,std::function<boost::any()>> m_getterMap;
 			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;

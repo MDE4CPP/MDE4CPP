@@ -7,20 +7,6 @@
 #ifndef LIBRARYMODEL_ECORE_AUTHORAUTHORIMPL_HPP
 #define LIBRARYMODEL_ECORE_AUTHORAUTHORIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../Author.hpp"
 
 #include "libraryModel_ecore/impl/NamedElementImpl.hpp"
-
-
 
 //*********************************
 namespace libraryModel_ecore 
@@ -46,6 +30,8 @@ namespace libraryModel_ecore
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			AuthorImpl();
+			virtual std::shared_ptr<Author> getThisAuthorPtr();
+			virtual void setThisAuthorPtr(std::weak_ptr<Author> thisAuthorPtr);
 
 
 
@@ -76,15 +62,29 @@ namespace libraryModel_ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Author> m_thisAuthorPtr;
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECORE_AUTHORAUTHORIMPL_HPP */
-

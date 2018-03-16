@@ -26,10 +26,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/CalcModelPackageImpl.cpp
 	CalcModelPackage.cpp
-	impl/CalcModelFactoryImpl.cpp
-	CalcModelFactory.cpp
 	impl/CalcModelPluginImpl.cpp
 	CalcModelPlugin.cpp
+	impl/CalcModelFactoryImpl.cpp
+	CalcModelFactory.cpp
 	impl/CheckIfPrimeImpl.cpp
 	impl/PrimeCheckerImpl.cpp
 )

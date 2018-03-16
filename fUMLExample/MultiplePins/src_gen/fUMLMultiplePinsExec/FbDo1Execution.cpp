@@ -11,15 +11,17 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
+#include "fUML/FUMLFactory.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
 
 
 #include "fUMLMultiplePins/TestClass.hpp"
-#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
+#include "fUMLMultiplePinsExec/TestClassObject.hpp"
 
 #include "fUML/Reference.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
-#include "fUMLMultiplePinsExec/TestClassExecution.hpp"
+#include "fUMLMultiplePinsExec/TestClassObject.hpp"
 #include "fUML/IntegerValue.hpp"
 
 using namespace fUMLMultiplePins;
@@ -39,7 +41,8 @@ FbDo1Execution::FbDo1Execution(const FbDo1Execution &obj)
 
 std::shared_ptr<ecore::EObject> FbDo1Execution::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FbDo1Execution(*this));
+	std::shared_ptr<FbDo1Execution> element(new FbDo1Execution(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -62,11 +65,11 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
 
     std::shared_ptr<fUML::Reference> input_1Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at(0)->getValues()->front());
 
-	input_1 = std::dynamic_pointer_cast<TestClassExecution>(input_1Value->getReferent())->getUmlValue();
+	input_1 = std::dynamic_pointer_cast<TestClassObject>(input_1Value->getReferent())->getUmlValue();
 	assert(input_1 != nullptr);
 
 	//Call Operation action target
-	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassObject>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //Body of the Opaquebehavior
@@ -110,4 +113,9 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
 
 	//set InOut parameters
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB fbDo1 ends its execution ^^^^^" << std::endl;)
+}
+
+void FbDo1Execution::setThisExecutionPtr(std::weak_ptr<FbDo1Execution> thisExecutionPtr)
+{
+	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

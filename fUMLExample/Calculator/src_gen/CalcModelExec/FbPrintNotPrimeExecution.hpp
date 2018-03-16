@@ -7,25 +7,11 @@
 #ifndef CALCMODEL_PRIMECHECKER_FBPRINTNOTPRIME_EXECUTION_HPP
 #define CALCMODEL_PRIMECHECKER_FBPRINTNOTPRIME_EXECUTION_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "abstractDataTypes/SubsetUnion.hpp" 
-
-//Included from function behavior "fbPrintNotPrime"
-#include <iostream>
 
 namespace CalcModel 
 {
-	class FbPrintNotPrimeExecution : public fUML::OpaqueBehaviorExecutionImpl 
+	class FbPrintNotPrimeExecution: virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -36,6 +22,7 @@ namespace CalcModel
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<FbPrintNotPrimeExecution> thisExecutionPtr);
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER_FBPRINTNOTPRIME_EXECUTION_HPP */
