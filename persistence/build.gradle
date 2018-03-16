@@ -1,5 +1,6 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+	id "de.undercouch.download" version "3.4.2"
 }
 apply plugin: 'base' 
 
@@ -19,7 +20,54 @@ task deliverPersistence(type: Copy) {
 	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
 }
 
-task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+
+task downloadFile(type: Download) {
+	description 'download xerces'
+    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.1.zip'
+    dest new File(file('./xerces/xerces-c-3.2.1.zip').absolutePath)
+    overwrite false
+}
+
+task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
+	description 'download and unzip xerces'
+	from zipTree('xerces/xerces-c-3.2.1.zip')
+	into 'xerces'
+}
+
+task compileXerces(dependsOn: downloadAndUnzipFile) {
+	description 'download, unzip and compile xerces'
+
+	def folder = new File(file('./xerces/xerces-c-3.2.1/.cmake').absolutePath)
+	if( !folder.exists()) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+		}
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+		copy {
+			from "xerces/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application"
+			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+			exclude "cmake", "share", "pkgconfig"
+		}
+	}
+}
+
+task compilePersistence(dependsOn: compileXerces, type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Persistence"
 	description "compile Persistence"
 
