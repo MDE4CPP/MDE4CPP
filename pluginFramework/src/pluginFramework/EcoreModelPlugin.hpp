@@ -23,8 +23,8 @@ class EcoreModelPlugin: public MDE4CPPPlugin
 	public:
 		virtual ~EcoreModelPlugin(){}
 
-		virtual std::shared_ptr<ecore::EFactory> getFactory() = 0;
-		virtual std::shared_ptr<ecore::EPackage> getPackage() = 0;
+		virtual std::shared_ptr<ecore::EFactory> getEFactory() = 0;
+		virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
 };
 
 #endif

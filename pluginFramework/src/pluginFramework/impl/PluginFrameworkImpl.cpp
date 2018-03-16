@@ -34,7 +34,8 @@ PluginFrameworkImpl::PluginFrameworkImpl()
 
 PluginFrameworkImpl::~PluginFrameworkImpl()
 {
-	m_pluginMap.clear();
+	m_mapPluginName.clear();
+	m_mapPluginUri.clear();
 }
 
 PluginFramework* PluginFrameworkImpl::create()
@@ -164,7 +165,13 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 	else
 	{
 		std::shared_ptr<MDE4CPPPlugin> plugin = startFunction();
-		m_pluginMap.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
+		m_mapPluginName.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
+		m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNS_URI(), plugin));
+		std::string eclipseURI = plugin->eclipseURI();
+		if (!eclipseURI.empty())
+		{
+			m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(eclipseURI, plugin));
+		}
 
 		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
 	}
@@ -172,18 +179,33 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 
 void PluginFrameworkImpl::clear()
 {
-	m_pluginMap.clear();
+	m_mapPluginName.clear();
+	m_mapPluginUri.clear();
 }
 
 std::shared_ptr<MDE4CPPPlugin> PluginFrameworkImpl::findPluginByName(const std::string name) const
 {
-	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_pluginMap.find(name);
+	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_mapPluginName.find(name);
 
 	std::shared_ptr<MDE4CPPPlugin> pluginObject;
-	if(iter != m_pluginMap.end())
+	if(iter != m_mapPluginName.end())
 	{
 		return iter->second;
 	}
 
 	return nullptr;
 }
+
+std::shared_ptr<MDE4CPPPlugin> PluginFrameworkImpl::findPluginByUri(const std::string uri) const
+{
+	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_mapPluginUri.find(uri);
+
+	std::shared_ptr<MDE4CPPPlugin> pluginObject;
+	if(iter != m_mapPluginUri.end())
+	{
+		return iter->second;
+	}
+
+	return nullptr;
+}
+

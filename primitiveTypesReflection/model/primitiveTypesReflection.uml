@@ -2,6 +2,9 @@
 <xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
   <uml:Model xmi:id="_0" name="PrimitiveTypes" URI="http://www.omg.org/spec/PrimitiveTypes/20131001">
     <eAnnotations xmi:id="_fXHgoMviEeSDHbriTb3gBw" source="PackageOnly"/>
+    <eAnnotations xmi:id="_4R788CiWEeiR-q9NEUW-dw" source="http://sse.tu-ilmenau.de/codegen">
+      <details xmi:id="_9jEfYCiWEeiR-q9NEUW-dw" key="eclipseURI" value="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml"/>
+    </eAnnotations>
     <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Boolean" name="Boolean">
       <ownedComment xmi:id="Boolean-_ownedComment.0" annotatedElement="Boolean">
         <body>Boolean is used for logical expressions, consisting of the predefined values true and false.</body>

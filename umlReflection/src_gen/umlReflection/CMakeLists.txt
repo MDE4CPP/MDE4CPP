@@ -26,6 +26,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/UMLPackageImpl.cpp
 	UMLPackage.cpp
+	impl/UMLPluginImpl.cpp
+	UMLPlugin.cpp
 	${MDE4CPP_HOME}/application/include/util/util.cpp
 	${MDE4CPP_HOME}/application/include/util/registry.cpp
 	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp

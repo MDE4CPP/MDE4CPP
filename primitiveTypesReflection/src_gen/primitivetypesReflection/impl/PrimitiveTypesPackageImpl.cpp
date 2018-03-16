@@ -5,6 +5,7 @@
 #include "uml/PrimitiveType.hpp"
 #include "uml/ProfileApplication.hpp"
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
@@ -103,20 +104,20 @@ void PrimitiveTypesPackageImpl::createPackageInterfaces(std::shared_ptr<Primitiv
 
 void PrimitiveTypesPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<PrimitiveTypesPackageImpl> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
 {
-	primitiveTypes_Boolean = factory->createPrimitiveType_in_Package(primitiveTypes);
-	primitiveTypes_Boolean->setName("Boolean");
-
 	primitiveTypes_UnlimitedNatural = factory->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
+
+	primitiveTypes_Boolean = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Boolean->setName("Boolean");
 
 	primitiveTypes_String = factory->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_String->setName("String");
 
-	primitiveTypes_Integer = factory->createPrimitiveType_in_Package(primitiveTypes);
-	primitiveTypes_Integer->setName("Integer");
-
 	primitiveTypes_Real = factory->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_Real->setName("Real");
+
+	primitiveTypes_Integer = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Integer->setName("Integer");
 }
 
 void PrimitiveTypesPackageImpl::createPackageStereotypes(std::shared_ptr<PrimitiveTypesPackageImpl> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
