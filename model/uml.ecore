@@ -4,6 +4,9 @@
   <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
     <details key="originalName" value="UML"/>
   </eAnnotations>
+  <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+    <details key="eclipseURI" value="pathmap://UML_METAMODELS/UML.metamodel.uml"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityContent" abstract="true" interface="true">
     <eOperations name="containingActivity" ordered="false" eType="#//Activity"/>
   </eClassifiers>
@@ -513,7 +516,7 @@
         <eAnnotations source="redefines" references="#//TemplateableElement/ownedTemplateSignature"/>
       </contents>
       <contents xsi:type="ecore:EReference" name="templateParameter" ordered="false"
-          eType="#//TemplateParameter" eOpposite="#//ClassifierTemplateParameter/%duplicates%/parameteredElement">
+          eType="#//TemplateParameter">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="TheClassifierTemplateParameter that exposes this element as a formal parameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
         </eAnnotations>
@@ -1241,8 +1244,8 @@
       <eAnnotations source="subsets" references="#//Element/owner"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        changeable="false" volatile="true" transient="true" derived="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" changeable="false"
+        volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -1625,11 +1628,11 @@
         <details key="documentation" value="The query mustBeOwned() indicates whether Elements of this type must have an owner. Subclasses of Element that do not require an owner must override this operation.&#xA;result = (true)&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getMetaClass" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class">
+    <eOperations name="getMetaClass" eType="#//Class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Returns the Class that describes this element.&#xD;&#xA;&#xD;&#xA;&lt;span style=&quot;background-color:#FF8000&quot;>This Element was merged from mof::Reflection package.&lt;/span>"/>
       </eAnnotations>
-      <eAnnotations source="merge" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Extension/getMetaclass"/>
+      <eAnnotations source="merge" references="#//Extension/getMetaclass"/>
     </eOperations>
     <eOperations name="container" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1927,22 +1930,19 @@
       <details key="documentation" value="Physical definition of a graphical image.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example &quot;SVG&quot; could instead be expressed as &quot;MIME: image/svg+xml&quot;.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2767,17 +2767,17 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the&#xD;&#xA;Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the&#xD;&#xA;Property. If there are no values, the ReflectiveCollection returned is empty. "/>
       </eAnnotations>
-      <eParameters name="property" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+      <eParameters name="property" eType="#//Property"/>
     </eOperations>
     <eOperations name="set">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object&#xD;&#xA;parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection."/>
       </eAnnotations>
-      <eParameters name="property" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+      <eParameters name="property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
     <eOperations name="unset">
-      <eParameters name="property" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+      <eParameters name="property" eType="#//Property"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="#//Element">
@@ -2789,7 +2789,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)&#xD;&#xA;== true.&#xD;&#xA;All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for&#xD;&#xA;every property."/>
       </eAnnotations>
-      <eParameters name="metaClass" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+      <eParameters name="metaClass" eType="#//Class"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
@@ -3413,8 +3413,8 @@
       <eAnnotations source="subsets" references="#//NamedElement/namespace #//Feature/featuringClassifier #//RedefinableElement/redefinitionContext"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        volatile="true" transient="true" unsettable="true" derived="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" volatile="true"
+        transient="true" unsettable="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="suppressedGetVisibility" value="true"/>
         <details key="suppressedSetVisibility" value="true"/>
@@ -3527,7 +3527,7 @@
         <details key="eType" value="uml::ConnectableElementTemplateParameter"/>
       </eAnnotations>
       <contents xsi:type="ecore:EReference" name="templateParameter" ordered="false"
-          eType="#//TemplateParameter" eOpposite="#//ConnectableElementTemplateParameter/%duplicates%/parameteredElement">
+          eType="#//TemplateParameter">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The ConnectableElementTemplateParameter for this ConnectableElement parameter.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
         </eAnnotations>
@@ -3931,7 +3931,7 @@
         <details key="eType" value="uml::ConnectableElement"/>
       </eAnnotations>
       <contents xsi:type="ecore:EReference" name="parameteredElement" ordered="false"
-          lowerBound="1" eType="#//ParameterableElement" eOpposite="#//ConnectableElement/%duplicates%/templateParameter">
+          lowerBound="1" eType="#//ParameterableElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The ConnectableElement for this ConnectableElementTemplateParameter.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
         </eAnnotations>
@@ -4055,15 +4055,13 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deploymentLocation" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'&#xA;&lt;p>From package UML::Deployments.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionLocation" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The location where a component Artifact executes. This may be a local or remote location.&#xA;&lt;p>From package UML::Deployments.&lt;/p>"/>
       </eAnnotations>
@@ -4131,8 +4129,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A concrete name that is used to refer to the Artifact in a physical context. Example: file system name, universal resource locator.&#xA;&lt;p>From package UML::Deployments.&lt;/p>"/>
       </eAnnotations>
@@ -4301,8 +4298,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -4311,8 +4307,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -4508,8 +4503,8 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        volatile="true" transient="true" unsettable="true" derived="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" volatile="true"
+        transient="true" unsettable="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A String that represents a value to be used when no argument is supplied for the Parameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -4639,7 +4634,7 @@
         <eAnnotations source="redefines" references="#//BehavioralFeature/raisedException"/>
       </contents>
       <contents xsi:type="ecore:EReference" name="templateParameter" ordered="false"
-          eType="#//TemplateParameter" eOpposite="#//OperationTemplateParameter/%duplicates%/parameteredElement">
+          eType="#//TemplateParameter">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The OperationTemplateParameter that exposes this element as a formal parameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
         </eAnnotations>
@@ -7035,7 +7030,7 @@
         <details key="eType" value="uml::Operation"/>
       </eAnnotations>
       <contents xsi:type="ecore:EReference" name="parameteredElement" ordered="false"
-          lowerBound="1" eType="#//ParameterableElement" eOpposite="#//Operation/%duplicates%/templateParameter">
+          lowerBound="1" eType="#//ParameterableElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The Operation exposed by this OperationTemplateParameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
         </eAnnotations>
@@ -7404,8 +7399,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -7663,8 +7657,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewpoint" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -7747,8 +7740,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The symbol associated with this node in the expression tree.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -8433,7 +8425,7 @@
         <details key="eType" value="uml::Classifier"/>
       </eAnnotations>
       <contents xsi:type="ecore:EReference" name="parameteredElement" ordered="false"
-          lowerBound="1" eType="#//ParameterableElement" eOpposite="#//Classifier/%duplicates%/templateParameter">
+          lowerBound="1" eType="#//ParameterableElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The Classifier exposed by this ClassifierTemplateParameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
         </eAnnotations>
@@ -9072,7 +9064,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The Activity that directly or indirectly contains this StructuredActivityNode (considered as an Action).&#xA;result = (self.Action::containingActivity())&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityGroup/%duplicates%/containingActivity #//ActivityNode/%duplicates%/containingActivity #//ActivityContent/containingActivity"/>
+        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
       </contents>
       <contents xsi:type="ecore:EReference" name="activity" ordered="false" eType="#//Activity"
           volatile="true" transient="true" derived="true">
@@ -11214,7 +11206,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Return only this ConditionalNode. This prevents Actions within the ConditionalNode from having their OutputPins used as bodyOutputs or decider Pins in containing LoopNodes or ConditionalNodes.&#xA;result = (self->asSet())&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//Action/allActions #//StructuredActivityNode/%duplicates%/allActions"/>
+        <eAnnotations source="redefines" references="#//Action/allActions"/>
       </contents>
     </eAnnotations>
     <eOperations name="result_no_incoming" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -11795,7 +11787,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Return only this LoopNode. This prevents Actions within the LoopNode from having their OutputPins used as bodyOutputs or decider Pins in containing LoopNodes or ConditionalNodes.&#xA;result = (self->asSet())&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//Action/allActions #//StructuredActivityNode/%duplicates%/allActions"/>
+        <eAnnotations source="redefines" references="#//Action/allActions"/>
       </contents>
       <contents xsi:type="ecore:EOperation" name="sourceNodes" ordered="false" upperBound="-1"
           eType="#//ActivityNode">
@@ -12059,8 +12051,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Provides a textual specification of the functionality of the Action, in one or more languages other than UML.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -12076,8 +12067,7 @@
       <eAnnotations source="subsets" references="#//Action/input"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If provided, a specification of the language used for each of the body Strings.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -14562,8 +14552,7 @@
       <details key="documentation" value="An OpaqueBehavior is a Behavior whose specification is given in a textual language other than UML.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the behavior in one or more languages.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
@@ -14572,8 +14561,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Languages the body strings use in the same order as the body strings.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
@@ -17103,7 +17091,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The DurationInterval constraining the duration.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//IntervalConstraint/%duplicates%/specification #//Constraint/specification"/>
+        <eAnnotations source="redefines" references="#//Constraint/specification"/>
       </contents>
     </eAnnotations>
     <eOperations name="first_event_multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -17403,8 +17391,7 @@
       </contents>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String"
-        unsettable="true">
+        eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The specified String value.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -17457,7 +17444,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="TheTimeInterval constraining the duration.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//IntervalConstraint/%duplicates%/specification #//Constraint/specification"/>
+        <eAnnotations source="redefines" references="#//Constraint/specification"/>
       </contents>
     </eAnnotations>
     <eOperations name="has_one_constrainedElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
