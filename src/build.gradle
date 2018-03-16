@@ -22,6 +22,16 @@ task compileReflectionModels(dependsOn: ['common:ecoreReflection:compileEcoreRef
 	description 'compile all reflection models'
 }
 
+task generateEcoreModels(dependsOn: ['ecore:ecore:generateEcore', 'ecore:types:generateTypes', 'uml:generateUml', 'fuml:generateFUML']) {
+	group 'Source'
+	description 'generate all ecore models'
+}
+
+task generateReflectionModels(dependsOn: ['common:ecoreReflection:generateEcoreReflection', 'common:primitiveTypesReflection:generatePrimitivetypesReflection', 'common:umlReflection:generateUmlReflection']) {
+	group 'Source'
+	description 'generate all reflection models'
+}
+
 tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
 tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFramework')
 tasks.getByPath('ecore:types:buildTypes').mustRunAfter tasks.getByPath('ecore:ecore:buildEcore')
