@@ -27,8 +27,8 @@ namespace persistence
 				virtual ~HandlerHelper();
 
 				static std::string extractType(const std::shared_ptr<ecore::EObject> obj, std::string prefix);
-				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix);
-				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix, std::list<std::shared_ptr<ecore::EObject>> m_currentObjects);
+				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix, const std::string& uri);
+				static std::string extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject, std::string prefix, std::list<std::shared_ptr<ecore::EObject>> m_currentObjects, const std::string& uri);
 		};
 
 	} /* namespace base */

@@ -63,7 +63,7 @@ std::string HandlerHelper::extractType(const std::shared_ptr<ecore::EObject> obj
 }
 
 std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-	std::string prefix)
+	std::string prefix, const std::string& uri)
 {
 	std::list<std::shared_ptr<ecore::EObject>> list;
 	std::shared_ptr<ecore::EObject> antecessor = toObject; //pre-init antecessor
@@ -72,7 +72,7 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		list.push_front(antecessor);
 		antecessor = list.front()->eContainer();
 	}
-	return extractReference(toObject, rootObject, prefix, list);
+	return extractReference(toObject, rootObject, prefix, list, uri);
 }
 
 /*
@@ -83,7 +83,7 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
  *
  */
 std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-	std::string prefix, std::list<std::shared_ptr<ecore::EObject>> currentObjects)
+	std::string prefix, std::list<std::shared_ptr<ecore::EObject>> currentObjects, const std::string& uri)
 {
 	std::stringstream ref;
 
@@ -108,7 +108,14 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
 		if (rootObject != rootPkg) // TODO check if works correct (not tested yet)
 		{
-			ref << extractType(toObject, prefix) << " " << rootPkg->getNsURI();
+			if (uri.empty())
+			{
+				ref << extractType(toObject, prefix) << " " << rootPkg->getNsURI();
+			}
+			else
+			{
+				ref << extractType(toObject, prefix) << " " << uri;
+			}
 		}
 
 		ref << "#/";

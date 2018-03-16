@@ -61,7 +61,7 @@ namespace persistence
 				std::string extractType(std::shared_ptr<ecore::EObject> obj) const;
 
 				void addToMap(std::shared_ptr<ecore::EObject> object);
-				void addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects);
+				void addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects, const std::string& uri);
 
 				void handleRoot(std::shared_ptr<ecore::EObject> object);
 				void handleChild(std::shared_ptr<ecore::EObject> object);
@@ -81,8 +81,8 @@ namespace persistence
 				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
 				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
-				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package);
-				virtual void loadTypes(std::shared_ptr<uml::Package> package, std::string uri);
+				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri);
+				virtual void loadTypes(std::shared_ptr<uml::Package> package, const std::string& uri);
 				virtual std::string getCurrentXMIID() = 0;
 				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getTypesMap();
 

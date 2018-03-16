@@ -92,10 +92,10 @@ std::shared_ptr<ecore::EObject> LoadHandler::getObjectByRef(std::string ref)
 
 void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object)
 {
-	addToMap(object, true);
+	addToMap(object, true, "");
 }
 
-void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects)
+void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurrentObjects, const std::string& uri)
 {
 
 	std::string ref = "";
@@ -104,12 +104,12 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 		ref = getCurrentXMIID();
 		if (ref.empty())
 		{
-			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects);
+			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects, uri);
 		}
 	}
 	else
 	{
-		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, uri);
 	}
 	if (!ref.empty())
 	{
@@ -328,13 +328,14 @@ void LoadHandler::loadTypes(const std::string& name)
 	if (indexStartUri != std::string::npos)
 	{
 		std::string nsURI = name.substr(indexStartUri+1, indexEndUri-indexStartUri-1);
+
 		std::shared_ptr<MDE4CPPPlugin> plugin = PluginFramework::eInstance()->findPluginByUri(nsURI);
 		if (plugin)
 		{
 			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>(plugin);
 			if (ecorePlugin)
 			{
-				loadTypes(ecorePlugin->getEPackage());
+				loadTypes(ecorePlugin->getEPackage(), nsURI);
 				return;
 			}
 			std::shared_ptr<UMLModelPlugin> umlPlugin = std::dynamic_pointer_cast<UMLModelPlugin>(plugin);
@@ -347,18 +348,18 @@ void LoadHandler::loadTypes(const std::string& name)
 	}
 }
 
-void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package)
+void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri)
 {
 	std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
 	for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
 	{
 		// Filter only EDataType objects and add to handler's internal map
 		std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
-		addToMap(eClassifier, false); // TODO add default parameter force=true to addToMap()
+		addToMap(eClassifier, false, uri); // TODO add default parameter force=true to addToMap()
 	}
 }
 
-void LoadHandler::loadTypes(std::shared_ptr<uml::Package> package, std::string uri)
+void LoadHandler::loadTypes(std::shared_ptr<uml::Package> package, const std::string& uri)
 {
 	std::shared_ptr<Bag<uml::NamedElement>> memberList = package->getMember();
 	for (std::shared_ptr<uml::NamedElement> member : *memberList)

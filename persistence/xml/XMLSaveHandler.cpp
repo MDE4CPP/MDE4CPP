@@ -179,7 +179,7 @@ void XMLSaveHandler::addReferences ( const std::string &name, std::shared_ptr<ec
 		}
 		else
 		{
-			ref = persistence::base::HandlerHelper::extractReference( object, m_rootObject, m_rootPrefix );
+			ref = persistence::base::HandlerHelper::extractReference( object, m_rootObject, m_rootPrefix, "");
 		}
 
 		std::stringstream ss;

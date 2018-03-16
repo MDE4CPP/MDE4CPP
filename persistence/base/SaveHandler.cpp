@@ -73,7 +73,7 @@ void SaveHandler::addReference(const std::string &name, std::shared_ptr<ecore::E
 		}
 		else
 		{
-			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix);
+			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, "");
 		}
 
 		if (!m_isXSIMode && name == "type")
@@ -143,7 +143,22 @@ void SaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, con
 		}
 		else
 		{
-			addAttribute("xmi:type", extractType(object));
+			std::string fullType = extractType(object);
+			unsigned int index = fullType.find(" ");
+			std::string type = "";
+			std::string ref = "";
+			if (index != std::string::npos)
+			{
+				ref = fullType.substr(0, index-1);
+				type = fullType.substr(index+1, fullType.size() - index -1);
+				createAndAddElement(type);
+				addAttribute("href", ref);
+				addAttribute("xmi:type", type);
+			}
+			else
+			{
+				addAttribute("xmi:type", fullType);
+			}
 		}
 	}
 
