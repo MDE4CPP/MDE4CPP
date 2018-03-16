@@ -1,6 +1,10 @@
 #include "fUMLMultiplePins/impl/FUMLMultiplePinsFactoryImpl.hpp"
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
+
+#include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
+
+#include "fUMLMultiplePins/impl/TestClassImpl.hpp"
 
 using namespace fUMLMultiplePins;
 
@@ -44,13 +48,13 @@ std::shared_ptr<uml::Element> FUMLMultiplePinsFactoryImpl::create(std::string _c
 		//invoke the creator function
         return iter->second();
     }
-
     return nullptr;
 }
 
 std::shared_ptr<fUMLMultiplePins::TestClass> FUMLMultiplePinsFactoryImpl::createTestClass ()
 {
-	std::shared_ptr<fUMLMultiplePins::TestClass> element(new TestClassImpl());
+	std::shared_ptr<fUMLMultiplePins::TestClassImpl> element(new TestClassImpl());
+	element->setThisTestClassPtr(element);
 	return element;
 }
 

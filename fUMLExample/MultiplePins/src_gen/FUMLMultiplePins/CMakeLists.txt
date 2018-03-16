@@ -26,10 +26,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/FUMLMultiplePinsPackageImpl.cpp
 	FUMLMultiplePinsPackage.cpp
-	impl/FUMLMultiplePinsFactoryImpl.cpp
-	FUMLMultiplePinsFactory.cpp
 	impl/FUMLMultiplePinsPluginImpl.cpp
 	FUMLMultiplePinsPlugin.cpp
+	impl/FUMLMultiplePinsFactoryImpl.cpp
+	FUMLMultiplePinsFactory.cpp
 	impl/TestClassImpl.cpp
 	impl/TestMultiplePinsImpl.cpp
 )

@@ -6,8 +6,10 @@
 
 #ifndef FUMLMULTIPLEPINS_METAMODELPACKAGEIMPL_HPP
 #define FUMLMULTIPLEPINS_METAMODELPACKAGEIMPL_HPP
+
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
+
 namespace uml
 {
 	class LiteralBoolean;
