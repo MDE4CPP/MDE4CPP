@@ -11,6 +11,7 @@
 #define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
 
 #include <iostream>
+#include "ecore/EObject.hpp"
 
 using namespace persistence::base;
 
@@ -31,3 +32,7 @@ bool Persistence::isValidFile(const std::string& filename)
 	return true;
 }
 
+std::map<std::string, std::shared_ptr<ecore::EObject>> Persistence::getObjectReferenceMap()
+{
+	return m_refToObject_map;
+}

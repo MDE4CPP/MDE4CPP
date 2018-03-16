@@ -29,6 +29,7 @@ namespace persistence
 
 				virtual std::shared_ptr<ecore::EObject> load(const std::string &filename) = 0;
 				virtual bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true) = 0;
+				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getObjectReferenceMap();
 
 			protected:
 				bool isValidFile(const std::string &filename);
