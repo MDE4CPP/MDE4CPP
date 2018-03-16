@@ -13,6 +13,11 @@ task compileAll(dependsOn: ['src:compileEcoreModels', 'src:compileReflectionMode
 	description 'compile all models without generating the models'
 }
 
+task generateAll(dependsOn: ['src:generateEcoreModels', 'src:generateReflectionModels']) {
+	group 'MDE4CPP'
+	description 'compile all models without generating the models'
+}
+
 //Generate All
 task buildEcoreModels(dependsOn: ['generator:ecore4CPP:createEcore4CPP', 'src:buildEcoreModels']) {
 	group 'MDE4CPP'
