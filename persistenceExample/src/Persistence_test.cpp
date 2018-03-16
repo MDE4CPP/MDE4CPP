@@ -25,7 +25,7 @@
 #include "uml/UmlPackage.hpp"
 #include "TestModel.hpp"
 
-void performReadAndWrite(std::string loadPath, std::string savePath, std::shared_ptr<ecore::EPackage> package)
+void performReadAndWrite(std::string loadPath, std::string savePath, std::shared_ptr<ecore::EPackage> package, bool xsiMode = true)
 {
 	try
 	{
@@ -45,7 +45,7 @@ void performReadAndWrite(std::string loadPath, std::string savePath, std::shared
 		// Perform save()
 		MSG_DEBUG("Start save() of 'myEcoreTestLoadMetaModel'");
 
-		if (myPersistence.save(savePath, myEcoreTestLoadMetaModel, package))
+		if (myPersistence.save(savePath, myEcoreTestLoadMetaModel, package, xsiMode))
 		{
 			MSG_DEBUG("Successful save() of model to '" << savePath << "'");
 		}
@@ -117,7 +117,6 @@ int main()
 //	performReadAndWrite("_tmp/types.ecore", "_tmp/types_out.ecore", testmodel::TestModel::getMetaMetaPackage());
 //	performReadAndWrite("_tmp/uml.ecore", "_tmp/uml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
 //	performReadAndWrite("_tmp/fuml.ecore", "_tmp/fuml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
-//	performReadAndWrite("_tmp/test.uml", "_tmp/test_out.uml", uml::UmlPackage::eInstance());
 
 	return 0;
 }
