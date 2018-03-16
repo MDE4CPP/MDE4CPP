@@ -10,6 +10,7 @@
 #include "uml/PrimitiveType.hpp"
 #include "uml/Property.hpp"
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 

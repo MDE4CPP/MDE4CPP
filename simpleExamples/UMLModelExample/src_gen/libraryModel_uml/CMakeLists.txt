@@ -26,10 +26,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/LibraryModel_umlPackageImpl.cpp
 	LibraryModel_umlPackage.cpp
-	impl/LibraryModel_umlFactoryImpl.cpp
-	LibraryModel_umlFactory.cpp
 	impl/LibraryModel_umlPluginImpl.cpp
 	LibraryModel_umlPlugin.cpp
+	impl/LibraryModel_umlFactoryImpl.cpp
+	LibraryModel_umlFactory.cpp
 	impl/AuthorImpl.cpp
 	impl/BookImpl.cpp
 	impl/LibraryImpl.cpp

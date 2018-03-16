@@ -7,16 +7,6 @@
 #ifndef LIBRARYMODEL_UML_PLUGIN_HPP
 #define LIBRARYMODEL_UML_PLUGIN_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
 #include "pluginFramework/UMLModelPlugin.hpp"
 
 namespace LibraryModel_uml
@@ -26,10 +16,12 @@ namespace LibraryModel_uml
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
 	
+			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
 			virtual std::shared_ptr<uml::Factory> getFactory() = 0;
 			virtual std::shared_ptr<uml::Package> getPackage() = 0;
 	

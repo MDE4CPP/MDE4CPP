@@ -7,25 +7,20 @@
 #ifndef LIBRARYMODEL_UML_BOOK_BOOKIMPL_HPP
 #define LIBRARYMODEL_UML_BOOK_BOOKIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-#include <functional>
-
-//*********************************
-// generated Includes
-
 //Model includes
 #include "../Book.hpp"
 #include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
 #include "uml/Property.hpp"
-#include "boost/any.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace LibraryModel_uml
@@ -40,6 +35,8 @@ namespace LibraryModel_uml
 			friend class LibraryModel_umlFactoryImpl;
 			//constructor
 			BookImpl();
+			virtual std::shared_ptr<Book> getThisBookPtr();
+			virtual void setThisBookPtr(std::weak_ptr<Book> thisBookPtr);
 
 
 		public:
@@ -72,6 +69,7 @@ namespace LibraryModel_uml
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 		
 		private:
+			std::weak_ptr<Book> m_thisBookPtr;
 			std::map<std::string,std::function<boost::any()>> m_getterMap;
 			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;

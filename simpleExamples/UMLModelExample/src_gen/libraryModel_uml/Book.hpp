@@ -7,22 +7,9 @@
 #ifndef LIBRARYMODEL_UML_BOOK__HPP
 #define LIBRARYMODEL_UML_BOOK__HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
+template<class T> class Bag;
 
 
-#include <map>
-#include <string>
-#include <vector>
-
-#include "boost/any.hpp"
-#include "boost/shared_ptr.hpp"
 
 //Forward Declaration for used types
 namespace LibraryModel_uml 
@@ -35,13 +22,10 @@ namespace LibraryModel_uml
 	class Picture;
 }
 
-
 // base class includes
 #include "LibraryModel_uml/NamedModelElement.hpp"
 
-// enum includes
 
-//*********************************
 
 namespace LibraryModel_uml
 {

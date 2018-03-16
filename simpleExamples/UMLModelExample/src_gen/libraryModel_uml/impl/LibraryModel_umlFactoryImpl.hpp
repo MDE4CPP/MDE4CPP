@@ -7,27 +7,10 @@
 #ifndef LIBRARYMODEL_UML_FACTORYIMPL_HPP
 #define LIBRARYMODEL_UML_FACTORYIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
-
-
-#include <functional>
-
-#include "LibraryModel_uml/impl/AuthorImpl.hpp"
-#include "LibraryModel_uml/impl/BookImpl.hpp"
-#include "LibraryModel_uml/impl/LibraryImpl.hpp"
-#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
-#include "LibraryModel_uml/impl/PictureImpl.hpp"
+#include <map>
 
 #include "uml/impl/FactoryImpl.hpp"
 #include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
-
 
 namespace LibraryModel_uml 
 {

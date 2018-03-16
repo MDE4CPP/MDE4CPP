@@ -7,32 +7,14 @@
 #ifndef LIBRARYMODEL_UML_AUTHOR__HPP
 #define LIBRARYMODEL_UML_AUTHOR__HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "abstractDataTypes/SubsetUnion.hpp"
 
 
-#include <map>
-#include <string>
-#include <vector>
-
-#include "boost/any.hpp"
-#include "boost/shared_ptr.hpp"
-
-//Forward Declaration for used types
 
 
 // base class includes
 #include "LibraryModel_uml/NamedModelElement.hpp"
 
-// enum includes
 
-//*********************************
 
 namespace LibraryModel_uml
 {
