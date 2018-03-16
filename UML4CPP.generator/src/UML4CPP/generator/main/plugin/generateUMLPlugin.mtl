@@ -19,11 +19,11 @@
 [import UML4CPP::generator::main::plugin::generateUMLPluginImplementationHeader /]
 [import UML4CPP::generator::main::plugin::generateUMLPluginImplementationSource /]
 
-[template public generateUMLPlugin(aPackage : Package)]
+[template public generateUMLPlugin(aPackage : Package, packOnly:Boolean)]
 [aPackage.generateUMLPluginInterfaceHeader()/]
 [aPackage.generateUMLPluginInterfaceSource()/]
 [aPackage.generateUMLPluginImplHeader()/]
-[aPackage.generateUMLPluginImplSource()/]
+[aPackage.generateUMLPluginImplSource(packOnly)/]
 [/template]
 
 

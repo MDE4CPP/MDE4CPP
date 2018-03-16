@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module helper('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module helper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::generateType /]
 
@@ -182,3 +182,9 @@ template<class T> class Bag;
 #include "abstractDataTypes/Bag.hpp"
 [/if]
 [/template]
+
+[**
+ * Helper for sourcegen annotations
+*/]
+[query public hasSourceGen(aElement : Element) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()/]
+[query public getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->first()/]

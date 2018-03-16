@@ -31,14 +31,15 @@
 [comment @main/]
 
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->notEmpty())]
-	[aPackage.generateBuildFile(true)/]  
+	[aPackage.generateBuildFile(true)/] 
+	[aPackage.generateUMLPlugin(true)/] 
 [else] 
 	[aPackage.generateBuildFile()/]
 	[aPackage.generateFactoryImpl()/]
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior))).oclAsType(uml::Class).generateElement()/]
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateModel()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnum()/]
-	[aPackage.generateUMLPlugin()/]
+	[aPackage.generateUMLPlugin(false)/]
 [/if]
 
 [aPackage.generatePackageImpl()/]

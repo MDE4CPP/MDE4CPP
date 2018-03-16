@@ -64,11 +64,11 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
 	[aPackage.name.toUpperFirst()/]Package.cpp
+	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
+	[aPackage.name.toUpperFirst()/]Plugin.cpp
 [if (not packOnly)]
 	impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
 	[aPackage.name.toUpperFirst()/]Factory.cpp
-	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
-	[aPackage.name.toUpperFirst()/]Plugin.cpp
 [for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not e.oclIsKindOf(FunctionBehavior))->sortedBy(myQualifiedName()))]
 	impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [/for]
