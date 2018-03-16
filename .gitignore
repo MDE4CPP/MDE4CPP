@@ -1,3 +1,4 @@
 .gradle/
 build/
 .cmake
+/persistence/xerces
