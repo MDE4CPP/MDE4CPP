@@ -17,7 +17,7 @@ std::shared_ptr<EcorePackage>EcorePackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(EcorePackageImpl::create());
-		std::dynamic_pointer_cast<EcorePackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<EcorePackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

@@ -7,31 +7,38 @@
 #ifndef ECORE_EOBJECT_HPP
 #define ECORE_EOBJECT_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
 
 //Forward Declaration for used types
 namespace ecore 
@@ -90,7 +97,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > eAllContents()  const  = 0;
+			virtual Bag <   ecore::EObject > eAllContents()  const  = 0;
 			
 			/*!
 			 */ 
@@ -106,11 +113,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > eContents()  const  = 0;
+			virtual Bag <   ecore::EObject > eContents()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > eCrossReferences()  const  = 0;
+			virtual Bag <   ecore::EObject > eCrossReferences()  const  = 0;
 			
 			/*!
 			 */ 
@@ -122,7 +129,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  = 0;
+			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   boost::any >  arguments)  const  = 0;
 			
 			/*!
 			 */ 
@@ -176,8 +183,16 @@ namespace ecore
 			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: ECORE_EOBJECT_HPP */
-

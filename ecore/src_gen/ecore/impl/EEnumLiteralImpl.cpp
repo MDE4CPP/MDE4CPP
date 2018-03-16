@@ -1,18 +1,48 @@
 #include "ecore/impl/EEnumLiteralImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EEnum.hpp"
 
 #include "ecore/ENamedElement.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -88,7 +118,8 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImp
 
 std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EEnumLiteralImpl(*this));
+	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(*this));
+	element->setThisEEnumLiteralPtr(element);
 	return element;
 }
 
@@ -149,6 +180,15 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 //*********************************
 
 
+std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr()
+{
+	return m_thisEEnumLiteralPtr.lock();
+}
+void EEnumLiteralImpl::setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr)
+{
+	m_thisEEnumLiteralPtr = thisEEnumLiteralPtr;
+	setThisENamedElementPtr(thisEEnumLiteralPtr);
+}
 std::shared_ptr<ecore::EObject> EEnumLiteralImpl::eContainer() const
 {
 	if(auto wp = m_eEnum.lock())
@@ -165,23 +205,33 @@ boost::any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //60
 		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
 			return getEEnum(); //65
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
 			return getInstance(); //63
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 			return getLiteral(); //64
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //61
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
 			return getValue(); //62
 	}
-	return boost::any();
+	return ENamedElementImpl::internalEIsSet(featureID);
 }
-
-void EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
+bool EEnumLiteralImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
+			return getEEnum().lock() != nullptr; //65
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
+			return !getInstance().empty(); //63
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
+			return getLiteral() != ""; //64
+		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
+			return getValue() != 0; //62
+	}
+	return ENamedElementImpl::internalEIsSet(featureID);
+}
+bool EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -190,28 +240,131 @@ void EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			boost::any _instance = boost::any_cast<boost::any>(newValue);
 			setInstance(_instance); //63
-			break;
+			return true;
 		}
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::string _literal = boost::any_cast<std::string>(newValue);
 			setLiteral(_literal); //64
-			break;
-		}
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //61
-			break;
+			return true;
 		}
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = boost::any_cast<int>(newValue);
 			setValue(_value); //62
-			break;
+			return true;
 		}
 	}
+
+	return ENamedElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EEnumLiteralImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EEnumLiteralImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("literal");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setLiteral(value);
+		}
+
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setValue(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ENamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EEnumLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	ENamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EEnumLiteralImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	ENamedElementImpl::resolveReferences(featureID, references);
+}
+
+void EEnumLiteralImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEEnumLiteral_EAttribute_literal()) )
+		{
+			saveHandler->addAttribute("literal", this->getLiteral());
+		}
+
+		if ( this->eIsSet(package->getEEnumLiteral_EAttribute_value()) )
+		{
+			saveHandler->addAttribute("value", this->getValue());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

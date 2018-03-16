@@ -7,22 +7,6 @@
 #ifndef ECOREPACKAGEIMPL_HPP
 #define ECOREPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <cassert>
-
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -594,10 +578,10 @@ namespace ecore
 			bool isInitialized = false;
  			bool isCreated = false;
 
-			virtual void init();
+			virtual void init(std::shared_ptr<ecore::EPackage> package);
 
 		public:
-			void createPackageContents();
+			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
 
 		private:
@@ -654,4 +638,3 @@ namespace ecore
 	};
 }
 #endif /* end of include guard: ECOREPACKAGEIMPL_HPP */
-

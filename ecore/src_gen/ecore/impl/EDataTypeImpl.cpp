@@ -1,12 +1,36 @@
 #include "ecore/impl/EDataTypeImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -15,6 +39,12 @@
 
 #include "ecore/ETypeParameter.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -97,7 +127,8 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
 
 std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EDataTypeImpl(*this));
+	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(*this));
+	element->setThisEDataTypePtr(element);
 	return element;
 }
 
@@ -132,6 +163,15 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 
 
+std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr()
+{
+	return m_thisEDataTypePtr.lock();
+}
+void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr)
+{
+	m_thisEDataTypePtr = thisEDataTypePtr;
+	setThisEClassifierPtr(thisEDataTypePtr);
+}
 std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -148,75 +188,129 @@ boost::any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
-			return getClassifierID(); //45
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue(); //44
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //40
-		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-			return getEPackage(); //47
-		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters(); //48
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-			return getInstanceClass(); //43
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
-			return getInstanceClassName(); //42
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
-			return getInstanceTypeName(); //46
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //41
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
 			return isSerializable(); //49
 	}
-	return boost::any();
+	return EClassifierImpl::internalEIsSet(featureID);
 }
-
-void EDataTypeImpl::eSet(int featureID, boost::any newValue)
+bool EDataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
-			setEPackage(_ePackage); //47
-			break;
-		}
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-		{
-			// BOOST CAST
-			void *  _instanceClass = boost::any_cast<void * >(newValue);
-			setInstanceClass(_instanceClass); //43
-			break;
-		}
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
-		{
-			// BOOST CAST
-			std::string _instanceClassName = boost::any_cast<std::string>(newValue);
-			setInstanceClassName(_instanceClassName); //42
-			break;
-		}
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
-		{
-			// BOOST CAST
-			std::string _instanceTypeName = boost::any_cast<std::string>(newValue);
-			setInstanceTypeName(_instanceTypeName); //46
-			break;
-		}
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //41
-			break;
-		}
+		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
+			return isSerializable() != true; //49
+	}
+	return EClassifierImpl::internalEIsSet(featureID);
+}
+bool EDataTypeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
 		{
 			// BOOST CAST
 			bool _serializable = boost::any_cast<bool>(newValue);
 			setSerializable(_serializable); //49
-			break;
+			return true;
 		}
 	}
+
+	return EClassifierImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EDataTypeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("serializable");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setSerializable(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	EClassifierImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	EClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EDataTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	EClassifierImpl::resolveReferences(featureID, references);
+}
+
+void EDataTypeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EClassifierImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEDataType_EAttribute_serializable()) )
+		{
+			saveHandler->addAttribute("serializable", this->isSerializable());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

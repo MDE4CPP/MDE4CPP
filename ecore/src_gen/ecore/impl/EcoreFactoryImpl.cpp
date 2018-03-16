@@ -1,4 +1,8 @@
 #include "ecore/impl/EcoreFactoryImpl.hpp"
+
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EcorePackage.hpp"
 
 
@@ -272,7 +276,8 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(std::string _className, std::s
 
 std::shared_ptr<EAnnotation> EcoreFactoryImpl::createEAnnotation() const
 {
-	std::shared_ptr<EAnnotation> element(new EAnnotationImpl());
+	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl());
+	element->setThisEAnnotationPtr(element);
 	return element;
 }
 std::shared_ptr<EAnnotation> EcoreFactoryImpl::createEAnnotation_in_EModelElement(std::weak_ptr<ecore::EModelElement > par_eModelElement) const
@@ -282,13 +287,15 @@ std::shared_ptr<EAnnotation> EcoreFactoryImpl::createEAnnotation_in_EModelElemen
 	{
 			wp->getEAnnotations()->push_back(element);
 	}
+	element->setThisEAnnotationPtr(element);
 	return element;
 	
 }
 
 std::shared_ptr<EAttribute> EcoreFactoryImpl::createEAttribute() const
 {
-	std::shared_ptr<EAttribute> element(new EAttributeImpl());
+	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	element->setThisEAttributePtr(element);
 	return element;
 }
 std::shared_ptr<EAttribute> EcoreFactoryImpl::createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const
@@ -298,6 +305,7 @@ std::shared_ptr<EAttribute> EcoreFactoryImpl::createEAttribute_in_EContainingCla
 	{
 			wp->getEAttributes()->push_back(element);
 	}
+	element->setThisEAttributePtr(element);
 	return element;
 	
 }
@@ -309,12 +317,14 @@ std::shared_ptr<EAttribute> EcoreFactoryImpl::createEAttribute_in_EContainingCla
 	{
 			wp->getEAttributes()->push_back(element);
 	}
+	element->setThisEAttributePtr(element);
 	return element;
 	
 }
 std::shared_ptr<EClass> EcoreFactoryImpl::createEClass() const
 {
-	std::shared_ptr<EClass> element(new EClassImpl());
+	std::shared_ptr<EClassImpl> element(new EClassImpl());
+	element->setThisEClassPtr(element);
 	return element;
 }
 std::shared_ptr<EClass> EcoreFactoryImpl::createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const
@@ -324,6 +334,7 @@ std::shared_ptr<EClass> EcoreFactoryImpl::createEClass_in_EPackage(std::weak_ptr
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEClassPtr(element);
 	return element;
 	
 }
@@ -335,12 +346,14 @@ std::shared_ptr<EClass> EcoreFactoryImpl::createEClass_in_EPackage(std::weak_ptr
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEClassPtr(element);
 	return element;
 	
 }
 std::shared_ptr<EDataType> EcoreFactoryImpl::createEDataType() const
 {
-	std::shared_ptr<EDataType> element(new EDataTypeImpl());
+	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl());
+	element->setThisEDataTypePtr(element);
 	return element;
 }
 std::shared_ptr<EDataType> EcoreFactoryImpl::createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const
@@ -350,6 +363,7 @@ std::shared_ptr<EDataType> EcoreFactoryImpl::createEDataType_in_EPackage(std::we
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEDataTypePtr(element);
 	return element;
 	
 }
@@ -361,12 +375,14 @@ std::shared_ptr<EDataType> EcoreFactoryImpl::createEDataType_in_EPackage(std::we
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEDataTypePtr(element);
 	return element;
 	
 }
 std::shared_ptr<EEnum> EcoreFactoryImpl::createEEnum() const
 {
-	std::shared_ptr<EEnum> element(new EEnumImpl());
+	std::shared_ptr<EEnumImpl> element(new EEnumImpl());
+	element->setThisEEnumPtr(element);
 	return element;
 }
 std::shared_ptr<EEnum> EcoreFactoryImpl::createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const
@@ -376,6 +392,7 @@ std::shared_ptr<EEnum> EcoreFactoryImpl::createEEnum_in_EPackage(std::weak_ptr<e
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEEnumPtr(element);
 	return element;
 	
 }
@@ -387,12 +404,14 @@ std::shared_ptr<EEnum> EcoreFactoryImpl::createEEnum_in_EPackage(std::weak_ptr<e
 	{
 			wp->getEClassifiers()->push_back(element);
 	}
+	element->setThisEEnumPtr(element);
 	return element;
 	
 }
 std::shared_ptr<EEnumLiteral> EcoreFactoryImpl::createEEnumLiteral() const
 {
-	std::shared_ptr<EEnumLiteral> element(new EEnumLiteralImpl());
+	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl());
+	element->setThisEEnumLiteralPtr(element);
 	return element;
 }
 std::shared_ptr<EEnumLiteral> EcoreFactoryImpl::createEEnumLiteral_in_EEnum(std::weak_ptr<ecore::EEnum > par_eEnum) const
@@ -402,28 +421,33 @@ std::shared_ptr<EEnumLiteral> EcoreFactoryImpl::createEEnumLiteral_in_EEnum(std:
 	{
 			wp->getELiterals()->push_back(element);
 	}
+	element->setThisEEnumLiteralPtr(element);
 	return element;
 	
 }
 
 std::shared_ptr<EFactory> EcoreFactoryImpl::createEFactory() const
 {
-	std::shared_ptr<EFactory> element(new EFactoryImpl());
+	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl());
+	element->setThisEFactoryPtr(element);
 	return element;
 }
 std::shared_ptr<EGenericType> EcoreFactoryImpl::createEGenericType() const
 {
-	std::shared_ptr<EGenericType> element(new EGenericTypeImpl());
+	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	element->setThisEGenericTypePtr(element);
 	return element;
 }
 std::shared_ptr<EObject> EcoreFactoryImpl::createEObject() const
 {
-	std::shared_ptr<EObject> element(new EObjectImpl());
+	std::shared_ptr<EObjectImpl> element(new EObjectImpl());
+	element->setThisEObjectPtr(element);
 	return element;
 }
 std::shared_ptr<EOperation> EcoreFactoryImpl::createEOperation() const
 {
-	std::shared_ptr<EOperation> element(new EOperationImpl());
+	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	element->setThisEOperationPtr(element);
 	return element;
 }
 std::shared_ptr<EOperation> EcoreFactoryImpl::createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const
@@ -433,6 +457,7 @@ std::shared_ptr<EOperation> EcoreFactoryImpl::createEOperation_in_EContainingCla
 	{
 			wp->getEOperations()->push_back(element);
 	}
+	element->setThisEOperationPtr(element);
 	return element;
 	
 }
@@ -444,12 +469,14 @@ std::shared_ptr<EOperation> EcoreFactoryImpl::createEOperation_in_EContainingCla
 	{
 			wp->getEOperations()->push_back(element);
 	}
+	element->setThisEOperationPtr(element);
 	return element;
 	
 }
 std::shared_ptr<EPackage> EcoreFactoryImpl::createEPackage() const
 {
-	std::shared_ptr<EPackage> element(new EPackageImpl());
+	std::shared_ptr<EPackageImpl> element(new EPackageImpl());
+	element->setThisEPackagePtr(element);
 	return element;
 }
 std::shared_ptr<EPackage> EcoreFactoryImpl::createEPackage_in_ESuperPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage) const
@@ -459,13 +486,15 @@ std::shared_ptr<EPackage> EcoreFactoryImpl::createEPackage_in_ESuperPackage(std:
 	{
 			wp->getESubpackages()->push_back(element);
 	}
+	element->setThisEPackagePtr(element);
 	return element;
 	
 }
 
 std::shared_ptr<EParameter> EcoreFactoryImpl::createEParameter() const
 {
-	std::shared_ptr<EParameter> element(new EParameterImpl());
+	std::shared_ptr<EParameterImpl> element(new EParameterImpl());
+	element->setThisEParameterPtr(element);
 	return element;
 }
 std::shared_ptr<EParameter> EcoreFactoryImpl::createEParameter_in_EOperation(std::weak_ptr<ecore::EOperation > par_eOperation) const
@@ -475,13 +504,15 @@ std::shared_ptr<EParameter> EcoreFactoryImpl::createEParameter_in_EOperation(std
 	{
 			wp->getEParameters()->push_back(element);
 	}
+	element->setThisEParameterPtr(element);
 	return element;
 	
 }
 
 std::shared_ptr<EReference> EcoreFactoryImpl::createEReference() const
 {
-	std::shared_ptr<EReference> element(new EReferenceImpl());
+	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	element->setThisEReferencePtr(element);
 	return element;
 }
 std::shared_ptr<EReference> EcoreFactoryImpl::createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const
@@ -491,6 +522,7 @@ std::shared_ptr<EReference> EcoreFactoryImpl::createEReference_in_EContainingCla
 	{
 			wp->getEReferences()->push_back(element);
 	}
+	element->setThisEReferencePtr(element);
 	return element;
 	
 }
@@ -502,17 +534,20 @@ std::shared_ptr<EReference> EcoreFactoryImpl::createEReference_in_EContainingCla
 	{
 			wp->getEReferences()->push_back(element);
 	}
+	element->setThisEReferencePtr(element);
 	return element;
 	
 }
 std::shared_ptr<EStringToStringMapEntry> EcoreFactoryImpl::createEStringToStringMapEntry() const
 {
-	std::shared_ptr<EStringToStringMapEntry> element(new EStringToStringMapEntryImpl());
+	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl());
+	element->setThisEStringToStringMapEntryPtr(element);
 	return element;
 }
 std::shared_ptr<ETypeParameter> EcoreFactoryImpl::createETypeParameter() const
 {
-	std::shared_ptr<ETypeParameter> element(new ETypeParameterImpl());
+	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	element->setThisETypeParameterPtr(element);
 	return element;
 }
 

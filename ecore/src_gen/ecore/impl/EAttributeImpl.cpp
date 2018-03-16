@@ -1,12 +1,36 @@
 #include "ecore/impl/EAttributeImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClass.hpp"
@@ -19,6 +43,12 @@
 
 #include "ecore/EStructuralFeature.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -116,7 +146,8 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 
 std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EAttributeImpl(*this));
+	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(*this));
+	element->setThisEAttributePtr(element);
 	return element;
 }
 
@@ -157,6 +188,15 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 
 
+std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr()
+{
+	return m_thisEAttributePtr.lock();
+}
+void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr)
+{
+	m_thisEAttributePtr = thisEAttributePtr;
+	setThisEStructuralFeaturePtr(thisEAttributePtr);
+}
 std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
 {
 	if(auto wp = m_eContainingClass.lock())
@@ -173,155 +213,136 @@ boost::any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-			return isChangeable(); //010
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CONTAINERCLASS:
-			return getContainerClass(); //018
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue(); //014
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-			return getDefaultValueLiteral(); //013
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-			return isDerived(); //016
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //00
 		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
 			return getEAttributeType(); //021
-		case EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass(); //019
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return getEGenericType(); //09
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return getEType(); //08
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID:
-			return getFeatureID(); //017
 		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
 			return isID(); //020
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return getLowerBound(); //04
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return isMany(); //06
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //01
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return isOrdered(); //02
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return isRequired(); //07
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-			return isTransient(); //012
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return isUnique(); //03
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-			return isUnsettable(); //015
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return getUpperBound(); //05
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-			return isVolatile(); //011
 	}
-	return boost::any();
+	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
-
-void EAttributeImpl::eSet(int featureID, boost::any newValue)
+bool EAttributeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-		{
-			// BOOST CAST
-			bool _changeable = boost::any_cast<bool>(newValue);
-			setChangeable(_changeable); //010
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-		{
-			// BOOST CAST
-			std::string _defaultValueLiteral = boost::any_cast<std::string>(newValue);
-			setDefaultValueLiteral(_defaultValueLiteral); //013
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-		{
-			// BOOST CAST
-			bool _derived = boost::any_cast<bool>(newValue);
-			setDerived(_derived); //016
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
-			setEGenericType(_eGenericType); //09
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
-			setEType(_eType); //08
-			break;
-		}
+		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
+			return getEAttributeType() != nullptr; //021
+		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
+			return isID() != false; //020
+	}
+	return EStructuralFeatureImpl::internalEIsSet(featureID);
+}
+bool EAttributeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
 		{
 			// BOOST CAST
 			bool _iD = boost::any_cast<bool>(newValue);
 			setID(_iD); //020
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-		{
-			// BOOST CAST
-			int _lowerBound = boost::any_cast<int>(newValue);
-			setLowerBound(_lowerBound); //04
-			break;
-		}
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //01
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-		{
-			// BOOST CAST
-			bool _ordered = boost::any_cast<bool>(newValue);
-			setOrdered(_ordered); //02
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-		{
-			// BOOST CAST
-			bool _transient = boost::any_cast<bool>(newValue);
-			setTransient(_transient); //012
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-		{
-			// BOOST CAST
-			bool _unique = boost::any_cast<bool>(newValue);
-			setUnique(_unique); //03
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-		{
-			// BOOST CAST
-			bool _unsettable = boost::any_cast<bool>(newValue);
-			setUnsettable(_unsettable); //015
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-		{
-			// BOOST CAST
-			int _upperBound = boost::any_cast<int>(newValue);
-			setUpperBound(_upperBound); //05
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-		{
-			// BOOST CAST
-			bool _volatile = boost::any_cast<bool>(newValue);
-			setVolatile(_volatile); //011
-			break;
+			return true;
 		}
 	}
+
+	return EStructuralFeatureImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EAttributeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EAttributeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("iD");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setID(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	EStructuralFeatureImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EAttributeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	EStructuralFeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EAttributeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	EStructuralFeatureImpl::resolveReferences(featureID, references);
+}
+
+void EAttributeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EStructuralFeatureImpl::saveContent(saveHandler);
+	
+	ETypedElementImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void EAttributeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEAttribute_EAttribute_iD()) )
+		{
+			saveHandler->addAttribute("iD", this->isID());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

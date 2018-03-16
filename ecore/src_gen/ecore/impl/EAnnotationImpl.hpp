@@ -7,20 +7,6 @@
 #ifndef ECORE_EANNOTATIONEANNOTATIONIMPL_HPP
 #define ECORE_EANNOTATIONEANNOTATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../EAnnotation.hpp"
 
 #include "ecore/impl/EModelElementImpl.hpp"
-
-
 
 //*********************************
 namespace ecore 
@@ -46,6 +30,8 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EAnnotationImpl();
+			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr();
+			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference
 			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
@@ -80,11 +66,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> getContents() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > getDetails() const ;
+			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const ;
 			
 			/*!
 			 */
@@ -95,7 +81,7 @@ namespace ecore
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EObject> > getReferences() const ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const ;
 			
 							
 			
@@ -107,15 +93,29 @@ namespace ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EAnnotation> m_thisEAnnotationPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EANNOTATIONEANNOTATIONIMPL_HPP */
-

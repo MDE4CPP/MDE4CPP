@@ -1,12 +1,36 @@
 #include "ecore/impl/EPackageImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -17,6 +41,12 @@
 
 #include "ecore/EPackage.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -131,7 +161,8 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 
 std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EPackageImpl(*this));
+	std::shared_ptr<EPackageImpl> element(new EPackageImpl(*this));
+	element->setThisEPackagePtr(element);
 	return element;
 }
 
@@ -185,7 +216,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<ecore::EClassifier> > EPackageImpl::getEClassifiers() const
+std::shared_ptr<Bag<ecore::EClassifier>> EPackageImpl::getEClassifiers() const
 {
 
     return m_eClassifiers;
@@ -202,7 +233,7 @@ void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactor
     m_eFactoryInstance = _eFactoryInstance;
 }
 
-std::shared_ptr< Bag<ecore::EPackage> > EPackageImpl::getESubpackages() const
+std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 {
 
     return m_eSubpackages;
@@ -221,6 +252,15 @@ std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 //*********************************
 
 
+std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr()
+{
+	return m_thisEPackagePtr.lock();
+}
+void EPackageImpl::setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr)
+{
+	m_thisEPackagePtr = thisEPackagePtr;
+	setThisENamedElementPtr(thisEPackagePtr);
+}
 std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
 {
 	if(auto wp = m_eSuperPackage.lock())
@@ -237,8 +277,6 @@ boost::any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //120
 		case EcorePackage::EPACKAGE_EREFERENCE_ECLASSIFIERS:
 			return getEClassifiers(); //125
 		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
@@ -247,17 +285,33 @@ boost::any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return getESubpackages(); //126
 		case EcorePackage::EPACKAGE_EREFERENCE_ESUPERPACKAGE:
 			return getESuperPackage(); //127
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //121
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
 			return getNsPrefix(); //123
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
 			return getNsURI(); //122
 	}
-	return boost::any();
+	return ENamedElementImpl::internalEIsSet(featureID);
 }
-
-void EPackageImpl::eSet(int featureID, boost::any newValue)
+bool EPackageImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case EcorePackage::EPACKAGE_EREFERENCE_ECLASSIFIERS:
+			return getEClassifiers() != nullptr; //125
+		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
+			return getEFactoryInstance() != nullptr; //124
+		case EcorePackage::EPACKAGE_EREFERENCE_ESUBPACKAGES:
+			return getESubpackages() != nullptr; //126
+		case EcorePackage::EPACKAGE_EREFERENCE_ESUPERPACKAGE:
+			return getESuperPackage().lock() != nullptr; //127
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
+			return getNsPrefix() != ""; //123
+		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
+			return getNsURI() != ""; //122
+	}
+	return ENamedElementImpl::internalEIsSet(featureID);
+}
+bool EPackageImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -266,28 +320,214 @@ void EPackageImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = boost::any_cast<std::shared_ptr<ecore::EFactory>>(newValue);
 			setEFactoryInstance(_eFactoryInstance); //124
-			break;
-		}
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //121
-			break;
+			return true;
 		}
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
 		{
 			// BOOST CAST
 			std::string _nsPrefix = boost::any_cast<std::string>(newValue);
 			setNsPrefix(_nsPrefix); //123
-			break;
+			return true;
 		}
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
 		{
 			// BOOST CAST
 			std::string _nsURI = boost::any_cast<std::string>(newValue);
 			setNsURI(_nsURI); //122
-			break;
+			return true;
 		}
 	}
+
+	return ENamedElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EPackageImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EPackageImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("nsPrefix");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setNsPrefix(value);
+		}
+
+		iter = attr_list.find("nsURI");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setNsURI(value);
+		}
+		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eFactoryInstance");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eFactoryInstance")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ENamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("eClassifiers") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> eClassifiers = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE);
+			if (eClassifiers != nullptr)
+			{
+				loadHandler->handleChild(eClassifiers);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("eSubpackages") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "EPackage";
+			}
+			std::shared_ptr<ecore::EObject> eSubpackages = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EPACKAGE_EREFERENCE_ESUPERPACKAGE);
+			if (eSubpackages != nullptr)
+			{
+				loadHandler->handleChild(eSubpackages);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ENamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EPackageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>( references.front() );
+				setEFactoryInstance(_eFactoryInstance);
+			}
+			
+			return;
+		}
+	}
+	ENamedElementImpl::resolveReferences(featureID, references);
+}
+
+void EPackageImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void EPackageImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEPackage_EAttribute_nsPrefix()) )
+		{
+			saveHandler->addAttribute("nsPrefix", this->getNsPrefix());
+		}
+
+		if ( this->eIsSet(package->getEPackage_EAttribute_nsURI()) )
+		{
+			saveHandler->addAttribute("nsURI", this->getNsURI());
+		}
+
+		// Add references
+		saveHandler->addReference("eFactoryInstance", this->getEFactoryInstance());
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<EClass> metaClass = this->eClass();
+		// Save 'eClassifiers'
+		std::shared_ptr<Bag<ecore::EClassifier>> list_eClassifiers = this->getEClassifiers();
+		for (std::shared_ptr<ecore::EClassifier> eClassifiers : *list_eClassifiers) 
+		{
+			saveHandler->addReference(eClassifiers, "eClassifiers", eClassifiers->eClass() != package->getEClassifier_EClass());
+		}
+
+		// Save 'eSubpackages'
+		std::shared_ptr<Bag<ecore::EPackage>> list_eSubpackages = this->getESubpackages();
+		for (std::shared_ptr<ecore::EPackage> eSubpackages : *list_eSubpackages) 
+		{
+			saveHandler->addReference(eSubpackages, "eSubpackages", eSubpackages->eClass() != package->getEPackage_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

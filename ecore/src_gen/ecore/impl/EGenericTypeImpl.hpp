@@ -7,20 +7,6 @@
 #ifndef ECORE_EGENERICTYPEEGENERICTYPEIMPL_HPP
 #define ECORE_EGENERICTYPEEGENERICTYPEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../EGenericType.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
-
-
 
 //*********************************
 namespace ecore 
@@ -46,6 +30,8 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EGenericTypeImpl();
+			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr();
+			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);
 
 
 
@@ -90,7 +76,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EGenericType> > getETypeArguments() const ;
+			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const ;
 			
 			/*!
 			 */
@@ -116,15 +102,29 @@ namespace ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EGenericType> m_thisEGenericTypePtr;
 	};
 }
 #endif /* end of include guard: ECORE_EGENERICTYPEEGENERICTYPEIMPL_HPP */
-

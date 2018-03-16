@@ -16,8 +16,14 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -27,6 +33,8 @@ SET(SOURCE_FILES
 	impl/EcoreFactoryImpl.cpp
 	EcoreFactory.cpp
 	impl/EcorePackageImpl.cpp
+	impl/EcorePackageImpl_Creation.cpp
+	impl/EcorePackageImpl_Initialization.cpp
 	EcorePackage.cpp
 	impl/EcorePluginImpl.cpp
 	EcorePlugin.cpp
@@ -74,6 +82,10 @@ endif(APPLE)
 
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	ELSE()
+	ENDIF()
+ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	ELSE()
 	ENDIF()

@@ -7,20 +7,6 @@
 #ifndef ECORE_EENUMLITERALEENUMLITERALIMPL_HPP
 #define ECORE_EENUMLITERALEENUMLITERALIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../EEnumLiteral.hpp"
 
 #include "ecore/impl/ENamedElementImpl.hpp"
-
-
 
 //*********************************
 namespace ecore 
@@ -46,6 +30,8 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EEnumLiteralImpl();
+			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr();
+			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
 			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum);
@@ -108,15 +94,29 @@ namespace ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EEnumLiteral> m_thisEEnumLiteralPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EENUMLITERALEENUMLITERALIMPL_HPP */
-

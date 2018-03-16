@@ -7,31 +7,34 @@
 #ifndef ECORE_ETYPEPARAMETER_HPP
 #define ECORE_ETYPEPARAMETER_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
-#include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
 
 //Forward Declaration for used types
 namespace ecore 
@@ -89,7 +92,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEBounds() const = 0;
+			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const = 0;
 			
 			
 
@@ -104,7 +107,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<ecore::EGenericType> > m_eBounds;
+			std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 			
 
 		public:
@@ -114,8 +117,16 @@ namespace ecore
 			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: ECORE_ETYPEPARAMETER_HPP */
-

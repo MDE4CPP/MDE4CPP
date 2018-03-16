@@ -1,12 +1,36 @@
 #include "ecore/impl/EReferenceImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EAttribute.hpp"
@@ -21,6 +45,12 @@
 
 #include "ecore/EStructuralFeature.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -106,7 +136,7 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-	std::shared_ptr< Bag<ecore::EAttribute> > _eKeys = obj.getEKeys();
+	std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = obj.getEKeys();
 	m_eKeys.reset(new Bag<ecore::EAttribute>(*(obj.getEKeys().get())));
 
 	m_eOpposite  = obj.getEOpposite();
@@ -138,7 +168,8 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 
 std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EReferenceImpl(*this));
+	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(*this));
+	element->setThisEReferencePtr(element);
 	return element;
 }
 
@@ -184,7 +215,7 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<ecore::EAttribute> > EReferenceImpl::getEKeys() const
+std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 {
 
     return m_eKeys;
@@ -213,6 +244,15 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //*********************************
 
 
+std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr()
+{
+	return m_thisEReferencePtr.lock();
+}
+void EReferenceImpl::setThisEReferencePtr(std::weak_ptr<EReference> thisEReferencePtr)
+{
+	m_thisEReferencePtr = thisEReferencePtr;
+	setThisEStructuralFeaturePtr(thisEReferencePtr);
+}
 std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
 {
 	if(auto wp = m_eContainingClass.lock())
@@ -229,177 +269,230 @@ boost::any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-			return isChangeable(); //1410
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
 			return isContainer(); //1421
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CONTAINERCLASS:
-			return getContainerClass(); //1418
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
 			return isContainment(); //1420
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue(); //1414
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-			return getDefaultValueLiteral(); //1413
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-			return isDerived(); //1416
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //140
-		case EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass(); //1419
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return getEGenericType(); //149
 		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
 			return getEKeys(); //1425
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
 			return getEOpposite(); //1423
 		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
 			return getEReferenceType(); //1424
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return getEType(); //148
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID:
-			return getFeatureID(); //1417
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return getLowerBound(); //144
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return isMany(); //146
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //141
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return isOrdered(); //142
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return isRequired(); //147
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
 			return isResolveProxies(); //1422
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-			return isTransient(); //1412
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return isUnique(); //143
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-			return isUnsettable(); //1415
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return getUpperBound(); //145
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-			return isVolatile(); //1411
 	}
-	return boost::any();
+	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
-
-void EReferenceImpl::eSet(int featureID, boost::any newValue)
+bool EReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-		{
-			// BOOST CAST
-			bool _changeable = boost::any_cast<bool>(newValue);
-			setChangeable(_changeable); //1410
-			break;
-		}
+		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
+			return isContainer() != false; //1421
+		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
+			return isContainment() != false; //1420
+		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
+			return getEKeys() != nullptr; //1425
+		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
+			return getEOpposite() != nullptr; //1423
+		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
+			return getEReferenceType() != nullptr; //1424
+		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
+			return isResolveProxies() != true; //1422
+	}
+	return EStructuralFeatureImpl::internalEIsSet(featureID);
+}
+bool EReferenceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
 		{
 			// BOOST CAST
 			bool _containment = boost::any_cast<bool>(newValue);
 			setContainment(_containment); //1420
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-		{
-			// BOOST CAST
-			std::string _defaultValueLiteral = boost::any_cast<std::string>(newValue);
-			setDefaultValueLiteral(_defaultValueLiteral); //1413
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-		{
-			// BOOST CAST
-			bool _derived = boost::any_cast<bool>(newValue);
-			setDerived(_derived); //1416
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
-			setEGenericType(_eGenericType); //149
-			break;
+			return true;
 		}
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EReference> _eOpposite = boost::any_cast<std::shared_ptr<ecore::EReference>>(newValue);
 			setEOpposite(_eOpposite); //1423
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
-			setEType(_eType); //148
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-		{
-			// BOOST CAST
-			int _lowerBound = boost::any_cast<int>(newValue);
-			setLowerBound(_lowerBound); //144
-			break;
-		}
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //141
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-		{
-			// BOOST CAST
-			bool _ordered = boost::any_cast<bool>(newValue);
-			setOrdered(_ordered); //142
-			break;
+			return true;
 		}
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
 			bool _resolveProxies = boost::any_cast<bool>(newValue);
 			setResolveProxies(_resolveProxies); //1422
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-		{
-			// BOOST CAST
-			bool _transient = boost::any_cast<bool>(newValue);
-			setTransient(_transient); //1412
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-		{
-			// BOOST CAST
-			bool _unique = boost::any_cast<bool>(newValue);
-			setUnique(_unique); //143
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-		{
-			// BOOST CAST
-			bool _unsettable = boost::any_cast<bool>(newValue);
-			setUnsettable(_unsettable); //1415
-			break;
-		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-		{
-			// BOOST CAST
-			int _upperBound = boost::any_cast<int>(newValue);
-			setUpperBound(_upperBound); //145
-			break;
-		}
-		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-		{
-			// BOOST CAST
-			bool _volatile = boost::any_cast<bool>(newValue);
-			setVolatile(_volatile); //1411
-			break;
+			return true;
 		}
 	}
+
+	return EStructuralFeatureImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EReferenceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("containment");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setContainment(value);
+		}
+
+		iter = attr_list.find("resolveProxies");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setResolveProxies(value);
+		}
+		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eKeys");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eKeys")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eOpposite");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eOpposite")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	EStructuralFeatureImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	EStructuralFeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
+		{
+			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ecore::EAttribute> _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
+				if (_r != nullptr)
+				{
+					_eKeys->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>( references.front() );
+				setEOpposite(_eOpposite);
+			}
+			
+			return;
+		}
+	}
+	EStructuralFeatureImpl::resolveReferences(featureID, references);
+}
+
+void EReferenceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EStructuralFeatureImpl::saveContent(saveHandler);
+	
+	ETypedElementImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void EReferenceImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEReference_EAttribute_containment()) )
+		{
+			saveHandler->addAttribute("containment", this->isContainment());
+		}
+
+		if ( this->eIsSet(package->getEReference_EAttribute_resolveProxies()) )
+		{
+			saveHandler->addAttribute("resolveProxies", this->isResolveProxies());
+		}
+
+		// Add references
+		std::shared_ptr<Bag<ecore::EAttribute>> eKeys_list = this->getEKeys();
+		for (std::shared_ptr<ecore::EAttribute > object : *eKeys_list)
+		{ 
+			saveHandler->addReferences("eKeys", object);
+		}
+		saveHandler->addReference("eOpposite", this->getEOpposite());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
