@@ -1,12 +1,39 @@
 #include "uml/impl/InteractionOperandImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Constraint.hpp"
@@ -41,6 +68,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -144,17 +177,17 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
 
 	m_enclosingOperand  = obj.getEnclosingOperand();
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -256,7 +289,8 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 
 std::shared_ptr<ecore::EObject>  InteractionOperandImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new InteractionOperandImpl(*this));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(*this));
+	element->setThisInteractionOperandPtr(element);
 	return element;
 }
 
@@ -287,7 +321,7 @@ bool InteractionOperandImpl::guard_directly_prior(boost::any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement > > InteractionOperandImpl::getFragment() const
+std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionOperandImpl::getFragment() const
 {
 
     return m_fragment;
@@ -307,7 +341,7 @@ void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement> > InteractionOperandImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> InteractionOperandImpl::getMember() const
 {
 	return m_member;
 }
@@ -315,11 +349,11 @@ std::weak_ptr<uml::Namespace > InteractionOperandImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > InteractionOperandImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> InteractionOperandImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > InteractionOperandImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> InteractionOperandImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -329,6 +363,16 @@ std::weak_ptr<uml::Element > InteractionOperandImpl::getOwner() const
 }
 
 
+std::shared_ptr<InteractionOperand> InteractionOperandImpl::getThisInteractionOperandPtr()
+{
+	return m_thisInteractionOperandPtr.lock();
+}
+void InteractionOperandImpl::setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr)
+{
+	m_thisInteractionOperandPtr = thisInteractionOperandPtr;
+	setThisInteractionFragmentPtr(thisInteractionOperandPtr);
+	setThisNamespacePtr(thisInteractionOperandPtr);
+}
 std::shared_ptr<ecore::EObject> InteractionOperandImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -360,99 +404,189 @@ boost::any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2184
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //21810
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2180
-		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return getElementImport(); //21811
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //21812
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //21811
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
 			return getFragment(); //21820
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //21813
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
 			return getGuard(); //21821
-		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return getImportedMember(); //21814
-		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return getMember(); //21815
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2185
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2186
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2187
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2181
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2182
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return getOwnedMember(); //21813
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return getOwnedRule(); //21810
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2183
-		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return getPackageImport(); //21812
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2188
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2189
 	}
-	return boost::any();
+	boost::any result;
+	result = InteractionFragmentImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = NamespaceImpl::internalEIsSet(featureID);
+	return result;
 }
-
-void InteractionOperandImpl::eSet(int featureID, boost::any newValue)
+bool InteractionOperandImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
-			setEnclosingInteraction(_enclosingInteraction); //21812
-			break;
-		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
-			setEnclosingOperand(_enclosingOperand); //21811
-			break;
-		}
+		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
+			return getFragment() != nullptr; //21820
+		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
+			return getGuard() != nullptr; //21821
+	}
+	bool result = false;
+	result = InteractionFragmentImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NamespaceImpl::internalEIsSet(featureID);
+	return result;
+}
+bool InteractionOperandImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionConstraint> _guard = boost::any_cast<std::shared_ptr<uml::InteractionConstraint>>(newValue);
 			setGuard(_guard); //21821
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2185
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2186
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2189
-			break;
+			return true;
 		}
 	}
+
+	bool result = false;
+	result = InteractionFragmentImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NamespaceImpl::eSet(featureID, newValue);
+	return result;
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InteractionOperandImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void InteractionOperandImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+	NamespaceImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("fragment") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND);
+			if (fragment != nullptr)
+			{
+				loadHandler->handleChild(fragment);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("guard") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InteractionConstraint";
+			}
+			std::shared_ptr<uml::InteractionConstraint> guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(modelFactory->create(typeName));
+			if (guard != nullptr)
+			{
+				this->setGuard(guard);
+				loadHandler->handleChild(guard);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	NamespaceImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void InteractionOperandImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+	NamespaceImpl::resolveReferences(featureID, references);
+}
+
+void InteractionOperandImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'fragment'
+		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		{
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_EClass());
+		}
+
+		// Save 'guard'
+		std::shared_ptr<uml::InteractionConstraint > guard = this->getGuard();
+		if (guard != nullptr)
+		{
+			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,12 +1,38 @@
 #include "uml/impl/ClassifierTemplateParameterImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Classifier.hpp"
 
 #include "uml/Comment.hpp"
@@ -21,6 +47,12 @@
 
 #include "uml/TemplateSignature.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -87,7 +119,7 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Classifier> > _constrainingClassifier = obj.getConstrainingClassifier();
+	std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = obj.getConstrainingClassifier();
 	m_constrainingClassifier.reset(new Bag<uml::Classifier>(*(obj.getConstrainingClassifier().get())));
 
 	m_default  = obj.getDefault();
@@ -136,7 +168,8 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ClassifierTemplateParameterImpl(*this));
+	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(*this));
+	element->setThisClassifierTemplateParameterPtr(element);
 	return element;
 }
 
@@ -200,7 +233,7 @@ bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::Classifier> > ClassifierTemplateParameterImpl::getConstrainingClassifier() const
+std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
 
     return m_constrainingClassifier;
@@ -210,7 +243,7 @@ std::shared_ptr< Bag<uml::Classifier> > ClassifierTemplateParameterImpl::getCons
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > ClassifierTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ClassifierTemplateParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -220,6 +253,15 @@ std::weak_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
 }
 
 
+std::shared_ptr<ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr()
+{
+	return m_thisClassifierTemplateParameterPtr.lock();
+}
+void ClassifierTemplateParameterImpl::setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr)
+{
+	m_thisClassifierTemplateParameterPtr = thisClassifierTemplateParameterPtr;
+	setThisTemplateParameterPtr(thisClassifierTemplateParameterPtr);
+}
 std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -245,29 +287,21 @@ boost::any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bo
 			return getAllowSubstitutable(); //1049
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
 			return getConstrainingClassifier(); //10410
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-			return getDefault(); //1044
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //1040
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //1041
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-			return getOwnedDefault(); //1045
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //1042
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-			return getOwnedParameteredElement(); //1048
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //1043
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-			return getParameteredElement(); //1046
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-			return getSignature(); //1047
 	}
-	return boost::any();
+	return TemplateParameterImpl::internalEIsSet(featureID);
 }
-
-void ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
+			return getAllowSubstitutable() != true; //1049
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
+			return getConstrainingClassifier() != nullptr; //10410
+	}
+	return TemplateParameterImpl::internalEIsSet(featureID);
+}
+bool ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -276,42 +310,137 @@ void ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			bool _allowSubstitutable = boost::any_cast<bool>(newValue);
 			setAllowSubstitutable(_allowSubstitutable); //1049
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _default = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setDefault(_default); //1044
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedDefault = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setOwnedDefault(_ownedDefault); //1045
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setOwnedParameteredElement(_ownedParameteredElement); //1048
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _parameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setParameteredElement(_parameteredElement); //1046
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
-			setSignature(_signature); //1047
-			break;
+			return true;
 		}
 	}
+
+	return TemplateParameterImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ClassifierTemplateParameterImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ClassifierTemplateParameterImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("allowSubstitutable");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setAllowSubstitutable(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("constrainingClassifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("constrainingClassifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	TemplateParameterImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClassifierTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	TemplateParameterImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = getConstrainingClassifier();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_constrainingClassifier->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	TemplateParameterImpl::resolveReferences(featureID, references);
+}
+
+void ClassifierTemplateParameterImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TemplateParameterImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getClassifierTemplateParameter_EAttribute_allowSubstitutable()) )
+		{
+			saveHandler->addAttribute("allowSubstitutable", this->getAllowSubstitutable());
+		}
+
+		// Add references
+		std::shared_ptr<Bag<uml::Classifier>> constrainingClassifier_list = this->getConstrainingClassifier();
+		for (std::shared_ptr<uml::Classifier > object : *constrainingClassifier_list)
+		{ 
+			saveHandler->addReferences("constrainingClassifier", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

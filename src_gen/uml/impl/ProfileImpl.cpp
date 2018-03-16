@@ -1,12 +1,39 @@
 #include "uml/impl/ProfileImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Class.hpp"
 
 #include "uml/Classifier.hpp"
@@ -59,6 +86,12 @@
 
 #include "uml/Type.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -192,10 +225,10 @@ ProfileImpl::ProfileImpl(const ProfileImpl & obj):ProfileImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -352,7 +385,8 @@ ProfileImpl::ProfileImpl(const ProfileImpl & obj):ProfileImpl()
 
 std::shared_ptr<ecore::EObject>  ProfileImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ProfileImpl(*this));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(*this));
+	element->setThisProfilePtr(element);
 	return element;
 }
 
@@ -437,14 +471,14 @@ bool ProfileImpl::references_same_metamodel(boost::any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ > > ProfileImpl::getMetaclassReference() const
+std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
 {
 
     return m_metaclassReference;
 }
 
 
-std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ > > ProfileImpl::getMetamodelReference() const
+std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
 {
 
     return m_metamodelReference;
@@ -454,7 +488,7 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement> > ProfileImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ProfileImpl::getMember() const
 {
 	return m_member;
 }
@@ -462,11 +496,11 @@ std::weak_ptr<uml::Namespace > ProfileImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ProfileImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ProfileImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProfileImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProfileImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -476,6 +510,15 @@ std::weak_ptr<uml::Element > ProfileImpl::getOwner() const
 }
 
 
+std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr()
+{
+	return m_thisProfilePtr.lock();
+}
+void ProfileImpl::setThisProfilePtr(std::weak_ptr<Profile> thisProfilePtr)
+{
+	m_thisProfilePtr = thisProfilePtr;
+	setThisPackagePtr(thisProfilePtr);
+}
 std::shared_ptr<ecore::EObject> ProfileImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -512,138 +555,177 @@ boost::any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
-			return getURI(); //1221
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //124
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //120
-		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return getElementImport(); //1211
-		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return getImportedMember(); //1214
-		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return getMember(); //1215
 		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
 			return getMetaclassReference(); //1229
 		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
 			return getMetamodelReference(); //1230
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //125
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //126
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //127
-		case UmlPackage::PACKAGE_EREFERENCE_NESTEDPACKAGE:
-			return getNestedPackage(); //1222
-		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-			return getNestingPackage(); //1223
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //121
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //122
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return getOwnedMember(); //1213
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return getOwnedRule(); //1210
-		case UmlPackage::PACKAGE_EREFERENCE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype(); //1224
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //125
-		case UmlPackage::PACKAGE_EREFERENCE_OWNEDTYPE:
-			return getOwnedType(); //1225
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //123
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage(); //1212
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //124
-		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return getPackageImport(); //1212
-		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEMERGE:
-			return getPackageMerge(); //1226
-		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEDELEMENT:
-			return getPackagedElement(); //1227
-		case UmlPackage::PACKAGE_EREFERENCE_PROFILEAPPLICATION:
-			return getProfileApplication(); //1228
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //128
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_TEMPLATEBINDING:
-			return getTemplateBinding(); //124
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //125
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //129
 	}
-	return boost::any();
+	return PackageImpl::internalEIsSet(featureID);
 }
-
-void ProfileImpl::eSet(int featureID, boost::any newValue)
+bool ProfileImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
+		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
+			return getMetaclassReference() != nullptr; //1229
+		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
+			return getMetamodelReference() != nullptr; //1230
+	}
+	return PackageImpl::internalEIsSet(featureID);
+}
+bool ProfileImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PackageImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ProfileImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ProfileImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("metaclassReference");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::string _URI = boost::any_cast<std::string>(newValue);
-			setURI(_URI); //1221
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metaclassReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+
+		iter = attr_list.find("metamodelReference");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //125
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //126
-			break;
-		}
-		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Package> _nestingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
-			setNestingPackage(_nestingPackage); //1223
-			break;
-		}
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
-			setOwnedTemplateSignature(_ownedTemplateSignature); //125
-			break;
-		}
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
-			setOwningPackage(_owningPackage); //1212
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setOwningTemplateParameter(_owningTemplateParameter); //124
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setTemplateParameter(_templateParameter); //125
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //129
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metamodelReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PackageImpl::loadAttributes(loadHandler, attr_list);
 }
+
+void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	PackageImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
+		{
+			std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ElementImport> _r = std::dynamic_pointer_cast<uml::ElementImport>(ref);
+				if (_r != nullptr)
+				{
+					_metaclassReference->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
+		{
+			std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::PackageImport> _r = std::dynamic_pointer_cast<uml::PackageImport>(ref);
+				if (_r != nullptr)
+				{
+					_metamodelReference->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	PackageImpl::resolveReferences(featureID, references);
+}
+
+void ProfileImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PackageImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void ProfileImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::ElementImport>> metaclassReference_list = this->getMetaclassReference();
+		for (std::shared_ptr<uml::ElementImport > object : *metaclassReference_list)
+		{ 
+			saveHandler->addReferences("metaclassReference", object);
+		}
+		std::shared_ptr<Bag<uml::PackageImport>> metamodelReference_list = this->getMetamodelReference();
+		for (std::shared_ptr<uml::PackageImport > object : *metamodelReference_list)
+		{ 
+			saveHandler->addReferences("metamodelReference", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,12 +1,39 @@
 #include "uml/impl/TemplateBindingImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
@@ -21,6 +48,12 @@
 
 #include "uml/TemplateableElement.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -107,7 +140,7 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
@@ -156,7 +189,8 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 
 std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TemplateBindingImpl(*this));
+	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(*this));
+	element->setThisTemplateBindingPtr(element);
 	return element;
 }
 
@@ -197,7 +231,7 @@ void TemplateBindingImpl::setBoundElement(std::shared_ptr<uml::TemplateableEleme
     m_boundElement = _boundElement;
 }
 
-std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element > > TemplateBindingImpl::getParameterSubstitution() const
+std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> TemplateBindingImpl::getParameterSubstitution() const
 {
 
     return m_parameterSubstitution;
@@ -217,7 +251,7 @@ void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TemplateBindingImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -225,20 +259,29 @@ std::weak_ptr<uml::Element > TemplateBindingImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> TemplateBindingImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr()
+{
+	return m_thisTemplateBindingPtr.lock();
+}
+void TemplateBindingImpl::setThisTemplateBindingPtr(std::weak_ptr<TemplateBinding> thisTemplateBindingPtr)
+{
+	m_thisTemplateBindingPtr = thisTemplateBindingPtr;
+	setThisDirectedRelationshipPtr(thisTemplateBindingPtr);
+}
 std::shared_ptr<ecore::EObject> TemplateBindingImpl::eContainer() const
 {
 	if(auto wp = m_boundElement.lock())
@@ -262,29 +305,27 @@ boost::any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
 			return getBoundElement(); //199
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //190
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //191
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //192
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //193
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
 			return getParameterSubstitution(); //197
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return getRelatedElement(); //194
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 			return getSignature(); //198
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource(); //195
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget(); //196
 	}
-	return boost::any();
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-
-void TemplateBindingImpl::eSet(int featureID, boost::any newValue)
+bool TemplateBindingImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+			return getBoundElement().lock() != nullptr; //199
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
+			return getParameterSubstitution() != nullptr; //197
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+			return getSignature() != nullptr; //198
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+bool TemplateBindingImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -293,14 +334,168 @@ void TemplateBindingImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _boundElement = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
 			setBoundElement(_boundElement); //199
-			break;
+			return true;
 		}
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
 			setSignature(_signature); //198
-			break;
+			return true;
 		}
 	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TemplateBindingImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TemplateBindingImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("signature");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("signature")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("parameterSubstitution") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "TemplateParameterSubstitution";
+			}
+			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING);
+			if (parameterSubstitution != nullptr)
+			{
+				loadHandler->handleChild(parameterSubstitution);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::TemplateableElement> _boundElement = std::dynamic_pointer_cast<uml::TemplateableElement>( references.front() );
+				setBoundElement(_boundElement);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>( references.front() );
+				setSignature(_signature);
+			}
+			
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+}
+
+void TemplateBindingImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'parameterSubstitution'
+		for (std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitution : *this->getParameterSubstitution()) 
+		{
+			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("signature", this->getSignature());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

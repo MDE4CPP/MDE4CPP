@@ -1,12 +1,38 @@
 #include "uml/impl/OperationTemplateParameterImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -19,6 +45,12 @@
 
 #include "uml/TemplateSignature.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -125,7 +157,8 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 
 std::shared_ptr<ecore::EObject>  OperationTemplateParameterImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OperationTemplateParameterImpl(*this));
+	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(*this));
+	element->setThisOperationTemplateParameterPtr(element);
 	return element;
 }
 
@@ -154,7 +187,7 @@ bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnost
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > OperationTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> OperationTemplateParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -164,6 +197,15 @@ std::weak_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
 }
 
 
+std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr()
+{
+	return m_thisOperationTemplateParameterPtr.lock();
+}
+void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::weak_ptr<OperationTemplateParameter> thisOperationTemplateParameterPtr)
+{
+	m_thisOperationTemplateParameterPtr = thisOperationTemplateParameterPtr;
+	setThisTemplateParameterPtr(thisOperationTemplateParameterPtr);
+}
 std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -185,66 +227,92 @@ boost::any OperationTemplateParameterImpl::eGet(int featureID, bool resolve, boo
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-			return getDefault(); //724
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //720
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //721
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-			return getOwnedDefault(); //725
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //722
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-			return getOwnedParameteredElement(); //728
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //723
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-			return getParameteredElement(); //726
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-			return getSignature(); //727
 	}
-	return boost::any();
+	return TemplateParameterImpl::internalEIsSet(featureID);
 }
-
-void OperationTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _default = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setDefault(_default); //724
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedDefault = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setOwnedDefault(_ownedDefault); //725
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setOwnedParameteredElement(_ownedParameteredElement); //728
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _parameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
-			setParameteredElement(_parameteredElement); //726
-			break;
-		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
-			setSignature(_signature); //727
-			break;
-		}
+	}
+	return TemplateParameterImpl::internalEIsSet(featureID);
+}
+bool OperationTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return TemplateParameterImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OperationTemplateParameterImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OperationTemplateParameterImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	TemplateParameterImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OperationTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	TemplateParameterImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OperationTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	TemplateParameterImpl::resolveReferences(featureID, references);
+}
+
+void OperationTemplateParameterImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TemplateParameterImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

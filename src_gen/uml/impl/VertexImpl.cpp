@@ -1,12 +1,38 @@
 #include "uml/impl/VertexImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -29,6 +55,12 @@
 
 #include "uml/Transition.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -119,17 +151,17 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_container  = obj.getContainer();
 
-	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
@@ -165,7 +197,8 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 
 std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new VertexImpl(*this));
+	std::shared_ptr<VertexImpl> element(new VertexImpl(*this));
+	element->setThisVertexPtr(element);
 	return element;
 }
 
@@ -224,14 +257,14 @@ void VertexImpl::setContainer(std::shared_ptr<uml::Region> _container)
     m_container = _container;
 }
 
-std::shared_ptr< Bag<uml::Transition> > VertexImpl::getIncoming() const
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 {
 
     return m_incoming;
 }
 
 
-std::shared_ptr< Bag<uml::Transition> > VertexImpl::getOutgoing() const
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 {
 
     return m_outgoing;
@@ -245,7 +278,7 @@ std::weak_ptr<uml::Namespace > VertexImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > VertexImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> VertexImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -255,6 +288,15 @@ std::weak_ptr<uml::Element > VertexImpl::getOwner() const
 }
 
 
+std::shared_ptr<Vertex> VertexImpl::getThisVertexPtr()
+{
+	return m_thisVertexPtr.lock();
+}
+void VertexImpl::setThisVertexPtr(std::weak_ptr<Vertex> thisVertexPtr)
+{
+	m_thisVertexPtr = thisVertexPtr;
+	setThisNamedElementPtr(thisVertexPtr);
+}
 std::shared_ptr<ecore::EObject> VertexImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -281,37 +323,29 @@ boost::any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //614
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 			return getContainer(); //6110
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //610
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
 			return getIncoming(); //6111
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //615
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //616
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //617
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
 			return getOutgoing(); //6112
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //611
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //612
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //613
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //618
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //619
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
-
-void VertexImpl::eSet(int featureID, boost::any newValue)
+bool VertexImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+			return getContainer().lock() != nullptr; //6110
+		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
+			return getIncoming() != nullptr; //6111
+		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
+			return getOutgoing() != nullptr; //6112
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool VertexImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -320,28 +354,94 @@ void VertexImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
 			setContainer(_container); //6110
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //615
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //616
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //619
-			break;
+			return true;
 		}
 	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void VertexImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void VertexImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void VertexImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void VertexImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>( references.front() );
+				setContainer(_container);
+			}
+			
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void VertexImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void VertexImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

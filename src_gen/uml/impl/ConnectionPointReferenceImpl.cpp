@@ -1,12 +1,39 @@
 #include "uml/impl/ConnectionPointReferenceImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -29,6 +56,12 @@
 
 #include "uml/Vertex.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -130,23 +163,23 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_container  = obj.getContainer();
 
-	std::shared_ptr< Bag<uml::Pseudostate> > _entry = obj.getEntry();
+	std::shared_ptr<Bag<uml::Pseudostate>> _entry = obj.getEntry();
 	m_entry.reset(new Bag<uml::Pseudostate>(*(obj.getEntry().get())));
 
-	std::shared_ptr< Bag<uml::Pseudostate> > _exit = obj.getExit();
+	std::shared_ptr<Bag<uml::Pseudostate>> _exit = obj.getExit();
 	m_exit.reset(new Bag<uml::Pseudostate>(*(obj.getExit().get())));
 
-	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
@@ -184,7 +217,8 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 
 std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ConnectionPointReferenceImpl(*this));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(*this));
+	element->setThisConnectionPointReferencePtr(element);
 	return element;
 }
 
@@ -215,14 +249,14 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(boost::any diagnostics,std:
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::Pseudostate> > ConnectionPointReferenceImpl::getEntry() const
+std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
 {
 
     return m_entry;
 }
 
 
-std::shared_ptr< Bag<uml::Pseudostate> > ConnectionPointReferenceImpl::getExit() const
+std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
 {
 
     return m_exit;
@@ -246,7 +280,7 @@ std::weak_ptr<uml::Namespace > ConnectionPointReferenceImpl::getNamespace() cons
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ConnectionPointReferenceImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ConnectionPointReferenceImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -256,6 +290,15 @@ std::weak_ptr<uml::Element > ConnectionPointReferenceImpl::getOwner() const
 }
 
 
+std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr()
+{
+	return m_thisConnectionPointReferencePtr.lock();
+}
+void ConnectionPointReferenceImpl::setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr)
+{
+	m_thisConnectionPointReferencePtr = thisConnectionPointReferencePtr;
+	setThisVertexPtr(thisConnectionPointReferencePtr);
+}
 std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -287,80 +330,194 @@ boost::any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool 
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //644
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return getContainer(); //6410
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //640
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
 			return getEntry(); //6413
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
 			return getExit(); //6414
-		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return getIncoming(); //6411
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //645
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //646
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //647
-		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return getOutgoing(); //6412
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //641
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //642
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //643
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //648
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
 			return getState(); //6415
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //649
 	}
-	return boost::any();
+	return VertexImpl::internalEIsSet(featureID);
 }
-
-void ConnectionPointReferenceImpl::eSet(int featureID, boost::any newValue)
+bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
-			setContainer(_container); //6410
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //645
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //646
-			break;
-		}
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
+			return getEntry() != nullptr; //6413
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
+			return getExit() != nullptr; //6414
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+			return getState().lock() != nullptr; //6415
+	}
+	return VertexImpl::internalEIsSet(featureID);
+}
+bool ConnectionPointReferenceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
 			setState(_state); //6415
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //649
-			break;
+			return true;
 		}
 	}
+
+	return VertexImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ConnectionPointReferenceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ConnectionPointReferenceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("entry");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("entry")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("exit");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("exit")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	VertexImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ConnectionPointReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	VertexImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
+		{
+			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Pseudostate> _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				if (_r != nullptr)
+				{
+					_entry->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
+		{
+			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Pseudostate> _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				if (_r != nullptr)
+				{
+					_exit->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>( references.front() );
+				setState(_state);
+			}
+			
+			return;
+		}
+	}
+	VertexImpl::resolveReferences(featureID, references);
+}
+
+void ConnectionPointReferenceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::Pseudostate>> entry_list = this->getEntry();
+		for (std::shared_ptr<uml::Pseudostate > object : *entry_list)
+		{ 
+			saveHandler->addReferences("entry", object);
+		}
+		std::shared_ptr<Bag<uml::Pseudostate>> exit_list = this->getExit();
+		for (std::shared_ptr<uml::Pseudostate > object : *exit_list)
+		{ 
+			saveHandler->addReferences("exit", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,12 +1,37 @@
 #include "uml/impl/TemplateableElementImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -19,6 +44,12 @@
 
 #include "uml/TemplateSignature.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -136,7 +167,8 @@ TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl &
 
 std::shared_ptr<ecore::EObject>  TemplateableElementImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TemplateableElementImpl(*this));
+	std::shared_ptr<TemplateableElementImpl> element(new TemplateableElementImpl(*this));
+	element->setThisTemplateableElementPtr(element);
 	return element;
 }
 
@@ -177,7 +209,7 @@ void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::Tem
     m_ownedTemplateSignature = _ownedTemplateSignature;
 }
 
-std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > > TemplateableElementImpl::getTemplateBinding() const
+std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementImpl::getTemplateBinding() const
 {
 
     return m_templateBinding;
@@ -187,12 +219,21 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > > TemplateableElemen
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > TemplateableElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TemplateableElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
 
 
+std::shared_ptr<TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr()
+{
+	return m_thisTemplateableElementPtr.lock();
+}
+void TemplateableElementImpl::setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr)
+{
+	m_thisTemplateableElementPtr = thisTemplateableElementPtr;
+	setThisElementPtr(thisTemplateableElementPtr);
+}
 std::shared_ptr<ecore::EObject> TemplateableElementImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -209,23 +250,25 @@ boost::any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //180
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //181
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //182
 		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
 			return getOwnedTemplateSignature(); //185
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //183
 		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_TEMPLATEBINDING:
 			return getTemplateBinding(); //184
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
-
-void TemplateableElementImpl::eSet(int featureID, boost::any newValue)
+bool TemplateableElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
+			return getOwnedTemplateSignature() != nullptr; //185
+		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_TEMPLATEBINDING:
+			return getTemplateBinding() != nullptr; //184
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool TemplateableElementImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -234,7 +277,129 @@ void TemplateableElementImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
 			setOwnedTemplateSignature(_ownedTemplateSignature); //185
-			break;
+			return true;
 		}
 	}
+
+	return ElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TemplateableElementImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TemplateableElementImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("ownedTemplateSignature") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "TemplateSignature";
+			}
+			std::shared_ptr<ecore::EObject> ownedTemplateSignature = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE);
+			if (ownedTemplateSignature != nullptr)
+			{
+				loadHandler->handleChild(ownedTemplateSignature);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("templateBinding") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "TemplateBinding";
+			}
+			std::shared_ptr<ecore::EObject> templateBinding = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT);
+			if (templateBinding != nullptr)
+			{
+				loadHandler->handleChild(templateBinding);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TemplateableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void TemplateableElementImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'ownedTemplateSignature'
+		std::shared_ptr<uml::TemplateSignature > ownedTemplateSignature = this->getOwnedTemplateSignature();
+		if (ownedTemplateSignature != nullptr)
+		{
+			saveHandler->addReference(ownedTemplateSignature, "ownedTemplateSignature", ownedTemplateSignature->eClass() != package->getTemplateSignature_EClass());
+		}
+
+		// Save 'templateBinding'
+		for (std::shared_ptr<uml::TemplateBinding> templateBinding : *this->getTemplateBinding()) 
+		{
+			saveHandler->addReference(templateBinding, "templateBinding", templateBinding->eClass() != package->getTemplateBinding_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

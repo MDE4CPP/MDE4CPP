@@ -1,12 +1,39 @@
 #include "uml/impl/StringExpressionImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -37,6 +64,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -163,7 +196,7 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -251,7 +284,8 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 
 std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new StringExpressionImpl(*this));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(*this));
+	element->setThisStringExpressionPtr(element);
 	return element;
 }
 
@@ -292,7 +326,7 @@ void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpres
     m_owningExpression = _owningExpression;
 }
 
-std::shared_ptr<Subset<uml::StringExpression, uml::Element > > StringExpressionImpl::getSubExpression() const
+std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
 {
 
     return m_subExpression;
@@ -306,7 +340,7 @@ std::weak_ptr<uml::Namespace > StringExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > StringExpressionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> StringExpressionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -316,6 +350,16 @@ std::weak_ptr<uml::Element > StringExpressionImpl::getOwner() const
 }
 
 
+std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr()
+{
+	return m_thisStringExpressionPtr.lock();
+}
+void StringExpressionImpl::setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr)
+{
+	m_thisStringExpressionPtr = thisStringExpressionPtr;
+	setThisExpressionPtr(thisStringExpressionPtr);
+	setThisTemplateableElementPtr(thisStringExpressionPtr);
+}
 std::shared_ptr<ecore::EObject> StringExpressionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -357,132 +401,187 @@ boost::any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //874
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //870
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //875
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //876
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //877
-		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return getOperand(); //8715
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //871
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //872
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //875
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //873
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
 			return getOwningExpression(); //8719
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage(); //8712
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return getOwningSlot(); //8714
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //874
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //878
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
 			return getSubExpression(); //8720
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return getSymbol(); //8716
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_TEMPLATEBINDING:
-			return getTemplateBinding(); //874
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //875
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType(); //8710
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //879
 	}
-	return boost::any();
+	boost::any result;
+	result = ExpressionImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::internalEIsSet(featureID);
+	return result;
 }
-
-void StringExpressionImpl::eSet(int featureID, boost::any newValue)
+bool StringExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //875
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //876
-			break;
-		}
-		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
-			setOwnedTemplateSignature(_ownedTemplateSignature); //875
-			break;
-		}
+		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+			return getOwningExpression().lock() != nullptr; //8719
+		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
+			return getSubExpression() != nullptr; //8720
+	}
+	bool result = false;
+	result = ExpressionImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool StringExpressionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _owningExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setOwningExpression(_owningExpression); //8719
-			break;
-		}
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
-			setOwningPackage(_owningPackage); //8712
-			break;
-		}
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Slot> _owningSlot = boost::any_cast<std::shared_ptr<uml::Slot>>(newValue);
-			setOwningSlot(_owningSlot); //8714
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setOwningTemplateParameter(_owningTemplateParameter); //874
-			break;
-		}
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-		{
-			// BOOST CAST
-			std::string _symbol = boost::any_cast<std::string>(newValue);
-			setSymbol(_symbol); //8716
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setTemplateParameter(_templateParameter); //875
-			break;
-		}
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
-			setType(_type); //8710
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //879
-			break;
+			return true;
 		}
 	}
+
+	bool result = false;
+	result = ExpressionImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::eSet(featureID, newValue);
+	return result;
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StringExpressionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void StringExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ExpressionImpl::loadAttributes(loadHandler, attr_list);
+	TemplateableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("subExpression") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "StringExpression";
+			}
+			std::shared_ptr<ecore::EObject> subExpression = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION);
+			if (subExpression != nullptr)
+			{
+				loadHandler->handleChild(subExpression);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExpressionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	TemplateableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void StringExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>( references.front() );
+				setOwningExpression(_owningExpression);
+			}
+			
+			return;
+		}
+	}
+	ExpressionImpl::resolveReferences(featureID, references);
+	TemplateableElementImpl::resolveReferences(featureID, references);
+}
+
+void StringExpressionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExpressionImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	
+	ValueSpecificationImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'subExpression'
+		for (std::shared_ptr<uml::StringExpression> subExpression : *this->getSubExpression()) 
+		{
+			saveHandler->addReference(subExpression, "subExpression", subExpression->eClass() != package->getStringExpression_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

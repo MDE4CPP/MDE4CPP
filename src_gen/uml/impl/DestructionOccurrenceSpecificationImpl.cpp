@@ -1,12 +1,39 @@
 #include "uml/impl/DestructionOccurrenceSpecificationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -31,6 +58,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -116,10 +149,10 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -132,10 +165,10 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toAfter = obj.getToAfter();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = obj.getToAfter();
 	m_toAfter.reset(new Bag<uml::GeneralOrdering>(*(obj.getToAfter().get())));
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toBefore = obj.getToBefore();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = obj.getToBefore();
 	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 
@@ -177,7 +210,8 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 
 std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DestructionOccurrenceSpecificationImpl(*this));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(*this));
+	element->setThisDestructionOccurrenceSpecificationPtr(element);
 	return element;
 }
 
@@ -210,7 +244,7 @@ std::weak_ptr<uml::Namespace > DestructionOccurrenceSpecificationImpl::getNamesp
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > DestructionOccurrenceSpecificationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DestructionOccurrenceSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -220,6 +254,15 @@ std::weak_ptr<uml::Element > DestructionOccurrenceSpecificationImpl::getOwner() 
 }
 
 
+std::shared_ptr<DestructionOccurrenceSpecification> DestructionOccurrenceSpecificationImpl::getThisDestructionOccurrenceSpecificationPtr()
+{
+	return m_thisDestructionOccurrenceSpecificationPtr.lock();
+}
+void DestructionOccurrenceSpecificationImpl::setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr)
+{
+	m_thisDestructionOccurrenceSpecificationPtr = thisDestructionOccurrenceSpecificationPtr;
+	setThisMessageOccurrenceSpecificationPtr(thisDestructionOccurrenceSpecificationPtr);
+}
 std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -251,89 +294,102 @@ boost::any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool reso
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2324
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //23210
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2320
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //23212
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //23211
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //23213
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return getMessage(); //23210
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2325
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2326
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2327
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2321
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2322
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2323
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2328
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
-			return getToAfter(); //23214
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
-			return getToBefore(); //23215
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2329
 	}
-	return boost::any();
+	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
-
-void DestructionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
-			setEnclosingInteraction(_enclosingInteraction); //23212
-			break;
-		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
-			setEnclosingOperand(_enclosingOperand); //23211
-			break;
-		}
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Message> _message = boost::any_cast<std::shared_ptr<uml::Message>>(newValue);
-			setMessage(_message); //23210
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2325
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2326
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2329
-			break;
-		}
+	}
+	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
+}
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return MessageOccurrenceSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DestructionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DestructionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	MessageOccurrenceSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	MessageOccurrenceSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DestructionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	MessageOccurrenceSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void DestructionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	MessageOccurrenceSpecificationImpl::saveContent(saveHandler);
+	
+	MessageEndImpl::saveContent(saveHandler);
+	OccurrenceSpecificationImpl::saveContent(saveHandler);
+	
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

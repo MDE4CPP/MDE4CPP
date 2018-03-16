@@ -1,12 +1,39 @@
 #include "uml/impl/ActionInputPinImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Action.hpp"
 
 #include "uml/Activity.hpp"
@@ -55,6 +82,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -187,33 +220,33 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	m_callOperationAction  = obj.getCallOperationAction();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-	std::shared_ptr< Bag<uml::State> > _inState = obj.getInState();
+	std::shared_ptr<Bag<uml::State>> _inState = obj.getInState();
 	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_invocationAction  = obj.getInvocationAction();
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_selection  = obj.getSelection();
@@ -306,7 +339,8 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActionInputPinImpl(*this));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(*this));
+	element->setThisActionInputPinPtr(element);
 	return element;
 }
 
@@ -356,11 +390,11 @@ void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > ActionInputPinImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> ActionInputPinImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<Union<uml::Element> > ActionInputPinImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ActionInputPinImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -368,12 +402,21 @@ std::weak_ptr<uml::Element > ActionInputPinImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ActionInputPinImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ActionInputPinImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<ActionInputPin> ActionInputPinImpl::getThisActionInputPinPtr()
+{
+	return m_thisActionInputPinPtr.lock();
+}
+void ActionInputPinImpl::setThisActionInputPinPtr(std::weak_ptr<ActionInputPin> thisActionInputPinPtr)
+{
+	m_thisActionInputPinPtr = thisActionInputPinPtr;
+	setThisInputPinPtr(thisActionInputPinPtr);
+}
 std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -420,243 +463,154 @@ boost::any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-			return getActivity(); //13413
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return getCallOperationAction(); //13435
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //1344
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //1340
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
 			return getFromAction(); //13437
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
-			return getInGroup(); //13414
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //13415
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
-			return getInPartition(); //13420
-		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return getInState(); //13422
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //13416
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
-			return getIncoming(); //13417
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return getInvocationAction(); //13436
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return getIsControl(); //13433
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType(); //13423
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf(); //13410
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-			return getIsOrdered(); //1344
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique(); //1345
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-			return getLower(); //1346
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-			return getLowerValue(); //1347
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //1345
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //1346
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //1347
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return getOrdering(); //13424
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
-			return getOutgoing(); //13418
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //1341
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //1342
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //1343
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //1348
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement(); //13411
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
-			return getRedefinedNode(); //13419
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //13412
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return getSelection(); //13425
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction(); //13434
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType(); //13410
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-			return getUpper(); //1348
-		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return getUpperBound(); //13426
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-			return getUpperValue(); //1349
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //1349
 	}
-	return boost::any();
+	return InputPinImpl::internalEIsSet(featureID);
 }
-
-void ActionInputPinImpl::eSet(int featureID, boost::any newValue)
+bool ActionInputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
-			setActivity(_activity); //13413
-			break;
-		}
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::CallOperationAction> _callOperationAction = boost::any_cast<std::shared_ptr<uml::CallOperationAction>>(newValue);
-			setCallOperationAction(_callOperationAction); //13435
-			break;
-		}
+		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
+			return getFromAction() != nullptr; //13437
+	}
+	return InputPinImpl::internalEIsSet(featureID);
+}
+bool ActionInputPinImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _fromAction = boost::any_cast<std::shared_ptr<uml::Action>>(newValue);
 			setFromAction(_fromAction); //13437
-			break;
-		}
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
-			setInStructuredNode(_inStructuredNode); //13416
-			break;
-		}
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::InvocationAction> _invocationAction = boost::any_cast<std::shared_ptr<uml::InvocationAction>>(newValue);
-			setInvocationAction(_invocationAction); //13436
-			break;
-		}
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-		{
-			// BOOST CAST
-			bool _isControl = boost::any_cast<bool>(newValue);
-			setIsControl(_isControl); //13433
-			break;
-		}
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-		{
-			// BOOST CAST
-			bool _isControlType = boost::any_cast<bool>(newValue);
-			setIsControlType(_isControlType); //13423
-			break;
-		}
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-		{
-			// BOOST CAST
-			bool _isLeaf = boost::any_cast<bool>(newValue);
-			setIsLeaf(_isLeaf); //13410
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-		{
-			// BOOST CAST
-			bool _isOrdered = boost::any_cast<bool>(newValue);
-			setIsOrdered(_isOrdered); //1344
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-		{
-			// BOOST CAST
-			bool _isUnique = boost::any_cast<bool>(newValue);
-			setIsUnique(_isUnique); //1345
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-		{
-			// BOOST CAST
-			int _lower = boost::any_cast<int>(newValue);
-			setLower(_lower); //1346
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setLowerValue(_lowerValue); //1347
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //1345
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //1346
-			break;
-		}
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-		{
-			// BOOST CAST
-			ObjectNodeOrderingKind _ordering = boost::any_cast<ObjectNodeOrderingKind>(newValue);
-			setOrdering(_ordering); //13424
-			break;
-		}
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
-			setSelection(_selection); //13425
-			break;
-		}
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = boost::any_cast<std::shared_ptr<uml::StructuralFeatureAction>>(newValue);
-			setStructuralFeatureAction(_structuralFeatureAction); //13434
-			break;
-		}
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
-			setType(_type); //13410
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-		{
-			// BOOST CAST
-			int _upper = boost::any_cast<int>(newValue);
-			setUpper(_upper); //1348
-			break;
-		}
-		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperBound = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setUpperBound(_upperBound); //13426
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setUpperValue(_upperValue); //1349
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //1349
-			break;
+			return true;
 		}
 	}
+
+	return InputPinImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActionInputPinImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActionInputPinImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InputPinImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActionInputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("fromAction") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<uml::Action> fromAction = std::dynamic_pointer_cast<uml::Action>(modelFactory->create(typeName));
+			if (fromAction != nullptr)
+			{
+				this->setFromAction(fromAction);
+				loadHandler->handleChild(fromAction);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InputPinImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActionInputPinImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InputPinImpl::resolveReferences(featureID, references);
+}
+
+void ActionInputPinImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InputPinImpl::saveContent(saveHandler);
+	
+	PinImpl::saveContent(saveHandler);
+	
+	MultiplicityElementImpl::saveContent(saveHandler);
+	ObjectNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'fromAction'
+		std::shared_ptr<uml::Action > fromAction = this->getFromAction();
+		if (fromAction != nullptr)
+		{
+			saveHandler->addReference(fromAction, "fromAction", fromAction->eClass() != package->getAction_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

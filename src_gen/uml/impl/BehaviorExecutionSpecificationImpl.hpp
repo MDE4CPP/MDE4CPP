@@ -7,20 +7,6 @@
 #ifndef UML_BEHAVIOREXECUTIONSPECIFICATIONBEHAVIOREXECUTIONSPECIFICATIONIMPL_HPP
 #define UML_BEHAVIOREXECUTIONSPECIFICATIONBEHAVIOREXECUTIONSPECIFICATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../BehaviorExecutionSpecification.hpp"
 
 #include "uml/impl/ExecutionSpecificationImpl.hpp"
-
-
 
 //*********************************
 namespace uml 
@@ -46,6 +30,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehaviorExecutionSpecificationImpl();
+			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr();
+			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
@@ -102,7 +88,7 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
@@ -110,15 +96,29 @@ namespace uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<BehaviorExecutionSpecification> m_thisBehaviorExecutionSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIOREXECUTIONSPECIFICATIONBEHAVIOREXECUTIONSPECIFICATIONIMPL_HPP */
-

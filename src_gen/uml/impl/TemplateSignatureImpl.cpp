@@ -1,12 +1,38 @@
 #include "uml/impl/TemplateSignatureImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -17,6 +43,12 @@
 
 #include "uml/TemplateableElement.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -108,7 +140,7 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 	
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
+	std::shared_ptr<Union<uml::TemplateParameter>> _parameter = obj.getParameter();
 	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
 
 	m_template  = obj.getTemplate();
@@ -152,7 +184,8 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 
 std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TemplateSignatureImpl(*this));
+	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(*this));
+	element->setThisTemplateSignaturePtr(element);
 	return element;
 }
 
@@ -183,7 +216,7 @@ bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > TemplateSignatureImpl::getOwnedParameter() const
+std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
 {
 
     return m_ownedParameter;
@@ -206,7 +239,7 @@ void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > TemplateSignatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TemplateSignatureImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -214,12 +247,21 @@ std::weak_ptr<uml::Element > TemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::TemplateParameter> > TemplateSignatureImpl::getParameter() const
+std::shared_ptr<Union<uml::TemplateParameter>> TemplateSignatureImpl::getParameter() const
 {
 	return m_parameter;
 }
 
 
+std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr()
+{
+	return m_thisTemplateSignaturePtr.lock();
+}
+void TemplateSignatureImpl::setThisTemplateSignaturePtr(std::weak_ptr<TemplateSignature> thisTemplateSignaturePtr)
+{
+	m_thisTemplateSignaturePtr = thisTemplateSignaturePtr;
+	setThisElementPtr(thisTemplateSignaturePtr);
+}
 std::shared_ptr<ecore::EObject> TemplateSignatureImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -241,25 +283,29 @@ boost::any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //170
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //171
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //172
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
 			return getOwnedParameter(); //176
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //173
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
 			return getParameter(); //174
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
 			return getTemplate(); //175
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
-
-void TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+bool TemplateSignatureImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
+			return getOwnedParameter() != nullptr; //176
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
+			return getParameter() != nullptr; //174
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+			return getTemplate().lock() != nullptr; //175
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -268,7 +314,161 @@ void TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _template = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
 			setTemplate(_template); //175
-			break;
+			return true;
 		}
 	}
+
+	return ElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TemplateSignatureImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TemplateSignatureImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("parameter");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("ownedParameter") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "TemplateParameter";
+			}
+			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE);
+			if (ownedParameter != nullptr)
+			{
+				loadHandler->handleChild(ownedParameter);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
+		{
+			std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::TemplateParameter> _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
+				if (_r != nullptr)
+				{
+					_parameter->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::TemplateableElement> _template = std::dynamic_pointer_cast<uml::TemplateableElement>( references.front() );
+				setTemplate(_template);
+			}
+			
+			return;
+		}
+	}
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void TemplateSignatureImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'ownedParameter'
+		for (std::shared_ptr<uml::TemplateParameter> ownedParameter : *this->getOwnedParameter()) 
+		{
+			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_EClass());
+		}
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::TemplateParameter>> parameter_list = this->getParameter();
+		for (std::shared_ptr<uml::TemplateParameter > object : *parameter_list)
+		{ 
+			saveHandler->addReferences("parameter", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

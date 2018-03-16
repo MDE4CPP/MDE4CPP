@@ -1,12 +1,38 @@
 #include "uml/impl/ConnectorEndImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/ConnectableElement.hpp"
@@ -21,6 +47,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -130,7 +162,8 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImp
 
 std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ConnectorEndImpl(*this));
+	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(*this));
+	element->setThisConnectorEndPtr(element);
 	return element;
 }
 
@@ -205,12 +238,21 @@ void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > ConnectorEndImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ConnectorEndImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
 
 
+std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr()
+{
+	return m_thisConnectorEndPtr.lock();
+}
+void ConnectorEndImpl::setThisConnectorEndPtr(std::weak_ptr<ConnectorEnd> thisConnectorEndPtr)
+{
+	m_thisConnectorEndPtr = thisConnectorEndPtr;
+	setThisMultiplicityElementPtr(thisConnectorEndPtr);
+}
 std::shared_ptr<ecore::EObject> ConnectorEndImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -229,93 +271,172 @@ boost::any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
 			return getDefiningEnd(); //3110
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //310
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-			return getIsOrdered(); //314
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique(); //315
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-			return getLower(); //316
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-			return getLowerValue(); //317
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //311
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //312
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //313
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
 			return getPartWithPort(); //3111
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
 			return getRole(); //3112
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-			return getUpper(); //318
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-			return getUpperValue(); //319
 	}
-	return boost::any();
+	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
-
-void ConnectorEndImpl::eSet(int featureID, boost::any newValue)
+bool ConnectorEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-		{
-			// BOOST CAST
-			bool _isOrdered = boost::any_cast<bool>(newValue);
-			setIsOrdered(_isOrdered); //314
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-		{
-			// BOOST CAST
-			bool _isUnique = boost::any_cast<bool>(newValue);
-			setIsUnique(_isUnique); //315
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-		{
-			// BOOST CAST
-			int _lower = boost::any_cast<int>(newValue);
-			setLower(_lower); //316
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setLowerValue(_lowerValue); //317
-			break;
-		}
+		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
+			return getDefiningEnd() != nullptr; //3110
+		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+			return getPartWithPort() != nullptr; //3111
+		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+			return getRole() != nullptr; //3112
+	}
+	return MultiplicityElementImpl::internalEIsSet(featureID);
+}
+bool ConnectorEndImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _partWithPort = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setPartWithPort(_partWithPort); //3111
-			break;
+			return true;
 		}
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _role = boost::any_cast<std::shared_ptr<uml::ConnectableElement>>(newValue);
 			setRole(_role); //3112
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-		{
-			// BOOST CAST
-			int _upper = boost::any_cast<int>(newValue);
-			setUpper(_upper); //318
-			break;
-		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setUpperValue(_upperValue); //319
-			break;
+			return true;
 		}
 	}
+
+	return MultiplicityElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ConnectorEndImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ConnectorEndImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("partWithPort");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("partWithPort")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("role");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("role")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ConnectorEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _partWithPort = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setPartWithPort(_partWithPort);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ConnectableElement> _role = std::dynamic_pointer_cast<uml::ConnectableElement>( references.front() );
+				setRole(_role);
+			}
+			
+			return;
+		}
+	}
+	MultiplicityElementImpl::resolveReferences(featureID, references);
+}
+
+void ConnectorEndImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	MultiplicityElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("partWithPort", this->getPartWithPort());
+		saveHandler->addReference("role", this->getRole());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

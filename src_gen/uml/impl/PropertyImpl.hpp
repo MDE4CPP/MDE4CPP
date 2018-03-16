@@ -7,20 +7,6 @@
 #ifndef UML_PROPERTYPROPERTYIMPL_HPP
 #define UML_PROPERTYPROPERTYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -30,8 +16,6 @@
 #include "uml/impl/ConnectableElementImpl.hpp"
 #include "uml/impl/DeploymentTargetImpl.hpp"
 #include "uml/impl/StructuralFeatureImpl.hpp"
-
-
 
 //*********************************
 namespace uml 
@@ -48,6 +32,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PropertyImpl();
+			virtual std::shared_ptr<Property> getThisPropertyPtr();
+			virtual void setThisPropertyPtr(std::weak_ptr<Property> thisPropertyPtr);
 
 			//Additional constructors for the containments back reference
 			PropertyImpl(std::weak_ptr<uml::Property > par_associationEnd);
@@ -375,17 +361,17 @@ namespace uml
 			/*!
 			 An optional list of ordered qualifier attributes for the end.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Property, uml::Element > > getQualifier() const ;
+			virtual std::shared_ptr<Subset<uml::Property, uml::Element>> getQualifier() const ;
 			
 			/*!
 			 The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > > getRedefinedProperty() const ;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> getRedefinedProperty() const ;
 			
 			/*!
 			 The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Property> > getSubsettedProperty() const ;
+			virtual std::shared_ptr<Bag<uml::Property>> getSubsettedProperty() const ;
 			
 							
 			
@@ -395,35 +381,49 @@ namespace uml
 			/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
+			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ; 
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Property> m_thisPropertyPtr;
 	};
 }
 #endif /* end of include guard: UML_PROPERTYPROPERTYIMPL_HPP */
-

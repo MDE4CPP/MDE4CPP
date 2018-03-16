@@ -5,21 +5,7 @@
 //********************************************************************
 
 #ifndef UML_AGGREGATIONKIND_HPP
-#define UML_AGGREGATIONKIND_HPP
-
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp" 
+#define UML_AGGREGATIONKIND_HPP 
 
 namespace uml 
 {

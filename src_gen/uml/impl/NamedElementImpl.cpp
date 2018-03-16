@@ -1,12 +1,39 @@
 #include "uml/impl/NamedElementImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -25,6 +52,12 @@
 
 #include "uml/Usage.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -103,7 +136,7 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -142,7 +175,8 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 
 std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new NamedElementImpl(*this));
+	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl(*this));
+	element->setThisNamedElementPtr(element);
 	return element;
 }
 
@@ -302,7 +336,7 @@ bool NamedElementImpl::visibility_needs_ownership(boost::any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::Dependency> > NamedElementImpl::getClientDependency() const
+std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() const
 {
 
     return m_clientDependency;
@@ -329,7 +363,7 @@ std::weak_ptr<uml::Namespace > NamedElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > NamedElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> NamedElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -339,6 +373,15 @@ std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
 }
 
 
+std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr()
+{
+	return m_thisNamedElementPtr.lock();
+}
+void NamedElementImpl::setThisNamedElementPtr(std::weak_ptr<NamedElement> thisNamedElementPtr)
+{
+	m_thisNamedElementPtr = thisNamedElementPtr;
+	setThisElementPtr(thisNamedElementPtr);
+}
 std::shared_ptr<ecore::EObject> NamedElementImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -362,29 +405,39 @@ boost::any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //74
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //70
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //75
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //76
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //77
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //71
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //72
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //73
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //78
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //79
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
-
-void NamedElementImpl::eSet(int featureID, boost::any newValue)
+bool NamedElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
+			return getClientDependency() != nullptr; //74
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+			return getName() != ""; //75
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
+			return getNameExpression() != nullptr; //76
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+			return getNamespace().lock() != nullptr; //77
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
+			return getQualifiedName() != ""; //78
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
+			return m_visibility != VisibilityKind::PUBLIC;; //79
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool NamedElementImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -393,21 +446,197 @@ void NamedElementImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //75
-			break;
+			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //76
-			break;
+			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
 			setVisibility(_visibility); //79
-			break;
+			return true;
 		}
 	}
+
+	return ElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void NamedElementImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("name");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setName(value);
+		}
+
+		iter = attr_list.find("visibility");
+		if ( iter != attr_list.end() )
+		{
+			VisibilityKind value = VisibilityKind::PUBLIC;
+			std::string literal = iter->second;
+			if (literal == "public")
+			{
+				value = VisibilityKind::PUBLIC;
+			}
+			else if (literal == "private")
+			{
+				value = VisibilityKind::PRIVATE;
+			}
+			else if (literal == "protected")
+			{
+				value = VisibilityKind::PROTECTED;
+			}
+			else if (literal == "package")
+			{
+				value = VisibilityKind::PACKAGE;
+			}
+			this->setVisibility(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("nameExpression") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "StringExpression";
+			}
+			std::shared_ptr<uml::StringExpression> nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(modelFactory->create(typeName));
+			if (nameExpression != nullptr)
+			{
+				this->setNameExpression(nameExpression);
+				loadHandler->handleChild(nameExpression);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void NamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void NamedElementImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void NamedElementImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'nameExpression'
+		std::shared_ptr<uml::StringExpression > nameExpression = this->getNameExpression();
+		if (nameExpression != nullptr)
+		{
+			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getNamedElement_EAttribute_name()) )
+		{
+			saveHandler->addAttribute("name", this->getName());
+		}
+
+		if ( this->eIsSet(package->getNamedElement_EAttribute_visibility()) )
+		{
+			VisibilityKind value = this->getVisibility();
+			std::string literal = "";
+			if (value == VisibilityKind::PUBLIC)
+			{
+				literal = "public";
+			}
+			else if (value == VisibilityKind::PRIVATE)
+			{
+				literal = "private";
+			}
+			else if (value == VisibilityKind::PROTECTED)
+			{
+				literal = "protected";
+			}
+			else if (value == VisibilityKind::PACKAGE)
+			{
+				literal = "package";
+			}
+			saveHandler->addAttribute("visibility", literal);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

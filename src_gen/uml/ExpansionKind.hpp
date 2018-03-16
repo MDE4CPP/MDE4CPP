@@ -5,21 +5,7 @@
 //********************************************************************
 
 #ifndef UML_EXPANSIONKIND_HPP
-#define UML_EXPANSIONKIND_HPP
-
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp" 
+#define UML_EXPANSIONKIND_HPP 
 
 namespace uml 
 {

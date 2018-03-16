@@ -1,12 +1,39 @@
 #include "uml/impl/RedefinableTemplateSignatureImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Classifier.hpp"
 
 #include "uml/Comment.hpp"
@@ -31,6 +58,12 @@
 
 #include "uml/TemplateableElement.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -140,20 +173,20 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
+	std::shared_ptr<Union<uml::TemplateParameter>> _parameter = obj.getParameter();
 	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_template  = obj.getTemplate();
@@ -220,7 +253,8 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 
 std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new RedefinableTemplateSignatureImpl(*this));
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(*this));
+	element->setThisRedefinableTemplateSignaturePtr(element);
 	return element;
 }
 
@@ -258,14 +292,14 @@ std::shared_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifie
 }
 
 
-std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement > > RedefinableTemplateSignatureImpl::getExtendedSignature() const
+std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
 
     return m_extendedSignature;
 }
 
 
-std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > > RedefinableTemplateSignatureImpl::getInheritedParameter() const
+std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
 
     return m_inheritedParameter;
@@ -275,7 +309,7 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > > Redefi
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > RedefinableTemplateSignatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> RedefinableTemplateSignatureImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -283,20 +317,30 @@ std::weak_ptr<uml::Element > RedefinableTemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getParameter() const
+std::shared_ptr<Union<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getParameter() const
 {
 	return m_parameter;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > RedefinableTemplateSignatureImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::Classifier> > RedefinableTemplateSignatureImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier>> RedefinableTemplateSignatureImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
 
 
+std::shared_ptr<RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr()
+{
+	return m_thisRedefinableTemplateSignaturePtr.lock();
+}
+void RedefinableTemplateSignatureImpl::setThisRedefinableTemplateSignaturePtr(std::weak_ptr<RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr)
+{
+	m_thisRedefinableTemplateSignaturePtr = thisRedefinableTemplateSignaturePtr;
+	setThisRedefinableElementPtr(thisRedefinableTemplateSignaturePtr);
+	setThisTemplateSignaturePtr(thisRedefinableTemplateSignaturePtr);
+}
 std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -325,84 +369,172 @@ boost::any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, b
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
 			return getClassifier(); //9718
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //974
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //970
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
 			return getExtendedSignature(); //9716
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
 			return getInheritedParameter(); //9717
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf(); //9710
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //975
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //976
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //977
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //971
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //972
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter(); //976
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //973
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
-			return getParameter(); //974
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //978
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement(); //9711
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //9712
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
-			return getTemplate(); //975
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //979
 	}
-	return boost::any();
+	boost::any result;
+	result = RedefinableElementImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = TemplateSignatureImpl::internalEIsSet(featureID);
+	return result;
 }
-
-void RedefinableTemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
+			return getClassifier() != nullptr; //9718
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
+			return getExtendedSignature() != nullptr; //9716
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
+			return getInheritedParameter() != nullptr; //9717
+	}
+	bool result = false;
+	result = RedefinableElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateSignatureImpl::internalEIsSet(featureID);
+	return result;
+}
+bool RedefinableTemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = RedefinableElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateSignatureImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void RedefinableTemplateSignatureImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void RedefinableTemplateSignatureImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("extendedSignature");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			bool _isLeaf = boost::any_cast<bool>(newValue);
-			setIsLeaf(_isLeaf); //9710
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //975
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //976
-			break;
-		}
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateableElement> _template = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
-			setTemplate(_template); //975
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //979
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("extendedSignature")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
+	TemplateSignatureImpl::loadAttributes(loadHandler, attr_list);
 }
+
+void RedefinableTemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	TemplateSignatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
+		{
+			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::RedefinableTemplateSignature> _r = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(ref);
+				if (_r != nullptr)
+				{
+					_extendedSignature->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	RedefinableElementImpl::resolveReferences(featureID, references);
+	TemplateSignatureImpl::resolveReferences(featureID, references);
+}
+
+void RedefinableTemplateSignatureImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateSignatureImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignature_list = this->getExtendedSignature();
+		for (std::shared_ptr<uml::RedefinableTemplateSignature > object : *extendedSignature_list)
+		{ 
+			saveHandler->addReferences("extendedSignature", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

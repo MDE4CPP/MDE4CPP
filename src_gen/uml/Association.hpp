@@ -7,31 +7,40 @@
 #ifndef UML_ASSOCIATION_HPP
 #define UML_ASSOCIATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -255,22 +264,22 @@ namespace uml
 			/*!
 			 The Classifiers that are used as types of the ends of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::Type, uml::Element > > getEndType() const = 0;
+			virtual std::shared_ptr<Subset<uml::Type, uml::Element>> getEndType() const = 0;
 			
 			/*!
 			 Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement > > getMemberEnd() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> getMemberEnd() const = 0;
 			
 			/*!
 			 The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/ > > getNavigableOwnedEnd() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> getNavigableOwnedEnd() const = 0;
 			
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement > > getOwnedEnd() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> getOwnedEnd() const = 0;
 			
 			
 
@@ -281,7 +290,7 @@ namespace uml
 			/*!
 			 Specifies whether the Association is derived from other model elements such as other Associations.
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			bool m_isDerived =  false;
+			bool m_isDerived = false;
 			
 			
 			//*********************************
@@ -290,19 +299,19 @@ namespace uml
 			/*!
 			 The Classifiers that are used as types of the ends of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Type, uml::Element > > m_endType;
+			std::shared_ptr<Subset<uml::Type, uml::Element>> m_endType;
 			/*!
 			 Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement > > m_memberEnd;
+			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> m_memberEnd;
 			/*!
 			 The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/ > > m_navigableOwnedEnd;
+			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> m_navigableOwnedEnd;
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement > > m_ownedEnd;
+			std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> m_ownedEnd;
 			
 
 		public:
@@ -312,32 +321,40 @@ namespace uml
 			/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;
+			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_ASSOCIATION_HPP */
-

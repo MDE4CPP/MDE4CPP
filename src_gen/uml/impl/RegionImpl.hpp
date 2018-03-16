@@ -7,20 +7,6 @@
 #ifndef UML_REGIONREGIONIMPL_HPP
 #define UML_REGIONREGIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 #include "uml/impl/NamespaceImpl.hpp"
 #include "uml/impl/RedefinableElementImpl.hpp"
-
-
 
 //*********************************
 namespace uml 
@@ -47,6 +31,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RegionImpl();
+			virtual std::shared_ptr<Region> getThisRegionPtr();
+			virtual void setThisRegionPtr(std::weak_ptr<Region> thisRegionPtr);
 
 			//Additional constructors for the containments back reference
 			RegionImpl(std::weak_ptr<uml::Namespace > par_namespace);
@@ -169,12 +155,12 @@ namespace uml
 			/*!
 			 The set of Vertices that are owned by this Region.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<Subset<uml::Vertex, uml::NamedElement > > getSubvertex() const ;
+			virtual std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> getSubvertex() const ;
 			
 			/*!
 			 The set of Transitions owned by the Region.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<Subset<uml::Transition, uml::NamedElement > > getTransition() const ;
+			virtual std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> getTransition() const ;
 			
 							
 			
@@ -184,35 +170,49 @@ namespace uml
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Region> m_thisRegionPtr;
 	};
 }
 #endif /* end of include guard: UML_REGIONREGIONIMPL_HPP */
-

@@ -7,20 +7,6 @@
 #ifndef UML_BEHAVIORALFEATUREBEHAVIORALFEATUREIMPL_HPP
 #define UML_BEHAVIORALFEATUREBEHAVIORALFEATUREIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -29,8 +15,6 @@
 
 #include "uml/impl/FeatureImpl.hpp"
 #include "uml/impl/NamespaceImpl.hpp"
-
-
 
 //*********************************
 namespace uml 
@@ -47,6 +31,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehavioralFeatureImpl();
+			virtual std::shared_ptr<BehavioralFeature> getThisBehavioralFeaturePtr();
+			virtual void setThisBehavioralFeaturePtr(std::weak_ptr<BehavioralFeature> thisBehavioralFeaturePtr);
 
 			//Additional constructors for the containments back reference
 			BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
@@ -119,22 +105,22 @@ namespace uml
 			/*!
 			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Behavior> > getMethod() const ;
+			virtual std::shared_ptr<Bag<uml::Behavior>> getMethod() const ;
 			
 			/*!
 			 The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement > > getOwnedParameter() const ;
+			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const ;
 			
 			/*!
 			 The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement > > getOwnedParameterSet() const ;
+			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
 			
 			/*!
 			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Type> > getRaisedException() const ;
+			virtual std::shared_ptr<Bag<uml::Type>> getRaisedException() const ;
 			
 							
 			
@@ -144,13 +130,13 @@ namespace uml
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
@@ -158,15 +144,29 @@ namespace uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<BehavioralFeature> m_thisBehavioralFeaturePtr;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIORALFEATUREBEHAVIORALFEATUREIMPL_HPP */
-

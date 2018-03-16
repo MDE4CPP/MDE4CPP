@@ -7,31 +7,40 @@
 #ifndef UML_INSTANCESPECIFICATION_HPP
 #define UML_INSTANCESPECIFICATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -176,12 +185,12 @@ namespace uml
 			/*!
 			 The Classifier or Classifiers of the represented instance. If multiple Classifiers are specified, the instance is classified by all of them.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getClassifier() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getClassifier() const = 0;
 			
 			/*!
 			 A Slot giving the value or values of a StructuralFeature of the instance. An InstanceSpecification can have one Slot per StructuralFeature of its Classifiers, including inherited features. It is not necessary to model a Slot for every StructuralFeature, in which case the InstanceSpecification is a partial description.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Slot, uml::Element > > getSlot() const = 0;
+			virtual std::shared_ptr<Subset<uml::Slot, uml::Element>> getSlot() const = 0;
 			
 			/*!
 			 A specification of how to compute, derive, or construct the instance.
@@ -206,11 +215,11 @@ namespace uml
 			/*!
 			 The Classifier or Classifiers of the represented instance. If multiple Classifiers are specified, the instance is classified by all of them.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::Classifier> > m_classifier;
+			std::shared_ptr<Bag<uml::Classifier>> m_classifier;
 			/*!
 			 A Slot giving the value or values of a StructuralFeature of the instance. An InstanceSpecification can have one Slot per StructuralFeature of its Classifiers, including inherited features. It is not necessary to model a Slot for every StructuralFeature, in which case the InstanceSpecification is a partial description.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Slot, uml::Element > > m_slot;
+			std::shared_ptr<Subset<uml::Slot, uml::Element>> m_slot;
 			/*!
 			 A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p> */
@@ -227,14 +236,22 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_INSTANCESPECIFICATION_HPP */
-

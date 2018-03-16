@@ -1,12 +1,39 @@
 #include "uml/impl/CombinedFragmentImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -31,6 +58,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -147,10 +180,10 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):Com
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -231,7 +264,8 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):Com
 
 std::shared_ptr<ecore::EObject>  CombinedFragmentImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CombinedFragmentImpl(*this));
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(*this));
+	element->setThisCombinedFragmentPtr(element);
 	return element;
 }
 
@@ -277,14 +311,14 @@ bool CombinedFragmentImpl::opt_loop_break_neg(boost::any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Gate, uml::Element > > CombinedFragmentImpl::getCfragmentGate() const
+std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragmentGate() const
 {
 
     return m_cfragmentGate;
 }
 
 
-std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > > CombinedFragmentImpl::getOperand() const
+std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentImpl::getOperand() const
 {
 //assert(m_operand);
     return m_operand;
@@ -298,7 +332,7 @@ std::weak_ptr<uml::Namespace > CombinedFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > CombinedFragmentImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> CombinedFragmentImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -308,6 +342,15 @@ std::weak_ptr<uml::Element > CombinedFragmentImpl::getOwner() const
 }
 
 
+std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr()
+{
+	return m_thisCombinedFragmentPtr.lock();
+}
+void CombinedFragmentImpl::setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr)
+{
+	m_thisCombinedFragmentPtr = thisCombinedFragmentPtr;
+	setThisInteractionFragmentPtr(thisCombinedFragmentPtr);
+}
 std::shared_ptr<ecore::EObject> CombinedFragmentImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -341,87 +384,291 @@ boost::any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
 			return getCfragmentGate(); //22814
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2284
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //22810
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2280
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //22812
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //22811
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //22813
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
 			return getInteractionOperator(); //22815
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2285
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2286
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2287
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
 			return getOperand(); //22816
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2281
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2282
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2283
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2288
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2289
 	}
-	return boost::any();
+	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-
-void CombinedFragmentImpl::eSet(int featureID, boost::any newValue)
+bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
-			setEnclosingInteraction(_enclosingInteraction); //22812
-			break;
-		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
-			setEnclosingOperand(_enclosingOperand); //22811
-			break;
-		}
+		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
+			return getCfragmentGate() != nullptr; //22814
+		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
+			return m_interactionOperator != InteractionOperatorKind::SEQ;; //22815
+		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
+			return getOperand() != nullptr; //22816
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+bool CombinedFragmentImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = boost::any_cast<InteractionOperatorKind>(newValue);
 			setInteractionOperator(_interactionOperator); //22815
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2285
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2286
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2289
-			break;
+			return true;
 		}
 	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CombinedFragmentImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("interactionOperator");
+		if ( iter != attr_list.end() )
+		{
+			InteractionOperatorKind value = InteractionOperatorKind::SEQ;
+			std::string literal = iter->second;
+			if (literal == "seq")
+			{
+				value = InteractionOperatorKind::SEQ;
+			}
+			else if (literal == "alt")
+			{
+				value = InteractionOperatorKind::ALT;
+			}
+			else if (literal == "opt")
+			{
+				value = InteractionOperatorKind::OPT;
+			}
+			else if (literal == "break")
+			{
+				value = InteractionOperatorKind::BREAK;
+			}
+			else if (literal == "par")
+			{
+				value = InteractionOperatorKind::PAR;
+			}
+			else if (literal == "strict")
+			{
+				value = InteractionOperatorKind::STRICT;
+			}
+			else if (literal == "loop")
+			{
+				value = InteractionOperatorKind::LOOP;
+			}
+			else if (literal == "critical")
+			{
+				value = InteractionOperatorKind::CRITICAL;
+			}
+			else if (literal == "neg")
+			{
+				value = InteractionOperatorKind::NEG;
+			}
+			else if (literal == "assert")
+			{
+				value = InteractionOperatorKind::ASSERT;
+			}
+			else if (literal == "ignore")
+			{
+				value = InteractionOperatorKind::IGNORE;
+			}
+			else if (literal == "consider")
+			{
+				value = InteractionOperatorKind::CONSIDER;
+			}
+			this->setInteractionOperator(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("cfragmentGate") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Gate";
+			}
+			std::shared_ptr<uml::Gate> cfragmentGate = std::dynamic_pointer_cast<uml::Gate>(modelFactory->create(typeName));
+			if (cfragmentGate != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Gate, uml::Element>> list_cfragmentGate = this->getCfragmentGate();
+				list_cfragmentGate->push_back(cfragmentGate);
+				loadHandler->handleChild(cfragmentGate);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("operand") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InteractionOperand";
+			}
+			std::shared_ptr<uml::InteractionOperand> operand = std::dynamic_pointer_cast<uml::InteractionOperand>(modelFactory->create(typeName));
+			if (operand != nullptr)
+			{
+				std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> list_operand = this->getOperand();
+				list_operand->push_back(operand);
+				loadHandler->handleChild(operand);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void CombinedFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void CombinedFragmentImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'cfragmentGate'
+		for (std::shared_ptr<uml::Gate> cfragmentGate : *this->getCfragmentGate()) 
+		{
+			saveHandler->addReference(cfragmentGate, "cfragmentGate", cfragmentGate->eClass() != package->getGate_EClass());
+		}
+
+		// Save 'operand'
+		for (std::shared_ptr<uml::InteractionOperand> operand : *this->getOperand()) 
+		{
+			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getCombinedFragment_EAttribute_interactionOperator()) )
+		{
+			InteractionOperatorKind value = this->getInteractionOperator();
+			std::string literal = "";
+			if (value == InteractionOperatorKind::SEQ)
+			{
+				literal = "seq";
+			}
+			else if (value == InteractionOperatorKind::ALT)
+			{
+				literal = "alt";
+			}
+			else if (value == InteractionOperatorKind::OPT)
+			{
+				literal = "opt";
+			}
+			else if (value == InteractionOperatorKind::BREAK)
+			{
+				literal = "break";
+			}
+			else if (value == InteractionOperatorKind::PAR)
+			{
+				literal = "par";
+			}
+			else if (value == InteractionOperatorKind::STRICT)
+			{
+				literal = "strict";
+			}
+			else if (value == InteractionOperatorKind::LOOP)
+			{
+				literal = "loop";
+			}
+			else if (value == InteractionOperatorKind::CRITICAL)
+			{
+				literal = "critical";
+			}
+			else if (value == InteractionOperatorKind::NEG)
+			{
+				literal = "neg";
+			}
+			else if (value == InteractionOperatorKind::ASSERT)
+			{
+				literal = "assert";
+			}
+			else if (value == InteractionOperatorKind::IGNORE)
+			{
+				literal = "ignore";
+			}
+			else if (value == InteractionOperatorKind::CONSIDER)
+			{
+				literal = "consider";
+			}
+			saveHandler->addAttribute("interactionOperator", literal);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

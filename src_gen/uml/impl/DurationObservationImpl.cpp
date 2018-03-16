@@ -1,12 +1,39 @@
 #include "uml/impl/DurationObservationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -27,6 +54,12 @@
 
 #include "uml/TemplateParameter.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -118,10 +151,10 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::NamedElement> > _event = obj.getEvent();
+	std::shared_ptr<Bag<uml::NamedElement>> _event = obj.getEvent();
 	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -165,7 +198,8 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 
 std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DurationObservationImpl(*this));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(*this));
+	element->setThisDurationObservationPtr(element);
 	return element;
 }
 
@@ -196,7 +230,7 @@ bool DurationObservationImpl::first_event_multiplicity(boost::any diagnostics,st
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::NamedElement> > DurationObservationImpl::getEvent() const
+std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
@@ -210,7 +244,7 @@ std::weak_ptr<uml::Namespace > DurationObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > DurationObservationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DurationObservationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -220,6 +254,15 @@ std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 }
 
 
+std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr()
+{
+	return m_thisDurationObservationPtr.lock();
+}
+void DurationObservationImpl::setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr)
+{
+	m_thisDurationObservationPtr = thisDurationObservationPtr;
+	setThisObservationPtr(thisDurationObservationPtr);
+}
 std::shared_ptr<ecore::EObject> DurationObservationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -251,85 +294,174 @@ boost::any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2474
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2470
 		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
 			return getEvent(); //24713
 		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
 			return getFirstEvent(); //24714
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2475
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2476
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2477
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2471
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2472
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2473
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage(); //24712
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2474
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2478
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2475
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2479
 	}
-	return boost::any();
+	return ObservationImpl::internalEIsSet(featureID);
 }
-
-void DurationObservationImpl::eSet(int featureID, boost::any newValue)
+bool DurationObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
+			return getEvent() != nullptr; //24713
+		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+			return !getFirstEvent()->empty(); //24714
+	}
+	return ObservationImpl::internalEIsSet(featureID);
+}
+bool DurationObservationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ObservationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DurationObservationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DurationObservationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("event");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2475
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2476
-			break;
-		}
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
-			setOwningPackage(_owningPackage); //24712
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setOwningTemplateParameter(_owningTemplateParameter); //2474
-			break;
-		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
-			setTemplateParameter(_templateParameter); //2475
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2479
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("event")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ObservationImpl::loadAttributes(loadHandler, attr_list);
 }
+
+void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+	try
+	{
+		if (nodeName.compare("firstEvent") == 0)
+		{
+			std::cout << "| ERROR    | unhandled attribute with upperbound <> 1" << std::endl;
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+
+	ObservationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DurationObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_event->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	ObservationImpl::resolveReferences(featureID, references);
+}
+
+void DurationObservationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ObservationImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getDurationObservation_EAttribute_firstEvent()) )
+		{
+			for (std::shared_ptr<bool> value : *m_firstEvent)
+			{
+				saveHandler->addAttributeAsNode("firstEvent", boost::to_string(*value));
+			}
+		}
+
+		// Add references
+		std::shared_ptr<Bag<uml::NamedElement>> event_list = this->getEvent();
+		for (std::shared_ptr<uml::NamedElement > object : *event_list)
+		{ 
+			saveHandler->addReferences("event", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

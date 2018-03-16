@@ -7,31 +7,39 @@
 #ifndef UML_GENERALIZATIONSET_HPP
 #define UML_GENERALIZATIONSET_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -164,7 +172,7 @@ namespace uml
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const = 0;
+			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const = 0;
 			
 			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
@@ -184,11 +192,11 @@ namespace uml
 			/*!
 			 Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isCovering =  false;
+			bool m_isCovering = false;
 			/*!
 			 Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isDisjoint =  false;
+			bool m_isDisjoint = false;
 			
 			
 			//*********************************
@@ -197,7 +205,7 @@ namespace uml
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::Generalization> > m_generalization;
+			std::shared_ptr<Bag<uml::Generalization>> m_generalization;
 			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
@@ -214,14 +222,22 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_GENERALIZATIONSET_HPP */
-

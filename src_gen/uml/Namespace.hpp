@@ -7,31 +7,41 @@
 #ifndef UML_NAMESPACE_HPP
 #define UML_NAMESPACE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+template<class T> class Union;
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -213,24 +223,24 @@ namespace uml
 			/*!
 			 References the ElementImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element > > getElementImport() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> getElementImport() const = 0;
 			
 			/*!
 			 References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > > getImportedMember() const = 0;
+			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getImportedMember() const = 0;
 			
 			
 			
 			/*!
 			 Specifies a set of Constraints owned by this Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement > > getOwnedRule() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> getOwnedRule() const = 0;
 			
 			/*!
 			 References the PackageImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element > > getPackageImport() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> getPackageImport() const = 0;
 			
 			
 
@@ -246,27 +256,27 @@ namespace uml
 			/*!
 			 References the ElementImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element > > m_elementImport;
+			std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> m_elementImport;
 			/*!
 			 References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > > m_importedMember;
+			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> m_importedMember;
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Union<uml::NamedElement> > m_member;
+			std::shared_ptr<Union<uml::NamedElement>> m_member;
 			/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > m_ownedMember;
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> m_ownedMember;
 			/*!
 			 Specifies a set of Constraints owned by this Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement > > m_ownedRule;
+			std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> m_ownedRule;
 			/*!
 			 References the PackageImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element > > m_packageImport;
+			std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> m_packageImport;
 			
 
 		public:
@@ -276,20 +286,28 @@ namespace uml
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_NAMESPACE_HPP */
-

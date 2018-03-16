@@ -17,7 +17,7 @@ std::shared_ptr<UmlPackage>UmlPackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(UmlPackageImpl::create());
-		std::dynamic_pointer_cast<UmlPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<UmlPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

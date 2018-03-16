@@ -1,12 +1,39 @@
 #include "uml/impl/InteractionUseImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -35,6 +62,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -162,10 +195,10 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):Interacti
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -259,7 +292,8 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):Interacti
 
 std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new InteractionUseImpl(*this));
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(*this));
+	element->setThisInteractionUsePtr(element);
 	return element;
 }
 
@@ -314,14 +348,14 @@ bool InteractionUseImpl::returnValue_type_recipient_correspondence(boost::any di
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Gate, uml::Element > > InteractionUseImpl::getActualGate() const
+std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGate() const
 {
 
     return m_actualGate;
 }
 
 
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > InteractionUseImpl::getArgument() const
+std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImpl::getArgument() const
 {
 
     return m_argument;
@@ -365,7 +399,7 @@ std::weak_ptr<uml::Namespace > InteractionUseImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > InteractionUseImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> InteractionUseImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -375,6 +409,15 @@ std::weak_ptr<uml::Element > InteractionUseImpl::getOwner() const
 }
 
 
+std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr()
+{
+	return m_thisInteractionUsePtr.lock();
+}
+void InteractionUseImpl::setThisInteractionUsePtr(std::weak_ptr<InteractionUse> thisInteractionUsePtr)
+{
+	m_thisInteractionUsePtr = thisInteractionUsePtr;
+	setThisInteractionFragmentPtr(thisInteractionUsePtr);
+}
 std::shared_ptr<ecore::EObject> InteractionUseImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -410,103 +453,268 @@ boost::any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) 
 			return getActualGate(); //21514
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
 			return getArgument(); //21515
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2154
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //21510
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2150
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //21512
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //21511
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //21513
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2155
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2156
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2157
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2151
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2152
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2153
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2158
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
 			return getRefersTo(); //21516
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 			return getReturnValue(); //21517
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 			return getReturnValueRecipient(); //21518
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2159
 	}
-	return boost::any();
+	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-
-void InteractionUseImpl::eSet(int featureID, boost::any newValue)
+bool InteractionUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
-			setEnclosingInteraction(_enclosingInteraction); //21512
-			break;
-		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
-			setEnclosingOperand(_enclosingOperand); //21511
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2155
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2156
-			break;
-		}
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
+			return getActualGate() != nullptr; //21514
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
+			return getArgument() != nullptr; //21515
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
+			return getRefersTo() != nullptr; //21516
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
+			return getReturnValue() != nullptr; //21517
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
+			return getReturnValueRecipient() != nullptr; //21518
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+bool InteractionUseImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _refersTo = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
 			setRefersTo(_refersTo); //21516
-			break;
+			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _returnValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setReturnValue(_returnValue); //21517
-			break;
+			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _returnValueRecipient = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setReturnValueRecipient(_returnValueRecipient); //21518
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2159
-			break;
+			return true;
 		}
 	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InteractionUseImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void InteractionUseImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("refersTo");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("refersTo")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("returnValueRecipient");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("returnValueRecipient")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("actualGate") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Gate";
+			}
+			std::shared_ptr<uml::Gate> actualGate = std::dynamic_pointer_cast<uml::Gate>(modelFactory->create(typeName));
+			if (actualGate != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Gate, uml::Element>> list_actualGate = this->getActualGate();
+				list_actualGate->push_back(actualGate);
+				loadHandler->handleChild(actualGate);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("argument") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<uml::ValueSpecification> argument = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
+			if (argument != nullptr)
+			{
+				std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> list_argument = this->getArgument();
+				list_argument->push_back(argument);
+				loadHandler->handleChild(argument);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("returnValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<uml::ValueSpecification> returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
+			if (returnValue != nullptr)
+			{
+				this->setReturnValue(returnValue);
+				loadHandler->handleChild(returnValue);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>( references.front() );
+				setRefersTo(_refersTo);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setReturnValueRecipient(_returnValueRecipient);
+			}
+			
+			return;
+		}
+	}
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void InteractionUseImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'actualGate'
+		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 
+		{
+			saveHandler->addReference(actualGate, "actualGate", actualGate->eClass() != package->getGate_EClass());
+		}
+
+		// Save 'argument'
+		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
+		{
+			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_EClass());
+		}
+
+		// Save 'returnValue'
+		std::shared_ptr<uml::ValueSpecification > returnValue = this->getReturnValue();
+		if (returnValue != nullptr)
+		{
+			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("refersTo", this->getRefersTo());
+		saveHandler->addReference("returnValueRecipient", this->getReturnValueRecipient());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

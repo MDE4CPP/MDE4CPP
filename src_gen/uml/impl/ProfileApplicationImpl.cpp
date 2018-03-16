@@ -1,12 +1,38 @@
 #include "uml/impl/ProfileApplicationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
@@ -25,6 +51,12 @@
 
 #include "uml/Profile.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -96,7 +128,7 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
@@ -130,7 +162,8 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 
 std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ProfileApplicationImpl(*this));
+	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(*this));
+	element->setThisProfileApplicationPtr(element);
 	return element;
 }
 
@@ -193,7 +226,7 @@ void ProfileApplicationImpl::setApplyingPackage(std::shared_ptr<uml::Package> _a
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ProfileApplicationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -201,20 +234,29 @@ std::weak_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> ProfileApplicationImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr()
+{
+	return m_thisProfileApplicationPtr.lock();
+}
+void ProfileApplicationImpl::setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr)
+{
+	m_thisProfileApplicationPtr = thisProfileApplicationPtr;
+	setThisDirectedRelationshipPtr(thisProfileApplicationPtr);
+}
 std::shared_ptr<ecore::EObject> ProfileApplicationImpl::eContainer() const
 {
 	if(auto wp = m_applyingPackage.lock())
@@ -240,27 +282,25 @@ boost::any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreTy
 			return getAppliedProfile(); //767
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 			return getApplyingPackage(); //769
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //760
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 			return getIsStrict(); //768
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //761
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //762
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //763
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return getRelatedElement(); //764
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource(); //765
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget(); //766
 	}
-	return boost::any();
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-
-void ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
+bool ProfileApplicationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+			return getAppliedProfile() != nullptr; //767
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+			return getApplyingPackage().lock() != nullptr; //769
+		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
+			return getIsStrict() != false; //768
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+bool ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -269,21 +309,160 @@ void ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::Profile> _appliedProfile = boost::any_cast<std::shared_ptr<uml::Profile>>(newValue);
 			setAppliedProfile(_appliedProfile); //767
-			break;
+			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _applyingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
 			setApplyingPackage(_applyingPackage); //769
-			break;
+			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = boost::any_cast<bool>(newValue);
 			setIsStrict(_isStrict); //768
-			break;
+			return true;
 		}
 	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ProfileApplicationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ProfileApplicationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isStrict");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsStrict(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("appliedProfile");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("appliedProfile")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ProfileApplicationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>( references.front() );
+				setAppliedProfile(_appliedProfile);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>( references.front() );
+				setApplyingPackage(_applyingPackage);
+			}
+			
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+}
+
+void ProfileApplicationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getProfileApplication_EAttribute_isStrict()) )
+		{
+			saveHandler->addAttribute("isStrict", this->getIsStrict());
+		}
+
+		// Add references
+		saveHandler->addReference("appliedProfile", this->getAppliedProfile());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

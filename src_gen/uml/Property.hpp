@@ -7,31 +7,41 @@
 #ifndef UML_PROPERTY_HPP
 #define UML_PROPERTY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -497,17 +507,17 @@ namespace uml
 			/*!
 			 An optional list of ordered qualifier attributes for the end.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Property, uml::Element > > getQualifier() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::Element>> getQualifier() const = 0;
 			
 			/*!
 			 The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > > getRedefinedProperty() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> getRedefinedProperty() const = 0;
 			
 			/*!
 			 The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Property> > getSubsettedProperty() const = 0;
+			virtual std::shared_ptr<Bag<uml::Property>> getSubsettedProperty() const = 0;
 			
 			
 
@@ -518,26 +528,26 @@ namespace uml
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			AggregationKind m_aggregation = AggregationKind::NONE ;
+			AggregationKind m_aggregation = AggregationKind::NONE;
 			/*!
 			 */ 
-			std::string m_default ;
+			std::string m_default = "";
 			/*!
 			 If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isComposite =  false;
+			bool m_isComposite = false;
 			/*!
 			 Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isDerived =  false;
+			bool m_isDerived = false;
 			/*!
 			 Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isDerivedUnion =  false;
+			bool m_isDerivedUnion = false;
 			/*!
 			 True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isID =  false;
+			bool m_isID = false;
 			
 			
 			//*********************************
@@ -578,15 +588,15 @@ namespace uml
 			/*!
 			 An optional list of ordered qualifier attributes for the end.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Element > > m_qualifier;
+			std::shared_ptr<Subset<uml::Property, uml::Element>> m_qualifier;
 			/*!
 			 The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > > m_redefinedProperty;
+			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> m_redefinedProperty;
 			/*!
 			 The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::Property> > m_subsettedProperty;
+			std::shared_ptr<Bag<uml::Property>> m_subsettedProperty;
 			
 
 		public:
@@ -596,26 +606,34 @@ namespace uml
 			/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0;
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_PROPERTY_HPP */
-

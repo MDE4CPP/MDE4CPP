@@ -1,12 +1,39 @@
 #include "uml/impl/PseudostateImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -29,6 +56,12 @@
 
 #include "uml/Vertex.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -132,17 +165,17 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_container  = obj.getContainer();
 
-	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
@@ -182,7 +215,8 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 
 std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new PseudostateImpl(*this));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(*this));
+	element->setThisPseudostatePtr(element);
 	return element;
 }
 
@@ -291,7 +325,7 @@ std::weak_ptr<uml::Namespace > PseudostateImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > PseudostateImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> PseudostateImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -301,6 +335,15 @@ std::weak_ptr<uml::Element > PseudostateImpl::getOwner() const
 }
 
 
+std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr()
+{
+	return m_thisPseudostatePtr.lock();
+}
+void PseudostateImpl::setThisPseudostatePtr(std::weak_ptr<Pseudostate> thisPseudostatePtr)
+{
+	m_thisPseudostatePtr = thisPseudostatePtr;
+	setThisVertexPtr(thisPseudostatePtr);
+}
 std::shared_ptr<ecore::EObject> PseudostateImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -337,94 +380,262 @@ boost::any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //604
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return getContainer(); //6010
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //600
-		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return getIncoming(); //6011
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
 			return getKind(); //6014
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //605
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //606
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //607
-		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return getOutgoing(); //6012
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //601
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //602
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //603
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //608
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 			return getState(); //6013
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 			return getStateMachine(); //6015
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //609
 	}
-	return boost::any();
+	return VertexImpl::internalEIsSet(featureID);
 }
-
-void PseudostateImpl::eSet(int featureID, boost::any newValue)
+bool PseudostateImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
-			setContainer(_container); //6010
-			break;
-		}
+		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
+			return m_kind != PseudostateKind::INITIAL;; //6014
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
+			return getState().lock() != nullptr; //6013
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
+			return getStateMachine().lock() != nullptr; //6015
+	}
+	return VertexImpl::internalEIsSet(featureID);
+}
+bool PseudostateImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
 		{
 			// BOOST CAST
 			PseudostateKind _kind = boost::any_cast<PseudostateKind>(newValue);
 			setKind(_kind); //6014
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //605
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //606
-			break;
+			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
 			setState(_state); //6013
-			break;
+			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
 			setStateMachine(_stateMachine); //6015
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //609
-			break;
+			return true;
 		}
 	}
+
+	return VertexImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PseudostateImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("kind");
+		if ( iter != attr_list.end() )
+		{
+			PseudostateKind value = PseudostateKind::INITIAL;
+			std::string literal = iter->second;
+			if (literal == "initial")
+			{
+				value = PseudostateKind::INITIAL;
+			}
+			else if (literal == "deepHistory")
+			{
+				value = PseudostateKind::DEEPHISTORY;
+			}
+			else if (literal == "shallowHistory")
+			{
+				value = PseudostateKind::SHALLOWHISTORY;
+			}
+			else if (literal == "join")
+			{
+				value = PseudostateKind::JOIN;
+			}
+			else if (literal == "fork")
+			{
+				value = PseudostateKind::FORK;
+			}
+			else if (literal == "junction")
+			{
+				value = PseudostateKind::JUNCTION;
+			}
+			else if (literal == "choice")
+			{
+				value = PseudostateKind::CHOICE;
+			}
+			else if (literal == "entryPoint")
+			{
+				value = PseudostateKind::ENTRYPOINT;
+			}
+			else if (literal == "exitPoint")
+			{
+				value = PseudostateKind::EXITPOINT;
+			}
+			else if (literal == "terminate")
+			{
+				value = PseudostateKind::TERMINATE;
+			}
+			this->setKind(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	VertexImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PseudostateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	VertexImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void PseudostateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>( references.front() );
+				setState(_state);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>( references.front() );
+				setStateMachine(_stateMachine);
+			}
+			
+			return;
+		}
+	}
+	VertexImpl::resolveReferences(featureID, references);
+}
+
+void PseudostateImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void PseudostateImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getPseudostate_EAttribute_kind()) )
+		{
+			PseudostateKind value = this->getKind();
+			std::string literal = "";
+			if (value == PseudostateKind::INITIAL)
+			{
+				literal = "initial";
+			}
+			else if (value == PseudostateKind::DEEPHISTORY)
+			{
+				literal = "deepHistory";
+			}
+			else if (value == PseudostateKind::SHALLOWHISTORY)
+			{
+				literal = "shallowHistory";
+			}
+			else if (value == PseudostateKind::JOIN)
+			{
+				literal = "join";
+			}
+			else if (value == PseudostateKind::FORK)
+			{
+				literal = "fork";
+			}
+			else if (value == PseudostateKind::JUNCTION)
+			{
+				literal = "junction";
+			}
+			else if (value == PseudostateKind::CHOICE)
+			{
+				literal = "choice";
+			}
+			else if (value == PseudostateKind::ENTRYPOINT)
+			{
+				literal = "entryPoint";
+			}
+			else if (value == PseudostateKind::EXITPOINT)
+			{
+				literal = "exitPoint";
+			}
+			else if (value == PseudostateKind::TERMINATE)
+			{
+				literal = "terminate";
+			}
+			saveHandler->addAttribute("kind", literal);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

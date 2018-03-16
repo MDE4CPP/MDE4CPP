@@ -1,12 +1,38 @@
 #include "uml/impl/OccurrenceSpecificationImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
@@ -29,6 +55,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -126,10 +158,10 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -140,10 +172,10 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toAfter = obj.getToAfter();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = obj.getToAfter();
 	m_toAfter.reset(new Bag<uml::GeneralOrdering>(*(obj.getToAfter().get())));
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toBefore = obj.getToBefore();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = obj.getToBefore();
 	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 
@@ -185,7 +217,8 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 
 std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OccurrenceSpecificationImpl(*this));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(*this));
+	element->setThisOccurrenceSpecificationPtr(element);
 	return element;
 }
 
@@ -212,14 +245,14 @@ void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  val
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::GeneralOrdering> > OccurrenceSpecificationImpl::getToAfter() const
+std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAfter() const
 {
 
     return m_toAfter;
 }
 
 
-std::shared_ptr< Bag<uml::GeneralOrdering> > OccurrenceSpecificationImpl::getToBefore() const
+std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBefore() const
 {
 
     return m_toBefore;
@@ -233,7 +266,7 @@ std::weak_ptr<uml::Namespace > OccurrenceSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > OccurrenceSpecificationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> OccurrenceSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -243,6 +276,15 @@ std::weak_ptr<uml::Element > OccurrenceSpecificationImpl::getOwner() const
 }
 
 
+std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr()
+{
+	return m_thisOccurrenceSpecificationPtr.lock();
+}
+void OccurrenceSpecificationImpl::setThisOccurrenceSpecificationPtr(std::weak_ptr<OccurrenceSpecification> thisOccurrenceSpecificationPtr)
+{
+	m_thisOccurrenceSpecificationPtr = thisOccurrenceSpecificationPtr;
+	setThisInteractionFragmentPtr(thisOccurrenceSpecificationPtr);
+}
 std::shared_ptr<ecore::EObject> OccurrenceSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -274,80 +316,171 @@ boost::any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //2214
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //22110
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //2210
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //22112
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //22111
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //22113
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //2215
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //2216
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //2217
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //2211
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //2212
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //2213
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //2218
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
 			return getToAfter(); //22114
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
 			return getToBefore(); //22115
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //2219
 	}
-	return boost::any();
+	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-
-void OccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
+			return getToAfter() != nullptr; //22114
+		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
+			return getToBefore() != nullptr; //22115
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+bool OccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("toAfter");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
-			setEnclosingInteraction(_enclosingInteraction); //22112
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("toAfter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+
+		iter = attr_list.find("toBefore");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
-			setEnclosingOperand(_enclosingOperand); //22111
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //2215
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //2216
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //2219
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("toBefore")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
+
+void OccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
+		{
+			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::GeneralOrdering> _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
+				if (_r != nullptr)
+				{
+					_toAfter->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
+		{
+			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::GeneralOrdering> _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
+				if (_r != nullptr)
+				{
+					_toBefore->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void OccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::GeneralOrdering>> toAfter_list = this->getToAfter();
+		for (std::shared_ptr<uml::GeneralOrdering > object : *toAfter_list)
+		{ 
+			saveHandler->addReferences("toAfter", object);
+		}
+		std::shared_ptr<Bag<uml::GeneralOrdering>> toBefore_list = this->getToBefore();
+		for (std::shared_ptr<uml::GeneralOrdering > object : *toBefore_list)
+		{ 
+			saveHandler->addReferences("toBefore", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -7,20 +7,6 @@
 #ifndef UML_CLAUSECLAUSEIMPL_HPP
 #define UML_CLAUSECLAUSEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 //*********************************
 // generated Includes
 
@@ -28,8 +14,6 @@
 #include "../Clause.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
-
-
 
 //*********************************
 namespace uml 
@@ -46,6 +30,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClauseImpl();
+			virtual std::shared_ptr<Clause> getThisClausePtr();
+			virtual void setThisClausePtr(std::weak_ptr<Clause> thisClausePtr);
 
 			//Additional constructors for the containments back reference
 			ClauseImpl(std::weak_ptr<uml::Element > par_owner);
@@ -90,12 +76,12 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getBody() const ;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBody() const ;
 			
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::OutputPin> > getBodyOutput() const ;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const ;
 			
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
@@ -109,17 +95,17 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::Clause> > getPredecessorClause() const ;
+			virtual std::shared_ptr<Bag<uml::Clause>> getPredecessorClause() const ;
 			
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::Clause> > getSuccessorClause() const ;
+			virtual std::shared_ptr<Bag<uml::Clause>> getSuccessorClause() const ;
 			
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getTest() const ;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const ;
 			
 							
 			
@@ -129,20 +115,34 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Clause> m_thisClausePtr;
 	};
 }
 #endif /* end of include guard: UML_CLAUSECLAUSEIMPL_HPP */
-

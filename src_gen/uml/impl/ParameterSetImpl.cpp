@@ -1,12 +1,39 @@
 #include "uml/impl/ParameterSetImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Comment.hpp"
 
 #include "uml/Constraint.hpp"
@@ -25,6 +52,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -109,14 +142,14 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr< Bag<uml::Parameter> > _parameter = obj.getParameter();
+	std::shared_ptr<Bag<uml::Parameter>> _parameter = obj.getParameter();
 	m_parameter.reset(new Bag<uml::Parameter>(*(obj.getParameter().get())));
 
 
@@ -165,7 +198,8 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 
 std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ParameterSetImpl(*this));
+	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(*this));
+	element->setThisParameterSetPtr(element);
 	return element;
 }
 
@@ -202,14 +236,14 @@ bool ParameterSetImpl::two_parameter_sets(boost::any diagnostics,std::map <   bo
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Constraint, uml::Element > > ParameterSetImpl::getCondition() const
+std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCondition() const
 {
 
     return m_condition;
 }
 
 
-std::shared_ptr< Bag<uml::Parameter> > ParameterSetImpl::getParameter() const
+std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
@@ -219,7 +253,7 @@ std::shared_ptr< Bag<uml::Parameter> > ParameterSetImpl::getParameter() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > ParameterSetImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ParameterSetImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -229,6 +263,15 @@ std::weak_ptr<uml::Element > ParameterSetImpl::getOwner() const
 }
 
 
+std::shared_ptr<ParameterSet> ParameterSetImpl::getThisParameterSetPtr()
+{
+	return m_thisParameterSetPtr.lock();
+}
+void ParameterSetImpl::setThisParameterSetPtr(std::weak_ptr<ParameterSet> thisParameterSetPtr)
+{
+	m_thisParameterSetPtr = thisParameterSetPtr;
+	setThisNamedElementPtr(thisParameterSetPtr);
+}
 std::shared_ptr<ecore::EObject> ParameterSetImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -250,58 +293,174 @@ boost::any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //524
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
 			return getCondition(); //5210
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //520
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //525
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //526
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //527
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //521
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //522
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //523
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
 			return getParameter(); //5211
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //528
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //529
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
-
-void ParameterSetImpl::eSet(int featureID, boost::any newValue)
+bool ParameterSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
+			return getCondition() != nullptr; //5210
+		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
+			return getParameter() != nullptr; //5211
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool ParameterSetImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ParameterSetImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ParameterSetImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("parameter");
+		if ( iter != attr_list.end() )
 		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //525
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //526
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //529
-			break;
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
+
+void ParameterSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("condition") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Constraint";
+			}
+			std::shared_ptr<uml::Constraint> condition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName));
+			if (condition != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Constraint, uml::Element>> list_condition = this->getCondition();
+				list_condition->push_back(condition);
+				loadHandler->handleChild(condition);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ParameterSetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
+		{
+			std::shared_ptr<Bag<uml::Parameter>> _parameter = getParameter();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Parameter> _r = std::dynamic_pointer_cast<uml::Parameter>(ref);
+				if (_r != nullptr)
+				{
+					_parameter->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void ParameterSetImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'condition'
+		for (std::shared_ptr<uml::Constraint> condition : *this->getCondition()) 
+		{
+			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_EClass());
+		}
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::Parameter>> parameter_list = this->getParameter();
+		for (std::shared_ptr<uml::Parameter > object : *parameter_list)
+		{ 
+			saveHandler->addReferences("parameter", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -7,31 +7,39 @@
 #ifndef UML_CLAUSE_HPP
 #define UML_CLAUSE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -123,12 +131,12 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getBody() const = 0;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBody() const = 0;
 			
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::OutputPin> > getBodyOutput() const = 0;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
 			
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
@@ -142,17 +150,17 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::Clause> > getPredecessorClause() const = 0;
+			virtual std::shared_ptr<Bag<uml::Clause>> getPredecessorClause() const = 0;
 			
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::Clause> > getSuccessorClause() const = 0;
+			virtual std::shared_ptr<Bag<uml::Clause>> getSuccessorClause() const = 0;
 			
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getTest() const = 0;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
 			
 			
 
@@ -168,11 +176,11 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExecutableNode> > m_body;
+			std::shared_ptr<Bag<uml::ExecutableNode>> m_body;
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::OutputPin> > m_bodyOutput;
+			std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p> */
@@ -180,15 +188,15 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::Clause> > m_predecessorClause;
+			std::shared_ptr<Bag<uml::Clause>> m_predecessorClause;
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::Clause> > m_successorClause;
+			std::shared_ptr<Bag<uml::Clause>> m_successorClause;
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExecutableNode> > m_test;
+			std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
 			
 
 		public:
@@ -198,11 +206,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_CLAUSE_HPP */
-

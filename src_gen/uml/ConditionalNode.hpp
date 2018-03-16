@@ -7,31 +7,40 @@
 #ifndef UML_CONDITIONALNODE_HPP
 #define UML_CONDITIONALNODE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -259,12 +268,12 @@ namespace uml
 			/*!
 			 The set of Clauses composing the ConditionalNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<Subset<uml::Clause, uml::Element > > getClause() const = 0;
+			virtual std::shared_ptr<Subset<uml::Clause, uml::Element>> getClause() const = 0;
 			
 			/*!
 			 The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::OutputPin> > getResult() const = 0;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 			
 			
 
@@ -275,11 +284,11 @@ namespace uml
 			/*!
 			 If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p> */ 
-			bool m_isAssured =  false;
+			bool m_isAssured = false;
 			/*!
 			 If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p> */ 
-			bool m_isDeterminate =  false;
+			bool m_isDeterminate = false;
 			
 			
 			//*********************************
@@ -288,11 +297,11 @@ namespace uml
 			/*!
 			 The set of Clauses composing the ConditionalNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Clause, uml::Element > > m_clause;
+			std::shared_ptr<Subset<uml::Clause, uml::Element>> m_clause;
 			/*!
 			 The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::OutputPin> > m_result;
+			std::shared_ptr<Bag<uml::OutputPin>> m_result;
 			
 
 		public:
@@ -302,38 +311,46 @@ namespace uml
 			/*!
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const = 0;/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_CONDITIONALNODE_HPP */
-

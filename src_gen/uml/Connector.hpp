@@ -7,31 +7,40 @@
 #ifndef UML_CONNECTOR_HPP
 #define UML_CONNECTOR_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include <map>
-#include <string>
-#include <vector>
+#include <list>
 #include <memory>
-#include <cassert>
+#include <string>
 
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -177,17 +186,17 @@ namespace uml
 			/*!
 			 The set of Behaviors that specify the valid interaction patterns across the Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr< Bag<uml::Behavior> > getContract() const = 0;
+			virtual std::shared_ptr<Bag<uml::Behavior>> getContract() const = 0;
 			
 			/*!
 			 A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element > > getEnd() const = 0;
+			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> getEnd() const = 0;
 			
 			/*!
 			 A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > > getRedefinedConnector() const = 0;
+			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const = 0;
 			
 			/*!
 			 An optional Association that classifies links corresponding to this Connector.
@@ -207,7 +216,7 @@ namespace uml
 			/*!
 			 Indicates the kind of Connector. This is derived: a Connector with one or more ends connected to a Port which is not on a Part and which is not a behavior port is a delegation; otherwise it is an assembly.
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			ConnectorKind m_kind ;
+			ConnectorKind m_kind = ConnectorKind::ASSEMBLY;
 			
 			
 			//*********************************
@@ -216,15 +225,15 @@ namespace uml
 			/*!
 			 The set of Behaviors that specify the valid interaction patterns across the Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr< Bag<uml::Behavior> > m_contract;
+			std::shared_ptr<Bag<uml::Behavior>> m_contract;
 			/*!
 			 A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element > > m_end;
+			std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> m_end;
 			/*!
 			 A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > > m_redefinedConnector;
+			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> m_redefinedConnector;
 			/*!
 			 An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
@@ -238,17 +247,25 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_CONNECTOR_HPP */
-

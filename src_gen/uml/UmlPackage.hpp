@@ -7,20 +7,6 @@
 #ifndef UMLPACKAGE_HPP
 #define UMLPACKAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -2616,10 +2602,10 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int FACTORY_ECLASS = 24;
 			static const unsigned int FACTORY_ECLASS_FEATURE_COUNT = 4;
-			static const unsigned int FACTORY_ECLASS_OPERATION_COUNT = 38;
+			static const unsigned int FACTORY_ECLASS_OPERATION_COUNT = 43;
 			
 			
-			static const int FACTORY_EOPERATION_CREATE_CLASS = 37;
+			static const int FACTORY_EOPERATION_CREATE_CLASS = 42;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFactory_EClass() const = 0;
@@ -6934,4 +6920,3 @@ namespace uml
 	};
 }
 #endif /* end of include guard: UMLPACKAGE_HPP */
-

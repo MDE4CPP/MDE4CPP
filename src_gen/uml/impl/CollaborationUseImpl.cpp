@@ -1,12 +1,39 @@
 #include "uml/impl/CollaborationUseImpl.hpp"
-#include <iostream>
-#include <cassert>
 
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Collaboration.hpp"
 
 #include "uml/Comment.hpp"
@@ -23,6 +50,12 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -104,7 +137,7 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):Col
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -159,7 +192,8 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):Col
 
 std::shared_ptr<ecore::EObject>  CollaborationUseImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CollaborationUseImpl(*this));
+	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(*this));
+	element->setThisCollaborationUsePtr(element);
 	return element;
 }
 
@@ -196,7 +230,7 @@ bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost:
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Dependency, uml::Element > > CollaborationUseImpl::getRoleBinding() const
+std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::getRoleBinding() const
 {
 
     return m_roleBinding;
@@ -216,7 +250,7 @@ void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > CollaborationUseImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> CollaborationUseImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -226,6 +260,15 @@ std::weak_ptr<uml::Element > CollaborationUseImpl::getOwner() const
 }
 
 
+std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr()
+{
+	return m_thisCollaborationUsePtr.lock();
+}
+void CollaborationUseImpl::setThisCollaborationUsePtr(std::weak_ptr<CollaborationUse> thisCollaborationUsePtr)
+{
+	m_thisCollaborationUsePtr = thisCollaborationUsePtr;
+	setThisNamedElementPtr(thisCollaborationUsePtr);
+}
 std::shared_ptr<ecore::EObject> CollaborationUseImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -247,65 +290,175 @@ boost::any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //904
-		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations(); //900
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //905
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //906
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //907
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //901
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //902
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //903
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //908
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
 			return getRoleBinding(); //9010
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
 			return getType(); //9011
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //909
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
-
-void CollaborationUseImpl::eSet(int featureID, boost::any newValue)
+bool CollaborationUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
-			setName(_name); //905
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
-			setNameExpression(_nameExpression); //906
-			break;
-		}
+		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
+			return getRoleBinding() != nullptr; //9010
+		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+			return getType() != nullptr; //9011
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool CollaborationUseImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Collaboration> _type = boost::any_cast<std::shared_ptr<uml::Collaboration>>(newValue);
 			setType(_type); //9011
-			break;
-		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
-			setVisibility(_visibility); //909
-			break;
+			return true;
 		}
 	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CollaborationUseImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CollaborationUseImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CollaborationUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("roleBinding") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Dependency";
+			}
+			std::shared_ptr<uml::Dependency> roleBinding = std::dynamic_pointer_cast<uml::Dependency>(modelFactory->create(typeName));
+			if (roleBinding != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Dependency, uml::Element>> list_roleBinding = this->getRoleBinding();
+				list_roleBinding->push_back(roleBinding);
+				loadHandler->handleChild(roleBinding);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void CollaborationUseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void CollaborationUseImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'roleBinding'
+		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 
+		{
+			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

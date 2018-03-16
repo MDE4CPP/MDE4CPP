@@ -7,20 +7,6 @@
 #ifndef UMLFACTORYIMPL_HPP
 #define UMLFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-//#include "util/ProfileCallCount.hpp"
-
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "uml/UmlFactory.hpp"
@@ -1388,6 +1374,9 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<Factory> createFactory() const ;
+			//Add containing object
+			virtual std::shared_ptr<Factory> createFactory_in_Owner(std::weak_ptr<uml::Element > par_owner) const ;
+			
 			
 			virtual std::shared_ptr<FinalState> createFinalState() const ;
 			//Add containing object
@@ -3084,9 +3073,6 @@ namespace uml
 		private:
 			static UmlFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: UMLFACTORYIMPL_HPP */
-
