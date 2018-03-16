@@ -356,7 +356,7 @@ void XMLLoadHandler::loadTypesFromFile(const std::string& name)
 			if (m_refToObject_map.find(key) == m_refToObject_map.end())
 			{
 				m_refToObject_map.insert(std::pair<std::string, std::shared_ptr<ecore::EObject>>(key, iter->second));
-				MSG_DEBUG("Add to map: '" << ref << "'");
+				MSG_DEBUG("Add to map: '" << key << "'");
 			}
 		}
 		iter++;
