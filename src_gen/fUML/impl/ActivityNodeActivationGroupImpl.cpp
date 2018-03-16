@@ -43,6 +43,12 @@
 
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/ActivityEdge.hpp"
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -57,6 +63,12 @@
 
 #include "fUML/StructuredActivityNodeActivation.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -180,7 +192,8 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 
 std::shared_ptr<ecore::EObject>  ActivityNodeActivationGroupImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityNodeActivationGroupImpl(*this));
+	std::shared_ptr<ActivityNodeActivationGroupImpl> element(new ActivityNodeActivationGroupImpl(*this));
+	element->setThisActivityNodeActivationGroupPtr(element);
 	return element;
 }
 
@@ -624,25 +637,11 @@ std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ActivityNodeActivationGroupIm
 
 std::shared_ptr<ActivityNodeActivationGroup> ActivityNodeActivationGroupImpl::getThisActivityNodeActivationGroupPtr()
 {
-	if(auto wp = m_activityExecution.lock())
-	{
-		std::shared_ptr<fUML::ActivityNodeActivationGroup > anActivityNodeActivationGroup = wp->getActivationGroup();
-		if (anActivityNodeActivationGroup.get() == this)
-		{
-			return anActivityNodeActivationGroup ;
-		}
-	}
-
-	if(auto wp = m_containingNodeActivation.lock())
-	{
-		std::shared_ptr<fUML::ActivityNodeActivationGroup > anActivityNodeActivationGroup = wp->getActivationGroup();
-		if (anActivityNodeActivationGroup.get() == this)
-		{
-			return anActivityNodeActivationGroup ;
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ActivityNodeActivationGroup>(this, null_deleter());
+	return m_thisActivityNodeActivationGroupPtr.lock();
+}
+void ActivityNodeActivationGroupImpl::setThisActivityNodeActivationGroupPtr(std::weak_ptr<ActivityNodeActivationGroup> thisActivityNodeActivationGroupPtr)
+{
+	m_thisActivityNodeActivationGroupPtr = thisActivityNodeActivationGroupPtr;
 }
 std::shared_ptr<ecore::EObject> ActivityNodeActivationGroupImpl::eContainer() const
 {
@@ -676,10 +675,26 @@ boost::any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bo
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
 			return getSuspendedActivations(); //504
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ActivityNodeActivationGroupImpl::eSet(int featureID, boost::any newValue)
+bool ActivityNodeActivationGroupImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
+			return getActivityExecution().lock() != nullptr; //502
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
+			return getContainingNodeActivation().lock() != nullptr; //503
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_EDGEINSTANCES:
+			return getEdgeInstances() != nullptr; //500
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_NODEACTIVATIONS:
+			return getNodeActivations() != nullptr; //501
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
+			return getSuspendedActivations() != nullptr; //504
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ActivityNodeActivationGroupImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -688,14 +703,204 @@ void ActivityNodeActivationGroupImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityExecution> _activityExecution = boost::any_cast<std::shared_ptr<fUML::ActivityExecution>>(newValue);
 			setActivityExecution(_activityExecution); //502
-			break;
+			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = boost::any_cast<std::shared_ptr<fUML::StructuredActivityNodeActivation>>(newValue);
 			setContainingNodeActivation(_containingNodeActivation); //503
-			break;
+			return true;
 		}
 	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityNodeActivationGroupImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityNodeActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("suspendedActivations");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("suspendedActivations")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("edgeInstances") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ActivityEdgeInstance";
+			}
+			std::shared_ptr<ecore::EObject> edgeInstances = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP);
+			if (edgeInstances != nullptr)
+			{
+				loadHandler->handleChild(edgeInstances);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("nodeActivations") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> nodeActivations = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP);
+			if (nodeActivations != nullptr)
+			{
+				loadHandler->handleChild(nodeActivations);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::ActivityExecution> _activityExecution = std::dynamic_pointer_cast<fUML::ActivityExecution>( references.front() );
+				setActivityExecution(_activityExecution);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = std::dynamic_pointer_cast<fUML::StructuredActivityNodeActivation>( references.front() );
+				setContainingNodeActivation(_containingNodeActivation);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
+		{
+			std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::ActivityNodeActivation> _r = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(ref);
+				if (_r != nullptr)
+				{
+					_suspendedActivations->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ActivityNodeActivationGroupImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ActivityNodeActivationGroupImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> suspendedActivations_list = this->getSuspendedActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation > object : *suspendedActivations_list)
+		{ 
+			saveHandler->addReferences("suspendedActivations", object);
+		}
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'edgeInstances'
+		std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> list_edgeInstances = this->getEdgeInstances();
+		for (std::shared_ptr<fUML::ActivityEdgeInstance> edgeInstances : *list_edgeInstances) 
+		{
+			saveHandler->addReference(edgeInstances, "edgeInstances", edgeInstances->eClass() != package->getActivityEdgeInstance_EClass());
+		}
+
+		// Save 'nodeActivations'
+		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> list_nodeActivations = this->getNodeActivations();
+		for (std::shared_ptr<fUML::ActivityNodeActivation> nodeActivations : *list_nodeActivations) 
+		{
+			saveHandler->addReference(nodeActivations, "nodeActivations", nodeActivations->eClass() != package->getActivityNodeActivation_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

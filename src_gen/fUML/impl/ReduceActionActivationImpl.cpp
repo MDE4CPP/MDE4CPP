@@ -26,6 +26,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActionActivation.hpp"
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -44,6 +50,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -144,7 +156,8 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 
 std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ReduceActionActivationImpl(*this));
+	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(*this));
+	element->setThisReduceActionActivationPtr(element);
 	return element;
 }
 
@@ -185,19 +198,12 @@ std::shared_ptr<Union<fUML::PinActivation>> ReduceActionActivationImpl::getPinAc
 
 std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersReduceActionActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anReduceActionActivation : *ownersReduceActionActivationList)
-		{
-			if (anReduceActionActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<ReduceActionActivation>(anReduceActionActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ReduceActionActivation>(this, null_deleter());
+	return m_thisReduceActionActivationPtr.lock();
+}
+void ReduceActionActivationImpl::setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr)
+{
+	m_thisReduceActionActivationPtr = thisReduceActionActivationPtr;
+	setThisActionActivationPtr(thisReduceActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::eContainer() const
 {
@@ -217,31 +223,19 @@ boost::any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
 			return getCurrentExecution(); //10510
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring(); //1057
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //1053
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //1052
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //1051
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation(); //1058
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //1054
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1050
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation(); //1059
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation(); //1056
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //1055
 	}
-	return boost::any();
+	return ActionActivationImpl::internalEIsSet(featureID);
 }
-
-void ReduceActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+			return getCurrentExecution() != nullptr; //10510
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+bool ReduceActionActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -250,35 +244,115 @@ void ReduceActionActivationImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _currentExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
 			setCurrentExecution(_currentExecution); //10510
-			break;
-		}
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-		{
-			// BOOST CAST
-			bool _firing = boost::any_cast<bool>(newValue);
-			setFiring(_firing); //1057
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //1053
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //1054
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //1055
-			break;
+			return true;
 		}
 	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ReduceActionActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ReduceActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("currentExecution");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("currentExecution")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReduceActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ReduceActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Execution> _currentExecution = std::dynamic_pointer_cast<fUML::Execution>( references.front() );
+				setCurrentExecution(_currentExecution);
+			}
+			
+			return;
+		}
+	}
+	ActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void ReduceActionActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("currentExecution", this->getCurrentExecution());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

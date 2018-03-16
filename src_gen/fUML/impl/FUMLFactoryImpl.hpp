@@ -476,8 +476,6 @@ namespace fUML
 		private:
 			static FUMLFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: FUMLFACTORYIMPL_HPP */

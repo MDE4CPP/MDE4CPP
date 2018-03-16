@@ -28,6 +28,12 @@
 #include "uml/Operation.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Behavior.hpp"
 
 #include "fUML/DispatchStrategy.hpp"
@@ -36,6 +42,12 @@
 
 #include "uml/Operation.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -83,7 +95,8 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(con
 
 std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new RedefinitionBasedDispatchStrategyImpl(*this));
+	std::shared_ptr<RedefinitionBasedDispatchStrategyImpl> element(new RedefinitionBasedDispatchStrategyImpl(*this));
+	element->setThisRedefinitionBasedDispatchStrategyPtr(element);
 	return element;
 }
 
@@ -167,8 +180,12 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 
 std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<RedefinitionBasedDispatchStrategy>(this, null_deleter());
+	return m_thisRedefinitionBasedDispatchStrategyPtr.lock();
+}
+void RedefinitionBasedDispatchStrategyImpl::setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr)
+{
+	m_thisRedefinitionBasedDispatchStrategyPtr = thisRedefinitionBasedDispatchStrategyPtr;
+	setThisDispatchStrategyPtr(thisRedefinitionBasedDispatchStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> RedefinitionBasedDispatchStrategyImpl::eContainer() const
 {
@@ -183,12 +200,87 @@ boost::any RedefinitionBasedDispatchStrategyImpl::eGet(int featureID, bool resol
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return DispatchStrategyImpl::internalEIsSet(featureID);
 }
-
-void RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+bool RedefinitionBasedDispatchStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return DispatchStrategyImpl::internalEIsSet(featureID);
 }
+bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return DispatchStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void RedefinitionBasedDispatchStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void RedefinitionBasedDispatchStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	DispatchStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void RedefinitionBasedDispatchStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	DispatchStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void RedefinitionBasedDispatchStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	DispatchStrategyImpl::resolveReferences(featureID, references);
+}
+
+void RedefinitionBasedDispatchStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DispatchStrategyImpl::saveContent(saveHandler);
+	
+	SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

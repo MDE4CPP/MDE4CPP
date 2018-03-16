@@ -17,7 +17,6 @@
 //depending model packages
 #include "ecore/EcorePackage.hpp"
 #include "uml/UmlPackage.hpp"
-#include "uml/UmlPackage.hpp"
 
 using namespace fUML;
 
@@ -42,13 +41,14 @@ FUMLPackage* FUMLPackageImpl::create()
 	 
     // Obtain or create package and create package meta-data objects
     FUMLPackageImpl * metaModelPackage = new FUMLPackageImpl();
-	metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void FUMLPackageImpl::init()
+void FUMLPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 {
     // Initialize created meta-data
+	createPackageContents(package);
+	setThisEPackagePtr(package);
     initializePackageContents();   
 }
 

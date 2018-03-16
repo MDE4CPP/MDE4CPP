@@ -28,11 +28,12 @@ virtual public EventDispatchLoop
 
 		private:    
 			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&) = delete;
-			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			EventDispatchLoopImpl();
+			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr();
+			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr);
 
 
 
@@ -63,14 +64,29 @@ virtual public EventDispatchLoop
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EventDispatchLoop> m_thisEventDispatchLoopPtr;
 	};
 }
 #endif /* end of include guard: FUML_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP */

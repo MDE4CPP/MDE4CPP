@@ -24,8 +24,20 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/SignalInstance.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -73,7 +85,8 @@ EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepte
 
 std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EventAccepterImpl(*this));
+	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl(*this));
+	element->setThisEventAccepterPtr(element);
 	return element;
 }
 
@@ -112,8 +125,11 @@ bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInsta
 
 std::shared_ptr<EventAccepter> EventAccepterImpl::getThisEventAccepterPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<EventAccepter>(this, null_deleter());
+	return m_thisEventAccepterPtr.lock();
+}
+void EventAccepterImpl::setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr)
+{
+	m_thisEventAccepterPtr = thisEventAccepterPtr;
 }
 std::shared_ptr<ecore::EObject> EventAccepterImpl::eContainer() const
 {
@@ -128,12 +144,83 @@ boost::any EventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void EventAccepterImpl::eSet(int featureID, boost::any newValue)
+bool EventAccepterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool EventAccepterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EventAccepterImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EventAccepterImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EventAccepterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void EventAccepterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void EventAccepterImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

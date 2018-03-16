@@ -35,6 +35,12 @@
 #include "fuml/ObjectToken.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -53,6 +59,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -164,7 +176,8 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 
 std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CallActionActivationImpl(*this));
+	std::shared_ptr<CallActionActivationImpl> element(new CallActionActivationImpl(*this));
+	element->setThisCallActionActivationPtr(element);
 	return element;
 }
 
@@ -323,19 +336,12 @@ std::shared_ptr<Union<fUML::PinActivation>> CallActionActivationImpl::getPinActi
 
 std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersCallActionActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anCallActionActivation : *ownersCallActionActivationList)
-		{
-			if (anCallActionActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<CallActionActivation>(anCallActionActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<CallActionActivation>(this, null_deleter());
+	return m_thisCallActionActivationPtr.lock();
+}
+void CallActionActivationImpl::setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr)
+{
+	m_thisCallActionActivationPtr = thisCallActionActivationPtr;
+	setThisInvocationActionActivationPtr(thisCallActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
 {
@@ -355,61 +361,135 @@ boost::any CallActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	{
 		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
 			return getCallExecutions(); //8110
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring(); //817
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //813
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //812
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //811
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation(); //818
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //814
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //810
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation(); //819
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation(); //816
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //815
 	}
-	return boost::any();
+	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
-
-void CallActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool CallActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
+		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
+			return getCallExecutions() != nullptr; //8110
+	}
+	return InvocationActionActivationImpl::internalEIsSet(featureID);
+}
+bool CallActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return InvocationActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CallActionActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InvocationActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("callExecutions") == 0 )
 		{
-			// BOOST CAST
-			bool _firing = boost::any_cast<bool>(newValue);
-			setFiring(_firing); //817
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //813
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //814
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //815
-			break;
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<fUML::Execution> callExecutions = std::dynamic_pointer_cast<fUML::Execution>(modelFactory->create(typeName));
+			if (callExecutions != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::Execution>> list_callExecutions = this->getCallExecutions();
+				list_callExecutions->push_back(callExecutions);
+				loadHandler->handleChild(callExecutions);
+			}
+			return;
 		}
 	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InvocationActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
 }
+
+void CallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InvocationActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void CallActionActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InvocationActionActivationImpl::saveContent(saveHandler);
+	
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'callExecutions'
+		std::shared_ptr<Bag<fUML::Execution>> list_callExecutions = this->getCallExecutions();
+		for (std::shared_ptr<fUML::Execution> callExecutions : *list_callExecutions) 
+		{
+			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() != package->getExecution_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

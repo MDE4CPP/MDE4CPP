@@ -32,6 +32,12 @@
 #include "uml/ValueSpecification.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Behavior.hpp"
 
 #include "uml/Element.hpp"
@@ -56,6 +62,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -147,7 +159,8 @@ ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):Exe
 
 std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryImpl(*this));
+	std::shared_ptr<ExecutionFactoryImpl> element(new ExecutionFactoryImpl(*this));
+	element->setThisExecutionFactoryPtr(element);
 	return element;
 }
 
@@ -392,16 +405,11 @@ std::shared_ptr<Bag<fUML::SemanticStrategy>> ExecutionFactoryImpl::getStrategies
 
 std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr()
 {
-	if(auto wp = m_locus.lock())
-	{
-		std::shared_ptr<fUML::ExecutionFactory > anExecutionFactory = wp->getFactory();
-		if (anExecutionFactory.get() == this)
-		{
-			return anExecutionFactory ;
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ExecutionFactory>(this, null_deleter());
+	return m_thisExecutionFactoryPtr.lock();
+}
+void ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr)
+{
+	m_thisExecutionFactoryPtr = thisExecutionFactoryPtr;
 }
 std::shared_ptr<ecore::EObject> ExecutionFactoryImpl::eContainer() const
 {
@@ -428,10 +436,24 @@ boost::any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
 			return getStrategies(); //11
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
+			return getBuiltInTypes() != nullptr; //13
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+			return getLocus().lock() != nullptr; //10
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
+			return getPrimitiveBehaviorPrototypes() != nullptr; //12
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
+			return getStrategies() != nullptr; //11
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -440,7 +462,178 @@ void ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
 			setLocus(_locus); //10
-			break;
+			return true;
 		}
 	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("builtInTypes");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("builtInTypes")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("primitiveBehaviorPrototypes");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("primitiveBehaviorPrototypes")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("strategies");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("strategies")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
+		{
+			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::PrimitiveType> _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
+				if (_r != nullptr)
+				{
+					_builtInTypes->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>( references.front() );
+				setLocus(_locus);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
+		{
+			std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::OpaqueBehaviorExecution> _r = std::dynamic_pointer_cast<fUML::OpaqueBehaviorExecution>(ref);
+				if (_r != nullptr)
+				{
+					_primitiveBehaviorPrototypes->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
+		{
+			std::shared_ptr<Bag<fUML::SemanticStrategy>> _strategies = getStrategies();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::SemanticStrategy> _r = std::dynamic_pointer_cast<fUML::SemanticStrategy>(ref);
+				if (_r != nullptr)
+				{
+					_strategies->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ExecutionFactoryImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypes_list = this->getBuiltInTypes();
+		for (std::shared_ptr<uml::PrimitiveType > object : *builtInTypes_list)
+		{ 
+			saveHandler->addReferences("builtInTypes", object);
+		}
+		std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> primitiveBehaviorPrototypes_list = this->getPrimitiveBehaviorPrototypes();
+		for (std::shared_ptr<fUML::OpaqueBehaviorExecution > object : *primitiveBehaviorPrototypes_list)
+		{ 
+			saveHandler->addReferences("primitiveBehaviorPrototypes", object);
+		}
+		std::shared_ptr<Bag<fUML::SemanticStrategy>> strategies_list = this->getStrategies();
+		for (std::shared_ptr<fUML::SemanticStrategy > object : *strategies_list)
+		{ 
+			saveHandler->addReferences("strategies", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

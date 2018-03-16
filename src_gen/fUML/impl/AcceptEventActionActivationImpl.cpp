@@ -26,6 +26,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/AcceptEventActionEventAccepter.hpp"
 
 #include "fUML/ActionActivation.hpp"
@@ -46,6 +52,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -147,7 +159,8 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 
 std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new AcceptEventActionActivationImpl(*this));
+	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(*this));
+	element->setThisAcceptEventActionActivationPtr(element);
 	return element;
 }
 
@@ -208,19 +221,12 @@ std::shared_ptr<Union<fUML::PinActivation>> AcceptEventActionActivationImpl::get
 
 std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersAcceptEventActionActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anAcceptEventActionActivation : *ownersAcceptEventActionActivationList)
-		{
-			if (anAcceptEventActionActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<AcceptEventActionActivation>(anAcceptEventActionActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<AcceptEventActionActivation>(this, null_deleter());
+	return m_thisAcceptEventActionActivationPtr.lock();
+}
+void AcceptEventActionActivationImpl::setThisAcceptEventActionActivationPtr(std::weak_ptr<AcceptEventActionActivation> thisAcceptEventActionActivationPtr)
+{
+	m_thisAcceptEventActionActivationPtr = thisAcceptEventActionActivationPtr;
+	setThisActionActivationPtr(thisAcceptEventActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::eContainer() const
 {
@@ -240,33 +246,23 @@ boost::any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bo
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
 			return getEventAccepter(); //10910
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring(); //1097
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //1093
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //1092
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //1091
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation(); //1098
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //1094
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1090
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation(); //1099
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation(); //1096
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //1095
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
 			return isWaiting(); //10911
 	}
-	return boost::any();
+	return ActionActivationImpl::internalEIsSet(featureID);
 }
-
-void AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+			return getEventAccepter() != nullptr; //10910
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
+			return isWaiting() != false; //10911
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+bool AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -275,42 +271,137 @@ void AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>(newValue);
 			setEventAccepter(_eventAccepter); //10910
-			break;
-		}
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-		{
-			// BOOST CAST
-			bool _firing = boost::any_cast<bool>(newValue);
-			setFiring(_firing); //1097
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //1093
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //1094
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //1095
-			break;
+			return true;
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
 		{
 			// BOOST CAST
 			bool _waiting = boost::any_cast<bool>(newValue);
 			setWaiting(_waiting); //10911
-			break;
+			return true;
 		}
 	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void AcceptEventActionActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void AcceptEventActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("waiting");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setWaiting(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eventAccepter");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eventAccepter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void AcceptEventActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = std::dynamic_pointer_cast<fUML::AcceptEventActionEventAccepter>( references.front() );
+				setEventAccepter(_eventAccepter);
+			}
+			
+			return;
+		}
+	}
+	ActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void AcceptEventActionActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getAcceptEventActionActivation_EAttribute_waiting()) )
+		{
+			saveHandler->addAttribute("waiting", this->isWaiting());
+		}
+
+		// Add references
+		saveHandler->addReference("eventAccepter", this->getEventAccepter());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

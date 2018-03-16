@@ -28,11 +28,12 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 
 		private:    
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl const&) = delete;
-			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl();
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr();
+			virtual void setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(std::weak_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr);
 
 
 
@@ -63,14 +64,29 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr;
 	};
 }
 #endif /* end of include guard: FUML_CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1IMPL_HPP */

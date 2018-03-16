@@ -52,6 +52,12 @@
 #include "uml/UmlPackage.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Element.hpp"
 
 #include "fUML/ExecutionFactoryL2.hpp"
@@ -66,6 +72,12 @@
 
 #include "fUML/SemanticVisitor.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -134,7 +146,8 @@ ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & ob
 
 std::shared_ptr<ecore::EObject>  ExecutionFactoryL3Impl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL3Impl(*this));
+	std::shared_ptr<ExecutionFactoryL3Impl> element(new ExecutionFactoryL3Impl(*this));
+	element->setThisExecutionFactoryL3Ptr(element);
 	return element;
 }
 
@@ -247,16 +260,12 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL3Impl::instantiateVisito
 
 std::shared_ptr<ExecutionFactoryL3> ExecutionFactoryL3Impl::getThisExecutionFactoryL3Ptr()
 {
-	if(auto wp = m_locus.lock())
-	{
-		std::shared_ptr<fUML::ExecutionFactory > anExecutionFactoryL3 = wp->getFactory();
-		if (anExecutionFactoryL3.get() == this)
-		{
-			return std::dynamic_pointer_cast<ExecutionFactoryL3>(anExecutionFactoryL3 );
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ExecutionFactoryL3>(this, null_deleter());
+	return m_thisExecutionFactoryL3Ptr.lock();
+}
+void ExecutionFactoryL3Impl::setThisExecutionFactoryL3Ptr(std::weak_ptr<ExecutionFactoryL3> thisExecutionFactoryL3Ptr)
+{
+	m_thisExecutionFactoryL3Ptr = thisExecutionFactoryL3Ptr;
+	setThisExecutionFactoryL2Ptr(thisExecutionFactoryL3Ptr);
 }
 std::shared_ptr<ecore::EObject> ExecutionFactoryL3Impl::eContainer() const
 {
@@ -274,28 +283,91 @@ boost::any ExecutionFactoryL3Impl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
-			return getBuiltInTypes(); //93
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
-			return getLocus(); //90
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes(); //92
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
-			return getStrategies(); //91
 	}
-	return boost::any();
+	return ExecutionFactoryL2Impl::internalEIsSet(featureID);
 }
-
-void ExecutionFactoryL3Impl::eSet(int featureID, boost::any newValue)
+bool ExecutionFactoryL3Impl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //90
-			break;
-		}
+	}
+	return ExecutionFactoryL2Impl::internalEIsSet(featureID);
+}
+bool ExecutionFactoryL3Impl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ExecutionFactoryL2Impl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutionFactoryL3Impl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutionFactoryL3Impl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ExecutionFactoryL2Impl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutionFactoryL3Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ExecutionFactoryL2Impl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExecutionFactoryL3Impl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ExecutionFactoryL2Impl::resolveReferences(featureID, references);
+}
+
+void ExecutionFactoryL3Impl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExecutionFactoryL2Impl::saveContent(saveHandler);
+	
+	ExecutionFactoryL1Impl::saveContent(saveHandler);
+	
+	ExecutionFactoryImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ExecutionFactoryL3Impl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

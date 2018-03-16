@@ -28,11 +28,12 @@ virtual public SemanticStrategy
 
 		private:    
 			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&) = delete;
-			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticStrategyImpl();
+			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr();
+			virtual void setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr);
 
 
 
@@ -67,14 +68,29 @@ virtual public SemanticStrategy
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<SemanticStrategy> m_thisSemanticStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICSTRATEGYSEMANTICSTRATEGYIMPL_HPP */

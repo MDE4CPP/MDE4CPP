@@ -25,12 +25,24 @@
 #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityNodeActivation.hpp"
 
 #include "fUML/Token.hpp"
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -81,7 +93,8 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 
 std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ControlTokenImpl(*this));
+	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
+	element->setThisControlTokenPtr(element);
 	return element;
 }
 
@@ -132,8 +145,12 @@ bool ControlTokenImpl::isControl()
 
 std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ControlToken>(this, null_deleter());
+	return m_thisControlTokenPtr.lock();
+}
+void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr)
+{
+	m_thisControlTokenPtr = thisControlTokenPtr;
+	setThisTokenPtr(thisControlTokenPtr);
 }
 std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 {
@@ -147,31 +164,85 @@ boost::any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-			return getHolder(); //560
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-			return isWithdrawn(); //561
 	}
-	return boost::any();
+	return TokenImpl::internalEIsSet(featureID);
 }
-
-void ControlTokenImpl::eSet(int featureID, boost::any newValue)
+bool ControlTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
-			setHolder(_holder); //560
-			break;
-		}
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-		{
-			// BOOST CAST
-			bool _withdrawn = boost::any_cast<bool>(newValue);
-			setWithdrawn(_withdrawn); //561
-			break;
-		}
+	}
+	return TokenImpl::internalEIsSet(featureID);
+}
+bool ControlTokenImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return TokenImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ControlTokenImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	TokenImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ControlTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	TokenImpl::resolveReferences(featureID, references);
+}
+
+void ControlTokenImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TokenImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

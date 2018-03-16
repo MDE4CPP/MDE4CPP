@@ -24,7 +24,19 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -72,7 +84,8 @@ ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl
 
 std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivityImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionActivityImpl(*this));
+	std::shared_ptr<ClassifierBehaviorExecutionActivityImpl> element(new ClassifierBehaviorExecutionActivityImpl(*this));
+	element->setThisClassifierBehaviorExecutionActivityPtr(element);
 	return element;
 }
 
@@ -100,8 +113,11 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticC
 
 std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ClassifierBehaviorExecutionActivity>(this, null_deleter());
+	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
+}
+void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr)
+{
+	m_thisClassifierBehaviorExecutionActivityPtr = thisClassifierBehaviorExecutionActivityPtr;
 }
 std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivityImpl::eContainer() const
 {
@@ -116,12 +132,83 @@ boost::any ClassifierBehaviorExecutionActivityImpl::eGet(int featureID, bool res
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, boost::any newValue)
+bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ClassifierBehaviorExecutionActivityImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ClassifierBehaviorExecutionActivityImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClassifierBehaviorExecutionActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ClassifierBehaviorExecutionActivityImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ClassifierBehaviorExecutionActivityImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ClassifierBehaviorExecutionActivityImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

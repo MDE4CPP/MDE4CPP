@@ -24,7 +24,19 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -72,7 +84,8 @@ SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):Semant
 
 std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new SemanticVisitorImpl(*this));
+	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl(*this));
+	element->setThisSemanticVisitorPtr(element);
 	return element;
 }
 
@@ -115,8 +128,11 @@ void SemanticVisitorImpl::_endIsolation()
 
 std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<SemanticVisitor>(this, null_deleter());
+	return m_thisSemanticVisitorPtr.lock();
+}
+void SemanticVisitorImpl::setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr)
+{
+	m_thisSemanticVisitorPtr = thisSemanticVisitorPtr;
 }
 std::shared_ptr<ecore::EObject> SemanticVisitorImpl::eContainer() const
 {
@@ -131,12 +147,83 @@ boost::any SemanticVisitorImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void SemanticVisitorImpl::eSet(int featureID, boost::any newValue)
+bool SemanticVisitorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool SemanticVisitorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void SemanticVisitorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void SemanticVisitorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void SemanticVisitorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void SemanticVisitorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void SemanticVisitorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void SemanticVisitorImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

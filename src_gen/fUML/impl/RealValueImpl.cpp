@@ -31,6 +31,12 @@
 #include "uml/Type.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/PrimitiveType.hpp"
 
 #include "fUML/PrimitiveValue.hpp"
@@ -39,6 +45,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -89,7 +101,8 @@ RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 
 std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new RealValueImpl(*this));
+	std::shared_ptr<RealValueImpl> element(new RealValueImpl(*this));
+	element->setThisRealValuePtr(element);
 	return element;
 }
 
@@ -163,8 +176,12 @@ std::string RealValueImpl::toString()
 
 std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<RealValue>(this, null_deleter());
+	return m_thisRealValuePtr.lock();
+}
+void RealValueImpl::setThisRealValuePtr(std::weak_ptr<RealValue> thisRealValuePtr)
+{
+	m_thisRealValuePtr = thisRealValuePtr;
+	setThisPrimitiveValuePtr(thisRealValuePtr);
 }
 std::shared_ptr<ecore::EObject> RealValueImpl::eContainer() const
 {
@@ -178,31 +195,129 @@ boost::any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-			return getType(); //190
 		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //191
 	}
-	return boost::any();
+	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-
-void RealValueImpl::eSet(int featureID, boost::any newValue)
+bool RealValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
-			setType(_type); //190
-			break;
-		}
+		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
+			return getValue() != 0; //191
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+bool RealValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			float _value = boost::any_cast<float>(newValue);
 			setValue(_value); //191
-			break;
+			return true;
 		}
 	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void RealValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void RealValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'float'
+			float value;
+			std::istringstream ( iter->second ) >> value;
+			this->setValue(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void RealValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PrimitiveValueImpl::resolveReferences(featureID, references);
+}
+
+void RealValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PrimitiveValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void RealValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getRealValue_EAttribute_value()) )
+		{
+			saveHandler->addAttribute("value", this->getValue());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

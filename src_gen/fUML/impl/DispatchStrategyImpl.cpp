@@ -27,6 +27,12 @@
 #include "fuml/Locus.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Behavior.hpp"
 
 #include "fUML/Execution.hpp"
@@ -37,6 +43,12 @@
 
 #include "fUML/SemanticStrategy.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -84,7 +96,8 @@ DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):Dis
 
 std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DispatchStrategyImpl(*this));
+	std::shared_ptr<DispatchStrategyImpl> element(new DispatchStrategyImpl(*this));
+	element->setThisDispatchStrategyPtr(element);
 	return element;
 }
 
@@ -135,8 +148,12 @@ std::string DispatchStrategyImpl::retrieveName()
 
 std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<DispatchStrategy>(this, null_deleter());
+	return m_thisDispatchStrategyPtr.lock();
+}
+void DispatchStrategyImpl::setThisDispatchStrategyPtr(std::weak_ptr<DispatchStrategy> thisDispatchStrategyPtr)
+{
+	m_thisDispatchStrategyPtr = thisDispatchStrategyPtr;
+	setThisSemanticStrategyPtr(thisDispatchStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> DispatchStrategyImpl::eContainer() const
 {
@@ -151,12 +168,84 @@ boost::any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-
-void DispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
+bool DispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return SemanticStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DispatchStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DispatchStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DispatchStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	SemanticStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DispatchStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	SemanticStrategyImpl::resolveReferences(featureID, references);
+}
+
+void DispatchStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

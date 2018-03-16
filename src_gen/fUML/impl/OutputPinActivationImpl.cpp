@@ -25,6 +25,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActionActivation.hpp"
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -37,6 +43,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -116,7 +128,8 @@ OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl &
 
 std::shared_ptr<ecore::EObject>  OutputPinActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OutputPinActivationImpl(*this));
+	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(*this));
+	element->setThisOutputPinActivationPtr(element);
 	return element;
 }
 
@@ -144,19 +157,12 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 
 std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersOutputPinActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anOutputPinActivation : *ownersOutputPinActivationList)
-		{
-			if (anOutputPinActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<OutputPinActivation>(anOutputPinActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<OutputPinActivation>(this, null_deleter());
+	return m_thisOutputPinActivationPtr.lock();
+}
+void OutputPinActivationImpl::setThisOutputPinActivationPtr(std::weak_ptr<OutputPinActivation> thisOutputPinActivationPtr)
+{
+	m_thisOutputPinActivationPtr = thisOutputPinActivationPtr;
+	setThisPinActivationPtr(thisOutputPinActivationPtr);
 }
 std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
 {
@@ -174,64 +180,94 @@ boost::any OutputPinActivationImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
-			return getActionActivation(); //867
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //863
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //862
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //861
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //864
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //866
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //860
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //865
 	}
-	return boost::any();
+	return PinActivationImpl::internalEIsSet(featureID);
 }
-
-void OutputPinActivationImpl::eSet(int featureID, boost::any newValue)
+bool OutputPinActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::ActionActivation>>(newValue);
-			setActionActivation(_actionActivation); //867
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //863
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //864
-			break;
-		}
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-		{
-			// BOOST CAST
-			int _offeredTokenCount = boost::any_cast<int>(newValue);
-			setOfferedTokenCount(_offeredTokenCount); //866
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //865
-			break;
-		}
+	}
+	return PinActivationImpl::internalEIsSet(featureID);
+}
+bool OutputPinActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PinActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OutputPinActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OutputPinActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	PinActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OutputPinActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	PinActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OutputPinActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PinActivationImpl::resolveReferences(featureID, references);
+}
+
+void OutputPinActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PinActivationImpl::saveContent(saveHandler);
+	
+	ObjectNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void OutputPinActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

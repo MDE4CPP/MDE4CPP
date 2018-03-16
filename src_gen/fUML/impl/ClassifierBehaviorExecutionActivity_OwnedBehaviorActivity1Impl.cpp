@@ -24,7 +24,19 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -72,7 +84,8 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehavi
 
 std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
+	std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
+	element->setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(element);
 	return element;
 }
 
@@ -100,8 +113,11 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 
 std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1>(this, null_deleter());
+	return m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr.lock();
+}
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(std::weak_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr)
+{
+	m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr = thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr;
 }
 std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eContainer() const
 {
@@ -116,12 +132,83 @@ boost::any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eGet(
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int featureID, boost::any newValue)
+bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

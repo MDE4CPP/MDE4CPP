@@ -26,6 +26,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -42,6 +48,12 @@
 
 #include "fUML/WriteStructuralFeatureActionActivation.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -138,7 +150,8 @@ AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionAc
 
 std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new AddStructuralFeatureValueActionActivationImpl(*this));
+	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl(*this));
+	element->setThisAddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
 
@@ -170,19 +183,12 @@ std::shared_ptr<Union<fUML::PinActivation>> AddStructuralFeatureValueActionActiv
 
 std::shared_ptr<AddStructuralFeatureValueActionActivation> AddStructuralFeatureValueActionActivationImpl::getThisAddStructuralFeatureValueActionActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersAddStructuralFeatureValueActionActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anAddStructuralFeatureValueActionActivation : *ownersAddStructuralFeatureValueActionActivationList)
-		{
-			if (anAddStructuralFeatureValueActionActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<AddStructuralFeatureValueActionActivation>(anAddStructuralFeatureValueActionActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this, null_deleter());
+	return m_thisAddStructuralFeatureValueActionActivationPtr.lock();
+}
+void AddStructuralFeatureValueActionActivationImpl::setThisAddStructuralFeatureValueActionActivationPtr(std::weak_ptr<AddStructuralFeatureValueActionActivation> thisAddStructuralFeatureValueActionActivationPtr)
+{
+	m_thisAddStructuralFeatureValueActionActivationPtr = thisAddStructuralFeatureValueActionActivationPtr;
+	setThisWriteStructuralFeatureActionActivationPtr(thisAddStructuralFeatureValueActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionActivationImpl::eContainer() const
 {
@@ -200,61 +206,97 @@ boost::any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bo
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring(); //1037
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //1033
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //1032
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //1031
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation(); //1038
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //1034
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1030
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation(); //1039
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation(); //1036
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //1035
 	}
-	return boost::any();
+	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
-
-void AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-		{
-			// BOOST CAST
-			bool _firing = boost::any_cast<bool>(newValue);
-			setFiring(_firing); //1037
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //1033
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //1034
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //1035
-			break;
-		}
+	}
+	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+}
+bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return WriteStructuralFeatureActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void AddStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void AddStructuralFeatureValueActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	WriteStructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void AddStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	WriteStructuralFeatureActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void AddStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	WriteStructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void AddStructuralFeatureValueActionActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	WriteStructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	StructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

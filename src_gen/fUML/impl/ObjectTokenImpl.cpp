@@ -25,12 +25,24 @@
  #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityNodeActivation.hpp"
 
 #include "fUML/Token.hpp"
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -91,7 +103,8 @@ ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
 
 std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ObjectTokenImpl(*this));
+	std::shared_ptr<ObjectTokenImpl> element(new ObjectTokenImpl(*this));
+	element->setThisObjectTokenPtr(element);
 	return element;
 }
 
@@ -143,8 +156,12 @@ void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Value> _value)
 
 std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ObjectToken>(this, null_deleter());
+	return m_thisObjectTokenPtr.lock();
+}
+void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr)
+{
+	m_thisObjectTokenPtr = thisObjectTokenPtr;
+	setThisTokenPtr(thisObjectTokenPtr);
 }
 std::shared_ptr<ecore::EObject> ObjectTokenImpl::eContainer() const
 {
@@ -158,40 +175,134 @@ boost::any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-			return getHolder(); //540
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
 			return getValue(); //542
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-			return isWithdrawn(); //541
 	}
-	return boost::any();
+	return TokenImpl::internalEIsSet(featureID);
 }
-
-void ObjectTokenImpl::eSet(int featureID, boost::any newValue)
+bool ObjectTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
-			setHolder(_holder); //540
-			break;
-		}
+		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
+			return getValue() != nullptr; //542
+	}
+	return TokenImpl::internalEIsSet(featureID);
+}
+bool ObjectTokenImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Value> _value = boost::any_cast<std::shared_ptr<fUML::Value>>(newValue);
 			setValue(_value); //542
-			break;
-		}
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-		{
-			// BOOST CAST
-			bool _withdrawn = boost::any_cast<bool>(newValue);
-			setWithdrawn(_withdrawn); //541
-			break;
+			return true;
 		}
 	}
+
+	return TokenImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ObjectTokenImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	TokenImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("value") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<fUML::Value> value = std::dynamic_pointer_cast<fUML::Value>(modelFactory->create(typeName));
+			if (value != nullptr)
+			{
+				this->setValue(value);
+				loadHandler->handleChild(value);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ObjectTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	TokenImpl::resolveReferences(featureID, references);
+}
+
+void ObjectTokenImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TokenImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'value'
+		std::shared_ptr<fUML::Value > value = this->getValue();
+		if (value != nullptr)
+		{
+			saveHandler->addReference(value, "value", value->eClass() != package->getValue_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

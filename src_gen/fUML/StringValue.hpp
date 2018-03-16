@@ -7,6 +7,7 @@
 #ifndef FUML_STRINGVALUE_HPP
 #define FUML_STRINGVALUE_HPP
 
+#include <list>
 #include <memory>
 #include <string>
 
@@ -17,6 +18,22 @@
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interface
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace fUML
+{
+	class FUMLFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -105,7 +122,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			std::string m_value ;
+			std::string m_value = "";
 			
 			
 			//*********************************
@@ -119,7 +136,16 @@ namespace fUML
 			//*********************************
 			
 
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }

@@ -24,12 +24,24 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ObjectActivation.hpp"
 
 #include "fUML/SemanticStrategy.hpp"
 
 #include "fUML/SignalInstance.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -77,7 +89,8 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImp
 
 std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new GetNextEventStrategyImpl(*this));
+	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl(*this));
+	element->setThisGetNextEventStrategyPtr(element);
 	return element;
 }
 
@@ -110,8 +123,12 @@ std::shared_ptr<fUML::SignalInstance> GetNextEventStrategyImpl::retrieveNextEven
 
 std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<GetNextEventStrategy>(this, null_deleter());
+	return m_thisGetNextEventStrategyPtr.lock();
+}
+void GetNextEventStrategyImpl::setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr)
+{
+	m_thisGetNextEventStrategyPtr = thisGetNextEventStrategyPtr;
+	setThisSemanticStrategyPtr(thisGetNextEventStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::eContainer() const
 {
@@ -126,12 +143,84 @@ boost::any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-
-void GetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
+bool GetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return SemanticStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void GetNextEventStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void GetNextEventStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void GetNextEventStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	SemanticStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void GetNextEventStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	SemanticStrategyImpl::resolveReferences(featureID, references);
+}
+
+void GetNextEventStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

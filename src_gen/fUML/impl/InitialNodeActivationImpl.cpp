@@ -27,6 +27,12 @@
 #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -37,6 +43,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -113,7 +125,8 @@ InitialNodeActivationImpl::InitialNodeActivationImpl(const InitialNodeActivation
 
 std::shared_ptr<ecore::EObject>  InitialNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new InitialNodeActivationImpl(*this));
+	std::shared_ptr<InitialNodeActivationImpl> element(new InitialNodeActivationImpl(*this));
+	element->setThisInitialNodeActivationPtr(element);
 	return element;
 }
 
@@ -153,19 +166,12 @@ void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomin
 
 std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersInitialNodeActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anInitialNodeActivation : *ownersInitialNodeActivationList)
-		{
-			if (anInitialNodeActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<InitialNodeActivation>(anInitialNodeActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<InitialNodeActivation>(this, null_deleter());
+	return m_thisInitialNodeActivationPtr.lock();
+}
+void InitialNodeActivationImpl::setThisInitialNodeActivationPtr(std::weak_ptr<InitialNodeActivation> thisInitialNodeActivationPtr)
+{
+	m_thisInitialNodeActivationPtr = thisInitialNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisInitialNodeActivationPtr);
 }
 std::shared_ptr<ecore::EObject> InitialNodeActivationImpl::eContainer() const
 {
@@ -183,46 +189,91 @@ boost::any InitialNodeActivationImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //653
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //652
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //651
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //654
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //650
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //655
 	}
-	return boost::any();
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-
-void InitialNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool InitialNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //653
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //654
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //655
-			break;
-		}
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+bool InitialNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InitialNodeActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void InitialNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InitialNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void InitialNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ControlNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void InitialNodeActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ControlNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void InitialNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

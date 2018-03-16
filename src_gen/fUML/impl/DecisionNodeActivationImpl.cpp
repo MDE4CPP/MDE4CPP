@@ -42,6 +42,12 @@
 #include "uml/ValueSpecification.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -58,6 +64,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -144,7 +156,8 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 
 std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DecisionNodeActivationImpl(*this));
+	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl(*this));
+	element->setThisDecisionNodeActivationPtr(element);
 	return element;
 }
 
@@ -477,19 +490,12 @@ void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML:
 
 std::shared_ptr<DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersDecisionNodeActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anDecisionNodeActivation : *ownersDecisionNodeActivationList)
-		{
-			if (anDecisionNodeActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<DecisionNodeActivation>(anDecisionNodeActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<DecisionNodeActivation>(this, null_deleter());
+	return m_thisDecisionNodeActivationPtr.lock();
+}
+void DecisionNodeActivationImpl::setThisDecisionNodeActivationPtr(std::weak_ptr<DecisionNodeActivation> thisDecisionNodeActivationPtr)
+{
+	m_thisDecisionNodeActivationPtr = thisDecisionNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisDecisionNodeActivationPtr);
 }
 std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::eContainer() const
 {
@@ -509,23 +515,19 @@ boost::any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool co
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
 			return getDecisionInputExecution(); //666
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //663
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //662
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //661
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //664
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //660
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //665
 	}
-	return boost::any();
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-
-void DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
+			return getDecisionInputExecution() != nullptr; //666
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+bool DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -534,28 +536,117 @@ void DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _decisionInputExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
 			setDecisionInputExecution(_decisionInputExecution); //666
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //663
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //664
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //665
-			break;
+			return true;
 		}
 	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DecisionNodeActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DecisionNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("decisionInputExecution") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<fUML::Execution> decisionInputExecution = std::dynamic_pointer_cast<fUML::Execution>(modelFactory->create(typeName));
+			if (decisionInputExecution != nullptr)
+			{
+				this->setDecisionInputExecution(decisionInputExecution);
+				loadHandler->handleChild(decisionInputExecution);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DecisionNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ControlNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void DecisionNodeActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ControlNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'decisionInputExecution'
+		std::shared_ptr<fUML::Execution > decisionInputExecution = this->getDecisionInputExecution();
+		if (decisionInputExecution != nullptr)
+		{
+			saveHandler->addReference(decisionInputExecution, "decisionInputExecution", decisionInputExecution->eClass() != package->getExecution_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

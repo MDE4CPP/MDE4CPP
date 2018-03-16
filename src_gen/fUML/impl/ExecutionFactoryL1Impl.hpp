@@ -26,11 +26,12 @@ namespace fUML
 
 		private:    
 			ExecutionFactoryL1Impl& operator=(ExecutionFactoryL1Impl const&) = delete;
-			virtual std::shared_ptr<ExecutionFactoryL1> getThisExecutionFactoryL1Ptr();
 
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryL1Impl();
+			virtual std::shared_ptr<ExecutionFactoryL1> getThisExecutionFactoryL1Ptr();
+			virtual void setThisExecutionFactoryL1Ptr(std::weak_ptr<ExecutionFactoryL1> thisExecutionFactoryL1Ptr);
 
 			//Additional constructors for the containments back reference
 			ExecutionFactoryL1Impl(std::weak_ptr<fUML::Locus > par_locus);
@@ -69,14 +70,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ExecutionFactoryL1> m_thisExecutionFactoryL1Ptr;
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYL1EXECUTIONFACTORYL1IMPL_HPP */

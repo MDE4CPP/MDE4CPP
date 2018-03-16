@@ -30,6 +30,12 @@
 #include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Classifier.hpp"
 
 #include "fUML/FeatureValue.hpp"
@@ -40,6 +46,12 @@
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -102,7 +114,8 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 
 std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CompoundValueImpl(*this));
+	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl(*this));
+	element->setThisCompoundValuePtr(element);
 	return element;
 }
 
@@ -263,8 +276,12 @@ std::shared_ptr<Bag<fUML::FeatureValue>> CompoundValueImpl::getFeatureValues() c
 
 std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<CompoundValue>(this, null_deleter());
+	return m_thisCompoundValuePtr.lock();
+}
+void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr)
+{
+	m_thisCompoundValuePtr = thisCompoundValuePtr;
+	setThisStructuredValuePtr(thisCompoundValuePtr);
 }
 std::shared_ptr<ecore::EObject> CompoundValueImpl::eContainer() const
 {
@@ -281,12 +298,130 @@ boost::any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //130
 	}
-	return boost::any();
+	return StructuredValueImpl::internalEIsSet(featureID);
 }
-
-void CompoundValueImpl::eSet(int featureID, boost::any newValue)
+bool CompoundValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
+			return getFeatureValues() != nullptr; //130
+	}
+	return StructuredValueImpl::internalEIsSet(featureID);
+}
+bool CompoundValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
 	}
+
+	return StructuredValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CompoundValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CompoundValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("featureValues") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "FeatureValue";
+			}
+			std::shared_ptr<fUML::FeatureValue> featureValues = std::dynamic_pointer_cast<fUML::FeatureValue>(modelFactory->create(typeName));
+			if (featureValues != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::FeatureValue>> list_featureValues = this->getFeatureValues();
+				list_featureValues->push_back(featureValues);
+				loadHandler->handleChild(featureValues);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void CompoundValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	StructuredValueImpl::resolveReferences(featureID, references);
+}
+
+void CompoundValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'featureValues'
+		std::shared_ptr<Bag<fUML::FeatureValue>> list_featureValues = this->getFeatureValues();
+		for (std::shared_ptr<fUML::FeatureValue> featureValues : *list_featureValues) 
+		{
+			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() != package->getFeatureValue_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

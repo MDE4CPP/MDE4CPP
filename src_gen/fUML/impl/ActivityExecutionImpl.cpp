@@ -39,6 +39,12 @@
 #include "uml/ParameterDirectionKind.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
 #include "uml/Classifier.hpp"
@@ -57,6 +63,12 @@
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -144,7 +156,8 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 
 std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityExecutionImpl(*this));
+	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl(*this));
+	element->setThisActivityExecutionPtr(element);
 	return element;
 }
 
@@ -267,8 +280,12 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::ActivityNod
 
 std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ActivityExecution>(this, null_deleter());
+	return m_thisActivityExecutionPtr.lock();
+}
+void ActivityExecutionImpl::setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr)
+{
+	m_thisActivityExecutionPtr = thisActivityExecutionPtr;
+	setThisExecutionPtr(thisActivityExecutionPtr);
 }
 std::shared_ptr<ecore::EObject> ActivityExecutionImpl::eContainer() const
 {
@@ -284,23 +301,19 @@ boost::any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
 			return getActivationGroup(); //576
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return getContext(); //574
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //570
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus(); //571
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation(); //573
-		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return getParameterValues(); //575
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes(); //572
 	}
-	return boost::any();
+	return ExecutionImpl::internalEIsSet(featureID);
 }
-
-void ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ActivityExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
+			return getActivationGroup() != nullptr; //576
+	}
+	return ExecutionImpl::internalEIsSet(featureID);
+}
+bool ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -309,28 +322,127 @@ void ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
 			setActivationGroup(_activationGroup); //576
-			break;
-		}
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
-			setContext(_context); //574
-			break;
-		}
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //571
-			break;
-		}
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
-			setObjectActivation(_objectActivation); //573
-			break;
+			return true;
 		}
 	}
+
+	return ExecutionImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityExecutionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityExecutionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ExecutionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("activationGroup") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ActivityNodeActivationGroup";
+			}
+			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION);
+			if (activationGroup != nullptr)
+			{
+				loadHandler->handleChild(activationGroup);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExecutionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActivityExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ExecutionImpl::resolveReferences(featureID, references);
+}
+
+void ActivityExecutionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExecutionImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'activationGroup'
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > activationGroup = this->getActivationGroup();
+		if (activationGroup != nullptr)
+		{
+			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -34,6 +34,12 @@
 
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Behavior.hpp"
 
 #include "uml/Classifier.hpp"
@@ -52,6 +58,12 @@
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -140,7 +152,8 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutionImpl(*this));
+	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl(*this));
+	element->setThisExecutionPtr(element);
 	return element;
 }
 
@@ -270,8 +283,12 @@ std::shared_ptr<Bag<fUML::ParameterValue>> ExecutionImpl::getParameterValues() c
 
 std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<Execution>(this, null_deleter());
+	return m_thisExecutionPtr.lock();
+}
+void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr)
+{
+	m_thisExecutionPtr = thisExecutionPtr;
+	setThisObjectPtr(thisExecutionPtr);
 }
 std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
 {
@@ -287,21 +304,23 @@ boost::any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 			return getContext(); //384
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //380
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus(); //381
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation(); //383
 		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
 			return getParameterValues(); //385
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes(); //382
 	}
-	return boost::any();
+	return ObjectImpl::internalEIsSet(featureID);
 }
-
-void ExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+			return getContext() != nullptr; //384
+		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
+			return getParameterValues() != nullptr; //385
+	}
+	return ObjectImpl::internalEIsSet(featureID);
+}
+bool ExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -310,21 +329,162 @@ void ExecutionImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
 			setContext(_context); //384
-			break;
-		}
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //381
-			break;
-		}
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
-			setObjectActivation(_objectActivation); //383
-			break;
+			return true;
 		}
 	}
+
+	return ObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("context");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("context")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("parameterValues") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ParameterValue";
+			}
+			std::shared_ptr<fUML::ParameterValue> parameterValues = std::dynamic_pointer_cast<fUML::ParameterValue>(modelFactory->create(typeName));
+			if (parameterValues != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::ParameterValue>> list_parameterValues = this->getParameterValues();
+				list_parameterValues->push_back(parameterValues);
+				loadHandler->handleChild(parameterValues);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ObjectImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Object> _context = std::dynamic_pointer_cast<fUML::Object>( references.front() );
+				setContext(_context);
+			}
+			
+			return;
+		}
+	}
+	ObjectImpl::resolveReferences(featureID, references);
+}
+
+void ExecutionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ObjectImpl::saveContent(saveHandler);
+	
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void ExecutionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("context", this->getContext());
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'parameterValues'
+		std::shared_ptr<Bag<fUML::ParameterValue>> list_parameterValues = this->getParameterValues();
+		for (std::shared_ptr<fUML::ParameterValue> parameterValues : *list_parameterValues) 
+		{
+			saveHandler->addReference(parameterValues, "parameterValues", parameterValues->eClass() != package->getParameterValue_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

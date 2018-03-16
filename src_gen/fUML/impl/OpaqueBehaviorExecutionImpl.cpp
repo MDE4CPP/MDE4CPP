@@ -31,6 +31,12 @@
 #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Classifier.hpp"
 
 #include "fUML/Execution.hpp"
@@ -45,6 +51,12 @@
 
 #include "fUML/ParameterValue.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -122,7 +134,8 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 
 std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OpaqueBehaviorExecutionImpl(*this));
+	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl(*this));
+	element->setThisOpaqueBehaviorExecutionPtr(element);
 	return element;
 }
 
@@ -195,8 +208,12 @@ void OpaqueBehaviorExecutionImpl::execute()
 
 std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<OpaqueBehaviorExecution>(this, null_deleter());
+	return m_thisOpaqueBehaviorExecutionPtr.lock();
+}
+void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr)
+{
+	m_thisOpaqueBehaviorExecutionPtr = thisOpaqueBehaviorExecutionPtr;
+	setThisExecutionPtr(thisOpaqueBehaviorExecutionPtr);
 }
 std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
 {
@@ -210,46 +227,103 @@ boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return getContext(); //404
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //400
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus(); //401
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation(); //403
-		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return getParameterValues(); //405
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes(); //402
 	}
-	return boost::any();
+	return ExecutionImpl::internalEIsSet(featureID);
 }
-
-void OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
-			setContext(_context); //404
-			break;
-		}
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //401
-			break;
-		}
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
-			setObjectActivation(_objectActivation); //403
-			break;
-		}
+	}
+	return ExecutionImpl::internalEIsSet(featureID);
+}
+bool OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ExecutionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OpaqueBehaviorExecutionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OpaqueBehaviorExecutionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ExecutionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OpaqueBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ExecutionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OpaqueBehaviorExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ExecutionImpl::resolveReferences(featureID, references);
+}
+
+void OpaqueBehaviorExecutionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExecutionImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

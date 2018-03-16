@@ -30,6 +30,12 @@
 #include "uml/Class.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Class.hpp"
 
 #include "fUML/ClassifierBehaviorExecution.hpp"
@@ -42,6 +48,12 @@
 
 #include "fUML/SignalInstance.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -138,7 +150,8 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 
 std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ObjectActivationImpl(*this));
+	std::shared_ptr<ObjectActivationImpl> element(new ObjectActivationImpl(*this));
+	element->setThisObjectActivationPtr(element);
 	return element;
 }
 
@@ -322,8 +335,11 @@ std::shared_ptr<Bag<fUML::EventAccepter>> ObjectActivationImpl::getWaitingEventA
 
 std::shared_ptr<ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ObjectActivation>(this, null_deleter());
+	return m_thisObjectActivationPtr.lock();
+}
+void ObjectActivationImpl::setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr)
+{
+	m_thisObjectActivationPtr = thisObjectActivationPtr;
 }
 std::shared_ptr<ecore::EObject> ObjectActivationImpl::eContainer() const
 {
@@ -346,10 +362,24 @@ boost::any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
 			return getWaitingEventAccepters(); //470
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ObjectActivationImpl::eSet(int featureID, boost::any newValue)
+bool ObjectActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
+			return getClassifierBehaviorExecutions() != nullptr; //473
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
+			return getEventPool() != nullptr; //471
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+			return getObject() != nullptr; //472
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
+			return getWaitingEventAccepters() != nullptr; //470
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ObjectActivationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -358,7 +388,196 @@ void ObjectActivationImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _object = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
 			setObject(_object); //472
-			break;
+			return true;
 		}
 	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ObjectActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ObjectActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("object");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("object")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("waitingEventAccepters");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("waitingEventAccepters")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("classifierBehaviorExecutions") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ClassifierBehaviorExecution";
+			}
+			std::shared_ptr<fUML::ClassifierBehaviorExecution> classifierBehaviorExecutions = std::dynamic_pointer_cast<fUML::ClassifierBehaviorExecution>(modelFactory->create(typeName));
+			if (classifierBehaviorExecutions != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> list_classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+				list_classifierBehaviorExecutions->push_back(classifierBehaviorExecutions);
+				loadHandler->handleChild(classifierBehaviorExecutions);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("eventPool") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "SignalInstance";
+			}
+			std::shared_ptr<fUML::SignalInstance> eventPool = std::dynamic_pointer_cast<fUML::SignalInstance>(modelFactory->create(typeName));
+			if (eventPool != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::SignalInstance>> list_eventPool = this->getEventPool();
+				list_eventPool->push_back(eventPool);
+				loadHandler->handleChild(eventPool);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ObjectActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Object> _object = std::dynamic_pointer_cast<fUML::Object>( references.front() );
+				setObject(_object);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
+		{
+			std::shared_ptr<Bag<fUML::EventAccepter>> _waitingEventAccepters = getWaitingEventAccepters();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::EventAccepter> _r = std::dynamic_pointer_cast<fUML::EventAccepter>(ref);
+				if (_r != nullptr)
+				{
+					_waitingEventAccepters->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ObjectActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("object", this->getObject());
+		std::shared_ptr<Bag<fUML::EventAccepter>> waitingEventAccepters_list = this->getWaitingEventAccepters();
+		for (std::shared_ptr<fUML::EventAccepter > object : *waitingEventAccepters_list)
+		{ 
+			saveHandler->addReferences("waitingEventAccepters", object);
+		}
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'classifierBehaviorExecutions'
+		std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> list_classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+		for (std::shared_ptr<fUML::ClassifierBehaviorExecution> classifierBehaviorExecutions : *list_classifierBehaviorExecutions) 
+		{
+			saveHandler->addReference(classifierBehaviorExecutions, "classifierBehaviorExecutions", classifierBehaviorExecutions->eClass() != package->getClassifierBehaviorExecution_EClass());
+		}
+
+		// Save 'eventPool'
+		std::shared_ptr<Bag<fUML::SignalInstance>> list_eventPool = this->getEventPool();
+		for (std::shared_ptr<fUML::SignalInstance> eventPool : *list_eventPool) 
+		{
+			saveHandler->addReference(eventPool, "eventPool", eventPool->eClass() != package->getSignalInstance_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

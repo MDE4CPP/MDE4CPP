@@ -24,7 +24,19 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -72,7 +84,8 @@ EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):
 
 std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EventDispatchLoopImpl(*this));
+	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl(*this));
+	element->setThisEventDispatchLoopPtr(element);
 	return element;
 }
 
@@ -100,8 +113,11 @@ std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 
 std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<EventDispatchLoop>(this, null_deleter());
+	return m_thisEventDispatchLoopPtr.lock();
+}
+void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr)
+{
+	m_thisEventDispatchLoopPtr = thisEventDispatchLoopPtr;
 }
 std::shared_ptr<ecore::EObject> EventDispatchLoopImpl::eContainer() const
 {
@@ -116,12 +132,83 @@ boost::any EventDispatchLoopImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void EventDispatchLoopImpl::eSet(int featureID, boost::any newValue)
+bool EventDispatchLoopImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool EventDispatchLoopImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EventDispatchLoopImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EventDispatchLoopImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EventDispatchLoopImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void EventDispatchLoopImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void EventDispatchLoopImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void EventDispatchLoopImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

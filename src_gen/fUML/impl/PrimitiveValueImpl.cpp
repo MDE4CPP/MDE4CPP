@@ -28,12 +28,24 @@
 #include "uml/Classifier.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Classifier.hpp"
 
 #include "uml/PrimitiveType.hpp"
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -85,7 +97,8 @@ PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):Primitive
 
 std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new PrimitiveValueImpl(*this));
+	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl(*this));
+	element->setThisPrimitiveValuePtr(element);
 	return element;
 }
 
@@ -135,8 +148,12 @@ void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 
 std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<PrimitiveValue>(this, null_deleter());
+	return m_thisPrimitiveValuePtr.lock();
+}
+void PrimitiveValueImpl::setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr)
+{
+	m_thisPrimitiveValuePtr = thisPrimitiveValuePtr;
+	setThisValuePtr(thisPrimitiveValuePtr);
 }
 std::shared_ptr<ecore::EObject> PrimitiveValueImpl::eContainer() const
 {
@@ -153,10 +170,18 @@ boost::any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 			return getType(); //150
 	}
-	return boost::any();
+	return ValueImpl::internalEIsSet(featureID);
 }
-
-void PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
+bool PrimitiveValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+			return getType() != nullptr; //150
+	}
+	return ValueImpl::internalEIsSet(featureID);
+}
+bool PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -165,7 +190,112 @@ void PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
 			setType(_type); //150
-			break;
+			return true;
 		}
 	}
+
+	return ValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PrimitiveValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	ValueImpl::resolveReferences(featureID, references);
+}
+
+void PrimitiveValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -26,6 +26,12 @@
 #include "fuml/Value.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -36,6 +42,12 @@
 
 #include "fUML/Token.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -113,7 +125,8 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 
 std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DataStoreNodeActivationImpl(*this));
+	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl(*this));
+	element->setThisDataStoreNodeActivationPtr(element);
 	return element;
 }
 
@@ -177,19 +190,12 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token
 
 std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr()
 {
-	if(auto wp = m_group.lock())
-	{
-		std::shared_ptr<Bag<fUML::ActivityNodeActivation>> ownersDataStoreNodeActivationList = wp->getNodeActivations();
-		for (std::shared_ptr<fUML::ActivityNodeActivation> anDataStoreNodeActivation : *ownersDataStoreNodeActivationList)
-		{
-			if (anDataStoreNodeActivation.get() == this)
-			{
-				return std::dynamic_pointer_cast<DataStoreNodeActivation>(anDataStoreNodeActivation );
-			}
-		}
-	}
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<DataStoreNodeActivation>(this, null_deleter());
+	return m_thisDataStoreNodeActivationPtr.lock();
+}
+void DataStoreNodeActivationImpl::setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr)
+{
+	m_thisDataStoreNodeActivationPtr = thisDataStoreNodeActivationPtr;
+	setThisCentralBufferNodeActivationPtr(thisDataStoreNodeActivationPtr);
 }
 std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::eContainer() const
 {
@@ -207,55 +213,94 @@ boost::any DataStoreNodeActivationImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //1133
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //1132
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //1131
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //1134
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //1136
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1130
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //1135
 	}
-	return boost::any();
+	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
 }
-
-void DataStoreNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
-			setGroup(_group); //1133
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
-			setNode(_node); //1134
-			break;
-		}
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-		{
-			// BOOST CAST
-			int _offeredTokenCount = boost::any_cast<int>(newValue);
-			setOfferedTokenCount(_offeredTokenCount); //1136
-			break;
-		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-		{
-			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
-			setRunning(_running); //1135
-			break;
-		}
+	}
+	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
+}
+bool DataStoreNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CentralBufferNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DataStoreNodeActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DataStoreNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	CentralBufferNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DataStoreNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	CentralBufferNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DataStoreNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	CentralBufferNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void DataStoreNodeActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CentralBufferNodeActivationImpl::saveContent(saveHandler);
+	
+	ObjectNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

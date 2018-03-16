@@ -25,6 +25,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Class.hpp"
 
 #include "fUML/Execution.hpp"
@@ -33,6 +39,12 @@
 
 #include "fUML/ParameterValue.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -96,7 +108,8 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const Classifie
 
 std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionImpl(*this));
+	std::shared_ptr<ClassifierBehaviorExecutionImpl> element(new ClassifierBehaviorExecutionImpl(*this));
+	element->setThisClassifierBehaviorExecutionPtr(element);
 	return element;
 }
 
@@ -170,8 +183,11 @@ void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::
 
 std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<ClassifierBehaviorExecution>(this, null_deleter());
+	return m_thisClassifierBehaviorExecutionPtr.lock();
+}
+void ClassifierBehaviorExecutionImpl::setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr)
+{
+	m_thisClassifierBehaviorExecutionPtr = thisClassifierBehaviorExecutionPtr;
 }
 std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionImpl::eContainer() const
 {
@@ -192,10 +208,22 @@ boost::any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bo
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
 			return getObjectActivation(); //462
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void ClassifierBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+			return getClassifier() != nullptr; //461
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+			return getExecution() != nullptr; //460
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+			return getObjectActivation() != nullptr; //462
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ClassifierBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -204,21 +232,162 @@ void ClassifierBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _classifier = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
 			setClassifier(_classifier); //461
-			break;
+			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _execution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
 			setExecution(_execution); //460
-			break;
+			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
 			setObjectActivation(_objectActivation); //462
-			break;
+			return true;
 		}
 	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ClassifierBehaviorExecutionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ClassifierBehaviorExecutionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("classifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("classifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("execution");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("execution")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("objectActivation");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("objectActivation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClassifierBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>( references.front() );
+				setClassifier(_classifier);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Execution> _execution = std::dynamic_pointer_cast<fUML::Execution>( references.front() );
+				setExecution(_execution);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>( references.front() );
+				setObjectActivation(_objectActivation);
+			}
+			
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ClassifierBehaviorExecutionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("classifier", this->getClassifier());
+		saveHandler->addReference("execution", this->getExecution());
+		saveHandler->addReference("objectActivation", this->getObjectActivation());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

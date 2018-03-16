@@ -28,6 +28,12 @@
 #include "uml/Association.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/Association.hpp"
 
 #include "uml/Classifier.hpp"
@@ -40,6 +46,12 @@
 
 #include "uml/Property.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -101,7 +113,8 @@ LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
 
 std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new LinkImpl(*this));
+	std::shared_ptr<LinkImpl> element(new LinkImpl(*this));
+	element->setThisLinkPtr(element);
 	return element;
 }
 
@@ -187,8 +200,12 @@ void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 
 std::shared_ptr<Link> LinkImpl::getThisLinkPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<Link>(this, null_deleter());
+	return m_thisLinkPtr.lock();
+}
+void LinkImpl::setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr)
+{
+	m_thisLinkPtr = thisLinkPtr;
+	setThisExtensionalValuePtr(thisLinkPtr);
 }
 std::shared_ptr<ecore::EObject> LinkImpl::eContainer() const
 {
@@ -202,33 +219,144 @@ boost::any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //320
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus(); //321
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
 			return getType(); //322
 	}
-	return boost::any();
+	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
-
-void LinkImpl::eSet(int featureID, boost::any newValue)
+bool LinkImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //321
-			break;
-		}
+		case FUMLPackage::LINK_EREFERENCE_TYPE:
+			return getType() != nullptr; //322
+	}
+	return ExtensionalValueImpl::internalEIsSet(featureID);
+}
+bool LinkImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
 			setType(_type); //322
-			break;
+			return true;
 		}
 	}
+
+	return ExtensionalValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LinkImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void LinkImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LinkImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ExtensionalValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void LinkImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::LINK_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	ExtensionalValueImpl::resolveReferences(featureID, references);
+}
+
+void LinkImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void LinkImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

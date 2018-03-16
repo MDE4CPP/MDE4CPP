@@ -25,12 +25,24 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/CompoundValue.hpp"
 
 #include "fUML/FeatureValue.hpp"
 
 #include "uml/Signal.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -90,7 +102,8 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalIns
 
 std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new SignalInstanceImpl(*this));
+	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl(*this));
+	element->setThisSignalInstancePtr(element);
 	return element;
 }
 
@@ -127,8 +140,12 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 
 std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<SignalInstance>(this, null_deleter());
+	return m_thisSignalInstancePtr.lock();
+}
+void SignalInstanceImpl::setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr)
+{
+	m_thisSignalInstancePtr = thisSignalInstancePtr;
+	setThisCompoundValuePtr(thisSignalInstancePtr);
 }
 std::shared_ptr<ecore::EObject> SignalInstanceImpl::eContainer() const
 {
@@ -142,15 +159,21 @@ boost::any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //450
 		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
 			return getType(); //451
 	}
-	return boost::any();
+	return CompoundValueImpl::internalEIsSet(featureID);
 }
-
-void SignalInstanceImpl::eSet(int featureID, boost::any newValue)
+bool SignalInstanceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+			return getType() != nullptr; //451
+	}
+	return CompoundValueImpl::internalEIsSet(featureID);
+}
+bool SignalInstanceImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -159,7 +182,118 @@ void SignalInstanceImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _type = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
 			setType(_type); //451
-			break;
+			return true;
 		}
 	}
+
+	return CompoundValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void SignalInstanceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void SignalInstanceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	CompoundValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void SignalInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	CompoundValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void SignalInstanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Signal> _type = std::dynamic_pointer_cast<uml::Signal>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	CompoundValueImpl::resolveReferences(featureID, references);
+}
+
+void SignalInstanceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

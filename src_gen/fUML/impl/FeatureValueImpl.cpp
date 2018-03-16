@@ -28,12 +28,24 @@
 
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/FeatureValue.hpp"
 
 #include "uml/StructuralFeature.hpp"
 
 #include "fUML/Value.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -103,7 +115,8 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImp
 
 std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FeatureValueImpl(*this));
+	std::shared_ptr<FeatureValueImpl> element(new FeatureValueImpl(*this));
+	element->setThisFeatureValuePtr(element);
 	return element;
 }
 
@@ -214,8 +227,11 @@ std::shared_ptr<Bag<fUML::Value>> FeatureValueImpl::getValues() const
 
 std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<FeatureValue>(this, null_deleter());
+	return m_thisFeatureValuePtr.lock();
+}
+void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr)
+{
+	m_thisFeatureValuePtr = thisFeatureValuePtr;
 }
 std::shared_ptr<ecore::EObject> FeatureValueImpl::eContainer() const
 {
@@ -236,10 +252,22 @@ boost::any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
 			return getValues(); //140
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-
-void FeatureValueImpl::eSet(int featureID, boost::any newValue)
+bool FeatureValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+			return getFeature() != nullptr; //142
+		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
+			return getPosition() != 0; //141
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
+			return getValues() != nullptr; //140
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool FeatureValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
@@ -248,14 +276,169 @@ void FeatureValueImpl::eSet(int featureID, boost::any newValue)
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _feature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
 			setFeature(_feature); //142
-			break;
+			return true;
 		}
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = boost::any_cast<int>(newValue);
 			setPosition(_position); //141
-			break;
+			return true;
 		}
 	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void FeatureValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void FeatureValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("position");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setPosition(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("feature");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("feature")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("values") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<fUML::Value> values = std::dynamic_pointer_cast<fUML::Value>(modelFactory->create(typeName));
+			if (values != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::Value>> list_values = this->getValues();
+				list_values->push_back(values);
+				loadHandler->handleChild(values);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void FeatureValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>( references.front() );
+				setFeature(_feature);
+			}
+			
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void FeatureValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getFeatureValue_EAttribute_position()) )
+		{
+			saveHandler->addAttribute("position", this->getPosition());
+		}
+
+		// Add references
+		saveHandler->addReference("feature", this->getFeature());
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'values'
+		std::shared_ptr<Bag<fUML::Value>> list_values = this->getValues();
+		for (std::shared_ptr<fUML::Value> values : *list_values) 
+		{
+			saveHandler->addReference(values, "values", values->eClass() != package->getValue_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

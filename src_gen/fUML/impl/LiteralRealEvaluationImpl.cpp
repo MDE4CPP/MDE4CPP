@@ -27,6 +27,12 @@
 #include "uml/LiteralReal.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/LiteralEvaluation.hpp"
 
 #include "fUML/Locus.hpp"
@@ -35,6 +41,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -86,7 +98,8 @@ LiteralRealEvaluationImpl::LiteralRealEvaluationImpl(const LiteralRealEvaluation
 
 std::shared_ptr<ecore::EObject>  LiteralRealEvaluationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new LiteralRealEvaluationImpl(*this));
+	std::shared_ptr<LiteralRealEvaluationImpl> element(new LiteralRealEvaluationImpl(*this));
+	element->setThisLiteralRealEvaluationPtr(element);
 	return element;
 }
 
@@ -125,8 +138,12 @@ std::shared_ptr<fUML::Value> LiteralRealEvaluationImpl::evaluate()
 
 std::shared_ptr<LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<LiteralRealEvaluation>(this, null_deleter());
+	return m_thisLiteralRealEvaluationPtr.lock();
+}
+void LiteralRealEvaluationImpl::setThisLiteralRealEvaluationPtr(std::weak_ptr<LiteralRealEvaluation> thisLiteralRealEvaluationPtr)
+{
+	m_thisLiteralRealEvaluationPtr = thisLiteralRealEvaluationPtr;
+	setThisLiteralEvaluationPtr(thisLiteralRealEvaluationPtr);
 }
 std::shared_ptr<ecore::EObject> LiteralRealEvaluationImpl::eContainer() const
 {
@@ -140,31 +157,91 @@ boost::any LiteralRealEvaluationImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
-			return getLocus(); //301
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
-			return getSpecification(); //300
 	}
-	return boost::any();
+	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
-
-void LiteralRealEvaluationImpl::eSet(int featureID, boost::any newValue)
+bool LiteralRealEvaluationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
-			setLocus(_locus); //301
-			break;
-		}
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
-			setSpecification(_specification); //300
-			break;
-		}
+	}
+	return LiteralEvaluationImpl::internalEIsSet(featureID);
+}
+bool LiteralRealEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LiteralEvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LiteralRealEvaluationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void LiteralRealEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	LiteralEvaluationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LiteralRealEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	LiteralEvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void LiteralRealEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	LiteralEvaluationImpl::resolveReferences(featureID, references);
+}
+
+void LiteralRealEvaluationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	LiteralEvaluationImpl::saveContent(saveHandler);
+	
+	EvaluationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void LiteralRealEvaluationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

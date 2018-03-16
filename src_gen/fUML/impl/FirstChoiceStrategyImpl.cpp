@@ -24,8 +24,20 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "fUML/ChoiceStrategy.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -73,7 +85,8 @@ FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl &
 
 std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FirstChoiceStrategyImpl(*this));
+	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl(*this));
+	element->setThisFirstChoiceStrategyPtr(element);
 	return element;
 }
 
@@ -108,8 +121,12 @@ int FirstChoiceStrategyImpl::choose(int size)
 
 std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<FirstChoiceStrategy>(this, null_deleter());
+	return m_thisFirstChoiceStrategyPtr.lock();
+}
+void FirstChoiceStrategyImpl::setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr)
+{
+	m_thisFirstChoiceStrategyPtr = thisFirstChoiceStrategyPtr;
+	setThisChoiceStrategyPtr(thisFirstChoiceStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::eContainer() const
 {
@@ -124,12 +141,87 @@ boost::any FirstChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreT
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ChoiceStrategyImpl::internalEIsSet(featureID);
 }
-
-void FirstChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+bool FirstChoiceStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
+	return ChoiceStrategyImpl::internalEIsSet(featureID);
 }
+bool FirstChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ChoiceStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void FirstChoiceStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void FirstChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ChoiceStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void FirstChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ChoiceStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ChoiceStrategyImpl::resolveReferences(featureID, references);
+}
+
+void FirstChoiceStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ChoiceStrategyImpl::saveContent(saveHandler);
+	
+	SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

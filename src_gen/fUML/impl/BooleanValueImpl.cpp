@@ -30,6 +30,12 @@
 #include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
+#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
+
 #include "uml/PrimitiveType.hpp"
 
 #include "fUML/PrimitiveValue.hpp"
@@ -38,6 +44,12 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -88,7 +100,8 @@ BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj):BooleanValueImp
 
 std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new BooleanValueImpl(*this));
+	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl(*this));
+	element->setThisBooleanValuePtr(element);
 	return element;
 }
 
@@ -166,8 +179,12 @@ std::string BooleanValueImpl::toString()
 
 std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr()
 {
-	struct null_deleter{void operator()(void const *) const {}};
-	return std::shared_ptr<BooleanValue>(this, null_deleter());
+	return m_thisBooleanValuePtr.lock();
+}
+void BooleanValueImpl::setThisBooleanValuePtr(std::weak_ptr<BooleanValue> thisBooleanValuePtr)
+{
+	m_thisBooleanValuePtr = thisBooleanValuePtr;
+	setThisPrimitiveValuePtr(thisBooleanValuePtr);
 }
 std::shared_ptr<ecore::EObject> BooleanValueImpl::eContainer() const
 {
@@ -181,31 +198,129 @@ boost::any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-			return getType(); //200
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
 			return isValue(); //201
 	}
-	return boost::any();
+	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-
-void BooleanValueImpl::eSet(int featureID, boost::any newValue)
+bool BooleanValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
-			setType(_type); //200
-			break;
-		}
+		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
+			return isValue() != false; //201
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+bool BooleanValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			bool _value = boost::any_cast<bool>(newValue);
 			setValue(_value); //201
-			break;
+			return true;
 		}
 	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
 }
+
+//*********************************
+// Persistence Functions
+//*********************************
+void BooleanValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void BooleanValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setValue(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void BooleanValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void BooleanValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PrimitiveValueImpl::resolveReferences(featureID, references);
+}
+
+void BooleanValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PrimitiveValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getBooleanValue_EAttribute_value()) )
+		{
+			saveHandler->addAttribute("value", this->isValue());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
