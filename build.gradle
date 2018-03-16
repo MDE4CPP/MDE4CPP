@@ -1,17 +1,19 @@
 description 'MDE4CPP root project'
 
-task buildAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModels', 'src:buildReflectionModels']) {
+task buildAll(dependsOn: ['generator:createAllGenerators', 'src:compileBasicProjects', 'src:buildEcoreModels', 'src:buildReflectionModels']) {
 	group 'MDE4CPP'
 	description 'build generators and all models'
 }
 tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:createAllGenerators')
+tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('src:compileBasicProjects')
 tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
 //Compile All
-task compileAll(dependsOn: ['src:compileEcoreModels', 'src:compileReflectionModels']) {
+task compileAll(dependsOn: ['src:compileBasicProjects', 'src:compileEcoreModels', 'src:compileReflectionModels']) {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
 }
+tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('src:compileBasicProjects')
 
 task generateAll(dependsOn: ['src:generateEcoreModels', 'src:generateReflectionModels']) {
 	group 'MDE4CPP'
