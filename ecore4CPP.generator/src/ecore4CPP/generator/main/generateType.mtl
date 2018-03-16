@@ -98,6 +98,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 
 [query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey('AggregationKind')) then aReference.valueKey('AggregationKind')='shared' else false endif/]
 [query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
+[query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 
 [template public pointertype(aReference : EReference) post(trim())]
 [if(isBackReference())]
@@ -128,7 +129,7 @@ std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [else]
 boost::any
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EBoolean' )or (name = 'EBooleanObject' ) or (name = 'Boolean' ))]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
 bool
 [/template]
 
@@ -144,15 +145,15 @@ int
 int
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EDouble')or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EDouble') or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
 double
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'ELong')or (name = 'ELongObject') )]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'ELong') or (name = 'ELongObject') )]
 long
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByte')or (name = 'EByteObject') )]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByte') or (name = 'EByteObject') )]
 char
 [/template]
 
@@ -160,11 +161,11 @@ char
 char
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EChar')or (name = 'ECharacterObject') )]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EChar') or (name = 'ECharacterObject') )]
 char
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EFloat')or (name = 'EFloatObject') )]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EFloat') or (name = 'EFloatObject') )]
 float
 [/template]
 
@@ -192,7 +193,7 @@ Bag
 void * 
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EEnumerator')or (name = 'EDiagnosticChain'))]
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
 boost::any
 [/template]
 
@@ -207,5 +208,57 @@ std::string
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
 [anEClassifier.name/]
 [/template]
+
+[query public getDefaultValue(anEClassifier : EClassifier) : String = 
+		if ((name = 'EBoolean' ) or 
+			(name = 'EBooleanObject' ) or 
+			(name = 'Boolean' )) 
+		then getDefaultBooleanValue()
+		else getDefaultValueCheckString()
+		endif
+/]
+[query private getDefaultValueCheckString(anEClassifier : EClassifier) : String = 
+		if ((name = 'EString') or 
+			(name = 'String')) 
+		then getDefaultStringValue() 
+		else getDefaultValueCheckInteger()
+		endif
+/]
+[query private getDefaultValueCheckInteger(anEClassifier : EClassifier) : String = 
+		if ((name = 'UnlimitedNatural') or 
+			(name = 'EResource') or 
+			(name = 'EInt') or 
+			(name = 'EIntegerObject') or 
+			(name = 'EBigInteger') or 
+			(name = 'Integer') or 
+			(name = 'EDouble') or 
+			(name = 'EDoubleObject') or 
+			(name = 'EBigDecimal') or 
+			(name = 'Real') or 
+			(name = 'ELong') or 
+			(name = 'ELongObject') or 
+			(name = 'EFloat') or 
+			(name = 'EFloatObject') or 
+			(name = 'EDate')) 
+		then getDefaultNumberValue() 
+		else getDefaultValueCheckChar() 
+		endif
+/]
+[query private getDefaultValueCheckChar(anEClassifier : EClassifier) : String = 
+		if ((name = 'EByte') or 
+			(name = 'EByteObject') or 
+			(name = 'EByteArray') or 
+			(name = 'EChar') or 
+			(name = 'ECharacterObject')) 
+		then getDefaultCharValue() 
+		else getDefaultPointerValue()
+		endif
+/]
+
+[query private getDefaultBooleanValue(anEClassifier : EClassifier) : String = 'false'/]
+[query private getDefaultCharValue(anEClassifier : EClassifier) : String = '\'\''/]
+[query private getDefaultNumberValue(anEClassifier : EClassifier) : String = '0'/]
+[query private getDefaultPointerValue(anEClassifier : EClassifier) : String = 'nullptr'/]
+[query private getDefaultStringValue(anEClassifier : EClassifier) : String = '""'/]
 
 [query public requiresAny(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then true else (name = 'EEnumerator' or name = 'EDiagnosticChain' or name = 'EJavaObject') endif/]

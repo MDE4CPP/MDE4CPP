@@ -86,10 +86,10 @@ namespace [anEPackage.name/]
 			bool isInitialized = false;
  			bool isCreated = false;
 
-			virtual void init();
+			virtual void init(std::shared_ptr<ecore::EPackage> package);
 
 		public:
-			void createPackageContents();
+			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
 
 		private:

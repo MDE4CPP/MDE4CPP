@@ -31,6 +31,6 @@ const std::string [packageName/]::eNS_URI ="[anEPackage.nsURI/]";
 const std::string [packageName/]::eNS_PREFIX ="[anEPackage.nsPrefix/]";
 
 //Singleton 
-[generateSingletonImpl(packageName)/]
+[generateSingletonImpl(packageName, true)/]
 [/file]
 [/template]

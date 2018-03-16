@@ -24,6 +24,6 @@
 using namespace [anPackage.name/];
 
 //static initialisation
-[generateSingletonImpl(packageName)/]
+[generateSingletonImpl(packageName, false)/]
 [/file]
 [/template]

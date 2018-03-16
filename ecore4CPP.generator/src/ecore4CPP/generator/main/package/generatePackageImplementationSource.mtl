@@ -67,13 +67,14 @@ bool [packageName/]::isInited = false;
 	 
     // Obtain or create package and create package meta-data objects
     [packageName/] * metaModelPackage = new [packageName/]();
-	metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void [packageName/]::init()
+void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 {
     // Initialize created meta-data
+	createPackageContents(package);
+	setThisEPackagePtr(package);
     initializePackageContents();   
 }
 
@@ -111,22 +112,21 @@ void [packageName/]::init()
 
 using namespace [anEPackage.name/];
 
-void [packageName/]::createPackageContents()
+void [packageName/]::createPackageContents(std::shared_ptr<ecore::EPackage> package)
 {
 	if (isCreated) 
 	{
 		return;
 	}
 	isCreated = true;
-	struct null_deleter{void operator()(void const *) const { } };
 
 	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-	create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	create[aClass.name.toUpperFirst()/]Content(package, factory);
 [/for]
 
-	createPackageEDataTypes(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	createPackageEDataTypes(package, factory);
 }
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]

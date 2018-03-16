@@ -17,6 +17,7 @@
 [import ecore4CPP::generator::main::generateAttribute/]
 [import ecore4CPP::generator::main::generateClass/]
 [import ecore4CPP::generator::main::generateOperation/]
+[import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
@@ -31,6 +32,7 @@
 [if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
 #include <map>
 [/if]
+#include <list>
 #include <memory>
 #include <string>
 
@@ -50,6 +52,8 @@ namespace boost
 
 //*********************************
 // generated Includes
+
+[generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
@@ -143,7 +147,12 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			//*********************************
 			[aClass.generateUnionGetterDeclaretaion(false)/]
 
-			[aClass.generateEContainerOperation(false)/]
+			[aClass.generateEContainerOperation(false)/] 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			[aClass.generatePersistenceDecl(false)/]
 	};
 
 }

@@ -25,6 +25,20 @@
  * Section for model and class implementation of an Attribute
  */]
 
+[query public getDefaultValue(anEAttribute : EAttribute) : String = if (defaultValueLiteral->notEmpty()) then defaultValueLiteral else eType.getDefaultValue() endif/]
+
+[template public generateDefaultValue(anEAttribute : EAttribute) post (trim())]
+[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+	[if (anEAttribute.defaultValueLiteral->notEmpty())]
+		= [anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/]
+	[else]
+		= [anEAttribute.eType.name/]::[anEAttribute.eType.oclAsType(EEnum).eLiterals->first().name.toUpperCase()/] 
+	[/if]
+[else]
+	= [anEAttribute.getDefaultValue()/]
+[/if]
+[/template]
+
 [template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
@@ -34,7 +48,7 @@
 [anEAttribute.generateDokumentation()/] 
 [if (not(anEAttribute.upperBound = 1))]
 [anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; [else]
-[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [if (anEAttribute.defaultValueLiteral->notEmpty())]= [if (anEAttribute.eType.oclIsTypeOf(EEnum))][anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/] [else] [anEAttribute.defaultValueLiteral/][/if][/if];
+[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [generateDefaultValue()/];
 [/if]
 [/template]
 
