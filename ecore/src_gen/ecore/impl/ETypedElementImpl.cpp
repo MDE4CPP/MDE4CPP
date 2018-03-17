@@ -25,8 +25,8 @@
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
 #include <exception> // used in Persistence
@@ -344,7 +344,7 @@ bool ETypedElementImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ETypedElementImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ETypedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -361,7 +361,7 @@ void ETypedElementImpl::load(std::shared_ptr<persistence::interface::XLoadHandle
 	}
 }		
 
-void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -422,7 +422,7 @@ void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interface::X
 	ENamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
 {
 
 	try
@@ -474,7 +474,7 @@ void ETypedElementImpl::resolveReferences(const int featureID, std::list<std::sh
 	ENamedElementImpl::resolveReferences(featureID, references);
 }
 
-void ETypedElementImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ETypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -487,7 +487,7 @@ void ETypedElementImpl::save(std::shared_ptr<persistence::interface::XSaveHandle
 	
 }
 
-void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

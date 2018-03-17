@@ -25,8 +25,8 @@
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
 #include <exception> // used in Persistence
@@ -221,7 +221,7 @@ bool EDataTypeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void EDataTypeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void EDataTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -238,7 +238,7 @@ void EDataTypeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> l
 	}
 }		
 
-void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -265,7 +265,7 @@ void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoad
 	EClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
 {
 
 
@@ -277,7 +277,7 @@ void EDataTypeImpl::resolveReferences(const int featureID, std::list<std::shared
 	EClassifierImpl::resolveReferences(featureID, references);
 }
 
-void EDataTypeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EDataTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -293,7 +293,7 @@ void EDataTypeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> s
 	
 }
 
-void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -25,8 +25,8 @@
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
 #include <exception> // used in Persistence
@@ -307,7 +307,7 @@ bool EAnnotationImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void EAnnotationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void EAnnotationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -324,7 +324,7 @@ void EAnnotationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler>
 	}
 }		
 
-void EAnnotationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void EAnnotationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -358,7 +358,7 @@ void EAnnotationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLo
 	EModelElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
 {
 
 	try
@@ -442,7 +442,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::list<std::shar
 	EModelElementImpl::resolveReferences(featureID, references);
 }
 
-void EAnnotationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EAnnotationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -452,7 +452,7 @@ void EAnnotationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler>
 	
 }
 
-void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

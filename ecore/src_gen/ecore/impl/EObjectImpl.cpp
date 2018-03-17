@@ -26,8 +26,8 @@
 #include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
 #include <exception> // used in Persistence
@@ -270,7 +270,7 @@ bool EObjectImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void EObjectImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -287,12 +287,12 @@ void EObjectImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loa
 	}
 }		
 
-void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 }
 
-void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
 {
 
 
@@ -302,7 +302,7 @@ void EObjectImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 }
 
-void EObjectImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -311,7 +311,7 @@ void EObjectImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> sav
 	
 }
 
-void EObjectImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{
