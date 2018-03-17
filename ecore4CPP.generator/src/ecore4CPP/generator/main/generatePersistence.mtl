@@ -21,7 +21,7 @@
 
 
 [template public generatePersistenceNSPath(path : EBoolean)]
-[if(path)]persistence/interface[else]persistence::interface[/if]
+[if(path)]persistence/interfaces[else]persistence::interfaces[/if]
 [/template]
 
 [template public generatePersistenceForwardDeclarations(aClass : EClass)]
@@ -29,7 +29,7 @@
 
 namespace persistence
 {
-	namespace interface
+	namespace interfaces
 	{
 		class XLoadHandler; // used for Persistence
 		class XSaveHandler; // used for Persistence
