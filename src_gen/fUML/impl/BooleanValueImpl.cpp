@@ -30,8 +30,8 @@
 #include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -231,7 +231,7 @@ bool BooleanValueImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void BooleanValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void BooleanValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -248,7 +248,7 @@ void BooleanValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void BooleanValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void BooleanValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -275,7 +275,7 @@ void BooleanValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XL
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void BooleanValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void BooleanValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -287,7 +287,7 @@ void BooleanValueImpl::resolveReferences(const int featureID, std::list<std::sha
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }
 
-void BooleanValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void BooleanValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -303,7 +303,7 @@ void BooleanValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

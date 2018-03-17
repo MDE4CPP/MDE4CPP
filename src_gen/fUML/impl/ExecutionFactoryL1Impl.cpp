@@ -41,8 +41,8 @@
 #include "uml/LiteralUnlimitedNatural.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -260,7 +260,7 @@ bool ExecutionFactoryL1Impl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ExecutionFactoryL1Impl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ExecutionFactoryL1Impl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -277,13 +277,13 @@ void ExecutionFactoryL1Impl::load(std::shared_ptr<persistence::interface::XLoadH
 	}
 }		
 
-void ExecutionFactoryL1Impl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ExecutionFactoryL1Impl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ExecutionFactoryImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionFactoryL1Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExecutionFactoryL1Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -295,7 +295,7 @@ void ExecutionFactoryL1Impl::resolveReferences(const int featureID, std::list<st
 	ExecutionFactoryImpl::resolveReferences(featureID, references);
 }
 
-void ExecutionFactoryL1Impl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutionFactoryL1Impl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -305,7 +305,7 @@ void ExecutionFactoryL1Impl::save(std::shared_ptr<persistence::interface::XSaveH
 	
 }
 
-void ExecutionFactoryL1Impl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutionFactoryL1Impl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

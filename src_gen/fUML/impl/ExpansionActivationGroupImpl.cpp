@@ -25,8 +25,8 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -243,7 +243,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -260,7 +260,7 @@ void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interface::
 	}
 }		
 
-void ExpansionActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ExpansionActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -285,7 +285,7 @@ void ExpansionActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::i
 	ActivityNodeActivationGroupImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -311,7 +311,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::l
 	ActivityNodeActivationGroupImpl::resolveReferences(featureID, references);
 }
 
-void ExpansionActivationGroupImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExpansionActivationGroupImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -321,7 +321,7 @@ void ExpansionActivationGroupImpl::save(std::shared_ptr<persistence::interface::
 	
 }
 
-void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/Classifier.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -200,7 +200,7 @@ bool PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void PrimitiveValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void PrimitiveValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -217,7 +217,7 @@ void PrimitiveValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandl
 	}
 }		
 
-void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -242,7 +242,7 @@ void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interface::
 	ValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -268,7 +268,7 @@ void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::s
 	ValueImpl::resolveReferences(featureID, references);
 }
 
-void PrimitiveValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PrimitiveValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -281,7 +281,7 @@ void PrimitiveValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandl
 	
 }
 
-void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

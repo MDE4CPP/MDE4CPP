@@ -26,8 +26,8 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -228,7 +228,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, boost::any n
 //*********************************
 // Persistence Functions
 //*********************************
-void ReadStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReadStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -245,13 +245,13 @@ void ReadStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence
 	}
 }		
 
-void ReadStructuralFeatureActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReadStructuralFeatureActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	StructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadStructuralFeatureActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ReadStructuralFeatureActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -263,7 +263,7 @@ void ReadStructuralFeatureActionActivationImpl::resolveReferences(const int feat
 	StructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
 }
 
-void ReadStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -282,7 +282,7 @@ void ReadStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence
 	
 }
 
-void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

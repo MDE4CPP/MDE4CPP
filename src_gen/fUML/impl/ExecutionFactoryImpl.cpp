@@ -32,8 +32,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -472,7 +472,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -489,7 +489,7 @@ void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interface::XLoadHan
 	}
 }		
 
-void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -528,7 +528,7 @@ void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -596,7 +596,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
 
-void ExecutionFactoryImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutionFactoryImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -605,7 +605,7 @@ void ExecutionFactoryImpl::save(std::shared_ptr<persistence::interface::XSaveHan
 	
 }
 
-void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

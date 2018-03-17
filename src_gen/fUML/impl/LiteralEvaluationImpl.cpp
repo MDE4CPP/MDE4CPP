@@ -28,8 +28,8 @@
 #include "uml/Type.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -183,7 +183,7 @@ bool LiteralEvaluationImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void LiteralEvaluationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void LiteralEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -200,13 +200,13 @@ void LiteralEvaluationImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void LiteralEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void LiteralEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	EvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -218,7 +218,7 @@ void LiteralEvaluationImpl::resolveReferences(const int featureID, std::list<std
 	EvaluationImpl::resolveReferences(featureID, references);
 }
 
-void LiteralEvaluationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void LiteralEvaluationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -231,7 +231,7 @@ void LiteralEvaluationImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

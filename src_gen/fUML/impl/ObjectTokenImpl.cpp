@@ -25,8 +25,8 @@
  #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -208,7 +208,7 @@ bool ObjectTokenImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ObjectTokenImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ObjectTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -225,13 +225,13 @@ void ObjectTokenImpl::load(std::shared_ptr<persistence::interface::XLoadHandler>
 	}
 }		
 
-void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	TokenImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 	try
@@ -270,7 +270,7 @@ void ObjectTokenImpl::resolveReferences(const int featureID, std::list<std::shar
 	TokenImpl::resolveReferences(featureID, references);
 }
 
-void ObjectTokenImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ObjectTokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -280,7 +280,7 @@ void ObjectTokenImpl::save(std::shared_ptr<persistence::interface::XSaveHandler>
 	
 }
 
-void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

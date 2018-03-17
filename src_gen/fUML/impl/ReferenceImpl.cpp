@@ -28,8 +28,8 @@
     #include "uml/Class.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -299,7 +299,7 @@ bool ReferenceImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ReferenceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -316,7 +316,7 @@ void ReferenceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> l
 	}
 }		
 
-void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -341,7 +341,7 @@ void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoad
 	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -367,7 +367,7 @@ void ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared
 	StructuredValueImpl::resolveReferences(featureID, references);
 }
 
-void ReferenceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -383,7 +383,7 @@ void ReferenceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> s
 	
 }
 
-void ReferenceImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

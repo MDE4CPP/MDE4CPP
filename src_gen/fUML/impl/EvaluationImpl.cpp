@@ -24,8 +24,8 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -217,7 +217,7 @@ bool EvaluationImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void EvaluationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void EvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -234,7 +234,7 @@ void EvaluationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> 
 	}
 }		
 
-void EvaluationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void EvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -266,7 +266,7 @@ void EvaluationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoa
 	SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void EvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -304,7 +304,7 @@ void EvaluationImpl::resolveReferences(const int featureID, std::list<std::share
 	SemanticVisitorImpl::resolveReferences(featureID, references);
 }
 
-void EvaluationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EvaluationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -314,7 +314,7 @@ void EvaluationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> 
 	
 }
 
-void EvaluationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

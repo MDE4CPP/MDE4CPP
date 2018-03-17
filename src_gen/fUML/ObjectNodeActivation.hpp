@@ -24,7 +24,7 @@ template<class T> class Bag;
 
 namespace persistence
 {
-	namespace interface
+	namespace interfaces
 	{
 		class XLoadHandler; // used for Persistence
 		class XSaveHandler; // used for Persistence
@@ -179,10 +179,10 @@ namespace fUML
 			//*********************************
 			// Persistence Functions
 			//*********************************
-			virtual void load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler) = 0;
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};
 

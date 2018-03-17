@@ -33,8 +33,8 @@
 #include "uml/OutputPin.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -494,7 +494,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, boost::any newVal
 //*********************************
 // Persistence Functions
 //*********************************
-void StructuredActivityNodeActivationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void StructuredActivityNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -511,13 +511,13 @@ void StructuredActivityNodeActivationImpl::load(std::shared_ptr<persistence::int
 	}
 }		
 
-void StructuredActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void StructuredActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 	try
@@ -554,7 +554,7 @@ void StructuredActivityNodeActivationImpl::resolveReferences(const int featureID
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
-void StructuredActivityNodeActivationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void StructuredActivityNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -570,7 +570,7 @@ void StructuredActivityNodeActivationImpl::save(std::shared_ptr<persistence::int
 	
 }
 
-void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -24,8 +24,8 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include <exception> // used in Persistence
@@ -168,7 +168,7 @@ bool ChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ChoiceStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ChoiceStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -185,13 +185,13 @@ void ChoiceStrategyImpl::load(std::shared_ptr<persistence::interface::XLoadHandl
 	}
 }		
 
-void ChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
@@ -203,7 +203,7 @@ void ChoiceStrategyImpl::resolveReferences(const int featureID, std::list<std::s
 	SemanticStrategyImpl::resolveReferences(featureID, references);
 }
 
-void ChoiceStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ChoiceStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -213,7 +213,7 @@ void ChoiceStrategyImpl::save(std::shared_ptr<persistence::interface::XSaveHandl
 	
 }
 
-void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{
