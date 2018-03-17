@@ -42,10 +42,8 @@ virtual public uml::Element
 [file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aInterface)/]
 
-#include <boost/any.hpp>
+#include <memory>
 #include <string> 
-#include <map>
-#include <vector>
 
 //*********************************
 // generated Includes
