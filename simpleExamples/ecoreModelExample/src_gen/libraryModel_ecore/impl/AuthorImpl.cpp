@@ -24,8 +24,8 @@
 #include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 #include <exception> // used in Persistence
@@ -156,7 +156,7 @@ bool AuthorImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void AuthorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void AuthorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -173,13 +173,13 @@ void AuthorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> load
 	}
 }		
 
-void AuthorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void AuthorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AuthorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory)
+void AuthorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory)
 {
 
 
@@ -191,7 +191,7 @@ void AuthorImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 	NamedElementImpl::resolveReferences(featureID, references);
 }
 
-void AuthorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void AuthorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -201,7 +201,7 @@ void AuthorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> save
 	
 }
 
-void AuthorImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void AuthorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

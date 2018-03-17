@@ -25,8 +25,8 @@
 #include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 #include <exception> // used in Persistence
@@ -211,7 +211,7 @@ bool LibraryModelImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void LibraryModelImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void LibraryModelImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -228,13 +228,13 @@ void LibraryModelImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void LibraryModelImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void LibraryModelImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LibraryModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory)
+void LibraryModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory)
 {
 
 	try
@@ -288,7 +288,7 @@ void LibraryModelImpl::resolveReferences(const int featureID, std::list<std::sha
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
 
-void LibraryModelImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void LibraryModelImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -297,7 +297,7 @@ void LibraryModelImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void LibraryModelImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void LibraryModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{
