@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -371,7 +371,7 @@ bool ExpressionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ExpressionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -388,7 +388,7 @@ void ExpressionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> 
 	}
 }		
 
-void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -415,7 +415,7 @@ void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoa
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -455,7 +455,7 @@ void ExpressionImpl::resolveReferences(const int featureID, std::list<std::share
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void ExpressionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -480,7 +480,7 @@ void ExpressionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> 
 	
 }
 
-void ExpressionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

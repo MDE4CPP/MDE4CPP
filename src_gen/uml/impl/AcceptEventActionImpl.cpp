@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -517,7 +517,7 @@ bool AcceptEventActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void AcceptEventActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void AcceptEventActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -534,7 +534,7 @@ void AcceptEventActionImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void AcceptEventActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void AcceptEventActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -561,7 +561,7 @@ void AcceptEventActionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -617,7 +617,7 @@ void AcceptEventActionImpl::resolveReferences(const int featureID, std::list<std
 	ActionImpl::resolveReferences(featureID, references);
 }
 
-void AcceptEventActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void AcceptEventActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -647,7 +647,7 @@ void AcceptEventActionImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

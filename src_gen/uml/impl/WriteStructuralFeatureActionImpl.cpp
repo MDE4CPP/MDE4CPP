@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -485,7 +485,7 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void WriteStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void WriteStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -502,13 +502,13 @@ void WriteStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfa
 	}
 }		
 
-void WriteStructuralFeatureActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void WriteStructuralFeatureActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	StructuralFeatureActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -562,7 +562,7 @@ void WriteStructuralFeatureActionImpl::resolveReferences(const int featureID, st
 	StructuralFeatureActionImpl::resolveReferences(featureID, references);
 }
 
-void WriteStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void WriteStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -595,7 +595,7 @@ void WriteStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfa
 	
 }
 
-void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

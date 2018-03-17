@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -504,7 +504,7 @@ bool PrimitiveTypeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void PrimitiveTypeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void PrimitiveTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -521,13 +521,13 @@ void PrimitiveTypeImpl::load(std::shared_ptr<persistence::interface::XLoadHandle
 	}
 }		
 
-void PrimitiveTypeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void PrimitiveTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	DataTypeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -539,7 +539,7 @@ void PrimitiveTypeImpl::resolveReferences(const int featureID, std::list<std::sh
 	DataTypeImpl::resolveReferences(featureID, references);
 }
 
-void PrimitiveTypeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PrimitiveTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -572,7 +572,7 @@ void PrimitiveTypeImpl::save(std::shared_ptr<persistence::interface::XSaveHandle
 	
 }
 
-void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

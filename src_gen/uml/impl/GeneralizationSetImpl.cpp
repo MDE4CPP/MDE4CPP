@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -392,7 +392,7 @@ bool GeneralizationSetImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void GeneralizationSetImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void GeneralizationSetImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -409,7 +409,7 @@ void GeneralizationSetImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void GeneralizationSetImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void GeneralizationSetImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -459,7 +459,7 @@ void GeneralizationSetImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -499,7 +499,7 @@ void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std
 	PackageableElementImpl::resolveReferences(featureID, references);
 }
 
-void GeneralizationSetImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void GeneralizationSetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -520,7 +520,7 @@ void GeneralizationSetImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

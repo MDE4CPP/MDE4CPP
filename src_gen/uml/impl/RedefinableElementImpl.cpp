@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -343,7 +343,7 @@ bool RedefinableElementImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void RedefinableElementImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void RedefinableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -360,7 +360,7 @@ void RedefinableElementImpl::load(std::shared_ptr<persistence::interface::XLoadH
 	}
 }		
 
-void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -387,7 +387,7 @@ void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -399,7 +399,7 @@ void RedefinableElementImpl::resolveReferences(const int featureID, std::list<st
 	NamedElementImpl::resolveReferences(featureID, references);
 }
 
-void RedefinableElementImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RedefinableElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -416,7 +416,7 @@ void RedefinableElementImpl::save(std::shared_ptr<persistence::interface::XSaveH
 	
 }
 
-void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

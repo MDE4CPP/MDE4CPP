@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -527,7 +527,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, boost::any newVal
 //*********************************
 // Persistence Functions
 //*********************************
-void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -544,7 +544,7 @@ void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::int
 	}
 }		
 
-void ReadLinkObjectEndQualifierActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReadLinkObjectEndQualifierActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -569,7 +569,7 @@ void ReadLinkObjectEndQualifierActionImpl::loadAttributes(std::shared_ptr<persis
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadLinkObjectEndQualifierActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadLinkObjectEndQualifierActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -637,7 +637,7 @@ void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID
 	ActionImpl::resolveReferences(featureID, references);
 }
 
-void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -667,7 +667,7 @@ void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::int
 	
 }
 
-void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

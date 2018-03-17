@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -561,7 +561,7 @@ bool SequenceNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void SequenceNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void SequenceNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -578,13 +578,13 @@ void SequenceNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void SequenceNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void SequenceNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -624,7 +624,7 @@ void SequenceNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 	StructuredActivityNodeImpl::resolveReferences(featureID, references);
 }
 
-void SequenceNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void SequenceNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -659,7 +659,7 @@ void SequenceNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

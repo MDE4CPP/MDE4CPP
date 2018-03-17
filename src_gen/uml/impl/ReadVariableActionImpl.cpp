@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -428,7 +428,7 @@ bool ReadVariableActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ReadVariableActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReadVariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -445,13 +445,13 @@ void ReadVariableActionImpl::load(std::shared_ptr<persistence::interface::XLoadH
 	}
 }		
 
-void ReadVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReadVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	VariableActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -489,7 +489,7 @@ void ReadVariableActionImpl::resolveReferences(const int featureID, std::list<st
 	VariableActionImpl::resolveReferences(featureID, references);
 }
 
-void ReadVariableActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -522,7 +522,7 @@ void ReadVariableActionImpl::save(std::shared_ptr<persistence::interface::XSaveH
 	
 }
 
-void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

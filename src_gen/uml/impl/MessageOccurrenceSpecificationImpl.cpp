@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -334,7 +334,7 @@ bool MessageOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue
 //*********************************
 // Persistence Functions
 //*********************************
-void MessageOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void MessageOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -351,14 +351,14 @@ void MessageOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::inter
 	}
 }		
 
-void MessageOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void MessageOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	MessageEndImpl::loadAttributes(loadHandler, attr_list);
 	OccurrenceSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MessageOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MessageOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -372,7 +372,7 @@ void MessageOccurrenceSpecificationImpl::resolveReferences(const int featureID, 
 	OccurrenceSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void MessageOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void MessageOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -396,7 +396,7 @@ void MessageOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::inter
 	
 }
 
-void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

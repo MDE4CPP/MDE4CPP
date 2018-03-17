@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -340,7 +340,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void TemplateParameterSubstitutionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void TemplateParameterSubstitutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -357,7 +357,7 @@ void TemplateParameterSubstitutionImpl::load(std::shared_ptr<persistence::interf
 	}
 }		
 
-void TemplateParameterSubstitutionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void TemplateParameterSubstitutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -389,7 +389,7 @@ void TemplateParameterSubstitutionImpl::loadAttributes(std::shared_ptr<persisten
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -466,7 +466,7 @@ void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, s
 	ElementImpl::resolveReferences(featureID, references);
 }
 
-void TemplateParameterSubstitutionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void TemplateParameterSubstitutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -480,7 +480,7 @@ void TemplateParameterSubstitutionImpl::save(std::shared_ptr<persistence::interf
 	
 }
 
-void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

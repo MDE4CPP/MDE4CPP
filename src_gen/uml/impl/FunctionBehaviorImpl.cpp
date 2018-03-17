@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -691,7 +691,7 @@ bool FunctionBehaviorImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void FunctionBehaviorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void FunctionBehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -708,13 +708,13 @@ void FunctionBehaviorImpl::load(std::shared_ptr<persistence::interface::XLoadHan
 	}
 }		
 
-void FunctionBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void FunctionBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	OpaqueBehaviorImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void FunctionBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void FunctionBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -726,7 +726,7 @@ void FunctionBehaviorImpl::resolveReferences(const int featureID, std::list<std:
 	OpaqueBehaviorImpl::resolveReferences(featureID, references);
 }
 
-void FunctionBehaviorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void FunctionBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -772,7 +772,7 @@ void FunctionBehaviorImpl::save(std::shared_ptr<persistence::interface::XSaveHan
 	
 }
 
-void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -516,7 +516,7 @@ bool UnmarshallActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void UnmarshallActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void UnmarshallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -533,7 +533,7 @@ void UnmarshallActionImpl::load(std::shared_ptr<persistence::interface::XLoadHan
 	}
 }		
 
-void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -558,7 +558,7 @@ void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -627,7 +627,7 @@ void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std:
 	ActionImpl::resolveReferences(featureID, references);
 }
 
-void UnmarshallActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -657,7 +657,7 @@ void UnmarshallActionImpl::save(std::shared_ptr<persistence::interface::XSaveHan
 	
 }
 
-void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

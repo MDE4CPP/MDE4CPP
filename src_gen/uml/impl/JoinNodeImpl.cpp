@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -408,7 +408,7 @@ bool JoinNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void JoinNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void JoinNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -425,7 +425,7 @@ void JoinNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> lo
 	}
 }		
 
-void JoinNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void JoinNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -452,7 +452,7 @@ void JoinNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadH
 	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -491,7 +491,7 @@ void JoinNodeImpl::resolveReferences(const int featureID, std::list<std::shared_
 	ControlNodeImpl::resolveReferences(featureID, references);
 }
 
-void JoinNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void JoinNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -518,7 +518,7 @@ void JoinNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> sa
 	
 }
 
-void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

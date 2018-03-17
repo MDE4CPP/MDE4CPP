@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -423,7 +423,7 @@ bool CombinedFragmentImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void CombinedFragmentImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void CombinedFragmentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -440,7 +440,7 @@ void CombinedFragmentImpl::load(std::shared_ptr<persistence::interface::XLoadHan
 	}
 }		
 
-void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -514,7 +514,7 @@ void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -570,7 +570,7 @@ void CombinedFragmentImpl::resolveReferences(const int featureID, std::list<std:
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }
 
-void CombinedFragmentImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void CombinedFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -590,7 +590,7 @@ void CombinedFragmentImpl::save(std::shared_ptr<persistence::interface::XSaveHan
 	
 }
 
-void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -375,7 +375,7 @@ bool EnumerationLiteralImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -392,13 +392,13 @@ void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interface::XLoadH
 	}
 }		
 
-void EnumerationLiteralImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void EnumerationLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	InstanceSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -424,7 +424,7 @@ void EnumerationLiteralImpl::resolveReferences(const int featureID, std::list<st
 	InstanceSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void EnumerationLiteralImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EnumerationLiteralImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -450,7 +450,7 @@ void EnumerationLiteralImpl::save(std::shared_ptr<persistence::interface::XSaveH
 	
 }
 
-void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

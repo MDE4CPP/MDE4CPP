@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -530,7 +530,7 @@ bool SignalImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void SignalImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void SignalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -547,13 +547,13 @@ void SignalImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> load
 	}
 }		
 
-void SignalImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void SignalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SignalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SignalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -592,7 +592,7 @@ void SignalImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 	ClassifierImpl::resolveReferences(featureID, references);
 }
 
-void SignalImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void SignalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -622,7 +622,7 @@ void SignalImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> save
 	
 }
 
-void SignalImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

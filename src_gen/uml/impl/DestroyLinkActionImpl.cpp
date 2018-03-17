@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -400,7 +400,7 @@ bool DestroyLinkActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void DestroyLinkActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void DestroyLinkActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -417,13 +417,13 @@ void DestroyLinkActionImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void DestroyLinkActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void DestroyLinkActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	WriteLinkActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DestroyLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DestroyLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -435,7 +435,7 @@ void DestroyLinkActionImpl::resolveReferences(const int featureID, std::list<std
 	WriteLinkActionImpl::resolveReferences(featureID, references);
 }
 
-void DestroyLinkActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DestroyLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -471,7 +471,7 @@ void DestroyLinkActionImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

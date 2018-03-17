@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -691,7 +691,7 @@ bool OpaqueBehaviorImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void OpaqueBehaviorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void OpaqueBehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -708,13 +708,13 @@ void OpaqueBehaviorImpl::load(std::shared_ptr<persistence::interface::XLoadHandl
 	}
 }		
 
-void OpaqueBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void OpaqueBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	BehaviorImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 	try
 	{
@@ -752,7 +752,7 @@ void OpaqueBehaviorImpl::resolveReferences(const int featureID, std::list<std::s
 	BehaviorImpl::resolveReferences(featureID, references);
 }
 
-void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -795,7 +795,7 @@ void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interface::XSaveHandl
 	
 }
 
-void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

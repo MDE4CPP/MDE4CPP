@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -419,7 +419,7 @@ bool ConnectorImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ConnectorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ConnectorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -436,7 +436,7 @@ void ConnectorImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> l
 	}
 }		
 
-void ConnectorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ConnectorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -475,7 +475,7 @@ void ConnectorImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoad
 	FeatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -556,7 +556,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared
 	FeatureImpl::resolveReferences(featureID, references);
 }
 
-void ConnectorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ConnectorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -579,7 +579,7 @@ void ConnectorImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> s
 	
 }
 
-void ConnectorImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

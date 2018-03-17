@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -528,7 +528,7 @@ bool InformationFlowImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InformationFlowImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InformationFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -545,7 +545,7 @@ void InformationFlowImpl::load(std::shared_ptr<persistence::interface::XLoadHand
 	}
 }		
 
-void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -613,7 +613,7 @@ void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interface:
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -727,7 +727,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 	PackageableElementImpl::resolveReferences(featureID, references);
 }
 
-void InformationFlowImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InformationFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -750,7 +750,7 @@ void InformationFlowImpl::save(std::shared_ptr<persistence::interface::XSaveHand
 	
 }
 
-void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

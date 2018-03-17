@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -515,7 +515,7 @@ bool ObjectNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ObjectNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ObjectNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -532,7 +532,7 @@ void ObjectNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> 
 	}
 }		
 
-void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -598,7 +598,7 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoa
 	TypedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ObjectNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ObjectNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -667,7 +667,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::share
 	TypedElementImpl::resolveReferences(featureID, references);
 }
 
-void ObjectNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -692,7 +692,7 @@ void ObjectNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> 
 	
 }
 
-void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

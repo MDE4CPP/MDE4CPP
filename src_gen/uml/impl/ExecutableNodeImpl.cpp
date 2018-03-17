@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -382,7 +382,7 @@ bool ExecutableNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ExecutableNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ExecutableNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -399,13 +399,13 @@ void ExecutableNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandl
 	}
 }		
 
-void ExecutableNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ExecutableNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -442,7 +442,7 @@ void ExecutableNodeImpl::resolveReferences(const int featureID, std::list<std::s
 	ActivityNodeImpl::resolveReferences(featureID, references);
 }
 
-void ExecutableNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutableNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -466,7 +466,7 @@ void ExecutableNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandl
 	
 }
 
-void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

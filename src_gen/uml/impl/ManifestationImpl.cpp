@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -360,7 +360,7 @@ bool ManifestationImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ManifestationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ManifestationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -377,7 +377,7 @@ void ManifestationImpl::load(std::shared_ptr<persistence::interface::XLoadHandle
 	}
 }		
 
-void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -402,7 +402,7 @@ void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interface::X
 	AbstractionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -428,7 +428,7 @@ void ManifestationImpl::resolveReferences(const int featureID, std::list<std::sh
 	AbstractionImpl::resolveReferences(featureID, references);
 }
 
-void ManifestationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ManifestationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -457,7 +457,7 @@ void ManifestationImpl::save(std::shared_ptr<persistence::interface::XSaveHandle
 	
 }
 
-void ManifestationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -405,7 +405,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InterfaceRealizationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InterfaceRealizationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -422,7 +422,7 @@ void InterfaceRealizationImpl::load(std::shared_ptr<persistence::interface::XLoa
 	}
 }		
 
-void InterfaceRealizationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InterfaceRealizationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -447,7 +447,7 @@ void InterfaceRealizationImpl::loadAttributes(std::shared_ptr<persistence::inter
 	RealizationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InterfaceRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InterfaceRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -485,7 +485,7 @@ void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<
 	RealizationImpl::resolveReferences(featureID, references);
 }
 
-void InterfaceRealizationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InterfaceRealizationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -517,7 +517,7 @@ void InterfaceRealizationImpl::save(std::shared_ptr<persistence::interface::XSav
 	
 }
 
-void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

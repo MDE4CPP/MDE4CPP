@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -446,7 +446,7 @@ bool DecisionNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void DecisionNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void DecisionNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -463,7 +463,7 @@ void DecisionNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -495,7 +495,7 @@ void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XL
 	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -533,7 +533,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 	ControlNodeImpl::resolveReferences(featureID, references);
 }
 
-void DecisionNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -560,7 +560,7 @@ void DecisionNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

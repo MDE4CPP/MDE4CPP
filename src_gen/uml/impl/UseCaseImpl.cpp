@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -691,7 +691,7 @@ bool UseCaseImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void UseCaseImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void UseCaseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -708,7 +708,7 @@ void UseCaseImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loa
 	}
 }		
 
-void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -733,7 +733,7 @@ void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHa
 	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -816,7 +816,7 @@ void UseCaseImpl::resolveReferences(const int featureID, std::list<std::shared_p
 	BehavioredClassifierImpl::resolveReferences(featureID, references);
 }
 
-void UseCaseImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void UseCaseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -849,7 +849,7 @@ void UseCaseImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> sav
 	
 }
 
-void UseCaseImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

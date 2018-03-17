@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -442,7 +442,7 @@ bool PinImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void PinImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void PinImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -459,7 +459,7 @@ void PinImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHan
 	}
 }		
 
-void PinImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void PinImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -487,7 +487,7 @@ void PinImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandle
 	ObjectNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -501,7 +501,7 @@ void PinImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<e
 	ObjectNodeImpl::resolveReferences(featureID, references);
 }
 
-void PinImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -530,7 +530,7 @@ void PinImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHan
 	
 }
 
-void PinImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

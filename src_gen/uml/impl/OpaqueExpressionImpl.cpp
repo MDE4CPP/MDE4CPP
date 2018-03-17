@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -424,7 +424,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -441,7 +441,7 @@ void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interface::XLoadHan
 	}
 }		
 
-void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -466,7 +466,7 @@ void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 	try
 	{
@@ -518,7 +518,7 @@ void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std:
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -543,7 +543,7 @@ void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interface::XSaveHan
 	
 }
 
-void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -815,7 +815,7 @@ bool ClassImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ClassImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ClassImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -832,7 +832,7 @@ void ClassImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadH
 	}
 }		
 
-void ClassImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ClassImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -867,7 +867,7 @@ void ClassImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHand
 	EncapsulatedClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -957,7 +957,7 @@ void ClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 	EncapsulatedClassifierImpl::resolveReferences(featureID, references);
 }
 
-void ClassImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ClassImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -994,7 +994,7 @@ void ClassImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveH
 	
 }
 
-void ClassImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

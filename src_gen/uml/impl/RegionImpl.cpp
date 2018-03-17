@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -585,7 +585,7 @@ bool RegionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void RegionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void RegionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -602,7 +602,7 @@ void RegionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> load
 	}
 }		
 
-void RegionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void RegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -628,7 +628,7 @@ void RegionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHan
 	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -721,7 +721,7 @@ void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 	RedefinableElementImpl::resolveReferences(featureID, references);
 }
 
-void RegionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -742,7 +742,7 @@ void RegionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> save
 	
 }
 
-void RegionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

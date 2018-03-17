@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -541,7 +541,7 @@ bool NamespaceImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void NamespaceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void NamespaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -558,13 +558,13 @@ void NamespaceImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> l
 	}
 }		
 
-void NamespaceImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void NamespaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -651,7 +651,7 @@ void NamespaceImpl::resolveReferences(const int featureID, std::list<std::shared
 	NamedElementImpl::resolveReferences(featureID, references);
 }
 
-void NamespaceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void NamespaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -668,7 +668,7 @@ void NamespaceImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> s
 	
 }
 
-void NamespaceImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

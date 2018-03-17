@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -531,7 +531,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void BehavioralFeatureImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void BehavioralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -548,7 +548,7 @@ void BehavioralFeatureImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -610,7 +610,7 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	NamespaceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -698,7 +698,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::list<std
 	NamespaceImpl::resolveReferences(featureID, references);
 }
 
-void BehavioralFeatureImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void BehavioralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -722,7 +722,7 @@ void BehavioralFeatureImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -439,7 +439,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void CallBehaviorActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void CallBehaviorActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -456,7 +456,7 @@ void CallBehaviorActionImpl::load(std::shared_ptr<persistence::interface::XLoadH
 	}
 }		
 
-void CallBehaviorActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void CallBehaviorActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -481,7 +481,7 @@ void CallBehaviorActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	CallActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CallBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -507,7 +507,7 @@ void CallBehaviorActionImpl::resolveReferences(const int featureID, std::list<st
 	CallActionImpl::resolveReferences(featureID, references);
 }
 
-void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -543,7 +543,7 @@ void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interface::XSaveH
 	
 }
 
-void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -493,7 +493,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ReclassifyObjectActionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReclassifyObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -510,7 +510,7 @@ void ReclassifyObjectActionImpl::load(std::shared_ptr<persistence::interface::XL
 	}
 }		
 
-void ReclassifyObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReclassifyObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -551,7 +551,7 @@ void ReclassifyObjectActionImpl::loadAttributes(std::shared_ptr<persistence::int
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReclassifyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReclassifyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -619,7 +619,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::lis
 	ActionImpl::resolveReferences(featureID, references);
 }
 
-void ReclassifyObjectActionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReclassifyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -649,7 +649,7 @@ void ReclassifyObjectActionImpl::save(std::shared_ptr<persistence::interface::XS
 	
 }
 
-void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

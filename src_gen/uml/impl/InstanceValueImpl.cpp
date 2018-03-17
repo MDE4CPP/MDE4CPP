@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -337,7 +337,7 @@ bool InstanceValueImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InstanceValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InstanceValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -354,7 +354,7 @@ void InstanceValueImpl::load(std::shared_ptr<persistence::interface::XLoadHandle
 	}
 }		
 
-void InstanceValueImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InstanceValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -379,7 +379,7 @@ void InstanceValueImpl::loadAttributes(std::shared_ptr<persistence::interface::X
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InstanceValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InstanceValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -405,7 +405,7 @@ void InstanceValueImpl::resolveReferences(const int featureID, std::list<std::sh
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void InstanceValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InstanceValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -430,7 +430,7 @@ void InstanceValueImpl::save(std::shared_ptr<persistence::interface::XSaveHandle
 	
 }
 
-void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

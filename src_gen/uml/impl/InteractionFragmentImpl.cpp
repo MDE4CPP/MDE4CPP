@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -399,7 +399,7 @@ bool InteractionFragmentImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InteractionFragmentImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InteractionFragmentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -416,7 +416,7 @@ void InteractionFragmentImpl::load(std::shared_ptr<persistence::interface::XLoad
 	}
 }		
 
-void InteractionFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InteractionFragmentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -441,7 +441,7 @@ void InteractionFragmentImpl::loadAttributes(std::shared_ptr<persistence::interf
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InteractionFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InteractionFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -520,7 +520,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 	NamedElementImpl::resolveReferences(featureID, references);
 }
 
-void InteractionFragmentImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InteractionFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -537,7 +537,7 @@ void InteractionFragmentImpl::save(std::shared_ptr<persistence::interface::XSave
 	
 }
 
-void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -343,7 +343,7 @@ bool ActivityFinalNodeImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ActivityFinalNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ActivityFinalNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -360,13 +360,13 @@ void ActivityFinalNodeImpl::load(std::shared_ptr<persistence::interface::XLoadHa
 	}
 }		
 
-void ActivityFinalNodeImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ActivityFinalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	FinalNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActivityFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ActivityFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -378,7 +378,7 @@ void ActivityFinalNodeImpl::resolveReferences(const int featureID, std::list<std
 	FinalNodeImpl::resolveReferences(featureID, references);
 }
 
-void ActivityFinalNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ActivityFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -408,7 +408,7 @@ void ActivityFinalNodeImpl::save(std::shared_ptr<persistence::interface::XSaveHa
 	
 }
 
-void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

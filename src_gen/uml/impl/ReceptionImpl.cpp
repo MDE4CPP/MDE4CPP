@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -379,7 +379,7 @@ bool ReceptionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ReceptionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void ReceptionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -396,7 +396,7 @@ void ReceptionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> l
 	}
 }		
 
-void ReceptionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ReceptionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -421,7 +421,7 @@ void ReceptionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoad
 	BehavioralFeatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -447,7 +447,7 @@ void ReceptionImpl::resolveReferences(const int featureID, std::list<std::shared
 	BehavioralFeatureImpl::resolveReferences(featureID, references);
 }
 
-void ReceptionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReceptionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -474,7 +474,7 @@ void ReceptionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> s
 	
 }
 
-void ReceptionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

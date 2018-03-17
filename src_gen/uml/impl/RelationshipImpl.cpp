@@ -26,8 +26,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -219,7 +219,7 @@ bool RelationshipImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void RelationshipImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void RelationshipImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -236,13 +236,13 @@ void RelationshipImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -254,7 +254,7 @@ void RelationshipImpl::resolveReferences(const int featureID, std::list<std::sha
 	ElementImpl::resolveReferences(featureID, references);
 }
 
-void RelationshipImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -268,7 +268,7 @@ void RelationshipImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void RelationshipImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

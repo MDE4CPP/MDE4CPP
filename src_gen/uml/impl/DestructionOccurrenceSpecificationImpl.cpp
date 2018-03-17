@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -316,7 +316,7 @@ bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newV
 //*********************************
 // Persistence Functions
 //*********************************
-void DestructionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void DestructionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -333,13 +333,13 @@ void DestructionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::i
 	}
 }		
 
-void DestructionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void DestructionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	MessageOccurrenceSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -351,7 +351,7 @@ void DestructionOccurrenceSpecificationImpl::resolveReferences(const int feature
 	MessageOccurrenceSpecificationImpl::resolveReferences(featureID, references);
 }
 
-void DestructionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DestructionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -378,7 +378,7 @@ void DestructionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::i
 	
 }
 
-void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -969,7 +969,7 @@ bool InteractionImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InteractionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InteractionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -986,14 +986,14 @@ void InteractionImpl::load(std::shared_ptr<persistence::interface::XLoadHandler>
 	}
 }		
 
-void InteractionImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InteractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	BehaviorImpl::loadAttributes(loadHandler, attr_list);
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 	try
@@ -1098,7 +1098,7 @@ void InteractionImpl::resolveReferences(const int featureID, std::list<std::shar
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }
 
-void InteractionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -1142,7 +1142,7 @@ void InteractionImpl::save(std::shared_ptr<persistence::interface::XSaveHandler>
 	
 }
 
-void InteractionImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

@@ -27,8 +27,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -287,7 +287,7 @@ bool MessageEventImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void MessageEventImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void MessageEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -304,13 +304,13 @@ void MessageEventImpl::load(std::shared_ptr<persistence::interface::XLoadHandler
 	}
 }		
 
-void MessageEventImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void MessageEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	EventImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -322,7 +322,7 @@ void MessageEventImpl::resolveReferences(const int featureID, std::list<std::sha
 	EventImpl::resolveReferences(featureID, references);
 }
 
-void MessageEventImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void MessageEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -346,7 +346,7 @@ void MessageEventImpl::save(std::shared_ptr<persistence::interface::XSaveHandler
 	
 }
 
-void MessageEventImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

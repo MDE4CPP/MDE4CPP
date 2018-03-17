@@ -28,8 +28,8 @@
 #include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "persistence/interface/XLoadHandler.hpp" // used for Persistence
-#include "persistence/interface/XSaveHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include <exception> // used in Persistence
@@ -516,7 +516,7 @@ bool InformationItemImpl::eSet(int featureID, boost::any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void InformationItemImpl::load(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler)
+void InformationItemImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -533,7 +533,7 @@ void InformationItemImpl::load(std::shared_ptr<persistence::interface::XLoadHand
 	}
 }		
 
-void InformationItemImpl::loadAttributes(std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void InformationItemImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 	try
 	{
@@ -558,7 +558,7 @@ void InformationItemImpl::loadAttributes(std::shared_ptr<persistence::interface:
 	ClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InformationItemImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interface::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InformationItemImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
 {
 
 
@@ -586,7 +586,7 @@ void InformationItemImpl::resolveReferences(const int featureID, std::list<std::
 	ClassifierImpl::resolveReferences(featureID, references);
 }
 
-void InformationItemImpl::save(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InformationItemImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -616,7 +616,7 @@ void InformationItemImpl::save(std::shared_ptr<persistence::interface::XSaveHand
 	
 }
 
-void InformationItemImpl::saveContent(std::shared_ptr<persistence::interface::XSaveHandler> saveHandler) const
+void InformationItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{
