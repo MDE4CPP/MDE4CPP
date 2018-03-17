@@ -5,7 +5,7 @@ apply plugin: "base"
 
 description 'Example collection'
 
-task buildBenchmarks(dependsOn: ['compileEcoreBenchmark', 'compileMemoryBenchmarkEcore']) {
+task buildBenchmarks(dependsOn: ['compileEcoreBenchmark', 'compileMemoryBenchmarkEcore', 'compileUMLBenchmark']) {
 	group 'Examples'
 	description 'build all benchmark applications'	
 }
