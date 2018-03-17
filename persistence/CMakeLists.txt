@@ -112,9 +112,9 @@ INSTALL(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
 )
 
-INSTALL(DIRECTORY interface xml base DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
+INSTALL(DIRECTORY interfaces xml base DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
   FILES_MATCHING 
-    PATTERN "interface/*.hpp"
+    PATTERN "interfaces/*.hpp"
     PATTERN "xml/XMLPersistence.hpp"
     PATTERN "base/Persistence.hpp"
     PATTERN "xerces" EXCLUDE

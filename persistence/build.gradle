@@ -10,7 +10,7 @@ task deliverPersistence(type: Copy) {
 	group 'Persistence'
 	description 'deliver persistence header to %MDE4CPP_HOME%/application/include/persistence'
 	from (".") {
-		include "interface/*.hpp"
+		include "interfaces/*.hpp"
 		include "base/Persistence.hpp"
 		include "xml/XMLPersistence.hpp"
 	}

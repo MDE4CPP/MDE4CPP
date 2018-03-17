@@ -8,7 +8,7 @@
 #ifndef PERSISTENCE_BASE_SAVEHANDLER_HPP
 #define PERSISTENCE_BASE_SAVEHANDLER_HPP
 
-#include "persistence/interface/XSaveHandler.hpp"
+#include "persistence/interfaces/XSaveHandler.hpp"
 
 #include <string>
 #include "abstractDataTypes/Bag.hpp"
@@ -22,7 +22,7 @@ namespace persistence
 {
 	namespace base
 	{
-		class SaveHandler: public persistence::interface::XSaveHandler
+		class SaveHandler: public persistence::interfaces::XSaveHandler
 		{
 			public:
 				SaveHandler();

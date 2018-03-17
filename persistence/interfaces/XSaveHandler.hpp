@@ -5,8 +5,8 @@
  *      Author: Alexander
  */
 
-#ifndef PERSISTENCE_INTERFACE_XSAVEHANDLER_HPP
-#define PERSISTENCE_INTERFACE_XSAVEHANDLER_HPP
+#ifndef PERSISTENCE_INTERFACES_XSAVEHANDLER_HPP
+#define PERSISTENCE_INTERFACES_XSAVEHANDLER_HPP
 
 #include <map>
 #include <memory>
@@ -23,7 +23,7 @@ namespace ecore
 
 namespace persistence
 {
-	namespace interface
+	namespace interfaces
 	{
 		class XSaveHandler
 		{
@@ -62,6 +62,6 @@ namespace persistence
 				virtual void release() = 0;
 		};
 
-	} /* namespace interface */
+	} /* namespace interfaces */
 } /* namespace persistence */
 #endif

@@ -5,8 +5,8 @@
  *      Author: Alexander
  */
 
-#ifndef PERSISTENCE_INTERFACE_XLOADHANDLER_HPP
-#define PERSISTENCE_INTERFACE_XLOADHANDLER_HPP
+#ifndef PERSISTENCE_INTERFACES_XLOADHANDLER_HPP
+#define PERSISTENCE_INTERFACES_XLOADHANDLER_HPP
 
 #include <map>
 #include <memory>
@@ -20,7 +20,7 @@ namespace ecore
 
 namespace persistence
 {
-	namespace interface
+	namespace interfaces
 	{
 
 		class XLoadHandler
@@ -47,7 +47,7 @@ namespace persistence
 				virtual std::shared_ptr<std::string> getChildText() = 0;
 		};
 
-	} /* namespace interface */
+	} /* namespace interfaces */
 } /* namespace persistence */
 
 #endif /* XLoadHandler_HPP_ */

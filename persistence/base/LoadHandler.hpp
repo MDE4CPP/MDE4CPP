@@ -8,7 +8,7 @@
 #ifndef PERSISTENCE_BASE_LOADHANDLER_HPP
 #define PERSISTENCE_BASE_LOADHANDLER_HPP
 
-#include "persistence/interface/XLoadHandler.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp"
 
 #include <list>
 #include <map>
@@ -46,7 +46,7 @@ namespace persistence
 		/**
 		 * Class LoadHandler
 		 */
-		class LoadHandler: public persistence::interface::XLoadHandler
+		class LoadHandler: public persistence::interfaces::XLoadHandler
 		{
 			public:
 				LoadHandler();
