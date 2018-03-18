@@ -60,8 +60,16 @@
 [type.generateTypeInclude(aPackage)/]
 [/for]
 
-#include "[anCallOperationAction.target.type.getNearestPackage().name/]/[anCallOperationAction.target.type.name/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name/]Object.hpp"
+[if (anCallOperationAction.target.name.startsWith('self'))]
+[if (anCallOperationAction.target.name.startsWith('self.'))]
+#include "[anCallOperationAction.target.type.getNearestPackage().ns()/]/[anCallOperationAction.target.type.name/].hpp"
+[/if]
+#include "[anCallOperationAction.activity.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+[else]
+#include "[anCallOperationAction.target.type.getNearestPackage().ns()/]/[anCallOperationAction.target.type.name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
+[/if]
  
 using namespace [aPackage.name/];
 
@@ -105,15 +113,30 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/if]
 	[/for]
 
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name/]Object>(this->getContext())->getUmlValue();
+[if (anCallOperationAction.target.name.startsWith('self'))]
+	std::shared_ptr<[anCallOperationAction.activity.owner.oclAsType(Classifier).namespace.ns()/]::[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
+    assert(subtarget != nullptr);
+	if (target != nullptr && subtarget != nullptr)
+	{
+[else]
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
     assert(target != nullptr);
+[/if]
 
     //call assigned operation
-	[for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->asOrderedSet())] [par.name/] = [/for]  target->[anCallOperationAction.operation.name/]([for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
-	
-	[if(anCallOperationAction.target.name.toLower().contains('self_'))]
-		//Target pin name starts with self_
-		//Attribute name: [anCallOperationAction.target.name.substitute('self_', '')/]
+	[for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->asOrderedSet())] [par.name/] = [/for] [if (target.name.startsWith('self.'))]subtarget[else]target[/if]->[anCallOperationAction.operation.name/]([for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
+
+[if (anCallOperationAction.target.name.startsWith('self.'))]
+	}
+	else
+	{
+		std::cerr << "attribute [anCallOperationAction.target.name/] is not set" << std::endl;
+	}
+[/if]
+	[if(anCallOperationAction.target.name.toLower().contains('self.'))]
+		//Target pin name starts with self.
+		//Attribute name: [anCallOperationAction.target.name.substitute('self.', '')/]
 	[elseif(anCallOperationAction.target.name.size() = 0)]
 		//Target pin name is empty
 	[/if]
