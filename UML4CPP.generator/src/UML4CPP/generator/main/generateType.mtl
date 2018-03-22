@@ -102,6 +102,5 @@ std::string
 [/template]
 
 [template public ns(ns : Namespace)]
-[if (ns.name='UML')]uml[else]
-[ns.name/][/if]
+[if (ns.name='UML')]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
 [/template]

@@ -26,6 +26,7 @@
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generatePrimitivetype /]
 [import UML4CPP::generator::main::generateStereotype /]
+[import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::generateValueSpecification /]
 [import UML4CPP::generator::main::helper /]
 
@@ -75,10 +76,10 @@
 [/for]
 
 [for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.name/]/[stereo.name/].hpp"
+#include "[stereo._package.ns()/]/[stereo.name/].hpp"
 [/for]
 [for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.name/]/[stereo.name/].hpp"
+#include "[stereo._package.ns()/]/[stereo.name/].hpp"
 [/for]
 
 
