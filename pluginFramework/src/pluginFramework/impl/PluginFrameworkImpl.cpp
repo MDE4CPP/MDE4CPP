@@ -47,13 +47,14 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 {
 	char folderBuffer[MAX_CHAR];
 	char nameBuffer[MAX_CHAR];
+	std::vector<std::string> libraries;
 
 	m_debugMode = false;
 #ifdef __linux__
 	m_endingDebug = "d.so";
 	m_endingRelease = ".so";
 	m_endingString = "d";
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!"
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!";
 	return libraries;
 #elif defined(_WIN32)
 	GetCurrentDirectory(MAX_CHAR, folderBuffer);
@@ -62,14 +63,13 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	m_endingRelease = ".dll";
 	m_endingString = "d.exe";
 #else
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!"
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!";
 	return libraries;
 #endif
 
 	std::string fileName(nameBuffer);
 	std::string folderName(folderBuffer);
 
-	std::vector<std::string> libraries;
 	if (fileName.length() >= m_endingString.length())
 	{
 		m_debugMode =  (0 == fileName.compare(fileName.length() - m_endingString.length(), m_endingString.length(), m_endingString));
@@ -79,7 +79,7 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	struct dirent *file;
 
 #ifdef __linux__
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!"
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!";
 #elif defined(_WIN32)
 	if((dir = opendir(folderBuffer)) != NULL)
 	{
@@ -98,7 +98,7 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 		std::cerr << "Could not open directory " << folderName << " failed" << std::endl;
 	}
 #else
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!"
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!";
 #endif
 
 	return libraries;
