@@ -14,7 +14,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExtensionalValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/Executor.hpp&quot;&#xD;&#xA;#include &quot;fuml/Object.hpp&quot;&#xD;&#xA;#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;"/>
+          value="#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExtensionalValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/Executor.hpp&quot;&#xD;&#xA;#include &quot;fUML/Object.hpp&quot;&#xD;&#xA;#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations
         name="conforms"
@@ -165,7 +165,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/fUMLPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/OpaqueBehavior.hpp&quot;&#xD;&#xA;#include &quot;fuml/OpaqueBehaviorExecution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Value.hpp&quot;&#xD;&#xA;#include &quot;fuml/Evaluation.hpp&quot;&#xD;&#xA;#include &quot;uml/Element.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/OpaqueBehavior.hpp&quot;&#xD;&#xA;#include &quot;fUML/OpaqueBehaviorExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/Value.hpp&quot;&#xD;&#xA;#include &quot;fUML/Evaluation.hpp&quot;&#xD;&#xA;#include &quot;uml/Element.hpp&quot;&#xD;&#xA;#include &quot;uml/ValueSpecification.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="createExecution"
@@ -539,7 +539,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralBooleanEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralStringEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralNullEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/InstanceValueEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralUnlimitedNaturalEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralIntegerEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralRealEvaluation.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralNull.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralBooleanEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralStringEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralNullEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/InstanceValueEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralUnlimitedNaturalEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralIntegerEvaluation.hpp&quot;&#xD;&#xA;#include &quot;fUML/LiteralRealEvaluation.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlPackage.hpp&quot;&#xD;&#xA;#include &quot;uml/InstanceValue.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralNull.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="instantiateVisitor"
@@ -787,7 +787,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &lt;uml/Classifier.hpp>&#xD;&#xA;    #include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;    #include &quot;uml/Class.hpp&quot;"/>
+          value="#include &lt;uml/Classifier.hpp>&#xD;&#xA;    #include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;    #include &quot;uml/Class.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="startBehavior"
@@ -976,7 +976,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &lt;fuml/FUMLFactory.hpp>&#xD;&#xA;#include &lt;cstdio>&#xD;&#xA;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+          value="#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &lt;fUML/FUMLFactory.hpp>&#xD;&#xA;#include &lt;cstdio>&#xD;&#xA;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="removeFeatureValues"
@@ -1092,7 +1092,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;&#xD;&#xA;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations
         name="hasEqualValues"
@@ -1140,7 +1140,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="getTypes"
@@ -1285,7 +1285,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &lt;cstdio>&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Literalinteger.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
+          value="#include &lt;cstdio>&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="specify"
@@ -1401,7 +1401,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;uml/PrimitiveType.hpp&quot;&#xD;&#xA;#include &quot;uml/Type.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="specify"
@@ -1460,7 +1460,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="destroy"
@@ -1626,7 +1626,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/BooleanValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;"/>
+          value="#include &quot;fUML/BooleanValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="evaluate"
@@ -1648,7 +1648,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/IntegerValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;"/>
+          value="#include &quot;fUML/IntegerValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="evaluate"
@@ -1686,7 +1686,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/StringValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;"/>
+          value="#include &quot;fUML/StringValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralString.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="evaluate"
@@ -1708,7 +1708,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/RealValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;"/>
+          value="#include &quot;fUML/RealValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralReal.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="evaluate"
@@ -1730,7 +1730,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/UnlimitedNaturalValue.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
+          value="#include &quot;fUML/UnlimitedNaturalValue.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="evaluate"
@@ -1905,7 +1905,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/DataValue.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/CompoundValue.hpp&quot;&#xD;&#xA;#include &quot;uml/DataType.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
+          value="#include &quot;fUML/DataValue.hpp&quot;&#xD;&#xA;#include &quot;uml/UmlFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/CompoundValue.hpp&quot;&#xD;&#xA;#include &quot;uml/DataType.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="new_"
@@ -1946,7 +1946,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
+          value="#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="dispatch"
@@ -2206,7 +2206,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &lt;uml/Parameter.hpp>&#xD;&#xA;#include &lt;uml/ParameterDirectionKind.hpp>&#xD;&#xA;#include &lt;fuml/ParameterValue.hpp>&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;fuml/impl/ObjectImpl.hpp&quot;&#xD;&#xA;"/>
+          value="#include &lt;uml/Parameter.hpp>&#xD;&#xA;#include &lt;uml/ParameterDirectionKind.hpp>&#xD;&#xA;#include &lt;fUML/ParameterValue.hpp>&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Classifier.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;fUML/impl/ObjectImpl.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations
         name="execute"
@@ -2316,7 +2316,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
@@ -2341,7 +2341,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;abstractDataTypes/Subset.hpp&quot;&#xD;&#xA;#include &quot;fuml/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value="#include &quot;abstractDataTypes/Subset.hpp&quot;&#xD;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="doBody"
@@ -2961,7 +2961,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value=" #include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value=" #include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="sendOffer"
@@ -3172,7 +3172,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fuml/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/Locus.hpp&quot;"/>
+          value="#include &quot;fUML/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Locus.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="transfer"
@@ -3264,7 +3264,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value=" #include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value=" #include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="equals"
@@ -3391,7 +3391,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="equals"
@@ -3498,7 +3498,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;ecore/EClass.hpp&quot;&#xD;&#xA;#include &quot;fuml/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;"/>
+          value="#include &quot;ecore/EClass.hpp&quot;&#xD;&#xA;#include &quot;fUML/ActivityNodeActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityEdge.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="run"
@@ -4160,7 +4160,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;"/>
+          value="#include &quot;fUML/ControlToken.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="fire"
@@ -4454,7 +4454,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuredActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
+          value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xD;&#xA;#include &quot;uml/StructuredActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/Action.hpp&quot;&#xD;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="doStructuredActivity"
@@ -5183,7 +5183,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;fuml/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/CallAction.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;fuml/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fuml/ObjectToken.hpp&quot;"/>
+          value="#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/OutputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xD;&#xA;#include &quot;uml/CallAction.hpp&quot;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="getCallExecution"
@@ -5274,7 +5274,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Execution.hpp&quot;&#xD;&#xA;#include &quot;fuml/Reference.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+          value="#include &quot;fUML/ActivityExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/Execution.hpp&quot;&#xD;&#xA;#include &quot;fUML/Reference.hpp&quot;&#xD;&#xA;#include &quot;uml/CallOperationAction.hpp&quot;&#xD;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="getCallExecution"
@@ -5350,7 +5350,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/ActionActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/Pin.hpp&quot;"/>
+          value="#include &quot;fUML/ActionActivation.hpp&quot;&#xD;&#xA;#include &quot;uml/Pin.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="recieveOffer"
@@ -5720,7 +5720,7 @@
         source="http://sse.tu-ilmenau.de/codegen">
       <details
           key="includes"
-          value="#include &quot;fuml/Value.hpp&quot;"/>
+          value="#include &quot;fUML/Value.hpp&quot;"/>
     </eAnnotations>
     <eOperations
         name="removeToken"
