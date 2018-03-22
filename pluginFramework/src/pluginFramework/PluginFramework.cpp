@@ -5,7 +5,7 @@
  *      Author: alwi0251
  */
 
-#include "pluginFramework/pluginFramework.hpp"
+#include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
 std::shared_ptr<PluginFramework> PluginFramework::instance;
