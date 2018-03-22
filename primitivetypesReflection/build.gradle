@@ -3,27 +3,27 @@ plugins {
 }
 apply plugin: 'base' 
 
-description 'Build tasks for project: PrimitivetypesReflection'
+description 'Build tasks for project: primitivetypesReflection'
 
 task buildPrimitivetypesReflection(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflection']) {
-	group 'PrimitivetypesReflection'
-	description 'build PrimitivetypesReflection'
+	group 'primitivetypesReflection'
+	description 'build primitivetypesReflection'
 }
 
 task compilePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'PrimitivetypesReflection'
-	description 'compile PrimitivetypesReflection'
+	group 'primitivetypesReflection'
+	description 'compile primitivetypesReflection'
 
-	projectFolder = file("./src_gen/PrimitivetypesReflection")
+	projectFolder = file("./src_gen/primitivetypesReflection")
 }
 
 task generatePrimitivetypesReflection(type: JavaExec) {
-	group 'PrimitivetypesReflection'
-	description 'generate C++ code of PrimitivetypesReflection.uml model'
+	group 'primitivetypesReflection'
+	description 'generate C++ code of primitivetypesReflection.uml model'
 	main = "-jar"
 	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "PrimitivetypesReflection.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/PrimitivetypesReflection.uml")
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "primitivetypesReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/primitivetypesReflection.uml")
 	outputs.dir file("src_gen")
 
 	doFirst {
@@ -39,7 +39,7 @@ task generatePrimitivetypesReflection(type: JavaExec) {
 compilePrimitivetypesReflection.mustRunAfter generatePrimitivetypesReflection
 
 clean.doFirst {
-	def cmakeFolder = file('./src_gen/PrimitivetypesReflection/.cmake/')
+	def cmakeFolder = file('./src_gen/primitivetypesReflection/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
