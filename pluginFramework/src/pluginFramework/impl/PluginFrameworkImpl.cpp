@@ -14,7 +14,6 @@
 #endif
 
 #define MAX_CHAR 260
-typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
 
 #include <iostream>
 #include <dirent.h>
@@ -23,6 +22,7 @@ typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
 
 #elif defined(_WIN32)
 	#include <windows.h>
+typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
 #endif
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"
@@ -150,6 +150,9 @@ void PluginFrameworkImpl::initialize()
 
 void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 {
+#ifdef __linux__
+
+#elif defined(_WIN32)
 	HINSTANCE hGetProcIDDLL = LoadLibrary(libraryPath.c_str());
 	if(!hGetProcIDDLL)
 	{
@@ -175,6 +178,7 @@ void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 
 		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
 	}
+#endif
 }
 
 void PluginFrameworkImpl::clear()
