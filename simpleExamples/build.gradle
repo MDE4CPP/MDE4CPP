@@ -20,17 +20,29 @@ task compileEcoreExampleDebug {
 	doLast {
 		exec {
 			workingDir 'ecoreExample/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./ecoreExample").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug ' + file("./ecoreExample").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ' + file("./ecoreExample").absolutePath
+			}
 		}
 		exec {
 			workingDir 'ecoreExample/.cmake/Debug'
 			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+					commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
+				}
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine '/bin/sh', '-c', 'make install' 
+				}
 			}
 		}
 	}
@@ -50,17 +62,29 @@ task compileEcoreExampleRelease {
 	doLast {
 		exec {
 			workingDir 'ecoreExample/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./ecoreExample").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ' + file("./ecoreExample").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ' + file("./ecoreExample").absolutePath
+			}
 		}
 		exec {
 			workingDir 'ecoreExample/.cmake/Release'
 			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+					commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
+				}
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine '/bin/sh', '-c', 'make install' 
+				}
 			}
 		}
 	}
@@ -84,17 +108,29 @@ task compileUMLExampleDebug {
 	doLast {
 		exec {
 			workingDir 'UMLExample/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./UMLExample").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug ' + file("./UMLExample").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ' + file("./UMLExample").absolutePath
+			}
 		}
 		exec {
 			workingDir 'UMLExample/.cmake/Debug'
 			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+					commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
+				}
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine '/bin/sh', '-c', 'make install' 
+				}
 			}
 		}
 	}
@@ -102,7 +138,6 @@ task compileUMLExampleDebug {
 compileUMLExampleDebug.onlyIf {
 	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
-
 
 task compileUMLExampleRelease {
 	description 'compile UML example in Release'
@@ -115,17 +150,29 @@ task compileUMLExampleRelease {
 	doLast {
 		exec {
 			workingDir 'UMLExample/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./UMLExample").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ' + file("./UMLExample").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ' + file("./UMLExample").absolutePath
+			}
 		}
 		exec {
 			workingDir 'UMLExample/.cmake/Release'
 			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+					commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
+				}
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine '/bin/sh', '-c', 'make install' 
+				}
 			}
 		}
 	}
