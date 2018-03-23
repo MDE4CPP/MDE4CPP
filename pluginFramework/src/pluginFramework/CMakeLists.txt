@@ -28,6 +28,14 @@ SET(SOURCE_FILES
 	impl/PluginFrameworkImpl.cpp
 )
 
+IF(WIN32)
+	list(APPEND SOURCE_FILES impl/PluginFrameworkImplWin.cpp)
+elseIF(UNIX AND NOT APPLE)
+	list(APPEND SOURCE_FILES impl/PluginFrameworkImplLinux.cpp)
+ELSEIF(APPLE)
+	list(APPEND SOURCE_FILES impl/PluginFrameworkImplApple.cpp)
+ENDIF()
+
 INCLUDE_DIRECTORIES(
 	../
 	${MDE4CPP_HOME}/application/include
