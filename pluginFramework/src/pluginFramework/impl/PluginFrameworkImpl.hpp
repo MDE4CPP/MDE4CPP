@@ -35,7 +35,6 @@ class PluginFrameworkImpl : virtual public PluginFramework
 		virtual std::string checkLibrary(struct dirent* file, std::string folderName);
 		virtual void loadLibrary(std::string libraryPath);
 
-	private:
 		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_mapPluginName;
 		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_mapPluginUri;
 

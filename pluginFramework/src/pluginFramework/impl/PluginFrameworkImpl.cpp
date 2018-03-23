@@ -2,7 +2,7 @@
  * PluginFramework.cpp
  *
  *  Created on: 21.06.2017
- *      Author: alwi0251
+ *      Author: wichmann
  */
 
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
@@ -13,19 +13,8 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 
-#define MAX_CHAR 260
-
 #include <iostream>
 #include <dirent.h>
-
-#ifdef __linux__
-
-#elif defined(_WIN32)
-	#include <windows.h>
-typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
-#endif
-
-#include "pluginFramework/MDE4CPPPlugin.hpp"
 
 PluginFrameworkImpl::PluginFrameworkImpl()
 {
@@ -45,62 +34,8 @@ PluginFramework* PluginFrameworkImpl::create()
 
 std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 {
-	char folderBuffer[MAX_CHAR];
-	char nameBuffer[MAX_CHAR];
 	std::vector<std::string> libraries;
-
-	m_debugMode = false;
-#ifdef __linux__
-	m_endingDebug = "d.so";
-	m_endingRelease = ".so";
-	m_endingString = "d";
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!";
-	return libraries;
-#elif defined(_WIN32)
-	GetCurrentDirectory(MAX_CHAR, folderBuffer);
-	GetModuleFileName(NULL, nameBuffer, MAX_CHAR);
-	m_endingDebug = "d.dll";
-	m_endingRelease = ".dll";
-	m_endingString = "d.exe";
-#else
 	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!";
-	return libraries;
-#endif
-
-	std::string fileName(nameBuffer);
-	std::string folderName(folderBuffer);
-
-	if (fileName.length() >= m_endingString.length())
-	{
-		m_debugMode =  (0 == fileName.compare(fileName.length() - m_endingString.length(), m_endingString.length(), m_endingString));
-	}
-
-	DIR *dir;
-	struct dirent *file;
-
-#ifdef __linux__
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!";
-#elif defined(_WIN32)
-	if((dir = opendir(folderBuffer)) != NULL)
-	{
-		while((file = readdir(dir)) != NULL)
-		{
-			std::string libName = checkLibrary(file, folderName);
-			if (!libName.empty())
-			{
-				libraries.push_back(libName);
-			}
-		}
-		closedir (dir);
-	}
-	else
-	{
-		std::cerr << "Could not open directory " << folderName << " failed" << std::endl;
-	}
-#else
-	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!";
-#endif
-
 	return libraries;
 }
 
@@ -146,39 +81,9 @@ void PluginFrameworkImpl::initialize()
 	}
 }
 
-
-
 void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 {
-#ifdef __linux__
-
-#elif defined(_WIN32)
-	HINSTANCE hGetProcIDDLL = LoadLibrary(libraryPath.c_str());
-	if(!hGetProcIDDLL)
-	{
-		std::cerr << "could not load the dynamic library, ErrorCode: " << GetLastError() << std::endl;
-		return;
-	}
-
-	StartFunction startFunction = (StartFunction) GetProcAddress(hGetProcIDDLL, "_Z5startv");
-	if(!startFunction)
-	{
-		DEBUG_MESSAGE(std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;)
-	}
-	else
-	{
-		std::shared_ptr<MDE4CPPPlugin> plugin = startFunction();
-		m_mapPluginName.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
-		m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNS_URI(), plugin));
-		std::string eclipseURI = plugin->eclipseURI();
-		if (!eclipseURI.empty())
-		{
-			m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(eclipseURI, plugin));
-		}
-
-		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
-	}
-#endif
+	std::cerr << "PluginFrameworkImpl::loadLibrary is not implemented for this system!";
 }
 
 void PluginFrameworkImpl::clear()
