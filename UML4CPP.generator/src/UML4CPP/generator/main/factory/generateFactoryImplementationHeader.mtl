@@ -21,6 +21,7 @@
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'FactoryImpl')/]
 
+#include <functional>
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"

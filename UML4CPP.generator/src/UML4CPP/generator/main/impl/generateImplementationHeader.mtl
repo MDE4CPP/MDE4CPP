@@ -33,6 +33,8 @@ virtual public uml::ClassImpl
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
+#include <functional>
+
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 [for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
