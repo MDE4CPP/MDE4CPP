@@ -25,7 +25,7 @@ task downloadFile(type: Download) {
 	description 'download xerces'
     src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.1.zip'
     dest new File(file('./xerces/xerces-c-3.2.1.zip').absolutePath)
-    overwrite false
+    onlyIfModified true
 }
 
 task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
@@ -73,8 +73,18 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 		copy {
 			from "xerces/bin"
 			into System.getenv('MDE4CPP_HOME')+"/application"
-			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c", "**/*.so"
-			exclude "cmake", "share", "pkgconfig"
+			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+			exclude "cmake"
+			exclude "lib/cmake"
+			exclude "lib/pkgconfig"
+			exclude "share"
+		}
+		copy {
+			from "xerces/bin/lib"
+			into System.getenv('MDE4CPP_HOME')+"/application/bin"
+			include "**/*.so", "**/*.dylib"
+			exclude "cmake"
+			exclude "pkgconfig"
 		}
 	}
 }
