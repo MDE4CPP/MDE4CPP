@@ -7,6 +7,7 @@
 #ifndef FUMLMULTIPLEPINS_FACTORYIMPL_HPP
 #define FUMLMULTIPLEPINS_FACTORYIMPL_HPP
 
+#include <functional>
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"

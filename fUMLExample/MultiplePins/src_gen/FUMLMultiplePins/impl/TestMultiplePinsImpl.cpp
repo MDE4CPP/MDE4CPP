@@ -11,7 +11,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/any.hpp"
-#include "fUMLMultiplePins/impl/fUMLMultiplePinsPackageImpl.hpp"
+#include "fUMLMultiplePins/impl/FUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Activity.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
 

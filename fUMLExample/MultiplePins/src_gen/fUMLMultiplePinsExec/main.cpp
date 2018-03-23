@@ -17,7 +17,7 @@
 #include "fUML/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
-#include "fuml/ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
@@ -44,9 +44,9 @@
 
 
 
-#include "fuml/Reference.hpp"
-#include "fUMLMultiplePins/fUMLMultiplePinsFactory.hpp"
-#include "fUMLMultiplePins/fUMLMultiplePinsPackage.hpp"
+#include "fUML/Reference.hpp"
+#include "fUMLMultiplePins/FUMLMultiplePinsFactory.hpp"
+#include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 
 #include "fUMLMultiplePins/TestClass.hpp"
 #include "fUMLMultiplePinsExec/TestClassObject.hpp"
@@ -54,7 +54,7 @@
 
 #include "fUMLMultiplePinsExec/TestClassObject.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
-#include "fUMLMultiplePins/fUMLMultiplePinsFactory.hpp"
+#include "fUMLMultiplePins/FUMLMultiplePinsFactory.hpp"
 
 using namespace fUMLMultiplePins;
 

@@ -3,27 +3,27 @@ plugins {
 }
 apply plugin: 'base' 
 
-description 'Build tasks for project: FUMLMultiplePins'
+description 'Build tasks for project: fUMLMultiplePins'
 
 task buildFUMLMultiplePins(dependsOn: ['generateFUMLMultiplePins', 'compileFUMLMultiplePins']) {
-	group 'FUMLMultiplePins'
-	description 'build FUMLMultiplePins'
+	group 'fUMLMultiplePins'
+	description 'build fUMLMultiplePins'
 }
 
 task compileFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'FUMLMultiplePins'
-	description 'compile FUMLMultiplePins'
+	group 'fUMLMultiplePins'
+	description 'compile fUMLMultiplePins'
 
-	projectFolder = file("./src_gen/FUMLMultiplePins")
+	projectFolder = file("./src_gen/fUMLMultiplePins")
 }
 
 task generateFUMLMultiplePins(type: JavaExec) {
-	group 'FUMLMultiplePins'
-	description 'generate C++ code of FUMLMultiplePins.uml model'
+	group 'fUMLMultiplePins'
+	description 'generate C++ code of fUMLMultiplePins.uml model'
 	main = "-jar"
 	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "FUMLMultiplePins.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/FUMLMultiplePins.uml")
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "fUMLMultiplePins.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/fUMLMultiplePins.uml")
 	outputs.dir file("src_gen")
 	
 	doFirst {
@@ -39,13 +39,13 @@ task generateFUMLMultiplePins(type: JavaExec) {
 compileFUMLMultiplePins.mustRunAfter generateFUMLMultiplePins
 
 clean.doFirst {
-	def cmakeFolder = file('./src_gen/FUMLMultiplePins/.cmake/')
+	def cmakeFolder = file('./src_gen/fUMLMultiplePins/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
 
-	def cmakeFolderExec = file('./src_gen/FUMLMultiplePinsExec/.cmake/')
+	def cmakeFolderExec = file('./src_gen/fUMLMultiplePinsExec/.cmake/')
 	if(cmakeFolderExec.exists()) {
     	delete cmakeFolderExec.absolutePath
    		println "deleting folder " + cmakeFolderExec.absolutePath

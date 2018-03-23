@@ -7,6 +7,8 @@
 #ifndef FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
 #define FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS_TESTMULTIPLEPINSIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../TestMultiplePins.hpp"
 #include "uml/impl/ClassImpl.hpp"
