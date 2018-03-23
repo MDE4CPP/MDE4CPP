@@ -22,8 +22,8 @@
 [query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
-[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fuml', 'ecoreReflection', 'primitiveTypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fuml', 'ecoreReflection', 'primitiveTypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitiveTypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
+[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
+[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
 [query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.includeEcorePackages()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
 [query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
 [query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
@@ -34,7 +34,7 @@
 [generateExecutionBuildFile(aPackage, false)/]
 [/template]
 
-[template public generateExecutionBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
+[template public generateExecutionBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
 [file (aPackage.name.concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
@@ -146,19 +146,19 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]'[']'/]) {
+task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/]'
 }
 
-task compile[packageName/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
 	projectFolder = file("./src_gen/[packageName/]")
 }
 
-task generate[packageName/](type: JavaExec) {
+task generate[packageName.toUpperFirst()/](type: JavaExec) {
 	group '[packageName/]'
 	description 'generate C++ code of [packageName/].uml model'
 	main = "-jar"
@@ -177,7 +177,7 @@ task generate[packageName/](type: JavaExec) {
 	}
 }
 
-compile[packageName/].mustRunAfter generate[packageName/]
+compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')

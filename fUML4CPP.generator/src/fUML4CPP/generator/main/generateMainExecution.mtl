@@ -37,7 +37,7 @@
 [if (act.owner.oclIsKindOf(Classifier))]
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).namespace.ns()/]Factory.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).namespace.ns().toUpperFirst()/]Factory.hpp"
 [/if]
 [/let]
 [else]
@@ -105,7 +105,7 @@ int main()
 #include "fUML/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
-#include "fuml/ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
@@ -142,9 +142,9 @@ int main()
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
 [if (anActivity.ownedParameter->asSet()->parametersArePointers())]
-#include "fuml/Reference.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Factory.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
+#include "fUML/Reference.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/if]
 
 [for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
