@@ -43,7 +43,7 @@
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
+#include "[aPackage.getPackageName()/]/impl/[packageName.toUpperFirst()/].hpp"
 
 //meta meta model classes
 [for (nE : EClass | aPackage.getMetaMetaModelIncludes())]

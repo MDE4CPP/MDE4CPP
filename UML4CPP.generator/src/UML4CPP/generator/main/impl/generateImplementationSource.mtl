@@ -34,7 +34,7 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/any.hpp"
-#include "[aPackage.getPackageName()/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
+#include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
 #include "[cl.getNearestPackage().ns()/]/[cl.name.toUpperFirst()/].hpp"
