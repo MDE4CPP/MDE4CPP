@@ -5,7 +5,7 @@ task buildEcoreModels(dependsOn: ['ecore:ecore:buildEcore', 'ecore:types:buildTy
 	description 'generate and compile all ecore models'
 }
 
-task buildReflectionModels(dependsOn: ['common:ecoreReflection:buildEcoreReflection', 'common:primitiveTypesReflection:buildPrimitivetypesReflection', 'common:umlReflection:buildUmlReflection']) {
+task buildReflectionModels(dependsOn: ['common:ecoreReflection:buildEcoreReflection', 'common:primitivetypesReflection:buildPrimitivetypesReflection', 'common:umlReflection:buildUmlReflection']) {
 	group 'reflection models'
 	description 'generate and compile reflection models'
 }
@@ -17,7 +17,7 @@ task compileEcoreModels(dependsOn: ['ecore:ecore:compileEcore', 'ecore:types:com
 }
 
 // Compile all without generating the models
-task compileReflectionModels(dependsOn: ['common:ecoreReflection:compileEcoreReflection', 'common:primitiveTypesReflection:compilePrimitivetypesReflection', 'common:umlReflection:compileUmlReflection']) {
+task compileReflectionModels(dependsOn: ['common:ecoreReflection:compileEcoreReflection', 'common:primitivetypesReflection:compilePrimitivetypesReflection', 'common:umlReflection:compileUmlReflection']) {
 	group 'Source'
 	description 'compile all reflection models'
 }
@@ -27,7 +27,7 @@ task generateEcoreModels(dependsOn: ['ecore:ecore:generateEcore', 'ecore:types:g
 	description 'generate all ecore models'
 }
 
-task generateReflectionModels(dependsOn: ['common:ecoreReflection:generateEcoreReflection', 'common:primitiveTypesReflection:generatePrimitivetypesReflection', 'common:umlReflection:generateUmlReflection']) {
+task generateReflectionModels(dependsOn: ['common:ecoreReflection:generateEcoreReflection', 'common:primitivetypesReflection:generatePrimitivetypesReflection', 'common:umlReflection:generateUmlReflection']) {
 	group 'Source'
 	description 'generate all reflection models'
 }
@@ -51,9 +51,9 @@ tasks.getByPath('uml:compileUml').mustRunAfter tasks.getByPath('ecore:types:comp
 tasks.getByPath('uml:compileUml').mustRunAfter tasks.getByPath('util:deliverUtil')
 tasks.getByPath('fuml:compileFUML').mustRunAfter tasks.getByPath('uml:compileUml')
 
-tasks.getByPath('common:umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('common:primitiveTypesReflection:buildPrimitivetypesReflection')
+tasks.getByPath('common:umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('common:primitivetypesReflection:buildPrimitivetypesReflection')
 tasks.getByPath('common:umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('common:ecoreReflection:buildEcoreReflection')
-tasks.getByPath('common:umlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('common:primitiveTypesReflection:compilePrimitivetypesReflection')
+tasks.getByPath('common:umlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('common:primitivetypesReflection:compilePrimitivetypesReflection')
 tasks.getByPath('common:umlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('common:ecoreReflection:compileEcoreReflection')
 
 
