@@ -22,7 +22,6 @@
 #include "uml/OutputPin.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/PrimitiveType.hpp"
-#include "uml/ProfileApplication.hpp"
 #include "uml/Property.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"

@@ -7,6 +7,7 @@
 #ifndef CALCMODEL_FACTORYIMPL_HPP
 #define CALCMODEL_FACTORYIMPL_HPP
 
+#include <functional>
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"

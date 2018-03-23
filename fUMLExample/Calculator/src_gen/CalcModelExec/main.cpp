@@ -17,7 +17,7 @@
 #include "fUML/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
-#include "fuml/ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
@@ -48,7 +48,7 @@
 
 
 
-#include "fuml/Reference.hpp"
+#include "fUML/Reference.hpp"
 #include "CalcModel/CalcModelFactory.hpp"
 #include "CalcModel/CalcModelPackage.hpp"
 

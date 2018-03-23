@@ -7,6 +7,8 @@
 #ifndef CALCMODEL_PRIMECHECKER_PRIMECHECKERIMPL_HPP
 #define CALCMODEL_PRIMECHECKER_PRIMECHECKERIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../PrimeChecker.hpp"
 #include "uml/impl/ClassImpl.hpp"

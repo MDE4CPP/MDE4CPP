@@ -7,6 +7,8 @@
 #ifndef CALCMODEL_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
 #define CALCMODEL_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../CheckIfPrime.hpp"
 #include "uml/impl/ClassImpl.hpp"

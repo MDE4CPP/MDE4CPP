@@ -16,8 +16,14 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -39,31 +45,86 @@ INCLUDE_DIRECTORIES(
 	${MDE4CPP_HOME}/application/include
 )
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(FUML_DEBUG fumld ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitiveTypesReflectiond ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(CALCMODEL_DEBUG CalcModeld ${MDE4CPP_HOME}/application/lib)
-ELSE()	
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(FUML_RELEASE fuml ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitiveTypesReflection ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(CALCMODEL_RELEASE CalcModel ${MDE4CPP_HOME}/application/lib)
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
+
+IF(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(CALCMODEL_DEBUG CalcModeld.so ${MDE4CPP_HOME}/application/bin)
+		
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(CALCMODEL_RELEASE CalcModel.so ${MDE4CPP_HOME}/application/bin)
+		
+	ENDIF()
+ELSEIF(APPLE)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(CALCMODEL_DEBUG CalcModeld.dylib ${MDE4CPP_HOME}/application/bin)
+		
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(CALCMODEL_RELEASE CalcModel.dylib ${MDE4CPP_HOME}/application/bin)
+		
+	ENDIF()
+ELSE()
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(CALCMODEL_DEBUG CalcModeld ${MDE4CPP_HOME}/application/lib)
+		
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(CALCMODEL_RELEASE CalcModel ${MDE4CPP_HOME}/application/lib)
+		
+	ENDIF()
 ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${PLUGINFRAMEWORK_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${UML_DEBUG}
@@ -85,6 +146,7 @@ ELSE()
 		optimized ${CALCMODEL_RELEASE}
 	)
 ENDIF()
+
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
 #-----------------------------------------------------
