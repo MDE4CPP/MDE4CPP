@@ -38,7 +38,7 @@ SOFTWARE.
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 
-#include "UmlReflection/UMLPackage.hpp"
+#include "umlReflection/UMLPackage.hpp"
 
 using namespace std;
 
