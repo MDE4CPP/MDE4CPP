@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
   <packagedElement xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _7Bd8gYyFEeaE8Ot-1J8eNg _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _zBMTEI7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg">
     <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="actInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_We8DcIx0EeazCdUXohZ79Q" target="_Vf7dgIx0EeazCdUXohZ79Q" source="_QJrKgIx0EeazCdUXohZ79Q">
@@ -160,10 +160,4 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:ChangeEvent" xmi:id="_ez5VsN_vEeexC-rsnTgvBg" name="ChangeEvent1"/>
-  <profileApplication xmi:id="_unVHIIxxEeazCdUXohZ79Q">
-    <eAnnotations xmi:id="_unbNwIxxEeazCdUXohZ79Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/UML2.profile.uml#_On7PcOmLEeC7Uf0JLQQJUg"/>
-    </eAnnotations>
-    <appliedProfile href="pathmap://UML_PROFILES/UML2.profile.uml#_0"/>
-  </profileApplication>
 </uml:Model>
