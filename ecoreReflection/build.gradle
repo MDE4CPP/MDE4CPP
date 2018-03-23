@@ -3,27 +3,27 @@ plugins {
 }
 apply plugin: 'base' 
 
-description 'Build tasks for project: EcoreReflection'
+description 'Build tasks for project: ecoreReflection'
 
 task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
-	group 'EcoreReflection'
-	description 'build EcoreReflection'
+	group 'ecoreReflection'
+	description 'build ecoreReflection'
 }
 
 task compileEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'EcoreReflection'
-	description 'compile EcoreReflection'
+	group 'ecoreReflection'
+	description 'compile ecoreReflection'
 
-	projectFolder = file("./src_gen/EcoreReflection")
+	projectFolder = file("./src_gen/ecoreReflection")
 }
 
 task generateEcoreReflection(type: JavaExec) {
-	group 'EcoreReflection'
-	description 'generate C++ code of EcoreReflection.uml model'
+	group 'ecoreReflection'
+	description 'generate C++ code of ecoreReflection.uml model'
 	main = "-jar"
 	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "EcoreReflection.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/EcoreReflection.uml")
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "ecoreReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/ecoreReflection.uml")
 	outputs.dir file("src_gen")
 
 	doFirst {
@@ -39,7 +39,7 @@ task generateEcoreReflection(type: JavaExec) {
 compileEcoreReflection.mustRunAfter generateEcoreReflection
 
 clean.doFirst {
-	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')
+	def cmakeFolder = file('./src_gen/ecoreReflection/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath

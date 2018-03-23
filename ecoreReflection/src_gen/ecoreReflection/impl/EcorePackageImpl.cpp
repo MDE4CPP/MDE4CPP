@@ -24,8 +24,8 @@
 
 //depending model packages
 
-#include "Ecore/EAttribute.hpp"
-#include "Ecore/EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 
 
 using namespace Ecore;
