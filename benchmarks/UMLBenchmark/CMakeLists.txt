@@ -17,6 +17,8 @@ IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Debug)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
+SET(CMAKE_CXX_STANDARD 14)
+
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
 	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
 ELSE()
