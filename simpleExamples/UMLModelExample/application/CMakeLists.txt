@@ -8,9 +8,6 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
-
 # Start of user code project_name
 # Acceleo's Protected Area. You may manually edit the project name, won't be overwritten upon generation.
 PROJECT(umlModelExample)
@@ -21,8 +18,14 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -38,7 +41,6 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-    .
 	../
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
@@ -55,47 +57,98 @@ INCLUDE_DIRECTORIES(
 # End of user code
 )
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
 
-FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-
-FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
-
-FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitiveTypesReflectiond ${MDE4CPP_HOME}/application/lib)
-
-FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld ${MDE4CPP_HOME}/application/lib)
-# Start of user code library_finding_debug
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
+IF(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld.so ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Linux_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml.so ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Linux_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
+ELSEIF(APPLE)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld.dylib ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Apple_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml.dylib ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Apple_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
 ELSE()
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitiveTypesReflection ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
-
-	FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml ${MDE4CPP_HOME}/application/lib)
-# Start of user code library_finding_release
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld ${MDE4CPP_HOME}/application/lib)
+		# [protected ('library_Win_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml ${MDE4CPP_HOME}/application/lib)
+		# [protected ('library_Win_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
 ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${PLUGINFRAMEWORK_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${UML_DEBUG}
@@ -103,10 +156,11 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
 		debug ${UMLREFLECTION_DEBUG}
 		debug ${LIBRARYMODEL_UML_DEBUG}
-	# Start of user code library_assigning_debug
-#Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
+	
+		# [protected ('library_linking_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
@@ -117,11 +171,11 @@ ELSE()
 		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
 		optimized ${UMLREFLECTION_RELEASE}
 		optimized ${LIBRARYMODEL_UML_RELEASE}
-	# Start of user code library_assigning_release
-# Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of Acceleo's Protected Area.
-# End of user code
+	
+		# [protected ('library_linking_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
 	)
 ENDIF()
 

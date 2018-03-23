@@ -7,6 +7,8 @@
 #ifndef LIBRARYMODEL_UML_AUTHOR_AUTHORIMPL_HPP
 #define LIBRARYMODEL_UML_AUTHOR_AUTHORIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../Author.hpp"
 #include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"

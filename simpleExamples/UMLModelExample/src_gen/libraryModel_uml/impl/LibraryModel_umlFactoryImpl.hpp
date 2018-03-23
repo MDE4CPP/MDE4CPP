@@ -7,6 +7,7 @@
 #ifndef LIBRARYMODEL_UML_FACTORYIMPL_HPP
 #define LIBRARYMODEL_UML_FACTORYIMPL_HPP
 
+#include <functional>
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"

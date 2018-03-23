@@ -7,6 +7,8 @@
 #ifndef LIBRARYMODEL_UML_LIBRARY_LIBRARYIMPL_HPP
 #define LIBRARYMODEL_UML_LIBRARY_LIBRARYIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../Library.hpp"
 #include "uml/impl/ClassImpl.hpp"

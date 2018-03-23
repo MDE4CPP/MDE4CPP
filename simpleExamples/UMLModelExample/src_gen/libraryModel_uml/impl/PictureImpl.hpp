@@ -7,6 +7,8 @@
 #ifndef LIBRARYMODEL_UML_PICTURE_PICTUREIMPL_HPP
 #define LIBRARYMODEL_UML_PICTURE_PICTUREIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../Picture.hpp"
 #include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"

@@ -7,6 +7,8 @@
 #ifndef LIBRARYMODEL_UML_NAMEDMODELELEMENT_NAMEDMODELELEMENTIMPL_HPP
 #define LIBRARYMODEL_UML_NAMEDMODELELEMENT_NAMEDMODELELEMENTIMPL_HPP
 
+#include <functional>
+
 //Model includes
 #include "../NamedModelElement.hpp"
 #include "uml/impl/ClassImpl.hpp"
