@@ -19,7 +19,7 @@
     </eAnnotations>
     <eAnnotations xmi:id="_JmPcMMcqEeSJx_SGGKDbKQ" source="PackageOnly"/>
     <packageImport xmi:id="_packageImport.0">
-      <importedPackage xmi:type="uml:Model" href="..\..\ecoreReflection\model\..\..\ecoreReflection\model\ecoreReflection.uml#_0"/>
+      <importedPackage xmi:type="uml:Model" href="../../ecoreReflection/model/ecoreReflection.uml#_0"/>
     </packageImport>
     <packageImport xmi:id="_packageImport.1">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -8038,7 +8038,7 @@ endif</body>
         </specification>
       </ownedRule>
       <generalization xmi:id="Element-_generalization.0">
-        <general xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EModelElement"/>
+        <general xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EModelElement"/>
       </generalization>
       <ownedAttribute xmi:id="Element-ownedComment" name="ownedComment" type="Comment" aggregation="composite" subsettedProperty="Element-ownedElement" association="A_ownedComment_owningElement">
         <ownedComment xmi:id="Element-ownedComment-_ownedComment.0" annotatedElement="Element-ownedComment">
@@ -8079,7 +8079,7 @@ endif</body>
           <body>Applies the specified stereotype to this element.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-applyStereotype-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
         </ownedParameter>
         <ownedParameter xmi:id="Element-applyStereotype-stereotype" name="stereotype" type="Stereotype" effect="read">
           <ownedComment xmi:id="Element-applyStereotype-stereotype-_ownedComment.0" annotatedElement="Element-applyStereotype-stereotype">
@@ -8092,7 +8092,7 @@ endif</body>
           <body>Creates an annotation with the specified source and this element as its model element.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-createEAnnotation-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EAnnotation"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EAnnotation"/>
         </ownedParameter>
         <ownedParameter xmi:id="Element-createEAnnotation-source" name="source" effect="read">
           <ownedComment xmi:id="Element-createEAnnotation-source-_ownedComment.0" annotatedElement="Element-createEAnnotation-source">
@@ -8237,7 +8237,7 @@ endif</body>
           <ownedComment xmi:id="Element-getRelationships.1-eClass-_ownedComment.0" annotatedElement="Element-getRelationships.1-eClass">
             <body>The (meta)type of the relationships to retrieve.</body>
           </ownedComment>
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EClass"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EClass"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="Element-getRequiredStereotype" name="getRequiredStereotype" isQuery="true">
@@ -8285,7 +8285,7 @@ endif</body>
           <ownedComment xmi:id="Element-getSourceDirectedRelationships.1-eClass-_ownedComment.0" annotatedElement="Element-getSourceDirectedRelationships.1-eClass">
             <body>The (meta)type of the directed relationships to retrieve.</body>
           </ownedComment>
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EClass"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EClass"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="Element-getStereotypeApplication" name="getStereotypeApplication" isQuery="true">
@@ -8293,7 +8293,7 @@ endif</body>
           <body>Retrieves the application of the specified stereotype for this element, or null if no such stereotype application exists.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-getStereotypeApplication-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Element-getStereotypeApplication-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Element-getStereotypeApplication-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -8308,7 +8308,7 @@ endif</body>
           <body>Retrieves the stereotype applications for this element.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-getStereotypeApplications-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Element-getStereotypeApplications-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Element-getStereotypeApplications-_ownedParameter.0-_upperValue" value="*"/>
         </ownedParameter>
@@ -8334,7 +8334,7 @@ endif</body>
           <ownedComment xmi:id="Element-getTargetDirectedRelationships.1-eClass-_ownedComment.0" annotatedElement="Element-getTargetDirectedRelationships.1-eClass">
             <body>The (meta)type of the directed relationships to retrieve.</body>
           </ownedComment>
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EClass"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EClass"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="Element-getValue" name="getValue" isQuery="true">
@@ -8342,7 +8342,7 @@ endif</body>
           <body>Retrieves the value of the property with the specified name in the specified stereotype for this element.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-getValue-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EJavaObject"/>
+          <type xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EJavaObject"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Element-getValue-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Element-getValue-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -8463,7 +8463,7 @@ endif</body>
           <ownedComment xmi:id="Element-setValue-newValue-_ownedComment.0" annotatedElement="Element-setValue-newValue">
             <body>The new value for the property.</body>
           </ownedComment>
-          <type xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EJavaObject"/>
+          <type xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EJavaObject"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="Element-unapplyStereotype" name="unapplyStereotype">
@@ -8471,7 +8471,7 @@ endif</body>
           <body>Unapplies the specified stereotype from this element.</body>
         </ownedComment>
         <ownedParameter xmi:id="Element-unapplyStereotype-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
         </ownedParameter>
         <ownedParameter xmi:id="Element-unapplyStereotype-stereotype" name="stereotype" type="Stereotype" effect="read">
           <ownedComment xmi:id="Element-unapplyStereotype-stereotype-_ownedComment.0" annotatedElement="Element-unapplyStereotype-stereotype">
@@ -12400,7 +12400,7 @@ A package is used to group elements, and provides a namespace for the grouped el
           <body>Applies the current definition of the specified profile to this package and automatically applies required stereotypes in the profile to elements within this package's namespace hieararchy. If a different definition is already applied, automatically migrates any associated stereotype values on a &quot;best effort&quot; basis (matching classifiers and structural features by name).</body>
         </ownedComment>
         <ownedParameter xmi:id="Package-applyProfile-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Package-applyProfile-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Package-applyProfile-_ownedParameter.0-_upperValue" value="*"/>
         </ownedParameter>
@@ -12605,7 +12605,7 @@ A package is used to group elements, and provides a namespace for the grouped el
           <body>Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy.</body>
         </ownedComment>
         <ownedParameter xmi:id="Package-unapplyProfile-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Package-unapplyProfile-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Package-unapplyProfile-_ownedParameter.0-_upperValue" value="*"/>
         </ownedParameter>
@@ -12813,7 +12813,7 @@ packagedElement->&#xD;
           <body>Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile.</body>
         </ownedComment>
         <ownedParameter xmi:id="Profile-create-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EObject"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EObject"/>
         </ownedParameter>
         <ownedParameter xmi:id="Profile-create-classifier" name="classifier" type="Classifier" effect="read">
           <ownedComment xmi:id="Profile-create-classifier-_ownedComment.0" annotatedElement="Profile-create-classifier">
@@ -12826,7 +12826,7 @@ packagedElement->&#xD;
           <body>Defines this profile by (re)creating Ecore representations of its current contents.</body>
         </ownedComment>
         <ownedParameter xmi:id="Profile-define-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EPackage"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EPackage"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Profile-define-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Profile-define-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -12836,7 +12836,7 @@ packagedElement->&#xD;
           <body>Retrieves the current definition (Ecore representation) of this profile.</body>
         </ownedComment>
         <ownedParameter xmi:id="Profile-getDefinition-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EPackage"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EPackage"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Profile-getDefinition-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Profile-getDefinition-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -12846,7 +12846,7 @@ packagedElement->&#xD;
           <body>Retrieves the current definition (Ecore representation) of the specified named element in this profile.</body>
         </ownedComment>
         <ownedParameter xmi:id="Profile-getDefinition.1-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#ENamedElement"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#ENamedElement"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Profile-getDefinition.1-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Profile-getDefinition.1-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -12900,27 +12900,27 @@ packagedElement->&#xD;
       <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="Profile-EMap_EJavaObject_EJavaObject" name="EMap_EJavaObject_EJavaObject">
         <templateBinding xmi:id="Profile-EMap_EJavaObject_EJavaObject-_templateBinding.0">
           <parameterSubstitution xmi:id="Profile-EMap_EJavaObject_EJavaObject-_templateBinding.0-_parameterSubstitution.0">
-            <actual xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EJavaObject"/>
-            <formal xmi:type="uml:ClassifierTemplateParameter" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.0"/>
+            <actual xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EJavaObject"/>
+            <formal xmi:type="uml:ClassifierTemplateParameter" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.0"/>
           </parameterSubstitution>
           <parameterSubstitution xmi:id="Profile-EMap_EJavaObject_EJavaObject-_templateBinding.0-_parameterSubstitution.1">
-            <actual xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EJavaObject"/>
-            <formal xmi:type="uml:ClassifierTemplateParameter" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.1"/>
+            <actual xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EJavaObject"/>
+            <formal xmi:type="uml:ClassifierTemplateParameter" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.1"/>
           </parameterSubstitution>
-          <signature xmi:type="uml:RedefinableTemplateSignature" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature"/>
+          <signature xmi:type="uml:RedefinableTemplateSignature" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature"/>
         </templateBinding>
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="Profile-EMap_EString_EString" name="EMap_EString_EString">
         <templateBinding xmi:id="Profile-EMap_EString_EString-_templateBinding.0">
           <parameterSubstitution xmi:id="Profile-EMap_EString_EString-_templateBinding.0-_parameterSubstitution.0">
-            <actual xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EString"/>
-            <formal xmi:type="uml:ClassifierTemplateParameter" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.0"/>
+            <actual xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EString"/>
+            <formal xmi:type="uml:ClassifierTemplateParameter" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.0"/>
           </parameterSubstitution>
           <parameterSubstitution xmi:id="Profile-EMap_EString_EString-_templateBinding.0-_parameterSubstitution.1">
-            <actual xmi:type="uml:PrimitiveType" href="..\..\ecoreReflection\model\ecoreReflection.uml#EString"/>
-            <formal xmi:type="uml:ClassifierTemplateParameter" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.1"/>
+            <actual xmi:type="uml:PrimitiveType" href="../../ecoreReflection/model/ecoreReflection.uml#EString"/>
+            <formal xmi:type="uml:ClassifierTemplateParameter" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature-_ownedParameter.1"/>
           </parameterSubstitution>
-          <signature xmi:type="uml:RedefinableTemplateSignature" href="..\..\ecoreReflection\model\ecoreReflection.uml#EMap-_ownedTemplateSignature"/>
+          <signature xmi:type="uml:RedefinableTemplateSignature" href="../../ecoreReflection/model/ecoreReflection.uml#EMap-_ownedTemplateSignature"/>
         </templateBinding>
       </nestedClassifier>
     </packagedElement>
@@ -12951,7 +12951,7 @@ packagedElement->&#xD;
           <body>Retrieves the definition (Ecore representation) of the profile associated with this profile application.</body>
         </ownedComment>
         <ownedParameter xmi:id="ProfileApplication-getAppliedDefinition-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EPackage"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EPackage"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="ProfileApplication-getAppliedDefinition-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="ProfileApplication-getAppliedDefinition-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -12961,7 +12961,7 @@ packagedElement->&#xD;
           <body>Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.</body>
         </ownedComment>
         <ownedParameter xmi:id="ProfileApplication-getAppliedDefinition.1-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#ENamedElement"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#ENamedElement"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="ProfileApplication-getAppliedDefinition.1-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="ProfileApplication-getAppliedDefinition.1-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
@@ -13104,7 +13104,7 @@ and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Ste
           <body>Retrieves the current definition (Ecore representation) of this stereotype.</body>
         </ownedComment>
         <ownedParameter xmi:id="Stereotype-getDefinition-_ownedParameter.0" direction="return">
-          <type xmi:type="uml:Class" href="..\..\ecoreReflection\model\ecoreReflection.uml#EClass"/>
+          <type xmi:type="uml:Class" href="../../ecoreReflection/model/ecoreReflection.uml#EClass"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Stereotype-getDefinition-_ownedParameter.0-_lowerValue"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Stereotype-getDefinition-_ownedParameter.0-_upperValue" value="1"/>
         </ownedParameter>
