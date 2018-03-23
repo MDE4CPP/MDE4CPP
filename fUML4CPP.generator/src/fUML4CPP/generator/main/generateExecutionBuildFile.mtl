@@ -54,8 +54,14 @@ ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -84,16 +90,19 @@ INCLUDE_DIRECTORIES(
 	${MDE4CPP_HOME}/application/include
 )
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-	FIND_LIBRARY([packName.toUpperCase()/]_DEBUG [packName/]d ${MDE4CPP_HOME}/application/lib)
-[/for]
-ELSE()	
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-	FIND_LIBRARY([packName.toUpperCase()/]_RELEASE [packName/] ${MDE4CPP_HOME}/application/lib)
-[/for]
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
+
+IF(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	[generateCMakeFindLibraryCommands('.so', 'bin')/]
+ELSEIF(APPLE)
+	[generateCMakeFindLibraryCommands('.dylib', 'bin')/]
+ELSE()
+	[generateCMakeFindLibraryCommands('', 'lib')/]
 ENDIF()
 
 [if (buildLibrary)]
@@ -105,20 +114,11 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POS
 [/if]
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-		debug ${PLUGINFRAMEWORK_DEBUG}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-		debug ${[packName.toUpperCase()/]_DEBUG}
-[/for]
-	)
+	[generateLibraryLinking(true)/]
 ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-		optimized ${[packName.toUpperCase()/]_RELEASE}
-[/for]
-	)
+	[generateLibraryLinking(false)/]
 ENDIF()
+
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
 #-----------------------------------------------------
@@ -193,4 +193,32 @@ clean.doFirst {
 	}
 }
 [/file]
+[/template]
+
+[template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String)]
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true)/]
+ELSE()
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, false)/]
+ENDIF()
+[/template]
+
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
+
+[template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
+FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
+[/template]
+
+[template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+)
 [/template]
