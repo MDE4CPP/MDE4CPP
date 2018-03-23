@@ -4,7 +4,6 @@
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/UmlFactory.hpp"
@@ -12,7 +11,7 @@
 #include "uml/Package.hpp"
 #include "uml/Class.hpp"
 #include "uml/Property.hpp"
-#include "UmlReflection/UMLPackage.hpp"
+#include "umlReflection/UMLPackage.hpp"
 
 #define SSTR( x ) static_cast< std::ostringstream & >( \
         ( std::ostringstream() << std::dec << x ) ).str()
