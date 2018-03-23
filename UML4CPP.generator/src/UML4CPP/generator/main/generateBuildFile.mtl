@@ -97,7 +97,6 @@ IF(APPLE)
   SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
 ENDIF(APPLE)
 
-
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	[generateCMakeFindLibraryCommands('.so', 'bin')/]
@@ -108,14 +107,13 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateLibraryLinking(true)/]
 ELSE()
 	[generateLibraryLinking(false)/]
 ENDIF()
-
-SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
