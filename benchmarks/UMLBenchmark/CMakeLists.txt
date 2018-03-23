@@ -40,11 +40,10 @@ INCLUDE_DIRECTORIES(
 )
 
 # Apple specific stuff
-if(APPLE)
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
-  set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
-endif(APPLE)
-
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
 
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
@@ -85,23 +84,24 @@ ELSE()
 	ENDIF()
 ENDIF()
 
-
-
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-	debug ${UML_DEBUG}
-	debug ${UMLREFLECTION_DEBUG}
-)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-	optimized ${UML_RELEASE}
-	optimized ${UMLREFLECTION_RELEASE}
-)
 
+IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 	
+		debug ${ECORE_DEBUG}
+		debug ${TYPES_DEBUG}
+		debug ${UML_DEBUG}
+		debug ${UMLREFLECTION_DEBUG}
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${ECORE_RELEASE}
+		optimized ${TYPES_RELEASE}
+		optimized ${UML_RELEASE}
+		optimized ${UMLREFLECTION_RELEASE}
+	)
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
