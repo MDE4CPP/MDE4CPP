@@ -34,8 +34,8 @@
 #include "ecoreReflection/EcorePackage.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
-#include "Ecore/EAttribute.hpp"
-#include "Ecore/EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 
 
 using namespace UML;

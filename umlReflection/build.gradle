@@ -3,27 +3,27 @@ plugins {
 }
 apply plugin: 'base' 
 
-description 'Build tasks for project: UmlReflection'
+description 'Build tasks for project: umlReflection'
 
 task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
-	group 'UmlReflection'
-	description 'build UmlReflection'
+	group 'umlReflection'
+	description 'build umlReflection'
 }
 
 task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'UmlReflection'
-	description 'compile UmlReflection'
+	group 'umlReflection'
+	description 'compile umlReflection'
 
-	projectFolder = file("./src_gen/UmlReflection")
+	projectFolder = file("./src_gen/umlReflection")
 }
 
 task generateUmlReflection(type: JavaExec) {
-	group 'UmlReflection'
-	description 'generate C++ code of UmlReflection.uml model'
+	group 'umlReflection'
+	description 'generate C++ code of umlReflection.uml model'
 	main = "-jar"
 	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "UmlReflection.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/UmlReflection.uml")
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "umlReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/umlReflection.uml")
 	outputs.dir file("src_gen")
 
 	doFirst {
@@ -39,7 +39,7 @@ task generateUmlReflection(type: JavaExec) {
 compileUmlReflection.mustRunAfter generateUmlReflection
 
 clean.doFirst {
-	def cmakeFolder = file('./src_gen/UmlReflection/.cmake/')
+	def cmakeFolder = file('./src_gen/umlReflection/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
