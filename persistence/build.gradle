@@ -48,7 +48,7 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
 				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
 			} else {
-				commandLine 'cmd -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
 			}
 		}
 		exec {
@@ -58,7 +58,7 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 				if (System.properties['os.name'].toLowerCase().contains('windows')) {
 					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
 				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
+				   commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
 				}
 			}
 			else
@@ -66,14 +66,14 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 				if (System.properties['os.name'].toLowerCase().contains('windows')) {
 					commandLine 'cmd', '/c', 'mingw32-make install' 
 				} else {
-					commandLine 'make install' 
+					commandLine '/bin/sh', '-c', 'make install' 
 				}
 			}
 		}
 		copy {
 			from "xerces/bin"
 			into System.getenv('MDE4CPP_HOME')+"/application"
-			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c", "**/*.so"
 			exclude "cmake", "share", "pkgconfig"
 		}
 	}
