@@ -76,9 +76,6 @@ int main ()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
-
 # [protected ('project_name')]
 # You may manually edit the project name, won't be overwritten upon generation.
 PROJECT(App_[packageName/])
@@ -89,15 +86,16 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-[if (aPackage.name='UML')]
-SET(CMAKE_CXX_FLAGS_DEBUG " -ggdb")
-SET(CMAKE_CXX_FLAGS_RELEASE " -DNDEBUG")
-[else]
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
-[/if]
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
@@ -110,9 +108,6 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-[if (not(aPackage.name='UML'))]
-    .
-[/if]
 	../
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
@@ -133,57 +128,28 @@ INCLUDE_DIRECTORIES(
 # [/protected]
 )
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-FIND_LIBRARY([packName.toUpperCase()/]_DEBUG [packName/]d ${MDE4CPP_HOME}/application/lib)
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
 
-[/for]
-	FIND_LIBRARY([packageName.toUpperCase()/]_DEBUG [packageName/]d ${MDE4CPP_HOME}/application/lib)
-# [protected ('library_finding_debug')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
+IF(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	[generateCMakeFindLibraryCommands('.so', 'bin', 'Linux')/]
+ELSEIF(APPLE)
+	[generateCMakeFindLibraryCommands('.dylib', 'bin', 'Apple')/]
 ELSE()
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-	FIND_LIBRARY([packName.toUpperCase()/]_RELEASE [packName/] ${MDE4CPP_HOME}/application/lib)
-
-[/for]
-	FIND_LIBRARY([packageName.toUpperCase()/]_RELEASE [packageName/] ${MDE4CPP_HOME}/application/lib)
-# [protected ('library_finding_release')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
+	[generateCMakeFindLibraryCommands('', 'lib', 'Win')/]
 ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-		debug ${PLUGINFRAMEWORK_DEBUG}
-	[for (packName : String | aPackage.metaModelLibrariesNames())]
-		debug ${[packName.toUpperCase()/]_DEBUG}
-	[/for]
-		debug ${[packageName.toUpperCase()/]_DEBUG}
-	# [protected ('library_assigning_debug')]
-	# You may manually edit the following lines, won't be overwritten upon generation.
-	
-	# [/protected]
-	)
+	[generateLibraryLinking(true)/]
 ELSE()
-	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${PLUGINFRAMEWORK_RELEASE}
-	[for (packName : String | aPackage.metaModelLibrariesNames())]
-		optimized ${[packName.toUpperCase()/]_RELEASE}
-	[/for]
-		optimized ${[packageName.toUpperCase()/]_RELEASE}
-	# [protected ('library_assigning_release')] 
-	# You may manually edit the following lines, won't be overwritten upon generation.
-	
-	# [/protected]
-	)
+	[generateLibraryLinking(false)/]
 ENDIF()
 
 #-----------------------------------------------------
@@ -201,4 +167,43 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/file]
 
 [aPackage.generateProjectsFiles(true)/]
+[/template]
+
+[template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String, system : String)]
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true, system)/]
+ELSE()
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, false, system)/]
+ENDIF()
+[/template]
+
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
+
+[template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean, system : String)]
+FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
+FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName().toUpperFirst()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+# ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
+# You may manually edit the following lines, won't be overwritten upon generation.
+
+# ['[/protected]'/]
+[/template]
+
+[template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+
+	# ['['/]protected ('library_linking_[buildModeCMakeProperty(debugMode)/]')[']'/]
+	# You may manually edit the following lines, won't be overwritten upon generation.
+	
+	# ['['/]/protected[']'/]
+)
 [/template]
