@@ -1,1 +1,1 @@
-include 'benchmarks', 'fumlExample:Calculator', 'simpleExamples', 'simpleExamples:ecoreModelExample', 'simpleExamples:UMLModelExample', 'persistenceExample'
+include 'benchmarks', 'fUMLExample:Calculator', 'fUMLExample:MultiplePins', 'simpleExamples', 'simpleExamples:ecoreModelExample', 'simpleExamples:UMLModelExample', 'persistenceExample'

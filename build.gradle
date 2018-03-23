@@ -1,6 +1,6 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['benchmarks:buildBenchmarks', 'simpleExamples:buildSimpleExamples', 'fumlExample:Calculator:buildCalcModel', 'persistenceExample:compileExamplePersistence']) {
+task buildAllExamples(dependsOn: ['benchmarks:buildBenchmarks', 'simpleExamples:buildSimpleExamples', 'fUMLExample:Calculator:buildCalcModel', 'fUMLExample:MultiplePins:buildFUMLMultiplePins', 'persistenceExample:compileExamplePersistence']) {
 	group 'Examples'
 	description 'build all example applications'	
 }
