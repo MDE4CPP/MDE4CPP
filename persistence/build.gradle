@@ -6,20 +6,17 @@ apply plugin: 'base'
 
 description 'Common collection'
 
-task deliverPersistence(type: Copy) {
+task deliverPersistenceInterface(type: Copy) {
 	group 'Persistence'
-	description 'deliver persistence header to %MDE4CPP_HOME%/application/include/persistence'
-	from (".") {
-		include "interfaces/*.hpp"
-		include "base/Persistence.hpp"
-		include "xml/XMLPersistence.hpp"
+	description 'deliver persistence interface header to %MDE4CPP_HOME%/application/include/persistence/interfaces'
+	from ("./interfaces") {
+		include "*.hpp"
 	}
 	exclude "build", ".gradle"
-	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence/interfaces"
 	inputs.dir file(".")
 	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
 }
-
 
 task downloadFile(type: Download) {
 	description 'download xerces'
