@@ -32,7 +32,7 @@ task generateReflectionModels(dependsOn: ['common:ecoreReflection:generateEcoreR
 	description 'generate all reflection models'
 }
 
-task compileBasicProjects(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'common:persistence:deliverPersistence', 'util:deliverUtil']) {
+task compileBasicProjects(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'common:persistence:deliverPersistenceInterface', 'util:deliverUtil']) {
 	group 'BasicProjects'
 	description 'deliver abstractDataTypes, util and persistence interfaces as well as compile pluginFramework'
 }
