@@ -1,5 +1,5 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 }
 apply plugin: "base"
 
