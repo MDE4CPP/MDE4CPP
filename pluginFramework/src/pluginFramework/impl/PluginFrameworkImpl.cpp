@@ -50,7 +50,7 @@ std::string PluginFrameworkImpl::checkLibrary(struct dirent* file, std::string f
 		{
 			if((0 == name.compare(name.length() - m_endingDebug.length(), m_endingDebug.length(), m_endingDebug)))
 			{
-				return folderName + "\\" + name;
+				return folderName + "/" + name;
 			}
 		}
 	}
@@ -64,7 +64,7 @@ std::string PluginFrameworkImpl::checkLibrary(struct dirent* file, std::string f
 				{
 					if((0 != name.compare(name.length() - m_endingDebug.length(), m_endingDebug.length(), m_endingDebug)))
 					{
-						return folderName + "\\" + name;
+						return folderName + "/" + name;
 					}
 				}
 			}
