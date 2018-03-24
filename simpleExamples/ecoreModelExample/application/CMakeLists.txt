@@ -57,7 +57,6 @@ ENDIF(APPLE)
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored.so ${MDE4CPP_HOME}/application/bin)
@@ -66,7 +65,6 @@ IF(UNIX AND NOT APPLE)
 		
 		# [/protected]
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore.so ${MDE4CPP_HOME}/application/bin)
@@ -77,7 +75,6 @@ IF(UNIX AND NOT APPLE)
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored.dylib ${MDE4CPP_HOME}/application/bin)
@@ -86,7 +83,6 @@ ELSEIF(APPLE)
 		
 		# [/protected]
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore.dylib ${MDE4CPP_HOME}/application/bin)
@@ -97,7 +93,6 @@ ELSEIF(APPLE)
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored ${MDE4CPP_HOME}/application/lib)
@@ -106,7 +101,6 @@ ELSE()
 		
 		# [/protected]
 	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore ${MDE4CPP_HOME}/application/lib)
@@ -122,7 +116,6 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		debug ${PLUGINFRAMEWORK_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${TYPES_DEBUG}
 		debug ${LIBRARYMODEL_ECORE_DEBUG}
@@ -134,7 +127,6 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${PLUGINFRAMEWORK_RELEASE}
 		optimized ${ECORE_RELEASE}
 		optimized ${TYPES_RELEASE}
 		optimized ${LIBRARYMODEL_ECORE_RELEASE}
