@@ -8,10 +8,17 @@
 #ifndef PLUGINFRAMEWORK_PLUGINFRAMEWORKIMPL_HPP
 #define PLUGINFRAMEWORK_PLUGINFRAMEWORKIMPL_HPP
 
+#include "pluginFramework/PluginFramework.hpp"
+
 #include <map>
 #include <vector>
 
-#include "pluginFramework/PluginFramework.hpp"
+#ifndef __stdcall
+	#define __stdcall
+#endif
+
+#define MAX_CHAR 260
+typedef std::shared_ptr<MDE4CPPPlugin> (__stdcall *StartFunction)();
 
 class PluginFrameworkImpl : virtual public PluginFramework
 {
