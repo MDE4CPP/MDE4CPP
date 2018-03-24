@@ -168,7 +168,6 @@ ENDIF()
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [template private generateCMakeFindLibraryCommand(aPackage : EPackage, ending : String, folderName : String, debugMode : Boolean, system : String)]
-FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
@@ -181,7 +180,6 @@ FIND_LIBRARY([aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
