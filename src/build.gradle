@@ -32,20 +32,20 @@ task generateReflectionModels(dependsOn: ['common:ecoreReflection:generateEcoreR
 	description 'generate all reflection models'
 }
 
-task compileBasicProjects(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'common:persistence:deliverPersistenceInterface', 'util:deliverUtil']) {
+task compileBasicProjects(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:deliverPluginFrameworkInterface', 'common:persistence:deliverPersistenceInterface', 'util:deliverUtil']) {
 	group 'BasicProjects'
 	description 'deliver abstractDataTypes, util and persistence interfaces as well as compile pluginFramework'
 }
 
 tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
-tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFramework')
+tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:deliverPluginFrameworkInterface')
 tasks.getByPath('ecore:types:buildTypes').mustRunAfter tasks.getByPath('ecore:ecore:buildEcore')
 tasks.getByPath('uml:buildUml').mustRunAfter tasks.getByPath('ecore:types:buildTypes')
 tasks.getByPath('uml:buildUml').mustRunAfter tasks.getByPath('util:deliverUtil')
 tasks.getByPath('fuml:buildFUML').mustRunAfter tasks.getByPath('uml:buildUml')
 
 tasks.getByPath('ecore:ecore:compileEcore').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
-tasks.getByPath('ecore:ecore:compileEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFramework')
+tasks.getByPath('ecore:ecore:compileEcore').mustRunAfter tasks.getByPath('common:pluginFramework:deliverPluginFrameworkInterface')
 tasks.getByPath('ecore:types:compileTypes').mustRunAfter tasks.getByPath('ecore:ecore:compileEcore')
 tasks.getByPath('uml:compileUml').mustRunAfter tasks.getByPath('ecore:types:compileTypes')
 tasks.getByPath('uml:compileUml').mustRunAfter tasks.getByPath('util:deliverUtil')
