@@ -30,7 +30,9 @@ PluginFrameworkImplLinux::~PluginFrameworkImplLinux()
 
 PluginFramework* PluginFrameworkImplLinux::create()
 {
-	return new PluginFrameworkImplLinux();
+	PluginFrameworkImplLinux* instance = new PluginFrameworkImplLinux();
+	instance->initialize();
+	return instance;
 }
 
 std::vector<std::string> PluginFrameworkImplLinux::findAllAvailableLibraries()

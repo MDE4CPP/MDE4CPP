@@ -30,7 +30,9 @@ PluginFrameworkImplApple::~PluginFrameworkImplApple()
 
 PluginFramework* PluginFrameworkImplApple::create()
 {
-	return new PluginFrameworkImplApple();
+	PluginFrameworkImplApple* instance = new PluginFrameworkImplApple();
+	instance->initialize();
+	return instance;
 }
 
 std::vector<std::string> PluginFrameworkImplApple::findAllAvailableLibraries()

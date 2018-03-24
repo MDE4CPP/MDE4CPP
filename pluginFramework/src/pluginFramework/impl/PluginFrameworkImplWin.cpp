@@ -33,7 +33,9 @@ PluginFrameworkImplWin::~PluginFrameworkImplWin()
 
 PluginFramework* PluginFrameworkImplWin::create()
 {
-	return new PluginFrameworkImplWin();
+	PluginFrameworkImplWin* instance = new PluginFrameworkImplWin();
+	instance->initialize();
+	return instance;
 }
 
 std::vector<std::string> PluginFrameworkImplWin::findAllAvailableLibraries()
@@ -59,7 +61,7 @@ std::vector<std::string> PluginFrameworkImplWin::findAllAvailableLibraries()
 
 	DIR *dir;
 	struct dirent *file;
-	if((dir = opendir(folderBuffer)) != NULL)
+	if((dir = opendir(folderName.c_str())) != NULL)
 	{
 		while((file = readdir(dir)) != NULL)
 		{

@@ -16,9 +16,9 @@
 #include <iostream>
 #include <dirent.h>
 
-PluginFrameworkImpl::PluginFrameworkImpl()
+PluginFrameworkImpl::PluginFrameworkImpl():
+	m_debugMode(false)
 {
-	initialize();
 }
 
 PluginFrameworkImpl::~PluginFrameworkImpl()
@@ -29,7 +29,9 @@ PluginFrameworkImpl::~PluginFrameworkImpl()
 
 PluginFramework* PluginFrameworkImpl::create()
 {
-	return new PluginFrameworkImpl();
+	PluginFrameworkImpl* instance = new PluginFrameworkImpl();
+	instance->initialize();
+	return instance;
 }
 
 std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
