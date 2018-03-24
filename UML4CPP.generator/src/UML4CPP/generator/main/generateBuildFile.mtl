@@ -133,7 +133,7 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 
 [file ('../build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
