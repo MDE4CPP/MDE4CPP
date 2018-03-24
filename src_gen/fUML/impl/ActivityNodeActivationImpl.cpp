@@ -24,7 +24,7 @@
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "ecore/EClass.hpp"
-#include "fuml/ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/Class.hpp"

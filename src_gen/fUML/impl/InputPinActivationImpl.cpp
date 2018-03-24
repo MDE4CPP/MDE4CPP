@@ -23,7 +23,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/ActionActivation.hpp"
+#include "fUML/ActionActivation.hpp"
 #include "uml/Pin.hpp"
 
 //Forward declaration includes

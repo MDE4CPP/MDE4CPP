@@ -22,7 +22,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/LiteralBoolean.hpp"
 #include "uml/PrimitiveType.hpp"

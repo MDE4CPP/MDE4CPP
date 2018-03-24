@@ -23,8 +23,8 @@
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "abstractDataTypes/Bag.hpp"
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/Locus.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/Locus.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence

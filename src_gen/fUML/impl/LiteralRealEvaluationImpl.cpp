@@ -22,8 +22,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/RealValue.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/RealValue.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/LiteralReal.hpp"
 
 //Forward declaration includes

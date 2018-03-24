@@ -26,12 +26,12 @@
 #include "uml/Classifier.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/ExtensionalValue.hpp"
-#include "fuml/Executor.hpp"
-#include "fuml/Object.hpp"
-#include "fuml/Execution.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/ExtensionalValue.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/Object.hpp"
+#include "fUML/Execution.hpp"
 
 
 //Forward declaration includes

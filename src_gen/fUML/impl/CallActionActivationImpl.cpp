@@ -24,15 +24,15 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/Execution.hpp"
-#include "fuml/ParameterValue.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/CallAction.hpp"
 #include "uml/Behavior.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/ObjectToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence

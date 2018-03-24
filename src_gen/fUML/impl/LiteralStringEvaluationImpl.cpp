@@ -22,8 +22,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/StringValue.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/StringValue.hpp"
+#include "fUML/FUMLFactory.hpp"
 #include "uml/LiteralString.hpp"
 
 //Forward declaration includes

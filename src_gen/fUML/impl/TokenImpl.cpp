@@ -22,9 +22,9 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/ControlToken.hpp"
-#include "fuml/ExecutionFactory.hpp"
-#include "fuml/Locus.hpp"
+#include "fUML/ControlToken.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/Locus.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence

@@ -23,10 +23,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fuml/DataValue.hpp"
+#include "fUML/DataValue.hpp"
 #include "uml/UmlFactory.hpp"
-#include "fuml/FUMLFactory.hpp"
-#include "fuml/CompoundValue.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/CompoundValue.hpp"
 #include "uml/DataType.hpp"
 #include "uml/Classifier.hpp"
 

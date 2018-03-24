@@ -25,12 +25,12 @@
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include <uml/Parameter.hpp>
 #include <uml/ParameterDirectionKind.hpp>
-#include <fuml/ParameterValue.hpp>
+#include <fUML/ParameterValue.hpp>
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 
-#include "fuml/impl/ObjectImpl.hpp"
+#include "fUML/impl/ObjectImpl.hpp"
 
 
 //Forward declaration includes

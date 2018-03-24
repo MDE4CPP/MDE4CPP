@@ -24,7 +24,7 @@
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include <uml/Classifier.hpp>
-    #include "fuml/FUMLFactory.hpp"
+    #include "fUML/FUMLFactory.hpp"
     #include "uml/Class.hpp"
 
 //Forward declaration includes

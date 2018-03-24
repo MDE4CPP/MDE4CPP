@@ -24,11 +24,11 @@
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "fuml/ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
-#include "fuml/FUMLFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
