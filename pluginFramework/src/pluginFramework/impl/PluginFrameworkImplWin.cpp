@@ -63,11 +63,13 @@ std::vector<std::string> PluginFrameworkImplWin::findAllAvailableLibraries()
 	struct dirent *file;
 	if((dir = opendir(folderName.c_str())) != NULL)
 	{
+		DEBUG_MESSAGE(std::cout << "libraries to be loaded" << std::endl;)
 		while((file = readdir(dir)) != NULL)
 		{
 			std::string libName = checkLibrary(file, folderName);
 			if (!libName.empty())
 			{
+				DEBUG_MESSAGE(std::cout << "\t" << libName << std::endl;)
 				libraries.push_back(libName);
 			}
 		}
