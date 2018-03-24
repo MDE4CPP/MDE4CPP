@@ -1,6 +1,6 @@
 description 'MDE4CPP root project'
 
-task buildAll(dependsOn: ['generator:createAllGenerators', 'src:deliverBasicInterfaces', 'src:buildEcoreModels', 'src:common:persistence:compilePersistence', 'src:buildReflectionModels']) {
+task buildAll(dependsOn: ['generator:createAllGenerators', 'src:deliverBasicInterfaces', 'src:buildEcoreModels', 'src:common:pluginFramework:compilePluginFramework', 'src:common:persistence:compilePersistence', 'src:buildReflectionModels']) {
 	group 'MDE4CPP'
 	description 'build generators and all models'
 }
@@ -10,13 +10,14 @@ tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.
 tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
 //Compile All
-task compileAll(dependsOn: ['src:deliverBasicInterfaces', 'src:compileEcoreModels', 'src:common:persistence:compilePersistence', 'src:compileReflectionModels']) {
+task compileAll(dependsOn: ['src:deliverBasicInterfaces', 'src:compileEcoreModels', 'src:common:pluginFramework:compilePluginFramework', 'src:common:persistence:compilePersistence', 'src:compileReflectionModels']) {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
 }
 tasks.getByPath('src:compileEcoreModels').mustRunAfter tasks.getByPath('src:deliverBasicInterfaces')
 tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:compileEcoreModels')
 tasks.getByPath('src:compileReflectionModels').mustRunAfter tasks.getByPath('src:compileEcoreModels')
+tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:common:pluginFramework:compilePluginFramework')
 
 task generateAll(dependsOn: ['src:generateEcoreModels', 'src:generateReflectionModels']) {
 	group 'MDE4CPP'
