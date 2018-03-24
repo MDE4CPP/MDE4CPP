@@ -14,6 +14,7 @@
 #endif
 
 #include <dirent.h>
+#include <dlfcn.h>
 #include <iostream>
 #include <sstream>
 #include <unistd.h>
@@ -21,6 +22,7 @@
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 
 #define MAX_CHAR 260
+typedef std::shared_ptr<MDE4CPPPlugin> (*StartFunction)();
 using namespace std;
 
 PluginFrameworkImplLinux::PluginFrameworkImplLinux():
@@ -84,5 +86,37 @@ std::vector<std::string> PluginFrameworkImplLinux::findAllAvailableLibraries()
 
 void PluginFrameworkImplLinux::loadLibrary(std::string libraryPath)
 {
-	std::cerr << "PluginFrameworkImpl::loadLibrary is not implemented for Linux systems!";
+	// open the library
+	DEBUG_MESSAGE(std::cout << "Opening " << libraryPath << std::endl;)
+	void* handle = dlopen(libraryPath.c_str(), RTLD_LAZY);
+
+	if (!handle)
+	{
+		DEBUG_MESSAGE(std::cout << "Cannot open library: " << dlerror() << std::endl;)
+		return;
+	}
+
+	// reset errors
+	dlerror();
+	StartFunction startFunction = (StartFunction) dlsym(handle, "_Z5startv");
+	const char *dlsym_error = dlerror();
+	if (dlsym_error)
+	{
+		DEBUG_MESSAGE(std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;)
+		dlclose(handle);
+		return;
+	}
+
+	if(startFunction)
+	{
+		std::shared_ptr<MDE4CPPPlugin> plugin = startFunction();
+		m_mapPluginName.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
+		m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNS_URI(), plugin));
+		std::string eclipseURI = plugin->eclipseURI();
+		if (!eclipseURI.empty())
+		{
+			m_mapPluginUri.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(eclipseURI, plugin));
+		}
+		DEBUG_MESSAGE(std::cout << "library " << libraryPath << " started" << std::endl;)
+	}
 }
