@@ -1,0 +1,31 @@
+plugins {
+	id "de.undercouch.download" version "3.4.2"
+}
+apply plugin: 'base' 
+
+description 'Common collection'
+
+task downloadFile(type: Download) {
+	description 'download boost'
+	src 'https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.zip'
+    dest new File(file('./boost.zip').absolutePath)
+    onlyIfModified true
+}
+
+task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
+	description 'download and unzip boost'
+	from zipTree('boost.zip')
+	into 'src'
+}
+
+task deliverBoost(dependsOn: downloadAndUnzipFile, type: Copy) {
+	description 'download, unzip and deliver boost library'
+	group 'Basic'
+	
+	from ("./src/boost_1_66_0/boost") {
+		include "**/*"
+	}
+	into System.getenv('MDE4CPP_HOME')+"/application/include/boost"
+	inputs.dir file(".")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/boost")
+}
