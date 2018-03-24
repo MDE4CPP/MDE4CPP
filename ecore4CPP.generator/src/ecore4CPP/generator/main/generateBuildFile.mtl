@@ -85,78 +85,21 @@ endif(APPLE)
 
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
-[/for]
-	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
-[/for]
-	ENDIF()
+	[generateCMakeFindLibraryCommands('.so', 'bin')/]
 ELSEIF(APPLE)
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.dylib ${MDE4CPP_HOME}/application/bin)
-[/for]
-	ELSE()
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].dylib ${MDE4CPP_HOME}/application/bin)
-[/for]
-	ENDIF()
+	[generateCMakeFindLibraryCommands('.dylib', 'bin')/]
 ELSE()
-	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
-[/for]
-	ELSE()
-		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
-[/for]
-	ENDIF()
+	[generateCMakeFindLibraryCommands('', 'lib')/]
 ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-
-IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	IF(NOT APPLE)
-		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-			debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-			debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-	)
-	ELSE()
-		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-			#debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-			debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-		)
-	ENDIF()
-ELSE()
-	IF(NOT APPLE) 
-		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-			optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-			optimized ${[pack.name.toUpperCase()/]_RELEASE}
-[/for]
-	)
-	ELSE()
-		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-			#optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-			optimized ${[pack.name.toUpperCase()/]_RELEASE}
-[/for]
-		)
-	ENDIF()
-ENDIF()
-
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
+
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateLibraryLinking(true)/]
+ELSE()
+	[generateLibraryLinking(false)/]
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
@@ -242,4 +185,30 @@ clean.doFirst {
 [/if]
 }
 [/file]
+[/template]
+
+[template private generateCMakeFindLibraryCommands(aPackage : EPackage, ending : String, folderName : String)]
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true)/]
+ELSE()
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, false)/]
+ENDIF()
+[/template]
+
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
+
+[template private generateCMakeFindLibraryCommand(aPackage : EPackage, ending : String, folderName : String, debugMode : Boolean)]
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
+[/template]
+
+[template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+)
 [/template]
