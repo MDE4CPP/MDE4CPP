@@ -1,6 +1,6 @@
 description 'Example collection'
 
-task buildCommonExamples(dependsOn: ['persistenceExample:compileExamplePersistence']) {
+task buildCommonExamples(dependsOn: ['persistenceExample:compileExamplePersistence', 'pluginFrameworkExample:compileExamplePluginFramework']) {
 	group 'Examples'
 	description 'build all common example applications'	
 }

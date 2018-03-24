@@ -1,1 +1,1 @@
-include 'persistenceExample'
+include 'persistenceExample', 'pluginFrameworkExample'
