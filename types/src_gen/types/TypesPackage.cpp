@@ -1,5 +1,5 @@
-#include "TypesPackage.hpp"
-#include "impl/TypesPackageImpl.hpp"
+#include "types/TypesPackage.hpp"
+#include "types/impl/TypesPackageImpl.hpp"
 
 using namespace types;
 
@@ -17,7 +17,7 @@ std::shared_ptr<TypesPackage>TypesPackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(TypesPackageImpl::create());
-		std::dynamic_pointer_cast<TypesPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<TypesPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

@@ -7,27 +7,34 @@
 #ifndef ECORE_ESTRUCTURALFEATURE_HPP
 #define ECORE_ESTRUCTURALFEATURE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
+
 #include "boost/any.hpp"
+
+// forward declarations
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
 
 //Forward Declaration for used types
 namespace ecore 
@@ -56,7 +63,7 @@ namespace ecore
 }
 
 // base class includes
-#include "ETypedElement.hpp"
+#include "ecore/ETypedElement.hpp"
 
 // enum includes
 
@@ -169,31 +176,31 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			bool m_changeable =  true;
+			bool m_changeable = true;
 			/*!
 			 */ 
-			void *  m_containerClass ;
+			void *  m_containerClass = nullptr;
 			/*!
 			 */ 
-			boost::any m_defaultValue ;
+			boost::any m_defaultValue = nullptr;
 			/*!
 			 */ 
-			std::string m_defaultValueLiteral ;
+			std::string m_defaultValueLiteral = "";
 			/*!
 			 */ 
-			bool m_derived ;
+			bool m_derived = false;
 			/*!
 			 */ 
-			int m_featureID =  -1;
+			int m_featureID = -1;
 			/*!
 			 */ 
-			bool m_transient ;
+			bool m_transient = false;
 			/*!
 			 */ 
-			bool m_unsettable ;
+			bool m_unsettable = false;
 			/*!
 			 */ 
-			bool m_volatile ;
+			bool m_volatile = false;
 			
 			
 			//*********************************
@@ -208,9 +215,19 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: ECORE_ESTRUCTURALFEATURE_HPP */
-

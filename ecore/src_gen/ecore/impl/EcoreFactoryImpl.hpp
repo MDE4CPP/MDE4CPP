@@ -7,42 +7,32 @@
 #ifndef ECOREFACTORYIMPL_HPP
 #define ECOREFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/impl/EFactoryImpl.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
+#include "ecore/EcoreFactory.hpp"
 
-#include "impl/EFactoryImpl.hpp"
-
-#include "EAnnotationImpl.hpp"
-#include "EAttributeImpl.hpp"
-#include "EClassImpl.hpp"
-#include "EClassifierImpl.hpp"
-#include "EDataTypeImpl.hpp"
-#include "EEnumImpl.hpp"
-#include "EEnumLiteralImpl.hpp"
-#include "EFactoryImpl.hpp"
-#include "EGenericTypeImpl.hpp"
-#include "EModelElementImpl.hpp"
-#include "ENamedElementImpl.hpp"
-#include "EObjectImpl.hpp"
-#include "EOperationImpl.hpp"
-#include "EPackageImpl.hpp"
-#include "EParameterImpl.hpp"
-#include "EReferenceImpl.hpp"
-#include "EStringToStringMapEntryImpl.hpp"
-#include "EStructuralFeatureImpl.hpp"
-#include "ETypeParameterImpl.hpp"
-#include "ETypedElementImpl.hpp"
-
-#include "EcoreFactory.hpp"
+namespace ecore 
+{	class EAnnotation;
+	class EAttribute;
+	class EClass;
+	class EClassifier;
+	class EDataType;
+	class EEnum;
+	class EEnumLiteral;
+	class EFactory;
+	class EGenericType;
+	class EModelElement;
+	class ENamedElement;
+	class EObject;
+	class EOperation;
+	class EPackage;
+	class EParameter;
+	class EReference;
+	class EStringToStringMapEntry;
+	class EStructuralFeature;
+	class ETypeParameter;
+	class ETypedElement;
+}
 
 namespace ecore 
 {
@@ -61,7 +51,8 @@ namespace ecore
 			virtual ~EcoreFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<EObject> create(std::shared_ptr<EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<EObject> create(std::shared_ptr<EClass> _class) const;
+			virtual std::shared_ptr<EObject> create(std::shared_ptr<EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<EObject> create(std::string _className) const;
 
 			//Creator functions
@@ -69,25 +60,31 @@ namespace ecore
 			//Add containing object
 			virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EModelElement(std::weak_ptr<ecore::EModelElement > par_eModelElement) const ;
 			
+			
 			virtual std::shared_ptr<EAttribute> createEAttribute() const ;
 			//Add containing object
 			virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const ;
+			virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EClass> createEClass() const ;
 			//Add containing object
 			virtual std::shared_ptr<EClass> createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const ;
+			virtual std::shared_ptr<EClass> createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EDataType> createEDataType() const ;
 			//Add containing object
 			virtual std::shared_ptr<EDataType> createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const ;
+			virtual std::shared_ptr<EDataType> createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EEnum> createEEnum() const ;
 			//Add containing object
 			virtual std::shared_ptr<EEnum> createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const ;
+			virtual std::shared_ptr<EEnum> createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral() const ;
 			//Add containing object
 			virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EEnum(std::weak_ptr<ecore::EEnum > par_eEnum) const ;
+			
 			
 			virtual std::shared_ptr<EFactory> createEFactory() const ;
 			
@@ -98,18 +95,22 @@ namespace ecore
 			virtual std::shared_ptr<EOperation> createEOperation() const ;
 			//Add containing object
 			virtual std::shared_ptr<EOperation> createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const ;
+			virtual std::shared_ptr<EOperation> createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EPackage> createEPackage() const ;
 			//Add containing object
 			virtual std::shared_ptr<EPackage> createEPackage_in_ESuperPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage) const ;
 			
+			
 			virtual std::shared_ptr<EParameter> createEParameter() const ;
 			//Add containing object
 			virtual std::shared_ptr<EParameter> createEParameter_in_EOperation(std::weak_ptr<ecore::EOperation > par_eOperation) const ;
 			
+			
 			virtual std::shared_ptr<EReference> createEReference() const ;
 			//Add containing object
 			virtual std::shared_ptr<EReference> createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const ;
+			virtual std::shared_ptr<EReference> createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const unsigned int classID) const ;
 			
 			virtual std::shared_ptr<EStringToStringMapEntry> createEStringToStringMapEntry() const ;
 			
@@ -123,9 +124,6 @@ namespace ecore
 		private:
 			static EcoreFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: ECOREFACTORYIMPL_HPP */
-

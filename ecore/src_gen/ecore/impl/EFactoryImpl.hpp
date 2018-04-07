@@ -7,29 +7,13 @@
 #ifndef ECORE_EFACTORYEFACTORYIMPL_HPP
 #define ECORE_EFACTORYEFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../EFactory.hpp"
 
-#include "impl/EModelElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ecore 
@@ -46,6 +30,8 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EFactoryImpl();
+			virtual std::shared_ptr<EFactory> getThisEFactoryPtr();
+			virtual void setThisEFactoryPtr(std::weak_ptr<EFactory> thisEFactoryPtr);
 
 
 
@@ -62,7 +48,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const  ;
 			
 			/*!
 			 */ 
@@ -95,12 +81,29 @@ namespace ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EFactory> m_thisEFactoryPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EFACTORYEFACTORYIMPL_HPP */
-

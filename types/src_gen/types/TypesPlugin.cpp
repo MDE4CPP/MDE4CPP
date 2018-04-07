@@ -1,6 +1,6 @@
 
-#include "TypesPlugin.hpp"
-#include "impl/TypesPluginImpl.hpp"
+#include "types/TypesPlugin.hpp"
+#include "types/impl/TypesPluginImpl.hpp"
 
 using namespace types;
 

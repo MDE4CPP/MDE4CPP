@@ -7,29 +7,13 @@
 #ifndef ECORE_EPACKAGEEPACKAGEIMPL_HPP
 #define ECORE_EPACKAGEEPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../EPackage.hpp"
 
-#include "impl/ENamedElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "ecore/impl/ENamedElementImpl.hpp"
 
 //*********************************
 namespace ecore 
@@ -46,6 +30,8 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EPackageImpl();
+			virtual std::shared_ptr<EPackage> getThisEPackagePtr();
+			virtual void setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr);
 
 			//Additional constructors for the containments back reference
 			EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
@@ -62,111 +48,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual void addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EParameter> addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered)  ;
-			
-			/*!
-			 */ 
-			virtual void createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> createEClass(int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EDataType> createEDataType(int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EEnum> createEEnum(int id)  ;
-			
-			/*!
-			 */ 
-			virtual void createEOperation(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
-			virtual void createEReference(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual void initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EDataType> initEDataType(std::shared_ptr<ecore::EDataType>  d,void *  instanceClass,std::string name,bool isSerializable,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EEnum> initEEnum(std::shared_ptr<ecore::EEnum>  e,void *  instanceClass,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound,bool isUnique,bool isOrdered)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			
-			
-			/*!
-			 */ 
-			virtual void initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EParameter> internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void setGeneratedClassName(std::shared_ptr<ecore::EClassifier>  eClassifier)  ;
 			
 			
 			
@@ -196,7 +78,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEClassifiers() const ;
+			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEClassifiers() const ;
 			
 			/*!
 			 */
@@ -207,7 +89,7 @@ namespace ecore
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance_eFactoryInstance) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EPackage> > getESubpackages() const ;
+			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
 			
 			/*!
 			 */
@@ -223,12 +105,29 @@ namespace ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EPackage> m_thisEPackagePtr;
 	};
 }
 #endif /* end of include guard: ECORE_EPACKAGEEPACKAGEIMPL_HPP */
-

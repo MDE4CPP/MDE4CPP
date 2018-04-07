@@ -1,7 +1,13 @@
-#include "TypesFactoryImpl.hpp"
-#include "TypesPackage.hpp"
+#include "types/impl/TypesFactoryImpl.hpp"
 
-#include "EClass.hpp"
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "types/TypesPackage.hpp"
+
+#include "ecore/EClass.hpp"
+
+
 
 using namespace types;
 
@@ -36,15 +42,20 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const unsigned int clas
 	return nullptr;
 }
 
-std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::shared_ptr<ecore::EClass> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className, _container);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::string _className) const

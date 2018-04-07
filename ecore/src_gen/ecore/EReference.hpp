@@ -7,27 +7,34 @@
 #ifndef ECORE_EREFERENCE_HPP
 #define ECORE_EREFERENCE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace ecore
+{
+	class EcoreFactory;
+}
 
 //Forward Declaration for used types
 namespace ecore 
@@ -66,7 +73,7 @@ namespace ecore
 }
 
 // base class includes
-#include "EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 // enum includes
 
@@ -125,7 +132,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEKeys() const = 0;
+			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const = 0;
 			
 			/*!
 			 */
@@ -146,13 +153,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			bool m_container ;
+			bool m_container = false;
 			/*!
 			 */ 
-			bool m_containment ;
+			bool m_containment = false;
 			/*!
 			 */ 
-			bool m_resolveProxies =  true;
+			bool m_resolveProxies = true;
 			
 			
 			//*********************************
@@ -160,7 +167,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<ecore::EAttribute> > m_eKeys;
+			std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
 			/*!
 			 */
 			std::shared_ptr<ecore::EReference > m_eOpposite;
@@ -173,9 +180,19 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: ECORE_EREFERENCE_HPP */
-

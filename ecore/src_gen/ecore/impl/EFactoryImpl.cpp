@@ -1,23 +1,55 @@
-#include "EFactoryImpl.hpp"
-#include <iostream>
+#include "ecore/impl/EFactoryImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EClass.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EDataType.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EModelElement.hpp"
+#include "ecore/EDataType.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EObject.hpp"
 
+#include "ecore/EPackage.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -45,7 +77,6 @@ EFactoryImpl::~EFactoryImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EFactory "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -78,13 +109,14 @@ EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
 
 std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EFactoryImpl(*this));
+	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(*this));
+	element->setThisEFactoryPtr(element);
 	return element;
 }
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEFactory();
+	return EcorePackageImpl::eInstance()->getEFactory_EClass();
 }
 
 //*********************************
@@ -100,7 +132,7 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDa
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass)  const 
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -130,17 +162,153 @@ void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 //*********************************
 
 
+std::shared_ptr<EFactory> EFactoryImpl::getThisEFactoryPtr()
+{
+	return m_thisEFactoryPtr.lock();
+}
+void EFactoryImpl::setThisEFactoryPtr(std::weak_ptr<EFactory> thisEFactoryPtr)
+{
+	m_thisEFactoryPtr = thisEFactoryPtr;
+	setThisEModelElementPtr(thisEFactoryPtr);
+}
+std::shared_ptr<ecore::EObject> EFactoryImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EFactoryImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //70
-		case EcorePackage::EFACTORY_EPACKAGE:
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
 			return getEPackage(); //71
 	}
-	return boost::any();
+	return EModelElementImpl::internalEIsSet(featureID);
 }
+bool EFactoryImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
+			return getEPackage() != nullptr; //71
+	}
+	return EModelElementImpl::internalEIsSet(featureID);
+}
+bool EFactoryImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
+			setEPackage(_ePackage); //71
+			return true;
+		}
+	}
+
+	return EModelElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EFactoryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("ePackage");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("ePackage")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	EModelElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	EModelElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>( references.front() );
+				setEPackage(_ePackage);
+			}
+			
+			return;
+		}
+	}
+	EModelElementImpl::resolveReferences(featureID, references);
+}
+
+void EFactoryImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("ePackage", this->getEPackage());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

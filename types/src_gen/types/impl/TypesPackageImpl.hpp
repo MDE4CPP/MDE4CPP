@@ -7,25 +7,20 @@
 #ifndef TYPESPACKAGEIMPL_HPP
 #define TYPESPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
+#include "types/TypesPackage.hpp"
 
-#include <cassert>
+namespace types 
+{
+}
 
+namespace ecore
+{
+	class EcoreFactory;
+}
 
-#include "TypesPackage.hpp"
-#include "TypesPackage.hpp"
-#include "EcorePackage.hpp"
-#include "impl/EPackageImpl.hpp"
 
 namespace types
 {
@@ -42,20 +37,23 @@ namespace types
 			virtual ~TypesPackageImpl();
 
 
-			virtual std::shared_ptr<ecore::EDataType> getBoolean() const ;
-			virtual std::shared_ptr<ecore::EDataType> getInteger() const ;
-			virtual std::shared_ptr<ecore::EDataType> getReal() const ;
-			virtual std::shared_ptr<ecore::EDataType> getString() const ;
-			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural() const ;
+			virtual std::shared_ptr<ecore::EDataType> getBoolean_EDataType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getInteger_EDataType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getReal_EDataType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getString_EDataType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_EDataType() const ;
 			
 
 		private:
 			
-			std::shared_ptr<ecore::EDataType> booleanEDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> integerEDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> realEDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> stringEDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> unlimitedNaturalEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_boolean_EDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_integer_EDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_real_EDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_string_EDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_unlimitedNatural_EDataType = nullptr;
+			
+			
+			
 			
 
 			friend class TypesPackage;
@@ -65,12 +63,19 @@ namespace types
 			bool isInitialized = false;
  			bool isCreated = false;
 
-			virtual void init();
+			virtual void init(std::shared_ptr<ecore::EPackage> package);
 
 		public:
+			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
-			void createPackageContents();
+
+		private:
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+
+			void initializePackageEDataTypes();
+
+
+
 	};
 }
 #endif /* end of include guard: TYPESPACKAGEIMPL_HPP */
-

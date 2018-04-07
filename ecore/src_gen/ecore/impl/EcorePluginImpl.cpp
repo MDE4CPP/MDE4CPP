@@ -1,6 +1,7 @@
-#include "EcorePluginImpl.hpp"
-#include "EcoreFactory.hpp"
-#include "EcorePackage.hpp"
+#include "ecore/impl/EcorePluginImpl.hpp"
+
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
 
 using namespace ecore;
 
@@ -15,14 +16,25 @@ EcorePluginImpl::~EcorePluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EFactory> EcorePluginImpl::getFactory()
+
+std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name)
+{
+	return EcoreFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EFactory> EcorePluginImpl::getEFactory()
 {
 	return EcoreFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> EcorePluginImpl::getPackage()
+std::shared_ptr<ecore::EPackage> EcorePluginImpl::getEPackage()
 {
 	return EcorePackage::eInstance();
+}
+
+std::string EcorePluginImpl::eclipseURI()
+{
+	return "";
 }
 
 std::string EcorePluginImpl::eNAME()

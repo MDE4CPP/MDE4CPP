@@ -1,5 +1,5 @@
-#include "EcoreFactory.hpp"
-#include "impl/EcoreFactoryImpl.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
 
 using namespace ecore;
 
@@ -12,7 +12,6 @@ std::shared_ptr<EcoreFactory>EcoreFactory::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(EcoreFactoryImpl::create());
-		std::dynamic_pointer_cast<EcoreFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

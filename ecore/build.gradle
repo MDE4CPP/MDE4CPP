@@ -1,104 +1,20 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: ecore'
 
 task buildEcore(dependsOn: ['generateEcore', 'compileEcore']) {
 	group 'ecore'
-	description 'build ecore in debug and release'
-}
-task buildEcoreDebug(dependsOn: ['generateEcore', 'compileEcoreDebug']) {
-	group 'ecore'
-	description 'build ecore in debug'
-}
-task buildEcoreRelease(dependsOn: ['generateEcore', 'compileEcoreRelease']) {
-	group 'ecore'
-	description 'build ecore in release'
+	description 'build ecore'
 }
 
-
-task compileEcore(dependsOn: ['compileEcoreDebug', 'compileEcoreRelease']) {
+task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'ecore'
-	description 'compile ecore in debug and release'
-}
-task compileEcoreDebug {
-	group 'ecore'
-	description 'compile ecore in Debug'
+	description 'compile ecore'
 
-	def folder = new File(file('./src_gen/ecore/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/ecore/.cmake/Debug'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/ecore").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/ecore").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/ecore/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-task compileEcoreRelease {
-	group 'ecore'
-	description 'compile ecore in Release'
-
-	def folder = new File(file('./src_gen/ecore/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/ecore/.cmake/Release'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/ecore").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/ecore").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/ecore/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
+	projectFolder = file("./src_gen/ecore")
 }
 
 task generateEcore(type: JavaExec) {
@@ -121,9 +37,6 @@ task generateEcore(type: JavaExec) {
 }
 
 compileEcore.mustRunAfter generateEcore
-compileEcoreDebug.mustRunAfter generateEcore
-compileEcoreRelease.mustRunAfter generateEcore
-
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/ecore/.cmake/')

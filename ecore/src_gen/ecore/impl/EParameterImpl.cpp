@@ -1,21 +1,52 @@
-#include "EParameterImpl.hpp"
-#include <iostream>
+#include "ecore/impl/EParameterImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EClassifier.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EOperation.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "ETypedElement.hpp"
+#include "ecore/EOperation.hpp"
 
+#include "ecore/ETypedElement.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace ecore;
 
@@ -43,7 +74,6 @@ EParameterImpl::~EParameterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -102,13 +132,14 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 
 std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EParameterImpl(*this));
+	std::shared_ptr<EParameterImpl> element(new EParameterImpl(*this));
+	element->setThisEParameterPtr(element);
 	return element;
 }
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEParameter();
+	return EcorePackageImpl::eInstance()->getEParameter_EClass();
 }
 
 //*********************************
@@ -134,35 +165,120 @@ std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 //*********************************
 
 
+std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr()
+{
+	return m_thisEParameterPtr.lock();
+}
+void EParameterImpl::setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr)
+{
+	m_thisEParameterPtr = thisEParameterPtr;
+	setThisETypedElementPtr(thisEParameterPtr);
+}
+std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
+{
+	if(auto wp = m_eOperation.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EParameterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //130
-		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
-			return getEGenericType(); //139
-		case EcorePackage::EPARAMETER_EOPERATION:
+		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
 			return getEOperation(); //1310
-		case EcorePackage::ETYPEDELEMENT_ETYPE:
-			return getEType(); //138
-		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
-			return getLowerBound(); //134
-		case EcorePackage::ETYPEDELEMENT_MANY:
-			return isMany(); //136
-		case EcorePackage::ENAMEDELEMENT_NAME:
-			return getName(); //131
-		case EcorePackage::ETYPEDELEMENT_ORDERED:
-			return isOrdered(); //132
-		case EcorePackage::ETYPEDELEMENT_REQUIRED:
-			return isRequired(); //137
-		case EcorePackage::ETYPEDELEMENT_UNIQUE:
-			return isUnique(); //133
-		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
-			return getUpperBound(); //135
 	}
-	return boost::any();
+	return ETypedElementImpl::internalEIsSet(featureID);
 }
+bool EParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
+			return getEOperation().lock() != nullptr; //1310
+	}
+	return ETypedElementImpl::internalEIsSet(featureID);
+}
+bool EParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ETypedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get EcoreFactory
+	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ETypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+{
+
+
+	ETypedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+{
+	ETypedElementImpl::resolveReferences(featureID, references);
+}
+
+void EParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ETypedElementImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

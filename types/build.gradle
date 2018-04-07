@@ -1,104 +1,20 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: types'
 
 task buildTypes(dependsOn: ['generateTypes', 'compileTypes']) {
 	group 'types'
-	description 'build types in debug and release'
-}
-task buildTypesDebug(dependsOn: ['generateTypes', 'compileTypesDebug']) {
-	group 'types'
-	description 'build types in debug'
-}
-task buildTypesRelease(dependsOn: ['generateTypes', 'compileTypesRelease']) {
-	group 'types'
-	description 'build types in release'
+	description 'build types'
 }
 
-
-task compileTypes(dependsOn: ['compileTypesDebug', 'compileTypesRelease']) {
+task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'types'
-	description 'compile types in debug and release'
-}
-task compileTypesDebug {
-	group 'types'
-	description 'compile types in Debug'
+	description 'compile types'
 
-	def folder = new File(file('./src_gen/types/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/types/.cmake/Debug'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/types").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/types").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/types/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-task compileTypesRelease {
-	group 'types'
-	description 'compile types in Release'
-
-	def folder = new File(file('./src_gen/types/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/types/.cmake/Release'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/types").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/types").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/types/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
+	projectFolder = file("./src_gen/types")
 }
 
 task generateTypes(type: JavaExec) {
@@ -121,9 +37,6 @@ task generateTypes(type: JavaExec) {
 }
 
 compileTypes.mustRunAfter generateTypes
-compileTypesDebug.mustRunAfter generateTypes
-compileTypesRelease.mustRunAfter generateTypes
-
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/types/.cmake/')
