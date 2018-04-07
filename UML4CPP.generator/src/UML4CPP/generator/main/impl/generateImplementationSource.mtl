@@ -15,27 +15,45 @@
 [module generateImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSetGet /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type}->flatten() /]
+[query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
 
-#include "[className.concat('.hpp')/]"
-#include "[aPackage.name.concat('PackageImpl')/].hpp"
-#include "[aClass.eClass().name/].hpp"
+[defineDebugMacro()/]
+
+#include <iostream>
+
+[generateAbstractDataTypesIncludes()/]
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
-#include "[cl.name/].hpp"
+#include "[cl.getNearestPackage().ns()/]/[cl.name.toUpperFirst()/].hpp"
 [/for]
-[if (aClass.ownedOperation.method->notEmpty())]
-[if(ownedOperation.method->filter(Activity)->notEmpty())]
-#include "PluginFramework.hpp"
-#include "UMLExecutionModelPlugin.hpp"
+
+[if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 [/if][/if]
+
+[for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() >= 2)]
+//Included from operation "[aOperation.name/]"
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(2)/]
+[/if]
+
+[/if]
+[/for]
 
 using namespace [aPackage.name/];
 using boost::any_cast;
@@ -103,5 +121,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 // Structural Feature Getter/Setter
 //*********************************
 [aClass.generateeGetSetImpl()/]
+
+[aClass.generateGetThisPtrCPP()/]
 [/file]
 [/template]

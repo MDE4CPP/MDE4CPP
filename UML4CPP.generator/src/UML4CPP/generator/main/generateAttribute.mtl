@@ -69,25 +69,20 @@ virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProper
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.upper=1 )]
 void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
-[if ((aProperty.isComposite) and (aProperty.upper=1))]
-	if(m_[aProperty.name/] != nullptr)
-	{
-		delete(m_[aProperty.name/]);
-		m_[aProperty.name/] = nullptr;
-	}
-[/if]
 	m_[aProperty.name/] = _[aProperty.name/];
 }
 [/template]
 
 [comment MetaModel Package/]
-[template public generateAttributeCreation(aProperty : Property)]
+[template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.class.oclIsUndefined())]
-[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Class([aProperty.class.memberName()/]);
+[aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
 [else][if (not aProperty.interface.oclIsUndefined())]
-[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Interface([aProperty.interface.memberName()/]);
+[aProperty.memberName()/] = factory->createProperty_in_Interface([aProperty.interface.memberName()/]);
 [/if][/if]
+[/template]
 
+[template public generateAttributeInitialization(aProperty : Property)]
 [aProperty.memberName()/]->setName("[aProperty.name/]");
 [aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
@@ -95,18 +90,17 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
-
 [/template]
 
 [template public addInterfaceAttribute(aProperty : Property, aClass : Class)]
 [aClass.memberName()/]->getOwnedAttribute()->push_back([if (aClass.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.packageGetter()/][/if]);
 [/template]
 
-[template public genDefault(aProperty : Property) ? (aProperty.type.name='String')]
+[template public genDefault(aProperty : Property) ? (aProperty.type.name='String' or aProperty.type.name='EString')]
 "[aProperty.default/]" /*defined default string*/
 [/template]
 
-[template public genDefault(aProperty : Property) ? (((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural')))]
+[template public genDefault(aProperty : Property) ? ((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural') or (aProperty.type.name='EInt') or (aProperty.type.name='EDouble') or (aProperty.type.name='EBoolean') or (aProperty.type.name='EFloat'))]
 [aProperty.default/] /*defined default value*/
 [/template]
 

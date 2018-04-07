@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generatePackageImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generatePackageImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::helper /]
 
@@ -24,32 +24,36 @@ virtual public uml::ProfileImpl
 virtual public uml::PackageImpl
 [/template]
 
-[template public generatePackageImplHeader(aPackage : Package)]
+[template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
-[if ((aPackage.name='UML') or (aPackage.name='Ecore') or (aPackage.name='PrimitiveType'))]
 #include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
-[else]
-#include "[aPackage.name.concat('Package').toUpperFirst()/].hpp"
-[/if]
 [if (aPackage.oclIsKindOf(Profile))]
-#include "impl/ProfileImpl.hpp"
+#include "uml/impl/ProfileImpl.hpp"
 [else]
-#include "impl/PackageImpl.hpp"	
+#include "uml/impl/PackageImpl.hpp"	
 [/if]
+
+namespace uml
+{
+[for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(ValueSpecification)-aPackage.allOwnedElements()->filter(Slot)).eClass()}->flatten()->sortedBy(name))]
+	class [nE.name/];
+[/for]
+	class UmlFactory;
+}
 
 namespace [aPackage.name/]
 {
-	class [aPackage.name.toUpperFirst().concat('PackageImpl')/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
+	class [packageName/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
 	{
 			friend class [aPackage.name.toUpperFirst().concat('Package')/];
 			// Constructor
-			[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			[packageName/]();
 
 		public:
 			// destructor
-			virtual ~[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			virtual ~[packageName/]();
 
 			//getter for the ownedMember
 			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generateGetter(true)/]
@@ -69,6 +73,24 @@ namespace [aPackage.name/]
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 [endGuard(aPackage,'MetaModelPackageImpl')/]

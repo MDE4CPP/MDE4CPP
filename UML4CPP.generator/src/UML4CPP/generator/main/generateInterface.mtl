@@ -28,7 +28,11 @@ virtual public uml::Element
 [/template]
 
 [template public generateInterfaceCreation(anInterface : Interface)]
-[memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
+[memberName(anInterface)/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
+
+[/template]
+
+[template public generateInterfaceInitialization(anInterface : Interface)]
 [memberName(anInterface)/]->setName("[anInterface.name/]");
 [memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
 
@@ -38,10 +42,8 @@ virtual public uml::Element
 [file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aInterface)/]
 
-#include <boost/any.hpp>
+#include <memory>
 #include <string> 
-#include <map>
-#include <vector>
 
 //*********************************
 // generated Includes
@@ -69,11 +71,11 @@ namespace [element.namespace.ns()/]
 [/for]
 
 [if (aInterface.oclIsKindOf(Stereotype))]
-#include "Stereotype.hpp"
+#include "uml/Stereotype.hpp"
 [/if]
 // enum includes
 [for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"[/for]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.concat('.hpp')/]"[/for]
 
 //*********************************
 

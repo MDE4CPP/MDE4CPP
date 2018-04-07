@@ -21,14 +21,11 @@
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'FactoryImpl')/]
 
-[comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(myQualifiedName()))]
-#include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
-[/for]
-
-#include "impl/FactoryImpl.hpp"
-#include "[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 #include <functional>
+#include <map>
+
+#include "uml/impl/FactoryImpl.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
 namespace [aPackage.name/] 
 {

@@ -19,8 +19,8 @@
 [template public generateUMLPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('Plugin').toUpperFirst(); }]
 [file  (anPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.getPackageName()/]/[packageName/].hpp"
+#include "[anPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
 
 using namespace [anPackage.name/];
 

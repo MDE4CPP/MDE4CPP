@@ -20,7 +20,7 @@
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
-#include "UMLModelPlugin.hpp"
+#include "pluginFramework/UMLModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {
@@ -29,10 +29,12 @@ namespace [aPackage.name/]
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
 	
+			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
 			virtual std::shared_ptr<uml::Factory> getFactory() = 0;
 			virtual std::shared_ptr<uml::Package> getPackage() = 0;
 	

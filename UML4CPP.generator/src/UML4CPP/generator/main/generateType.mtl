@@ -14,13 +14,13 @@
  */]
 [module generateType('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') /]
+[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat')/]
 [query public isBackReference(aProperty : Property) : Boolean = (not aProperty.association.oclIsUndefined()) and (not aProperty.owner.oclIsKindOf(Association)) and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite /]
 
 [template public generateCppType(aProperty : Property)]
-[if (not aProperty.type.oclIsUndefined() and not aProperty.type.isPrimitive())]
+[if (not aProperty.type.oclIsUndefined() and not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 [aProperty.pointertype()/]<[if (aProperty.upper <> 1)]Bag<[/if][aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>[/if][else]
-[if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>[/if][/if]
+[if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>>[/if][/if]
 [/template]
 
 [template public pointertype(aProperty : Property) post(trim())]
@@ -33,9 +33,19 @@ std::shared_ptr
 
 [template public generateCppType(aOperation : Operation)]
 [if (not(aOperation.upper=1))]
-std::shared_ptr<Bag<[if (not aOperation.type.isPrimitive())]std::shared_ptr<[/if][aOperation.type.transformType()/][if (not aOperation.type.isPrimitive())]>[/if]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
+std::shared_ptr<Bag<[aOperation.type.transformType()/]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
 std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [aOperation.type.transformType()/][/if]
+[/template]
+
+[template public generateCppType(aParameter : Parameter)]
+[generateCppType(true)/]
+[/template]
+
+[template public generateCppType(aParameter : Parameter, useReference : Boolean)]
+[if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if][else]
+[if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
 [/template]
 
 [template public generateCppType(aType : Type)]
@@ -43,7 +53,7 @@ std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [/template]
 
 [template public generateCppType(aType : Type, noShared : Boolean)]
-[if (not (aType.isPrimitive() or noShared))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared))]>[/if]
+[if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]>[/if]
 [/template]
 
 [template public generateType(aType : Type)]
@@ -63,7 +73,7 @@ QVariant[else]
 void
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Boolean' )]
+[template public transformType(aType : Type) ? (name = 'Boolean' or name = 'EBoolean')]
 bool
 [/template]
 
@@ -71,15 +81,15 @@ bool
 int
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Integer')]
+[template public transformType(aType : Type) ? (name = 'Integer' or name = 'EInt')]
 int
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Real')]
+[template public transformType(aType : Type) ? (name = 'Real' or name = 'EDouble' or name = 'EFloat')]
 double
 [/template]
 
-[template public transformType(aType : Type) ? (oclIsKindOf(PrimitiveType) and name = 'String')]
+[template public transformType(aType : Type) ? (oclIsKindOf(PrimitiveType) and name = 'String' or name = 'EString')]
 std::string
 [/template]
 
@@ -92,6 +102,5 @@ std::string
 [/template]
 
 [template public ns(ns : Namespace)]
-[if (ns.name='UML')]uml[else]
-[ns.name/][/if]
+[if (ns.name='UML')]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
 [/template]

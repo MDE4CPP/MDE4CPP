@@ -24,16 +24,18 @@
  * @param anEOperation
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
-virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.type.generateCppType()/] [sParameter.name/][/for] ) [abstractSufix(impl)/];
+virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.generateCppType()/] [sParameter.name/][/for] ) [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.type.generateCppType()/] [sParameter.name/][/for])
+[sParameter.generateCppType()/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	[aOperation.generateCppType()/] [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+[let parameter : Parameter = aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	[aOperation.generateCppType()/] [if(parameter.name.oclIsUndefined())][parameter.myQualifiedName()/][else][parameter.name/][/if][if (parameter.upper > 1)](new Bag<[parameter.type.generateCppType(true)/]>())[/if];
+[/let]
 [/if]
 
 [comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
@@ -52,10 +54,13 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 			DEBUG_MESSAGE(std::cout << "JIHA fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
 
 			std::shared_ptr<std::vector<boost::any>> parameterList(new std::vector<boost::any>());
-[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 			parameterList->push_back([par.name/]);
 [/for]
-			boost::any result = executionPlugin->executeActivity("[aOperation.method->filter(Activity)->asOrderedSet()->first().name/]", parameterList);
+			struct null_deleter{void operator()(void const *) const {} };
+[let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
+			boost::any result = executionPlugin->executeActivity([anActivity.getNearestPackage().myName()/]::[anActivity.getNearestPackage().myName()/]Package::eInstance()->[anActivity.packageGetter()/], parameterList, std::shared_ptr<[aOperation.class.name.toUpperFirst()/]>(this, null_deleter()));
+[/let]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = boost::any_cast<[aOperation.generateCppType()/]>(result);
@@ -85,7 +90,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/if]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	return [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+	return [if(aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().name.oclIsUndefined())][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().myQualifiedName()/][else][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/][/if];
 [/if]
 }
 [/template]
@@ -100,27 +105,36 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [sParameter.type.packageGetter(sParameter)/][/for]
 [/template]
 
-[template public generateOperationCreation(aOperation : Operation) ]
+[template public generateOperationCreation(aOperation : Operation) post(trim())]
 [if (not aOperation.class.oclIsUndefined())]
-[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([memberName(aOperation.class)/]);[else]
-[if (not aOperation.interface.oclIsUndefined())][memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Interface([memberName(aOperation.interface)/]);[/if][/if]
-[memberName(aOperation)/]->setName("[aOperation.name/]");
+[memberName(aOperation)/] = factory->createOperation_in_Class([memberName(aOperation.class)/]);
+[elseif (not aOperation.interface.oclIsUndefined())]
+[memberName(aOperation)/] = factory->createOperation_in_Interface([memberName(aOperation.interface)/]);
+[/if]
 [aOperation.ownedParameter.generateParameterCreation()/]
-
 [/template]
 
-[template public initalizeOperation(aOperation : Operation) ]
+[template public initalizeOperation(aOperation : Operation)]
+[memberName(aOperation)/]->setName("[aOperation.name/]");
 [for (beh : Behavior | aOperation.method) separator ('\n')]
 [memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
 
+[for (anOwnedParameter : Parameter | aOperation.ownedParameter) separator ('\n')]
+[anOwnedParameter.generateParameterInitialization()/]
+[/for]
 [/template]
 
-[template public generateDependencyCreation(aDependency : Dependency) ]
-[memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
+[template public generateDependencyCreation(aDependency : Dependency)]
+[memberName(aDependency)/] = factory->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
+
+[/template]
+
+[template public generateDependencyInitialization(aDependency : Dependency)]
 [memberName(aDependency)/]->setName("[aDependency.name/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
 [aDependency.generateStereotypeApplication()/]
+
 [/template]
 
 [template public generateDependencyClientAdding(aNamedElement : NamedElement, aDependency : Dependency)]

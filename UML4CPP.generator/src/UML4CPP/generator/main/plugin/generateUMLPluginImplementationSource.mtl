@@ -17,11 +17,14 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateUMLPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
+[template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "[aPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aPackage.name.toUpperFirst()/]Package.hpp"
+#include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
+
+[defineDebugMacro()/]
+
+[if (not packOnly)]#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Factory.hpp"[/if]
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 
 using namespace [aPackage.name/];
 
@@ -36,14 +39,24 @@ using namespace [aPackage.name/];
 {
 }
 
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+{		
+	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name)[/if];
+}
+
 std::shared_ptr<uml::Factory> [packageName/]::getFactory()
 {
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
+	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()[/if];
 }
 
 std::shared_ptr<uml::Package> [packageName/]::getPackage()
 {
 	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+}
+
+std::string [packageName/]::eclipseURI()
+{
+	return "[getEclipseURI()/]";
 }
 
 std::string [packageName/]::eNAME()
@@ -62,3 +75,6 @@ std::string [packageName/]::eNS_PREFIX()
 }
 [/file]
 [/template]
+
+[query private hasEclipseURI(aPackage : Package) : Boolean = if (hasSourceGen()) then getSourceGen().details->select(key = 'eclipseURI')->notEmpty() else false endif/]
+[query private getEclipseURI(aPackage : Package) : String = if (hasEclipseURI()) then getSourceGen().details->select(key = 'eclipseURI')->first().value else '' endif/]

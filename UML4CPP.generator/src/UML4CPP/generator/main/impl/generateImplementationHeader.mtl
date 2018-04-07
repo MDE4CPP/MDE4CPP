@@ -15,6 +15,7 @@
 [module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSetGet /]
 [import UML4CPP::generator::main::generateType /]
@@ -32,23 +33,29 @@ virtual public uml::ClassImpl
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
-//*********************************
-// generated Includes
+#include <functional>
 
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
-#include <functional>
-[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
+[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
+[/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+#include "uml/impl/ClassImpl.hpp"
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+#include "uml/impl/StereotypeImpl.hpp"
+[/if]
+#include "uml/Property.hpp"
 
-[if (aClass.superClass->isEmpty())]
-#include "impl/ClassImpl.hpp"
-[/if]
-[if (aClass.oclIsKindOf(Stereotype))]
-#include "impl/StereotypeImpl.hpp"
-[/if]
-#include "Property.hpp"
-#include "boost/any.hpp"
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace [aPackage.name/]
@@ -62,9 +69,10 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
-			friend class [aClass.getNearestPackage().name.concat('FactoryImpl').toUpperFirst()/];
+			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
 			//constructor
 			[className/]();
+			[aClass.generateGetThisPtr()/]
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
@@ -103,6 +111,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[aClass.generateeGetSetDel(true)/]
 		
 		private:
+			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 			[aClass.generateGetSetMemeberInit()/]
 	};
 }

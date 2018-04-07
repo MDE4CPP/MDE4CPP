@@ -22,26 +22,32 @@
 	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([memberName(anInstSpec)/]));
 	slot->setDefiningFeature([memberName(aSlot.definingFeature)/]);
 [for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
-	std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
+	{
+		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
 [if (aValueSpec.oclIsKindOf(LiteralSpecification))]
-	literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+[elseif(aValueSpec.oclIsKindOf(InstanceValue))]
+		literal->setInstance([memberName(aValueSpec.oclAsType(InstanceValue).instance)/]);
 [/if]
-	this->getOwnedElement()->push_back(literal);
+		this->getOwnedElement()->push_back(literal);
+	}
 [/for]
 }
 [/template]
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[memberName(anInstSpec)/] = factory->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInstSpec)/]);
+[/template]
+
+[template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
-[for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
 
-[for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
 [aSlot.generateSlotCreation(anInstSpec)/]
 [/for]
 [/for]
 
-[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInstSpec)/]);
 [/template]
-
