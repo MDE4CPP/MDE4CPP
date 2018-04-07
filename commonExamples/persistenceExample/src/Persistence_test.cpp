@@ -5,10 +5,21 @@
  *      Author: Alexander P.
  */
 
+#include <dirent.h>
 #include <memory>
 #include <iostream>
 #include <omp.h>
 #include <string>
+#include <vector>
+
+#ifdef _WIN32
+	#include <windows.h>
+
+	#define getcwd _getcwd
+#else
+	#include <sys/stat.h>
+#endif
+#define MAX_CHAR 260
 
 #ifdef NDEBUG
 #define MSG_DEBUG(a) /**/
@@ -60,11 +71,11 @@ void performReadAndWrite(std::string loadPath, std::string savePath, std::shared
 	}
 }
 
-void performUniModelTest()
+void performUniModelTest(std::string dataFolderName)
 {
 	// Set filename with path
-	std::string filename = "_tmp/UniModel.ecore";
-	std::string filename2 = "_tmp/UniModel_out.ecore";
+	std::string filename = dataFolderName + "/UniModel.ecore";
+	std::string filename2 = dataFolderName + "/UniModel_out.ecore";
 	try
 	{
 		// Get MetaPackage
@@ -111,12 +122,34 @@ int main()
 {
 	// Set OpenMP number of threads
 	omp_set_num_threads(1);
+	char folderBuffer[MAX_CHAR];
+	std::vector<std::string> libraries;
+	if (!getcwd(folderBuffer, sizeof(folderBuffer)))
+	{
+		std::cerr << "Could not locate workspace folder" << std::endl;
+		return 1;
+	}
+	std::string dataFolderName = "data";
+	std::string folderName(folderBuffer);
+	std::string folderPath = folderName + "/" + dataFolderName;
 
-	performUniModelTest();
-//	performReadAndWrite("_tmp/ecore.ecore", "_tmp/ecore_out.ecore", testmodel::TestModel::getMetaMetaPackage());
-//	performReadAndWrite("_tmp/types.ecore", "_tmp/types_out.ecore", testmodel::TestModel::getMetaMetaPackage());
-//	performReadAndWrite("_tmp/uml.ecore", "_tmp/uml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
-//	performReadAndWrite("_tmp/fuml.ecore", "_tmp/fuml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+#ifdef _WIN32
+	if (!(CreateDirectory(folderPath.c_str(), NULL) ||
+		    ERROR_ALREADY_EXISTS == GetLastError()))
+	{
+		std::cout << "Could not create folder '" << folderPath << "'!" << std::endl;
+		return 2;
+	}
+#else
+	 mkdir(dataFolderName.c_str(), 0777);
+#endif
+
+
+	performUniModelTest(dataFolderName);
+//	performReadAndWrite(dataFolderName + "//ecore.ecore", dataFolderName + "//ecore_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite(dataFolderName + "//types.ecore", dataFolderName + "//types_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite(dataFolderName + "//uml.ecore", dataFolderName + "//uml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
+//	performReadAndWrite(dataFolderName + "//fuml.ecore", dataFolderName + "//fuml_out.ecore", testmodel::TestModel::getMetaMetaPackage());
 
 	return 0;
 }
