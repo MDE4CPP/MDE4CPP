@@ -7,20 +7,10 @@
 #ifndef LIBRARYMODEL_ECOREFACTORY_HPP
 #define LIBRARYMODEL_ECOREFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include "EFactory.hpp"
+#include <map>
 #include <memory>
+
+#include "ecore/EFactory.hpp"
 
 namespace libraryModel_ecore 
 {	class Author;
@@ -29,7 +19,6 @@ namespace libraryModel_ecore
 	class NamedElement;
 	class Picture;
 	class LibraryModel_ecorePackage;
-	class LibraryModel_ecoreFactory;
 }
 
 namespace libraryModel_ecore 
@@ -59,6 +48,7 @@ namespace libraryModel_ecore
 			//Add containing object
 			virtual std::shared_ptr<Book> createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const = 0;
 			
+			
 			virtual std::shared_ptr<LibraryModel> createLibraryModel() const = 0;
 			
 			virtual std::shared_ptr<NamedElement> createNamedElement() const = 0;
@@ -68,9 +58,9 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<Picture> createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const = 0;
 			
 			
+			
 			//Package
 			virtual std::shared_ptr<LibraryModel_ecorePackage> getLibraryModel_ecorePackage() const = 0;
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECOREFACTORY_HPP */
-

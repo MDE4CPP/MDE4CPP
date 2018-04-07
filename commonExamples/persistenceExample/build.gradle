@@ -1,0 +1,21 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: 'base' 
+
+description 'Example collection'
+
+task compileExamplePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Examples"
+	description "compile Persistence"
+
+	projectFolder = file("./src")
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./src/.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

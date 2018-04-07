@@ -1,6 +1,6 @@
 
-#include "LibraryModel_umlPlugin.hpp"
-#include "impl/LibraryModel_umlPluginImpl.hpp"
+#include "LibraryModel_uml/LibraryModel_umlPlugin.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPluginImpl.hpp"
 
 using namespace LibraryModel_uml;
 

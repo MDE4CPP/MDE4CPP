@@ -7,16 +7,7 @@
 #ifndef LIBRARYMODEL_UML_FACTORY_HPP
 #define LIBRARYMODEL_UML_FACTORY_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "SubsetUnion.hpp"
-
-#include "Factory.hpp"
+#include "uml/Factory.hpp"
 
 namespace LibraryModel_uml 
 {

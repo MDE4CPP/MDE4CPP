@@ -7,27 +7,17 @@
 #ifndef LIBRARYMODEL_ECOREFACTORYIMPL_HPP
 #define LIBRARYMODEL_ECOREFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/impl/EFactoryImpl.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 
-#include "impl/EFactoryImpl.hpp"
-
-#include "AuthorImpl.hpp"
-#include "BookImpl.hpp"
-#include "LibraryModelImpl.hpp"
-#include "NamedElementImpl.hpp"
-#include "PictureImpl.hpp"
-
-#include "LibraryModel_ecoreFactory.hpp"
+namespace libraryModel_ecore 
+{	class Author;
+	class Book;
+	class LibraryModel;
+	class NamedElement;
+	class Picture;
+}
 
 namespace libraryModel_ecore 
 {
@@ -46,7 +36,8 @@ namespace libraryModel_ecore
 			virtual ~LibraryModel_ecoreFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions
@@ -55,6 +46,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<Book> createBook() const ;
 			//Add containing object
 			virtual std::shared_ptr<Book> createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const ;
+			
 			
 			virtual std::shared_ptr<LibraryModel> createLibraryModel() const ;
 			
@@ -65,6 +57,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<Picture> createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const ;
 			
 			
+			
 
 			//Package
 			virtual std::shared_ptr<LibraryModel_ecorePackage> getLibraryModel_ecorePackage() const;
@@ -72,9 +65,6 @@ namespace libraryModel_ecore
 		private:
 			static LibraryModel_ecoreFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECOREFACTORYIMPL_HPP */
-

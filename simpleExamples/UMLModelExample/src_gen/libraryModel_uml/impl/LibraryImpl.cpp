@@ -1,9 +1,23 @@
+#include "LibraryModel_uml/impl/LibraryImpl.hpp"
 
-#include "LibraryImpl.hpp"
-#include "LibraryModel_umlPackageImpl.hpp"
-#include "Class.hpp"
-#include "Author.hpp"
-#include "Book.hpp"
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
+#include "uml/Class.hpp"
+#include "LibraryModel_uml/Author.hpp"
+#include "LibraryModel_uml/Book.hpp"
+
+
 
 using namespace LibraryModel_uml;
 using boost::any_cast;
@@ -100,4 +114,14 @@ void LibraryImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<Library> LibraryImpl::getThisLibraryPtr()
+{
+	return m_thisLibraryPtr.lock();
+}
+void LibraryImpl::setThisLibraryPtr(std::weak_ptr<Library> thisLibraryPtr)
+{
+	m_thisLibraryPtr = thisLibraryPtr;
+	setThisClassPtr(thisLibraryPtr);
 }

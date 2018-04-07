@@ -1,6 +1,6 @@
 
-#include "LibraryModel_umlFactory.hpp"
-#include "impl/LibraryModel_umlFactoryImpl.hpp"
+#include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlFactoryImpl.hpp"
 
 using namespace LibraryModel_uml;
 

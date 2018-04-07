@@ -1,19 +1,23 @@
-
-
-#include "EClass.hpp"
-#include "EAnnotation.hpp"
-#include "EcoreFactory.hpp"
-#include "EcorePackage.hpp"
-#include "EClassifier.hpp"
-#include "impl/EcorePackageImpl.hpp"
-#include "EStructuralFeature.hpp"
-#include "EReference.hpp"
-#include "EStringToStringMapEntry.hpp"
-#include "impl/EcoreFactoryImpl.hpp"
-
 #include <string>
 #include <iostream>
 #include <chrono>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EStructuralFeature.hpp"
+
 
 #define NUMBER_OF_OBJECTS 50000
 

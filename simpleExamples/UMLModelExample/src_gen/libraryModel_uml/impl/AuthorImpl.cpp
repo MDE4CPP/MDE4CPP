@@ -1,7 +1,20 @@
+#include "LibraryModel_uml/impl/AuthorImpl.hpp"
 
-#include "AuthorImpl.hpp"
-#include "LibraryModel_umlPackageImpl.hpp"
-#include "Class.hpp"
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
+#include "uml/Class.hpp"
+
+
 
 using namespace LibraryModel_uml;
 using boost::any_cast;
@@ -81,4 +94,14 @@ void AuthorImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<Author> AuthorImpl::getThisAuthorPtr()
+{
+	return m_thisAuthorPtr.lock();
+}
+void AuthorImpl::setThisAuthorPtr(std::weak_ptr<Author> thisAuthorPtr)
+{
+	m_thisAuthorPtr = thisAuthorPtr;
+	setThisNamedModelElementPtr(thisAuthorPtr);
 }

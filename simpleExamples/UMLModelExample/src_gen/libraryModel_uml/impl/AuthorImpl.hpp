@@ -7,24 +7,22 @@
 #ifndef LIBRARYMODEL_UML_AUTHOR_AUTHORIMPL_HPP
 #define LIBRARYMODEL_UML_AUTHOR_AUTHORIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "SubsetUnion.hpp"
-
-//*********************************
-// generated Includes
+#include <functional>
 
 //Model includes
 #include "../Author.hpp"
-#include <functional>
-#include "impl/NamedModelElementImpl.hpp"
-#include "Property.hpp"
-#include "boost/any.hpp"
+#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
+#include "uml/Property.hpp"
+
+namespace boost
+{
+	class any;
+}
+
+namespace uml
+{
+	class Property;
+}
 
 //*********************************
 namespace LibraryModel_uml
@@ -39,6 +37,8 @@ namespace LibraryModel_uml
 			friend class LibraryModel_umlFactoryImpl;
 			//constructor
 			AuthorImpl();
+			virtual std::shared_ptr<Author> getThisAuthorPtr();
+			virtual void setThisAuthorPtr(std::weak_ptr<Author> thisAuthorPtr);
 
 
 		public:
@@ -67,6 +67,7 @@ namespace LibraryModel_uml
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
 		
 		private:
+			std::weak_ptr<Author> m_thisAuthorPtr;
 			std::map<std::string,std::function<boost::any()>> m_getterMap;
 			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;

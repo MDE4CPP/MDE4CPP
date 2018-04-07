@@ -1,0 +1,227 @@
+apply plugin: 'base' 
+
+description 'Build tasks for project: subsetUnionBenchmark'
+
+task buildSubsetUnionBenchmark(dependsOn: ['generateSubsetUnionBenchmark', 'compileSubsetUnionBenchmark', 'compileApplicationForsubsetUnionBenchmark']) {
+	group 'subsetUnionBenchmark'
+	description 'build subsetUnionBenchmark in debug and release'
+}
+task buildSubsetUnionBenchmarkDebug(dependsOn: ['generateSubsetUnionBenchmark', 'compileSubsetUnionBenchmarkDebug', 'compileApplicationForsubsetUnionBenchmarkDebug']) {
+	group 'subsetUnionBenchmark'
+	description 'build subsetUnionBenchmark in debug'
+}
+task buildSubsetUnionBenchmarkRelease(dependsOn: ['generateSubsetUnionBenchmark', 'compileSubsetUnionBenchmarkRelease', 'compileApplicationForsubsetUnionBenchmarkRelease']) {
+	group 'subsetUnionBenchmark'
+	description 'build subsetUnionBenchmark in release'
+}
+
+task compileApplicationForsubsetUnionBenchmark(dependsOn: ['compileApplicationForsubsetUnionBenchmarkDebug', 'compileApplicationForsubsetUnionBenchmarkRelease']) {
+	group 'subsetUnionBenchmark'
+	description 'compile subsetUnionBenchmark in debug and release'
+}
+task compileApplicationForsubsetUnionBenchmarkDebug {
+	group 'ApplicationForsubsetUnionBenchmark'
+	description 'compile ApplicationForsubsetUnionBenchmark in Debug'
+
+	def folder = new File(file('./application/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'application/.cmake/Debug'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./application").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./application").absolutePath
+			}
+		}
+		exec {
+			workingDir 'application/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+task compileApplicationForsubsetUnionBenchmarkRelease {
+	group 'ApplicationForsubsetUnionBenchmark'
+	description 'compile ApplicationForsubsetUnionBenchmark in Release'
+
+	def folder = new File(file('./application/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'application/.cmake/Release'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./application").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./application").absolutePath
+			}
+		}
+		exec {
+			workingDir 'application/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+
+
+task compileSubsetUnionBenchmark(dependsOn: ['compileSubsetUnionBenchmarkDebug', 'compileSubsetUnionBenchmarkRelease']) {
+	group 'subsetUnionBenchmark'
+	description 'compile subsetUnionBenchmark in debug and release'
+}
+task compileSubsetUnionBenchmarkDebug {
+	group 'subsetUnionBenchmark'
+	description 'compile subsetUnionBenchmark in Debug'
+
+	def folder = new File(file('./src_gen/subsetUnionBenchmark/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/subsetUnionBenchmark/.cmake/Debug'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/subsetUnionBenchmark").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/subsetUnionBenchmark").absolutePath
+			}
+		}
+		exec {
+			workingDir 'src_gen/subsetUnionBenchmark/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+task compileSubsetUnionBenchmarkRelease {
+	group 'subsetUnionBenchmark'
+	description 'compile subsetUnionBenchmark in Release'
+
+	def folder = new File(file('./src_gen/subsetUnionBenchmark/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/subsetUnionBenchmark/.cmake/Release'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/subsetUnionBenchmark").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/subsetUnionBenchmark").absolutePath
+			}
+		}
+		exec {
+			workingDir 'src_gen/subsetUnionBenchmark/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+
+task generateSubsetUnionBenchmark(type: JavaExec) {
+	group 'subsetUnionBenchmark'
+	description 'generate C++ code of subsetUnionBenchmark.ecore model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "subsetUnionBenchmark.ecore", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/subsetUnionBenchmark.ecore")
+	outputs.dir file("src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
+			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
+		}
+	}
+}
+
+compileSubsetUnionBenchmark.mustRunAfter generateSubsetUnionBenchmark
+compileSubsetUnionBenchmarkDebug.mustRunAfter generateSubsetUnionBenchmark
+compileSubsetUnionBenchmarkRelease.mustRunAfter generateSubsetUnionBenchmark
+
+compileApplicationForsubsetUnionBenchmark.mustRunAfter compileSubsetUnionBenchmark
+compileApplicationForsubsetUnionBenchmarkDebug.mustRunAfter compileSubsetUnionBenchmarkDebug
+compileApplicationForsubsetUnionBenchmarkRelease.mustRunAfter compileSubsetUnionBenchmarkRelease
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/subsetUnionBenchmark/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+	cmakeFolder = file('./application/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

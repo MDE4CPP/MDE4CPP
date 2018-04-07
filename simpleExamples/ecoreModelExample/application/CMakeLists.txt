@@ -8,9 +8,6 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
-
 # Start of user code project_name
 # You may manually edit the project name, won't be overwritten upon generation.
 PROJECT(ecoreModelExample)
@@ -19,9 +16,16 @@ PROJECT(ecoreModelExample)
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
 ENDIF(NOT CMAKE_BUILD_TYPE)
+
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -35,104 +39,104 @@ SET(SOURCE_FILES
 # End of user code
 )
 
-
 INCLUDE_DIRECTORIES(
-	.
+	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/types
-	${MDE4CPP_HOME}/application/include/libraryModel_ecore
 # Start of user code includes
 # You may manually edit the following lines, won't be overwritten upon generation.
 
 # End of user code
 )
 
-if(NOT UNIX)
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-endif()
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
 
-if(UNIX AND NOT APPLE)
+IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
-	FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored.so ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore.so ${MDE4CPP_HOME}/application/lib)
-# Start of user code library_finding_unix
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-else()
-	FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore ${MDE4CPP_HOME}/application/lib)
-# Start of user code library_finding_not_unix
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-endif()
-
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored.so ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Linux_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore.so ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Linux_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
+ELSEIF(APPLE)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored.dylib ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Apple_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore.dylib ${MDE4CPP_HOME}/application/bin)
+		# [protected ('library_Apple_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
+ELSE()
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_DEBUG libraryModel_ecored ${MDE4CPP_HOME}/application/lib)
+		# [protected ('library_Win_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(LIBRARYMODEL_ECORE_RELEASE libraryModel_ecore ${MDE4CPP_HOME}/application/lib)
+		# [protected ('library_Win_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	ENDIF()
+ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
-if(NOT UNIX)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-	debug ${LIBRARYMODEL_ECORE_DEBUG}
-# Start of user code library_assigning_debug_not_unix
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	#debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-	debug ${LIBRARYMODEL_ECORE_DEBUG}
-# Start of user code library_assigning_debug_unix
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-)
-endif()
-
-if(NOT UNIX) 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-	optimized ${LIBRARYMODEL_ECORE_RELEASE}
-# Start of user code library_assigning_release_not_unix 
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	#optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-	optimized ${LIBRARYMODEL_ECORE_RELEASE}
-# Start of user code library_assigning_release_unix 
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of user code
-)
-endif()
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		debug ${ECORE_DEBUG}
+		debug ${TYPES_DEBUG}
+		debug ${LIBRARYMODEL_ECORE_DEBUG}
+	
+		# [protected ('library_linking_debug')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${ECORE_RELEASE}
+		optimized ${TYPES_RELEASE}
+		optimized ${LIBRARYMODEL_ECORE_RELEASE}
+	
+		# [protected ('library_linking_optimized')]
+		# You may manually edit the following lines, won't be overwritten upon generation.
+		
+		# [/protected]
+	)
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}

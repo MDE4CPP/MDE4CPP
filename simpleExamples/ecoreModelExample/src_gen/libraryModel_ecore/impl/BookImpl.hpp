@@ -7,29 +7,13 @@
 #ifndef LIBRARYMODEL_ECORE_BOOKBOOKIMPL_HPP
 #define LIBRARYMODEL_ECORE_BOOKBOOKIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../Book.hpp"
 
-#include "impl/NamedElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
 
 //*********************************
 namespace libraryModel_ecore 
@@ -46,6 +30,8 @@ namespace libraryModel_ecore
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			BookImpl();
+			virtual std::shared_ptr<Book> getThisBookPtr();
+			virtual void setThisBookPtr(std::weak_ptr<Book> thisBookPtr);
 
 			//Additional constructors for the containments back reference
 			BookImpl(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library);
@@ -72,7 +58,7 @@ namespace libraryModel_ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<libraryModel_ecore::Author> > getAuthors() const ;
+			virtual std::shared_ptr<Bag<libraryModel_ecore::Author>> getAuthors() const ;
 			
 			/*!
 			 */
@@ -83,7 +69,7 @@ namespace libraryModel_ecore
 			virtual void setLibrary(std::shared_ptr<libraryModel_ecore::LibraryModel> _library_library) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<libraryModel_ecore::Picture> > getPictures() const ;
+			virtual std::shared_ptr<Bag<libraryModel_ecore::Picture>> getPictures() const ;
 			
 							
 			
@@ -95,12 +81,29 @@ namespace libraryModel_ecore
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<libraryModel_ecore::LibraryModel_ecoreFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Book> m_thisBookPtr;
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_ECORE_BOOKBOOKIMPL_HPP */
-

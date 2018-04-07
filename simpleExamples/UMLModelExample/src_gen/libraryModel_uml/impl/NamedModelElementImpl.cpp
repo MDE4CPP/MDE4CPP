@@ -1,7 +1,20 @@
+#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
 
-#include "NamedModelElementImpl.hpp"
-#include "LibraryModel_umlPackageImpl.hpp"
-#include "Class.hpp"
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
+#include "uml/Class.hpp"
+
+
 
 using namespace LibraryModel_uml;
 using boost::any_cast;
@@ -90,4 +103,14 @@ void NamedModelElementImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+}
+
+std::shared_ptr<NamedModelElement> NamedModelElementImpl::getThisNamedModelElementPtr()
+{
+	return m_thisNamedModelElementPtr.lock();
+}
+void NamedModelElementImpl::setThisNamedModelElementPtr(std::weak_ptr<NamedModelElement> thisNamedModelElementPtr)
+{
+	m_thisNamedModelElementPtr = thisNamedModelElementPtr;
+	setThisClassPtr(thisNamedModelElementPtr);
 }

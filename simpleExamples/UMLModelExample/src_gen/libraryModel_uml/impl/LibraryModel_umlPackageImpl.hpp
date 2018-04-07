@@ -7,17 +7,15 @@
 #ifndef LIBRARYMODEL_UML_METAMODELPACKAGEIMPL_HPP
 #define LIBRARYMODEL_UML_METAMODELPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-#include <iostream>
-#include <memory>
-#include "SubsetUnion.hpp"
+#include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
+#include "uml/impl/PackageImpl.hpp"	
 
-#include "LibraryModel_umlPackage.hpp"
-#include "impl/PackageImpl.hpp"	
+namespace uml
+{
+	class LiteralInteger;
+	class LiteralUnlimitedNatural;
+	class UmlFactory;
+}
 
 namespace LibraryModel_uml
 {
@@ -41,9 +39,9 @@ namespace LibraryModel_uml
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Author();
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Book();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_authors();
-			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_book();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_books();
+			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures();
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Library();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_authors();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_books();
@@ -70,15 +68,15 @@ namespace LibraryModel_uml
 			std::shared_ptr<uml::Property> libraryModel_uml_Book_authors = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Book_authors_lowerValue_LiteralInteger_LibraryModel_uml_Book_authors = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Book_authors_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_authors = nullptr;
-			std::shared_ptr<uml::Property> libraryModel_uml_Book_pictures = nullptr;
-			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures = nullptr;
-			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures = nullptr;
 			std::shared_ptr<uml::Property> libraryModel_uml_Book_book = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Book_book_lowerValue_LiteralInteger_LibraryModel_uml_Book_book = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Book_book_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_book = nullptr;
 			std::shared_ptr<uml::Property> libraryModel_uml_Book_books = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Book_books_lowerValue_LiteralInteger_LibraryModel_uml_Book_books = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Book_books_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_books = nullptr;
+			std::shared_ptr<uml::Property> libraryModel_uml_Book_pictures = nullptr;
+			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures = nullptr;
+			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures = nullptr;
 			std::shared_ptr<uml::Class> libraryModel_uml_Library = nullptr;
 			std::shared_ptr<uml::Property> libraryModel_uml_Library_authors = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Library_authors_lowerValue_LiteralInteger_LibraryModel_uml_Library_authors = nullptr;
@@ -107,6 +105,24 @@ namespace LibraryModel_uml
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 #endif /* end of include guard: LIBRARYMODEL_UML_METAMODELPACKAGEIMPL_HPP */

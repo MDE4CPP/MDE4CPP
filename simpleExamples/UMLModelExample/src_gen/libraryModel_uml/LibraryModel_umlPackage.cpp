@@ -1,5 +1,5 @@
-#include "LibraryModel_umlPackage.hpp"
-#include "impl/LibraryModel_umlPackageImpl.hpp"
+#include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
 
 using namespace LibraryModel_uml;
 
