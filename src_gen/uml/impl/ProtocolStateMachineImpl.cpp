@@ -1,95 +1,129 @@
-#include "ProtocolStateMachineImpl.hpp"
-#include <iostream>
+#include "uml/impl/ProtocolStateMachineImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "BehavioralFeature.hpp"
+#include "uml/Behavior.hpp"
 
-#include "BehavioredClassifier.hpp"
+#include "uml/BehavioralFeature.hpp"
 
-#include "Class.hpp"
+#include "uml/BehavioredClassifier.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/Comment.hpp"
 
-#include "Connector.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Connector.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Extension.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Feature.hpp"
+#include "uml/Extension.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Operation.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Parameter.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/Parameter.hpp"
 
-#include "Port.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "Property.hpp"
+#include "uml/Port.hpp"
 
-#include "ProtocolConformance.hpp"
+#include "uml/Property.hpp"
 
-#include "Pseudostate.hpp"
+#include "uml/ProtocolConformance.hpp"
 
-#include "Reception.hpp"
+#include "uml/Pseudostate.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Reception.hpp"
 
-#include "Region.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "State.hpp"
+#include "uml/Region.hpp"
 
-#include "StateMachine.hpp"
+#include "uml/State.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StateMachine.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "UseCase.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -129,7 +163,6 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProtocolStateMachine "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -172,10 +205,10 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -225,19 +258,19 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 	
 	m_behavioredClassifier  = obj.getBehavioredClassifier();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::StateMachine> > _extendedStateMachine = obj.getExtendedStateMachine();
+	std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = obj.getExtendedStateMachine();
 	m_extendedStateMachine.reset(new Bag<uml::StateMachine>(*(obj.getExtendedStateMachine().get())));
 
-	std::shared_ptr< Bag<uml::Extension> > _extension = obj.getExtension();
+	std::shared_ptr<Bag<uml::Extension>> _extension = obj.getExtension();
 	m_extension.reset(new Bag<uml::Extension>(*(obj.getExtension().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -250,29 +283,29 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	std::shared_ptr<Bag<uml::Property>> _part = obj.getPart();
 	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_specification  = obj.getSpecification();
 
-	std::shared_ptr< Bag<uml::State> > _submachineState = obj.getSubmachineState();
+	std::shared_ptr<Bag<uml::State>> _submachineState = obj.getSubmachineState();
 	m_submachineState.reset(new Bag<uml::State>(*(obj.getSubmachineState().get())));
 
-	std::shared_ptr< Bag<uml::Class> > _superClass = obj.getSuperClass();
+	std::shared_ptr<Bag<uml::Class>> _superClass = obj.getSuperClass();
 	m_superClass.reset(new Bag<uml::Class>(*(obj.getSuperClass().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -557,13 +590,14 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 
 std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ProtocolStateMachineImpl(*this));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(*this));
+	element->setThisProtocolStateMachinePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolStateMachine();
+	return UmlPackageImpl::eInstance()->getProtocolStateMachine_EClass();
 }
 
 //*********************************
@@ -594,7 +628,7 @@ bool ProtocolStateMachineImpl::protocol_transitions(boost::any diagnostics,std::
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element > > ProtocolStateMachineImpl::getConformance() const
+std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMachineImpl::getConformance() const
 {
 
     return m_conformance;
@@ -604,15 +638,15 @@ std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element > > ProtocolStateM
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > ProtocolStateMachineImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ProtocolStateMachineImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > ProtocolStateMachineImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ProtocolStateMachineImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > ProtocolStateMachineImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ProtocolStateMachineImpl::getMember() const
 {
 	return m_member;
 }
@@ -620,11 +654,11 @@ std::weak_ptr<uml::Namespace > ProtocolStateMachineImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ProtocolStateMachineImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ProtocolStateMachineImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolStateMachineImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProtocolStateMachineImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -632,161 +666,219 @@ std::weak_ptr<uml::Element > ProtocolStateMachineImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ProtocolStateMachineImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ProtocolStateMachineImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::Classifier> > ProtocolStateMachineImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier>> ProtocolStateMachineImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > ProtocolStateMachineImpl::getRole() const
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> ProtocolStateMachineImpl::getRole() const
 {
 	return m_role;
 }
 
 
+std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr()
+{
+	return m_thisProtocolStateMachinePtr.lock();
+}
+void ProtocolStateMachineImpl::setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr)
+{
+	m_thisProtocolStateMachinePtr = thisProtocolStateMachinePtr;
+	setThisStateMachinePtr(thisProtocolStateMachinePtr);
+}
+std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::eContainer() const
+{
+	if(auto wp = m_behavioredClassifier.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolStateMachineImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //5826
-		case UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier(); //5861
-		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //5839
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //584
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //5827
-		case UmlPackage::PROTOCOLSTATEMACHINE_CONFORMANCE:
+		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
 			return getConformance(); //5866
-		case UmlPackage::STATEMACHINE_CONNECTIONPOINT:
-			return getConnectionPoint(); //5862
-		case UmlPackage::BEHAVIOR_CONTEXT:
-			return getContext(); //5854
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //580
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //5811
-		case UmlPackage::STATEMACHINE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine(); //5865
-		case UmlPackage::CLASS_EXTENSION:
-			return getExtension(); //5848
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //5825
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //5828
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //5829
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //5814
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //5831
-		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //5840
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //5832
-		case UmlPackage::CLASS_ISACTIVE:
-			return getIsActive(); //5849
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //5833
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //5810
-		case UmlPackage::BEHAVIOR_ISREENTRANT:
-			return getIsReentrant(); //5855
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //5815
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //585
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //586
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //587
-		case UmlPackage::CLASS_NESTEDCLASSIFIER:
-			return getNestedClassifier(); //5850
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //5839
-		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //5841
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //581
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDCONNECTOR:
-			return getOwnedConnector(); //5840
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //582
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //5813
-		case UmlPackage::CLASS_OWNEDOPERATION:
-			return getOwnedOperation(); //5847
-		case UmlPackage::BEHAVIOR_OWNEDPARAMETER:
-			return getOwnedParameter(); //5856
-		case UmlPackage::BEHAVIOR_OWNEDPARAMETERSET:
-			return getOwnedParameterSet(); //5857
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_OWNEDPORT:
-			return getOwnedPort(); //5843
-		case UmlPackage::CLASS_OWNEDRECEPTION:
-			return getOwnedReception(); //5851
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //5810
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //585
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //5834
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //583
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //5812
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //584
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //5813
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //5812
-		case UmlPackage::STRUCTUREDCLASSIFIER_PART:
-			return getPart(); //5841
-		case UmlPackage::BEHAVIOR_POSTCONDITION:
-			return getPostcondition(); //5858
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //5830
-		case UmlPackage::BEHAVIOR_PRECONDITION:
-			return getPrecondition(); //5859
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //588
-		case UmlPackage::BEHAVIOR_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior(); //5860
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //5836
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //5811
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //5812
-		case UmlPackage::STATEMACHINE_REGION:
-			return getRegion(); //5864
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //5837
-		case UmlPackage::STRUCTUREDCLASSIFIER_ROLE:
-			return getRole(); //5842
-		case UmlPackage::BEHAVIOR_SPECIFICATION:
-			return getSpecification(); //5853
-		case UmlPackage::STATEMACHINE_SUBMACHINESTATE:
-			return getSubmachineState(); //5863
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //5838
-		case UmlPackage::CLASS_SUPERCLASS:
-			return getSuperClass(); //5852
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //584
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //585
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //5835
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //589
 	}
-	return boost::any();
+	return StateMachineImpl::internalEIsSet(featureID);
 }
+bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
+			return getConformance() != nullptr; //5866
+	}
+	return StateMachineImpl::internalEIsSet(featureID);
+}
+bool ProtocolStateMachineImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return StateMachineImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ProtocolStateMachineImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ProtocolStateMachineImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StateMachineImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("conformance") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ProtocolConformance";
+			}
+			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE);
+			if (conformance != nullptr)
+			{
+				loadHandler->handleChild(conformance);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StateMachineImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ProtocolStateMachineImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	StateMachineImpl::resolveReferences(featureID, references);
+}
+
+void ProtocolStateMachineImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StateMachineImpl::saveContent(saveHandler);
+	
+	BehaviorImpl::saveContent(saveHandler);
+	
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'conformance'
+		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 
+		{
+			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

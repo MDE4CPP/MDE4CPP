@@ -1,53 +1,87 @@
-#include "WriteVariableActionImpl.hpp"
-#include <iostream>
+#include "uml/impl/WriteVariableActionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Variable.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "VariableAction.hpp"
+#include "uml/Variable.hpp"
 
+#include "uml/VariableAction.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -75,7 +109,6 @@ WriteVariableActionImpl::~WriteVariableActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete WriteVariableAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -140,30 +173,30 @@ WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl &
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_variable  = obj.getVariable();
@@ -255,13 +288,14 @@ WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl &
 
 std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new WriteVariableActionImpl(*this));
+	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl(*this));
+	element->setThisWriteVariableActionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteVariableAction();
+	return UmlPackageImpl::eInstance()->getWriteVariableAction_EClass();
 }
 
 //*********************************
@@ -299,15 +333,15 @@ void WriteVariableActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > WriteVariableActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> WriteVariableActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > WriteVariableActionImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> WriteVariableActionImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<Union<uml::Element> > WriteVariableActionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> WriteVariableActionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -315,79 +349,197 @@ std::weak_ptr<uml::Element > WriteVariableActionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > WriteVariableActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> WriteVariableActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr()
+{
+	return m_thisWriteVariableActionPtr.lock();
+}
+void WriteVariableActionImpl::setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr)
+{
+	m_thisWriteVariableActionPtr = thisWriteVariableActionPtr;
+	setThisVariableActionPtr(thisWriteVariableActionPtr);
+}
+std::shared_ptr<ecore::EObject> WriteVariableActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any WriteVariableActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //13013
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1304
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //13022
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1300
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //13021
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //13014
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //13015
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //13020
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //13016
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //13017
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //13023
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //13010
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //13024
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //13025
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //13026
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1305
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1306
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1307
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //13018
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //13027
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1301
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1302
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1303
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1308
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //13011
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //13019
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //13012
-		case UmlPackage::WRITEVARIABLEACTION_VALUE:
+		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
 			return getValue(); //13029
-		case UmlPackage::VARIABLEACTION_VARIABLE:
-			return getVariable(); //13028
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1309
 	}
-	return boost::any();
+	return VariableActionImpl::internalEIsSet(featureID);
 }
+bool WriteVariableActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+			return getValue() != nullptr; //13029
+	}
+	return VariableActionImpl::internalEIsSet(featureID);
+}
+bool WriteVariableActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //13029
+			return true;
+		}
+	}
+
+	return VariableActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void WriteVariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void WriteVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	VariableActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void WriteVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("value") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<uml::InputPin> value = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			if (value != nullptr)
+			{
+				this->setValue(value);
+				loadHandler->handleChild(value);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	VariableActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void WriteVariableActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	VariableActionImpl::resolveReferences(featureID, references);
+}
+
+void WriteVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	VariableActionImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'value'
+		std::shared_ptr<uml::InputPin > value = this->getValue();
+		if (value != nullptr)
+		{
+			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

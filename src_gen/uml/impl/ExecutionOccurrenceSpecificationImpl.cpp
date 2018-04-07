@@ -1,35 +1,68 @@
-#include "ExecutionOccurrenceSpecificationImpl.hpp"
-#include <iostream>
+#include "uml/impl/ExecutionOccurrenceSpecificationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExecutionSpecification.hpp"
+#include "uml/Element.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/ExecutionSpecification.hpp"
 
-#include "Interaction.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/Interaction.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "OccurrenceSpecification.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/OccurrenceSpecification.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -57,7 +90,6 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionOccurrenceSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -118,10 +150,10 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -134,10 +166,10 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toAfter = obj.getToAfter();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = obj.getToAfter();
 	m_toAfter.reset(new Bag<uml::GeneralOrdering>(*(obj.getToAfter().get())));
 
-	std::shared_ptr< Bag<uml::GeneralOrdering> > _toBefore = obj.getToBefore();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = obj.getToBefore();
 	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 
@@ -179,13 +211,14 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 
 std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutionOccurrenceSpecificationImpl(*this));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(*this));
+	element->setThisExecutionOccurrenceSpecificationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification();
+	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_EClass();
 }
 
 //*********************************
@@ -216,7 +249,7 @@ std::weak_ptr<uml::Namespace > ExecutionOccurrenceSpecificationImpl::getNamespac
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ExecutionOccurrenceSpecificationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ExecutionOccurrenceSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -226,47 +259,185 @@ std::weak_ptr<uml::Element > ExecutionOccurrenceSpecificationImpl::getOwner() co
 }
 
 
+std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr()
+{
+	return m_thisExecutionOccurrenceSpecificationPtr.lock();
+}
+void ExecutionOccurrenceSpecificationImpl::setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr)
+{
+	m_thisExecutionOccurrenceSpecificationPtr = thisExecutionOccurrenceSpecificationPtr;
+	setThisOccurrenceSpecificationPtr(thisExecutionOccurrenceSpecificationPtr);
+}
+std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionOccurrenceSpecificationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2344
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
-			return getCovered(); //23410
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2340
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //23412
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //23411
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
 			return getExecution(); //23416
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
-			return getGeneralOrdering(); //23413
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2345
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2346
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2347
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2341
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2342
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2343
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2348
-		case UmlPackage::OCCURRENCESPECIFICATION_TOAFTER:
-			return getToAfter(); //23414
-		case UmlPackage::OCCURRENCESPECIFICATION_TOBEFORE:
-			return getToBefore(); //23415
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2349
 	}
-	return boost::any();
+	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
+bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+			return getExecution() != nullptr; //23416
+	}
+	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
+}
+bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ExecutionSpecification> _execution = boost::any_cast<std::shared_ptr<uml::ExecutionSpecification>>(newValue);
+			setExecution(_execution); //23416
+			return true;
+		}
+	}
+
+	return OccurrenceSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("execution");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("execution")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	OccurrenceSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ExecutionSpecification> _execution = std::dynamic_pointer_cast<uml::ExecutionSpecification>( references.front() );
+				setExecution(_execution);
+			}
+			
+			return;
+		}
+	}
+	OccurrenceSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void ExecutionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	OccurrenceSpecificationImpl::saveContent(saveHandler);
+	
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("execution", this->getExecution());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,43 +1,77 @@
-#include "InformationFlowImpl.hpp"
-#include <iostream>
+#include "uml/impl/InformationFlowImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Connector.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Connector.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Message.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Message.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Package.hpp"
 
-#include "Relationship.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Relationship.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -128,7 +162,6 @@ InformationFlowImpl::~InformationFlowImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InformationFlow "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -189,10 +222,10 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):Inform
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _conveyed = obj.getConveyed();
+	std::shared_ptr<Bag<uml::Classifier>> _conveyed = obj.getConveyed();
 	m_conveyed.reset(new Bag<uml::Classifier>(*(obj.getConveyed().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -203,19 +236,19 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):Inform
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr< Bag<uml::Relationship> > _realization = obj.getRealization();
+	std::shared_ptr<Bag<uml::Relationship>> _realization = obj.getRealization();
 	m_realization.reset(new Bag<uml::Relationship>(*(obj.getRealization().get())));
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _realizingActivityEdge = obj.getRealizingActivityEdge();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = obj.getRealizingActivityEdge();
 	m_realizingActivityEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getRealizingActivityEdge().get())));
 
-	std::shared_ptr< Bag<uml::Connector> > _realizingConnector = obj.getRealizingConnector();
+	std::shared_ptr<Bag<uml::Connector>> _realizingConnector = obj.getRealizingConnector();
 	m_realizingConnector.reset(new Bag<uml::Connector>(*(obj.getRealizingConnector().get())));
 
-	std::shared_ptr< Bag<uml::Message> > _realizingMessage = obj.getRealizingMessage();
+	std::shared_ptr<Bag<uml::Message>> _realizingMessage = obj.getRealizingMessage();
 	m_realizingMessage.reset(new Bag<uml::Message>(*(obj.getRealizingMessage().get())));
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -267,13 +300,14 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):Inform
 
 std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new InformationFlowImpl(*this));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(*this));
+	element->setThisInformationFlowPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInformationFlow();
+	return UmlPackageImpl::eInstance()->getInformationFlow_EClass();
 }
 
 //*********************************
@@ -304,49 +338,49 @@ bool InformationFlowImpl::sources_and_targets_kind(boost::any diagnostics,std::m
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::Classifier> > InformationFlowImpl::getConveyed() const
+std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 {
 //assert(m_conveyed);
     return m_conveyed;
 }
 
 
-std::shared_ptr<Subset<uml::NamedElement, uml::Element > > InformationFlowImpl::getInformationSource() const
+std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationSource() const
 {
 //assert(m_informationSource);
     return m_informationSource;
 }
 
 
-std::shared_ptr<Subset<uml::NamedElement, uml::Element > > InformationFlowImpl::getInformationTarget() const
+std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationTarget() const
 {
 //assert(m_informationTarget);
     return m_informationTarget;
 }
 
 
-std::shared_ptr< Bag<uml::Relationship> > InformationFlowImpl::getRealization() const
+std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() const
 {
 
     return m_realization;
 }
 
 
-std::shared_ptr< Bag<uml::ActivityEdge> > InformationFlowImpl::getRealizingActivityEdge() const
+std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivityEdge() const
 {
 
     return m_realizingActivityEdge;
 }
 
 
-std::shared_ptr< Bag<uml::Connector> > InformationFlowImpl::getRealizingConnector() const
+std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector() const
 {
 
     return m_realizingConnector;
 }
 
 
-std::shared_ptr< Bag<uml::Message> > InformationFlowImpl::getRealizingMessage() const
+std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() const
 {
 
     return m_realizingMessage;
@@ -360,7 +394,7 @@ std::weak_ptr<uml::Namespace > InformationFlowImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > InformationFlowImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> InformationFlowImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -368,73 +402,403 @@ std::weak_ptr<uml::Element > InformationFlowImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > InformationFlowImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> InformationFlowImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > InformationFlowImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > InformationFlowImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr()
+{
+	return m_thisInformationFlowPtr.lock();
+}
+void InformationFlowImpl::setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr)
+{
+	m_thisInformationFlowPtr = thisInformationFlowPtr;
+	setThisDirectedRelationshipPtr(thisInformationFlowPtr);
+	setThisPackageableElementPtr(thisInformationFlowPtr);
+}
+std::shared_ptr<ecore::EObject> InformationFlowImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InformationFlowImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2094
-		case UmlPackage::INFORMATIONFLOW_CONVEYED:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
 			return getConveyed(); //20916
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2090
-		case UmlPackage::INFORMATIONFLOW_INFORMATIONSOURCE:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
 			return getInformationSource(); //20917
-		case UmlPackage::INFORMATIONFLOW_INFORMATIONTARGET:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
 			return getInformationTarget(); //20918
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2095
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2096
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2097
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2091
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2092
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2093
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //20912
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2094
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2098
-		case UmlPackage::INFORMATIONFLOW_REALIZATION:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
 			return getRealization(); //20919
-		case UmlPackage::INFORMATIONFLOW_REALIZINGACTIVITYEDGE:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
 			return getRealizingActivityEdge(); //20920
-		case UmlPackage::INFORMATIONFLOW_REALIZINGCONNECTOR:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
 			return getRealizingConnector(); //20921
-		case UmlPackage::INFORMATIONFLOW_REALIZINGMESSAGE:
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
 			return getRealizingMessage(); //20922
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
-			return getRelatedElement(); //2094
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
-			return getSource(); //2095
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
-			return getTarget(); //2096
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2095
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2099
 	}
-	return boost::any();
+	boost::any result;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = PackageableElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool InformationFlowImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
+			return getConveyed() != nullptr; //20916
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
+			return getInformationSource() != nullptr; //20917
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
+			return getInformationTarget() != nullptr; //20918
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
+			return getRealization() != nullptr; //20919
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
+			return getRealizingActivityEdge() != nullptr; //20920
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
+			return getRealizingConnector() != nullptr; //20921
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
+			return getRealizingMessage() != nullptr; //20922
+	}
+	bool result = false;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool InformationFlowImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = DirectedRelationshipImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InformationFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("conveyed");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("conveyed")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("informationSource");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("informationSource")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("informationTarget");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("informationTarget")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realization");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realization")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingActivityEdge");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingActivityEdge")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingConnector");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingConnector")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("realizingMessage");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingMessage")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _conveyed = getConveyed();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_conveyed->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> _informationSource = getInformationSource();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_informationSource->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> _informationTarget = getInformationTarget();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_informationTarget->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
+		{
+			std::shared_ptr<Bag<uml::Relationship>> _realization = getRealization();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Relationship> _r = std::dynamic_pointer_cast<uml::Relationship>(ref);
+				if (_r != nullptr)
+				{
+					_realization->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = getRealizingActivityEdge();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge> _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_realizingActivityEdge->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
+		{
+			std::shared_ptr<Bag<uml::Connector>> _realizingConnector = getRealizingConnector();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Connector> _r = std::dynamic_pointer_cast<uml::Connector>(ref);
+				if (_r != nullptr)
+				{
+					_realizingConnector->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
+		{
+			std::shared_ptr<Bag<uml::Message>> _realizingMessage = getRealizingMessage();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Message> _r = std::dynamic_pointer_cast<uml::Message>(ref);
+				if (_r != nullptr)
+				{
+					_realizingMessage->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+	PackageableElementImpl::resolveReferences(featureID, references);
+}
+
+void InformationFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::Classifier>> conveyed_list = this->getConveyed();
+		for (std::shared_ptr<uml::Classifier > object : *conveyed_list)
+		{ 
+			saveHandler->addReferences("conveyed", object);
+		}
+		std::shared_ptr<Bag<uml::NamedElement>> informationSource_list = this->getInformationSource();
+		for (std::shared_ptr<uml::NamedElement > object : *informationSource_list)
+		{ 
+			saveHandler->addReferences("informationSource", object);
+		}
+		std::shared_ptr<Bag<uml::NamedElement>> informationTarget_list = this->getInformationTarget();
+		for (std::shared_ptr<uml::NamedElement > object : *informationTarget_list)
+		{ 
+			saveHandler->addReferences("informationTarget", object);
+		}
+		std::shared_ptr<Bag<uml::Relationship>> realization_list = this->getRealization();
+		for (std::shared_ptr<uml::Relationship > object : *realization_list)
+		{ 
+			saveHandler->addReferences("realization", object);
+		}
+		std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdge_list = this->getRealizingActivityEdge();
+		for (std::shared_ptr<uml::ActivityEdge > object : *realizingActivityEdge_list)
+		{ 
+			saveHandler->addReferences("realizingActivityEdge", object);
+		}
+		std::shared_ptr<Bag<uml::Connector>> realizingConnector_list = this->getRealizingConnector();
+		for (std::shared_ptr<uml::Connector > object : *realizingConnector_list)
+		{ 
+			saveHandler->addReferences("realizingConnector", object);
+		}
+		std::shared_ptr<Bag<uml::Message>> realizingMessage_list = this->getRealizingMessage();
+		for (std::shared_ptr<uml::Message > object : *realizingMessage_list)
+		{ 
+			saveHandler->addReferences("realizingMessage", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

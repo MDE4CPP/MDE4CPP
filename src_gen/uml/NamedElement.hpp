@@ -7,27 +7,41 @@
 #ifndef UML_NAMEDELEMENT_HPP
 #define UML_NAMEDELEMENT_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -76,10 +90,10 @@ namespace uml
 }
 
 // base class includes
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -240,7 +254,7 @@ namespace uml
 			/*!
 			 Indicates the Dependencies that reference this NamedElement as a client.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr< Bag<uml::Dependency> > getClientDependency() const = 0;
+			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependency() const = 0;
 			
 			/*!
 			 The StringExpression used to define the name of this NamedElement.
@@ -261,15 +275,15 @@ namespace uml
 			/*!
 			 The name of the NamedElement.
 			<p>From package UML::CommonStructure.</p> */ 
-			std::string m_name ;
+			std::string m_name = "";
 			/*!
 			 A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself.
 			<p>From package UML::CommonStructure.</p> */ 
-			std::string m_qualifiedName ;
+			std::string m_qualifiedName = "";
 			/*!
 			 Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p> */ 
-			VisibilityKind m_visibility ;
+			VisibilityKind m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************
@@ -278,7 +292,7 @@ namespace uml
 			/*!
 			 Indicates the Dependencies that reference this NamedElement as a client.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr< Bag<uml::Dependency> > m_clientDependency;
+			std::shared_ptr<Bag<uml::Dependency>> m_clientDependency;
 			/*!
 			 The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p> */
@@ -299,12 +313,22 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_NAMEDELEMENT_HPP */
-

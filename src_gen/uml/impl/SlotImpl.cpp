@@ -1,23 +1,55 @@
-#include "SlotImpl.hpp"
-#include <iostream>
+#include "uml/impl/SlotImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EAnnotation.hpp"
+#include "uml/Comment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "InstanceSpecification.hpp"
+#include "uml/Element.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/InstanceSpecification.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/StructuralFeature.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -65,7 +97,6 @@ SlotImpl::~SlotImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Slot "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -146,13 +177,14 @@ SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
 
 std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new SlotImpl(*this));
+	std::shared_ptr<SlotImpl> element(new SlotImpl(*this));
+	element->setThisSlotPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSlot();
+	return UmlPackageImpl::eInstance()->getSlot_EClass();
 }
 
 //*********************************
@@ -186,7 +218,7 @@ void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _ow
     m_owningInstance = _owningInstance;
 }
 
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > SlotImpl::getValue() const
+std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
 {
 
     return m_value;
@@ -196,7 +228,7 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > SlotImpl::getVa
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > SlotImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> SlotImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -206,27 +238,224 @@ std::weak_ptr<uml::Element > SlotImpl::getOwner() const
 }
 
 
+std::shared_ptr<Slot> SlotImpl::getThisSlotPtr()
+{
+	return m_thisSlotPtr.lock();
+}
+void SlotImpl::setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr)
+{
+	m_thisSlotPtr = thisSlotPtr;
+	setThisElementPtr(thisSlotPtr);
+}
+std::shared_ptr<ecore::EObject> SlotImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningInstance.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SlotImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_DEFININGFEATURE:
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
 			return getDefiningFeature(); //804
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //800
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //801
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //802
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //803
-		case UmlPackage::SLOT_OWNINGINSTANCE:
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
 			return getOwningInstance(); //806
-		case UmlPackage::SLOT_VALUE:
+		case UmlPackage::SLOT_EREFERENCE_VALUE:
 			return getValue(); //805
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
+bool SlotImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+			return getDefiningFeature() != nullptr; //804
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+			return getOwningInstance().lock() != nullptr; //806
+		case UmlPackage::SLOT_EREFERENCE_VALUE:
+			return getValue() != nullptr; //805
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool SlotImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuralFeature> _definingFeature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
+			setDefiningFeature(_definingFeature); //804
+			return true;
+		}
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InstanceSpecification> _owningInstance = boost::any_cast<std::shared_ptr<uml::InstanceSpecification>>(newValue);
+			setOwningInstance(_owningInstance); //806
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void SlotImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void SlotImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("definingFeature");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("definingFeature")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("value") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT);
+			if (value != nullptr)
+			{
+				loadHandler->handleChild(value);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>( references.front() );
+				setDefiningFeature(_definingFeature);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>( references.front() );
+				setOwningInstance(_owningInstance);
+			}
+			
+			return;
+		}
+	}
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void SlotImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'value'
+		for (std::shared_ptr<uml::ValueSpecification> value : *this->getValue()) 
+		{
+			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("definingFeature", this->getDefiningFeature());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

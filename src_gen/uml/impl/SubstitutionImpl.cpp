@@ -1,35 +1,68 @@
-#include "SubstitutionImpl.hpp"
-#include <iostream>
+#include "uml/impl/SubstitutionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "OpaqueExpression.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/OpaqueExpression.hpp"
 
-#include "Realization.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Realization.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -61,7 +94,6 @@ SubstitutionImpl::~SubstitutionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Substitution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -133,7 +165,7 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -144,7 +176,7 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_substitutingClassifier  = obj.getSubstitutingClassifier();
@@ -212,13 +244,14 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 
 std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new SubstitutionImpl(*this));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(*this));
+	element->setThisSubstitutionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSubstitution();
+	return UmlPackageImpl::eInstance()->getSubstitution_EClass();
 }
 
 //*********************************
@@ -259,7 +292,7 @@ std::weak_ptr<uml::Namespace > SubstitutionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> SubstitutionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -267,69 +300,236 @@ std::weak_ptr<uml::Element > SubstitutionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> SubstitutionImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > SubstitutionImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> SubstitutionImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > SubstitutionImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> SubstitutionImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr()
+{
+	return m_thisSubstitutionPtr.lock();
+}
+void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr)
+{
+	m_thisSubstitutionPtr = thisSubstitutionPtr;
+	setThisRealizationPtr(thisSubstitutionPtr);
+}
+std::shared_ptr<ecore::EObject> SubstitutionImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_substitutingClassifier.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SubstitutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_CLIENT:
-			return getClient(); //10216
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1024
-		case UmlPackage::SUBSTITUTION_CONTRACT:
+		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
 			return getContract(); //10219
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1020
-		case UmlPackage::ABSTRACTION_MAPPING:
-			return getMapping(); //10218
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1025
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1026
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1027
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1021
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1022
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1023
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //10212
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //1024
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1028
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
-			return getRelatedElement(); //1024
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
-			return getSource(); //1025
-		case UmlPackage::SUBSTITUTION_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
 			return getSubstitutingClassifier(); //10220
-		case UmlPackage::DEPENDENCY_SUPPLIER:
-			return getSupplier(); //10217
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
-			return getTarget(); //1026
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //1025
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1029
 	}
-	return boost::any();
+	return RealizationImpl::internalEIsSet(featureID);
 }
+bool SubstitutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+			return getContract() != nullptr; //10219
+		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+			return getSubstitutingClassifier().lock() != nullptr; //10220
+	}
+	return RealizationImpl::internalEIsSet(featureID);
+}
+bool SubstitutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Classifier> _contract = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			setContract(_contract); //10219
+			return true;
+		}
+		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Classifier> _substitutingClassifier = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			setSubstitutingClassifier(_substitutingClassifier); //10220
+			return true;
+		}
+	}
+
+	return RealizationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void SubstitutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void SubstitutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("contract");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("contract")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	RealizationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void SubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	RealizationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setContract(_contract);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setSubstitutingClassifier(_substitutingClassifier);
+			}
+			
+			return;
+		}
+	}
+	RealizationImpl::resolveReferences(featureID, references);
+}
+
+void SubstitutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	RealizationImpl::saveContent(saveHandler);
+	
+	AbstractionImpl::saveContent(saveHandler);
+	
+	DependencyImpl::saveContent(saveHandler);
+	
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("contract", this->getContract());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

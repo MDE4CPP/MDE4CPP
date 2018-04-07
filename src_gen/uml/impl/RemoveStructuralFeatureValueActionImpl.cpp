@@ -1,53 +1,87 @@
-#include "RemoveStructuralFeatureValueActionImpl.hpp"
-#include <iostream>
+#include "uml/impl/RemoveStructuralFeatureValueActionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "WriteStructuralFeatureAction.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
+#include "uml/WriteStructuralFeatureAction.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -75,7 +109,6 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RemoveStructuralFeatureValueAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -141,30 +174,30 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(c
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_structuralFeature  = obj.getStructuralFeature();
@@ -277,13 +310,14 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(c
 
 std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new RemoveStructuralFeatureValueActionImpl(*this));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(*this));
+	element->setThisRemoveStructuralFeatureValueActionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction();
+	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_EClass();
 }
 
 //*********************************
@@ -324,19 +358,19 @@ void RemoveStructuralFeatureValueActionImpl::setRemoveAt(std::shared_ptr<uml::In
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > RemoveStructuralFeatureValueActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> RemoveStructuralFeatureValueActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > RemoveStructuralFeatureValueActionImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> RemoveStructuralFeatureValueActionImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > RemoveStructuralFeatureValueActionImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> RemoveStructuralFeatureValueActionImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<Union<uml::Element> > RemoveStructuralFeatureValueActionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> RemoveStructuralFeatureValueActionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -344,87 +378,238 @@ std::weak_ptr<uml::Element > RemoveStructuralFeatureValueActionImpl::getOwner() 
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > RemoveStructuralFeatureValueActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> RemoveStructuralFeatureValueActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr()
+{
+	return m_thisRemoveStructuralFeatureValueActionPtr.lock();
+}
+void RemoveStructuralFeatureValueActionImpl::setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr)
+{
+	m_thisRemoveStructuralFeatureValueActionPtr = thisRemoveStructuralFeatureValueActionPtr;
+	setThisWriteStructuralFeatureActionPtr(thisRemoveStructuralFeatureValueActionPtr);
+}
+std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RemoveStructuralFeatureValueActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //16913
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1694
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //16922
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1690
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //16921
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //16914
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //16915
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //16920
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //16916
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //16917
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //16923
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //16910
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //16924
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
 			return getIsRemoveDuplicates(); //16932
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //16925
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //16926
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1695
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1696
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1697
-		case UmlPackage::STRUCTURALFEATUREACTION_OBJECT:
-			return getObject(); //16928
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //16918
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //16927
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1691
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1692
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1693
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1698
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //16911
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //16919
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //16912
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_REMOVEAT:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
 			return getRemoveAt(); //16933
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_RESULT:
-			return getResult(); //16930
-		case UmlPackage::STRUCTURALFEATUREACTION_STRUCTURALFEATURE:
-			return getStructuralFeature(); //16929
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_VALUE:
-			return getValue(); //16931
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1699
 	}
-	return boost::any();
+	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
+bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+			return getIsRemoveDuplicates() != false; //16932
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+			return getRemoveAt() != nullptr; //16933
+	}
+	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
+}
+bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		{
+			// BOOST CAST
+			bool _isRemoveDuplicates = boost::any_cast<bool>(newValue);
+			setIsRemoveDuplicates(_isRemoveDuplicates); //16932
+			return true;
+		}
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _removeAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setRemoveAt(_removeAt); //16933
+			return true;
+		}
+	}
+
+	return WriteStructuralFeatureActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void RemoveStructuralFeatureValueActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void RemoveStructuralFeatureValueActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isRemoveDuplicates");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsRemoveDuplicates(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	WriteStructuralFeatureActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("removeAt") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<uml::InputPin> removeAt = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			if (removeAt != nullptr)
+			{
+				this->setRemoveAt(removeAt);
+				loadHandler->handleChild(removeAt);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	WriteStructuralFeatureActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void RemoveStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	WriteStructuralFeatureActionImpl::resolveReferences(featureID, references);
+}
+
+void RemoveStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	WriteStructuralFeatureActionImpl::saveContent(saveHandler);
+	
+	StructuralFeatureActionImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'removeAt'
+		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
+		if (removeAt != nullptr)
+		{
+			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_EAttribute_isRemoveDuplicates()) )
+		{
+			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

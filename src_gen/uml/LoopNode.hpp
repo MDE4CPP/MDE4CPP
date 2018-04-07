@@ -7,27 +7,40 @@
 #ifndef UML_LOOPNODE_HPP
 #define UML_LOOPNODE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -156,10 +169,10 @@ namespace uml
 }
 
 // base class includes
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -268,12 +281,12 @@ namespace uml
 			/*!
 			 The OutputPins on Actions within the bodyPart, the values of which are moved to the loopVariable OutputPins after the completion of each execution of the bodyPart, before the next iteration of the loop begins or before the loop exits.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::OutputPin> > getBodyOutput() const = 0;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
 			
 			/*!
 			 The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getBodyPart() const = 0;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBodyPart() const = 0;
 			
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
@@ -287,27 +300,27 @@ namespace uml
 			/*!
 			 A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::Element > > getLoopVariable() const = 0;
+			virtual std::shared_ptr<Subset<uml::OutputPin, uml::Element>> getLoopVariable() const = 0;
 			
 			/*!
 			 A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::InputPin> > getLoopVariableInput() const = 0;
+			virtual std::shared_ptr<Bag<uml::InputPin>> getLoopVariableInput() const = 0;
 			
 			/*!
 			 A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::OutputPin> > getResult() const = 0;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 			
 			/*!
 			 The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getSetupPart() const = 0;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getSetupPart() const = 0;
 			
 			/*!
 			 The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getTest() const = 0;
+			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
 			
 			
 
@@ -318,7 +331,7 @@ namespace uml
 			/*!
 			 If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p> */ 
-			bool m_isTestedFirst =  false;
+			bool m_isTestedFirst = false;
 			
 			
 			//*********************************
@@ -327,11 +340,11 @@ namespace uml
 			/*!
 			 The OutputPins on Actions within the bodyPart, the values of which are moved to the loopVariable OutputPins after the completion of each execution of the bodyPart, before the next iteration of the loop begins or before the loop exits.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::OutputPin> > m_bodyOutput;
+			std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
 			/*!
 			 The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExecutableNode> > m_bodyPart;
+			std::shared_ptr<Bag<uml::ExecutableNode>> m_bodyPart;
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p> */
@@ -339,23 +352,23 @@ namespace uml
 			/*!
 			 A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::Element > > m_loopVariable;
+			std::shared_ptr<Subset<uml::OutputPin, uml::Element>> m_loopVariable;
 			/*!
 			 A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::InputPin> > m_loopVariableInput;
+			std::shared_ptr<Bag<uml::InputPin>> m_loopVariableInput;
 			/*!
 			 A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::OutputPin> > m_result;
+			std::shared_ptr<Bag<uml::OutputPin>> m_result;
 			/*!
 			 The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExecutableNode> > m_setupPart;
+			std::shared_ptr<Bag<uml::ExecutableNode>> m_setupPart;
 			/*!
 			 The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExecutableNode> > m_test;
+			std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
 			
 
 		public:
@@ -365,36 +378,46 @@ namespace uml
 			/*!
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const = 0;/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_LOOPNODE_HPP */
-

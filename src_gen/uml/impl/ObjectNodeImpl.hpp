@@ -7,30 +7,14 @@
 #ifndef UML_OBJECTNODEOBJECTNODEIMPL_HPP
 #define UML_OBJECTNODEOBJECTNODEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../ObjectNode.hpp"
 
-#include "impl/ActivityNodeImpl.hpp"
-#include "impl/TypedElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/ActivityNodeImpl.hpp"
+#include "uml/impl/TypedElementImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -47,6 +31,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ObjectNodeImpl();
+			virtual std::shared_ptr<ObjectNode> getThisObjectNodePtr();
+			virtual void setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr);
 
 			//Additional constructors for the containments back reference
 			ObjectNodeImpl(std::weak_ptr<uml::Activity > par_activity);
@@ -125,7 +111,7 @@ namespace uml
 			/*!
 			 The States required to be associated with the values held by tokens on this ObjectNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr< Bag<uml::State> > getInState() const ;
+			virtual std::shared_ptr<Bag<uml::State>> getInState() const ;
 			
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
@@ -153,26 +139,43 @@ namespace uml
 			/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ObjectNode> m_thisObjectNodePtr;
 	};
 }
 #endif /* end of include guard: UML_OBJECTNODEOBJECTNODEIMPL_HPP */
-

@@ -7,27 +7,34 @@
 #ifndef UML_OCCURRENCESPECIFICATION_HPP
 #define UML_OCCURRENCESPECIFICATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -86,10 +93,10 @@ namespace uml
 }
 
 // base class includes
-#include "InteractionFragment.hpp"
+#include "uml/InteractionFragment.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -134,12 +141,12 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr< Bag<uml::GeneralOrdering> > getToAfter() const = 0;
+			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const = 0;
 			
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr< Bag<uml::GeneralOrdering> > getToBefore() const = 0;
+			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const = 0;
 			
 			
 
@@ -155,11 +162,11 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr< Bag<uml::GeneralOrdering> > m_toAfter;
+			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr< Bag<uml::GeneralOrdering> > m_toBefore;
+			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
 			
 
 		public:
@@ -172,12 +179,22 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_OCCURRENCESPECIFICATION_HPP */
-

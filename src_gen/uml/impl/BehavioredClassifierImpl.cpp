@@ -1,65 +1,99 @@
-#include "BehavioredClassifierImpl.hpp"
-#include <iostream>
+#include "uml/impl/BehavioredClassifierImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/Behavior.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Feature.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "Interface.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/Interface.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Property.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Property.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "UseCase.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -119,7 +153,6 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BehavioredClassifier "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -151,10 +184,10 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -200,13 +233,13 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -219,18 +252,18 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -404,13 +437,14 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 
 std::shared_ptr<ecore::EObject>  BehavioredClassifierImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new BehavioredClassifierImpl(*this));
+	std::shared_ptr<BehavioredClassifierImpl> element(new BehavioredClassifierImpl(*this));
+	element->setThisBehavioredClassifierPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehavioredClassifier();
+	return UmlPackageImpl::eInstance()->getBehavioredClassifier_EClass();
 }
 
 //*********************************
@@ -451,14 +485,14 @@ void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavi
     m_classifierBehavior = _classifierBehavior;
 }
 
-std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element > > BehavioredClassifierImpl::getInterfaceRealization() const
+std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClassifierImpl::getInterfaceRealization() const
 {
 
     return m_interfaceRealization;
 }
 
 
-std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement > > BehavioredClassifierImpl::getOwnedBehavior() const
+std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
 {
 
     return m_ownedBehavior;
@@ -468,11 +502,11 @@ std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement > > BehavioredClass
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > BehavioredClassifierImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> BehavioredClassifierImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > BehavioredClassifierImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> BehavioredClassifierImpl::getMember() const
 {
 	return m_member;
 }
@@ -480,11 +514,11 @@ std::weak_ptr<uml::Namespace > BehavioredClassifierImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > BehavioredClassifierImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> BehavioredClassifierImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > BehavioredClassifierImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> BehavioredClassifierImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -492,103 +526,268 @@ std::weak_ptr<uml::Element > BehavioredClassifierImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > BehavioredClassifierImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> BehavioredClassifierImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr()
+{
+	return m_thisBehavioredClassifierPtr.lock();
+}
+void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr)
+{
+	m_thisBehavioredClassifierPtr = thisBehavioredClassifierPtr;
+	setThisClassifierPtr(thisBehavioredClassifierPtr);
+}
+std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehavioredClassifierImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //426
-		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
 			return getClassifierBehavior(); //439
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //44
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //427
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //40
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //411
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //425
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //428
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //429
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //414
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //431
-		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
 			return getInterfaceRealization(); //440
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //432
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //433
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //410
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //415
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //45
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //46
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //47
-		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
 			return getOwnedBehavior(); //441
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //41
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //42
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //413
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //410
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //45
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //434
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //43
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //412
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //44
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //413
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //412
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //430
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //48
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //436
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //411
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //412
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //437
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //438
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //44
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //45
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //435
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //49
 	}
-	return boost::any();
+	return ClassifierImpl::internalEIsSet(featureID);
 }
+bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+			return getClassifierBehavior() != nullptr; //439
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
+			return getInterfaceRealization() != nullptr; //440
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
+			return getOwnedBehavior() != nullptr; //441
+	}
+	return ClassifierImpl::internalEIsSet(featureID);
+}
+bool BehavioredClassifierImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _classifierBehavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setClassifierBehavior(_classifierBehavior); //439
+			return true;
+		}
+	}
+
+	return ClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void BehavioredClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void BehavioredClassifierImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("classifierBehavior");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("classifierBehavior")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("interfaceRealization") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InterfaceRealization";
+			}
+			std::shared_ptr<ecore::EObject> interfaceRealization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER);
+			if (interfaceRealization != nullptr)
+			{
+				loadHandler->handleChild(interfaceRealization);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("ownedBehavior") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> ownedBehavior = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER);
+			if (ownedBehavior != nullptr)
+			{
+				loadHandler->handleChild(ownedBehavior);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void BehavioredClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setClassifierBehavior(_classifierBehavior);
+			}
+			
+			return;
+		}
+	}
+	ClassifierImpl::resolveReferences(featureID, references);
+}
+
+void BehavioredClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'interfaceRealization'
+		for (std::shared_ptr<uml::InterfaceRealization> interfaceRealization : *this->getInterfaceRealization()) 
+		{
+			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("classifierBehavior", this->getClassifierBehavior());
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'ownedBehavior'
+		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> list_ownedBehavior = this->getOwnedBehavior();
+		for (std::shared_ptr<uml::Behavior> ownedBehavior : *list_ownedBehavior) 
+		{
+			saveHandler->addReference(ownedBehavior, "ownedBehavior", ownedBehavior->eClass() != package->getBehavior_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

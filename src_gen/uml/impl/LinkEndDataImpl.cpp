@@ -1,23 +1,56 @@
-#include "LinkEndDataImpl.hpp"
-#include <iostream>
+#include "uml/impl/LinkEndDataImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EAnnotation.hpp"
+#include "uml/Comment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "InputPin.hpp"
+#include "uml/Element.hpp"
 
-#include "Property.hpp"
+#include "uml/InputPin.hpp"
 
-#include "QualifierValue.hpp"
+#include "uml/Property.hpp"
 
+#include "uml/QualifierValue.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -65,7 +98,6 @@ LinkEndDataImpl::~LinkEndDataImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -135,13 +167,14 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 
 std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new LinkEndDataImpl(*this));
+	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(*this));
+	element->setThisLinkEndDataPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndData();
+	return UmlPackageImpl::eInstance()->getLinkEndData_EClass();
 }
 
 //*********************************
@@ -200,7 +233,7 @@ void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
     m_end = _end;
 }
 
-std::shared_ptr<Subset<uml::QualifierValue, uml::Element > > LinkEndDataImpl::getQualifier() const
+std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
 {
 
     return m_qualifier;
@@ -220,33 +253,234 @@ void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> LinkEndDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
 
 
+std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr()
+{
+	return m_thisLinkEndDataPtr.lock();
+}
+void LinkEndDataImpl::setThisLinkEndDataPtr(std::weak_ptr<LinkEndData> thisLinkEndDataPtr)
+{
+	m_thisLinkEndDataPtr = thisLinkEndDataPtr;
+	setThisElementPtr(thisLinkEndDataPtr);
+}
+std::shared_ptr<ecore::EObject> LinkEndDataImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndDataImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1260
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 			return getEnd(); //1264
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1261
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1262
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1263
-		case UmlPackage::LINKENDDATA_QUALIFIER:
+		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1265
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 			return getValue(); //1266
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
+bool LinkEndDataImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+			return getEnd() != nullptr; //1264
+		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
+			return getQualifier() != nullptr; //1265
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+			return getValue() != nullptr; //1266
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool LinkEndDataImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setEnd(_end); //1264
+			return true;
+		}
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //1266
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LinkEndDataImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void LinkEndDataImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("end");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("end")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("value")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("qualifier") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "QualifierValue";
+			}
+			std::shared_ptr<uml::QualifierValue> qualifier = std::dynamic_pointer_cast<uml::QualifierValue>(modelFactory->create(typeName));
+			if (qualifier != nullptr)
+			{
+				std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> list_qualifier = this->getQualifier();
+				list_qualifier->push_back(qualifier);
+				loadHandler->handleChild(qualifier);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setEnd(_end);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>( references.front() );
+				setValue(_value);
+			}
+			
+			return;
+		}
+	}
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void LinkEndDataImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'qualifier'
+		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 
+		{
+			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("end", this->getEnd());
+		saveHandler->addReference("value", this->getValue());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

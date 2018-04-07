@@ -1,49 +1,82 @@
-#include "ModelImpl.hpp"
-#include <iostream>
+#include "uml/impl/ModelImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageMerge.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageMerge.hpp"
 
-#include "ProfileApplication.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Stereotype.hpp"
+#include "uml/ProfileApplication.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Stereotype.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/Type.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -69,7 +102,6 @@ ModelImpl::~ModelImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Model "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -90,10 +122,10 @@ ModelImpl::~ModelImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGE_NESTINGPACKAGE:
+				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
 					 m_nestingPackage = par_Package;
 					 return;
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
 				default:
@@ -149,10 +181,10 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -293,13 +325,14 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 
 std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ModelImpl(*this));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(*this));
+	element->setThisModelPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getModel();
+	return UmlPackageImpl::eInstance()->getModel_EClass();
 }
 
 //*********************************
@@ -331,7 +364,7 @@ bool ModelImpl::isMetamodel()
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement> > ModelImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ModelImpl::getMember() const
 {
 	return m_member;
 }
@@ -339,11 +372,11 @@ std::weak_ptr<uml::Namespace > ModelImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ModelImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ModelImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ModelImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ModelImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -353,73 +386,184 @@ std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 }
 
 
+std::shared_ptr<Model> ModelImpl::getThisModelPtr()
+{
+	return m_thisModelPtr.lock();
+}
+void ModelImpl::setThisModelPtr(std::weak_ptr<Model> thisModelPtr)
+{
+	m_thisModelPtr = thisModelPtr;
+	setThisPackagePtr(thisModelPtr);
+}
+std::shared_ptr<ecore::EObject> ModelImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_nestingPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ModelImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGE_URI:
-			return getURI(); //8621
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //864
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //860
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //8611
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //8614
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //8615
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //865
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //866
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //867
-		case UmlPackage::PACKAGE_NESTEDPACKAGE:
-			return getNestedPackage(); //8622
-		case UmlPackage::PACKAGE_NESTINGPACKAGE:
-			return getNestingPackage(); //8623
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //861
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //862
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //8613
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //8610
-		case UmlPackage::PACKAGE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype(); //8624
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //865
-		case UmlPackage::PACKAGE_OWNEDTYPE:
-			return getOwnedType(); //8625
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //863
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //8612
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //864
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //8612
-		case UmlPackage::PACKAGE_PACKAGEMERGE:
-			return getPackageMerge(); //8626
-		case UmlPackage::PACKAGE_PACKAGEDELEMENT:
-			return getPackagedElement(); //8627
-		case UmlPackage::PACKAGE_PROFILEAPPLICATION:
-			return getProfileApplication(); //8628
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //868
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //864
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //865
-		case UmlPackage::MODEL_VIEWPOINT:
+		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
 			return getViewpoint(); //8629
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //869
 	}
-	return boost::any();
+	return PackageImpl::internalEIsSet(featureID);
 }
+bool ModelImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+			return getViewpoint() != ""; //8629
+	}
+	return PackageImpl::internalEIsSet(featureID);
+}
+bool ModelImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+		{
+			// BOOST CAST
+			std::string _viewpoint = boost::any_cast<std::string>(newValue);
+			setViewpoint(_viewpoint); //8629
+			return true;
+		}
+	}
+
+	return PackageImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ModelImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ModelImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("viewpoint");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setViewpoint(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PackageImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	PackageImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ModelImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PackageImpl::resolveReferences(featureID, references);
+}
+
+void ModelImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PackageImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getModel_EAttribute_viewpoint()) )
+		{
+			saveHandler->addAttribute("viewpoint", this->getViewpoint());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

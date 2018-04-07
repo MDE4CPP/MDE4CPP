@@ -1,37 +1,70 @@
-#include "StructuralFeatureImpl.hpp"
-#include <iostream>
+#include "uml/impl/StructuralFeatureImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Feature.hpp"
+#include "uml/Element.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/Feature.hpp"
 
-#include "Namespace.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Type.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TypedElement.hpp"
+#include "uml/Type.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/TypedElement.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -57,7 +90,6 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuralFeature "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -103,20 +135,20 @@ StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
 	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_type  = obj.getType();
@@ -166,13 +198,14 @@ StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):
 
 std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new StructuralFeatureImpl(*this));
+	std::shared_ptr<StructuralFeatureImpl> element(new StructuralFeatureImpl(*this));
+	element->setThisStructuralFeaturePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuralFeature();
+	return UmlPackageImpl::eInstance()->getStructuralFeature_EClass();
 }
 
 //*********************************
@@ -199,7 +232,7 @@ bool StructuralFeatureImpl::getIsReadOnly() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > StructuralFeatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> StructuralFeatureImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -209,59 +242,212 @@ std::weak_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
 }
 
 
+std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr()
+{
+	return m_thisStructuralFeaturePtr.lock();
+}
+void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr)
+{
+	m_thisStructuralFeaturePtr = thisStructuralFeaturePtr;
+	setThisFeaturePtr(thisStructuralFeaturePtr);
+	setThisMultiplicityElementPtr(thisStructuralFeaturePtr);
+	setThisTypedElementPtr(thisStructuralFeaturePtr);
+}
+std::shared_ptr<ecore::EObject> StructuralFeatureImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuralFeatureImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //734
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //730
-		case UmlPackage::FEATURE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier(); //7313
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //7310
-		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
-			return getIsOrdered(); //734
-		case UmlPackage::STRUCTURALFEATURE_ISREADONLY:
+		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
 			return getIsReadOnly(); //7322
-		case UmlPackage::FEATURE_ISSTATIC:
-			return getIsStatic(); //7314
-		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
-			return getIsUnique(); //735
-		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
-			return getLower(); //736
-		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
-			return getLowerValue(); //737
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //735
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //736
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //737
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //731
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //732
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //733
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //738
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //7311
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //7312
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //7310
-		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
-			return getUpper(); //738
-		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
-			return getUpperValue(); //739
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //739
 	}
-	return boost::any();
+	boost::any result;
+	result = FeatureImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = TypedElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool StructuralFeatureImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //7322
+	}
+	bool result = false;
+	result = FeatureImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool StructuralFeatureImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+		{
+			// BOOST CAST
+			bool _isReadOnly = boost::any_cast<bool>(newValue);
+			setIsReadOnly(_isReadOnly); //7322
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = FeatureImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void StructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isReadOnly");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsReadOnly(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	FeatureImpl::loadAttributes(loadHandler, attr_list);
+	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
+	TypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	FeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	TypedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void StructuralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	FeatureImpl::resolveReferences(featureID, references);
+	MultiplicityElementImpl::resolveReferences(featureID, references);
+	TypedElementImpl::resolveReferences(featureID, references);
+}
+
+void StructuralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	FeatureImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getStructuralFeature_EAttribute_isReadOnly()) )
+		{
+			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

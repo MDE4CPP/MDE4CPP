@@ -7,29 +7,13 @@
 #ifndef UML_CONNECTORCONNECTORIMPL_HPP
 #define UML_CONNECTORCONNECTORIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../Connector.hpp"
 
-#include "impl/FeatureImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/FeatureImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -46,6 +30,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConnectorImpl();
+			virtual std::shared_ptr<Connector> getThisConnectorPtr();
+			virtual void setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr);
 
 			//Additional constructors for the containments back reference
 			ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace);
@@ -110,17 +96,17 @@ namespace uml
 			/*!
 			 The set of Behaviors that specify the valid interaction patterns across the Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr< Bag<uml::Behavior> > getContract() const ;
+			virtual std::shared_ptr<Bag<uml::Behavior>> getContract() const ;
 			
 			/*!
 			 A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element > > getEnd() const ;
+			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> getEnd() const ;
 			
 			/*!
 			 A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > > getRedefinedConnector() const ;
+			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const ;
 			
 			/*!
 			 An optional Association that classifies links corresponding to this Connector.
@@ -139,23 +125,40 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Connector> m_thisConnectorPtr;
 	};
 }
 #endif /* end of include guard: UML_CONNECTORCONNECTORIMPL_HPP */
-

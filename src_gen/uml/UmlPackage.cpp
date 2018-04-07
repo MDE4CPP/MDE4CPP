@@ -1,5 +1,5 @@
-#include "UmlPackage.hpp"
-#include "impl/UmlPackageImpl.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 using namespace uml;
 
@@ -17,7 +17,7 @@ std::shared_ptr<UmlPackage>UmlPackage::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(UmlPackageImpl::create());
-		std::dynamic_pointer_cast<UmlPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<UmlPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

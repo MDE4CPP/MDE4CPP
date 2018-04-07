@@ -7,27 +7,39 @@
 #ifndef UML_OPERATION_HPP
 #define UML_OPERATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -166,16 +178,16 @@ namespace uml
 }
 
 // base class includes
-#include "BehavioralFeature.hpp"
+#include "uml/BehavioralFeature.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
 // enum includes
-#include "CallConcurrencyKind.hpp"
+#include "uml/CallConcurrencyKind.hpp"
 
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -370,17 +382,17 @@ namespace uml
 			/*!
 			 An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > getPostcondition() const = 0;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPostcondition() const = 0;
 			
 			/*!
 			 An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > getPrecondition() const = 0;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPrecondition() const = 0;
 			
 			/*!
 			 The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > > getRedefinedOperation() const = 0;
+			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> getRedefinedOperation() const = 0;
 			
 			/*!
 			 The return type of the operation, if present. This information is derived from the return result for this Operation.
@@ -396,23 +408,23 @@ namespace uml
 			/*!
 			 Specifies whether the return parameter is ordered or not, if present.  This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isOrdered ;
+			bool m_isOrdered = false;
 			/*!
 			 Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p> */ 
-			bool m_isQuery =  false;
+			bool m_isQuery = false;
 			/*!
 			 Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isUnique =  true;
+			bool m_isUnique = true;
 			/*!
 			 Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			int m_lower =  1;
+			int m_lower = 1;
 			/*!
 			 The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			int m_upper =  1;
+			int m_upper = 1;
 			
 			
 			//*********************************
@@ -437,15 +449,15 @@ namespace uml
 			/*!
 			 An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > m_postcondition;
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
 			/*!
 			 An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > m_precondition;
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
 			/*!
 			 The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > > m_redefinedOperation;
+			std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> m_redefinedOperation;
 			/*!
 			 The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */
@@ -459,30 +471,40 @@ namespace uml
 			/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0; 
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_OPERATION_HPP */
-

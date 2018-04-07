@@ -1,71 +1,104 @@
-#include "CollaborationImpl.hpp"
-#include <iostream>
+#include "uml/impl/CollaborationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "BehavioredClassifier.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/BehavioredClassifier.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/Comment.hpp"
 
-#include "Connector.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Connector.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Feature.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Property.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Property.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredClassifier.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StructuredClassifier.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "UseCase.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -105,7 +138,6 @@ CollaborationImpl::~CollaborationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Collaboration "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -137,10 +169,10 @@ CollaborationImpl::~CollaborationImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -186,13 +218,13 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):Collaboratio
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -205,21 +237,21 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):Collaboratio
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	std::shared_ptr<Bag<uml::Property>> _part = obj.getPart();
 	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -402,13 +434,14 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):Collaboratio
 
 std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CollaborationImpl(*this));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(*this));
+	element->setThisCollaborationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCollaboration();
+	return UmlPackageImpl::eInstance()->getCollaboration_EClass();
 }
 
 //*********************************
@@ -422,7 +455,7 @@ std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement > > CollaborationImpl::getCollaborationRole() const
+std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> CollaborationImpl::getCollaborationRole() const
 {
 
     return m_collaborationRole;
@@ -432,15 +465,15 @@ std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement > > Coll
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > CollaborationImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> CollaborationImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > CollaborationImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> CollaborationImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > CollaborationImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> CollaborationImpl::getMember() const
 {
 	return m_member;
 }
@@ -448,11 +481,11 @@ std::weak_ptr<uml::Namespace > CollaborationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > CollaborationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> CollaborationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > CollaborationImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> CollaborationImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -460,117 +493,235 @@ std::weak_ptr<uml::Element > CollaborationImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > CollaborationImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> CollaborationImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > CollaborationImpl::getRole() const
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> CollaborationImpl::getRole() const
 {
 	return m_role;
 }
 
 
+std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr()
+{
+	return m_thisCollaborationPtr.lock();
+}
+void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr)
+{
+	m_thisCollaborationPtr = thisCollaborationPtr;
+	setThisBehavioredClassifierPtr(thisCollaborationPtr);
+	setThisStructuredClassifierPtr(thisCollaborationPtr);
+}
+std::shared_ptr<ecore::EObject> CollaborationImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CollaborationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //9126
-		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //9139
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //914
-		case UmlPackage::COLLABORATION_COLLABORATIONROLE:
+		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
 			return getCollaborationRole(); //9146
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //9127
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //910
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //9111
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //9125
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //9128
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //9129
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //9114
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //9131
-		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //9140
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //9132
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //9133
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //9110
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //9115
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //915
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //916
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //917
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //9139
-		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //9141
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //911
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDCONNECTOR:
-			return getOwnedConnector(); //9140
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //912
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //9113
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //9110
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //915
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //9134
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //913
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //9112
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //914
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //9113
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //9112
-		case UmlPackage::STRUCTUREDCLASSIFIER_PART:
-			return getPart(); //9141
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //9130
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //918
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //9136
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //9111
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //9112
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //9137
-		case UmlPackage::STRUCTUREDCLASSIFIER_ROLE:
-			return getRole(); //9142
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //9138
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //914
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //915
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //9135
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //919
 	}
-	return boost::any();
+	boost::any result;
+	result = BehavioredClassifierImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::internalEIsSet(featureID);
+	return result;
 }
+bool CollaborationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+			return getCollaborationRole() != nullptr; //9146
+	}
+	bool result = false;
+	result = BehavioredClassifierImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::internalEIsSet(featureID);
+	return result;
+}
+bool CollaborationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = BehavioredClassifierImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CollaborationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CollaborationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("collaborationRole");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("collaborationRole")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
+	StructuredClassifierImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CollaborationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	BehavioredClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	StructuredClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void CollaborationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+		{
+			std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ConnectableElement> _r = std::dynamic_pointer_cast<uml::ConnectableElement>(ref);
+				if (_r != nullptr)
+				{
+					_collaborationRole->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	BehavioredClassifierImpl::resolveReferences(featureID, references);
+	StructuredClassifierImpl::resolveReferences(featureID, references);
+}
+
+void CollaborationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRole_list = this->getCollaborationRole();
+		for (std::shared_ptr<uml::ConnectableElement > object : *collaborationRole_list)
+		{ 
+			saveHandler->addReferences("collaborationRole", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

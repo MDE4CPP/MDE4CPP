@@ -1,39 +1,73 @@
-#include "PartDecompositionImpl.hpp"
-#include <iostream>
+#include "uml/impl/PartDecompositionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Gate.hpp"
+#include "uml/Element.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/Gate.hpp"
 
-#include "Interaction.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/Interaction.hpp"
 
-#include "InteractionUse.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/InteractionUse.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "Property.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Property.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -59,7 +93,6 @@ PartDecompositionImpl::~PartDecompositionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PartDecomposition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -120,10 +153,10 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -200,13 +233,14 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 
 std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new PartDecompositionImpl(*this));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(*this));
+	element->setThisPartDecompositionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPartDecomposition();
+	return UmlPackageImpl::eInstance()->getPartDecomposition_EClass();
 }
 
 //*********************************
@@ -245,7 +279,7 @@ std::weak_ptr<uml::Namespace > PartDecompositionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > PartDecompositionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> PartDecompositionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -255,51 +289,138 @@ std::weak_ptr<uml::Element > PartDecompositionImpl::getOwner() const
 }
 
 
+std::shared_ptr<PartDecomposition> PartDecompositionImpl::getThisPartDecompositionPtr()
+{
+	return m_thisPartDecompositionPtr.lock();
+}
+void PartDecompositionImpl::setThisPartDecompositionPtr(std::weak_ptr<PartDecomposition> thisPartDecompositionPtr)
+{
+	m_thisPartDecompositionPtr = thisPartDecompositionPtr;
+	setThisInteractionUsePtr(thisPartDecompositionPtr);
+}
+std::shared_ptr<ecore::EObject> PartDecompositionImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PartDecompositionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PartDecompositionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ACTUALGATE:
-			return getActualGate(); //21414
-		case UmlPackage::INTERACTIONUSE_ARGUMENT:
-			return getArgument(); //21415
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2144
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
-			return getCovered(); //21410
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2140
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //21412
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //21411
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
-			return getGeneralOrdering(); //21413
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2145
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2146
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2147
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2141
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2142
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2143
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2148
-		case UmlPackage::INTERACTIONUSE_REFERSTO:
-			return getRefersTo(); //21416
-		case UmlPackage::INTERACTIONUSE_RETURNVALUE:
-			return getReturnValue(); //21417
-		case UmlPackage::INTERACTIONUSE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient(); //21418
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2149
 	}
-	return boost::any();
+	return InteractionUseImpl::internalEIsSet(featureID);
 }
+bool PartDecompositionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return InteractionUseImpl::internalEIsSet(featureID);
+}
+bool PartDecompositionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return InteractionUseImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PartDecompositionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void PartDecompositionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InteractionUseImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PartDecompositionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	InteractionUseImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void PartDecompositionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InteractionUseImpl::resolveReferences(featureID, references);
+}
+
+void PartDecompositionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionUseImpl::saveContent(saveHandler);
+	
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void PartDecompositionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,61 +1,95 @@
-#include "ConditionalNodeImpl.hpp"
-#include <iostream>
+#include "uml/impl/ConditionalNodeImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Clause.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Clause.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Variable.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
+#include "uml/Variable.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -103,7 +137,6 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConditionalNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -113,10 +146,10 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					 m_activity = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 					 m_inActivity = par_Activity;
 					 return;
 				default:
@@ -199,41 +232,41 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):Condit
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
 	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
 	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_context  = obj.getContext();
 
 	m_inActivity  = obj.getInActivity();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_superGroup  = obj.getSuperGroup();
@@ -415,13 +448,14 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):Condit
 
 std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ConditionalNodeImpl(*this));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(*this));
+	element->setThisConditionalNodePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConditionalNode();
+	return UmlPackageImpl::eInstance()->getConditionalNode_EClass();
 }
 
 //*********************************
@@ -489,14 +523,14 @@ bool ConditionalNodeImpl::result_no_incoming(boost::any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Clause, uml::Element > > ConditionalNodeImpl::getClause() const
+std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClause() const
 {
 //assert(m_clause);
     return m_clause;
 }
 
 
-std::shared_ptr< Bag<uml::OutputPin> > ConditionalNodeImpl::getResult() const
+std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
 
     return m_result;
@@ -506,35 +540,35 @@ std::shared_ptr< Bag<uml::OutputPin> > ConditionalNodeImpl::getResult() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityEdge> > ConditionalNodeImpl::getContainedEdge() const
+std::shared_ptr<Union<uml::ActivityEdge>> ConditionalNodeImpl::getContainedEdge() const
 {
 	return m_containedEdge;
 }
-std::shared_ptr<Union<uml::ActivityNode> > ConditionalNodeImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode>> ConditionalNodeImpl::getContainedNode() const
 {
 	return m_containedNode;
 }
-std::shared_ptr<Union<uml::ActivityGroup> > ConditionalNodeImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> ConditionalNodeImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > ConditionalNodeImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ConditionalNodeImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<Union<uml::NamedElement> > ConditionalNodeImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ConditionalNodeImpl::getMember() const
 {
 	return m_member;
 }
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > ConditionalNodeImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ConditionalNodeImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<Union<uml::Element> > ConditionalNodeImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ConditionalNodeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ConditionalNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ConditionalNodeImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -542,117 +576,297 @@ std::weak_ptr<uml::Element > ConditionalNodeImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ConditionalNodeImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ConditionalNodeImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr()
+{
+	return m_thisConditionalNodePtr.lock();
+}
+void ConditionalNodeImpl::setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr)
+{
+	m_thisConditionalNodePtr = thisConditionalNodePtr;
+	setThisStructuredActivityNodePtr(thisConditionalNodePtr);
+}
+std::shared_ptr<ecore::EObject> ConditionalNodeImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_inActivity.lock())
+	{
+		return wp;
+	}
+
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_superGroup.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConditionalNodeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //14613
-		case UmlPackage::CONDITIONALNODE_CLAUSE:
+		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
 			return getClause(); //14645
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1464
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
-			return getContainedEdge(); //14610
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
-			return getContainedNode(); //14611
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //14622
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1460
-		case UmlPackage::STRUCTUREDACTIVITYNODE_EDGE:
-			return getEdge(); //14639
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //14611
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //14621
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //14614
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
-			return getInActivity(); //14612
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //14614
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //14615
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //14620
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //14616
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //14617
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //14623
-		case UmlPackage::CONDITIONALNODE_ISASSURED:
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
 			return getIsAssured(); //14646
-		case UmlPackage::CONDITIONALNODE_ISDETERMINATE:
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
 			return getIsDeterminate(); //14647
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //14610
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //14624
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //14625
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //14626
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //14615
-		case UmlPackage::STRUCTUREDACTIVITYNODE_MUSTISOLATE:
-			return getMustIsolate(); //14640
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1465
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1466
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1467
-		case UmlPackage::STRUCTUREDACTIVITYNODE_NODE:
-			return getNode(); //14644
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //14618
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //14627
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1461
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1462
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //14613
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //14610
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1463
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //14612
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1468
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //14611
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //14619
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //14612
-		case UmlPackage::CONDITIONALNODE_RESULT:
+		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
 			return getResult(); //14648
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput(); //14641
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput(); //14642
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
-			return getSubgroup(); //14613
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
-			return getSuperGroup(); //14614
-		case UmlPackage::STRUCTUREDACTIVITYNODE_VARIABLE:
-			return getVariable(); //14643
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1469
 	}
-	return boost::any();
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
+bool ConditionalNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
+			return getClause() != nullptr; //14645
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+			return getIsAssured() != false; //14646
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+			return getIsDeterminate() != false; //14647
+		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
+			return getResult() != nullptr; //14648
+	}
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+}
+bool ConditionalNodeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+		{
+			// BOOST CAST
+			bool _isAssured = boost::any_cast<bool>(newValue);
+			setIsAssured(_isAssured); //14646
+			return true;
+		}
+		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+		{
+			// BOOST CAST
+			bool _isDeterminate = boost::any_cast<bool>(newValue);
+			setIsDeterminate(_isDeterminate); //14647
+			return true;
+		}
+	}
+
+	return StructuredActivityNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ConditionalNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ConditionalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isAssured");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsAssured(value);
+		}
+
+		iter = attr_list.find("isDeterminate");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsDeterminate(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("clause") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Clause";
+			}
+			std::shared_ptr<uml::Clause> clause = std::dynamic_pointer_cast<uml::Clause>(modelFactory->create(typeName));
+			if (clause != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Clause, uml::Element>> list_clause = this->getClause();
+				list_clause->push_back(clause);
+				loadHandler->handleChild(clause);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			if (result != nullptr)
+			{
+				std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
+				list_result->push_back(result);
+				loadHandler->handleChild(result);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ConditionalNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	StructuredActivityNodeImpl::resolveReferences(featureID, references);
+}
+
+void ConditionalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredActivityNodeImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	ActivityGroupImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'clause'
+		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
+		{
+			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getConditionalNode_EAttribute_isAssured()) )
+		{
+			saveHandler->addAttribute("isAssured", this->getIsAssured());
+		}
+
+		if ( this->eIsSet(package->getConditionalNode_EAttribute_isDeterminate()) )
+		{
+			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
+		}
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'result'
+		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
+		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

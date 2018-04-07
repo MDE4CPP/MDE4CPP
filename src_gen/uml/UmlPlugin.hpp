@@ -7,19 +7,7 @@
 #ifndef UMLPLUGIN_HPP
 #define UMLPLUGIN_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include "EcoreModelPlugin.hpp"
+#include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace uml
 {
@@ -28,12 +16,14 @@ namespace uml
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
 	
+			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
-	
-			virtual std::shared_ptr<ecore::EFactory> getFactory() = 0;
-			virtual std::shared_ptr<ecore::EPackage> getPackage() = 0;
+			
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
+			virtual std::shared_ptr<ecore::EFactory> getEFactory() = 0;
+			virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
 	
 		protected:
 			UmlPlugin(){};
@@ -44,4 +34,3 @@ namespace uml
 	};
 }
 #endif /* end of include guard: UMLPLUGIN_HPP */
-

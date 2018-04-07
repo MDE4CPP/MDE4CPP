@@ -1,27 +1,60 @@
-#include "TypedElementImpl.hpp"
-#include <iostream>
+#include "uml/impl/TypedElementImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Type.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/Type.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -49,7 +82,6 @@ TypedElementImpl::~TypedElementImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TypedElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -88,7 +120,7 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -128,13 +160,14 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 
 std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TypedElementImpl(*this));
+	std::shared_ptr<TypedElementImpl> element(new TypedElementImpl(*this));
+	element->setThisTypedElementPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTypedElement();
+	return UmlPackageImpl::eInstance()->getTypedElement_EClass();
 }
 
 //*********************************
@@ -161,7 +194,7 @@ void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > TypedElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TypedElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -171,35 +204,177 @@ std::weak_ptr<uml::Element > TypedElementImpl::getOwner() const
 }
 
 
+std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr()
+{
+	return m_thisTypedElementPtr.lock();
+}
+void TypedElementImpl::setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr)
+{
+	m_thisTypedElementPtr = thisTypedElementPtr;
+	setThisNamedElementPtr(thisTypedElementPtr);
+}
+std::shared_ptr<ecore::EObject> TypedElementImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TypedElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //304
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //300
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //305
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //306
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //307
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //301
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //302
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //303
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //308
-		case UmlPackage::TYPEDELEMENT_TYPE:
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
 			return getType(); //3010
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //309
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
+bool TypedElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+			return getType() != nullptr; //3010
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool TypedElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
+			setType(_type); //3010
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TypedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+		else
+		{
+			std::shared_ptr<uml::Type> type = std::dynamic_pointer_cast<uml::Type>(loadHandler->checkNodeType(getThisTypedElementPtr()));
+			if (type)
+			{
+				setType(type);
+			}
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TypedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void TypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

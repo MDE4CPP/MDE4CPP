@@ -7,29 +7,13 @@
 #ifndef UML_CLASSIFIERTEMPLATEPARAMETERCLASSIFIERTEMPLATEPARAMETERIMPL_HPP
 #define UML_CLASSIFIERTEMPLATEPARAMETERCLASSIFIERTEMPLATEPARAMETERIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../ClassifierTemplateParameter.hpp"
 
-#include "impl/TemplateParameterImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/TemplateParameterImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -46,6 +30,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClassifierTemplateParameterImpl();
+			virtual std::shared_ptr<ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr();
+			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
 			ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
@@ -125,7 +111,7 @@ namespace uml
 			/*!
 			 The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any Classifier that is compatible with this constraining Classifier can be substituted; otherwise, it must be either this Classifier or one of its specializations. If this property is empty, there are no constraints on the Classifier that can be used as an argument.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getConstrainingClassifier() const ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getConstrainingClassifier() const ;
 			
 							
 			
@@ -135,7 +121,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
@@ -143,12 +129,29 @@ namespace uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ClassifierTemplateParameter> m_thisClassifierTemplateParameterPtr;
 	};
 }
 #endif /* end of include guard: UML_CLASSIFIERTEMPLATEPARAMETERCLASSIFIERTEMPLATEPARAMETERIMPL_HPP */
-

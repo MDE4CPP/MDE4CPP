@@ -1,21 +1,54 @@
-#include "QualifierValueImpl.hpp"
-#include <iostream>
+#include "uml/impl/QualifierValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EAnnotation.hpp"
+#include "uml/Comment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "InputPin.hpp"
+#include "uml/Element.hpp"
 
-#include "Property.hpp"
+#include "uml/InputPin.hpp"
 
+#include "uml/Property.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -47,7 +80,6 @@ QualifierValueImpl::~QualifierValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete QualifierValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -102,13 +134,14 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):Qualifier
 
 std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new QualifierValueImpl(*this));
+	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(*this));
+	element->setThisQualifierValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getQualifierValue();
+	return UmlPackageImpl::eInstance()->getQualifierValue_EClass();
 }
 
 //*********************************
@@ -162,31 +195,198 @@ void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > QualifierValueImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
 
 
+std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr()
+{
+	return m_thisQualifierValuePtr.lock();
+}
+void QualifierValueImpl::setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr)
+{
+	m_thisQualifierValuePtr = thisQualifierValuePtr;
+	setThisElementPtr(thisQualifierValuePtr);
+}
+std::shared_ptr<ecore::EObject> QualifierValueImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any QualifierValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1270
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1271
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1272
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1273
-		case UmlPackage::QUALIFIERVALUE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1274
-		case UmlPackage::QUALIFIERVALUE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 			return getValue(); //1275
 	}
-	return boost::any();
+	return ElementImpl::internalEIsSet(featureID);
 }
+bool QualifierValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+			return getQualifier() != nullptr; //1274
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+			return getValue() != nullptr; //1275
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+bool QualifierValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _qualifier = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setQualifier(_qualifier); //1274
+			return true;
+		}
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //1275
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void QualifierValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void QualifierValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("qualifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("qualifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("value")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setQualifier(_qualifier);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>( references.front() );
+				setValue(_value);
+			}
+			
+			return;
+		}
+	}
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void QualifierValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("qualifier", this->getQualifier());
+		saveHandler->addReference("value", this->getValue());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

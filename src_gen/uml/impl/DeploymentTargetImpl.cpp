@@ -1,29 +1,62 @@
-#include "DeploymentTargetImpl.hpp"
-#include <iostream>
+#include "uml/impl/DeploymentTargetImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "Deployment.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Deployment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/PackageableElement.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -70,7 +103,6 @@ DeploymentTargetImpl::~DeploymentTargetImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DeploymentTarget "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -109,10 +141,10 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -165,13 +197,14 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 
 std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DeploymentTargetImpl(*this));
+	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl(*this));
+	element->setThisDeploymentTargetPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeploymentTarget();
+	return UmlPackageImpl::eInstance()->getDeploymentTarget_EClass();
 }
 
 //*********************************
@@ -190,14 +223,14 @@ std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployed
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElement() const
+std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElement() const
 {
 
     return m_deployedElement;
 }
 
 
-std::shared_ptr<Subset<uml::Deployment, uml::Element > > DeploymentTargetImpl::getDeployment() const
+std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::getDeployment() const
 {
 
     return m_deployment;
@@ -207,7 +240,7 @@ std::shared_ptr<Subset<uml::Deployment, uml::Element > > DeploymentTargetImpl::g
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > DeploymentTargetImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DeploymentTargetImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -217,37 +250,160 @@ std::weak_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
 }
 
 
+std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr()
+{
+	return m_thisDeploymentTargetPtr.lock();
+}
+void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr)
+{
+	m_thisDeploymentTargetPtr = thisDeploymentTargetPtr;
+	setThisNamedElementPtr(thisDeploymentTargetPtr);
+}
+std::shared_ptr<ecore::EObject> DeploymentTargetImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeploymentTargetImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //354
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
+		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
 			return getDeployedElement(); //3510
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
 			return getDeployment(); //3511
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //350
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //355
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //356
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //357
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //351
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //352
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //353
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //358
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //359
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
+bool DeploymentTargetImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
+			return getDeployedElement() != nullptr; //3510
+		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
+			return getDeployment() != nullptr; //3511
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool DeploymentTargetImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DeploymentTargetImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DeploymentTargetImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("deployment") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Deployment";
+			}
+			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION);
+			if (deployment != nullptr)
+			{
+				loadHandler->handleChild(deployment);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DeploymentTargetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void DeploymentTargetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'deployment'
+		for (std::shared_ptr<uml::Deployment> deployment : *this->getDeployment()) 
+		{
+			saveHandler->addReference(deployment, "deployment", deployment->eClass() != package->getDeployment_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

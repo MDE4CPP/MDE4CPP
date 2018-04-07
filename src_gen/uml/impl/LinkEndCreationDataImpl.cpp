@@ -1,25 +1,58 @@
-#include "LinkEndCreationDataImpl.hpp"
-#include <iostream>
+#include "uml/impl/LinkEndCreationDataImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "EAnnotation.hpp"
+#include "uml/Comment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "InputPin.hpp"
+#include "uml/Element.hpp"
 
-#include "LinkEndData.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Property.hpp"
+#include "uml/LinkEndData.hpp"
 
-#include "QualifierValue.hpp"
+#include "uml/Property.hpp"
 
+#include "uml/QualifierValue.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -47,7 +80,6 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndCreationData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -113,13 +145,14 @@ LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl &
 
 std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new LinkEndCreationDataImpl(*this));
+	std::shared_ptr<LinkEndCreationDataImpl> element(new LinkEndCreationDataImpl(*this));
+	element->setThisLinkEndCreationDataPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndCreationData();
+	return UmlPackageImpl::eInstance()->getLinkEndCreationData_EClass();
 }
 
 //*********************************
@@ -160,37 +193,196 @@ void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insert
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > LinkEndCreationDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
 
 
+std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr()
+{
+	return m_thisLinkEndCreationDataPtr.lock();
+}
+void LinkEndCreationDataImpl::setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr)
+{
+	m_thisLinkEndCreationDataPtr = thisLinkEndCreationDataPtr;
+	setThisLinkEndDataPtr(thisLinkEndCreationDataPtr);
+}
+std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndCreationDataImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1480
-		case UmlPackage::LINKENDDATA_END:
-			return getEnd(); //1484
-		case UmlPackage::LINKENDCREATIONDATA_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
 			return getInsertAt(); //1487
-		case UmlPackage::LINKENDCREATIONDATA_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll(); //1488
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1481
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1482
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1483
-		case UmlPackage::LINKENDDATA_QUALIFIER:
-			return getQualifier(); //1485
-		case UmlPackage::LINKENDDATA_VALUE:
-			return getValue(); //1486
 	}
-	return boost::any();
+	return LinkEndDataImpl::internalEIsSet(featureID);
 }
+bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+			return getInsertAt() != nullptr; //1487
+		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1488
+	}
+	return LinkEndDataImpl::internalEIsSet(featureID);
+}
+bool LinkEndCreationDataImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _insertAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setInsertAt(_insertAt); //1487
+			return true;
+		}
+		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
+		{
+			// BOOST CAST
+			bool _isReplaceAll = boost::any_cast<bool>(newValue);
+			setIsReplaceAll(_isReplaceAll); //1488
+			return true;
+		}
+	}
+
+	return LinkEndDataImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LinkEndCreationDataImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void LinkEndCreationDataImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isReplaceAll");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsReplaceAll(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("insertAt");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("insertAt")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	LinkEndDataImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	LinkEndDataImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>( references.front() );
+				setInsertAt(_insertAt);
+			}
+			
+			return;
+		}
+	}
+	LinkEndDataImpl::resolveReferences(featureID, references);
+}
+
+void LinkEndCreationDataImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	LinkEndDataImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getLinkEndCreationData_EAttribute_isReplaceAll()) )
+		{
+			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
+		}
+
+		// Add references
+		saveHandler->addReference("insertAt", this->getInsertAt());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

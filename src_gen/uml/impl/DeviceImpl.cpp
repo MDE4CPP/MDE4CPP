@@ -1,81 +1,114 @@
-#include "DeviceImpl.hpp"
-#include <iostream>
+#include "uml/impl/DeviceImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Class.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/Comment.hpp"
 
-#include "Connector.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Connector.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Deployment.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Deployment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Extension.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Feature.hpp"
+#include "uml/Extension.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Node.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Operation.hpp"
+#include "uml/Node.hpp"
 
-#include "Package.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Port.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Property.hpp"
+#include "uml/Port.hpp"
 
-#include "Reception.hpp"
+#include "uml/Property.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Reception.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "UseCase.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -101,7 +134,6 @@ DeviceImpl::~DeviceImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Device "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -133,10 +165,10 @@ DeviceImpl::~DeviceImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -183,19 +215,19 @@ DeviceImpl::DeviceImpl(const DeviceImpl & obj):DeviceImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
-	std::shared_ptr< Bag<uml::Extension> > _extension = obj.getExtension();
+	std::shared_ptr<Bag<uml::Extension>> _extension = obj.getExtension();
 	m_extension.reset(new Bag<uml::Extension>(*(obj.getExtension().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -208,24 +240,24 @@ DeviceImpl::DeviceImpl(const DeviceImpl & obj):DeviceImpl()
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	std::shared_ptr<Bag<uml::Property>> _part = obj.getPart();
 	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-	std::shared_ptr< Bag<uml::Class> > _superClass = obj.getSuperClass();
+	std::shared_ptr<Bag<uml::Class>> _superClass = obj.getSuperClass();
 	m_superClass.reset(new Bag<uml::Class>(*(obj.getSuperClass().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -448,13 +480,14 @@ DeviceImpl::DeviceImpl(const DeviceImpl & obj):DeviceImpl()
 
 std::shared_ptr<ecore::EObject>  DeviceImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DeviceImpl(*this));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(*this));
+	element->setThisDevicePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDevice();
+	return UmlPackageImpl::eInstance()->getDevice_EClass();
 }
 
 //*********************************
@@ -472,15 +505,15 @@ std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > DeviceImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> DeviceImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > DeviceImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> DeviceImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > DeviceImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> DeviceImpl::getMember() const
 {
 	return m_member;
 }
@@ -488,11 +521,11 @@ std::weak_ptr<uml::Namespace > DeviceImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > DeviceImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DeviceImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > DeviceImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> DeviceImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -500,135 +533,174 @@ std::weak_ptr<uml::Element > DeviceImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > DeviceImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> DeviceImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > DeviceImpl::getRole() const
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> DeviceImpl::getRole() const
 {
 	return m_role;
 }
 
 
+std::shared_ptr<Device> DeviceImpl::getThisDevicePtr()
+{
+	return m_thisDevicePtr.lock();
+}
+void DeviceImpl::setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr)
+{
+	m_thisDevicePtr = thisDevicePtr;
+	setThisNodePtr(thisDevicePtr);
+}
+std::shared_ptr<ecore::EObject> DeviceImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeviceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DeviceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //20626
-		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //20639
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2064
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //20627
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
-			return getDeployedElement(); //20610
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYMENT:
-			return getDeployment(); //20611
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2060
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //20611
-		case UmlPackage::CLASS_EXTENSION:
-			return getExtension(); //20648
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //20625
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //20628
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //20629
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //20614
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //20631
-		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //20640
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //20632
-		case UmlPackage::CLASS_ISACTIVE:
-			return getIsActive(); //20649
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //20633
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //20610
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //20615
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2065
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2066
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2067
-		case UmlPackage::CLASS_NESTEDCLASSIFIER:
-			return getNestedClassifier(); //20650
-		case UmlPackage::NODE_NESTEDNODE:
-			return getNestedNode(); //20655
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //20639
-		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //20641
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2061
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDCONNECTOR:
-			return getOwnedConnector(); //20640
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2062
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //20613
-		case UmlPackage::CLASS_OWNEDOPERATION:
-			return getOwnedOperation(); //20647
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_OWNEDPORT:
-			return getOwnedPort(); //20643
-		case UmlPackage::CLASS_OWNEDRECEPTION:
-			return getOwnedReception(); //20651
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //20610
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //2065
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //20634
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2063
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //20612
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2064
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //20613
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //20612
-		case UmlPackage::STRUCTUREDCLASSIFIER_PART:
-			return getPart(); //20641
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //20630
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2068
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //20636
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //20611
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //20612
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //20637
-		case UmlPackage::STRUCTUREDCLASSIFIER_ROLE:
-			return getRole(); //20642
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //20638
-		case UmlPackage::CLASS_SUPERCLASS:
-			return getSuperClass(); //20652
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //2064
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2065
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //20635
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2069
 	}
-	return boost::any();
+	return NodeImpl::internalEIsSet(featureID);
 }
+bool DeviceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return NodeImpl::internalEIsSet(featureID);
+}
+bool DeviceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DeviceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DeviceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DeviceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DeviceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	NodeImpl::resolveReferences(featureID, references);
+}
+
+void DeviceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NodeImpl::saveContent(saveHandler);
+	
+	ClassImpl::saveContent(saveHandler);
+	DeploymentTargetImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

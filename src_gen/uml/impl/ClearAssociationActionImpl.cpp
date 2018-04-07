@@ -1,53 +1,87 @@
-#include "ClearAssociationActionImpl.hpp"
-#include <iostream>
+#include "uml/impl/ClearAssociationActionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Action.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Activity.hpp"
+#include "uml/Action.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Association.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Association.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/StructuredActivityNode.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -79,7 +113,6 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClearAssociationAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -146,30 +179,30 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationAct
 
 	m_association  = obj.getAssociation();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
@@ -259,13 +292,14 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationAct
 
 std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ClearAssociationActionImpl(*this));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(*this));
+	element->setThisClearAssociationActionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClearAssociationAction();
+	return UmlPackageImpl::eInstance()->getClearAssociationAction_EClass();
 }
 
 //*********************************
@@ -313,15 +347,15 @@ void ClearAssociationActionImpl::setObject(std::shared_ptr<uml::InputPin> _objec
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > ClearAssociationActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> ClearAssociationActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > ClearAssociationActionImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ClearAssociationActionImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<Union<uml::Element> > ClearAssociationActionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ClearAssociationActionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -329,79 +363,241 @@ std::weak_ptr<uml::Element > ClearAssociationActionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ClearAssociationActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ClearAssociationActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr()
+{
+	return m_thisClearAssociationActionPtr.lock();
+}
+void ClearAssociationActionImpl::setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr)
+{
+	m_thisClearAssociationActionPtr = thisClearAssociationActionPtr;
+	setThisActionPtr(thisClearAssociationActionPtr);
+}
+std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearAssociationActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //14313
-		case UmlPackage::CLEARASSOCIATIONACTION_ASSOCIATION:
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
 			return getAssociation(); //14328
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1434
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //14322
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1430
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //14321
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //14314
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //14315
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //14320
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //14316
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //14317
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //14323
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //14310
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //14324
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //14325
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //14326
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1435
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1436
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1437
-		case UmlPackage::CLEARASSOCIATIONACTION_OBJECT:
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
 			return getObject(); //14329
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //14318
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //14327
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1431
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1432
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1433
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1438
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //14311
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //14319
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //14312
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1439
 	}
-	return boost::any();
+	return ActionImpl::internalEIsSet(featureID);
 }
+bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+			return getAssociation() != nullptr; //14328
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
+			return getObject() != nullptr; //14329
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+bool ClearAssociationActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Association> _association = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			setAssociation(_association); //14328
+			return true;
+		}
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setObject(_object); //14329
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ClearAssociationActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ClearAssociationActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("association");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("association")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("object") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<uml::InputPin> object = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			if (object != nullptr)
+			{
+				this->setObject(object);
+				loadHandler->handleChild(object);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ClearAssociationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>( references.front() );
+				setAssociation(_association);
+			}
+			
+			return;
+		}
+	}
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void ClearAssociationActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'object'
+		std::shared_ptr<uml::InputPin > object = this->getObject();
+		if (object != nullptr)
+		{
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("association", this->getAssociation());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

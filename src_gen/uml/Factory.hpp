@@ -7,27 +7,33 @@
 #ifndef UML_FACTORY_HPP
 #define UML_FACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -50,13 +56,8 @@ namespace uml
 	class Element;
 }
 
-namespace uml 
-{
-	class Element;
-}
-
 // base class includes
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 // enum includes
 
@@ -121,10 +122,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_FACTORY_HPP */
-

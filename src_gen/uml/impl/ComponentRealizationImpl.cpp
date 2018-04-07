@@ -1,37 +1,70 @@
-#include "ComponentRealizationImpl.hpp"
-#include <iostream>
+#include "uml/impl/ComponentRealizationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Component.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Component.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "OpaqueExpression.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/OpaqueExpression.hpp"
 
-#include "Realization.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Realization.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -75,7 +108,6 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ComponentRealization "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -149,7 +181,7 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	
 	m_abstraction  = obj.getAbstraction();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -160,7 +192,7 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -227,13 +259,14 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 
 std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ComponentRealizationImpl(*this));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(*this));
+	element->setThisComponentRealizationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComponentRealization();
+	return UmlPackageImpl::eInstance()->getComponentRealization_EClass();
 }
 
 //*********************************
@@ -257,7 +290,7 @@ void ComponentRealizationImpl::setAbstraction(std::shared_ptr<uml::Component> _a
     m_abstraction = _abstraction;
 }
 
-std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > > ComponentRealizationImpl::getRealizingClassifier() const
+std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> ComponentRealizationImpl::getRealizingClassifier() const
 {
 //assert(m_realizingClassifier);
     return m_realizingClassifier;
@@ -271,7 +304,7 @@ std::weak_ptr<uml::Namespace > ComponentRealizationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ComponentRealizationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -279,69 +312,235 @@ std::weak_ptr<uml::Element > ComponentRealizationImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> ComponentRealizationImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ComponentRealizationImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ComponentRealizationImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr()
+{
+	return m_thisComponentRealizationPtr.lock();
+}
+void ComponentRealizationImpl::setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr)
+{
+	m_thisComponentRealizationPtr = thisComponentRealizationPtr;
+	setThisRealizationPtr(thisComponentRealizationPtr);
+}
+std::shared_ptr<ecore::EObject> ComponentRealizationImpl::eContainer() const
+{
+	if(auto wp = m_abstraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ComponentRealizationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
 			return getAbstraction(); //24020
-		case UmlPackage::DEPENDENCY_CLIENT:
-			return getClient(); //24016
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2404
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2400
-		case UmlPackage::ABSTRACTION_MAPPING:
-			return getMapping(); //24018
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2405
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2406
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2407
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2401
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2402
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2403
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //24012
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2404
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2408
-		case UmlPackage::COMPONENTREALIZATION_REALIZINGCLASSIFIER:
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
 			return getRealizingClassifier(); //24019
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
-			return getRelatedElement(); //2404
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
-			return getSource(); //2405
-		case UmlPackage::DEPENDENCY_SUPPLIER:
-			return getSupplier(); //24017
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
-			return getTarget(); //2406
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2405
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2409
 	}
-	return boost::any();
+	return RealizationImpl::internalEIsSet(featureID);
 }
+bool ComponentRealizationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+			return getAbstraction().lock() != nullptr; //24020
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+			return getRealizingClassifier() != nullptr; //24019
+	}
+	return RealizationImpl::internalEIsSet(featureID);
+}
+bool ComponentRealizationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Component> _abstraction = boost::any_cast<std::shared_ptr<uml::Component>>(newValue);
+			setAbstraction(_abstraction); //24020
+			return true;
+		}
+	}
+
+	return RealizationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ComponentRealizationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ComponentRealizationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("realizingClassifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("realizingClassifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	RealizationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ComponentRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	RealizationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Component> _abstraction = std::dynamic_pointer_cast<uml::Component>( references.front() );
+				setAbstraction(_abstraction);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_realizingClassifier->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	RealizationImpl::resolveReferences(featureID, references);
+}
+
+void ComponentRealizationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	RealizationImpl::saveContent(saveHandler);
+	
+	AbstractionImpl::saveContent(saveHandler);
+	
+	DependencyImpl::saveContent(saveHandler);
+	
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::Classifier>> realizingClassifier_list = this->getRealizingClassifier();
+		for (std::shared_ptr<uml::Classifier > object : *realizingClassifier_list)
+		{ 
+			saveHandler->addReferences("realizingClassifier", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

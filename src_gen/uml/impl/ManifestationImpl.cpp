@@ -1,35 +1,68 @@
-#include "ManifestationImpl.hpp"
-#include <iostream>
+#include "uml/impl/ManifestationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Abstraction.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Abstraction.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "OpaqueExpression.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/OpaqueExpression.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -57,7 +90,6 @@ ManifestationImpl::~ManifestationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Manifestation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -118,7 +150,7 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):Manifestatio
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -129,7 +161,7 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):Manifestatio
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -195,13 +227,14 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):Manifestatio
 
 std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ManifestationImpl(*this));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(*this));
+	element->setThisManifestationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getManifestation();
+	return UmlPackageImpl::eInstance()->getManifestation_EClass();
 }
 
 //*********************************
@@ -232,7 +265,7 @@ std::weak_ptr<uml::Namespace > ManifestationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ManifestationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ManifestationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -240,67 +273,205 @@ std::weak_ptr<uml::Element > ManifestationImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > ManifestationImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> ManifestationImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ManifestationImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ManifestationImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr()
+{
+	return m_thisManifestationPtr.lock();
+}
+void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr)
+{
+	m_thisManifestationPtr = thisManifestationPtr;
+	setThisAbstractionPtr(thisManifestationPtr);
+}
+std::shared_ptr<ecore::EObject> ManifestationImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ManifestationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_CLIENT:
-			return getClient(); //4116
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //414
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //410
-		case UmlPackage::ABSTRACTION_MAPPING:
-			return getMapping(); //4118
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //415
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //416
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //417
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //411
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //412
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //413
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //4112
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //414
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //418
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
-			return getRelatedElement(); //414
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
-			return getSource(); //415
-		case UmlPackage::DEPENDENCY_SUPPLIER:
-			return getSupplier(); //4117
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
-			return getTarget(); //416
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //415
-		case UmlPackage::MANIFESTATION_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
 			return getUtilizedElement(); //4119
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //419
 	}
-	return boost::any();
+	return AbstractionImpl::internalEIsSet(featureID);
 }
+bool ManifestationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+			return getUtilizedElement() != nullptr; //4119
+	}
+	return AbstractionImpl::internalEIsSet(featureID);
+}
+bool ManifestationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PackageableElement> _utilizedElement = boost::any_cast<std::shared_ptr<uml::PackageableElement>>(newValue);
+			setUtilizedElement(_utilizedElement); //4119
+			return true;
+		}
+	}
+
+	return AbstractionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ManifestationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("utilizedElement");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("utilizedElement")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	AbstractionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	AbstractionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ManifestationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>( references.front() );
+				setUtilizedElement(_utilizedElement);
+			}
+			
+			return;
+		}
+	}
+	AbstractionImpl::resolveReferences(featureID, references);
+}
+
+void ManifestationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	AbstractionImpl::saveContent(saveHandler);
+	
+	DependencyImpl::saveContent(saveHandler);
+	
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("utilizedElement", this->getUtilizedElement());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

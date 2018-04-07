@@ -1,35 +1,69 @@
-#include "ActivityGroupImpl.hpp"
-#include <iostream>
+#include "uml/impl/ActivityGroupImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityContent.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityContent.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "Comment.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -99,7 +133,6 @@ ActivityGroupImpl::~ActivityGroupImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityGroup "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -160,13 +193,13 @@ ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGrou
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
 	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
 	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_inActivity  = obj.getInActivity();
@@ -208,13 +241,14 @@ ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGrou
 
 std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityGroupImpl(*this));
+	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl(*this));
+	element->setThisActivityGroupPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityGroup();
+	return UmlPackageImpl::eInstance()->getActivityGroup_EClass();
 }
 
 //*********************************
@@ -264,15 +298,15 @@ void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityEdge> > ActivityGroupImpl::getContainedEdge() const
+std::shared_ptr<Union<uml::ActivityEdge>> ActivityGroupImpl::getContainedEdge() const
 {
 	return m_containedEdge;
 }
-std::shared_ptr<Union<uml::ActivityNode> > ActivityGroupImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode>> ActivityGroupImpl::getContainedNode() const
 {
 	return m_containedNode;
 }
-std::shared_ptr<Union<uml::Element> > ActivityGroupImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ActivityGroupImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -280,7 +314,7 @@ std::weak_ptr<uml::Element > ActivityGroupImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > > ActivityGroupImpl::getSubgroup() const
+std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityGroupImpl::getSubgroup() const
 {
 	return m_subgroup;
 }
@@ -290,43 +324,236 @@ std::weak_ptr<uml::ActivityGroup > ActivityGroupImpl::getSuperGroup() const
 }
 
 
+std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr()
+{
+	return m_thisActivityGroupPtr.lock();
+}
+void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr)
+{
+	m_thisActivityGroupPtr = thisActivityGroupPtr;
+	setThisActivityContentPtr(thisActivityGroupPtr);
+	setThisNamedElementPtr(thisActivityGroupPtr);
+}
+std::shared_ptr<ecore::EObject> ActivityGroupImpl::eContainer() const
+{
+	if(auto wp = m_inActivity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_superGroup.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityGroupImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1074
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
 			return getContainedEdge(); //10710
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
 			return getContainedNode(); //10711
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1070
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 			return getInActivity(); //10712
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1075
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1076
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1077
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1071
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1072
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1073
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1078
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
 			return getSubgroup(); //10713
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
 			return getSuperGroup(); //10714
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1079
 	}
-	return boost::any();
+	boost::any result;
+	result = ActivityContentImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = NamedElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool ActivityGroupImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
+			return getContainedEdge() != nullptr; //10710
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
+			return getContainedNode() != nullptr; //10711
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+			return getInActivity().lock() != nullptr; //10712
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
+			return getSubgroup() != nullptr; //10713
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
+			return getSuperGroup().lock() != nullptr; //10714
+	}
+	bool result = false;
+	result = ActivityContentImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool ActivityGroupImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _inActivity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setInActivity(_inActivity); //10712
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ActivityContentImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityGroupImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ActivityContentImpl::loadAttributes(loadHandler, attr_list);
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("subgroup") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<ecore::EObject> subgroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP);
+			if (subgroup != nullptr)
+			{
+				loadHandler->handleChild(subgroup);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityContentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActivityGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>( references.front() );
+				setInActivity(_inActivity);
+			}
+			
+			return;
+		}
+	}
+	ActivityContentImpl::resolveReferences(featureID, references);
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void ActivityGroupImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityContentImpl::saveContent(saveHandler);
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'subgroup'
+		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> list_subgroup = this->getSubgroup();
+		for (std::shared_ptr<uml::ActivityGroup> subgroup : *list_subgroup) 
+		{
+			saveHandler->addReference(subgroup, "subgroup", subgroup->eClass() != package->getActivityGroup_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

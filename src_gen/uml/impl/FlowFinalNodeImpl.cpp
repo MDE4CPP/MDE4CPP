@@ -1,43 +1,76 @@
-#include "FlowFinalNodeImpl.hpp"
-#include <iostream>
+#include "uml/impl/FlowFinalNodeImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "FinalNode.hpp"
+#include "uml/Element.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/FinalNode.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/StructuredActivityNode.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -63,7 +96,6 @@ FlowFinalNodeImpl::~FlowFinalNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FlowFinalNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -127,28 +159,28 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj):FlowFinalNod
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
@@ -206,13 +238,14 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj):FlowFinalNod
 
 std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FlowFinalNodeImpl(*this));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(*this));
+	element->setThisFlowFinalNodePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFlowFinalNode();
+	return UmlPackageImpl::eInstance()->getFlowFinalNode_EClass();
 }
 
 //*********************************
@@ -230,11 +263,11 @@ std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > FlowFinalNodeImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> FlowFinalNodeImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<Union<uml::Element> > FlowFinalNodeImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> FlowFinalNodeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -242,61 +275,151 @@ std::weak_ptr<uml::Element > FlowFinalNodeImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > FlowFinalNodeImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> FlowFinalNodeImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr()
+{
+	return m_thisFlowFinalNodePtr.lock();
+}
+void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr)
+{
+	m_thisFlowFinalNodePtr = thisFlowFinalNodePtr;
+	setThisFinalNodePtr(thisFlowFinalNodePtr);
+}
+std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FlowFinalNodeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FlowFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //18913
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1894
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1890
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //18914
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //18915
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //18920
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //18916
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //18917
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //18910
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1895
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1896
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1897
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //18918
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1891
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1892
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1893
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1898
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //18911
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //18919
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //18912
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1899
 	}
-	return boost::any();
+	return FinalNodeImpl::internalEIsSet(featureID);
 }
+bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return FinalNodeImpl::internalEIsSet(featureID);
+}
+bool FlowFinalNodeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return FinalNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void FlowFinalNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void FlowFinalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	FinalNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void FlowFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	FinalNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void FlowFinalNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	FinalNodeImpl::resolveReferences(featureID, references);
+}
+
+void FlowFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	FinalNodeImpl::saveContent(saveHandler);
+	
+	ControlNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -7,27 +7,39 @@
 #ifndef UML_MESSAGE_HPP
 #define UML_MESSAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T, class ... U> class Subset;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -86,14 +98,14 @@ namespace uml
 }
 
 // base class includes
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
 // enum includes
-#include "MessageKind.hpp"
+#include "uml/MessageKind.hpp"
 
-#include "MessageSort.hpp"
+#include "uml/MessageSort.hpp"
 
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -243,7 +255,7 @@ namespace uml
 			/*!
 			 The arguments of the Message.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > getArgument() const = 0;
+			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const = 0;
 			
 			/*!
 			 The Connector on which this Message is sent.
@@ -299,11 +311,11 @@ namespace uml
 			/*!
 			 The derived kind of the Message (complete, lost, found, or unknown).
 			<p>From package UML::Interactions.</p> */ 
-			MessageKind m_messageKind = MessageKind::UNKNOWN ;
+			MessageKind m_messageKind = MessageKind::UNKNOWN;
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			MessageSort m_messageSort = MessageSort::SYNCHCALL ;
+			MessageSort m_messageSort = MessageSort::SYNCHCALL;
 			
 			
 			//*********************************
@@ -312,7 +324,7 @@ namespace uml
 			/*!
 			 The arguments of the Message.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > m_argument;
+			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_argument;
 			/*!
 			 The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p> */
@@ -345,12 +357,22 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_MESSAGE_HPP */
-

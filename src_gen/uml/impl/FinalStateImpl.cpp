@@ -1,53 +1,87 @@
-#include "FinalStateImpl.hpp"
-#include <iostream>
+#include "uml/impl/FinalStateImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "ConnectionPointReference.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/ConnectionPointReference.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Pseudostate.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Pseudostate.hpp"
 
-#include "Region.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "State.hpp"
+#include "uml/Region.hpp"
 
-#include "StateMachine.hpp"
+#include "uml/State.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StateMachine.hpp"
 
-#include "Transition.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Trigger.hpp"
+#include "uml/Transition.hpp"
 
+#include "uml/Trigger.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -73,7 +107,6 @@ FinalStateImpl::~FinalStateImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FinalState "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -128,28 +161,28 @@ FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_container  = obj.getContainer();
 
-	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_submachine  = obj.getSubmachine();
@@ -284,13 +317,14 @@ FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 
 std::shared_ptr<ecore::EObject>  FinalStateImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new FinalStateImpl(*this));
+	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(*this));
+	element->setThisFinalStatePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFinalState();
+	return UmlPackageImpl::eInstance()->getFinalState_EClass();
 }
 
 //*********************************
@@ -343,7 +377,7 @@ bool FinalStateImpl::no_state_behavior(boost::any diagnostics,std::map <   boost
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement> > FinalStateImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> FinalStateImpl::getMember() const
 {
 	return m_member;
 }
@@ -351,11 +385,11 @@ std::weak_ptr<uml::Namespace > FinalStateImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > FinalStateImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> FinalStateImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > FinalStateImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> FinalStateImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -363,91 +397,141 @@ std::weak_ptr<uml::Element > FinalStateImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > FinalStateImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> FinalStateImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr()
+{
+	return m_thisFinalStatePtr.lock();
+}
+void FinalStateImpl::setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr)
+{
+	m_thisFinalStatePtr = thisFinalStatePtr;
+	setThisStatePtr(thisFinalStatePtr);
+}
+std::shared_ptr<ecore::EObject> FinalStateImpl::eContainer() const
+{
+	if(auto wp = m_container.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FinalStateImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FinalStateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2364
-		case UmlPackage::STATE_CONNECTION:
-			return getConnection(); //23622
-		case UmlPackage::STATE_CONNECTIONPOINT:
-			return getConnectionPoint(); //23623
-		case UmlPackage::VERTEX_CONTAINER:
-			return getContainer(); //23610
-		case UmlPackage::STATE_DEFERRABLETRIGGER:
-			return getDeferrableTrigger(); //23624
-		case UmlPackage::STATE_DOACTIVITY:
-			return getDoActivity(); //23625
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2360
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //23611
-		case UmlPackage::STATE_ENTRY:
-			return getEntry(); //23626
-		case UmlPackage::STATE_EXIT:
-			return getExit(); //23627
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //23614
-		case UmlPackage::VERTEX_INCOMING:
-			return getIncoming(); //23611
-		case UmlPackage::STATE_ISCOMPOSITE:
-			return getIsComposite(); //23628
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //23610
-		case UmlPackage::STATE_ISORTHOGONAL:
-			return getIsOrthogonal(); //23629
-		case UmlPackage::STATE_ISSIMPLE:
-			return getIsSimple(); //23630
-		case UmlPackage::STATE_ISSUBMACHINESTATE:
-			return getIsSubmachineState(); //23631
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //23615
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2365
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2366
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2367
-		case UmlPackage::VERTEX_OUTGOING:
-			return getOutgoing(); //23612
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2361
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2362
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //23613
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //23610
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2363
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //23612
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2368
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //23611
-		case UmlPackage::STATE_REDEFINEDSTATE:
-			return getRedefinedState(); //23632
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //23612
-		case UmlPackage::STATE_REGION:
-			return getRegion(); //23635
-		case UmlPackage::STATE_STATEINVARIANT:
-			return getStateInvariant(); //23633
-		case UmlPackage::STATE_SUBMACHINE:
-			return getSubmachine(); //23634
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2369
 	}
-	return boost::any();
+	return StateImpl::internalEIsSet(featureID);
 }
+bool FinalStateImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return StateImpl::internalEIsSet(featureID);
+}
+bool FinalStateImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return StateImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void FinalStateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void FinalStateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StateImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	StateImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void FinalStateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	StateImpl::resolveReferences(featureID, references);
+}
+
+void FinalStateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StateImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void FinalStateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

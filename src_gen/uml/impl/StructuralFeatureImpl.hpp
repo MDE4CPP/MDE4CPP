@@ -7,31 +7,15 @@
 #ifndef UML_STRUCTURALFEATURESTRUCTURALFEATUREIMPL_HPP
 #define UML_STRUCTURALFEATURESTRUCTURALFEATUREIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../StructuralFeature.hpp"
 
-#include "impl/FeatureImpl.hpp"
-#include "impl/MultiplicityElementImpl.hpp"
-#include "impl/TypedElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/FeatureImpl.hpp"
+#include "uml/impl/MultiplicityElementImpl.hpp"
+#include "uml/impl/TypedElementImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -48,6 +32,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StructuralFeatureImpl();
+			virtual std::shared_ptr<StructuralFeature> getThisStructuralFeaturePtr();
+			virtual void setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
 			StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
@@ -94,7 +80,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
@@ -102,12 +88,29 @@ namespace uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<StructuralFeature> m_thisStructuralFeaturePtr;
 	};
 }
 #endif /* end of include guard: UML_STRUCTURALFEATURESTRUCTURALFEATUREIMPL_HPP */
-

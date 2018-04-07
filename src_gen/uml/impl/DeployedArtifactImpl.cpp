@@ -1,25 +1,58 @@
-#include "DeployedArtifactImpl.hpp"
-#include <iostream>
+#include "uml/impl/DeployedArtifactImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -45,7 +78,6 @@ DeployedArtifactImpl::~DeployedArtifactImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DeployedArtifact "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -84,7 +116,7 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -122,13 +154,14 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 
 std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DeployedArtifactImpl(*this));
+	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl(*this));
+	element->setThisDeployedArtifactPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeployedArtifact();
+	return UmlPackageImpl::eInstance()->getDeployedArtifact_EClass();
 }
 
 //*********************************
@@ -146,7 +179,7 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > DeployedArtifactImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DeployedArtifactImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -156,33 +189,122 @@ std::weak_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
 }
 
 
+std::shared_ptr<DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr()
+{
+	return m_thisDeployedArtifactPtr.lock();
+}
+void DeployedArtifactImpl::setThisDeployedArtifactPtr(std::weak_ptr<DeployedArtifact> thisDeployedArtifactPtr)
+{
+	m_thisDeployedArtifactPtr = thisDeployedArtifactPtr;
+	setThisNamedElementPtr(thisDeployedArtifactPtr);
+}
+std::shared_ptr<ecore::EObject> DeployedArtifactImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeployedArtifactImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DeployedArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //404
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //400
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //405
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //406
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //407
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //401
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //402
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //403
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //408
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //409
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
+bool DeployedArtifactImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool DeployedArtifactImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DeployedArtifactImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DeployedArtifactImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DeployedArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DeployedArtifactImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void DeployedArtifactImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void DeployedArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

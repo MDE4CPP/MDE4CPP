@@ -1,37 +1,70 @@
-#include "BehaviorExecutionSpecificationImpl.hpp"
-#include <iostream>
+#include "uml/impl/BehaviorExecutionSpecificationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExecutionSpecification.hpp"
+#include "uml/Element.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/ExecutionSpecification.hpp"
 
-#include "Interaction.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/Interaction.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "OccurrenceSpecification.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/OccurrenceSpecification.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -59,7 +92,6 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BehaviorExecutionSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -122,10 +154,10 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 	
 	m_behavior  = obj.getBehavior();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -179,13 +211,14 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 
 std::shared_ptr<ecore::EObject>  BehaviorExecutionSpecificationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new BehaviorExecutionSpecificationImpl(*this));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(*this));
+	element->setThisBehaviorExecutionSpecificationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehaviorExecutionSpecification();
+	return UmlPackageImpl::eInstance()->getBehaviorExecutionSpecification_EClass();
 }
 
 //*********************************
@@ -216,7 +249,7 @@ std::weak_ptr<uml::Namespace > BehaviorExecutionSpecificationImpl::getNamespace(
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > BehaviorExecutionSpecificationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> BehaviorExecutionSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -226,47 +259,185 @@ std::weak_ptr<uml::Element > BehaviorExecutionSpecificationImpl::getOwner() cons
 }
 
 
+std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr()
+{
+	return m_thisBehaviorExecutionSpecificationPtr.lock();
+}
+void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr)
+{
+	m_thisBehaviorExecutionSpecificationPtr = thisBehaviorExecutionSpecificationPtr;
+	setThisExecutionSpecificationPtr(thisBehaviorExecutionSpecificationPtr);
+}
+std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehaviorExecutionSpecificationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_BEHAVIOR:
+		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
 			return getBehavior(); //22716
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2274
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
-			return getCovered(); //22710
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2270
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //22712
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //22711
-		case UmlPackage::EXECUTIONSPECIFICATION_FINISH:
-			return getFinish(); //22714
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
-			return getGeneralOrdering(); //22713
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2275
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2276
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2277
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2271
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2272
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2273
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2278
-		case UmlPackage::EXECUTIONSPECIFICATION_START:
-			return getStart(); //22715
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2279
 	}
-	return boost::any();
+	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
+bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
+			return getBehavior() != nullptr; //22716
+	}
+	return ExecutionSpecificationImpl::internalEIsSet(featureID);
+}
+bool BehaviorExecutionSpecificationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setBehavior(_behavior); //22716
+			return true;
+		}
+	}
+
+	return ExecutionSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void BehaviorExecutionSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void BehaviorExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("behavior");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("behavior")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExecutionSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void BehaviorExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void BehaviorExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setBehavior(_behavior);
+			}
+			
+			return;
+		}
+	}
+	ExecutionSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void BehaviorExecutionSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExecutionSpecificationImpl::saveContent(saveHandler);
+	
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("behavior", this->getBehavior());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

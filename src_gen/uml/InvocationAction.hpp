@@ -7,27 +7,34 @@
 #ifndef UML_INVOCATIONACTION_HPP
 #define UML_INVOCATIONACTION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T, class ... U> class Subset;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -136,10 +143,10 @@ namespace uml
 }
 
 // base class includes
-#include "Action.hpp"
+#include "uml/Action.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -178,7 +185,7 @@ namespace uml
 			/*!
 			 The InputPins that provide the argument values passed in the invocation request.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > getArgument() const = 0;
+			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getArgument() const = 0;
 			
 			/*!
 			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
@@ -203,7 +210,7 @@ namespace uml
 			/*!
 			 The InputPins that provide the argument values passed in the invocation request.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > m_argument;
+			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_argument;
 			/*!
 			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p> */
@@ -217,21 +224,31 @@ namespace uml
 			/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_INVOCATIONACTION_HPP */
-

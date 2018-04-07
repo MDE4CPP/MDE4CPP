@@ -1,53 +1,87 @@
-#include "AcceptCallActionImpl.hpp"
-#include <iostream>
+#include "uml/impl/AcceptCallActionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventAction.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Activity.hpp"
+#include "uml/AcceptEventAction.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Trigger.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
+#include "uml/Trigger.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -75,7 +109,6 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptCallAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -141,30 +174,30 @@ AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):Acc
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
@@ -270,13 +303,14 @@ AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):Acc
 
 std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new AcceptCallActionImpl(*this));
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(*this));
+	element->setThisAcceptCallActionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptCallAction();
+	return UmlPackageImpl::eInstance()->getAcceptCallAction_EClass();
 }
 
 //*********************************
@@ -320,15 +354,15 @@ void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > AcceptCallActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> AcceptCallActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > AcceptCallActionImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> AcceptCallActionImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<Union<uml::Element> > AcceptCallActionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> AcceptCallActionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -336,83 +370,197 @@ std::weak_ptr<uml::Element > AcceptCallActionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > AcceptCallActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> AcceptCallActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr()
+{
+	return m_thisAcceptCallActionPtr.lock();
+}
+void AcceptCallActionImpl::setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr)
+{
+	m_thisAcceptCallActionPtr = thisAcceptCallActionPtr;
+	setThisAcceptEventActionPtr(thisAcceptCallActionPtr);
+}
+std::shared_ptr<ecore::EObject> AcceptCallActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptCallActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //13213
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1324
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //13222
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1320
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //13221
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //13214
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //13215
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //13220
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //13216
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //13217
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //13223
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //13210
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //13224
-		case UmlPackage::ACCEPTEVENTACTION_ISUNMARSHALL:
-			return getIsUnmarshall(); //13228
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //13225
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //13226
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1325
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1326
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1327
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //13218
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //13227
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1321
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1322
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1323
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1328
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //13211
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //13219
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //13212
-		case UmlPackage::ACCEPTEVENTACTION_RESULT:
-			return getResult(); //13229
-		case UmlPackage::ACCEPTCALLACTION_RETURNINFORMATION:
+		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
 			return getReturnInformation(); //13231
-		case UmlPackage::ACCEPTEVENTACTION_TRIGGER:
-			return getTrigger(); //13230
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1329
 	}
-	return boost::any();
+	return AcceptEventActionImpl::internalEIsSet(featureID);
 }
+bool AcceptCallActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+			return getReturnInformation() != nullptr; //13231
+	}
+	return AcceptEventActionImpl::internalEIsSet(featureID);
+}
+bool AcceptCallActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::OutputPin> _returnInformation = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			setReturnInformation(_returnInformation); //13231
+			return true;
+		}
+	}
+
+	return AcceptEventActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void AcceptCallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void AcceptCallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	AcceptEventActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("returnInformation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<uml::OutputPin> returnInformation = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			if (returnInformation != nullptr)
+			{
+				this->setReturnInformation(returnInformation);
+				loadHandler->handleChild(returnInformation);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	AcceptEventActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void AcceptCallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	AcceptEventActionImpl::resolveReferences(featureID, references);
+}
+
+void AcceptCallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	AcceptEventActionImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'returnInformation'
+		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();
+		if (returnInformation != nullptr)
+		{
+			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_EClass());
+		}
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,69 +1,102 @@
-#include "ArtifactImpl.hpp"
-#include <iostream>
+#include "uml/impl/ArtifactImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Artifact.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/Artifact.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "DeployedArtifact.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/DeployedArtifact.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Feature.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "Manifestation.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Manifestation.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Operation.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Property.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Property.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateSignature.hpp"
 
-#include "UseCase.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -151,7 +184,6 @@ ArtifactImpl::~ArtifactImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Artifact "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -183,10 +215,10 @@ ArtifactImpl::~ArtifactImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -233,13 +265,13 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -252,18 +284,18 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -462,13 +494,14 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 
 std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ArtifactImpl(*this));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(*this));
+	element->setThisArtifactPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getArtifact();
+	return UmlPackageImpl::eInstance()->getArtifact_EClass();
 }
 
 //*********************************
@@ -502,28 +535,28 @@ std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string n
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::Manifestation, uml::Element > > ArtifactImpl::getManifestation() const
+std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManifestation() const
 {
 
     return m_manifestation;
 }
 
 
-std::shared_ptr<Subset<uml::Artifact, uml::NamedElement > > ArtifactImpl::getNestedArtifact() const
+std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNestedArtifact() const
 {
 
     return m_nestedArtifact;
 }
 
 
-std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > > ArtifactImpl::getOwnedAttribute() const
+std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> ArtifactImpl::getOwnedAttribute() const
 {
 
     return m_ownedAttribute;
 }
 
 
-std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > > ArtifactImpl::getOwnedOperation() const
+std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> ArtifactImpl::getOwnedOperation() const
 {
 
     return m_ownedOperation;
@@ -533,15 +566,15 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > > Artifa
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > ArtifactImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ArtifactImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > ArtifactImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ArtifactImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > ArtifactImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ArtifactImpl::getMember() const
 {
 	return m_member;
 }
@@ -549,11 +582,11 @@ std::weak_ptr<uml::Namespace > ArtifactImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ArtifactImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ArtifactImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ArtifactImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ArtifactImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -561,107 +594,337 @@ std::weak_ptr<uml::Element > ArtifactImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ArtifactImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ArtifactImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<Artifact> ArtifactImpl::getThisArtifactPtr()
+{
+	return m_thisArtifactPtr.lock();
+}
+void ArtifactImpl::setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr)
+{
+	m_thisArtifactPtr = thisArtifactPtr;
+	setThisClassifierPtr(thisArtifactPtr);
+	setThisDeployedArtifactPtr(thisArtifactPtr);
+}
+std::shared_ptr<ecore::EObject> ArtifactImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ArtifactImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //3926
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //394
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //3927
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //390
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //3911
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //3925
-		case UmlPackage::ARTIFACT_FILENAME:
+		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
 			return getFileName(); //3939
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //3928
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //3929
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //3914
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //3931
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //3932
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //3933
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //3910
-		case UmlPackage::ARTIFACT_MANIFESTATION:
+		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
 			return getManifestation(); //3940
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //3915
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //395
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //396
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //397
-		case UmlPackage::ARTIFACT_NESTEDARTIFACT:
+		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
 			return getNestedArtifact(); //3941
-		case UmlPackage::ARTIFACT_OWNEDATTRIBUTE:
+		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
 			return getOwnedAttribute(); //3942
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //391
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //392
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //3913
-		case UmlPackage::ARTIFACT_OWNEDOPERATION:
+		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
 			return getOwnedOperation(); //3943
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //3910
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //395
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //3934
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //393
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //3912
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //394
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //3913
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //3912
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //3930
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //398
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //3936
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //3911
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //3912
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //3937
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //3938
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //394
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //395
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //3935
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //399
 	}
-	return boost::any();
+	boost::any result;
+	result = ClassifierImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = DeployedArtifactImpl::internalEIsSet(featureID);
+	return result;
 }
+bool ArtifactImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
+			return getFileName() != ""; //3939
+		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
+			return getManifestation() != nullptr; //3940
+		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
+			return getNestedArtifact() != nullptr; //3941
+		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //3942
+		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //3943
+	}
+	bool result = false;
+	result = ClassifierImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = DeployedArtifactImpl::internalEIsSet(featureID);
+	return result;
+}
+bool ArtifactImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
+		{
+			// BOOST CAST
+			std::string _fileName = boost::any_cast<std::string>(newValue);
+			setFileName(_fileName); //3939
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ClassifierImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = DeployedArtifactImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ArtifactImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ArtifactImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("fileName");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setFileName(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadAttributes(loadHandler, attr_list);
+	DeployedArtifactImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("manifestation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Manifestation";
+			}
+			std::shared_ptr<uml::Manifestation> manifestation = std::dynamic_pointer_cast<uml::Manifestation>(modelFactory->create(typeName));
+			if (manifestation != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Manifestation, uml::Element>> list_manifestation = this->getManifestation();
+				list_manifestation->push_back(manifestation);
+				loadHandler->handleChild(manifestation);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("nestedArtifact") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Artifact";
+			}
+			std::shared_ptr<uml::Artifact> nestedArtifact = std::dynamic_pointer_cast<uml::Artifact>(modelFactory->create(typeName));
+			if (nestedArtifact != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> list_nestedArtifact = this->getNestedArtifact();
+				list_nestedArtifact->push_back(nestedArtifact);
+				loadHandler->handleChild(nestedArtifact);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("ownedAttribute") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Property";
+			}
+			std::shared_ptr<uml::Property> ownedAttribute = std::dynamic_pointer_cast<uml::Property>(modelFactory->create(typeName));
+			if (ownedAttribute != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> list_ownedAttribute = this->getOwnedAttribute();
+				list_ownedAttribute->push_back(ownedAttribute);
+				loadHandler->handleChild(ownedAttribute);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("ownedOperation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Operation";
+			}
+			std::shared_ptr<uml::Operation> ownedOperation = std::dynamic_pointer_cast<uml::Operation>(modelFactory->create(typeName));
+			if (ownedOperation != nullptr)
+			{
+				std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> list_ownedOperation = this->getOwnedOperation();
+				list_ownedOperation->push_back(ownedOperation);
+				loadHandler->handleChild(ownedOperation);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	DeployedArtifactImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ArtifactImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ClassifierImpl::resolveReferences(featureID, references);
+	DeployedArtifactImpl::resolveReferences(featureID, references);
+}
+
+void ArtifactImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassifierImpl::saveContent(saveHandler);
+	DeployedArtifactImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'manifestation'
+		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 
+		{
+			saveHandler->addReference(manifestation, "manifestation", manifestation->eClass() != package->getManifestation_EClass());
+		}
+
+		// Save 'nestedArtifact'
+		for (std::shared_ptr<uml::Artifact> nestedArtifact : *this->getNestedArtifact()) 
+		{
+			saveHandler->addReference(nestedArtifact, "nestedArtifact", nestedArtifact->eClass() != package->getArtifact_EClass());
+		}
+
+		// Save 'ownedAttribute'
+		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		{
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+		}
+
+		// Save 'ownedOperation'
+		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		{
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getArtifact_EAttribute_fileName()) )
+		{
+			saveHandler->addAttribute("fileName", this->getFileName());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

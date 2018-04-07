@@ -1,53 +1,87 @@
-#include "PortImpl.hpp"
-#include <iostream>
+#include "uml/impl/PortImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Association.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Class.hpp"
+#include "uml/Association.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "ConnectorEnd.hpp"
+#include "uml/Comment.hpp"
 
-#include "DataType.hpp"
+#include "uml/ConnectorEnd.hpp"
 
-#include "Dependency.hpp"
+#include "uml/DataType.hpp"
 
-#include "Deployment.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Deployment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Interface.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Interface.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Port.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Property.hpp"
+#include "uml/Port.hpp"
 
-#include "ProtocolStateMachine.hpp"
+#include "uml/Property.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/ProtocolStateMachine.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -107,7 +141,6 @@ PortImpl::~PortImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Port "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -234,18 +267,18 @@ PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 
 	m_class  = obj.getClass();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_datatype  = obj.getDatatype();
 
-	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
-	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	std::shared_ptr<Bag<uml::ConnectorEnd>> _end = obj.getEnd();
 	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
 	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	m_interface  = obj.getInterface();
@@ -262,19 +295,19 @@ PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 
 	m_protocol  = obj.getProtocol();
 
-	std::shared_ptr< Bag<uml::Interface> > _provided = obj.getProvided();
+	std::shared_ptr<Bag<uml::Interface>> _provided = obj.getProvided();
 	m_provided.reset(new Bag<uml::Interface>(*(obj.getProvided().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-	std::shared_ptr< Bag<uml::Interface> > _required = obj.getRequired();
+	std::shared_ptr<Bag<uml::Interface>> _required = obj.getRequired();
 	m_required.reset(new Bag<uml::Interface>(*(obj.getRequired().get())));
 
-	std::shared_ptr< Bag<uml::Property> > _subsettedProperty = obj.getSubsettedProperty();
+	std::shared_ptr<Bag<uml::Property>> _subsettedProperty = obj.getSubsettedProperty();
 	m_subsettedProperty.reset(new Bag<uml::Property>(*(obj.getSubsettedProperty().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -365,13 +398,14 @@ PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 
 std::shared_ptr<ecore::EObject>  PortImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new PortImpl(*this));
+	std::shared_ptr<PortImpl> element(new PortImpl(*this));
+	element->setThisPortPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPort();
+	return UmlPackageImpl::eInstance()->getPort_EClass();
 }
 
 //*********************************
@@ -465,21 +499,21 @@ void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
     m_protocol = _protocol;
 }
 
-std::shared_ptr< Bag<uml::Interface> > PortImpl::getProvided() const
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 {
 
     return m_provided;
 }
 
 
-std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/ > > PortImpl::getRedefinedPort() const
+std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
 {
 
     return m_redefinedPort;
 }
 
 
-std::shared_ptr< Bag<uml::Interface> > PortImpl::getRequired() const
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 {
 
     return m_required;
@@ -489,7 +523,7 @@ std::shared_ptr< Bag<uml::Interface> > PortImpl::getRequired() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Classifier> > PortImpl::getFeaturingClassifier() const
+std::shared_ptr<Union<uml::Classifier>> PortImpl::getFeaturingClassifier() const
 {
 	return m_featuringClassifier;
 }
@@ -497,7 +531,7 @@ std::weak_ptr<uml::Namespace > PortImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > PortImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> PortImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -505,127 +539,340 @@ std::weak_ptr<uml::Element > PortImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > PortImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> PortImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::Classifier> > PortImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier>> PortImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
 
 
+std::shared_ptr<Port> PortImpl::getThisPortPtr()
+{
+	return m_thisPortPtr.lock();
+}
+void PortImpl::setThisPortPtr(std::weak_ptr<Port> thisPortPtr)
+{
+	m_thisPortPtr = thisPortPtr;
+	setThisPropertyPtr(thisPortPtr);
+}
+std::shared_ptr<ecore::EObject> PortImpl::eContainer() const
+{
+	if(auto wp = m_associationEnd.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_class.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_datatype.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_interface.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningAssociation.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PortImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_AGGREGATION:
-			return getAggregation(); //6731
-		case UmlPackage::PROPERTY_ASSOCIATION:
-			return getAssociation(); //6744
-		case UmlPackage::PROPERTY_ASSOCIATIONEND:
-			return getAssociationEnd(); //6732
-		case UmlPackage::PROPERTY_CLASS:
-			return getClass(); //6734
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //674
-		case UmlPackage::PROPERTY_DATATYPE:
-			return getDatatype(); //6728
-		case UmlPackage::PROPERTY_DEFAULT:
-			return getDefault(); //6730
-		case UmlPackage::PROPERTY_DEFAULTVALUE:
-			return getDefaultValue(); //6735
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
-			return getDeployedElement(); //6710
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYMENT:
-			return getDeployment(); //6711
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //670
-		case UmlPackage::CONNECTABLEELEMENT_END:
-			return getEnd(); //6713
-		case UmlPackage::FEATURE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier(); //6713
-		case UmlPackage::PROPERTY_INTERFACE:
-			return getInterface(); //6729
-		case UmlPackage::PORT_ISBEHAVIOR:
+		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
 			return getIsBehavior(); //6745
-		case UmlPackage::PROPERTY_ISCOMPOSITE:
-			return getIsComposite(); //6736
-		case UmlPackage::PORT_ISCONJUGATED:
+		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
 			return getIsConjugated(); //6746
-		case UmlPackage::PROPERTY_ISDERIVED:
-			return getIsDerived(); //6737
-		case UmlPackage::PROPERTY_ISDERIVEDUNION:
-			return getIsDerivedUnion(); //6738
-		case UmlPackage::PROPERTY_ISID:
-			return getIsID(); //6739
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //6710
-		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
-			return getIsOrdered(); //674
-		case UmlPackage::STRUCTURALFEATURE_ISREADONLY:
-			return getIsReadOnly(); //6722
-		case UmlPackage::PORT_ISSERVICE:
+		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
 			return getIsService(); //6747
-		case UmlPackage::FEATURE_ISSTATIC:
-			return getIsStatic(); //6714
-		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
-			return getIsUnique(); //675
-		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
-			return getLower(); //676
-		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
-			return getLowerValue(); //677
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //675
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //676
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //677
-		case UmlPackage::PROPERTY_OPPOSITE:
-			return getOpposite(); //6740
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //671
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //672
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //673
-		case UmlPackage::PROPERTY_OWNINGASSOCIATION:
-			return getOwningAssociation(); //6741
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //674
-		case UmlPackage::PORT_PROTOCOL:
+		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
 			return getProtocol(); //6748
-		case UmlPackage::PORT_PROVIDED:
+		case UmlPackage::PORT_EREFERENCE_PROVIDED:
 			return getProvided(); //6749
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //678
-		case UmlPackage::PROPERTY_QUALIFIER:
-			return getQualifier(); //6733
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //6711
-		case UmlPackage::PORT_REDEFINEDPORT:
+		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
 			return getRedefinedPort(); //6750
-		case UmlPackage::PROPERTY_REDEFINEDPROPERTY:
-			return getRedefinedProperty(); //6742
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //6712
-		case UmlPackage::PORT_REQUIRED:
+		case UmlPackage::PORT_EREFERENCE_REQUIRED:
 			return getRequired(); //6751
-		case UmlPackage::PROPERTY_SUBSETTEDPROPERTY:
-			return getSubsettedProperty(); //6743
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //675
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //6710
-		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
-			return getUpper(); //678
-		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
-			return getUpperValue(); //679
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //679
 	}
-	return boost::any();
+	return PropertyImpl::internalEIsSet(featureID);
 }
+bool PortImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
+			return getIsBehavior() != false; //6745
+		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
+			return getIsConjugated() != false; //6746
+		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
+			return getIsService() != true; //6747
+		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+			return getProtocol() != nullptr; //6748
+		case UmlPackage::PORT_EREFERENCE_PROVIDED:
+			return getProvided() != nullptr; //6749
+		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
+			return getRedefinedPort() != nullptr; //6750
+		case UmlPackage::PORT_EREFERENCE_REQUIRED:
+			return getRequired() != nullptr; //6751
+	}
+	return PropertyImpl::internalEIsSet(featureID);
+}
+bool PortImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
+		{
+			// BOOST CAST
+			bool _isBehavior = boost::any_cast<bool>(newValue);
+			setIsBehavior(_isBehavior); //6745
+			return true;
+		}
+		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
+		{
+			// BOOST CAST
+			bool _isConjugated = boost::any_cast<bool>(newValue);
+			setIsConjugated(_isConjugated); //6746
+			return true;
+		}
+		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
+		{
+			// BOOST CAST
+			bool _isService = boost::any_cast<bool>(newValue);
+			setIsService(_isService); //6747
+			return true;
+		}
+		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			setProtocol(_protocol); //6748
+			return true;
+		}
+	}
+
+	return PropertyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PortImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void PortImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isBehavior");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsBehavior(value);
+		}
+
+		iter = attr_list.find("isConjugated");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsConjugated(value);
+		}
+
+		iter = attr_list.find("isService");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsService(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("protocol");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("protocol")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("redefinedPort");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("redefinedPort")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PropertyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PortImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	PropertyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void PortImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>( references.front() );
+				setProtocol(_protocol);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
+		{
+			std::shared_ptr<Bag<uml::Port>> _redefinedPort = getRedefinedPort();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Port> _r = std::dynamic_pointer_cast<uml::Port>(ref);
+				if (_r != nullptr)
+				{
+					_redefinedPort->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	PropertyImpl::resolveReferences(featureID, references);
+}
+
+void PortImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PropertyImpl::saveContent(saveHandler);
+	
+	ConnectableElementImpl::saveContent(saveHandler);
+	DeploymentTargetImpl::saveContent(saveHandler);
+	StructuralFeatureImpl::saveContent(saveHandler);
+	
+	FeatureImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getPort_EAttribute_isBehavior()) )
+		{
+			saveHandler->addAttribute("isBehavior", this->getIsBehavior());
+		}
+
+		if ( this->eIsSet(package->getPort_EAttribute_isConjugated()) )
+		{
+			saveHandler->addAttribute("isConjugated", this->getIsConjugated());
+		}
+
+		if ( this->eIsSet(package->getPort_EAttribute_isService()) )
+		{
+			saveHandler->addAttribute("isService", this->getIsService());
+		}
+
+		// Add references
+		saveHandler->addReference("protocol", this->getProtocol());
+		std::shared_ptr<Bag<uml::Port>> redefinedPort_list = this->getRedefinedPort();
+		for (std::shared_ptr<uml::Port > object : *redefinedPort_list)
+		{ 
+			saveHandler->addReferences("redefinedPort", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

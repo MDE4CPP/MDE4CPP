@@ -7,30 +7,14 @@
 #ifndef UML_INFORMATIONFLOWINFORMATIONFLOWIMPL_HPP
 #define UML_INFORMATIONFLOWINFORMATIONFLOWIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../InformationFlow.hpp"
 
-#include "impl/DirectedRelationshipImpl.hpp"
-#include "impl/PackageableElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/DirectedRelationshipImpl.hpp"
+#include "uml/impl/PackageableElementImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -47,6 +31,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InformationFlowImpl();
+			virtual std::shared_ptr<InformationFlow> getThisInformationFlowPtr();
+			virtual void setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr);
 
 			//Additional constructors for the containments back reference
 			InformationFlowImpl(std::weak_ptr<uml::Namespace > par_namespace);
@@ -114,37 +100,37 @@ namespace uml
 			/*!
 			 Specifies the information items that may circulate on this information flow.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getConveyed() const ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const ;
 			
 			/*!
 			 Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element > > getInformationSource() const ;
+			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const ;
 			
 			/*!
 			 Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element > > getInformationTarget() const ;
+			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const ;
 			
 			/*!
 			 Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr< Bag<uml::Relationship> > getRealization() const ;
+			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const ;
 			
 			/*!
 			 Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr< Bag<uml::ActivityEdge> > getRealizingActivityEdge() const ;
+			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const ;
 			
 			/*!
 			 Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr< Bag<uml::Connector> > getRealizingConnector() const ;
+			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const ;
 			
 			/*!
 			 Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr< Bag<uml::Message> > getRealizingMessage() const ;
+			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const ;
 			
 							
 			
@@ -157,29 +143,46 @@ namespace uml
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const ; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<InformationFlow> m_thisInformationFlowPtr;
 	};
 }
 #endif /* end of include guard: UML_INFORMATIONFLOWINFORMATIONFLOWIMPL_HPP */
-

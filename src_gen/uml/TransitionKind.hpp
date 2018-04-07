@@ -5,19 +5,7 @@
 //********************************************************************
 
 #ifndef UML_TRANSITIONKIND_HPP
-#define UML_TRANSITIONKIND_HPP
-
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif 
+#define UML_TRANSITIONKIND_HPP 
 
 namespace uml 
 {

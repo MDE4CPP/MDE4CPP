@@ -1,49 +1,83 @@
-#include "ProtocolTransitionImpl.hpp"
-#include <iostream>
+#include "uml/impl/ProtocolTransitionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Operation.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Region.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Region.hpp"
 
-#include "Transition.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Trigger.hpp"
+#include "uml/Transition.hpp"
 
-#include "Vertex.hpp"
+#include "uml/Trigger.hpp"
 
+#include "uml/Vertex.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -82,7 +116,6 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProtocolTransition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -134,25 +167,25 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_container  = obj.getContainer();
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-	std::shared_ptr< Bag<uml::Operation> > _referred = obj.getReferred();
+	std::shared_ptr<Bag<uml::Operation>> _referred = obj.getReferred();
 	m_referred.reset(new Bag<uml::Operation>(*(obj.getReferred().get())));
 
 	m_source  = obj.getSource();
@@ -265,13 +298,14 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ProtocolTransitionImpl(*this));
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(*this));
+	element->setThisProtocolTransitionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolTransition();
+	return UmlPackageImpl::eInstance()->getProtocolTransition_EClass();
 }
 
 //*********************************
@@ -328,7 +362,7 @@ void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _p
     m_preCondition = _preCondition;
 }
 
-std::shared_ptr< Bag<uml::Operation> > ProtocolTransitionImpl::getReferred() const
+std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 {
 
     return m_referred;
@@ -338,7 +372,7 @@ std::shared_ptr< Bag<uml::Operation> > ProtocolTransitionImpl::getReferred() con
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::NamedElement> > ProtocolTransitionImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> ProtocolTransitionImpl::getMember() const
 {
 	return m_member;
 }
@@ -346,11 +380,11 @@ std::weak_ptr<uml::Namespace > ProtocolTransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ProtocolTransitionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ProtocolTransitionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolTransitionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProtocolTransitionImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -358,79 +392,222 @@ std::weak_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ProtocolTransitionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ProtocolTransitionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr()
+{
+	return m_thisProtocolTransitionPtr.lock();
+}
+void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr)
+{
+	m_thisProtocolTransitionPtr = thisProtocolTransitionPtr;
+	setThisTransitionPtr(thisProtocolTransitionPtr);
+}
+std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::eContainer() const
+{
+	if(auto wp = m_container.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolTransitionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2374
-		case UmlPackage::TRANSITION_CONTAINER:
-			return getContainer(); //23726
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2370
-		case UmlPackage::TRANSITION_EFFECT:
-			return getEffect(); //23719
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //23711
-		case UmlPackage::TRANSITION_GUARD:
-			return getGuard(); //23720
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //23714
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //23710
-		case UmlPackage::TRANSITION_KIND:
-			return getKind(); //23721
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //23715
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2375
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2376
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2377
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2371
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2372
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //23713
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //23710
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2373
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //23712
-		case UmlPackage::PROTOCOLTRANSITION_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
 			return getPostCondition(); //23727
-		case UmlPackage::PROTOCOLTRANSITION_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 			return getPreCondition(); //23728
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2378
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //23711
-		case UmlPackage::TRANSITION_REDEFINEDTRANSITION:
-			return getRedefinedTransition(); //23722
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //23712
-		case UmlPackage::PROTOCOLTRANSITION_REFERRED:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
 			return getReferred(); //23729
-		case UmlPackage::TRANSITION_SOURCE:
-			return getSource(); //23723
-		case UmlPackage::TRANSITION_TARGET:
-			return getTarget(); //23724
-		case UmlPackage::TRANSITION_TRIGGER:
-			return getTrigger(); //23725
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2379
 	}
-	return boost::any();
+	return TransitionImpl::internalEIsSet(featureID);
 }
+bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+			return getPostCondition() != nullptr; //23727
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+			return getPreCondition() != nullptr; //23728
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
+			return getReferred() != nullptr; //23729
+	}
+	return TransitionImpl::internalEIsSet(featureID);
+}
+bool ProtocolTransitionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _postCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setPostCondition(_postCondition); //23727
+			return true;
+		}
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _preCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setPreCondition(_preCondition); //23728
+			return true;
+		}
+	}
+
+	return TransitionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ProtocolTransitionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ProtocolTransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("postCondition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("postCondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("preCondition");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("preCondition")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	TransitionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ProtocolTransitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	TransitionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>( references.front() );
+				setPostCondition(_postCondition);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>( references.front() );
+				setPreCondition(_preCondition);
+			}
+			
+			return;
+		}
+	}
+	TransitionImpl::resolveReferences(featureID, references);
+}
+
+void ProtocolTransitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TransitionImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("postCondition", this->getPostCondition());
+		saveHandler->addReference("preCondition", this->getPreCondition());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

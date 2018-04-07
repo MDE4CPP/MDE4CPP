@@ -7,27 +7,40 @@
 #ifndef UML_PACKAGE_HPP
 #define UML_PACKAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -161,14 +174,14 @@ namespace uml
 }
 
 // base class includes
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -358,7 +371,7 @@ namespace uml
 			/*!
 			 References the packaged elements that are Packages.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > > getNestedPackage() const = 0;
+			virtual std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> getNestedPackage() const = 0;
 			
 			/*!
 			 References the Package that owns this Package.
@@ -372,27 +385,27 @@ namespace uml
 			/*!
 			 References the Stereotypes that are owned by the Package.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > > getOwnedStereotype() const = 0;
+			virtual std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> getOwnedStereotype() const = 0;
 			
 			/*!
 			 References the packaged elements that are Types.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > > getOwnedType() const = 0;
+			virtual std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> getOwnedType() const = 0;
 			
 			/*!
 			 References the PackageMerges that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<Subset<uml::PackageMerge, uml::Element > > getPackageMerge() const = 0;
+			virtual std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> getPackageMerge() const = 0;
 			
 			/*!
 			 Specifies the packageable elements that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement > > getPackagedElement() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> getPackagedElement() const = 0;
 			
 			/*!
 			 References the ProfileApplications that indicate which profiles have been applied to the Package.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<Subset<uml::ProfileApplication, uml::Element > > getProfileApplication() const = 0;
+			virtual std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> getProfileApplication() const = 0;
 			
 			
 
@@ -403,7 +416,7 @@ namespace uml
 			/*!
 			 Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
 			<p>From package UML::Packages.</p> */ 
-			std::string m_URI ;
+			std::string m_URI = "";
 			
 			
 			//*********************************
@@ -412,7 +425,7 @@ namespace uml
 			/*!
 			 References the packaged elements that are Packages.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > > m_nestedPackage;
+			std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> m_nestedPackage;
 			/*!
 			 References the Package that owns this Package.
 			<p>From package UML::Packages.</p> */
@@ -420,23 +433,23 @@ namespace uml
 			/*!
 			 References the Stereotypes that are owned by the Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > > m_ownedStereotype;
+			std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedStereotype;
 			/*!
 			 References the packaged elements that are Types.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > > m_ownedType;
+			std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedType;
 			/*!
 			 References the PackageMerges that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::PackageMerge, uml::Element > > m_packageMerge;
+			std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> m_packageMerge;
 			/*!
 			 Specifies the packageable elements that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement > > m_packagedElement;
+			std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> m_packagedElement;
 			/*!
 			 References the ProfileApplications that indicate which profiles have been applied to the Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::ProfileApplication, uml::Element > > m_profileApplication;
+			std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> m_profileApplication;
 			
 
 		public:
@@ -446,21 +459,31 @@ namespace uml
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_PACKAGE_HPP */
-

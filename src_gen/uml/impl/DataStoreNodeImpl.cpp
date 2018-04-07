@@ -1,51 +1,84 @@
-#include "DataStoreNodeImpl.hpp"
-#include <iostream>
+#include "uml/impl/DataStoreNodeImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Behavior.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "CentralBufferNode.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/CentralBufferNode.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "State.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/State.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -71,7 +104,6 @@ DataStoreNodeImpl::~DataStoreNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataStoreNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -137,31 +169,31 @@ DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj):DataStoreNod
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-	std::shared_ptr< Bag<uml::State> > _inState = obj.getInState();
+	std::shared_ptr<Bag<uml::State>> _inState = obj.getInState();
 	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_selection  = obj.getSelection();
@@ -230,13 +262,14 @@ DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj):DataStoreNod
 
 std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DataStoreNodeImpl(*this));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(*this));
+	element->setThisDataStoreNodePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDataStoreNode();
+	return UmlPackageImpl::eInstance()->getDataStoreNode_EClass();
 }
 
 //*********************************
@@ -254,11 +287,11 @@ std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > DataStoreNodeImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> DataStoreNodeImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<Union<uml::Element> > DataStoreNodeImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DataStoreNodeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -266,73 +299,152 @@ std::weak_ptr<uml::Element > DataStoreNodeImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > DataStoreNodeImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> DataStoreNodeImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr()
+{
+	return m_thisDataStoreNodePtr.lock();
+}
+void DataStoreNodeImpl::setThisDataStoreNodePtr(std::weak_ptr<DataStoreNode> thisDataStoreNodePtr)
+{
+	m_thisDataStoreNodePtr = thisDataStoreNodePtr;
+	setThisCentralBufferNodePtr(thisDataStoreNodePtr);
+}
+std::shared_ptr<ecore::EObject> DataStoreNodeImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataStoreNodeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DataStoreNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //18613
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1864
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1860
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //18614
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //18615
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //18620
-		case UmlPackage::OBJECTNODE_INSTATE:
-			return getInState(); //18622
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //18616
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //18617
-		case UmlPackage::OBJECTNODE_ISCONTROLTYPE:
-			return getIsControlType(); //18623
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //18610
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1865
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1866
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1867
-		case UmlPackage::OBJECTNODE_ORDERING:
-			return getOrdering(); //18624
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //18618
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1861
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1862
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1863
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1868
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //18611
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //18619
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //18612
-		case UmlPackage::OBJECTNODE_SELECTION:
-			return getSelection(); //18625
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //18610
-		case UmlPackage::OBJECTNODE_UPPERBOUND:
-			return getUpperBound(); //18626
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1869
 	}
-	return boost::any();
+	return CentralBufferNodeImpl::internalEIsSet(featureID);
 }
+bool DataStoreNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CentralBufferNodeImpl::internalEIsSet(featureID);
+}
+bool DataStoreNodeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CentralBufferNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DataStoreNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DataStoreNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	CentralBufferNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DataStoreNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	CentralBufferNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DataStoreNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	CentralBufferNodeImpl::resolveReferences(featureID, references);
+}
+
+void DataStoreNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CentralBufferNodeImpl::saveContent(saveHandler);
+	
+	ObjectNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void DataStoreNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,35 +1,68 @@
-#include "TimeIntervalImpl.hpp"
-#include <iostream>
+#include "uml/impl/TimeIntervalImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Interval.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Interval.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Slot.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Slot.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -55,7 +88,6 @@ TimeIntervalImpl::~TimeIntervalImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TimeInterval "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -127,7 +159,7 @@ TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj):TimeIntervalImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_max  = obj.getMax();
@@ -179,13 +211,14 @@ TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj):TimeIntervalImp
 
 std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TimeIntervalImpl(*this));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(*this));
+	element->setThisTimeIntervalPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeInterval();
+	return UmlPackageImpl::eInstance()->getTimeInterval_EClass();
 }
 
 //*********************************
@@ -207,7 +240,7 @@ std::weak_ptr<uml::Namespace > TimeIntervalImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > TimeIntervalImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TimeIntervalImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -217,47 +250,148 @@ std::weak_ptr<uml::Element > TimeIntervalImpl::getOwner() const
 }
 
 
+std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr()
+{
+	return m_thisTimeIntervalPtr.lock();
+}
+void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr)
+{
+	m_thisTimeIntervalPtr = thisTimeIntervalPtr;
+	setThisIntervalPtr(thisTimeIntervalPtr);
+}
+std::shared_ptr<ecore::EObject> TimeIntervalImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningSlot.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeIntervalImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TimeIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2564
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2560
-		case UmlPackage::INTERVAL_MAX:
-			return getMax(); //25615
-		case UmlPackage::INTERVAL_MIN:
-			return getMin(); //25616
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2565
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2566
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2567
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2561
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2562
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2563
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //25612
-		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
-			return getOwningSlot(); //25614
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2564
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2568
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2565
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //25610
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2569
 	}
-	return boost::any();
+	return IntervalImpl::internalEIsSet(featureID);
 }
+bool TimeIntervalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return IntervalImpl::internalEIsSet(featureID);
+}
+bool TimeIntervalImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return IntervalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TimeIntervalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TimeIntervalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	IntervalImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TimeIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	IntervalImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TimeIntervalImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	IntervalImpl::resolveReferences(featureID, references);
+}
+
+void TimeIntervalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	IntervalImpl::saveContent(saveHandler);
+	
+	ValueSpecificationImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

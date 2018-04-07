@@ -1,61 +1,95 @@
-#include "LoopNodeImpl.hpp"
-#include <iostream>
+#include "uml/impl/LoopNodeImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "ExecutableNode.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExecutableNode.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Variable.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
+#include "uml/Variable.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -141,7 +175,6 @@ LoopNodeImpl::~LoopNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LoopNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -151,10 +184,10 @@ LoopNodeImpl::~LoopNodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					 m_activity = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 					 m_inActivity = par_Activity;
 					 return;
 				default:
@@ -236,19 +269,19 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::OutputPin> > _bodyOutput = obj.getBodyOutput();
+	std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = obj.getBodyOutput();
 	m_bodyOutput.reset(new Bag<uml::OutputPin>(*(obj.getBodyOutput().get())));
 
-	std::shared_ptr< Bag<uml::ExecutableNode> > _bodyPart = obj.getBodyPart();
+	std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = obj.getBodyPart();
 	m_bodyPart.reset(new Bag<uml::ExecutableNode>(*(obj.getBodyPart().get())));
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
 	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
 	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_context  = obj.getContext();
@@ -257,36 +290,36 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 
 	m_inActivity  = obj.getInActivity();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-	std::shared_ptr< Bag<uml::ExecutableNode> > _setupPart = obj.getSetupPart();
+	std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = obj.getSetupPart();
 	m_setupPart.reset(new Bag<uml::ExecutableNode>(*(obj.getSetupPart().get())));
 
 	m_superGroup  = obj.getSuperGroup();
 
-	std::shared_ptr< Bag<uml::ExecutableNode> > _test = obj.getTest();
+	std::shared_ptr<Bag<uml::ExecutableNode>> _test = obj.getTest();
 	m_test.reset(new Bag<uml::ExecutableNode>(*(obj.getTest().get())));
 
 
@@ -477,13 +510,14 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 
 std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new LoopNodeImpl(*this));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(*this));
+	element->setThisLoopNodePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLoopNode();
+	return UmlPackageImpl::eInstance()->getLoopNode_EClass();
 }
 
 //*********************************
@@ -559,14 +593,14 @@ bool LoopNodeImpl::setup_test_and_body(boost::any diagnostics,std::map <   boost
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<uml::OutputPin> > LoopNodeImpl::getBodyOutput() const
+std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 {
 
     return m_bodyOutput;
 }
 
 
-std::shared_ptr< Bag<uml::ExecutableNode> > LoopNodeImpl::getBodyPart() const
+std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 {
 
     return m_bodyPart;
@@ -583,35 +617,35 @@ void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
     m_decider = _decider;
 }
 
-std::shared_ptr<Subset<uml::OutputPin, uml::Element > > LoopNodeImpl::getLoopVariable() const
+std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVariable() const
 {
 
     return m_loopVariable;
 }
 
 
-std::shared_ptr< Bag<uml::InputPin> > LoopNodeImpl::getLoopVariableInput() const
+std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 {
 
     return m_loopVariableInput;
 }
 
 
-std::shared_ptr< Bag<uml::OutputPin> > LoopNodeImpl::getResult() const
+std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 {
 
     return m_result;
 }
 
 
-std::shared_ptr< Bag<uml::ExecutableNode> > LoopNodeImpl::getSetupPart() const
+std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 {
 
     return m_setupPart;
 }
 
 
-std::shared_ptr< Bag<uml::ExecutableNode> > LoopNodeImpl::getTest() const
+std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 {
 //assert(m_test);
     return m_test;
@@ -621,35 +655,35 @@ std::shared_ptr< Bag<uml::ExecutableNode> > LoopNodeImpl::getTest() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityEdge> > LoopNodeImpl::getContainedEdge() const
+std::shared_ptr<Union<uml::ActivityEdge>> LoopNodeImpl::getContainedEdge() const
 {
 	return m_containedEdge;
 }
-std::shared_ptr<Union<uml::ActivityNode> > LoopNodeImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode>> LoopNodeImpl::getContainedNode() const
 {
 	return m_containedNode;
 }
-std::shared_ptr<Union<uml::ActivityGroup> > LoopNodeImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> LoopNodeImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > LoopNodeImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> LoopNodeImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<Union<uml::NamedElement> > LoopNodeImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> LoopNodeImpl::getMember() const
 {
 	return m_member;
 }
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > LoopNodeImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> LoopNodeImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<Union<uml::Element> > LoopNodeImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> LoopNodeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > LoopNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> LoopNodeImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -657,127 +691,455 @@ std::weak_ptr<uml::Element > LoopNodeImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > LoopNodeImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> LoopNodeImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<LoopNode> LoopNodeImpl::getThisLoopNodePtr()
+{
+	return m_thisLoopNodePtr.lock();
+}
+void LoopNodeImpl::setThisLoopNodePtr(std::weak_ptr<LoopNode> thisLoopNodePtr)
+{
+	m_thisLoopNodePtr = thisLoopNodePtr;
+	setThisStructuredActivityNodePtr(thisLoopNodePtr);
+}
+std::shared_ptr<ecore::EObject> LoopNodeImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_inActivity.lock())
+	{
+		return wp;
+	}
+
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_superGroup.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LoopNodeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //15613
-		case UmlPackage::LOOPNODE_BODYOUTPUT:
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
 			return getBodyOutput(); //15645
-		case UmlPackage::LOOPNODE_BODYPART:
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
 			return getBodyPart(); //15646
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1564
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
-			return getContainedEdge(); //15610
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
-			return getContainedNode(); //15611
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //15622
-		case UmlPackage::LOOPNODE_DECIDER:
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
 			return getDecider(); //15647
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1560
-		case UmlPackage::STRUCTUREDACTIVITYNODE_EDGE:
-			return getEdge(); //15639
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //15611
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //15621
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //15614
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
-			return getInActivity(); //15612
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //15614
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //15615
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //15620
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //15616
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //15617
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //15623
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //15610
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //15624
-		case UmlPackage::LOOPNODE_ISTESTEDFIRST:
+		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
 			return getIsTestedFirst(); //15648
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //15625
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //15626
-		case UmlPackage::LOOPNODE_LOOPVARIABLE:
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
 			return getLoopVariable(); //15649
-		case UmlPackage::LOOPNODE_LOOPVARIABLEINPUT:
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
 			return getLoopVariableInput(); //15650
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //15615
-		case UmlPackage::STRUCTUREDACTIVITYNODE_MUSTISOLATE:
-			return getMustIsolate(); //15640
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1565
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1566
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1567
-		case UmlPackage::STRUCTUREDACTIVITYNODE_NODE:
-			return getNode(); //15644
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //15618
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //15627
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1561
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1562
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //15613
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //15610
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1563
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //15612
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1568
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //15611
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //15619
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //15612
-		case UmlPackage::LOOPNODE_RESULT:
+		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
 			return getResult(); //15651
-		case UmlPackage::LOOPNODE_SETUPPART:
+		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
 			return getSetupPart(); //15652
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput(); //15641
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput(); //15642
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
-			return getSubgroup(); //15613
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
-			return getSuperGroup(); //15614
-		case UmlPackage::LOOPNODE_TEST:
+		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
 			return getTest(); //15653
-		case UmlPackage::STRUCTUREDACTIVITYNODE_VARIABLE:
-			return getVariable(); //15643
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1569
 	}
-	return boost::any();
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
+bool LoopNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
+			return getBodyOutput() != nullptr; //15645
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
+			return getBodyPart() != nullptr; //15646
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
+			return getDecider() != nullptr; //15647
+		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
+			return getIsTestedFirst() != false; //15648
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
+			return getLoopVariable() != nullptr; //15649
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
+			return getLoopVariableInput() != nullptr; //15650
+		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
+			return getResult() != nullptr; //15651
+		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
+			return getSetupPart() != nullptr; //15652
+		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
+			return getTest() != nullptr; //15653
+	}
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+}
+bool LoopNodeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::OutputPin> _decider = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			setDecider(_decider); //15647
+			return true;
+		}
+		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
+		{
+			// BOOST CAST
+			bool _isTestedFirst = boost::any_cast<bool>(newValue);
+			setIsTestedFirst(_isTestedFirst); //15648
+			return true;
+		}
+	}
+
+	return StructuredActivityNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void LoopNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void LoopNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isTestedFirst");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsTestedFirst(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("bodyOutput");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyOutput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("bodyPart");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyPart")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("decider");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decider")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("setupPart");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("setupPart")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("test");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("test")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("loopVariable") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<uml::OutputPin> loopVariable = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			if (loopVariable != nullptr)
+			{
+				std::shared_ptr<Subset<uml::OutputPin, uml::Element>> list_loopVariable = this->getLoopVariable();
+				list_loopVariable->push_back(loopVariable);
+				loadHandler->handleChild(loopVariable);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("loopVariableInput") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<uml::InputPin> loopVariableInput = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			if (loopVariableInput != nullptr)
+			{
+				std::shared_ptr<Bag<uml::InputPin>> list_loopVariableInput = this->getLoopVariableInput();
+				list_loopVariableInput->push_back(loopVariableInput);
+				loadHandler->handleChild(loopVariableInput);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			if (result != nullptr)
+			{
+				std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
+				list_result->push_back(result);
+				loadHandler->handleChild(result);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
+		{
+			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::OutputPin> _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
+				if (_r != nullptr)
+				{
+					_bodyOutput->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode> _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_bodyPart->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>( references.front() );
+				setDecider(_decider);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode> _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_setupPart->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode> _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_test->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	StructuredActivityNodeImpl::resolveReferences(featureID, references);
+}
+
+void LoopNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredActivityNodeImpl::saveContent(saveHandler);
+	
+	ActionImpl::saveContent(saveHandler);
+	ActivityGroupImpl::saveContent(saveHandler);
+	NamespaceImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'loopVariable'
+		for (std::shared_ptr<uml::OutputPin> loopVariable : *this->getLoopVariable()) 
+		{
+			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getLoopNode_EAttribute_isTestedFirst()) )
+		{
+			saveHandler->addAttribute("isTestedFirst", this->getIsTestedFirst());
+		}
+
+		// Add references
+		std::shared_ptr<Bag<uml::OutputPin>> bodyOutput_list = this->getBodyOutput();
+		for (std::shared_ptr<uml::OutputPin > object : *bodyOutput_list)
+		{ 
+			saveHandler->addReferences("bodyOutput", object);
+		}
+		std::shared_ptr<Bag<uml::ExecutableNode>> bodyPart_list = this->getBodyPart();
+		for (std::shared_ptr<uml::ExecutableNode > object : *bodyPart_list)
+		{ 
+			saveHandler->addReferences("bodyPart", object);
+		}
+		saveHandler->addReference("decider", this->getDecider());
+		std::shared_ptr<Bag<uml::ExecutableNode>> setupPart_list = this->getSetupPart();
+		for (std::shared_ptr<uml::ExecutableNode > object : *setupPart_list)
+		{ 
+			saveHandler->addReferences("setupPart", object);
+		}
+		std::shared_ptr<Bag<uml::ExecutableNode>> test_list = this->getTest();
+		for (std::shared_ptr<uml::ExecutableNode > object : *test_list)
+		{ 
+			saveHandler->addReferences("test", object);
+		}
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'loopVariableInput'
+		std::shared_ptr<Bag<uml::InputPin>> list_loopVariableInput = this->getLoopVariableInput();
+		for (std::shared_ptr<uml::InputPin> loopVariableInput : *list_loopVariableInput) 
+		{
+			saveHandler->addReference(loopVariableInput, "loopVariableInput", loopVariableInput->eClass() != package->getInputPin_EClass());
+		}
+
+		// Save 'result'
+		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
+		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

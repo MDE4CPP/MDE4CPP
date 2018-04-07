@@ -1,31 +1,65 @@
-#include "PackageableElementImpl.hpp"
-#include <iostream>
+#include "uml/impl/PackageableElementImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -53,7 +87,6 @@ PackageableElementImpl::~PackageableElementImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PackageableElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -114,7 +147,7 @@ PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -158,13 +191,14 @@ PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & ob
 
 std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new PackageableElementImpl(*this));
+	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl(*this));
+	element->setThisPackageableElementPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageableElement();
+	return UmlPackageImpl::eInstance()->getPackageableElement_EClass();
 }
 
 //*********************************
@@ -200,7 +234,7 @@ std::weak_ptr<uml::Namespace > PackageableElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > PackageableElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> PackageableElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -210,39 +244,183 @@ std::weak_ptr<uml::Element > PackageableElementImpl::getOwner() const
 }
 
 
+std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr()
+{
+	return m_thisPackageableElementPtr.lock();
+}
+void PackageableElementImpl::setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr)
+{
+	m_thisPackageableElementPtr = thisPackageableElementPtr;
+	setThisNamedElementPtr(thisPackageableElementPtr);
+	setThisParameterableElementPtr(thisPackageableElementPtr);
+}
+std::shared_ptr<ecore::EObject> PackageableElementImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageableElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //144
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //140
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //145
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //146
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //147
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //141
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //142
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //143
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 			return getOwningPackage(); //1412
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //144
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //148
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //145
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //149
 	}
-	return boost::any();
+	boost::any result;
+	result = NamedElementImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool PackageableElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+			return getOwningPackage().lock() != nullptr; //1412
+	}
+	bool result = false;
+	result = NamedElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool PackageableElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setOwningPackage(_owningPackage); //1412
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = NamedElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void PackageableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void PackageableElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+	ParameterableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void PackageableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	ParameterableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void PackageableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>( references.front() );
+				setOwningPackage(_owningPackage);
+			}
+			
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+	ParameterableElementImpl::resolveReferences(featureID, references);
+}
+
+void PackageableElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

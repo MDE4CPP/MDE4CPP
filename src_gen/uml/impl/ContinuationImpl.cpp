@@ -1,33 +1,67 @@
-#include "ContinuationImpl.hpp"
-#include <iostream>
+#include "uml/impl/ContinuationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/Element.hpp"
 
-#include "Interaction.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "InteractionFragment.hpp"
+#include "uml/Interaction.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/InteractionFragment.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -53,7 +87,6 @@ ContinuationImpl::~ContinuationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Continuation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -115,10 +148,10 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -168,13 +201,14 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 
 std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ContinuationImpl(*this));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(*this));
+	element->setThisContinuationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getContinuation();
+	return UmlPackageImpl::eInstance()->getContinuation_EClass();
 }
 
 //*********************************
@@ -222,7 +256,7 @@ std::weak_ptr<uml::Namespace > ContinuationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ContinuationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ContinuationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -232,43 +266,173 @@ std::weak_ptr<uml::Element > ContinuationImpl::getOwner() const
 }
 
 
+std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr()
+{
+	return m_thisContinuationPtr.lock();
+}
+void ContinuationImpl::setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr)
+{
+	m_thisContinuationPtr = thisContinuationPtr;
+	setThisInteractionFragmentPtr(thisContinuationPtr);
+}
+std::shared_ptr<ecore::EObject> ContinuationImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ContinuationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2314
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
-			return getCovered(); //23110
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2310
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //23112
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //23111
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
-			return getGeneralOrdering(); //23113
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2315
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2316
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2317
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2311
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2312
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2313
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2318
-		case UmlPackage::CONTINUATION_SETTING:
+		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
 			return getSetting(); //23114
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2319
 	}
-	return boost::any();
+	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
+bool ContinuationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+			return getSetting() != true; //23114
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+bool ContinuationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+		{
+			// BOOST CAST
+			bool _setting = boost::any_cast<bool>(newValue);
+			setSetting(_setting); //23114
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ContinuationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ContinuationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("setting");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setSetting(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ContinuationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ContinuationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void ContinuationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getContinuation_EAttribute_setting()) )
+		{
+			saveHandler->addAttribute("setting", this->getSetting());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

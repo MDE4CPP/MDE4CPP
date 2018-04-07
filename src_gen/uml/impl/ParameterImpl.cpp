@@ -1,41 +1,75 @@
-#include "ParameterImpl.hpp"
-#include <iostream>
+#include "uml/impl/ParameterImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Behavior.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/Comment.hpp"
 
-#include "ConnectorEnd.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Dependency.hpp"
+#include "uml/ConnectorEnd.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "Operation.hpp"
+#include "uml/Namespace.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/Operation.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -82,7 +116,6 @@ ParameterImpl::~ParameterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Parameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -165,10 +198,10 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 	
 	m_behavior  = obj.getBehavior();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	std::shared_ptr<Bag<uml::ConnectorEnd>> _end = obj.getEnd();
 	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -179,7 +212,7 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr< Bag<uml::ParameterSet> > _parameterSet = obj.getParameterSet();
+	std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = obj.getParameterSet();
 	m_parameterSet.reset(new Bag<uml::ParameterSet>(*(obj.getParameterSet().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -239,13 +272,14 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 
 std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ParameterImpl(*this));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(*this));
+	element->setThisParameterPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getParameter();
+	return UmlPackageImpl::eInstance()->getParameter_EClass();
 }
 
 //*********************************
@@ -418,7 +452,7 @@ std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 }
 
 
-std::shared_ptr< Bag<uml::ParameterSet> > ParameterImpl::getParameterSet() const
+std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 {
 
     return m_parameterSet;
@@ -432,7 +466,7 @@ std::weak_ptr<uml::Namespace > ParameterImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -442,71 +476,465 @@ std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 }
 
 
+std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr()
+{
+	return m_thisParameterPtr.lock();
+}
+void ParameterImpl::setThisParameterPtr(std::weak_ptr<Parameter> thisParameterPtr)
+{
+	m_thisParameterPtr = thisParameterPtr;
+	setThisConnectableElementPtr(thisParameterPtr);
+	setThisMultiplicityElementPtr(thisParameterPtr);
+}
+std::shared_ptr<ecore::EObject> ParameterImpl::eContainer() const
+{
+	if(auto wp = m_behavior.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_operation.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETER_BEHAVIOR:
+		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
 			return getBehavior(); //4428
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //444
-		case UmlPackage::PARAMETER_DEFAULT:
+		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
 			return getDefault(); //4420
-		case UmlPackage::PARAMETER_DEFAULTVALUE:
+		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
 			return getDefaultValue(); //4421
-		case UmlPackage::PARAMETER_DIRECTION:
+		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
 			return getDirection(); //4422
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //440
-		case UmlPackage::PARAMETER_EFFECT:
+		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
 			return getEffect(); //4423
-		case UmlPackage::CONNECTABLEELEMENT_END:
-			return getEnd(); //4413
-		case UmlPackage::PARAMETER_ISEXCEPTION:
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
 			return getIsException(); //4424
-		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
-			return getIsOrdered(); //444
-		case UmlPackage::PARAMETER_ISSTREAM:
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
 			return getIsStream(); //4425
-		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
-			return getIsUnique(); //445
-		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
-			return getLower(); //446
-		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
-			return getLowerValue(); //447
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //445
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //446
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //447
-		case UmlPackage::PARAMETER_OPERATION:
+		case UmlPackage::PARAMETER_EREFERENCE_OPERATION:
 			return getOperation(); //4426
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //441
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //442
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //443
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //444
-		case UmlPackage::PARAMETER_PARAMETERSET:
+		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
 			return getParameterSet(); //4427
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //448
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //445
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //4410
-		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
-			return getUpper(); //448
-		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
-			return getUpperValue(); //449
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //449
 	}
-	return boost::any();
+	boost::any result;
+	result = ConnectableElementImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool ParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
+			return getBehavior().lock() != nullptr; //4428
+		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
+			return getDefault() != ""; //4420
+		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
+			return getDefaultValue() != nullptr; //4421
+		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
+			return m_direction != ParameterDirectionKind::IN;; //4422
+		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
+			return m_effect != ParameterEffectKind::CREATE;; //4423
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
+			return getIsException() != false; //4424
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
+			return getIsStream() != false; //4425
+		case UmlPackage::PARAMETER_EREFERENCE_OPERATION:
+			return getOperation().lock() != nullptr; //4426
+		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
+			return getParameterSet() != nullptr; //4427
+	}
+	bool result = false;
+	result = ConnectableElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool ParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setBehavior(_behavior); //4428
+			return true;
+		}
+		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
+		{
+			// BOOST CAST
+			std::string _default = boost::any_cast<std::string>(newValue);
+			setDefault(_default); //4420
+			return true;
+		}
+		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setDefaultValue(_defaultValue); //4421
+			return true;
+		}
+		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
+		{
+			// BOOST CAST
+			ParameterDirectionKind _direction = boost::any_cast<ParameterDirectionKind>(newValue);
+			setDirection(_direction); //4422
+			return true;
+		}
+		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
+		{
+			// BOOST CAST
+			ParameterEffectKind _effect = boost::any_cast<ParameterEffectKind>(newValue);
+			setEffect(_effect); //4423
+			return true;
+		}
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
+		{
+			// BOOST CAST
+			bool _isException = boost::any_cast<bool>(newValue);
+			setIsException(_isException); //4424
+			return true;
+		}
+		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
+		{
+			// BOOST CAST
+			bool _isStream = boost::any_cast<bool>(newValue);
+			setIsStream(_isStream); //4425
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ConnectableElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("direction");
+		if ( iter != attr_list.end() )
+		{
+			ParameterDirectionKind value = ParameterDirectionKind::IN;
+			std::string literal = iter->second;
+			if (literal == "in")
+			{
+				value = ParameterDirectionKind::IN;
+			}
+			else if (literal == "inout")
+			{
+				value = ParameterDirectionKind::INOUT;
+			}
+			else if (literal == "out")
+			{
+				value = ParameterDirectionKind::OUT;
+			}
+			else if (literal == "return")
+			{
+				value = ParameterDirectionKind::RETURN;
+			}
+			this->setDirection(value);
+		}
+
+		iter = attr_list.find("effect");
+		if ( iter != attr_list.end() )
+		{
+			ParameterEffectKind value = ParameterEffectKind::CREATE;
+			std::string literal = iter->second;
+			if (literal == "create")
+			{
+				value = ParameterEffectKind::CREATE;
+			}
+			else if (literal == "read")
+			{
+				value = ParameterEffectKind::READ;
+			}
+			else if (literal == "update")
+			{
+				value = ParameterEffectKind::UPDATE;
+			}
+			else if (literal == "delete")
+			{
+				value = ParameterEffectKind::DELETE;
+			}
+			this->setEffect(value);
+		}
+
+		iter = attr_list.find("isException");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsException(value);
+		}
+
+		iter = attr_list.find("isStream");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsStream(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("parameterSet");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameterSet")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ConnectableElementImpl::loadAttributes(loadHandler, attr_list);
+	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("defaultValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			std::shared_ptr<uml::ValueSpecification> defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
+			if (defaultValue != nullptr)
+			{
+				this->setDefaultValue(defaultValue);
+				loadHandler->handleChild(defaultValue);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ConnectableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setBehavior(_behavior);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
+		{
+			std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ParameterSet> _r = std::dynamic_pointer_cast<uml::ParameterSet>(ref);
+				if (_r != nullptr)
+				{
+					_parameterSet->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	ConnectableElementImpl::resolveReferences(featureID, references);
+	MultiplicityElementImpl::resolveReferences(featureID, references);
+}
+
+void ParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ConnectableElementImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	
+	ParameterableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'defaultValue'
+		std::shared_ptr<uml::ValueSpecification > defaultValue = this->getDefaultValue();
+		if (defaultValue != nullptr)
+		{
+			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getParameter_EAttribute_direction()) )
+		{
+			ParameterDirectionKind value = this->getDirection();
+			std::string literal = "";
+			if (value == ParameterDirectionKind::IN)
+			{
+				literal = "in";
+			}
+			else if (value == ParameterDirectionKind::INOUT)
+			{
+				literal = "inout";
+			}
+			else if (value == ParameterDirectionKind::OUT)
+			{
+				literal = "out";
+			}
+			else if (value == ParameterDirectionKind::RETURN)
+			{
+				literal = "return";
+			}
+			saveHandler->addAttribute("direction", literal);
+		}
+
+		if ( this->eIsSet(package->getParameter_EAttribute_effect()) )
+		{
+			ParameterEffectKind value = this->getEffect();
+			std::string literal = "";
+			if (value == ParameterEffectKind::CREATE)
+			{
+				literal = "create";
+			}
+			else if (value == ParameterEffectKind::READ)
+			{
+				literal = "read";
+			}
+			else if (value == ParameterEffectKind::UPDATE)
+			{
+				literal = "update";
+			}
+			else if (value == ParameterEffectKind::DELETE)
+			{
+				literal = "delete";
+			}
+			saveHandler->addAttribute("effect", literal);
+		}
+
+		if ( this->eIsSet(package->getParameter_EAttribute_isException()) )
+		{
+			saveHandler->addAttribute("isException", this->getIsException());
+		}
+
+		if ( this->eIsSet(package->getParameter_EAttribute_isStream()) )
+		{
+			saveHandler->addAttribute("isStream", this->getIsStream());
+		}
+
+		// Add references
+		std::shared_ptr<Bag<uml::ParameterSet>> parameterSet_list = this->getParameterSet();
+		for (std::shared_ptr<uml::ParameterSet > object : *parameterSet_list)
+		{ 
+			saveHandler->addReferences("parameterSet", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

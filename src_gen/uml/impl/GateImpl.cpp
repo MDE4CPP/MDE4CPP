@@ -1,31 +1,65 @@
-#include "GateImpl.hpp"
-#include <iostream>
+#include "uml/impl/GateImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Gate.hpp"
+#include "uml/Element.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/Gate.hpp"
 
-#include "Message.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "MessageEnd.hpp"
+#include "uml/Message.hpp"
 
-#include "Namespace.hpp"
+#include "uml/MessageEnd.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -51,7 +85,6 @@ GateImpl::~GateImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Gate "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -90,7 +123,7 @@ GateImpl::GateImpl(const GateImpl & obj):GateImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_message  = obj.getMessage();
@@ -130,13 +163,14 @@ GateImpl::GateImpl(const GateImpl & obj):GateImpl()
 
 std::shared_ptr<ecore::EObject>  GateImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new GateImpl(*this));
+	std::shared_ptr<GateImpl> element(new GateImpl(*this));
+	element->setThisGatePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGate();
+	return UmlPackageImpl::eInstance()->getGate_EClass();
 }
 
 //*********************************
@@ -237,7 +271,7 @@ bool GateImpl::outside_cf_matched(boost::any diagnostics,std::map <   boost::any
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > GateImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> GateImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -247,35 +281,125 @@ std::weak_ptr<uml::Element > GateImpl::getOwner() const
 }
 
 
+std::shared_ptr<Gate> GateImpl::getThisGatePtr()
+{
+	return m_thisGatePtr.lock();
+}
+void GateImpl::setThisGatePtr(std::weak_ptr<Gate> thisGatePtr)
+{
+	m_thisGatePtr = thisGatePtr;
+	setThisMessageEndPtr(thisGatePtr);
+}
+std::shared_ptr<ecore::EObject> GateImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GateImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any GateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2164
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2160
-		case UmlPackage::MESSAGEEND_MESSAGE:
-			return getMessage(); //21610
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2165
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2166
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2167
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2161
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2162
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2163
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2168
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2169
 	}
-	return boost::any();
+	return MessageEndImpl::internalEIsSet(featureID);
 }
+bool GateImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return MessageEndImpl::internalEIsSet(featureID);
+}
+bool GateImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return MessageEndImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void GateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void GateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	MessageEndImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void GateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	MessageEndImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void GateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	MessageEndImpl::resolveReferences(featureID, references);
+}
+
+void GateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	MessageEndImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void GateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

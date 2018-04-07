@@ -1,33 +1,67 @@
-#include "ActivityPartitionImpl.hpp"
-#include <iostream>
+#include "uml/impl/ActivityPartitionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Comment.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Element.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Namespace.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -108,7 +142,6 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityPartition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -182,13 +215,13 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
 	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
 	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_inActivity  = obj.getInActivity();
@@ -265,13 +298,14 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 
 std::shared_ptr<ecore::EObject>  ActivityPartitionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityPartitionImpl(*this));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(*this));
+	element->setThisActivityPartitionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityPartition();
+	return UmlPackageImpl::eInstance()->getActivityPartition_EClass();
 }
 
 //*********************************
@@ -327,14 +361,14 @@ bool ActivityPartitionImpl::represents_property_and_is_contained(boost::any diag
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge > > ActivityPartitionImpl::getEdge() const
+std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
 {
 
     return m_edge;
 }
 
 
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > > ActivityPartitionImpl::getNode() const
+std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
 {
 
     return m_node;
@@ -351,7 +385,7 @@ void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represe
     m_represents = _represents;
 }
 
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > ActivityPartitionImpl::getSubpartition() const
+std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
 {
 
     return m_subpartition;
@@ -371,15 +405,15 @@ void ActivityPartitionImpl::setSuperPartition(std::shared_ptr<uml::ActivityParti
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityEdge> > ActivityPartitionImpl::getContainedEdge() const
+std::shared_ptr<Union<uml::ActivityEdge>> ActivityPartitionImpl::getContainedEdge() const
 {
 	return m_containedEdge;
 }
-std::shared_ptr<Union<uml::ActivityNode> > ActivityPartitionImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode>> ActivityPartitionImpl::getContainedNode() const
 {
 	return m_containedNode;
 }
-std::shared_ptr<Union<uml::Element> > ActivityPartitionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ActivityPartitionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -387,7 +421,7 @@ std::weak_ptr<uml::Element > ActivityPartitionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > > ActivityPartitionImpl::getSubgroup() const
+std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityPartitionImpl::getSubgroup() const
 {
 	return m_subgroup;
 }
@@ -397,57 +431,356 @@ std::weak_ptr<uml::ActivityGroup > ActivityPartitionImpl::getSuperGroup() const
 }
 
 
+std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr()
+{
+	return m_thisActivityPartitionPtr.lock();
+}
+void ActivityPartitionImpl::setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr)
+{
+	m_thisActivityPartitionPtr = thisActivityPartitionPtr;
+	setThisActivityGroupPtr(thisActivityPartitionPtr);
+}
+std::shared_ptr<ecore::EObject> ActivityPartitionImpl::eContainer() const
+{
+	if(auto wp = m_inActivity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_superGroup.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_superPartition.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityPartitionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1094
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
-			return getContainedEdge(); //10910
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
-			return getContainedNode(); //10911
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1090
-		case UmlPackage::ACTIVITYPARTITION_EDGE:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
 			return getEdge(); //10921
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
-			return getInActivity(); //10912
-		case UmlPackage::ACTIVITYPARTITION_ISDIMENSION:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
 			return getIsDimension(); //10915
-		case UmlPackage::ACTIVITYPARTITION_ISEXTERNAL:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 			return getIsExternal(); //10916
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1095
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1096
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1097
-		case UmlPackage::ACTIVITYPARTITION_NODE:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
 			return getNode(); //10917
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1091
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1092
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1093
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1098
-		case UmlPackage::ACTIVITYPARTITION_REPRESENTS:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 			return getRepresents(); //10918
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
-			return getSubgroup(); //10913
-		case UmlPackage::ACTIVITYPARTITION_SUBPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
 			return getSubpartition(); //10919
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
-			return getSuperGroup(); //10914
-		case UmlPackage::ACTIVITYPARTITION_SUPERPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 			return getSuperPartition(); //10920
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1099
 	}
-	return boost::any();
+	return ActivityGroupImpl::internalEIsSet(featureID);
 }
+bool ActivityPartitionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
+			return getEdge() != nullptr; //10921
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
+			return getIsDimension() != false; //10915
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
+			return getIsExternal() != false; //10916
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
+			return getNode() != nullptr; //10917
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
+			return getRepresents() != nullptr; //10918
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
+			return getSubpartition() != nullptr; //10919
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
+			return getSuperPartition().lock() != nullptr; //10920
+	}
+	return ActivityGroupImpl::internalEIsSet(featureID);
+}
+bool ActivityPartitionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
+		{
+			// BOOST CAST
+			bool _isDimension = boost::any_cast<bool>(newValue);
+			setIsDimension(_isDimension); //10915
+			return true;
+		}
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
+		{
+			// BOOST CAST
+			bool _isExternal = boost::any_cast<bool>(newValue);
+			setIsExternal(_isExternal); //10916
+			return true;
+		}
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Element> _represents = boost::any_cast<std::shared_ptr<uml::Element>>(newValue);
+			setRepresents(_represents); //10918
+			return true;
+		}
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityPartition> _superPartition = boost::any_cast<std::shared_ptr<uml::ActivityPartition>>(newValue);
+			setSuperPartition(_superPartition); //10920
+			return true;
+		}
+	}
+
+	return ActivityGroupImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityPartitionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityPartitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isDimension");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsDimension(value);
+		}
+
+		iter = attr_list.find("isExternal");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsExternal(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("edge");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("edge")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("node");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("node")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("represents");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("represents")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityGroupImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("subpartition") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ActivityPartition";
+			}
+			std::shared_ptr<ecore::EObject> subpartition = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION);
+			if (subpartition != nullptr)
+			{
+				loadHandler->handleChild(subpartition);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityGroupImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
+		{
+			std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityEdge> _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				if (_r != nullptr)
+				{
+					_edge->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
+		{
+			std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ActivityNode> _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
+				if (_r != nullptr)
+				{
+					_node->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>( references.front() );
+				setRepresents(_represents);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>( references.front() );
+				setSuperPartition(_superPartition);
+			}
+			
+			return;
+		}
+	}
+	ActivityGroupImpl::resolveReferences(featureID, references);
+}
+
+void ActivityPartitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityGroupImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'subpartition'
+		for (std::shared_ptr<uml::ActivityPartition> subpartition : *this->getSubpartition()) 
+		{
+			saveHandler->addReference(subpartition, "subpartition", subpartition->eClass() != package->getActivityPartition_EClass());
+		}
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getActivityPartition_EAttribute_isDimension()) )
+		{
+			saveHandler->addAttribute("isDimension", this->getIsDimension());
+		}
+
+		if ( this->eIsSet(package->getActivityPartition_EAttribute_isExternal()) )
+		{
+			saveHandler->addAttribute("isExternal", this->getIsExternal());
+		}
+
+		// Add references
+		std::shared_ptr<Bag<uml::ActivityEdge>> edge_list = this->getEdge();
+		for (std::shared_ptr<uml::ActivityEdge > object : *edge_list)
+		{ 
+			saveHandler->addReferences("edge", object);
+		}
+		std::shared_ptr<Bag<uml::ActivityNode>> node_list = this->getNode();
+		for (std::shared_ptr<uml::ActivityNode > object : *node_list)
+		{ 
+			saveHandler->addReferences("node", object);
+		}
+		saveHandler->addReference("represents", this->getRepresents());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

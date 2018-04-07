@@ -1,31 +1,64 @@
-#include "SignalEventImpl.hpp"
-#include <iostream>
+#include "uml/impl/SignalEventImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "MessageEvent.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/MessageEvent.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Signal.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Signal.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -53,7 +86,6 @@ SignalEventImpl::~SignalEventImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SignalEvent "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -114,7 +146,7 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -160,13 +192,14 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 
 std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new SignalEventImpl(*this));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(*this));
+	element->setThisSignalEventPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSignalEvent();
+	return UmlPackageImpl::eInstance()->getSignalEvent_EClass();
 }
 
 //*********************************
@@ -197,7 +230,7 @@ std::weak_ptr<uml::Namespace > SignalEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > SignalEventImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> SignalEventImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -207,41 +240,189 @@ std::weak_ptr<uml::Element > SignalEventImpl::getOwner() const
 }
 
 
+std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr()
+{
+	return m_thisSignalEventPtr.lock();
+}
+void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr)
+{
+	m_thisSignalEventPtr = thisSignalEventPtr;
+	setThisMessageEventPtr(thisSignalEventPtr);
+}
+std::shared_ptr<ecore::EObject> SignalEventImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SignalEventImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2014
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2010
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2015
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2016
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2017
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2011
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2012
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2013
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //20112
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2014
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2018
-		case UmlPackage::SIGNALEVENT_SIGNAL:
+		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
 			return getSignal(); //20113
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2015
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2019
 	}
-	return boost::any();
+	return MessageEventImpl::internalEIsSet(featureID);
 }
+bool SignalEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+			return getSignal() != nullptr; //20113
+	}
+	return MessageEventImpl::internalEIsSet(featureID);
+}
+bool SignalEventImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			setSignal(_signal); //20113
+			return true;
+		}
+	}
+
+	return MessageEventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void SignalEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void SignalEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("signal");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("signal")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	MessageEventImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void SignalEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	MessageEventImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void SignalEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>( references.front() );
+				setSignal(_signal);
+			}
+			
+			return;
+		}
+	}
+	MessageEventImpl::resolveReferences(featureID, references);
+}
+
+void SignalEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	MessageEventImpl::saveContent(saveHandler);
+	
+	EventImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+}
+
+void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("signal", this->getSignal());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

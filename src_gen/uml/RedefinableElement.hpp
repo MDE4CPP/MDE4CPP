@@ -7,27 +7,38 @@
 #ifndef UML_REDEFINABLEELEMENT_HPP
 #define UML_REDEFINABLEELEMENT_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T> class Union;
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -76,10 +87,10 @@ namespace uml
 }
 
 // base class includes
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -164,7 +175,7 @@ namespace uml
 			/*!
 			 Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isLeaf =  false;
+			bool m_isLeaf = false;
 			
 			
 			//*********************************
@@ -173,11 +184,11 @@ namespace uml
 			/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Union<uml::RedefinableElement> > m_redefinedElement;
+			std::shared_ptr<Union<uml::RedefinableElement>> m_redefinedElement;
 			/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Union<uml::Classifier> > m_redefinitionContext;
+			std::shared_ptr<Union<uml::Classifier>> m_redefinitionContext;
 			
 
 		public:
@@ -187,18 +198,28 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0; 
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_REDEFINABLEELEMENT_HPP */
-

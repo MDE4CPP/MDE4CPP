@@ -1,35 +1,69 @@
-#include "ExecutionSpecificationImpl.hpp"
-#include <iostream>
+#include "uml/impl/ExecutionSpecificationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/Element.hpp"
 
-#include "Interaction.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "InteractionFragment.hpp"
+#include "uml/Interaction.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/InteractionFragment.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "OccurrenceSpecification.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/OccurrenceSpecification.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -61,7 +95,6 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -122,10 +155,10 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
 	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -179,13 +212,14 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 
 std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutionSpecificationImpl(*this));
+	std::shared_ptr<ExecutionSpecificationImpl> element(new ExecutionSpecificationImpl(*this));
+	element->setThisExecutionSpecificationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionSpecification();
+	return UmlPackageImpl::eInstance()->getExecutionSpecification_EClass();
 }
 
 //*********************************
@@ -231,7 +265,7 @@ std::weak_ptr<uml::Namespace > ExecutionSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ExecutionSpecificationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ExecutionSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -241,45 +275,213 @@ std::weak_ptr<uml::Element > ExecutionSpecificationImpl::getOwner() const
 }
 
 
+std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr()
+{
+	return m_thisExecutionSpecificationPtr.lock();
+}
+void ExecutionSpecificationImpl::setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr)
+{
+	m_thisExecutionSpecificationPtr = thisExecutionSpecificationPtr;
+	setThisInteractionFragmentPtr(thisExecutionSpecificationPtr);
+}
+std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionSpecificationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2264
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
-			return getCovered(); //22610
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2260
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //22612
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //22611
-		case UmlPackage::EXECUTIONSPECIFICATION_FINISH:
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
 			return getFinish(); //22614
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
-			return getGeneralOrdering(); //22613
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2265
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2266
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2267
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2261
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2262
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2263
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2268
-		case UmlPackage::EXECUTIONSPECIFICATION_START:
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
 			return getStart(); //22615
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2269
 	}
-	return boost::any();
+	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
+bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+			return getFinish() != nullptr; //22614
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+			return getStart() != nullptr; //22615
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+bool ExecutionSpecificationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::OccurrenceSpecification> _finish = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			setFinish(_finish); //22614
+			return true;
+		}
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::OccurrenceSpecification> _start = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			setStart(_start); //22615
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutionSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("finish");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("finish")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("start");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("start")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>( references.front() );
+				setFinish(_finish);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>( references.front() );
+				setStart(_start);
+			}
+			
+			return;
+		}
+	}
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void ExecutionSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("finish", this->getFinish());
+		saveHandler->addReference("start", this->getStart());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

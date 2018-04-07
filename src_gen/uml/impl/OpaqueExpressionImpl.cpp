@@ -1,37 +1,71 @@
-#include "OpaqueExpressionImpl.hpp"
-#include <iostream>
+#include "uml/impl/OpaqueExpressionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Element.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Parameter.hpp"
+#include "uml/Package.hpp"
 
-#include "Slot.hpp"
+#include "uml/Parameter.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Slot.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -64,7 +98,6 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OpaqueExpression "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -140,7 +173,7 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 	
 	m_behavior  = obj.getBehavior();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -190,13 +223,14 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 
 std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OpaqueExpressionImpl(*this));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(*this));
+	element->setThisOpaqueExpressionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueExpression();
+	return UmlPackageImpl::eInstance()->getOpaqueExpression_EClass();
 }
 
 //*********************************
@@ -290,7 +324,7 @@ std::weak_ptr<uml::Namespace > OpaqueExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > OpaqueExpressionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> OpaqueExpressionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -300,51 +334,247 @@ std::weak_ptr<uml::Element > OpaqueExpressionImpl::getOwner() const
 }
 
 
+std::shared_ptr<OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr()
+{
+	return m_thisOpaqueExpressionPtr.lock();
+}
+void OpaqueExpressionImpl::setThisOpaqueExpressionPtr(std::weak_ptr<OpaqueExpression> thisOpaqueExpressionPtr)
+{
+	m_thisOpaqueExpressionPtr = thisOpaqueExpressionPtr;
+	setThisValueSpecificationPtr(thisOpaqueExpressionPtr);
+}
+std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningSlot.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueExpressionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_BEHAVIOR:
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
 			return getBehavior(); //4315
-		case UmlPackage::OPAQUEEXPRESSION_BODY:
+		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
 			return getBody(); //4316
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //434
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //430
-		case UmlPackage::OPAQUEEXPRESSION_LANGUAGE:
+		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
 			return getLanguage(); //4317
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //435
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //436
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //437
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //431
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //432
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //433
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //4312
-		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
-			return getOwningSlot(); //4314
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //434
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //438
-		case UmlPackage::OPAQUEEXPRESSION_RESULT:
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
 			return getResult(); //4318
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //435
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //4310
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //439
 	}
-	return boost::any();
+	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
+bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+			return getBehavior() != nullptr; //4315
+		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
+			return !getBody()->empty(); //4316
+		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //4317
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
+			return getResult() != nullptr; //4318
+	}
+	return ValueSpecificationImpl::internalEIsSet(featureID);
+}
+bool OpaqueExpressionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setBehavior(_behavior); //4315
+			return true;
+		}
+	}
+
+	return ValueSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("behavior");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("behavior")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+	try
+	{
+		if (nodeName.compare("body") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			list_body->push_back(value);
+			return;
+		}
+
+		if (nodeName.compare("language") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			list_language->push_back(value);
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setBehavior(_behavior);
+			}
+			
+			return;
+		}
+	}
+	ValueSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ValueSpecificationImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getOpaqueExpression_EAttribute_body()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_body)
+			{
+				saveHandler->addAttributeAsNode("body", boost::to_string(*value));
+			}
+		}
+
+		if ( this->eIsSet(package->getOpaqueExpression_EAttribute_language()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_language)
+			{
+				saveHandler->addAttributeAsNode("language", boost::to_string(*value));
+			}
+		}
+
+		// Add references
+		saveHandler->addReference("behavior", this->getBehavior());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

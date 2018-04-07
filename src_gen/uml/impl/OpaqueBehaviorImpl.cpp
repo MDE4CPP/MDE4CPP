@@ -1,85 +1,118 @@
-#include "OpaqueBehaviorImpl.hpp"
-#include <iostream>
+#include "uml/impl/OpaqueBehaviorImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "BehavioralFeature.hpp"
+#include "uml/Behavior.hpp"
 
-#include "BehavioredClassifier.hpp"
+#include "uml/BehavioralFeature.hpp"
 
-#include "Class.hpp"
+#include "uml/BehavioredClassifier.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/Comment.hpp"
 
-#include "Connector.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Connector.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/Element.hpp"
 
-#include "Extension.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Feature.hpp"
+#include "uml/Extension.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Feature.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/Generalization.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Operation.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "Parameter.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/Parameter.hpp"
 
-#include "Port.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "Property.hpp"
+#include "uml/Port.hpp"
 
-#include "Reception.hpp"
+#include "uml/Property.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Reception.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Substitution.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "UseCase.hpp"
+#include "uml/TemplateSignature.hpp"
 
+#include "uml/UseCase.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -106,7 +139,6 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OpaqueBehavior "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -149,10 +181,10 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 					 m_owningPackage = par_Package;
 					 return;
-				case UmlPackage::TYPE_PACKAGE:
+				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 					 m_package = par_Package;
 					 return;
 				default:
@@ -204,16 +236,16 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj):OpaqueBeh
 	
 	m_behavioredClassifier  = obj.getBehavioredClassifier();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::Extension> > _extension = obj.getExtension();
+	std::shared_ptr<Bag<uml::Extension>> _extension = obj.getExtension();
 	m_extension.reset(new Bag<uml::Extension>(*(obj.getExtension().get())));
 
-	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
 	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -226,26 +258,26 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj):OpaqueBeh
 
 	m_package  = obj.getPackage();
 
-	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	std::shared_ptr<Bag<uml::Property>> _part = obj.getPart();
 	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_specification  = obj.getSpecification();
 
-	std::shared_ptr< Bag<uml::Class> > _superClass = obj.getSuperClass();
+	std::shared_ptr<Bag<uml::Class>> _superClass = obj.getSuperClass();
 	m_superClass.reset(new Bag<uml::Class>(*(obj.getSuperClass().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
@@ -499,13 +531,14 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj):OpaqueBeh
 
 std::shared_ptr<ecore::EObject>  OpaqueBehaviorImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new OpaqueBehaviorImpl(*this));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(*this));
+	element->setThisOpaqueBehaviorPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueBehavior();
+	return UmlPackageImpl::eInstance()->getOpaqueBehavior_EClass();
 }
 
 //*********************************
@@ -536,15 +569,15 @@ std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getLanguage() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > OpaqueBehaviorImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> OpaqueBehaviorImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > OpaqueBehaviorImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> OpaqueBehaviorImpl::getFeature() const
 {
 	return m_feature;
 }
-std::shared_ptr<Union<uml::NamedElement> > OpaqueBehaviorImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement>> OpaqueBehaviorImpl::getMember() const
 {
 	return m_member;
 }
@@ -552,11 +585,11 @@ std::weak_ptr<uml::Namespace > OpaqueBehaviorImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > OpaqueBehaviorImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> OpaqueBehaviorImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > OpaqueBehaviorImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> OpaqueBehaviorImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
@@ -564,155 +597,233 @@ std::weak_ptr<uml::Element > OpaqueBehaviorImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > OpaqueBehaviorImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> OpaqueBehaviorImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::Classifier> > OpaqueBehaviorImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier>> OpaqueBehaviorImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > OpaqueBehaviorImpl::getRole() const
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueBehaviorImpl::getRole() const
 {
 	return m_role;
 }
 
 
+std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr()
+{
+	return m_thisOpaqueBehaviorPtr.lock();
+}
+void OpaqueBehaviorImpl::setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr)
+{
+	m_thisOpaqueBehaviorPtr = thisOpaqueBehaviorPtr;
+	setThisBehaviorPtr(thisOpaqueBehaviorPtr);
+}
+std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::eContainer() const
+{
+	if(auto wp = m_behavioredClassifier.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueBehaviorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //20026
-		case UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier(); //20061
-		case UmlPackage::OPAQUEBEHAVIOR_BODY:
+		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
 			return getBody(); //20062
-		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //20039
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //2004
-		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //20027
-		case UmlPackage::BEHAVIOR_CONTEXT:
-			return getContext(); //20054
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //2000
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
-			return getElementImport(); //20011
-		case UmlPackage::CLASS_EXTENSION:
-			return getExtension(); //20048
-		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //20025
-		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //20028
-		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //20029
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
-			return getImportedMember(); //20014
-		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //20031
-		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //20040
-		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //20032
-		case UmlPackage::CLASS_ISACTIVE:
-			return getIsActive(); //20049
-		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //20033
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //20010
-		case UmlPackage::BEHAVIOR_ISREENTRANT:
-			return getIsReentrant(); //20055
-		case UmlPackage::OPAQUEBEHAVIOR_LANGUAGE:
+		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
 			return getLanguage(); //20063
-		case UmlPackage::NAMESPACE_MEMBER:
-			return getMember(); //20015
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //2005
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //2006
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //2007
-		case UmlPackage::CLASS_NESTEDCLASSIFIER:
-			return getNestedClassifier(); //20050
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //20039
-		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //20041
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //2001
-		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDCONNECTOR:
-			return getOwnedConnector(); //20040
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //2002
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
-			return getOwnedMember(); //20013
-		case UmlPackage::CLASS_OWNEDOPERATION:
-			return getOwnedOperation(); //20047
-		case UmlPackage::BEHAVIOR_OWNEDPARAMETER:
-			return getOwnedParameter(); //20056
-		case UmlPackage::BEHAVIOR_OWNEDPARAMETERSET:
-			return getOwnedParameterSet(); //20057
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_OWNEDPORT:
-			return getOwnedPort(); //20043
-		case UmlPackage::CLASS_OWNEDRECEPTION:
-			return getOwnedReception(); //20051
-		case UmlPackage::NAMESPACE_OWNEDRULE:
-			return getOwnedRule(); //20010
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature(); //2005
-		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //20034
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //2003
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //20012
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //2004
-		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //20013
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
-			return getPackageImport(); //20012
-		case UmlPackage::STRUCTUREDCLASSIFIER_PART:
-			return getPart(); //20041
-		case UmlPackage::BEHAVIOR_POSTCONDITION:
-			return getPostcondition(); //20058
-		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //20030
-		case UmlPackage::BEHAVIOR_PRECONDITION:
-			return getPrecondition(); //20059
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //2008
-		case UmlPackage::BEHAVIOR_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior(); //20060
-		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //20036
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //20011
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //20012
-		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //20037
-		case UmlPackage::STRUCTUREDCLASSIFIER_ROLE:
-			return getRole(); //20042
-		case UmlPackage::BEHAVIOR_SPECIFICATION:
-			return getSpecification(); //20053
-		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //20038
-		case UmlPackage::CLASS_SUPERCLASS:
-			return getSuperClass(); //20052
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
-			return getTemplateBinding(); //2004
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //2005
-		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //20035
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //2009
 	}
-	return boost::any();
+	return BehaviorImpl::internalEIsSet(featureID);
 }
+bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
+			return !getBody()->empty(); //20062
+		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //20063
+	}
+	return BehaviorImpl::internalEIsSet(featureID);
+}
+bool OpaqueBehaviorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return BehaviorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void OpaqueBehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void OpaqueBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	BehaviorImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+	try
+	{
+		if (nodeName.compare("body") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			list_body->push_back(value);
+			return;
+		}
+
+		if (nodeName.compare("language") == 0)
+		{
+			std::shared_ptr<std::string> value = loadHandler->getChildText();
+			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			list_language->push_back(value);
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+
+	BehaviorImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void OpaqueBehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	BehaviorImpl::resolveReferences(featureID, references);
+}
+
+void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	BehaviorImpl::saveContent(saveHandler);
+	
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getOpaqueBehavior_EAttribute_body()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_body)
+			{
+				saveHandler->addAttributeAsNode("body", boost::to_string(*value));
+			}
+		}
+
+		if ( this->eIsSet(package->getOpaqueBehavior_EAttribute_language()) )
+		{
+			for (std::shared_ptr<std::string> value : *m_language)
+			{
+				saveHandler->addAttributeAsNode("language", boost::to_string(*value));
+			}
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

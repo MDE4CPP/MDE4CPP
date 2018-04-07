@@ -1,29 +1,63 @@
-#include "TriggerImpl.hpp"
-#include <iostream>
+#include "uml/impl/TriggerImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Event.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Event.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Port.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Port.hpp"
 
+#include "uml/StringExpression.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -58,7 +92,6 @@ TriggerImpl::~TriggerImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Trigger "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -97,7 +130,7 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_event  = obj.getEvent();
@@ -106,7 +139,7 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr< Bag<uml::Port> > _port = obj.getPort();
+	std::shared_ptr<Bag<uml::Port>> _port = obj.getPort();
 	m_port.reset(new Bag<uml::Port>(*(obj.getPort().get())));
 
 
@@ -140,13 +173,14 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 
 std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new TriggerImpl(*this));
+	std::shared_ptr<TriggerImpl> element(new TriggerImpl(*this));
+	element->setThisTriggerPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTrigger();
+	return UmlPackageImpl::eInstance()->getTrigger_EClass();
 }
 
 //*********************************
@@ -175,7 +209,7 @@ void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
     m_event = _event;
 }
 
-std::shared_ptr< Bag<uml::Port> > TriggerImpl::getPort() const
+std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 {
 
     return m_port;
@@ -185,7 +219,7 @@ std::shared_ptr< Bag<uml::Port> > TriggerImpl::getPort() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > TriggerImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> TriggerImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -195,37 +229,199 @@ std::weak_ptr<uml::Element > TriggerImpl::getOwner() const
 }
 
 
+std::shared_ptr<Trigger> TriggerImpl::getThisTriggerPtr()
+{
+	return m_thisTriggerPtr.lock();
+}
+void TriggerImpl::setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr)
+{
+	m_thisTriggerPtr = thisTriggerPtr;
+	setThisNamedElementPtr(thisTriggerPtr);
+}
+std::shared_ptr<ecore::EObject> TriggerImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TriggerImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //654
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //650
-		case UmlPackage::TRIGGER_EVENT:
+		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
 			return getEvent(); //6510
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //655
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //656
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //657
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //651
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //652
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //653
-		case UmlPackage::TRIGGER_PORT:
+		case UmlPackage::TRIGGER_EREFERENCE_PORT:
 			return getPort(); //6511
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //658
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //659
 	}
-	return boost::any();
+	return NamedElementImpl::internalEIsSet(featureID);
 }
+bool TriggerImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+			return getEvent() != nullptr; //6510
+		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+			return getPort() != nullptr; //6511
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+bool TriggerImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Event> _event = boost::any_cast<std::shared_ptr<uml::Event>>(newValue);
+			setEvent(_event); //6510
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void TriggerImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void TriggerImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("event");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("event")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("port");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("port")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TriggerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>( references.front() );
+				setEvent(_event);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+		{
+			std::shared_ptr<Bag<uml::Port>> _port = getPort();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Port> _r = std::dynamic_pointer_cast<uml::Port>(ref);
+				if (_r != nullptr)
+				{
+					_port->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void TriggerImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("event", this->getEvent());
+		std::shared_ptr<Bag<uml::Port>> port_list = this->getPort();
+		for (std::shared_ptr<uml::Port > object : *port_list)
+		{ 
+			saveHandler->addReferences("port", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -7,29 +7,13 @@
 #ifndef UML_INTERRUPTIBLEACTIVITYREGIONINTERRUPTIBLEACTIVITYREGIONIMPL_HPP
 #define UML_INTERRUPTIBLEACTIVITYREGIONINTERRUPTIBLEACTIVITYREGIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../InterruptibleActivityRegion.hpp"
 
-#include "impl/ActivityGroupImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "uml/impl/ActivityGroupImpl.hpp"
 
 //*********************************
 namespace uml 
@@ -46,6 +30,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InterruptibleActivityRegionImpl();
+			virtual std::shared_ptr<InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr();
+			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);
 
 			//Additional constructors for the containments back reference
 			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity > par_inActivity);
@@ -91,12 +77,12 @@ namespace uml
 			/*!
 			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr< Bag<uml::ActivityEdge> > getInterruptingEdge() const ;
+			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const ;
 			
 			/*!
 			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > > getNode() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const ;
 			
 							
 			
@@ -106,10 +92,10 @@ namespace uml
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
@@ -117,12 +103,29 @@ namespace uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<InterruptibleActivityRegion> m_thisInterruptibleActivityRegionPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERRUPTIBLEACTIVITYREGIONINTERRUPTIBLEACTIVITYREGIONIMPL_HPP */
-

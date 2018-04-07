@@ -1,49 +1,83 @@
-#include "ExtensionEndImpl.hpp"
-#include <iostream>
+#include "uml/impl/ExtensionEndImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Association.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Class.hpp"
+#include "uml/Association.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "ConnectorEnd.hpp"
+#include "uml/Comment.hpp"
 
-#include "DataType.hpp"
+#include "uml/ConnectorEnd.hpp"
 
-#include "Dependency.hpp"
+#include "uml/DataType.hpp"
 
-#include "Deployment.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Deployment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Interface.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Interface.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Property.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/Property.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Type.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/Type.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -69,7 +103,6 @@ ExtensionEndImpl::~ExtensionEndImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionEnd "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -193,18 +226,18 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj):ExtensionEndImp
 
 	m_class  = obj.getClass();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_datatype  = obj.getDatatype();
 
-	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
-	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	std::shared_ptr<Bag<uml::ConnectorEnd>> _end = obj.getEnd();
 	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
 	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	m_interface  = obj.getInterface();
@@ -219,13 +252,13 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj):ExtensionEndImp
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-	std::shared_ptr< Bag<uml::Property> > _subsettedProperty = obj.getSubsettedProperty();
+	std::shared_ptr<Bag<uml::Property>> _subsettedProperty = obj.getSubsettedProperty();
 	m_subsettedProperty.reset(new Bag<uml::Property>(*(obj.getSubsettedProperty().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -308,13 +341,14 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj):ExtensionEndImp
 
 std::shared_ptr<ecore::EObject>  ExtensionEndImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExtensionEndImpl(*this));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(*this));
+	element->setThisExtensionEndPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtensionEnd();
+	return UmlPackageImpl::eInstance()->getExtensionEnd_EClass();
 }
 
 //*********************************
@@ -343,7 +377,7 @@ bool ExtensionEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::a
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Classifier> > ExtensionEndImpl::getFeaturingClassifier() const
+std::shared_ptr<Union<uml::Classifier>> ExtensionEndImpl::getFeaturingClassifier() const
 {
 	return m_featuringClassifier;
 }
@@ -351,7 +385,7 @@ std::weak_ptr<uml::Namespace > ExtensionEndImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > ExtensionEndImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> ExtensionEndImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -359,113 +393,179 @@ std::weak_ptr<uml::Element > ExtensionEndImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > ExtensionEndImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> ExtensionEndImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::Classifier> > ExtensionEndImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier>> ExtensionEndImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
 
 
+std::shared_ptr<ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr()
+{
+	return m_thisExtensionEndPtr.lock();
+}
+void ExtensionEndImpl::setThisExtensionEndPtr(std::weak_ptr<ExtensionEnd> thisExtensionEndPtr)
+{
+	m_thisExtensionEndPtr = thisExtensionEndPtr;
+	setThisPropertyPtr(thisExtensionEndPtr);
+}
+std::shared_ptr<ecore::EObject> ExtensionEndImpl::eContainer() const
+{
+	if(auto wp = m_associationEnd.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_class.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_datatype.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_interface.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningAssociation.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionEndImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExtensionEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_AGGREGATION:
-			return getAggregation(); //8531
-		case UmlPackage::PROPERTY_ASSOCIATION:
-			return getAssociation(); //8544
-		case UmlPackage::PROPERTY_ASSOCIATIONEND:
-			return getAssociationEnd(); //8532
-		case UmlPackage::PROPERTY_CLASS:
-			return getClass(); //8534
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //854
-		case UmlPackage::PROPERTY_DATATYPE:
-			return getDatatype(); //8528
-		case UmlPackage::PROPERTY_DEFAULT:
-			return getDefault(); //8530
-		case UmlPackage::PROPERTY_DEFAULTVALUE:
-			return getDefaultValue(); //8535
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
-			return getDeployedElement(); //8510
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYMENT:
-			return getDeployment(); //8511
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //850
-		case UmlPackage::CONNECTABLEELEMENT_END:
-			return getEnd(); //8513
-		case UmlPackage::FEATURE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier(); //8513
-		case UmlPackage::PROPERTY_INTERFACE:
-			return getInterface(); //8529
-		case UmlPackage::PROPERTY_ISCOMPOSITE:
-			return getIsComposite(); //8536
-		case UmlPackage::PROPERTY_ISDERIVED:
-			return getIsDerived(); //8537
-		case UmlPackage::PROPERTY_ISDERIVEDUNION:
-			return getIsDerivedUnion(); //8538
-		case UmlPackage::PROPERTY_ISID:
-			return getIsID(); //8539
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //8510
-		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
-			return getIsOrdered(); //854
-		case UmlPackage::STRUCTURALFEATURE_ISREADONLY:
-			return getIsReadOnly(); //8522
-		case UmlPackage::FEATURE_ISSTATIC:
-			return getIsStatic(); //8514
-		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
-			return getIsUnique(); //855
-		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
-			return getLower(); //856
-		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
-			return getLowerValue(); //857
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //855
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //856
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //857
-		case UmlPackage::PROPERTY_OPPOSITE:
-			return getOpposite(); //8540
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //851
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //852
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //853
-		case UmlPackage::PROPERTY_OWNINGASSOCIATION:
-			return getOwningAssociation(); //8541
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //854
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //858
-		case UmlPackage::PROPERTY_QUALIFIER:
-			return getQualifier(); //8533
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //8511
-		case UmlPackage::PROPERTY_REDEFINEDPROPERTY:
-			return getRedefinedProperty(); //8542
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //8512
-		case UmlPackage::PROPERTY_SUBSETTEDPROPERTY:
-			return getSubsettedProperty(); //8543
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //855
-		case UmlPackage::TYPEDELEMENT_TYPE:
-			return getType(); //8510
-		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
-			return getUpper(); //858
-		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
-			return getUpperValue(); //859
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //859
 	}
-	return boost::any();
+	return PropertyImpl::internalEIsSet(featureID);
 }
+bool ExtensionEndImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PropertyImpl::internalEIsSet(featureID);
+}
+bool ExtensionEndImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PropertyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExtensionEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExtensionEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	PropertyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	PropertyImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExtensionEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PropertyImpl::resolveReferences(featureID, references);
+}
+
+void ExtensionEndImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PropertyImpl::saveContent(saveHandler);
+	
+	ConnectableElementImpl::saveContent(saveHandler);
+	DeploymentTargetImpl::saveContent(saveHandler);
+	StructuralFeatureImpl::saveContent(saveHandler);
+	
+	FeatureImpl::saveContent(saveHandler);
+	MultiplicityElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

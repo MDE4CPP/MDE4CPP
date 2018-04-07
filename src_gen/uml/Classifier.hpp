@@ -7,27 +7,41 @@
 #ifndef UML_CLASSIFIER_HPP
 #define UML_CLASSIFIER_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include <string>
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+#include <list>
+#include <memory>
+#include <string>
+
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
+
+
+namespace boost
+{
+	class any;
+}
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace uml
+{
+	class UmlFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -176,16 +190,16 @@ namespace uml
 }
 
 // base class includes
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
-#include "Type.hpp"
+#include "uml/Type.hpp"
 
 // enum includes
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -404,38 +418,38 @@ namespace uml
 			/*!
 			 The CollaborationUses owned by the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element > > getCollaborationUse() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> getCollaborationUse() const = 0;
 			
 			
 			/*!
 			 The generalizing Classifiers for this Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getGeneral() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getGeneral() const = 0;
 			
 			/*!
 			 The Generalization relationships for this Classifier. These Generalizations navigate to more general Classifiers in the generalization hierarchy.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Generalization, uml::Element > > getGeneralization() const = 0;
+			virtual std::shared_ptr<Subset<uml::Generalization, uml::Element>> getGeneralization() const = 0;
 			
 			/*!
 			 All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement > > getInheritedMember() const = 0;
+			virtual std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> getInheritedMember() const = 0;
 			
 			/*!
 			 The UseCases owned by this classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::UseCase, uml::NamedElement > > getOwnedUseCase() const = 0;
+			virtual std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> getOwnedUseCase() const = 0;
 			
 			/*!
 			 The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::GeneralizationSet> > getPowertypeExtent() const = 0;
+			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getPowertypeExtent() const = 0;
 			
 			/*!
 			 The Classifiers redefined by this Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement > > getRedefinedClassifier() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> getRedefinedClassifier() const = 0;
 			
 			/*!
 			 A CollaborationUse which indicates the Collaboration that represents this Classifier.
@@ -449,12 +463,12 @@ namespace uml
 			/*!
 			 The Substitutions owned by this Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::Substitution, uml::Element > > getSubstitution() const = 0;
+			virtual std::shared_ptr<Subset<uml::Substitution, uml::Element>> getSubstitution() const = 0;
 			
 			/*!
 			 The set of UseCases for which this Classifier is the subject.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::UseCase> > getUseCase() const = 0;
+			virtual std::shared_ptr<Bag<uml::UseCase>> getUseCase() const = 0;
 			
 			
 
@@ -465,11 +479,11 @@ namespace uml
 			/*!
 			 If true, the Classifier can only be instantiated by instantiating one of its specializations. An abstract Classifier is intended to be used by other Classifiers e.g., as the target of Associations or Generalizations.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isAbstract =  false;
+			bool m_isAbstract = false;
 			/*!
 			 If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p> */ 
-			bool m_isFinalSpecialization =  false;
+			bool m_isFinalSpecialization = false;
 			
 			
 			//*********************************
@@ -478,39 +492,39 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > m_attribute;
+			std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> m_attribute;
 			/*!
 			 The CollaborationUses owned by the Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element > > m_collaborationUse;
+			std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> m_collaborationUse;
 			/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > m_feature;
+			std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> m_feature;
 			/*!
 			 The generalizing Classifiers for this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::Classifier> > m_general;
+			std::shared_ptr<Bag<uml::Classifier>> m_general;
 			/*!
 			 The Generalization relationships for this Classifier. These Generalizations navigate to more general Classifiers in the generalization hierarchy.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Generalization, uml::Element > > m_generalization;
+			std::shared_ptr<Subset<uml::Generalization, uml::Element>> m_generalization;
 			/*!
 			 All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement > > m_inheritedMember;
+			std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> m_inheritedMember;
 			/*!
 			 The UseCases owned by this classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::UseCase, uml::NamedElement > > m_ownedUseCase;
+			std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> m_ownedUseCase;
 			/*!
 			 The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::GeneralizationSet> > m_powertypeExtent;
+			std::shared_ptr<Bag<uml::GeneralizationSet>> m_powertypeExtent;
 			/*!
 			 The Classifiers redefined by this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement > > m_redefinedClassifier;
+			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> m_redefinedClassifier;
 			/*!
 			 A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p> */
@@ -518,11 +532,11 @@ namespace uml
 			/*!
 			 The Substitutions owned by this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Substitution, uml::Element > > m_substitution;
+			std::shared_ptr<Subset<uml::Substitution, uml::Element>> m_substitution;
 			/*!
 			 The set of UseCases for which this Classifier is the subject.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr< Bag<uml::UseCase> > m_useCase;
+			std::shared_ptr<Bag<uml::UseCase>> m_useCase;
 			
 
 		public:
@@ -532,30 +546,40 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const = 0;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: UML_CLASSIFIER_HPP */
-

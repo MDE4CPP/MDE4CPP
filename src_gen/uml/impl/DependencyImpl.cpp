@@ -1,33 +1,66 @@
-#include "DependencyImpl.hpp"
-#include <iostream>
+#include "uml/impl/DependencyImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Package.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/TemplateParameter.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -83,7 +116,6 @@ DependencyImpl::~DependencyImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Dependency "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -144,7 +176,7 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_namespace  = obj.getNamespace();
@@ -155,7 +187,7 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -207,13 +239,14 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 
 std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new DependencyImpl(*this));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(*this));
+	element->setThisDependencyPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDependency();
+	return UmlPackageImpl::eInstance()->getDependency_EClass();
 }
 
 //*********************************
@@ -227,14 +260,14 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > > DependencyImpl::getClient() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
 {
 //assert(m_client);
     return m_client;
 }
 
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > > DependencyImpl::getSupplier() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
 {
 //assert(m_supplier);
     return m_supplier;
@@ -248,7 +281,7 @@ std::weak_ptr<uml::Namespace > DependencyImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > DependencyImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> DependencyImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -256,63 +289,253 @@ std::weak_ptr<uml::Element > DependencyImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::Element> > DependencyImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element>> DependencyImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DependencyImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DependencyImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarget() const
 {
 	return m_target;
 }
 
 
+std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr()
+{
+	return m_thisDependencyPtr.lock();
+}
+void DependencyImpl::setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr)
+{
+	m_thisDependencyPtr = thisDependencyPtr;
+	setThisDirectedRelationshipPtr(thisDependencyPtr);
+	setThisPackageableElementPtr(thisDependencyPtr);
+}
+std::shared_ptr<ecore::EObject> DependencyImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DependencyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_CLIENT:
+		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
 			return getClient(); //3716
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //374
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //370
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //375
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //376
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //377
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //371
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //372
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //373
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //3712
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //374
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //378
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
-			return getRelatedElement(); //374
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
-			return getSource(); //375
-		case UmlPackage::DEPENDENCY_SUPPLIER:
+		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
 			return getSupplier(); //3717
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
-			return getTarget(); //376
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //375
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //379
 	}
-	return boost::any();
+	boost::any result;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (!result.empty())
+	{
+		return result;
+	}
+	result = PackageableElementImpl::internalEIsSet(featureID);
+	return result;
 }
+bool DependencyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+			return getClient() != nullptr; //3716
+		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+			return getSupplier() != nullptr; //3717
+	}
+	bool result = false;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+bool DependencyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = DirectedRelationshipImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void DependencyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void DependencyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("client");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("client")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("supplier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("supplier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
+	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void DependencyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_client->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				if (_r != nullptr)
+				{
+					_supplier->push_back(_r);
+				}				
+			}
+			return;
+		}
+	}
+	DirectedRelationshipImpl::resolveReferences(featureID, references);
+	PackageableElementImpl::resolveReferences(featureID, references);
+}
+
+void DependencyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	DirectedRelationshipImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+		// Add references
+		std::shared_ptr<Bag<uml::NamedElement>> client_list = this->getClient();
+		for (std::shared_ptr<uml::NamedElement > object : *client_list)
+		{ 
+			saveHandler->addReferences("client", object);
+		}
+		std::shared_ptr<Bag<uml::NamedElement>> supplier_list = this->getSupplier();
+		for (std::shared_ptr<uml::NamedElement > object : *supplier_list)
+		{ 
+			saveHandler->addReferences("supplier", object);
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

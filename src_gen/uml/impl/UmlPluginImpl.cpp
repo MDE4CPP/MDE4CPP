@@ -1,6 +1,7 @@
-#include "UmlPluginImpl.hpp"
-#include "UmlFactory.hpp"
-#include "UmlPackage.hpp"
+#include "uml/impl/UmlPluginImpl.hpp"
+
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 using namespace uml;
 
@@ -15,14 +16,25 @@ UmlPluginImpl::~UmlPluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EFactory> UmlPluginImpl::getFactory()
+
+std::shared_ptr<ecore::EObject> UmlPluginImpl::create(const std::string& name)
+{
+	return UmlFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EFactory> UmlPluginImpl::getEFactory()
 {
 	return UmlFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> UmlPluginImpl::getPackage()
+std::shared_ptr<ecore::EPackage> UmlPluginImpl::getEPackage()
 {
 	return UmlPackage::eInstance();
+}
+
+std::string UmlPluginImpl::eclipseURI()
+{
+	return "pathmap://UML_METAMODELS/UML.metamodel.uml";
 }
 
 std::string UmlPluginImpl::eNAME()

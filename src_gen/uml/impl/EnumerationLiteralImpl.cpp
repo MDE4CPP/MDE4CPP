@@ -1,41 +1,74 @@
-#include "EnumerationLiteralImpl.hpp"
-#include <iostream>
+#include "uml/impl/EnumerationLiteralImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Comment.hpp"
 
-#include "Deployment.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Deployment.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Enumeration.hpp"
+#include "uml/Element.hpp"
 
-#include "InstanceSpecification.hpp"
+#include "uml/Enumeration.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InstanceSpecification.hpp"
 
-#include "Package.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/Package.hpp"
 
-#include "Slot.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/Slot.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/TemplateParameter.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -63,7 +96,6 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationLiteral "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -135,13 +167,13 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr< Bag<uml::Classifier> > _classifier = obj.getClassifier();
+	std::shared_ptr<Bag<uml::Classifier>> _classifier = obj.getClassifier();
 	m_classifier.reset(new Bag<uml::Classifier>(*(obj.getClassifier().get())));
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
 	m_enumeration  = obj.getEnumeration();
@@ -210,13 +242,14 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EnumerationLiteralImpl(*this));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(*this));
+	element->setThisEnumerationLiteralPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getEnumerationLiteral();
+	return UmlPackageImpl::eInstance()->getEnumerationLiteral_EClass();
 }
 
 //*********************************
@@ -254,7 +287,7 @@ std::weak_ptr<uml::Namespace > EnumerationLiteralImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<Union<uml::Element> > EnumerationLiteralImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> EnumerationLiteralImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -264,51 +297,171 @@ std::weak_ptr<uml::Element > EnumerationLiteralImpl::getOwner() const
 }
 
 
+std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr()
+{
+	return m_thisEnumerationLiteralPtr.lock();
+}
+void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr)
+{
+	m_thisEnumerationLiteralPtr = thisEnumerationLiteralPtr;
+	setThisInstanceSpecificationPtr(thisEnumerationLiteralPtr);
+}
+std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::eContainer() const
+{
+	if(auto wp = m_enumeration.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationLiteralImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_CLASSIFIER:
-			return getClassifier(); //7815
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //784
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
-			return getDeployedElement(); //7810
-		case UmlPackage::DEPLOYMENTTARGET_DEPLOYMENT:
-			return getDeployment(); //7811
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //780
-		case UmlPackage::ENUMERATIONLITERAL_ENUMERATION:
+		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
 			return getEnumeration(); //7818
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //785
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //786
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //787
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //781
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //782
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //783
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
-			return getOwningPackage(); //7812
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //784
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //788
-		case UmlPackage::INSTANCESPECIFICATION_SLOT:
-			return getSlot(); //7816
-		case UmlPackage::INSTANCESPECIFICATION_SPECIFICATION:
-			return getSpecification(); //7817
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //785
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //789
 	}
-	return boost::any();
+	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
+bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+			return getEnumeration().lock() != nullptr; //7818
+	}
+	return InstanceSpecificationImpl::internalEIsSet(featureID);
+}
+bool EnumerationLiteralImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Enumeration> _enumeration = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			setEnumeration(_enumeration); //7818
+			return true;
+		}
+	}
+
+	return InstanceSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EnumerationLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	InstanceSpecificationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	InstanceSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EnumerationLiteralImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>( references.front() );
+				setEnumeration(_enumeration);
+			}
+			
+			return;
+		}
+	}
+	InstanceSpecificationImpl::resolveReferences(featureID, references);
+}
+
+void EnumerationLiteralImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	InstanceSpecificationImpl::saveContent(saveHandler);
+	
+	DeployedArtifactImpl::saveContent(saveHandler);
+	DeploymentTargetImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+}
+
+void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,51 +1,85 @@
-#include "UnmarshallActionImpl.hpp"
-#include <iostream>
+#include "uml/impl/UnmarshallActionImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "boost/any.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Action.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Activity.hpp"
+#include "uml/Action.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Comment.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Constraint.hpp"
 
-#include "EAnnotation.hpp"
+#include "uml/Dependency.hpp"
 
-#include "Element.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Namespace.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StringExpression.hpp"
 
+#include "uml/StructuredActivityNode.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace uml;
 
@@ -93,7 +127,6 @@ UnmarshallActionImpl::~UnmarshallActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete UnmarshallAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -158,30 +191,30 @@ UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj):Unm
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_unmarshallType  = obj.getUnmarshallType();
@@ -289,13 +322,14 @@ UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj):Unm
 
 std::shared_ptr<ecore::EObject>  UnmarshallActionImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new UnmarshallActionImpl(*this));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(*this));
+	element->setThisUnmarshallActionPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getUnmarshallAction();
+	return UmlPackageImpl::eInstance()->getUnmarshallAction_EClass();
 }
 
 //*********************************
@@ -348,7 +382,7 @@ void UnmarshallActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
     m_object = _object;
 }
 
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > > UnmarshallActionImpl::getResult() const
+std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
@@ -368,19 +402,19 @@ void UnmarshallActionImpl::setUnmarshallType(std::shared_ptr<uml::Classifier> _u
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::ActivityGroup> > UnmarshallActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup>> UnmarshallActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > UnmarshallActionImpl::getInput() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> UnmarshallActionImpl::getInput() const
 {
 	return m_input;
 }
-std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > UnmarshallActionImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> UnmarshallActionImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<Union<uml::Element> > UnmarshallActionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element>> UnmarshallActionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
@@ -388,81 +422,268 @@ std::weak_ptr<uml::Element > UnmarshallActionImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<Union<uml::RedefinableElement> > UnmarshallActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement>> UnmarshallActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
 
 
+std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr()
+{
+	return m_thisUnmarshallActionPtr.lock();
+}
+void UnmarshallActionImpl::setThisUnmarshallActionPtr(std::weak_ptr<UnmarshallAction> thisUnmarshallActionPtr)
+{
+	m_thisUnmarshallActionPtr = thisUnmarshallActionPtr;
+	setThisActionPtr(thisUnmarshallActionPtr);
+}
+std::shared_ptr<ecore::EObject> UnmarshallActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UnmarshallActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
-			return getActivity(); //17813
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
-			return getClientDependency(); //1784
-		case UmlPackage::ACTION_CONTEXT:
-			return getContext(); //17822
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
-			return getEAnnotations(); //1780
-		case UmlPackage::EXECUTABLENODE_HANDLER:
-			return getHandler(); //17821
-		case UmlPackage::ACTIVITYNODE_INGROUP:
-			return getInGroup(); //17814
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion(); //17815
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
-			return getInPartition(); //17820
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //17816
-		case UmlPackage::ACTIVITYNODE_INCOMING:
-			return getIncoming(); //17817
-		case UmlPackage::ACTION_INPUT:
-			return getInput(); //17823
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
-			return getIsLeaf(); //17810
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //17824
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //17825
-		case UmlPackage::ACTION_LOCALPRECONDITION:
-			return getLocalPrecondition(); //17826
-		case UmlPackage::NAMEDELEMENT_NAME:
-			return getName(); //1785
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
-			return getNameExpression(); //1786
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
-			return getNamespace(); //1787
-		case UmlPackage::UNMARSHALLACTION_OBJECT:
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
 			return getObject(); //17828
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
-			return getOutgoing(); //17818
-		case UmlPackage::ACTION_OUTPUT:
-			return getOutput(); //17827
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
-			return getOwnedComment(); //1781
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
-			return getOwnedElement(); //1782
-		case UmlPackage::ELEMENT_OWNER:
-			return getOwner(); //1783
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
-			return getQualifiedName(); //1788
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
-			return getRedefinedElement(); //17811
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
-			return getRedefinedNode(); //17819
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //17812
-		case UmlPackage::UNMARSHALLACTION_RESULT:
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
 			return getResult(); //17829
-		case UmlPackage::UNMARSHALLACTION_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
 			return getUnmarshallType(); //17830
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
-			return getVisibility(); //1789
 	}
-	return boost::any();
+	return ActionImpl::internalEIsSet(featureID);
 }
+bool UnmarshallActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+			return getObject() != nullptr; //17828
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
+			return getResult() != nullptr; //17829
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+			return getUnmarshallType() != nullptr; //17830
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+bool UnmarshallActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setObject(_object); //17828
+			return true;
+		}
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Classifier> _unmarshallType = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			setUnmarshallType(_unmarshallType); //17830
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void UnmarshallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("unmarshallType");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("unmarshallType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("object") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<uml::InputPin> object = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			if (object != nullptr)
+			{
+				this->setObject(object);
+				loadHandler->handleChild(object);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			if (result != nullptr)
+			{
+				std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> list_result = this->getResult();
+				list_result->push_back(result);
+				loadHandler->handleChild(result);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _unmarshallType = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setUnmarshallType(_unmarshallType);
+			}
+			
+			return;
+		}
+	}
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	ActivityContentImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
+}
+
+void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+		// Save 'object'
+		std::shared_ptr<uml::InputPin > object = this->getObject();
+		if (object != nullptr)
+		{
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+		}
+
+		// Save 'result'
+		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+		}
+	
+
+		// Add references
+		saveHandler->addReference("unmarshallType", this->getUnmarshallType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
