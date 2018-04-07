@@ -7,33 +7,13 @@
 #ifndef FUML_OBJECTOBJECTIMPL_HPP
 #define FUML_OBJECTOBJECTIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../Object.hpp"
 
-#include "impl/ExtensionalValueImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "Class.hpp"
-#include "Classifier.hpp"
-
+#include "fUML/impl/ExtensionalValueImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -50,6 +30,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectImpl();
+			virtual std::shared_ptr<Object> getThisObjectPtr();
+			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
 
 
 
@@ -107,7 +89,7 @@ namespace fUML
 			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const ;
 			
 							
 			
@@ -119,12 +101,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Object> m_thisObjectPtr;
 	};
 }
 #endif /* end of include guard: FUML_OBJECTOBJECTIMPL_HPP */
-

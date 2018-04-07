@@ -7,31 +7,13 @@
 #ifndef FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP
 #define FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../ForkNodeActivation.hpp"
 
-#include "impl/ControlNodeActivationImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include"ActivityNode.hpp"
-#include "FUMLFactory.hpp"
-
+#include "fUML/impl/ControlNodeActivationImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -48,6 +30,12 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ForkNodeActivationImpl();
+			virtual std::shared_ptr<ForkNodeActivation> getThisForkNodeActivationPtr();
+			virtual void setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr);
+
+			//Additional constructors for the containments back reference
+			ForkNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -86,12 +74,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ForkNodeActivation> m_thisForkNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP */
-

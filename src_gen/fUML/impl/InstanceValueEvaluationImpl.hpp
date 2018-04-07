@@ -7,43 +7,13 @@
 #ifndef FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP
 #define FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../InstanceValueEvaluation.hpp"
 
-#include "impl/EvaluationImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "InstanceSpecification.hpp"
-#include "InstanceValue.hpp"
-#include "Classifier.hpp"
-#include "EnumerationLiteral.hpp"
-#include "FUMLFactory.hpp"
-#include "EnumerationLiteral.hpp"
-#include "DataType.hpp"
-#include "Object.hpp"
-#include "Slot.hpp"
-#include "Value.hpp"
-#include "StructuralFeature.hpp"
-#include "Enumeration.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
-
+#include "fUML/impl/EvaluationImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -60,6 +30,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			InstanceValueEvaluationImpl();
+			virtual std::shared_ptr<InstanceValueEvaluation> getThisInstanceValueEvaluationPtr();
+			virtual void setThisInstanceValueEvaluationPtr(std::weak_ptr<InstanceValueEvaluation> thisInstanceValueEvaluationPtr);
 
 
 
@@ -94,12 +66,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<InstanceValueEvaluation> m_thisInstanceValueEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP */
-

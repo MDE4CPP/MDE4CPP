@@ -7,18 +7,6 @@
 #ifndef FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP
 #define FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
@@ -26,15 +14,7 @@
 #include "../ObjectActivation.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "Behavior.hpp"
-#include "ClassifierBehaviorExecution.hpp"
-
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -52,6 +32,8 @@ virtual public ObjectActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectActivationImpl();
+			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr();
+			virtual void setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr);
 
 
 
@@ -110,11 +92,11 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const ;
+			virtual std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> getClassifierBehaviorExecutions() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SignalInstance> > getEventPool() const ;
+			virtual std::shared_ptr<Bag<fUML::SignalInstance>> getEventPool() const ;
 			
 			/*!
 			 */
@@ -125,7 +107,7 @@ virtual public ObjectActivation
 			virtual void setObject(std::shared_ptr<fUML::Object> _object_object) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const ;
+			virtual std::shared_ptr<Bag<fUML::EventAccepter>> getWaitingEventAccepters() const ;
 			
 							
 			
@@ -137,12 +119,29 @@ virtual public ObjectActivation
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ObjectActivation> m_thisObjectActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP */
-

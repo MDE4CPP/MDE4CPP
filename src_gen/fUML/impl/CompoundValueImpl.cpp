@@ -1,26 +1,57 @@
-#include "CompoundValueImpl.hpp"
-#include <iostream>
+#include "fUML/impl/CompoundValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Classifier.hpp"
-#include <FUMLFactory.hpp>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Classifier.hpp"
+#include <fUML/FUMLFactory.hpp>
 #include <cstdio>
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "FeatureValue.hpp"
+#include "uml/Classifier.hpp"
 
-#include "StructuralFeature.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "StructuredValue.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "Value.hpp"
+#include "fUML/StructuredValue.hpp"
 
+#include "fUML/Value.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -51,7 +82,6 @@ CompoundValueImpl::~CompoundValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -84,13 +114,14 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 
 std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new CompoundValueImpl(*this));
+	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl(*this));
+	element->setThisCompoundValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCompoundValue();
+	return FUMLPackageImpl::eInstance()->getCompoundValue_EClass();
 }
 
 //*********************************
@@ -102,6 +133,7 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::FeatureValue> featureValue = this->retrieveFeatureValue(feature);
     if(featureValue == nullptr)
@@ -121,6 +153,7 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
 
 bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<CompoundValue>(otherValue);
 	bool isEqual = (otherCompoundValue != nullptr);
@@ -157,6 +190,7 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::remove_if(this->getFeatureValues()->begin(),this->getFeatureValues()->end(),[classifier](std::shared_ptr<FeatureValue> featureValue){return featureValue->getFeature()->getType()==classifier;});
 	//end of body
@@ -164,6 +198,7 @@ void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  cl
 
 std::shared_ptr<fUML::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr<fUML::FeatureValue> featureValue = nullptr;
     unsigned int i = 0;
@@ -181,6 +216,7 @@ std::shared_ptr<fUML::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std:
 
 std::shared_ptr<Bag<fUML::FeatureValue> > CompoundValueImpl::retrieveFeatureValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	 return this->getFeatureValues();
 	//end of body
@@ -188,6 +224,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > CompoundValueImpl::retrieveFeatureValu
 
 std::string CompoundValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::string buffer = "(" + this->objectId() + ":";
 
@@ -225,7 +262,7 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
-std::shared_ptr< Bag<fUML::FeatureValue> > CompoundValueImpl::getFeatureValues() const
+std::shared_ptr<Bag<fUML::FeatureValue>> CompoundValueImpl::getFeatureValues() const
 {
 
     return m_featureValues;
@@ -237,15 +274,154 @@ std::shared_ptr< Bag<fUML::FeatureValue> > CompoundValueImpl::getFeatureValues()
 //*********************************
 
 
+std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr()
+{
+	return m_thisCompoundValuePtr.lock();
+}
+void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr)
+{
+	m_thisCompoundValuePtr = thisCompoundValuePtr;
+	setThisStructuredValuePtr(thisCompoundValuePtr);
+}
+std::shared_ptr<ecore::EObject> CompoundValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CompoundValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
 			return getFeatureValues(); //130
 	}
-	return boost::any();
+	return StructuredValueImpl::internalEIsSet(featureID);
 }
+bool CompoundValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
+			return getFeatureValues() != nullptr; //130
+	}
+	return StructuredValueImpl::internalEIsSet(featureID);
+}
+bool CompoundValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return StructuredValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void CompoundValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void CompoundValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("featureValues") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "FeatureValue";
+			}
+			std::shared_ptr<fUML::FeatureValue> featureValues = std::dynamic_pointer_cast<fUML::FeatureValue>(modelFactory->create(typeName));
+			if (featureValues != nullptr)
+			{
+				std::shared_ptr<Bag<fUML::FeatureValue>> list_featureValues = this->getFeatureValues();
+				list_featureValues->push_back(featureValues);
+				loadHandler->handleChild(featureValues);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void CompoundValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	StructuredValueImpl::resolveReferences(featureID, references);
+}
+
+void CompoundValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'featureValues'
+		std::shared_ptr<Bag<fUML::FeatureValue>> list_featureValues = this->getFeatureValues();
+		for (std::shared_ptr<fUML::FeatureValue> featureValues : *list_featureValues) 
+		{
+			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() != package->getFeatureValue_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

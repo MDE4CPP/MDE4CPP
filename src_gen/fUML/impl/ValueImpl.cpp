@@ -1,20 +1,51 @@
-#include "ValueImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include <Classifier.hpp>
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "uml/Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "SemanticVisitor.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Value.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -40,7 +71,6 @@ ValueImpl::~ValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -63,13 +93,14 @@ ValueImpl::ValueImpl(const ValueImpl & obj):ValueImpl()
 
 std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ValueImpl(*this));
+	std::shared_ptr<ValueImpl> element(new ValueImpl(*this));
+	element->setThisValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValue();
+	return FUMLPackageImpl::eInstance()->getValue_EClass();
 }
 
 //*********************************
@@ -81,6 +112,7 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
 	std::shared_ptr<Bag<uml::Classifier> > otherTypes = otherValue->getTypes();
@@ -122,6 +154,7 @@ std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes()  const
 
 bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
@@ -139,6 +172,7 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
 
 std::string ValueImpl::objectId() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "SemanticVisitor";//typename(SemanticVisitor); //return super.toString();
 
@@ -166,13 +200,106 @@ std::string ValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<Value> ValueImpl::getThisValuePtr()
+{
+	return m_thisValuePtr.lock();
+}
+void ValueImpl::setThisValuePtr(std::weak_ptr<Value> thisValuePtr)
+{
+	m_thisValuePtr = thisValuePtr;
+	setThisSemanticVisitorPtr(thisValuePtr);
+}
+std::shared_ptr<ecore::EObject> ValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
+bool ValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return SemanticVisitorImpl::internalEIsSet(featureID);
+}
+bool ValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return SemanticVisitorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	SemanticVisitorImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	SemanticVisitorImpl::resolveReferences(featureID, references);
+}
+
+void ValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

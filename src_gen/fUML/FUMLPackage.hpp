@@ -7,137 +7,16 @@
 #ifndef FUMLPACKAGE_HPP
 #define FUMLPACKAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/EPackage.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
-
-namespace fUML 
-{	class AcceptEventActionActivation;
-	class AcceptEventActionEventAccepter;
-	class ActionActivation;
-	class ActivityEdgeInstance;
-	class ActivityExecution;
-	class ActivityFinalNodeActivation;
-	class ActivityNodeActivation;
-	class ActivityNodeActivationGroup;
-	class ActivityParameterNodeActivation;
-	class AddStructuralFeatureValueActionActivation;
-	class BooleanValue;
-	class CallActionActivation;
-	class CallBehaviorActionActivation;
-	class CallOperationActionActivation;
-	class CentralBufferNodeActivation;
-	class ChoiceStrategy;
-	class ClassifierBehaviorExecution;
-	class ClassifierBehaviorExecutionActivity;
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1;
-	class ClauseActivation;
-	class ClearAssociationActionActivation;
-	class ClearStructuralFeatureActionActivation;
-	class CompoundValue;
-	class ConditionalNodeActivation;
-	class ControlNodeActivation;
-	class ControlToken;
-	class CreateLinkActionActivation;
-	class CreateObjectActionActivation;
-	class DataStoreNodeActivation;
-	class DataValue;
-	class DecisionNodeActivation;
-	class DestroyLinkActionActivation;
-	class DestroyObjectActionActivation;
-	class DispatchStrategy;
-	class EnumerationValue;
-	class Evaluation;
-	class EventAccepter;
-	class EventDispatchLoop;
-	class Execution;
-	class ExecutionFactory;
-	class ExecutionFactoryL1;
-	class ExecutionFactoryL2;
-	class ExecutionFactoryL3;
-	class Executor;
-	class ExpansionActivationGroup;
-	class ExpansionNodeActivation;
-	class ExpansionRegionActivation;
-	class ExtensionalValue;
-	class ExtensionalValueList;
-	class FIFOGetNextEventStrategy;
-	class FeatureValue;
-	class FirstChoiceStrategy;
-	class FlowFinalNodeActivation;
-	class ForkNodeActivation;
-	class ForkedToken;
-	class GetNextEventStrategy;
-	class InitialNodeActivation;
-	class InputPinActivation;
-	class InstanceValueEvaluation;
-	class IntegerValue;
-	class InvocationActionActivation;
-	class JoinNodeActivation;
-	class Link;
-	class LinkActionActivation;
-	class LiteralBooleanEvaluation;
-	class LiteralEvaluation;
-	class LiteralIntegerEvaluation;
-	class LiteralNullEvaluation;
-	class LiteralRealEvaluation;
-	class LiteralStringEvaluation;
-	class LiteralUnlimitedNaturalEvaluation;
-	class Locus;
-	class LoopNodeActivation;
-	class MergeNodeActivation;
-	class Object;
-	class ObjectActivation;
-	class ObjectNodeActivation;
-	class ObjectToken;
-	class Offer;
-	class OpaqueBehaviorExecution;
-	class OutputPinActivation;
-	class ParameterValue;
-	class PinActivation;
-	class PrimitiveValue;
-	class ReadExtentActionActivation;
-	class ReadIsClassifiedObjectActionActivation;
-	class ReadLinkActionActivation;
-	class ReadSelfActionActivation;
-	class ReadStructuralFeatureActionActivation;
-	class RealValue;
-	class ReclassifyObjectActionActivation;
-	class RedefinitionBasedDispatchStrategy;
-	class ReduceActionActivation;
-	class Reference;
-	class RemoveStructuralFeatureValueActivation;
-	class SemanticStrategy;
-	class SemanticVisitor;
-	class SendSignalActionActivation;
-	class SignalInstance;
-	class StartClassifierBehaviorActionActivation;
-	class StartObjectBehaviorActionActivation;
-	class StringValue;
-	class StructuralFeatureActionActivation;
-	class StructuredActivityNodeActivation;
-	class StructuredValue;
-	class TestIdentityActionActivation;
-	class Token;
-	class TokenSet;
-	class UnlimitedNaturalValue;
-	class Value;
-	class ValueSpecificActionActivation;
-	class Values;
-	class WriteLinkActionActivation;
-	class WriteStructuralFeatureActionActivation;
-	class FUMLPackage;
+namespace ecore 
+{
+	class EAttribute;
+	class EClass;
+	class EDataType;
+	class EOperation;
+	class EParameter;
+	class EReference;
 }
 
 namespace fUML 
@@ -165,41 +44,43 @@ namespace fUML
 
 			// Begin Class AcceptEventActionActivation
 			//Class and Feature IDs 
-			static const int ACCEPTEVENTACTIONACTIVATION = 109;
-			static const int ACCEPTEVENTACTIONACTIVATION_FEATURE_COUNT = 10;
-			static const int ACCEPTEVENTACTIONACTIVATION_OPERATION_COUNT = 49;
-			static const int ACCEPTEVENTACTIONACTIVATION_WAITING = 1099;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_ECLASS = 109;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 12;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 49;
+			static const int ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING = 10911;
 			
-			static const int ACCEPTEVENTACTIONACTIVATION_EVENTACCEPTER = 1098;
+			static const int ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER = 10910;
 			
-			static const int ACCEPTEVENTACTIONACTIVATION___ACCEPT__SIGNALINSTANCE = 47;
-			static const int ACCEPTEVENTACTIONACTIVATION___MATCH__SIGNALINSTANCE = 48;
+			static const int ACCEPTEVENTACTIONACTIVATION_EOPERATION_ACCEPT_SIGNALINSTANCE = 47;
+			static const int ACCEPTEVENTACTIONACTIVATION_EOPERATION_MATCH_SIGNALINSTANCE = 48;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAcceptEventActionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getAcceptEventActionActivation_Waiting() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getAcceptEventActionActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAcceptEventActionActivation_EventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getAcceptEventActionActivation_EAttribute_waiting() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventActionActivation___Accept__SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventActionActivation___Match__SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getAcceptEventActionActivation_EReference_eventAccepter() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getAcceptEventActionActivation_EOperation_accept_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getAcceptEventActionActivation_EOperation_match_SignalInstance() const = 0;
 			
 			// End Class AcceptEventActionActivation
 
 
 			// Begin Class AcceptEventActionEventAccepter
 			//Class and Feature IDs 
-			static const int ACCEPTEVENTACTIONEVENTACCEPTER = 111;
-			static const int ACCEPTEVENTACTIONEVENTACCEPTER_FEATURE_COUNT = 1;
-			static const int ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_COUNT = 2;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS = 111;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS_OPERATION_COUNT = 2;
 			
-			static const int ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION = 1110;
+			static const int ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION = 1110;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAcceptEventActionEventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getAcceptEventActionEventAccepter_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAcceptEventActionEventAccepter_ActionActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getAcceptEventActionEventAccepter_EReference_actionActivation() const = 0;
 			
 			
 			// End Class AcceptEventActionEventAccepter
@@ -207,312 +88,324 @@ namespace fUML
 
 			// Begin Class ActionActivation
 			//Class and Feature IDs 
-			static const int ACTIONACTIVATION = 78;
-			static const int ACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int ACTIONACTIVATION_OPERATION_COUNT = 47;
-			static const int ACTIONACTIVATION_FIRING = 787;
+			static const unsigned int ACTIONACTIVATION_ECLASS = 78;
+			static const unsigned int ACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int ACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
+			static const int ACTIONACTIVATION_EATTRIBUTE_FIRING = 787;
 			
-			static const int ACTIONACTIVATION_PINACTIVATION = 786;
+			static const int ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION = 788;
+			static const int ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION = 789;
+			static const int ACTIONACTIVATION_EREFERENCE_PINACTIVATION = 786;
 			
-			static const int ACTIONACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE = 45;
-			static const int ACTIONACTIVATION___ADDPINACTIVATION__PINACTIVATION = 30;
-			static const int ACTIONACTIVATION___COMPLETEACTION = 43;
-			static const int ACTIONACTIVATION___CREATENODEACTIVATIONS = 44;
-			static const int ACTIONACTIVATION___DOACTION = 28;
-			static const int ACTIONACTIVATION___FIRE__TOKEN = 40;
-			static const int ACTIONACTIVATION___GETTOKENS__INPUTPIN = 34;
-			static const int ACTIONACTIVATION___ISFIRNG = 27;
-			static const int ACTIONACTIVATION___ISREADY = 42;
-			static const int ACTIONACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE = 46;
-			static const int ACTIONACTIVATION___MAKEBOOLEANVALUE__EBOOLEAN = 37;
-			static const int ACTIONACTIVATION___PUTTOKEN__OUTPUTPIN_VALUE = 32;
-			static const int ACTIONACTIVATION___PUTTOKENS__OUTPUTPIN_VALUE = 33;
-			static const int ACTIONACTIVATION___RETRIEVEPINACTIVATION__PIN = 31;
-			static const int ACTIONACTIVATION___RUN = 38;
-			static const int ACTIONACTIVATION___SENDOFFERS = 29;
-			static const int ACTIONACTIVATION___TAKEOFFEREDTOKENS = 39;
-			static const int ACTIONACTIVATION___TAKETOKENS__INPUTPIN = 35;
-			static const int ACTIONACTIVATION___TERMINATE = 41;
-			static const int ACTIONACTIVATION___VALUEPARTICIPATESINLINK__VALUE_LINK = 36;
+			static const int ACTIONACTIVATION_EOPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE = 45;
+			static const int ACTIONACTIVATION_EOPERATION_ADDPINACTIVATION_PINACTIVATION = 30;
+			static const int ACTIONACTIVATION_EOPERATION_COMPLETEACTION = 43;
+			static const int ACTIONACTIVATION_EOPERATION_CREATENODEACTIVATIONS = 44;
+			static const int ACTIONACTIVATION_EOPERATION_DOACTION = 28;
+			static const int ACTIONACTIVATION_EOPERATION_FIRE_TOKEN = 40;
+			static const int ACTIONACTIVATION_EOPERATION_GETTOKENS_INPUTPIN = 34;
+			static const int ACTIONACTIVATION_EOPERATION_ISFIRNG = 27;
+			static const int ACTIONACTIVATION_EOPERATION_ISREADY = 42;
+			static const int ACTIONACTIVATION_EOPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 46;
+			static const int ACTIONACTIVATION_EOPERATION_MAKEBOOLEANVALUE_EBOOLEAN = 37;
+			static const int ACTIONACTIVATION_EOPERATION_PUTTOKEN_OUTPUTPIN_VALUE = 32;
+			static const int ACTIONACTIVATION_EOPERATION_PUTTOKENS_OUTPUTPIN_VALUE = 33;
+			static const int ACTIONACTIVATION_EOPERATION_RETRIEVEPINACTIVATION_PIN = 31;
+			static const int ACTIONACTIVATION_EOPERATION_RUN = 38;
+			static const int ACTIONACTIVATION_EOPERATION_SENDOFFERS = 29;
+			static const int ACTIONACTIVATION_EOPERATION_TAKEOFFEREDTOKENS = 39;
+			static const int ACTIONACTIVATION_EOPERATION_TAKETOKENS_INPUTPIN = 35;
+			static const int ACTIONACTIVATION_EOPERATION_TERMINATE = 41;
+			static const int ACTIONACTIVATION_EOPERATION_VALUEPARTICIPATESINLINK_VALUE_LINK = 36;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActionActivation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getActionActivation_Firing() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActionActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActionActivation_PinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getActionActivation_EAttribute_firing() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___AddOutgoingEdge__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___AddPinActivation__PinActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___CompleteAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___CreateNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___DoAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___GetTokens__InputPin() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___IsFirng() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___IsReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___IsSourceFor__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___MakeBooleanValue__EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___PutToken__OutputPin_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___PutTokens__OutputPin_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___RetrievePinActivation__Pin() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___Run() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___SendOffers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___TakeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___TakeTokens__InputPin() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___Terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation___ValueParticipatesInLink__Value_Link() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_inputPinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_outputPinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActionActivation_EReference_pinActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_addPinActivation_PinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_completeAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_createNodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_fire_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_getTokens_InputPin() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_isFirng() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_isReady() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_isSourceFor_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_makeBooleanValue_EBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_putToken_OutputPin_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_putTokens_OutputPin_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_retrievePinActivation_Pin() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_run() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_sendOffers() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_takeOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_takeTokens_InputPin() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_terminate() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActionActivation_EOperation_valueParticipatesInLink_Value_Link() const = 0;
 			
 			// End Class ActionActivation
 
 
 			// Begin Class ActivityEdgeInstance
 			//Class and Feature IDs 
-			static const int ACTIVITYEDGEINSTANCE = 51;
-			static const int ACTIVITYEDGEINSTANCE_FEATURE_COUNT = 5;
-			static const int ACTIVITYEDGEINSTANCE_OPERATION_COUNT = 6;
+			static const unsigned int ACTIVITYEDGEINSTANCE_ECLASS = 51;
+			static const unsigned int ACTIVITYEDGEINSTANCE_ECLASS_FEATURE_COUNT = 5;
+			static const unsigned int ACTIVITYEDGEINSTANCE_ECLASS_OPERATION_COUNT = 6;
 			
-			static const int ACTIVITYEDGEINSTANCE_EDGE = 510;
-			static const int ACTIVITYEDGEINSTANCE_GROUP = 514;
-			static const int ACTIVITYEDGEINSTANCE_OFFERS = 513;
-			static const int ACTIVITYEDGEINSTANCE_SOURCE = 511;
-			static const int ACTIVITYEDGEINSTANCE_TARGET = 512;
+			static const int ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE = 510;
+			static const int ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP = 514;
+			static const int ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS = 513;
+			static const int ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE = 511;
+			static const int ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET = 512;
 			
-			static const int ACTIVITYEDGEINSTANCE___COUNTOFFEREDVALUE = 1;
-			static const int ACTIVITYEDGEINSTANCE___GETOFFEREDTOKENS = 4;
-			static const int ACTIVITYEDGEINSTANCE___HASOFFER = 5;
-			static const int ACTIVITYEDGEINSTANCE___SENDOFFER__TOKEN = 0;
-			static const int ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS = 2;
-			static const int ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS__EINT = 3;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_COUNTOFFEREDVALUE = 1;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_GETOFFEREDTOKENS = 4;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_HASOFFER = 5;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_SENDOFFER_TOKEN = 0;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_TAKEOFFEREDTOKENS = 2;
+			static const int ACTIVITYEDGEINSTANCE_EOPERATION_TAKEOFFEREDTOKENS_EINT = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityEdgeInstance_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Edge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Group() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Offers() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___CountOfferedValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___GetOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___HasOffer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___SendOffer__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___TakeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance___TakeOfferedTokens__EInt() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_EReference_edge() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_EReference_group() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_EReference_offers() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_EReference_source() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_EReference_target() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_countOfferedValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_getOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_hasOffer() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_sendOffer_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_takeOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_EOperation_takeOfferedTokens_EInt() const = 0;
 			
 			// End Class ActivityEdgeInstance
 
 
 			// Begin Class ActivityExecution
 			//Class and Feature IDs 
-			static const int ACTIVITYEXECUTION = 57;
-			static const int ACTIVITYEXECUTION_FEATURE_COUNT = 7;
-			static const int ACTIVITYEXECUTION_OPERATION_COUNT = 37;
+			static const unsigned int ACTIVITYEXECUTION_ECLASS = 57;
+			static const unsigned int ACTIVITYEXECUTION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int ACTIVITYEXECUTION_ECLASS_OPERATION_COUNT = 37;
 			
-			static const int ACTIVITYEXECUTION_ACTIVATIONGROUP = 576;
+			static const int ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP = 576;
 			
-			static const int ACTIVITYEXECUTION___EXECUTE = 34;
-			static const int ACTIVITYEXECUTION___NEW_ = 36;
-			static const int ACTIVITYEXECUTION___TERMINATE = 35;
+			static const int ACTIVITYEXECUTION_EOPERATION_EXECUTE = 34;
+			static const int ACTIVITYEXECUTION_EOPERATION_NEW_ = 36;
+			static const int ACTIVITYEXECUTION_EOPERATION_TERMINATE = 35;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityExecution() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityExecution_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityExecution_ActivationGroup() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution___Execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution___New_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityExecution_EReference_activationGroup() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_EOperation_execute() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_EOperation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_EOperation_terminate() const = 0;
 			
 			// End Class ActivityExecution
 
 
 			// Begin Class ActivityFinalNodeActivation
 			//Class and Feature IDs 
-			static const int ACTIVITYFINALNODEACTIVATION = 67;
-			static const int ACTIVITYFINALNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int ACTIVITYFINALNODEACTIVATION_OPERATION_COUNT = 29;
+			static const unsigned int ACTIVITYFINALNODEACTIVATION_ECLASS = 67;
+			static const unsigned int ACTIVITYFINALNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int ACTIVITYFINALNODEACTIVATION_ECLASS_OPERATION_COUNT = 29;
 			
 			
-			static const int ACTIVITYFINALNODEACTIVATION___FIRE__TOKEN = 28;
+			static const int ACTIVITYFINALNODEACTIVATION_EOPERATION_FIRE_TOKEN = 28;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityFinalNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityFinalNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityFinalNodeActivation___Fire__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityFinalNodeActivation_EOperation_fire_Token() const = 0;
 			
 			// End Class ActivityFinalNodeActivation
 
 
 			// Begin Class ActivityNodeActivation
 			//Class and Feature IDs 
-			static const int ACTIVITYNODEACTIVATION = 58;
-			static const int ACTIVITYNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int ACTIVITYNODEACTIVATION_OPERATION_COUNT = 27;
-			static const int ACTIVITYNODEACTIVATION_RUNNING = 585;
+			static const unsigned int ACTIVITYNODEACTIVATION_ECLASS = 58;
+			static const unsigned int ACTIVITYNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int ACTIVITYNODEACTIVATION_ECLASS_OPERATION_COUNT = 27;
+			static const int ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING = 585;
 			
-			static const int ACTIVITYNODEACTIVATION_GROUP = 583;
-			static const int ACTIVITYNODEACTIVATION_HELDTOKENS = 582;
-			static const int ACTIVITYNODEACTIVATION_INCOMINGEDGES = 581;
-			static const int ACTIVITYNODEACTIVATION_NODE = 584;
-			static const int ACTIVITYNODEACTIVATION_OUTGOINGEDGES = 580;
+			static const int ACTIVITYNODEACTIVATION_EREFERENCE_GROUP = 583;
+			static const int ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS = 582;
+			static const int ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES = 581;
+			static const int ACTIVITYNODEACTIVATION_EREFERENCE_NODE = 584;
+			static const int ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES = 580;
 			
-			static const int ACTIVITYNODEACTIVATION___ADDINCOMINGEDGE__ACTIVITYEDGEINSTANCE = 11;
-			static const int ACTIVITYNODEACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE = 10;
-			static const int ACTIVITYNODEACTIVATION___ADDTOKEN__TOKEN = 19;
-			static const int ACTIVITYNODEACTIVATION___ADDTOKENS__TOKEN = 21;
-			static const int ACTIVITYNODEACTIVATION___CLEARTOKENS = 23;
-			static const int ACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES = 13;
-			static const int ACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS = 12;
-			static const int ACTIVITYNODEACTIVATION___FIRE__TOKEN = 5;
-			static const int ACTIVITYNODEACTIVATION___GETACTIVITYEXECUTION = 15;
-			static const int ACTIVITYNODEACTIVATION___GETEXECUTIONCONTEXT = 16;
-			static const int ACTIVITYNODEACTIVATION___GETEXECUTIONLOCUS = 17;
-			static const int ACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE = 18;
-			static const int ACTIVITYNODEACTIVATION___GETRUNNING = 9;
-			static const int ACTIVITYNODEACTIVATION___GETTOKENS = 24;
-			static const int ACTIVITYNODEACTIVATION___ISREADY = 8;
-			static const int ACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE = 14;
-			static const int ACTIVITYNODEACTIVATION___RECIEVEOFFER = 3;
-			static const int ACTIVITYNODEACTIVATION___REMOVETOKEN__TOKEN = 20;
-			static const int ACTIVITYNODEACTIVATION___RESUME = 26;
-			static const int ACTIVITYNODEACTIVATION___RUN = 2;
-			static const int ACTIVITYNODEACTIVATION___SENDOFFERS__TOKEN = 6;
-			static const int ACTIVITYNODEACTIVATION___SUSPEND = 25;
-			static const int ACTIVITYNODEACTIVATION___TAKEOFFEREDTOKENS = 4;
-			static const int ACTIVITYNODEACTIVATION___TAKETOKENS = 22;
-			static const int ACTIVITYNODEACTIVATION___TERMINATE = 7;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE = 11;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE = 10;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ADDTOKEN_TOKEN = 19;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ADDTOKENS_TOKEN = 21;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_CLEARTOKENS = 23;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_CREATEEDGEINSTANCES = 13;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_CREATENODEACTIVATIONS = 12;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_FIRE_TOKEN = 5;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETACTIVITYEXECUTION = 15;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETEXECUTIONCONTEXT = 16;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETEXECUTIONLOCUS = 17;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETNODEACTIVATION_ACTIVITYNODE = 18;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETRUNNING = 9;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_GETTOKENS = 24;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ISREADY = 8;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 14;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_RECIEVEOFFER = 3;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_REMOVETOKEN_TOKEN = 20;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_RESUME = 26;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_RUN = 2;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_SENDOFFERS_TOKEN = 6;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_SUSPEND = 25;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_TAKEOFFEREDTOKENS = 4;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_TAKETOKENS = 22;
+			static const int ACTIVITYNODEACTIVATION_EOPERATION_TERMINATE = 7;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getActivityNodeActivation_Running() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Group() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_HeldTokens() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_IncomingEdges() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Node() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_OutgoingEdges() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getActivityNodeActivation_EAttribute_running() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___AddIncomingEdge__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___AddOutgoingEdge__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___AddToken__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___AddTokens__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___ClearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___CreateEdgeInstances() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___CreateNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetExecutionContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetExecutionLocus() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetNodeActivation__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetRunning() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___GetTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___IsReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___IsSourceFor__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___RecieveOffer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___RemoveToken__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___Resume() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___Run() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___SendOffers__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___Suspend() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___TakeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___TakeTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_EReference_group() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_EReference_heldTokens() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_EReference_incomingEdges() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_EReference_node() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_EReference_outgoingEdges() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_addIncomingEdge_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_addToken_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_addTokens_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_clearTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_createEdgeInstances() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_createNodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_fire_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getActivityExecution() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getExecutionContext() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getExecutionLocus() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getNodeActivation_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getRunning() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_getTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_isReady() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_recieveOffer() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_removeToken_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_resume() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_run() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_sendOffers_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_suspend() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_takeOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_takeTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_EOperation_terminate() const = 0;
 			
 			// End Class ActivityNodeActivation
 
 
 			// Begin Class ActivityNodeActivationGroup
 			//Class and Feature IDs 
-			static const int ACTIVITYNODEACTIVATIONGROUP = 50;
-			static const int ACTIVITYNODEACTIVATIONGROUP_FEATURE_COUNT = 5;
-			static const int ACTIVITYNODEACTIVATIONGROUP_OPERATION_COUNT = 17;
+			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_ECLASS = 50;
+			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_ECLASS_FEATURE_COUNT = 5;
+			static const unsigned int ACTIVITYNODEACTIVATIONGROUP_ECLASS_OPERATION_COUNT = 17;
 			
-			static const int ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION = 502;
-			static const int ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION = 503;
-			static const int ACTIVITYNODEACTIVATIONGROUP_EDGEINSTANCES = 500;
-			static const int ACTIVITYNODEACTIVATIONGROUP_NODEACTIVATIONS = 501;
-			static const int ACTIVITYNODEACTIVATIONGROUP_SUSPENDEDACTIVATIONS = 504;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION = 502;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION = 503;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_EDGEINSTANCES = 500;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_NODEACTIVATIONS = 501;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS = 504;
 			
-			static const int ACTIVITYNODEACTIVATIONGROUP___ACTIVATE__ACTIVITYNODE_ACTIVITYEDGE = 2;
-			static const int ACTIVITYNODEACTIVATIONGROUP___ADDEDGEINSTANCE__ACTIVITYEDGEINSTANCE = 10;
-			static const int ACTIVITYNODEACTIVATIONGROUP___ADDNODEACTIVATION__ACTIVITYNODEACTIVATION = 7;
-			static const int ACTIVITYNODEACTIVATIONGROUP___CHECKINCOMINGEDGES__ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION = 1;
-			static const int ACTIVITYNODEACTIVATIONGROUP___CREATEEDGEINSTANCE__ACTIVITYEDGE = 9;
-			static const int ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATION__ACTIVITYNODE = 6;
-			static const int ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATIONS__ACTIVITYNODE = 5;
-			static const int ACTIVITYNODEACTIVATIONGROUP___GETNODEACTIVATION__ACTIVITYNODE = 8;
-			static const int ACTIVITYNODEACTIVATIONGROUP___GETOUTPUTPARAMETERNODEACTIVATIONS = 12;
-			static const int ACTIVITYNODEACTIVATIONGROUP___HASSOURCEFOR__ACTIVITYEDGEINSTANCE = 16;
-			static const int ACTIVITYNODEACTIVATIONGROUP___ISSUSPENDED = 15;
-			static const int ACTIVITYNODEACTIVATIONGROUP___RESUME__ACTIVITYNODEACTIVATION = 13;
-			static const int ACTIVITYNODEACTIVATIONGROUP___RETRIEVEACTIVITYEXECUTION = 11;
-			static const int ACTIVITYNODEACTIVATIONGROUP___RUN__ACTIVITYNODEACTIVATION = 0;
-			static const int ACTIVITYNODEACTIVATIONGROUP___RUNNODES__ACTIVITYNODE = 3;
-			static const int ACTIVITYNODEACTIVATIONGROUP___SUSPEND__ACTIVITYNODEACTIVATION = 14;
-			static const int ACTIVITYNODEACTIVATIONGROUP___TERMINATEALL = 4;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE = 2;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE = 10;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION = 7;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION = 1;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE = 9;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_CREATENODEACTIVATION_ACTIVITYNODE = 6;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE = 5;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_GETNODEACTIVATION_ACTIVITYNODE = 8;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS = 12;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE = 16;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_ISSUSPENDED = 15;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_RESUME_ACTIVITYNODEACTIVATION = 13;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_RETRIEVEACTIVITYEXECUTION = 11;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_RUN_ACTIVITYNODEACTIVATION = 0;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_RUNNODES_ACTIVITYNODE = 3;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_SUSPEND_ACTIVITYNODEACTIVATION = 14;
+			static const int ACTIVITYNODEACTIVATIONGROUP_EOPERATION_TERMINATEALL = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivationGroup() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivationGroup_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_ActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_ContainingNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EdgeInstances() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_NodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_SuspendedActivations() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___Activate__ActivityNode_ActivityEdge() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___AddEdgeInstance__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___AddNodeActivation__ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___CheckIncomingEdges__ActivityEdgeInstance_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___CreateEdgeInstance__ActivityEdge() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___CreateNodeActivation__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___CreateNodeActivations__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___GetNodeActivation__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___GetOutputParameterNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___HasSourceFor__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___IsSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___Resume__ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___RetrieveActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___Run__ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___RunNodes__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___Suspend__ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup___TerminateAll() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EReference_activityExecution() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EReference_containingNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EReference_edgeInstances() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EReference_nodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_EReference_suspendedActivations() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_activate_ActivityNode_ActivityEdge() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_addEdgeInstance_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_addNodeActivation_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_createEdgeInstance_ActivityEdge() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_createNodeActivation_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_createNodeActivations_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_getNodeActivation_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_getOutputParameterNodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_hasSourceFor_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_isSuspended() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_resume_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_retrieveActivityExecution() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_run_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_runNodes_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_suspend_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_EOperation_terminateAll() const = 0;
 			
 			// End Class ActivityNodeActivationGroup
 
 
 			// Begin Class ActivityParameterNodeActivation
 			//Class and Feature IDs 
-			static const int ACTIVITYPARAMETERNODEACTIVATION = 60;
-			static const int ACTIVITYPARAMETERNODEACTIVATION_FEATURE_COUNT = 7;
-			static const int ACTIVITYPARAMETERNODEACTIVATION_OPERATION_COUNT = 40;
+			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_ECLASS = 60;
+			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_ECLASS_OPERATION_COUNT = 40;
 			
 			
-			static const int ACTIVITYPARAMETERNODEACTIVATION___CLEARTOKENS = 39;
-			static const int ACTIVITYPARAMETERNODEACTIVATION___FIRE__TOKEN = 38;
+			static const int ACTIVITYPARAMETERNODEACTIVATION_EOPERATION_CLEARTOKENS = 39;
+			static const int ACTIVITYPARAMETERNODEACTIVATION_EOPERATION_FIRE_TOKEN = 38;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityParameterNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getActivityParameterNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation___ClearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation___Fire__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation_EOperation_clearTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation_EOperation_fire_Token() const = 0;
 			
 			// End Class ActivityParameterNodeActivation
 
 
 			// Begin Class AddStructuralFeatureValueActionActivation
 			//Class and Feature IDs 
-			static const int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION = 103;
-			static const int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_COUNT = 51;
+			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS = 103;
+			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS_OPERATION_COUNT = 51;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -521,166 +414,174 @@ namespace fUML
 
 			// Begin Class BooleanValue
 			//Class and Feature IDs 
-			static const int BOOLEANVALUE = 20;
-			static const int BOOLEANVALUE_FEATURE_COUNT = 2;
-			static const int BOOLEANVALUE_OPERATION_COUNT = 12;
-			static const int BOOLEANVALUE_VALUE = 201;
+			static const unsigned int BOOLEANVALUE_ECLASS = 20;
+			static const unsigned int BOOLEANVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int BOOLEANVALUE_ECLASS_OPERATION_COUNT = 12;
+			static const int BOOLEANVALUE_EATTRIBUTE_VALUE = 201;
 			
 			
-			static const int BOOLEANVALUE___EQUALS__VALUE = 10;
-			static const int BOOLEANVALUE___SPECIFY = 9;
-			static const int BOOLEANVALUE___TOSTRING = 11;
+			static const int BOOLEANVALUE_EOPERATION_EQUALS_VALUE = 10;
+			static const int BOOLEANVALUE_EOPERATION_SPECIFY = 9;
+			static const int BOOLEANVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBooleanValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getBooleanValue_Value() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getBooleanValue_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getBooleanValue_EAttribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_EOperation_toString() const = 0;
 			
 			// End Class BooleanValue
 
 
 			// Begin Class CallActionActivation
 			//Class and Feature IDs 
-			static const int CALLACTIONACTIVATION = 81;
-			static const int CALLACTIONACTIVATION_FEATURE_COUNT = 9;
-			static const int CALLACTIONACTIVATION_OPERATION_COUNT = 51;
+			static const unsigned int CALLACTIONACTIVATION_ECLASS = 81;
+			static const unsigned int CALLACTIONACTIVATION_ECLASS_FEATURE_COUNT = 11;
+			static const unsigned int CALLACTIONACTIVATION_ECLASS_OPERATION_COUNT = 51;
 			
-			static const int CALLACTIONACTIVATION_CALLEXECUTIONS = 818;
+			static const int CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS = 8110;
 			
-			static const int CALLACTIONACTIVATION___DOACTION = 49;
-			static const int CALLACTIONACTIVATION___GETCALLEXECUTION = 47;
-			static const int CALLACTIONACTIVATION___REMOVECALLEXECUTION__EXECUTION = 48;
-			static const int CALLACTIONACTIVATION___TERMINATE = 50;
+			static const int CALLACTIONACTIVATION_EOPERATION_DOACTION = 49;
+			static const int CALLACTIONACTIVATION_EOPERATION_GETCALLEXECUTION = 47;
+			static const int CALLACTIONACTIVATION_EOPERATION_REMOVECALLEXECUTION_EXECUTION = 48;
+			static const int CALLACTIONACTIVATION_EOPERATION_TERMINATE = 50;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCallActionActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getCallActionActivation_CallExecutions() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation___DoAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation___GetCallExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation___RemoveCallExecution__Execution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getCallActionActivation_EReference_callExecutions() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_EOperation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_EOperation_getCallExecution() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_EOperation_removeCallExecution_Execution() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_EOperation_terminate() const = 0;
 			
 			// End Class CallActionActivation
 
 
 			// Begin Class CallBehaviorActionActivation
 			//Class and Feature IDs 
-			static const int CALLBEHAVIORACTIONACTIVATION = 82;
-			static const int CALLBEHAVIORACTIONACTIVATION_FEATURE_COUNT = 9;
-			static const int CALLBEHAVIORACTIONACTIVATION_OPERATION_COUNT = 52;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_ECLASS = 82;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_ECLASS_FEATURE_COUNT = 11;
+			static const unsigned int CALLBEHAVIORACTIONACTIVATION_ECLASS_OPERATION_COUNT = 52;
 			
 			
-			static const int CALLBEHAVIORACTIONACTIVATION___GETCALLEXECUTION = 51;
+			static const int CALLBEHAVIORACTIONACTIVATION_EOPERATION_GETCALLEXECUTION = 51;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallBehaviorActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCallBehaviorActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation___GetCallExecution() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_EOperation_getCallExecution() const = 0;
 			
 			// End Class CallBehaviorActionActivation
 
 
 			// Begin Class CallOperationActionActivation
 			//Class and Feature IDs 
-			static const int CALLOPERATIONACTIONACTIVATION = 83;
-			static const int CALLOPERATIONACTIONACTIVATION_FEATURE_COUNT = 9;
-			static const int CALLOPERATIONACTIONACTIVATION_OPERATION_COUNT = 52;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_ECLASS = 83;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_ECLASS_FEATURE_COUNT = 11;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_ECLASS_OPERATION_COUNT = 52;
 			
 			
-			static const int CALLOPERATIONACTIONACTIVATION___GETCALLEXECUTION = 51;
+			static const int CALLOPERATIONACTIONACTIVATION_EOPERATION_GETCALLEXECUTION = 51;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation___GetCallExecution() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_EOperation_getCallExecution() const = 0;
 			
 			// End Class CallOperationActionActivation
 
 
 			// Begin Class CentralBufferNodeActivation
 			//Class and Feature IDs 
-			static const int CENTRALBUFFERNODEACTIVATION = 112;
-			static const int CENTRALBUFFERNODEACTIVATION_FEATURE_COUNT = 7;
-			static const int CENTRALBUFFERNODEACTIVATION_OPERATION_COUNT = 39;
+			static const unsigned int CENTRALBUFFERNODEACTIVATION_ECLASS = 112;
+			static const unsigned int CENTRALBUFFERNODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int CENTRALBUFFERNODEACTIVATION_ECLASS_OPERATION_COUNT = 39;
 			
 			
-			static const int CENTRALBUFFERNODEACTIVATION___FIRE__TOKEN = 38;
+			static const int CENTRALBUFFERNODEACTIVATION_EOPERATION_FIRE_TOKEN = 38;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation___Fire__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation_EOperation_fire_Token() const = 0;
 			
 			// End Class CentralBufferNodeActivation
 
 
 			// Begin Class ChoiceStrategy
 			//Class and Feature IDs 
-			static const int CHOICESTRATEGY = 6;
-			static const int CHOICESTRATEGY_FEATURE_COUNT = 0;
-			static const int CHOICESTRATEGY_OPERATION_COUNT = 3;
+			static const unsigned int CHOICESTRATEGY_ECLASS = 5;
+			static const unsigned int CHOICESTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int CHOICESTRATEGY_ECLASS_OPERATION_COUNT = 3;
 			
 			
-			static const int CHOICESTRATEGY___CHOOSE__EINT = 1;
-			static const int CHOICESTRATEGY___RETRIEVENAME = 2;
+			static const int CHOICESTRATEGY_EOPERATION_CHOOSE_EINT = 1;
+			static const int CHOICESTRATEGY_EOPERATION_RETRIEVENAME = 2;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getChoiceStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getChoiceStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy___Choose__EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy___RetrieveName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy_EOperation_choose_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy_EOperation_retrieveName() const = 0;
 			
 			// End Class ChoiceStrategy
 
 
 			// Begin Class ClassifierBehaviorExecution
 			//Class and Feature IDs 
-			static const int CLASSIFIERBEHAVIOREXECUTION = 46;
-			static const int CLASSIFIERBEHAVIOREXECUTION_FEATURE_COUNT = 3;
-			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION_COUNT = 3;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_ECLASS = 46;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_ECLASS_OPERATION_COUNT = 3;
 			
-			static const int CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER = 461;
-			static const int CLASSIFIERBEHAVIOREXECUTION_EXECUTION = 460;
-			static const int CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION = 462;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER = 461;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION = 460;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION = 462;
 			
-			static const int CLASSIFIERBEHAVIOREXECUTION____STARTOBJECTBEHAVIOR = 2;
-			static const int CLASSIFIERBEHAVIOREXECUTION___EXECUTE__CLASS_PARAMETERVALUE = 0;
-			static const int CLASSIFIERBEHAVIOREXECUTION___TERMINATE = 1;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EOPERATION__STARTOBJECTBEHAVIOR = 2;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EOPERATION_EXECUTE_CLASS_PARAMETERVALUE = 0;
+			static const int CLASSIFIERBEHAVIOREXECUTION_EOPERATION_TERMINATE = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecution() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecution_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_Execution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_ObjectActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution____startObjectBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution___Execute__Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_EReference_classifier() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_EReference_execution() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_EReference_objectActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_EOperation__startObjectBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_EOperation_execute_Class_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_EOperation_terminate() const = 0;
 			
 			// End Class ClassifierBehaviorExecution
 
 
 			// Begin Class ClassifierBehaviorExecutionActivity
 			//Class and Feature IDs 
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY = 41;
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_FEATURE_COUNT = 0;
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OPERATION_COUNT = 0;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS = 41;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_EClass() const = 0;
+			
 			
 			
 			
@@ -689,14 +590,15 @@ namespace fUML
 
 			// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			//Class and Feature IDs 
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1 = 42;
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_FEATURE_COUNT = 0;
-			static const int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_OPERATION_COUNT = 0;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS = 42;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass() const = 0;
+			
 			
 			
 			
@@ -705,48 +607,50 @@ namespace fUML
 
 			// Begin Class ClauseActivation
 			//Class and Feature IDs 
-			static const int CLAUSEACTIVATION = 70;
-			static const int CLAUSEACTIVATION_FEATURE_COUNT = 2;
-			static const int CLAUSEACTIVATION_OPERATION_COUNT = 7;
+			static const unsigned int CLAUSEACTIVATION_ECLASS = 70;
+			static const unsigned int CLAUSEACTIVATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int CLAUSEACTIVATION_ECLASS_OPERATION_COUNT = 7;
 			
-			static const int CLAUSEACTIVATION_CLAUSE = 700;
-			static const int CLAUSEACTIVATION_CONDITIONALNODEACTIVATION = 701;
+			static const int CLAUSEACTIVATION_EREFERENCE_CLAUSE = 700;
+			static const int CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION = 701;
 			
-			static const int CLAUSEACTIVATION___GETDECISION = 4;
-			static const int CLAUSEACTIVATION___GETPREDECESSORS = 5;
-			static const int CLAUSEACTIVATION___GETSUCCESSORS = 6;
-			static const int CLAUSEACTIVATION___ISREADY = 1;
-			static const int CLAUSEACTIVATION___RECIEVECONTROL = 0;
-			static const int CLAUSEACTIVATION___RUNTEST = 2;
-			static const int CLAUSEACTIVATION___SELECTBODY = 3;
+			static const int CLAUSEACTIVATION_EOPERATION_GETDECISION = 4;
+			static const int CLAUSEACTIVATION_EOPERATION_GETPREDECESSORS = 5;
+			static const int CLAUSEACTIVATION_EOPERATION_GETSUCCESSORS = 6;
+			static const int CLAUSEACTIVATION_EOPERATION_ISREADY = 1;
+			static const int CLAUSEACTIVATION_EOPERATION_RECIEVECONTROL = 0;
+			static const int CLAUSEACTIVATION_EOPERATION_RUNTEST = 2;
+			static const int CLAUSEACTIVATION_EOPERATION_SELECTBODY = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClauseActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClauseActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getClauseActivation_Clause() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClauseActivation_ConditionalNodeActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___GetDecision() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___GetPredecessors() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___GetSuccessors() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___IsReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___RecieveControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___RunTest() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClauseActivation___SelectBody() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClauseActivation_EReference_clause() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClauseActivation_EReference_conditionalNodeActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_getDecision() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_getPredecessors() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_getSuccessors() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_isReady() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_recieveControl() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_runTest() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getClauseActivation_EOperation_selectBody() const = 0;
 			
 			// End Class ClauseActivation
 
 
 			// Begin Class ClearAssociationActionActivation
 			//Class and Feature IDs 
-			static const int CLEARASSOCIATIONACTIONACTIVATION = 92;
-			static const int CLEARASSOCIATIONACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int CLEARASSOCIATIONACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_ECLASS = 92;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearAssociationActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClearAssociationActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -755,14 +659,15 @@ namespace fUML
 
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const int CLEARSTRUCTURALFEATUREACTIONACTIVATION = 100;
-			static const int CLEARSTRUCTURALFEATUREACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS = 100;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -771,110 +676,115 @@ namespace fUML
 
 			// Begin Class CompoundValue
 			//Class and Feature IDs 
-			static const int COMPOUNDVALUE = 13;
-			static const int COMPOUNDVALUE_FEATURE_COUNT = 1;
-			static const int COMPOUNDVALUE_OPERATION_COUNT = 19;
+			static const unsigned int COMPOUNDVALUE_ECLASS = 13;
+			static const unsigned int COMPOUNDVALUE_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int COMPOUNDVALUE_ECLASS_OPERATION_COUNT = 19;
 			
-			static const int COMPOUNDVALUE_FEATUREVALUES = 130;
+			static const int COMPOUNDVALUE_EREFERENCE_FEATUREVALUES = 130;
 			
-			static const int COMPOUNDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT = 17;
-			static const int COMPOUNDVALUE___EQUALS__VALUE = 14;
-			static const int COMPOUNDVALUE___REMOVEFEATUREVALUES__CLASSIFIER = 13;
-			static const int COMPOUNDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE = 16;
-			static const int COMPOUNDVALUE___RETRIEVEFEATUREVALUES = 18;
-			static const int COMPOUNDVALUE___TOSTRING = 15;
+			static const int COMPOUNDVALUE_EOPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 17;
+			static const int COMPOUNDVALUE_EOPERATION_EQUALS_VALUE = 14;
+			static const int COMPOUNDVALUE_EOPERATION_REMOVEFEATUREVALUES_CLASSIFIER = 13;
+			static const int COMPOUNDVALUE_EOPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 16;
+			static const int COMPOUNDVALUE_EOPERATION_RETRIEVEFEATUREVALUES = 18;
+			static const int COMPOUNDVALUE_EOPERATION_TOSTRING = 15;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCompoundValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCompoundValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getCompoundValue_FeatureValues() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___AssignFeatureValue__StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___RemoveFeatureValues__Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___RetrieveFeatureValue__StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___RetrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getCompoundValue_EReference_featureValues() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_assignFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_removeFeatureValues_Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_retrieveFeatureValue_StructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_retrieveFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_EOperation_toString() const = 0;
 			
 			// End Class CompoundValue
 
 
 			// Begin Class ConditionalNodeActivation
 			//Class and Feature IDs 
-			static const int CONDITIONALNODEACTIVATION = 73;
-			static const int CONDITIONALNODEACTIVATION_FEATURE_COUNT = 11;
-			static const int CONDITIONALNODEACTIVATION_OPERATION_COUNT = 64;
+			static const unsigned int CONDITIONALNODEACTIVATION_ECLASS = 73;
+			static const unsigned int CONDITIONALNODEACTIVATION_ECLASS_FEATURE_COUNT = 13;
+			static const unsigned int CONDITIONALNODEACTIVATION_ECLASS_OPERATION_COUNT = 64;
 			
-			static const int CONDITIONALNODEACTIVATION_CLAUSEACTIVATIONS = 739;
-			static const int CONDITIONALNODEACTIVATION_SELECTEDCLAUSES = 7310;
+			static const int CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS = 7311;
+			static const int CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES = 7312;
 			
-			static const int CONDITIONALNODEACTIVATION___GETCLAUSEACTIVATION__CLAUSE = 61;
-			static const int CONDITIONALNODEACTIVATION___RUNTEST__CLAUSE = 62;
-			static const int CONDITIONALNODEACTIVATION___SELECTBODY__CLAUSE = 63;
+			static const int CONDITIONALNODEACTIVATION_EOPERATION_GETCLAUSEACTIVATION_CLAUSE = 61;
+			static const int CONDITIONALNODEACTIVATION_EOPERATION_RUNTEST_CLAUSE = 62;
+			static const int CONDITIONALNODEACTIVATION_EOPERATION_SELECTBODY_CLAUSE = 63;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConditionalNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getConditionalNodeActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getConditionalNodeActivation_ClauseActivations() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConditionalNodeActivation_SelectedClauses() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation___GetClauseActivation__Clause() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation___RunTest__Clause() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation___SelectBody__Clause() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getConditionalNodeActivation_EReference_clauseActivations() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getConditionalNodeActivation_EReference_selectedClauses() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation_EOperation_getClauseActivation_Clause() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation_EOperation_runTest_Clause() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getConditionalNodeActivation_EOperation_selectBody_Clause() const = 0;
 			
 			// End Class ConditionalNodeActivation
 
 
 			// Begin Class ControlNodeActivation
 			//Class and Feature IDs 
-			static const int CONTROLNODEACTIVATION = 61;
-			static const int CONTROLNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int CONTROLNODEACTIVATION_OPERATION_COUNT = 28;
+			static const unsigned int CONTROLNODEACTIVATION_ECLASS = 61;
+			static const unsigned int CONTROLNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int CONTROLNODEACTIVATION_ECLASS_OPERATION_COUNT = 28;
 			
 			
-			static const int CONTROLNODEACTIVATION___FIRE__TOKEN = 27;
+			static const int CONTROLNODEACTIVATION_EOPERATION_FIRE_TOKEN = 27;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getControlNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getControlNodeActivation___Fire__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getControlNodeActivation_EOperation_fire_Token() const = 0;
 			
 			// End Class ControlNodeActivation
 
 
 			// Begin Class ControlToken
 			//Class and Feature IDs 
-			static const int CONTROLTOKEN = 56;
-			static const int CONTROLTOKEN_FEATURE_COUNT = 1;
-			static const int CONTROLTOKEN_OPERATION_COUNT = 9;
+			static const unsigned int CONTROLTOKEN_ECLASS = 56;
+			static const unsigned int CONTROLTOKEN_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int CONTROLTOKEN_ECLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int CONTROLTOKEN___EQUALS__TOKEN = 6;
-			static const int CONTROLTOKEN___GETVALUE = 8;
-			static const int CONTROLTOKEN___ISCONTROL = 7;
+			static const int CONTROLTOKEN_EOPERATION_EQUALS_TOKEN = 5;
+			static const int CONTROLTOKEN_EOPERATION_GETVALUE = 7;
+			static const int CONTROLTOKEN_EOPERATION_ISCONTROL = 6;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlToken() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getControlToken_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getControlToken___Equals__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getControlToken___GetValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getControlToken___IsControl() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getControlToken_EOperation_equals_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getControlToken_EOperation_getValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getControlToken_EOperation_isControl() const = 0;
 			
 			// End Class ControlToken
 
 
 			// Begin Class CreateLinkActionActivation
 			//Class and Feature IDs 
-			static const int CREATELINKACTIONACTIVATION = 97;
-			static const int CREATELINKACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int CREATELINKACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int CREATELINKACTIONACTIVATION_ECLASS = 97;
+			static const unsigned int CREATELINKACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int CREATELINKACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateLinkActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCreateLinkActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -883,14 +793,15 @@ namespace fUML
 
 			// Begin Class CreateObjectActionActivation
 			//Class and Feature IDs 
-			static const int CREATEOBJECTACTIONACTIVATION = 91;
-			static const int CREATEOBJECTACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int CREATEOBJECTACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS = 91;
+			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateObjectActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getCreateObjectActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -899,96 +810,100 @@ namespace fUML
 
 			// Begin Class DataStoreNodeActivation
 			//Class and Feature IDs 
-			static const int DATASTORENODEACTIVATION = 113;
-			static const int DATASTORENODEACTIVATION_FEATURE_COUNT = 7;
-			static const int DATASTORENODEACTIVATION_OPERATION_COUNT = 41;
+			static const unsigned int DATASTORENODEACTIVATION_ECLASS = 113;
+			static const unsigned int DATASTORENODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int DATASTORENODEACTIVATION_ECLASS_OPERATION_COUNT = 41;
 			
 			
-			static const int DATASTORENODEACTIVATION___ADDTOKEN__TOKEN = 40;
-			static const int DATASTORENODEACTIVATION___REMOVETOKEN__TOKEN = 39;
+			static const int DATASTORENODEACTIVATION_EOPERATION_ADDTOKEN_TOKEN = 40;
+			static const int DATASTORENODEACTIVATION_EOPERATION_REMOVETOKEN_TOKEN = 39;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___AddToken__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___RemoveToken__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation_EOperation_addToken_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation_EOperation_removeToken_Token() const = 0;
 			
 			// End Class DataStoreNodeActivation
 
 
 			// Begin Class DataValue
 			//Class and Feature IDs 
-			static const int DATAVALUE = 34;
-			static const int DATAVALUE_FEATURE_COUNT = 2;
-			static const int DATAVALUE_OPERATION_COUNT = 21;
+			static const unsigned int DATAVALUE_ECLASS = 34;
+			static const unsigned int DATAVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int DATAVALUE_ECLASS_OPERATION_COUNT = 21;
 			
-			static const int DATAVALUE_TYPE = 341;
+			static const int DATAVALUE_EREFERENCE_TYPE = 341;
 			
-			static const int DATAVALUE___GETTYPES = 20;
-			static const int DATAVALUE___NEW_ = 19;
+			static const int DATAVALUE_EOPERATION_GETTYPES = 20;
+			static const int DATAVALUE_EOPERATION_NEW_ = 19;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDataValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDataValue_Type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataValue___GetTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataValue___New_() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getDataValue_EReference_type() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDataValue_EOperation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDataValue_EOperation_new_() const = 0;
 			
 			// End Class DataValue
 
 
 			// Begin Class DecisionNodeActivation
 			//Class and Feature IDs 
-			static const int DECISIONNODEACTIVATION = 66;
-			static const int DECISIONNODEACTIVATION_FEATURE_COUNT = 7;
-			static const int DECISIONNODEACTIVATION_OPERATION_COUNT = 39;
+			static const unsigned int DECISIONNODEACTIVATION_ECLASS = 66;
+			static const unsigned int DECISIONNODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int DECISIONNODEACTIVATION_ECLASS_OPERATION_COUNT = 39;
 			
-			static const int DECISIONNODEACTIVATION_DECISIONINPUTEXECUTION = 666;
+			static const int DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION = 666;
 			
-			static const int DECISIONNODEACTIVATION___EXECUTEDECISIONINPUTBEHAVIOR__VALUE_VALUE = 29;
-			static const int DECISIONNODEACTIVATION___FIRE__TOKEN = 36;
-			static const int DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWINSTANCE = 31;
-			static const int DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWVALUE = 30;
-			static const int DECISIONNODEACTIVATION___GETDECISIONVALUES__TOKEN = 28;
-			static const int DECISIONNODEACTIVATION___HASOBJECTFLOWINPUT = 34;
-			static const int DECISIONNODEACTIVATION___ISREADY = 38;
-			static const int DECISIONNODEACTIVATION___REMOVEJOINEDCONTROLTOKENS__TOKEN = 33;
-			static const int DECISIONNODEACTIVATION___TAKEOFFEREDTOKENS = 35;
-			static const int DECISIONNODEACTIVATION___TERMINATE = 37;
-			static const int DECISIONNODEACTIVATION___TEST__VALUESPECIFICATION_VALUE = 32;
+			static const int DECISIONNODEACTIVATION_EOPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE = 29;
+			static const int DECISIONNODEACTIVATION_EOPERATION_FIRE_TOKEN = 36;
+			static const int DECISIONNODEACTIVATION_EOPERATION_GETDECISIONINPUTFLOWINSTANCE = 31;
+			static const int DECISIONNODEACTIVATION_EOPERATION_GETDECISIONINPUTFLOWVALUE = 30;
+			static const int DECISIONNODEACTIVATION_EOPERATION_GETDECISIONVALUES_TOKEN = 28;
+			static const int DECISIONNODEACTIVATION_EOPERATION_HASOBJECTFLOWINPUT = 34;
+			static const int DECISIONNODEACTIVATION_EOPERATION_ISREADY = 38;
+			static const int DECISIONNODEACTIVATION_EOPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 33;
+			static const int DECISIONNODEACTIVATION_EOPERATION_TAKEOFFEREDTOKENS = 35;
+			static const int DECISIONNODEACTIVATION_EOPERATION_TERMINATE = 37;
+			static const int DECISIONNODEACTIVATION_EOPERATION_TEST_VALUESPECIFICATION_VALUE = 32;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_DecisionInputExecution() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___ExecuteDecisionInputBehavior__Value_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___GetDecisionInputFlowInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___GetDecisionInputFlowValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___GetDecisionValues__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___HasObjectFlowInput() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___IsReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___RemoveJoinedControlTokens__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___TakeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___Terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation___Test__ValueSpecification_Value() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_EReference_decisionInputExecution() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_executeDecisionInputBehavior_Value_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_fire_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_getDecisionInputFlowInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_getDecisionInputFlowValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_getDecisionValues_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_hasObjectFlowInput() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_isReady() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_removeJoinedControlTokens_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_takeOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_terminate() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_EOperation_test_ValueSpecification_Value() const = 0;
 			
 			// End Class DecisionNodeActivation
 
 
 			// Begin Class DestroyLinkActionActivation
 			//Class and Feature IDs 
-			static const int DESTROYLINKACTIONACTIVATION = 96;
-			static const int DESTROYLINKACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int DESTROYLINKACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_ECLASS = 96;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestroyLinkActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDestroyLinkActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -997,128 +912,134 @@ namespace fUML
 
 			// Begin Class DestroyObjectActionActivation
 			//Class and Feature IDs 
-			static const int DESTROYOBJECTACTIONACTIVATION = 90;
-			static const int DESTROYOBJECTACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_COUNT = 49;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS = 90;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 49;
 			
 			
-			static const int DESTROYOBJECTACTIONACTIVATION___DESTROYOBJECT__VALUE_EBOOLEAN = 47;
-			static const int DESTROYOBJECTACTIONACTIVATION___OBJECTISCOMPOSITE__REFERENCE_LINK = 48;
+			static const int DESTROYOBJECTACTIONACTIVATION_EOPERATION_DESTROYOBJECT_VALUE_EBOOLEAN = 47;
+			static const int DESTROYOBJECTACTIONACTIVATION_EOPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK = 48;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestroyObjectActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDestroyObjectActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation___DestroyObject__Value_EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation___ObjectIsComposite__Reference_Link() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link() const = 0;
 			
 			// End Class DestroyObjectActionActivation
 
 
 			// Begin Class DispatchStrategy
 			//Class and Feature IDs 
-			static const int DISPATCHSTRATEGY = 35;
-			static const int DISPATCHSTRATEGY_FEATURE_COUNT = 0;
-			static const int DISPATCHSTRATEGY_OPERATION_COUNT = 4;
+			static const unsigned int DISPATCHSTRATEGY_ECLASS = 35;
+			static const unsigned int DISPATCHSTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int DISPATCHSTRATEGY_ECLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int DISPATCHSTRATEGY___DISPATCH__OBJECT_OPERATION = 1;
-			static const int DISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION = 2;
-			static const int DISPATCHSTRATEGY___RETRIEVENAME = 3;
+			static const int DISPATCHSTRATEGY_EOPERATION_DISPATCH_OBJECT_OPERATION = 1;
+			static const int DISPATCHSTRATEGY_EOPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 2;
+			static const int DISPATCHSTRATEGY_EOPERATION_RETRIEVENAME = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy___Dispatch__Object_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy___RetrieveMethod__Object_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy___RetrieveName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_EOperation_dispatch_Object_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_EOperation_retrieveMethod_Object_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_EOperation_retrieveName() const = 0;
 			
 			// End Class DispatchStrategy
 
 
 			// Begin Class EnumerationValue
 			//Class and Feature IDs 
-			static const int ENUMERATIONVALUE = 33;
-			static const int ENUMERATIONVALUE_FEATURE_COUNT = 2;
-			static const int ENUMERATIONVALUE_OPERATION_COUNT = 13;
+			static const unsigned int ENUMERATIONVALUE_ECLASS = 33;
+			static const unsigned int ENUMERATIONVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int ENUMERATIONVALUE_ECLASS_OPERATION_COUNT = 13;
 			
-			static const int ENUMERATIONVALUE_LITERAL = 330;
-			static const int ENUMERATIONVALUE_TYPE = 331;
+			static const int ENUMERATIONVALUE_EREFERENCE_LITERAL = 330;
+			static const int ENUMERATIONVALUE_EREFERENCE_TYPE = 331;
 			
-			static const int ENUMERATIONVALUE___EQUALS__VALUE = 9;
-			static const int ENUMERATIONVALUE___GETTYPES = 12;
-			static const int ENUMERATIONVALUE___NEW_ = 10;
-			static const int ENUMERATIONVALUE___SPECIFY = 8;
-			static const int ENUMERATIONVALUE___TOSTRING = 11;
+			static const int ENUMERATIONVALUE_EOPERATION_EQUALS_VALUE = 9;
+			static const int ENUMERATIONVALUE_EOPERATION_GETTYPES = 12;
+			static const int ENUMERATIONVALUE_EOPERATION_NEW_ = 10;
+			static const int ENUMERATIONVALUE_EOPERATION_SPECIFY = 8;
+			static const int ENUMERATIONVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumerationValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEnumerationValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Literal() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue___GetTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue___New_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_EReference_literal() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_EReference_type() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_EOperation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_EOperation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_EOperation_toString() const = 0;
 			
 			// End Class EnumerationValue
 
 
 			// Begin Class Evaluation
 			//Class and Feature IDs 
-			static const int EVALUATION = 23;
-			static const int EVALUATION_FEATURE_COUNT = 2;
-			static const int EVALUATION_OPERATION_COUNT = 3;
+			static const unsigned int EVALUATION_ECLASS = 23;
+			static const unsigned int EVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int EVALUATION_ECLASS_OPERATION_COUNT = 3;
 			
-			static const int EVALUATION_LOCUS = 231;
-			static const int EVALUATION_SPECIFICATION = 230;
+			static const int EVALUATION_EREFERENCE_LOCUS = 231;
+			static const int EVALUATION_EREFERENCE_SPECIFICATION = 230;
 			
-			static const int EVALUATION___EVALUATE = 2;
+			static const int EVALUATION_EOPERATION_EVALUATE = 2;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEvaluation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Locus() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Specification() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEvaluation___Evaluate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEvaluation_EReference_locus() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEvaluation_EReference_specification() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class Evaluation
 
 
 			// Begin Class EventAccepter
 			//Class and Feature IDs 
-			static const int EVENTACCEPTER = 44;
-			static const int EVENTACCEPTER_FEATURE_COUNT = 0;
-			static const int EVENTACCEPTER_OPERATION_COUNT = 2;
+			static const unsigned int EVENTACCEPTER_ECLASS = 44;
+			static const unsigned int EVENTACCEPTER_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int EVENTACCEPTER_ECLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int EVENTACCEPTER___ACCEPT__SIGNALINSTANCE = 0;
-			static const int EVENTACCEPTER___MATCH__SIGNALINSTANCE = 1;
+			static const int EVENTACCEPTER_EOPERATION_ACCEPT_SIGNALINSTANCE = 0;
+			static const int EVENTACCEPTER_EOPERATION_MATCH_SIGNALINSTANCE = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEventAccepter_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter___Accept__SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter___Match__SignalInstance() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_EOperation_accept_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_EOperation_match_SignalInstance() const = 0;
 			
 			// End Class EventAccepter
 
 
 			// Begin Class EventDispatchLoop
 			//Class and Feature IDs 
-			static const int EVENTDISPATCHLOOP = 43;
-			static const int EVENTDISPATCHLOOP_FEATURE_COUNT = 0;
-			static const int EVENTDISPATCHLOOP_OPERATION_COUNT = 0;
+			static const unsigned int EVENTDISPATCHLOOP_ECLASS = 43;
+			static const unsigned int EVENTDISPATCHLOOP_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int EVENTDISPATCHLOOP_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventDispatchLoop() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEventDispatchLoop_EClass() const = 0;
+			
 			
 			
 			
@@ -1127,173 +1048,180 @@ namespace fUML
 
 			// Begin Class Execution
 			//Class and Feature IDs 
-			static const int EXECUTION = 38;
-			static const int EXECUTION_FEATURE_COUNT = 6;
-			static const int EXECUTION_OPERATION_COUNT = 34;
+			static const unsigned int EXECUTION_ECLASS = 38;
+			static const unsigned int EXECUTION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int EXECUTION_ECLASS_OPERATION_COUNT = 34;
 			
-			static const int EXECUTION_CONTEXT = 384;
-			static const int EXECUTION_PARAMETERVALUES = 385;
+			static const int EXECUTION_EREFERENCE_CONTEXT = 384;
+			static const int EXECUTION_EREFERENCE_PARAMETERVALUES = 385;
 			
-			static const int EXECUTION___EXECUTE = 27;
-			static const int EXECUTION___GETBEHAVIOR = 32;
-			static const int EXECUTION___GETOUTPUTPARAMETERVALUES = 31;
-			static const int EXECUTION___GETPARAMETERVALUE__PARAMETER = 30;
-			static const int EXECUTION___NEW_ = 33;
-			static const int EXECUTION___SETPARAMETERVALUE__PARAMETERVALUE = 29;
-			static const int EXECUTION___TERMINATE = 28;
+			static const int EXECUTION_EOPERATION_EXECUTE = 27;
+			static const int EXECUTION_EOPERATION_GETBEHAVIOR = 32;
+			static const int EXECUTION_EOPERATION_GETOUTPUTPARAMETERVALUES = 31;
+			static const int EXECUTION_EOPERATION_GETPARAMETERVALUE_PARAMETER = 30;
+			static const int EXECUTION_EOPERATION_NEW_ = 33;
+			static const int EXECUTION_EOPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 29;
+			static const int EXECUTION_EOPERATION_TERMINATE = 28;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecution() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecution_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExecution_Context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_ParameterValues() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecution___Execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___GetBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___GetOutputParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___GetParameterValue__Parameter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___New_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___SetParameterValue__ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecution_EReference_context() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecution_EReference_parameterValues() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_execute() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_getBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_getOutputParameterValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_getParameterValue_Parameter() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_setParameterValue_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecution_EOperation_terminate() const = 0;
 			
 			// End Class Execution
 
 
 			// Begin Class ExecutionFactory
 			//Class and Feature IDs 
-			static const int EXECUTIONFACTORY = 1;
-			static const int EXECUTIONFACTORY_FEATURE_COUNT = 4;
-			static const int EXECUTIONFACTORY_OPERATION_COUNT = 10;
+			static const unsigned int EXECUTIONFACTORY_ECLASS = 1;
+			static const unsigned int EXECUTIONFACTORY_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int EXECUTIONFACTORY_ECLASS_OPERATION_COUNT = 10;
 			
-			static const int EXECUTIONFACTORY_BUILTINTYPES = 13;
-			static const int EXECUTIONFACTORY_LOCUS = 10;
-			static const int EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES = 12;
-			static const int EXECUTIONFACTORY_STRATEGIES = 11;
+			static const int EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES = 13;
+			static const int EXECUTIONFACTORY_EREFERENCE_LOCUS = 10;
+			static const int EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES = 12;
+			static const int EXECUTIONFACTORY_EREFERENCE_STRATEGIES = 11;
 			
-			static const int EXECUTIONFACTORY___ADDBUILTINTYPE__PRIMITIVETYPE = 5;
-			static const int EXECUTIONFACTORY___ADDPRIMITIVEBEHAVIORPROTOTYPE__OPAQUEBEHAVIOREXECUTION = 4;
-			static const int EXECUTIONFACTORY___ASSIGNSTRATEGY__SEMANTICSTRATEGY = 7;
-			static const int EXECUTIONFACTORY___CREATEEVALUATION__VALUESPECIFICATION = 1;
-			static const int EXECUTIONFACTORY___CREATEEXECUTION__BEHAVIOR_OBJECT = 0;
-			static const int EXECUTIONFACTORY___GETBUILTINTYPE__ESTRING = 6;
-			static const int EXECUTIONFACTORY___GETSTRATEGY__ESTRING = 8;
-			static const int EXECUTIONFACTORY___GETSTRATEGYINDEX__ESTRING = 9;
-			static const int EXECUTIONFACTORY___INSTANTIATEOPAQUEBEHAVIOREXECUTION__OPAQUEBEHAVIOR = 3;
-			static const int EXECUTIONFACTORY___INSTANTIATEVISITOR__ELEMENT = 2;
+			static const int EXECUTIONFACTORY_EOPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 5;
+			static const int EXECUTIONFACTORY_EOPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 4;
+			static const int EXECUTIONFACTORY_EOPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 7;
+			static const int EXECUTIONFACTORY_EOPERATION_CREATEEVALUATION_VALUESPECIFICATION = 1;
+			static const int EXECUTIONFACTORY_EOPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT = 0;
+			static const int EXECUTIONFACTORY_EOPERATION_GETBUILTINTYPE_ESTRING = 6;
+			static const int EXECUTIONFACTORY_EOPERATION_GETSTRATEGY_ESTRING = 8;
+			static const int EXECUTIONFACTORY_EOPERATION_GETSTRATEGYINDEX_ESTRING = 9;
+			static const int EXECUTIONFACTORY_EOPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR = 3;
+			static const int EXECUTIONFACTORY_EOPERATION_INSTANTIATEVISITOR_ELEMENT = 2;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactory() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecutionFactory_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_BuiltInTypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Locus() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_PrimitiveBehaviorPrototypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Strategies() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___AddBuiltInType__PrimitiveType() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___AddPrimitiveBehaviorPrototype__OpaqueBehaviorExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___AssignStrategy__SemanticStrategy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___CreateEvaluation__ValueSpecification() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___CreateExecution__Behavior_Object() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___GetBuiltInType__EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___GetStrategy__EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___GetStrategyIndex__EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___InstantiateOpaqueBehaviorExecution__OpaqueBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory___InstantiateVisitor__Element() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_EReference_builtInTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_EReference_locus() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_EReference_primitiveBehaviorPrototypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_EReference_strategies() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_addBuiltInType_PrimitiveType() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_assignStrategy_SemanticStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_createEvaluation_ValueSpecification() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_createExecution_Behavior_Object() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_getBuiltInType_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_getStrategy_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_getStrategyIndex_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_EOperation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactory
 
 
 			// Begin Class ExecutionFactoryL1
 			//Class and Feature IDs 
-			static const int EXECUTIONFACTORYL1 = 3;
-			static const int EXECUTIONFACTORYL1_FEATURE_COUNT = 4;
-			static const int EXECUTIONFACTORYL1_OPERATION_COUNT = 11;
+			static const unsigned int EXECUTIONFACTORYL1_ECLASS = 7;
+			static const unsigned int EXECUTIONFACTORYL1_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int EXECUTIONFACTORYL1_ECLASS_OPERATION_COUNT = 11;
 			
 			
-			static const int EXECUTIONFACTORYL1___INSTANTIATEVISITOR__ELEMENT = 10;
+			static const int EXECUTIONFACTORYL1_EOPERATION_INSTANTIATEVISITOR_ELEMENT = 10;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL1() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL1_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL1___InstantiateVisitor__Element() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL1_EOperation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactoryL1
 
 
 			// Begin Class ExecutionFactoryL2
 			//Class and Feature IDs 
-			static const int EXECUTIONFACTORYL2 = 8;
-			static const int EXECUTIONFACTORYL2_FEATURE_COUNT = 4;
-			static const int EXECUTIONFACTORYL2_OPERATION_COUNT = 12;
+			static const unsigned int EXECUTIONFACTORYL2_ECLASS = 8;
+			static const unsigned int EXECUTIONFACTORYL2_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int EXECUTIONFACTORYL2_ECLASS_OPERATION_COUNT = 12;
 			
 			
-			static const int EXECUTIONFACTORYL2___INSTANTIATEVISITOR__ELEMENT = 11;
+			static const int EXECUTIONFACTORYL2_EOPERATION_INSTANTIATEVISITOR_ELEMENT = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL2() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL2_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL2___InstantiateVisitor__Element() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL2_EOperation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactoryL2
 
 
 			// Begin Class ExecutionFactoryL3
 			//Class and Feature IDs 
-			static const int EXECUTIONFACTORYL3 = 9;
-			static const int EXECUTIONFACTORYL3_FEATURE_COUNT = 4;
-			static const int EXECUTIONFACTORYL3_OPERATION_COUNT = 13;
+			static const unsigned int EXECUTIONFACTORYL3_ECLASS = 9;
+			static const unsigned int EXECUTIONFACTORYL3_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int EXECUTIONFACTORYL3_ECLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int EXECUTIONFACTORYL3___INSTANTIATEVISITOR__ELEMENT = 12;
+			static const int EXECUTIONFACTORYL3_EOPERATION_INSTANTIATEVISITOR_ELEMENT = 12;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL3() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL3_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL3___InstantiateVisitor__Element() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL3_EOperation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactoryL3
 
 
 			// Begin Class Executor
 			//Class and Feature IDs 
-			static const int EXECUTOR = 2;
-			static const int EXECUTOR_FEATURE_COUNT = 1;
-			static const int EXECUTOR_OPERATION_COUNT = 3;
+			static const unsigned int EXECUTOR_ECLASS = 2;
+			static const unsigned int EXECUTOR_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int EXECUTOR_ECLASS_OPERATION_COUNT = 3;
 			
-			static const int EXECUTOR_LOCUS = 20;
+			static const int EXECUTOR_EREFERENCE_LOCUS = 20;
 			
-			static const int EXECUTOR___EVALUATE__VALUESPECIFICATION = 0;
-			static const int EXECUTOR___EXECUTE__BEHAVIOR_PARAMETERVALUE = 2;
-			static const int EXECUTOR___START__CLASS_PARAMETERVALUE = 1;
+			static const int EXECUTOR_EOPERATION_EVALUATE_VALUESPECIFICATION = 0;
+			static const int EXECUTOR_EOPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 2;
+			static const int EXECUTOR_EOPERATION_START_CLASS_PARAMETERVALUE = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutor() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExecutor_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutor_Locus() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutor___Evaluate__ValueSpecification() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutor___Execute__Behavior_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutor___Start__Class_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExecutor_EReference_locus() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExecutor_EOperation_evaluate_ValueSpecification() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutor_EOperation_execute_Behavior_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutor_EOperation_start_Class_ParameterValue() const = 0;
 			
 			// End Class Executor
 
 
 			// Begin Class ExpansionActivationGroup
 			//Class and Feature IDs 
-			static const int EXPANSIONACTIVATIONGROUP = 75;
-			static const int EXPANSIONACTIVATIONGROUP_FEATURE_COUNT = 6;
-			static const int EXPANSIONACTIVATIONGROUP_OPERATION_COUNT = 17;
+			static const unsigned int EXPANSIONACTIVATIONGROUP_ECLASS = 75;
+			static const unsigned int EXPANSIONACTIVATIONGROUP_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int EXPANSIONACTIVATIONGROUP_ECLASS_OPERATION_COUNT = 17;
 			
-			static const int EXPANSIONACTIVATIONGROUP_REGIONACTIVATION = 755;
+			static const int EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION = 755;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionActivationGroup() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExpansionActivationGroup_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_RegionActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_EReference_regionActivation() const = 0;
 			
 			
 			// End Class ExpansionActivationGroup
@@ -1301,108 +1229,113 @@ namespace fUML
 
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature IDs 
-			static const int EXPANSIONNODEACTIVATION = 77;
-			static const int EXPANSIONNODEACTIVATION_FEATURE_COUNT = 7;
-			static const int EXPANSIONNODEACTIVATION_OPERATION_COUNT = 39;
+			static const unsigned int EXPANSIONNODEACTIVATION_ECLASS = 77;
+			static const unsigned int EXPANSIONNODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int EXPANSIONNODEACTIVATION_ECLASS_OPERATION_COUNT = 39;
 			
 			
-			static const int EXPANSIONNODEACTIVATION___GETEXPANSIONREGIONACTIVATION = 38;
+			static const int EXPANSIONNODEACTIVATION_EOPERATION_GETEXPANSIONREGIONACTIVATION = 38;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation___GetExpansionRegionActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_EOperation_getExpansionRegionActivation() const = 0;
 			
 			// End Class ExpansionNodeActivation
 
 
 			// Begin Class ExpansionRegionActivation
 			//Class and Feature IDs 
-			static const int EXPANSIONREGIONACTIVATION = 76;
-			static const int EXPANSIONREGIONACTIVATION_FEATURE_COUNT = 11;
-			static const int EXPANSIONREGIONACTIVATION_OPERATION_COUNT = 51;
+			static const unsigned int EXPANSIONREGIONACTIVATION_ECLASS = 76;
+			static const unsigned int EXPANSIONREGIONACTIVATION_ECLASS_FEATURE_COUNT = 13;
+			static const unsigned int EXPANSIONREGIONACTIVATION_ECLASS_OPERATION_COUNT = 51;
 			
-			static const int EXPANSIONREGIONACTIVATION_ACTIVATIONGROUPS = 7610;
-			static const int EXPANSIONREGIONACTIVATION_INPUTEXPANSIONTOKENS = 769;
-			static const int EXPANSIONREGIONACTIVATION_INPUTTOKENS = 768;
+			static const int EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS = 7612;
+			static const int EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS = 7611;
+			static const int EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS = 7610;
 			
-			static const int EXPANSIONREGIONACTIVATION___DOSTRUCTUREDACTIVITY = 47;
-			static const int EXPANSIONREGIONACTIVATION___GETEXPANSIONNODEACTIVATION__EXPANSIONNODE = 49;
-			static const int EXPANSIONREGIONACTIVATION___NUMBEROFVALUES = 50;
-			static const int EXPANSIONREGIONACTIVATION___RUNGROUP__EXPANSIONACTIVATIONGROUP = 48;
+			static const int EXPANSIONREGIONACTIVATION_EOPERATION_DOSTRUCTUREDACTIVITY = 47;
+			static const int EXPANSIONREGIONACTIVATION_EOPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE = 49;
+			static const int EXPANSIONREGIONACTIVATION_EOPERATION_NUMBEROFVALUES = 50;
+			static const int EXPANSIONREGIONACTIVATION_EOPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP = 48;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_ActivationGroups() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_InputExpansionTokens() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_InputTokens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation___DoStructuredActivity() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation___GetExpansionNodeActivation__ExpansionNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation___NumberOfValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation___RunGroup__ExpansionActivationGroup() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_EReference_activationGroups() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_EReference_inputExpansionTokens() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_EReference_inputTokens() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_EOperation_doStructuredActivity() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_EOperation_getExpansionNodeActivation_ExpansionNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_EOperation_numberOfValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_EOperation_runGroup_ExpansionActivationGroup() const = 0;
 			
 			// End Class ExpansionRegionActivation
 
 
 			// Begin Class ExtensionalValue
 			//Class and Feature IDs 
-			static const int EXTENSIONALVALUE = 21;
-			static const int EXTENSIONALVALUE_FEATURE_COUNT = 2;
-			static const int EXTENSIONALVALUE_OPERATION_COUNT = 20;
+			static const unsigned int EXTENSIONALVALUE_ECLASS = 21;
+			static const unsigned int EXTENSIONALVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int EXTENSIONALVALUE_ECLASS_OPERATION_COUNT = 20;
 			
-			static const int EXTENSIONALVALUE_LOCUS = 211;
+			static const int EXTENSIONALVALUE_EREFERENCE_LOCUS = 211;
 			
-			static const int EXTENSIONALVALUE___DESTROY = 19;
+			static const int EXTENSIONALVALUE_EOPERATION_DESTROY = 19;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExtensionalValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExtensionalValue_Locus() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue___Destroy() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getExtensionalValue_EReference_locus() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_EOperation_destroy() const = 0;
 			
 			// End Class ExtensionalValue
 
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature IDs 
-			static const int EXTENSIONALVALUELIST = 22;
-			static const int EXTENSIONALVALUELIST_FEATURE_COUNT = 2;
-			static const int EXTENSIONALVALUELIST_OPERATION_COUNT = 25;
+			static const unsigned int EXTENSIONALVALUELIST_ECLASS = 22;
+			static const unsigned int EXTENSIONALVALUELIST_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int EXTENSIONALVALUELIST_ECLASS_OPERATION_COUNT = 25;
 			
 			
-			static const int EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE = 21;
-			static const int EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE_EINT = 22;
-			static const int EXTENSIONALVALUELIST___GETVALUE = 20;
-			static const int EXTENSIONALVALUELIST___REMOVEVALUE__EINT = 24;
-			static const int EXTENSIONALVALUELIST___SETVALUE__EXTENSIONALVALUE_EINT = 23;
+			static const int EXTENSIONALVALUELIST_EOPERATION_ADDVALUE_EXTENSIONALVALUE = 21;
+			static const int EXTENSIONALVALUELIST_EOPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 22;
+			static const int EXTENSIONALVALUELIST_EOPERATION_GETVALUE = 20;
+			static const int EXTENSIONALVALUELIST_EOPERATION_REMOVEVALUE_EINT = 24;
+			static const int EXTENSIONALVALUELIST_EOPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 23;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList___AddValue__ExtensionalValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList___AddValue__ExtensionalValue_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList___GetValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList___RemoveValue__EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList___SetValue__ExtensionalValue_EInt() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_EOperation_addValue_ExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_EOperation_addValue_ExtensionalValue_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_EOperation_getValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_EOperation_removeValue_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_EOperation_setValue_ExtensionalValue_EInt() const = 0;
 			
 			// End Class ExtensionalValueList
 
 
 			// Begin Class FIFOGetNextEventStrategy
 			//Class and Feature IDs 
-			static const int FIFOGETNEXTEVENTSTRATEGY = 49;
-			static const int FIFOGETNEXTEVENTSTRATEGY_FEATURE_COUNT = 0;
-			static const int FIFOGETNEXTEVENTSTRATEGY_OPERATION_COUNT = 2;
+			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_ECLASS = 49;
+			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_ECLASS_OPERATION_COUNT = 2;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFIFOGetNextEventStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getFIFOGetNextEventStrategy_EClass() const = 0;
+			
 			
 			
 			
@@ -1411,56 +1344,59 @@ namespace fUML
 
 			// Begin Class FeatureValue
 			//Class and Feature IDs 
-			static const int FEATUREVALUE = 14;
-			static const int FEATUREVALUE_FEATURE_COUNT = 3;
-			static const int FEATUREVALUE_OPERATION_COUNT = 1;
-			static const int FEATUREVALUE_POSITION = 141;
+			static const unsigned int FEATUREVALUE_ECLASS = 14;
+			static const unsigned int FEATUREVALUE_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int FEATUREVALUE_ECLASS_OPERATION_COUNT = 1;
+			static const int FEATUREVALUE_EATTRIBUTE_POSITION = 141;
 			
-			static const int FEATUREVALUE_FEATURE = 142;
-			static const int FEATUREVALUE_VALUES = 140;
+			static const int FEATUREVALUE_EREFERENCE_FEATURE = 142;
+			static const int FEATUREVALUE_EREFERENCE_VALUES = 140;
 			
-			static const int FEATUREVALUE___HASEQUALVALUES__FEATUREVALUE = 0;
+			static const int FEATUREVALUE_EOPERATION_HASEQUALVALUES_FEATUREVALUE = 0;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFeatureValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getFeatureValue_Position() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getFeatureValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Feature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Values() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getFeatureValue_EAttribute_position() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getFeatureValue___HasEqualValues__FeatureValue() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getFeatureValue_EReference_feature() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getFeatureValue_EReference_values() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_EOperation_hasEqualValues_FeatureValue() const = 0;
 			
 			// End Class FeatureValue
 
 
 			// Begin Class FirstChoiceStrategy
 			//Class and Feature IDs 
-			static const int FIRSTCHOICESTRATEGY = 7;
-			static const int FIRSTCHOICESTRATEGY_FEATURE_COUNT = 0;
-			static const int FIRSTCHOICESTRATEGY_OPERATION_COUNT = 4;
+			static const unsigned int FIRSTCHOICESTRATEGY_ECLASS = 6;
+			static const unsigned int FIRSTCHOICESTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int FIRSTCHOICESTRATEGY_ECLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int FIRSTCHOICESTRATEGY___CHOOSE__EINT = 3;
+			static const int FIRSTCHOICESTRATEGY_EOPERATION_CHOOSE_EINT = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFirstChoiceStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getFirstChoiceStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFirstChoiceStrategy___Choose__EInt() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getFirstChoiceStrategy_EOperation_choose_EInt() const = 0;
 			
 			// End Class FirstChoiceStrategy
 
 
 			// Begin Class FlowFinalNodeActivation
 			//Class and Feature IDs 
-			static const int FLOWFINALNODEACTIVATION = 68;
-			static const int FLOWFINALNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int FLOWFINALNODEACTIVATION_OPERATION_COUNT = 28;
+			static const unsigned int FLOWFINALNODEACTIVATION_ECLASS = 68;
+			static const unsigned int FLOWFINALNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int FLOWFINALNODEACTIVATION_ECLASS_OPERATION_COUNT = 28;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFlowFinalNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getFlowFinalNodeActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -1469,162 +1405,170 @@ namespace fUML
 
 			// Begin Class ForkNodeActivation
 			//Class and Feature IDs 
-			static const int FORKNODEACTIVATION = 64;
-			static const int FORKNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int FORKNODEACTIVATION_OPERATION_COUNT = 30;
+			static const unsigned int FORKNODEACTIVATION_ECLASS = 64;
+			static const unsigned int FORKNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int FORKNODEACTIVATION_ECLASS_OPERATION_COUNT = 30;
 			
 			
-			static const int FORKNODEACTIVATION___FIRE__TOKEN = 28;
-			static const int FORKNODEACTIVATION___TERMINATE = 29;
+			static const int FORKNODEACTIVATION_EOPERATION_FIRE_TOKEN = 28;
+			static const int FORKNODEACTIVATION_EOPERATION_TERMINATE = 29;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getForkNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getForkNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation___Terminate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation_EOperation_fire_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation_EOperation_terminate() const = 0;
 			
 			// End Class ForkNodeActivation
 
 
 			// Begin Class ForkedToken
 			//Class and Feature IDs 
-			static const int FORKEDTOKEN = 55;
-			static const int FORKEDTOKEN_FEATURE_COUNT = 4;
-			static const int FORKEDTOKEN_OPERATION_COUNT = 10;
-			static const int FORKEDTOKEN_BASETOKENISWITHDRAWN = 553;
-			static const int FORKEDTOKEN_REMAININGOFFERSCOUNT = 552;
+			static const unsigned int FORKEDTOKEN_ECLASS = 55;
+			static const unsigned int FORKEDTOKEN_ECLASS_FEATURE_COUNT = 5;
+			static const unsigned int FORKEDTOKEN_ECLASS_OPERATION_COUNT = 9;
+			static const int FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN = 554;
+			static const int FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT = 553;
 			
-			static const int FORKEDTOKEN_BASETOKEN = 551;
+			static const int FORKEDTOKEN_EREFERENCE_BASETOKEN = 552;
 			
-			static const int FORKEDTOKEN___EQUALS__TOKEN = 6;
-			static const int FORKEDTOKEN___GETVALUE = 9;
-			static const int FORKEDTOKEN___ISCONTROL = 8;
-			static const int FORKEDTOKEN___WITHDRAW = 7;
+			static const int FORKEDTOKEN_EOPERATION_EQUALS_TOKEN = 5;
+			static const int FORKEDTOKEN_EOPERATION_GETVALUE = 8;
+			static const int FORKEDTOKEN_EOPERATION_ISCONTROL = 7;
+			static const int FORKEDTOKEN_EOPERATION_WITHDRAW = 6;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getForkedToken() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_BaseTokenIsWithdrawn() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_RemainingOffersCount() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getForkedToken_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getForkedToken_BaseToken() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_EAttribute_baseTokenIsWithdrawn() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_EAttribute_remainingOffersCount() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken___Equals__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken___GetValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken___IsControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken___Withdraw() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getForkedToken_EReference_baseToken() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getForkedToken_EOperation_equals_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getForkedToken_EOperation_getValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getForkedToken_EOperation_isControl() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getForkedToken_EOperation_withdraw() const = 0;
 			
 			// End Class ForkedToken
 
 
 			// Begin Class GetNextEventStrategy
 			//Class and Feature IDs 
-			static const int GETNEXTEVENTSTRATEGY = 48;
-			static const int GETNEXTEVENTSTRATEGY_FEATURE_COUNT = 0;
-			static const int GETNEXTEVENTSTRATEGY_OPERATION_COUNT = 2;
+			static const unsigned int GETNEXTEVENTSTRATEGY_ECLASS = 48;
+			static const unsigned int GETNEXTEVENTSTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int GETNEXTEVENTSTRATEGY_ECLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int GETNEXTEVENTSTRATEGY___RETRIEVENEXTEVENT__OBJECTACTIVATION = 1;
+			static const int GETNEXTEVENTSTRATEGY_EOPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGetNextEventStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getGetNextEventStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getGetNextEventStrategy___RetrieveNextEvent__ObjectActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getGetNextEventStrategy_EOperation_retrieveNextEvent_ObjectActivation() const = 0;
 			
 			// End Class GetNextEventStrategy
 
 
 			// Begin Class InitialNodeActivation
 			//Class and Feature IDs 
-			static const int INITIALNODEACTIVATION = 65;
-			static const int INITIALNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int INITIALNODEACTIVATION_OPERATION_COUNT = 29;
+			static const unsigned int INITIALNODEACTIVATION_ECLASS = 65;
+			static const unsigned int INITIALNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int INITIALNODEACTIVATION_ECLASS_OPERATION_COUNT = 29;
 			
 			
-			static const int INITIALNODEACTIVATION___FIRE__TOKEN = 28;
+			static const int INITIALNODEACTIVATION_EOPERATION_FIRE_TOKEN = 28;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInitialNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getInitialNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInitialNodeActivation___Fire__Token() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getInitialNodeActivation_EOperation_fire_Token() const = 0;
 			
 			// End Class InitialNodeActivation
 
 
 			// Begin Class InputPinActivation
 			//Class and Feature IDs 
-			static const int INPUTPINACTIVATION = 85;
-			static const int INPUTPINACTIVATION_FEATURE_COUNT = 8;
-			static const int INPUTPINACTIVATION_OPERATION_COUNT = 42;
+			static const unsigned int INPUTPINACTIVATION_ECLASS = 85;
+			static const unsigned int INPUTPINACTIVATION_ECLASS_FEATURE_COUNT = 8;
+			static const unsigned int INPUTPINACTIVATION_ECLASS_OPERATION_COUNT = 42;
 			
 			
-			static const int INPUTPINACTIVATION___ISREADY = 41;
-			static const int INPUTPINACTIVATION___RECIEVEOFFER = 40;
+			static const int INPUTPINACTIVATION_EOPERATION_ISREADY = 41;
+			static const int INPUTPINACTIVATION_EOPERATION_RECIEVEOFFER = 40;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInputPinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getInputPinActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation___IsReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation___RecieveOffer() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation_EOperation_isReady() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation_EOperation_recieveOffer() const = 0;
 			
 			// End Class InputPinActivation
 
 
 			// Begin Class InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const int INSTANCEVALUEEVALUATION = 25;
-			static const int INSTANCEVALUEEVALUATION_FEATURE_COUNT = 2;
-			static const int INSTANCEVALUEEVALUATION_OPERATION_COUNT = 4;
+			static const unsigned int INSTANCEVALUEEVALUATION_ECLASS = 25;
+			static const unsigned int INSTANCEVALUEEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int INSTANCEVALUEEVALUATION_ECLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int INSTANCEVALUEEVALUATION___EVALUATE = 3;
+			static const int INSTANCEVALUEEVALUATION_EOPERATION_EVALUATE = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class InstanceValueEvaluation
 
 
 			// Begin Class IntegerValue
 			//Class and Feature IDs 
-			static const int INTEGERVALUE = 18;
-			static const int INTEGERVALUE_FEATURE_COUNT = 2;
-			static const int INTEGERVALUE_OPERATION_COUNT = 12;
-			static const int INTEGERVALUE_VALUE = 181;
+			static const unsigned int INTEGERVALUE_ECLASS = 18;
+			static const unsigned int INTEGERVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int INTEGERVALUE_ECLASS_OPERATION_COUNT = 12;
+			static const int INTEGERVALUE_EATTRIBUTE_VALUE = 181;
 			
 			
-			static const int INTEGERVALUE___EQUALS__VALUE = 10;
-			static const int INTEGERVALUE___SPECIFY = 9;
-			static const int INTEGERVALUE___TOSTRING = 11;
+			static const int INTEGERVALUE_EOPERATION_EQUALS_VALUE = 10;
+			static const int INTEGERVALUE_EOPERATION_SPECIFY = 9;
+			static const int INTEGERVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIntegerValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getIntegerValue_Value() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getIntegerValue_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getIntegerValue_EAttribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_EOperation_toString() const = 0;
 			
 			// End Class IntegerValue
 
 
 			// Begin Class InvocationActionActivation
 			//Class and Feature IDs 
-			static const int INVOCATIONACTIONACTIVATION = 79;
-			static const int INVOCATIONACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int INVOCATIONACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int INVOCATIONACTIONACTIVATION_ECLASS = 79;
+			static const unsigned int INVOCATIONACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int INVOCATIONACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvocationActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getInvocationActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -1633,268 +1577,281 @@ namespace fUML
 
 			// Begin Class JoinNodeActivation
 			//Class and Feature IDs 
-			static const int JOINNODEACTIVATION = 63;
-			static const int JOINNODEACTIVATION_FEATURE_COUNT = 6;
-			static const int JOINNODEACTIVATION_OPERATION_COUNT = 29;
+			static const unsigned int JOINNODEACTIVATION_ECLASS = 63;
+			static const unsigned int JOINNODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int JOINNODEACTIVATION_ECLASS_OPERATION_COUNT = 29;
 			
 			
-			static const int JOINNODEACTIVATION___ISREADY = 28;
+			static const int JOINNODEACTIVATION_EOPERATION_ISREADY = 28;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation___IsReady() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_EOperation_isReady() const = 0;
 			
 			// End Class JoinNodeActivation
 
 
 			// Begin Class Link
 			//Class and Feature IDs 
-			static const int LINK = 32;
-			static const int LINK_FEATURE_COUNT = 3;
-			static const int LINK_OPERATION_COUNT = 24;
+			static const unsigned int LINK_ECLASS = 32;
+			static const unsigned int LINK_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int LINK_ECLASS_OPERATION_COUNT = 24;
 			
-			static const int LINK_TYPE = 322;
+			static const int LINK_EREFERENCE_TYPE = 322;
 			
-			static const int LINK___ADDTO__LOCUS = 22;
-			static const int LINK___GETOTHERFEATUREVALUES__EXTENSIONALVALUE_PROPERTY = 23;
-			static const int LINK___GETTYPES = 20;
-			static const int LINK___ISMATCHINGLINK__EXTENSIONALVALUE_PROPERTY = 21;
+			static const int LINK_EOPERATION_ADDTO_LOCUS = 22;
+			static const int LINK_EOPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 23;
+			static const int LINK_EOPERATION_GETTYPES = 20;
+			static const int LINK_EOPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 21;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLink() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLink_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLink_Type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLink___AddTo__Locus() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink___GetOtherFeatureValues__ExtensionalValue_Property() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink___GetTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLink___IsMatchingLink__ExtensionalValue_Property() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLink_EReference_type() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLink_EOperation_addTo_Locus() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLink_EOperation_getOtherFeatureValues_ExtensionalValue_Property() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLink_EOperation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLink_EOperation_isMatchingLink_ExtensionalValue_Property() const = 0;
 			
 			// End Class Link
 
 
 			// Begin Class LinkActionActivation
 			//Class and Feature IDs 
-			static const int LINKACTIONACTIVATION = 93;
-			static const int LINKACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int LINKACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int LINKACTIONACTIVATION_ECLASS = 93;
+			static const unsigned int LINKACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int LINKACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
-			static const int LINKACTIONACTIVATION___ENDMATCHESENDDATA__LINK_LINKENDDATA = 48;
-			static const int LINKACTIONACTIVATION___GETASSOCIATION = 49;
-			static const int LINKACTIONACTIVATION___LINKMATCHESENDDATA__LINK_LINKENDDATA = 47;
+			static const int LINKACTIONACTIVATION_EOPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA = 48;
+			static const int LINKACTIONACTIVATION_EOPERATION_GETASSOCIATION = 49;
+			static const int LINKACTIONACTIVATION_EOPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA = 47;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLinkActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLinkActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation___EndMatchesEndData__Link_LinkEndData() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation___GetAssociation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation___LinkMatchesEndData__Link_LinkEndData() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation_EOperation_endMatchesEndData_Link_LinkEndData() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation_EOperation_getAssociation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLinkActionActivation_EOperation_linkMatchesEndData_Link_LinkEndData() const = 0;
 			
 			// End Class LinkActionActivation
 
 
 			// Begin Class LiteralBooleanEvaluation
 			//Class and Feature IDs 
-			static const int LITERALBOOLEANEVALUATION = 26;
-			static const int LITERALBOOLEANEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALBOOLEANEVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALBOOLEANEVALUATION_ECLASS = 26;
+			static const unsigned int LITERALBOOLEANEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALBOOLEANEVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALBOOLEANEVALUATION___EVALUATE = 4;
+			static const int LITERALBOOLEANEVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralBooleanEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralBooleanEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralBooleanEvaluation
 
 
 			// Begin Class LiteralEvaluation
 			//Class and Feature IDs 
-			static const int LITERALEVALUATION = 24;
-			static const int LITERALEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALEVALUATION_OPERATION_COUNT = 4;
+			static const unsigned int LITERALEVALUATION_ECLASS = 24;
+			static const unsigned int LITERALEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALEVALUATION_ECLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int LITERALEVALUATION___GETTYPE__ESTRING = 3;
+			static const int LITERALEVALUATION_EOPERATION_GETTYPE_ESTRING = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralEvaluation___GetType__EString() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralEvaluation_EOperation_getType_EString() const = 0;
 			
 			// End Class LiteralEvaluation
 
 
 			// Begin Class LiteralIntegerEvaluation
 			//Class and Feature IDs 
-			static const int LITERALINTEGEREVALUATION = 27;
-			static const int LITERALINTEGEREVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALINTEGEREVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALINTEGEREVALUATION_ECLASS = 27;
+			static const unsigned int LITERALINTEGEREVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALINTEGEREVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALINTEGEREVALUATION___EVALUATE = 4;
+			static const int LITERALINTEGEREVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralIntegerEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralIntegerEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralIntegerEvaluation
 
 
 			// Begin Class LiteralNullEvaluation
 			//Class and Feature IDs 
-			static const int LITERALNULLEVALUATION = 28;
-			static const int LITERALNULLEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALNULLEVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALNULLEVALUATION_ECLASS = 28;
+			static const unsigned int LITERALNULLEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALNULLEVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALNULLEVALUATION___EVALUATE = 4;
+			static const int LITERALNULLEVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralNullEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralNullEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralNullEvaluation
 
 
 			// Begin Class LiteralRealEvaluation
 			//Class and Feature IDs 
-			static const int LITERALREALEVALUATION = 30;
-			static const int LITERALREALEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALREALEVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALREALEVALUATION_ECLASS = 30;
+			static const unsigned int LITERALREALEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALREALEVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALREALEVALUATION___EVALUATE = 4;
+			static const int LITERALREALEVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralRealEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralRealEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralRealEvaluation
 
 
 			// Begin Class LiteralStringEvaluation
 			//Class and Feature IDs 
-			static const int LITERALSTRINGEVALUATION = 29;
-			static const int LITERALSTRINGEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALSTRINGEVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALSTRINGEVALUATION_ECLASS = 29;
+			static const unsigned int LITERALSTRINGEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALSTRINGEVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALSTRINGEVALUATION___EVALUATE = 4;
+			static const int LITERALSTRINGEVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralStringEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralStringEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralStringEvaluation
 
 
 			// Begin Class LiteralUnlimitedNaturalEvaluation
 			//Class and Feature IDs 
-			static const int LITERALUNLIMITEDNATURALEVALUATION = 31;
-			static const int LITERALUNLIMITEDNATURALEVALUATION_FEATURE_COUNT = 2;
-			static const int LITERALUNLIMITEDNATURALEVALUATION_OPERATION_COUNT = 5;
+			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_ECLASS = 31;
+			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_ECLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALUNLIMITEDNATURALEVALUATION___EVALUATE = 4;
+			static const int LITERALUNLIMITEDNATURALEVALUATION_EOPERATION_EVALUATE = 4;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNaturalEvaluation___Evaluate() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNaturalEvaluation_EOperation_evaluate() const = 0;
 			
 			// End Class LiteralUnlimitedNaturalEvaluation
 
 
 			// Begin Class Locus
 			//Class and Feature IDs 
-			static const int LOCUS = 0;
-			static const int LOCUS_FEATURE_COUNT = 3;
-			static const int LOCUS_OPERATION_COUNT = 7;
+			static const unsigned int LOCUS_ECLASS = 0;
+			static const unsigned int LOCUS_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int LOCUS_ECLASS_OPERATION_COUNT = 7;
 			
-			static const int LOCUS_EXECUTOR = 00;
-			static const int LOCUS_EXTENSIONALVALUES = 02;
-			static const int LOCUS_FACTORY = 01;
+			static const int LOCUS_EREFERENCE_EXECUTOR = 00;
+			static const int LOCUS_EREFERENCE_EXTENSIONALVALUES = 02;
+			static const int LOCUS_EREFERENCE_FACTORY = 01;
 			
-			static const int LOCUS___ADD__EXTENSIONALVALUE = 4;
-			static const int LOCUS___ASSIGNEXECUTOR__EXECUTOR = 1;
-			static const int LOCUS___ASSIGNFACTORY__EXECUTIONFACTORY = 2;
-			static const int LOCUS___CONFORMS__CLASSIFIER_CLASSIFIER = 0;
-			static const int LOCUS___INSTANTIATE__CLASS = 6;
-			static const int LOCUS___REMOVE__EXTENSIONALVALUE = 5;
-			static const int LOCUS___RETRIEVEEXTENT__CLASSIFIER = 3;
+			static const int LOCUS_EOPERATION_ADD_EXTENSIONALVALUE = 4;
+			static const int LOCUS_EOPERATION_ASSIGNEXECUTOR_EXECUTOR = 1;
+			static const int LOCUS_EOPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2;
+			static const int LOCUS_EOPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 0;
+			static const int LOCUS_EOPERATION_INSTANTIATE_CLASS = 6;
+			static const int LOCUS_EOPERATION_REMOVE_EXTENSIONALVALUE = 5;
+			static const int LOCUS_EOPERATION_RETRIEVEEXTENT_CLASSIFIER = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLocus() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLocus_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLocus_Executor() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocus_ExtensionalValues() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocus_Factory() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLocus___Add__ExtensionalValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___AssignExecutor__Executor() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___AssignFactory__ExecutionFactory() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___Conforms__Classifier_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___Instantiate__Class() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___Remove__ExtensionalValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus___RetrieveExtent__Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLocus_EReference_executor() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLocus_EReference_extensionalValues() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLocus_EReference_factory() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_add_ExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_assignExecutor_Executor() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_assignFactory_ExecutionFactory() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_conforms_Classifier_Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_instantiate_Class() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_remove_ExtensionalValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLocus_EOperation_retrieveExtent_Classifier() const = 0;
 			
 			// End Class Locus
 
 
 			// Begin Class LoopNodeActivation
 			//Class and Feature IDs 
-			static const int LOOPNODEACTIVATION = 72;
-			static const int LOOPNODEACTIVATION_FEATURE_COUNT = 10;
-			static const int LOOPNODEACTIVATION_OPERATION_COUNT = 65;
+			static const unsigned int LOOPNODEACTIVATION_ECLASS = 72;
+			static const unsigned int LOOPNODEACTIVATION_ECLASS_FEATURE_COUNT = 12;
+			static const unsigned int LOOPNODEACTIVATION_ECLASS_OPERATION_COUNT = 65;
 			
-			static const int LOOPNODEACTIVATION_BODYOUTPUTLISTS = 729;
+			static const int LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS = 7211;
 			
-			static const int LOOPNODEACTIVATION___MAKELOOPVARIABLELIST = 64;
-			static const int LOOPNODEACTIVATION___RUNBODY = 62;
-			static const int LOOPNODEACTIVATION___RUNLOOPVARIABLES = 63;
-			static const int LOOPNODEACTIVATION___RUNTEST = 61;
+			static const int LOOPNODEACTIVATION_EOPERATION_MAKELOOPVARIABLELIST = 64;
+			static const int LOOPNODEACTIVATION_EOPERATION_RUNBODY = 62;
+			static const int LOOPNODEACTIVATION_EOPERATION_RUNLOOPVARIABLES = 63;
+			static const int LOOPNODEACTIVATION_EOPERATION_RUNTEST = 61;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLoopNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getLoopNodeActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLoopNodeActivation_BodyOutputLists() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation___MakeLoopVariableList() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation___RunBody() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation___RunLoopVariables() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation___RunTest() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLoopNodeActivation_EReference_bodyOutputLists() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation_EOperation_makeLoopVariableList() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation_EOperation_runBody() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation_EOperation_runLoopVariables() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLoopNodeActivation_EOperation_runTest() const = 0;
 			
 			// End Class LoopNodeActivation
 
 
 			// Begin Class MergeNodeActivation
 			//Class and Feature IDs 
-			static const int MERGENODEACTIVATION = 62;
-			static const int MERGENODEACTIVATION_FEATURE_COUNT = 6;
-			static const int MERGENODEACTIVATION_OPERATION_COUNT = 28;
+			static const unsigned int MERGENODEACTIVATION_ECLASS = 62;
+			static const unsigned int MERGENODEACTIVATION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int MERGENODEACTIVATION_ECLASS_OPERATION_COUNT = 28;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMergeNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getMergeNodeActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -1903,200 +1860,207 @@ namespace fUML
 
 			// Begin Class Object
 			//Class and Feature IDs 
-			static const int OBJECT = 37;
-			static const int OBJECT_FEATURE_COUNT = 4;
-			static const int OBJECT_OPERATION_COUNT = 27;
+			static const unsigned int OBJECT_ECLASS = 37;
+			static const unsigned int OBJECT_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int OBJECT_ECLASS_OPERATION_COUNT = 27;
 			
-			static const int OBJECT_OBJECTACTIVATION = 373;
-			static const int OBJECT_TYPES = 372;
+			static const int OBJECT_EREFERENCE_OBJECTACTIVATION = 373;
+			static const int OBJECT_EREFERENCE_TYPES = 372;
 			
-			static const int OBJECT____REGISTER__EVENTACCEPTER = 23;
-			static const int OBJECT___DESTROY = 26;
-			static const int OBJECT___DISPATCH__OPERATION = 21;
-			static const int OBJECT___NEW_ = 25;
-			static const int OBJECT___SEND__SIGNALINSTANCE = 22;
-			static const int OBJECT___STARTBEHAVIOR__CLASS_PARAMETERVALUE = 20;
-			static const int OBJECT___UNREGISTER__EVENTACCEPTER = 24;
+			static const int OBJECT_EOPERATION__REGISTER_EVENTACCEPTER = 23;
+			static const int OBJECT_EOPERATION_DESTROY = 26;
+			static const int OBJECT_EOPERATION_DISPATCH_OPERATION = 21;
+			static const int OBJECT_EOPERATION_NEW_ = 25;
+			static const int OBJECT_EOPERATION_SEND_SIGNALINSTANCE = 22;
+			static const int OBJECT_EOPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 20;
+			static const int OBJECT_EOPERATION_UNREGISTER_EVENTACCEPTER = 24;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObject() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getObject_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObject_ObjectActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObject_Types() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObject____register__EventAccepter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___Destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___Dispatch__Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___New_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___Send__SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___StartBehavior__Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject___Unregister__EventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObject_EReference_objectActivation() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObject_EReference_types() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation__register_EventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_destroy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_dispatch_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_send_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_startBehavior_Class_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_EOperation_unregister_EventAccepter() const = 0;
 			
 			// End Class Object
 
 
 			// Begin Class ObjectActivation
 			//Class and Feature IDs 
-			static const int OBJECTACTIVATION = 47;
-			static const int OBJECTACTIVATION_FEATURE_COUNT = 4;
-			static const int OBJECTACTIVATION_OPERATION_COUNT = 9;
+			static const unsigned int OBJECTACTIVATION_ECLASS = 47;
+			static const unsigned int OBJECTACTIVATION_ECLASS_FEATURE_COUNT = 4;
+			static const unsigned int OBJECTACTIVATION_ECLASS_OPERATION_COUNT = 9;
 			
-			static const int OBJECTACTIVATION_CLASSIFIERBEHAVIOREXECUTIONS = 473;
-			static const int OBJECTACTIVATION_EVENTPOOL = 471;
-			static const int OBJECTACTIVATION_OBJECT = 472;
-			static const int OBJECTACTIVATION_WAITINGEVENTACCEPTERS = 470;
+			static const int OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS = 473;
+			static const int OBJECTACTIVATION_EREFERENCE_EVENTPOOL = 471;
+			static const int OBJECTACTIVATION_EREFERENCE_OBJECT = 472;
+			static const int OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS = 470;
 			
-			static const int OBJECTACTIVATION____REGISTER__EVENTACCEPTER = 2;
-			static const int OBJECTACTIVATION____SEND__EJAVAOBJECT = 8;
-			static const int OBJECTACTIVATION____STARTOBJECTBEHAVIOR = 7;
-			static const int OBJECTACTIVATION___DISPATCHNEXTEVENT = 5;
-			static const int OBJECTACTIVATION___RETRIEVENEXTEVENT = 6;
-			static const int OBJECTACTIVATION___SEND__SIGNALINSTANCE = 4;
-			static const int OBJECTACTIVATION___STARTBEHAVIOR__CLASS_PARAMETERVALUE = 0;
-			static const int OBJECTACTIVATION___STOP = 1;
-			static const int OBJECTACTIVATION___UNREGISTER__EVENTACCEPTER = 3;
+			static const int OBJECTACTIVATION_EOPERATION__REGISTER_EVENTACCEPTER = 2;
+			static const int OBJECTACTIVATION_EOPERATION__SEND_EJAVAOBJECT = 8;
+			static const int OBJECTACTIVATION_EOPERATION__STARTOBJECTBEHAVIOR = 7;
+			static const int OBJECTACTIVATION_EOPERATION_DISPATCHNEXTEVENT = 5;
+			static const int OBJECTACTIVATION_EOPERATION_RETRIEVENEXTEVENT = 6;
+			static const int OBJECTACTIVATION_EOPERATION_SEND_SIGNALINSTANCE = 4;
+			static const int OBJECTACTIVATION_EOPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 0;
+			static const int OBJECTACTIVATION_EOPERATION_STOP = 1;
+			static const int OBJECTACTIVATION_EOPERATION_UNREGISTER_EVENTACCEPTER = 3;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getObjectActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_ClassifierBehaviorExecutions() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_EventPool() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_Object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_WaitingEventAccepters() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation____register__EventAccepter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation____send__EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation____startObjectBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___DispatchNextEvent() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___RetrieveNextEvent() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___Send__SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___StartBehavior__Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___Stop() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation___Unregister__EventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObjectActivation_EReference_classifierBehaviorExecutions() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObjectActivation_EReference_eventPool() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObjectActivation_EReference_object() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObjectActivation_EReference_waitingEventAccepters() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation__register_EventAccepter() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation__send_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation__startObjectBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_dispatchNextEvent() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_retrieveNextEvent() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_send_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_startBehavior_Class_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_stop() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_EOperation_unregister_EventAccepter() const = 0;
 			
 			// End Class ObjectActivation
 
 
 			// Begin Class ObjectNodeActivation
 			//Class and Feature IDs 
-			static const int OBJECTNODEACTIVATION = 59;
-			static const int OBJECTNODEACTIVATION_FEATURE_COUNT = 7;
-			static const int OBJECTNODEACTIVATION_OPERATION_COUNT = 38;
-			static const int OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT = 596;
+			static const unsigned int OBJECTNODEACTIVATION_ECLASS = 59;
+			static const unsigned int OBJECTNODEACTIVATION_ECLASS_FEATURE_COUNT = 7;
+			static const unsigned int OBJECTNODEACTIVATION_ECLASS_OPERATION_COUNT = 38;
+			static const int OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT = 596;
 			
 			
-			static const int OBJECTNODEACTIVATION___ADDTOKEN__TOKEN = 35;
-			static const int OBJECTNODEACTIVATION___CLEARTOKENS = 37;
-			static const int OBJECTNODEACTIVATION___COUNTOFFEREDVALUES = 27;
-			static const int OBJECTNODEACTIVATION___COUNTUNOFFEREDTOKENS = 29;
-			static const int OBJECTNODEACTIVATION___GETUNOFFEREDTOKENS = 30;
-			static const int OBJECTNODEACTIVATION___REMOVETOKEN__TOKEN = 36;
-			static const int OBJECTNODEACTIVATION___RUN = 32;
-			static const int OBJECTNODEACTIVATION___SENDOFFERS__TOKEN = 33;
-			static const int OBJECTNODEACTIVATION___SENDUNOFFEREDTOKENS = 28;
-			static const int OBJECTNODEACTIVATION___TAKEUNOFFEREDTOKENS = 31;
-			static const int OBJECTNODEACTIVATION___TERMINATE = 34;
+			static const int OBJECTNODEACTIVATION_EOPERATION_ADDTOKEN_TOKEN = 35;
+			static const int OBJECTNODEACTIVATION_EOPERATION_CLEARTOKENS = 37;
+			static const int OBJECTNODEACTIVATION_EOPERATION_COUNTOFFEREDVALUES = 27;
+			static const int OBJECTNODEACTIVATION_EOPERATION_COUNTUNOFFEREDTOKENS = 29;
+			static const int OBJECTNODEACTIVATION_EOPERATION_GETUNOFFEREDTOKENS = 30;
+			static const int OBJECTNODEACTIVATION_EOPERATION_REMOVETOKEN_TOKEN = 36;
+			static const int OBJECTNODEACTIVATION_EOPERATION_RUN = 32;
+			static const int OBJECTNODEACTIVATION_EOPERATION_SENDOFFERS_TOKEN = 33;
+			static const int OBJECTNODEACTIVATION_EOPERATION_SENDUNOFFEREDTOKENS = 28;
+			static const int OBJECTNODEACTIVATION_EOPERATION_TAKEUNOFFEREDTOKENS = 31;
+			static const int OBJECTNODEACTIVATION_EOPERATION_TERMINATE = 34;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getObjectNodeActivation_OfferedTokenCount() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getObjectNodeActivation_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getObjectNodeActivation_EAttribute_offeredTokenCount() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___AddToken__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___ClearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___CountOfferedValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___CountUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___GetUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___RemoveToken__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___Run() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___SendOffers__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___SendUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___TakeUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation___Terminate() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_addToken_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_clearTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_countOfferedValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_countUnofferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_getUnofferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_removeToken_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_run() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_sendOffers_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_sendUnofferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_takeUnofferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_EOperation_terminate() const = 0;
 			
 			// End Class ObjectNodeActivation
 
 
 			// Begin Class ObjectToken
 			//Class and Feature IDs 
-			static const int OBJECTTOKEN = 54;
-			static const int OBJECTTOKEN_FEATURE_COUNT = 2;
-			static const int OBJECTTOKEN_OPERATION_COUNT = 8;
+			static const unsigned int OBJECTTOKEN_ECLASS = 54;
+			static const unsigned int OBJECTTOKEN_ECLASS_FEATURE_COUNT = 3;
+			static const unsigned int OBJECTTOKEN_ECLASS_OPERATION_COUNT = 7;
 			
-			static const int OBJECTTOKEN_VALUE = 541;
+			static const int OBJECTTOKEN_EREFERENCE_VALUE = 542;
 			
-			static const int OBJECTTOKEN___EQUALS__TOKEN = 6;
-			static const int OBJECTTOKEN___ISCONTROL = 7;
+			static const int OBJECTTOKEN_EOPERATION_EQUALS_TOKEN = 5;
+			static const int OBJECTTOKEN_EOPERATION_ISCONTROL = 6;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectToken() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getObjectToken_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectToken_Value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectToken___Equals__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectToken___IsControl() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getObjectToken_EReference_value() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getObjectToken_EOperation_equals_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObjectToken_EOperation_isControl() const = 0;
 			
 			// End Class ObjectToken
 
 
 			// Begin Class Offer
 			//Class and Feature IDs 
-			static const int OFFER = 52;
-			static const int OFFER_FEATURE_COUNT = 1;
-			static const int OFFER_OPERATION_COUNT = 5;
+			static const unsigned int OFFER_ECLASS = 52;
+			static const unsigned int OFFER_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int OFFER_ECLASS_OPERATION_COUNT = 5;
 			
-			static const int OFFER_OFFEREDTOKENS = 520;
+			static const int OFFER_EREFERENCE_OFFEREDTOKENS = 520;
 			
-			static const int OFFER___COUNTOFFEREDVALES = 0;
-			static const int OFFER___HASTOKENS = 4;
-			static const int OFFER___REMOVEOFFEREDVALUES__EINT = 2;
-			static const int OFFER___REMOVEWITHDRAWNTOKENS = 3;
-			static const int OFFER___RETRIEVEOFFEREDTOKENS = 1;
+			static const int OFFER_EOPERATION_COUNTOFFEREDVALES = 0;
+			static const int OFFER_EOPERATION_HASTOKENS = 4;
+			static const int OFFER_EOPERATION_REMOVEOFFEREDVALUES_EINT = 2;
+			static const int OFFER_EOPERATION_REMOVEWITHDRAWNTOKENS = 3;
+			static const int OFFER_EOPERATION_RETRIEVEOFFEREDTOKENS = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOffer() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getOffer_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getOffer_OfferedTokens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOffer___CountOfferedVales() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer___HasTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer___RemoveOfferedValues__EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer___RemoveWithdrawnTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer___RetrieveOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOffer_EReference_offeredTokens() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getOffer_EOperation_countOfferedVales() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOffer_EOperation_hasTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOffer_EOperation_removeOfferedValues_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOffer_EOperation_removeWithdrawnTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOffer_EOperation_retrieveOfferedTokens() const = 0;
 			
 			// End Class Offer
 
 
 			// Begin Class OpaqueBehaviorExecution
 			//Class and Feature IDs 
-			static const int OPAQUEBEHAVIOREXECUTION = 40;
-			static const int OPAQUEBEHAVIOREXECUTION_FEATURE_COUNT = 6;
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_COUNT = 36;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_ECLASS = 40;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_ECLASS_FEATURE_COUNT = 6;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_ECLASS_OPERATION_COUNT = 36;
 			
 			
-			static const int OPAQUEBEHAVIOREXECUTION___DOBODY__PARAMETERVALUE_PARAMETERVALUE = 34;
-			static const int OPAQUEBEHAVIOREXECUTION___EXECUTE = 35;
+			static const int OPAQUEBEHAVIOREXECUTION_EOPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 34;
+			static const int OPAQUEBEHAVIOREXECUTION_EOPERATION_EXECUTE = 35;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution___DoBody__ParameterValue_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution___Execute() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution_EOperation_doBody_ParameterValue_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution_EOperation_execute() const = 0;
 			
 			// End Class OpaqueBehaviorExecution
 
 
 			// Begin Class OutputPinActivation
 			//Class and Feature IDs 
-			static const int OUTPUTPINACTIVATION = 86;
-			static const int OUTPUTPINACTIVATION_FEATURE_COUNT = 8;
-			static const int OUTPUTPINACTIVATION_OPERATION_COUNT = 40;
+			static const unsigned int OUTPUTPINACTIVATION_ECLASS = 86;
+			static const unsigned int OUTPUTPINACTIVATION_ECLASS_FEATURE_COUNT = 8;
+			static const unsigned int OUTPUTPINACTIVATION_ECLASS_OPERATION_COUNT = 40;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOutputPinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getOutputPinActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2105,19 +2069,20 @@ namespace fUML
 
 			// Begin Class ParameterValue
 			//Class and Feature IDs 
-			static const int PARAMETERVALUE = 39;
-			static const int PARAMETERVALUE_FEATURE_COUNT = 2;
-			static const int PARAMETERVALUE_OPERATION_COUNT = 0;
+			static const unsigned int PARAMETERVALUE_ECLASS = 39;
+			static const unsigned int PARAMETERVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int PARAMETERVALUE_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int PARAMETERVALUE_PARAMETER = 390;
-			static const int PARAMETERVALUE_VALUES = 391;
+			static const int PARAMETERVALUE_EREFERENCE_PARAMETER = 390;
+			static const int PARAMETERVALUE_EREFERENCE_VALUES = 391;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getParameterValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Parameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Values() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getParameterValue_EReference_parameter() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getParameterValue_EReference_values() const = 0;
 			
 			
 			// End Class ParameterValue
@@ -2125,56 +2090,59 @@ namespace fUML
 
 			// Begin Class PinActivation
 			//Class and Feature IDs 
-			static const int PINACTIVATION = 84;
-			static const int PINACTIVATION_FEATURE_COUNT = 8;
-			static const int PINACTIVATION_OPERATION_COUNT = 40;
+			static const unsigned int PINACTIVATION_ECLASS = 84;
+			static const unsigned int PINACTIVATION_ECLASS_FEATURE_COUNT = 8;
+			static const unsigned int PINACTIVATION_ECLASS_OPERATION_COUNT = 40;
 			
-			static const int PINACTIVATION_ACTIONACTIVATION = 847;
+			static const int PINACTIVATION_EREFERENCE_ACTIONACTIVATION = 847;
 			
-			static const int PINACTIVATION___FIRE__TOKEN = 38;
-			static const int PINACTIVATION___TAKEOFFEREDTOKENS = 39;
+			static const int PINACTIVATION_EOPERATION_FIRE_TOKEN = 38;
+			static const int PINACTIVATION_EOPERATION_TAKEOFFEREDTOKENS = 39;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPinActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getPinActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPinActivation_ActionActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPinActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPinActivation___TakeOfferedTokens() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getPinActivation_EReference_actionActivation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getPinActivation_EOperation_fire_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getPinActivation_EOperation_takeOfferedTokens() const = 0;
 			
 			// End Class PinActivation
 
 
 			// Begin Class PrimitiveValue
 			//Class and Feature IDs 
-			static const int PRIMITIVEVALUE = 15;
-			static const int PRIMITIVEVALUE_FEATURE_COUNT = 1;
-			static const int PRIMITIVEVALUE_OPERATION_COUNT = 9;
+			static const unsigned int PRIMITIVEVALUE_ECLASS = 15;
+			static const unsigned int PRIMITIVEVALUE_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int PRIMITIVEVALUE_ECLASS_OPERATION_COUNT = 9;
 			
-			static const int PRIMITIVEVALUE_TYPE = 150;
+			static const int PRIMITIVEVALUE_EREFERENCE_TYPE = 150;
 			
-			static const int PRIMITIVEVALUE___GETTYPES = 8;
+			static const int PRIMITIVEVALUE_EOPERATION_GETTYPES = 8;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrimitiveValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getPrimitiveValue_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPrimitiveValue_Type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue___GetTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getPrimitiveValue_EReference_type() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_EOperation_getTypes() const = 0;
 			
 			// End Class PrimitiveValue
 
 
 			// Begin Class ReadExtentActionActivation
 			//Class and Feature IDs 
-			static const int READEXTENTACTIONACTIVATION = 108;
-			static const int READEXTENTACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int READEXTENTACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int READEXTENTACTIONACTIVATION_ECLASS = 108;
+			static const unsigned int READEXTENTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int READEXTENTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadExtentActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReadExtentActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2183,32 +2151,34 @@ namespace fUML
 
 			// Begin Class ReadIsClassifiedObjectActionActivation
 			//Class and Feature IDs 
-			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION = 106;
-			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_COUNT = 48;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS = 106;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION___CHECKALLPARENTS__CLASSIFIER_CLASSIFIER = 47;
+			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION_EOPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 47;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectActionActivation___CheckAllParents__Classifier_Classifier() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectActionActivation_EOperation_checkAllParents_Classifier_Classifier() const = 0;
 			
 			// End Class ReadIsClassifiedObjectActionActivation
 
 
 			// Begin Class ReadLinkActionActivation
 			//Class and Feature IDs 
-			static const int READLINKACTIONACTIVATION = 94;
-			static const int READLINKACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int READLINKACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int READLINKACTIONACTIVATION_ECLASS = 94;
+			static const unsigned int READLINKACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int READLINKACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadLinkActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReadLinkActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2217,14 +2187,15 @@ namespace fUML
 
 			// Begin Class ReadSelfActionActivation
 			//Class and Feature IDs 
-			static const int READSELFACTIONACTIVATION = 89;
-			static const int READSELFACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int READSELFACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int READSELFACTIONACTIVATION_ECLASS = 89;
+			static const unsigned int READSELFACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int READSELFACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2233,14 +2204,15 @@ namespace fUML
 
 			// Begin Class ReadStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const int READSTRUCTURALFEATUREACTIONACTIVATION = 99;
-			static const int READSTRUCTURALFEATUREACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS = 99;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2249,38 +2221,40 @@ namespace fUML
 
 			// Begin Class RealValue
 			//Class and Feature IDs 
-			static const int REALVALUE = 19;
-			static const int REALVALUE_FEATURE_COUNT = 2;
-			static const int REALVALUE_OPERATION_COUNT = 12;
-			static const int REALVALUE_VALUE = 191;
+			static const unsigned int REALVALUE_ECLASS = 19;
+			static const unsigned int REALVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int REALVALUE_ECLASS_OPERATION_COUNT = 12;
+			static const int REALVALUE_EATTRIBUTE_VALUE = 191;
 			
 			
-			static const int REALVALUE___EQUALS__VALUE = 10;
-			static const int REALVALUE___SPECIFY = 9;
-			static const int REALVALUE___TOSTRING = 11;
+			static const int REALVALUE_EOPERATION_EQUALS_VALUE = 10;
+			static const int REALVALUE_EOPERATION_SPECIFY = 9;
+			static const int REALVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRealValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getRealValue_Value() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getRealValue_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getRealValue_EAttribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getRealValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRealValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRealValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRealValue_EOperation_toString() const = 0;
 			
 			// End Class RealValue
 
 
 			// Begin Class ReclassifyObjectActionActivation
 			//Class and Feature IDs 
-			static const int RECLASSIFYOBJECTACTIONACTIVATION = 107;
-			static const int RECLASSIFYOBJECTACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int RECLASSIFYOBJECTACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_ECLASS = 107;
+			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReclassifyObjectActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReclassifyObjectActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2289,37 +2263,39 @@ namespace fUML
 
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature IDs 
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY = 36;
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_FEATURE_COUNT = 0;
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_COUNT = 6;
+			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS = 36;
+			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS_OPERATION_COUNT = 6;
 			
 			
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY___OPERATIONSMATCH__OPERATION_OPERATION = 4;
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION = 5;
+			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_EOPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 4;
+			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_EOPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 5;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy___OperationsMatch__Operation_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy___RetrieveMethod__Object_Operation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_EOperation_operationsMatch_Operation_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_EOperation_retrieveMethod_Object_Operation() const = 0;
 			
 			// End Class RedefinitionBasedDispatchStrategy
 
 
 			// Begin Class ReduceActionActivation
 			//Class and Feature IDs 
-			static const int REDUCEACTIONACTIVATION = 105;
-			static const int REDUCEACTIONACTIVATION_FEATURE_COUNT = 9;
-			static const int REDUCEACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int REDUCEACTIONACTIVATION_ECLASS = 105;
+			static const unsigned int REDUCEACTIONACTIVATION_ECLASS_FEATURE_COUNT = 11;
+			static const unsigned int REDUCEACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
-			static const int REDUCEACTIONACTIVATION_CURRENTEXECUTION = 1058;
+			static const int REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION = 10510;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReduceActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReduceActionActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getReduceActionActivation_CurrentExecution() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getReduceActionActivation_EReference_currentExecution() const = 0;
 			
 			
 			// End Class ReduceActionActivation
@@ -2327,54 +2303,56 @@ namespace fUML
 
 			// Begin Class Reference
 			//Class and Feature IDs 
-			static const int REFERENCE = 12;
-			static const int REFERENCE_FEATURE_COUNT = 1;
-			static const int REFERENCE_OPERATION_COUNT = 24;
+			static const unsigned int REFERENCE_ECLASS = 12;
+			static const unsigned int REFERENCE_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int REFERENCE_ECLASS_OPERATION_COUNT = 24;
 			
-			static const int REFERENCE_REFERENT = 120;
+			static const int REFERENCE_EREFERENCE_REFERENT = 120;
 			
-			static const int REFERENCE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT = 21;
-			static const int REFERENCE___DESTROY = 16;
-			static const int REFERENCE___DISPATCH__OPERATION = 14;
-			static const int REFERENCE___EQUALS__VALUE = 17;
-			static const int REFERENCE___GETTYPES = 19;
-			static const int REFERENCE___NEW_ = 18;
-			static const int REFERENCE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE = 20;
-			static const int REFERENCE___RETRIEVEFEATUREVALUES = 22;
-			static const int REFERENCE___SEND__SIGNALINSTANCE = 15;
-			static const int REFERENCE___STARTBEHAVIOR__CLASS_PARAMETERVALUE = 13;
-			static const int REFERENCE___TOSTRING = 23;
+			static const int REFERENCE_EOPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 21;
+			static const int REFERENCE_EOPERATION_DESTROY = 16;
+			static const int REFERENCE_EOPERATION_DISPATCH_OPERATION = 14;
+			static const int REFERENCE_EOPERATION_EQUALS_VALUE = 17;
+			static const int REFERENCE_EOPERATION_GETTYPES = 19;
+			static const int REFERENCE_EOPERATION_NEW_ = 18;
+			static const int REFERENCE_EOPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 20;
+			static const int REFERENCE_EOPERATION_RETRIEVEFEATUREVALUES = 22;
+			static const int REFERENCE_EOPERATION_SEND_SIGNALINSTANCE = 15;
+			static const int REFERENCE_EOPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 13;
+			static const int REFERENCE_EOPERATION_TOSTRING = 23;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReference() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getReference_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getReference_Referent() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReference___AssignFeatureValue__StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___Destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___Dispatch__Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___GetTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___New_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___RetrieveFeatureValue__StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___RetrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___Send__SignalInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___StartBehavior__Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReference___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getReference_EReference_referent() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_assignFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_destroy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_dispatch_Operation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_retrieveFeatureValue_StructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_retrieveFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_send_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_startBehavior_Class_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_EOperation_toString() const = 0;
 			
 			// End Class Reference
 
 
 			// Begin Class RemoveStructuralFeatureValueActivation
 			//Class and Feature IDs 
-			static const int REMOVESTRUCTURALFEATUREVALUEACTIVATION = 102;
-			static const int REMOVESTRUCTURALFEATUREVALUEACTIVATION_FEATURE_COUNT = 8;
-			static const int REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_COUNT = 51;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS = 102;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS_OPERATION_COUNT = 51;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2383,73 +2361,77 @@ namespace fUML
 
 			// Begin Class SemanticStrategy
 			//Class and Feature IDs 
-			static const int SEMANTICSTRATEGY = 4;
-			static const int SEMANTICSTRATEGY_FEATURE_COUNT = 0;
-			static const int SEMANTICSTRATEGY_OPERATION_COUNT = 1;
+			static const unsigned int SEMANTICSTRATEGY_ECLASS = 3;
+			static const unsigned int SEMANTICSTRATEGY_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int SEMANTICSTRATEGY_ECLASS_OPERATION_COUNT = 1;
 			
 			
-			static const int SEMANTICSTRATEGY___RETRIEVENAME = 0;
+			static const int SEMANTICSTRATEGY_EOPERATION_RETRIEVENAME = 0;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSemanticStrategy() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getSemanticStrategy_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSemanticStrategy___RetrieveName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getSemanticStrategy_EOperation_retrieveName() const = 0;
 			
 			// End Class SemanticStrategy
 
 
 			// Begin Class SemanticVisitor
 			//Class and Feature IDs 
-			static const int SEMANTICVISITOR = 5;
-			static const int SEMANTICVISITOR_FEATURE_COUNT = 0;
-			static const int SEMANTICVISITOR_OPERATION_COUNT = 2;
+			static const unsigned int SEMANTICVISITOR_ECLASS = 4;
+			static const unsigned int SEMANTICVISITOR_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int SEMANTICVISITOR_ECLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int SEMANTICVISITOR____BEGINISOLATION = 1;
-			static const int SEMANTICVISITOR____ENDISOLATION = 0;
+			static const int SEMANTICVISITOR_EOPERATION__BEGINISOLATION = 1;
+			static const int SEMANTICVISITOR_EOPERATION__ENDISOLATION = 0;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSemanticVisitor() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getSemanticVisitor_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor____beginIsolation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor____endIsolation() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor_EOperation__beginIsolation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor_EOperation__endIsolation() const = 0;
 			
 			// End Class SemanticVisitor
 
 
 			// Begin Class SendSignalActionActivation
 			//Class and Feature IDs 
-			static const int SENDSIGNALACTIONACTIVATION = 80;
-			static const int SENDSIGNALACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int SENDSIGNALACTIONACTIVATION_OPERATION_COUNT = 48;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_ECLASS = 80;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_ECLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int SENDSIGNALACTIONACTIVATION___DOACTION = 47;
+			static const int SENDSIGNALACTIONACTIVATION_EOPERATION_DOACTION = 47;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSendSignalActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getSendSignalActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSendSignalActionActivation___DoAction() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getSendSignalActionActivation_EOperation_doAction() const = 0;
 			
 			// End Class SendSignalActionActivation
 
 
 			// Begin Class SignalInstance
 			//Class and Feature IDs 
-			static const int SIGNALINSTANCE = 45;
-			static const int SIGNALINSTANCE_FEATURE_COUNT = 2;
-			static const int SIGNALINSTANCE_OPERATION_COUNT = 19;
+			static const unsigned int SIGNALINSTANCE_ECLASS = 45;
+			static const unsigned int SIGNALINSTANCE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int SIGNALINSTANCE_ECLASS_OPERATION_COUNT = 19;
 			
-			static const int SIGNALINSTANCE_TYPE = 451;
+			static const int SIGNALINSTANCE_EREFERENCE_TYPE = 451;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getSignalInstance_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getSignalInstance_Type() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getSignalInstance_EReference_type() const = 0;
 			
 			
 			// End Class SignalInstance
@@ -2457,14 +2439,15 @@ namespace fUML
 
 			// Begin Class StartClassifierBehaviorActionActivation
 			//Class and Feature IDs 
-			static const int STARTCLASSIFIERBEHAVIORACTIONACTIVATION = 104;
-			static const int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS = 104;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStartClassifierBehaviorActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStartClassifierBehaviorActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2473,14 +2456,15 @@ namespace fUML
 
 			// Begin Class StartObjectBehaviorActionActivation
 			//Class and Feature IDs 
-			static const int STARTOBJECTBEHAVIORACTIONACTIVATION = 110;
-			static const int STARTOBJECTBEHAVIORACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS = 110;
+			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2489,132 +2473,137 @@ namespace fUML
 
 			// Begin Class StringValue
 			//Class and Feature IDs 
-			static const int STRINGVALUE = 17;
-			static const int STRINGVALUE_FEATURE_COUNT = 2;
-			static const int STRINGVALUE_OPERATION_COUNT = 12;
-			static const int STRINGVALUE_VALUE = 171;
+			static const unsigned int STRINGVALUE_ECLASS = 17;
+			static const unsigned int STRINGVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int STRINGVALUE_ECLASS_OPERATION_COUNT = 12;
+			static const int STRINGVALUE_EATTRIBUTE_VALUE = 171;
 			
 			
-			static const int STRINGVALUE___EQUALS__VALUE = 10;
-			static const int STRINGVALUE___SPECIFY = 9;
-			static const int STRINGVALUE___TOSTRING = 11;
+			static const int STRINGVALUE_EOPERATION_EQUALS_VALUE = 10;
+			static const int STRINGVALUE_EOPERATION_SPECIFY = 9;
+			static const int STRINGVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStringValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getStringValue_Value() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStringValue_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getStringValue_EAttribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStringValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStringValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStringValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStringValue_EOperation_toString() const = 0;
 			
 			// End Class StringValue
 
 
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const int STRUCTURALFEATUREACTIONACTIVATION = 98;
-			static const int STRUCTURALFEATUREACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_ECLASS = 98;
+			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
-			static const int STRUCTURALFEATUREACTIONACTIVATION___GETASSOCIATION__STRUCTURALFEATURE = 47;
-			static const int STRUCTURALFEATUREACTIONACTIVATION___GETMATCHINGLINKS__ASSOCIATION_VALUE = 48;
-			static const int STRUCTURALFEATUREACTIONACTIVATION___GETOPPOSITEEND__ASSOCIATION_STRUCTURALFEATURE = 49;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_EOPERATION_GETASSOCIATION_STRUCTURALFEATURE = 47;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_EOPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE = 48;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_EOPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE = 49;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation___GetAssociation__StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation___GetMatchingLinks__Association_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation___GetOppositeEnd__Association_StructuralFeature() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_EOperation_getAssociation_StructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_EOperation_getMatchingLinks_Association_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_EOperation_getOppositeEnd_Association_StructuralFeature() const = 0;
 			
 			// End Class StructuralFeatureActionActivation
 
 
 			// Begin Class StructuredActivityNodeActivation
 			//Class and Feature IDs 
-			static const int STRUCTUREDACTIVITYNODEACTIVATION = 71;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_FEATURE_COUNT = 9;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COUNT = 61;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_ECLASS = 71;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_ECLASS_FEATURE_COUNT = 11;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_ECLASS_OPERATION_COUNT = 61;
 			
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP = 718;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP = 7110;
 			
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___COMPLETEACTION = 59;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES = 55;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS = 54;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___DOACTION = 51;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___DOSTRUCTUREDACTIVITY = 47;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE = 53;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___GETPINVALUES__OUTPUTPIN = 49;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE = 57;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___ISSUSPENDED = 58;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___MAKEACTIVITYNODELIST__EXECUTABLENODE = 48;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___PUTPINVALUES__OUTPUTPIN_VALUE = 50;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___RESUME = 60;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___TERMINATE = 52;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION___TERMINATEALL = 56;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_COMPLETEACTION = 59;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_CREATEEDGEINSTANCES = 55;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_CREATENODEACTIVATIONS = 54;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_DOACTION = 51;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_DOSTRUCTUREDACTIVITY = 47;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_GETNODEACTIVATION_ACTIVITYNODE = 53;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_GETPINVALUES_OUTPUTPIN = 49;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 57;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_ISSUSPENDED = 58;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE = 48;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_PUTPINVALUES_OUTPUTPIN_VALUE = 50;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_RESUME = 60;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_TERMINATE = 52;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_EOPERATION_TERMINATEALL = 56;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNodeActivation_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNodeActivation_ActivationGroup() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___CompleteAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___CreateEdgeInstances() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___CreateNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___DoAction() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___DoStructuredActivity() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___GetNodeActivation__ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___GetPinValues__OutputPin() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___IsSourceFor__ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___IsSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___MakeActivityNodeList__ExecutableNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___PutPinValues__OutputPin_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___Resume() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___Terminate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation___TerminateAll() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNodeActivation_EReference_activationGroup() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_completeAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_createEdgeInstances() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_createNodeActivations() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_doAction() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_doStructuredActivity() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_getNodeActivation_ActivityNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_getPinValues_OutputPin() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_isSuspended() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_makeActivityNodeList_ExecutableNode() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_putPinValues_OutputPin_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_resume() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_terminate() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_EOperation_terminateAll() const = 0;
 			
 			// End Class StructuredActivityNodeActivation
 
 
 			// Begin Class StructuredValue
 			//Class and Feature IDs 
-			static const int STRUCTUREDVALUE = 11;
-			static const int STRUCTUREDVALUE_FEATURE_COUNT = 0;
-			static const int STRUCTUREDVALUE_OPERATION_COUNT = 13;
+			static const unsigned int STRUCTUREDVALUE_ECLASS = 11;
+			static const unsigned int STRUCTUREDVALUE_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int STRUCTUREDVALUE_ECLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int STRUCTUREDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT = 9;
-			static const int STRUCTUREDVALUE___CREATEFEATUREVALUES = 11;
-			static const int STRUCTUREDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE = 8;
-			static const int STRUCTUREDVALUE___RETRIEVEFEATUREVALUES = 10;
-			static const int STRUCTUREDVALUE___SPECIFY = 12;
+			static const int STRUCTUREDVALUE_EOPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 9;
+			static const int STRUCTUREDVALUE_EOPERATION_CREATEFEATUREVALUES = 11;
+			static const int STRUCTUREDVALUE_EOPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 8;
+			static const int STRUCTUREDVALUE_EOPERATION_RETRIEVEFEATUREVALUES = 10;
+			static const int STRUCTUREDVALUE_EOPERATION_SPECIFY = 12;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getStructuredValue_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue___AssignFeatureValue__StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue___CreateFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue___RetrieveFeatureValue__StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue___RetrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue___Specify() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_EOperation_assignFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_EOperation_createFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_EOperation_retrieveFeatureValue_StructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_EOperation_retrieveFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_EOperation_specify() const = 0;
 			
 			// End Class StructuredValue
 
 
 			// Begin Class TestIdentityActionActivation
 			//Class and Feature IDs 
-			static const int TESTIDENTITYACTIONACTIVATION = 88;
-			static const int TESTIDENTITYACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int TESTIDENTITYACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int TESTIDENTITYACTIONACTIVATION_ECLASS = 88;
+			static const unsigned int TESTIDENTITYACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int TESTIDENTITYACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTestIdentityActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getTestIdentityActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2623,47 +2612,49 @@ namespace fUML
 
 			// Begin Class Token
 			//Class and Feature IDs 
-			static const int TOKEN = 53;
-			static const int TOKEN_FEATURE_COUNT = 1;
-			static const int TOKEN_OPERATION_COUNT = 6;
+			static const unsigned int TOKEN_ECLASS = 53;
+			static const unsigned int TOKEN_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int TOKEN_ECLASS_OPERATION_COUNT = 5;
+			static const int TOKEN_EATTRIBUTE_WITHDRAWN = 531;
 			
-			static const int TOKEN_HOLDER = 530;
+			static const int TOKEN_EREFERENCE_HOLDER = 530;
 			
-			static const int TOKEN___EQUALS__TOKEN = 2;
-			static const int TOKEN___GETVALUE = 5;
-			static const int TOKEN___ISCONTROL = 4;
-			static const int TOKEN___ISWITHDRAWN = 3;
-			static const int TOKEN___TRANSFER__ACTIVITYNODEACTIVATION = 0;
-			static const int TOKEN___WITHDRAW = 1;
+			static const int TOKEN_EOPERATION_EQUALS_TOKEN = 2;
+			static const int TOKEN_EOPERATION_GETVALUE = 4;
+			static const int TOKEN_EOPERATION_ISCONTROL = 3;
+			static const int TOKEN_EOPERATION_TRANSFER_ACTIVITYNODEACTIVATION = 0;
+			static const int TOKEN_EOPERATION_WITHDRAW = 1;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getToken() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getToken_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getToken_Holder() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getToken_EAttribute_withdrawn() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getToken___Equals__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___GetValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___IsControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___IsWithdrawn() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___Transfer__ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___Withdraw() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getToken_EReference_holder() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getToken_EOperation_equals_Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getToken_EOperation_getValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getToken_EOperation_isControl() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getToken_EOperation_transfer_ActivityNodeActivation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getToken_EOperation_withdraw() const = 0;
 			
 			// End Class Token
 
 
 			// Begin Class TokenSet
 			//Class and Feature IDs 
-			static const int TOKENSET = 74;
-			static const int TOKENSET_FEATURE_COUNT = 1;
-			static const int TOKENSET_OPERATION_COUNT = 0;
+			static const unsigned int TOKENSET_ECLASS = 74;
+			static const unsigned int TOKENSET_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int TOKENSET_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int TOKENSET_TOKENS = 740;
+			static const int TOKENSET_EREFERENCE_TOKENS = 740;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTokenSet() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getTokenSet_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTokenSet_Tokens() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getTokenSet_EReference_tokens() const = 0;
 			
 			
 			// End Class TokenSet
@@ -2671,66 +2662,69 @@ namespace fUML
 
 			// Begin Class UnlimitedNaturalValue
 			//Class and Feature IDs 
-			static const int UNLIMITEDNATURALVALUE = 16;
-			static const int UNLIMITEDNATURALVALUE_FEATURE_COUNT = 2;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_COUNT = 12;
-			static const int UNLIMITEDNATURALVALUE_VALUE = 161;
+			static const unsigned int UNLIMITEDNATURALVALUE_ECLASS = 16;
+			static const unsigned int UNLIMITEDNATURALVALUE_ECLASS_FEATURE_COUNT = 2;
+			static const unsigned int UNLIMITEDNATURALVALUE_ECLASS_OPERATION_COUNT = 12;
+			static const int UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE = 161;
 			
 			
-			static const int UNLIMITEDNATURALVALUE___EQUALS__VALUE = 10;
-			static const int UNLIMITEDNATURALVALUE___SPECIFY = 9;
-			static const int UNLIMITEDNATURALVALUE___TOSTRING = 11;
+			static const int UNLIMITEDNATURALVALUE_EOPERATION_EQUALS_VALUE = 10;
+			static const int UNLIMITEDNATURALVALUE_EOPERATION_SPECIFY = 9;
+			static const int UNLIMITEDNATURALVALUE_EOPERATION_TOSTRING = 11;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getUnlimitedNaturalValue_Value() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalValue_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getUnlimitedNaturalValue_EAttribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue___ToString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_EOperation_toString() const = 0;
 			
 			// End Class UnlimitedNaturalValue
 
 
 			// Begin Class Value
 			//Class and Feature IDs 
-			static const int VALUE = 10;
-			static const int VALUE_FEATURE_COUNT = 0;
-			static const int VALUE_OPERATION_COUNT = 8;
+			static const unsigned int VALUE_ECLASS = 10;
+			static const unsigned int VALUE_ECLASS_FEATURE_COUNT = 0;
+			static const unsigned int VALUE_ECLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int VALUE___EQUALS__VALUE = 3;
-			static const int VALUE___GETTYPES = 4;
-			static const int VALUE___HASTYPES__CLASSIFIER = 5;
-			static const int VALUE___OBJECTID = 7;
-			static const int VALUE___SPECIFY = 2;
-			static const int VALUE___TOSTRING = 6;
+			static const int VALUE_EOPERATION_EQUALS_VALUE = 3;
+			static const int VALUE_EOPERATION_GETTYPES = 4;
+			static const int VALUE_EOPERATION_HASTYPES_CLASSIFIER = 5;
+			static const int VALUE_EOPERATION_OBJECTID = 7;
+			static const int VALUE_EOPERATION_SPECIFY = 2;
+			static const int VALUE_EOPERATION_TOSTRING = 6;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValue() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getValue_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getValue___Equals__Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValue___GetTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValue___HasTypes__Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValue___ObjectId() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValue___Specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValue___ToString() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_hasTypes_Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_objectId() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_specify() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_EOperation_toString() const = 0;
 			
 			// End Class Value
 
 
 			// Begin Class ValueSpecificActionActivation
 			//Class and Feature IDs 
-			static const int VALUESPECIFICACTIONACTIVATION = 87;
-			static const int VALUESPECIFICACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int VALUESPECIFICACTIONACTIVATION_OPERATION_COUNT = 47;
+			static const unsigned int VALUESPECIFICACTIONACTIVATION_ECLASS = 87;
+			static const unsigned int VALUESPECIFICACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int VALUESPECIFICACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecificActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getValueSpecificActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2739,17 +2733,18 @@ namespace fUML
 
 			// Begin Class Values
 			//Class and Feature IDs 
-			static const int VALUES = 69;
-			static const int VALUES_FEATURE_COUNT = 1;
-			static const int VALUES_OPERATION_COUNT = 0;
+			static const unsigned int VALUES_ECLASS = 69;
+			static const unsigned int VALUES_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int VALUES_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int VALUES_VALUES = 690;
+			static const int VALUES_EREFERENCE_VALUES = 690;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValues() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getValues_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getValues_Values() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getValues_EReference_values() const = 0;
 			
 			
 			// End Class Values
@@ -2757,14 +2752,15 @@ namespace fUML
 
 			// Begin Class WriteLinkActionActivation
 			//Class and Feature IDs 
-			static const int WRITELINKACTIONACTIVATION = 95;
-			static const int WRITELINKACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int WRITELINKACTIONACTIVATION_OPERATION_COUNT = 50;
+			static const unsigned int WRITELINKACTIONACTIVATION_ECLASS = 95;
+			static const unsigned int WRITELINKACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int WRITELINKACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteLinkActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getWriteLinkActionActivation_EClass() const = 0;
+			
 			
 			
 			
@@ -2773,18 +2769,19 @@ namespace fUML
 
 			// Begin Class WriteStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION = 101;
-			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION_FEATURE_COUNT = 8;
-			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_COUNT = 51;
+			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_ECLASS = 101;
+			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
+			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_ECLASS_OPERATION_COUNT = 51;
 			
 			
-			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION___POSITION__VALUE_EINT = 50;
+			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION_EOPERATION_POSITION_VALUE_EINT = 50;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureActionActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureActionActivation_EClass() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureActionActivation___Position__Value_EInt() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureActionActivation_EOperation_position_Value_EInt() const = 0;
 			
 			// End Class WriteStructuralFeatureActionActivation
 
@@ -2799,4 +2796,3 @@ namespace fUML
 	};
 }
 #endif /* end of include guard: FUMLPACKAGE_HPP */
-

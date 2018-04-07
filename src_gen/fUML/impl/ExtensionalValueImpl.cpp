@@ -1,18 +1,49 @@
-#include "ExtensionalValueImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ExtensionalValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "FeatureValue.hpp"
+#include "fUML/CompoundValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/FeatureValue.hpp"
 
+#include "fUML/Locus.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -40,7 +71,6 @@ ExtensionalValueImpl::~ExtensionalValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -73,13 +103,14 @@ ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj):Ext
 
 std::shared_ptr<ecore::EObject>  ExtensionalValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExtensionalValueImpl(*this));
+	std::shared_ptr<ExtensionalValueImpl> element(new ExtensionalValueImpl(*this));
+	element->setThisExtensionalValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExtensionalValue();
+	return FUMLPackageImpl::eInstance()->getExtensionalValue_EClass();
 }
 
 //*********************************
@@ -91,11 +122,11 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 void ExtensionalValueImpl::destroy() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if(this->getLocus() != nullptr)
     {
-		struct null_deleter{void operator()(void const *) const { } };
-        this->getLocus()->remove(std::shared_ptr<ExtensionalValue>(this, null_deleter()));
+        this->getLocus()->remove(getThisExtensionalValuePtr());
     }
 	//end of body
 }
@@ -118,17 +149,162 @@ void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 //*********************************
 
 
+std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr()
+{
+	return m_thisExtensionalValuePtr.lock();
+}
+void ExtensionalValueImpl::setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr)
+{
+	m_thisExtensionalValuePtr = thisExtensionalValuePtr;
+	setThisCompoundValuePtr(thisExtensionalValuePtr);
+}
+std::shared_ptr<ecore::EObject> ExtensionalValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionalValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_FEATUREVALUES:
-			return getFeatureValues(); //210
-		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 			return getLocus(); //211
 	}
-	return boost::any();
+	return CompoundValueImpl::internalEIsSet(featureID);
 }
+bool ExtensionalValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+			return getLocus() != nullptr; //211
+	}
+	return CompoundValueImpl::internalEIsSet(featureID);
+}
+bool ExtensionalValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //211
+			return true;
+		}
+	}
+
+	return CompoundValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExtensionalValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExtensionalValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("locus");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("locus")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	CompoundValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExtensionalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	CompoundValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExtensionalValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>( references.front() );
+				setLocus(_locus);
+			}
+			
+			return;
+		}
+	}
+	CompoundValueImpl::resolveReferences(featureID, references);
+}
+
+void ExtensionalValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CompoundValueImpl::saveContent(saveHandler);
+	
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+}
+
+void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("locus", this->getLocus());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

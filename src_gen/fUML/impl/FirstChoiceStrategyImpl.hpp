@@ -7,29 +7,13 @@
 #ifndef FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP
 #define FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../FirstChoiceStrategy.hpp"
 
-#include "impl/ChoiceStrategyImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "fUML/impl/ChoiceStrategyImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -46,6 +30,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			FirstChoiceStrategyImpl();
+			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr();
+			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
 
 
 
@@ -80,12 +66,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<FirstChoiceStrategy> m_thisFirstChoiceStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP */
-

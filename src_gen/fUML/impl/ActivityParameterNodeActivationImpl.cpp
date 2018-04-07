@@ -1,24 +1,59 @@
-#include "ActivityParameterNodeActivationImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ActivityParameterNodeActivationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
-#include "ActivityParameterNode.hpp"
-#include "FUMLFactory.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "fUML/ParameterValue.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/ActivityParameterNode.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityNode.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ObjectNodeActivation.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Token.hpp"
+#include "fUML/ObjectNodeActivation.hpp"
 
+#include "fUML/Token.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -44,8 +79,17 @@ ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityParameterNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
+
+
+//Additional constructor for the containments back reference
+			ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityParameterNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
 
 
 
@@ -63,12 +107,12 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -87,13 +131,14 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 
 std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityParameterNodeActivationImpl(*this));
+	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl(*this));
+	element->setThisActivityParameterNodeActivationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityParameterNodeActivation();
+	return FUMLPackageImpl::eInstance()->getActivityParameterNodeActivation_EClass();
 }
 
 //*********************************
@@ -105,6 +150,7 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass
 //*********************************
 void ActivityParameterNodeActivationImpl::clearTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (this->getNode()->getIncoming()->size() == 0) {
         ObjectNodeActivationImpl::clearTokens();
@@ -114,6 +160,7 @@ void ActivityParameterNodeActivationImpl::clearTokens()
 
 void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if (this->getNode()->getIncoming()->size() == 0) 
 	{
@@ -124,11 +171,14 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		if (parameterValue != nullptr) 
 		{
 			DEBUG_MESSAGE(std::cout<< "[fire] Parameter has "<< parameterValue->getValues()->size() << " value(s)."<<std::endl;)
-			std::shared_ptr<Bag<Value> > valueList = parameterValue->getValues();
-			for (std::shared_ptr<Value> value : *valueList)
+			Bag<Value>* valueList = parameterValue->getValues().get();
+			auto factory = fUML::FUMLFactory::eInstance();
+            const auto size = valueList->size();
+            std::shared_ptr<Value> value;
+			for (unsigned int i = 0; i< size; i++)
 			{
-                //struct null_deleter{void operator()(void const *) const { } };
-				std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
+                value = (*valueList)[i];
+				std::shared_ptr<ObjectToken> token = factory->createObjectToken();
 				token->setValue(value);
 				this->addToken(token);
 			}
@@ -141,11 +191,10 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		DEBUG_MESSAGE(std::cout<< "[fire] Output activity parameter node "
 				<< this->getNode()->getName() + "..."<<std::endl;)
 		this->addTokens(incomingTokens);
-		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>(incomingTokens->at(0));
+		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>((*incomingTokens)[0]);
 		if (forkToken != nullptr) 
 		{
-			//struct null_deleter{void operator()(void const *) const { } };
-			forkToken->getBaseToken()->setHolder(shared_from_this());
+			forkToken->getBaseToken()->setHolder(getThisActivityParameterNodeActivationPtr());
 		}
 	}
 	//end of body
@@ -160,27 +209,116 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 //*********************************
 
 
+std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr()
+{
+	return m_thisActivityParameterNodeActivationPtr.lock();
+}
+void ActivityParameterNodeActivationImpl::setThisActivityParameterNodeActivationPtr(std::weak_ptr<ActivityParameterNodeActivation> thisActivityParameterNodeActivationPtr)
+{
+	m_thisActivityParameterNodeActivationPtr = thisActivityParameterNodeActivationPtr;
+	setThisObjectNodeActivationPtr(thisActivityParameterNodeActivationPtr);
+}
+std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::eContainer() const
+{
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityParameterNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
-			return getGroup(); //603
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
-			return getHeldTokens(); //602
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
-			return getIncomingEdges(); //601
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
-			return getNode(); //604
-		case FUMLPackage::OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //606
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
-			return getOutgoingEdges(); //600
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
-			return isRunning(); //605
 	}
-	return boost::any();
+	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
+bool ActivityParameterNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ObjectNodeActivationImpl::internalEIsSet(featureID);
+}
+bool ActivityParameterNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ObjectNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityParameterNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityParameterNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityParameterNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActivityParameterNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ObjectNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void ActivityParameterNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ObjectNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

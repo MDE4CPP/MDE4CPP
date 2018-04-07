@@ -1,36 +1,67 @@
-#include "ReferenceImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ReferenceImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include <Classifier.hpp>
-    #include "FUMLFactory.hpp"
-    #include "Class.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include <uml/Classifier.hpp>
+    #include "fUML/FUMLFactory.hpp"
+    #include "uml/Class.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Classifier.hpp"
+#include "uml/Class.hpp"
 
-#include "Execution.hpp"
+#include "uml/Classifier.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/Execution.hpp"
 
-#include "Object.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Operation.hpp"
+#include "fUML/Object.hpp"
 
-#include "ParameterValue.hpp"
+#include "uml/Operation.hpp"
 
-#include "SignalInstance.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "StructuralFeature.hpp"
+#include "fUML/SignalInstance.hpp"
 
-#include "StructuredValue.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "Value.hpp"
+#include "fUML/StructuredValue.hpp"
 
+#include "fUML/Value.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -58,7 +89,6 @@ ReferenceImpl::~ReferenceImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -83,13 +113,14 @@ ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 
 std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ReferenceImpl(*this));
+	std::shared_ptr<ReferenceImpl> element(new ReferenceImpl(*this));
+	element->setThisReferencePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReference();
+	return FUMLPackageImpl::eInstance()->getReference_EClass();
 }
 
 //*********************************
@@ -101,6 +132,7 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->assignFeatureValue(feature,values,position);
 	//end of body
@@ -108,6 +140,7 @@ void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  
 
 void ReferenceImpl::destroy() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->destroy();
 	//end of body
@@ -115,6 +148,7 @@ void ReferenceImpl::destroy()
 
 std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->dispatch(operation);
 	//end of body
@@ -122,51 +156,24 @@ std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Op
 
 bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > myTypes = nullptr;//this->getTypes();
-	std::shared_ptr<Bag<uml::Classifier> > otherTypes = nullptr;//otherValue->getTypes();
-
-    bool isEqual = true;
-
-    // Debug.println("[equals] Value...");
-    // Debug.println("[equals] this has " + myTypes.size() +
-    // "types, other has " + otherTypes.size() + ".");
-    if(myTypes->size() != otherTypes->size())
-    {
-        isEqual = false;
-    }
-    else
-    {
-        // Debug.println("[equals] " + myTypes.size() + " type(s).");
-        unsigned int i = 0;
-	const unsigned int i_size =  myTypes->size();
-        while(isEqual && i < i_size)
-        {
-            // Debug.println("[equals] this type = " +
-            // myTypes.getValue(i).name);
-
-            bool matched = false;
-            unsigned int j = 0;
-	     const unsigned int j_size = otherTypes->size();
-            while(!matched && j < j_size)
-            {
-                // Debug.println("[equals] other type = " +
-                // otherTypes.getValue(j).name);
-                matched = (otherTypes->at(j) == myTypes->at(i));
-                j = j + 1;
-            }
-
-            isEqual = matched;
-            i = i + 1;
-        }
-    }
-
-    return isEqual;
+		bool isEqual = false;
+	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE_ECLASS) {
+		auto other = std::dynamic_pointer_cast<Reference>(otherValue);
+		if (this->getReferent() == nullptr) {
+			isEqual = other->getReferent() == nullptr;
+		} else {
+			isEqual = this->getReferent()->equals(other->getReferent());
+		}
+	}
+	return isEqual;
 	//end of body
 }
 
 std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		return  this->getReferent()->getTypes();
 	//end of body
@@ -174,6 +181,7 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 
 std::shared_ptr<fUML::Value> ReferenceImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createReference());
 	//end of body
@@ -181,6 +189,7 @@ std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 
 std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValue(feature);
 	//end of body
@@ -188,6 +197,7 @@ std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::sha
 
 std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValues();
 	//end of body
@@ -195,6 +205,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues()
 
 void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->send(signalInstance);
 	//end of body
@@ -202,6 +213,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 
 void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->startBehavior(classifier,inputs);
 	//end of body
@@ -209,6 +221,7 @@ void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::s
 
 std::string ReferenceImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "Reference to " + this->getReferent()->toString();
 	//end of body
@@ -232,15 +245,159 @@ void ReferenceImpl::setReferent(std::shared_ptr<fUML::Object> _referent)
 //*********************************
 
 
+std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr()
+{
+	return m_thisReferencePtr.lock();
+}
+void ReferenceImpl::setThisReferencePtr(std::weak_ptr<Reference> thisReferencePtr)
+{
+	m_thisReferencePtr = thisReferencePtr;
+	setThisStructuredValuePtr(thisReferencePtr);
+}
+std::shared_ptr<ecore::EObject> ReferenceImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReferenceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
 			return getReferent(); //120
 	}
-	return boost::any();
+	return StructuredValueImpl::internalEIsSet(featureID);
 }
+bool ReferenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+			return getReferent() != nullptr; //120
+	}
+	return StructuredValueImpl::internalEIsSet(featureID);
+}
+bool ReferenceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _referent = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setReferent(_referent); //120
+			return true;
+		}
+	}
+
+	return StructuredValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("referent");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referent")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	StructuredValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Object> _referent = std::dynamic_pointer_cast<fUML::Object>( references.front() );
+				setReferent(_referent);
+			}
+			
+			return;
+		}
+	}
+	StructuredValueImpl::resolveReferences(featureID, references);
+}
+
+void ReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("referent", this->getReferent());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -7,18 +7,6 @@
 #ifndef FUML_LOCUSLOCUSIMPL_HPP
 #define FUML_LOCUSLOCUSIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
@@ -26,21 +14,7 @@
 #include "../Locus.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "Classifier.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "ExecutionFactory.hpp"
-#include "ExtensionalValue.hpp"
-#include "Executor.hpp"
-#include "Object.hpp"
-#include "Execution.hpp"
-
-
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -58,6 +32,8 @@ virtual public Locus
 		protected:
 			friend class FUMLFactoryImpl;
 			LocusImpl();
+			virtual std::shared_ptr<Locus> getThisLocusPtr();
+			virtual void setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr);
 
 
 
@@ -115,7 +91,7 @@ virtual public Locus
 			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor_executor) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const ;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue>> getExtensionalValues() const ;
 			
 			/*!
 			 */
@@ -134,12 +110,29 @@ virtual public Locus
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<Locus> m_thisLocusPtr;
 	};
 }
 #endif /* end of include guard: FUML_LOCUSLOCUSIMPL_HPP */
-

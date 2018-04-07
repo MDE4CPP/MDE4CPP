@@ -1,23 +1,58 @@
-#include "ActivityFinalNodeActivationImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ActivityFinalNodeActivationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
-#include "FUMLFactory.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ExpansionActivationGroup.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
+#include "uml/ActivityNode.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityNode.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ControlNodeActivation.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Token.hpp"
+#include "fUML/ControlNodeActivation.hpp"
 
+#include "fUML/Token.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -43,8 +78,17 @@ ActivityFinalNodeActivationImpl::~ActivityFinalNodeActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityFinalNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
+
+
+//Additional constructor for the containments back reference
+			ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ActivityFinalNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
 
 
 
@@ -61,12 +105,12 @@ ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityF
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
@@ -85,13 +129,14 @@ ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityF
 
 std::shared_ptr<ecore::EObject>  ActivityFinalNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ActivityFinalNodeActivationImpl(*this));
+	std::shared_ptr<ActivityFinalNodeActivationImpl> element(new ActivityFinalNodeActivationImpl(*this));
+	element->setThisActivityFinalNodeActivationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityFinalNodeActivation();
+	return FUMLPackageImpl::eInstance()->getActivityFinalNodeActivation_EClass();
 }
 
 //*********************************
@@ -103,29 +148,41 @@ std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() c
 //*********************************
 void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
+		DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
 
     if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
     {
-        if (this->getGroup()->getActivityExecution() != nullptr) 
-        {
-            this->getGroup()->getActivityExecution()->terminate();
-        }
-        else if (this->getGroup()->getContainingNodeActivation() != nullptr) 
-        {
-            this->getGroup()->getContainingNodeActivation()->terminateAll();
-        }
-        else 
-        {
-        	std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this->getGroup());
-        	if (group != nullptr) 
-        	{
-        		group->getRegionActivation()->terminate();
-        	}
-        	        
-        }
+		auto this_group = this->getGroup().lock();
+		if(this_group )
+		{
+			auto activityExecution = this_group->getActivityExecution().lock();
+			if (activityExecution)
+			{
+				activityExecution->terminate();
+			}
+			else if (this_group->getContainingNodeActivation().lock())
+			{
+				auto activation= this_group->getContainingNodeActivation().lock();
+				if(activation)
+				{
+					activation->terminateAll();
+				}
+			}
+			else
+			{
+				std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this_group);
+				if (group != nullptr)
+				{
+					group->getRegionActivation()->terminate();
+				}
+
+			}
+		}
     }
+
+
 	//end of body
 }
 
@@ -138,25 +195,116 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 //*********************************
 
 
+std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr()
+{
+	return m_thisActivityFinalNodeActivationPtr.lock();
+}
+void ActivityFinalNodeActivationImpl::setThisActivityFinalNodeActivationPtr(std::weak_ptr<ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr)
+{
+	m_thisActivityFinalNodeActivationPtr = thisActivityFinalNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisActivityFinalNodeActivationPtr);
+}
+std::shared_ptr<ecore::EObject> ActivityFinalNodeActivationImpl::eContainer() const
+{
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityFinalNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityFinalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
-			return getGroup(); //673
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
-			return getHeldTokens(); //672
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
-			return getIncomingEdges(); //671
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
-			return getNode(); //674
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
-			return getOutgoingEdges(); //670
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
-			return isRunning(); //675
 	}
-	return boost::any();
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
+bool ActivityFinalNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+bool ActivityFinalNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ActivityFinalNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ActivityFinalNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityFinalNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ActivityFinalNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ControlNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void ActivityFinalNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ControlNodeActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ActivityFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

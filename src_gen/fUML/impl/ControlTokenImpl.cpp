@@ -1,18 +1,48 @@
-#include "ControlTokenImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ControlTokenImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Token.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "Value.hpp"
+#include "fUML/Token.hpp"
 
+#include "fUML/Value.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -38,7 +68,6 @@ ControlTokenImpl::~ControlTokenImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -50,6 +79,7 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
 	
@@ -63,13 +93,14 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 
 std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ControlTokenImpl(*this));
+	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
+	element->setThisControlTokenPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getControlToken();
+	return FUMLPackageImpl::eInstance()->getControlToken_EClass();
 }
 
 //*********************************
@@ -81,6 +112,7 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 //*********************************
 bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return (std::dynamic_pointer_cast<ControlToken>(other) != nullptr);
 	//end of body
@@ -88,6 +120,7 @@ bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 
 std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return nullptr;
 	//end of body
@@ -95,6 +128,7 @@ std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const
 
 bool ControlTokenImpl::isControl() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		return true;
 	//end of body
@@ -109,15 +143,106 @@ bool ControlTokenImpl::isControl()
 //*********************************
 
 
+std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr()
+{
+	return m_thisControlTokenPtr.lock();
+}
+void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr)
+{
+	m_thisControlTokenPtr = thisControlTokenPtr;
+	setThisTokenPtr(thisControlTokenPtr);
+}
+std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ControlTokenImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_HOLDER:
-			return getHolder(); //560
 	}
-	return boost::any();
+	return TokenImpl::internalEIsSet(featureID);
 }
+bool ControlTokenImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return TokenImpl::internalEIsSet(featureID);
+}
+bool ControlTokenImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return TokenImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ControlTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	TokenImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ControlTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	TokenImpl::resolveReferences(featureID, references);
+}
+
+void ControlTokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TokenImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

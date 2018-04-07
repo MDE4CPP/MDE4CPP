@@ -1,5 +1,5 @@
-#include "FUMLFactory.hpp"
-#include "impl/FUMLFactoryImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/impl/FUMLFactoryImpl.hpp"
 
 using namespace fUML;
 
@@ -12,7 +12,6 @@ std::shared_ptr<FUMLFactory>FUMLFactory::eInstance()
 	{
 		//create a new Factoryimplementation
 		instance.reset(FUMLFactoryImpl::create());
-		std::dynamic_pointer_cast<FUMLFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

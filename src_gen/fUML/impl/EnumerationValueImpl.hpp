@@ -7,36 +7,13 @@
 #ifndef FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP
 #define FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
 //Model includes
 #include "../EnumerationValue.hpp"
 
-#include "impl/ValueImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "InstanceValue.hpp"
-#include "InstanceSpecification.hpp"
-#include "EnumerationValue.hpp"
-#include "EnumerationLiteral.hpp"
-#include "Enumeration.hpp"
-
+#include "fUML/impl/ValueImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -53,6 +30,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			EnumerationValueImpl();
+			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr();
+			virtual void setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr);
 
 
 
@@ -117,12 +96,29 @@ namespace fUML
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<EnumerationValue> m_thisEnumerationValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP */
-

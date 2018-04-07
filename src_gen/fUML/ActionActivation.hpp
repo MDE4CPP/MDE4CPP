@@ -7,27 +7,35 @@
 #ifndef FUML_ACTIONACTIVATION_HPP
 #define FUML_ACTIONACTIVATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T> class Bag;
+template<class T, class ... U> class Subset;
+template<class T> class Union;
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace fUML
+{
+	class FUMLFactory;
+}
 
 //Forward Declaration for used types
 namespace fUML 
@@ -62,12 +70,22 @@ namespace uml
 
 namespace fUML 
 {
+	class InputPinActivation;
+}
+
+namespace fUML 
+{
 	class Link;
 }
 
 namespace uml 
 {
 	class OutputPin;
+}
+
+namespace fUML 
+{
+	class OutputPinActivation;
 }
 
 namespace uml 
@@ -91,7 +109,7 @@ namespace fUML
 }
 
 // base class includes
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
 // enum includes
 
@@ -218,7 +236,12 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::PinActivation> > getPinActivation() const = 0;
+			virtual std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation>> getInputPinActivation() const = 0;
+			
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation>> getOutputPinActivation() const = 0;
+			
 			
 			
 
@@ -228,7 +251,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			bool m_firing =  false;
+			bool m_firing = false;
 			
 			
 			//*********************************
@@ -236,16 +259,34 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::PinActivation> > m_pinActivation;
+			std::shared_ptr<Subset<fUML::InputPinActivation, fUML::PinActivation>> m_inputPinActivation;
+			/*!
+			 */
+			std::shared_ptr<Subset<fUML::OutputPinActivation, fUML::PinActivation>> m_outputPinActivation;
+			/*!
+			 */
+			std::shared_ptr<Union<fUML::PinActivation>> m_pinActivation;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::PinActivation>> getPinActivation() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: FUML_ACTIONACTIVATION_HPP */
-

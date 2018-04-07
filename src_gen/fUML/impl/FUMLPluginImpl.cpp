@@ -1,6 +1,7 @@
-#include "FUMLPluginImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "FUMLPackage.hpp"
+#include "fUML/impl/FUMLPluginImpl.hpp"
+
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 using namespace fUML;
 
@@ -15,14 +16,25 @@ FUMLPluginImpl::~FUMLPluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EFactory> FUMLPluginImpl::getFactory()
+
+std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name)
+{
+	return FUMLFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EFactory> FUMLPluginImpl::getEFactory()
 {
 	return FUMLFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> FUMLPluginImpl::getPackage()
+std::shared_ptr<ecore::EPackage> FUMLPluginImpl::getEPackage()
 {
 	return FUMLPackage::eInstance();
+}
+
+std::string FUMLPluginImpl::eclipseURI()
+{
+	return "";
 }
 
 std::string FUMLPluginImpl::eNAME()

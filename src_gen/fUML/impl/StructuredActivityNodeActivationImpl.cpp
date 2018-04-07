@@ -1,37 +1,74 @@
-#include "StructuredActivityNodeActivationImpl.hpp"
-#include <iostream>
+#include "fUML/impl/StructuredActivityNodeActivationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "StructuredActivityNode.hpp"
-#include "Action.hpp"
-#include "ActivityNode.hpp"
-#include "InputPin.hpp"
-#include "OutputPin.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActionActivation.hpp"
 
-#include "ActivityNode.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ExecutableNode.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/ExecutableNode.hpp"
 
-#include "PinActivation.hpp"
+#include "fUML/InputPinActivation.hpp"
 
-#include "Token.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "Value.hpp"
+#include "fUML/OutputPinActivation.hpp"
 
+#include "fUML/PinActivation.hpp"
+
+#include "fUML/Token.hpp"
+
+#include "fUML/Value.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -59,8 +96,17 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredActivityNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
+
+
+//Additional constructor for the containments back reference
+			StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:StructuredActivityNodeActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
 
 
 
@@ -78,16 +124,16 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
+	std::shared_ptr<Union<fUML::PinActivation>> _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Union<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -107,19 +153,36 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
+	#endif
 
 	
 }
 
 std::shared_ptr<ecore::EObject>  StructuredActivityNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new StructuredActivityNodeActivationImpl(*this));
+	std::shared_ptr<StructuredActivityNodeActivationImpl> element(new StructuredActivityNodeActivationImpl(*this));
+	element->setThisStructuredActivityNodeActivationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation();
+	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation_EClass();
 }
 
 //*********************************
@@ -131,6 +194,7 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClas
 //*********************************
 std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::completeAction() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > incomingTokens(new Bag<fUML::Token>());
     if (!this->isSuspended()) 
@@ -143,6 +207,7 @@ std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::complet
 
 void StructuredActivityNodeActivationImpl::createEdgeInstances() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::ActivityEdge> > edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
 	this->getActivationGroup()->createEdgeInstance(edges);
@@ -151,21 +216,22 @@ void StructuredActivityNodeActivationImpl::createEdgeInstances()
 
 void StructuredActivityNodeActivationImpl::createNodeActivations() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	ActionActivationImpl::createNodeActivations();
 
-    this->setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
-    struct null_deleter{void operator()(void const *) const { } };
-    this->getActivationGroup()->setContainingNodeActivation(std::shared_ptr<StructuredActivityNodeActivation>(this, null_deleter()));
+	this->setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
+	this->getActivationGroup()->setContainingNodeActivation(getThisStructuredActivityNodeActivationPtr());
 
-    std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
-    std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
-    this->getActivationGroup()->createNodeActivations(nodes);
+	std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
+	std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
+	this->getActivationGroup()->createNodeActivations(nodes);
 	//end of body
 }
 
 void StructuredActivityNodeActivationImpl::doAction() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if ((std::dynamic_pointer_cast<uml::StructuredActivityNode>(this->getNode()))->getMustIsolate()) 
 	{
@@ -182,6 +248,7 @@ void StructuredActivityNodeActivationImpl::doAction()
 
 void StructuredActivityNodeActivationImpl::doStructuredActivity() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	//Remark: action is not used in the specification.
 	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(this->getNode());
@@ -205,6 +272,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
 
 std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation> thisActivation = ActionActivationImpl::getNodeActivation(node);
 
@@ -224,6 +292,7 @@ std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationIm
 
 std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<PinActivation> pinActivation = std::dynamic_pointer_cast<PinActivation>(this->getActivationGroup()->getNodeActivation(std::dynamic_pointer_cast<uml::ActivityNode>(pin)));
 	std::shared_ptr<Bag<Token> > tokens = pinActivation->getTokens();
@@ -245,6 +314,7 @@ std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinV
 
 bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    bool isSource = ActionActivationImpl::isSourceFor(edgeInstance);
     if (!isSource) {
@@ -256,6 +326,7 @@ bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Act
 
 bool StructuredActivityNodeActivationImpl::isSuspended() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return this->getActivationGroup()->isSuspended();
 	//end of body
@@ -263,6 +334,7 @@ bool StructuredActivityNodeActivationImpl::isSuspended()
 
 std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::ActivityNode> > activityNodes(new Bag<uml::ActivityNode>());
 
@@ -295,6 +367,7 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::m
 
 void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<PinActivation> pinActivation = std::dynamic_pointer_cast<PinActivation>(this->getActivationGroup()->getNodeActivation(std::dynamic_pointer_cast<uml::ActivityNode>(pin)));
 
@@ -310,6 +383,7 @@ void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::Out
 
 void StructuredActivityNodeActivationImpl::resume() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > incomingTokens = ActionActivationImpl::completeAction();
     if (incomingTokens->size() > 0) 
@@ -325,6 +399,7 @@ void StructuredActivityNodeActivationImpl::resume()
 
 void StructuredActivityNodeActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->terminateAll();
     ActionActivationImpl::terminate();
@@ -333,6 +408,7 @@ void StructuredActivityNodeActivationImpl::terminate()
 
 void StructuredActivityNodeActivationImpl::terminateAll() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->getActivationGroup()->terminateAll();
 	//end of body
@@ -354,33 +430,169 @@ void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fU
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation>> StructuredActivityNodeActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
+
+std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr()
+{
+	return m_thisStructuredActivityNodeActivationPtr.lock();
+}
+void StructuredActivityNodeActivationImpl::setThisStructuredActivityNodeActivationPtr(std::weak_ptr<StructuredActivityNodeActivation> thisStructuredActivityNodeActivationPtr)
+{
+	m_thisStructuredActivityNodeActivationPtr = thisStructuredActivityNodeActivationPtr;
+	setThisActionActivationPtr(thisStructuredActivityNodeActivationPtr);
+}
+std::shared_ptr<ecore::EObject> StructuredActivityNodeActivationImpl::eContainer() const
+{
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
 
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuredActivityNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP:
-			return getActivationGroup(); //718
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
-			return isFiring(); //717
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
-			return getGroup(); //713
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
-			return getHeldTokens(); //712
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
-			return getIncomingEdges(); //711
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
-			return getNode(); //714
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
-			return getOutgoingEdges(); //710
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
-			return getPinActivation(); //716
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
-			return isRunning(); //715
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+			return getActivationGroup(); //7110
 	}
-	return boost::any();
+	return ActionActivationImpl::internalEIsSet(featureID);
 }
+bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+			return getActivationGroup() != nullptr; //7110
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+bool StructuredActivityNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setActivationGroup(_activationGroup); //7110
+			return true;
+		}
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StructuredActivityNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void StructuredActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+	try
+	{
+		if ( nodeName.compare("activationGroup") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ActivityNodeActivationGroup";
+			}
+			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION);
+			if (activationGroup != nullptr)
+			{
+				loadHandler->handleChild(activationGroup);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void StructuredActivityNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void StructuredActivityNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'activationGroup'
+		std::shared_ptr<fUML::ActivityNodeActivationGroup > activationGroup = this->getActivationGroup();
+		if (activationGroup != nullptr)
+		{
+			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_EClass());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

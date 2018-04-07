@@ -1,29 +1,61 @@
-#include "StructuredValueImpl.hpp"
-#include <iostream>
-#include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "InstanceValue.hpp"
-#include "UmlFactory.hpp"
-#include "Slot.hpp"
-#include "Classifier.hpp"
-#include "NamedElement.hpp"
-#include "InstanceSpecification.hpp"
+#include "fUML/impl/StructuredValueImpl.hpp"
 
-#include "FUMLFactory.hpp"
-#include "StructuralFeature.hpp"
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Slot.hpp"
+#include "uml/StructuralFeature.hpp"
+#include "uml/UmlFactory.hpp"
 
 
 //Forward declaration includes
-#include "FeatureValue.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "StructuralFeature.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Value.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -49,7 +81,6 @@ StructuredValueImpl::~StructuredValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -72,13 +103,14 @@ StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj):Struct
 
 std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new StructuredValueImpl(*this));
+	std::shared_ptr<StructuredValueImpl> element(new StructuredValueImpl(*this));
+	element->setThisStructuredValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredValue();
+	return FUMLPackageImpl::eInstance()->getStructuredValue_EClass();
 }
 
 //*********************************
@@ -90,6 +122,7 @@ std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 //*********************************
 void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
 	//end of body
@@ -97,6 +130,7 @@ void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeat
 
 void StructuredValueImpl::createFeatureValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
@@ -136,6 +170,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureVa
 
 std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::InstanceValue> instanceValue = uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
 	std::shared_ptr<uml::InstanceSpecification> instance = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());
@@ -182,13 +217,109 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
 //*********************************
 
 
+std::shared_ptr<StructuredValue> StructuredValueImpl::getThisStructuredValuePtr()
+{
+	return m_thisStructuredValuePtr.lock();
+}
+void StructuredValueImpl::setThisStructuredValuePtr(std::weak_ptr<StructuredValue> thisStructuredValuePtr)
+{
+	m_thisStructuredValuePtr = thisStructuredValuePtr;
+	setThisValuePtr(thisStructuredValuePtr);
+}
+std::shared_ptr<ecore::EObject> StructuredValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuredValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StructuredValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return boost::any();
+	return ValueImpl::internalEIsSet(featureID);
 }
+bool StructuredValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ValueImpl::internalEIsSet(featureID);
+}
+bool StructuredValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void StructuredValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void StructuredValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StructuredValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void StructuredValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ValueImpl::resolveReferences(featureID, references);
+}
+
+void StructuredValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void StructuredValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

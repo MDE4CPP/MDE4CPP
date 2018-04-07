@@ -1,25 +1,61 @@
-#include "ReadIsClassifiedObjectActionActivationImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ReadIsClassifiedObjectActionActivationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActionActivation.hpp"
 
-#include "ActivityNode.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "Classifier.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "PinActivation.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Token.hpp"
+#include "fUML/InputPinActivation.hpp"
 
+#include "fUML/OutputPinActivation.hpp"
+
+#include "fUML/PinActivation.hpp"
+
+#include "fUML/Token.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -45,8 +81,17 @@ ReadIsClassifiedObjectActionActivationImpl::~ReadIsClassifiedObjectActionActivat
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ReadIsClassifiedObjectActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
+
+
+//Additional constructor for the containments back reference
+			ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ReadIsClassifiedObjectActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
 
 
 
@@ -64,16 +109,16 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
+	std::shared_ptr<Union<fUML::PinActivation>> _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Union<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -86,18 +131,35 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
+	std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::InputPinActivation>(std::dynamic_pointer_cast<fUML::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::OutputPinActivation>(std::dynamic_pointer_cast<fUML::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
+	#endif
 
 }
 
 std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionActivationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ReadIsClassifiedObjectActionActivationImpl(*this));
+	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl(*this));
+	element->setThisReadIsClassifiedObjectActionActivationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadIsClassifiedObjectActionActivation();
+	return FUMLPackageImpl::eInstance()->getReadIsClassifiedObjectActionActivation_EClass();
 }
 
 //*********************************
@@ -120,31 +182,122 @@ bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::PinActivation>> ReadIsClassifiedObjectActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
+
+std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr()
+{
+	return m_thisReadIsClassifiedObjectActionActivationPtr.lock();
+}
+void ReadIsClassifiedObjectActionActivationImpl::setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr)
+{
+	m_thisReadIsClassifiedObjectActionActivationPtr = thisReadIsClassifiedObjectActionActivationPtr;
+	setThisActionActivationPtr(thisReadIsClassifiedObjectActionActivationPtr);
+}
+std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionActivationImpl::eContainer() const
+{
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
 
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_FIRING:
-			return isFiring(); //1067
-		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
-			return getGroup(); //1063
-		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
-			return getHeldTokens(); //1062
-		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
-			return getIncomingEdges(); //1061
-		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
-			return getNode(); //1064
-		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1060
-		case FUMLPackage::ACTIONACTIVATION_PINACTIVATION:
-			return getPinActivation(); //1066
-		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
-			return isRunning(); //1065
 	}
-	return boost::any();
+	return ActionActivationImpl::internalEIsSet(featureID);
 }
+bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ReadIsClassifiedObjectActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ReadIsClassifiedObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReadIsClassifiedObjectActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ReadIsClassifiedObjectActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void ReadIsClassifiedObjectActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void ReadIsClassifiedObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

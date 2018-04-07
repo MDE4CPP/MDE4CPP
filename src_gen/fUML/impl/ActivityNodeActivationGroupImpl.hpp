@@ -7,18 +7,6 @@
 #ifndef FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP
 #define FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
@@ -26,23 +14,7 @@
 #include "../ActivityNodeActivationGroup.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-#include "ActivityNode.hpp"
-#include "ActivityNodeActivation.hpp"
-#include "ActivityNodeActivationGroup.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "ControlNodeActivation.hpp"
-
-#include "ActivityEdgeInstance.hpp"
-#include "InputPin.hpp"
-#include "Class.hpp"
-#include "ActivityEdge.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "FUMLFactory.hpp"
-
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace fUML 
@@ -60,6 +32,16 @@ virtual public ActivityNodeActivationGroup
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationGroupImpl();
+			virtual std::shared_ptr<ActivityNodeActivationGroup> getThisActivityNodeActivationGroupPtr();
+			virtual void setThisActivityNodeActivationGroupPtr(std::weak_ptr<ActivityNodeActivationGroup> thisActivityNodeActivationGroupPtr);
+
+			//Additional constructors for the containments back reference
+			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::ActivityExecution > par_activityExecution);
+
+
+			//Additional constructors for the containments back reference
+			ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation);
+
 
 
 
@@ -150,29 +132,29 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityExecution > getActivityExecution() const ;
+			virtual std::weak_ptr<fUML::ActivityExecution > getActivityExecution() const ;
 			
 			/*!
 			 */
 			virtual void setActivityExecution(std::shared_ptr<fUML::ActivityExecution> _activityExecution_activityExecution) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::StructuredActivityNodeActivation > getContainingNodeActivation() const ;
+			virtual std::weak_ptr<fUML::StructuredActivityNodeActivation > getContainingNodeActivation() const ;
 			
 			/*!
 			 */
 			virtual void setContainingNodeActivation(std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation_containingNodeActivation) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getEdgeInstances() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getEdgeInstances() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getNodeActivations() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityNodeActivation>> getNodeActivations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getSuspendedActivations() const ;
+			virtual std::shared_ptr<Bag<fUML::ActivityNodeActivation>> getSuspendedActivations() const ;
 			
 							
 			
@@ -184,12 +166,29 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, boost::any newValue) ;
+
+		private:
+			std::weak_ptr<ActivityNodeActivationGroup> m_thisActivityNodeActivationGroupPtr;
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP */
-

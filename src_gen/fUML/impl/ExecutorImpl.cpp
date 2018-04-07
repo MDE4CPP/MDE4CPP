@@ -1,29 +1,63 @@
-#include "ExecutorImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ExecutorImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Object.hpp"
-#include "FUMLFactory.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Evaluation.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Object.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Class.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Locus.hpp"
+#include "uml/Class.hpp"
 
-#include "Object.hpp"
+#include "fUML/Locus.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/Object.hpp"
 
-#include "Reference.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Reference.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -51,7 +85,6 @@ ExecutorImpl::~ExecutorImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Executor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -76,13 +109,14 @@ ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 
 std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExecutorImpl(*this));
+	std::shared_ptr<ExecutorImpl> element(new ExecutorImpl(*this));
+	element->setThisExecutorPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutor();
+	return FUMLPackageImpl::eInstance()->getExecutor_EClass();
 }
 
 //*********************************
@@ -94,6 +128,7 @@ std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return this->getLocus()->getFactory()->createEvaluation(specification)->evaluate();
 	//end of body
@@ -101,6 +136,7 @@ std::shared_ptr<fUML::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSp
 
 std::shared_ptr<Bag<fUML::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
 
@@ -125,6 +161,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > ExecutorImpl::execute(std::shared_pt
 
 std::shared_ptr<fUML::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[start] Starting " << typeid(type).name() <<"..."<<std::endl;)
 
@@ -157,15 +194,151 @@ void ExecutorImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 //*********************************
 
 
+std::shared_ptr<Executor> ExecutorImpl::getThisExecutorPtr()
+{
+	return m_thisExecutorPtr.lock();
+}
+void ExecutorImpl::setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr)
+{
+	m_thisExecutorPtr = thisExecutorPtr;
+}
+std::shared_ptr<ecore::EObject> ExecutorImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_LOCUS:
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
 			return getLocus(); //20
 	}
-	return boost::any();
+	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+bool ExecutorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+			return getLocus() != nullptr; //20
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ExecutorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //20
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExecutorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExecutorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("locus");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("locus")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExecutorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ExecutorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>( references.front() );
+				setLocus(_locus);
+			}
+			
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ExecutorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("locus", this->getLocus());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

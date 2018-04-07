@@ -1,25 +1,56 @@
-#include "IntegerValueImpl.hpp"
-#include <iostream>
+#include "fUML/impl/IntegerValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "Literalinteger.hpp"
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 #include <cstdio>
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "PrimitiveValue.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "Value.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -45,7 +76,6 @@ IntegerValueImpl::~IntegerValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -71,13 +101,14 @@ IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImp
 
 std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new IntegerValueImpl(*this));
+	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl(*this));
+	element->setThisIntegerValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getIntegerValue();
+	return FUMLPackageImpl::eInstance()->getIntegerValue_EClass();
 }
 
 //*********************************
@@ -98,12 +129,14 @@ int IntegerValueImpl::getValue() const
 //*********************************
 bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	bool isEqual = false;
+		bool isEqual = false;
 
-	std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
-    if(otherIntegerValue != nullptr)
+
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE_ECLASS)
     {
+		std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
         isEqual = (otherIntegerValue->getValue() == this->getValue());
     }
 
@@ -113,6 +146,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
 
@@ -125,6 +159,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 
 std::string IntegerValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    char buf [11];
     std::sprintf(buf, "%d", this->getValue());
@@ -141,17 +176,150 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr()
+{
+	return m_thisIntegerValuePtr.lock();
+}
+void IntegerValueImpl::setThisIntegerValuePtr(std::weak_ptr<IntegerValue> thisIntegerValuePtr)
+{
+	m_thisIntegerValuePtr = thisIntegerValuePtr;
+	setThisPrimitiveValuePtr(thisIntegerValuePtr);
+}
+std::shared_ptr<ecore::EObject> IntegerValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IntegerValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_TYPE:
-			return getType(); //180
-		case FUMLPackage::INTEGERVALUE_VALUE:
+		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
 			return getValue(); //181
 	}
-	return boost::any();
+	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
+bool IntegerValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
+			return getValue() != 0; //181
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+bool IntegerValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			int _value = boost::any_cast<int>(newValue);
+			setValue(_value); //181
+			return true;
+		}
+	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void IntegerValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void IntegerValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("value");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setValue(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void IntegerValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void IntegerValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	PrimitiveValueImpl::resolveReferences(featureID, references);
+}
+
+void IntegerValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PrimitiveValueImpl::saveContent(saveHandler);
+	
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+}
+
+void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getIntegerValue_EAttribute_value()) )
+		{
+			saveHandler->addAttribute("value", this->getValue());
+		}
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

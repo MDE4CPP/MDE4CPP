@@ -7,27 +7,34 @@
 #ifndef FUML_ACTIVITYNODEACTIVATION_HPP
 #define FUML_ACTIVITYNODEACTIVATION_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace fUML
+{
+	class FUMLFactory;
+}
 
 //Forward Declaration for used types
 namespace fUML 
@@ -76,7 +83,7 @@ namespace fUML
 }
 
 // base class includes
-#include "SemanticVisitor.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
 // enum includes
 
@@ -86,7 +93,7 @@ namespace fUML
 {
 	/*!
 	 */
-	class ActivityNodeActivation:virtual public SemanticVisitor, public std::enable_shared_from_this<ActivityNodeActivation>
+	class ActivityNodeActivation:virtual public SemanticVisitor
 	{
 		public:
  			ActivityNodeActivation(const ActivityNodeActivation &) {}
@@ -95,6 +102,10 @@ namespace fUML
 		protected:
 			ActivityNodeActivation(){}
 
+
+			//Additional constructors for the containments back reference
+
+			ActivityNodeActivation(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -223,18 +234,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const = 0;
+			virtual std::weak_ptr<fUML::ActivityNodeActivationGroup > getGroup() const = 0;
 			
 			/*!
 			 */
 			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Token> > getHeldTokens() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Token>> getHeldTokens() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getIncomingEdges() const = 0;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getIncomingEdges() const = 0;
 			
 			/*!
 			 */
@@ -245,7 +256,7 @@ namespace fUML
 			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node_node) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getOutgoingEdges() const = 0;
+			virtual std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> getOutgoingEdges() const = 0;
 			
 			
 
@@ -255,7 +266,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			bool m_running ;
+			bool m_running = false;
 			
 			
 			//*********************************
@@ -263,28 +274,38 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::ActivityNodeActivationGroup > m_group;
+			std::weak_ptr<fUML::ActivityNodeActivationGroup > m_group;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::Token> > m_heldTokens;
+			std::shared_ptr<Bag<fUML::Token>> m_heldTokens;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > m_incomingEdges;
+			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> m_incomingEdges;
 			/*!
 			 */
 			std::shared_ptr<uml::ActivityNode > m_node;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > m_outgoingEdges;
+			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> m_outgoingEdges;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: FUML_ACTIVITYNODEACTIVATION_HPP */
-

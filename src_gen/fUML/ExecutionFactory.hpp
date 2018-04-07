@@ -7,27 +7,34 @@
 #ifndef FUML_EXECUTIONFACTORY_HPP
 #define FUML_EXECUTIONFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
+#include <list>
+#include <memory>
 #include <string>
-#include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
-#include "boost/any.hpp"
+
+
+// forward declarations
+template<class T> class Bag;
+
+
 
 //*********************************
 // generated Includes
+
+#include <map>
+
+namespace persistence
+{
+	namespace interfaces
+	{
+		class XLoadHandler; // used for Persistence
+		class XSaveHandler; // used for Persistence
+	}
+}
+
+namespace fUML
+{
+	class FUMLFactory;
+}
 
 //Forward Declaration for used types
 namespace uml 
@@ -94,7 +101,7 @@ namespace uml
 
 // enum includes
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
 //*********************************
 namespace fUML 
@@ -102,6 +109,7 @@ namespace fUML
 	/*!
 	 */
 	class ExecutionFactory : virtual public ecore::EObject 
+
 	{
 		public:
  			ExecutionFactory(const ExecutionFactory &) {}
@@ -174,7 +182,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::PrimitiveType> > getBuiltInTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;
 			
 			/*!
 			 */
@@ -185,11 +193,11 @@ namespace fUML
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > getPrimitiveBehaviorPrototypes() const = 0;
+			virtual std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::SemanticStrategy> > getStrategies() const = 0;
+			virtual std::shared_ptr<Bag<fUML::SemanticStrategy>> getStrategies() const = 0;
 			
 			
 
@@ -204,25 +212,35 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<uml::PrimitiveType> > m_builtInTypes;
+			std::shared_ptr<Bag<uml::PrimitiveType>> m_builtInTypes;
 			/*!
 			 */
 			std::weak_ptr<fUML::Locus > m_locus;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > m_primitiveBehaviorPrototypes;
+			std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> m_primitiveBehaviorPrototypes;
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::SemanticStrategy> > m_strategies;
+			std::shared_ptr<Bag<fUML::SemanticStrategy>> m_strategies;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
+			
 	};
 
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORY_HPP */
-

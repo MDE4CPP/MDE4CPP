@@ -1,28 +1,59 @@
-#include "EnumerationValueImpl.hpp"
-#include <iostream>
+#include "fUML/impl/EnumerationValueImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "InstanceValue.hpp"
-#include "InstanceSpecification.hpp"
-#include "EnumerationValue.hpp"
-#include "EnumerationLiteral.hpp"
-#include "Enumeration.hpp"
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/EnumerationValue.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/UmlFactory.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Enumeration.hpp"
+#include "uml/Classifier.hpp"
 
-#include "EnumerationLiteral.hpp"
+#include "uml/Enumeration.hpp"
 
-#include "Value.hpp"
+#include "uml/EnumerationLiteral.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -54,7 +85,6 @@ EnumerationValueImpl::~EnumerationValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -81,13 +111,14 @@ EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):Enu
 
 std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new EnumerationValueImpl(*this));
+	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl(*this));
+	element->setThisEnumerationValuePtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEnumerationValue();
+	return FUMLPackageImpl::eInstance()->getEnumerationValue_EClass();
 }
 
 //*********************************
@@ -99,6 +130,7 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool isEqual = false;
 	std::shared_ptr<fUML::EnumerationValue> value = std::dynamic_pointer_cast<fUML::EnumerationValue>(otherValue);
@@ -112,6 +144,7 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
@@ -121,6 +154,7 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 
 std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
 	//end of body
@@ -128,6 +162,7 @@ std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 
 std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>()));
     //Remark: instance is so defined in the specification, but even there is not used.
@@ -142,6 +177,7 @@ std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 
 std::string EnumerationValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return this->getLiteral()->getName();
 	//end of body
@@ -175,17 +211,187 @@ void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 //*********************************
 
 
+std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr()
+{
+	return m_thisEnumerationValuePtr.lock();
+}
+void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr)
+{
+	m_thisEnumerationValuePtr = thisEnumerationValuePtr;
+	setThisValuePtr(thisEnumerationValuePtr);
+}
+std::shared_ptr<ecore::EObject> EnumerationValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
 			return getLiteral(); //330
-		case FUMLPackage::ENUMERATIONVALUE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 			return getType(); //331
 	}
-	return boost::any();
+	return ValueImpl::internalEIsSet(featureID);
 }
+bool EnumerationValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+			return getLiteral() != nullptr; //330
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+			return getType() != nullptr; //331
+	}
+	return ValueImpl::internalEIsSet(featureID);
+}
+bool EnumerationValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::EnumerationLiteral> _literal = boost::any_cast<std::shared_ptr<uml::EnumerationLiteral>>(newValue);
+			setLiteral(_literal); //330
+			return true;
+		}
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Enumeration> _type = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			setType(_type); //331
+			return true;
+		}
+	}
+
+	return ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void EnumerationValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void EnumerationValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("literal");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("literal")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("type");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("type")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EnumerationValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>( references.front() );
+				setLiteral(_literal);
+			}
+			
+			return;
+		}
+
+		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>( references.front() );
+				setType(_type);
+			}
+			
+			return;
+		}
+	}
+	ValueImpl::resolveReferences(featureID, references);
+}
+
+void EnumerationValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ValueImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("literal", this->getLiteral());
+		saveHandler->addReference("type", this->getType());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

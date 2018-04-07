@@ -1,33 +1,69 @@
-#include "InstanceValueEvaluationImpl.hpp"
-#include <iostream>
+#include "fUML/impl/InstanceValueEvaluationImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "InstanceSpecification.hpp"
-#include "InstanceValue.hpp"
-#include "Classifier.hpp"
-#include "EnumerationLiteral.hpp"
-#include "FUMLFactory.hpp"
-#include "EnumerationLiteral.hpp"
-#include "DataType.hpp"
-#include "Object.hpp"
-#include "Slot.hpp"
-#include "Value.hpp"
-#include "StructuralFeature.hpp"
-#include "Enumeration.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
+#include <iostream>
+
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/DataValue.hpp"
+#include "fUML/EnumerationValue.hpp"
+#include "fUML/Execution.hpp"
+#include "fUML/ExecutionFactory.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Object.hpp"
+#include "fUML/Reference.hpp"
+#include "fUML/Value.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/Slot.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "Locus.hpp"
+#include "fUML/Evaluation.hpp"
 
-#include "Value.hpp"
+#include "fUML/Locus.hpp"
 
-#include "ValueSpecification.hpp"
+#include "fUML/Value.hpp"
 
+#include "uml/ValueSpecification.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -53,7 +89,6 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InstanceValueEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -80,13 +115,14 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEval
 
 std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new InstanceValueEvaluationImpl(*this));
+	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl(*this));
+	element->setThisInstanceValueEvaluationPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation();
+	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation_EClass();
 }
 
 //*********************************
@@ -98,6 +134,7 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
 	std::shared_ptr<Bag<uml::Classifier> > types = instance->getClassifier();
@@ -185,17 +222,109 @@ std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr()
+{
+	return m_thisInstanceValueEvaluationPtr.lock();
+}
+void InstanceValueEvaluationImpl::setThisInstanceValueEvaluationPtr(std::weak_ptr<InstanceValueEvaluation> thisInstanceValueEvaluationPtr)
+{
+	m_thisInstanceValueEvaluationPtr = thisInstanceValueEvaluationPtr;
+	setThisEvaluationPtr(thisInstanceValueEvaluationPtr);
+}
+std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InstanceValueEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_LOCUS:
-			return getLocus(); //251
-		case FUMLPackage::EVALUATION_SPECIFICATION:
-			return getSpecification(); //250
 	}
-	return boost::any();
+	return EvaluationImpl::internalEIsSet(featureID);
 }
+bool InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return EvaluationImpl::internalEIsSet(featureID);
+}
+bool InstanceValueEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void InstanceValueEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	EvaluationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	EvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	EvaluationImpl::resolveReferences(featureID, references);
+}
+
+void InstanceValueEvaluationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	EvaluationImpl::saveContent(saveHandler);
+	
+	SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+}
+
+void InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,23 +1,54 @@
-#include "ExpansionActivationGroupImpl.hpp"
-#include <iostream>
+#include "fUML/impl/ExpansionActivationGroupImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+#include <iostream>
+
+#include "abstractDataTypes/Bag.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include <exception> // used in Persistence
 
-#include "ActivityExecution.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityExecution.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ExpansionRegionActivation.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "StructuredActivityNodeActivation.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
 
+#include "fUML/StructuredActivityNodeActivation.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML;
 
@@ -45,8 +76,28 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExpansionActivationGroup "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
+
+
+//Additional constructor for the containments back reference
+			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::ActivityExecution > par_activityExecution)
+			:ExpansionActivationGroupImpl()
+			{
+			    m_activityExecution = par_activityExecution;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::StructuredActivityNodeActivation > par_containingNodeActivation)
+			:ExpansionActivationGroupImpl()
+			{
+			    m_containingNodeActivation = par_containingNodeActivation;
+			}
+
+
 
 
 
@@ -66,7 +117,7 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 	m_regionActivation  = obj.getRegionActivation();
 
-	std::shared_ptr< Bag<fUML::ActivityNodeActivation> > _suspendedActivations = obj.getSuspendedActivations();
+	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _suspendedActivations = obj.getSuspendedActivations();
 	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
@@ -93,13 +144,14 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
 {
-	std::shared_ptr<ecore::EObject> element(new ExpansionActivationGroupImpl(*this));
+	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(*this));
+	element->setThisExpansionActivationGroupPtr(element);
 	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup();
+	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup_EClass();
 }
 
 //*********************************
@@ -128,25 +180,162 @@ void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Exp
 //*********************************
 
 
+std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr()
+{
+	return m_thisExpansionActivationGroupPtr.lock();
+}
+void ExpansionActivationGroupImpl::setThisExpansionActivationGroupPtr(std::weak_ptr<ExpansionActivationGroup> thisExpansionActivationGroupPtr)
+{
+	m_thisExpansionActivationGroupPtr = thisExpansionActivationGroupPtr;
+	setThisActivityNodeActivationGroupPtr(thisExpansionActivationGroupPtr);
+}
+std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
+{
+	if(auto wp = m_activityExecution.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_containingNodeActivation.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionActivationGroupImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION:
-			return getActivityExecution(); //752
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION:
-			return getContainingNodeActivation(); //753
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EDGEINSTANCES:
-			return getEdgeInstances(); //750
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_NODEACTIVATIONS:
-			return getNodeActivations(); //751
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
 			return getRegionActivation(); //755
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_SUSPENDEDACTIVATIONS:
-			return getSuspendedActivations(); //754
 	}
-	return boost::any();
+	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
+bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+			return getRegionActivation() != nullptr; //755
+	}
+	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
+}
+bool ExpansionActivationGroupImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = boost::any_cast<std::shared_ptr<fUML::ExpansionRegionActivation>>(newValue);
+			setRegionActivation(_regionActivation); //755
+			return true;
+		}
+	}
+
+	return ActivityNodeActivationGroupImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get FUMLFactory
+	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ExpansionActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("regionActivation");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("regionActivation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityNodeActivationGroupImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+{
+
+
+	ActivityNodeActivationGroupImpl::loadNode(nodeName, loadHandler, modelFactory);
+}
+
+void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::ExpansionRegionActivation>( references.front() );
+				setRegionActivation(_regionActivation);
+			}
+			
+			return;
+		}
+	}
+	ActivityNodeActivationGroupImpl::resolveReferences(featureID, references);
+}
+
+void ExpansionActivationGroupImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityNodeActivationGroupImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+
+	
+
+		// Add references
+		saveHandler->addReference("regionActivation", this->getRegionActivation());
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

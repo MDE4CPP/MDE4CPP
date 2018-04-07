@@ -1,104 +1,20 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: fUML'
 
 task buildFUML(dependsOn: ['generateFUML', 'compileFUML']) {
 	group 'fUML'
-	description 'build fUML in debug and release'
-}
-task buildFUMLDebug(dependsOn: ['generateFUML', 'compileFUMLDebug']) {
-	group 'fUML'
-	description 'build fUML in debug'
-}
-task buildFUMLRelease(dependsOn: ['generateFUML', 'compileFUMLRelease']) {
-	group 'fUML'
-	description 'build fUML in release'
+	description 'build fUML'
 }
 
-
-task compileFUML(dependsOn: ['compileFUMLDebug', 'compileFUMLRelease']) {
+task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'fUML'
-	description 'compile fUML in debug and release'
-}
-task compileFUMLDebug {
-	group 'fUML'
-	description 'compile fUML in Debug'
+	description 'compile fUML'
 
-	def folder = new File(file('./src_gen/fUML/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/fUML/.cmake/Debug'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/fUML/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-task compileFUMLRelease {
-	group 'fUML'
-	description 'compile fUML in Release'
-
-	def folder = new File(file('./src_gen/fUML/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/fUML/.cmake/Release'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/fUML/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
+	projectFolder = file("./src_gen/fUML")
 }
 
 task generateFUML(type: JavaExec) {
@@ -121,9 +37,6 @@ task generateFUML(type: JavaExec) {
 }
 
 compileFUML.mustRunAfter generateFUML
-compileFUMLDebug.mustRunAfter generateFUML
-compileFUMLRelease.mustRunAfter generateFUML
-
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/fUML/.cmake/')
