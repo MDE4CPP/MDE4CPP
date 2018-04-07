@@ -21,7 +21,7 @@
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'ExecPluginImpl')/]
 
-#include "[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
+#include "[aPackage.getPackageName()/]Exec/[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
 
 namespace [aPackage.name/] 
 {
@@ -31,11 +31,13 @@ namespace [aPackage.name/]
 			[aPackage.name.toUpperFirst()/]ExecPluginImpl();
 			virtual ~[aPackage.name.toUpperFirst()/]ExecPluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 
-			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList);
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
+			virtual boost::any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element);
 	};
 }
 [endGuard(aPackage,'ExecPluginImpl')/]

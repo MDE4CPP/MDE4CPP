@@ -16,25 +16,18 @@
  
 [import UML4CPP::generator::main::helper /]
 
-[template public generateBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
+[template public generateBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package) {
+	className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution');
+}]
+
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anOpaqueBehavior,'Execution')/]
 
-#include "impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "SubsetUnion.hpp" 
-
-[if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
-[let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
-	[if (fb._body->asOrderedSet()->size() = 2)]
-//Included from function behavior "[fb.name/]"
-[fb._body->asOrderedSet()->at(2)/]
-	[/if]
-[/let]
-[/if]
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [className/] : public fUML::OpaqueBehaviorExecutionImpl 
+	class [className/]: virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -45,6 +38,7 @@ namespace [aPackage.name/]
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<[className/]> thisExecutionPtr);
 	};
 }
 [endGuard(anOpaqueBehavior,'Execution')/]

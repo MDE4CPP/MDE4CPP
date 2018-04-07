@@ -15,14 +15,12 @@
 [module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
     
 [import UML4CPP::generator::main::generate /]
-[import fUML4CPP::generator::main::generateActivityExecutionHeader /]
-[import fUML4CPP::generator::main::generateActivityExecutionSource /]
 [import fUML4CPP::generator::main::generateBehaviorExecutionHeader /]
 [import fUML4CPP::generator::main::generateBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::generateCallOperationActionExecutionHeader /]
 [import fUML4CPP::generator::main::generateCallOperationActionExecutionSource /]
-[import fUML4CPP::generator::main::generateClassifierExecutionHeader /]
-[import fUML4CPP::generator::main::generateClassifierExecutionSource /]
+[import fUML4CPP::generator::main::generateClassifierObjectHeader /]
+[import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
@@ -52,16 +50,9 @@
 [/if]
 [/for]
 
-//generate execution classes
-[getClassiferExecutions().generateClassifierExecutionHeader(aPackage)/]
-[getClassiferExecutions().generateClassifierExecutionSource(aPackage)/]
- 
-//generate activityExecution 
-[comment Generate activities than implement an operation/]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity))]
-[act.generateActivityExecutionHeader()/]
-[act.generateActivityExecutionSource()/]
-[/for]
+//generate execution classifier
+[getClassiferExecutions().generateClassifierObjectHeader(aPackage)/]
+[getClassiferExecutions().generateClassifierObjectSource(aPackage)/]
 
 [if (not buildLibrary())]
 //generate main

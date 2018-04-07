@@ -19,8 +19,8 @@
 [template public generateExecutionPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('ExecPlugin').toUpperFirst(); }]
 [file  (anPackage.getPackageName().concat('Exec/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.getPackageName()/]Exec/[packageName/].hpp"
+#include "[anPackage.getPackageName()/]Exec/impl/[packageName.concat('Impl')/].hpp"
 
 using namespace [anPackage.name/];
 

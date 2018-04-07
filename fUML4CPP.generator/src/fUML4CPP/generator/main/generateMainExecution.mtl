@@ -22,15 +22,23 @@
 
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
+
+[defineDebugMacro()/]
+
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <omp.h>
 
 [generateMainIncludes()/]
-[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 [generateActivityRelatedIncludes(act, aPackage)/]
+[if (act.owner.oclIsKindOf(Classifier))]
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).namespace.ns().toUpperFirst()/]Factory.hpp"
+[/if]
 [/let]
 [else]
 //No main activity found (place one activity as child of the module to set it as a main activity).
@@ -46,11 +54,14 @@ int main()
 
 	[generateLocusInitialization()/]
 
-	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
+	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
-	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+	[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 	[act.generateParameterInstances(aPackage)/]
-	[act.generateStartActivityExecution(aPackage)/]   
+[if (act.owner.oclIsKindOf(Classifier))]
+	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.ns()/]::[act.owner.oclAsType(Classifier).namespace.ns().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
+[/if]
+	[act.generateStartActivityExecution(aPackage, act.owner.oclIsKindOf(Classifier))/]   
 	[/let]
 
 	if(nullptr == resultPList)
@@ -87,45 +98,43 @@ int main()
 [/template]
 
 [template public generateMainIncludes(aPackage : Package)]
-#include "FUMLFactory.hpp"
-#include "Locus.hpp"
-#include "Executor.hpp"
-#include "Parameter.hpp"
-#include "ExecutionFactoryL3.hpp"
-#include "FirstChoiceStrategy.hpp"
-#include "DispatchStrategy.hpp"
-#include "FunctionBehavior.hpp"
-#include "Activity.hpp"
-#include "SubsetUnion.hpp"
-#include "UmlFactory.hpp"
-#include "Operation.hpp"
-#include "Interface.hpp"
-#include "PrimitiveType.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/DispatchStrategy.hpp"
+#include "fUML/ExecutionFactoryL3.hpp"
+#include "fUML/FirstChoiceStrategy.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/ParameterValue.hpp"
+#include "uml/Activity.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/UmlFactory.hpp"
 
-#include "ParameterValue.hpp"
 
 //include Model package
-#include "[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
 [for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
-#include "[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+#include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
 [for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet())]
-[if ((pack.name='UML') or (pack.name='Ecore'))]
+[if (not (pack.name='StandardProfile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
-[elseif (not (pack.name='StandardProfile'))]
-#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/for]
 
 [if (aPackage.getOpaqueBehaviors()->size()>0)]
 //OpaqueBehaviourExecutions
-[aPackage.getOpaqueBehaviors().generateInclude()/]
+[aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateInclude()/]
 [/if]
 
 [if (aPackage.getCallOperationActions()->size()>0)]
 //OpaqueBehaviourExecutions
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions())]
+[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(myQualifiedName()))]
 [if (not aCOA.hasCOAAMethod())][aCOA.generateInclude()/][/if]
 [/for]
 [/if]
@@ -133,12 +142,13 @@ int main()
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
 [if (anActivity.ownedParameter->asSet()->parametersArePointers())]
-#include "Reference.hpp"
-#include "[aPackage.getPackageName()/]Factory.hpp"
+#include "fUML/Reference.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/if]
 
-[for ( par : Parameter | anActivity->asOrderedSet()->first().ownedParameter)]
-[par.generateParameterInclude()/]
+[for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
+[type.generateTypeInclude(aPackage)/]
 [/for]
 
 [/template]
@@ -163,31 +173,31 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[if(par.supportedTypes())]
-[par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
+[if(par.type.supportedTypes())]
+[par.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 
 [/for]
 [/template]
 
-[template public generateStartActivityExecution(anActivity : Activity, aPackage : Package)]
+[template public generateStartActivityExecution(anActivity : Activity, aPackage : Package, objectUsed : Boolean)]
 [if (aPackage.getOpaqueBehaviors()->size() > 0)]
-[aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
+[aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateOpaqueBehaviorCreation()/]
 [/if]
 
 [if (aPackage.getCallOperationActions()->size() > 0)]
-[aPackage.getCallOperationActions().generateCallOperationActionCreation()/]
+[aPackage.getCallOperationActions()->sortedBy(myQualifiedName()).generateCallOperationActionCreation()/]
 [/if]
 
 std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
-[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //INput parameter [par.name/] 
 std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.packageGetter()/]);
 [par.generateOutputParameter()/]
-[if(par.supportedTypes())]
+[if(par.type.supportedTypes())]
 [par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
 [par.name/]UmlLinker->setLocus(locus);
@@ -196,8 +206,14 @@ std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue
 [par.name/]P->getValues()->push_back([par.name/]Value);
 pList->push_back([par.name/]P);
 
-[/for] 
-std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute([anActivity.packageGetter()/], nullptr, pList);
+[/for]
+[if (objectUsed)]
+std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object());
+object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]ObjectPtr(object);
+object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.ns()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
+object->setLocus(locus);
+[/if]
+std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.packageGetter()/], [if (objectUsed)]object[else]nullptr[/if], pList);
 
 [if (aPackage.getCallOperationActions()->size() > 0)]
 [aPackage.getCallOperationActions().generateCallOperationActionClearing()/]

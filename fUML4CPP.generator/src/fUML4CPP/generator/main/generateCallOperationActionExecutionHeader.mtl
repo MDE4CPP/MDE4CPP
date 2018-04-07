@@ -16,17 +16,18 @@
  
 [import UML4CPP::generator::main::helper /]
 
-[template public generateCallOperationActionExecutionHeader(anCallOperationAction : CallOperationAction, aPackage :Package){ className : String = anCallOperationAction.name.toUpperFirst().concat('Execution'); }]
+[template public generateCallOperationActionExecutionHeader(anCallOperationAction : CallOperationAction, aPackage :Package) {
+	className : String = anCallOperationAction.name.toUpperFirst().concat('Execution');
+}]
 
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anCallOperationAction,'Execution')/]
 
-#include "impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "SubsetUnion.hpp"
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [className/] : public fUML::OpaqueBehaviorExecutionImpl 
+	class [className/] : virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -37,6 +38,7 @@ namespace [aPackage.name/]
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<[className/]> thisExecutionPtr);
 		};
 }
 

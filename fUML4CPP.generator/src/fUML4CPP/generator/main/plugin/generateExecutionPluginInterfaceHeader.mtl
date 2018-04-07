@@ -20,7 +20,7 @@
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
-#include "UMLExecutionModelPlugin.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {
@@ -29,11 +29,13 @@ namespace [aPackage.name/]
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
 	
+			virtual std::string eclipseURI() = 0;
 			virtual std::string eNAME() = 0;
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
-			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
+			virtual boost::any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
 
 		protected:
 			[packageName/](){};

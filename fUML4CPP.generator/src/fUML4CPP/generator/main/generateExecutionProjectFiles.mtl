@@ -18,96 +18,7 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 
 [template public generateExecutionProjectFiles(aPackage : Package) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
-[file (execPackageName.concat('/').concat('.project'), false, 'UTF-8')]
-<?xml version="1.0" encoding="UTF-8"?>
-<projectDescription>
-	<name>[execPackageName/]_src_gen</name>
-	<comment></comment>
-	<projects> 
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers>clean,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>?name?</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.append_environment</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.autoBuildTarget</key>
-					<value>all</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>build.bat</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
-					<value>clean</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.contents</key>
-					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-					<value>false</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
-					<value>all</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.stopOnError</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-					<value>false</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<triggers>full,incremental,</triggers>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-	</natures>
-	<filteredResources>
-		<filter>
-			<id>0</id>
-			<name></name>
-			<type>14</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-*.pro</arguments>
-			</matcher>
-		</filter>
-	</filteredResources>
-</projectDescription>
-[/file]
-
-[file (execPackageName.concat('/').concat('.cproject'), false, 'UTF-8')]
+[file ('../.cproject', false, 'UTF-8')]
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
@@ -131,29 +42,18 @@
 					<folderInfo id="0.1." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185.1934256561" name=""/>
-							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compile[execPackageName/]Debug" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compile[aPackage.name.toUpperFirst()/]All -PDEBUG" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[packageName/]_src_gen/src_gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/ecore&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/PluginFramework&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/fuml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/uml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/util&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/types&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[packageName/]&quot;"/>
-[for (aMetaModelPackage : Package | aPackage.metaModelIncludesWithoutReflection())]
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aMetaModelPackage.getPackageName()/]&quot;"/>
-[/for]
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1168779061" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
@@ -183,29 +83,17 @@
 					<folderInfo id="0.1.2." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.889939462" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="org.eclipse.cdt.build.core.prefbase.toolchain.889939462.2122636331" name=""/>
-							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1312542440" incrementalBuildTarget="compile[execPackageName/]Release" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1312542440" incrementalBuildTarget="compile[aPackage.name.toUpperFirst()/]All -PRELEASE" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.640181682" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.985992690" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[packageName/]_src_gen/src_gen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/ecore&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/fuml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/PluginFramework&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/uml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/util&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/types&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[packageName/]&quot;"/>
-[for (aMetaModelPackage : Package | aPackage.metaModelIncludesWithoutReflection())]
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aMetaModelPackage.getPackageName()/]&quot;"/>
-[/for]
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2144890842" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>

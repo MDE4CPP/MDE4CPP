@@ -14,6 +14,7 @@
  */]
 [module generateOpaqueBehaviorExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
@@ -35,7 +36,8 @@
 
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().name/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+std::shared_ptr<[anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
 [memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
 [memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus().lock());
 factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
@@ -54,7 +56,7 @@ std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
 std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
 [memberName(aParameter)/]->setName("[aParameter.name/]");
-[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().name.concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.packageGetter(aParameter)/]);
+[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().ns().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.packageGetter(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
@@ -62,7 +64,8 @@ std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInst
 
 [/for]
 
-std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().name/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
+std::shared_ptr<[aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
+[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
 [memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
 [memberName(aCallOperationAction)/]Execution->setLocus(factory->getLocus().lock());
 factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);
@@ -78,7 +81,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
 [if (not anOpaqueBehavior.oclIsUndefined())]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-#include "[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
+#include "[anOpaqueBehavior.getNearestPackage().getPackageName()/]Exec/[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]
@@ -86,13 +89,13 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.oclIsUndefined())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
+#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]
 
 [template public generateInclude(anActivity : Activity)]
 [if (not anActivity.name.oclIsUndefined())]
-#include "[anActivity.name.toUpperFirst()/]Execution.hpp"
+#include "[anActivity.getNearestPackage().getPackageName()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/template]
