@@ -19,9 +19,10 @@
 
 [template public generateEcorePluginImplSource(aPackage : EPackage) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "[aPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aPackage.name.toUpperFirst()/]Package.hpp"
+#include "[aPackage.name/]/impl/[packageName/].hpp"
+
+#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 
 using namespace [aPackage.name/];
 
@@ -36,14 +37,25 @@ using namespace [aPackage.name/];
 {
 }
 
-std::shared_ptr<ecore::EFactory> [packageName/]::getFactory()
+
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+{
+	return [aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EFactory> [packageName/]::getEFactory()
 {
 	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> [packageName/]::getPackage()
+std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
 {
 	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+}
+
+std::string [packageName/]::eclipseURI()
+{
+	return "[getEclipseURI()/]";
 }
 
 std::string [packageName/]::eNAME()
@@ -62,3 +74,6 @@ std::string [packageName/]::eNS_PREFIX()
 }
 [/file]
 [/template]
+
+[query private hasEclipseURI(aPackage : EPackage) : Boolean = if (hasSourceGen()) then SourceGen().details->select(key = 'eclipseURI')->notEmpty() else false endif/]
+[query private getEclipseURI(aPackage : EPackage) : String = if (hasEclipseURI()) then SourceGen().details->select(key = 'eclipseURI')->first().value else '' endif/]

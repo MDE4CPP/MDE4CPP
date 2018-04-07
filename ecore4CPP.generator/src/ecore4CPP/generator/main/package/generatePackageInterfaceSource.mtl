@@ -16,11 +16,12 @@
 
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Package').toUpperFirst(); }]
 [file (anEPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+#include "[anEPackage.name/]/[packageName/].hpp"
+#include "[anEPackage.name/]/impl/[packageName.concat('Impl')/].hpp"
 
 using namespace [anEPackage.name/];
 
@@ -30,6 +31,6 @@ const std::string [packageName/]::eNS_URI ="[anEPackage.nsURI/]";
 const std::string [packageName/]::eNS_PREFIX ="[anEPackage.nsPrefix/]";
 
 //Singleton 
-[generateSingletonImpl(packageName)/]
+[generateSingletonImpl(packageName, true)/]
 [/file]
 [/template]

@@ -24,14 +24,15 @@
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 
 #include <iostream>
-#include "[packageName.toUpperFirst()/]Factory.hpp"
-#include "[packageName.toUpperFirst()/]Package.hpp"
+
+#include "[aPackage.name/]/[packageName.toUpperFirst()/]Factory.hpp"
+#include "[aPackage.name/]/[packageName.toUpperFirst()/]Package.hpp"
 
 [for (aEClass : EClass | aPackage.eAllContents(EClass))]
-#include "[aEClass.name.toUpperFirst()/].hpp"
+#include "[aPackage.name/]/[aEClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
-#include "[anEEnum.name/].hpp"
+#include "[aPackage.name/]/[anEEnum.name/].hpp"
 [/for]
 
 // [protected ('includes')] 
@@ -74,9 +75,6 @@ int main ()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
-
 # [protected ('project_name')]
 # You may manually edit the project name, won't be overwritten upon generation.
 PROJECT(App_[packageName/])
@@ -85,9 +83,16 @@ PROJECT(App_[packageName/])
 IF(NOT CMAKE_BUILD_TYPE) 
     SET(CMAKE_BUILD_TYPE Debug)
 ENDIF(NOT CMAKE_BUILD_TYPE)
+
 SET(CMAKE_CXX_STANDARD 14)
-SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+
+IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+ELSE()
+	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
+	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
+ENDIF()
+
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 [if (packageName='uml')]
 SET(CMAKE_CXX_FLAGS_RELEASE " -O1 -DNDEBUG")
@@ -105,115 +110,38 @@ SET(SOURCE_FILES
 # [/protected]
 )
 
-
 INCLUDE_DIRECTORIES(
-	.
-[if (packageName='uml')]
 	../
-[/if]
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
-[if (packageName='uml')]
-	${MDE4CPP_HOME}/application/include/util
-[/if]
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	${MDE4CPP_HOME}/application/include/[pack.name/]
-[/for]
-	${MDE4CPP_HOME}/application/include/[packageName/]
 # [protected ('includes')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
 # [/protected]
 )
 
-if(NOT UNIX)
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-endif()
+# Apple specific stuff
+IF(APPLE)
+  SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+  SET(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -undefined dynamic_lookup")
+ENDIF(APPLE)
 
-if(UNIX AND NOT APPLE)
+IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
-[/for]
-	FIND_LIBRARY([packageName.toUpperCase()/]_DEBUG [packageName/]d.so ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY([packageName.toUpperCase()/]_RELEASE [packageName/].so ${MDE4CPP_HOME}/application/lib)
-# [protected ('library_finding_unix')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-else()
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
-[/for]
-	FIND_LIBRARY([packageName.toUpperCase()/]_DEBUG [packageName/]d ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY([packageName.toUpperCase()/]_RELEASE [packageName/] ${MDE4CPP_HOME}/application/lib)
-# [protected ('library_finding_not_unix')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-endif()
-
+	[generateCMakeFindLibraryCommands('.so', 'bin', 'Linux')/]
+ELSEIF(APPLE)
+	[generateCMakeFindLibraryCommands('.dylib', 'bin', 'Apple')/]
+ELSE()
+	[generateCMakeFindLibraryCommands('', 'lib', 'Win')/]
+ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
-if(NOT UNIX)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-	debug ${[packageName.toUpperCase()/]_DEBUG}
-# [protected ('library_assigning_debug_not_unix')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	#debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-	debug ${[packageName.toUpperCase()/]_DEBUG}
-# [protected ('library_assigning_debug_unix')]
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-)
-endif()
-
-if(NOT UNIX) 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	optimized ${[pack.name.toUpperCase()/]_RELEASE}
-[/for]
-	optimized ${[packageName.toUpperCase()/]_RELEASE}
-# [protected ('library_assigning_release_not_unix')] 
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	#optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	optimized ${[pack.name.toUpperCase()/]_RELEASE}
-[/for]	
-	optimized ${[packageName.toUpperCase()/]_RELEASE}
-# [protected ('library_assigning_release_unix')] 
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-)
-endif()
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateLibraryLinking(true)/]
+ELSE()
+	[generateLibraryLinking(false)/]
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
@@ -225,4 +153,41 @@ INSTALL(TARGETS ${PROJECT_NAME}
 [/file]
 
 [aPackage.generateProjectsFiles(true)/]
+[/template]
+
+[template private generateCMakeFindLibraryCommands(aPackage : EPackage, ending : String, folderName : String, system : String)]
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true, system)/]
+ELSE()
+	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, false, system)/]
+ENDIF()
+[/template]
+
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
+
+[template private generateCMakeFindLibraryCommand(aPackage : EPackage, ending : String, folderName : String, debugMode : Boolean, system : String)]
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
+FIND_LIBRARY([aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+# ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
+# You may manually edit the following lines, won't be overwritten upon generation.
+
+# ['[/protected]'/]
+[/template]
+
+[template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+	[buildModeCMakeProperty(debugMode)/] ${[aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+
+	# ['['/]protected ('library_linking_[buildModeCMakeProperty(debugMode)/]')[']'/]
+	# You may manually edit the following lines, won't be overwritten upon generation.
+	
+	# ['['/]/protected[']'/]
+)
 [/template]

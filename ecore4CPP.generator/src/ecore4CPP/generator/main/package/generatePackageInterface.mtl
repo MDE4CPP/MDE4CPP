@@ -21,19 +21,19 @@
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
 [file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Package')/]
 
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
+#include "ecore/EPackage.hpp"
 
-namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
-	class [elements.name/];[/for]
-
-	class [packageName/];
+namespace [anEPackage.eClass().ePackage.name/] 
+{
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
+	class [elements.name/];
+[/for]
 }
 
 [comment namespace /]
@@ -67,15 +67,15 @@ namespace [anEPackage.name/]
 			[aClass.eReferences->sortedBy(name).generateStaticReferenceID()/]
 			[aClass.eOperations->sortedBy(name).generateStaticOperationID()/]
 			//Class and Feature Getter
-			[aClass.generateClassGetter(false)/]
-			[aClass.eAttributes->sortedBy(name).generateAttributeGetter(false)/]
-			[aClass.eReferences->sortedBy(name).generateReferenceGetter(false)/]
-			[aClass.eOperations->sortedBy(name).generateOperationGetter(false)/]
+			[aClass.generateModelElementGetter(anEPackage, false)/]
+			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			// End Class [aClass.name.toUpperFirst()/]
 
 [/for]
 			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatype(false)/]
+			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

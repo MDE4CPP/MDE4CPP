@@ -17,24 +17,8 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[query public classNameMember(aEClass : EClass) : String = aEClass.name.toLowerFirst().concat(aEClass.eClass().name) /]
-[query public classNumberName(aEClass : EClass) : String = aEClass.name.toUpperCase() /]
-
-[template public generateStaticClassID(aEClass : EClass)]
-static const int [aEClass.name.toUpperCase()/] = [aEClass.getClassifierID()/];
-static const int [aEClass.name.toUpperCase()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
-static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
-[/template]
-
 [**
- * Class getter for EPackage
-*/]
-[template public generateClassGetter(aEClass : EClass,impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(aEClass)/]> get[aEClass.name/]() const [abstractSufix(impl)/];
-[/template]
-
-[**
- * Operation to generate create operation
+ * Operation to generate create operation in model factory
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() const [abstractSufix(impl)/];
@@ -42,39 +26,89 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() 
 [for(aReference:EReference | ref->sortedBy(name))]
 //Add containing object
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const [abstractSufix(impl)/];
+[if(aEClass.getClassifierIDName().size() > 0)]virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID) const [abstractSufix(impl)/];[/if]
 [/for]
 
 [/let]
 [/template]
 
-[template public generateClassGetterImpl(aEClass : EClass)]
-std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
+[template public generateEContainerOperation(aClass : EClass, impl : EBoolean)]
+virtual std::shared_ptr<ecore::EObject> eContainer() const [abstractSufix(impl)/];
+[/template]
+
+[template public generateEContainerOperationCPP(aClass: EClass)]
+std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() const
 {
-	return [aEClass.classNameMember()/];
+[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
+	if(auto wp = m_[multipleRef.name/].lock())
+	{
+		return wp;
+	}
+		[/for]
+	[/if]
+	[else]
+	if(auto wp = m_[aReference.name/].lock())
+	{
+		return wp;
+	}
+	[/if]
+[/for]
+[/let]
+	return nullptr;
 }
+[/template]
+
+[template public generateGetThisPtr(aClass : EClass)]
+virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
+[/template]
+
+[template public generateGetThisPtrCPP(aClass: EClass)]
+std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
+{
+	return m_[generateGetThisPtrPropertyName()/].lock();
+}
+void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+{
+	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+	[for (superClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+	[/for]	
+}
+[/template]
+
+[query public generateGetThisPtrPropertyName(anEClass : EClass) : String = 'this'.concat(anEClass.name.toUpperFirst()).concat('Ptr')/]
+[query public generateGetThisPtrPropertySetterName(anEClass : EClass) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+[query public generateGetThisPtrPropertyGetterName(anEClass : EClass) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+
+[***###########################################################################################
+ * Section for creating the Attribute elements in the metamodel package
+*/]
+
+[template public generateClassCreation(aEClass : EClass)]
+[aEClass.getClassMemberName()/] = factory->createEClass_in_EPackage(package, [aEClass.getStaticAttributeIDName()/]);
+[/template]
+
+[template public generateClassInit(aEClass : EClass)]
+[aEClass.getClassMemberName()/]->setInstanceClass(nullptr);
+[aEClass.getClassMemberName()/]->setName("[aEClass.name/]");
+[aEClass.getClassMemberName()/]->setAbstract([aEClass.abstract.toString()/]);
+[aEClass.getClassMemberName()/]->setInterface([aEClass.interface.toString()/]);
+
+[/template]
+
+[template public generateStaticClassID(aEClass : EClass)]
+static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
 [/template]
 
 [template public initSuperTypes(aEClass : EClass)]
 [for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-[aEClass.classNameMember()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
+[aEClass.getClassMemberName()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
 [/for]
-[/template]
-
-[template public generateClassCreation(aEClass : EClass)]
-[classNameMember(aEClass)/] = createEClass([classNumberName(aEClass)/]);
-[/template]
-
-[template public generateClassInit(aEClass : EClass)]
-initEClass([aEClass.classNameMember()/], nullptr, "[aEClass.name/]", [aEClass.abstract.toString()/], [aEClass.interface.toString()/], true);
-[/template]
-
-[template public generatePrivatePackageMember(aEClass : EClass)]
-std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.classNameMember()/] = nullptr;
-
-[/template]
-
-
-[template public generateDeletePrivatePackageMember(aEClass : EClass)]
-[aEClass.classNameMember()/].reset();
-
 [/template]

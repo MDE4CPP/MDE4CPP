@@ -15,7 +15,9 @@
 [module generateModel('http://www.eclipse.org/emf/2002/Ecore')]
  
 [import ecore4CPP::generator::main::generateAttribute/]
+[import ecore4CPP::generator::main::generateClass/]
 [import ecore4CPP::generator::main::generateOperation/]
+[import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
@@ -27,15 +29,31 @@
 [file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-#include <string>
+[if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
 #include <map>
-#include <vector>
-#include "SubsetUnion.hpp"
-#include "boost/shared_ptr.hpp"
+[/if]
+#include <list>
+#include <memory>
+#include <string>
+
+[if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
 #include "boost/any.hpp"
+[/if]
+
+// forward declarations
+[generateAbstractDataTypesForwardDeclaration()/]
+
+[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+namespace boost
+{
+	class any;
+}
+[/if]
 
 //*********************************
 // generated Includes
+
+[generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
@@ -47,16 +65,16 @@ namespace [element.ePackage.name/]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
 [for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 [/if]
 
 //*********************************
@@ -66,8 +84,8 @@ namespace [aClass.ePackage.name/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
-[/if]
+virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
 	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
@@ -127,7 +145,14 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shar
 			//*********************************
 			// Union Getter
 			//*********************************
-			[aClass.generateUnionGetterDeclaretaion(false)/] 
+			[aClass.generateUnionGetterDeclaretaion(false)/]
+
+			[aClass.generateEContainerOperation(false)/] 
+			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			[aClass.generatePersistenceDecl(false)/]
 	};
 
 }

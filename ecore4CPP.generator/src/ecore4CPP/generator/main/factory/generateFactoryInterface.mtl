@@ -22,8 +22,10 @@
 [file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 
-#include "EFactory.hpp"
+#include <map>
 #include <memory>
+
+#include "ecore/EFactory.hpp"
 
 [comment  Generate Includes for the Factory/]
 namespace [anEPackage.name/] 
@@ -31,7 +33,6 @@ namespace [anEPackage.name/]
 	class [elements.name/];[/for]
 
 	class [anEPackage.name.toUpperFirst().concat('Package')/];
-	class [packageName/];
 }
 
 [comment namespace /]

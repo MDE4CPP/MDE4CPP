@@ -20,7 +20,7 @@
 [file (aPackage.name.concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'PluginImpl')/]
 
-#include "[aPackage.name.toUpperFirst()/]Plugin.hpp"
+#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Plugin.hpp"
 
 namespace [aPackage.name/] 
 {
@@ -30,12 +30,14 @@ namespace [aPackage.name/]
 			[aPackage.name.toUpperFirst()/]PluginImpl();
 			virtual ~[aPackage.name.toUpperFirst()/]PluginImpl();
 		
+			virtual std::string eclipseURI();
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 		
-			virtual std::shared_ptr<ecore::EFactory> getFactory();
-			virtual std::shared_ptr<ecore::EPackage> getPackage();
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
+			virtual std::shared_ptr<ecore::EFactory> getEFactory();
+			virtual std::shared_ptr<ecore::EPackage> getEPackage();
 	};
 }
 [endGuard(aPackage,'PluginImpl')/]

@@ -15,7 +15,9 @@
 [module generateImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateAttribute /]
+[import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
 [import ecore4CPP::generator::main::generateUnion /]
@@ -32,19 +34,12 @@
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
-[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
+[for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[aEClass.ePackage.name/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 [/if]
-
-#include "SubsetUnion.hpp"
-
-[if (aClass.hasKey('includes'))]
-[aClass.valueKey('includes')/]
-[/if]
-
 
 //*********************************
 [comment namespace /]
@@ -65,6 +60,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 		protected:
 			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
+			[aClass.generateGetThisPtr()/]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) ]
@@ -109,11 +105,22 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			[aClass.generateEContainerOperation(true)/] 
 			
-			[aClass.generateeGetDel(true)/]
-			
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			[aClass.generatePersistenceDecl(true)/]
+
 		protected:
 			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
+			[aClass.generateeGetDel(true)/]
+			[aClass.generateeIsSetDel(true)/]
+			[aClass.generateeSetDel(true)/]
+
+		private:
+			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 	};
 }
 [endGuard(className)/]
