@@ -1,38 +1,31 @@
-#include "EcorePackageImpl.hpp"
+#include "ecoreReflection/impl/EcorePackageImpl.hpp"
 
-//metamodel classes
-#include "Stereotype.hpp"
-#include "Generalization.hpp"
-#include "Constraint.hpp"
-#include "OpaqueExpression.hpp"
-#include "EnumerationLiteral.hpp"
-#include "PrimitiveType.hpp"
-#include "FunctionBehavior.hpp"
-#include "Interface.hpp"
-#include "Operation.hpp"
-#include "Property.hpp"
+//meta meta model classes
+#include "uml/Association.hpp"
+#include "uml/Class.hpp"
+#include "uml/ClassifierTemplateParameter.hpp"
+#include "uml/Generalization.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/ProfileApplication.hpp"
+#include "uml/Property.hpp"
+#include "uml/RedefinableTemplateSignature.hpp"
+#include "uml/TemplateBinding.hpp"
+#include "uml/TemplateParameterSubstitution.hpp"
 
-#include "RedefinableTemplateSignature.hpp"
-#include "LiteralInteger.hpp"
-#include "TemplateBinding.hpp"
-#include "Association.hpp"
-#include "TemplateParameterSubstitution.hpp"
-#include "Property.hpp"
-#include "PrimitiveType.hpp"
-#include "Operation.hpp"
-#include "ClassifierTemplateParameter.hpp"
-#include "Generalization.hpp"
-#include "Class.hpp"
-#include "ProfileApplication.hpp"
-#include "Parameter.hpp"
-#include "LiteralUnlimitedNatural.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+//meta meta model factory
+#include "uml/UmlFactory.hpp"
+
 //metamodel factory
-#include "UmlFactory.hpp"
 
 //depending model packages
 
-#include "EAttribute.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 
 
 using namespace Ecore;
@@ -82,2064 +75,942 @@ void EcorePackageImpl::createPackageContents()
 
 	struct null_deleter{void operator()(void const *) const {} };
 	std::shared_ptr<EcorePackageImpl> ecore = std::shared_ptr<EcorePackageImpl>(this, null_deleter());
+	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+
+	createPackageValueSpecifications(ecore, factory);
+	createPackageInterfaces(ecore, factory);
+	createPackageClasses(ecore, factory);
+	createPackageInstanceSpecifications(ecore, factory);
+	createPackageStereotypes(ecore, factory);
+	createPackageActivities(ecore, factory);
+	createPackageDependencies(ecore, factory);
+	createPackagePrimitiveTypes(ecore, factory);
+	createPackageEnumerationLiterals(ecore, factory);
+}
+
+void EcorePackageImpl::createPackageActivities(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
+
+void EcorePackageImpl::createPackageClasses(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
-	
-	ecore_EAnnotation_contents_lowerValue_LiteralInteger_Ecore_EAnnotation_contents = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_contents));
-	ecore_EAnnotation_contents_lowerValue_LiteralInteger_Ecore_EAnnotation_contents->setValue(0);
-	
-	ecore_EAnnotation_contents_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_contents = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_contents));
-	ecore_EAnnotation_contents_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_contents->setValue(-1);
-	
-	ecore_EAnnotation_details_lowerValue_LiteralInteger_Ecore_EAnnotation_details = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_details));
-	ecore_EAnnotation_details_lowerValue_LiteralInteger_Ecore_EAnnotation_details->setValue(0);
-	
-	ecore_EAnnotation_details_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_details = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_details));
-	ecore_EAnnotation_details_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_details->setValue(-1);
-	
-	ecore_EAnnotation_eModelElement_lowerValue_LiteralInteger_Ecore_EAnnotation_eModelElement = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_eModelElement));
-	ecore_EAnnotation_eModelElement_lowerValue_LiteralInteger_Ecore_EAnnotation_eModelElement->setValue(0);
-	
-	ecore_EAnnotation_references_lowerValue_LiteralInteger_Ecore_EAnnotation_references = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_references));
-	ecore_EAnnotation_references_lowerValue_LiteralInteger_Ecore_EAnnotation_references->setValue(0);
-	
-	ecore_EAnnotation_references_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_references = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_references));
-	ecore_EAnnotation_references_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_references->setValue(-1);
-	
-	ecore_EAnnotation_source_lowerValue_LiteralInteger_Ecore_EAnnotation_source = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_source));
-	ecore_EAnnotation_source_lowerValue_LiteralInteger_Ecore_EAnnotation_source->setValue(0);
-	
-	ecore_EAttribute_id_lowerValue_LiteralInteger_Ecore_EAttribute_id = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAttribute_id));
-	ecore_EAttribute_id_lowerValue_LiteralInteger_Ecore_EAttribute_id->setValue(0);
-	
-	ecore_EClass_abstract_lowerValue_LiteralInteger_Ecore_EClass_abstract = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_abstract));
-	ecore_EClass_abstract_lowerValue_LiteralInteger_Ecore_EClass_abstract->setValue(0);
-	
-	ecore_EClass_eAllAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAllAttributes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllAttributes));
-	ecore_EClass_eAllAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAllAttributes->setValue(0);
-	
-	ecore_EClass_eAllAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllAttributes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllAttributes));
-	ecore_EClass_eAllAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllAttributes->setValue(-1);
-	
-	ecore_EClass_eAllContainments_lowerValue_LiteralInteger_Ecore_EClass_eAllContainments = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllContainments));
-	ecore_EClass_eAllContainments_lowerValue_LiteralInteger_Ecore_EClass_eAllContainments->setValue(0);
-	
-	ecore_EClass_eAllContainments_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllContainments = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllContainments));
-	ecore_EClass_eAllContainments_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllContainments->setValue(-1);
-	
-	ecore_EClass_eAllGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllGenericSuperTypes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllGenericSuperTypes));
-	ecore_EClass_eAllGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllGenericSuperTypes->setValue(0);
-	
-	ecore_EClass_eAllGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllGenericSuperTypes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllGenericSuperTypes));
-	ecore_EClass_eAllGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllGenericSuperTypes->setValue(-1);
-	
-	ecore_EClass_eAllOperations_lowerValue_LiteralInteger_Ecore_EClass_eAllOperations = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllOperations));
-	ecore_EClass_eAllOperations_lowerValue_LiteralInteger_Ecore_EClass_eAllOperations->setValue(0);
-	
-	ecore_EClass_eAllOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllOperations = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllOperations));
-	ecore_EClass_eAllOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllOperations->setValue(-1);
-	
-	ecore_EClass_eAllReferences_lowerValue_LiteralInteger_Ecore_EClass_eAllReferences = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllReferences));
-	ecore_EClass_eAllReferences_lowerValue_LiteralInteger_Ecore_EClass_eAllReferences->setValue(0);
-	
-	ecore_EClass_eAllReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllReferences = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllReferences));
-	ecore_EClass_eAllReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllReferences->setValue(-1);
-	
-	ecore_EClass_eAllStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eAllStructuralFeatures = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllStructuralFeatures));
-	ecore_EClass_eAllStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eAllStructuralFeatures->setValue(0);
-	
-	ecore_EClass_eAllStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllStructuralFeatures = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllStructuralFeatures));
-	ecore_EClass_eAllStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllStructuralFeatures->setValue(-1);
-	
-	ecore_EClass_eAllSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllSuperTypes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllSuperTypes));
-	ecore_EClass_eAllSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllSuperTypes->setValue(0);
-	
-	ecore_EClass_eAllSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllSuperTypes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllSuperTypes));
-	ecore_EClass_eAllSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllSuperTypes->setValue(-1);
-	
-	ecore_EClass_eAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAttributes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAttributes));
-	ecore_EClass_eAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAttributes->setValue(0);
-	
-	ecore_EClass_eAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAttributes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAttributes));
-	ecore_EClass_eAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAttributes->setValue(-1);
-	
-	ecore_EClass_eGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eGenericSuperTypes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eGenericSuperTypes));
-	ecore_EClass_eGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eGenericSuperTypes->setValue(0);
-	
-	ecore_EClass_eGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eGenericSuperTypes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eGenericSuperTypes));
-	ecore_EClass_eGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eGenericSuperTypes->setValue(-1);
-	
-	ecore_EClass_eIDAttribute_lowerValue_LiteralInteger_Ecore_EClass_eIDAttribute = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eIDAttribute));
-	ecore_EClass_eIDAttribute_lowerValue_LiteralInteger_Ecore_EClass_eIDAttribute->setValue(0);
-	
-	ecore_EClass_eOperations_lowerValue_LiteralInteger_Ecore_EClass_eOperations = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eOperations));
-	ecore_EClass_eOperations_lowerValue_LiteralInteger_Ecore_EClass_eOperations->setValue(0);
-	
-	ecore_EClass_eOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eOperations = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eOperations));
-	ecore_EClass_eOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eOperations->setValue(-1);
-	
-	ecore_EClass_eReferences_lowerValue_LiteralInteger_Ecore_EClass_eReferences = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eReferences));
-	ecore_EClass_eReferences_lowerValue_LiteralInteger_Ecore_EClass_eReferences->setValue(0);
-	
-	ecore_EClass_eReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eReferences = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eReferences));
-	ecore_EClass_eReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eReferences->setValue(-1);
-	
-	ecore_EClass_eStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eStructuralFeatures = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eStructuralFeatures));
-	ecore_EClass_eStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eStructuralFeatures->setValue(0);
-	
-	ecore_EClass_eStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eStructuralFeatures = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eStructuralFeatures));
-	ecore_EClass_eStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eStructuralFeatures->setValue(-1);
-	
-	ecore_EClass_eSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eSuperTypes = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eSuperTypes));
-	ecore_EClass_eSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eSuperTypes->setValue(0);
-	
-	ecore_EClass_eSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eSuperTypes = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eSuperTypes));
-	ecore_EClass_eSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eSuperTypes->setValue(-1);
-	
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID));
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setValue(0);
-	
-	ecore_EClass_getEStructuralFeature_EInt_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EInt_return));
-	ecore_EClass_getEStructuralFeature_EInt_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_return->setValue(0);
-	
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName));
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setValue(0);
-	
-	ecore_EClass_getEStructuralFeature_EString_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EString_return));
-	ecore_EClass_getEStructuralFeature_EString_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_return->setValue(0);
-	
-	ecore_EClass_getFeatureCount__return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureCount__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureCount__return));
-	ecore_EClass_getFeatureCount__return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureCount__return->setValue(0);
-	
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature));
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setValue(0);
-	
-	ecore_EClass_getFeatureID_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureID_EStructuralFeature_return));
-	ecore_EClass_getFeatureID_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_return->setValue(0);
-	
-	ecore_EClass_interface_lowerValue_LiteralInteger_Ecore_EClass_interface = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_interface));
-	ecore_EClass_interface_lowerValue_LiteralInteger_Ecore_EClass_interface->setValue(0);
-	
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass));
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setValue(0);
-	
-	ecore_EClass_isSuperTypeOf_EClass_return_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_isSuperTypeOf_EClass_return));
-	ecore_EClass_isSuperTypeOf_EClass_return_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_return->setValue(0);
-	
-	ecore_EClassifier_defaultValue_lowerValue_LiteralInteger_Ecore_EClassifier_defaultValue = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_defaultValue));
-	ecore_EClassifier_defaultValue_lowerValue_LiteralInteger_Ecore_EClassifier_defaultValue->setValue(0);
-	
-	ecore_EClassifier_ePackage_lowerValue_LiteralInteger_Ecore_EClassifier_ePackage = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_ePackage));
-	ecore_EClassifier_ePackage_lowerValue_LiteralInteger_Ecore_EClassifier_ePackage->setValue(0);
-	
-	ecore_EClassifier_eTypeParameters_lowerValue_LiteralInteger_Ecore_EClassifier_eTypeParameters = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_eTypeParameters));
-	ecore_EClassifier_eTypeParameters_lowerValue_LiteralInteger_Ecore_EClassifier_eTypeParameters->setValue(0);
-	
-	ecore_EClassifier_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EClassifier_eTypeParameters = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_eTypeParameters));
-	ecore_EClassifier_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EClassifier_eTypeParameters->setValue(-1);
-	
-	ecore_EClassifier_getClassifierID__return_lowerValue_LiteralInteger_Ecore_EClassifier_getClassifierID__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_getClassifierID__return));
-	ecore_EClassifier_getClassifierID__return_lowerValue_LiteralInteger_Ecore_EClassifier_getClassifierID__return->setValue(0);
-	
-	ecore_EClassifier_instanceClassName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClassName = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceClassName));
-	ecore_EClassifier_instanceClassName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClassName->setValue(0);
-	
-	ecore_EClassifier_instanceClass_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClass = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceClass));
-	ecore_EClassifier_instanceClass_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClass->setValue(0);
-	
-	ecore_EClassifier_instanceTypeName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceTypeName = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceTypeName));
-	ecore_EClassifier_instanceTypeName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceTypeName->setValue(0);
-	
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object));
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setValue(0);
-	
-	ecore_EClassifier_isInstance_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_isInstance_EJavaObject_return));
-	ecore_EClassifier_isInstance_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_return->setValue(0);
-	
-	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EDataType_serializable));
-	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable->setValue(0);
-	
-	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_eLiterals));
-	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals->setValue(0);
-	
-	ecore_EEnum_eLiterals_upperValue_LiteralUnlimitedNatural_Ecore_EEnum_eLiterals = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_eLiterals));
-	ecore_EEnum_eLiterals_upperValue_LiteralUnlimitedNatural_Ecore_EEnum_eLiterals->setValue(-1);
-	
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal));
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setValue(0);
-	
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteralByLiteral_EString_return));
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setValue(0);
-	
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value));
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setValue(0);
-	
-	ecore_EEnum_getEEnumLiteral_EInt_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EInt_return));
-	ecore_EEnum_getEEnumLiteral_EInt_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_return->setValue(0);
-	
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name));
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setValue(0);
-	
-	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EString_return));
-	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return->setValue(0);
-	
-	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_eEnum));
-	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum->setValue(0);
-	
-	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_instance));
-	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance->setValue(0);
-	
-	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_literal));
-	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal->setValue(0);
-	
-	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_value));
-	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value->setValue(0);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType));
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setValue(0);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue));
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setValue(0);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_return));
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_return->setValue(0);
-	
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType));
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setValue(0);
-	
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue));
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setValue(0);
-	
-	ecore_EFactory_createFromString_EDataType_EString_return_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_return));
-	ecore_EFactory_createFromString_EDataType_EString_return_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_return->setValue(0);
-	
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass));
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setValue(0);
-	
-	ecore_EFactory_create_EClass_return_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_create_EClass_return));
-	ecore_EFactory_create_EClass_return_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_return->setValue(0);
-	
-	ecore_EGenericType_eClassifier_lowerValue_LiteralInteger_Ecore_EGenericType_eClassifier = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eClassifier));
-	ecore_EGenericType_eClassifier_lowerValue_LiteralInteger_Ecore_EGenericType_eClassifier->setValue(0);
-	
-	ecore_EGenericType_eLowerBound_lowerValue_LiteralInteger_Ecore_EGenericType_eLowerBound = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eLowerBound));
-	ecore_EGenericType_eLowerBound_lowerValue_LiteralInteger_Ecore_EGenericType_eLowerBound->setValue(0);
-	
-	ecore_EGenericType_eTypeArguments_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeArguments = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeArguments));
-	ecore_EGenericType_eTypeArguments_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeArguments->setValue(0);
-	
-	ecore_EGenericType_eTypeArguments_upperValue_LiteralUnlimitedNatural_Ecore_EGenericType_eTypeArguments = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeArguments));
-	ecore_EGenericType_eTypeArguments_upperValue_LiteralUnlimitedNatural_Ecore_EGenericType_eTypeArguments->setValue(-1);
-	
-	ecore_EGenericType_eTypeParameter_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeParameter = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeParameter));
-	ecore_EGenericType_eTypeParameter_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeParameter->setValue(0);
-	
-	ecore_EGenericType_eUpperBound_lowerValue_LiteralInteger_Ecore_EGenericType_eUpperBound = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eUpperBound));
-	ecore_EGenericType_eUpperBound_lowerValue_LiteralInteger_Ecore_EGenericType_eUpperBound->setValue(0);
-	
-	ecore_EModelElement_eAnnotations_lowerValue_LiteralInteger_Ecore_EModelElement_eAnnotations = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_eAnnotations));
-	ecore_EModelElement_eAnnotations_lowerValue_LiteralInteger_Ecore_EModelElement_eAnnotations->setValue(0);
-	
-	ecore_EModelElement_eAnnotations_upperValue_LiteralUnlimitedNatural_Ecore_EModelElement_eAnnotations = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_eAnnotations));
-	ecore_EModelElement_eAnnotations_upperValue_LiteralUnlimitedNatural_Ecore_EModelElement_eAnnotations->setValue(-1);
-	
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source));
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setValue(0);
-	
-	ecore_EModelElement_getEAnnotation_EString_return_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_getEAnnotation_EString_return));
-	ecore_EModelElement_getEAnnotation_EString_return_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_return->setValue(0);
-	
-	ecore_ENamedElement_name_lowerValue_LiteralInteger_Ecore_ENamedElement_name = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ENamedElement_name));
-	ecore_ENamedElement_name_lowerValue_LiteralInteger_Ecore_ENamedElement_name->setValue(0);
-	
-	ecore_EObject_eAllContents__return_lowerValue_LiteralInteger_Ecore_EObject_eAllContents__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eAllContents__return));
-	ecore_EObject_eAllContents__return_lowerValue_LiteralInteger_Ecore_EObject_eAllContents__return->setValue(0);
-	
-	ecore_EObject_eClass__return_lowerValue_LiteralInteger_Ecore_EObject_eClass__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eClass__return));
-	ecore_EObject_eClass__return_lowerValue_LiteralInteger_Ecore_EObject_eClass__return->setValue(0);
-	
-	ecore_EObject_eContainer__return_lowerValue_LiteralInteger_Ecore_EObject_eContainer__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainer__return));
-	ecore_EObject_eContainer__return_lowerValue_LiteralInteger_Ecore_EObject_eContainer__return->setValue(0);
-	
-	ecore_EObject_eContainingFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainingFeature__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainingFeature__return));
-	ecore_EObject_eContainingFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainingFeature__return->setValue(0);
-	
-	ecore_EObject_eContainmentFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainmentFeature__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainmentFeature__return));
-	ecore_EObject_eContainmentFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainmentFeature__return->setValue(0);
-	
-	ecore_EObject_eContents__return_lowerValue_LiteralInteger_Ecore_EObject_eContents__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContents__return));
-	ecore_EObject_eContents__return_lowerValue_LiteralInteger_Ecore_EObject_eContents__return->setValue(0);
-	
-	ecore_EObject_eCrossReferences__return_lowerValue_LiteralInteger_Ecore_EObject_eCrossReferences__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eCrossReferences__return));
-	ecore_EObject_eCrossReferences__return_lowerValue_LiteralInteger_Ecore_EObject_eCrossReferences__return->setValue(0);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature));
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setValue(0);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve));
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setValue(0);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_return));
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setValue(0);
-	
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature));
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setValue(0);
-	
-	ecore_EObject_eGet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_return));
-	ecore_EObject_eGet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_return->setValue(0);
-	
-	ecore_EObject_eIsProxy__return_lowerValue_LiteralInteger_Ecore_EObject_eIsProxy__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsProxy__return));
-	ecore_EObject_eIsProxy__return_lowerValue_LiteralInteger_Ecore_EObject_eIsProxy__return->setValue(0);
-	
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature));
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setValue(0);
-	
-	ecore_EObject_eIsSet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsSet_EStructuralFeature_return));
-	ecore_EObject_eIsSet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_return->setValue(0);
-	
-	ecore_EObject_eResource__return_lowerValue_LiteralInteger_Ecore_EObject_eResource__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eResource__return));
-	ecore_EObject_eResource__return_lowerValue_LiteralInteger_Ecore_EObject_eResource__return->setValue(0);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature));
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setValue(0);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue));
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setValue(0);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_return));
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setValue(0);
-	
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature));
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setValue(0);
-	
-	ecore_EObject_eUnset_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eUnset_EStructuralFeature_return));
-	ecore_EObject_eUnset_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_return->setValue(0);
-	
-	ecore_EOperation_eContainingClass_lowerValue_LiteralInteger_Ecore_EOperation_eContainingClass = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eContainingClass));
-	ecore_EOperation_eContainingClass_lowerValue_LiteralInteger_Ecore_EOperation_eContainingClass->setValue(0);
-	
-	ecore_EOperation_eExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eExceptions = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eExceptions));
-	ecore_EOperation_eExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eExceptions->setValue(0);
-	
-	ecore_EOperation_eExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eExceptions = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eExceptions));
-	ecore_EOperation_eExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eExceptions->setValue(-1);
-	
-	ecore_EOperation_eGenericExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eGenericExceptions = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eGenericExceptions));
-	ecore_EOperation_eGenericExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eGenericExceptions->setValue(0);
-	
-	ecore_EOperation_eGenericExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eGenericExceptions = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eGenericExceptions));
-	ecore_EOperation_eGenericExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eGenericExceptions->setValue(-1);
-	
-	ecore_EOperation_eParameters_lowerValue_LiteralInteger_Ecore_EOperation_eParameters = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eParameters));
-	ecore_EOperation_eParameters_lowerValue_LiteralInteger_Ecore_EOperation_eParameters->setValue(0);
-	
-	ecore_EOperation_eParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eParameters = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eParameters));
-	ecore_EOperation_eParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eParameters->setValue(-1);
-	
-	ecore_EOperation_eTypeParameters_lowerValue_LiteralInteger_Ecore_EOperation_eTypeParameters = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eTypeParameters));
-	ecore_EOperation_eTypeParameters_lowerValue_LiteralInteger_Ecore_EOperation_eTypeParameters->setValue(0);
-	
-	ecore_EOperation_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eTypeParameters = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eTypeParameters));
-	ecore_EOperation_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eTypeParameters->setValue(-1);
-	
-	ecore_EPackage_eClassifiers_lowerValue_LiteralInteger_Ecore_EPackage_eClassifiers = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eClassifiers));
-	ecore_EPackage_eClassifiers_lowerValue_LiteralInteger_Ecore_EPackage_eClassifiers->setValue(0);
-	
-	ecore_EPackage_eClassifiers_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eClassifiers = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eClassifiers));
-	ecore_EPackage_eClassifiers_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eClassifiers->setValue(-1);
-	
-	ecore_EPackage_eSubpackages_lowerValue_LiteralInteger_Ecore_EPackage_eSubpackages = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSubpackages));
-	ecore_EPackage_eSubpackages_lowerValue_LiteralInteger_Ecore_EPackage_eSubpackages->setValue(0);
-	
-	ecore_EPackage_eSubpackages_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eSubpackages = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSubpackages));
-	ecore_EPackage_eSubpackages_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eSubpackages->setValue(-1);
-	
-	ecore_EPackage_eSuperPackage_lowerValue_LiteralInteger_Ecore_EPackage_eSuperPackage = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSuperPackage));
-	ecore_EPackage_eSuperPackage_lowerValue_LiteralInteger_Ecore_EPackage_eSuperPackage->setValue(0);
-	
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name));
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setValue(0);
-	
-	ecore_EPackage_getEClassifier_EString_return_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_getEClassifier_EString_return));
-	ecore_EPackage_getEClassifier_EString_return_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_return->setValue(0);
-	
-	ecore_EPackage_nsPrefix_lowerValue_LiteralInteger_Ecore_EPackage_nsPrefix = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_nsPrefix));
-	ecore_EPackage_nsPrefix_lowerValue_LiteralInteger_Ecore_EPackage_nsPrefix->setValue(0);
-	
-	ecore_EPackage_nsURI_lowerValue_LiteralInteger_Ecore_EPackage_nsURI = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_nsURI));
-	ecore_EPackage_nsURI_lowerValue_LiteralInteger_Ecore_EPackage_nsURI->setValue(0);
-	
-	ecore_EParameter_eOperation_lowerValue_LiteralInteger_Ecore_EParameter_eOperation = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EParameter_eOperation));
-	ecore_EParameter_eOperation_lowerValue_LiteralInteger_Ecore_EParameter_eOperation->setValue(0);
-	
-	ecore_EReference_container_lowerValue_LiteralInteger_Ecore_EReference_container = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_container));
-	ecore_EReference_container_lowerValue_LiteralInteger_Ecore_EReference_container->setValue(0);
-	
-	ecore_EReference_containment_lowerValue_LiteralInteger_Ecore_EReference_containment = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_containment));
-	ecore_EReference_containment_lowerValue_LiteralInteger_Ecore_EReference_containment->setValue(0);
-	
-	ecore_EReference_eKeys_lowerValue_LiteralInteger_Ecore_EReference_eKeys = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eKeys));
-	ecore_EReference_eKeys_lowerValue_LiteralInteger_Ecore_EReference_eKeys->setValue(0);
-	
-	ecore_EReference_eKeys_upperValue_LiteralUnlimitedNatural_Ecore_EReference_eKeys = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eKeys));
-	ecore_EReference_eKeys_upperValue_LiteralUnlimitedNatural_Ecore_EReference_eKeys->setValue(-1);
-	
-	ecore_EReference_eOpposite_lowerValue_LiteralInteger_Ecore_EReference_eOpposite = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eOpposite));
-	ecore_EReference_eOpposite_lowerValue_LiteralInteger_Ecore_EReference_eOpposite->setValue(0);
-	
-	ecore_EReference_resolveProxies_lowerValue_LiteralInteger_Ecore_EReference_resolveProxies = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_resolveProxies));
-	ecore_EReference_resolveProxies_lowerValue_LiteralInteger_Ecore_EReference_resolveProxies->setValue(0);
-	
-	ecore_EStringToStringMapEntry_key_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_key = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStringToStringMapEntry_key));
-	ecore_EStringToStringMapEntry_key_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_key->setValue(0);
-	
-	ecore_EStringToStringMapEntry_value_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_value = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStringToStringMapEntry_value));
-	ecore_EStringToStringMapEntry_value_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_value->setValue(0);
-	
-	ecore_EStructuralFeature_changeable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_changeable = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_changeable));
-	ecore_EStructuralFeature_changeable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_changeable->setValue(0);
-	
-	ecore_EStructuralFeature_defaultValueLiteral_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValueLiteral = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_defaultValueLiteral));
-	ecore_EStructuralFeature_defaultValueLiteral_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValueLiteral->setValue(0);
-	
-	ecore_EStructuralFeature_defaultValue_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValue = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_defaultValue));
-	ecore_EStructuralFeature_defaultValue_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValue->setValue(0);
-	
-	ecore_EStructuralFeature_derived_lowerValue_LiteralInteger_Ecore_EStructuralFeature_derived = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_derived));
-	ecore_EStructuralFeature_derived_lowerValue_LiteralInteger_Ecore_EStructuralFeature_derived->setValue(0);
-	
-	ecore_EStructuralFeature_eContainingClass_lowerValue_LiteralInteger_Ecore_EStructuralFeature_eContainingClass = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_eContainingClass));
-	ecore_EStructuralFeature_eContainingClass_lowerValue_LiteralInteger_Ecore_EStructuralFeature_eContainingClass->setValue(0);
-	
-	ecore_EStructuralFeature_getContainerClass__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getContainerClass__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_getContainerClass__return));
-	ecore_EStructuralFeature_getContainerClass__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getContainerClass__return->setValue(0);
-	
-	ecore_EStructuralFeature_getFeatureID__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getFeatureID__return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_getFeatureID__return));
-	ecore_EStructuralFeature_getFeatureID__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getFeatureID__return->setValue(0);
-	
-	ecore_EStructuralFeature_transient_lowerValue_LiteralInteger_Ecore_EStructuralFeature_transient = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_transient));
-	ecore_EStructuralFeature_transient_lowerValue_LiteralInteger_Ecore_EStructuralFeature_transient->setValue(0);
-	
-	ecore_EStructuralFeature_unsettable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_unsettable = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_unsettable));
-	ecore_EStructuralFeature_unsettable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_unsettable->setValue(0);
-	
-	ecore_EStructuralFeature_volatile_lowerValue_LiteralInteger_Ecore_EStructuralFeature_volatile = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_volatile));
-	ecore_EStructuralFeature_volatile_lowerValue_LiteralInteger_Ecore_EStructuralFeature_volatile->setValue(0);
-	
-	ecore_ETypeParameter_eBounds_lowerValue_LiteralInteger_Ecore_ETypeParameter_eBounds = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypeParameter_eBounds));
-	ecore_ETypeParameter_eBounds_lowerValue_LiteralInteger_Ecore_ETypeParameter_eBounds->setValue(0);
-	
-	ecore_ETypeParameter_eBounds_upperValue_LiteralUnlimitedNatural_Ecore_ETypeParameter_eBounds = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypeParameter_eBounds));
-	ecore_ETypeParameter_eBounds_upperValue_LiteralUnlimitedNatural_Ecore_ETypeParameter_eBounds->setValue(-1);
-	
-	ecore_ETypedElement_eGenericType_lowerValue_LiteralInteger_Ecore_ETypedElement_eGenericType = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_eGenericType));
-	ecore_ETypedElement_eGenericType_lowerValue_LiteralInteger_Ecore_ETypedElement_eGenericType->setValue(0);
-	
-	ecore_ETypedElement_eType_lowerValue_LiteralInteger_Ecore_ETypedElement_eType = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_eType));
-	ecore_ETypedElement_eType_lowerValue_LiteralInteger_Ecore_ETypedElement_eType->setValue(0);
-	
-	ecore_ETypedElement_lowerBound_lowerValue_LiteralInteger_Ecore_ETypedElement_lowerBound = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_lowerBound));
-	ecore_ETypedElement_lowerBound_lowerValue_LiteralInteger_Ecore_ETypedElement_lowerBound->setValue(0);
-	
-	ecore_ETypedElement_many_lowerValue_LiteralInteger_Ecore_ETypedElement_many = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_many));
-	ecore_ETypedElement_many_lowerValue_LiteralInteger_Ecore_ETypedElement_many->setValue(0);
-	
-	ecore_ETypedElement_ordered_lowerValue_LiteralInteger_Ecore_ETypedElement_ordered = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_ordered));
-	ecore_ETypedElement_ordered_lowerValue_LiteralInteger_Ecore_ETypedElement_ordered->setValue(0);
-	
-	ecore_ETypedElement_required_lowerValue_LiteralInteger_Ecore_ETypedElement_required = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_required));
-	ecore_ETypedElement_required_lowerValue_LiteralInteger_Ecore_ETypedElement_required->setValue(0);
-	
-	ecore_ETypedElement_unique_lowerValue_LiteralInteger_Ecore_ETypedElement_unique = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_unique));
-	ecore_ETypedElement_unique_lowerValue_LiteralInteger_Ecore_ETypedElement_unique->setValue(0);
-	
-	ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_upperBound));
-	ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound->setValue(0);
-	
-	
+
+	// EAnnotation
+	ecore_EAnnotation = factory->createClass_in_Package(ecore);
+	
+    // EAnnotation attributes
+	ecore_EAnnotation_contents = factory->createProperty_in_Class(ecore_EAnnotation);
+	ecore_EAnnotation_details = factory->createProperty_in_Class(ecore_EAnnotation);
+	ecore_EAnnotation_eModelElement = factory->createProperty_in_Class(ecore_EAnnotation);
+	ecore_EAnnotation_references = factory->createProperty_in_Class(ecore_EAnnotation);
+	ecore_EAnnotation_source = factory->createProperty_in_Class(ecore_EAnnotation);
 
 
-	ecore_EAnnotation = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EAnnotation->setName("EAnnotation");
-	ecore_EAnnotation->setIsAbstract(false);
+    //-------------------------------------------
+	// EAttribute
+	ecore_EAttribute = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EAnnotation_contents = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAnnotation);
-	
-	ecore_EAnnotation_contents->setName("contents");
-	ecore_EAnnotation_contents->setType(get_Ecore_EObject());
-	ecore_EAnnotation_contents->setLower(0);
-	ecore_EAnnotation_contents->setUpper(-1);
-	
-	
-	
-	ecore_EAnnotation_details = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAnnotation);
-	
-	ecore_EAnnotation_details->setName("details");
-	ecore_EAnnotation_details->setType(get_Ecore_EStringToStringMapEntry());
-	ecore_EAnnotation_details->setLower(0);
-	ecore_EAnnotation_details->setUpper(-1);
-	
-	
-	
-	ecore_EAnnotation_eModelElement = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAnnotation);
-	
-	ecore_EAnnotation_eModelElement->setName("eModelElement");
-	ecore_EAnnotation_eModelElement->setType(get_Ecore_EModelElement());
-	ecore_EAnnotation_eModelElement->setLower(0);
-	ecore_EAnnotation_eModelElement->setUpper(1);
-	
-	
-	
-	ecore_EAnnotation_references = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAnnotation);
-	
-	ecore_EAnnotation_references->setName("references");
-	ecore_EAnnotation_references->setType(get_Ecore_EObject());
-	ecore_EAnnotation_references->setLower(0);
-	ecore_EAnnotation_references->setUpper(-1);
-	
-	
-	
-	ecore_EAnnotation_source = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAnnotation);
-	
-	ecore_EAnnotation_source->setName("source");
-	ecore_EAnnotation_source->setType(get_Ecore_EString());
-	ecore_EAnnotation_source->setLower(0);
-	ecore_EAnnotation_source->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EAttribute attributes
+	ecore_EAttribute_eAttributeType = factory->createProperty_in_Class(ecore_EAttribute);
+	ecore_EAttribute_id = factory->createProperty_in_Class(ecore_EAttribute);
 
 
-	ecore_EAttribute = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EAttribute->setName("EAttribute");
-	ecore_EAttribute->setIsAbstract(false);
+    //-------------------------------------------
+	// EClass
+	ecore_EClass = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EAttribute_eAttributeType = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAttribute);
-	
-	ecore_EAttribute_eAttributeType->setName("eAttributeType");
-	ecore_EAttribute_eAttributeType->setType(get_Ecore_EDataType());
-	ecore_EAttribute_eAttributeType->setLower(1);
-	ecore_EAttribute_eAttributeType->setUpper(1);
-	
-	
-	
-	ecore_EAttribute_id = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EAttribute);
-	
-	ecore_EAttribute_id->setName("id");
-	ecore_EAttribute_id->setType(get_Ecore_EBoolean());
-	ecore_EAttribute_id->setLower(0);
-	ecore_EAttribute_id->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EClass attributes
+	ecore_EClass_abstract = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllAttributes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllContainments = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllGenericSuperTypes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllOperations = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllReferences = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllStructuralFeatures = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAllSuperTypes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eAttributes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eGenericSuperTypes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eIDAttribute = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eOperations = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eReferences = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eStructuralFeatures = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_eSuperTypes = factory->createProperty_in_Class(ecore_EClass);
+	ecore_EClass_interface = factory->createProperty_in_Class(ecore_EClass);
+
+    // EClass operations
+	ecore_EClass_getEStructuralFeature_EInt = factory->createOperation_in_Class(ecore_EClass);
+	ecore_EClass_getEStructuralFeature_EInt_return = factory->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EInt);ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID = factory->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EInt);
+
+	ecore_EClass_getEStructuralFeature_EString = factory->createOperation_in_Class(ecore_EClass);
+	ecore_EClass_getEStructuralFeature_EString_return = factory->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EString);ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName = factory->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EString);
+
+	ecore_EClass_getFeatureCount_ = factory->createOperation_in_Class(ecore_EClass);
+	ecore_EClass_getFeatureCount__return = factory->createParameter_in_Operation(ecore_EClass_getFeatureCount_);
+
+	ecore_EClass_getFeatureID_EStructuralFeature = factory->createOperation_in_Class(ecore_EClass);
+	ecore_EClass_getFeatureID_EStructuralFeature_return = factory->createParameter_in_Operation(ecore_EClass_getFeatureID_EStructuralFeature);ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature = factory->createParameter_in_Operation(ecore_EClass_getFeatureID_EStructuralFeature);
+
+	ecore_EClass_isSuperTypeOf_EClass = factory->createOperation_in_Class(ecore_EClass);
+	ecore_EClass_isSuperTypeOf_EClass_return = factory->createParameter_in_Operation(ecore_EClass_isSuperTypeOf_EClass);ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass = factory->createParameter_in_Operation(ecore_EClass_isSuperTypeOf_EClass);
 
 
-	ecore_EClass = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EClass->setName("EClass");
-	ecore_EClass->setIsAbstract(false);
-	
-	//constraints
-	
-	
-	ecore_EClass_abstract = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_abstract->setName("abstract");
-	ecore_EClass_abstract->setType(get_Ecore_EBoolean());
-	ecore_EClass_abstract->setLower(0);
-	ecore_EClass_abstract->setUpper(1);
-	
-	
-	
-	ecore_EClass_eAllAttributes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllAttributes->setName("eAllAttributes");
-	ecore_EClass_eAllAttributes->setType(get_Ecore_EAttribute());
-	ecore_EClass_eAllAttributes->setLower(0);
-	ecore_EClass_eAllAttributes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllContainments = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllContainments->setName("eAllContainments");
-	ecore_EClass_eAllContainments->setType(get_Ecore_EReference());
-	ecore_EClass_eAllContainments->setLower(0);
-	ecore_EClass_eAllContainments->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllGenericSuperTypes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllGenericSuperTypes->setName("eAllGenericSuperTypes");
-	ecore_EClass_eAllGenericSuperTypes->setType(get_Ecore_EGenericType());
-	ecore_EClass_eAllGenericSuperTypes->setLower(0);
-	ecore_EClass_eAllGenericSuperTypes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllOperations = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllOperations->setName("eAllOperations");
-	ecore_EClass_eAllOperations->setType(get_Ecore_EOperation());
-	ecore_EClass_eAllOperations->setLower(0);
-	ecore_EClass_eAllOperations->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllReferences = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllReferences->setName("eAllReferences");
-	ecore_EClass_eAllReferences->setType(get_Ecore_EReference());
-	ecore_EClass_eAllReferences->setLower(0);
-	ecore_EClass_eAllReferences->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllStructuralFeatures = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllStructuralFeatures->setName("eAllStructuralFeatures");
-	ecore_EClass_eAllStructuralFeatures->setType(get_Ecore_EStructuralFeature());
-	ecore_EClass_eAllStructuralFeatures->setLower(0);
-	ecore_EClass_eAllStructuralFeatures->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAllSuperTypes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAllSuperTypes->setName("eAllSuperTypes");
-	ecore_EClass_eAllSuperTypes->setType(get_Ecore_EClass());
-	ecore_EClass_eAllSuperTypes->setLower(0);
-	ecore_EClass_eAllSuperTypes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eAttributes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eAttributes->setName("eAttributes");
-	ecore_EClass_eAttributes->setType(get_Ecore_EAttribute());
-	ecore_EClass_eAttributes->setLower(0);
-	ecore_EClass_eAttributes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eGenericSuperTypes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eGenericSuperTypes->setName("eGenericSuperTypes");
-	ecore_EClass_eGenericSuperTypes->setType(get_Ecore_EGenericType());
-	ecore_EClass_eGenericSuperTypes->setLower(0);
-	ecore_EClass_eGenericSuperTypes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eIDAttribute = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eIDAttribute->setName("eIDAttribute");
-	ecore_EClass_eIDAttribute->setType(get_Ecore_EAttribute());
-	ecore_EClass_eIDAttribute->setLower(0);
-	ecore_EClass_eIDAttribute->setUpper(1);
-	
-	
-	
-	ecore_EClass_eOperations = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eOperations->setName("eOperations");
-	ecore_EClass_eOperations->setType(get_Ecore_EOperation());
-	ecore_EClass_eOperations->setLower(0);
-	ecore_EClass_eOperations->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eReferences = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eReferences->setName("eReferences");
-	ecore_EClass_eReferences->setType(get_Ecore_EReference());
-	ecore_EClass_eReferences->setLower(0);
-	ecore_EClass_eReferences->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eStructuralFeatures = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eStructuralFeatures->setName("eStructuralFeatures");
-	ecore_EClass_eStructuralFeatures->setType(get_Ecore_EStructuralFeature());
-	ecore_EClass_eStructuralFeatures->setLower(0);
-	ecore_EClass_eStructuralFeatures->setUpper(-1);
-	
-	
-	
-	ecore_EClass_eSuperTypes = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_eSuperTypes->setName("eSuperTypes");
-	ecore_EClass_eSuperTypes->setType(get_Ecore_EClass());
-	ecore_EClass_eSuperTypes->setLower(0);
-	ecore_EClass_eSuperTypes->setUpper(-1);
-	
-	
-	
-	ecore_EClass_interface = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClass);
-	
-	ecore_EClass_interface->setName("interface");
-	ecore_EClass_interface->setType(get_Ecore_EBoolean());
-	ecore_EClass_interface->setLower(0);
-	ecore_EClass_interface->setUpper(1);
-	
-	
-	
-	
-	ecore_EClass_getEStructuralFeature_EInt = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClass);ecore_EClass_getEStructuralFeature_EInt->setName("getEStructuralFeature");
-	//Operation
-	ecore_EClass_getEStructuralFeature_EInt_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EInt);
-	
-	ecore_EClass_getEStructuralFeature_EInt_return->setName("");
-	ecore_EClass_getEStructuralFeature_EInt_return->setType(get_Ecore_EStructuralFeature());
-	ecore_EClass_getEStructuralFeature_EInt_return->setLower(0);
-	ecore_EClass_getEStructuralFeature_EInt_return->setUpper(1);
-	ecore_EClass_getEStructuralFeature_EInt_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EInt);
-	
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setName("featureID");
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setType(get_Ecore_EInt());
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setLower(0);
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setUpper(1);
-	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EClass_getEStructuralFeature_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClass);ecore_EClass_getEStructuralFeature_EString->setName("getEStructuralFeature");
-	//Operation
-	ecore_EClass_getEStructuralFeature_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EString);
-	
-	ecore_EClass_getEStructuralFeature_EString_return->setName("");
-	ecore_EClass_getEStructuralFeature_EString_return->setType(get_Ecore_EStructuralFeature());
-	ecore_EClass_getEStructuralFeature_EString_return->setLower(0);
-	ecore_EClass_getEStructuralFeature_EString_return->setUpper(1);
-	ecore_EClass_getEStructuralFeature_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getEStructuralFeature_EString);
-	
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setName("featureName");
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setType(get_Ecore_EString());
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setLower(0);
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setUpper(1);
-	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EClass_getFeatureCount_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClass);ecore_EClass_getFeatureCount_->setName("getFeatureCount");
-	//Operation
-	ecore_EClass_getFeatureCount__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getFeatureCount_);
-	
-	ecore_EClass_getFeatureCount__return->setName("");
-	ecore_EClass_getFeatureCount__return->setType(get_Ecore_EInt());
-	ecore_EClass_getFeatureCount__return->setLower(0);
-	ecore_EClass_getFeatureCount__return->setUpper(1);
-	ecore_EClass_getFeatureCount__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EClass_getFeatureID_EStructuralFeature = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClass);ecore_EClass_getFeatureID_EStructuralFeature->setName("getFeatureID");
-	//Operation
-	ecore_EClass_getFeatureID_EStructuralFeature_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getFeatureID_EStructuralFeature);
-	
-	ecore_EClass_getFeatureID_EStructuralFeature_return->setName("");
-	ecore_EClass_getFeatureID_EStructuralFeature_return->setType(get_Ecore_EInt());
-	ecore_EClass_getFeatureID_EStructuralFeature_return->setLower(0);
-	ecore_EClass_getFeatureID_EStructuralFeature_return->setUpper(1);
-	ecore_EClass_getFeatureID_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_getFeatureID_EStructuralFeature);
-	
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setName("feature");
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setLower(0);
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setUpper(1);
-	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EClass_isSuperTypeOf_EClass = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClass);ecore_EClass_isSuperTypeOf_EClass->setName("isSuperTypeOf");
-	//Operation
-	ecore_EClass_isSuperTypeOf_EClass_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_isSuperTypeOf_EClass);
-	
-	ecore_EClass_isSuperTypeOf_EClass_return->setName("");
-	ecore_EClass_isSuperTypeOf_EClass_return->setType(get_Ecore_EBoolean());
-	ecore_EClass_isSuperTypeOf_EClass_return->setLower(0);
-	ecore_EClass_isSuperTypeOf_EClass_return->setUpper(1);
-	ecore_EClass_isSuperTypeOf_EClass_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClass_isSuperTypeOf_EClass);
-	
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setName("someClass");
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setType(get_Ecore_EClass());
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setLower(0);
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setUpper(1);
-	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    //-------------------------------------------
+	// EClassifier
+	ecore_EClassifier = factory->createClass_in_Package(ecore);
+	
+    // EClassifier attributes
+	ecore_EClassifier_defaultValue = factory->createProperty_in_Class(ecore_EClassifier);
+	ecore_EClassifier_ePackage = factory->createProperty_in_Class(ecore_EClassifier);
+	ecore_EClassifier_eTypeParameters = factory->createProperty_in_Class(ecore_EClassifier);
+	ecore_EClassifier_instanceClass = factory->createProperty_in_Class(ecore_EClassifier);
+	ecore_EClassifier_instanceClassName = factory->createProperty_in_Class(ecore_EClassifier);
+	ecore_EClassifier_instanceTypeName = factory->createProperty_in_Class(ecore_EClassifier);
+
+    // EClassifier operations
+	ecore_EClassifier_getClassifierID_ = factory->createOperation_in_Class(ecore_EClassifier);
+	ecore_EClassifier_getClassifierID__return = factory->createParameter_in_Operation(ecore_EClassifier_getClassifierID_);
+
+	ecore_EClassifier_isInstance_EJavaObject = factory->createOperation_in_Class(ecore_EClassifier);
+	ecore_EClassifier_isInstance_EJavaObject_return = factory->createParameter_in_Operation(ecore_EClassifier_isInstance_EJavaObject);ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object = factory->createParameter_in_Operation(ecore_EClassifier_isInstance_EJavaObject);
 
 
-	ecore_EClassifier = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EClassifier->setName("EClassifier");
-	ecore_EClassifier->setIsAbstract(true);
+    //-------------------------------------------
+	// EDataType
+	ecore_EDataType = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EClassifier_defaultValue = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_defaultValue->setName("defaultValue");
-	ecore_EClassifier_defaultValue->setType(get_Ecore_EJavaObject());
-	ecore_EClassifier_defaultValue->setLower(0);
-	ecore_EClassifier_defaultValue->setUpper(1);
-	
-	
-	
-	ecore_EClassifier_ePackage = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_ePackage->setName("ePackage");
-	ecore_EClassifier_ePackage->setType(get_Ecore_EPackage());
-	ecore_EClassifier_ePackage->setLower(0);
-	ecore_EClassifier_ePackage->setUpper(1);
-	
-	
-	
-	ecore_EClassifier_eTypeParameters = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_eTypeParameters->setName("eTypeParameters");
-	ecore_EClassifier_eTypeParameters->setType(get_Ecore_ETypeParameter());
-	ecore_EClassifier_eTypeParameters->setLower(0);
-	ecore_EClassifier_eTypeParameters->setUpper(-1);
-	
-	
-	
-	ecore_EClassifier_instanceClass = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_instanceClass->setName("instanceClass");
-	ecore_EClassifier_instanceClass->setType(get_Ecore_EClassifier_EJavaClass_Wildcard());
-	ecore_EClassifier_instanceClass->setLower(0);
-	ecore_EClassifier_instanceClass->setUpper(1);
-	
-	
-	
-	ecore_EClassifier_instanceClassName = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_instanceClassName->setName("instanceClassName");
-	ecore_EClassifier_instanceClassName->setType(get_Ecore_EString());
-	ecore_EClassifier_instanceClassName->setLower(0);
-	ecore_EClassifier_instanceClassName->setUpper(1);
-	
-	
-	
-	ecore_EClassifier_instanceTypeName = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EClassifier);
-	
-	ecore_EClassifier_instanceTypeName->setName("instanceTypeName");
-	ecore_EClassifier_instanceTypeName->setType(get_Ecore_EString());
-	ecore_EClassifier_instanceTypeName->setLower(0);
-	ecore_EClassifier_instanceTypeName->setUpper(1);
-	
-	
-	
-	
-	ecore_EClassifier_getClassifierID_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClassifier);ecore_EClassifier_getClassifierID_->setName("getClassifierID");
-	//Operation
-	ecore_EClassifier_getClassifierID__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClassifier_getClassifierID_);
-	
-	ecore_EClassifier_getClassifierID__return->setName("");
-	ecore_EClassifier_getClassifierID__return->setType(get_Ecore_EInt());
-	ecore_EClassifier_getClassifierID__return->setLower(0);
-	ecore_EClassifier_getClassifierID__return->setUpper(1);
-	ecore_EClassifier_getClassifierID__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EClassifier_isInstance_EJavaObject = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EClassifier);ecore_EClassifier_isInstance_EJavaObject->setName("isInstance");
-	//Operation
-	ecore_EClassifier_isInstance_EJavaObject_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClassifier_isInstance_EJavaObject);
-	
-	ecore_EClassifier_isInstance_EJavaObject_return->setName("");
-	ecore_EClassifier_isInstance_EJavaObject_return->setType(get_Ecore_EBoolean());
-	ecore_EClassifier_isInstance_EJavaObject_return->setLower(0);
-	ecore_EClassifier_isInstance_EJavaObject_return->setUpper(1);
-	ecore_EClassifier_isInstance_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EClassifier_isInstance_EJavaObject);
-	
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setName("object");
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setType(get_Ecore_EJavaObject());
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setLower(0);
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setUpper(1);
-	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // EDataType attributes
+	ecore_EDataType_serializable = factory->createProperty_in_Class(ecore_EDataType);
 
 
-	ecore_EDataType = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EDataType->setName("EDataType");
-	ecore_EDataType->setIsAbstract(false);
+    //-------------------------------------------
+	// EEnum
+	ecore_EEnum = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EDataType_serializable = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EDataType);
-	
-	ecore_EDataType_serializable->setName("serializable");
-	ecore_EDataType_serializable->setType(get_Ecore_EBoolean());
-	ecore_EDataType_serializable->setLower(0);
-	ecore_EDataType_serializable->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EEnum attributes
+	ecore_EEnum_eLiterals = factory->createProperty_in_Class(ecore_EEnum);
+
+    // EEnum operations
+	ecore_EEnum_getEEnumLiteral_EString = factory->createOperation_in_Class(ecore_EEnum);
+	ecore_EEnum_getEEnumLiteral_EString_return = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EString);ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EString);
+
+	ecore_EEnum_getEEnumLiteral_EInt = factory->createOperation_in_Class(ecore_EEnum);
+	ecore_EEnum_getEEnumLiteral_EInt_return = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EInt);ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EInt);
+
+	ecore_EEnum_getEEnumLiteralByLiteral_EString = factory->createOperation_in_Class(ecore_EEnum);
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteralByLiteral_EString);ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal = factory->createParameter_in_Operation(ecore_EEnum_getEEnumLiteralByLiteral_EString);
 
 
-	ecore_EEnum = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EEnum->setName("EEnum");
-	ecore_EEnum->setIsAbstract(false);
+    //-------------------------------------------
+	// EEnumLiteral
+	ecore_EEnumLiteral = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EEnum_eLiterals = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EEnum);
-	
-	ecore_EEnum_eLiterals->setName("eLiterals");
-	ecore_EEnum_eLiterals->setType(get_Ecore_EEnumLiteral());
-	ecore_EEnum_eLiterals->setLower(0);
-	ecore_EEnum_eLiterals->setUpper(-1);
-	
-	
-	
-	
-	ecore_EEnum_getEEnumLiteral_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EEnum);ecore_EEnum_getEEnumLiteral_EString->setName("getEEnumLiteral");
-	//Operation
-	ecore_EEnum_getEEnumLiteral_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EString);
-	
-	ecore_EEnum_getEEnumLiteral_EString_return->setName("");
-	ecore_EEnum_getEEnumLiteral_EString_return->setType(get_Ecore_EEnumLiteral());
-	ecore_EEnum_getEEnumLiteral_EString_return->setLower(0);
-	ecore_EEnum_getEEnumLiteral_EString_return->setUpper(1);
-	ecore_EEnum_getEEnumLiteral_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EString);
-	
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setName("name");
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setType(get_Ecore_EString());
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setLower(0);
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setUpper(1);
-	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EEnum_getEEnumLiteral_EInt = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EEnum);ecore_EEnum_getEEnumLiteral_EInt->setName("getEEnumLiteral");
-	//Operation
-	ecore_EEnum_getEEnumLiteral_EInt_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EInt);
-	
-	ecore_EEnum_getEEnumLiteral_EInt_return->setName("");
-	ecore_EEnum_getEEnumLiteral_EInt_return->setType(get_Ecore_EEnumLiteral());
-	ecore_EEnum_getEEnumLiteral_EInt_return->setLower(0);
-	ecore_EEnum_getEEnumLiteral_EInt_return->setUpper(1);
-	ecore_EEnum_getEEnumLiteral_EInt_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteral_EInt);
-	
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setName("value");
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setType(get_Ecore_EInt());
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setLower(0);
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setUpper(1);
-	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EEnum_getEEnumLiteralByLiteral_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EEnum);ecore_EEnum_getEEnumLiteralByLiteral_EString->setName("getEEnumLiteralByLiteral");
-	//Operation
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteralByLiteral_EString);
-	
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setName("");
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setType(get_Ecore_EEnumLiteral());
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setLower(0);
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setUpper(1);
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EEnum_getEEnumLiteralByLiteral_EString);
-	
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setName("literal");
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setType(get_Ecore_EString());
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setLower(0);
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setUpper(1);
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // EEnumLiteral attributes
+	ecore_EEnumLiteral_eEnum = factory->createProperty_in_Class(ecore_EEnumLiteral);
+	ecore_EEnumLiteral_instance = factory->createProperty_in_Class(ecore_EEnumLiteral);
+	ecore_EEnumLiteral_literal = factory->createProperty_in_Class(ecore_EEnumLiteral);
+	ecore_EEnumLiteral_value = factory->createProperty_in_Class(ecore_EEnumLiteral);
 
 
-	ecore_EEnumLiteral = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EEnumLiteral->setName("EEnumLiteral");
-	ecore_EEnumLiteral->setIsAbstract(false);
+    //-------------------------------------------
+	// EFactory
+	ecore_EFactory = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EEnumLiteral_eEnum = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EEnumLiteral);
-	
-	ecore_EEnumLiteral_eEnum->setName("eEnum");
-	ecore_EEnumLiteral_eEnum->setType(get_Ecore_EEnum());
-	ecore_EEnumLiteral_eEnum->setLower(0);
-	ecore_EEnumLiteral_eEnum->setUpper(1);
-	
-	
-	
-	ecore_EEnumLiteral_instance = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EEnumLiteral);
-	
-	ecore_EEnumLiteral_instance->setName("instance");
-	ecore_EEnumLiteral_instance->setType(get_Ecore_EEnumerator());
-	ecore_EEnumLiteral_instance->setLower(0);
-	ecore_EEnumLiteral_instance->setUpper(1);
-	
-	
-	
-	ecore_EEnumLiteral_literal = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EEnumLiteral);
-	
-	ecore_EEnumLiteral_literal->setName("literal");
-	ecore_EEnumLiteral_literal->setType(get_Ecore_EString());
-	ecore_EEnumLiteral_literal->setLower(0);
-	ecore_EEnumLiteral_literal->setUpper(1);
-	
-	
-	
-	ecore_EEnumLiteral_value = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EEnumLiteral);
-	
-	ecore_EEnumLiteral_value->setName("value");
-	ecore_EEnumLiteral_value->setType(get_Ecore_EInt());
-	ecore_EEnumLiteral_value->setLower(0);
-	ecore_EEnumLiteral_value->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EFactory attributes
+	ecore_EFactory_ePackage = factory->createProperty_in_Class(ecore_EFactory);
+
+    // EFactory operations
+	ecore_EFactory_convertToString_EDataType_EJavaObject = factory->createOperation_in_Class(ecore_EFactory);
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return = factory->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType = factory->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue = factory->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);
+
+	ecore_EFactory_create_EClass = factory->createOperation_in_Class(ecore_EFactory);
+	ecore_EFactory_create_EClass_return = factory->createParameter_in_Operation(ecore_EFactory_create_EClass);ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass = factory->createParameter_in_Operation(ecore_EFactory_create_EClass);
+
+	ecore_EFactory_createFromString_EDataType_EString = factory->createOperation_in_Class(ecore_EFactory);
+	ecore_EFactory_createFromString_EDataType_EString_return = factory->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType = factory->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue = factory->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);
 
 
-	ecore_EFactory = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EFactory->setName("EFactory");
-	ecore_EFactory->setIsAbstract(false);
+    //-------------------------------------------
+	// EGenericType
+	ecore_EGenericType = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EFactory_ePackage = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EFactory);
-	
-	ecore_EFactory_ePackage->setName("ePackage");
-	ecore_EFactory_ePackage->setType(get_Ecore_EPackage());
-	ecore_EFactory_ePackage->setLower(1);
-	ecore_EFactory_ePackage->setUpper(1);
-	
-	
-	
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EFactory);ecore_EFactory_convertToString_EDataType_EJavaObject->setName("convertToString");
-	//Operation
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setName("");
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setType(get_Ecore_EString());
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setLower(0);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setUpper(1);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setName("eDataType");
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setType(get_Ecore_EDataType());
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setLower(0);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setUpper(1);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setDirection(uml::ParameterDirectionKind::IN);
-	
-	//Operation
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_convertToString_EDataType_EJavaObject);
-	
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setName("instanceValue");
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setType(get_Ecore_EJavaObject());
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setLower(0);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setUpper(1);
-	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EFactory_create_EClass = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EFactory);ecore_EFactory_create_EClass->setName("create");
-	//Operation
-	ecore_EFactory_create_EClass_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_create_EClass);
-	
-	ecore_EFactory_create_EClass_return->setName("");
-	ecore_EFactory_create_EClass_return->setType(get_Ecore_EObject());
-	ecore_EFactory_create_EClass_return->setLower(0);
-	ecore_EFactory_create_EClass_return->setUpper(1);
-	ecore_EFactory_create_EClass_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_create_EClass);
-	
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setName("eClass");
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setType(get_Ecore_EClass());
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setLower(0);
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setUpper(1);
-	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EFactory_createFromString_EDataType_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EFactory);ecore_EFactory_createFromString_EDataType_EString->setName("createFromString");
-	//Operation
-	ecore_EFactory_createFromString_EDataType_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);
-	
-	ecore_EFactory_createFromString_EDataType_EString_return->setName("");
-	ecore_EFactory_createFromString_EDataType_EString_return->setType(get_Ecore_EJavaObject());
-	ecore_EFactory_createFromString_EDataType_EString_return->setLower(0);
-	ecore_EFactory_createFromString_EDataType_EString_return->setUpper(1);
-	ecore_EFactory_createFromString_EDataType_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);
-	
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setName("eDataType");
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setType(get_Ecore_EDataType());
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setLower(0);
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setUpper(1);
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setDirection(uml::ParameterDirectionKind::IN);
-	
-	//Operation
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EFactory_createFromString_EDataType_EString);
-	
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setName("literalValue");
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setType(get_Ecore_EString());
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setLower(0);
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setUpper(1);
-	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // EGenericType attributes
+	ecore_EGenericType_eClassifier = factory->createProperty_in_Class(ecore_EGenericType);
+	ecore_EGenericType_eLowerBound = factory->createProperty_in_Class(ecore_EGenericType);
+	ecore_EGenericType_eRawType = factory->createProperty_in_Class(ecore_EGenericType);
+	ecore_EGenericType_eTypeArguments = factory->createProperty_in_Class(ecore_EGenericType);
+	ecore_EGenericType_eTypeParameter = factory->createProperty_in_Class(ecore_EGenericType);
+	ecore_EGenericType_eUpperBound = factory->createProperty_in_Class(ecore_EGenericType);
 
 
-	ecore_EGenericType = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EGenericType->setName("EGenericType");
-	ecore_EGenericType->setIsAbstract(false);
+    //-------------------------------------------
+	// EModelElement
+	ecore_EModelElement = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EGenericType_eClassifier = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eClassifier->setName("eClassifier");
-	ecore_EGenericType_eClassifier->setType(get_Ecore_EClassifier());
-	ecore_EGenericType_eClassifier->setLower(0);
-	ecore_EGenericType_eClassifier->setUpper(1);
-	
-	
-	
-	ecore_EGenericType_eLowerBound = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eLowerBound->setName("eLowerBound");
-	ecore_EGenericType_eLowerBound->setType(get_Ecore_EGenericType());
-	ecore_EGenericType_eLowerBound->setLower(0);
-	ecore_EGenericType_eLowerBound->setUpper(1);
-	
-	
-	
-	ecore_EGenericType_eRawType = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eRawType->setName("eRawType");
-	ecore_EGenericType_eRawType->setType(get_Ecore_EClassifier());
-	ecore_EGenericType_eRawType->setLower(1);
-	ecore_EGenericType_eRawType->setUpper(1);
-	
-	
-	
-	ecore_EGenericType_eTypeArguments = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eTypeArguments->setName("eTypeArguments");
-	ecore_EGenericType_eTypeArguments->setType(get_Ecore_EGenericType());
-	ecore_EGenericType_eTypeArguments->setLower(0);
-	ecore_EGenericType_eTypeArguments->setUpper(-1);
-	
-	
-	
-	ecore_EGenericType_eTypeParameter = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eTypeParameter->setName("eTypeParameter");
-	ecore_EGenericType_eTypeParameter->setType(get_Ecore_ETypeParameter());
-	ecore_EGenericType_eTypeParameter->setLower(0);
-	ecore_EGenericType_eTypeParameter->setUpper(1);
-	
-	
-	
-	ecore_EGenericType_eUpperBound = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EGenericType);
-	
-	ecore_EGenericType_eUpperBound->setName("eUpperBound");
-	ecore_EGenericType_eUpperBound->setType(get_Ecore_EGenericType());
-	ecore_EGenericType_eUpperBound->setLower(0);
-	ecore_EGenericType_eUpperBound->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EModelElement attributes
+	ecore_EModelElement_eAnnotations = factory->createProperty_in_Class(ecore_EModelElement);
+
+    // EModelElement operations
+	ecore_EModelElement_getEAnnotation_EString = factory->createOperation_in_Class(ecore_EModelElement);
+	ecore_EModelElement_getEAnnotation_EString_return = factory->createParameter_in_Operation(ecore_EModelElement_getEAnnotation_EString);ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source = factory->createParameter_in_Operation(ecore_EModelElement_getEAnnotation_EString);
 
 
-	ecore_EModelElement = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EModelElement->setName("EModelElement");
-	ecore_EModelElement->setIsAbstract(true);
+    //-------------------------------------------
+	// ENamedElement
+	ecore_ENamedElement = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EModelElement_eAnnotations = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EModelElement);
-	
-	ecore_EModelElement_eAnnotations->setName("eAnnotations");
-	ecore_EModelElement_eAnnotations->setType(get_Ecore_EAnnotation());
-	ecore_EModelElement_eAnnotations->setLower(0);
-	ecore_EModelElement_eAnnotations->setUpper(-1);
-	
-	
-	
-	
-	ecore_EModelElement_getEAnnotation_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EModelElement);ecore_EModelElement_getEAnnotation_EString->setName("getEAnnotation");
-	//Operation
-	ecore_EModelElement_getEAnnotation_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EModelElement_getEAnnotation_EString);
-	
-	ecore_EModelElement_getEAnnotation_EString_return->setName("");
-	ecore_EModelElement_getEAnnotation_EString_return->setType(get_Ecore_EAnnotation());
-	ecore_EModelElement_getEAnnotation_EString_return->setLower(0);
-	ecore_EModelElement_getEAnnotation_EString_return->setUpper(1);
-	ecore_EModelElement_getEAnnotation_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EModelElement_getEAnnotation_EString);
-	
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setName("source");
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setType(get_Ecore_EString());
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setLower(0);
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setUpper(1);
-	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // ENamedElement attributes
+	ecore_ENamedElement_name = factory->createProperty_in_Class(ecore_ENamedElement);
 
 
-	ecore_ENamedElement = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_ENamedElement->setName("ENamedElement");
-	ecore_ENamedElement->setIsAbstract(true);
+    //-------------------------------------------
+	// EObject
+	ecore_EObject = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_ENamedElement_name = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ENamedElement);
-	
-	ecore_ENamedElement_name->setName("name");
-	ecore_ENamedElement_name->setType(get_Ecore_EString());
-	ecore_ENamedElement_name->setLower(0);
-	ecore_ENamedElement_name->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EObject operations
+	ecore_EObject_eAllContents_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eAllContents__return = factory->createParameter_in_Operation(ecore_EObject_eAllContents_);
+
+	ecore_EObject_eClass_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eClass__return = factory->createParameter_in_Operation(ecore_EObject_eClass_);
+
+	ecore_EObject_eContainer_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eContainer__return = factory->createParameter_in_Operation(ecore_EObject_eContainer_);
+
+	ecore_EObject_eContainingFeature_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eContainingFeature__return = factory->createParameter_in_Operation(ecore_EObject_eContainingFeature_);
+
+	ecore_EObject_eContainmentFeature_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eContainmentFeature__return = factory->createParameter_in_Operation(ecore_EObject_eContainmentFeature_);
+
+	ecore_EObject_eContents_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eContents__return = factory->createParameter_in_Operation(ecore_EObject_eContents_);
+
+	ecore_EObject_eCrossReferences_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eCrossReferences__return = factory->createParameter_in_Operation(ecore_EObject_eCrossReferences_);
+
+	ecore_EObject_eGet_EStructuralFeature = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eGet_EStructuralFeature_return = factory->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature);ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature = factory->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature);
+
+	ecore_EObject_eGet_EStructuralFeature_EBoolean = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return = factory->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature = factory->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve = factory->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);
+
+	ecore_EObject_eIsProxy_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eIsProxy__return = factory->createParameter_in_Operation(ecore_EObject_eIsProxy_);
+
+	ecore_EObject_eIsSet_EStructuralFeature = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eIsSet_EStructuralFeature_return = factory->createParameter_in_Operation(ecore_EObject_eIsSet_EStructuralFeature);ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature = factory->createParameter_in_Operation(ecore_EObject_eIsSet_EStructuralFeature);
+
+	ecore_EObject_eResource_ = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eResource__return = factory->createParameter_in_Operation(ecore_EObject_eResource_);
+
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return = factory->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature = factory->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue = factory->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);
+
+	ecore_EObject_eUnset_EStructuralFeature = factory->createOperation_in_Class(ecore_EObject);
+	ecore_EObject_eUnset_EStructuralFeature_return = factory->createParameter_in_Operation(ecore_EObject_eUnset_EStructuralFeature);ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature = factory->createParameter_in_Operation(ecore_EObject_eUnset_EStructuralFeature);
 
 
-	ecore_EObject = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EObject->setName("EObject");
-	ecore_EObject->setIsAbstract(false);
+    //-------------------------------------------
+	// EOperation
+	ecore_EOperation = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	
-	ecore_EObject_eAllContents_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eAllContents_->setName("eAllContents");
-	//Operation
-	ecore_EObject_eAllContents__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eAllContents_);
-	
-	ecore_EObject_eAllContents__return->setName("");
-	ecore_EObject_eAllContents__return->setType(get_Ecore_EObject_ETreeIterator_EObject());
-	ecore_EObject_eAllContents__return->setLower(0);
-	ecore_EObject_eAllContents__return->setUpper(1);
-	ecore_EObject_eAllContents__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eClass_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eClass_->setName("eClass");
-	//Operation
-	ecore_EObject_eClass__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eClass_);
-	
-	ecore_EObject_eClass__return->setName("");
-	ecore_EObject_eClass__return->setType(get_Ecore_EClass());
-	ecore_EObject_eClass__return->setLower(0);
-	ecore_EObject_eClass__return->setUpper(1);
-	ecore_EObject_eClass__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eContainer_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eContainer_->setName("eContainer");
-	//Operation
-	ecore_EObject_eContainer__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eContainer_);
-	
-	ecore_EObject_eContainer__return->setName("");
-	ecore_EObject_eContainer__return->setType(get_Ecore_EObject());
-	ecore_EObject_eContainer__return->setLower(0);
-	ecore_EObject_eContainer__return->setUpper(1);
-	ecore_EObject_eContainer__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eContainingFeature_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eContainingFeature_->setName("eContainingFeature");
-	//Operation
-	ecore_EObject_eContainingFeature__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eContainingFeature_);
-	
-	ecore_EObject_eContainingFeature__return->setName("");
-	ecore_EObject_eContainingFeature__return->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eContainingFeature__return->setLower(0);
-	ecore_EObject_eContainingFeature__return->setUpper(1);
-	ecore_EObject_eContainingFeature__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eContainmentFeature_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eContainmentFeature_->setName("eContainmentFeature");
-	//Operation
-	ecore_EObject_eContainmentFeature__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eContainmentFeature_);
-	
-	ecore_EObject_eContainmentFeature__return->setName("");
-	ecore_EObject_eContainmentFeature__return->setType(get_Ecore_EReference());
-	ecore_EObject_eContainmentFeature__return->setLower(0);
-	ecore_EObject_eContainmentFeature__return->setUpper(1);
-	ecore_EObject_eContainmentFeature__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eContents_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eContents_->setName("eContents");
-	//Operation
-	ecore_EObject_eContents__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eContents_);
-	
-	ecore_EObject_eContents__return->setName("");
-	ecore_EObject_eContents__return->setType(get_Ecore_EObject_EEList_EObject());
-	ecore_EObject_eContents__return->setLower(0);
-	ecore_EObject_eContents__return->setUpper(1);
-	ecore_EObject_eContents__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eCrossReferences_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eCrossReferences_->setName("eCrossReferences");
-	//Operation
-	ecore_EObject_eCrossReferences__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eCrossReferences_);
-	
-	ecore_EObject_eCrossReferences__return->setName("");
-	ecore_EObject_eCrossReferences__return->setType(get_Ecore_EObject_EEList_EObject());
-	ecore_EObject_eCrossReferences__return->setLower(0);
-	ecore_EObject_eCrossReferences__return->setUpper(1);
-	ecore_EObject_eCrossReferences__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eGet_EStructuralFeature = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eGet_EStructuralFeature->setName("eGet");
-	//Operation
-	ecore_EObject_eGet_EStructuralFeature_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature);
-	
-	ecore_EObject_eGet_EStructuralFeature_return->setName("");
-	ecore_EObject_eGet_EStructuralFeature_return->setType(get_Ecore_EJavaObject());
-	ecore_EObject_eGet_EStructuralFeature_return->setLower(0);
-	ecore_EObject_eGet_EStructuralFeature_return->setUpper(1);
-	ecore_EObject_eGet_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature);
-	
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setName("feature");
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setLower(0);
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setUpper(1);
-	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eGet_EStructuralFeature_EBoolean->setName("eGet");
-	//Operation
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setName("");
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setType(get_Ecore_EJavaObject());
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setLower(0);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setUpper(1);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setName("feature");
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setLower(0);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setUpper(1);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	//Operation
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eGet_EStructuralFeature_EBoolean);
-	
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setName("resolve");
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setType(get_Ecore_EBoolean());
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setLower(0);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setUpper(1);
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EObject_eIsProxy_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eIsProxy_->setName("eIsProxy");
-	//Operation
-	ecore_EObject_eIsProxy__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eIsProxy_);
-	
-	ecore_EObject_eIsProxy__return->setName("");
-	ecore_EObject_eIsProxy__return->setType(get_Ecore_EBoolean());
-	ecore_EObject_eIsProxy__return->setLower(0);
-	ecore_EObject_eIsProxy__return->setUpper(1);
-	ecore_EObject_eIsProxy__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eIsSet_EStructuralFeature = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eIsSet_EStructuralFeature->setName("eIsSet");
-	//Operation
-	ecore_EObject_eIsSet_EStructuralFeature_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eIsSet_EStructuralFeature);
-	
-	ecore_EObject_eIsSet_EStructuralFeature_return->setName("");
-	ecore_EObject_eIsSet_EStructuralFeature_return->setType(get_Ecore_EBoolean());
-	ecore_EObject_eIsSet_EStructuralFeature_return->setLower(0);
-	ecore_EObject_eIsSet_EStructuralFeature_return->setUpper(1);
-	ecore_EObject_eIsSet_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eIsSet_EStructuralFeature);
-	
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setName("feature");
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setLower(0);
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setUpper(1);
-	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EObject_eResource_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eResource_->setName("eResource");
-	//Operation
-	ecore_EObject_eResource__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eResource_);
-	
-	ecore_EObject_eResource__return->setName("");
-	ecore_EObject_eResource__return->setType(get_Ecore_EResource());
-	ecore_EObject_eResource__return->setLower(0);
-	ecore_EObject_eResource__return->setUpper(1);
-	ecore_EObject_eResource__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eSet_EStructuralFeature_EJavaObject->setName("eSet");
-	//Operation
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setName("");
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setType(nullptr);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setLower(0);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setUpper(1);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setName("feature");
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setLower(0);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setUpper(1);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	//Operation
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eSet_EStructuralFeature_EJavaObject);
-	
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setName("newValue");
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setType(get_Ecore_EJavaObject());
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setLower(0);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setUpper(1);
-	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	ecore_EObject_eUnset_EStructuralFeature = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EObject);ecore_EObject_eUnset_EStructuralFeature->setName("eUnset");
-	//Operation
-	ecore_EObject_eUnset_EStructuralFeature_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eUnset_EStructuralFeature);
-	
-	ecore_EObject_eUnset_EStructuralFeature_return->setName("");
-	ecore_EObject_eUnset_EStructuralFeature_return->setType(nullptr);
-	ecore_EObject_eUnset_EStructuralFeature_return->setLower(0);
-	ecore_EObject_eUnset_EStructuralFeature_return->setUpper(1);
-	ecore_EObject_eUnset_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EObject_eUnset_EStructuralFeature);
-	
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setName("feature");
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setType(get_Ecore_EStructuralFeature());
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setLower(0);
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setUpper(1);
-	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // EOperation attributes
+	ecore_EOperation_eContainingClass = factory->createProperty_in_Class(ecore_EOperation);
+	ecore_EOperation_eExceptions = factory->createProperty_in_Class(ecore_EOperation);
+	ecore_EOperation_eGenericExceptions = factory->createProperty_in_Class(ecore_EOperation);
+	ecore_EOperation_eParameters = factory->createProperty_in_Class(ecore_EOperation);
+	ecore_EOperation_eTypeParameters = factory->createProperty_in_Class(ecore_EOperation);
 
 
-	ecore_EOperation = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EOperation->setName("EOperation");
-	ecore_EOperation->setIsAbstract(false);
+    //-------------------------------------------
+	// EPackage
+	ecore_EPackage = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EOperation_eContainingClass = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EOperation);
-	
-	ecore_EOperation_eContainingClass->setName("eContainingClass");
-	ecore_EOperation_eContainingClass->setType(get_Ecore_EClass());
-	ecore_EOperation_eContainingClass->setLower(0);
-	ecore_EOperation_eContainingClass->setUpper(1);
-	
-	
-	
-	ecore_EOperation_eExceptions = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EOperation);
-	
-	ecore_EOperation_eExceptions->setName("eExceptions");
-	ecore_EOperation_eExceptions->setType(get_Ecore_EClassifier());
-	ecore_EOperation_eExceptions->setLower(0);
-	ecore_EOperation_eExceptions->setUpper(-1);
-	
-	
-	
-	ecore_EOperation_eGenericExceptions = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EOperation);
-	
-	ecore_EOperation_eGenericExceptions->setName("eGenericExceptions");
-	ecore_EOperation_eGenericExceptions->setType(get_Ecore_EGenericType());
-	ecore_EOperation_eGenericExceptions->setLower(0);
-	ecore_EOperation_eGenericExceptions->setUpper(-1);
-	
-	
-	
-	ecore_EOperation_eParameters = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EOperation);
-	
-	ecore_EOperation_eParameters->setName("eParameters");
-	ecore_EOperation_eParameters->setType(get_Ecore_EParameter());
-	ecore_EOperation_eParameters->setLower(0);
-	ecore_EOperation_eParameters->setUpper(-1);
-	
-	
-	
-	ecore_EOperation_eTypeParameters = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EOperation);
-	
-	ecore_EOperation_eTypeParameters->setName("eTypeParameters");
-	ecore_EOperation_eTypeParameters->setType(get_Ecore_ETypeParameter());
-	ecore_EOperation_eTypeParameters->setLower(0);
-	ecore_EOperation_eTypeParameters->setUpper(-1);
-	
-	
-	
-	
-	
-	
+    // EPackage attributes
+	ecore_EPackage_eClassifiers = factory->createProperty_in_Class(ecore_EPackage);
+	ecore_EPackage_eFactoryInstance = factory->createProperty_in_Class(ecore_EPackage);
+	ecore_EPackage_eSubpackages = factory->createProperty_in_Class(ecore_EPackage);
+	ecore_EPackage_eSuperPackage = factory->createProperty_in_Class(ecore_EPackage);
+	ecore_EPackage_nsPrefix = factory->createProperty_in_Class(ecore_EPackage);
+	ecore_EPackage_nsURI = factory->createProperty_in_Class(ecore_EPackage);
+
+    // EPackage operations
+	ecore_EPackage_getEClassifier_EString = factory->createOperation_in_Class(ecore_EPackage);
+	ecore_EPackage_getEClassifier_EString_return = factory->createParameter_in_Operation(ecore_EPackage_getEClassifier_EString);ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name = factory->createParameter_in_Operation(ecore_EPackage_getEClassifier_EString);
 
 
-	ecore_EPackage = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EPackage->setName("EPackage");
-	ecore_EPackage->setIsAbstract(false);
+    //-------------------------------------------
+	// EParameter
+	ecore_EParameter = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EPackage_eClassifiers = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_eClassifiers->setName("eClassifiers");
-	ecore_EPackage_eClassifiers->setType(get_Ecore_EClassifier());
-	ecore_EPackage_eClassifiers->setLower(0);
-	ecore_EPackage_eClassifiers->setUpper(-1);
-	
-	
-	
-	ecore_EPackage_eFactoryInstance = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_eFactoryInstance->setName("eFactoryInstance");
-	ecore_EPackage_eFactoryInstance->setType(get_Ecore_EFactory());
-	ecore_EPackage_eFactoryInstance->setLower(1);
-	ecore_EPackage_eFactoryInstance->setUpper(1);
-	
-	
-	
-	ecore_EPackage_eSubpackages = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_eSubpackages->setName("eSubpackages");
-	ecore_EPackage_eSubpackages->setType(get_Ecore_EPackage());
-	ecore_EPackage_eSubpackages->setLower(0);
-	ecore_EPackage_eSubpackages->setUpper(-1);
-	
-	
-	
-	ecore_EPackage_eSuperPackage = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_eSuperPackage->setName("eSuperPackage");
-	ecore_EPackage_eSuperPackage->setType(get_Ecore_EPackage());
-	ecore_EPackage_eSuperPackage->setLower(0);
-	ecore_EPackage_eSuperPackage->setUpper(1);
-	
-	
-	
-	ecore_EPackage_nsPrefix = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_nsPrefix->setName("nsPrefix");
-	ecore_EPackage_nsPrefix->setType(get_Ecore_EString());
-	ecore_EPackage_nsPrefix->setLower(0);
-	ecore_EPackage_nsPrefix->setUpper(1);
-	
-	
-	
-	ecore_EPackage_nsURI = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EPackage);
-	
-	ecore_EPackage_nsURI->setName("nsURI");
-	ecore_EPackage_nsURI->setType(get_Ecore_EString());
-	ecore_EPackage_nsURI->setLower(0);
-	ecore_EPackage_nsURI->setUpper(1);
-	
-	
-	
-	
-	ecore_EPackage_getEClassifier_EString = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EPackage);ecore_EPackage_getEClassifier_EString->setName("getEClassifier");
-	//Operation
-	ecore_EPackage_getEClassifier_EString_return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EPackage_getEClassifier_EString);
-	
-	ecore_EPackage_getEClassifier_EString_return->setName("");
-	ecore_EPackage_getEClassifier_EString_return->setType(get_Ecore_EClassifier());
-	ecore_EPackage_getEClassifier_EString_return->setLower(0);
-	ecore_EPackage_getEClassifier_EString_return->setUpper(1);
-	ecore_EPackage_getEClassifier_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	//Operation
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EPackage_getEClassifier_EString);
-	
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setName("name");
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setType(get_Ecore_EString());
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setLower(0);
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setUpper(1);
-	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
-	
+    // EParameter attributes
+	ecore_EParameter_eOperation = factory->createProperty_in_Class(ecore_EParameter);
 
 
-	ecore_EParameter = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EParameter->setName("EParameter");
-	ecore_EParameter->setIsAbstract(false);
+    //-------------------------------------------
+	// EReference
+	ecore_EReference = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EParameter_eOperation = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EParameter);
-	
-	ecore_EParameter_eOperation->setName("eOperation");
-	ecore_EParameter_eOperation->setType(get_Ecore_EOperation());
-	ecore_EParameter_eOperation->setLower(0);
-	ecore_EParameter_eOperation->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EReference attributes
+	ecore_EReference_container = factory->createProperty_in_Class(ecore_EReference);
+	ecore_EReference_containment = factory->createProperty_in_Class(ecore_EReference);
+	ecore_EReference_eKeys = factory->createProperty_in_Class(ecore_EReference);
+	ecore_EReference_eOpposite = factory->createProperty_in_Class(ecore_EReference);
+	ecore_EReference_eReferenceType = factory->createProperty_in_Class(ecore_EReference);
+	ecore_EReference_resolveProxies = factory->createProperty_in_Class(ecore_EReference);
 
 
-	ecore_EReference = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EReference->setName("EReference");
-	ecore_EReference->setIsAbstract(false);
+    //-------------------------------------------
+	// EStringToStringMapEntry
+	ecore_EStringToStringMapEntry = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EReference_container = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_container->setName("container");
-	ecore_EReference_container->setType(get_Ecore_EBoolean());
-	ecore_EReference_container->setLower(0);
-	ecore_EReference_container->setUpper(1);
-	
-	
-	
-	ecore_EReference_containment = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_containment->setName("containment");
-	ecore_EReference_containment->setType(get_Ecore_EBoolean());
-	ecore_EReference_containment->setLower(0);
-	ecore_EReference_containment->setUpper(1);
-	
-	
-	
-	ecore_EReference_eKeys = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_eKeys->setName("eKeys");
-	ecore_EReference_eKeys->setType(get_Ecore_EAttribute());
-	ecore_EReference_eKeys->setLower(0);
-	ecore_EReference_eKeys->setUpper(-1);
-	
-	
-	
-	ecore_EReference_eOpposite = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_eOpposite->setName("eOpposite");
-	ecore_EReference_eOpposite->setType(get_Ecore_EReference());
-	ecore_EReference_eOpposite->setLower(0);
-	ecore_EReference_eOpposite->setUpper(1);
-	
-	
-	
-	ecore_EReference_eReferenceType = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_eReferenceType->setName("eReferenceType");
-	ecore_EReference_eReferenceType->setType(get_Ecore_EClass());
-	ecore_EReference_eReferenceType->setLower(1);
-	ecore_EReference_eReferenceType->setUpper(1);
-	
-	
-	
-	ecore_EReference_resolveProxies = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EReference);
-	
-	ecore_EReference_resolveProxies->setName("resolveProxies");
-	ecore_EReference_resolveProxies->setType(get_Ecore_EBoolean());
-	ecore_EReference_resolveProxies->setLower(0);
-	ecore_EReference_resolveProxies->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EStringToStringMapEntry attributes
+	ecore_EStringToStringMapEntry_key = factory->createProperty_in_Class(ecore_EStringToStringMapEntry);
+	ecore_EStringToStringMapEntry_value = factory->createProperty_in_Class(ecore_EStringToStringMapEntry);
 
 
-	ecore_EStringToStringMapEntry = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EStringToStringMapEntry->setName("EStringToStringMapEntry");
-	ecore_EStringToStringMapEntry->setIsAbstract(false);
+    //-------------------------------------------
+	// EStructuralFeature
+	ecore_EStructuralFeature = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EStringToStringMapEntry_key = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStringToStringMapEntry);
-	
-	ecore_EStringToStringMapEntry_key->setName("key");
-	ecore_EStringToStringMapEntry_key->setType(get_Ecore_EString());
-	ecore_EStringToStringMapEntry_key->setLower(0);
-	ecore_EStringToStringMapEntry_key->setUpper(1);
-	
-	
-	
-	ecore_EStringToStringMapEntry_value = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStringToStringMapEntry);
-	
-	ecore_EStringToStringMapEntry_value->setName("value");
-	ecore_EStringToStringMapEntry_value->setType(get_Ecore_EString());
-	ecore_EStringToStringMapEntry_value->setLower(0);
-	ecore_EStringToStringMapEntry_value->setUpper(1);
-	
-	
-	
-	
-	
-	
+    // EStructuralFeature attributes
+	ecore_EStructuralFeature_changeable = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_defaultValue = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_defaultValueLiteral = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_derived = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_eContainingClass = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_transient = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_unsettable = factory->createProperty_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_volatile = factory->createProperty_in_Class(ecore_EStructuralFeature);
+
+    // EStructuralFeature operations
+	ecore_EStructuralFeature_getContainerClass_ = factory->createOperation_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_getContainerClass__return = factory->createParameter_in_Operation(ecore_EStructuralFeature_getContainerClass_);
+
+	ecore_EStructuralFeature_getFeatureID_ = factory->createOperation_in_Class(ecore_EStructuralFeature);
+	ecore_EStructuralFeature_getFeatureID__return = factory->createParameter_in_Operation(ecore_EStructuralFeature_getFeatureID_);
 
 
-	ecore_EStructuralFeature = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_EStructuralFeature->setName("EStructuralFeature");
-	ecore_EStructuralFeature->setIsAbstract(true);
+    //-------------------------------------------
+	// ETypeParameter
+	ecore_ETypeParameter = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_EStructuralFeature_changeable = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_changeable->setName("changeable");
-	ecore_EStructuralFeature_changeable->setType(get_Ecore_EBoolean());
-	ecore_EStructuralFeature_changeable->setLower(0);
-	ecore_EStructuralFeature_changeable->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_defaultValue = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_defaultValue->setName("defaultValue");
-	ecore_EStructuralFeature_defaultValue->setType(get_Ecore_EJavaObject());
-	ecore_EStructuralFeature_defaultValue->setLower(0);
-	ecore_EStructuralFeature_defaultValue->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_defaultValueLiteral = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_defaultValueLiteral->setName("defaultValueLiteral");
-	ecore_EStructuralFeature_defaultValueLiteral->setType(get_Ecore_EString());
-	ecore_EStructuralFeature_defaultValueLiteral->setLower(0);
-	ecore_EStructuralFeature_defaultValueLiteral->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_derived = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_derived->setName("derived");
-	ecore_EStructuralFeature_derived->setType(get_Ecore_EBoolean());
-	ecore_EStructuralFeature_derived->setLower(0);
-	ecore_EStructuralFeature_derived->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_eContainingClass = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_eContainingClass->setName("eContainingClass");
-	ecore_EStructuralFeature_eContainingClass->setType(get_Ecore_EClass());
-	ecore_EStructuralFeature_eContainingClass->setLower(0);
-	ecore_EStructuralFeature_eContainingClass->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_transient = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_transient->setName("transient");
-	ecore_EStructuralFeature_transient->setType(get_Ecore_EBoolean());
-	ecore_EStructuralFeature_transient->setLower(0);
-	ecore_EStructuralFeature_transient->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_unsettable = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_unsettable->setName("unsettable");
-	ecore_EStructuralFeature_unsettable->setType(get_Ecore_EBoolean());
-	ecore_EStructuralFeature_unsettable->setLower(0);
-	ecore_EStructuralFeature_unsettable->setUpper(1);
-	
-	
-	
-	ecore_EStructuralFeature_volatile = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_EStructuralFeature);
-	
-	ecore_EStructuralFeature_volatile->setName("volatile");
-	ecore_EStructuralFeature_volatile->setType(get_Ecore_EBoolean());
-	ecore_EStructuralFeature_volatile->setLower(0);
-	ecore_EStructuralFeature_volatile->setUpper(1);
-	
-	
-	
-	
-	ecore_EStructuralFeature_getContainerClass_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EStructuralFeature);ecore_EStructuralFeature_getContainerClass_->setName("getContainerClass");
-	//Operation
-	ecore_EStructuralFeature_getContainerClass__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EStructuralFeature_getContainerClass_);
-	
-	ecore_EStructuralFeature_getContainerClass__return->setName("");
-	ecore_EStructuralFeature_getContainerClass__return->setType(get_Ecore_EStructuralFeature_EJavaClass_Wildcard());
-	ecore_EStructuralFeature_getContainerClass__return->setLower(0);
-	ecore_EStructuralFeature_getContainerClass__return->setUpper(1);
-	ecore_EStructuralFeature_getContainerClass__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	ecore_EStructuralFeature_getFeatureID_ = uml::UmlFactory::eInstance()->createOperation_in_Class(ecore_EStructuralFeature);ecore_EStructuralFeature_getFeatureID_->setName("getFeatureID");
-	//Operation
-	ecore_EStructuralFeature_getFeatureID__return = uml::UmlFactory::eInstance()->createParameter_in_Operation(ecore_EStructuralFeature_getFeatureID_);
-	
-	ecore_EStructuralFeature_getFeatureID__return->setName("");
-	ecore_EStructuralFeature_getFeatureID__return->setType(get_Ecore_EInt());
-	ecore_EStructuralFeature_getFeatureID__return->setLower(0);
-	ecore_EStructuralFeature_getFeatureID__return->setUpper(1);
-	ecore_EStructuralFeature_getFeatureID__return->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	
-	
-	
+    // ETypeParameter attributes
+	ecore_ETypeParameter_eBounds = factory->createProperty_in_Class(ecore_ETypeParameter);
 
 
-	ecore_ETypeParameter = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_ETypeParameter->setName("ETypeParameter");
-	ecore_ETypeParameter->setIsAbstract(false);
+    //-------------------------------------------
+	// ETypedElement
+	ecore_ETypedElement = factory->createClass_in_Package(ecore);
 	
-	//constraints
-	
-	
-	ecore_ETypeParameter_eBounds = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypeParameter);
-	
-	ecore_ETypeParameter_eBounds->setName("eBounds");
-	ecore_ETypeParameter_eBounds->setType(get_Ecore_EGenericType());
-	ecore_ETypeParameter_eBounds->setLower(0);
-	ecore_ETypeParameter_eBounds->setUpper(-1);
-	
-	
-	
-	
-	
-	
+    // ETypedElement attributes
+	ecore_ETypedElement_eGenericType = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_eType = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_lowerBound = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_many = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_ordered = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_required = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_unique = factory->createProperty_in_Class(ecore_ETypedElement);
+	ecore_ETypedElement_upperBound = factory->createProperty_in_Class(ecore_ETypedElement);
 
+}
 
-	ecore_ETypedElement = uml::UmlFactory::eInstance()->createClass_in_Package(ecore);
-	ecore_ETypedElement->setName("ETypedElement");
-	ecore_ETypedElement->setIsAbstract(true);
-	
-	//constraints
-	
-	
-	ecore_ETypedElement_eGenericType = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_eGenericType->setName("eGenericType");
-	ecore_ETypedElement_eGenericType->setType(get_Ecore_EGenericType());
-	ecore_ETypedElement_eGenericType->setLower(0);
-	ecore_ETypedElement_eGenericType->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_eType = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_eType->setName("eType");
-	ecore_ETypedElement_eType->setType(get_Ecore_EClassifier());
-	ecore_ETypedElement_eType->setLower(0);
-	ecore_ETypedElement_eType->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_lowerBound = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_lowerBound->setName("lowerBound");
-	ecore_ETypedElement_lowerBound->setType(get_Ecore_EInt());
-	ecore_ETypedElement_lowerBound->setLower(0);
-	ecore_ETypedElement_lowerBound->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_many = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_many->setName("many");
-	ecore_ETypedElement_many->setType(get_Ecore_EBoolean());
-	ecore_ETypedElement_many->setLower(0);
-	ecore_ETypedElement_many->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_ordered = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_ordered->setName("ordered");
-	ecore_ETypedElement_ordered->setType(get_Ecore_EBoolean());
-	ecore_ETypedElement_ordered->setLower(0);
-	ecore_ETypedElement_ordered->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_required = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_required->setName("required");
-	ecore_ETypedElement_required->setType(get_Ecore_EBoolean());
-	ecore_ETypedElement_required->setLower(0);
-	ecore_ETypedElement_required->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_unique = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_unique->setName("unique");
-	ecore_ETypedElement_unique->setType(get_Ecore_EBoolean());
-	ecore_ETypedElement_unique->setLower(0);
-	ecore_ETypedElement_unique->setUpper(1);
-	
-	
-	
-	ecore_ETypedElement_upperBound = uml::UmlFactory::eInstance()->createProperty_in_Class(ecore_ETypedElement);
-	
-	ecore_ETypedElement_upperBound->setName("upperBound");
-	ecore_ETypedElement_upperBound->setType(get_Ecore_EInt());
-	ecore_ETypedElement_upperBound->setLower(0);
-	ecore_ETypedElement_upperBound->setUpper(1);
-	
-	
-	
-	
-	
-	
+void EcorePackageImpl::createPackageDependencies(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
 
+void EcorePackageImpl::createPackageEnumerationLiterals(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
 
+void EcorePackageImpl::createPackageInstanceSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
 
+void EcorePackageImpl::createPackageInterfaces(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
 
-
-//Dependency 
-
-	ecore_EIntegerObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EIntegerObject->setName("EIntegerObject");
-	ecore_ETreeIterator = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_ETreeIterator->setName("ETreeIterator");
-	ecore_EBigInteger = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EBigInteger->setName("EBigInteger");
-	ecore_EDate = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EDate->setName("EDate");
-	ecore_ELongObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_ELongObject->setName("ELongObject");
-	ecore_EInvocationTargetException = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EInvocationTargetException->setName("EInvocationTargetException");
-	ecore_EFloatObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EFloatObject->setName("EFloatObject");
-	ecore_EBooleanObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EBooleanObject->setName("EBooleanObject");
-	ecore_EEnumerator = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EEnumerator->setName("EEnumerator");
-	ecore_EDouble = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EDouble->setName("EDouble");
-	ecore_EJavaClass = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EJavaClass->setName("EJavaClass");
-	ecore_ELong = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_ELong->setName("ELong");
-	ecore_EBoolean = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EBoolean->setName("EBoolean");
-	ecore_EFeatureMapEntry = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EFeatureMapEntry->setName("EFeatureMapEntry");
-	ecore_EMap = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EMap->setName("EMap");
-	ecore_EJavaObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EJavaObject->setName("EJavaObject");
-	ecore_EResource = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EResource->setName("EResource");
-	ecore_EShortObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EShortObject->setName("EShortObject");
-	ecore_EChar = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EChar->setName("EChar");
-	ecore_EEList = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EEList->setName("EEList");
-	ecore_EBigDecimal = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EBigDecimal->setName("EBigDecimal");
-	ecore_EShort = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EShort->setName("EShort");
-	ecore_EInt = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EInt->setName("EInt");
-	ecore_EString = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EString->setName("EString");
-	ecore_EByteArray = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EByteArray->setName("EByteArray");
-	ecore_EByte = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EByte->setName("EByte");
-	ecore_EResourceSet = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EResourceSet->setName("EResourceSet");
-	ecore_EByteObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EByteObject->setName("EByteObject");
-	ecore_EFloat = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EFloat->setName("EFloat");
-	ecore_EDoubleObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EDoubleObject->setName("EDoubleObject");
-	ecore_ECharacterObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
+void EcorePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+	ecore_ECharacterObject = factory->createPrimitiveType_in_Package(ecore);
 	ecore_ECharacterObject->setName("ECharacterObject");
-	ecore_EDiagnosticChain = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EDiagnosticChain->setName("EDiagnosticChain");
-	ecore_EFeatureMap = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EFeatureMap->setName("EFeatureMap");
-	
 
+	ecore_EDiagnosticChain = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDiagnosticChain->setName("EDiagnosticChain");
+
+	ecore_EIntegerObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EIntegerObject->setName("EIntegerObject");
+
+	ecore_EDouble = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDouble->setName("EDouble");
+
+	ecore_EBigDecimal = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EBigDecimal->setName("EBigDecimal");
+
+	ecore_EInvocationTargetException = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EInvocationTargetException->setName("EInvocationTargetException");
+
+	ecore_EBigInteger = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EBigInteger->setName("EBigInteger");
+
+	ecore_EJavaClass = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EJavaClass->setName("EJavaClass");
+
+	ecore_ELongObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ELongObject->setName("ELongObject");
+
+	ecore_EFeatureMapEntry = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFeatureMapEntry->setName("EFeatureMapEntry");
+
+	ecore_ELong = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ELong->setName("ELong");
+
+	ecore_EEList = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EEList->setName("EEList");
+
+	ecore_EJavaObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EJavaObject->setName("EJavaObject");
+
+	ecore_EByteArray = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EByteArray->setName("EByteArray");
+
+	ecore_EChar = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EChar->setName("EChar");
+
+	ecore_EFeatureMap = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFeatureMap->setName("EFeatureMap");
+
+	ecore_EString = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EString->setName("EString");
+
+	ecore_EFloatObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFloatObject->setName("EFloatObject");
+
+	ecore_EMap = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EMap->setName("EMap");
+
+	ecore_EDate = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDate->setName("EDate");
+
+	ecore_EResourceSet = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EResourceSet->setName("EResourceSet");
+
+	ecore_EDoubleObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDoubleObject->setName("EDoubleObject");
+
+	ecore_EByteObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EByteObject->setName("EByteObject");
+
+	ecore_EEnumerator = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EEnumerator->setName("EEnumerator");
+
+	ecore_EByte = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EByte->setName("EByte");
+
+	ecore_EBoolean = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EBoolean->setName("EBoolean");
+
+	ecore_EFloat = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFloat->setName("EFloat");
+
+	ecore_EResource = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EResource->setName("EResource");
+
+	ecore_EShort = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EShort->setName("EShort");
+
+	ecore_EShortObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EShortObject->setName("EShortObject");
+
+	ecore_ETreeIterator = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ETreeIterator->setName("ETreeIterator");
+
+	ecore_EBooleanObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EBooleanObject->setName("EBooleanObject");
+
+	ecore_EInt = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EInt->setName("EInt");
+}
+
+void EcorePackageImpl::createPackageStereotypes(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
+
+void EcorePackageImpl::createPackageValueSpecifications(std::shared_ptr<EcorePackageImpl> ecore, std::shared_ptr<uml::UmlFactory> factory)
+{
+	ecore_EAnnotation_contents_lowerValue_LiteralInteger_Ecore_EAnnotation_contents = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_contents));
+	ecore_EAnnotation_contents_lowerValue_LiteralInteger_Ecore_EAnnotation_contents->setValue(0);
+
+	ecore_EAnnotation_contents_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_contents = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_contents));
+	ecore_EAnnotation_contents_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_contents->setValue(-1);
+
+	ecore_EAnnotation_details_lowerValue_LiteralInteger_Ecore_EAnnotation_details = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_details));
+	ecore_EAnnotation_details_lowerValue_LiteralInteger_Ecore_EAnnotation_details->setValue(0);
+
+	ecore_EAnnotation_details_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_details = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_details));
+	ecore_EAnnotation_details_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_details->setValue(-1);
+
+	ecore_EAnnotation_eModelElement_lowerValue_LiteralInteger_Ecore_EAnnotation_eModelElement = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_eModelElement));
+	ecore_EAnnotation_eModelElement_lowerValue_LiteralInteger_Ecore_EAnnotation_eModelElement->setValue(0);
+
+	ecore_EAnnotation_references_lowerValue_LiteralInteger_Ecore_EAnnotation_references = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_references));
+	ecore_EAnnotation_references_lowerValue_LiteralInteger_Ecore_EAnnotation_references->setValue(0);
+
+	ecore_EAnnotation_references_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_references = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_references));
+	ecore_EAnnotation_references_upperValue_LiteralUnlimitedNatural_Ecore_EAnnotation_references->setValue(-1);
+
+	ecore_EAnnotation_source_lowerValue_LiteralInteger_Ecore_EAnnotation_source = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAnnotation_source));
+	ecore_EAnnotation_source_lowerValue_LiteralInteger_Ecore_EAnnotation_source->setValue(0);
+
+	ecore_EAttribute_id_lowerValue_LiteralInteger_Ecore_EAttribute_id = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EAttribute_id));
+	ecore_EAttribute_id_lowerValue_LiteralInteger_Ecore_EAttribute_id->setValue(0);
+
+	ecore_EClass_abstract_lowerValue_LiteralInteger_Ecore_EClass_abstract = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_abstract));
+	ecore_EClass_abstract_lowerValue_LiteralInteger_Ecore_EClass_abstract->setValue(0);
+
+	ecore_EClass_eAllAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAllAttributes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllAttributes));
+	ecore_EClass_eAllAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAllAttributes->setValue(0);
+
+	ecore_EClass_eAllAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllAttributes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllAttributes));
+	ecore_EClass_eAllAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllAttributes->setValue(-1);
+
+	ecore_EClass_eAllContainments_lowerValue_LiteralInteger_Ecore_EClass_eAllContainments = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllContainments));
+	ecore_EClass_eAllContainments_lowerValue_LiteralInteger_Ecore_EClass_eAllContainments->setValue(0);
+
+	ecore_EClass_eAllContainments_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllContainments = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllContainments));
+	ecore_EClass_eAllContainments_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllContainments->setValue(-1);
+
+	ecore_EClass_eAllGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllGenericSuperTypes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllGenericSuperTypes));
+	ecore_EClass_eAllGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllGenericSuperTypes->setValue(0);
+
+	ecore_EClass_eAllGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllGenericSuperTypes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllGenericSuperTypes));
+	ecore_EClass_eAllGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllGenericSuperTypes->setValue(-1);
+
+	ecore_EClass_eAllOperations_lowerValue_LiteralInteger_Ecore_EClass_eAllOperations = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllOperations));
+	ecore_EClass_eAllOperations_lowerValue_LiteralInteger_Ecore_EClass_eAllOperations->setValue(0);
+
+	ecore_EClass_eAllOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllOperations = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllOperations));
+	ecore_EClass_eAllOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllOperations->setValue(-1);
+
+	ecore_EClass_eAllReferences_lowerValue_LiteralInteger_Ecore_EClass_eAllReferences = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllReferences));
+	ecore_EClass_eAllReferences_lowerValue_LiteralInteger_Ecore_EClass_eAllReferences->setValue(0);
+
+	ecore_EClass_eAllReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllReferences = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllReferences));
+	ecore_EClass_eAllReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllReferences->setValue(-1);
+
+	ecore_EClass_eAllStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eAllStructuralFeatures = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllStructuralFeatures));
+	ecore_EClass_eAllStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eAllStructuralFeatures->setValue(0);
+
+	ecore_EClass_eAllStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllStructuralFeatures = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllStructuralFeatures));
+	ecore_EClass_eAllStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllStructuralFeatures->setValue(-1);
+
+	ecore_EClass_eAllSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllSuperTypes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllSuperTypes));
+	ecore_EClass_eAllSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eAllSuperTypes->setValue(0);
+
+	ecore_EClass_eAllSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllSuperTypes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAllSuperTypes));
+	ecore_EClass_eAllSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAllSuperTypes->setValue(-1);
+
+	ecore_EClass_eAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAttributes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAttributes));
+	ecore_EClass_eAttributes_lowerValue_LiteralInteger_Ecore_EClass_eAttributes->setValue(0);
+
+	ecore_EClass_eAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAttributes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eAttributes));
+	ecore_EClass_eAttributes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eAttributes->setValue(-1);
+
+	ecore_EClass_eGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eGenericSuperTypes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eGenericSuperTypes));
+	ecore_EClass_eGenericSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eGenericSuperTypes->setValue(0);
+
+	ecore_EClass_eGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eGenericSuperTypes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eGenericSuperTypes));
+	ecore_EClass_eGenericSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eGenericSuperTypes->setValue(-1);
+
+	ecore_EClass_eIDAttribute_lowerValue_LiteralInteger_Ecore_EClass_eIDAttribute = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eIDAttribute));
+	ecore_EClass_eIDAttribute_lowerValue_LiteralInteger_Ecore_EClass_eIDAttribute->setValue(0);
+
+	ecore_EClass_eOperations_lowerValue_LiteralInteger_Ecore_EClass_eOperations = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eOperations));
+	ecore_EClass_eOperations_lowerValue_LiteralInteger_Ecore_EClass_eOperations->setValue(0);
+
+	ecore_EClass_eOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eOperations = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eOperations));
+	ecore_EClass_eOperations_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eOperations->setValue(-1);
+
+	ecore_EClass_eReferences_lowerValue_LiteralInteger_Ecore_EClass_eReferences = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eReferences));
+	ecore_EClass_eReferences_lowerValue_LiteralInteger_Ecore_EClass_eReferences->setValue(0);
+
+	ecore_EClass_eReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eReferences = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eReferences));
+	ecore_EClass_eReferences_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eReferences->setValue(-1);
+
+	ecore_EClass_eStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eStructuralFeatures = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eStructuralFeatures));
+	ecore_EClass_eStructuralFeatures_lowerValue_LiteralInteger_Ecore_EClass_eStructuralFeatures->setValue(0);
+
+	ecore_EClass_eStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eStructuralFeatures = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eStructuralFeatures));
+	ecore_EClass_eStructuralFeatures_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eStructuralFeatures->setValue(-1);
+
+	ecore_EClass_eSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eSuperTypes = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eSuperTypes));
+	ecore_EClass_eSuperTypes_lowerValue_LiteralInteger_Ecore_EClass_eSuperTypes->setValue(0);
+
+	ecore_EClass_eSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eSuperTypes = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_eSuperTypes));
+	ecore_EClass_eSuperTypes_upperValue_LiteralUnlimitedNatural_Ecore_EClass_eSuperTypes->setValue(-1);
+
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID));
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setValue(0);
+
+	ecore_EClass_getEStructuralFeature_EInt_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EInt_return));
+	ecore_EClass_getEStructuralFeature_EInt_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EInt_return->setValue(0);
+
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName));
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setValue(0);
+
+	ecore_EClass_getEStructuralFeature_EString_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getEStructuralFeature_EString_return));
+	ecore_EClass_getEStructuralFeature_EString_return_lowerValue_LiteralInteger_Ecore_EClass_getEStructuralFeature_EString_return->setValue(0);
+
+	ecore_EClass_getFeatureCount__return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureCount__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureCount__return));
+	ecore_EClass_getFeatureCount__return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureCount__return->setValue(0);
+
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature));
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setValue(0);
+
+	ecore_EClass_getFeatureID_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_getFeatureID_EStructuralFeature_return));
+	ecore_EClass_getFeatureID_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EClass_getFeatureID_EStructuralFeature_return->setValue(0);
+
+	ecore_EClass_interface_lowerValue_LiteralInteger_Ecore_EClass_interface = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_interface));
+	ecore_EClass_interface_lowerValue_LiteralInteger_Ecore_EClass_interface->setValue(0);
+
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass));
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setValue(0);
+
+	ecore_EClass_isSuperTypeOf_EClass_return_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClass_isSuperTypeOf_EClass_return));
+	ecore_EClass_isSuperTypeOf_EClass_return_lowerValue_LiteralInteger_Ecore_EClass_isSuperTypeOf_EClass_return->setValue(0);
+
+	ecore_EClassifier_defaultValue_lowerValue_LiteralInteger_Ecore_EClassifier_defaultValue = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_defaultValue));
+	ecore_EClassifier_defaultValue_lowerValue_LiteralInteger_Ecore_EClassifier_defaultValue->setValue(0);
+
+	ecore_EClassifier_ePackage_lowerValue_LiteralInteger_Ecore_EClassifier_ePackage = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_ePackage));
+	ecore_EClassifier_ePackage_lowerValue_LiteralInteger_Ecore_EClassifier_ePackage->setValue(0);
+
+	ecore_EClassifier_eTypeParameters_lowerValue_LiteralInteger_Ecore_EClassifier_eTypeParameters = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_eTypeParameters));
+	ecore_EClassifier_eTypeParameters_lowerValue_LiteralInteger_Ecore_EClassifier_eTypeParameters->setValue(0);
+
+	ecore_EClassifier_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EClassifier_eTypeParameters = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_eTypeParameters));
+	ecore_EClassifier_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EClassifier_eTypeParameters->setValue(-1);
+
+	ecore_EClassifier_getClassifierID__return_lowerValue_LiteralInteger_Ecore_EClassifier_getClassifierID__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_getClassifierID__return));
+	ecore_EClassifier_getClassifierID__return_lowerValue_LiteralInteger_Ecore_EClassifier_getClassifierID__return->setValue(0);
+
+	ecore_EClassifier_instanceClassName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClassName = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceClassName));
+	ecore_EClassifier_instanceClassName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClassName->setValue(0);
+
+	ecore_EClassifier_instanceClass_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClass = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceClass));
+	ecore_EClassifier_instanceClass_lowerValue_LiteralInteger_Ecore_EClassifier_instanceClass->setValue(0);
+
+	ecore_EClassifier_instanceTypeName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceTypeName = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_instanceTypeName));
+	ecore_EClassifier_instanceTypeName_lowerValue_LiteralInteger_Ecore_EClassifier_instanceTypeName->setValue(0);
+
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object));
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setValue(0);
+
+	ecore_EClassifier_isInstance_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EClassifier_isInstance_EJavaObject_return));
+	ecore_EClassifier_isInstance_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EClassifier_isInstance_EJavaObject_return->setValue(0);
+
+	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EDataType_serializable));
+	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable->setValue(0);
+
+	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_eEnum));
+	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum->setValue(0);
+
+	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_instance));
+	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance->setValue(0);
+
+	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_literal));
+	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal->setValue(0);
+
+	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_value));
+	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value->setValue(0);
+
+	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_eLiterals));
+	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals->setValue(0);
+
+	ecore_EEnum_eLiterals_upperValue_LiteralUnlimitedNatural_Ecore_EEnum_eLiterals = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_eLiterals));
+	ecore_EEnum_eLiterals_upperValue_LiteralUnlimitedNatural_Ecore_EEnum_eLiterals->setValue(-1);
+
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal));
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setValue(0);
+
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteralByLiteral_EString_return));
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setValue(0);
+
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value));
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setValue(0);
+
+	ecore_EEnum_getEEnumLiteral_EInt_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EInt_return));
+	ecore_EEnum_getEEnumLiteral_EInt_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EInt_return->setValue(0);
+
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name));
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setValue(0);
+
+	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EString_return));
+	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return->setValue(0);
+
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType));
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setValue(0);
+
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue));
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setValue(0);
+
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_return));
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_return->setValue(0);
+
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType));
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setValue(0);
+
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue));
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setValue(0);
+
+	ecore_EFactory_createFromString_EDataType_EString_return_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_createFromString_EDataType_EString_return));
+	ecore_EFactory_createFromString_EDataType_EString_return_lowerValue_LiteralInteger_Ecore_EFactory_createFromString_EDataType_EString_return->setValue(0);
+
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass));
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setValue(0);
+
+	ecore_EFactory_create_EClass_return_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_create_EClass_return));
+	ecore_EFactory_create_EClass_return_lowerValue_LiteralInteger_Ecore_EFactory_create_EClass_return->setValue(0);
+
+	ecore_EGenericType_eClassifier_lowerValue_LiteralInteger_Ecore_EGenericType_eClassifier = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eClassifier));
+	ecore_EGenericType_eClassifier_lowerValue_LiteralInteger_Ecore_EGenericType_eClassifier->setValue(0);
+
+	ecore_EGenericType_eLowerBound_lowerValue_LiteralInteger_Ecore_EGenericType_eLowerBound = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eLowerBound));
+	ecore_EGenericType_eLowerBound_lowerValue_LiteralInteger_Ecore_EGenericType_eLowerBound->setValue(0);
+
+	ecore_EGenericType_eTypeArguments_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeArguments = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeArguments));
+	ecore_EGenericType_eTypeArguments_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeArguments->setValue(0);
+
+	ecore_EGenericType_eTypeArguments_upperValue_LiteralUnlimitedNatural_Ecore_EGenericType_eTypeArguments = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeArguments));
+	ecore_EGenericType_eTypeArguments_upperValue_LiteralUnlimitedNatural_Ecore_EGenericType_eTypeArguments->setValue(-1);
+
+	ecore_EGenericType_eTypeParameter_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeParameter = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eTypeParameter));
+	ecore_EGenericType_eTypeParameter_lowerValue_LiteralInteger_Ecore_EGenericType_eTypeParameter->setValue(0);
+
+	ecore_EGenericType_eUpperBound_lowerValue_LiteralInteger_Ecore_EGenericType_eUpperBound = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EGenericType_eUpperBound));
+	ecore_EGenericType_eUpperBound_lowerValue_LiteralInteger_Ecore_EGenericType_eUpperBound->setValue(0);
+
+	ecore_EModelElement_eAnnotations_lowerValue_LiteralInteger_Ecore_EModelElement_eAnnotations = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_eAnnotations));
+	ecore_EModelElement_eAnnotations_lowerValue_LiteralInteger_Ecore_EModelElement_eAnnotations->setValue(0);
+
+	ecore_EModelElement_eAnnotations_upperValue_LiteralUnlimitedNatural_Ecore_EModelElement_eAnnotations = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_eAnnotations));
+	ecore_EModelElement_eAnnotations_upperValue_LiteralUnlimitedNatural_Ecore_EModelElement_eAnnotations->setValue(-1);
+
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source));
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setValue(0);
+
+	ecore_EModelElement_getEAnnotation_EString_return_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EModelElement_getEAnnotation_EString_return));
+	ecore_EModelElement_getEAnnotation_EString_return_lowerValue_LiteralInteger_Ecore_EModelElement_getEAnnotation_EString_return->setValue(0);
+
+	ecore_ENamedElement_name_lowerValue_LiteralInteger_Ecore_ENamedElement_name = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ENamedElement_name));
+	ecore_ENamedElement_name_lowerValue_LiteralInteger_Ecore_ENamedElement_name->setValue(0);
+
+	ecore_EObject_eAllContents__return_lowerValue_LiteralInteger_Ecore_EObject_eAllContents__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eAllContents__return));
+	ecore_EObject_eAllContents__return_lowerValue_LiteralInteger_Ecore_EObject_eAllContents__return->setValue(0);
+
+	ecore_EObject_eClass__return_lowerValue_LiteralInteger_Ecore_EObject_eClass__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eClass__return));
+	ecore_EObject_eClass__return_lowerValue_LiteralInteger_Ecore_EObject_eClass__return->setValue(0);
+
+	ecore_EObject_eContainer__return_lowerValue_LiteralInteger_Ecore_EObject_eContainer__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainer__return));
+	ecore_EObject_eContainer__return_lowerValue_LiteralInteger_Ecore_EObject_eContainer__return->setValue(0);
+
+	ecore_EObject_eContainingFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainingFeature__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainingFeature__return));
+	ecore_EObject_eContainingFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainingFeature__return->setValue(0);
+
+	ecore_EObject_eContainmentFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainmentFeature__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContainmentFeature__return));
+	ecore_EObject_eContainmentFeature__return_lowerValue_LiteralInteger_Ecore_EObject_eContainmentFeature__return->setValue(0);
+
+	ecore_EObject_eContents__return_lowerValue_LiteralInteger_Ecore_EObject_eContents__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eContents__return));
+	ecore_EObject_eContents__return_lowerValue_LiteralInteger_Ecore_EObject_eContents__return->setValue(0);
+
+	ecore_EObject_eCrossReferences__return_lowerValue_LiteralInteger_Ecore_EObject_eCrossReferences__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eCrossReferences__return));
+	ecore_EObject_eCrossReferences__return_lowerValue_LiteralInteger_Ecore_EObject_eCrossReferences__return->setValue(0);
+
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature));
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setValue(0);
+
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve));
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setValue(0);
+
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_EBoolean_return));
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setValue(0);
+
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature));
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setValue(0);
+
+	ecore_EObject_eGet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eGet_EStructuralFeature_return));
+	ecore_EObject_eGet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eGet_EStructuralFeature_return->setValue(0);
+
+	ecore_EObject_eIsProxy__return_lowerValue_LiteralInteger_Ecore_EObject_eIsProxy__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsProxy__return));
+	ecore_EObject_eIsProxy__return_lowerValue_LiteralInteger_Ecore_EObject_eIsProxy__return->setValue(0);
+
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature));
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setValue(0);
+
+	ecore_EObject_eIsSet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eIsSet_EStructuralFeature_return));
+	ecore_EObject_eIsSet_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eIsSet_EStructuralFeature_return->setValue(0);
+
+	ecore_EObject_eResource__return_lowerValue_LiteralInteger_Ecore_EObject_eResource__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eResource__return));
+	ecore_EObject_eResource__return_lowerValue_LiteralInteger_Ecore_EObject_eResource__return->setValue(0);
+
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature));
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setValue(0);
+
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue));
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setValue(0);
+
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eSet_EStructuralFeature_EJavaObject_return));
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return_lowerValue_LiteralInteger_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setValue(0);
+
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature));
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setValue(0);
+
+	ecore_EObject_eUnset_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EObject_eUnset_EStructuralFeature_return));
+	ecore_EObject_eUnset_EStructuralFeature_return_lowerValue_LiteralInteger_Ecore_EObject_eUnset_EStructuralFeature_return->setValue(0);
+
+	ecore_EOperation_eContainingClass_lowerValue_LiteralInteger_Ecore_EOperation_eContainingClass = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eContainingClass));
+	ecore_EOperation_eContainingClass_lowerValue_LiteralInteger_Ecore_EOperation_eContainingClass->setValue(0);
+
+	ecore_EOperation_eExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eExceptions = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eExceptions));
+	ecore_EOperation_eExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eExceptions->setValue(0);
+
+	ecore_EOperation_eExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eExceptions = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eExceptions));
+	ecore_EOperation_eExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eExceptions->setValue(-1);
+
+	ecore_EOperation_eGenericExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eGenericExceptions = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eGenericExceptions));
+	ecore_EOperation_eGenericExceptions_lowerValue_LiteralInteger_Ecore_EOperation_eGenericExceptions->setValue(0);
+
+	ecore_EOperation_eGenericExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eGenericExceptions = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eGenericExceptions));
+	ecore_EOperation_eGenericExceptions_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eGenericExceptions->setValue(-1);
+
+	ecore_EOperation_eParameters_lowerValue_LiteralInteger_Ecore_EOperation_eParameters = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eParameters));
+	ecore_EOperation_eParameters_lowerValue_LiteralInteger_Ecore_EOperation_eParameters->setValue(0);
+
+	ecore_EOperation_eParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eParameters = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eParameters));
+	ecore_EOperation_eParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eParameters->setValue(-1);
+
+	ecore_EOperation_eTypeParameters_lowerValue_LiteralInteger_Ecore_EOperation_eTypeParameters = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eTypeParameters));
+	ecore_EOperation_eTypeParameters_lowerValue_LiteralInteger_Ecore_EOperation_eTypeParameters->setValue(0);
+
+	ecore_EOperation_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eTypeParameters = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EOperation_eTypeParameters));
+	ecore_EOperation_eTypeParameters_upperValue_LiteralUnlimitedNatural_Ecore_EOperation_eTypeParameters->setValue(-1);
+
+	ecore_EPackage_eClassifiers_lowerValue_LiteralInteger_Ecore_EPackage_eClassifiers = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eClassifiers));
+	ecore_EPackage_eClassifiers_lowerValue_LiteralInteger_Ecore_EPackage_eClassifiers->setValue(0);
+
+	ecore_EPackage_eClassifiers_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eClassifiers = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eClassifiers));
+	ecore_EPackage_eClassifiers_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eClassifiers->setValue(-1);
+
+	ecore_EPackage_eSubpackages_lowerValue_LiteralInteger_Ecore_EPackage_eSubpackages = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSubpackages));
+	ecore_EPackage_eSubpackages_lowerValue_LiteralInteger_Ecore_EPackage_eSubpackages->setValue(0);
+
+	ecore_EPackage_eSubpackages_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eSubpackages = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSubpackages));
+	ecore_EPackage_eSubpackages_upperValue_LiteralUnlimitedNatural_Ecore_EPackage_eSubpackages->setValue(-1);
+
+	ecore_EPackage_eSuperPackage_lowerValue_LiteralInteger_Ecore_EPackage_eSuperPackage = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_eSuperPackage));
+	ecore_EPackage_eSuperPackage_lowerValue_LiteralInteger_Ecore_EPackage_eSuperPackage->setValue(0);
+
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name));
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setValue(0);
+
+	ecore_EPackage_getEClassifier_EString_return_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_getEClassifier_EString_return));
+	ecore_EPackage_getEClassifier_EString_return_lowerValue_LiteralInteger_Ecore_EPackage_getEClassifier_EString_return->setValue(0);
+
+	ecore_EPackage_nsPrefix_lowerValue_LiteralInteger_Ecore_EPackage_nsPrefix = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_nsPrefix));
+	ecore_EPackage_nsPrefix_lowerValue_LiteralInteger_Ecore_EPackage_nsPrefix->setValue(0);
+
+	ecore_EPackage_nsURI_lowerValue_LiteralInteger_Ecore_EPackage_nsURI = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EPackage_nsURI));
+	ecore_EPackage_nsURI_lowerValue_LiteralInteger_Ecore_EPackage_nsURI->setValue(0);
+
+	ecore_EParameter_eOperation_lowerValue_LiteralInteger_Ecore_EParameter_eOperation = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EParameter_eOperation));
+	ecore_EParameter_eOperation_lowerValue_LiteralInteger_Ecore_EParameter_eOperation->setValue(0);
+
+	ecore_EReference_container_lowerValue_LiteralInteger_Ecore_EReference_container = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_container));
+	ecore_EReference_container_lowerValue_LiteralInteger_Ecore_EReference_container->setValue(0);
+
+	ecore_EReference_containment_lowerValue_LiteralInteger_Ecore_EReference_containment = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_containment));
+	ecore_EReference_containment_lowerValue_LiteralInteger_Ecore_EReference_containment->setValue(0);
+
+	ecore_EReference_eKeys_lowerValue_LiteralInteger_Ecore_EReference_eKeys = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eKeys));
+	ecore_EReference_eKeys_lowerValue_LiteralInteger_Ecore_EReference_eKeys->setValue(0);
+
+	ecore_EReference_eKeys_upperValue_LiteralUnlimitedNatural_Ecore_EReference_eKeys = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eKeys));
+	ecore_EReference_eKeys_upperValue_LiteralUnlimitedNatural_Ecore_EReference_eKeys->setValue(-1);
+
+	ecore_EReference_eOpposite_lowerValue_LiteralInteger_Ecore_EReference_eOpposite = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_eOpposite));
+	ecore_EReference_eOpposite_lowerValue_LiteralInteger_Ecore_EReference_eOpposite->setValue(0);
+
+	ecore_EReference_resolveProxies_lowerValue_LiteralInteger_Ecore_EReference_resolveProxies = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EReference_resolveProxies));
+	ecore_EReference_resolveProxies_lowerValue_LiteralInteger_Ecore_EReference_resolveProxies->setValue(0);
+
+	ecore_EStringToStringMapEntry_key_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_key = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStringToStringMapEntry_key));
+	ecore_EStringToStringMapEntry_key_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_key->setValue(0);
+
+	ecore_EStringToStringMapEntry_value_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_value = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStringToStringMapEntry_value));
+	ecore_EStringToStringMapEntry_value_lowerValue_LiteralInteger_Ecore_EStringToStringMapEntry_value->setValue(0);
+
+	ecore_EStructuralFeature_changeable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_changeable = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_changeable));
+	ecore_EStructuralFeature_changeable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_changeable->setValue(0);
+
+	ecore_EStructuralFeature_defaultValueLiteral_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValueLiteral = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_defaultValueLiteral));
+	ecore_EStructuralFeature_defaultValueLiteral_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValueLiteral->setValue(0);
+
+	ecore_EStructuralFeature_defaultValue_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValue = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_defaultValue));
+	ecore_EStructuralFeature_defaultValue_lowerValue_LiteralInteger_Ecore_EStructuralFeature_defaultValue->setValue(0);
+
+	ecore_EStructuralFeature_derived_lowerValue_LiteralInteger_Ecore_EStructuralFeature_derived = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_derived));
+	ecore_EStructuralFeature_derived_lowerValue_LiteralInteger_Ecore_EStructuralFeature_derived->setValue(0);
+
+	ecore_EStructuralFeature_eContainingClass_lowerValue_LiteralInteger_Ecore_EStructuralFeature_eContainingClass = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_eContainingClass));
+	ecore_EStructuralFeature_eContainingClass_lowerValue_LiteralInteger_Ecore_EStructuralFeature_eContainingClass->setValue(0);
+
+	ecore_EStructuralFeature_getContainerClass__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getContainerClass__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_getContainerClass__return));
+	ecore_EStructuralFeature_getContainerClass__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getContainerClass__return->setValue(0);
+
+	ecore_EStructuralFeature_getFeatureID__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getFeatureID__return = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_getFeatureID__return));
+	ecore_EStructuralFeature_getFeatureID__return_lowerValue_LiteralInteger_Ecore_EStructuralFeature_getFeatureID__return->setValue(0);
+
+	ecore_EStructuralFeature_transient_lowerValue_LiteralInteger_Ecore_EStructuralFeature_transient = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_transient));
+	ecore_EStructuralFeature_transient_lowerValue_LiteralInteger_Ecore_EStructuralFeature_transient->setValue(0);
+
+	ecore_EStructuralFeature_unsettable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_unsettable = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_unsettable));
+	ecore_EStructuralFeature_unsettable_lowerValue_LiteralInteger_Ecore_EStructuralFeature_unsettable->setValue(0);
+
+	ecore_EStructuralFeature_volatile_lowerValue_LiteralInteger_Ecore_EStructuralFeature_volatile = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EStructuralFeature_volatile));
+	ecore_EStructuralFeature_volatile_lowerValue_LiteralInteger_Ecore_EStructuralFeature_volatile->setValue(0);
+
+	ecore_ETypeParameter_eBounds_lowerValue_LiteralInteger_Ecore_ETypeParameter_eBounds = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypeParameter_eBounds));
+	ecore_ETypeParameter_eBounds_lowerValue_LiteralInteger_Ecore_ETypeParameter_eBounds->setValue(0);
+
+	ecore_ETypeParameter_eBounds_upperValue_LiteralUnlimitedNatural_Ecore_ETypeParameter_eBounds = factory->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypeParameter_eBounds));
+	ecore_ETypeParameter_eBounds_upperValue_LiteralUnlimitedNatural_Ecore_ETypeParameter_eBounds->setValue(-1);
+
+	ecore_ETypedElement_eGenericType_lowerValue_LiteralInteger_Ecore_ETypedElement_eGenericType = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_eGenericType));
+	ecore_ETypedElement_eGenericType_lowerValue_LiteralInteger_Ecore_ETypedElement_eGenericType->setValue(0);
+
+	ecore_ETypedElement_eType_lowerValue_LiteralInteger_Ecore_ETypedElement_eType = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_eType));
+	ecore_ETypedElement_eType_lowerValue_LiteralInteger_Ecore_ETypedElement_eType->setValue(0);
+
+	ecore_ETypedElement_lowerBound_lowerValue_LiteralInteger_Ecore_ETypedElement_lowerBound = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_lowerBound));
+	ecore_ETypedElement_lowerBound_lowerValue_LiteralInteger_Ecore_ETypedElement_lowerBound->setValue(0);
+
+	ecore_ETypedElement_many_lowerValue_LiteralInteger_Ecore_ETypedElement_many = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_many));
+	ecore_ETypedElement_many_lowerValue_LiteralInteger_Ecore_ETypedElement_many->setValue(0);
+
+	ecore_ETypedElement_ordered_lowerValue_LiteralInteger_Ecore_ETypedElement_ordered = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_ordered));
+	ecore_ETypedElement_ordered_lowerValue_LiteralInteger_Ecore_ETypedElement_ordered->setValue(0);
+
+	ecore_ETypedElement_required_lowerValue_LiteralInteger_Ecore_ETypedElement_required = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_required));
+	ecore_ETypedElement_required_lowerValue_LiteralInteger_Ecore_ETypedElement_required->setValue(0);
+
+	ecore_ETypedElement_unique_lowerValue_LiteralInteger_Ecore_ETypedElement_unique = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_unique));
+	ecore_ETypedElement_unique_lowerValue_LiteralInteger_Ecore_ETypedElement_unique->setValue(0);
+
+	ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_ETypedElement_upperBound));
+	ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound->setValue(0);
 }
 
 void EcorePackageImpl::initializePackageContents()
@@ -2157,99 +1028,1399 @@ void EcorePackageImpl::initializePackageContents()
 	// Add supertypes to classes
 	struct null_deleter{void operator()(void const *) const {} };
 	std::shared_ptr<EcorePackageImpl> ecore = std::shared_ptr<EcorePackageImpl>(this, null_deleter());
+
+	initializePackageActivities();
+	initializePackageClasses();
+	initializePackageDependencies();
+	initializePackageInstanceSpecifications();
+	initializePackageInterfaces();
+	initializePackageStereotypes();
+}
+
+//ActivityNodes and Edges
+void EcorePackageImpl::initializePackageActivities()
+{
+}
+
+void EcorePackageImpl::initializePackageClasses()
+{
 	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+	//	class EAnnotation
+	ecore_EAnnotation->setName("EAnnotation");
+	ecore_EAnnotation->setIsAbstract(false);
+	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EAnnotation());
 	gen->setGeneral(get_Ecore_EModelElement());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ETypedElement());
-	gen->setGeneral(get_Ecore_ENamedElement());
-	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EReference());
-	gen->setGeneral(get_Ecore_EStructuralFeature());
-	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EFactory());
-	gen->setGeneral(get_Ecore_EModelElement());
-	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EEnumLiteral());
-	gen->setGeneral(get_Ecore_ENamedElement());
+    // EAnnotation attributes
+	ecore_EAnnotation_contents->setName("contents");
+	ecore_EAnnotation_contents->setType(get_Ecore_EObject());
+	ecore_EAnnotation_contents->setLower(0);
+	ecore_EAnnotation_contents->setUpper(-1);
 	
 	
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EPackage());
-	gen->setGeneral(get_Ecore_ENamedElement());
+	ecore_EAnnotation_details->setName("details");
+	ecore_EAnnotation_details->setType(get_Ecore_EStringToStringMapEntry());
+	ecore_EAnnotation_details->setLower(0);
+	ecore_EAnnotation_details->setUpper(-1);
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EClass());
-	gen->setGeneral(get_Ecore_EClassifier());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EParameter());
-	gen->setGeneral(get_Ecore_ETypedElement());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EDataType());
-	gen->setGeneral(get_Ecore_EClassifier());
+	ecore_EAnnotation_eModelElement->setName("eModelElement");
+	ecore_EAnnotation_eModelElement->setType(get_Ecore_EModelElement());
+	ecore_EAnnotation_eModelElement->setLower(0);
+	ecore_EAnnotation_eModelElement->setUpper(1);
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ENamedElement());
-	gen->setGeneral(get_Ecore_EModelElement());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ETypeParameter());
-	gen->setGeneral(get_Ecore_ENamedElement());
+	
+	ecore_EAnnotation_references->setName("references");
+	ecore_EAnnotation_references->setType(get_Ecore_EObject());
+	ecore_EAnnotation_references->setLower(0);
+	ecore_EAnnotation_references->setUpper(-1);
+	
+	
+	
+	ecore_EAnnotation_source->setName("source");
+	ecore_EAnnotation_source->setType(get_Ecore_EString());
+	ecore_EAnnotation_source->setLower(0);
+	ecore_EAnnotation_source->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EAttribute
+	ecore_EAttribute->setName("EAttribute");
+	ecore_EAttribute->setIsAbstract(false);
 	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EAttribute());
 	gen->setGeneral(get_Ecore_EStructuralFeature());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EOperation());
-	gen->setGeneral(get_Ecore_ETypedElement());
+    // EAttribute attributes
+	ecore_EAttribute_eAttributeType->setName("eAttributeType");
+	ecore_EAttribute_eAttributeType->setType(get_Ecore_EDataType());
+	ecore_EAttribute_eAttributeType->setLower(1);
+	ecore_EAttribute_eAttributeType->setUpper(1);
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EGenericType());
-	gen->setGeneral(get_Ecore_EObject());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EEnum());
-	gen->setGeneral(get_Ecore_EDataType());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EModelElement());
-	gen->setGeneral(get_Ecore_EObject());
+	ecore_EAttribute_id->setName("id");
+	ecore_EAttribute_id->setType(get_Ecore_EBoolean());
+	ecore_EAttribute_id->setLower(0);
+	ecore_EAttribute_id->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EClass
+	ecore_EClass->setName("EClass");
+	ecore_EClass->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EClass());
+	gen->setGeneral(get_Ecore_EClassifier());
+	
+    // EClass attributes
+	ecore_EClass_abstract->setName("abstract");
+	ecore_EClass_abstract->setType(get_Ecore_EBoolean());
+	ecore_EClass_abstract->setLower(0);
+	ecore_EClass_abstract->setUpper(1);
+	
+	
+	
+	ecore_EClass_eAllAttributes->setName("eAllAttributes");
+	ecore_EClass_eAllAttributes->setType(get_Ecore_EAttribute());
+	ecore_EClass_eAllAttributes->setLower(0);
+	ecore_EClass_eAllAttributes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllContainments->setName("eAllContainments");
+	ecore_EClass_eAllContainments->setType(get_Ecore_EReference());
+	ecore_EClass_eAllContainments->setLower(0);
+	ecore_EClass_eAllContainments->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllGenericSuperTypes->setName("eAllGenericSuperTypes");
+	ecore_EClass_eAllGenericSuperTypes->setType(get_Ecore_EGenericType());
+	ecore_EClass_eAllGenericSuperTypes->setLower(0);
+	ecore_EClass_eAllGenericSuperTypes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllOperations->setName("eAllOperations");
+	ecore_EClass_eAllOperations->setType(get_Ecore_EOperation());
+	ecore_EClass_eAllOperations->setLower(0);
+	ecore_EClass_eAllOperations->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllReferences->setName("eAllReferences");
+	ecore_EClass_eAllReferences->setType(get_Ecore_EReference());
+	ecore_EClass_eAllReferences->setLower(0);
+	ecore_EClass_eAllReferences->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllStructuralFeatures->setName("eAllStructuralFeatures");
+	ecore_EClass_eAllStructuralFeatures->setType(get_Ecore_EStructuralFeature());
+	ecore_EClass_eAllStructuralFeatures->setLower(0);
+	ecore_EClass_eAllStructuralFeatures->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAllSuperTypes->setName("eAllSuperTypes");
+	ecore_EClass_eAllSuperTypes->setType(get_Ecore_EClass());
+	ecore_EClass_eAllSuperTypes->setLower(0);
+	ecore_EClass_eAllSuperTypes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eAttributes->setName("eAttributes");
+	ecore_EClass_eAttributes->setType(get_Ecore_EAttribute());
+	ecore_EClass_eAttributes->setLower(0);
+	ecore_EClass_eAttributes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eGenericSuperTypes->setName("eGenericSuperTypes");
+	ecore_EClass_eGenericSuperTypes->setType(get_Ecore_EGenericType());
+	ecore_EClass_eGenericSuperTypes->setLower(0);
+	ecore_EClass_eGenericSuperTypes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eIDAttribute->setName("eIDAttribute");
+	ecore_EClass_eIDAttribute->setType(get_Ecore_EAttribute());
+	ecore_EClass_eIDAttribute->setLower(0);
+	ecore_EClass_eIDAttribute->setUpper(1);
+	
+	
+	
+	ecore_EClass_eOperations->setName("eOperations");
+	ecore_EClass_eOperations->setType(get_Ecore_EOperation());
+	ecore_EClass_eOperations->setLower(0);
+	ecore_EClass_eOperations->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eReferences->setName("eReferences");
+	ecore_EClass_eReferences->setType(get_Ecore_EReference());
+	ecore_EClass_eReferences->setLower(0);
+	ecore_EClass_eReferences->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eStructuralFeatures->setName("eStructuralFeatures");
+	ecore_EClass_eStructuralFeatures->setType(get_Ecore_EStructuralFeature());
+	ecore_EClass_eStructuralFeatures->setLower(0);
+	ecore_EClass_eStructuralFeatures->setUpper(-1);
+	
+	
+	
+	ecore_EClass_eSuperTypes->setName("eSuperTypes");
+	ecore_EClass_eSuperTypes->setType(get_Ecore_EClass());
+	ecore_EClass_eSuperTypes->setLower(0);
+	ecore_EClass_eSuperTypes->setUpper(-1);
+	
+	
+	
+	ecore_EClass_interface->setName("interface");
+	ecore_EClass_interface->setType(get_Ecore_EBoolean());
+	ecore_EClass_interface->setLower(0);
+	ecore_EClass_interface->setUpper(1);
+	
+	
+	
+
+    // EClass operations
+	ecore_EClass_getEStructuralFeature_EInt->setName("getEStructuralFeature");
+	
+	// parameter 
+	ecore_EClass_getEStructuralFeature_EInt_return->setName("");
+	ecore_EClass_getEStructuralFeature_EInt_return->setType(get_Ecore_EStructuralFeature());
+	ecore_EClass_getEStructuralFeature_EInt_return->setLower(0);
+	ecore_EClass_getEStructuralFeature_EInt_return->setUpper(1);
+	ecore_EClass_getEStructuralFeature_EInt_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter featureID
+	
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setName("featureID");
+	
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setType(get_Ecore_EInt());
+	
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setLower(0);
+	
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setUpper(1);
+	
+	ecore_EClass_getEStructuralFeature_EInt_Ecore_EClass_getEStructuralFeature_featureID->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EClass_getEStructuralFeature_EString->setName("getEStructuralFeature");
+	
+	// parameter 
+	ecore_EClass_getEStructuralFeature_EString_return->setName("");
+	ecore_EClass_getEStructuralFeature_EString_return->setType(get_Ecore_EStructuralFeature());
+	ecore_EClass_getEStructuralFeature_EString_return->setLower(0);
+	ecore_EClass_getEStructuralFeature_EString_return->setUpper(1);
+	ecore_EClass_getEStructuralFeature_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter featureName
+	
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setName("featureName");
+	
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setType(get_Ecore_EString());
+	
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setLower(0);
+	
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setUpper(1);
+	
+	ecore_EClass_getEStructuralFeature_EString_Ecore_EClass_getEStructuralFeature_featureName->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EClass_getFeatureCount_->setName("getFeatureCount");
+	
+	// parameter 
+	ecore_EClass_getFeatureCount__return->setName("");
+	ecore_EClass_getFeatureCount__return->setType(get_Ecore_EInt());
+	ecore_EClass_getFeatureCount__return->setLower(0);
+	ecore_EClass_getFeatureCount__return->setUpper(1);
+	ecore_EClass_getFeatureCount__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EClass_getFeatureID_EStructuralFeature->setName("getFeatureID");
+	
+	// parameter 
+	ecore_EClass_getFeatureID_EStructuralFeature_return->setName("");
+	ecore_EClass_getFeatureID_EStructuralFeature_return->setType(get_Ecore_EInt());
+	ecore_EClass_getFeatureID_EStructuralFeature_return->setLower(0);
+	ecore_EClass_getFeatureID_EStructuralFeature_return->setUpper(1);
+	ecore_EClass_getFeatureID_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setName("feature");
+	
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setLower(0);
+	
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setUpper(1);
+	
+	ecore_EClass_getFeatureID_EStructuralFeature_Ecore_EClass_getFeatureID_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EClass_isSuperTypeOf_EClass->setName("isSuperTypeOf");
+	
+	// parameter 
+	ecore_EClass_isSuperTypeOf_EClass_return->setName("");
+	ecore_EClass_isSuperTypeOf_EClass_return->setType(get_Ecore_EBoolean());
+	ecore_EClass_isSuperTypeOf_EClass_return->setLower(0);
+	ecore_EClass_isSuperTypeOf_EClass_return->setUpper(1);
+	ecore_EClass_isSuperTypeOf_EClass_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter someClass
+	
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setName("someClass");
+	
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setType(get_Ecore_EClass());
+	
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setLower(0);
+	
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setUpper(1);
+	
+	ecore_EClass_isSuperTypeOf_EClass_Ecore_EClass_isSuperTypeOf_someClass->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EClassifier
+	ecore_EClassifier->setName("EClassifier");
+	ecore_EClassifier->setIsAbstract(true);
 	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EClassifier());
 	gen->setGeneral(get_Ecore_ENamedElement());
 	
-	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EStructuralFeature());
-	gen->setGeneral(get_Ecore_ETypedElement());
+    // EClassifier attributes
+	ecore_EClassifier_defaultValue->setName("defaultValue");
+	ecore_EClassifier_defaultValue->setType(get_Ecore_EJavaObject());
+	ecore_EClassifier_defaultValue->setLower(0);
+	ecore_EClassifier_defaultValue->setUpper(1);
+	
+	
+	
+	ecore_EClassifier_ePackage->setName("ePackage");
+	ecore_EClassifier_ePackage->setType(get_Ecore_EPackage());
+	ecore_EClassifier_ePackage->setLower(0);
+	ecore_EClassifier_ePackage->setUpper(1);
+	
+	
+	
+	ecore_EClassifier_eTypeParameters->setName("eTypeParameters");
+	ecore_EClassifier_eTypeParameters->setType(get_Ecore_ETypeParameter());
+	ecore_EClassifier_eTypeParameters->setLower(0);
+	ecore_EClassifier_eTypeParameters->setUpper(-1);
+	
+	
+	
+	ecore_EClassifier_instanceClass->setName("instanceClass");
+	ecore_EClassifier_instanceClass->setType(get_Ecore_EClassifier_EJavaClass_Wildcard());
+	ecore_EClassifier_instanceClass->setLower(0);
+	ecore_EClassifier_instanceClass->setUpper(1);
+	
+	
+	
+	ecore_EClassifier_instanceClassName->setName("instanceClassName");
+	ecore_EClassifier_instanceClassName->setType(get_Ecore_EString());
+	ecore_EClassifier_instanceClassName->setLower(0);
+	ecore_EClassifier_instanceClassName->setUpper(1);
+	
+	
+	
+	ecore_EClassifier_instanceTypeName->setName("instanceTypeName");
+	ecore_EClassifier_instanceTypeName->setType(get_Ecore_EString());
+	ecore_EClassifier_instanceTypeName->setLower(0);
+	ecore_EClassifier_instanceTypeName->setUpper(1);
+	
 	
 	
 
+    // EClassifier operations
+	ecore_EClassifier_getClassifierID_->setName("getClassifierID");
+	
+	// parameter 
+	ecore_EClassifier_getClassifierID__return->setName("");
+	ecore_EClassifier_getClassifierID__return->setType(get_Ecore_EInt());
+	ecore_EClassifier_getClassifierID__return->setLower(0);
+	ecore_EClassifier_getClassifierID__return->setUpper(1);
+	ecore_EClassifier_getClassifierID__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EClassifier_isInstance_EJavaObject->setName("isInstance");
+	
+	// parameter 
+	ecore_EClassifier_isInstance_EJavaObject_return->setName("");
+	ecore_EClassifier_isInstance_EJavaObject_return->setType(get_Ecore_EBoolean());
+	ecore_EClassifier_isInstance_EJavaObject_return->setLower(0);
+	ecore_EClassifier_isInstance_EJavaObject_return->setUpper(1);
+	ecore_EClassifier_isInstance_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter object
+	
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setName("object");
+	
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setType(get_Ecore_EJavaObject());
+	
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setLower(0);
+	
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setUpper(1);
+	
+	ecore_EClassifier_isInstance_EJavaObject_Ecore_EClassifier_isInstance_object->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EDataType
+	ecore_EDataType->setName("EDataType");
+	ecore_EDataType->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EDataType());
+	gen->setGeneral(get_Ecore_EClassifier());
+	
+    // EDataType attributes
+	ecore_EDataType_serializable->setName("serializable");
+	ecore_EDataType_serializable->setType(get_Ecore_EBoolean());
+	ecore_EDataType_serializable->setLower(0);
+	ecore_EDataType_serializable->setUpper(1);
 	
 	
 	
+
+
+    //-------------------------------------------
+	//	class EEnum
+	ecore_EEnum->setName("EEnum");
+	ecore_EEnum->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EEnum());
+	gen->setGeneral(get_Ecore_EDataType());
+	
+    // EEnum attributes
+	ecore_EEnum_eLiterals->setName("eLiterals");
+	ecore_EEnum_eLiterals->setType(get_Ecore_EEnumLiteral());
+	ecore_EEnum_eLiterals->setLower(0);
+	ecore_EEnum_eLiterals->setUpper(-1);
 	
 	
 	
+
+    // EEnum operations
+	ecore_EEnum_getEEnumLiteral_EString->setName("getEEnumLiteral");
+	
+	// parameter 
+	ecore_EEnum_getEEnumLiteral_EString_return->setName("");
+	ecore_EEnum_getEEnumLiteral_EString_return->setType(get_Ecore_EEnumLiteral());
+	ecore_EEnum_getEEnumLiteral_EString_return->setLower(0);
+	ecore_EEnum_getEEnumLiteral_EString_return->setUpper(1);
+	ecore_EEnum_getEEnumLiteral_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter name
+	
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setName("name");
+	
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setType(get_Ecore_EString());
+	
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setLower(0);
+	
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setUpper(1);
+	
+	ecore_EEnum_getEEnumLiteral_EString_Ecore_EEnum_getEEnumLiteral_name->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EEnum_getEEnumLiteral_EInt->setName("getEEnumLiteral");
+	
+	// parameter 
+	ecore_EEnum_getEEnumLiteral_EInt_return->setName("");
+	ecore_EEnum_getEEnumLiteral_EInt_return->setType(get_Ecore_EEnumLiteral());
+	ecore_EEnum_getEEnumLiteral_EInt_return->setLower(0);
+	ecore_EEnum_getEEnumLiteral_EInt_return->setUpper(1);
+	ecore_EEnum_getEEnumLiteral_EInt_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter value
+	
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setName("value");
+	
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setType(get_Ecore_EInt());
+	
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setLower(0);
+	
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setUpper(1);
+	
+	ecore_EEnum_getEEnumLiteral_EInt_Ecore_EEnum_getEEnumLiteral_value->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EEnum_getEEnumLiteralByLiteral_EString->setName("getEEnumLiteralByLiteral");
+	
+	// parameter 
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setName("");
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setType(get_Ecore_EEnumLiteral());
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setLower(0);
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setUpper(1);
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter literal
+	
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setName("literal");
+	
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setType(get_Ecore_EString());
+	
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setLower(0);
+	
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setUpper(1);
+	
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_Ecore_EEnum_getEEnumLiteralByLiteral_literal->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EEnumLiteral
+	ecore_EEnumLiteral->setName("EEnumLiteral");
+	ecore_EEnumLiteral->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EEnumLiteral());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	
+    // EEnumLiteral attributes
+	ecore_EEnumLiteral_eEnum->setName("eEnum");
+	ecore_EEnumLiteral_eEnum->setType(get_Ecore_EEnum());
+	ecore_EEnumLiteral_eEnum->setLower(0);
+	ecore_EEnumLiteral_eEnum->setUpper(1);
 	
 	
 	
+	ecore_EEnumLiteral_instance->setName("instance");
+	ecore_EEnumLiteral_instance->setType(get_Ecore_EEnumerator());
+	ecore_EEnumLiteral_instance->setLower(0);
+	ecore_EEnumLiteral_instance->setUpper(1);
 	
 	
 	
+	ecore_EEnumLiteral_literal->setName("literal");
+	ecore_EEnumLiteral_literal->setType(get_Ecore_EString());
+	ecore_EEnumLiteral_literal->setLower(0);
+	ecore_EEnumLiteral_literal->setUpper(1);
 	
 	
 	
+	ecore_EEnumLiteral_value->setName("value");
+	ecore_EEnumLiteral_value->setType(get_Ecore_EInt());
+	ecore_EEnumLiteral_value->setLower(0);
+	ecore_EEnumLiteral_value->setUpper(1);
 	
 	
 	
+
+
+    //-------------------------------------------
+	//	class EFactory
+	ecore_EFactory->setName("EFactory");
+	ecore_EFactory->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EFactory());
+	gen->setGeneral(get_Ecore_EModelElement());
+	
+    // EFactory attributes
+	ecore_EFactory_ePackage->setName("ePackage");
+	ecore_EFactory_ePackage->setType(get_Ecore_EPackage());
+	ecore_EFactory_ePackage->setLower(1);
+	ecore_EFactory_ePackage->setUpper(1);
 	
 	
 	
+
+    // EFactory operations
+	ecore_EFactory_convertToString_EDataType_EJavaObject->setName("convertToString");
+	
+	// parameter 
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setName("");
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setType(get_Ecore_EString());
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setLower(0);
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setUpper(1);
+	ecore_EFactory_convertToString_EDataType_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter eDataType
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setName("eDataType");
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setType(get_Ecore_EDataType());
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setLower(0);
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setUpper(1);
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter instanceValue
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setName("instanceValue");
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setType(get_Ecore_EJavaObject());
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setLower(0);
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setUpper(1);
+	
+	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_instanceValue->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EFactory_create_EClass->setName("create");
+	
+	// parameter 
+	ecore_EFactory_create_EClass_return->setName("");
+	ecore_EFactory_create_EClass_return->setType(get_Ecore_EObject());
+	ecore_EFactory_create_EClass_return->setLower(0);
+	ecore_EFactory_create_EClass_return->setUpper(1);
+	ecore_EFactory_create_EClass_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter eClass
+	
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setName("eClass");
+	
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setType(get_Ecore_EClass());
+	
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setLower(0);
+	
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setUpper(1);
+	
+	ecore_EFactory_create_EClass_Ecore_EFactory_create_eClass->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EFactory_createFromString_EDataType_EString->setName("createFromString");
+	
+	// parameter 
+	ecore_EFactory_createFromString_EDataType_EString_return->setName("");
+	ecore_EFactory_createFromString_EDataType_EString_return->setType(get_Ecore_EJavaObject());
+	ecore_EFactory_createFromString_EDataType_EString_return->setLower(0);
+	ecore_EFactory_createFromString_EDataType_EString_return->setUpper(1);
+	ecore_EFactory_createFromString_EDataType_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter eDataType
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setName("eDataType");
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setType(get_Ecore_EDataType());
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setLower(0);
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setUpper(1);
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_eDataType->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter literalValue
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setName("literalValue");
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setType(get_Ecore_EString());
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setLower(0);
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setUpper(1);
+	
+	ecore_EFactory_createFromString_EDataType_EString_Ecore_EFactory_createFromString_literalValue->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EGenericType
+	ecore_EGenericType->setName("EGenericType");
+	ecore_EGenericType->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EGenericType());
+	gen->setGeneral(get_Ecore_EObject());
+	
+    // EGenericType attributes
+	ecore_EGenericType_eClassifier->setName("eClassifier");
+	ecore_EGenericType_eClassifier->setType(get_Ecore_EClassifier());
+	ecore_EGenericType_eClassifier->setLower(0);
+	ecore_EGenericType_eClassifier->setUpper(1);
 	
 	
 	
+	ecore_EGenericType_eLowerBound->setName("eLowerBound");
+	ecore_EGenericType_eLowerBound->setType(get_Ecore_EGenericType());
+	ecore_EGenericType_eLowerBound->setLower(0);
+	ecore_EGenericType_eLowerBound->setUpper(1);
 	
 	
 	
+	ecore_EGenericType_eRawType->setName("eRawType");
+	ecore_EGenericType_eRawType->setType(get_Ecore_EClassifier());
+	ecore_EGenericType_eRawType->setLower(1);
+	ecore_EGenericType_eRawType->setUpper(1);
 	
 	
 	
+	ecore_EGenericType_eTypeArguments->setName("eTypeArguments");
+	ecore_EGenericType_eTypeArguments->setType(get_Ecore_EGenericType());
+	ecore_EGenericType_eTypeArguments->setLower(0);
+	ecore_EGenericType_eTypeArguments->setUpper(-1);
 	
 	
 	
-	//initalize ActivityNodes and Edges
+	ecore_EGenericType_eTypeParameter->setName("eTypeParameter");
+	ecore_EGenericType_eTypeParameter->setType(get_Ecore_ETypeParameter());
+	ecore_EGenericType_eTypeParameter->setLower(0);
+	ecore_EGenericType_eTypeParameter->setUpper(1);
+	
+	
+	
+	ecore_EGenericType_eUpperBound->setName("eUpperBound");
+	ecore_EGenericType_eUpperBound->setType(get_Ecore_EGenericType());
+	ecore_EGenericType_eUpperBound->setLower(0);
+	ecore_EGenericType_eUpperBound->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EModelElement
+	ecore_EModelElement->setName("EModelElement");
+	ecore_EModelElement->setIsAbstract(true);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EModelElement());
+	gen->setGeneral(get_Ecore_EObject());
+	
+    // EModelElement attributes
+	ecore_EModelElement_eAnnotations->setName("eAnnotations");
+	ecore_EModelElement_eAnnotations->setType(get_Ecore_EAnnotation());
+	ecore_EModelElement_eAnnotations->setLower(0);
+	ecore_EModelElement_eAnnotations->setUpper(-1);
+	
+	
+	
+
+    // EModelElement operations
+	ecore_EModelElement_getEAnnotation_EString->setName("getEAnnotation");
+	
+	// parameter 
+	ecore_EModelElement_getEAnnotation_EString_return->setName("");
+	ecore_EModelElement_getEAnnotation_EString_return->setType(get_Ecore_EAnnotation());
+	ecore_EModelElement_getEAnnotation_EString_return->setLower(0);
+	ecore_EModelElement_getEAnnotation_EString_return->setUpper(1);
+	ecore_EModelElement_getEAnnotation_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter source
+	
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setName("source");
+	
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setType(get_Ecore_EString());
+	
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setLower(0);
+	
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setUpper(1);
+	
+	ecore_EModelElement_getEAnnotation_EString_Ecore_EModelElement_getEAnnotation_source->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class ENamedElement
+	ecore_ENamedElement->setName("ENamedElement");
+	ecore_ENamedElement->setIsAbstract(true);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ENamedElement());
+	gen->setGeneral(get_Ecore_EModelElement());
+	
+    // ENamedElement attributes
+	ecore_ENamedElement_name->setName("name");
+	ecore_ENamedElement_name->setType(get_Ecore_EString());
+	ecore_ENamedElement_name->setLower(0);
+	ecore_ENamedElement_name->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EObject
+	ecore_EObject->setName("EObject");
+	ecore_EObject->setIsAbstract(false);
+	
+    // EObject operations
+	ecore_EObject_eAllContents_->setName("eAllContents");
+	
+	// parameter 
+	ecore_EObject_eAllContents__return->setName("");
+	ecore_EObject_eAllContents__return->setType(get_Ecore_EObject_ETreeIterator_EObject());
+	ecore_EObject_eAllContents__return->setLower(0);
+	ecore_EObject_eAllContents__return->setUpper(1);
+	ecore_EObject_eAllContents__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eClass_->setName("eClass");
+	
+	// parameter 
+	ecore_EObject_eClass__return->setName("");
+	ecore_EObject_eClass__return->setType(get_Ecore_EClass());
+	ecore_EObject_eClass__return->setLower(0);
+	ecore_EObject_eClass__return->setUpper(1);
+	ecore_EObject_eClass__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eContainer_->setName("eContainer");
+	
+	// parameter 
+	ecore_EObject_eContainer__return->setName("");
+	ecore_EObject_eContainer__return->setType(get_Ecore_EObject());
+	ecore_EObject_eContainer__return->setLower(0);
+	ecore_EObject_eContainer__return->setUpper(1);
+	ecore_EObject_eContainer__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eContainingFeature_->setName("eContainingFeature");
+	
+	// parameter 
+	ecore_EObject_eContainingFeature__return->setName("");
+	ecore_EObject_eContainingFeature__return->setType(get_Ecore_EStructuralFeature());
+	ecore_EObject_eContainingFeature__return->setLower(0);
+	ecore_EObject_eContainingFeature__return->setUpper(1);
+	ecore_EObject_eContainingFeature__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eContainmentFeature_->setName("eContainmentFeature");
+	
+	// parameter 
+	ecore_EObject_eContainmentFeature__return->setName("");
+	ecore_EObject_eContainmentFeature__return->setType(get_Ecore_EReference());
+	ecore_EObject_eContainmentFeature__return->setLower(0);
+	ecore_EObject_eContainmentFeature__return->setUpper(1);
+	ecore_EObject_eContainmentFeature__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eContents_->setName("eContents");
+	
+	// parameter 
+	ecore_EObject_eContents__return->setName("");
+	ecore_EObject_eContents__return->setType(get_Ecore_EObject_EEList_EObject());
+	ecore_EObject_eContents__return->setLower(0);
+	ecore_EObject_eContents__return->setUpper(1);
+	ecore_EObject_eContents__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eCrossReferences_->setName("eCrossReferences");
+	
+	// parameter 
+	ecore_EObject_eCrossReferences__return->setName("");
+	ecore_EObject_eCrossReferences__return->setType(get_Ecore_EObject_EEList_EObject());
+	ecore_EObject_eCrossReferences__return->setLower(0);
+	ecore_EObject_eCrossReferences__return->setUpper(1);
+	ecore_EObject_eCrossReferences__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eGet_EStructuralFeature->setName("eGet");
+	
+	// parameter 
+	ecore_EObject_eGet_EStructuralFeature_return->setName("");
+	ecore_EObject_eGet_EStructuralFeature_return->setType(get_Ecore_EJavaObject());
+	ecore_EObject_eGet_EStructuralFeature_return->setLower(0);
+	ecore_EObject_eGet_EStructuralFeature_return->setUpper(1);
+	ecore_EObject_eGet_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setName("feature");
+	
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setLower(0);
+	
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setUpper(1);
+	
+	ecore_EObject_eGet_EStructuralFeature_Ecore_EObject_eGet_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EObject_eGet_EStructuralFeature_EBoolean->setName("eGet");
+	
+	// parameter 
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setName("");
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setType(get_Ecore_EJavaObject());
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setLower(0);
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setUpper(1);
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setName("feature");
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setLower(0);
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setUpper(1);
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter resolve
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setName("resolve");
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setType(get_Ecore_EBoolean());
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setLower(0);
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setUpper(1);
+	
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_Ecore_EObject_eGet_resolve->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EObject_eIsProxy_->setName("eIsProxy");
+	
+	// parameter 
+	ecore_EObject_eIsProxy__return->setName("");
+	ecore_EObject_eIsProxy__return->setType(get_Ecore_EBoolean());
+	ecore_EObject_eIsProxy__return->setLower(0);
+	ecore_EObject_eIsProxy__return->setUpper(1);
+	ecore_EObject_eIsProxy__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eIsSet_EStructuralFeature->setName("eIsSet");
+	
+	// parameter 
+	ecore_EObject_eIsSet_EStructuralFeature_return->setName("");
+	ecore_EObject_eIsSet_EStructuralFeature_return->setType(get_Ecore_EBoolean());
+	ecore_EObject_eIsSet_EStructuralFeature_return->setLower(0);
+	ecore_EObject_eIsSet_EStructuralFeature_return->setUpper(1);
+	ecore_EObject_eIsSet_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setName("feature");
+	
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setLower(0);
+	
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setUpper(1);
+	
+	ecore_EObject_eIsSet_EStructuralFeature_Ecore_EObject_eIsSet_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EObject_eResource_->setName("eResource");
+	
+	// parameter 
+	ecore_EObject_eResource__return->setName("");
+	ecore_EObject_eResource__return->setType(get_Ecore_EResource());
+	ecore_EObject_eResource__return->setLower(0);
+	ecore_EObject_eResource__return->setUpper(1);
+	ecore_EObject_eResource__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject->setName("eSet");
+	
+	// parameter 
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setName("");
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setType(nullptr);
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setLower(0);
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setUpper(1);
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setName("feature");
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setLower(0);
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setUpper(1);
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter newValue
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setName("newValue");
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setType(get_Ecore_EJavaObject());
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setLower(0);
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setUpper(1);
+	
+	ecore_EObject_eSet_EStructuralFeature_EJavaObject_Ecore_EObject_eSet_newValue->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+	ecore_EObject_eUnset_EStructuralFeature->setName("eUnset");
+	
+	// parameter 
+	ecore_EObject_eUnset_EStructuralFeature_return->setName("");
+	ecore_EObject_eUnset_EStructuralFeature_return->setType(nullptr);
+	ecore_EObject_eUnset_EStructuralFeature_return->setLower(0);
+	ecore_EObject_eUnset_EStructuralFeature_return->setUpper(1);
+	ecore_EObject_eUnset_EStructuralFeature_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter feature
+	
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setName("feature");
+	
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setType(get_Ecore_EStructuralFeature());
+	
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setLower(0);
+	
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setUpper(1);
+	
+	ecore_EObject_eUnset_EStructuralFeature_Ecore_EObject_eUnset_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EOperation
+	ecore_EOperation->setName("EOperation");
+	ecore_EOperation->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EOperation());
+	gen->setGeneral(get_Ecore_ETypedElement());
+	
+    // EOperation attributes
+	ecore_EOperation_eContainingClass->setName("eContainingClass");
+	ecore_EOperation_eContainingClass->setType(get_Ecore_EClass());
+	ecore_EOperation_eContainingClass->setLower(0);
+	ecore_EOperation_eContainingClass->setUpper(1);
+	
+	
+	
+	ecore_EOperation_eExceptions->setName("eExceptions");
+	ecore_EOperation_eExceptions->setType(get_Ecore_EClassifier());
+	ecore_EOperation_eExceptions->setLower(0);
+	ecore_EOperation_eExceptions->setUpper(-1);
+	
+	
+	
+	ecore_EOperation_eGenericExceptions->setName("eGenericExceptions");
+	ecore_EOperation_eGenericExceptions->setType(get_Ecore_EGenericType());
+	ecore_EOperation_eGenericExceptions->setLower(0);
+	ecore_EOperation_eGenericExceptions->setUpper(-1);
+	
+	
+	
+	ecore_EOperation_eParameters->setName("eParameters");
+	ecore_EOperation_eParameters->setType(get_Ecore_EParameter());
+	ecore_EOperation_eParameters->setLower(0);
+	ecore_EOperation_eParameters->setUpper(-1);
+	
+	
+	
+	ecore_EOperation_eTypeParameters->setName("eTypeParameters");
+	ecore_EOperation_eTypeParameters->setType(get_Ecore_ETypeParameter());
+	ecore_EOperation_eTypeParameters->setLower(0);
+	ecore_EOperation_eTypeParameters->setUpper(-1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EPackage
+	ecore_EPackage->setName("EPackage");
+	ecore_EPackage->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EPackage());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	
+    // EPackage attributes
+	ecore_EPackage_eClassifiers->setName("eClassifiers");
+	ecore_EPackage_eClassifiers->setType(get_Ecore_EClassifier());
+	ecore_EPackage_eClassifiers->setLower(0);
+	ecore_EPackage_eClassifiers->setUpper(-1);
+	
+	
+	
+	ecore_EPackage_eFactoryInstance->setName("eFactoryInstance");
+	ecore_EPackage_eFactoryInstance->setType(get_Ecore_EFactory());
+	ecore_EPackage_eFactoryInstance->setLower(1);
+	ecore_EPackage_eFactoryInstance->setUpper(1);
+	
+	
+	
+	ecore_EPackage_eSubpackages->setName("eSubpackages");
+	ecore_EPackage_eSubpackages->setType(get_Ecore_EPackage());
+	ecore_EPackage_eSubpackages->setLower(0);
+	ecore_EPackage_eSubpackages->setUpper(-1);
+	
+	
+	
+	ecore_EPackage_eSuperPackage->setName("eSuperPackage");
+	ecore_EPackage_eSuperPackage->setType(get_Ecore_EPackage());
+	ecore_EPackage_eSuperPackage->setLower(0);
+	ecore_EPackage_eSuperPackage->setUpper(1);
+	
+	
+	
+	ecore_EPackage_nsPrefix->setName("nsPrefix");
+	ecore_EPackage_nsPrefix->setType(get_Ecore_EString());
+	ecore_EPackage_nsPrefix->setLower(0);
+	ecore_EPackage_nsPrefix->setUpper(1);
+	
+	
+	
+	ecore_EPackage_nsURI->setName("nsURI");
+	ecore_EPackage_nsURI->setType(get_Ecore_EString());
+	ecore_EPackage_nsURI->setLower(0);
+	ecore_EPackage_nsURI->setUpper(1);
+	
+	
+	
+
+    // EPackage operations
+	ecore_EPackage_getEClassifier_EString->setName("getEClassifier");
+	
+	// parameter 
+	ecore_EPackage_getEClassifier_EString_return->setName("");
+	ecore_EPackage_getEClassifier_EString_return->setType(get_Ecore_EClassifier());
+	ecore_EPackage_getEClassifier_EString_return->setLower(0);
+	ecore_EPackage_getEClassifier_EString_return->setUpper(1);
+	ecore_EPackage_getEClassifier_EString_return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	// parameter name
+	
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setName("name");
+	
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setType(get_Ecore_EString());
+	
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setLower(0);
+	
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setUpper(1);
+	
+	ecore_EPackage_getEClassifier_EString_Ecore_EPackage_getEClassifier_name->setDirection(uml::ParameterDirectionKind::IN);
+	
+
+
+    //-------------------------------------------
+	//	class EParameter
+	ecore_EParameter->setName("EParameter");
+	ecore_EParameter->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EParameter());
+	gen->setGeneral(get_Ecore_ETypedElement());
+	
+    // EParameter attributes
+	ecore_EParameter_eOperation->setName("eOperation");
+	ecore_EParameter_eOperation->setType(get_Ecore_EOperation());
+	ecore_EParameter_eOperation->setLower(0);
+	ecore_EParameter_eOperation->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EReference
+	ecore_EReference->setName("EReference");
+	ecore_EReference->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EReference());
+	gen->setGeneral(get_Ecore_EStructuralFeature());
+	
+    // EReference attributes
+	ecore_EReference_container->setName("container");
+	ecore_EReference_container->setType(get_Ecore_EBoolean());
+	ecore_EReference_container->setLower(0);
+	ecore_EReference_container->setUpper(1);
+	
+	
+	
+	ecore_EReference_containment->setName("containment");
+	ecore_EReference_containment->setType(get_Ecore_EBoolean());
+	ecore_EReference_containment->setLower(0);
+	ecore_EReference_containment->setUpper(1);
+	
+	
+	
+	ecore_EReference_eKeys->setName("eKeys");
+	ecore_EReference_eKeys->setType(get_Ecore_EAttribute());
+	ecore_EReference_eKeys->setLower(0);
+	ecore_EReference_eKeys->setUpper(-1);
+	
+	
+	
+	ecore_EReference_eOpposite->setName("eOpposite");
+	ecore_EReference_eOpposite->setType(get_Ecore_EReference());
+	ecore_EReference_eOpposite->setLower(0);
+	ecore_EReference_eOpposite->setUpper(1);
+	
+	
+	
+	ecore_EReference_eReferenceType->setName("eReferenceType");
+	ecore_EReference_eReferenceType->setType(get_Ecore_EClass());
+	ecore_EReference_eReferenceType->setLower(1);
+	ecore_EReference_eReferenceType->setUpper(1);
+	
+	
+	
+	ecore_EReference_resolveProxies->setName("resolveProxies");
+	ecore_EReference_resolveProxies->setType(get_Ecore_EBoolean());
+	ecore_EReference_resolveProxies->setLower(0);
+	ecore_EReference_resolveProxies->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EStringToStringMapEntry
+	ecore_EStringToStringMapEntry->setName("EStringToStringMapEntry");
+	ecore_EStringToStringMapEntry->setIsAbstract(false);
+	
+    // EStringToStringMapEntry attributes
+	ecore_EStringToStringMapEntry_key->setName("key");
+	ecore_EStringToStringMapEntry_key->setType(get_Ecore_EString());
+	ecore_EStringToStringMapEntry_key->setLower(0);
+	ecore_EStringToStringMapEntry_key->setUpper(1);
+	
+	
+	
+	ecore_EStringToStringMapEntry_value->setName("value");
+	ecore_EStringToStringMapEntry_value->setType(get_Ecore_EString());
+	ecore_EStringToStringMapEntry_value->setLower(0);
+	ecore_EStringToStringMapEntry_value->setUpper(1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class EStructuralFeature
+	ecore_EStructuralFeature->setName("EStructuralFeature");
+	ecore_EStructuralFeature->setIsAbstract(true);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_EStructuralFeature());
+	gen->setGeneral(get_Ecore_ETypedElement());
+	
+    // EStructuralFeature attributes
+	ecore_EStructuralFeature_changeable->setName("changeable");
+	ecore_EStructuralFeature_changeable->setType(get_Ecore_EBoolean());
+	ecore_EStructuralFeature_changeable->setLower(0);
+	ecore_EStructuralFeature_changeable->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_defaultValue->setName("defaultValue");
+	ecore_EStructuralFeature_defaultValue->setType(get_Ecore_EJavaObject());
+	ecore_EStructuralFeature_defaultValue->setLower(0);
+	ecore_EStructuralFeature_defaultValue->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_defaultValueLiteral->setName("defaultValueLiteral");
+	ecore_EStructuralFeature_defaultValueLiteral->setType(get_Ecore_EString());
+	ecore_EStructuralFeature_defaultValueLiteral->setLower(0);
+	ecore_EStructuralFeature_defaultValueLiteral->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_derived->setName("derived");
+	ecore_EStructuralFeature_derived->setType(get_Ecore_EBoolean());
+	ecore_EStructuralFeature_derived->setLower(0);
+	ecore_EStructuralFeature_derived->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_eContainingClass->setName("eContainingClass");
+	ecore_EStructuralFeature_eContainingClass->setType(get_Ecore_EClass());
+	ecore_EStructuralFeature_eContainingClass->setLower(0);
+	ecore_EStructuralFeature_eContainingClass->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_transient->setName("transient");
+	ecore_EStructuralFeature_transient->setType(get_Ecore_EBoolean());
+	ecore_EStructuralFeature_transient->setLower(0);
+	ecore_EStructuralFeature_transient->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_unsettable->setName("unsettable");
+	ecore_EStructuralFeature_unsettable->setType(get_Ecore_EBoolean());
+	ecore_EStructuralFeature_unsettable->setLower(0);
+	ecore_EStructuralFeature_unsettable->setUpper(1);
+	
+	
+	
+	ecore_EStructuralFeature_volatile->setName("volatile");
+	ecore_EStructuralFeature_volatile->setType(get_Ecore_EBoolean());
+	ecore_EStructuralFeature_volatile->setLower(0);
+	ecore_EStructuralFeature_volatile->setUpper(1);
+	
+	
+	
+
+    // EStructuralFeature operations
+	ecore_EStructuralFeature_getContainerClass_->setName("getContainerClass");
+	
+	// parameter 
+	ecore_EStructuralFeature_getContainerClass__return->setName("");
+	ecore_EStructuralFeature_getContainerClass__return->setType(get_Ecore_EStructuralFeature_EJavaClass_Wildcard());
+	ecore_EStructuralFeature_getContainerClass__return->setLower(0);
+	ecore_EStructuralFeature_getContainerClass__return->setUpper(1);
+	ecore_EStructuralFeature_getContainerClass__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+	ecore_EStructuralFeature_getFeatureID_->setName("getFeatureID");
+	
+	// parameter 
+	ecore_EStructuralFeature_getFeatureID__return->setName("");
+	ecore_EStructuralFeature_getFeatureID__return->setType(get_Ecore_EInt());
+	ecore_EStructuralFeature_getFeatureID__return->setLower(0);
+	ecore_EStructuralFeature_getFeatureID__return->setUpper(1);
+	ecore_EStructuralFeature_getFeatureID__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
+
+    //-------------------------------------------
+	//	class ETypeParameter
+	ecore_ETypeParameter->setName("ETypeParameter");
+	ecore_ETypeParameter->setIsAbstract(false);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ETypeParameter());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	
+    // ETypeParameter attributes
+	ecore_ETypeParameter_eBounds->setName("eBounds");
+	ecore_ETypeParameter_eBounds->setType(get_Ecore_EGenericType());
+	ecore_ETypeParameter_eBounds->setLower(0);
+	ecore_ETypeParameter_eBounds->setUpper(-1);
+	
+	
+	
+
+
+    //-------------------------------------------
+	//	class ETypedElement
+	ecore_ETypedElement->setName("ETypedElement");
+	ecore_ETypedElement->setIsAbstract(true);
+	
+	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_Ecore_ETypedElement());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	
+    // ETypedElement attributes
+	ecore_ETypedElement_eGenericType->setName("eGenericType");
+	ecore_ETypedElement_eGenericType->setType(get_Ecore_EGenericType());
+	ecore_ETypedElement_eGenericType->setLower(0);
+	ecore_ETypedElement_eGenericType->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_eType->setName("eType");
+	ecore_ETypedElement_eType->setType(get_Ecore_EClassifier());
+	ecore_ETypedElement_eType->setLower(0);
+	ecore_ETypedElement_eType->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_lowerBound->setName("lowerBound");
+	ecore_ETypedElement_lowerBound->setType(get_Ecore_EInt());
+	ecore_ETypedElement_lowerBound->setLower(0);
+	ecore_ETypedElement_lowerBound->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_many->setName("many");
+	ecore_ETypedElement_many->setType(get_Ecore_EBoolean());
+	ecore_ETypedElement_many->setLower(0);
+	ecore_ETypedElement_many->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_ordered->setName("ordered");
+	ecore_ETypedElement_ordered->setType(get_Ecore_EBoolean());
+	ecore_ETypedElement_ordered->setLower(0);
+	ecore_ETypedElement_ordered->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_required->setName("required");
+	ecore_ETypedElement_required->setType(get_Ecore_EBoolean());
+	ecore_ETypedElement_required->setLower(0);
+	ecore_ETypedElement_required->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_unique->setName("unique");
+	ecore_ETypedElement_unique->setType(get_Ecore_EBoolean());
+	ecore_ETypedElement_unique->setLower(0);
+	ecore_ETypedElement_unique->setUpper(1);
+	
+	
+	
+	ecore_ETypedElement_upperBound->setName("upperBound");
+	ecore_ETypedElement_upperBound->setType(get_Ecore_EInt());
+	ecore_ETypedElement_upperBound->setLower(0);
+	ecore_ETypedElement_upperBound->setUpper(1);
+	
+	
+	
+
+}
+
+void EcorePackageImpl::initializePackageDependencies()
+{
+}
+
+void EcorePackageImpl::initializePackageInstanceSpecifications()
+{
+}
+
+void EcorePackageImpl::initializePackageInterfaces()
+{
+}
+
+void EcorePackageImpl::initializePackageStereotypes()
+{
 }
 
 std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAnnotation_contents_ecore_EAnnotation()
@@ -2832,6 +3003,26 @@ std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnum()
 {
 	return ecore_EEnum;
 }
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnumLiteral()
+{
+	return ecore_EEnumLiteral;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
+{
+	return ecore_EEnumLiteral_eEnum;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
+{
+	return ecore_EEnumLiteral_instance;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
+{
+	return ecore_EEnumLiteral_literal;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_value()
+{
+	return ecore_EEnumLiteral_value;
+}
 std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnum_eLiterals()
 {
 	return ecore_EEnum_eLiterals;
@@ -2871,26 +3062,6 @@ std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLitera
 std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_return()
 {
 	return ecore_EEnum_getEEnumLiteral_EString_return;
-}
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnumLiteral()
-{
-	return ecore_EEnumLiteral;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
-{
-	return ecore_EEnumLiteral_eEnum;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
-{
-	return ecore_EEnumLiteral_instance;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
-{
-	return ecore_EEnumLiteral_literal;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_value()
-{
-	return ecore_EEnumLiteral_value;
 }
 std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EEnumerator()
 {
@@ -3008,13 +3179,13 @@ std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaClass()
 {
 	return ecore_EJavaClass;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EJavaClass_T()
-{
-	return ecore_EJavaClass_T;
-}
 std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EJavaClass_RedefinableTemplateSignature()
 {
 	return ecore_EJavaClass_RedefinableTemplateSignature;
+}
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EJavaClass_T()
+{
+	return ecore_EJavaClass_T;
 }
 std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaObject()
 {
@@ -3036,13 +3207,13 @@ std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_K()
 {
 	return ecore_EMap_K;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_V()
-{
-	return ecore_EMap_V;
-}
 std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EMap_RedefinableTemplateSignature()
 {
 	return ecore_EMap_RedefinableTemplateSignature;
+}
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_V()
+{
+	return ecore_EMap_V;
 }
 std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EModelElement()
 {

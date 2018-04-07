@@ -1,0 +1,33 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: "base"
+
+description "Build task for project: pluginFramework"
+
+task deliverPluginFrameworkInterface(type: Copy) {
+	group 'pluginFramework'
+	description 'deliver pluginFramework interface header to %MDE4CPP_HOME%/application/include/pluginFramework'
+	from ("./src/pluginFramework") {
+		include "*.hpp"
+	}
+	exclude "build", ".gradle", "impl", "PluginFramework.hpp"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework"
+	inputs.dir file(".")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework")
+}
+
+task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "pluginFramework"
+	description "compile pluginFramework"
+
+	projectFolder = file("./src/pluginFramework")
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./src/pluginFramework/.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

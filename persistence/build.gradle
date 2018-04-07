@@ -1,0 +1,102 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+	id "de.undercouch.download" version "3.4.2"
+}
+apply plugin: 'base' 
+
+description 'Common collection'
+
+task deliverPersistenceInterface(type: Copy) {
+	group 'Persistence'
+	description 'deliver persistence interface header to %MDE4CPP_HOME%/application/include/persistence/interfaces'
+	from ("./interfaces") {
+		include "*.hpp"
+	}
+	exclude "build", ".gradle"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence/interfaces"
+	inputs.dir file(".")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
+}
+
+task downloadFile(type: Download) {
+	description 'download xerces'
+    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.1.zip'
+    dest new File(file('./xerces/xerces-c-3.2.1.zip').absolutePath)
+    onlyIfModified true
+}
+
+task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
+	description 'download and unzip xerces'
+	from zipTree('xerces/xerces-c-3.2.1.zip')
+	into 'xerces'
+}
+
+task compileXerces(dependsOn: downloadAndUnzipFile) {
+	description 'download, unzip and compile xerces'
+
+	def folder = new File(file('./xerces/xerces-c-3.2.1/.cmake').absolutePath)
+	if( !folder.exists()) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+			}
+		}
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			if (make_parallel_jobs)
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
+				}
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine '/bin/sh', '-c', 'make install' 
+				}
+			}
+		}
+		copy {
+			from "xerces/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application"
+			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+			exclude "cmake"
+			exclude "lib/cmake"
+			exclude "lib/pkgconfig"
+			exclude "share"
+		}
+		copy {
+			from "xerces/bin/lib"
+			into System.getenv('MDE4CPP_HOME')+"/application/bin"
+			include "**/*.so", "**/*.dylib"
+			exclude "cmake"
+			exclude "pkgconfig"
+		}
+	}
+}
+
+task compilePersistence(dependsOn: compileXerces, type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Persistence"
+	description "compile Persistence"
+
+	projectFolder = file(".")
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./.cmake/")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

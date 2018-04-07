@@ -1,0 +1,47 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: 'base' 
+
+description 'Build tasks for project: primitivetypesReflection'
+
+task buildPrimitivetypesReflection(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflection']) {
+	group 'primitivetypesReflection'
+	description 'build primitivetypesReflection'
+}
+
+task compilePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'primitivetypesReflection'
+	description 'compile primitivetypesReflection'
+
+	projectFolder = file("./src_gen/primitivetypesReflection")
+}
+
+task generatePrimitivetypesReflection(type: JavaExec) {
+	group 'primitivetypesReflection'
+	description 'generate C++ code of primitivetypesReflection.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "primitivetypesReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/primitivetypesReflection.uml")
+	outputs.dir file("src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compilePrimitivetypesReflection.mustRunAfter generatePrimitivetypesReflection
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/primitivetypesReflection/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
