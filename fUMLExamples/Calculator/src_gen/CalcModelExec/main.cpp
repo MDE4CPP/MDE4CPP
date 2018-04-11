@@ -56,6 +56,9 @@
 #include "CalcModelExec/PrimeCheckerObject.hpp"
 
 
+#include "CalcModelExec/PrimeCheckerObject.hpp"
+#include "CalcModel/PrimeChecker.hpp"
+#include "CalcModel/CalcModelFactory.hpp"
 
 using namespace CalcModel;
 
@@ -85,6 +88,7 @@ int main()
 	std::shared_ptr<CalcModel::PrimeChecker> actInputNode(CalcModel::CalcModelFactory::eInstance()->createPrimeChecker());
 	
 	
+	std::shared_ptr<PrimeChecker> element = CalcModel::CalcModelFactory::eInstance()->createPrimeChecker();
 	std::shared_ptr<CalcModel::FbDividesExecution> calcModel_PrimeChecker_fbDividesExecution(new CalcModel::FbDividesExecution());
 	calcModel_PrimeChecker_fbDividesExecution->setThisExecutionPtr(calcModel_PrimeChecker_fbDividesExecution);
 	calcModel_PrimeChecker_fbDividesExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbDivides());
@@ -128,7 +132,7 @@ int main()
 	std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
 	//INput parameter actInputNode 
 	std::shared_ptr<fUML::ParameterValue> actInputNodeP(fumlFac->createParameterValue());
-	actInputNodeP->setParameter(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode());
+	actInputNodeP->setParameter(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_CheckIfPrime_CalcModel_PrimeChecker_CheckIfPrime_actInputNode());
 	std::shared_ptr<fUML::Reference> actInputNodeValue(fUML::FUMLFactory::eInstance()->createReference());
 	std::shared_ptr<PrimeCheckerObject> actInputNodeUmlLinker(new PrimeCheckerObject(actInputNode));
 	actInputNodeUmlLinker->setThisPrimeCheckerObjectPtr(actInputNodeUmlLinker);
@@ -137,7 +141,11 @@ int main()
 	actInputNodeP->getValues()->push_back(actInputNodeValue);
 	pList->push_back(actInputNodeP);
 	
-	std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime(), nullptr, pList);
+	std::shared_ptr<PrimeCheckerObject> object(new PrimeCheckerObject());
+	object->setThisPrimeCheckerObjectPtr(object);
+	object->setUmlValue(std::dynamic_pointer_cast<CalcModel::PrimeChecker>(element));
+	object->setLocus(locus);
+	std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_CheckIfPrime(), object, pList);
 	
 	
 	

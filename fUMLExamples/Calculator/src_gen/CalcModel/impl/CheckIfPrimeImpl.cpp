@@ -44,7 +44,7 @@ CheckIfPrimeImpl::~CheckIfPrimeImpl()
 
 std::shared_ptr<uml::Class> CheckIfPrimeImpl::getMetaClass()
 {
-	return CalcModelPackageImpl::eInstance()->get_CalcModel_CheckIfPrime();
+	return CalcModelPackageImpl::eInstance()->get_CalcModel_PrimeChecker_CheckIfPrime();
 }
 
 //*********************************

@@ -28,8 +28,6 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::Element> create(std::string _className);
 
 			//Creator functions
-			virtual std::shared_ptr<CalcModel::CheckIfPrime> createCheckIfPrime();
-			
 			virtual std::shared_ptr<CalcModel::PrimeChecker> createPrimeChecker();
 			
 			

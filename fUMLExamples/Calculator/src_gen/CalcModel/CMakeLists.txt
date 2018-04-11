@@ -36,8 +36,8 @@ SET(SOURCE_FILES
 	CalcModelPlugin.cpp
 	impl/CalcModelFactoryImpl.cpp
 	CalcModelFactory.cpp
-	impl/CheckIfPrimeImpl.cpp
 	impl/PrimeCheckerImpl.cpp
+	impl/CheckIfPrimeImpl.cpp
 )
 
 INCLUDE_DIRECTORIES(
