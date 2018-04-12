@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef CALCMODEL_CHECKIFPRIME__HPP
-#define CALCMODEL_CHECKIFPRIME__HPP
+#ifndef CALCMODEL_PRIMECHECKER_CHECKIFPRIME__HPP
+#define CALCMODEL_PRIMECHECKER_CHECKIFPRIME__HPP
 
 
 
@@ -48,4 +48,4 @@ namespace CalcModel
 	
 	};
 }
-#endif /* end of include guard: CALCMODEL_CHECKIFPRIME__HPP */
+#endif /* end of include guard: CALCMODEL_PRIMECHECKER_CHECKIFPRIME__HPP */

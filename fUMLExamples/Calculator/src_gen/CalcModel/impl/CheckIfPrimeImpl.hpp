@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef CALCMODEL_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
-#define CALCMODEL_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
+#ifndef CALCMODEL_PRIMECHECKER_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
+#define CALCMODEL_PRIMECHECKER_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP
 
 #include <functional>
 
@@ -73,4 +73,4 @@ namespace CalcModel
 			std::map<std::string,std::function<void()>> m_unsetterMap;
 	};
 }
-#endif /* end of include guard: CALCMODEL_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP */
+#endif /* end of include guard: CALCMODEL_PRIMECHECKER_CHECKIFPRIME_CHECKIFPRIMEIMPL_HPP */
