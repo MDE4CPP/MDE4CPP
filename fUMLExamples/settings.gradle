@@ -1,1 +1,1 @@
-include 'Calculator', 'MultiplePins'
+include 'Calculator', 'ForkNodeTest', 'MultiplePins'

@@ -1,7 +1,6 @@
 description 'Example collection'
 
-task buildFUMLExamples(dependsOn: ['Calculator:buildCalcModel', 'MultiplePins:buildFUMLMultiplePins']) {
+task buildFUMLExamples(dependsOn: ['Calculator:buildCalcModel', 'ForkNodeTest:buildForkNodeTest',  'MultiplePins:buildFUMLMultiplePins']) {
 	group 'Examples'
-	description 'build all fUML example applications'	
+	description 'build all fUML example applications'
 }
-
