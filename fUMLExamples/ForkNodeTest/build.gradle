@@ -1,0 +1,53 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: 'base' 
+
+description 'Build tasks for project: forkNodeTest'
+
+task buildForkNodeTest(dependsOn: ['generateForkNodeTest', 'compileForkNodeTest']) {
+	group 'forkNodeTest'
+	description 'build forkNodeTest'
+}
+
+task compileForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'forkNodeTest'
+	description 'compile forkNodeTest'
+
+	projectFolder = file("./src_gen/forkNodeTest")
+}
+
+task generateForkNodeTest(type: JavaExec) {
+	group 'forkNodeTest'
+	description 'generate C++ code of forkNodeTest.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "forkNodeTest.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/forkNodeTest.uml")
+	outputs.dir file("src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
+			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
+		}
+	}
+}
+
+compileForkNodeTest.mustRunAfter generateForkNodeTest
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/forkNodeTest/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+
+	def cmakeFolderExec = file('./src_gen/forkNodeTestExec/.cmake/')
+	if(cmakeFolderExec.exists()) {
+    	delete cmakeFolderExec.absolutePath
+   		println "deleting folder " + cmakeFolderExec.absolutePath
+	}
+}
