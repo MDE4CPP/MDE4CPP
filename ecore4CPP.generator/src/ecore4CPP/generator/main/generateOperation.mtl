@@ -95,6 +95,6 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOperationID()/];
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/];
 
 [/template]
