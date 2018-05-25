@@ -124,6 +124,6 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 [/template]
 
 [template public generateStaticAttributeID(anEAttribute : EAttribute)]
-static const int [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.eContainingClass.getMyClassifierID()/][anEAttribute.getFeatureID()/];
+static const int [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.eContainingClass.getMyClassifierID() * 100 + anEAttribute.getFeatureID()/];
 
 [/template]
