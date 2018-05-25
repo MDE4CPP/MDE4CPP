@@ -94,7 +94,6 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]
-[aEClass.getClassMemberName()/]->setInstanceClass(nullptr);
 [aEClass.getClassMemberName()/]->setName("[aEClass.name/]");
 [aEClass.getClassMemberName()/]->setAbstract([aEClass.abstract.toString()/]);
 [aEClass.getClassMemberName()/]->setInterface([aEClass.interface.toString()/]);

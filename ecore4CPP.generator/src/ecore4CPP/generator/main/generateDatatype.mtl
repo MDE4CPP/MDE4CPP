@@ -26,7 +26,6 @@
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]
-[adatatype.getClassMemberName()/]->setInstanceClass(nullptr);
 [adatatype.getClassMemberName()/]->setName("[adatatype.name/]");
 [if (not adatatype.oclIsKindOf(EEnum))]
 [adatatype.getClassMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
