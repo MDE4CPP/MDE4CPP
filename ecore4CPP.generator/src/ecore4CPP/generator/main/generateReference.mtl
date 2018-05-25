@@ -167,6 +167,6 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 [/template]
 
 [template public generateStaticReferenceID(anEReference : EReference)]
-static const int [anEReference.getStaticAttributeIDName()/] = [anEReference.eContainingClass.getClassifierID()/][anEReference.getFeatureID()/];
+static const int [anEReference.getStaticAttributeIDName()/] = [anEReference.eContainingClass.getMyClassifierID()/][anEReference.getFeatureID()/];
 
 [/template]

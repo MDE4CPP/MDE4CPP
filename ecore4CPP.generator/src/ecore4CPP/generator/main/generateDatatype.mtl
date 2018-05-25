@@ -34,6 +34,6 @@
 [/template]
 
 [template public generateStaticDatatypeID(aEDatatype : EDataType)]
-static const int [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.getClassifierID()/];
+static const int [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.getMyClassifierID()/];
 
 [/template]

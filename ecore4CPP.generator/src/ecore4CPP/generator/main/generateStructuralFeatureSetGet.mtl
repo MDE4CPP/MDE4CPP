@@ -41,7 +41,7 @@ boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, boo
 	{
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-			return [struct.GetterName()/](); //[aClass.getClassifierID()/][struct.getFeatureID()/]
+			return [struct.GetterName()/](); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 	[/for]
 	}
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
@@ -73,7 +73,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 	{
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-			return [struct.generateComparison()/]; //[aClass.getClassifierID()/][struct.getFeatureID()/]
+			return [struct.generateComparison()/]; //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 	[/for]
 	}
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
@@ -112,7 +112,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::an
 [else]
 			[struct.eGenericType.generateCppType()/] _[struct.name/] = boost::any_cast<[struct.eGenericType.generateCppType()/]>(newValue);
 [/if]
-			[struct.SetterName()/](_[struct.name/]); //[aClass.getClassifierID()/][struct.getFeatureID()/]
+			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 			return true;
 		}
 [/for]

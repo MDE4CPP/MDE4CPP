@@ -102,7 +102,7 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]
-static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getMyClassifierID()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
 [/template]
