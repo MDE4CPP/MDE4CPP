@@ -33,7 +33,7 @@
 #include "uml/Element.hpp"
 
 [generateMainIncludes()/]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
