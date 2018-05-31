@@ -115,13 +115,16 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
 [if (anCallOperationAction.target.name.startsWith('self'))]
 	std::shared_ptr<[anCallOperationAction.activity.owner.oclAsType(Classifier).namespace.ns()/]::[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+[else]
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+    assert(target != nullptr);
+[/if]
+
+[if (target.name.startsWith('self.'))]
 	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
 	if (target != nullptr && subtarget != nullptr)
 	{
-[else]
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
-    assert(target != nullptr);
 [/if]
 
     //call assigned operation
