@@ -44,7 +44,7 @@
 [/if]
 
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
-[let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
+[let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 [if (cOpSet.target.name.startsWith('self'))]
 [if (cOpSet.target.name.startsWith('self.'))]
@@ -112,7 +112,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
-	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
+	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 [if (cOpSet.target.name.startsWith('self'))]
 	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
@@ -124,8 +124,8 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
     //Body of the Opaquebehavior
     //Start ---------------------------
-	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
-	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
+	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
+	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 	
 	//Calling the associated operation.
 [if (target.name.startsWith('self.'))]
