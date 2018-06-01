@@ -18,6 +18,8 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
+
+[query public hasGenerateOwnerVariable(aElement : Element) : Boolean = if (hasSourceGen()) then getSourceGen().details->select(key = 'generateOwnerVariable')->first().value = 'true' else false endif/]
 [template public generateBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
 
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
@@ -59,6 +61,12 @@
 [/if]
 [/let]
 [/if]
+
+[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+[/if]
+
 
 [if (anOpaqueBehavior.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
@@ -147,8 +155,12 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 [/if]
 	[/for]
 	[else]
-		[if (anOpaqueBehavior.getAppliedStereotype('setBehaviour').oclIsUndefined() )]
-		//Function Behaviour from a Call Behavior Action
+		[if (anOpaqueBehavior.getAppliedStereotype('setBehaviour').oclIsUndefined())]
+		//Function Behaviour from a Call Behavior Action [anOpaqueBehavior.hasGenerateOwnerVariable()/]
+		[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.ns()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+		[/if]
+
    		[anOpaqueBehavior._body->first()/]
 		[else]
 		[anOpaqueBehavior.inputParameters()->selectByType(InputPin).name/]->set[anOpaqueBehavior.name/]([anOpaqueBehavior.inputParameters()->selectByType(ValuePin).value.oclAsType(LiteralInteger).value/]);
