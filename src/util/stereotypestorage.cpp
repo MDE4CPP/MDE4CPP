@@ -57,7 +57,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 	}
 
 	std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
-	if (nullptr)
+	if (list == nullptr)
 	{
 		list.reset(new Bag<uml::Stereotype>());
 		list->push_back(stereotype);
