@@ -155,15 +155,20 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 [/if]
 	[/for]
 	[else]
-		[if (anOpaqueBehavior.getAppliedStereotype('setBehaviour').oclIsUndefined())]
+		[if (anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::setBehavior').oclIsUndefined() and anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
 		//Function Behaviour from a Call Behavior Action [anOpaqueBehavior.hasGenerateOwnerVariable()/]
 		[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
 			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.ns()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 		[/if]
 
    		[anOpaqueBehavior._body->first()/]
+		[elseif (not anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
+		// getBehavior generated
+[if (anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclIsKindOf(Property))]
+		[anOpaqueBehavior.outputParameters()->first().name/] = [anOpaqueBehavior.inputParameters()->first().name/]->get[anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclAsType(Property).name.toUpperFirst()/]();
+[/if]
 		[else]
-		[anOpaqueBehavior.inputParameters()->selectByType(InputPin).name/]->set[anOpaqueBehavior.name/]([anOpaqueBehavior.inputParameters()->selectByType(ValuePin).value.oclAsType(LiteralInteger).value/]);
+		// setBehavior generated - TODO
 		[/if]
 	[/if]
     //End -----------------------------
