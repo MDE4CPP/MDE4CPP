@@ -30,6 +30,7 @@
 
 [template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
 [memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
+[memberName(aFunctionBehavior)/]->setContext([aFunctionBehavior._context.memberName()/]);
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterInitialization()/]
 [/for]
