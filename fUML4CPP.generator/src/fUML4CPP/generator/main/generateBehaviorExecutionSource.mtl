@@ -165,7 +165,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 		[elseif (not anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
 		// getBehavior generated
 [if (anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclIsKindOf(Property))]
-		[anOpaqueBehavior.outputParameters()->first().name/] = [anOpaqueBehavior.inputParameters()->first().name/]->get[anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclAsType(Property).name.toUpperFirst()/]();
+		[anOpaqueBehavior.outputParameters()->select(direction = ParameterDirectionKind::return)->first().name/] = [anOpaqueBehavior.inputParameters()->first().name/]->get[anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclAsType(Property).name.toUpperFirst()/]();
 [/if]
 		[else]
 		// setBehavior generated - TODO
