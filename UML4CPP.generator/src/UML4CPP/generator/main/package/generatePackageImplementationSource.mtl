@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::generateFunctionBehavior /]
 [import UML4CPP::generator::main::generateInstanceSpecification /]
 [import UML4CPP::generator::main::generateInterface /]
+[import UML4CPP::generator::main::generateInterfaceRealization /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generatePrimitivetype /]
 [import UML4CPP::generator::main::generateStereotype /]
@@ -38,7 +39,8 @@
 								aPackage.allOwnedElements()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(FunctionBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass()
+								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
+								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
@@ -141,6 +143,7 @@ void [packageName/]::createPackageContents()
 	createPackageDependencies([aPackage.memberName()/], factory);
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageEnumerationLiterals([aPackage.memberName()/], factory);
+	createPackageInterfaceRealizations([aPackage.memberName()/], factory);
 }
 
 void [packageName/]::createPackageActivities(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
@@ -198,7 +201,13 @@ void [packageName/]::createPackageInstanceSpecifications(std::shared_ptr<[packag
 [/for]
 }
 
-[comment]Only Classes[/comment]
+void [packageName/]::createPackageInterfaceRealizations(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
+{
+[for (anInterfaceRealization : InterfaceRealization | aPackage.allOwnedElements()->filter(InterfaceRealization)) separator ('\n')]
+	[anInterfaceRealization.generateInterfaceRealizationCreation()/]
+[/for]
+}
+
 void [packageName/]::createPackageInterfaces(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
 [if (not (aPackage.name='UML'))]
@@ -254,6 +263,7 @@ void [packageName/]::initializePackageContents()
 	initializePackageClasses();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
 }
@@ -304,6 +314,14 @@ void [packageName/]::initializePackageInstanceSpecifications()
 {
 [for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->sortedBy(myQualifiedName()))]
 	[anInstSpec.generateInstanceSpecificationInitialization()/]
+[/for]
+}
+
+
+void [packageName/]::initializePackageInterfaceRealizations()
+{
+[for (anInterfaceRealization : InterfaceRealization | aPackage.allOwnedElements()->filter(InterfaceRealization)) separator ('\n')]
+	[anInterfaceRealization.generateInterfaceRealizationInitialization()/]
 [/for]
 }
 

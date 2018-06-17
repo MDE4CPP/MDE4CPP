@@ -80,6 +80,7 @@ namespace [aPackage.name/]
 			void createPackageDependencies(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageInstanceSpecifications(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaceRealizations(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageInterfaces(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackagePrimitiveTypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<[packageName/]> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
@@ -89,6 +90,7 @@ namespace [aPackage.name/]
 			void initializePackageClasses();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
 	};
