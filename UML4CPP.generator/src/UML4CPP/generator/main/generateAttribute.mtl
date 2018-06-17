@@ -87,6 +87,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 [aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
+[aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
 
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]

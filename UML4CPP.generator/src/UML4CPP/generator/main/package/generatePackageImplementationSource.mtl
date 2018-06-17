@@ -53,6 +53,7 @@
 [/for]
 
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
 //meta meta model factory
 #include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.toUpperFirst().concat('Factory')/].hpp"
 
