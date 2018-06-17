@@ -22,7 +22,7 @@ public:
 	static std::shared_ptr<[packageName/]> eInstance();
 [/template]
 
-[template public generateSingletonImpl(packageName : String)]
+[template public generateSingletonImpl(packageName : String, callInit : Boolean)]
 std::shared_ptr<[packageName/]> [packageName/]::instance;
 
 std::shared_ptr<[packageName/]> [packageName/]::eInstance()
@@ -31,7 +31,9 @@ std::shared_ptr<[packageName/]> [packageName/]::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset([packageName.concat('Impl')/]::create());
-		std::dynamic_pointer_cast<[packageName.concat('Impl')/]>(instance)->init();
+[if (callInit)]
+		std::dynamic_pointer_cast<[packageName.concat('Impl')/]>(instance)->init(instance);
+[/if]
 	}	
 	return instance;
 }
