@@ -31,6 +31,7 @@ class PluginFrameworkImpl : virtual public PluginFramework
 		virtual ~PluginFrameworkImpl();
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByName(const std::string name) const;
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByUri(const std::string uri) const;
+		virtual std::shared_ptr<Bag<MDE4CPPPlugin>> getAllPlugins() const;
 		virtual void clear();
 
 	protected:

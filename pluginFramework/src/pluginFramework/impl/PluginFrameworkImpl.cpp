@@ -31,6 +31,7 @@
 #include <dirent.h>
 #include <iostream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "pluginFramework/MDE4CPPPlugin.hpp"
 
 PluginFrameworkImpl::PluginFrameworkImpl():
@@ -212,3 +213,17 @@ std::shared_ptr<MDE4CPPPlugin> PluginFrameworkImpl::findPluginByUri(const std::s
 	return nullptr;
 }
 
+std::shared_ptr<Bag<MDE4CPPPlugin>> PluginFrameworkImpl::getAllPlugins() const
+{
+	std::shared_ptr<Bag<MDE4CPPPlugin>> pluginList(new Bag<MDE4CPPPlugin>());
+
+	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_mapPluginName.begin();
+	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator end = m_mapPluginName.end();
+	while (iter != end)
+	{
+		pluginList->push_back(iter->second);
+		iter++;
+	}
+
+	return pluginList;
+}
