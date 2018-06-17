@@ -74,6 +74,10 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName)
 {
 	std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
+	if (list == nullptr)
+	{
+		return nullptr;
+	}
 	for (std::shared_ptr<uml::Stereotype> s : *list)
 	{
 		if (s->getMetaClass()->getQualifiedName() == qualifiedName)
