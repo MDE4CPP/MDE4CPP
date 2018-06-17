@@ -256,10 +256,6 @@ void [packageName/]::initializePackageContents()
 	setName(eNAME);
 	setURI(eNS_URI);
 
-	// Add supertypes to classes
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<[packageName/]> [aPackage.memberName()/] = std::shared_ptr<[packageName/]>(this, null_deleter());
-
 	initializePackageActivities();
 	initializePackageClasses();
 	initializePackageDependencies();
