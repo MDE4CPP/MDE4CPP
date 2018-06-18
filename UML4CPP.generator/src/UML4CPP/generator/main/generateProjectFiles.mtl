@@ -17,6 +17,9 @@
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateBuildFile /]
 
+[query private getMinGWDeliverName(aPackage : Package) : String = 'x86_64-w64-mingw32' /]
+[query private getMinGWVersion(aPackage : Package) : String = '8.1.0' /]
+
 [template public generateProjectsFiles(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
 [generateProjectsFiles(false)/]
 [/template]
@@ -133,11 +136,11 @@
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[if(prepareApplication)]ApplicatonFor[/if][packageName/]_src[if(not prepareApplication)]_gen[/if]/src[if(not prepareApplication)]_gen[/if]}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++/[getMinGWDeliverName()/]&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1168779061" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
@@ -174,11 +177,11 @@
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[if(prepareApplication)]ApplicatonFor[/if][packageName/]_src[if(not prepareApplication)]_gen[/if]/src[if(not prepareApplication)]_gen[/if]}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include/c++/[getMinGWDeliverName()/]&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/[getMinGWDeliverName()/]/[getMinGWVersion()/]/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>	
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2144890842" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
