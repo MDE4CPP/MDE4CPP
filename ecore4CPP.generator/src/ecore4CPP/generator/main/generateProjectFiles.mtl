@@ -21,8 +21,8 @@
 [generateProjectsFiles(false)/]
 [/template]
 
-[query private getMinGWDeliverName(aPackage : EPackage) : String = 'mingw32' /]
-[query private getMinGWVersion(aPackage : EPackage) : String = '6.3.0' /]
+[query private getMinGWDeliverName(aPackage : EPackage) : String = 'x86_64-w64-mingw32' /]
+[query private getMinGWVersion(aPackage : EPackage) : String = '8.1.0' /]
 
 [template public generateProjectsFiles(aPackage : EPackage, prepareApplication : Boolean) { packageName : String = aPackage.name; }]
 [file (if (prepareApplication) then '../application/.project' else '../.project' endif, false, 'UTF-8')]
