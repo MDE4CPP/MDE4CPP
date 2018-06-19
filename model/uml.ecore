@@ -1191,7 +1191,7 @@
         <details key="originalName" value="qualifiedName"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret = ns->getName() + separator() + ret;&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret += ns->getName() + separator();&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>
