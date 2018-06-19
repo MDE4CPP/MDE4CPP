@@ -55,6 +55,9 @@ namespace boost
 namespace uml
 {
 	class Property;
+[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+	class EnumerationLiteral;
+[/if]
 }
 
 //*********************************
@@ -109,6 +112,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			// Structural Feature Getter/Setter
 			//*********************************
 			[aClass.generateeGetSetDel(true)/]
+			[aClass.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
 		
 		private:
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];

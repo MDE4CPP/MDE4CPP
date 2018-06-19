@@ -192,7 +192,6 @@ void [packageName/]::createPackageDependencies(std::shared_ptr<uml::Package> [aP
 void [packageName/]::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
 [if (aPackage.ownedMember->filter(Enumeration)->size() > 0)]
-	std::shared_ptr<uml::EnumerationLiteral> lit = nullptr;
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationCreation()/]
 [/if]
 }

@@ -47,7 +47,11 @@ m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qua
 [/for]
 
 [for (aFeature : StructuralFeature | aClass.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
+[if (aFeature.type.oclIsKindOf(Enumeration))]
+m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<std::shared_ptr<uml::EnumerationLiteral>>(object));}));
+[else]
 m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>[/if]>(object));}));
+[/if]
 [/for]
 
 [for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
@@ -58,6 +62,25 @@ m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifi
 [/if]
 [/for]
 [/template]
+
+
+[template public generateESetFunctionForEnumerationDecl(aProperty : Property)]
+virtual void [aProperty.SetterName()/] (std::shared_ptr<uml::EnumerationLiteral> literal); 
+[/template]
+
+[template public generateESetFunctionForEnumerationImpl(aProperty : Property, aClass : Class)]
+void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
+{
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
+	if (literal == [literal.packageGetter()/])
+	{	
+		[aProperty.SetterName()/]([literal.enumeration.name/]::[literal.name.toUpper()/]);
+		return;
+	}
+[/for]
+}
+[/template]
+
 
 [template public generateeGetSetImpl(aClass : Class)]
 boost::any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
