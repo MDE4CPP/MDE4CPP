@@ -602,6 +602,9 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves all the attributes of this classifier, including those inherited from its parents."/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;uml::Property>> eAllAttributes(new Bag&lt;uml::Property>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Property>> attributeList = this->getAttribute();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;Classifier> > classList = this->getGenerals();&#xD;&#xA;    for (std::shared_ptr&lt;Classifier> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;Property> > attributeList = c->getAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
