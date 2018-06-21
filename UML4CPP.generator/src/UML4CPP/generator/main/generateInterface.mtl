@@ -48,6 +48,8 @@ virtual public uml::Element
 //*********************************
 // generated Includes
 
+[generateAbstractDataTypesForwardDeclaration()/]
+
 //Forward Declaration for used types
 [for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 

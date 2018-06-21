@@ -177,6 +177,12 @@ template<class T> class Bag;
 [/if]
 [/template]
 
+[template public generateAbstractDataTypesForwardDeclaration(anInterface : Interface)]
+[if (anInterface.ownedAttribute->select(upper <> 1)->size() > 0 or anInterface.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+template<class T> class Bag;
+[/if]
+[/template]
+
 [template public generateAbstractDataTypesIncludes(aClass : Class)]
 [if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
