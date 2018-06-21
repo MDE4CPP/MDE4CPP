@@ -31,7 +31,7 @@
  * @param aClass
  */]
 [template public generateAttributeProtectedMember(aProperty : Property)]
-[aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
+[if (aProperty.isStatic)]static [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
 
 [/template]
 
