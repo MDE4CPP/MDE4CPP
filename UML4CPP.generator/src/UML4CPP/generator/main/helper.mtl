@@ -14,8 +14,6 @@
  */]
 [module helper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
-[import UML4CPP::generator::main::generateType /]
-
 [**
  * Helper for c++ abstract function sufix
 */]
@@ -117,6 +115,14 @@
 [query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
 
+[template public generateTypeClass(anEDataType : ecore::EClass)]
+[anEDataType.name/]
+[/template]
+
+[template public ns(ns : Namespace)]
+[if (ns.name='UML')]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
+[/template]
+
 [**
  * Helper for include guard
 */]
@@ -195,3 +201,7 @@ template<class T> class Bag;
 */]
 [query public hasSourceGen(aElement : Element) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()/]
 [query public getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->first()/]
+[query public hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aKey:String) : String = aElement.getSourceGen().details->select(key = aKey)->first().value /]
+
+[query public ignoreNamespace(aElement : Element) : Boolean = if (aElement.getNearestPackage().hasKey('ignoreNamespace')) then aElement.getNearestPackage().valueKey('ignoreNamespace') = '1' else false endif /]
