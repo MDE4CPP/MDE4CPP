@@ -95,8 +95,8 @@
 
 [query public metamodelClassTypeString(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().generateTypeClass() else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().generateTypeClass()) endif /]
 
-[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.ns() = base.namespace.ns() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
-[query public InterfaceWithNamespace(anInterface : Interface, base : Classifier) : String = if anInterface.namespace.ns() = base.namespace.ns() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
+[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.ns() = base.namespace.ns() or aClass.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
+[query public InterfaceWithNamespace(anInterface : Interface, base : Classifier) : String = if anInterface.namespace.ns() = base.namespace.ns() or anInterface.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
  
 [query public creatorFunction(aType : Type) : String =  metaModelFactory(aType).concat('create').concat(aType.name.toUpperFirst()).concat('()')/]
 [query public metaModelFactory(aType : Type) : String = aType.getNearestPackage().name.concat('::').concat(aType.getNearestPackage().name).concat('Factory::eInstance()->')/]

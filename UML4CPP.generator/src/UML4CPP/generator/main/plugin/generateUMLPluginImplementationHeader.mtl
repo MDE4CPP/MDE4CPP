@@ -23,8 +23,9 @@
 
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Plugin.hpp"
 
-namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
+[/if]
 	class [aPackage.name.toUpperFirst().concat('PluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('Plugin')/] 
 	{
 		public:
@@ -40,7 +41,7 @@ namespace [aPackage.name/]
 			virtual std::shared_ptr<uml::Factory> getFactory();
 			virtual std::shared_ptr<uml::Package> getPackage();
 	};
-}
+[if (not aPackage.getNearestPackage().ignoreNamespace())]}[/if]
 [endGuard(aPackage,'PluginImpl')/]
 [/file]
 [/template]

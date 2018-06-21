@@ -89,7 +89,7 @@
 [/for]
 
 
-using namespace [aPackage.name/];
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
 [packageName/]::[packageName/]()
 {

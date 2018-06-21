@@ -27,8 +27,9 @@
 #include "uml/impl/FactoryImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
-namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
+[/if]
 	class [aPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.toUpperFirst().concat('Factory')/] 
 	{
 		protected:
@@ -53,7 +54,7 @@ namespace [aPackage.name/]
 
 			virtual void init() {}
 	};
-}
+[if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'FactoryImpl')/]
 [/file]
 [/template]

@@ -22,7 +22,7 @@
 #include "[aPackage.getPackageName()/]/[packageName/].hpp"
 #include "[aPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [aPackage.name/];
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
 //static initialisation
 const std::string [packageName/]::eNAME ="[aPackage.name/]";

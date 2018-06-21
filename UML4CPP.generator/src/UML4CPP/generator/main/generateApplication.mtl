@@ -41,7 +41,7 @@
 
 // [/protected]
 
-using namespace [getPackageName()/];
+[if (not aPackage.ignoreNamespace())]using namespace [getPackageName()/];[/if]
 
 // [protected ('functions')] 
 // You may manually edit additional functions, won't be overwritten upon generation.

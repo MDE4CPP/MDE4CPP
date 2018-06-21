@@ -59,7 +59,7 @@
 #include "uml/EnumerationLiteral.hpp"
 [/if]
 
-using namespace [aPackage.name/];
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 using boost::any_cast;
 
 //*********************************

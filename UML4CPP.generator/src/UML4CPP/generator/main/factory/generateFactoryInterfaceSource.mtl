@@ -23,7 +23,7 @@
 #include "[anPackage.getPackageName()/]/[packageName/].hpp"
 #include "[anPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anPackage.name/];
+[if (not anPackage.ignoreNamespace())]using namespace [anPackage.name/];[/if]
 
 //static initialisation
 [generateSingletonImpl(packageName, false)/]

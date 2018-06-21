@@ -22,8 +22,9 @@
 
 #include "pluginFramework/UMLModelPlugin.hpp"
 
-namespace [aPackage.name/]
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
 {
+[/if]
 	class [packageName/] : virtual public UMLModelPlugin
 	{
 		public:
@@ -45,7 +46,7 @@ namespace [aPackage.name/]
 		private:
 			static std::shared_ptr<MDE4CPPPlugin> instance;
 	};
-}
+[if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'Plugin')/]
 [/file]
 [/template]

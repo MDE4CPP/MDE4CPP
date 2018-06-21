@@ -20,14 +20,15 @@
 [file (anEEnum._package.getPackageName().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEEnum)/]
 
-namespace [anEEnum._package.name/] 
+[if (not anEEnum.getNearestPackage().ignoreNamespace())]namespace [anEEnum._package.name/] 
 {
+[/if]
 	enum class [anEEnum.name/] 
 	{
 [for (lit : EnumerationLiteral | anEEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n')]
 		[lit.name.toUpperCase()/] = [anEEnum.ownedLiteral->indexOf(lit).toString()/][/for]
 	};
-}
+[if (not anEEnum.getNearestPackage().ignoreNamespace())]}[/if]
 [endGuard(anEEnum)/]
 [/file]
 [/template]

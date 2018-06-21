@@ -43,8 +43,9 @@ namespace uml
 	class UmlFactory;
 }
 
-namespace [aPackage.name/]
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
 {
+[/if]
 	class [packageName/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
 	{
 			friend class [aPackage.name.toUpperFirst().concat('Package')/];
@@ -94,7 +95,7 @@ namespace [aPackage.name/]
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
 	};
-} 
+[if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackageImpl')/]
 [/file]
 [/template]
