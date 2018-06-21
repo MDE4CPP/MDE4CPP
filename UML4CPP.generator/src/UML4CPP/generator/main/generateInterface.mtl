@@ -75,6 +75,10 @@ virtual public uml::Element
 [if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 
+[for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+
 [if (aInterface.oclIsKindOf(Stereotype))]
 #include "uml/Stereotype.hpp"
 [/if]
