@@ -83,7 +83,8 @@ namespace [element.namespace.ns()/]
 
 namespace [aPackage.name/] 
 {
-	class [aInterface.name/] 
+	class [aInterface.name/] [for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [InterfaceWithNamespace(aInterface,aClassifier)/][/for]
 	{
 		protected:
 			[aInterface.name/](){}
