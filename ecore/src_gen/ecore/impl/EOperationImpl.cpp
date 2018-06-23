@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -228,6 +229,8 @@ int EOperationImpl::getOperationID() const
 //*********************************
 // Operations
 //*********************************
+
+
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -332,24 +335,24 @@ std::shared_ptr<ecore::EObject> EOperationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass(); //1111
+			return eAny(getEContainingClass()); //1111
 		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
-			return getEExceptions(); //1114
+			return eAny(getEExceptions()); //1114
 		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions(); //1115
+			return eAny(getEGenericExceptions()); //1115
 		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
-			return getEParameters(); //1113
+			return eAny(getEParameters()); //1113
 		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters(); //1112
+			return eAny(getETypeParameters()); //1112
 		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
-			return getOperationID(); //1110
+			return eAny(getOperationID()); //1110
 	}
-	return ETypedElementImpl::internalEIsSet(featureID);
+	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EOperationImpl::internalEIsSet(int featureID) const
 {
@@ -370,7 +373,7 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
-bool EOperationImpl::eSet(int featureID, boost::any newValue)
+bool EOperationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

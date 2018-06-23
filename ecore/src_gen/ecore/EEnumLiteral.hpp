@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
 
 // forward declarations
 
@@ -92,11 +92,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual boost::any getInstance() const = 0;
+			virtual Any getInstance() const = 0;
 			
 			/*!
 			 */ 
-			virtual void setInstance (boost::any _instance)= 0; 
+			virtual void setInstance (Any _instance)= 0; 
 			
 			/*!
 			 */ 
@@ -130,7 +130,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			boost::any m_instance = nullptr;
+			Any m_instance = nullptr;
 			/*!
 			 */ 
 			std::string m_literal = "";

@@ -16,11 +16,12 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
@@ -126,19 +127,19 @@ std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const 
+std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const 
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const 
+Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -179,14 +180,14 @@ std::shared_ptr<ecore::EObject> EFactoryImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
-			return getEPackage(); //71
+			return eAny(getEPackage()); //71
 	}
-	return EModelElementImpl::internalEIsSet(featureID);
+	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EFactoryImpl::internalEIsSet(int featureID) const
 {
@@ -197,14 +198,14 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
-bool EFactoryImpl::eSet(int featureID, boost::any newValue)
+bool EFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
+			std::shared_ptr<ecore::EPackage> _ePackage = newValue->get<std::shared_ptr<ecore::EPackage>>();
 			setEPackage(_ePackage); //71
 			return true;
 		}

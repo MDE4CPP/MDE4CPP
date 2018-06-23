@@ -44,15 +44,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  ;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const  ;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
+			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
 			
 			
 			
@@ -98,9 +98,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EFactory> m_thisEFactoryPtr;

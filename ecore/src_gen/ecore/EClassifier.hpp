@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
 
 // forward declarations
 template<class T> class Bag;
@@ -92,9 +92,11 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			
+			
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  = 0;
+			virtual bool isInstance(Any object)  const  = 0;
 			
 			
 			//*********************************
@@ -106,15 +108,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual boost::any getDefaultValue() const = 0;
+			virtual Any getDefaultValue() const = 0;
 			
 			/*!
 			 */ 
 			virtual void *  getInstanceClass() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setInstanceClass (void *  _instanceClass)= 0; 
 			
 			/*!
 			 */ 
@@ -142,9 +140,6 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) = 0;
-			/*!
-			 */
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
 			
 			
@@ -158,7 +153,7 @@ namespace ecore
 			int m_classifierID = -1;
 			/*!
 			 */ 
-			boost::any m_defaultValue = nullptr;
+			Any m_defaultValue = nullptr;
 			/*!
 			 */ 
 			void *  m_instanceClass = nullptr;

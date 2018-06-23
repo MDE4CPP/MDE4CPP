@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -247,22 +248,22 @@ std::shared_ptr<ecore::EObject> EAnnotationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
-			return getContents(); //14
+			return eAny(getContents()); //14
 		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
-			return getDetails(); //12
+			return eAny(getDetails()); //12
 		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
-			return getEModelElement(); //13
+			return eAny(getEModelElement()); //13
 		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
-			return getReferences(); //15
+			return eAny(getReferences()); //15
 		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
-			return getSource(); //11
+			return eAny(getSource()); //11
 	}
-	return EModelElementImpl::internalEIsSet(featureID);
+	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EAnnotationImpl::internalEIsSet(int featureID) const
 {
@@ -281,21 +282,21 @@ bool EAnnotationImpl::internalEIsSet(int featureID) const
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
-bool EAnnotationImpl::eSet(int featureID, boost::any newValue)
+bool EAnnotationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EModelElement> _eModelElement = boost::any_cast<std::shared_ptr<ecore::EModelElement>>(newValue);
+			std::shared_ptr<ecore::EModelElement> _eModelElement = newValue->get<std::shared_ptr<ecore::EModelElement>>();
 			setEModelElement(_eModelElement); //13
 			return true;
 		}
 		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
-			std::string _source = boost::any_cast<std::string>(newValue);
+			std::string _source = newValue->get<std::string>();
 			setSource(_source); //11
 			return true;
 		}

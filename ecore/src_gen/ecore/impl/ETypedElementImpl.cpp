@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -244,28 +245,28 @@ std::shared_ptr<ecore::EObject> ETypedElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return getEGenericType(); //169
+			return eAny(getEGenericType()); //169
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return getEType(); //168
+			return eAny(getEType()); //168
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return getLowerBound(); //164
+			return eAny(getLowerBound()); //164
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return isMany(); //166
+			return eAny(isMany()); //166
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return isOrdered(); //162
+			return eAny(isOrdered()); //162
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return isRequired(); //167
+			return eAny(isRequired()); //167
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return isUnique(); //163
+			return eAny(isUnique()); //163
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return getUpperBound(); //165
+			return eAny(getUpperBound()); //165
 	}
-	return ENamedElementImpl::internalEIsSet(featureID);
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ETypedElementImpl::internalEIsSet(int featureID) const
 {
@@ -290,49 +291,49 @@ bool ETypedElementImpl::internalEIsSet(int featureID) const
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
-bool ETypedElementImpl::eSet(int featureID, boost::any newValue)
+bool ETypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
+			std::shared_ptr<ecore::EGenericType> _eGenericType = newValue->get<std::shared_ptr<ecore::EGenericType>>();
 			setEGenericType(_eGenericType); //169
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
+			std::shared_ptr<ecore::EClassifier> _eType = newValue->get<std::shared_ptr<ecore::EClassifier>>();
 			setEType(_eType); //168
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 		{
 			// BOOST CAST
-			int _lowerBound = boost::any_cast<int>(newValue);
+			int _lowerBound = newValue->get<int>();
 			setLowerBound(_lowerBound); //164
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 		{
 			// BOOST CAST
-			bool _ordered = boost::any_cast<bool>(newValue);
+			bool _ordered = newValue->get<bool>();
 			setOrdered(_ordered); //162
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 		{
 			// BOOST CAST
-			bool _unique = boost::any_cast<bool>(newValue);
+			bool _unique = newValue->get<bool>();
 			setUnique(_unique); //163
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
-			int _upperBound = boost::any_cast<int>(newValue);
+			int _upperBound = newValue->get<int>();
 			setUpperBound(_upperBound); //165
 			return true;
 		}

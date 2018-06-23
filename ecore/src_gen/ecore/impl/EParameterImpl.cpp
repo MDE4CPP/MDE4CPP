@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -186,14 +187,14 @@ std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
-			return getEOperation(); //1310
+			return eAny(getEOperation()); //1310
 	}
-	return ETypedElementImpl::internalEIsSet(featureID);
+	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EParameterImpl::internalEIsSet(int featureID) const
 {
@@ -204,7 +205,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
-bool EParameterImpl::eSet(int featureID, boost::any newValue)
+bool EParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -46,9 +46,11 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			
+			
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  ;
+			virtual bool isInstance(Any object)  const  ;
 			
 			
 			
@@ -65,15 +67,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual boost::any getDefaultValue() const ;
+			virtual Any getDefaultValue() const ;
 			
 			/*!
 			 */ 
 			virtual void *  getInstanceClass() const ;
-			
-			/*!
-			 */ 
-			virtual void setInstanceClass (void *  _instanceClass); 
 			
 			/*!
 			 */ 
@@ -100,9 +98,6 @@ namespace ecore
 			 */
 			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
 			
-			/*!
-			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) ;
 			/*!
 			 */
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
@@ -134,9 +129,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EClassifier> m_thisEClassifierPtr;

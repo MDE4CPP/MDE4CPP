@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
 
 // forward declarations
 
@@ -96,6 +96,12 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void * getContainerClass()  = 0;
+			
+			
+			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -110,11 +116,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void *  getContainerClass() const = 0;
-			
-			/*!
-			 */ 
-			virtual boost::any getDefaultValue() const = 0;
+			virtual Any getDefaultValue() const = 0;
 			
 			/*!
 			 */ 
@@ -179,10 +181,7 @@ namespace ecore
 			bool m_changeable = true;
 			/*!
 			 */ 
-			void *  m_containerClass = nullptr;
-			/*!
-			 */ 
-			boost::any m_defaultValue = nullptr;
+			Any m_defaultValue = nullptr;
 			/*!
 			 */ 
 			std::string m_defaultValueLiteral = "";

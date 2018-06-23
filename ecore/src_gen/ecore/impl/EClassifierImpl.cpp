@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -166,15 +167,12 @@ int EClassifierImpl::getClassifierID() const
 
 
 
-boost::any EClassifierImpl::getDefaultValue() const 
+Any EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
 
-void EClassifierImpl::setInstanceClass(void *  _instanceClass)
-{
-	m_instanceClass = _instanceClass;
-} 
+
 
 void *  EClassifierImpl::getInstanceClass() const 
 {
@@ -204,7 +202,9 @@ std::string EClassifierImpl::getInstanceTypeName() const
 //*********************************
 // Operations
 //*********************************
-bool EClassifierImpl::isInstance(boost::any object)  const 
+
+
+bool EClassifierImpl::isInstance(Any object)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -218,10 +218,7 @@ std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 
     return m_ePackage;
 }
-void EClassifierImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
-{
-    m_ePackage = _ePackage;
-}
+
 
 std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters() const
 {
@@ -256,26 +253,26 @@ std::shared_ptr<ecore::EObject> EClassifierImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
-			return getClassifierID(); //35
+			return eAny(getClassifierID()); //35
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue(); //34
+			return eAny(getDefaultValue()); //34
 		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-			return getEPackage(); //37
+			return eAny(getEPackage()); //37
 		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters(); //38
+			return eAny(getETypeParameters()); //38
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-			return getInstanceClass(); //33
+			return eAny(getInstanceClass()); //33
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
-			return getInstanceClassName(); //32
+			return eAny(getInstanceClassName()); //32
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
-			return getInstanceTypeName(); //36
+			return eAny(getInstanceTypeName()); //36
 	}
-	return ENamedElementImpl::internalEIsSet(featureID);
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EClassifierImpl::internalEIsSet(int featureID) const
 {
@@ -284,7 +281,7 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
 			return getClassifierID() != -1; //35
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
-			return !getDefaultValue().empty(); //34
+			return !getDefaultValue()->isEmpty(); //34
 		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
 			return getEPackage().lock() != nullptr; //37
 		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
@@ -298,35 +295,21 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
-bool EClassifierImpl::eSet(int featureID, boost::any newValue)
+bool EClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
-			setEPackage(_ePackage); //37
-			return true;
-		}
-		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-		{
-			// BOOST CAST
-			void *  _instanceClass = boost::any_cast<void * >(newValue);
-			setInstanceClass(_instanceClass); //33
-			return true;
-		}
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
 		{
 			// BOOST CAST
-			std::string _instanceClassName = boost::any_cast<std::string>(newValue);
+			std::string _instanceClassName = newValue->get<std::string>();
 			setInstanceClassName(_instanceClassName); //32
 			return true;
 		}
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
 		{
 			// BOOST CAST
-			std::string _instanceTypeName = boost::any_cast<std::string>(newValue);
+			std::string _instanceTypeName = newValue->get<std::string>();
 			setInstanceTypeName(_instanceTypeName); //36
 			return true;
 		}
@@ -436,20 +419,6 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 
 void EClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
 {
-	switch(featureID)
-	{
-		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>( references.front() );
-				setEPackage(_ePackage);
-			}
-			
-			return;
-		}
-	}
 	ENamedElementImpl::resolveReferences(featureID, references);
 }
 

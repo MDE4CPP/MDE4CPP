@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -669,44 +670,44 @@ std::shared_ptr<ecore::EObject> EClassImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
-			return isAbstract(); //29
+			return eAny(isAbstract()); //29
 		case EcorePackage::ECLASS_EREFERENCE_EALLATTRIBUTES:
-			return getEAllAttributes(); //213
+			return eAny(getEAllAttributes()); //213
 		case EcorePackage::ECLASS_EREFERENCE_EALLCONTAINMENTS:
-			return getEAllContainments(); //217
+			return eAny(getEAllContainments()); //217
 		case EcorePackage::ECLASS_EREFERENCE_EALLGENERICSUPERTYPES:
-			return getEAllGenericSuperTypes(); //224
+			return eAny(getEAllGenericSuperTypes()); //224
 		case EcorePackage::ECLASS_EREFERENCE_EALLOPERATIONS:
-			return getEAllOperations(); //218
+			return eAny(getEAllOperations()); //218
 		case EcorePackage::ECLASS_EREFERENCE_EALLREFERENCES:
-			return getEAllReferences(); //214
+			return eAny(getEAllReferences()); //214
 		case EcorePackage::ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES:
-			return getEAllStructuralFeatures(); //219
+			return eAny(getEAllStructuralFeatures()); //219
 		case EcorePackage::ECLASS_EREFERENCE_EALLSUPERTYPES:
-			return getEAllSuperTypes(); //220
+			return eAny(getEAllSuperTypes()); //220
 		case EcorePackage::ECLASS_EREFERENCE_EATTRIBUTES:
-			return getEAttributes(); //216
+			return eAny(getEAttributes()); //216
 		case EcorePackage::ECLASS_EREFERENCE_EGENERICSUPERTYPES:
-			return getEGenericSuperTypes(); //223
+			return eAny(getEGenericSuperTypes()); //223
 		case EcorePackage::ECLASS_EREFERENCE_EIDATTRIBUTE:
-			return getEIDAttribute(); //221
+			return eAny(getEIDAttribute()); //221
 		case EcorePackage::ECLASS_EREFERENCE_EOPERATIONS:
-			return getEOperations(); //212
+			return eAny(getEOperations()); //212
 		case EcorePackage::ECLASS_EREFERENCE_EREFERENCES:
-			return getEReferences(); //215
+			return eAny(getEReferences()); //215
 		case EcorePackage::ECLASS_EREFERENCE_ESTRUCTURALFEATURES:
-			return getEStructuralFeatures(); //222
+			return eAny(getEStructuralFeatures()); //222
 		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
-			return getESuperTypes(); //211
+			return eAny(getESuperTypes()); //211
 		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
-			return isInterface(); //210
+			return eAny(isInterface()); //210
 	}
-	return EClassifierImpl::internalEIsSet(featureID);
+	return EClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool EClassImpl::internalEIsSet(int featureID) const
 {
@@ -747,21 +748,21 @@ bool EClassImpl::internalEIsSet(int featureID) const
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
 }
-bool EClassImpl::eSet(int featureID, boost::any newValue)
+bool EClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
 		{
 			// BOOST CAST
-			bool _abstract = boost::any_cast<bool>(newValue);
+			bool _abstract = newValue->get<bool>();
 			setAbstract(_abstract); //29
 			return true;
 		}
 		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
-			bool _interface = boost::any_cast<bool>(newValue);
+			bool _interface = newValue->get<bool>();
 			setInterface(_interface); //210
 			return true;
 		}

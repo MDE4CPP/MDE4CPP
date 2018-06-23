@@ -46,6 +46,12 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void * getContainerClass()  ;
+			
+			
+			
 			
 			
 			//*********************************
@@ -61,11 +67,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void *  getContainerClass() const ;
-			
-			/*!
-			 */ 
-			virtual boost::any getDefaultValue() const ;
+			virtual Any getDefaultValue() const ;
 			
 			/*!
 			 */ 
@@ -151,9 +153,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EStructuralFeature> m_thisEStructuralFeaturePtr;

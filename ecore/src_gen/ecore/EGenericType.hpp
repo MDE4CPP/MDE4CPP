@@ -16,10 +16,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -53,26 +51,22 @@ namespace ecore
 
 namespace ecore 
 {
-	class EObject;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
 // base class includes
-#include "ecore/EObject.hpp"
 
 // enum includes
 
+#include "ecore/EObject.hpp"
 
 //*********************************
 namespace ecore 
 {
 	/*!
 	 */
-	class EGenericType:virtual public EObject
+	class EGenericType : virtual public ecore::EObject 
+
 	{
 		public:
  			EGenericType(const EGenericType &) {}
@@ -93,7 +87,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  = 0;
+			virtual bool isInstance(Any object)  const  = 0;
 			
 			
 			//*********************************

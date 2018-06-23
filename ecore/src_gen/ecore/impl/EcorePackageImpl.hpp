@@ -127,6 +127,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> getEClassifier_EReference_ePackage() const ;
 			virtual std::shared_ptr<ecore::EReference> getEClassifier_EReference_eTypeParameters() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getEClassifier_EOperation_getClassifierID() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEClassifier_EOperation_isInstance_EJavaObject() const ;
 			
 			// End Class EClassifier
@@ -175,7 +176,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> getEFactory_EReference_ePackage() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_convertToString_EDataType_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_create_EClass_EObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_create_EClass() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_createFromString_EDataType_EString() const ;
 			
 			// End Class EFactory
@@ -222,10 +223,10 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EClass> getEObject_EClass() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEObject_EReference_eContainer() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eAllContents() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainer() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainingFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainmentFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContents() const ;
@@ -253,6 +254,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eParameters() const ;
 			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eTypeParameters() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getEOperation_EOperation_getOperationID() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEOperation_EOperation_isOverrideOf_EOperation() const ;
 			
 			// End Class EOperation
@@ -314,7 +316,6 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EClass> getEStructuralFeature_EClass() const ;
 			
 			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_changeable() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_containerClass() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_defaultValue() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_defaultValueLiteral() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_derived() const ;
@@ -325,6 +326,8 @@ namespace ecore
 			
 			virtual std::shared_ptr<ecore::EReference> getEStructuralFeature_EReference_eContainingClass() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_EOperation_getContainerClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_EOperation_getFeatureID() const ;
 			
 			// End Class EStructuralFeature
 
@@ -450,7 +453,6 @@ namespace ecore
 			std::shared_ptr<ecore::EAttribute> m_eStructuralFeature_EAttribute_changeable = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_eClassifier_EAttribute_classifierID = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_eReference_EAttribute_container = nullptr;
-			std::shared_ptr<ecore::EAttribute> m_eStructuralFeature_EAttribute_containerClass = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_eReference_EAttribute_containment = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_eClassifier_EAttribute_defaultValue = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_eStructuralFeature_EAttribute_defaultValue = nullptr;
@@ -499,7 +501,6 @@ namespace ecore
 			std::shared_ptr<ecore::EReference> m_eTypeParameter_EReference_eBounds = nullptr;
 			std::shared_ptr<ecore::EReference> m_eGenericType_EReference_eClassifier = nullptr;
 			std::shared_ptr<ecore::EReference> m_ePackage_EReference_eClassifiers = nullptr;
-			std::shared_ptr<ecore::EReference> m_eObject_EReference_eContainer = nullptr;
 			std::shared_ptr<ecore::EReference> m_eOperation_EReference_eContainingClass = nullptr;
 			std::shared_ptr<ecore::EReference> m_eStructuralFeature_EReference_eContainingClass = nullptr;
 			std::shared_ptr<ecore::EReference> m_eEnumLiteral_EReference_eEnum = nullptr;
@@ -535,10 +536,11 @@ namespace ecore
 			std::shared_ptr<ecore::EReference> m_eAnnotation_EReference_references = nullptr;
 			
 			std::shared_ptr<ecore::EOperation> m_eFactory_EOperation_convertToString_EDataType_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_eFactory_EOperation_create_EClass_EObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eFactory_EOperation_create_EClass = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eFactory_EOperation_createFromString_EDataType_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eAllContents = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eClass = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eContainer = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eContainingFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eContainmentFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eContents = nullptr;
@@ -551,6 +553,8 @@ namespace ecore
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eResource = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eSet_EStructuralFeature_EJavaObject = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eObject_EOperation_eUnset_EStructuralFeature = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eClassifier_EOperation_getClassifierID = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eStructuralFeature_EOperation_getContainerClass = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eModelElement_EOperation_getEAnnotation_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_ePackage_EOperation_getEClassifier_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eEnum_EOperation_getEEnumLiteral_EString = nullptr;
@@ -561,9 +565,11 @@ namespace ecore
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getEStructuralFeature_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getFeatureCount = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getFeatureID_EStructuralFeature = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eStructuralFeature_EOperation_getFeatureID = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getFeatureType_EStructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getOperationCount = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getOperationID_EOperation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_eOperation_EOperation_getOperationID = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClass_EOperation_getOverride_EOperation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eClassifier_EOperation_isInstance_EJavaObject = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eGenericType_EOperation_isInstance_EJavaObject = nullptr;

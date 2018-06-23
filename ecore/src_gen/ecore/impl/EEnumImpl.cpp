@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -243,14 +244,14 @@ std::shared_ptr<ecore::EObject> EEnumImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
-			return getELiterals(); //510
+			return eAny(getELiterals()); //510
 	}
-	return EDataTypeImpl::internalEIsSet(featureID);
+	return EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
 bool EEnumImpl::internalEIsSet(int featureID) const
 {
@@ -261,7 +262,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
-bool EEnumImpl::eSet(int featureID, boost::any newValue)
+bool EEnumImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

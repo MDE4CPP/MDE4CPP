@@ -53,6 +53,10 @@ virtual public EObject
 			
 			/*!
 			 */ 
+			virtual std::shared_ptr<ecore::EObject> eContainer()  ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature()  const  ;
 			
 			/*!
@@ -69,15 +73,15 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   boost::any >  arguments)  const  ;
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments)  const  ;
 			
 			/*!
 			 */ 
@@ -93,7 +97,7 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)  ;
 			
 			/*!
 			 */ 
@@ -109,7 +113,6 @@ virtual public EObject
 			//*********************************
 			// Reference
 			//*********************************
-			
 							
 			
 			//*********************************
@@ -137,9 +140,9 @@ virtual public EObject
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EObject> m_thisEObjectPtr;
