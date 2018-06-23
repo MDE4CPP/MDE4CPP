@@ -28,7 +28,8 @@
 
 #include <cassert>
 #include <iostream>
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/Bag.hpp"
 #include "uml/Activity.hpp"
 #include "uml/Element.hpp"
 
@@ -77,7 +78,7 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
 	return nullptr;
 }
 
-boost::any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<boost::any>> parameterList, std::shared_ptr<uml::Element> element)
+Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
 
 	[generateLocusInitialization()/]
@@ -100,11 +101,7 @@ boost::any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activi
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[if(par.type.supportedTypes())]
-[par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
-[else]
-[par.generateCppType()/] [par.name.toLowerFirst()/] = boost::any_cast<[par.generateCppType()/]>(parameterList->at([par.listNumber(anActivity)/]));
-[/if]
+[par.generateCppType()/] [par.name.toLowerFirst()/] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType()/]>();
 
 [/for]
 [/template]
@@ -117,11 +114,11 @@ assert(resultPList->front());
 [if(par.type.supportedTypes())]
 std::shared_ptr<fUML::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(resultPList->front()->getValues()->front());
 assert(ret != nullptr);
-return ret->getValue();
+return eAny(ret->getValue());
 [else]
 std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
-return [par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]();
+return eAny([par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]());
 [/if]
 [/let]
 [else]
