@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -279,12 +280,12 @@ std::shared_ptr<ecore::EObject> ExecutionFactoryL3Impl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionFactoryL3Impl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionFactoryL3Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ExecutionFactoryL2Impl::internalEIsSet(featureID);
+	return ExecutionFactoryL2Impl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionFactoryL3Impl::internalEIsSet(int featureID) const
 {
@@ -293,7 +294,7 @@ bool ExecutionFactoryL3Impl::internalEIsSet(int featureID) const
 	}
 	return ExecutionFactoryL2Impl::internalEIsSet(featureID);
 }
-bool ExecutionFactoryL3Impl::eSet(int featureID, boost::any newValue)
+bool ExecutionFactoryL3Impl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -240,16 +241,16 @@ std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::eContainer() co
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
-			return getEventAccepter(); //10910
+			return eAny(getEventAccepter()); //10910
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
-			return isWaiting(); //10911
+			return eAny(isWaiting()); //10911
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -262,21 +263,21 @@ bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>(newValue);
+			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = newValue->get<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>();
 			setEventAccepter(_eventAccepter); //10910
 			return true;
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
 		{
 			// BOOST CAST
-			bool _waiting = boost::any_cast<bool>(newValue);
+			bool _waiting = newValue->get<bool>();
 			setWaiting(_waiting); //10911
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -163,12 +164,12 @@ std::shared_ptr<ecore::EObject> DispatchStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -177,7 +178,7 @@ bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-bool DispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

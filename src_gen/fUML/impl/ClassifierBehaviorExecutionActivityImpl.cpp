@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -127,12 +128,12 @@ std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivityImpl::eContai
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierBehaviorExecutionActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClassifierBehaviorExecutionActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) const
 {
@@ -141,7 +142,7 @@ bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) cons
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, boost::any newValue)
+bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

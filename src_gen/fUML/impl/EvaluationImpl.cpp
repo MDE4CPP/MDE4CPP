@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -169,16 +170,16 @@ std::shared_ptr<ecore::EObject> EvaluationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
-			return getLocus(); //231
+			return eAny(getLocus()); //231
 		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
-			return getSpecification(); //230
+			return eAny(getSpecification()); //230
 	}
-	return SemanticVisitorImpl::internalEIsSet(featureID);
+	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
 bool EvaluationImpl::internalEIsSet(int featureID) const
 {
@@ -191,21 +192,21 @@ bool EvaluationImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
-bool EvaluationImpl::eSet(int featureID, boost::any newValue)
+bool EvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
 			setLocus(_locus); //231
 			return true;
 		}
 		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setSpecification(_specification); //230
 			return true;
 		}

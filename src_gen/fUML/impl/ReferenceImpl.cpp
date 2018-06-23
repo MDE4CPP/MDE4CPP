@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -262,14 +263,14 @@ std::shared_ptr<ecore::EObject> ReferenceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
-			return getReferent(); //120
+			return eAny(getReferent()); //120
 	}
-	return StructuredValueImpl::internalEIsSet(featureID);
+	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
 bool ReferenceImpl::internalEIsSet(int featureID) const
 {
@@ -280,14 +281,14 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
-bool ReferenceImpl::eSet(int featureID, boost::any newValue)
+bool ReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _referent = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			std::shared_ptr<fUML::Object> _referent = newValue->get<std::shared_ptr<fUML::Object>>();
 			setReferent(_referent); //120
 			return true;
 		}

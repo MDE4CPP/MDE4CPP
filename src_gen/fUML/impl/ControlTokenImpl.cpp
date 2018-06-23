@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -160,12 +161,12 @@ std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return TokenImpl::internalEIsSet(featureID);
+	return TokenImpl::eGet(featureID, resolve, coreType);
 }
 bool ControlTokenImpl::internalEIsSet(int featureID) const
 {
@@ -174,7 +175,7 @@ bool ControlTokenImpl::internalEIsSet(int featureID) const
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
-bool ControlTokenImpl::eSet(int featureID, boost::any newValue)
+bool ControlTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

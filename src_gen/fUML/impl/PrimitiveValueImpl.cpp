@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -163,14 +164,14 @@ std::shared_ptr<ecore::EObject> PrimitiveValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-			return getType(); //150
+			return eAny(getType()); //150
 	}
-	return ValueImpl::internalEIsSet(featureID);
+	return ValueImpl::eGet(featureID, resolve, coreType);
 }
 bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 {
@@ -181,14 +182,14 @@ bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
-bool PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
+bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			std::shared_ptr<uml::PrimitiveType> _type = newValue->get<std::shared_ptr<uml::PrimitiveType>>();
 			setType(_type); //150
 			return true;
 		}

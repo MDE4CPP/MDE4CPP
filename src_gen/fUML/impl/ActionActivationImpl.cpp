@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -24,6 +25,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include <iterator>
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/ActivityExecution.hpp"
@@ -797,20 +799,20 @@ std::shared_ptr<ecore::EObject> ActionActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring(); //787
+			return eAny(isFiring()); //787
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation(); //788
+			return eAny(getInputPinActivation()); //788
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation(); //789
+			return eAny(getOutputPinActivation()); //789
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation(); //786
+			return eAny(getPinActivation()); //786
 	}
-	return ActivityNodeActivationImpl::internalEIsSet(featureID);
+	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -827,14 +829,14 @@ bool ActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
-			bool _firing = boost::any_cast<bool>(newValue);
+			bool _firing = newValue->get<bool>();
 			setFiring(_firing); //787
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -136,12 +137,12 @@ std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FirstChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FirstChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ChoiceStrategyImpl::internalEIsSet(featureID);
+	return ChoiceStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool FirstChoiceStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -150,7 +151,7 @@ bool FirstChoiceStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return ChoiceStrategyImpl::internalEIsSet(featureID);
 }
-bool FirstChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+bool FirstChoiceStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

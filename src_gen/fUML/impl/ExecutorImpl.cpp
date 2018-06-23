@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -210,14 +211,14 @@ std::shared_ptr<ecore::EObject> ExecutorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
-			return getLocus(); //20
+			return eAny(getLocus()); //20
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutorImpl::internalEIsSet(int featureID) const
 {
@@ -228,14 +229,14 @@ bool ExecutorImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ExecutorImpl::eSet(int featureID, boost::any newValue)
+bool ExecutorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
 			setLocus(_locus); //20
 			return true;
 		}

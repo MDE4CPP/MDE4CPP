@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -187,14 +188,14 @@ std::shared_ptr<ecore::EObject> StringValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
-			return getValue(); //171
+			return eAny(getValue()); //171
 	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
 bool StringValueImpl::internalEIsSet(int featureID) const
 {
@@ -205,14 +206,14 @@ bool StringValueImpl::internalEIsSet(int featureID) const
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-bool StringValueImpl::eSet(int featureID, boost::any newValue)
+bool StringValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::string _value = boost::any_cast<std::string>(newValue);
+			std::string _value = newValue->get<std::string>();
 			setValue(_value); //171
 			return true;
 		}

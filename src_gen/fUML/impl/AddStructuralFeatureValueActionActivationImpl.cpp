@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionActivationImpl::e
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID
 	}
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
-bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -191,14 +192,14 @@ std::shared_ptr<ecore::EObject> RealValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
-			return getValue(); //191
+			return eAny(getValue()); //191
 	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
 bool RealValueImpl::internalEIsSet(int featureID) const
 {
@@ -209,14 +210,14 @@ bool RealValueImpl::internalEIsSet(int featureID) const
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-bool RealValueImpl::eSet(int featureID, boost::any newValue)
+bool RealValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			float _value = boost::any_cast<float>(newValue);
+			float _value = newValue->get<float>();
 			setValue(_value); //191
 			return true;
 		}

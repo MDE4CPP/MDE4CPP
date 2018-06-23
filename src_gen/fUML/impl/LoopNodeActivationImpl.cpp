@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -255,14 +256,14 @@ std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS:
-			return getBodyOutputLists(); //7211
+			return eAny(getBodyOutputLists()); //7211
 	}
-	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -273,7 +274,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool LoopNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

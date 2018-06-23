@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include "uml/Classifier.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -323,48 +325,48 @@ std::shared_ptr<ecore::EObject> LocusImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return getExecutor(); //00
+			return eAny(getExecutor()); //1140
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return getExtensionalValues(); //02
+			return eAny(getExtensionalValues()); //1142
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return getFactory(); //01
+			return eAny(getFactory()); //1141
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool LocusImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return getExecutor() != nullptr; //00
+			return getExecutor() != nullptr; //1140
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //02
+			return getExtensionalValues() != nullptr; //1142
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return getFactory() != nullptr; //01
+			return getFactory() != nullptr; //1141
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool LocusImpl::eSet(int featureID, boost::any newValue)
+bool LocusImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Executor> _executor = boost::any_cast<std::shared_ptr<fUML::Executor>>(newValue);
-			setExecutor(_executor); //00
+			std::shared_ptr<fUML::Executor> _executor = newValue->get<std::shared_ptr<fUML::Executor>>();
+			setExecutor(_executor); //1140
 			return true;
 		}
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ExecutionFactory> _factory = boost::any_cast<std::shared_ptr<fUML::ExecutionFactory>>(newValue);
-			setFactory(_factory); //01
+			std::shared_ptr<fUML::ExecutionFactory> _factory = newValue->get<std::shared_ptr<fUML::ExecutionFactory>>();
+			setFactory(_factory); //1141
 			return true;
 		}
 	}

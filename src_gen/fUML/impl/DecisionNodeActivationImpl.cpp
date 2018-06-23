@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -509,14 +510,14 @@ std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
-			return getDecisionInputExecution(); //666
+			return eAny(getDecisionInputExecution()); //666
 	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -527,14 +528,14 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-bool DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _decisionInputExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
+			std::shared_ptr<fUML::Execution> _decisionInputExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
 			setDecisionInputExecution(_decisionInputExecution); //666
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -166,14 +167,14 @@ std::shared_ptr<ecore::EObject> ExtensionalValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus(); //211
+			return eAny(getLocus()); //211
 	}
-	return CompoundValueImpl::internalEIsSet(featureID);
+	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
 bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 {
@@ -184,14 +185,14 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
-bool ExtensionalValueImpl::eSet(int featureID, boost::any newValue)
+bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
 			setLocus(_locus); //211
 			return true;
 		}

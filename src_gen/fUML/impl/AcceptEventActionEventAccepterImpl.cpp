@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -144,14 +145,14 @@ std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::eContainer()
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
-			return getActionActivation(); //1110
+			return eAny(getActionActivation()); //1110
 	}
-	return EventAccepterImpl::internalEIsSet(featureID);
+	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }
 bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
 {
@@ -162,14 +163,14 @@ bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
 	}
 	return EventAccepterImpl::internalEIsSet(featureID);
 }
-bool AcceptEventActionEventAccepterImpl::eSet(int featureID, boost::any newValue)
+bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionActivation>>(newValue);
+			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::AcceptEventActionActivation>>();
 			setActionActivation(_actionActivation); //1110
 			return true;
 		}

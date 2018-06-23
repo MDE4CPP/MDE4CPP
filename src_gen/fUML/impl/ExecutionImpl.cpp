@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include <uml/Parameter.hpp>
 #include <uml/ParameterDirectionKind.hpp>
 #include <fUML/ParameterValue.hpp>
@@ -298,16 +300,16 @@ std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return getContext(); //384
+			return eAny(getContext()); //384
 		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return getParameterValues(); //385
+			return eAny(getParameterValues()); //385
 	}
-	return ObjectImpl::internalEIsSet(featureID);
+	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionImpl::internalEIsSet(int featureID) const
 {
@@ -320,14 +322,14 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }
-bool ExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			std::shared_ptr<fUML::Object> _context = newValue->get<std::shared_ptr<fUML::Object>>();
 			setContext(_context); //384
 			return true;
 		}

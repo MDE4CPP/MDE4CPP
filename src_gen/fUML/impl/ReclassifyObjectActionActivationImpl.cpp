@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> ReclassifyObjectActionActivationImpl::eContainer
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReclassifyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReclassifyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ReclassifyObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool ReclassifyObjectActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ReclassifyObjectActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ReclassifyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

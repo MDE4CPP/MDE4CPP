@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -295,14 +296,14 @@ std::shared_ptr<ecore::EObject> ActivityExecutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
-			return getActivationGroup(); //576
+			return eAny(getActivationGroup()); //576
 	}
-	return ExecutionImpl::internalEIsSet(featureID);
+	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +314,14 @@ bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
-bool ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setActivationGroup(_activationGroup); //576
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -244,14 +245,14 @@ std::shared_ptr<ecore::EObject> PinActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
-			return getActionActivation(); //847
+			return eAny(getActionActivation()); //847
 	}
-	return ObjectNodeActivationImpl::internalEIsSet(featureID);
+	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool PinActivationImpl::internalEIsSet(int featureID) const
 {
@@ -262,14 +263,14 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
-bool PinActivationImpl::eSet(int featureID, boost::any newValue)
+bool PinActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::ActionActivation>>(newValue);
+			std::shared_ptr<fUML::ActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::ActionActivation>>();
 			setActionActivation(_actionActivation); //847
 			return true;
 		}

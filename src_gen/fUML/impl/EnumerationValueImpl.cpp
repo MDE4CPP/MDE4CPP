@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -228,16 +229,16 @@ std::shared_ptr<ecore::EObject> EnumerationValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
-			return getLiteral(); //330
+			return eAny(getLiteral()); //330
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
-			return getType(); //331
+			return eAny(getType()); //331
 	}
-	return ValueImpl::internalEIsSet(featureID);
+	return ValueImpl::eGet(featureID, resolve, coreType);
 }
 bool EnumerationValueImpl::internalEIsSet(int featureID) const
 {
@@ -250,21 +251,21 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
-bool EnumerationValueImpl::eSet(int featureID, boost::any newValue)
+bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::EnumerationLiteral> _literal = boost::any_cast<std::shared_ptr<uml::EnumerationLiteral>>(newValue);
+			std::shared_ptr<uml::EnumerationLiteral> _literal = newValue->get<std::shared_ptr<uml::EnumerationLiteral>>();
 			setLiteral(_literal); //330
 			return true;
 		}
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Enumeration> _type = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			std::shared_ptr<uml::Enumeration> _type = newValue->get<std::shared_ptr<uml::Enumeration>>();
 			setType(_type); //331
 			return true;
 		}

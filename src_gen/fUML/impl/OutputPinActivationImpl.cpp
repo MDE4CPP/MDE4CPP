@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -176,12 +177,12 @@ std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OutputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OutputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return PinActivationImpl::internalEIsSet(featureID);
+	return PinActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool OutputPinActivationImpl::internalEIsSet(int featureID) const
 {
@@ -190,7 +191,7 @@ bool OutputPinActivationImpl::internalEIsSet(int featureID) const
 	}
 	return PinActivationImpl::internalEIsSet(featureID);
 }
-bool OutputPinActivationImpl::eSet(int featureID, boost::any newValue)
+bool OutputPinActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -654,24 +655,24 @@ std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //583
+			return eAny(getGroup()); //583
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //582
+			return eAny(getHeldTokens()); //582
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //581
+			return eAny(getIncomingEdges()); //581
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //584
+			return eAny(getNode()); //584
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //580
+			return eAny(getOutgoingEdges()); //580
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //585
+			return eAny(isRunning()); //585
 	}
-	return SemanticVisitorImpl::internalEIsSet(featureID);
+	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -692,28 +693,28 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
-bool ActivityNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setGroup(_group); //583
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			std::shared_ptr<uml::ActivityNode> _node = newValue->get<std::shared_ptr<uml::ActivityNode>>();
 			setNode(_node); //584
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
+			bool _running = newValue->get<bool>();
 			setRunning(_running); //585
 			return true;
 		}

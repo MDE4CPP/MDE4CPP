@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -217,14 +218,14 @@ std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
-			return getCurrentExecution(); //10510
+			return eAny(getCurrentExecution()); //10510
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -235,14 +236,14 @@ bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ReduceActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _currentExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
+			std::shared_ptr<fUML::Execution> _currentExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
 			setCurrentExecution(_currentExecution); //10510
 			return true;
 		}

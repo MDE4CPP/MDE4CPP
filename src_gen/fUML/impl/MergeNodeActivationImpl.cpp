@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -171,12 +172,12 @@ std::shared_ptr<ecore::EObject> MergeNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MergeNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MergeNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool MergeNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -185,7 +186,7 @@ bool MergeNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-bool MergeNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool MergeNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

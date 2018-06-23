@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -282,16 +283,16 @@ std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation(); //373
+			return eAny(getObjectActivation()); //373
 		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes(); //372
+			return eAny(getTypes()); //372
 	}
-	return ExtensionalValueImpl::internalEIsSet(featureID);
+	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectImpl::internalEIsSet(int featureID) const
 {
@@ -304,14 +305,14 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
-bool ObjectImpl::eSet(int featureID, boost::any newValue)
+bool ObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
 			setObjectActivation(_objectActivation); //373
 			return true;
 		}

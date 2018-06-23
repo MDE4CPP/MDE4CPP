@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include "uml/Classifier.hpp"
 #include <fUML/FUMLFactory.hpp>
 #include <cstdio>
@@ -291,14 +293,14 @@ std::shared_ptr<ecore::EObject> CompoundValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues(); //130
+			return eAny(getFeatureValues()); //130
 	}
-	return StructuredValueImpl::internalEIsSet(featureID);
+	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
 bool CompoundValueImpl::internalEIsSet(int featureID) const
 {
@@ -309,7 +311,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
-bool CompoundValueImpl::eSet(int featureID, boost::any newValue)
+bool CompoundValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

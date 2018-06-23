@@ -16,10 +16,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -108,7 +106,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void _send(boost::any signal)  = 0;
+			virtual void _send(Any signal)  = 0;
 			
 			/*!
 			 */ 

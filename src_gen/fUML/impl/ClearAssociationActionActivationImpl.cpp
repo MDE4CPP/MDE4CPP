@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionActivationImpl::eContainer
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearAssociationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClearAssociationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ClearAssociationActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool ClearAssociationActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ClearAssociationActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ClearAssociationActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

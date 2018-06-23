@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -199,14 +200,14 @@ std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
-			return getValue(); //161
+			return eAny(getValue()); //161
 	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
 bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 {
@@ -217,14 +218,14 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-bool UnlimitedNaturalValueImpl::eSet(int featureID, boost::any newValue)
+bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			int _value = boost::any_cast<int>(newValue);
+			int _value = newValue->get<int>();
 			setValue(_value); //161
 			return true;
 		}

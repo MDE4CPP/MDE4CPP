@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -326,14 +327,14 @@ std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //596
+			return eAny(getOfferedTokenCount()); //596
 	}
-	return ActivityNodeActivationImpl::internalEIsSet(featureID);
+	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -344,14 +345,14 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ObjectNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
 			// BOOST CAST
-			int _offeredTokenCount = boost::any_cast<int>(newValue);
+			int _offeredTokenCount = newValue->get<int>();
 			setOfferedTokenCount(_offeredTokenCount); //596
 			return true;
 		}

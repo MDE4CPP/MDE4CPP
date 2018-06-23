@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -129,12 +130,12 @@ std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FIFOGetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FIFOGetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return GetNextEventStrategyImpl::internalEIsSet(featureID);
+	return GetNextEventStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool FIFOGetNextEventStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -143,7 +144,7 @@ bool FIFOGetNextEventStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return GetNextEventStrategyImpl::internalEIsSet(featureID);
 }
-bool FIFOGetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -223,12 +224,12 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ExecutionImpl::internalEIsSet(featureID);
+	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
 bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 {
@@ -237,7 +238,7 @@ bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
-bool OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

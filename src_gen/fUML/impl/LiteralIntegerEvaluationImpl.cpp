@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -154,12 +155,12 @@ std::shared_ptr<ecore::EObject> LiteralIntegerEvaluationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralIntegerEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralIntegerEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return LiteralEvaluationImpl::internalEIsSet(featureID);
+	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralIntegerEvaluationImpl::internalEIsSet(int featureID) const
 {
@@ -168,7 +169,7 @@ bool LiteralIntegerEvaluationImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
-bool LiteralIntegerEvaluationImpl::eSet(int featureID, boost::any newValue)
+bool LiteralIntegerEvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

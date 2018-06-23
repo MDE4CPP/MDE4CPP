@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -138,12 +139,12 @@ std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -152,7 +153,7 @@ bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-bool GetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
