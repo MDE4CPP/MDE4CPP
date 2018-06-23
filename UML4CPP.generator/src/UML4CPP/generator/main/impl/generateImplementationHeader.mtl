@@ -47,10 +47,8 @@ virtual public uml::ClassImpl
 [/if]
 #include "uml/Property.hpp"
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 namespace uml
 {

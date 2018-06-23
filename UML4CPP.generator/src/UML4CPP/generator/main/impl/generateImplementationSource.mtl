@@ -32,8 +32,8 @@
 #include <iostream>
 
 [generateAbstractDataTypesIncludes()/]
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
@@ -60,7 +60,6 @@
 [/if]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
-using boost::any_cast;
 
 //*********************************
 // Constructor / Destructor
