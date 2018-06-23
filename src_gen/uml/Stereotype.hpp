@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -259,24 +257,24 @@ namespace uml
 			ownedAttribute
 			->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))
 			->forAll(opposite.owner = association) */ 
-			virtual bool associationEndOwnership(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime. */ 
-			virtual bool base_property_multiplicity_multiple_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1. */ 
-			virtual bool base_property_multiplicity_single_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The upper bound of base-properties is exactly 1. */ 
-			virtual bool base_property_upper_bound(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2) */ 
-			virtual bool binaryAssociationsOnly(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
@@ -300,7 +298,7 @@ namespace uml
 			 A Stereotype may only generalize or specialize another Stereotype.
 			allParents()->forAll(oclIsKindOf(Stereotype)) 
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype)) */ 
-			virtual bool generalize(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes. */ 
@@ -326,7 +324,7 @@ namespace uml
 			
 			/*!
 			 Stereotype names should not clash with keyword names for the extended model element. */ 
-			virtual bool name_not_clash(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

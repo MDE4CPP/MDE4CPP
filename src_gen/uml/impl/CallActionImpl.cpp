@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -131,6 +132,7 @@ CallActionImpl::~CallActionImpl()
 			:CallActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -142,6 +144,7 @@ CallActionImpl::~CallActionImpl()
 			:CallActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -153,6 +156,7 @@ CallActionImpl::~CallActionImpl()
 			:CallActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -344,7 +348,7 @@ bool CallActionImpl::getIsSynchronous() const
 //*********************************
 // Operations
 //*********************************
-bool CallActionImpl::argument_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CallActionImpl::argument_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -362,13 +366,13 @@ std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters()
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::synchronous_call(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -449,16 +453,16 @@ std::shared_ptr<ecore::EObject> CallActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous(); //13930
+			return eAny(getIsSynchronous()); //13930
 		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
-			return getResult(); //13931
+			return eAny(getResult()); //13931
 	}
-	return InvocationActionImpl::internalEIsSet(featureID);
+	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CallActionImpl::internalEIsSet(int featureID) const
 {
@@ -471,14 +475,14 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
-bool CallActionImpl::eSet(int featureID, boost::any newValue)
+bool CallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
 		{
 			// BOOST CAST
-			bool _isSynchronous = boost::any_cast<bool>(newValue);
+			bool _isSynchronous = newValue->get<bool>();
 			setIsSynchronous(_isSynchronous); //13930
 			return true;
 		}

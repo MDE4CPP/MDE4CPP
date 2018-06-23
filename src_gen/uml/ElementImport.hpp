@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -125,12 +123,12 @@ namespace uml
 			/*!
 			 An importedElement has either public visibility or no visibility at all.
 			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public */ 
-			virtual bool imported_element_is_public(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The visibility of an ElementImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool visibility_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

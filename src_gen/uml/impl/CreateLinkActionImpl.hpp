@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The Association cannot be an abstract Classifier.
 			not self.association().isAbstract */ 
-			virtual bool association_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -115,9 +115,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CreateLinkAction> m_thisCreateLinkActionPtr;

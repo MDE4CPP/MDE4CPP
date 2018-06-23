@@ -108,7 +108,7 @@ namespace uml
 			/*!
 			 If an element that is owned by a package has visibility, it is public or private.
 			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private) */ 
-			virtual bool elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s). */ 
@@ -284,9 +284,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Package> m_thisPackagePtr;

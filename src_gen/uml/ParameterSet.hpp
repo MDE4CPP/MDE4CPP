@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -127,17 +125,17 @@ namespace uml
 			    and
 			((parameter->exists(direction = ParameterDirectionKind::out)) implies 
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream)) */ 
-			virtual bool input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool input(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
 			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction) */ 
-			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_parameterized_entity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Two ParameterSets cannot have exactly the same set of Parameters.
 			parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p)))) */ 
-			virtual bool two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool two_parameter_sets(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

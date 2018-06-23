@@ -577,7 +577,6 @@ void UmlPackageImpl::initializePackageContents()
 
 void UmlPackageImpl::initializeAbstractionContent()
 {
-	m_abstraction_EClass->setInstanceClass(nullptr);
 	m_abstraction_EClass->setName("Abstraction");
 	m_abstraction_EClass->setAbstract(false);
 	m_abstraction_EClass->setInterface(false);
@@ -614,7 +613,6 @@ void UmlPackageImpl::initializeAbstractionContent()
 
 void UmlPackageImpl::initializeAcceptCallActionContent()
 {
-	m_acceptCallAction_EClass->setInstanceClass(nullptr);
 	m_acceptCallAction_EClass->setName("AcceptCallAction");
 	m_acceptCallAction_EClass->setAbstract(false);
 	m_acceptCallAction_EClass->setInterface(false);
@@ -732,7 +730,6 @@ void UmlPackageImpl::initializeAcceptCallActionContent()
 
 void UmlPackageImpl::initializeAcceptEventActionContent()
 {
-	m_acceptEventAction_EClass->setInstanceClass(nullptr);
 	m_acceptEventAction_EClass->setName("AcceptEventAction");
 	m_acceptEventAction_EClass->setAbstract(false);
 	m_acceptEventAction_EClass->setInterface(false);
@@ -949,7 +946,6 @@ void UmlPackageImpl::initializeAcceptEventActionContent()
 
 void UmlPackageImpl::initializeActionContent()
 {
-	m_action_EClass->setInstanceClass(nullptr);
 	m_action_EClass->setName("Action");
 	m_action_EClass->setAbstract(true);
 	m_action_EClass->setInterface(false);
@@ -1138,7 +1134,6 @@ void UmlPackageImpl::initializeActionContent()
 
 void UmlPackageImpl::initializeActionExecutionSpecificationContent()
 {
-	m_actionExecutionSpecification_EClass->setInstanceClass(nullptr);
 	m_actionExecutionSpecification_EClass->setName("ActionExecutionSpecification");
 	m_actionExecutionSpecification_EClass->setAbstract(false);
 	m_actionExecutionSpecification_EClass->setInterface(false);
@@ -1202,7 +1197,6 @@ void UmlPackageImpl::initializeActionExecutionSpecificationContent()
 
 void UmlPackageImpl::initializeActionInputPinContent()
 {
-	m_actionInputPin_EClass->setInstanceClass(nullptr);
 	m_actionInputPin_EClass->setName("ActionInputPin");
 	m_actionInputPin_EClass->setAbstract(false);
 	m_actionInputPin_EClass->setInterface(false);
@@ -1320,7 +1314,6 @@ void UmlPackageImpl::initializeActionInputPinContent()
 
 void UmlPackageImpl::initializeActivityContent()
 {
-	m_activity_EClass->setInstanceClass(nullptr);
 	m_activity_EClass->setName("Activity");
 	m_activity_EClass->setAbstract(false);
 	m_activity_EClass->setInterface(false);
@@ -1626,7 +1619,6 @@ void UmlPackageImpl::initializeActivityContent()
 
 void UmlPackageImpl::initializeActivityContentContent()
 {
-	m_activityContent_EClass->setInstanceClass(nullptr);
 	m_activityContent_EClass->setName("ActivityContent");
 	m_activityContent_EClass->setAbstract(true);
 	m_activityContent_EClass->setInterface(true);
@@ -1646,7 +1638,6 @@ void UmlPackageImpl::initializeActivityContentContent()
 
 void UmlPackageImpl::initializeActivityEdgeContent()
 {
-	m_activityEdge_EClass->setInstanceClass(nullptr);
 	m_activityEdge_EClass->setName("ActivityEdge");
 	m_activityEdge_EClass->setAbstract(true);
 	m_activityEdge_EClass->setInterface(false);
@@ -1935,7 +1926,6 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 
 void UmlPackageImpl::initializeActivityFinalNodeContent()
 {
-	m_activityFinalNode_EClass->setInstanceClass(nullptr);
 	m_activityFinalNode_EClass->setName("ActivityFinalNode");
 	m_activityFinalNode_EClass->setAbstract(false);
 	m_activityFinalNode_EClass->setInterface(false);
@@ -1947,7 +1937,6 @@ void UmlPackageImpl::initializeActivityFinalNodeContent()
 
 void UmlPackageImpl::initializeActivityGroupContent()
 {
-	m_activityGroup_EClass->setInstanceClass(nullptr);
 	m_activityGroup_EClass->setName("ActivityGroup");
 	m_activityGroup_EClass->setAbstract(true);
 	m_activityGroup_EClass->setInterface(false);
@@ -2138,7 +2127,6 @@ void UmlPackageImpl::initializeActivityGroupContent()
 
 void UmlPackageImpl::initializeActivityNodeContent()
 {
-	m_activityNode_EClass->setInstanceClass(nullptr);
 	m_activityNode_EClass->setName("ActivityNode");
 	m_activityNode_EClass->setAbstract(true);
 	m_activityNode_EClass->setInterface(false);
@@ -2350,7 +2338,6 @@ void UmlPackageImpl::initializeActivityNodeContent()
 
 void UmlPackageImpl::initializeActivityParameterNodeContent()
 {
-	m_activityParameterNode_EClass->setInstanceClass(nullptr);
 	m_activityParameterNode_EClass->setName("ActivityParameterNode");
 	m_activityParameterNode_EClass->setAbstract(false);
 	m_activityParameterNode_EClass->setInterface(false);
@@ -2522,7 +2509,6 @@ void UmlPackageImpl::initializeActivityParameterNodeContent()
 
 void UmlPackageImpl::initializeActivityPartitionContent()
 {
-	m_activityPartition_EClass->setInstanceClass(nullptr);
 	m_activityPartition_EClass->setName("ActivityPartition");
 	m_activityPartition_EClass->setAbstract(false);
 	m_activityPartition_EClass->setInterface(false);
@@ -2807,7 +2793,6 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 
 void UmlPackageImpl::initializeActorContent()
 {
-	m_actor_EClass->setInstanceClass(nullptr);
 	m_actor_EClass->setName("Actor");
 	m_actor_EClass->setAbstract(false);
 	m_actor_EClass->setInterface(false);
@@ -2873,7 +2858,6 @@ void UmlPackageImpl::initializeActorContent()
 
 void UmlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 {
-	m_addStructuralFeatureValueAction_EClass->setInstanceClass(nullptr);
 	m_addStructuralFeatureValueAction_EClass->setName("AddStructuralFeatureValueAction");
 	m_addStructuralFeatureValueAction_EClass->setAbstract(false);
 	m_addStructuralFeatureValueAction_EClass->setInterface(false);
@@ -2984,7 +2968,6 @@ void UmlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 
 void UmlPackageImpl::initializeAddVariableValueActionContent()
 {
-	m_addVariableValueAction_EClass->setInstanceClass(nullptr);
 	m_addVariableValueAction_EClass->setName("AddVariableValueAction");
 	m_addVariableValueAction_EClass->setAbstract(false);
 	m_addVariableValueAction_EClass->setInterface(false);
@@ -3095,7 +3078,6 @@ void UmlPackageImpl::initializeAddVariableValueActionContent()
 
 void UmlPackageImpl::initializeAnyReceiveEventContent()
 {
-	m_anyReceiveEvent_EClass->setInstanceClass(nullptr);
 	m_anyReceiveEvent_EClass->setName("AnyReceiveEvent");
 	m_anyReceiveEvent_EClass->setAbstract(false);
 	m_anyReceiveEvent_EClass->setInterface(false);
@@ -3107,7 +3089,6 @@ void UmlPackageImpl::initializeAnyReceiveEventContent()
 
 void UmlPackageImpl::initializeArtifactContent()
 {
-	m_artifact_EClass->setInstanceClass(nullptr);
 	m_artifact_EClass->setName("Artifact");
 	m_artifact_EClass->setAbstract(false);
 	m_artifact_EClass->setInterface(false);
@@ -3333,7 +3314,6 @@ void UmlPackageImpl::initializeArtifactContent()
 
 void UmlPackageImpl::initializeAssociationContent()
 {
-	m_association_EClass->setInstanceClass(nullptr);
 	m_association_EClass->setName("Association");
 	m_association_EClass->setAbstract(false);
 	m_association_EClass->setInterface(false);
@@ -3616,7 +3596,6 @@ void UmlPackageImpl::initializeAssociationContent()
 
 void UmlPackageImpl::initializeAssociationClassContent()
 {
-	m_associationClass_EClass->setInstanceClass(nullptr);
 	m_associationClass_EClass->setName("AssociationClass");
 	m_associationClass_EClass->setAbstract(false);
 	m_associationClass_EClass->setInterface(false);
@@ -3682,7 +3661,6 @@ void UmlPackageImpl::initializeAssociationClassContent()
 
 void UmlPackageImpl::initializeBehaviorContent()
 {
-	m_behavior_EClass->setInstanceClass(nullptr);
 	m_behavior_EClass->setName("Behavior");
 	m_behavior_EClass->setAbstract(true);
 	m_behavior_EClass->setInterface(false);
@@ -3739,7 +3717,7 @@ void UmlPackageImpl::initializeBehaviorContent()
 	m_behavior_EReference_context->setUpperBound(1);
 	m_behavior_EReference_context->setTransient(true);
 	m_behavior_EReference_context->setVolatile(true);
-	m_behavior_EReference_context->setChangeable(false);
+	m_behavior_EReference_context->setChangeable(true);
 	m_behavior_EReference_context->setUnsettable(false);
 	m_behavior_EReference_context->setUnique(true);
 	m_behavior_EReference_context->setDerived(true);
@@ -4036,7 +4014,6 @@ void UmlPackageImpl::initializeBehaviorContent()
 
 void UmlPackageImpl::initializeBehaviorExecutionSpecificationContent()
 {
-	m_behaviorExecutionSpecification_EClass->setInstanceClass(nullptr);
 	m_behaviorExecutionSpecification_EClass->setName("BehaviorExecutionSpecification");
 	m_behaviorExecutionSpecification_EClass->setAbstract(false);
 	m_behaviorExecutionSpecification_EClass->setInterface(false);
@@ -4073,7 +4050,6 @@ void UmlPackageImpl::initializeBehaviorExecutionSpecificationContent()
 
 void UmlPackageImpl::initializeBehavioralFeatureContent()
 {
-	m_behavioralFeature_EClass->setInstanceClass(nullptr);
 	m_behavioralFeature_EClass->setName("BehavioralFeature");
 	m_behavioralFeature_EClass->setAbstract(true);
 	m_behavioralFeature_EClass->setInterface(false);
@@ -4295,7 +4271,6 @@ void UmlPackageImpl::initializeBehavioralFeatureContent()
 
 void UmlPackageImpl::initializeBehavioredClassifierContent()
 {
-	m_behavioredClassifier_EClass->setInstanceClass(nullptr);
 	m_behavioredClassifier_EClass->setName("BehavioredClassifier");
 	m_behavioredClassifier_EClass->setAbstract(true);
 	m_behavioredClassifier_EClass->setInterface(false);
@@ -4425,7 +4400,6 @@ void UmlPackageImpl::initializeBehavioredClassifierContent()
 
 void UmlPackageImpl::initializeBroadcastSignalActionContent()
 {
-	m_broadcastSignalAction_EClass->setInstanceClass(nullptr);
 	m_broadcastSignalAction_EClass->setName("BroadcastSignalAction");
 	m_broadcastSignalAction_EClass->setAbstract(false);
 	m_broadcastSignalAction_EClass->setInterface(false);
@@ -4543,7 +4517,6 @@ void UmlPackageImpl::initializeBroadcastSignalActionContent()
 
 void UmlPackageImpl::initializeCallActionContent()
 {
-	m_callAction_EClass->setInstanceClass(nullptr);
 	m_callAction_EClass->setName("CallAction");
 	m_callAction_EClass->setAbstract(true);
 	m_callAction_EClass->setInterface(false);
@@ -4697,7 +4670,6 @@ void UmlPackageImpl::initializeCallActionContent()
 
 void UmlPackageImpl::initializeCallBehaviorActionContent()
 {
-	m_callBehaviorAction_EClass->setInstanceClass(nullptr);
 	m_callBehaviorAction_EClass->setName("CallBehaviorAction");
 	m_callBehaviorAction_EClass->setAbstract(false);
 	m_callBehaviorAction_EClass->setInterface(false);
@@ -4761,7 +4733,6 @@ void UmlPackageImpl::initializeCallBehaviorActionContent()
 
 void UmlPackageImpl::initializeCallEventContent()
 {
-	m_callEvent_EClass->setInstanceClass(nullptr);
 	m_callEvent_EClass->setName("CallEvent");
 	m_callEvent_EClass->setAbstract(false);
 	m_callEvent_EClass->setInterface(false);
@@ -4798,7 +4769,6 @@ void UmlPackageImpl::initializeCallEventContent()
 
 void UmlPackageImpl::initializeCallOperationActionContent()
 {
-	m_callOperationAction_EClass->setInstanceClass(nullptr);
 	m_callOperationAction_EClass->setName("CallOperationAction");
 	m_callOperationAction_EClass->setAbstract(false);
 	m_callOperationAction_EClass->setInterface(false);
@@ -4887,7 +4857,6 @@ void UmlPackageImpl::initializeCallOperationActionContent()
 
 void UmlPackageImpl::initializeCentralBufferNodeContent()
 {
-	m_centralBufferNode_EClass->setInstanceClass(nullptr);
 	m_centralBufferNode_EClass->setName("CentralBufferNode");
 	m_centralBufferNode_EClass->setAbstract(false);
 	m_centralBufferNode_EClass->setInterface(false);
@@ -4899,7 +4868,6 @@ void UmlPackageImpl::initializeCentralBufferNodeContent()
 
 void UmlPackageImpl::initializeChangeEventContent()
 {
-	m_changeEvent_EClass->setInstanceClass(nullptr);
 	m_changeEvent_EClass->setName("ChangeEvent");
 	m_changeEvent_EClass->setAbstract(false);
 	m_changeEvent_EClass->setInterface(false);
@@ -4936,7 +4904,6 @@ void UmlPackageImpl::initializeChangeEventContent()
 
 void UmlPackageImpl::initializeClassContent()
 {
-	m_class_EClass->setInstanceClass(nullptr);
 	m_class_EClass->setName("Class");
 	m_class_EClass->setAbstract(false);
 	m_class_EClass->setInterface(false);
@@ -5191,7 +5158,6 @@ void UmlPackageImpl::initializeClassContent()
 
 void UmlPackageImpl::initializeClassifierContent()
 {
-	m_classifier_EClass->setInstanceClass(nullptr);
 	m_classifier_EClass->setName("Classifier");
 	m_classifier_EClass->setAbstract(true);
 	m_classifier_EClass->setInterface(false);
@@ -5948,7 +5914,6 @@ void UmlPackageImpl::initializeClassifierContent()
 
 void UmlPackageImpl::initializeClassifierTemplateParameterContent()
 {
-	m_classifierTemplateParameter_EClass->setInstanceClass(nullptr);
 	m_classifierTemplateParameter_EClass->setName("ClassifierTemplateParameter");
 	m_classifierTemplateParameter_EClass->setAbstract(false);
 	m_classifierTemplateParameter_EClass->setInterface(false);
@@ -6167,7 +6132,6 @@ void UmlPackageImpl::initializeClassifierTemplateParameterContent()
 
 void UmlPackageImpl::initializeClauseContent()
 {
-	m_clause_EClass->setInstanceClass(nullptr);
 	m_clause_EClass->setName("Clause");
 	m_clause_EClass->setAbstract(false);
 	m_clause_EClass->setInterface(false);
@@ -6410,7 +6374,6 @@ void UmlPackageImpl::initializeClauseContent()
 
 void UmlPackageImpl::initializeClearAssociationActionContent()
 {
-	m_clearAssociationAction_EClass->setInstanceClass(nullptr);
 	m_clearAssociationAction_EClass->setName("ClearAssociationAction");
 	m_clearAssociationAction_EClass->setAbstract(false);
 	m_clearAssociationAction_EClass->setInterface(false);
@@ -6526,7 +6489,6 @@ void UmlPackageImpl::initializeClearAssociationActionContent()
 
 void UmlPackageImpl::initializeClearStructuralFeatureActionContent()
 {
-	m_clearStructuralFeatureAction_EClass->setInstanceClass(nullptr);
 	m_clearStructuralFeatureAction_EClass->setName("ClearStructuralFeatureAction");
 	m_clearStructuralFeatureAction_EClass->setAbstract(false);
 	m_clearStructuralFeatureAction_EClass->setInterface(false);
@@ -6617,7 +6579,6 @@ void UmlPackageImpl::initializeClearStructuralFeatureActionContent()
 
 void UmlPackageImpl::initializeClearVariableActionContent()
 {
-	m_clearVariableAction_EClass->setInstanceClass(nullptr);
 	m_clearVariableAction_EClass->setName("ClearVariableAction");
 	m_clearVariableAction_EClass->setAbstract(false);
 	m_clearVariableAction_EClass->setInterface(false);
@@ -6629,7 +6590,6 @@ void UmlPackageImpl::initializeClearVariableActionContent()
 
 void UmlPackageImpl::initializeCollaborationContent()
 {
-	m_collaboration_EClass->setInstanceClass(nullptr);
 	m_collaboration_EClass->setName("Collaboration");
 	m_collaboration_EClass->setAbstract(false);
 	m_collaboration_EClass->setInterface(false);
@@ -6666,7 +6626,6 @@ void UmlPackageImpl::initializeCollaborationContent()
 
 void UmlPackageImpl::initializeCollaborationUseContent()
 {
-	m_collaborationUse_EClass->setInstanceClass(nullptr);
 	m_collaborationUse_EClass->setName("CollaborationUse");
 	m_collaborationUse_EClass->setAbstract(false);
 	m_collaborationUse_EClass->setInterface(false);
@@ -6809,7 +6768,6 @@ void UmlPackageImpl::initializeCollaborationUseContent()
 
 void UmlPackageImpl::initializeCombinedFragmentContent()
 {
-	m_combinedFragment_EClass->setInstanceClass(nullptr);
 	m_combinedFragment_EClass->setName("CombinedFragment");
 	m_combinedFragment_EClass->setAbstract(false);
 	m_combinedFragment_EClass->setInterface(false);
@@ -6972,7 +6930,6 @@ void UmlPackageImpl::initializeCombinedFragmentContent()
 
 void UmlPackageImpl::initializeCommentContent()
 {
-	m_comment_EClass->setInstanceClass(nullptr);
 	m_comment_EClass->setName("Comment");
 	m_comment_EClass->setAbstract(false);
 	m_comment_EClass->setInterface(false);
@@ -7029,7 +6986,6 @@ void UmlPackageImpl::initializeCommentContent()
 
 void UmlPackageImpl::initializeCommunicationPathContent()
 {
-	m_communicationPath_EClass->setInstanceClass(nullptr);
 	m_communicationPath_EClass->setName("CommunicationPath");
 	m_communicationPath_EClass->setAbstract(false);
 	m_communicationPath_EClass->setInterface(false);
@@ -7041,7 +6997,6 @@ void UmlPackageImpl::initializeCommunicationPathContent()
 
 void UmlPackageImpl::initializeComponentContent()
 {
-	m_component_EClass->setInstanceClass(nullptr);
 	m_component_EClass->setName("Component");
 	m_component_EClass->setAbstract(false);
 	m_component_EClass->setInterface(false);
@@ -7321,7 +7276,6 @@ void UmlPackageImpl::initializeComponentContent()
 
 void UmlPackageImpl::initializeComponentRealizationContent()
 {
-	m_componentRealization_EClass->setInstanceClass(nullptr);
 	m_componentRealization_EClass->setName("ComponentRealization");
 	m_componentRealization_EClass->setAbstract(false);
 	m_componentRealization_EClass->setInterface(false);
@@ -7383,7 +7337,6 @@ void UmlPackageImpl::initializeComponentRealizationContent()
 
 void UmlPackageImpl::initializeConditionalNodeContent()
 {
-	m_conditionalNode_EClass->setInstanceClass(nullptr);
 	m_conditionalNode_EClass->setName("ConditionalNode");
 	m_conditionalNode_EClass->setAbstract(false);
 	m_conditionalNode_EClass->setInterface(false);
@@ -7647,7 +7600,6 @@ void UmlPackageImpl::initializeConditionalNodeContent()
 
 void UmlPackageImpl::initializeConnectableElementContent()
 {
-	m_connectableElement_EClass->setInstanceClass(nullptr);
 	m_connectableElement_EClass->setName("ConnectableElement");
 	m_connectableElement_EClass->setAbstract(true);
 	m_connectableElement_EClass->setInterface(false);
@@ -7692,7 +7644,6 @@ void UmlPackageImpl::initializeConnectableElementContent()
 
 void UmlPackageImpl::initializeConnectableElementTemplateParameterContent()
 {
-	m_connectableElementTemplateParameter_EClass->setInstanceClass(nullptr);
 	m_connectableElementTemplateParameter_EClass->setName("ConnectableElementTemplateParameter");
 	m_connectableElementTemplateParameter_EClass->setAbstract(false);
 	m_connectableElementTemplateParameter_EClass->setInterface(false);
@@ -7704,7 +7655,6 @@ void UmlPackageImpl::initializeConnectableElementTemplateParameterContent()
 
 void UmlPackageImpl::initializeConnectionPointReferenceContent()
 {
-	m_connectionPointReference_EClass->setInstanceClass(nullptr);
 	m_connectionPointReference_EClass->setName("ConnectionPointReference");
 	m_connectionPointReference_EClass->setAbstract(false);
 	m_connectionPointReference_EClass->setInterface(false);
@@ -7845,7 +7795,6 @@ void UmlPackageImpl::initializeConnectionPointReferenceContent()
 
 void UmlPackageImpl::initializeConnectorContent()
 {
-	m_connector_EClass->setInstanceClass(nullptr);
 	m_connector_EClass->setName("Connector");
 	m_connector_EClass->setAbstract(false);
 	m_connector_EClass->setInterface(false);
@@ -8039,7 +7988,6 @@ void UmlPackageImpl::initializeConnectorContent()
 
 void UmlPackageImpl::initializeConnectorEndContent()
 {
-	m_connectorEnd_EClass->setInstanceClass(nullptr);
 	m_connectorEnd_EClass->setName("ConnectorEnd");
 	m_connectorEnd_EClass->setAbstract(false);
 	m_connectorEnd_EClass->setInterface(false);
@@ -8242,7 +8190,6 @@ void UmlPackageImpl::initializeConnectorEndContent()
 
 void UmlPackageImpl::initializeConsiderIgnoreFragmentContent()
 {
-	m_considerIgnoreFragment_EClass->setInstanceClass(nullptr);
 	m_considerIgnoreFragment_EClass->setName("ConsiderIgnoreFragment");
 	m_considerIgnoreFragment_EClass->setAbstract(false);
 	m_considerIgnoreFragment_EClass->setInterface(false);
@@ -8333,7 +8280,6 @@ void UmlPackageImpl::initializeConsiderIgnoreFragmentContent()
 
 void UmlPackageImpl::initializeConstraintContent()
 {
-	m_constraint_EClass->setInstanceClass(nullptr);
 	m_constraint_EClass->setName("Constraint");
 	m_constraint_EClass->setAbstract(false);
 	m_constraint_EClass->setInterface(false);
@@ -8501,7 +8447,6 @@ void UmlPackageImpl::initializeConstraintContent()
 
 void UmlPackageImpl::initializeContinuationContent()
 {
-	m_continuation_EClass->setInstanceClass(nullptr);
 	m_continuation_EClass->setName("Continuation");
 	m_continuation_EClass->setAbstract(false);
 	m_continuation_EClass->setInterface(false);
@@ -8614,7 +8559,6 @@ void UmlPackageImpl::initializeContinuationContent()
 
 void UmlPackageImpl::initializeControlFlowContent()
 {
-	m_controlFlow_EClass->setInstanceClass(nullptr);
 	m_controlFlow_EClass->setName("ControlFlow");
 	m_controlFlow_EClass->setAbstract(false);
 	m_controlFlow_EClass->setInterface(false);
@@ -8653,7 +8597,6 @@ void UmlPackageImpl::initializeControlFlowContent()
 
 void UmlPackageImpl::initializeControlNodeContent()
 {
-	m_controlNode_EClass->setInstanceClass(nullptr);
 	m_controlNode_EClass->setName("ControlNode");
 	m_controlNode_EClass->setAbstract(true);
 	m_controlNode_EClass->setInterface(false);
@@ -8665,7 +8608,6 @@ void UmlPackageImpl::initializeControlNodeContent()
 
 void UmlPackageImpl::initializeCreateLinkActionContent()
 {
-	m_createLinkAction_EClass->setInstanceClass(nullptr);
 	m_createLinkAction_EClass->setName("CreateLinkAction");
 	m_createLinkAction_EClass->setAbstract(false);
 	m_createLinkAction_EClass->setInterface(false);
@@ -8704,7 +8646,6 @@ void UmlPackageImpl::initializeCreateLinkActionContent()
 
 void UmlPackageImpl::initializeCreateLinkObjectActionContent()
 {
-	m_createLinkObjectAction_EClass->setInstanceClass(nullptr);
 	m_createLinkObjectAction_EClass->setName("CreateLinkObjectAction");
 	m_createLinkObjectAction_EClass->setAbstract(false);
 	m_createLinkObjectAction_EClass->setInterface(false);
@@ -8822,7 +8763,6 @@ void UmlPackageImpl::initializeCreateLinkObjectActionContent()
 
 void UmlPackageImpl::initializeCreateObjectActionContent()
 {
-	m_createObjectAction_EClass->setInstanceClass(nullptr);
 	m_createObjectAction_EClass->setName("CreateObjectAction");
 	m_createObjectAction_EClass->setAbstract(false);
 	m_createObjectAction_EClass->setInterface(false);
@@ -8992,7 +8932,6 @@ void UmlPackageImpl::initializeCreateObjectActionContent()
 
 void UmlPackageImpl::initializeDataStoreNodeContent()
 {
-	m_dataStoreNode_EClass->setInstanceClass(nullptr);
 	m_dataStoreNode_EClass->setName("DataStoreNode");
 	m_dataStoreNode_EClass->setAbstract(false);
 	m_dataStoreNode_EClass->setInterface(false);
@@ -9004,7 +8943,6 @@ void UmlPackageImpl::initializeDataStoreNodeContent()
 
 void UmlPackageImpl::initializeDataTypeContent()
 {
-	m_dataType_EClass->setInstanceClass(nullptr);
 	m_dataType_EClass->setName("DataType");
 	m_dataType_EClass->setAbstract(false);
 	m_dataType_EClass->setInterface(false);
@@ -9160,7 +9098,6 @@ void UmlPackageImpl::initializeDataTypeContent()
 
 void UmlPackageImpl::initializeDecisionNodeContent()
 {
-	m_decisionNode_EClass->setInstanceClass(nullptr);
 	m_decisionNode_EClass->setName("DecisionNode");
 	m_decisionNode_EClass->setAbstract(false);
 	m_decisionNode_EClass->setInterface(false);
@@ -9438,7 +9375,6 @@ void UmlPackageImpl::initializeDecisionNodeContent()
 
 void UmlPackageImpl::initializeDependencyContent()
 {
-	m_dependency_EClass->setInstanceClass(nullptr);
 	m_dependency_EClass->setName("Dependency");
 	m_dependency_EClass->setAbstract(false);
 	m_dependency_EClass->setInterface(false);
@@ -9500,7 +9436,6 @@ void UmlPackageImpl::initializeDependencyContent()
 
 void UmlPackageImpl::initializeDeployedArtifactContent()
 {
-	m_deployedArtifact_EClass->setInstanceClass(nullptr);
 	m_deployedArtifact_EClass->setName("DeployedArtifact");
 	m_deployedArtifact_EClass->setAbstract(true);
 	m_deployedArtifact_EClass->setInterface(false);
@@ -9512,7 +9447,6 @@ void UmlPackageImpl::initializeDeployedArtifactContent()
 
 void UmlPackageImpl::initializeDeploymentContent()
 {
-	m_deployment_EClass->setInstanceClass(nullptr);
 	m_deployment_EClass->setName("Deployment");
 	m_deployment_EClass->setAbstract(false);
 	m_deployment_EClass->setInterface(false);
@@ -9599,7 +9533,6 @@ void UmlPackageImpl::initializeDeploymentContent()
 
 void UmlPackageImpl::initializeDeploymentSpecificationContent()
 {
-	m_deploymentSpecification_EClass->setInstanceClass(nullptr);
 	m_deploymentSpecification_EClass->setName("DeploymentSpecification");
 	m_deploymentSpecification_EClass->setAbstract(false);
 	m_deploymentSpecification_EClass->setInterface(false);
@@ -9730,7 +9663,6 @@ void UmlPackageImpl::initializeDeploymentSpecificationContent()
 
 void UmlPackageImpl::initializeDeploymentTargetContent()
 {
-	m_deploymentTarget_EClass->setInstanceClass(nullptr);
 	m_deploymentTarget_EClass->setName("DeploymentTarget");
 	m_deploymentTarget_EClass->setAbstract(true);
 	m_deploymentTarget_EClass->setInterface(false);
@@ -9800,7 +9732,6 @@ void UmlPackageImpl::initializeDeploymentTargetContent()
 
 void UmlPackageImpl::initializeDestroyLinkActionContent()
 {
-	m_destroyLinkAction_EClass->setInstanceClass(nullptr);
 	m_destroyLinkAction_EClass->setName("DestroyLinkAction");
 	m_destroyLinkAction_EClass->setAbstract(false);
 	m_destroyLinkAction_EClass->setInterface(false);
@@ -9812,7 +9743,6 @@ void UmlPackageImpl::initializeDestroyLinkActionContent()
 
 void UmlPackageImpl::initializeDestroyObjectActionContent()
 {
-	m_destroyObjectAction_EClass->setInstanceClass(nullptr);
 	m_destroyObjectAction_EClass->setName("DestroyObjectAction");
 	m_destroyObjectAction_EClass->setAbstract(false);
 	m_destroyObjectAction_EClass->setInterface(false);
@@ -9943,7 +9873,6 @@ void UmlPackageImpl::initializeDestroyObjectActionContent()
 
 void UmlPackageImpl::initializeDestructionOccurrenceSpecificationContent()
 {
-	m_destructionOccurrenceSpecification_EClass->setInstanceClass(nullptr);
 	m_destructionOccurrenceSpecification_EClass->setName("DestructionOccurrenceSpecification");
 	m_destructionOccurrenceSpecification_EClass->setAbstract(false);
 	m_destructionOccurrenceSpecification_EClass->setInterface(false);
@@ -9982,7 +9911,6 @@ void UmlPackageImpl::initializeDestructionOccurrenceSpecificationContent()
 
 void UmlPackageImpl::initializeDeviceContent()
 {
-	m_device_EClass->setInstanceClass(nullptr);
 	m_device_EClass->setName("Device");
 	m_device_EClass->setAbstract(false);
 	m_device_EClass->setInterface(false);
@@ -9994,7 +9922,6 @@ void UmlPackageImpl::initializeDeviceContent()
 
 void UmlPackageImpl::initializeDirectedRelationshipContent()
 {
-	m_directedRelationship_EClass->setInstanceClass(nullptr);
 	m_directedRelationship_EClass->setName("DirectedRelationship");
 	m_directedRelationship_EClass->setAbstract(true);
 	m_directedRelationship_EClass->setInterface(false);
@@ -10056,7 +9983,6 @@ void UmlPackageImpl::initializeDirectedRelationshipContent()
 
 void UmlPackageImpl::initializeDurationContent()
 {
-	m_duration_EClass->setInstanceClass(nullptr);
 	m_duration_EClass->setName("Duration");
 	m_duration_EClass->setAbstract(false);
 	m_duration_EClass->setInterface(false);
@@ -10145,7 +10071,6 @@ void UmlPackageImpl::initializeDurationContent()
 
 void UmlPackageImpl::initializeDurationConstraintContent()
 {
-	m_durationConstraint_EClass->setInstanceClass(nullptr);
 	m_durationConstraint_EClass->setName("DurationConstraint");
 	m_durationConstraint_EClass->setAbstract(false);
 	m_durationConstraint_EClass->setInterface(false);
@@ -10231,7 +10156,6 @@ void UmlPackageImpl::initializeDurationConstraintContent()
 
 void UmlPackageImpl::initializeDurationIntervalContent()
 {
-	m_durationInterval_EClass->setInstanceClass(nullptr);
 	m_durationInterval_EClass->setName("DurationInterval");
 	m_durationInterval_EClass->setAbstract(false);
 	m_durationInterval_EClass->setInterface(false);
@@ -10243,7 +10167,6 @@ void UmlPackageImpl::initializeDurationIntervalContent()
 
 void UmlPackageImpl::initializeDurationObservationContent()
 {
-	m_durationObservation_EClass->setInstanceClass(nullptr);
 	m_durationObservation_EClass->setName("DurationObservation");
 	m_durationObservation_EClass->setAbstract(false);
 	m_durationObservation_EClass->setInterface(false);
@@ -10327,7 +10250,6 @@ void UmlPackageImpl::initializeDurationObservationContent()
 
 void UmlPackageImpl::initializeElementContent()
 {
-	m_element_EClass->setInstanceClass(nullptr);
 	m_element_EClass->setName("Element");
 	m_element_EClass->setAbstract(true);
 	m_element_EClass->setInterface(false);
@@ -10995,7 +10917,6 @@ void UmlPackageImpl::initializeElementContent()
 
 void UmlPackageImpl::initializeElementImportContent()
 {
-	m_elementImport_EClass->setInstanceClass(nullptr);
 	m_elementImport_EClass->setName("ElementImport");
 	m_elementImport_EClass->setAbstract(false);
 	m_elementImport_EClass->setInterface(false);
@@ -11159,7 +11080,6 @@ void UmlPackageImpl::initializeElementImportContent()
 
 void UmlPackageImpl::initializeEncapsulatedClassifierContent()
 {
-	m_encapsulatedClassifier_EClass->setInstanceClass(nullptr);
 	m_encapsulatedClassifier_EClass->setName("EncapsulatedClassifier");
 	m_encapsulatedClassifier_EClass->setAbstract(true);
 	m_encapsulatedClassifier_EClass->setInterface(false);
@@ -11204,7 +11124,6 @@ void UmlPackageImpl::initializeEncapsulatedClassifierContent()
 
 void UmlPackageImpl::initializeEnumerationContent()
 {
-	m_enumeration_EClass->setInstanceClass(nullptr);
 	m_enumeration_EClass->setName("Enumeration");
 	m_enumeration_EClass->setAbstract(false);
 	m_enumeration_EClass->setInterface(false);
@@ -11268,7 +11187,6 @@ void UmlPackageImpl::initializeEnumerationContent()
 
 void UmlPackageImpl::initializeEnumerationLiteralContent()
 {
-	m_enumerationLiteral_EClass->setInstanceClass(nullptr);
 	m_enumerationLiteral_EClass->setName("EnumerationLiteral");
 	m_enumerationLiteral_EClass->setAbstract(false);
 	m_enumerationLiteral_EClass->setInterface(false);
@@ -11321,7 +11239,6 @@ void UmlPackageImpl::initializeEnumerationLiteralContent()
 
 void UmlPackageImpl::initializeEventContent()
 {
-	m_event_EClass->setInstanceClass(nullptr);
 	m_event_EClass->setName("Event");
 	m_event_EClass->setAbstract(true);
 	m_event_EClass->setInterface(false);
@@ -11333,7 +11250,6 @@ void UmlPackageImpl::initializeEventContent()
 
 void UmlPackageImpl::initializeExceptionHandlerContent()
 {
-	m_exceptionHandler_EClass->setInstanceClass(nullptr);
 	m_exceptionHandler_EClass->setName("ExceptionHandler");
 	m_exceptionHandler_EClass->setAbstract(false);
 	m_exceptionHandler_EClass->setInterface(false);
@@ -11607,7 +11523,6 @@ void UmlPackageImpl::initializeExceptionHandlerContent()
 
 void UmlPackageImpl::initializeExecutableNodeContent()
 {
-	m_executableNode_EClass->setInstanceClass(nullptr);
 	m_executableNode_EClass->setName("ExecutableNode");
 	m_executableNode_EClass->setAbstract(true);
 	m_executableNode_EClass->setInterface(false);
@@ -11644,7 +11559,6 @@ void UmlPackageImpl::initializeExecutableNodeContent()
 
 void UmlPackageImpl::initializeExecutionEnvironmentContent()
 {
-	m_executionEnvironment_EClass->setInstanceClass(nullptr);
 	m_executionEnvironment_EClass->setName("ExecutionEnvironment");
 	m_executionEnvironment_EClass->setAbstract(false);
 	m_executionEnvironment_EClass->setInterface(false);
@@ -11656,7 +11570,6 @@ void UmlPackageImpl::initializeExecutionEnvironmentContent()
 
 void UmlPackageImpl::initializeExecutionOccurrenceSpecificationContent()
 {
-	m_executionOccurrenceSpecification_EClass->setInstanceClass(nullptr);
 	m_executionOccurrenceSpecification_EClass->setName("ExecutionOccurrenceSpecification");
 	m_executionOccurrenceSpecification_EClass->setAbstract(false);
 	m_executionOccurrenceSpecification_EClass->setInterface(false);
@@ -11693,7 +11606,6 @@ void UmlPackageImpl::initializeExecutionOccurrenceSpecificationContent()
 
 void UmlPackageImpl::initializeExecutionSpecificationContent()
 {
-	m_executionSpecification_EClass->setInstanceClass(nullptr);
 	m_executionSpecification_EClass->setName("ExecutionSpecification");
 	m_executionSpecification_EClass->setAbstract(true);
 	m_executionSpecification_EClass->setInterface(false);
@@ -11782,7 +11694,6 @@ void UmlPackageImpl::initializeExecutionSpecificationContent()
 
 void UmlPackageImpl::initializeExpansionNodeContent()
 {
-	m_expansionNode_EClass->setInstanceClass(nullptr);
 	m_expansionNode_EClass->setName("ExpansionNode");
 	m_expansionNode_EClass->setAbstract(false);
 	m_expansionNode_EClass->setInterface(false);
@@ -11871,7 +11782,6 @@ void UmlPackageImpl::initializeExpansionNodeContent()
 
 void UmlPackageImpl::initializeExpansionRegionContent()
 {
-	m_expansionRegion_EClass->setInstanceClass(nullptr);
 	m_expansionRegion_EClass->setName("ExpansionRegion");
 	m_expansionRegion_EClass->setAbstract(false);
 	m_expansionRegion_EClass->setInterface(false);
@@ -11953,7 +11863,6 @@ void UmlPackageImpl::initializeExpansionRegionContent()
 
 void UmlPackageImpl::initializeExpressionContent()
 {
-	m_expression_EClass->setInstanceClass(nullptr);
 	m_expression_EClass->setName("Expression");
 	m_expression_EClass->setAbstract(false);
 	m_expression_EClass->setInterface(false);
@@ -12010,7 +11919,6 @@ void UmlPackageImpl::initializeExpressionContent()
 
 void UmlPackageImpl::initializeExtendContent()
 {
-	m_extend_EClass->setInstanceClass(nullptr);
 	m_extend_EClass->setName("Extend");
 	m_extend_EClass->setAbstract(false);
 	m_extend_EClass->setInterface(false);
@@ -12149,7 +12057,6 @@ void UmlPackageImpl::initializeExtendContent()
 
 void UmlPackageImpl::initializeExtensionContent()
 {
-	m_extension_EClass->setInstanceClass(nullptr);
 	m_extension_EClass->setName("Extension");
 	m_extension_EClass->setAbstract(false);
 	m_extension_EClass->setInterface(false);
@@ -12300,7 +12207,6 @@ void UmlPackageImpl::initializeExtensionContent()
 
 void UmlPackageImpl::initializeExtensionEndContent()
 {
-	m_extensionEnd_EClass->setInstanceClass(nullptr);
 	m_extensionEnd_EClass->setName("ExtensionEnd");
 	m_extensionEnd_EClass->setAbstract(false);
 	m_extensionEnd_EClass->setInterface(false);
@@ -12366,7 +12272,6 @@ void UmlPackageImpl::initializeExtensionEndContent()
 
 void UmlPackageImpl::initializeExtensionPointContent()
 {
-	m_extensionPoint_EClass->setInstanceClass(nullptr);
 	m_extensionPoint_EClass->setName("ExtensionPoint");
 	m_extensionPoint_EClass->setAbstract(false);
 	m_extensionPoint_EClass->setInterface(false);
@@ -12430,7 +12335,6 @@ void UmlPackageImpl::initializeExtensionPointContent()
 
 void UmlPackageImpl::initializeFactoryContent()
 {
-	m_factory_EClass->setInstanceClass(nullptr);
 	m_factory_EClass->setName("Factory");
 	m_factory_EClass->setAbstract(false);
 	m_factory_EClass->setInterface(false);
@@ -12459,7 +12363,6 @@ void UmlPackageImpl::initializeFactoryContent()
 
 void UmlPackageImpl::initializeFeatureContent()
 {
-	m_feature_EClass->setInstanceClass(nullptr);
 	m_feature_EClass->setName("Feature");
 	m_feature_EClass->setAbstract(true);
 	m_feature_EClass->setInterface(false);
@@ -12516,7 +12419,6 @@ void UmlPackageImpl::initializeFeatureContent()
 
 void UmlPackageImpl::initializeFinalNodeContent()
 {
-	m_finalNode_EClass->setInstanceClass(nullptr);
 	m_finalNode_EClass->setName("FinalNode");
 	m_finalNode_EClass->setAbstract(true);
 	m_finalNode_EClass->setInterface(false);
@@ -12555,7 +12457,6 @@ void UmlPackageImpl::initializeFinalNodeContent()
 
 void UmlPackageImpl::initializeFinalStateContent()
 {
-	m_finalState_EClass->setInstanceClass(nullptr);
 	m_finalState_EClass->setName("FinalState");
 	m_finalState_EClass->setAbstract(false);
 	m_finalState_EClass->setInterface(false);
@@ -12729,7 +12630,6 @@ void UmlPackageImpl::initializeFinalStateContent()
 
 void UmlPackageImpl::initializeFlowFinalNodeContent()
 {
-	m_flowFinalNode_EClass->setInstanceClass(nullptr);
 	m_flowFinalNode_EClass->setName("FlowFinalNode");
 	m_flowFinalNode_EClass->setAbstract(false);
 	m_flowFinalNode_EClass->setInterface(false);
@@ -12741,7 +12641,6 @@ void UmlPackageImpl::initializeFlowFinalNodeContent()
 
 void UmlPackageImpl::initializeForkNodeContent()
 {
-	m_forkNode_EClass->setInstanceClass(nullptr);
 	m_forkNode_EClass->setName("ForkNode");
 	m_forkNode_EClass->setAbstract(false);
 	m_forkNode_EClass->setInterface(false);
@@ -12807,7 +12706,6 @@ void UmlPackageImpl::initializeForkNodeContent()
 
 void UmlPackageImpl::initializeFunctionBehaviorContent()
 {
-	m_functionBehavior_EClass->setInstanceClass(nullptr);
 	m_functionBehavior_EClass->setName("FunctionBehavior");
 	m_functionBehavior_EClass->setAbstract(false);
 	m_functionBehavior_EClass->setInterface(false);
@@ -12890,7 +12788,6 @@ void UmlPackageImpl::initializeFunctionBehaviorContent()
 
 void UmlPackageImpl::initializeGateContent()
 {
-	m_gate_EClass->setInstanceClass(nullptr);
 	m_gate_EClass->setName("Gate");
 	m_gate_EClass->setAbstract(false);
 	m_gate_EClass->setInterface(false);
@@ -13156,7 +13053,6 @@ void UmlPackageImpl::initializeGateContent()
 
 void UmlPackageImpl::initializeGeneralOrderingContent()
 {
-	m_generalOrdering_EClass->setInstanceClass(nullptr);
 	m_generalOrdering_EClass->setName("GeneralOrdering");
 	m_generalOrdering_EClass->setAbstract(false);
 	m_generalOrdering_EClass->setInterface(false);
@@ -13245,7 +13141,6 @@ void UmlPackageImpl::initializeGeneralOrderingContent()
 
 void UmlPackageImpl::initializeGeneralizationContent()
 {
-	m_generalization_EClass->setInstanceClass(nullptr);
 	m_generalization_EClass->setName("Generalization");
 	m_generalization_EClass->setAbstract(false);
 	m_generalization_EClass->setInterface(false);
@@ -13352,7 +13247,6 @@ void UmlPackageImpl::initializeGeneralizationContent()
 
 void UmlPackageImpl::initializeGeneralizationSetContent()
 {
-	m_generalizationSet_EClass->setInstanceClass(nullptr);
 	m_generalizationSet_EClass->setName("GeneralizationSet");
 	m_generalizationSet_EClass->setAbstract(false);
 	m_generalizationSet_EClass->setInterface(false);
@@ -13508,7 +13402,6 @@ void UmlPackageImpl::initializeGeneralizationSetContent()
 
 void UmlPackageImpl::initializeImageContent()
 {
-	m_image_EClass->setInstanceClass(nullptr);
 	m_image_EClass->setName("Image");
 	m_image_EClass->setAbstract(false);
 	m_image_EClass->setInterface(false);
@@ -13580,7 +13473,6 @@ void UmlPackageImpl::initializeImageContent()
 
 void UmlPackageImpl::initializeIncludeContent()
 {
-	m_include_EClass->setInstanceClass(nullptr);
 	m_include_EClass->setName("Include");
 	m_include_EClass->setAbstract(false);
 	m_include_EClass->setInterface(false);
@@ -13642,7 +13534,6 @@ void UmlPackageImpl::initializeIncludeContent()
 
 void UmlPackageImpl::initializeInformationFlowContent()
 {
-	m_informationFlow_EClass->setInstanceClass(nullptr);
 	m_informationFlow_EClass->setName("InformationFlow");
 	m_informationFlow_EClass->setAbstract(false);
 	m_informationFlow_EClass->setInterface(false);
@@ -13910,7 +13801,6 @@ void UmlPackageImpl::initializeInformationFlowContent()
 
 void UmlPackageImpl::initializeInformationItemContent()
 {
-	m_informationItem_EClass->setInstanceClass(nullptr);
 	m_informationItem_EClass->setName("InformationItem");
 	m_informationItem_EClass->setAbstract(false);
 	m_informationItem_EClass->setInterface(false);
@@ -14028,7 +13918,6 @@ void UmlPackageImpl::initializeInformationItemContent()
 
 void UmlPackageImpl::initializeInitialNodeContent()
 {
-	m_initialNode_EClass->setInstanceClass(nullptr);
 	m_initialNode_EClass->setName("InitialNode");
 	m_initialNode_EClass->setAbstract(false);
 	m_initialNode_EClass->setInterface(false);
@@ -14094,7 +13983,6 @@ void UmlPackageImpl::initializeInitialNodeContent()
 
 void UmlPackageImpl::initializeInputPinContent()
 {
-	m_inputPin_EClass->setInstanceClass(nullptr);
 	m_inputPin_EClass->setName("InputPin");
 	m_inputPin_EClass->setAbstract(false);
 	m_inputPin_EClass->setInterface(false);
@@ -14208,7 +14096,6 @@ void UmlPackageImpl::initializeInputPinContent()
 
 void UmlPackageImpl::initializeInstanceSpecificationContent()
 {
-	m_instanceSpecification_EClass->setInstanceClass(nullptr);
 	m_instanceSpecification_EClass->setName("InstanceSpecification");
 	m_instanceSpecification_EClass->setAbstract(false);
 	m_instanceSpecification_EClass->setInterface(false);
@@ -14403,7 +14290,6 @@ void UmlPackageImpl::initializeInstanceSpecificationContent()
 
 void UmlPackageImpl::initializeInstanceValueContent()
 {
-	m_instanceValue_EClass->setInstanceClass(nullptr);
 	m_instanceValue_EClass->setName("InstanceValue");
 	m_instanceValue_EClass->setAbstract(false);
 	m_instanceValue_EClass->setInterface(false);
@@ -14440,7 +14326,6 @@ void UmlPackageImpl::initializeInstanceValueContent()
 
 void UmlPackageImpl::initializeInteractionContent()
 {
-	m_interaction_EClass->setInstanceClass(nullptr);
 	m_interaction_EClass->setName("Interaction");
 	m_interaction_EClass->setAbstract(false);
 	m_interaction_EClass->setInterface(false);
@@ -14604,7 +14489,6 @@ void UmlPackageImpl::initializeInteractionContent()
 
 void UmlPackageImpl::initializeInteractionConstraintContent()
 {
-	m_interactionConstraint_EClass->setInstanceClass(nullptr);
 	m_interactionConstraint_EClass->setName("InteractionConstraint");
 	m_interactionConstraint_EClass->setAbstract(false);
 	m_interactionConstraint_EClass->setInterface(false);
@@ -14828,7 +14712,6 @@ void UmlPackageImpl::initializeInteractionConstraintContent()
 
 void UmlPackageImpl::initializeInteractionFragmentContent()
 {
-	m_interactionFragment_EClass->setInstanceClass(nullptr);
 	m_interactionFragment_EClass->setName("InteractionFragment");
 	m_interactionFragment_EClass->setAbstract(true);
 	m_interactionFragment_EClass->setInterface(false);
@@ -14940,7 +14823,6 @@ void UmlPackageImpl::initializeInteractionFragmentContent()
 
 void UmlPackageImpl::initializeInteractionOperandContent()
 {
-	m_interactionOperand_EClass->setInstanceClass(nullptr);
 	m_interactionOperand_EClass->setName("InteractionOperand");
 	m_interactionOperand_EClass->setAbstract(false);
 	m_interactionOperand_EClass->setInterface(false);
@@ -15056,7 +14938,6 @@ void UmlPackageImpl::initializeInteractionOperandContent()
 
 void UmlPackageImpl::initializeInteractionUseContent()
 {
-	m_interactionUse_EClass->setInstanceClass(nullptr);
 	m_interactionUse_EClass->setName("InteractionUse");
 	m_interactionUse_EClass->setAbstract(false);
 	m_interactionUse_EClass->setInterface(false);
@@ -15355,7 +15236,6 @@ void UmlPackageImpl::initializeInteractionUseContent()
 
 void UmlPackageImpl::initializeInterfaceContent()
 {
-	m_interface_EClass->setInstanceClass(nullptr);
 	m_interface_EClass->setName("Interface");
 	m_interface_EClass->setAbstract(false);
 	m_interface_EClass->setInterface(false);
@@ -15638,7 +15518,6 @@ void UmlPackageImpl::initializeInterfaceContent()
 
 void UmlPackageImpl::initializeInterfaceRealizationContent()
 {
-	m_interfaceRealization_EClass->setInstanceClass(nullptr);
 	m_interfaceRealization_EClass->setName("InterfaceRealization");
 	m_interfaceRealization_EClass->setAbstract(false);
 	m_interfaceRealization_EClass->setInterface(false);
@@ -15700,7 +15579,6 @@ void UmlPackageImpl::initializeInterfaceRealizationContent()
 
 void UmlPackageImpl::initializeInterruptibleActivityRegionContent()
 {
-	m_interruptibleActivityRegion_EClass->setInstanceClass(nullptr);
 	m_interruptibleActivityRegion_EClass->setName("InterruptibleActivityRegion");
 	m_interruptibleActivityRegion_EClass->setAbstract(false);
 	m_interruptibleActivityRegion_EClass->setInterface(false);
@@ -15789,7 +15667,6 @@ void UmlPackageImpl::initializeInterruptibleActivityRegionContent()
 
 void UmlPackageImpl::initializeIntervalContent()
 {
-	m_interval_EClass->setInstanceClass(nullptr);
 	m_interval_EClass->setName("Interval");
 	m_interval_EClass->setAbstract(false);
 	m_interval_EClass->setInterface(false);
@@ -15851,7 +15728,6 @@ void UmlPackageImpl::initializeIntervalContent()
 
 void UmlPackageImpl::initializeIntervalConstraintContent()
 {
-	m_intervalConstraint_EClass->setInstanceClass(nullptr);
 	m_intervalConstraint_EClass->setName("IntervalConstraint");
 	m_intervalConstraint_EClass->setAbstract(false);
 	m_intervalConstraint_EClass->setInterface(false);
@@ -15863,7 +15739,6 @@ void UmlPackageImpl::initializeIntervalConstraintContent()
 
 void UmlPackageImpl::initializeInvocationActionContent()
 {
-	m_invocationAction_EClass->setInstanceClass(nullptr);
 	m_invocationAction_EClass->setName("InvocationAction");
 	m_invocationAction_EClass->setAbstract(true);
 	m_invocationAction_EClass->setInterface(false);
@@ -15925,7 +15800,6 @@ void UmlPackageImpl::initializeInvocationActionContent()
 
 void UmlPackageImpl::initializeJoinNodeContent()
 {
-	m_joinNode_EClass->setInstanceClass(nullptr);
 	m_joinNode_EClass->setName("JoinNode");
 	m_joinNode_EClass->setAbstract(false);
 	m_joinNode_EClass->setInterface(false);
@@ -16036,7 +15910,6 @@ void UmlPackageImpl::initializeJoinNodeContent()
 
 void UmlPackageImpl::initializeLifelineContent()
 {
-	m_lifeline_EClass->setInstanceClass(nullptr);
 	m_lifeline_EClass->setName("Lifeline");
 	m_lifeline_EClass->setAbstract(false);
 	m_lifeline_EClass->setInterface(false);
@@ -16281,7 +16154,6 @@ void UmlPackageImpl::initializeLifelineContent()
 
 void UmlPackageImpl::initializeLinkActionContent()
 {
-	m_linkAction_EClass->setInstanceClass(nullptr);
 	m_linkAction_EClass->setName("LinkAction");
 	m_linkAction_EClass->setAbstract(true);
 	m_linkAction_EClass->setInterface(false);
@@ -16432,7 +16304,6 @@ void UmlPackageImpl::initializeLinkActionContent()
 
 void UmlPackageImpl::initializeLinkEndCreationDataContent()
 {
-	m_linkEndCreationData_EClass->setInstanceClass(nullptr);
 	m_linkEndCreationData_EClass->setName("LinkEndCreationData");
 	m_linkEndCreationData_EClass->setAbstract(false);
 	m_linkEndCreationData_EClass->setInterface(false);
@@ -16516,7 +16387,6 @@ void UmlPackageImpl::initializeLinkEndCreationDataContent()
 
 void UmlPackageImpl::initializeLinkEndDataContent()
 {
-	m_linkEndData_EClass->setInstanceClass(nullptr);
 	m_linkEndData_EClass->setName("LinkEndData");
 	m_linkEndData_EClass->setAbstract(false);
 	m_linkEndData_EClass->setInterface(false);
@@ -16746,7 +16616,6 @@ void UmlPackageImpl::initializeLinkEndDataContent()
 
 void UmlPackageImpl::initializeLinkEndDestructionDataContent()
 {
-	m_linkEndDestructionData_EClass->setInstanceClass(nullptr);
 	m_linkEndDestructionData_EClass->setName("LinkEndDestructionData");
 	m_linkEndDestructionData_EClass->setAbstract(false);
 	m_linkEndDestructionData_EClass->setInterface(false);
@@ -16830,7 +16699,6 @@ void UmlPackageImpl::initializeLinkEndDestructionDataContent()
 
 void UmlPackageImpl::initializeLiteralBooleanContent()
 {
-	m_literalBoolean_EClass->setInstanceClass(nullptr);
 	m_literalBoolean_EClass->setName("LiteralBoolean");
 	m_literalBoolean_EClass->setAbstract(false);
 	m_literalBoolean_EClass->setInterface(false);
@@ -16862,7 +16730,6 @@ void UmlPackageImpl::initializeLiteralBooleanContent()
 
 void UmlPackageImpl::initializeLiteralIntegerContent()
 {
-	m_literalInteger_EClass->setInstanceClass(nullptr);
 	m_literalInteger_EClass->setName("LiteralInteger");
 	m_literalInteger_EClass->setAbstract(false);
 	m_literalInteger_EClass->setInterface(false);
@@ -16894,7 +16761,6 @@ void UmlPackageImpl::initializeLiteralIntegerContent()
 
 void UmlPackageImpl::initializeLiteralNullContent()
 {
-	m_literalNull_EClass->setInstanceClass(nullptr);
 	m_literalNull_EClass->setName("LiteralNull");
 	m_literalNull_EClass->setAbstract(false);
 	m_literalNull_EClass->setInterface(false);
@@ -16906,7 +16772,6 @@ void UmlPackageImpl::initializeLiteralNullContent()
 
 void UmlPackageImpl::initializeLiteralRealContent()
 {
-	m_literalReal_EClass->setInstanceClass(nullptr);
 	m_literalReal_EClass->setName("LiteralReal");
 	m_literalReal_EClass->setAbstract(false);
 	m_literalReal_EClass->setInterface(false);
@@ -16938,7 +16803,6 @@ void UmlPackageImpl::initializeLiteralRealContent()
 
 void UmlPackageImpl::initializeLiteralSpecificationContent()
 {
-	m_literalSpecification_EClass->setInstanceClass(nullptr);
 	m_literalSpecification_EClass->setName("LiteralSpecification");
 	m_literalSpecification_EClass->setAbstract(true);
 	m_literalSpecification_EClass->setInterface(false);
@@ -16950,7 +16814,6 @@ void UmlPackageImpl::initializeLiteralSpecificationContent()
 
 void UmlPackageImpl::initializeLiteralStringContent()
 {
-	m_literalString_EClass->setInstanceClass(nullptr);
 	m_literalString_EClass->setName("LiteralString");
 	m_literalString_EClass->setAbstract(false);
 	m_literalString_EClass->setInterface(false);
@@ -16982,7 +16845,6 @@ void UmlPackageImpl::initializeLiteralStringContent()
 
 void UmlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 {
-	m_literalUnlimitedNatural_EClass->setInstanceClass(nullptr);
 	m_literalUnlimitedNatural_EClass->setName("LiteralUnlimitedNatural");
 	m_literalUnlimitedNatural_EClass->setAbstract(false);
 	m_literalUnlimitedNatural_EClass->setInterface(false);
@@ -17014,7 +16876,6 @@ void UmlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 
 void UmlPackageImpl::initializeLoopNodeContent()
 {
-	m_loopNode_EClass->setInstanceClass(nullptr);
 	m_loopNode_EClass->setName("LoopNode");
 	m_loopNode_EClass->setAbstract(false);
 	m_loopNode_EClass->setInterface(false);
@@ -17489,7 +17350,6 @@ void UmlPackageImpl::initializeLoopNodeContent()
 
 void UmlPackageImpl::initializeManifestationContent()
 {
-	m_manifestation_EClass->setInstanceClass(nullptr);
 	m_manifestation_EClass->setName("Manifestation");
 	m_manifestation_EClass->setAbstract(false);
 	m_manifestation_EClass->setInterface(false);
@@ -17526,7 +17386,6 @@ void UmlPackageImpl::initializeManifestationContent()
 
 void UmlPackageImpl::initializeMergeNodeContent()
 {
-	m_mergeNode_EClass->setInstanceClass(nullptr);
 	m_mergeNode_EClass->setName("MergeNode");
 	m_mergeNode_EClass->setAbstract(false);
 	m_mergeNode_EClass->setInterface(false);
@@ -17592,7 +17451,6 @@ void UmlPackageImpl::initializeMergeNodeContent()
 
 void UmlPackageImpl::initializeMessageContent()
 {
-	m_message_EClass->setInstanceClass(nullptr);
 	m_message_EClass->setName("Message");
 	m_message_EClass->setAbstract(false);
 	m_message_EClass->setInterface(false);
@@ -18018,7 +17876,6 @@ void UmlPackageImpl::initializeMessageContent()
 
 void UmlPackageImpl::initializeMessageEndContent()
 {
-	m_messageEnd_EClass->setInstanceClass(nullptr);
 	m_messageEnd_EClass->setName("MessageEnd");
 	m_messageEnd_EClass->setAbstract(true);
 	m_messageEnd_EClass->setInterface(false);
@@ -18087,7 +17944,6 @@ void UmlPackageImpl::initializeMessageEndContent()
 
 void UmlPackageImpl::initializeMessageEventContent()
 {
-	m_messageEvent_EClass->setInstanceClass(nullptr);
 	m_messageEvent_EClass->setName("MessageEvent");
 	m_messageEvent_EClass->setAbstract(true);
 	m_messageEvent_EClass->setInterface(false);
@@ -18099,7 +17955,6 @@ void UmlPackageImpl::initializeMessageEventContent()
 
 void UmlPackageImpl::initializeMessageOccurrenceSpecificationContent()
 {
-	m_messageOccurrenceSpecification_EClass->setInstanceClass(nullptr);
 	m_messageOccurrenceSpecification_EClass->setName("MessageOccurrenceSpecification");
 	m_messageOccurrenceSpecification_EClass->setAbstract(false);
 	m_messageOccurrenceSpecification_EClass->setInterface(false);
@@ -18111,7 +17966,6 @@ void UmlPackageImpl::initializeMessageOccurrenceSpecificationContent()
 
 void UmlPackageImpl::initializeModelContent()
 {
-	m_model_EClass->setInstanceClass(nullptr);
 	m_model_EClass->setName("Model");
 	m_model_EClass->setAbstract(false);
 	m_model_EClass->setInterface(false);
@@ -18151,7 +18005,6 @@ void UmlPackageImpl::initializeModelContent()
 
 void UmlPackageImpl::initializeMultiplicityElementContent()
 {
-	m_multiplicityElement_EClass->setInstanceClass(nullptr);
 	m_multiplicityElement_EClass->setName("MultiplicityElement");
 	m_multiplicityElement_EClass->setAbstract(true);
 	m_multiplicityElement_EClass->setInterface(false);
@@ -18540,7 +18393,6 @@ void UmlPackageImpl::initializeMultiplicityElementContent()
 
 void UmlPackageImpl::initializeNamedElementContent()
 {
-	m_namedElement_EClass->setInstanceClass(nullptr);
 	m_namedElement_EClass->setName("NamedElement");
 	m_namedElement_EClass->setAbstract(true);
 	m_namedElement_EClass->setInterface(false);
@@ -18902,7 +18754,6 @@ void UmlPackageImpl::initializeNamedElementContent()
 
 void UmlPackageImpl::initializeNamespaceContent()
 {
-	m_namespace_EClass->setInstanceClass(nullptr);
 	m_namespace_EClass->setName("Namespace");
 	m_namespace_EClass->setAbstract(true);
 	m_namespace_EClass->setInterface(false);
@@ -19290,7 +19141,6 @@ void UmlPackageImpl::initializeNamespaceContent()
 
 void UmlPackageImpl::initializeNodeContent()
 {
-	m_node_EClass->setInstanceClass(nullptr);
 	m_node_EClass->setName("Node");
 	m_node_EClass->setAbstract(false);
 	m_node_EClass->setInterface(false);
@@ -19479,7 +19329,6 @@ void UmlPackageImpl::initializeNodeContent()
 
 void UmlPackageImpl::initializeObjectContent()
 {
-	m_object_EClass->setInstanceClass(nullptr);
 	m_object_EClass->setName("Object");
 	m_object_EClass->setAbstract(false);
 	m_object_EClass->setInterface(false);
@@ -19552,7 +19401,6 @@ void UmlPackageImpl::initializeObjectContent()
 
 void UmlPackageImpl::initializeObjectFlowContent()
 {
-	m_objectFlow_EClass->setInstanceClass(nullptr);
 	m_objectFlow_EClass->setName("ObjectFlow");
 	m_objectFlow_EClass->setAbstract(false);
 	m_objectFlow_EClass->setInterface(false);
@@ -19870,7 +19718,6 @@ void UmlPackageImpl::initializeObjectFlowContent()
 
 void UmlPackageImpl::initializeObjectNodeContent()
 {
-	m_objectNode_EClass->setInstanceClass(nullptr);
 	m_objectNode_EClass->setName("ObjectNode");
 	m_objectNode_EClass->setAbstract(true);
 	m_objectNode_EClass->setInterface(false);
@@ -20078,7 +19925,6 @@ void UmlPackageImpl::initializeObjectNodeContent()
 
 void UmlPackageImpl::initializeObservationContent()
 {
-	m_observation_EClass->setInstanceClass(nullptr);
 	m_observation_EClass->setName("Observation");
 	m_observation_EClass->setAbstract(true);
 	m_observation_EClass->setInterface(false);
@@ -20090,7 +19936,6 @@ void UmlPackageImpl::initializeObservationContent()
 
 void UmlPackageImpl::initializeOccurrenceSpecificationContent()
 {
-	m_occurrenceSpecification_EClass->setInstanceClass(nullptr);
 	m_occurrenceSpecification_EClass->setName("OccurrenceSpecification");
 	m_occurrenceSpecification_EClass->setAbstract(false);
 	m_occurrenceSpecification_EClass->setInterface(false);
@@ -20177,7 +20022,6 @@ void UmlPackageImpl::initializeOccurrenceSpecificationContent()
 
 void UmlPackageImpl::initializeOpaqueActionContent()
 {
-	m_opaqueAction_EClass->setInstanceClass(nullptr);
 	m_opaqueAction_EClass->setName("OpaqueAction");
 	m_opaqueAction_EClass->setAbstract(false);
 	m_opaqueAction_EClass->setInterface(false);
@@ -20306,7 +20150,6 @@ void UmlPackageImpl::initializeOpaqueActionContent()
 
 void UmlPackageImpl::initializeOpaqueBehaviorContent()
 {
-	m_opaqueBehavior_EClass->setInstanceClass(nullptr);
 	m_opaqueBehavior_EClass->setName("OpaqueBehavior");
 	m_opaqueBehavior_EClass->setAbstract(false);
 	m_opaqueBehavior_EClass->setInterface(false);
@@ -20358,7 +20201,6 @@ void UmlPackageImpl::initializeOpaqueBehaviorContent()
 
 void UmlPackageImpl::initializeOpaqueExpressionContent()
 {
-	m_opaqueExpression_EClass->setInstanceClass(nullptr);
 	m_opaqueExpression_EClass->setName("OpaqueExpression");
 	m_opaqueExpression_EClass->setAbstract(false);
 	m_opaqueExpression_EClass->setInterface(false);
@@ -20581,7 +20423,6 @@ void UmlPackageImpl::initializeOpaqueExpressionContent()
 
 void UmlPackageImpl::initializeOperationContent()
 {
-	m_operation_EClass->setInstanceClass(nullptr);
 	m_operation_EClass->setName("Operation");
 	m_operation_EClass->setAbstract(false);
 	m_operation_EClass->setInterface(false);
@@ -21088,7 +20929,6 @@ void UmlPackageImpl::initializeOperationContent()
 
 void UmlPackageImpl::initializeOperationTemplateParameterContent()
 {
-	m_operationTemplateParameter_EClass->setInstanceClass(nullptr);
 	m_operationTemplateParameter_EClass->setName("OperationTemplateParameter");
 	m_operationTemplateParameter_EClass->setAbstract(false);
 	m_operationTemplateParameter_EClass->setInterface(false);
@@ -21127,7 +20967,6 @@ void UmlPackageImpl::initializeOperationTemplateParameterContent()
 
 void UmlPackageImpl::initializeOutputPinContent()
 {
-	m_outputPin_EClass->setInstanceClass(nullptr);
 	m_outputPin_EClass->setName("OutputPin");
 	m_outputPin_EClass->setAbstract(false);
 	m_outputPin_EClass->setInterface(false);
@@ -21191,7 +21030,6 @@ void UmlPackageImpl::initializeOutputPinContent()
 
 void UmlPackageImpl::initializePackageContent()
 {
-	m_package_EClass->setInstanceClass(nullptr);
 	m_package_EClass->setName("Package");
 	m_package_EClass->setAbstract(false);
 	m_package_EClass->setInterface(false);
@@ -21766,7 +21604,6 @@ void UmlPackageImpl::initializePackageContent()
 
 void UmlPackageImpl::initializePackageImportContent()
 {
-	m_packageImport_EClass->setInstanceClass(nullptr);
 	m_packageImport_EClass->setName("PackageImport");
 	m_packageImport_EClass->setAbstract(false);
 	m_packageImport_EClass->setInterface(false);
@@ -21875,7 +21712,6 @@ void UmlPackageImpl::initializePackageImportContent()
 
 void UmlPackageImpl::initializePackageMergeContent()
 {
-	m_packageMerge_EClass->setInstanceClass(nullptr);
 	m_packageMerge_EClass->setName("PackageMerge");
 	m_packageMerge_EClass->setAbstract(false);
 	m_packageMerge_EClass->setInterface(false);
@@ -21937,7 +21773,6 @@ void UmlPackageImpl::initializePackageMergeContent()
 
 void UmlPackageImpl::initializePackageableElementContent()
 {
-	m_packageableElement_EClass->setInstanceClass(nullptr);
 	m_packageableElement_EClass->setName("PackageableElement");
 	m_packageableElement_EClass->setAbstract(true);
 	m_packageableElement_EClass->setInterface(false);
@@ -22001,7 +21836,6 @@ void UmlPackageImpl::initializePackageableElementContent()
 
 void UmlPackageImpl::initializeParameterContent()
 {
-	m_parameter_EClass->setInstanceClass(nullptr);
 	m_parameter_EClass->setName("Parameter");
 	m_parameter_EClass->setAbstract(false);
 	m_parameter_EClass->setInterface(false);
@@ -22484,7 +22318,6 @@ void UmlPackageImpl::initializeParameterContent()
 
 void UmlPackageImpl::initializeParameterSetContent()
 {
-	m_parameterSet_EClass->setInstanceClass(nullptr);
 	m_parameterSet_EClass->setName("ParameterSet");
 	m_parameterSet_EClass->setAbstract(false);
 	m_parameterSet_EClass->setInterface(false);
@@ -22627,7 +22460,6 @@ void UmlPackageImpl::initializeParameterSetContent()
 
 void UmlPackageImpl::initializeParameterableElementContent()
 {
-	m_parameterableElement_EClass->setInstanceClass(nullptr);
 	m_parameterableElement_EClass->setName("ParameterableElement");
 	m_parameterableElement_EClass->setAbstract(true);
 	m_parameterableElement_EClass->setInterface(false);
@@ -22714,7 +22546,6 @@ void UmlPackageImpl::initializeParameterableElementContent()
 
 void UmlPackageImpl::initializePartDecompositionContent()
 {
-	m_partDecomposition_EClass->setInstanceClass(nullptr);
 	m_partDecomposition_EClass->setName("PartDecomposition");
 	m_partDecomposition_EClass->setAbstract(false);
 	m_partDecomposition_EClass->setInterface(false);
@@ -22807,7 +22638,6 @@ void UmlPackageImpl::initializePartDecompositionContent()
 
 void UmlPackageImpl::initializePinContent()
 {
-	m_pin_EClass->setInstanceClass(nullptr);
 	m_pin_EClass->setName("Pin");
 	m_pin_EClass->setAbstract(true);
 	m_pin_EClass->setInterface(false);
@@ -22893,7 +22723,6 @@ void UmlPackageImpl::initializePinContent()
 
 void UmlPackageImpl::initializePortContent()
 {
-	m_port_EClass->setInstanceClass(nullptr);
 	m_port_EClass->setName("Port");
 	m_port_EClass->setAbstract(false);
 	m_port_EClass->setInterface(false);
@@ -23178,7 +23007,6 @@ void UmlPackageImpl::initializePortContent()
 
 void UmlPackageImpl::initializePrimitiveTypeContent()
 {
-	m_primitiveType_EClass->setInstanceClass(nullptr);
 	m_primitiveType_EClass->setName("PrimitiveType");
 	m_primitiveType_EClass->setAbstract(false);
 	m_primitiveType_EClass->setInterface(false);
@@ -23190,7 +23018,6 @@ void UmlPackageImpl::initializePrimitiveTypeContent()
 
 void UmlPackageImpl::initializeProfileContent()
 {
-	m_profile_EClass->setInstanceClass(nullptr);
 	m_profile_EClass->setName("Profile");
 	m_profile_EClass->setAbstract(false);
 	m_profile_EClass->setInterface(false);
@@ -23434,7 +23261,6 @@ void UmlPackageImpl::initializeProfileContent()
 
 void UmlPackageImpl::initializeProfileApplicationContent()
 {
-	m_profileApplication_EClass->setInstanceClass(nullptr);
 	m_profileApplication_EClass->setName("ProfileApplication");
 	m_profileApplication_EClass->setAbstract(false);
 	m_profileApplication_EClass->setInterface(false);
@@ -23541,7 +23367,6 @@ void UmlPackageImpl::initializeProfileApplicationContent()
 
 void UmlPackageImpl::initializePropertyContent()
 {
-	m_property_EClass->setInstanceClass(nullptr);
 	m_property_EClass->setName("Property");
 	m_property_EClass->setAbstract(false);
 	m_property_EClass->setInterface(false);
@@ -24419,7 +24244,6 @@ void UmlPackageImpl::initializePropertyContent()
 
 void UmlPackageImpl::initializeProtocolConformanceContent()
 {
-	m_protocolConformance_EClass->setInstanceClass(nullptr);
 	m_protocolConformance_EClass->setName("ProtocolConformance");
 	m_protocolConformance_EClass->setAbstract(false);
 	m_protocolConformance_EClass->setInterface(false);
@@ -24481,7 +24305,6 @@ void UmlPackageImpl::initializeProtocolConformanceContent()
 
 void UmlPackageImpl::initializeProtocolStateMachineContent()
 {
-	m_protocolStateMachine_EClass->setInstanceClass(nullptr);
 	m_protocolStateMachine_EClass->setName("ProtocolStateMachine");
 	m_protocolStateMachine_EClass->setAbstract(false);
 	m_protocolStateMachine_EClass->setInterface(false);
@@ -24599,7 +24422,6 @@ void UmlPackageImpl::initializeProtocolStateMachineContent()
 
 void UmlPackageImpl::initializeProtocolTransitionContent()
 {
-	m_protocolTransition_EClass->setInstanceClass(nullptr);
 	m_protocolTransition_EClass->setName("ProtocolTransition");
 	m_protocolTransition_EClass->setAbstract(false);
 	m_protocolTransition_EClass->setInterface(false);
@@ -24775,7 +24597,6 @@ void UmlPackageImpl::initializeProtocolTransitionContent()
 
 void UmlPackageImpl::initializePseudostateContent()
 {
-	m_pseudostate_EClass->setInstanceClass(nullptr);
 	m_pseudostate_EClass->setName("Pseudostate");
 	m_pseudostate_EClass->setAbstract(false);
 	m_pseudostate_EClass->setInterface(false);
@@ -25100,7 +24921,6 @@ void UmlPackageImpl::initializePseudostateContent()
 
 void UmlPackageImpl::initializeQualifierValueContent()
 {
-	m_qualifierValue_EClass->setInstanceClass(nullptr);
 	m_qualifierValue_EClass->setName("QualifierValue");
 	m_qualifierValue_EClass->setAbstract(false);
 	m_qualifierValue_EClass->setInterface(false);
@@ -25243,7 +25063,6 @@ void UmlPackageImpl::initializeQualifierValueContent()
 
 void UmlPackageImpl::initializeRaiseExceptionActionContent()
 {
-	m_raiseExceptionAction_EClass->setInstanceClass(nullptr);
 	m_raiseExceptionAction_EClass->setName("RaiseExceptionAction");
 	m_raiseExceptionAction_EClass->setAbstract(false);
 	m_raiseExceptionAction_EClass->setInterface(false);
@@ -25280,7 +25099,6 @@ void UmlPackageImpl::initializeRaiseExceptionActionContent()
 
 void UmlPackageImpl::initializeReadExtentActionContent()
 {
-	m_readExtentAction_EClass->setInstanceClass(nullptr);
 	m_readExtentAction_EClass->setName("ReadExtentAction");
 	m_readExtentAction_EClass->setAbstract(false);
 	m_readExtentAction_EClass->setInterface(false);
@@ -25396,7 +25214,6 @@ void UmlPackageImpl::initializeReadExtentActionContent()
 
 void UmlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 {
-	m_readIsClassifiedObjectAction_EClass->setInstanceClass(nullptr);
 	m_readIsClassifiedObjectAction_EClass->setName("ReadIsClassifiedObjectAction");
 	m_readIsClassifiedObjectAction_EClass->setAbstract(false);
 	m_readIsClassifiedObjectAction_EClass->setInterface(false);
@@ -25611,7 +25428,6 @@ void UmlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 
 void UmlPackageImpl::initializeReadLinkActionContent()
 {
-	m_readLinkAction_EClass->setInstanceClass(nullptr);
 	m_readLinkAction_EClass->setName("ReadLinkAction");
 	m_readLinkAction_EClass->setAbstract(false);
 	m_readLinkAction_EClass->setInterface(false);
@@ -25791,7 +25607,6 @@ void UmlPackageImpl::initializeReadLinkActionContent()
 
 void UmlPackageImpl::initializeReadLinkObjectEndActionContent()
 {
-	m_readLinkObjectEndAction_EClass->setInstanceClass(nullptr);
 	m_readLinkObjectEndAction_EClass->setName("ReadLinkObjectEndAction");
 	m_readLinkObjectEndAction_EClass->setAbstract(false);
 	m_readLinkObjectEndAction_EClass->setInterface(false);
@@ -26067,7 +25882,6 @@ void UmlPackageImpl::initializeReadLinkObjectEndActionContent()
 
 void UmlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 {
-	m_readLinkObjectEndQualifierAction_EClass->setInstanceClass(nullptr);
 	m_readLinkObjectEndQualifierAction_EClass->setName("ReadLinkObjectEndQualifierAction");
 	m_readLinkObjectEndQualifierAction_EClass->setAbstract(false);
 	m_readLinkObjectEndQualifierAction_EClass->setInterface(false);
@@ -26370,7 +26184,6 @@ void UmlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 
 void UmlPackageImpl::initializeReadSelfActionContent()
 {
-	m_readSelfAction_EClass->setInstanceClass(nullptr);
 	m_readSelfAction_EClass->setName("ReadSelfAction");
 	m_readSelfAction_EClass->setAbstract(false);
 	m_readSelfAction_EClass->setInterface(false);
@@ -26515,7 +26328,6 @@ void UmlPackageImpl::initializeReadSelfActionContent()
 
 void UmlPackageImpl::initializeReadStructuralFeatureActionContent()
 {
-	m_readStructuralFeatureAction_EClass->setInstanceClass(nullptr);
 	m_readStructuralFeatureAction_EClass->setName("ReadStructuralFeatureAction");
 	m_readStructuralFeatureAction_EClass->setAbstract(false);
 	m_readStructuralFeatureAction_EClass->setInterface(false);
@@ -26579,7 +26391,6 @@ void UmlPackageImpl::initializeReadStructuralFeatureActionContent()
 
 void UmlPackageImpl::initializeReadVariableActionContent()
 {
-	m_readVariableAction_EClass->setInstanceClass(nullptr);
 	m_readVariableAction_EClass->setName("ReadVariableAction");
 	m_readVariableAction_EClass->setAbstract(false);
 	m_readVariableAction_EClass->setInterface(false);
@@ -26670,7 +26481,6 @@ void UmlPackageImpl::initializeReadVariableActionContent()
 
 void UmlPackageImpl::initializeRealizationContent()
 {
-	m_realization_EClass->setInstanceClass(nullptr);
 	m_realization_EClass->setName("Realization");
 	m_realization_EClass->setAbstract(false);
 	m_realization_EClass->setInterface(false);
@@ -26682,7 +26492,6 @@ void UmlPackageImpl::initializeRealizationContent()
 
 void UmlPackageImpl::initializeReceptionContent()
 {
-	m_reception_EClass->setInstanceClass(nullptr);
 	m_reception_EClass->setName("Reception");
 	m_reception_EClass->setAbstract(false);
 	m_reception_EClass->setInterface(false);
@@ -26773,7 +26582,6 @@ void UmlPackageImpl::initializeReceptionContent()
 
 void UmlPackageImpl::initializeReclassifyObjectActionContent()
 {
-	m_reclassifyObjectAction_EClass->setInstanceClass(nullptr);
 	m_reclassifyObjectAction_EClass->setName("ReclassifyObjectAction");
 	m_reclassifyObjectAction_EClass->setAbstract(false);
 	m_reclassifyObjectAction_EClass->setInterface(false);
@@ -26961,7 +26769,6 @@ void UmlPackageImpl::initializeReclassifyObjectActionContent()
 
 void UmlPackageImpl::initializeRedefinableElementContent()
 {
-	m_redefinableElement_EClass->setInstanceClass(nullptr);
 	m_redefinableElement_EClass->setName("RedefinableElement");
 	m_redefinableElement_EClass->setAbstract(true);
 	m_redefinableElement_EClass->setInterface(false);
@@ -27158,7 +26965,6 @@ void UmlPackageImpl::initializeRedefinableElementContent()
 
 void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 {
-	m_redefinableTemplateSignature_EClass->setInstanceClass(nullptr);
 	m_redefinableTemplateSignature_EClass->setName("RedefinableTemplateSignature");
 	m_redefinableTemplateSignature_EClass->setAbstract(false);
 	m_redefinableTemplateSignature_EClass->setInterface(false);
@@ -27280,7 +27086,6 @@ void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 
 void UmlPackageImpl::initializeReduceActionContent()
 {
-	m_reduceAction_EClass->setInstanceClass(nullptr);
 	m_reduceAction_EClass->setName("ReduceAction");
 	m_reduceAction_EClass->setAbstract(false);
 	m_reduceAction_EClass->setInterface(false);
@@ -27468,7 +27273,6 @@ void UmlPackageImpl::initializeReduceActionContent()
 
 void UmlPackageImpl::initializeRegionContent()
 {
-	m_region_EClass->setInstanceClass(nullptr);
 	m_region_EClass->setName("Region");
 	m_region_EClass->setAbstract(false);
 	m_region_EClass->setInterface(false);
@@ -27737,7 +27541,6 @@ void UmlPackageImpl::initializeRegionContent()
 
 void UmlPackageImpl::initializeRelationshipContent()
 {
-	m_relationship_EClass->setInstanceClass(nullptr);
 	m_relationship_EClass->setName("Relationship");
 	m_relationship_EClass->setAbstract(true);
 	m_relationship_EClass->setInterface(false);
@@ -27774,7 +27577,6 @@ void UmlPackageImpl::initializeRelationshipContent()
 
 void UmlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 {
-	m_removeStructuralFeatureValueAction_EClass->setInstanceClass(nullptr);
 	m_removeStructuralFeatureValueAction_EClass->setName("RemoveStructuralFeatureValueAction");
 	m_removeStructuralFeatureValueAction_EClass->setAbstract(false);
 	m_removeStructuralFeatureValueAction_EClass->setInterface(false);
@@ -27858,7 +27660,6 @@ void UmlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 
 void UmlPackageImpl::initializeRemoveVariableValueActionContent()
 {
-	m_removeVariableValueAction_EClass->setInstanceClass(nullptr);
 	m_removeVariableValueAction_EClass->setName("RemoveVariableValueAction");
 	m_removeVariableValueAction_EClass->setAbstract(false);
 	m_removeVariableValueAction_EClass->setInterface(false);
@@ -27942,7 +27743,6 @@ void UmlPackageImpl::initializeRemoveVariableValueActionContent()
 
 void UmlPackageImpl::initializeReplyActionContent()
 {
-	m_replyAction_EClass->setInstanceClass(nullptr);
 	m_replyAction_EClass->setName("ReplyAction");
 	m_replyAction_EClass->setAbstract(false);
 	m_replyAction_EClass->setInterface(false);
@@ -28083,7 +27883,6 @@ void UmlPackageImpl::initializeReplyActionContent()
 
 void UmlPackageImpl::initializeSendObjectActionContent()
 {
-	m_sendObjectAction_EClass->setInstanceClass(nullptr);
 	m_sendObjectAction_EClass->setName("SendObjectAction");
 	m_sendObjectAction_EClass->setAbstract(false);
 	m_sendObjectAction_EClass->setInterface(false);
@@ -28172,7 +27971,6 @@ void UmlPackageImpl::initializeSendObjectActionContent()
 
 void UmlPackageImpl::initializeSendSignalActionContent()
 {
-	m_sendSignalAction_EClass->setInstanceClass(nullptr);
 	m_sendSignalAction_EClass->setName("SendSignalAction");
 	m_sendSignalAction_EClass->setAbstract(false);
 	m_sendSignalAction_EClass->setInterface(false);
@@ -28315,7 +28113,6 @@ void UmlPackageImpl::initializeSendSignalActionContent()
 
 void UmlPackageImpl::initializeSequenceNodeContent()
 {
-	m_sequenceNode_EClass->setInstanceClass(nullptr);
 	m_sequenceNode_EClass->setName("SequenceNode");
 	m_sequenceNode_EClass->setAbstract(false);
 	m_sequenceNode_EClass->setInterface(false);
@@ -28352,7 +28149,6 @@ void UmlPackageImpl::initializeSequenceNodeContent()
 
 void UmlPackageImpl::initializeSignalContent()
 {
-	m_signal_EClass->setInstanceClass(nullptr);
 	m_signal_EClass->setName("Signal");
 	m_signal_EClass->setAbstract(false);
 	m_signal_EClass->setInterface(false);
@@ -28436,7 +28232,6 @@ void UmlPackageImpl::initializeSignalContent()
 
 void UmlPackageImpl::initializeSignalEventContent()
 {
-	m_signalEvent_EClass->setInstanceClass(nullptr);
 	m_signalEvent_EClass->setName("SignalEvent");
 	m_signalEvent_EClass->setAbstract(false);
 	m_signalEvent_EClass->setInterface(false);
@@ -28473,7 +28268,6 @@ void UmlPackageImpl::initializeSignalEventContent()
 
 void UmlPackageImpl::initializeSlotContent()
 {
-	m_slot_EClass->setInstanceClass(nullptr);
 	m_slot_EClass->setName("Slot");
 	m_slot_EClass->setAbstract(false);
 	m_slot_EClass->setInterface(false);
@@ -28560,7 +28354,6 @@ void UmlPackageImpl::initializeSlotContent()
 
 void UmlPackageImpl::initializeStartClassifierBehaviorActionContent()
 {
-	m_startClassifierBehaviorAction_EClass->setInstanceClass(nullptr);
 	m_startClassifierBehaviorAction_EClass->setName("StartClassifierBehaviorAction");
 	m_startClassifierBehaviorAction_EClass->setAbstract(false);
 	m_startClassifierBehaviorAction_EClass->setInterface(false);
@@ -28651,7 +28444,6 @@ void UmlPackageImpl::initializeStartClassifierBehaviorActionContent()
 
 void UmlPackageImpl::initializeStartObjectBehaviorActionContent()
 {
-	m_startObjectBehaviorAction_EClass->setInstanceClass(nullptr);
 	m_startObjectBehaviorAction_EClass->setName("StartObjectBehaviorAction");
 	m_startObjectBehaviorAction_EClass->setAbstract(false);
 	m_startObjectBehaviorAction_EClass->setInterface(false);
@@ -28777,7 +28569,6 @@ void UmlPackageImpl::initializeStartObjectBehaviorActionContent()
 
 void UmlPackageImpl::initializeStateContent()
 {
-	m_state_EClass->setInstanceClass(nullptr);
 	m_state_EClass->setName("State");
 	m_state_EClass->setAbstract(false);
 	m_state_EClass->setInterface(false);
@@ -29294,7 +29085,6 @@ void UmlPackageImpl::initializeStateContent()
 
 void UmlPackageImpl::initializeStateInvariantContent()
 {
-	m_stateInvariant_EClass->setInstanceClass(nullptr);
 	m_stateInvariant_EClass->setName("StateInvariant");
 	m_stateInvariant_EClass->setAbstract(false);
 	m_stateInvariant_EClass->setInterface(false);
@@ -29331,7 +29121,6 @@ void UmlPackageImpl::initializeStateInvariantContent()
 
 void UmlPackageImpl::initializeStateMachineContent()
 {
-	m_stateMachine_EClass->setInstanceClass(nullptr);
 	m_stateMachine_EClass->setName("StateMachine");
 	m_stateMachine_EClass->setAbstract(false);
 	m_stateMachine_EClass->setInterface(false);
@@ -29632,7 +29421,6 @@ void UmlPackageImpl::initializeStateMachineContent()
 
 void UmlPackageImpl::initializeStereotypeContent()
 {
-	m_stereotype_EClass->setInstanceClass(nullptr);
 	m_stereotype_EClass->setName("Stereotype");
 	m_stereotype_EClass->setAbstract(false);
 	m_stereotype_EClass->setInterface(false);
@@ -30019,7 +29807,6 @@ void UmlPackageImpl::initializeStereotypeContent()
 
 void UmlPackageImpl::initializeStringExpressionContent()
 {
-	m_stringExpression_EClass->setInstanceClass(nullptr);
 	m_stringExpression_EClass->setName("StringExpression");
 	m_stringExpression_EClass->setAbstract(false);
 	m_stringExpression_EClass->setInterface(false);
@@ -30135,7 +29922,6 @@ void UmlPackageImpl::initializeStringExpressionContent()
 
 void UmlPackageImpl::initializeStructuralFeatureContent()
 {
-	m_structuralFeature_EClass->setInstanceClass(nullptr);
 	m_structuralFeature_EClass->setName("StructuralFeature");
 	m_structuralFeature_EClass->setAbstract(true);
 	m_structuralFeature_EClass->setInterface(false);
@@ -30167,7 +29953,6 @@ void UmlPackageImpl::initializeStructuralFeatureContent()
 
 void UmlPackageImpl::initializeStructuralFeatureActionContent()
 {
-	m_structuralFeatureAction_EClass->setInstanceClass(nullptr);
 	m_structuralFeatureAction_EClass->setName("StructuralFeatureAction");
 	m_structuralFeatureAction_EClass->setAbstract(true);
 	m_structuralFeatureAction_EClass->setInterface(false);
@@ -30364,7 +30149,6 @@ void UmlPackageImpl::initializeStructuralFeatureActionContent()
 
 void UmlPackageImpl::initializeStructuredActivityNodeContent()
 {
-	m_structuredActivityNode_EClass->setInstanceClass(nullptr);
 	m_structuredActivityNode_EClass->setName("StructuredActivityNode");
 	m_structuredActivityNode_EClass->setAbstract(false);
 	m_structuredActivityNode_EClass->setInterface(false);
@@ -30618,7 +30402,6 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 
 void UmlPackageImpl::initializeStructuredClassifierContent()
 {
-	m_structuredClassifier_EClass->setInstanceClass(nullptr);
 	m_structuredClassifier_EClass->setName("StructuredClassifier");
 	m_structuredClassifier_EClass->setAbstract(true);
 	m_structuredClassifier_EClass->setInterface(false);
@@ -30793,7 +30576,6 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 
 void UmlPackageImpl::initializeSubstitutionContent()
 {
-	m_substitution_EClass->setInstanceClass(nullptr);
 	m_substitution_EClass->setName("Substitution");
 	m_substitution_EClass->setAbstract(false);
 	m_substitution_EClass->setInterface(false);
@@ -30855,7 +30637,6 @@ void UmlPackageImpl::initializeSubstitutionContent()
 
 void UmlPackageImpl::initializeTemplateBindingContent()
 {
-	m_templateBinding_EClass->setInstanceClass(nullptr);
 	m_templateBinding_EClass->setName("TemplateBinding");
 	m_templateBinding_EClass->setAbstract(false);
 	m_templateBinding_EClass->setInterface(false);
@@ -30996,7 +30777,6 @@ void UmlPackageImpl::initializeTemplateBindingContent()
 
 void UmlPackageImpl::initializeTemplateParameterContent()
 {
-	m_templateParameter_EClass->setInstanceClass(nullptr);
 	m_templateParameter_EClass->setName("TemplateParameter");
 	m_templateParameter_EClass->setAbstract(false);
 	m_templateParameter_EClass->setInterface(false);
@@ -31160,7 +30940,6 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 
 void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 {
-	m_templateParameterSubstitution_EClass->setInstanceClass(nullptr);
 	m_templateParameterSubstitution_EClass->setName("TemplateParameterSubstitution");
 	m_templateParameterSubstitution_EClass->setAbstract(false);
 	m_templateParameterSubstitution_EClass->setInterface(false);
@@ -31299,7 +31078,6 @@ void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 
 void UmlPackageImpl::initializeTemplateSignatureContent()
 {
-	m_templateSignature_EClass->setInstanceClass(nullptr);
 	m_templateSignature_EClass->setName("TemplateSignature");
 	m_templateSignature_EClass->setAbstract(false);
 	m_templateSignature_EClass->setInterface(false);
@@ -31440,7 +31218,6 @@ void UmlPackageImpl::initializeTemplateSignatureContent()
 
 void UmlPackageImpl::initializeTemplateableElementContent()
 {
-	m_templateableElement_EClass->setInstanceClass(nullptr);
 	m_templateableElement_EClass->setName("TemplateableElement");
 	m_templateableElement_EClass->setAbstract(true);
 	m_templateableElement_EClass->setInterface(false);
@@ -31518,7 +31295,6 @@ void UmlPackageImpl::initializeTemplateableElementContent()
 
 void UmlPackageImpl::initializeTestIdentityActionContent()
 {
-	m_testIdentityAction_EClass->setInstanceClass(nullptr);
 	m_testIdentityAction_EClass->setName("TestIdentityAction");
 	m_testIdentityAction_EClass->setAbstract(false);
 	m_testIdentityAction_EClass->setInterface(false);
@@ -31686,7 +31462,6 @@ void UmlPackageImpl::initializeTestIdentityActionContent()
 
 void UmlPackageImpl::initializeTimeConstraintContent()
 {
-	m_timeConstraint_EClass->setInstanceClass(nullptr);
 	m_timeConstraint_EClass->setName("TimeConstraint");
 	m_timeConstraint_EClass->setAbstract(false);
 	m_timeConstraint_EClass->setInterface(false);
@@ -31745,7 +31520,6 @@ void UmlPackageImpl::initializeTimeConstraintContent()
 
 void UmlPackageImpl::initializeTimeEventContent()
 {
-	m_timeEvent_EClass->setInstanceClass(nullptr);
 	m_timeEvent_EClass->setName("TimeEvent");
 	m_timeEvent_EClass->setAbstract(false);
 	m_timeEvent_EClass->setInterface(false);
@@ -31829,7 +31603,6 @@ void UmlPackageImpl::initializeTimeEventContent()
 
 void UmlPackageImpl::initializeTimeExpressionContent()
 {
-	m_timeExpression_EClass->setInstanceClass(nullptr);
 	m_timeExpression_EClass->setName("TimeExpression");
 	m_timeExpression_EClass->setAbstract(false);
 	m_timeExpression_EClass->setInterface(false);
@@ -31918,7 +31691,6 @@ void UmlPackageImpl::initializeTimeExpressionContent()
 
 void UmlPackageImpl::initializeTimeIntervalContent()
 {
-	m_timeInterval_EClass->setInstanceClass(nullptr);
 	m_timeInterval_EClass->setName("TimeInterval");
 	m_timeInterval_EClass->setAbstract(false);
 	m_timeInterval_EClass->setInterface(false);
@@ -31930,7 +31702,6 @@ void UmlPackageImpl::initializeTimeIntervalContent()
 
 void UmlPackageImpl::initializeTimeObservationContent()
 {
-	m_timeObservation_EClass->setInstanceClass(nullptr);
 	m_timeObservation_EClass->setName("TimeObservation");
 	m_timeObservation_EClass->setAbstract(false);
 	m_timeObservation_EClass->setInterface(false);
@@ -31987,7 +31758,6 @@ void UmlPackageImpl::initializeTimeObservationContent()
 
 void UmlPackageImpl::initializeTransitionContent()
 {
-	m_transition_EClass->setInstanceClass(nullptr);
 	m_transition_EClass->setName("Transition");
 	m_transition_EClass->setAbstract(false);
 	m_transition_EClass->setInterface(false);
@@ -32453,7 +32223,6 @@ void UmlPackageImpl::initializeTransitionContent()
 
 void UmlPackageImpl::initializeTriggerContent()
 {
-	m_trigger_EClass->setInstanceClass(nullptr);
 	m_trigger_EClass->setName("Trigger");
 	m_trigger_EClass->setAbstract(false);
 	m_trigger_EClass->setInterface(false);
@@ -32542,7 +32311,6 @@ void UmlPackageImpl::initializeTriggerContent()
 
 void UmlPackageImpl::initializeTypeContent()
 {
-	m_type_EClass->setInstanceClass(nullptr);
 	m_type_EClass->setName("Type");
 	m_type_EClass->setAbstract(true);
 	m_type_EClass->setInterface(false);
@@ -32721,7 +32489,6 @@ void UmlPackageImpl::initializeTypeContent()
 
 void UmlPackageImpl::initializeTypedElementContent()
 {
-	m_typedElement_EClass->setInstanceClass(nullptr);
 	m_typedElement_EClass->setName("TypedElement");
 	m_typedElement_EClass->setAbstract(true);
 	m_typedElement_EClass->setInterface(false);
@@ -32758,7 +32525,6 @@ void UmlPackageImpl::initializeTypedElementContent()
 
 void UmlPackageImpl::initializeUnmarshallActionContent()
 {
-	m_unmarshallAction_EClass->setInstanceClass(nullptr);
 	m_unmarshallAction_EClass->setName("UnmarshallAction");
 	m_unmarshallAction_EClass->setAbstract(false);
 	m_unmarshallAction_EClass->setInterface(false);
@@ -32980,7 +32746,6 @@ void UmlPackageImpl::initializeUnmarshallActionContent()
 
 void UmlPackageImpl::initializeUsageContent()
 {
-	m_usage_EClass->setInstanceClass(nullptr);
 	m_usage_EClass->setName("Usage");
 	m_usage_EClass->setAbstract(false);
 	m_usage_EClass->setInterface(false);
@@ -32992,7 +32757,6 @@ void UmlPackageImpl::initializeUsageContent()
 
 void UmlPackageImpl::initializeUseCaseContent()
 {
-	m_useCase_EClass->setInstanceClass(nullptr);
 	m_useCase_EClass->setName("UseCase");
 	m_useCase_EClass->setAbstract(false);
 	m_useCase_EClass->setInterface(false);
@@ -33220,7 +32984,6 @@ void UmlPackageImpl::initializeUseCaseContent()
 
 void UmlPackageImpl::initializeValuePinContent()
 {
-	m_valuePin_EClass->setInstanceClass(nullptr);
 	m_valuePin_EClass->setName("ValuePin");
 	m_valuePin_EClass->setAbstract(false);
 	m_valuePin_EClass->setInterface(false);
@@ -33311,7 +33074,6 @@ void UmlPackageImpl::initializeValuePinContent()
 
 void UmlPackageImpl::initializeValueSpecificationContent()
 {
-	m_valueSpecification_EClass->setInstanceClass(nullptr);
 	m_valueSpecification_EClass->setName("ValueSpecification");
 	m_valueSpecification_EClass->setAbstract(true);
 	m_valueSpecification_EClass->setInterface(false);
@@ -33404,7 +33166,6 @@ void UmlPackageImpl::initializeValueSpecificationContent()
 
 void UmlPackageImpl::initializeValueSpecificationActionContent()
 {
-	m_valueSpecificationAction_EClass->setInstanceClass(nullptr);
 	m_valueSpecificationAction_EClass->setName("ValueSpecificationAction");
 	m_valueSpecificationAction_EClass->setAbstract(false);
 	m_valueSpecificationAction_EClass->setInterface(false);
@@ -33520,7 +33281,6 @@ void UmlPackageImpl::initializeValueSpecificationActionContent()
 
 void UmlPackageImpl::initializeVariableContent()
 {
-	m_variable_EClass->setInstanceClass(nullptr);
 	m_variable_EClass->setName("Variable");
 	m_variable_EClass->setAbstract(false);
 	m_variable_EClass->setInterface(false);
@@ -33599,7 +33359,6 @@ void UmlPackageImpl::initializeVariableContent()
 
 void UmlPackageImpl::initializeVariableActionContent()
 {
-	m_variableAction_EClass->setInstanceClass(nullptr);
 	m_variableAction_EClass->setName("VariableAction");
 	m_variableAction_EClass->setAbstract(true);
 	m_variableAction_EClass->setInterface(false);
@@ -33663,7 +33422,6 @@ void UmlPackageImpl::initializeVariableActionContent()
 
 void UmlPackageImpl::initializeVertexContent()
 {
-	m_vertex_EClass->setInstanceClass(nullptr);
 	m_vertex_EClass->setName("Vertex");
 	m_vertex_EClass->setAbstract(true);
 	m_vertex_EClass->setInterface(false);
@@ -33808,7 +33566,6 @@ void UmlPackageImpl::initializeVertexContent()
 
 void UmlPackageImpl::initializeWriteLinkActionContent()
 {
-	m_writeLinkAction_EClass->setInstanceClass(nullptr);
 	m_writeLinkAction_EClass->setName("WriteLinkAction");
 	m_writeLinkAction_EClass->setAbstract(true);
 	m_writeLinkAction_EClass->setInterface(false);
@@ -33847,7 +33604,6 @@ void UmlPackageImpl::initializeWriteLinkActionContent()
 
 void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 {
-	m_writeStructuralFeatureAction_EClass->setInstanceClass(nullptr);
 	m_writeStructuralFeatureAction_EClass->setName("WriteStructuralFeatureAction");
 	m_writeStructuralFeatureAction_EClass->setAbstract(true);
 	m_writeStructuralFeatureAction_EClass->setInterface(false);
@@ -34017,7 +33773,6 @@ void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 
 void UmlPackageImpl::initializeWriteVariableActionContent()
 {
-	m_writeVariableAction_EClass->setInstanceClass(nullptr);
 	m_writeVariableAction_EClass->setName("WriteVariableAction");
 	m_writeVariableAction_EClass->setAbstract(true);
 	m_writeVariableAction_EClass->setInterface(false);
@@ -34108,31 +33863,18 @@ void UmlPackageImpl::initializeWriteVariableActionContent()
 
 void UmlPackageImpl::initializePackageEDataTypes()
 {
-	m_aggregationKind_EEnum->setInstanceClass(nullptr);
 	m_aggregationKind_EEnum->setName("AggregationKind");
-	m_callConcurrencyKind_EEnum->setInstanceClass(nullptr);
 	m_callConcurrencyKind_EEnum->setName("CallConcurrencyKind");
-	m_connectorKind_EEnum->setInstanceClass(nullptr);
 	m_connectorKind_EEnum->setName("ConnectorKind");
-	m_expansionKind_EEnum->setInstanceClass(nullptr);
 	m_expansionKind_EEnum->setName("ExpansionKind");
-	m_interactionOperatorKind_EEnum->setInstanceClass(nullptr);
 	m_interactionOperatorKind_EEnum->setName("InteractionOperatorKind");
-	m_messageKind_EEnum->setInstanceClass(nullptr);
 	m_messageKind_EEnum->setName("MessageKind");
-	m_messageSort_EEnum->setInstanceClass(nullptr);
 	m_messageSort_EEnum->setName("MessageSort");
-	m_objectNodeOrderingKind_EEnum->setInstanceClass(nullptr);
 	m_objectNodeOrderingKind_EEnum->setName("ObjectNodeOrderingKind");
-	m_parameterDirectionKind_EEnum->setInstanceClass(nullptr);
 	m_parameterDirectionKind_EEnum->setName("ParameterDirectionKind");
-	m_parameterEffectKind_EEnum->setInstanceClass(nullptr);
 	m_parameterEffectKind_EEnum->setName("ParameterEffectKind");
-	m_pseudostateKind_EEnum->setInstanceClass(nullptr);
 	m_pseudostateKind_EEnum->setName("PseudostateKind");
-	m_transitionKind_EEnum->setInstanceClass(nullptr);
 	m_transitionKind_EEnum->setName("TransitionKind");
-	m_visibilityKind_EEnum->setInstanceClass(nullptr);
 	m_visibilityKind_EEnum->setName("VisibilityKind");
 	
 }

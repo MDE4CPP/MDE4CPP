@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -111,6 +112,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_associationEnd = par_associationEnd;
+				m_owner = par_associationEnd;
 			}
 
 
@@ -122,6 +124,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_class = par_class;
+				m_namespace = par_class;
 			}
 
 
@@ -133,6 +136,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_datatype = par_datatype;
+				m_namespace = par_datatype;
 			}
 
 
@@ -144,6 +148,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_interface = par_interface;
+				m_namespace = par_interface;
 			}
 
 
@@ -155,6 +160,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -177,6 +183,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_owningAssociation = par_owningAssociation;
+				m_namespace = par_owningAssociation;
 			}
 
 
@@ -188,6 +195,7 @@ ExtensionEndImpl::~ExtensionEndImpl()
 			:ExtensionEndImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -358,13 +366,13 @@ std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionEndImpl::aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionEndImpl::aggregation(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -459,12 +467,12 @@ std::shared_ptr<ecore::EObject> ExtensionEndImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionEndImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExtensionEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return PropertyImpl::internalEIsSet(featureID);
+	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
 bool ExtensionEndImpl::internalEIsSet(int featureID) const
 {
@@ -473,7 +481,7 @@ bool ExtensionEndImpl::internalEIsSet(int featureID) const
 	}
 	return PropertyImpl::internalEIsSet(featureID);
 }
-bool ExtensionEndImpl::eSet(int featureID, boost::any newValue)
+bool ExtensionEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

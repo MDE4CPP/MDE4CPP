@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			:BroadcastSignalActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			:BroadcastSignalActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			:BroadcastSignalActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -309,19 +313,19 @@ std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -401,14 +405,14 @@ std::shared_ptr<ecore::EObject> BroadcastSignalActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
-			return getSignal(); //13730
+			return eAny(getSignal()); //13730
 	}
-	return InvocationActionImpl::internalEIsSet(featureID);
+	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
 bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 {
@@ -419,14 +423,14 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
-bool BroadcastSignalActionImpl::eSet(int featureID, boost::any newValue)
+bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
 			setSignal(_signal); //13730
 			return true;
 		}

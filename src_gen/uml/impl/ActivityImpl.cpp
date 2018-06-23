@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -286,6 +287,7 @@ ActivityImpl::~ActivityImpl()
 			:ActivityImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -297,6 +299,7 @@ ActivityImpl::~ActivityImpl()
 			:ActivityImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -321,10 +324,12 @@ ActivityImpl::~ActivityImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -341,6 +346,7 @@ ActivityImpl::~ActivityImpl()
 			:ActivityImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -809,13 +815,13 @@ bool ActivityImpl::getIsSingleExecution() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityImpl::maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityImpl::maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityImpl::maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityImpl::maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -971,32 +977,32 @@ std::shared_ptr<ecore::EObject> ActivityImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return getEdge(); //163
+			return eAny(getEdge()); //163
 		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return getGroup(); //166
+			return eAny(getGroup()); //166
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly(); //168
+			return eAny(getIsReadOnly()); //168
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return getIsSingleExecution(); //169
+			return eAny(getIsSingleExecution()); //169
 		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return getNode(); //164
+			return eAny(getNode()); //164
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return getOwnedGroup(); //162
+			return eAny(getOwnedGroup()); //162
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return getOwnedNode(); //167
+			return eAny(getOwnedNode()); //167
 		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return getPartition(); //170
+			return eAny(getPartition()); //170
 		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return getStructuredNode(); //171
+			return eAny(getStructuredNode()); //171
 		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return getVariable(); //165
+			return eAny(getVariable()); //165
 	}
-	return BehaviorImpl::internalEIsSet(featureID);
+	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityImpl::internalEIsSet(int featureID) const
 {
@@ -1025,21 +1031,21 @@ bool ActivityImpl::internalEIsSet(int featureID) const
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
-bool ActivityImpl::eSet(int featureID, boost::any newValue)
+bool ActivityImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
-			bool _isReadOnly = boost::any_cast<bool>(newValue);
+			bool _isReadOnly = newValue->get<bool>();
 			setIsReadOnly(_isReadOnly); //168
 			return true;
 		}
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
 		{
 			// BOOST CAST
-			bool _isSingleExecution = boost::any_cast<bool>(newValue);
+			bool _isSingleExecution = newValue->get<bool>();
 			setIsSingleExecution(_isSingleExecution); //169
 			return true;
 		}

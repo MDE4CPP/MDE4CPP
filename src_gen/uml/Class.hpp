@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -282,7 +280,7 @@ namespace uml
 			/*!
 			 Only an active Class may own Receptions and have a classifierBehavior.
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null) */ 
-			virtual bool passive_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool passive_class(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

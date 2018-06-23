@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -108,6 +109,7 @@ GeneralizationImpl::~GeneralizationImpl()
 			:GeneralizationImpl()
 			{
 			    m_specific = par_specific;
+				m_owner = par_specific;
 			}
 
 
@@ -274,20 +276,20 @@ std::shared_ptr<ecore::EObject> GeneralizationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
-			return getGeneral(); //957
+			return eAny(getGeneral()); //957
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
-			return getGeneralizationSet(); //958
+			return eAny(getGeneralizationSet()); //958
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
-			return getIsSubstitutable(); //959
+			return eAny(getIsSubstitutable()); //959
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
-			return getSpecific(); //9510
+			return eAny(getSpecific()); //9510
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool GeneralizationImpl::internalEIsSet(int featureID) const
 {
@@ -304,28 +306,28 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool GeneralizationImpl::eSet(int featureID, boost::any newValue)
+bool GeneralizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _general = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _general = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setGeneral(_general); //957
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
-			bool _isSubstitutable = boost::any_cast<bool>(newValue);
+			bool _isSubstitutable = newValue->get<bool>();
 			setIsSubstitutable(_isSubstitutable); //959
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _specific = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _specific = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setSpecific(_specific); //9510
 			return true;
 		}

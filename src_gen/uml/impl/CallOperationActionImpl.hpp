@@ -63,7 +63,7 @@ namespace uml
 			if onPort=null then  target.type.oclAsType(Classifier).allFeatures()->includes(operation)
 			else target.type.oclAsType(Classifier).allFeatures()->includes(onPort) and onPort.provided->union(onPort.required).allFeatures()->includes(operation)
 			endif */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CallOperationAction> m_thisCallOperationActionPtr;

@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type) */ 
-			virtual bool value_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -129,9 +129,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<WriteVariableAction> m_thisWriteVariableActionPtr;

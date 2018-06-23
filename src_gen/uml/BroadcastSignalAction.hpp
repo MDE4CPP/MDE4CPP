@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -186,12 +184,12 @@ namespace uml
 			/*!
 			 A BroadcaseSignalAction may not specify onPort.
 			onPort=null */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size() */ 
-			virtual bool number_of_arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool number_of_arguments(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
@@ -200,7 +198,7 @@ namespace uml
 				argument->at(i).type.conformsTo(attribute->at(i).type) and 
 				argument->at(i).isOrdered = attribute->at(i).isOrdered and
 				argument->at(i).compatibleWith(attribute->at(i))) */ 
-			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

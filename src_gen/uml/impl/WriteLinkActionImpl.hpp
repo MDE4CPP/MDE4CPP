@@ -66,7 +66,7 @@ namespace uml
 			  end.visibility=VisibilityKind::protected and
 			  endData.end->exists(other | 
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier)))) */ 
-			virtual bool allow_access(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -120,9 +120,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<WriteLinkAction> m_thisWriteLinkActionPtr;

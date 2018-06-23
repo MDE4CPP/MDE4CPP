@@ -64,33 +64,33 @@ namespace uml
 			/*!
 			 A fork segment must not have Guards or Triggers.
 			(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A fork segment must always target a State.
 			(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State)) */ 
-			virtual bool fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool fork_segment_state(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 An initial Transition at the topmost level Region of a StateMachine that has no Trigger.
 			(source.oclIsKindOf(Pseudostate) and container.stateMachine->notEmpty()) implies
 				trigger->isEmpty() */ 
-			virtual bool initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool initial_transition(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A join segment must not have Guards or Triggers.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool join_segment_guards(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A join segment must always originate from a State.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State)) */ 
-			virtual bool join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool join_segment_state(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Transitions outgoing Pseudostates may not have a Trigger.
 			source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty() */ 
-			virtual bool outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The redefinition context of a Transition is the nearest containing StateMachine.
@@ -107,20 +107,20 @@ namespace uml
 			 A Transition with kind external can source any Vertex except entry points.
 			(kind = TransitionKind::external) implies
 				not (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint) */ 
-			virtual bool state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool state_is_external(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Transition with kind internal must have a State as its source, and its source and target must be equal.
 			(kind = TransitionKind::internal) implies
 					(source.oclIsKindOf (State) and source = target) */ 
-			virtual bool state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool state_is_internal(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Transition with kind local must have a composite State or an entry point as its source.
 			(kind = TransitionKind::local) implies
 					((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or
 					(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint)) */ 
-			virtual bool state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool state_is_local(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -246,9 +246,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Transition> m_thisTransitionPtr;

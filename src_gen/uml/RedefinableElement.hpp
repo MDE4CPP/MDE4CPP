@@ -16,10 +16,8 @@
 // forward declarations
 template<class T> class Union;
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -134,17 +132,17 @@ namespace uml
 			/*!
 			 A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf) */ 
-			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
-			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
-			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,6 +96,7 @@ PackageableElementImpl::~PackageableElementImpl()
 			:PackageableElementImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -117,6 +119,7 @@ PackageableElementImpl::~PackageableElementImpl()
 			:PackageableElementImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -128,6 +131,7 @@ PackageableElementImpl::~PackageableElementImpl()
 			:PackageableElementImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -208,7 +212,7 @@ std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PackageableElementImpl::namespace_needs_visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -281,20 +285,20 @@ std::shared_ptr<ecore::EObject> PackageableElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage(); //1412
+			return eAny(getOwningPackage()); //1412
 	}
-	boost::any result;
-	result = NamedElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ParameterableElementImpl::internalEIsSet(featureID);
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool PackageableElementImpl::internalEIsSet(int featureID) const
@@ -313,14 +317,14 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 	result = ParameterableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool PackageableElementImpl::eSet(int featureID, boost::any newValue)
+bool PackageableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _owningPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setOwningPackage(_owningPackage); //1412
 			return true;
 		}

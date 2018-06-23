@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 template<class T> class Union;
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -109,13 +107,13 @@ namespace uml
 			/*!
 			 Parameters must own the ParameterableElements they parameter or those ParameterableElements must be owned by the TemplateableElement being templated.
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet()) */ 
-			virtual bool own_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name) */ 
-			virtual bool unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

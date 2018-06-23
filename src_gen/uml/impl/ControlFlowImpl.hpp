@@ -62,7 +62,7 @@ namespace uml
 			 ControlFlows may not have ObjectNodes at either end, except for ObjectNodes with control type.
 			(source.oclIsKindOf(ObjectNode) implies source.oclAsType(ObjectNode).isControlType) and 
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType) */ 
-			virtual bool object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool object_nodes(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -113,9 +113,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ControlFlow> m_thisControlFlowPtr;

@@ -48,12 +48,12 @@ virtual public Object
 			 Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
-			virtual boost::any get(std::shared_ptr<uml::Property>  property)  ;
+			virtual Any get(std::shared_ptr<uml::Property>  property)  ;
 			
 			/*!
 			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection. */ 
-			virtual void set(std::shared_ptr<uml::Property>  property,boost::any value)  ;
+			virtual void set(std::shared_ptr<uml::Property>  property,Any value)  ;
 			
 			/*!
 			 */ 
@@ -96,9 +96,9 @@ virtual public Object
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Object> m_thisObjectPtr;

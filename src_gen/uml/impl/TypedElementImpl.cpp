@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -90,6 +91,7 @@ TypedElementImpl::~TypedElementImpl()
 			:TypedElementImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -230,14 +232,14 @@ std::shared_ptr<ecore::EObject> TypedElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType(); //3010
+			return eAny(getType()); //3010
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool TypedElementImpl::internalEIsSet(int featureID) const
 {
@@ -248,14 +250,14 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool TypedElementImpl::eSet(int featureID, boost::any newValue)
+bool TypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
+			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
 			setType(_type); //3010
 			return true;
 		}

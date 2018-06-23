@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ AbstractionImpl::~AbstractionImpl()
 			:AbstractionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ AbstractionImpl::~AbstractionImpl()
 			:AbstractionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ AbstractionImpl::~AbstractionImpl()
 			:AbstractionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -313,14 +317,14 @@ std::shared_ptr<ecore::EObject> AbstractionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return getMapping(); //4218
+			return eAny(getMapping()); //4218
 	}
-	return DependencyImpl::internalEIsSet(featureID);
+	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
 bool AbstractionImpl::internalEIsSet(int featureID) const
 {
@@ -331,14 +335,14 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
-bool AbstractionImpl::eSet(int featureID, boost::any newValue)
+bool AbstractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OpaqueExpression> _mapping = boost::any_cast<std::shared_ptr<uml::OpaqueExpression>>(newValue);
+			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
 			setMapping(_mapping); //4218
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -111,6 +112,7 @@ RedefinableElementImpl::~RedefinableElementImpl()
 			:RedefinableElementImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -224,19 +226,19 @@ bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::Red
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -298,18 +300,18 @@ std::shared_ptr<ecore::EObject> RedefinableElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf(); //5010
+			return eAny(getIsLeaf()); //5010
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement(); //5011
+			return eAny(getRedefinedElement()); //5011
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext(); //5012
+			return eAny(getRedefinitionContext()); //5012
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool RedefinableElementImpl::internalEIsSet(int featureID) const
 {
@@ -324,14 +326,14 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool RedefinableElementImpl::eSet(int featureID, boost::any newValue)
+bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
-			bool _isLeaf = boost::any_cast<bool>(newValue);
+			bool _isLeaf = newValue->get<bool>();
 			setIsLeaf(_isLeaf); //5010
 			return true;
 		}

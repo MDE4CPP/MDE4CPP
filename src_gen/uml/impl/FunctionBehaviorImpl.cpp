@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -151,6 +152,7 @@ FunctionBehaviorImpl::~FunctionBehaviorImpl()
 			:FunctionBehaviorImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -162,6 +164,7 @@ FunctionBehaviorImpl::~FunctionBehaviorImpl()
 			:FunctionBehaviorImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -186,10 +189,12 @@ FunctionBehaviorImpl::~FunctionBehaviorImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -206,6 +211,7 @@ FunctionBehaviorImpl::~FunctionBehaviorImpl()
 			:FunctionBehaviorImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -558,13 +564,13 @@ bool FunctionBehaviorImpl::hasAllDataTypeAttributes(std::shared_ptr<uml::DataTyp
 	throw "UnsupportedOperationException";
 }
 
-bool FunctionBehaviorImpl::one_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FunctionBehaviorImpl::one_output_parameter(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FunctionBehaviorImpl::types_of_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FunctionBehaviorImpl::types_of_parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -665,12 +671,12 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FunctionBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FunctionBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return OpaqueBehaviorImpl::internalEIsSet(featureID);
+	return OpaqueBehaviorImpl::eGet(featureID, resolve, coreType);
 }
 bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
 {
@@ -679,7 +685,7 @@ bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
 	}
 	return OpaqueBehaviorImpl::internalEIsSet(featureID);
 }
-bool FunctionBehaviorImpl::eSet(int featureID, boost::any newValue)
+bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

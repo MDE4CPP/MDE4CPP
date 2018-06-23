@@ -64,7 +64,7 @@ namespace uml
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -133,9 +133,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<RedefinableTemplateSignature> m_thisRedefinableTemplateSignaturePtr;

@@ -87,18 +87,18 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query value() gives an integer value for an expression intended to produce one.
@@ -177,9 +177,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<OpaqueExpression> m_thisOpaqueExpressionPtr;

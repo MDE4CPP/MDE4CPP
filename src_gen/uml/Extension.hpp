@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -232,7 +230,7 @@ namespace uml
 			/*!
 			 An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2 */ 
-			virtual bool is_binary(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool is_binary(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
@@ -243,7 +241,7 @@ namespace uml
 			/*!
 			 The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
-			virtual bool non_owned_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool non_owned_end(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

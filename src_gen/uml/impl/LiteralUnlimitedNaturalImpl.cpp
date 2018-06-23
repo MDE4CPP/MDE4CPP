@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 			:LiteralUnlimitedNaturalImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 			:LiteralUnlimitedNaturalImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 			:LiteralUnlimitedNaturalImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 			:LiteralUnlimitedNaturalImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -295,14 +300,14 @@ std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralUnlimitedNaturalImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralUnlimitedNaturalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALUNLIMITEDNATURAL_EATTRIBUTE_VALUE:
-			return getValue(); //25415
+			return eAny(getValue()); //25415
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralUnlimitedNaturalImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +318,14 @@ bool LiteralUnlimitedNaturalImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralUnlimitedNaturalImpl::eSet(int featureID, boost::any newValue)
+bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALUNLIMITEDNATURAL_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			int _value = boost::any_cast<int>(newValue);
+			int _value = newValue->get<int>();
 			setValue(_value); //25415
 			return true;
 		}

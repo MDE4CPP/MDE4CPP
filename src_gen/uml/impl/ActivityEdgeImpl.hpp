@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 If an ActivityEdge is directly owned by an Activity, then its source and target must be directly or indirectly contained in the same Activity.
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity */ 
-			virtual bool source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool source_and_target(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -186,9 +186,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityEdge> m_thisActivityEdgePtr;

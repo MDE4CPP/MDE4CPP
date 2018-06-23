@@ -19,10 +19,8 @@ template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 template<class T> class Union;
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -139,12 +137,12 @@ namespace uml
 			/*!
 			 A Namespace cannot have an ElementImport to one of its ownedMembers.
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember) */ 
-			virtual bool cannot_import_ownedMembers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self) */ 
-			virtual bool cannot_import_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool cannot_import_self(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Creates an import of the specified element into this namespace with the specified visibility. */ 
@@ -210,7 +208,7 @@ namespace uml
 			/*!
 			 All the members of a Namespace are distinguishable within it.
 			membersAreDistinguishable() */ 
-			virtual bool members_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool members_distinguishable(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

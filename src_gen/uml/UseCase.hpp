@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -234,17 +232,17 @@ namespace uml
 			/*!
 			 UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2) */ 
-			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self) */ 
-			virtual bool cannot_include_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A UseCase must have a name.
 			name -> notEmpty () */ 
-			virtual bool must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 UseCases cannot have Associations to UseCases specifying the same subject.
@@ -254,7 +252,7 @@ namespace uml
 			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
 			   )
 			) */ 
-			virtual bool no_association_to_use_case(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

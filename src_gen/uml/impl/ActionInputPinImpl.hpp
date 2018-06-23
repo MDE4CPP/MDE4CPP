@@ -73,19 +73,19 @@ namespace uml
 			/*!
 			 The fromAction of an ActionInputPin must only have ActionInputPins as InputPins.
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin)) */ 
-			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty() */ 
-			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1 */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -145,9 +145,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActionInputPin> m_thisActionInputPinPtr;

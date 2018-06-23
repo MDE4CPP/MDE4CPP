@@ -113,22 +113,22 @@ namespace uml
 			/*!
 			 The Classifier context of a StateMachine cannot be an Interface.
 			_'context' <> null implies not _'context'.oclIsKindOf(Interface) */ 
-			virtual bool classifier_context(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool classifier_context(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The connection points of a StateMachine are Pseudostates of kind entry point or exit point.
 			connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool connection_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool connection_points(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The context Classifier of the method StateMachine of a BehavioralFeature must be the Classifier that owns the BehavioralFeature.
 			specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context')) */ 
-			virtual bool context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool context_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A StateMachine as the method for a BehavioralFeature cannot have entry/exit connection points.
 			specification <> null implies connectionPoint->isEmpty() */ 
-			virtual bool method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool method(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -217,9 +217,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StateMachine> m_thisStateMachinePtr;

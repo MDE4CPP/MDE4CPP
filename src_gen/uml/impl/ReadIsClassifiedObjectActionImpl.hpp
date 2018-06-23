@@ -61,22 +61,22 @@ namespace uml
 			/*!
 			 The type of the result OutputPin is Boolean.
 			result.type = Boolean */ 
-			virtual bool boolean_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity_of_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -170,9 +170,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadIsClassifiedObjectAction> m_thisReadIsClassifiedObjectActionPtr;

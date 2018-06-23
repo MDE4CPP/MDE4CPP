@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -214,7 +212,7 @@ namespace uml
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context. */ 
-			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this profile. */ 
@@ -249,13 +247,13 @@ namespace uml
 			packagedElement->
 			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 A Reception has the same name as its signal
 			name = signal.name */ 
-			virtual bool same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -65,7 +65,7 @@ namespace uml
 			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
 			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
 			) */ 
-			virtual bool same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -125,9 +125,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Reception> m_thisReceptionPtr;

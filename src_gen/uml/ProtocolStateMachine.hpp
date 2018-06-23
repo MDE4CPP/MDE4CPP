@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -288,18 +286,18 @@ namespace uml
 			 ProtocolStateMachines cannot have deep or shallow history Pseudostates.
 			region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory)))) */ 
-			virtual bool deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty()))) */ 
-			virtual bool entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool entry_exit_do(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition))) */ 
-			virtual bool protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool protocol_transitions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

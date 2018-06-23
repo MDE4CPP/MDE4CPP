@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -161,6 +162,7 @@ NodeImpl::~NodeImpl()
 			:NodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -185,10 +187,12 @@ NodeImpl::~NodeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -205,6 +209,7 @@ NodeImpl::~NodeImpl()
 			:NodeImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -535,7 +540,7 @@ std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
 	throw "UnsupportedOperationException";
 }
 
-bool NodeImpl::internal_structure(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NodeImpl::internal_structure(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -634,20 +639,20 @@ std::shared_ptr<ecore::EObject> NodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return getNestedNode(); //20755
+			return eAny(getNestedNode()); //20755
 	}
-	boost::any result;
-	result = ClassImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ClassImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = DeploymentTargetImpl::internalEIsSet(featureID);
+	result = DeploymentTargetImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool NodeImpl::internalEIsSet(int featureID) const
@@ -666,7 +671,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	result = DeploymentTargetImpl::internalEIsSet(featureID);
 	return result;
 }
-bool NodeImpl::eSet(int featureID, boost::any newValue)
+bool NodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

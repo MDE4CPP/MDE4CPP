@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -182,23 +180,23 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The structuralFeature must not be static.
 			not structuralFeature.isStatic */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type) */ 
-			virtual bool object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1 */ 
-			virtual bool one_featuring_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
@@ -206,7 +204,7 @@ namespace uml
 			_'context'.allFeatures()->includes(structuralFeature) or
 			structuralFeature.visibility=VisibilityKind::protected and
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier)) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

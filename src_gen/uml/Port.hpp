@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -200,12 +198,12 @@ namespace uml
 			/*!
 			 A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty() */ 
-			virtual bool default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool default_value(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier */ 
-			virtual bool encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Derivation for Port::/provided
@@ -222,7 +220,7 @@ namespace uml
 			/*!
 			 Port.aggregation must be composite.
 			aggregation = AggregationKind::composite */ 
-			virtual bool port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool port_aggregation(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

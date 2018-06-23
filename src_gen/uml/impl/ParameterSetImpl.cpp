@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -112,6 +113,7 @@ ParameterSetImpl::~ParameterSetImpl()
 			:ParameterSetImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -215,19 +217,19 @@ std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterSetImpl::input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::input(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterSetImpl::same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::same_parameterized_entity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterSetImpl::two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -289,16 +291,16 @@ std::shared_ptr<ecore::EObject> ParameterSetImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
-			return getCondition(); //5210
+			return eAny(getCondition()); //5210
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
-			return getParameter(); //5211
+			return eAny(getParameter()); //5211
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ParameterSetImpl::internalEIsSet(int featureID) const
 {
@@ -311,7 +313,7 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool ParameterSetImpl::eSet(int featureID, boost::any newValue)
+bool ParameterSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

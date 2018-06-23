@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -96,6 +97,7 @@ TypeImpl::~TypeImpl()
 			:TypeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -120,10 +122,12 @@ TypeImpl::~TypeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -140,6 +144,7 @@ TypeImpl::~TypeImpl()
 			:TypeImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -317,14 +322,14 @@ std::shared_ptr<ecore::EObject> TypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-			return getPackage(); //2613
+			return eAny(getPackage()); //2613
 	}
-	return PackageableElementImpl::internalEIsSet(featureID);
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool TypeImpl::internalEIsSet(int featureID) const
 {
@@ -335,14 +340,14 @@ bool TypeImpl::internalEIsSet(int featureID) const
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
-bool TypeImpl::eSet(int featureID, boost::any newValue)
+bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _package = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _package = newValue->get<std::shared_ptr<uml::Package>>();
 			setPackage(_package); //2613
 			return true;
 		}

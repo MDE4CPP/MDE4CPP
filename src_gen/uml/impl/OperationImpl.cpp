@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -197,6 +198,7 @@ OperationImpl::~OperationImpl()
 			:OperationImpl()
 			{
 			    m_class = par_class;
+				m_namespace = par_class;
 			}
 
 
@@ -208,6 +210,7 @@ OperationImpl::~OperationImpl()
 			:OperationImpl()
 			{
 			    m_datatype = par_datatype;
+				m_namespace = par_datatype;
 			}
 
 
@@ -219,6 +222,7 @@ OperationImpl::~OperationImpl()
 			:OperationImpl()
 			{
 			    m_interface = par_interface;
+				m_namespace = par_interface;
 			}
 
 
@@ -230,6 +234,7 @@ OperationImpl::~OperationImpl()
 			:OperationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -252,6 +257,7 @@ OperationImpl::~OperationImpl()
 			:OperationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -496,7 +502,7 @@ int OperationImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationImpl::at_most_one_return(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -534,7 +540,7 @@ bool OperationImpl::isUnique()
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -732,49 +738,49 @@ std::shared_ptr<ecore::EObject> OperationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
-			return getBodyCondition(); //4731
+			return eAny(getBodyCondition()); //4731
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
-			return getClass(); //4732
+			return eAny(getClass()); //4732
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
-			return getDatatype(); //4733
+			return eAny(getDatatype()); //4733
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
-			return getInterface(); //4734
+			return eAny(getInterface()); //4734
 		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
-			return getIsOrdered(); //4735
+			return eAny(getIsOrdered()); //4735
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
-			return getIsQuery(); //4736
+			return eAny(getIsQuery()); //4736
 		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique(); //4737
+			return eAny(getIsUnique()); //4737
 		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
-			return getLower(); //4738
+			return eAny(getLower()); //4738
 		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
-			return getPostcondition(); //4739
+			return eAny(getPostcondition()); //4739
 		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
-			return getPrecondition(); //4740
+			return eAny(getPrecondition()); //4740
 		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
-			return getRedefinedOperation(); //4741
+			return eAny(getRedefinedOperation()); //4741
 		case UmlPackage::OPERATION_EREFERENCE_TYPE:
-			return getType(); //4742
+			return eAny(getType()); //4742
 		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
-			return getUpper(); //4743
+			return eAny(getUpper()); //4743
 	}
-	boost::any result;
-	result = BehavioralFeatureImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ParameterableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TemplateableElementImpl::internalEIsSet(featureID);
+	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool OperationImpl::internalEIsSet(int featureID) const
@@ -822,42 +828,42 @@ bool OperationImpl::internalEIsSet(int featureID) const
 	result = TemplateableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool OperationImpl::eSet(int featureID, boost::any newValue)
+bool OperationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _bodyCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _bodyCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setBodyCondition(_bodyCondition); //4731
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Class> _class = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
+			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
 			setClass(_class); //4732
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _datatype = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
+			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
 			setDatatype(_datatype); //4733
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _interface = boost::any_cast<std::shared_ptr<uml::Interface>>(newValue);
+			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
 			setInterface(_interface); //4734
 			return true;
 		}
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
 		{
 			// BOOST CAST
-			bool _isQuery = boost::any_cast<bool>(newValue);
+			bool _isQuery = newValue->get<bool>();
 			setIsQuery(_isQuery); //4736
 			return true;
 		}

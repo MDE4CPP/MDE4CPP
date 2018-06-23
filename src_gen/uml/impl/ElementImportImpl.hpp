@@ -63,12 +63,12 @@ namespace uml
 			/*!
 			 An importedElement has either public visibility or no visibility at all.
 			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public */ 
-			virtual bool imported_element_is_public(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The visibility of an ElementImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool visibility_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -160,9 +160,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ElementImport> m_thisElementImportPtr;

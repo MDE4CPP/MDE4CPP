@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,6 +96,7 @@ TimeEventImpl::~TimeEventImpl()
 			:TimeEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -117,6 +119,7 @@ TimeEventImpl::~TimeEventImpl()
 			:TimeEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -128,6 +131,7 @@ TimeEventImpl::~TimeEventImpl()
 			:TimeEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -226,7 +230,7 @@ bool TimeEventImpl::getIsRelative() const
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -298,16 +302,16 @@ std::shared_ptr<ecore::EObject> TimeEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
-			return getIsRelative(); //20213
+			return eAny(getIsRelative()); //20213
 		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
-			return getWhen(); //20214
+			return eAny(getWhen()); //20214
 	}
-	return EventImpl::internalEIsSet(featureID);
+	return EventImpl::eGet(featureID, resolve, coreType);
 }
 bool TimeEventImpl::internalEIsSet(int featureID) const
 {
@@ -320,21 +324,21 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
-bool TimeEventImpl::eSet(int featureID, boost::any newValue)
+bool TimeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
 		{
 			// BOOST CAST
-			bool _isRelative = boost::any_cast<bool>(newValue);
+			bool _isRelative = newValue->get<bool>();
 			setIsRelative(_isRelative); //20213
 			return true;
 		}
 		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TimeExpression> _when = boost::any_cast<std::shared_ptr<uml::TimeExpression>>(newValue);
+			std::shared_ptr<uml::TimeExpression> _when = newValue->get<std::shared_ptr<uml::TimeExpression>>();
 			setWhen(_when); //20214
 			return true;
 		}

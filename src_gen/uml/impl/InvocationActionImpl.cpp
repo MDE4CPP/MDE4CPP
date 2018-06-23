@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -132,6 +133,7 @@ InvocationActionImpl::~InvocationActionImpl()
 			:InvocationActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -143,6 +145,7 @@ InvocationActionImpl::~InvocationActionImpl()
 			:InvocationActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -154,6 +157,7 @@ InvocationActionImpl::~InvocationActionImpl()
 			:InvocationActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -409,16 +413,16 @@ std::shared_ptr<ecore::EObject> InvocationActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INVOCATIONACTION_EREFERENCE_ARGUMENT:
-			return getArgument(); //13828
+			return eAny(getArgument()); //13828
 		case UmlPackage::INVOCATIONACTION_EREFERENCE_ONPORT:
-			return getOnPort(); //13829
+			return eAny(getOnPort()); //13829
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool InvocationActionImpl::internalEIsSet(int featureID) const
 {
@@ -431,14 +435,14 @@ bool InvocationActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool InvocationActionImpl::eSet(int featureID, boost::any newValue)
+bool InvocationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INVOCATIONACTION_EREFERENCE_ONPORT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Port> _onPort = boost::any_cast<std::shared_ptr<uml::Port>>(newValue);
+			std::shared_ptr<uml::Port> _onPort = newValue->get<std::shared_ptr<uml::Port>>();
 			setOnPort(_onPort); //13829
 			return true;
 		}

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -182,13 +180,13 @@ namespace uml
 			/*!
 			 The multiplicity of the variable must be compatible with the multiplicity of the output pin.
 			variable.compatibleWith(result) */ 
-			virtual bool compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered */ 
-			virtual bool type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

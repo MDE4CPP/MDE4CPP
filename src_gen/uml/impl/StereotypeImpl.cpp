@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -163,6 +164,7 @@ StereotypeImpl::~StereotypeImpl()
 			:StereotypeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -187,10 +189,12 @@ StereotypeImpl::~StereotypeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -207,6 +211,7 @@ StereotypeImpl::~StereotypeImpl()
 			:StereotypeImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -516,31 +521,31 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StereotypeImpl::associationEndOwnership(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_multiplicity_multiple_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_multiplicity_single_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_upper_bound(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::binaryAssociationsOnly(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -570,7 +575,7 @@ std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format,std::s
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::generalize(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::generalize(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -608,7 +613,7 @@ std::string StereotypeImpl::getKeyword(bool localize)
 
 
 
-bool StereotypeImpl::name_not_clash(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::name_not_clash(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -713,16 +718,16 @@ std::shared_ptr<ecore::EObject> StereotypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return getIcon(); //1053
+			return eAny(getIcon()); //1053
 		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return getProfile(); //1054
+			return eAny(getProfile()); //1054
 	}
-	return ClassImpl::internalEIsSet(featureID);
+	return ClassImpl::eGet(featureID, resolve, coreType);
 }
 bool StereotypeImpl::internalEIsSet(int featureID) const
 {
@@ -735,7 +740,7 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
-bool StereotypeImpl::eSet(int featureID, boost::any newValue)
+bool StereotypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

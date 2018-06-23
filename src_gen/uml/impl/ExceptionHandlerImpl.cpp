@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -112,6 +113,7 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 			:ExceptionHandlerImpl()
 			{
 			    m_protectedNode = par_protectedNode;
+				m_owner = par_protectedNode;
 			}
 
 
@@ -180,37 +182,37 @@ std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExceptionHandlerImpl::edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::edge_source_target(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::exception_input_type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::handler_body_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::handler_body_owner(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::one_input(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -295,20 +297,20 @@ std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
-			return getExceptionInput(); //1154
+			return eAny(getExceptionInput()); //1154
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
-			return getExceptionType(); //1155
+			return eAny(getExceptionType()); //1155
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
-			return getHandlerBody(); //1156
+			return eAny(getHandlerBody()); //1156
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
-			return getProtectedNode(); //1157
+			return eAny(getProtectedNode()); //1157
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 {
@@ -325,28 +327,28 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool ExceptionHandlerImpl::eSet(int featureID, boost::any newValue)
+bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ObjectNode> _exceptionInput = boost::any_cast<std::shared_ptr<uml::ObjectNode>>(newValue);
+			std::shared_ptr<uml::ObjectNode> _exceptionInput = newValue->get<std::shared_ptr<uml::ObjectNode>>();
 			setExceptionInput(_exceptionInput); //1154
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutableNode> _handlerBody = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);
+			std::shared_ptr<uml::ExecutableNode> _handlerBody = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
 			setHandlerBody(_handlerBody); //1156
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutableNode> _protectedNode = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);
+			std::shared_ptr<uml::ExecutableNode> _protectedNode = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
 			setProtectedNode(_protectedNode); //1157
 			return true;
 		}

@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -240,13 +241,13 @@ int MultiplicityElementImpl::lowerBound()
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::lower_ge_0(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -258,25 +259,25 @@ int MultiplicityElementImpl::upperBound()
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::value_specification_constant(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -335,24 +336,24 @@ std::shared_ptr<ecore::EObject> MultiplicityElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-			return getIsOrdered(); //324
+			return eAny(getIsOrdered()); //324
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique(); //325
+			return eAny(getIsUnique()); //325
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-			return getLower(); //326
+			return eAny(getLower()); //326
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-			return getLowerValue(); //327
+			return eAny(getLowerValue()); //327
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-			return getUpper(); //328
+			return eAny(getUpper()); //328
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-			return getUpperValue(); //329
+			return eAny(getUpperValue()); //329
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 {
@@ -373,49 +374,49 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool MultiplicityElementImpl::eSet(int featureID, boost::any newValue)
+bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
-			bool _isOrdered = boost::any_cast<bool>(newValue);
+			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //324
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
 		{
 			// BOOST CAST
-			bool _isUnique = boost::any_cast<bool>(newValue);
+			bool _isUnique = newValue->get<bool>();
 			setIsUnique(_isUnique); //325
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
 		{
 			// BOOST CAST
-			int _lower = boost::any_cast<int>(newValue);
+			int _lower = newValue->get<int>();
 			setLower(_lower); //326
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setLowerValue(_lowerValue); //327
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
-			int _upper = boost::any_cast<int>(newValue);
+			int _upper = newValue->get<int>();
 			setUpper(_upper); //328
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _upperValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setUpperValue(_upperValue); //329
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -104,6 +105,7 @@ InterfaceRealizationImpl::~InterfaceRealizationImpl()
 			:InterfaceRealizationImpl()
 			{
 			    m_implementingClassifier = par_implementingClassifier;
+				m_owner = par_implementingClassifier;
 			}
 
 
@@ -115,6 +117,7 @@ InterfaceRealizationImpl::~InterfaceRealizationImpl()
 			:InterfaceRealizationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -137,6 +140,7 @@ InterfaceRealizationImpl::~InterfaceRealizationImpl()
 			:InterfaceRealizationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -148,6 +152,7 @@ InterfaceRealizationImpl::~InterfaceRealizationImpl()
 			:InterfaceRealizationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -357,16 +362,16 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
-			return getContract(); //10519
+			return eAny(getContract()); //10519
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
-			return getImplementingClassifier(); //10520
+			return eAny(getImplementingClassifier()); //10520
 	}
-	return RealizationImpl::internalEIsSet(featureID);
+	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
 bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 {
@@ -379,21 +384,21 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
-bool InterfaceRealizationImpl::eSet(int featureID, boost::any newValue)
+bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _contract = boost::any_cast<std::shared_ptr<uml::Interface>>(newValue);
+			std::shared_ptr<uml::Interface> _contract = newValue->get<std::shared_ptr<uml::Interface>>();
 			setContract(_contract); //10519
 			return true;
 		}
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = boost::any_cast<std::shared_ptr<uml::BehavioredClassifier>>(newValue);
+			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
 			setImplementingClassifier(_implementingClassifier); //10520
 			return true;
 		}

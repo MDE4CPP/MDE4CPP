@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -96,6 +97,7 @@ TimeIntervalImpl::~TimeIntervalImpl()
 			:TimeIntervalImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -118,6 +120,7 @@ TimeIntervalImpl::~TimeIntervalImpl()
 			:TimeIntervalImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -129,6 +132,7 @@ TimeIntervalImpl::~TimeIntervalImpl()
 			:TimeIntervalImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -140,6 +144,7 @@ TimeIntervalImpl::~TimeIntervalImpl()
 			:TimeIntervalImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -291,12 +296,12 @@ std::shared_ptr<ecore::EObject> TimeIntervalImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TimeIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return IntervalImpl::internalEIsSet(featureID);
+	return IntervalImpl::eGet(featureID, resolve, coreType);
 }
 bool TimeIntervalImpl::internalEIsSet(int featureID) const
 {
@@ -305,7 +310,7 @@ bool TimeIntervalImpl::internalEIsSet(int featureID) const
 	}
 	return IntervalImpl::internalEIsSet(featureID);
 }
-bool TimeIntervalImpl::eSet(int featureID, boost::any newValue)
+bool TimeIntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

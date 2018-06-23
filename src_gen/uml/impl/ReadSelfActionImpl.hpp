@@ -61,23 +61,23 @@ namespace uml
 			/*!
 			 A ReadSelfAction must have a context Classifier.
 			_'context' <> null */ 
-			virtual bool contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool contained(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin is the context Classifier.
 			result.type = _'context' */ 
-			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -140,9 +140,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadSelfAction> m_thisReadSelfActionPtr;

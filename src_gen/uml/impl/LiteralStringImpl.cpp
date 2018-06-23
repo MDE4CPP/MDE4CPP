@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralStringImpl::~LiteralStringImpl()
 			:LiteralStringImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralStringImpl::~LiteralStringImpl()
 			:LiteralStringImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralStringImpl::~LiteralStringImpl()
 			:LiteralStringImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralStringImpl::~LiteralStringImpl()
 			:LiteralStringImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -295,14 +300,14 @@ std::shared_ptr<ecore::EObject> LiteralStringImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALSTRING_EATTRIBUTE_VALUE:
-			return getValue(); //25315
+			return eAny(getValue()); //25315
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralStringImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +318,14 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralStringImpl::eSet(int featureID, boost::any newValue)
+bool LiteralStringImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALSTRING_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::string _value = boost::any_cast<std::string>(newValue);
+			std::string _value = newValue->get<std::string>();
 			setValue(_value); //25315
 			return true;
 		}

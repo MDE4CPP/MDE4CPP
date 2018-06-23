@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -104,6 +105,7 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			:ActivityFinalNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -115,6 +117,7 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			:ActivityFinalNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -126,6 +129,7 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			:ActivityFinalNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -317,12 +321,12 @@ std::shared_ptr<ecore::EObject> ActivityFinalNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return FinalNodeImpl::internalEIsSet(featureID);
+	return FinalNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
 {
@@ -331,7 +335,7 @@ bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
 	}
 	return FinalNodeImpl::internalEIsSet(featureID);
 }
-bool ActivityFinalNodeImpl::eSet(int featureID, boost::any newValue)
+bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,6 +96,7 @@ ContinuationImpl::~ContinuationImpl()
 			:ContinuationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -106,6 +108,7 @@ ContinuationImpl::~ContinuationImpl()
 			:ContinuationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -117,6 +120,7 @@ ContinuationImpl::~ContinuationImpl()
 			:ContinuationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -227,19 +231,19 @@ bool ContinuationImpl::getSetting() const
 //*********************************
 // Operations
 //*********************************
-bool ContinuationImpl::first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::global(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ContinuationImpl::global(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ContinuationImpl::same_name(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -302,14 +306,14 @@ std::shared_ptr<ecore::EObject> ContinuationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
-			return getSetting(); //23114
+			return eAny(getSetting()); //23114
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool ContinuationImpl::internalEIsSet(int featureID) const
 {
@@ -320,14 +324,14 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool ContinuationImpl::eSet(int featureID, boost::any newValue)
+bool ContinuationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
 		{
 			// BOOST CAST
-			bool _setting = boost::any_cast<bool>(newValue);
+			bool _setting = newValue->get<bool>();
 			setSetting(_setting); //23114
 			return true;
 		}

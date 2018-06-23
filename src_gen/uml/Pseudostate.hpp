@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -154,37 +152,37 @@ namespace uml
 			/*!
 			 In a complete statemachine, a choice Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1) */ 
-			virtual bool choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool choice_vertex(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
 			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2) */ 
-			virtual bool fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool fork_vertex(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 History Vertices can have at most one outgoing Transition.
 			((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1) */ 
-			virtual bool history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool history_vertices(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 An initial Vertex can have at most one outgoing Transition.
 			(kind = PseudostateKind::initial) implies (outgoing->size() <= 1) */ 
-			virtual bool initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
 			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2) */ 
-			virtual bool join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool join_vertex(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1) */ 
-			virtual bool junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool junction_vertex(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
 			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty()) */ 
-			virtual bool outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
@@ -196,7 +194,7 @@ namespace uml
 			incoming->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.source, t2.source) in
 				((contState <> null) and (contState.region
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2))))) */ 
-			virtual bool transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool transitions_incoming(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
@@ -208,7 +206,7 @@ namespace uml
 			outgoing->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.target, t2.target) in
 				((contState <> null) and (contState.region
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2))))) */ 
-			virtual bool transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -133,9 +133,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<SendObjectAction> m_thisSendObjectActionPtr;

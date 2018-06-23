@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ InstanceValueImpl::~InstanceValueImpl()
 			:InstanceValueImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -120,6 +122,7 @@ InstanceValueImpl::~InstanceValueImpl()
 			:InstanceValueImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -131,6 +134,7 @@ InstanceValueImpl::~InstanceValueImpl()
 			:InstanceValueImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -142,6 +146,7 @@ InstanceValueImpl::~InstanceValueImpl()
 			:InstanceValueImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -300,14 +305,14 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
-			return getInstance(); //19415
+			return eAny(getInstance()); //19415
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool InstanceValueImpl::internalEIsSet(int featureID) const
 {
@@ -318,14 +323,14 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool InstanceValueImpl::eSet(int featureID, boost::any newValue)
+bool InstanceValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InstanceSpecification> _instance = boost::any_cast<std::shared_ptr<uml::InstanceSpecification>>(newValue);
+			std::shared_ptr<uml::InstanceSpecification> _instance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
 			setInstance(_instance); //19415
 			return true;
 		}

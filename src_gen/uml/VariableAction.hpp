@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -181,7 +179,7 @@ namespace uml
 			/*!
 			 The VariableAction must be in the scope of the variable.
 			variable.isAccessibleBy(self) */ 
-			virtual bool scope_of_variable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

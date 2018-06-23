@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
-			virtual bool region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -130,9 +130,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExpansionNode> m_thisExpansionNodePtr;

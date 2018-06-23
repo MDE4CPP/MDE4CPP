@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			:ValueSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -120,6 +122,7 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			:ValueSpecificationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -131,6 +134,7 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			:ValueSpecificationImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -142,6 +146,7 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			:ValueSpecificationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -340,20 +345,20 @@ std::shared_ptr<ecore::EObject> ValueSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return getOwningSlot(); //3314
+			return eAny(getOwningSlot()); //3314
 	}
-	boost::any result;
-	result = PackageableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TypedElementImpl::internalEIsSet(featureID);
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ValueSpecificationImpl::internalEIsSet(int featureID) const
@@ -372,14 +377,14 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 	result = TypedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ValueSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Slot> _owningSlot = boost::any_cast<std::shared_ptr<uml::Slot>>(newValue);
+			std::shared_ptr<uml::Slot> _owningSlot = newValue->get<std::shared_ptr<uml::Slot>>();
 			setOwningSlot(_owningSlot); //3314
 			return true;
 		}

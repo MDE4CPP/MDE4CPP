@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,6 +96,7 @@ GeneralOrderingImpl::~GeneralOrderingImpl()
 			:GeneralOrderingImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -184,7 +186,7 @@ std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -252,16 +254,16 @@ std::shared_ptr<ecore::EObject> GeneralOrderingImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
-			return getAfter(); //22010
+			return eAny(getAfter()); //22010
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
-			return getBefore(); //22011
+			return eAny(getBefore()); //22011
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 {
@@ -274,21 +276,21 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool GeneralOrderingImpl::eSet(int featureID, boost::any newValue)
+bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _after = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			std::shared_ptr<uml::OccurrenceSpecification> _after = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
 			setAfter(_after); //22010
 			return true;
 		}
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _before = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			std::shared_ptr<uml::OccurrenceSpecification> _before = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
 			setBefore(_before); //22011
 			return true;
 		}

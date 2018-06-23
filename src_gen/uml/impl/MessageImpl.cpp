@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -130,6 +131,7 @@ MessageImpl::~MessageImpl()
 			:MessageImpl()
 			{
 			    m_interaction = par_interaction;
+				m_namespace = par_interaction;
 			}
 
 
@@ -141,6 +143,7 @@ MessageImpl::~MessageImpl()
 			:MessageImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -269,13 +272,13 @@ MessageSort MessageImpl::getMessageSort() const
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::arguments(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -287,37 +290,37 @@ MessageKind MessageImpl::getMessageKind()
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::occurrence_specifications(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_operation_request(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_signal(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -431,28 +434,28 @@ std::shared_ptr<ecore::EObject> MessageImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGE_EREFERENCE_ARGUMENT:
-			return getArgument(); //21010
+			return eAny(getArgument()); //21010
 		case UmlPackage::MESSAGE_EREFERENCE_CONNECTOR:
-			return getConnector(); //21011
+			return eAny(getConnector()); //21011
 		case UmlPackage::MESSAGE_EREFERENCE_INTERACTION:
-			return getInteraction(); //21012
+			return eAny(getInteraction()); //21012
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGEKIND:
-			return getMessageKind(); //21013
+			return eAny(getMessageKind()); //21013
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGESORT:
-			return getMessageSort(); //21014
+			return eAny(getMessageSort()); //21014
 		case UmlPackage::MESSAGE_EREFERENCE_RECEIVEEVENT:
-			return getReceiveEvent(); //21015
+			return eAny(getReceiveEvent()); //21015
 		case UmlPackage::MESSAGE_EREFERENCE_SENDEVENT:
-			return getSendEvent(); //21016
+			return eAny(getSendEvent()); //21016
 		case UmlPackage::MESSAGE_EREFERENCE_SIGNATURE:
-			return getSignature(); //21017
+			return eAny(getSignature()); //21017
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool MessageImpl::internalEIsSet(int featureID) const
 {
@@ -477,49 +480,49 @@ bool MessageImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool MessageImpl::eSet(int featureID, boost::any newValue)
+bool MessageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGE_EREFERENCE_CONNECTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Connector> _connector = boost::any_cast<std::shared_ptr<uml::Connector>>(newValue);
+			std::shared_ptr<uml::Connector> _connector = newValue->get<std::shared_ptr<uml::Connector>>();
 			setConnector(_connector); //21011
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _interaction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
+			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setInteraction(_interaction); //21012
 			return true;
 		}
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGESORT:
 		{
 			// BOOST CAST
-			MessageSort _messageSort = boost::any_cast<MessageSort>(newValue);
+			MessageSort _messageSort = newValue->get<MessageSort>();
 			setMessageSort(_messageSort); //21014
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_RECEIVEEVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::MessageEnd> _receiveEvent = boost::any_cast<std::shared_ptr<uml::MessageEnd>>(newValue);
+			std::shared_ptr<uml::MessageEnd> _receiveEvent = newValue->get<std::shared_ptr<uml::MessageEnd>>();
 			setReceiveEvent(_receiveEvent); //21015
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_SENDEVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::MessageEnd> _sendEvent = boost::any_cast<std::shared_ptr<uml::MessageEnd>>(newValue);
+			std::shared_ptr<uml::MessageEnd> _sendEvent = newValue->get<std::shared_ptr<uml::MessageEnd>>();
 			setSendEvent(_sendEvent); //21016
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::NamedElement> _signature = boost::any_cast<std::shared_ptr<uml::NamedElement>>(newValue);
+			std::shared_ptr<uml::NamedElement> _signature = newValue->get<std::shared_ptr<uml::NamedElement>>();
 			setSignature(_signature); //21017
 			return true;
 		}

@@ -18,10 +18,8 @@ template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -295,7 +293,7 @@ namespace uml
 			ownedParameter->forAll(p | 
 			   p.direction <> ParameterDirectionKind::inout implies node->select(
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1) */ 
-			virtual bool maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -307,7 +305,7 @@ namespace uml
 			  associatedNodes->select(incoming->notEmpty())->size()<=1 and
 			  associatedNodes->select(outgoing->notEmpty())->size()<=1
 			) */ 
-			virtual bool maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

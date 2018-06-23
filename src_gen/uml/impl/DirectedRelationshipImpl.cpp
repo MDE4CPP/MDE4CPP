@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -224,16 +225,16 @@ std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource(); //205
+			return eAny(getSource()); //205
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget(); //206
+			return eAny(getTarget()); //206
 	}
-	return RelationshipImpl::internalEIsSet(featureID);
+	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 {
@@ -246,7 +247,7 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }
-bool DirectedRelationshipImpl::eSet(int featureID, boost::any newValue)
+bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 The argument to a ClassifierTemplateParameter is a Classifier.
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier)) */ 
-			virtual bool actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
@@ -64,29 +64,29 @@ namespace uml
 			         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))
 			      )
 			) */ 
-			virtual bool constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			constrainingClassifier->forAll(
 			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
 			) */ 
-			virtual bool constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If allowSubstitutable is true, then there must be a constrainingClassifier.
 			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
-			virtual bool has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
 			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
-			virtual bool matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool matching_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
 			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
-			virtual bool parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -146,9 +146,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ClassifierTemplateParameter> m_thisClassifierTemplateParameterPtr;

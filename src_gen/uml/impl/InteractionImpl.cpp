@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -241,6 +242,7 @@ InteractionImpl::~InteractionImpl()
 			:InteractionImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -252,6 +254,7 @@ InteractionImpl::~InteractionImpl()
 			:InteractionImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -263,6 +266,7 @@ InteractionImpl::~InteractionImpl()
 			:InteractionImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -274,6 +278,7 @@ InteractionImpl::~InteractionImpl()
 			:InteractionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -298,10 +303,12 @@ InteractionImpl::~InteractionImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -318,6 +325,7 @@ InteractionImpl::~InteractionImpl()
 			:InteractionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -756,7 +764,7 @@ std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionImpl::not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -902,28 +910,28 @@ std::shared_ptr<ecore::EObject> InteractionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return getAction(); //21168
+			return eAny(getAction()); //21168
 		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return getFormalGate(); //21169
+			return eAny(getFormalGate()); //21169
 		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return getFragment(); //21167
+			return eAny(getFragment()); //21167
 		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return getLifeline(); //21166
+			return eAny(getLifeline()); //21166
 		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return getMessage(); //21170
+			return eAny(getMessage()); //21170
 	}
-	boost::any result;
-	result = BehaviorImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = BehaviorImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = InteractionFragmentImpl::internalEIsSet(featureID);
+	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool InteractionImpl::internalEIsSet(int featureID) const
@@ -950,7 +958,7 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	result = InteractionFragmentImpl::internalEIsSet(featureID);
 	return result;
 }
-bool InteractionImpl::eSet(int featureID, boost::any newValue)
+bool InteractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -185,12 +183,12 @@ namespace uml
 			/*!
 			 A control Pin has a control type.
 			isControl implies isControlType */ 
-			virtual bool control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Pin multiplicity is not unique.
 			not isUnique */ 
-			virtual bool not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

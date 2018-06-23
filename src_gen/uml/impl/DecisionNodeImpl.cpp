@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -115,6 +116,7 @@ DecisionNodeImpl::~DecisionNodeImpl()
 			:DecisionNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -126,6 +128,7 @@ DecisionNodeImpl::~DecisionNodeImpl()
 			:DecisionNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -137,6 +140,7 @@ DecisionNodeImpl::~DecisionNodeImpl()
 			:DecisionNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -270,49 +274,49 @@ std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DecisionNodeImpl::decision_input_flow_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_control_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_object_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::two_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::zero_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -398,16 +402,16 @@ std::shared_ptr<ecore::EObject> DecisionNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
-			return getDecisionInput(); //18721
+			return eAny(getDecisionInput()); //18721
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
-			return getDecisionInputFlow(); //18722
+			return eAny(getDecisionInputFlow()); //18722
 	}
-	return ControlNodeImpl::internalEIsSet(featureID);
+	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool DecisionNodeImpl::internalEIsSet(int featureID) const
 {
@@ -420,21 +424,21 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
-bool DecisionNodeImpl::eSet(int featureID, boost::any newValue)
+bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _decisionInput = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _decisionInput = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setDecisionInput(_decisionInput); //18721
 			return true;
 		}
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = boost::any_cast<std::shared_ptr<uml::ObjectFlow>>(newValue);
+			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = newValue->get<std::shared_ptr<uml::ObjectFlow>>();
 			setDecisionInputFlow(_decisionInputFlow); //18722
 			return true;
 		}

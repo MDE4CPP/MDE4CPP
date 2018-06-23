@@ -60,7 +60,7 @@ namespace uml
 			//*********************************
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type. */ 
-			virtual bool compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool compatible_types(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A selection Behavior has one input Parameter and one output Parameter. The input Parameter must have the same as or a supertype of the type of the source ObjectNode, be non-unique and have multiplicity 0..*. The output Parameter must be the same or a subtype of the type of source ObjectNode. The Behavior cannot have side effects.
@@ -68,37 +68,37 @@ namespace uml
 				selection.inputParameters()->size()=1 and
 				selection.inputParameters()->forAll(not isUnique and is(0,*)) and
 				selection.outputParameters()->size()=1 */ 
-			virtual bool input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool input_and_output_parameter(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive) */ 
-			virtual bool is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool is_multicast_or_is_multireceive(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode)) */ 
-			virtual bool no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_executable_nodes(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds. */ 
-			virtual bool same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_upper_bounds(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode) */ 
-			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight. */ 
-			virtual bool target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool target(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
 				transformation.inputParameters()->size()=1 and
 				transformation.outputParameters()->size()=1 */ 
-			virtual bool transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool transformation_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -187,9 +187,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ObjectFlow> m_thisObjectFlowPtr;

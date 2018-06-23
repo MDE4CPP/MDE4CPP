@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -102,6 +103,7 @@ ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
 			:ClassifierTemplateParameterImpl()
 			{
 			    m_signature = par_signature;
+				m_owner = par_signature;
 			}
 
 
@@ -194,37 +196,37 @@ bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -279,16 +281,16 @@ std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::eContainer() co
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return getAllowSubstitutable(); //1049
+			return eAny(getAllowSubstitutable()); //1049
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
-			return getConstrainingClassifier(); //10410
+			return eAny(getConstrainingClassifier()); //10410
 	}
-	return TemplateParameterImpl::internalEIsSet(featureID);
+	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
 bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 {
@@ -301,14 +303,14 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
-bool ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
 		{
 			// BOOST CAST
-			bool _allowSubstitutable = boost::any_cast<bool>(newValue);
+			bool _allowSubstitutable = newValue->get<bool>();
 			setAllowSubstitutable(_allowSubstitutable); //1049
 			return true;
 		}

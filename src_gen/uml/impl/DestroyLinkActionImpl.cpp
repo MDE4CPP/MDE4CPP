@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -114,6 +115,7 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			:DestroyLinkActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -125,6 +127,7 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			:DestroyLinkActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -136,6 +139,7 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			:DestroyLinkActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -374,12 +378,12 @@ std::shared_ptr<ecore::EObject> DestroyLinkActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DestroyLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DestroyLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return WriteLinkActionImpl::internalEIsSet(featureID);
+	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
 }
 bool DestroyLinkActionImpl::internalEIsSet(int featureID) const
 {
@@ -388,7 +392,7 @@ bool DestroyLinkActionImpl::internalEIsSet(int featureID) const
 	}
 	return WriteLinkActionImpl::internalEIsSet(featureID);
 }
-bool DestroyLinkActionImpl::eSet(int featureID, boost::any newValue)
+bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

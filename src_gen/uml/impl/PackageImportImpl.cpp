@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -91,6 +92,7 @@ PackageImportImpl::~PackageImportImpl()
 			:PackageImportImpl()
 			{
 			    m_importingNamespace = par_importingNamespace;
+				m_owner = par_importingNamespace;
 			}
 
 
@@ -183,7 +185,7 @@ VisibilityKind PackageImportImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PackageImportImpl::public_or_private(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -263,18 +265,18 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
-			return getImportedPackage(); //837
+			return eAny(getImportedPackage()); //837
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return getImportingNamespace(); //838
+			return eAny(getImportingNamespace()); //838
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //839
+			return eAny(getVisibility()); //839
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool PackageImportImpl::internalEIsSet(int featureID) const
 {
@@ -289,28 +291,28 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool PackageImportImpl::eSet(int featureID, boost::any newValue)
+bool PackageImportImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _importedPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _importedPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setImportedPackage(_importedPackage); //837
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Namespace> _importingNamespace = boost::any_cast<std::shared_ptr<uml::Namespace>>(newValue);
+			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
 			setImportingNamespace(_importingNamespace); //838
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			VisibilityKind _visibility = newValue->get<VisibilityKind>();
 			setVisibility(_visibility); //839
 			return true;
 		}

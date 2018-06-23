@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -193,17 +191,17 @@ namespace uml
 			/*!
 			 The ends of the endData must not be static.
 			endData->forAll(not end.isStatic) */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag() */ 
-			virtual bool same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins() */ 
-			virtual bool same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

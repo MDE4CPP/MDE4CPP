@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -191,6 +192,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_associationEnd = par_associationEnd;
+				m_owner = par_associationEnd;
 			}
 
 
@@ -202,6 +204,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_class = par_class;
+				m_namespace = par_class;
 			}
 
 
@@ -213,6 +216,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_datatype = par_datatype;
+				m_namespace = par_datatype;
 			}
 
 
@@ -224,6 +228,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_interface = par_interface;
+				m_namespace = par_interface;
 			}
 
 
@@ -235,6 +240,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -257,6 +263,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_owningAssociation = par_owningAssociation;
+				m_namespace = par_owningAssociation;
 			}
 
 
@@ -268,6 +275,7 @@ PropertyImpl::~PropertyImpl()
 			:PropertyImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -506,25 +514,25 @@ bool PropertyImpl::getIsID() const
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -562,19 +570,19 @@ bool PropertyImpl::isSetDefault()
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -622,7 +630,7 @@ void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -634,19 +642,19 @@ std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext()
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::subsetting_rules(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -849,57 +857,57 @@ std::shared_ptr<ecore::EObject> PropertyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROPERTY_EATTRIBUTE_AGGREGATION:
-			return getAggregation(); //2831
+			return eAny(getAggregation()); //2831
 		case UmlPackage::PROPERTY_EREFERENCE_ASSOCIATION:
-			return getAssociation(); //2844
+			return eAny(getAssociation()); //2844
 		case UmlPackage::PROPERTY_EREFERENCE_ASSOCIATIONEND:
-			return getAssociationEnd(); //2832
+			return eAny(getAssociationEnd()); //2832
 		case UmlPackage::PROPERTY_EREFERENCE_CLASS:
-			return getClass(); //2834
+			return eAny(getClass()); //2834
 		case UmlPackage::PROPERTY_EREFERENCE_DATATYPE:
-			return getDatatype(); //2828
+			return eAny(getDatatype()); //2828
 		case UmlPackage::PROPERTY_EATTRIBUTE_DEFAULT:
-			return getDefault(); //2830
+			return eAny(getDefault()); //2830
 		case UmlPackage::PROPERTY_EREFERENCE_DEFAULTVALUE:
-			return getDefaultValue(); //2835
+			return eAny(getDefaultValue()); //2835
 		case UmlPackage::PROPERTY_EREFERENCE_INTERFACE:
-			return getInterface(); //2829
+			return eAny(getInterface()); //2829
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite(); //2836
+			return eAny(getIsComposite()); //2836
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISDERIVED:
-			return getIsDerived(); //2837
+			return eAny(getIsDerived()); //2837
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISDERIVEDUNION:
-			return getIsDerivedUnion(); //2838
+			return eAny(getIsDerivedUnion()); //2838
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISID:
-			return getIsID(); //2839
+			return eAny(getIsID()); //2839
 		case UmlPackage::PROPERTY_EREFERENCE_OPPOSITE:
-			return getOpposite(); //2840
+			return eAny(getOpposite()); //2840
 		case UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION:
-			return getOwningAssociation(); //2841
+			return eAny(getOwningAssociation()); //2841
 		case UmlPackage::PROPERTY_EREFERENCE_QUALIFIER:
-			return getQualifier(); //2833
+			return eAny(getQualifier()); //2833
 		case UmlPackage::PROPERTY_EREFERENCE_REDEFINEDPROPERTY:
-			return getRedefinedProperty(); //2842
+			return eAny(getRedefinedProperty()); //2842
 		case UmlPackage::PROPERTY_EREFERENCE_SUBSETTEDPROPERTY:
-			return getSubsettedProperty(); //2843
+			return eAny(getSubsettedProperty()); //2843
 	}
-	boost::any result;
-	result = ConnectableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = DeploymentTargetImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = DeploymentTargetImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = StructuralFeatureImpl::internalEIsSet(featureID);
+	result = StructuralFeatureImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool PropertyImpl::internalEIsSet(int featureID) const
@@ -955,105 +963,105 @@ bool PropertyImpl::internalEIsSet(int featureID) const
 	result = StructuralFeatureImpl::internalEIsSet(featureID);
 	return result;
 }
-bool PropertyImpl::eSet(int featureID, boost::any newValue)
+bool PropertyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROPERTY_EATTRIBUTE_AGGREGATION:
 		{
 			// BOOST CAST
-			AggregationKind _aggregation = boost::any_cast<AggregationKind>(newValue);
+			AggregationKind _aggregation = newValue->get<AggregationKind>();
 			setAggregation(_aggregation); //2831
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_ASSOCIATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _association = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
 			setAssociation(_association); //2844
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_ASSOCIATIONEND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _associationEnd = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _associationEnd = newValue->get<std::shared_ptr<uml::Property>>();
 			setAssociationEnd(_associationEnd); //2832
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_CLASS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Class> _class = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
+			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
 			setClass(_class); //2834
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_DATATYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _datatype = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
+			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
 			setDatatype(_datatype); //2828
 			return true;
 		}
 		case UmlPackage::PROPERTY_EATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
-			std::string _default = boost::any_cast<std::string>(newValue);
+			std::string _default = newValue->get<std::string>();
 			setDefault(_default); //2830
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_DEFAULTVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setDefaultValue(_defaultValue); //2835
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_INTERFACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _interface = boost::any_cast<std::shared_ptr<uml::Interface>>(newValue);
+			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
 			setInterface(_interface); //2829
 			return true;
 		}
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISCOMPOSITE:
 		{
 			// BOOST CAST
-			bool _isComposite = boost::any_cast<bool>(newValue);
+			bool _isComposite = newValue->get<bool>();
 			setIsComposite(_isComposite); //2836
 			return true;
 		}
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISDERIVED:
 		{
 			// BOOST CAST
-			bool _isDerived = boost::any_cast<bool>(newValue);
+			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //2837
 			return true;
 		}
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISDERIVEDUNION:
 		{
 			// BOOST CAST
-			bool _isDerivedUnion = boost::any_cast<bool>(newValue);
+			bool _isDerivedUnion = newValue->get<bool>();
 			setIsDerivedUnion(_isDerivedUnion); //2838
 			return true;
 		}
 		case UmlPackage::PROPERTY_EATTRIBUTE_ISID:
 		{
 			// BOOST CAST
-			bool _isID = boost::any_cast<bool>(newValue);
+			bool _isID = newValue->get<bool>();
 			setIsID(_isID); //2839
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_OPPOSITE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _opposite = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _opposite = newValue->get<std::shared_ptr<uml::Property>>();
 			setOpposite(_opposite); //2840
 			return true;
 		}
 		case UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _owningAssociation = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			std::shared_ptr<uml::Association> _owningAssociation = newValue->get<std::shared_ptr<uml::Association>>();
 			setOwningAssociation(_owningAssociation); //2841
 			return true;
 		}

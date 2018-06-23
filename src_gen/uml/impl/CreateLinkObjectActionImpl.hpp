@@ -61,17 +61,17 @@ namespace uml
 			/*!
 			 The Association must be an AssociationClass.
 			self.association().oclIsKindOf(AssociationClass) */ 
-			virtual bool association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool association_class(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
 			result.type = association() */ 
-			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -137,9 +137,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CreateLinkObjectAction> m_thisCreateLinkObjectActionPtr;

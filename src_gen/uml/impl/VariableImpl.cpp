@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -108,6 +109,7 @@ VariableImpl::~VariableImpl()
 			:VariableImpl()
 			{
 			    m_activityScope = par_activityScope;
+				m_namespace = par_activityScope;
 			}
 
 
@@ -119,6 +121,7 @@ VariableImpl::~VariableImpl()
 			:VariableImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -141,6 +144,7 @@ VariableImpl::~VariableImpl()
 			:VariableImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -152,6 +156,7 @@ VariableImpl::~VariableImpl()
 			:VariableImpl()
 			{
 			    m_scope = par_scope;
+				m_namespace = par_scope;
 			}
 
 
@@ -345,22 +350,22 @@ std::shared_ptr<ecore::EObject> VariableImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return getActivityScope(); //12120
+			return eAny(getActivityScope()); //12120
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return getScope(); //12121
+			return eAny(getScope()); //12121
 	}
-	boost::any result;
-	result = ConnectableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool VariableImpl::internalEIsSet(int featureID) const
@@ -381,21 +386,21 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	result = MultiplicityElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool VariableImpl::eSet(int featureID, boost::any newValue)
+bool VariableImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Activity> _activityScope = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			std::shared_ptr<uml::Activity> _activityScope = newValue->get<std::shared_ptr<uml::Activity>>();
 			setActivityScope(_activityScope); //12120
 			return true;
 		}
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuredActivityNode> _scope = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			std::shared_ptr<uml::StructuredActivityNode> _scope = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
 			setScope(_scope); //12121
 			return true;
 		}

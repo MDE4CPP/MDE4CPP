@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -123,6 +124,7 @@ ActionInputPinImpl::~ActionInputPinImpl()
 			:ActionInputPinImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -145,6 +147,7 @@ ActionInputPinImpl::~ActionInputPinImpl()
 			:ActionInputPinImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -167,6 +170,7 @@ ActionInputPinImpl::~ActionInputPinImpl()
 			:ActionInputPinImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -356,19 +360,19 @@ std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActionInputPinImpl::input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActionInputPinImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -459,14 +463,14 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return getFromAction(); //13437
+			return eAny(getFromAction()); //13437
 	}
-	return InputPinImpl::internalEIsSet(featureID);
+	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
 bool ActionInputPinImpl::internalEIsSet(int featureID) const
 {
@@ -477,14 +481,14 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
-bool ActionInputPinImpl::eSet(int featureID, boost::any newValue)
+bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Action> _fromAction = boost::any_cast<std::shared_ptr<uml::Action>>(newValue);
+			std::shared_ptr<uml::Action> _fromAction = newValue->get<std::shared_ptr<uml::Action>>();
 			setFromAction(_fromAction); //13437
 			return true;
 		}

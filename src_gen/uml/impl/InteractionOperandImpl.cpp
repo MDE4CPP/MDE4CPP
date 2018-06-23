@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -125,6 +126,7 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			:InteractionOperandImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -136,6 +138,7 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			:InteractionOperandImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -147,6 +150,7 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			:InteractionOperandImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -306,13 +310,13 @@ std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionOperandImpl::guard_contain_references(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionOperandImpl::guard_directly_prior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -400,22 +404,22 @@ std::shared_ptr<ecore::EObject> InteractionOperandImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
-			return getFragment(); //21820
+			return eAny(getFragment()); //21820
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
-			return getGuard(); //21821
+			return eAny(getGuard()); //21821
 	}
-	boost::any result;
-	result = InteractionFragmentImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamespaceImpl::internalEIsSet(featureID);
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool InteractionOperandImpl::internalEIsSet(int featureID) const
@@ -436,14 +440,14 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 	result = NamespaceImpl::internalEIsSet(featureID);
 	return result;
 }
-bool InteractionOperandImpl::eSet(int featureID, boost::any newValue)
+bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionConstraint> _guard = boost::any_cast<std::shared_ptr<uml::InteractionConstraint>>(newValue);
+			std::shared_ptr<uml::InteractionConstraint> _guard = newValue->get<std::shared_ptr<uml::InteractionConstraint>>();
 			setGuard(_guard); //21821
 			return true;
 		}

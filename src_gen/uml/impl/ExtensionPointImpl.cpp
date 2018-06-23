@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -93,6 +94,7 @@ ExtensionPointImpl::~ExtensionPointImpl()
 			:ExtensionPointImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -115,6 +117,7 @@ ExtensionPointImpl::~ExtensionPointImpl()
 			:ExtensionPointImpl()
 			{
 			    m_useCase = par_useCase;
+				m_namespace = par_useCase;
 			}
 
 
@@ -198,7 +201,7 @@ std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -265,14 +268,14 @@ std::shared_ptr<ecore::EObject> ExtensionPointImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return getUseCase(); //10013
+			return eAny(getUseCase()); //10013
 	}
-	return RedefinableElementImpl::internalEIsSet(featureID);
+	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ExtensionPointImpl::internalEIsSet(int featureID) const
 {
@@ -283,14 +286,14 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
-bool ExtensionPointImpl::eSet(int featureID, boost::any newValue)
+bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _useCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setUseCase(_useCase); //10013
 			return true;
 		}

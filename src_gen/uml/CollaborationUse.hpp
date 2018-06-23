@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -125,7 +123,7 @@ namespace uml
 			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
 			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
 			      ce1.collaboration = ce2.collaboration) */ 
-			virtual bool client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool client_elements(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
@@ -138,12 +136,12 @@ namespace uml
 			              correspondingConnector.end.role->forAll( role | boundRoles->includes(role) )
 			              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty()) implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
 			) */ 
-			virtual bool connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool connectors(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
-			virtual bool every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool every_role(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

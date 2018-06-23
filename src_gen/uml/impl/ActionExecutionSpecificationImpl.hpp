@@ -65,7 +65,7 @@ namespace uml
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
-			virtual bool action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -122,9 +122,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActionExecutionSpecification> m_thisActionExecutionSpecificationPtr;

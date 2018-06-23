@@ -55,27 +55,27 @@ namespace uml
 			/*!
 			 The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value) */ 
-			virtual bool end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool property_is_association_end(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier) */ 
-			virtual bool qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool qualifiers(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type) */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -140,9 +140,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LinkEndData> m_thisLinkEndDataPtr;

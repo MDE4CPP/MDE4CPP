@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The VariableAction must be in the scope of the variable.
 			variable.isAccessibleBy(self) */ 
-			virtual bool scope_of_variable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -121,9 +121,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<VariableAction> m_thisVariableActionPtr;

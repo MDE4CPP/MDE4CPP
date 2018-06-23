@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -156,7 +154,7 @@ namespace uml
 			/*!
 			 A FinalNode has no outgoing ActivityEdges.
 			outgoing->isEmpty() */ 
-			virtual bool no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

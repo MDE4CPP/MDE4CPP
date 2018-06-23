@@ -61,37 +61,37 @@ namespace uml
 			/*!
 			 The association of the end must be an AssociationClass.
 			end.association.oclIsKindOf(AssociationClass) */ 
-			virtual bool association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The ends of the association must not be static.
 			end.association.memberEnd->forAll(e | not e.isStatic) */ 
-			virtual bool ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The end Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool property(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool property(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the object InputPin is the AssociationClass that owns the end Property.
 			object.type = end.association */ 
-			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the end Property.
 			result.type = end.type */ 
-			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -175,9 +175,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadLinkObjectEndAction> m_thisReadLinkObjectEndActionPtr;

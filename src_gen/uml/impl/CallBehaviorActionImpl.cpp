@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ CallBehaviorActionImpl::~CallBehaviorActionImpl()
 			:CallBehaviorActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ CallBehaviorActionImpl::~CallBehaviorActionImpl()
 			:CallBehaviorActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ CallBehaviorActionImpl::~CallBehaviorActionImpl()
 			:CallBehaviorActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -318,7 +322,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallBehaviorActionImpl::no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -402,14 +406,14 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
-			return getBehavior(); //14032
+			return eAny(getBehavior()); //14032
 	}
-	return CallActionImpl::internalEIsSet(featureID);
+	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 {
@@ -420,14 +424,14 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
-bool CallBehaviorActionImpl::eSet(int featureID, boost::any newValue)
+bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setBehavior(_behavior); //14032
 			return true;
 		}

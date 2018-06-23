@@ -71,7 +71,7 @@ namespace uml
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context. */ 
-			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this profile. */ 
@@ -106,13 +106,13 @@ namespace uml
 			packagedElement->
 			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -176,9 +176,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Profile> m_thisProfilePtr;

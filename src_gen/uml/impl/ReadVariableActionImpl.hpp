@@ -61,13 +61,13 @@ namespace uml
 			/*!
 			 The multiplicity of the variable must be compatible with the multiplicity of the output pin.
 			variable.compatibleWith(result) */ 
-			virtual bool compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered */ 
-			virtual bool type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -130,9 +130,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadVariableAction> m_thisReadVariableActionPtr;

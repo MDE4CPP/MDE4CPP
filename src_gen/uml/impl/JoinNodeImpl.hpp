@@ -63,12 +63,12 @@ namespace uml
 			if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))
 			else outgoing->forAll(oclIsKindOf(ControlFlow))
 			endif */ 
-			virtual bool incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1 */ 
-			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<JoinNode> m_thisJoinNodePtr;

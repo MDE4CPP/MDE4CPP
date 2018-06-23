@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -127,7 +125,7 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

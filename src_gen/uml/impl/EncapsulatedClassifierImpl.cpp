@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -142,6 +143,7 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 			:EncapsulatedClassifierImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -166,10 +168,12 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -186,6 +190,7 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 			:EncapsulatedClassifierImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -522,14 +527,14 @@ std::shared_ptr<ecore::EObject> EncapsulatedClassifierImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ENCAPSULATEDCLASSIFIER_EREFERENCE_OWNEDPORT:
-			return getOwnedPort(); //10643
+			return eAny(getOwnedPort()); //10643
 	}
-	return StructuredClassifierImpl::internalEIsSet(featureID);
+	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 {
@@ -540,7 +545,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);
 }
-bool EncapsulatedClassifierImpl::eSet(int featureID, boost::any newValue)
+bool EncapsulatedClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

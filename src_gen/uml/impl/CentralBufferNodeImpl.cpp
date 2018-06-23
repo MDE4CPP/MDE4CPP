@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -112,6 +113,7 @@ CentralBufferNodeImpl::~CentralBufferNodeImpl()
 			:CentralBufferNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -123,6 +125,7 @@ CentralBufferNodeImpl::~CentralBufferNodeImpl()
 			:CentralBufferNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -134,6 +137,7 @@ CentralBufferNodeImpl::~CentralBufferNodeImpl()
 			:CentralBufferNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -341,12 +345,12 @@ std::shared_ptr<ecore::EObject> CentralBufferNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CentralBufferNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CentralBufferNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ObjectNodeImpl::internalEIsSet(featureID);
+	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool CentralBufferNodeImpl::internalEIsSet(int featureID) const
 {
@@ -355,7 +359,7 @@ bool CentralBufferNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
-bool CentralBufferNodeImpl::eSet(int featureID, boost::any newValue)
+bool CentralBufferNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

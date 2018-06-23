@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -192,7 +190,7 @@ namespace uml
 				argument->at(i).type.conformsTo(parameter->at(i).type) and 
 				argument->at(i).isOrdered = parameter->at(i).isOrdered and
 				argument->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool argument_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool argument_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
@@ -212,12 +210,12 @@ namespace uml
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
 				parameter->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous */ 
-			virtual bool synchronous_call(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool synchronous_call(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

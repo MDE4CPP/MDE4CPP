@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -97,6 +98,7 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 			:DestructionOccurrenceSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -108,6 +110,7 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 			:DestructionOccurrenceSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -119,6 +122,7 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 			:DestructionOccurrenceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -227,7 +231,7 @@ std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticCl
 //*********************************
 // Operations
 //*********************************
-bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -290,12 +294,12 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::eContain
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
+	return MessageOccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -304,7 +308,7 @@ bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
-bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

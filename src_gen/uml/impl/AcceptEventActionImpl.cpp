@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -145,6 +146,7 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			:AcceptEventActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -156,6 +158,7 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			:AcceptEventActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -167,6 +170,7 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			:AcceptEventActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -364,31 +368,31 @@ bool AcceptEventActionImpl::getIsUnmarshall() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptEventActionImpl::conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -472,18 +476,18 @@ std::shared_ptr<ecore::EObject> AcceptEventActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
-			return getIsUnmarshall(); //13328
+			return eAny(getIsUnmarshall()); //13328
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_RESULT:
-			return getResult(); //13329
+			return eAny(getResult()); //13329
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_TRIGGER:
-			return getTrigger(); //13330
+			return eAny(getTrigger()); //13330
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 {
@@ -498,14 +502,14 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool AcceptEventActionImpl::eSet(int featureID, boost::any newValue)
+bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
 		{
 			// BOOST CAST
-			bool _isUnmarshall = boost::any_cast<bool>(newValue);
+			bool _isUnmarshall = newValue->get<bool>();
 			setIsUnmarshall(_isUnmarshall); //13328
 			return true;
 		}

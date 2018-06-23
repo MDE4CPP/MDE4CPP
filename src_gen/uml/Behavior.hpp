@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -298,7 +296,7 @@ namespace uml
 			/*!
 			 The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification) */ 
-			virtual bool feature_of_context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			
@@ -311,7 +309,7 @@ namespace uml
 			/*!
 			 There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1 */ 
-			virtual bool most_one_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The out, inout and return ownedParameters.
@@ -322,7 +320,7 @@ namespace uml
 			/*!
 			 If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size() */ 
-			virtual bool parameters_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************
@@ -354,6 +352,10 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p> */
 			virtual std::shared_ptr<uml::BehavioredClassifier > getContext() const = 0;
 			
+			/*!
+			 The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.
+			<p>From package UML::CommonBehavior.</p> */
+			virtual void setContext(std::shared_ptr<uml::BehavioredClassifier> _context_context) = 0;
 			/*!
 			 References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p> */

@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -231,7 +229,7 @@ namespace uml
 			/*!
 			 The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

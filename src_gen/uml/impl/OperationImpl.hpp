@@ -71,7 +71,7 @@ namespace uml
 			/*!
 			 An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1 */ 
-			virtual bool at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
@@ -106,7 +106,7 @@ namespace uml
 			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
-			virtual bool only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
@@ -281,9 +281,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Operation> m_thisOperationPtr;

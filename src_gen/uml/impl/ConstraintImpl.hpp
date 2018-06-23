@@ -63,16 +63,16 @@ namespace uml
 			//*********************************
 			/*!
 			 The ValueSpecification for a Constraint must evaluate to a Boolean value. */ 
-			virtual bool boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool boolean_value(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Evaluating the ValueSpecification for a Constraint must not have side effects. */ 
-			virtual bool no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_side_effects(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self) */ 
-			virtual bool not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -143,9 +143,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Constraint> m_thisConstraintPtr;

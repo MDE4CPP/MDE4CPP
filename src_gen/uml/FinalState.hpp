@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -181,32 +179,32 @@ namespace uml
 			/*!
 			 A FinalState cannot reference a submachine.
 			submachine->isEmpty() */ 
-			virtual bool cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A FinalState has no entry Behavior.
 			entry->isEmpty() */ 
-			virtual bool no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A FinalState has no exit Behavior.
 			exit->isEmpty() */ 
-			virtual bool no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0 */ 
-			virtual bool no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A FinalState cannot have Regions.
 			region->size() = 0 */ 
-			virtual bool no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_regions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty() */ 
-			virtual bool no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_state_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

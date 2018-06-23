@@ -68,12 +68,12 @@ namespace uml
 			/*!
 			 The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated Deployment-Specification is a kind of Component (i.e., the configured components).
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component))) */ 
-			virtual bool deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment)) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -165,9 +165,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DeploymentSpecification> m_thisDeploymentSpecificationPtr;

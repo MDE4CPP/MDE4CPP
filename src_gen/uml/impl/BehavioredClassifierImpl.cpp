@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -161,6 +162,7 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 			:BehavioredClassifierImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -185,10 +187,12 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -205,6 +209,7 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 			:BehavioredClassifierImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -454,7 +459,7 @@ std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -573,18 +578,18 @@ std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //439
+			return eAny(getClassifierBehavior()); //439
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //440
+			return eAny(getInterfaceRealization()); //440
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //441
+			return eAny(getOwnedBehavior()); //441
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 {
@@ -599,14 +604,14 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool BehavioredClassifierImpl::eSet(int featureID, boost::any newValue)
+bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _classifierBehavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _classifierBehavior = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setClassifierBehavior(_classifierBehavior); //439
 			return true;
 		}

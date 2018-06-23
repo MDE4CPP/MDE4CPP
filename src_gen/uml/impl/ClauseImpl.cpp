@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -197,19 +198,19 @@ std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClauseImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClauseImpl::decider_output(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClauseImpl::test_and_body(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,24 +294,24 @@ std::shared_ptr<ecore::EObject> ClauseImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_BODY:
-			return getBody(); //1424
+			return eAny(getBody()); //1424
 		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
-			return getBodyOutput(); //1425
+			return eAny(getBodyOutput()); //1425
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
-			return getDecider(); //1426
+			return eAny(getDecider()); //1426
 		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
-			return getPredecessorClause(); //1427
+			return eAny(getPredecessorClause()); //1427
 		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
-			return getSuccessorClause(); //1428
+			return eAny(getSuccessorClause()); //1428
 		case UmlPackage::CLAUSE_EREFERENCE_TEST:
-			return getTest(); //1429
+			return eAny(getTest()); //1429
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ClauseImpl::internalEIsSet(int featureID) const
 {
@@ -331,14 +332,14 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool ClauseImpl::eSet(int featureID, boost::any newValue)
+bool ClauseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _decider = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setDecider(_decider); //1426
 			return true;
 		}

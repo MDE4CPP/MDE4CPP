@@ -65,7 +65,7 @@ namespace uml
 			/*!
 			 An ActvivityPartition with isDimension = true may not be contained by another ActivityPartition.
 			isDimension implies superPartition->isEmpty() */ 
-			virtual bool dimension_not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If a non-external ActivityPartition represents a Classifier and has a superPartition, then the superPartition must represent a Classifier, and the Classifier of the subpartition must be nested (nestedClassifier or ownedBehavior) in the Classifier represented by the superPartition, or be at the contained end of a composition Association with the Classifier represented by the superPartition.
@@ -82,7 +82,7 @@ namespace uml
 			       (Association.allInstances()->exists(a | a.memberEnd->exists(end1 | end1.isComposite and end1.type = representedClassifier and 
 			                                                                      a.memberEnd->exists(end2 | end1<>end2 and end2.type = representedSuperClassifier))))
 			) */ 
-			virtual bool represents_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool represents_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If an ActivityPartition represents a Property and has a superPartition representing a Classifier, then all the other non-external subpartitions of the superPartition must represent Properties directly owned by the same Classifier.
@@ -93,7 +93,7 @@ namespace uml
 			    superPartition.subpartition->reject(isExternal)->forAll(p | 
 			       p.represents.oclIsKindOf(Property) and p.owner=representedClassifier)
 			) */ 
-			virtual bool represents_property(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool represents_property(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If an ActivityPartition represents a Property and has a superPartition, then the Property must be of a Classifier represented by the superPartition, or of a Classifier that is the type of a Property represented by the superPartition.
@@ -102,7 +102,7 @@ namespace uml
 			  (superPartition.represents.oclIsKindOf(Classifier) and represents.owner = superPartition.represents) or 
 			  (superPartition.represents.oclIsKindOf(Property) and represents.owner = superPartition.represents.oclAsType(Property).type)
 			) */ 
-			virtual bool represents_property_and_is_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -212,9 +212,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityPartition> m_thisActivityPartitionPtr;

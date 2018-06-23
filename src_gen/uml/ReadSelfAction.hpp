@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,23 +175,23 @@ namespace uml
 			/*!
 			 A ReadSelfAction must have a context Classifier.
 			_'context' <> null */ 
-			virtual bool contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool contained(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The type of the result OutputPin is the context Classifier.
 			result.type = _'context' */ 
-			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

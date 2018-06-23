@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -106,6 +107,7 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			:OpaqueExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -128,6 +130,7 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			:OpaqueExpressionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -139,6 +142,7 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			:OpaqueExpressionImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -150,6 +154,7 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			:OpaqueExpressionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -273,19 +278,19 @@ bool OpaqueExpressionImpl::isPositive()
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -375,20 +380,20 @@ std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
-			return getBehavior(); //4315
+			return eAny(getBehavior()); //4315
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
-			return getBody(); //4316
+			return eAny(getBody()); //4316
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
-			return getLanguage(); //4317
+			return eAny(getLanguage()); //4317
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
-			return getResult(); //4318
+			return eAny(getResult()); //4318
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 {
@@ -405,14 +410,14 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool OpaqueExpressionImpl::eSet(int featureID, boost::any newValue)
+bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setBehavior(_behavior); //4315
 			return true;
 		}
@@ -556,7 +561,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			for (std::shared_ptr<std::string> value : *m_body)
 			{
-				saveHandler->addAttributeAsNode("body", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("body", *value);
 			}
 		}
 
@@ -564,7 +569,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			for (std::shared_ptr<std::string> value : *m_language)
 			{
-				saveHandler->addAttributeAsNode("language", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
 

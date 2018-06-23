@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ SignalEventImpl::~SignalEventImpl()
 			:SignalEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ SignalEventImpl::~SignalEventImpl()
 			:SignalEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ SignalEventImpl::~SignalEventImpl()
 			:SignalEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -276,14 +280,14 @@ std::shared_ptr<ecore::EObject> SignalEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
-			return getSignal(); //20113
+			return eAny(getSignal()); //20113
 	}
-	return MessageEventImpl::internalEIsSet(featureID);
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
 bool SignalEventImpl::internalEIsSet(int featureID) const
 {
@@ -294,14 +298,14 @@ bool SignalEventImpl::internalEIsSet(int featureID) const
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
-bool SignalEventImpl::eSet(int featureID, boost::any newValue)
+bool SignalEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
 			setSignal(_signal); //20113
 			return true;
 		}

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 template<class T> class Union;
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -256,7 +254,7 @@ namespace uml
 			
 			/*!
 			 Retrieves the value of the property with the specified name in the specified stereotype for this element. */ 
-			virtual boost::any getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName)  = 0;
+			virtual Any getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName)  = 0;
 			
 			/*!
 			 Determines whether this element has the specified keyword. */ 
@@ -269,7 +267,7 @@ namespace uml
 			/*!
 			 Elements that must be owned must have an owner.
 			mustBeOwned() implies owner->notEmpty() */ 
-			virtual bool has_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool has_owner(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Determines whether the specified stereotype is applicable to this element. */ 
@@ -292,7 +290,7 @@ namespace uml
 			/*!
 			 An element may not directly or indirectly own itself.
 			not allOwnedElements()->includes(self) */ 
-			virtual bool not_own_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_own_self(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Removes the specified keyword from this element. */ 
@@ -300,7 +298,7 @@ namespace uml
 			
 			/*!
 			 Sets the value of the property with the specified name in the specified stereotype for this element. */ 
-			virtual void setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,boost::any newValue)  = 0;
+			virtual void setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,Any newValue)  = 0;
 			
 			/*!
 			 Unapplies the specified stereotype from this element. */ 

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ OutputPinImpl::~OutputPinImpl()
 			:OutputPinImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -139,6 +141,7 @@ OutputPinImpl::~OutputPinImpl()
 			:OutputPinImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -150,6 +153,7 @@ OutputPinImpl::~OutputPinImpl()
 			:OutputPinImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -316,7 +320,7 @@ std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool OutputPinImpl::incoming_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -397,14 +401,14 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
-			return getCallAction(); //12034
+			return eAny(getCallAction()); //12034
 	}
-	return PinImpl::internalEIsSet(featureID);
+	return PinImpl::eGet(featureID, resolve, coreType);
 }
 bool OutputPinImpl::internalEIsSet(int featureID) const
 {
@@ -415,14 +419,14 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
-bool OutputPinImpl::eSet(int featureID, boost::any newValue)
+bool OutputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::CallAction> _callAction = boost::any_cast<std::shared_ptr<uml::CallAction>>(newValue);
+			std::shared_ptr<uml::CallAction> _callAction = newValue->get<std::shared_ptr<uml::CallAction>>();
 			setCallAction(_callAction); //12034
 			return true;
 		}

@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,6 +96,7 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 			:OperationTemplateParameterImpl()
 			{
 			    m_signature = par_signature;
+				m_owner = par_signature;
 			}
 
 
@@ -174,7 +176,7 @@ std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -223,12 +225,12 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::eContainer() con
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OperationTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OperationTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return TemplateParameterImpl::internalEIsSet(featureID);
+	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
 bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
 {
@@ -237,7 +239,7 @@ bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
-bool OperationTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,10 +96,12 @@ TimeConstraintImpl::~TimeConstraintImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					 m_context = par_Namespace;
+					m_context = par_Namespace;
+					m_namespace = par_Namespace;
 					 return;
 				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					 m_namespace = par_Namespace;
+					m_namespace = par_Namespace;
+					m_owner = par_Namespace;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -132,6 +135,7 @@ TimeConstraintImpl::~TimeConstraintImpl()
 			:TimeConstraintImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -143,6 +147,7 @@ TimeConstraintImpl::~TimeConstraintImpl()
 			:TimeConstraintImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -245,7 +250,7 @@ bool TimeConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -313,14 +318,14 @@ std::shared_ptr<ecore::EObject> TimeConstraintImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent(); //25516
+			return eAny(getFirstEvent()); //25516
 	}
-	return IntervalConstraintImpl::internalEIsSet(featureID);
+	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
 bool TimeConstraintImpl::internalEIsSet(int featureID) const
 {
@@ -331,14 +336,14 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
-bool TimeConstraintImpl::eSet(int featureID, boost::any newValue)
+bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
-			bool _firstEvent = boost::any_cast<bool>(newValue);
+			bool _firstEvent = newValue->get<bool>();
 			setFirstEvent(_firstEvent); //25516
 			return true;
 		}

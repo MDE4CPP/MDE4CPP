@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -136,6 +137,7 @@ SignalImpl::~SignalImpl()
 			:SignalImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -160,10 +162,12 @@ SignalImpl::~SignalImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -180,6 +184,7 @@ SignalImpl::~SignalImpl()
 			:SignalImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -500,14 +505,14 @@ std::shared_ptr<ecore::EObject> SignalImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SIGNAL_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //5739
+			return eAny(getOwnedAttribute()); //5739
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool SignalImpl::internalEIsSet(int featureID) const
 {
@@ -518,7 +523,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool SignalImpl::eSet(int featureID, boost::any newValue)
+bool SignalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

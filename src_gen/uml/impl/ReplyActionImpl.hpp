@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The event of the replyToCall Trigger must be a CallEvent.
 			replyToCall.event.oclIsKindOf(CallEvent) */ 
-			virtual bool event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
@@ -71,7 +71,7 @@ namespace uml
 				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
 				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
 				replyValue->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -148,9 +148,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReplyAction> m_thisReplyActionPtr;

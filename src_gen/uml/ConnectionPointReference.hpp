@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -149,12 +147,12 @@ namespace uml
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

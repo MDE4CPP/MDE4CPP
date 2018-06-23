@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -116,7 +114,7 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

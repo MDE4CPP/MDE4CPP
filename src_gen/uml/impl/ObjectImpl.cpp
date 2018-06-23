@@ -16,10 +16,11 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -103,13 +104,13 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-boost::any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
+Any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
+void ObjectImpl::set(std::shared_ptr<uml::Property>  property,Any value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -146,12 +147,12 @@ std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectImpl::internalEIsSet(int featureID) const
 {
@@ -160,7 +161,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ObjectImpl::eSet(int featureID, boost::any newValue)
+bool ObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

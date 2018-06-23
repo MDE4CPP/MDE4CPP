@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -203,10 +204,12 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					 m_activity = par_Activity;
+					m_activity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					 m_inActivity = par_Activity;
+					m_inActivity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -229,6 +232,7 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 			:StructuredActivityNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -240,6 +244,7 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 			:StructuredActivityNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -262,6 +267,7 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 			:StructuredActivityNodeImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -541,19 +547,19 @@ bool StructuredActivityNodeImpl::getMustIsolate() const
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StructuredActivityNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -702,35 +708,35 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
-			return getEdge(); //11239
+			return eAny(getEdge()); //11239
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
-			return getMustIsolate(); //11240
+			return eAny(getMustIsolate()); //11240
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
-			return getNode(); //11244
+			return eAny(getNode()); //11244
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput(); //11241
+			return eAny(getStructuredNodeInput()); //11241
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput(); //11242
+			return eAny(getStructuredNodeOutput()); //11242
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
-			return getVariable(); //11243
+			return eAny(getVariable()); //11243
 	}
-	boost::any result;
-	result = ActionImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ActionImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ActivityGroupImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = ActivityGroupImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamespaceImpl::internalEIsSet(featureID);
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
@@ -764,14 +770,14 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	result = NamespaceImpl::internalEIsSet(featureID);
 	return result;
 }
-bool StructuredActivityNodeImpl::eSet(int featureID, boost::any newValue)
+bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
 		{
 			// BOOST CAST
-			bool _mustIsolate = boost::any_cast<bool>(newValue);
+			bool _mustIsolate = newValue->get<bool>();
 			setMustIsolate(_mustIsolate); //11240
 			return true;
 		}

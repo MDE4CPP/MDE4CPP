@@ -194,7 +194,7 @@ namespace uml
 			  gs.generalization->forAll( gen | 
 			    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) 
 			  )) */ 
-			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
@@ -205,12 +205,12 @@ namespace uml
 			/*!
 			 Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
 			not allParents()->includes(self) */ 
-			virtual bool no_cycles_in_generalization(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_cycles_in_generalization(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The parents of a Classifier must be non-final.
 			parents()->forAll(not isFinalSpecialization) */ 
-			virtual bool non_final_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool non_final_parents(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query parents() gives all of the immediate ancestors of a generalized Classifier.
@@ -221,7 +221,7 @@ namespace uml
 			/*!
 			 A Classifier may only specialize Classifiers of a valid type.
 			parents()->forAll(c | self.maySpecializeType(c)) */ 
-			virtual bool specialize_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool specialize_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -360,9 +360,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Classifier> m_thisClassifierPtr;

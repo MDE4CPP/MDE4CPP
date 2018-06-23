@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -96,6 +97,7 @@ IncludeImpl::~IncludeImpl()
 			:IncludeImpl()
 			{
 			    m_includingCase = par_includingCase;
+				m_namespace = par_includingCase;
 			}
 
 
@@ -107,6 +109,7 @@ IncludeImpl::~IncludeImpl()
 			:IncludeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -289,22 +292,22 @@ std::shared_ptr<ecore::EObject> IncludeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
-			return getAddition(); //10113
+			return eAny(getAddition()); //10113
 		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
-			return getIncludingCase(); //10114
+			return eAny(getIncludingCase()); //10114
 	}
-	boost::any result;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamedElementImpl::internalEIsSet(featureID);
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool IncludeImpl::internalEIsSet(int featureID) const
@@ -325,21 +328,21 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 	result = NamedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool IncludeImpl::eSet(int featureID, boost::any newValue)
+bool IncludeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _addition = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			std::shared_ptr<uml::UseCase> _addition = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setAddition(_addition); //10113
 			return true;
 		}
 		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _includingCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			std::shared_ptr<uml::UseCase> _includingCase = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setIncludingCase(_includingCase); //10114
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -186,6 +187,7 @@ UseCaseImpl::~UseCaseImpl()
 			:UseCaseImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -210,10 +212,12 @@ UseCaseImpl::~UseCaseImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -230,6 +234,7 @@ UseCaseImpl::~UseCaseImpl()
 			:UseCaseImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -520,25 +525,25 @@ std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UseCaseImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::cannot_include_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UseCaseImpl::cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UseCaseImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::no_association_to_use_case(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -649,20 +654,20 @@ std::shared_ptr<ecore::EObject> UseCaseImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::USECASE_EREFERENCE_EXTEND:
-			return getExtend(); //9842
+			return eAny(getExtend()); //9842
 		case UmlPackage::USECASE_EREFERENCE_EXTENSIONPOINT:
-			return getExtensionPoint(); //9843
+			return eAny(getExtensionPoint()); //9843
 		case UmlPackage::USECASE_EREFERENCE_INCLUDE:
-			return getInclude(); //9844
+			return eAny(getInclude()); //9844
 		case UmlPackage::USECASE_EREFERENCE_SUBJECT:
-			return getSubject(); //9845
+			return eAny(getSubject()); //9845
 	}
-	return BehavioredClassifierImpl::internalEIsSet(featureID);
+	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool UseCaseImpl::internalEIsSet(int featureID) const
 {
@@ -679,7 +684,7 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
-bool UseCaseImpl::eSet(int featureID, boost::any newValue)
+bool UseCaseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

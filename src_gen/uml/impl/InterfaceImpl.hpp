@@ -72,7 +72,7 @@ namespace uml
 			/*!
 			 The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -169,9 +169,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Interface> m_thisInterfacePtr;

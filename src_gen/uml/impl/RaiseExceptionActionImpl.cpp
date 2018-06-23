@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -114,6 +115,7 @@ RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
 			:RaiseExceptionActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -125,6 +127,7 @@ RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
 			:RaiseExceptionActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -136,6 +139,7 @@ RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
 			:RaiseExceptionActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -375,14 +379,14 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
-			return getException(); //15828
+			return eAny(getException()); //15828
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 {
@@ -393,14 +397,14 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool RaiseExceptionActionImpl::eSet(int featureID, boost::any newValue)
+bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _exception = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _exception = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setException(_exception); //15828
 			return true;
 		}

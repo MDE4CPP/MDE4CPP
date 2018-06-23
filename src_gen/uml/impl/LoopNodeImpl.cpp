@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -185,10 +186,12 @@ LoopNodeImpl::~LoopNodeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					 m_activity = par_Activity;
+					m_activity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					 m_inActivity = par_Activity;
+					m_inActivity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -211,6 +214,7 @@ LoopNodeImpl::~LoopNodeImpl()
 			:LoopNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -222,6 +226,7 @@ LoopNodeImpl::~LoopNodeImpl()
 			:LoopNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -244,6 +249,7 @@ LoopNodeImpl::~LoopNodeImpl()
 			:LoopNodeImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -536,55 +542,55 @@ bool LoopNodeImpl::getIsTestedFirst() const
 //*********************************
 // Operations
 //*********************************
-bool LoopNodeImpl::body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::input_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::input_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::loop_variable_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_loop_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::result_no_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::setup_test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -743,30 +749,30 @@ std::shared_ptr<ecore::EObject> LoopNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
-			return getBodyOutput(); //15645
+			return eAny(getBodyOutput()); //15645
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
-			return getBodyPart(); //15646
+			return eAny(getBodyPart()); //15646
 		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
-			return getDecider(); //15647
+			return eAny(getDecider()); //15647
 		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
-			return getIsTestedFirst(); //15648
+			return eAny(getIsTestedFirst()); //15648
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
-			return getLoopVariable(); //15649
+			return eAny(getLoopVariable()); //15649
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
-			return getLoopVariableInput(); //15650
+			return eAny(getLoopVariableInput()); //15650
 		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
-			return getResult(); //15651
+			return eAny(getResult()); //15651
 		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
-			return getSetupPart(); //15652
+			return eAny(getSetupPart()); //15652
 		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
-			return getTest(); //15653
+			return eAny(getTest()); //15653
 	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool LoopNodeImpl::internalEIsSet(int featureID) const
 {
@@ -793,21 +799,21 @@ bool LoopNodeImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
-bool LoopNodeImpl::eSet(int featureID, boost::any newValue)
+bool LoopNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _decider = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setDecider(_decider); //15647
 			return true;
 		}
 		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
 		{
 			// BOOST CAST
-			bool _isTestedFirst = boost::any_cast<bool>(newValue);
+			bool _isTestedFirst = newValue->get<bool>();
 			setIsTestedFirst(_isTestedFirst); //15648
 			return true;
 		}

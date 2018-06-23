@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -115,6 +116,7 @@ PinImpl::~PinImpl()
 			:PinImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -126,6 +128,7 @@ PinImpl::~PinImpl()
 			:PinImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -137,6 +140,7 @@ PinImpl::~PinImpl()
 			:PinImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -310,13 +314,13 @@ bool PinImpl::getIsControl() const
 //*********************************
 // Operations
 //*********************************
-bool PinImpl::control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PinImpl::control_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PinImpl::not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PinImpl::not_unique(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -384,20 +388,20 @@ std::shared_ptr<ecore::EObject> PinImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return getIsControl(); //11933
+			return eAny(getIsControl()); //11933
 	}
-	boost::any result;
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ObjectNodeImpl::internalEIsSet(featureID);
+	result = ObjectNodeImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool PinImpl::internalEIsSet(int featureID) const
@@ -416,14 +420,14 @@ bool PinImpl::internalEIsSet(int featureID) const
 	result = ObjectNodeImpl::internalEIsSet(featureID);
 	return result;
 }
-bool PinImpl::eSet(int featureID, boost::any newValue)
+bool PinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
 		{
 			// BOOST CAST
-			bool _isControl = boost::any_cast<bool>(newValue);
+			bool _isControl = newValue->get<bool>();
 			setIsControl(_isControl); //11933
 			return true;
 		}

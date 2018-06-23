@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -201,6 +202,7 @@ StateMachineImpl::~StateMachineImpl()
 			:StateMachineImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -212,6 +214,7 @@ StateMachineImpl::~StateMachineImpl()
 			:StateMachineImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -236,10 +239,12 @@ StateMachineImpl::~StateMachineImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -256,6 +261,7 @@ StateMachineImpl::~StateMachineImpl()
 			:StateMachineImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -655,25 +661,25 @@ bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::classifier_context(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateMachineImpl::classifier_context(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::connection_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateMachineImpl::connection_points(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateMachineImpl::context_classifier(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::method(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateMachineImpl::method(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -801,20 +807,20 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STATEMACHINE_EREFERENCE_CONNECTIONPOINT:
-			return getConnectionPoint(); //5962
+			return eAny(getConnectionPoint()); //5962
 		case UmlPackage::STATEMACHINE_EREFERENCE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine(); //5965
+			return eAny(getExtendedStateMachine()); //5965
 		case UmlPackage::STATEMACHINE_EREFERENCE_REGION:
-			return getRegion(); //5964
+			return eAny(getRegion()); //5964
 		case UmlPackage::STATEMACHINE_EREFERENCE_SUBMACHINESTATE:
-			return getSubmachineState(); //5963
+			return eAny(getSubmachineState()); //5963
 	}
-	return BehaviorImpl::internalEIsSet(featureID);
+	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
 bool StateMachineImpl::internalEIsSet(int featureID) const
 {
@@ -831,7 +837,7 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
-bool StateMachineImpl::eSet(int featureID, boost::any newValue)
+bool StateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

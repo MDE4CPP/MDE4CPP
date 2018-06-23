@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 template<class T> class Union;
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -173,7 +171,7 @@ namespace uml
 			/*!
 			 If an ActivityEdge is directly owned by an Activity, then its source and target must be directly or indirectly contained in the same Activity.
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity */ 
-			virtual bool source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool source_and_target(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

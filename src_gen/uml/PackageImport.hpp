@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -115,7 +113,7 @@ namespace uml
 			/*!
 			 The visibility of a PackageImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -304,12 +302,12 @@ namespace uml
 			/*!
 			 A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty() */ 
-			virtual bool no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty() */ 
-			virtual bool no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

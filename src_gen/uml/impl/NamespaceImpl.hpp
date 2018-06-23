@@ -53,12 +53,12 @@ namespace uml
 			/*!
 			 A Namespace cannot have an ElementImport to one of its ownedMembers.
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember) */ 
-			virtual bool cannot_import_ownedMembers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self) */ 
-			virtual bool cannot_import_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool cannot_import_self(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Creates an import of the specified element into this namespace with the specified visibility. */ 
@@ -124,7 +124,7 @@ namespace uml
 			/*!
 			 All the members of a Namespace are distinguishable within it.
 			membersAreDistinguishable() */ 
-			virtual bool members_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool members_distinguishable(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -197,9 +197,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Namespace> m_thisNamespacePtr;

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			:ClearAssociationActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -132,6 +134,7 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			:ClearAssociationActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -143,6 +146,7 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			:ClearAssociationActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -309,13 +313,13 @@ std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClearAssociationActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearAssociationActionImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -405,16 +409,16 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
-			return getAssociation(); //14328
+			return eAny(getAssociation()); //14328
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
-			return getObject(); //14329
+			return eAny(getObject()); //14329
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 {
@@ -427,21 +431,21 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ClearAssociationActionImpl::eSet(int featureID, boost::any newValue)
+bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _association = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
 			setAssociation(_association); //14328
 			return true;
 		}
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //14329
 			return true;
 		}

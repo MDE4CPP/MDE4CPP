@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -182,6 +183,7 @@ ActionImpl::~ActionImpl()
 			:ActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -193,6 +195,7 @@ ActionImpl::~ActionImpl()
 			:ActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -204,6 +207,7 @@ ActionImpl::~ActionImpl()
 			:ActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -499,24 +503,24 @@ std::shared_ptr<ecore::EObject> ActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
-			return getContext(); //11322
+			return eAny(getContext()); //11322
 		case UmlPackage::ACTION_EREFERENCE_INPUT:
-			return getInput(); //11323
+			return eAny(getInput()); //11323
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant(); //11324
+			return eAny(getIsLocallyReentrant()); //11324
 		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
-			return getLocalPostcondition(); //11325
+			return eAny(getLocalPostcondition()); //11325
 		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
-			return getLocalPrecondition(); //11326
+			return eAny(getLocalPrecondition()); //11326
 		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
-			return getOutput(); //11327
+			return eAny(getOutput()); //11327
 	}
-	return ExecutableNodeImpl::internalEIsSet(featureID);
+	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ActionImpl::internalEIsSet(int featureID) const
 {
@@ -537,14 +541,14 @@ bool ActionImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutableNodeImpl::internalEIsSet(featureID);
 }
-bool ActionImpl::eSet(int featureID, boost::any newValue)
+bool ActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 		{
 			// BOOST CAST
-			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
+			bool _isLocallyReentrant = newValue->get<bool>();
 			setIsLocallyReentrant(_isLocallyReentrant); //11324
 			return true;
 		}

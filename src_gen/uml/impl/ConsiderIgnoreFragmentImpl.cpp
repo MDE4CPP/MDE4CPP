@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -104,6 +105,7 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			:ConsiderIgnoreFragmentImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -115,6 +117,7 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			:ConsiderIgnoreFragmentImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -126,6 +129,7 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			:ConsiderIgnoreFragmentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -246,13 +250,13 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConsiderIgnoreFragmentImpl::type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -321,14 +325,14 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
-			return getMessage(); //23017
+			return eAny(getMessage()); //23017
 	}
-	return CombinedFragmentImpl::internalEIsSet(featureID);
+	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 {
@@ -339,7 +343,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	}
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }
-bool ConsiderIgnoreFragmentImpl::eSet(int featureID, boost::any newValue)
+bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

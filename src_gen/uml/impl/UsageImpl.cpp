@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -90,6 +91,7 @@ UsageImpl::~UsageImpl()
 			:UsageImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -112,6 +114,7 @@ UsageImpl::~UsageImpl()
 			:UsageImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -123,6 +126,7 @@ UsageImpl::~UsageImpl()
 			:UsageImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -292,12 +296,12 @@ std::shared_ptr<ecore::EObject> UsageImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UsageImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any UsageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return DependencyImpl::internalEIsSet(featureID);
+	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
 bool UsageImpl::internalEIsSet(int featureID) const
 {
@@ -306,7 +310,7 @@ bool UsageImpl::internalEIsSet(int featureID) const
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
-bool UsageImpl::eSet(int featureID, boost::any newValue)
+bool UsageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

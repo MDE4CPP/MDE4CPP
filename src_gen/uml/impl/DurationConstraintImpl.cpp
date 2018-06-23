@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -95,10 +96,12 @@ DurationConstraintImpl::~DurationConstraintImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					 m_context = par_Namespace;
+					m_context = par_Namespace;
+					m_namespace = par_Namespace;
 					 return;
 				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					 m_namespace = par_Namespace;
+					m_namespace = par_Namespace;
+					m_owner = par_Namespace;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -132,6 +135,7 @@ DurationConstraintImpl::~DurationConstraintImpl()
 			:DurationConstraintImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -143,6 +147,7 @@ DurationConstraintImpl::~DurationConstraintImpl()
 			:DurationConstraintImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -242,13 +247,13 @@ std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -316,14 +321,14 @@ std::shared_ptr<ecore::EObject> DurationConstraintImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONCONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent(); //24316
+			return eAny(getFirstEvent()); //24316
 	}
-	return IntervalConstraintImpl::internalEIsSet(featureID);
+	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
 bool DurationConstraintImpl::internalEIsSet(int featureID) const
 {
@@ -334,7 +339,7 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
-bool DurationConstraintImpl::eSet(int featureID, boost::any newValue)
+bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
@@ -437,7 +442,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 		{
 			for (std::shared_ptr<bool> value : *m_firstEvent)
 			{
-				saveHandler->addAttributeAsNode("firstEvent", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}
 		}
 

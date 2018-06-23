@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
 			:ReadStructuralFeatureActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
 			:ReadStructuralFeatureActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
 			:ReadStructuralFeatureActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -312,7 +316,7 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool ReadStructuralFeatureActionImpl::type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -396,14 +400,14 @@ std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionImpl::eContainer() co
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult(); //16530
+			return eAny(getResult()); //16530
 	}
-	return StructuralFeatureActionImpl::internalEIsSet(featureID);
+	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
@@ -414,14 +418,14 @@ bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
-bool ReadStructuralFeatureActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16530
 			return true;
 		}

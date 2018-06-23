@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -161,14 +159,14 @@ namespace uml
 			  end->forAll( e | structuredClassifier.allRoles()->includes(e.role)
 			or
 			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort)) */ 
-			virtual bool roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool roles(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
 			type<>null implies 
 			  let noOfEnds : Integer = end->size() in 
 			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type)) */ 
-			virtual bool types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool types(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

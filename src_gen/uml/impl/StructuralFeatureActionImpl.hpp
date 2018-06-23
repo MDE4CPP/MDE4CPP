@@ -61,23 +61,23 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The structuralFeature must not be static.
 			not structuralFeature.isStatic */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type) */ 
-			virtual bool object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1 */ 
-			virtual bool one_featuring_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
@@ -85,7 +85,7 @@ namespace uml
 			_'context'.allFeatures()->includes(structuralFeature) or
 			structuralFeature.visibility=VisibilityKind::protected and
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier)) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -157,9 +157,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StructuralFeatureAction> m_thisStructuralFeatureActionPtr;

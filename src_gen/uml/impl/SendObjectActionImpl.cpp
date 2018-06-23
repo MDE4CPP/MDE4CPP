@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			:SendObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -132,6 +134,7 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			:SendObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -143,6 +146,7 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			:SendObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -326,7 +330,7 @@ std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,16 +420,16 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return getRequest(); //17230
+			return eAny(getRequest()); //17230
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget(); //17231
+			return eAny(getTarget()); //17231
 	}
-	return InvocationActionImpl::internalEIsSet(featureID);
+	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
 bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -438,21 +442,21 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
-bool SendObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _request = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _request = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setRequest(_request); //17230
 			return true;
 		}
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setTarget(_target); //17231
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ VariableActionImpl::~VariableActionImpl()
 			:VariableActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ VariableActionImpl::~VariableActionImpl()
 			:VariableActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ VariableActionImpl::~VariableActionImpl()
 			:VariableActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -297,7 +301,7 @@ std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableActionImpl::scope_of_variable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -373,14 +377,14 @@ std::shared_ptr<ecore::EObject> VariableActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
-			return getVariable(); //12328
+			return eAny(getVariable()); //12328
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool VariableActionImpl::internalEIsSet(int featureID) const
 {
@@ -391,14 +395,14 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool VariableActionImpl::eSet(int featureID, boost::any newValue)
+bool VariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Variable> _variable = boost::any_cast<std::shared_ptr<uml::Variable>>(newValue);
+			std::shared_ptr<uml::Variable> _variable = newValue->get<std::shared_ptr<uml::Variable>>();
 			setVariable(_variable); //12328
 			return true;
 		}

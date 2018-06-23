@@ -105,12 +105,12 @@ namespace uml
 			/*!
 			 A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty() */ 
-			virtual bool no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty() */ 
-			virtual bool no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -206,9 +206,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Component> m_thisComponentPtr;

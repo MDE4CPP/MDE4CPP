@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -86,6 +87,7 @@ DeployedArtifactImpl::~DeployedArtifactImpl()
 			:DeployedArtifactImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -215,12 +217,12 @@ std::shared_ptr<ecore::EObject> DeployedArtifactImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeployedArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DeployedArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool DeployedArtifactImpl::internalEIsSet(int featureID) const
 {
@@ -229,7 +231,7 @@ bool DeployedArtifactImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool DeployedArtifactImpl::eSet(int featureID, boost::any newValue)
+bool DeployedArtifactImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

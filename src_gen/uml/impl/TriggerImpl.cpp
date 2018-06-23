@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -100,6 +101,7 @@ TriggerImpl::~TriggerImpl()
 			:TriggerImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -190,7 +192,7 @@ std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -255,16 +257,16 @@ std::shared_ptr<ecore::EObject> TriggerImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
-			return getEvent(); //6510
+			return eAny(getEvent()); //6510
 		case UmlPackage::TRIGGER_EREFERENCE_PORT:
-			return getPort(); //6511
+			return eAny(getPort()); //6511
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool TriggerImpl::internalEIsSet(int featureID) const
 {
@@ -277,14 +279,14 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool TriggerImpl::eSet(int featureID, boost::any newValue)
+bool TriggerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Event> _event = boost::any_cast<std::shared_ptr<uml::Event>>(newValue);
+			std::shared_ptr<uml::Event> _event = newValue->get<std::shared_ptr<uml::Event>>();
 			setEvent(_event); //6510
 			return true;
 		}

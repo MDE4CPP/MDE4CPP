@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -99,6 +100,7 @@ PackageMergeImpl::~PackageMergeImpl()
 			:PackageMergeImpl()
 			{
 			    m_receivingPackage = par_receivingPackage;
+				m_owner = par_receivingPackage;
 			}
 
 
@@ -245,16 +247,16 @@ std::shared_ptr<ecore::EObject> PackageMergeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
-			return getMergedPackage(); //757
+			return eAny(getMergedPackage()); //757
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
-			return getReceivingPackage(); //758
+			return eAny(getReceivingPackage()); //758
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool PackageMergeImpl::internalEIsSet(int featureID) const
 {
@@ -267,21 +269,21 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool PackageMergeImpl::eSet(int featureID, boost::any newValue)
+bool PackageMergeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _mergedPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _mergedPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setMergedPackage(_mergedPackage); //757
 			return true;
 		}
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _receivingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _receivingPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setReceivingPackage(_receivingPackage); //758
 			return true;
 		}

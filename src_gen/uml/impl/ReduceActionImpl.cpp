@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -125,6 +126,7 @@ ReduceActionImpl::~ReduceActionImpl()
 			:ReduceActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -136,6 +138,7 @@ ReduceActionImpl::~ReduceActionImpl()
 			:ReduceActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -147,6 +150,7 @@ ReduceActionImpl::~ReduceActionImpl()
 			:ReduceActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -332,19 +336,19 @@ bool ReduceActionImpl::getIsOrdered() const
 //*********************************
 // Operations
 //*********************************
-bool ReduceActionImpl::input_type_is_collection(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::output_types_are_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::reducer_inputs_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -448,20 +452,20 @@ std::shared_ptr<ecore::EObject> ReduceActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
-			return getCollection(); //16828
+			return eAny(getCollection()); //16828
 		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
-			return getIsOrdered(); //16829
+			return eAny(getIsOrdered()); //16829
 		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
-			return getReducer(); //16830
+			return eAny(getReducer()); //16830
 		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
-			return getResult(); //16831
+			return eAny(getResult()); //16831
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReduceActionImpl::internalEIsSet(int featureID) const
 {
@@ -478,35 +482,35 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReduceActionImpl::eSet(int featureID, boost::any newValue)
+bool ReduceActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _collection = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _collection = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setCollection(_collection); //16828
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
-			bool _isOrdered = boost::any_cast<bool>(newValue);
+			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //16829
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _reducer = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _reducer = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setReducer(_reducer); //16830
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16831
 			return true;
 		}

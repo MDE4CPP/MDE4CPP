@@ -18,10 +18,8 @@ template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -275,7 +273,7 @@ namespace uml
 			/*!
 			 If an element that is owned by a package has visibility, it is public or private.
 			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private) */ 
-			virtual bool elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s). */ 

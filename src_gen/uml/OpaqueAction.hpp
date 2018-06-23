@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,7 +175,7 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language lists must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

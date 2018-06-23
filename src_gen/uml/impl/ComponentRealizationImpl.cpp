@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -116,6 +117,7 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			:ComponentRealizationImpl()
 			{
 			    m_abstraction = par_abstraction;
+				m_owner = par_abstraction;
 			}
 
 
@@ -127,6 +129,7 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			:ComponentRealizationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -149,6 +152,7 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			:ComponentRealizationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -160,6 +164,7 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			:ComponentRealizationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -367,16 +372,16 @@ std::shared_ptr<ecore::EObject> ComponentRealizationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
-			return getAbstraction(); //24020
+			return eAny(getAbstraction()); //24020
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
-			return getRealizingClassifier(); //24019
+			return eAny(getRealizingClassifier()); //24019
 	}
-	return RealizationImpl::internalEIsSet(featureID);
+	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
 bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 {
@@ -389,14 +394,14 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
-bool ComponentRealizationImpl::eSet(int featureID, boost::any newValue)
+bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Component> _abstraction = boost::any_cast<std::shared_ptr<uml::Component>>(newValue);
+			std::shared_ptr<uml::Component> _abstraction = newValue->get<std::shared_ptr<uml::Component>>();
 			setAbstraction(_abstraction); //24020
 			return true;
 		}

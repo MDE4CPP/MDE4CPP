@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -101,6 +102,7 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			:PartDecompositionImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -112,6 +114,7 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			:PartDecompositionImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -123,6 +126,7 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			:PartDecompositionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -250,19 +254,19 @@ std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PartDecompositionImpl::assume(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::assume(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::commutativity_of_decomposition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::commutativity_of_decomposition(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::parts_of_internal_structures(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -325,12 +329,12 @@ std::shared_ptr<ecore::EObject> PartDecompositionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PartDecompositionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PartDecompositionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return InteractionUseImpl::internalEIsSet(featureID);
+	return InteractionUseImpl::eGet(featureID, resolve, coreType);
 }
 bool PartDecompositionImpl::internalEIsSet(int featureID) const
 {
@@ -339,7 +343,7 @@ bool PartDecompositionImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionUseImpl::internalEIsSet(featureID);
 }
-bool PartDecompositionImpl::eSet(int featureID, boost::any newValue)
+bool PartDecompositionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

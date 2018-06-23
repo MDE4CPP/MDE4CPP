@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ ActivityParameterNodeImpl::~ActivityParameterNodeImpl()
 			:ActivityParameterNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ ActivityParameterNodeImpl::~ActivityParameterNodeImpl()
 			:ActivityParameterNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ ActivityParameterNodeImpl::~ActivityParameterNodeImpl()
 			:ActivityParameterNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -286,31 +290,31 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityParameterNodeImpl::has_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -386,14 +390,14 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
-			return getParameter(); //18327
+			return eAny(getParameter()); //18327
 	}
-	return ObjectNodeImpl::internalEIsSet(featureID);
+	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 {
@@ -404,14 +408,14 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
-bool ActivityParameterNodeImpl::eSet(int featureID, boost::any newValue)
+bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Parameter> _parameter = boost::any_cast<std::shared_ptr<uml::Parameter>>(newValue);
+			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
 			setParameter(_parameter); //18327
 			return true;
 		}

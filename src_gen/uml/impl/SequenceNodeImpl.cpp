@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -129,10 +130,12 @@ SequenceNodeImpl::~SequenceNodeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					 m_activity = par_Activity;
+					m_activity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					 m_inActivity = par_Activity;
+					m_inActivity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -155,6 +158,7 @@ SequenceNodeImpl::~SequenceNodeImpl()
 			:SequenceNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -166,6 +170,7 @@ SequenceNodeImpl::~SequenceNodeImpl()
 			:SequenceNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -188,6 +193,7 @@ SequenceNodeImpl::~SequenceNodeImpl()
 			:SequenceNodeImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -531,14 +537,14 @@ std::shared_ptr<ecore::EObject> SequenceNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
-			return getExecutableNode(); //17445
+			return eAny(getExecutableNode()); //17445
 	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool SequenceNodeImpl::internalEIsSet(int featureID) const
 {
@@ -549,7 +555,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
-bool SequenceNodeImpl::eSet(int featureID, boost::any newValue)
+bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

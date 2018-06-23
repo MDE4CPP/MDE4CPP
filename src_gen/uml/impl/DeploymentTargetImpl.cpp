@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -111,6 +112,7 @@ DeploymentTargetImpl::~DeploymentTargetImpl()
 			:DeploymentTargetImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -276,16 +278,16 @@ std::shared_ptr<ecore::EObject> DeploymentTargetImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
-			return getDeployedElement(); //3510
+			return eAny(getDeployedElement()); //3510
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
-			return getDeployment(); //3511
+			return eAny(getDeployment()); //3511
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 {
@@ -298,7 +300,7 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool DeploymentTargetImpl::eSet(int featureID, boost::any newValue)
+bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -102,6 +103,7 @@ SubstitutionImpl::~SubstitutionImpl()
 			:SubstitutionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -124,6 +126,7 @@ SubstitutionImpl::~SubstitutionImpl()
 			:SubstitutionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -135,6 +138,7 @@ SubstitutionImpl::~SubstitutionImpl()
 			:SubstitutionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -146,6 +150,7 @@ SubstitutionImpl::~SubstitutionImpl()
 			:SubstitutionImpl()
 			{
 			    m_substitutingClassifier = par_substitutingClassifier;
+				m_owner = par_substitutingClassifier;
 			}
 
 
@@ -355,16 +360,16 @@ std::shared_ptr<ecore::EObject> SubstitutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
-			return getContract(); //10219
+			return eAny(getContract()); //10219
 		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier(); //10220
+			return eAny(getSubstitutingClassifier()); //10220
 	}
-	return RealizationImpl::internalEIsSet(featureID);
+	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
 bool SubstitutionImpl::internalEIsSet(int featureID) const
 {
@@ -377,21 +382,21 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
-bool SubstitutionImpl::eSet(int featureID, boost::any newValue)
+bool SubstitutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _contract = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _contract = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setContract(_contract); //10219
 			return true;
 		}
 		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _substitutingClassifier = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _substitutingClassifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setSubstitutingClassifier(_substitutingClassifier); //10220
 			return true;
 		}

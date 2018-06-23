@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -100,6 +101,7 @@ IntervalImpl::~IntervalImpl()
 			:IntervalImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -122,6 +124,7 @@ IntervalImpl::~IntervalImpl()
 			:IntervalImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -133,6 +136,7 @@ IntervalImpl::~IntervalImpl()
 			:IntervalImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -144,6 +148,7 @@ IntervalImpl::~IntervalImpl()
 			:IntervalImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -314,16 +319,16 @@ std::shared_ptr<ecore::EObject> IntervalImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return getMax(); //24515
+			return eAny(getMax()); //24515
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return getMin(); //24516
+			return eAny(getMin()); //24516
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool IntervalImpl::internalEIsSet(int featureID) const
 {
@@ -336,21 +341,21 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool IntervalImpl::eSet(int featureID, boost::any newValue)
+bool IntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _max = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMax(_max); //24515
 			return true;
 		}
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _min = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMin(_min); //24516
 			return true;
 		}

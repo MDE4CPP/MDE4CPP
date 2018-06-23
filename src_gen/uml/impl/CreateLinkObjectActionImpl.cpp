@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ CreateLinkObjectActionImpl::~CreateLinkObjectActionImpl()
 			:CreateLinkObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ CreateLinkObjectActionImpl::~CreateLinkObjectActionImpl()
 			:CreateLinkObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ CreateLinkObjectActionImpl::~CreateLinkObjectActionImpl()
 			:CreateLinkObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -319,19 +323,19 @@ std::shared_ptr<ecore::EClass> CreateLinkObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkObjectActionImpl::association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateLinkObjectActionImpl::association_class(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateLinkObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateLinkObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateLinkObjectActionImpl::type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -415,14 +419,14 @@ std::shared_ptr<ecore::EObject> CreateLinkObjectActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
-			return getResult(); //14930
+			return eAny(getResult()); //14930
 	}
-	return CreateLinkActionImpl::internalEIsSet(featureID);
+	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -433,14 +437,14 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return CreateLinkActionImpl::internalEIsSet(featureID);
 }
-bool CreateLinkObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //14930
 			return true;
 		}

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -187,17 +185,17 @@ namespace uml
 			/*!
 			 The multiplicity of the open Association end must be compatible with the multiplicity of the result OutputPin.
 			self.openEnd()->first().compatibleWith(result) */ 
-			virtual bool compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The open end must be navigable.
 			self.openEnd()->first().isNavigable() */ 
-			virtual bool navigable_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1 */ 
-			virtual bool one_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
@@ -208,7 +206,7 @@ namespace uml
 			/*!
 			 The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered) */ 
-			virtual bool type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Visibility of the open end must allow access from the object performing the action.
@@ -219,7 +217,7 @@ namespace uml
 			    (_'context' = oed.end.type or 
 			      (openEnd.visibility = VisibilityKind::protected and 
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier))))) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

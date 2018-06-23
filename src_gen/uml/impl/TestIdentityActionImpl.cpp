@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -123,6 +124,7 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			:TestIdentityActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -134,6 +136,7 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			:TestIdentityActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -145,6 +148,7 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			:TestIdentityActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -327,19 +331,19 @@ std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TestIdentityActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TestIdentityActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::result_is_boolean(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -443,18 +447,18 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
-			return getFirst(); //17728
+			return eAny(getFirst()); //17728
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
-			return getResult(); //17729
+			return eAny(getResult()); //17729
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
-			return getSecond(); //17730
+			return eAny(getSecond()); //17730
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 {
@@ -469,28 +473,28 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool TestIdentityActionImpl::eSet(int featureID, boost::any newValue)
+bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _first = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _first = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setFirst(_first); //17728
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //17729
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _second = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _second = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setSecond(_second); //17730
 			return true;
 		}

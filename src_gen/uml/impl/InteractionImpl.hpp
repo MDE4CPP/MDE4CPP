@@ -77,7 +77,7 @@ namespace uml
 			/*!
 			 An Interaction instance must not be contained within another Interaction instance.
 			enclosingInteraction->isEmpty() */ 
-			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -171,9 +171,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Interaction> m_thisInteractionPtr;

@@ -57,32 +57,32 @@ namespace uml
 			/*!
 			 A FinalState cannot reference a submachine.
 			submachine->isEmpty() */ 
-			virtual bool cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A FinalState has no entry Behavior.
 			entry->isEmpty() */ 
-			virtual bool no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A FinalState has no exit Behavior.
 			exit->isEmpty() */ 
-			virtual bool no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0 */ 
-			virtual bool no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A FinalState cannot have Regions.
 			region->size() = 0 */ 
-			virtual bool no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_regions(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty() */ 
-			virtual bool no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_state_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -139,9 +139,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<FinalState> m_thisFinalStatePtr;

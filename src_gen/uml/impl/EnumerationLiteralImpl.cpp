@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -104,6 +105,7 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 			:EnumerationLiteralImpl()
 			{
 			    m_enumeration = par_enumeration;
+				m_namespace = par_enumeration;
 			}
 
 
@@ -115,6 +117,7 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 			:EnumerationLiteralImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -137,6 +140,7 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 			:EnumerationLiteralImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -148,6 +152,7 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 			:EnumerationLiteralImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -338,14 +343,14 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
-			return getEnumeration(); //7818
+			return eAny(getEnumeration()); //7818
 	}
-	return InstanceSpecificationImpl::internalEIsSet(featureID);
+	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 {
@@ -356,14 +361,14 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 	}
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
-bool EnumerationLiteralImpl::eSet(int featureID, boost::any newValue)
+bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Enumeration> _enumeration = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			std::shared_ptr<uml::Enumeration> _enumeration = newValue->get<std::shared_ptr<uml::Enumeration>>();
 			setEnumeration(_enumeration); //7818
 			return true;
 		}

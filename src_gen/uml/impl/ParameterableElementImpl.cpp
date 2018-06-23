@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ ParameterableElementImpl::~ParameterableElementImpl()
 			:ParameterableElementImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -235,16 +237,16 @@ std::shared_ptr<ecore::EObject> ParameterableElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter(); //154
+			return eAny(getOwningTemplateParameter()); //154
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter(); //155
+			return eAny(getTemplateParameter()); //155
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ParameterableElementImpl::internalEIsSet(int featureID) const
 {
@@ -257,21 +259,21 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool ParameterableElementImpl::eSet(int featureID, boost::any newValue)
+bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
 			setOwningTemplateParameter(_owningTemplateParameter); //154
 			return true;
 		}
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
 			setTemplateParameter(_templateParameter); //155
 			return true;
 		}

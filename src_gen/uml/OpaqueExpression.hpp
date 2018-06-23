@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -163,18 +161,18 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The query value() gives an integer value for an expression intended to produce one.

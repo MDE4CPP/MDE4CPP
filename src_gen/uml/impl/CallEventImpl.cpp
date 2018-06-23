@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ CallEventImpl::~CallEventImpl()
 			:CallEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ CallEventImpl::~CallEventImpl()
 			:CallEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ CallEventImpl::~CallEventImpl()
 			:CallEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -276,14 +280,14 @@ std::shared_ptr<ecore::EObject> CallEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
-			return getOperation(); //19713
+			return eAny(getOperation()); //19713
 	}
-	return MessageEventImpl::internalEIsSet(featureID);
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
 bool CallEventImpl::internalEIsSet(int featureID) const
 {
@@ -294,14 +298,14 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
-bool CallEventImpl::eSet(int featureID, boost::any newValue)
+bool CallEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Operation> _operation = boost::any_cast<std::shared_ptr<uml::Operation>>(newValue);
+			std::shared_ptr<uml::Operation> _operation = newValue->get<std::shared_ptr<uml::Operation>>();
 			setOperation(_operation); //19713
 			return true;
 		}

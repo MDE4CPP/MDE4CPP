@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -145,7 +143,7 @@ namespace uml
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

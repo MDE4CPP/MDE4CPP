@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -126,7 +124,7 @@ namespace uml
 			/*!
 			 A TimeConstraint has one constrainedElement.
 			constrainedElement->size() = 1 */ 
-			virtual bool has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

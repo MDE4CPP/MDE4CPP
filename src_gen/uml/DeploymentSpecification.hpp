@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -240,12 +238,12 @@ namespace uml
 			/*!
 			 The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated Deployment-Specification is a kind of Component (i.e., the configured components).
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component))) */ 
-			virtual bool deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment)) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

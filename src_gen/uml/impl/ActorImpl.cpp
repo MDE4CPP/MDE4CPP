@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -127,6 +128,7 @@ ActorImpl::~ActorImpl()
 			:ActorImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -151,10 +153,12 @@ ActorImpl::~ActorImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -171,6 +175,7 @@ ActorImpl::~ActorImpl()
 			:ActorImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -405,13 +410,13 @@ std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActorImpl::associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActorImpl::associations(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActorImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActorImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -495,12 +500,12 @@ std::shared_ptr<ecore::EObject> ActorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return BehavioredClassifierImpl::internalEIsSet(featureID);
+	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool ActorImpl::internalEIsSet(int featureID) const
 {
@@ -509,7 +514,7 @@ bool ActorImpl::internalEIsSet(int featureID) const
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
-bool ActorImpl::eSet(int featureID, boost::any newValue)
+bool ActorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

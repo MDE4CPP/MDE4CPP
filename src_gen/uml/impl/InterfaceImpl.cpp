@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -213,6 +214,7 @@ InterfaceImpl::~InterfaceImpl()
 			:InterfaceImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -237,10 +239,12 @@ InterfaceImpl::~InterfaceImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -257,6 +261,7 @@ InterfaceImpl::~InterfaceImpl()
 			:InterfaceImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -560,7 +565,7 @@ std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string 
 	throw "UnsupportedOperationException";
 }
 
-bool InterfaceImpl::visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InterfaceImpl::visibility(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -692,24 +697,24 @@ std::shared_ptr<ecore::EObject> InterfaceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACE_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier(); //5539
+			return eAny(getNestedClassifier()); //5539
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //5540
+			return eAny(getOwnedAttribute()); //5540
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation(); //5544
+			return eAny(getOwnedOperation()); //5544
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception(); //5541
+			return eAny(getOwnedReception()); //5541
 		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
-			return getProtocol(); //5542
+			return eAny(getProtocol()); //5542
 		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
-			return getRedefinedInterface(); //5543
+			return eAny(getRedefinedInterface()); //5543
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool InterfaceImpl::internalEIsSet(int featureID) const
 {
@@ -730,14 +735,14 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool InterfaceImpl::eSet(int featureID, boost::any newValue)
+bool InterfaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _protocol = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
 			setProtocol(_protocol); //5542
 			return true;
 		}

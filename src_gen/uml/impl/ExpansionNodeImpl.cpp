@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ ExpansionNodeImpl::~ExpansionNodeImpl()
 			:ExpansionNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -132,6 +134,7 @@ ExpansionNodeImpl::~ExpansionNodeImpl()
 			:ExpansionNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -143,6 +146,7 @@ ExpansionNodeImpl::~ExpansionNodeImpl()
 			:ExpansionNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -292,7 +296,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExpansionNodeImpl::region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -378,16 +382,16 @@ std::shared_ptr<ecore::EObject> ExpansionNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
-			return getRegionAsInput(); //15427
+			return eAny(getRegionAsInput()); //15427
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
-			return getRegionAsOutput(); //15428
+			return eAny(getRegionAsOutput()); //15428
 	}
-	return ObjectNodeImpl::internalEIsSet(featureID);
+	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 {
@@ -400,21 +404,21 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
-bool ExpansionNodeImpl::eSet(int featureID, boost::any newValue)
+bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = boost::any_cast<std::shared_ptr<uml::ExpansionRegion>>(newValue);
+			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
 			setRegionAsInput(_regionAsInput); //15427
 			return true;
 		}
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = boost::any_cast<std::shared_ptr<uml::ExpansionRegion>>(newValue);
+			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
 			setRegionAsOutput(_regionAsOutput); //15428
 			return true;
 		}

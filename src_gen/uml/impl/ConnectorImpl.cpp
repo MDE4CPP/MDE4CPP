@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -140,6 +141,7 @@ ConnectorImpl::~ConnectorImpl()
 			:ConnectorImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -277,13 +279,13 @@ ConnectorKind ConnectorImpl::getKind()
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorImpl::roles(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorImpl::types(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -366,22 +368,22 @@ std::shared_ptr<ecore::EObject> ConnectorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
-			return getContract(); //9315
+			return eAny(getContract()); //9315
 		case UmlPackage::CONNECTOR_EREFERENCE_END:
-			return getEnd(); //9316
+			return eAny(getEnd()); //9316
 		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
-			return getKind(); //9317
+			return eAny(getKind()); //9317
 		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector(); //9318
+			return eAny(getRedefinedConnector()); //9318
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
-			return getType(); //9319
+			return eAny(getType()); //9319
 	}
-	return FeatureImpl::internalEIsSet(featureID);
+	return FeatureImpl::eGet(featureID, resolve, coreType);
 }
 bool ConnectorImpl::internalEIsSet(int featureID) const
 {
@@ -400,14 +402,14 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	}
 	return FeatureImpl::internalEIsSet(featureID);
 }
-bool ConnectorImpl::eSet(int featureID, boost::any newValue)
+bool ConnectorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
 			setType(_type); //9319
 			return true;
 		}

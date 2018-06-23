@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -141,6 +142,7 @@ EnumerationImpl::~EnumerationImpl()
 			:EnumerationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -165,10 +167,12 @@ EnumerationImpl::~EnumerationImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -185,6 +189,7 @@ EnumerationImpl::~EnumerationImpl()
 			:EnumerationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -427,7 +432,7 @@ std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool EnumerationImpl::immutable(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -521,14 +526,14 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATION_EREFERENCE_OWNEDLITERAL:
-			return getOwnedLiteral(); //7741
+			return eAny(getOwnedLiteral()); //7741
 	}
-	return DataTypeImpl::internalEIsSet(featureID);
+	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }
 bool EnumerationImpl::internalEIsSet(int featureID) const
 {
@@ -539,7 +544,7 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }
-bool EnumerationImpl::eSet(int featureID, boost::any newValue)
+bool EnumerationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

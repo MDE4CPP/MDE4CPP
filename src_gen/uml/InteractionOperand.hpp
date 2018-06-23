@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -163,11 +161,11 @@ namespace uml
 			//*********************************
 			/*!
 			 The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction. */ 
-			virtual bool guard_contain_references(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand. */ 
-			virtual bool guard_directly_prior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

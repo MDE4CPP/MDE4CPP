@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -112,23 +110,23 @@ namespace uml
 			/*!
 			 The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
 			self.compatibleWith(definingEnd) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty() */ 
-			virtual bool part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role)) */ 
-			virtual bool role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port) */ 
-			virtual bool self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool self_part_with_port(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

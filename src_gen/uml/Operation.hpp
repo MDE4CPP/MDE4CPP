@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -242,7 +240,7 @@ namespace uml
 			/*!
 			 An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1 */ 
-			virtual bool at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
@@ -277,7 +275,7 @@ namespace uml
 			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
-			virtual bool only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set

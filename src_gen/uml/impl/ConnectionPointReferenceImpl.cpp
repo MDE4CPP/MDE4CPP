@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -111,6 +112,7 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 			:ConnectionPointReferenceImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -122,6 +124,7 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 			:ConnectionPointReferenceImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -144,6 +147,7 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 			:ConnectionPointReferenceImpl()
 			{
 			    m_state = par_state;
+				m_namespace = par_state;
 			}
 
 
@@ -234,13 +238,13 @@ std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -326,18 +330,18 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
-			return getEntry(); //6413
+			return eAny(getEntry()); //6413
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
-			return getExit(); //6414
+			return eAny(getExit()); //6414
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
-			return getState(); //6415
+			return eAny(getState()); //6415
 	}
-	return VertexImpl::internalEIsSet(featureID);
+	return VertexImpl::eGet(featureID, resolve, coreType);
 }
 bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 {
@@ -352,14 +356,14 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
-bool ConnectionPointReferenceImpl::eSet(int featureID, boost::any newValue)
+bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
 			setState(_state); //6415
 			return true;
 		}

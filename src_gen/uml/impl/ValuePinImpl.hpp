@@ -73,12 +73,12 @@ namespace uml
 			/*!
 			 The type of the value ValueSpecification must conform to the type of the ValuePin.
 			value.type.conformsTo(type) */ 
-			virtual bool compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ValuePin> m_thisValuePinPtr;

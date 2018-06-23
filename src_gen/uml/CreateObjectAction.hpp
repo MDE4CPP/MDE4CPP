@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,22 +175,22 @@ namespace uml
 			/*!
 			 The classifier cannot be abstract.
 			not classifier.isAbstract */ 
-			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass) */ 
-			virtual bool classifier_not_association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

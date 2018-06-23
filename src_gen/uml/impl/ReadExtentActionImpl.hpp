@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the result OutputPin is 0..*.
 			result.is(0,*) */ 
-			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin is the classifier.
 			result.type = classifier */ 
-			virtual bool type_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_is_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadExtentAction> m_thisReadExtentActionPtr;

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -147,6 +148,7 @@ LinkActionImpl::~LinkActionImpl()
 			:LinkActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -158,6 +160,7 @@ LinkActionImpl::~LinkActionImpl()
 			:LinkActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -169,6 +172,7 @@ LinkActionImpl::~LinkActionImpl()
 			:LinkActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -362,19 +366,19 @@ std::shared_ptr<uml::Association> LinkActionImpl::association()
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::same_association(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::same_pins(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -458,16 +462,16 @@ std::shared_ptr<ecore::EObject> LinkActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return getEndData(); //12528
+			return eAny(getEndData()); //12528
 		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue(); //12529
+			return eAny(getInputValue()); //12529
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkActionImpl::internalEIsSet(int featureID) const
 {
@@ -480,7 +484,7 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool LinkActionImpl::eSet(int featureID, boost::any newValue)
+bool LinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

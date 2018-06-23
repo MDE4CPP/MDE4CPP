@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -359,14 +360,14 @@ std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedR
 	throw "UnsupportedOperationException";
 }
 
-boost::any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName) 
+Any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName) 
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());
 	if(stereoInstance == nullptr)
 	{
-	   return boost::any();
+	   return Any();
 	}
 
 	std::shared_ptr<Bag<uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();
@@ -377,7 +378,7 @@ boost::any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,st
 			return stereoInstance->get(p);
 		}
 	}
-	return boost::any();
+	return Any();
 	//end of body
 }
 
@@ -393,7 +394,7 @@ bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype>  stereotype,std::str
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::has_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ElementImpl::has_owner(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -425,7 +426,7 @@ bool ElementImpl::mustBeOwned()
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::not_own_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ElementImpl::not_own_self(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -437,7 +438,7 @@ bool ElementImpl::removeKeyword(std::string keyword)
 	throw "UnsupportedOperationException";
 }
 
-void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,boost::any newValue) 
+void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,Any newValue) 
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -508,24 +509,24 @@ std::shared_ptr<ecore::EObject> ElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //81
+			return eAny(getOwnedComment()); //81
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //82
+			return eAny(getOwnedElement()); //82
 		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //83
+			return eAny(getOwner()); //83
 	}
-	boost::any result;
-	result = ecore::EModelElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ecore::EModelElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ObjectImpl::internalEIsSet(featureID);
+	result = ObjectImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ElementImpl::internalEIsSet(int featureID) const
@@ -548,7 +549,7 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	result = ObjectImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ElementImpl::eSet(int featureID, boost::any newValue)
+bool ElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -97,6 +98,7 @@ FeatureImpl::~FeatureImpl()
 			:FeatureImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -252,16 +254,16 @@ std::shared_ptr<ecore::EObject> FeatureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier(); //4913
+			return eAny(getFeaturingClassifier()); //4913
 		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
-			return getIsStatic(); //4914
+			return eAny(getIsStatic()); //4914
 	}
-	return RedefinableElementImpl::internalEIsSet(featureID);
+	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool FeatureImpl::internalEIsSet(int featureID) const
 {
@@ -274,14 +276,14 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
-bool FeatureImpl::eSet(int featureID, boost::any newValue)
+bool FeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
-			bool _isStatic = boost::any_cast<bool>(newValue);
+			bool _isStatic = newValue->get<bool>();
 			setIsStatic(_isStatic); //4914
 			return true;
 		}

@@ -76,7 +76,7 @@ namespace uml
 				action<>null and
 				action.oclIsKindOf(StructuredActivityNode) and
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target) */ 
-			virtual bool outgoing_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -148,9 +148,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InputPin> m_thisInputPinPtr;

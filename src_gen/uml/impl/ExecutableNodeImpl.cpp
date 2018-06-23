@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -118,6 +119,7 @@ ExecutableNodeImpl::~ExecutableNodeImpl()
 			:ExecutableNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -129,6 +131,7 @@ ExecutableNodeImpl::~ExecutableNodeImpl()
 			:ExecutableNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -140,6 +143,7 @@ ExecutableNodeImpl::~ExecutableNodeImpl()
 			:ExecutableNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -352,14 +356,14 @@ std::shared_ptr<ecore::EObject> ExecutableNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
-			return getHandler(); //11421
+			return eAny(getHandler()); //11421
 	}
-	return ActivityNodeImpl::internalEIsSet(featureID);
+	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 {
@@ -370,7 +374,7 @@ bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
-bool ExecutableNodeImpl::eSet(int featureID, boost::any newValue)
+bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

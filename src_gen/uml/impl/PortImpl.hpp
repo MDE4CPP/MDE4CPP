@@ -92,12 +92,12 @@ namespace uml
 			/*!
 			 A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty() */ 
-			virtual bool default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool default_value(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier */ 
-			virtual bool encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Derivation for Port::/provided
@@ -114,7 +114,7 @@ namespace uml
 			/*!
 			 Port.aggregation must be composite.
 			aggregation = AggregationKind::composite */ 
-			virtual bool port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool port_aggregation(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -225,9 +225,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Port> m_thisPortPtr;

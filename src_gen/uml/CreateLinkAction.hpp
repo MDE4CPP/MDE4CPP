@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -181,7 +179,7 @@ namespace uml
 			/*!
 			 The Association cannot be an abstract Classifier.
 			not self.association().isAbstract */ 
-			virtual bool association_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

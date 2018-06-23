@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ TimeObservationImpl::~TimeObservationImpl()
 			:TimeObservationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ TimeObservationImpl::~TimeObservationImpl()
 			:TimeObservationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ TimeObservationImpl::~TimeObservationImpl()
 			:TimeObservationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -286,16 +290,16 @@ std::shared_ptr<ecore::EObject> TimeObservationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
-			return getEvent(); //25713
+			return eAny(getEvent()); //25713
 		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent(); //25714
+			return eAny(getFirstEvent()); //25714
 	}
-	return ObservationImpl::internalEIsSet(featureID);
+	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
 bool TimeObservationImpl::internalEIsSet(int featureID) const
 {
@@ -308,21 +312,21 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
-bool TimeObservationImpl::eSet(int featureID, boost::any newValue)
+bool TimeObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::NamedElement> _event = boost::any_cast<std::shared_ptr<uml::NamedElement>>(newValue);
+			std::shared_ptr<uml::NamedElement> _event = newValue->get<std::shared_ptr<uml::NamedElement>>();
 			setEvent(_event); //25713
 			return true;
 		}
 		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
-			bool _firstEvent = boost::any_cast<bool>(newValue);
+			bool _firstEvent = newValue->get<bool>();
 			setFirstEvent(_firstEvent); //25714
 			return true;
 		}

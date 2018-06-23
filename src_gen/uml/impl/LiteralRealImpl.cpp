@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralRealImpl::~LiteralRealImpl()
 			:LiteralRealImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralRealImpl::~LiteralRealImpl()
 			:LiteralRealImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralRealImpl::~LiteralRealImpl()
 			:LiteralRealImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralRealImpl::~LiteralRealImpl()
 			:LiteralRealImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -295,14 +300,14 @@ std::shared_ptr<ecore::EObject> LiteralRealImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
-			return getValue(); //25215
+			return eAny(getValue()); //25215
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralRealImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +318,14 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralRealImpl::eSet(int featureID, boost::any newValue)
+bool LiteralRealImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			double _value = boost::any_cast<double>(newValue);
+			double _value = newValue->get<double>();
 			setValue(_value); //25215
 			return true;
 		}

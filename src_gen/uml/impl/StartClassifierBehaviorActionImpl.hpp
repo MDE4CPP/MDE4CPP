@@ -61,13 +61,13 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null) */ 
-			virtual bool type_has_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -130,9 +130,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StartClassifierBehaviorAction> m_thisStartClassifierBehaviorActionPtr;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ ChangeEventImpl::~ChangeEventImpl()
 			:ChangeEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ ChangeEventImpl::~ChangeEventImpl()
 			:ChangeEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ ChangeEventImpl::~ChangeEventImpl()
 			:ChangeEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -282,14 +286,14 @@ std::shared_ptr<ecore::EObject> ChangeEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
-			return getChangeExpression(); //19813
+			return eAny(getChangeExpression()); //19813
 	}
-	return EventImpl::internalEIsSet(featureID);
+	return EventImpl::eGet(featureID, resolve, coreType);
 }
 bool ChangeEventImpl::internalEIsSet(int featureID) const
 {
@@ -300,14 +304,14 @@ bool ChangeEventImpl::internalEIsSet(int featureID) const
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
-bool ChangeEventImpl::eSet(int featureID, boost::any newValue)
+bool ChangeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _changeExpression = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _changeExpression = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setChangeExpression(_changeExpression); //19813
 			return true;
 		}

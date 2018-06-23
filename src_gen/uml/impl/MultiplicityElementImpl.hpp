@@ -81,12 +81,12 @@ namespace uml
 			/*!
 			 The lower bound must be a non-negative integer literal.
 			lowerBound() >= 0 */ 
-			virtual bool lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool lower_ge_0(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null */ 
-			virtual bool lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool lower_is_integer(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
@@ -97,20 +97,20 @@ namespace uml
 			/*!
 			 The upper bound must be greater than or equal to the lower bound.
 			upperBound() >= lowerBound() */ 
-			virtual bool upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null */ 
-			virtual bool upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression. */ 
-			virtual bool value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool value_specification_constant(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects. */ 
-			virtual bool value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -210,9 +210,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<MultiplicityElement> m_thisMultiplicityElementPtr;

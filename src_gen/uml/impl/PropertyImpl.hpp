@@ -83,22 +83,22 @@ namespace uml
 			implies (templateParameterSubstitution->forAll(ts |
 			    ts.formal.oclIsKindOf(Property)
 			    and ts.formal.oclAsType(Property).isAttribute()))) */ 
-			virtual bool binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self)) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A derived union is derived.
 			isDerivedUnion implies isDerived */ 
-			virtual bool derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A derived union is read only.
 			isDerivedUnion implies isReadOnly */ 
-			virtual bool derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -131,12 +131,12 @@ namespace uml
 			/*!
 			 A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.
 			isComposite and association <> null implies opposite.upperBound() <= 1 */ 
-			virtual bool multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty() */ 
-			virtual bool qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A redefined Property must be inherited from a more general Classifier.
@@ -145,7 +145,7 @@ namespace uml
 			      redefinedProperty->forAll(rp|
 			        ((redefinitionContext->collect(fc|
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp))) */ 
-			virtual bool redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Sets the default value for this property to the specified Boolean value. */ 
@@ -178,7 +178,7 @@ namespace uml
 			/*!
 			 A Property may not subset a Property with the same name.
 			subsettedProperty->forAll(sp | sp.name <> name) */ 
-			virtual bool subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
@@ -199,7 +199,7 @@ namespace uml
 			  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
 			    subsettedProperty->forAll(sp |
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c))))) */ 
-			virtual bool subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
@@ -207,12 +207,12 @@ namespace uml
 			  self.type.conformsTo(sp.type) and
 			    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
 			      self.upperBound() <= sp.upperBound() )) */ 
-			virtual bool subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool subsetting_rules(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type */ 
-			virtual bool type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 */ 
@@ -418,9 +418,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Property> m_thisPropertyPtr;

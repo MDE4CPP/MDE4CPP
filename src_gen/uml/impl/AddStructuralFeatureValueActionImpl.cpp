@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ AddStructuralFeatureValueActionImpl::~AddStructuralFeatureValueActionImpl()
 			:AddStructuralFeatureValueActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ AddStructuralFeatureValueActionImpl::~AddStructuralFeatureValueActionImpl()
 			:AddStructuralFeatureValueActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ AddStructuralFeatureValueActionImpl::~AddStructuralFeatureValueActionImpl()
 			:AddStructuralFeatureValueActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -336,13 +340,13 @@ bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool AddStructuralFeatureValueActionImpl::insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AddStructuralFeatureValueActionImpl::required_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -426,16 +430,16 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::eContainer(
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
-			return getInsertAt(); //13532
+			return eAny(getInsertAt()); //13532
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll(); //13533
+			return eAny(getIsReplaceAll()); //13533
 	}
-	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
+	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
 bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
@@ -448,21 +452,21 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
-bool AddStructuralFeatureValueActionImpl::eSet(int featureID, boost::any newValue)
+bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _insertAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setInsertAt(_insertAt); //13532
 			return true;
 		}
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
-			bool _isReplaceAll = boost::any_cast<bool>(newValue);
+			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //13533
 			return true;
 		}

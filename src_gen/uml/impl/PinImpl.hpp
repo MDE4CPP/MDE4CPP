@@ -62,12 +62,12 @@ namespace uml
 			/*!
 			 A control Pin has a control type.
 			isControl implies isControlType */ 
-			virtual bool control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Pin multiplicity is not unique.
 			not isUnique */ 
-			virtual bool not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -128,9 +128,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Pin> m_thisPinPtr;

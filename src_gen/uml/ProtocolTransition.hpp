@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -175,12 +173,12 @@ namespace uml
 			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
@@ -193,7 +191,7 @@ namespace uml
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif */ 
-			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

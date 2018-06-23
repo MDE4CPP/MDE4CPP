@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -110,6 +111,7 @@ VertexImpl::~VertexImpl()
 			:VertexImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -121,6 +123,7 @@ VertexImpl::~VertexImpl()
 			:VertexImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -319,18 +322,18 @@ std::shared_ptr<ecore::EObject> VertexImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return getContainer(); //6110
+			return eAny(getContainer()); //6110
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return getIncoming(); //6111
+			return eAny(getIncoming()); //6111
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return getOutgoing(); //6112
+			return eAny(getOutgoing()); //6112
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool VertexImpl::internalEIsSet(int featureID) const
 {
@@ -345,14 +348,14 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool VertexImpl::eSet(int featureID, boost::any newValue)
+bool VertexImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
 			setContainer(_container); //6110
 			return true;
 		}

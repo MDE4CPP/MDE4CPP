@@ -74,17 +74,17 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty() */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null */ 
-			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -150,9 +150,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StartObjectBehaviorAction> m_thisStartObjectBehaviorActionPtr;

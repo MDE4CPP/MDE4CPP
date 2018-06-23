@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -191,19 +189,19 @@ namespace uml
 			/*!
 			 Only composite States can have entry or exit Pseudostates defined.
 			connectionPoint->notEmpty() implies isComposite */ 
-			virtual bool composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
 			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine))) */ 
-			virtual bool destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 A composite State is a State with at least one Region.
@@ -243,12 +241,12 @@ namespace uml
 			/*!
 			 A State is not allowed to have both a submachine and Regions.
 			isComposite implies not isSubmachineState */ 
-			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( ) */ 
-			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			
 			//*********************************

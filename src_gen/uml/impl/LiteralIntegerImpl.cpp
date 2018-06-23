@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 			:LiteralIntegerImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 			:LiteralIntegerImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 			:LiteralIntegerImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 			:LiteralIntegerImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -295,14 +300,14 @@ std::shared_ptr<ecore::EObject> LiteralIntegerImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALINTEGER_EATTRIBUTE_VALUE:
-			return getValue(); //25015
+			return eAny(getValue()); //25015
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +318,14 @@ bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralIntegerImpl::eSet(int featureID, boost::any newValue)
+bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALINTEGER_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			int _value = boost::any_cast<int>(newValue);
+			int _value = newValue->get<int>();
 			setValue(_value); //25015
 			return true;
 		}

@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -116,9 +116,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<GeneralOrdering> m_thisGeneralOrderingPtr;

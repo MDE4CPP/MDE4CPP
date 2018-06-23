@@ -61,17 +61,17 @@ namespace uml
 			/*!
 			 The multiplicity of the InputPins is 1..1.
 			first.is(1,1) and second.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The InputPins have no type.
 			first.type= null and second.type = null */ 
-			virtual bool no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin is Boolean.
 			result.type=Boolean */ 
-			virtual bool result_is_boolean(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -155,9 +155,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TestIdentityAction> m_thisTestIdentityActionPtr;

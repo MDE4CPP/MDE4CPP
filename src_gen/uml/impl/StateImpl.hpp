@@ -59,19 +59,19 @@ namespace uml
 			/*!
 			 Only composite States can have entry or exit Pseudostates defined.
 			connectionPoint->notEmpty() implies isComposite */ 
-			virtual bool composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
 			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine))) */ 
-			virtual bool destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 A composite State is a State with at least one Region.
@@ -111,12 +111,12 @@ namespace uml
 			/*!
 			 A State is not allowed to have both a submachine and Regions.
 			isComposite implies not isSubmachineState */ 
-			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( ) */ 
-			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -267,9 +267,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<State> m_thisStatePtr;

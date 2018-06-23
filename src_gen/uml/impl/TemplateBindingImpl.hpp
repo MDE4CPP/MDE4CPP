@@ -53,12 +53,12 @@ namespace uml
 			/*!
 			 A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter of the target TemplateSignature.
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1) */ 
-			virtual bool one_parameter_substitution(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal)) */ 
-			virtual bool parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -135,9 +135,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TemplateBinding> m_thisTemplateBindingPtr;

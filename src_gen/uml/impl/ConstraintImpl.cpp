@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -108,10 +109,12 @@ ConstraintImpl::~ConstraintImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					 m_context = par_Namespace;
+					m_context = par_Namespace;
+					m_namespace = par_Namespace;
 					 return;
 				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					 m_namespace = par_Namespace;
+					m_namespace = par_Namespace;
+					m_owner = par_Namespace;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -145,6 +148,7 @@ ConstraintImpl::~ConstraintImpl()
 			:ConstraintImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -156,6 +160,7 @@ ConstraintImpl::~ConstraintImpl()
 			:ConstraintImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -249,19 +254,19 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::boolean_value(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -355,18 +360,18 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return getConstrainedElement(); //5313
+			return eAny(getConstrainedElement()); //5313
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return getContext(); //5314
+			return eAny(getContext()); //5314
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return getSpecification(); //5315
+			return eAny(getSpecification()); //5315
 	}
-	return PackageableElementImpl::internalEIsSet(featureID);
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ConstraintImpl::internalEIsSet(int featureID) const
 {
@@ -381,21 +386,21 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
-bool ConstraintImpl::eSet(int featureID, boost::any newValue)
+bool ConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Namespace> _context = boost::any_cast<std::shared_ptr<uml::Namespace>>(newValue);
+			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
 			setContext(_context); //5314
 			return true;
 		}
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setSpecification(_specification); //5315
 			return true;
 		}

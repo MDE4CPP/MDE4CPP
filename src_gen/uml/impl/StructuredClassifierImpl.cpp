@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -179,6 +180,7 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 			:StructuredClassifierImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -203,10 +205,12 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -223,6 +227,7 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 			:StructuredClassifierImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -595,20 +600,20 @@ std::shared_ptr<ecore::EObject> StructuredClassifierImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //9239
+			return eAny(getOwnedAttribute()); //9239
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
-			return getOwnedConnector(); //9240
+			return eAny(getOwnedConnector()); //9240
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
-			return getPart(); //9241
+			return eAny(getPart()); //9241
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
-			return getRole(); //9242
+			return eAny(getRole()); //9242
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 {
@@ -625,7 +630,7 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool StructuredClassifierImpl::eSet(int featureID, boost::any newValue)
+bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -172,7 +170,7 @@ namespace uml
 			/*!
 			 When isAbstract is true there are no methods.
 			isAbstract implies method->isEmpty() */ 
-			virtual bool abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context)  = 0;
 			
 			/*!
 			 Creates a return result parameter with the specified name and type. */ 

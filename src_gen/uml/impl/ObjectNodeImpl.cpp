@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -127,6 +128,7 @@ ObjectNodeImpl::~ObjectNodeImpl()
 			:ObjectNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -138,6 +140,7 @@ ObjectNodeImpl::~ObjectNodeImpl()
 			:ObjectNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -149,6 +152,7 @@ ObjectNodeImpl::~ObjectNodeImpl()
 			:ObjectNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -314,19 +318,19 @@ ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectNodeImpl::input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -420,28 +424,28 @@ std::shared_ptr<ecore::EObject> ObjectNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return getInState(); //11622
+			return eAny(getInState()); //11622
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType(); //11623
+			return eAny(getIsControlType()); //11623
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return getOrdering(); //11624
+			return eAny(getOrdering()); //11624
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return getSelection(); //11625
+			return eAny(getSelection()); //11625
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return getUpperBound(); //11626
+			return eAny(getUpperBound()); //11626
 	}
-	boost::any result;
-	result = ActivityNodeImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TypedElementImpl::internalEIsSet(featureID);
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ObjectNodeImpl::internalEIsSet(int featureID) const
@@ -468,35 +472,35 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 	result = TypedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ObjectNodeImpl::eSet(int featureID, boost::any newValue)
+bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
 		{
 			// BOOST CAST
-			bool _isControlType = boost::any_cast<bool>(newValue);
+			bool _isControlType = newValue->get<bool>();
 			setIsControlType(_isControlType); //11623
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
-			ObjectNodeOrderingKind _ordering = boost::any_cast<ObjectNodeOrderingKind>(newValue);
+			ObjectNodeOrderingKind _ordering = newValue->get<ObjectNodeOrderingKind>();
 			setOrdering(_ordering); //11624
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setSelection(_selection); //11625
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperBound = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _upperBound = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setUpperBound(_upperBound); //11626
 			return true;
 		}

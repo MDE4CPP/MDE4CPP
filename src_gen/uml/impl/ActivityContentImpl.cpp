@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -133,12 +134,12 @@ std::shared_ptr<ecore::EObject> ActivityContentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityContentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityContentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityContentImpl::internalEIsSet(int featureID) const
 {
@@ -147,7 +148,7 @@ bool ActivityContentImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ActivityContentImpl::eSet(int featureID, boost::any newValue)
+bool ActivityContentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

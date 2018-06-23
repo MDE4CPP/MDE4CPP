@@ -80,7 +80,7 @@ namespace uml
 			/*!
 			 An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2 */ 
-			virtual bool is_binary(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool is_binary(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			/*!
 			 The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
@@ -91,7 +91,7 @@ namespace uml
 			/*!
 			 The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
-			virtual bool non_owned_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool non_owned_end(Any diagnostics,std::map <   Any, Any >  context)  ;
 			
 			
 			
@@ -164,9 +164,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Extension> m_thisExtensionPtr;
