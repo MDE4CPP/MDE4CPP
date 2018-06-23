@@ -17,7 +17,7 @@ std::shared_ptr<PrimitiveTypesPackage> PrimitiveTypesPackage::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(PrimitiveTypesPackageImpl::create());
-		std::dynamic_pointer_cast<PrimitiveTypesPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<PrimitiveTypesPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

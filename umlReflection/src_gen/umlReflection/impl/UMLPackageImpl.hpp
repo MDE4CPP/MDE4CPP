@@ -8774,29 +8774,31 @@ namespace UML
 			bool isCreated = false;
 
 			void initMetaModel();
-			virtual void init();
+			virtual void init(std::shared_ptr<uml::Package> package);
 
 		public:
- 			void initializePackageContents();
-			void createPackageContents();
+ 			void initializePackageContents(std::shared_ptr<uml::Package> uML);
+			void createPackageContents(std::shared_ptr<uml::Package> uML);
 
 		private:
-			void createPackageActivities(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageClasses(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageDependencies(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageEnumerationLiterals(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInstanceSpecifications(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaces(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackagePrimitiveTypes(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageStereotypes(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageValueSpecifications(std::shared_ptr<UMLPackageImpl> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageActivities(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
 
 			void initializePackageActivities();
 			void initializePackageClasses();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
 	};
-} 
+}
 #endif /* end of include guard: UML_METAMODELPACKAGEIMPL_HPP */
