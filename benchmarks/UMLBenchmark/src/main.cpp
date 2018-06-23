@@ -20,9 +20,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	//OMP parallelization.
-	omp_set_num_threads(1);
-
     cout << "Hello World!" << endl;
 
 	for (int i=0; i<1; i++){

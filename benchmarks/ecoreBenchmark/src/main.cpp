@@ -20,7 +20,6 @@ using namespace ecore;
 
 int main()
 {
-	omp_set_num_threads(1);
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 
     {

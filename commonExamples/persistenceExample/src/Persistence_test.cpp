@@ -8,7 +8,6 @@
 #include <dirent.h>
 #include <memory>
 #include <iostream>
-#include <omp.h>
 #include <string>
 #include <vector>
 
@@ -120,8 +119,6 @@ void performUniModelTest(std::string dataFolderName)
 
 int main()
 {
-	// Set OpenMP number of threads
-	omp_set_num_threads(1);
 	char folderBuffer[MAX_CHAR];
 	std::vector<std::string> libraries;
 	if (!getcwd(folderBuffer, sizeof(folderBuffer)))

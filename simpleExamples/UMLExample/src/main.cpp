@@ -44,8 +44,6 @@ using namespace std;
 
 int main()
 {
-	omp_set_num_threads(1);
-
     //#############  Create simple UML model  #############
     std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
     std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();

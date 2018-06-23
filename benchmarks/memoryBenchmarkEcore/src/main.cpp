@@ -25,7 +25,6 @@ using namespace ecore;
 
 int main()
 {
-	omp_set_num_threads(omp_get_num_procs());
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 
     std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();

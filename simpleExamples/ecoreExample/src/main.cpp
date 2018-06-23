@@ -18,7 +18,6 @@ using namespace ecore;
 
 int main()
 {
-  omp_set_num_threads(1);
   std::shared_ptr<EcorePackage> package = EcorePackage::eInstance();
   std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();
 

@@ -17,7 +17,6 @@
 
 //source: https://www.murrayc.com/permalink/2015/12/05/modern-c-variadic-template-parameters-and-tuples/
 
-#include <omp.h>
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
@@ -226,7 +225,6 @@ void buildLevels (){
 
 int main()
 {
-    omp_set_num_threads(omp_get_num_procs());
     cout << "Number of threads (= number of cores): " << omp_get_num_procs() << std::endl;
     {
         std::shared_ptr<Namespace> ns1 = std::shared_ptr<Namespace>(new Namespace());
