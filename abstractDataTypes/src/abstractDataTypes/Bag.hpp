@@ -56,7 +56,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
 				}
 			}
 #endif
@@ -71,7 +71,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+			//			DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
 				}
 			}
 #endif
@@ -86,7 +86,7 @@ class Bag
 
 			if (i > -1)
 			{
-				DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
 			}
 #endif
 			m_bag.insert(a, b);
@@ -149,7 +149,7 @@ class Bag
 			// The debug version check if an inserted element is already present in the collection.
 			if (find(el) > -1)
 			{
-				DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
 			}
 #endif
 			m_bag.push_back(el);
