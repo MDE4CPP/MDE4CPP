@@ -36,7 +36,7 @@ std::shared_ptr<uml::Element> FUMLMultiplePinsFactoryImpl::create(std::shared_pt
     }
 
 	//TODO: still two times run through map
-	std::string _className = _class->getQualifiedName();
+	std::string _className = _class->getName();
 	return create(_className);
 }
 

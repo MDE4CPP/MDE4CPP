@@ -17,7 +17,7 @@ std::shared_ptr<CalcModelPackage> CalcModelPackage::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(CalcModelPackageImpl::create());
-		std::dynamic_pointer_cast<CalcModelPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<CalcModelPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

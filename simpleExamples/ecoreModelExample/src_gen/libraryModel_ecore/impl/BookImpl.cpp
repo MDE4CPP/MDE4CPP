@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -205,41 +206,41 @@ std::shared_ptr<ecore::EObject> BookImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BookImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BookImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_AUTHORS:
-			return getAuthors(); //01
+			return eAny(getAuthors()); //51
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
-			return getLibrary(); //02
+			return eAny(getLibrary()); //52
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_PICTURES:
-			return getPictures(); //03
+			return eAny(getPictures()); //53
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool BookImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_AUTHORS:
-			return getAuthors() != nullptr; //01
+			return getAuthors() != nullptr; //51
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
-			return getLibrary().lock() != nullptr; //02
+			return getLibrary().lock() != nullptr; //52
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_PICTURES:
-			return getPictures() != nullptr; //03
+			return getPictures() != nullptr; //53
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool BookImpl::eSet(int featureID, boost::any newValue)
+bool BookImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
 		{
 			// BOOST CAST
-			std::shared_ptr<libraryModel_ecore::LibraryModel> _library = boost::any_cast<std::shared_ptr<libraryModel_ecore::LibraryModel>>(newValue);
-			setLibrary(_library); //02
+			std::shared_ptr<libraryModel_ecore::LibraryModel> _library = newValue->get<std::shared_ptr<libraryModel_ecore::LibraryModel>>();
+			setLibrary(_library); //52
 			return true;
 		}
 	}

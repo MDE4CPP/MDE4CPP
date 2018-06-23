@@ -48,7 +48,6 @@ void LibraryModel_ecorePackageImpl::initializePackageContents()
 
 void LibraryModel_ecorePackageImpl::initializeAuthorContent()
 {
-	m_author_EClass->setInstanceClass(nullptr);
 	m_author_EClass->setName("Author");
 	m_author_EClass->setAbstract(false);
 	m_author_EClass->setInterface(false);
@@ -60,7 +59,6 @@ void LibraryModel_ecorePackageImpl::initializeAuthorContent()
 
 void LibraryModel_ecorePackageImpl::initializeBookContent()
 {
-	m_book_EClass->setInstanceClass(nullptr);
 	m_book_EClass->setName("Book");
 	m_book_EClass->setAbstract(false);
 	m_book_EClass->setInterface(false);
@@ -147,7 +145,6 @@ void LibraryModel_ecorePackageImpl::initializeBookContent()
 
 void LibraryModel_ecorePackageImpl::initializeLibraryModelContent()
 {
-	m_libraryModel_EClass->setInstanceClass(nullptr);
 	m_libraryModel_EClass->setName("LibraryModel");
 	m_libraryModel_EClass->setAbstract(false);
 	m_libraryModel_EClass->setInterface(false);
@@ -209,7 +206,6 @@ void LibraryModel_ecorePackageImpl::initializeLibraryModelContent()
 
 void LibraryModel_ecorePackageImpl::initializeNamedElementContent()
 {
-	m_namedElement_EClass->setInstanceClass(nullptr);
 	m_namedElement_EClass->setName("NamedElement");
 	m_namedElement_EClass->setAbstract(false);
 	m_namedElement_EClass->setInterface(false);
@@ -241,7 +237,6 @@ void LibraryModel_ecorePackageImpl::initializeNamedElementContent()
 
 void LibraryModel_ecorePackageImpl::initializePictureContent()
 {
-	m_picture_EClass->setInstanceClass(nullptr);
 	m_picture_EClass->setName("Picture");
 	m_picture_EClass->setAbstract(false);
 	m_picture_EClass->setInterface(false);

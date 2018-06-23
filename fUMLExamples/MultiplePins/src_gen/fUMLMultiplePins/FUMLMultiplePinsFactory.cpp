@@ -13,7 +13,6 @@ std::shared_ptr<FUMLMultiplePinsFactory> FUMLMultiplePinsFactory::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(FUMLMultiplePinsFactoryImpl::create());
-		std::dynamic_pointer_cast<FUMLMultiplePinsFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

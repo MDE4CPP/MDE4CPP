@@ -11,6 +11,7 @@
 #include "uml/Property.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
@@ -45,22 +46,23 @@ LibraryModel_umlPackage* LibraryModel_umlPackageImpl::create()
 	
     // Obtain or create and register package, create package meta-data objects
     LibraryModel_umlPackageImpl * metaModelPackage = new LibraryModel_umlPackageImpl();
-	metaModelPackage->initMetaModel();
-    metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void LibraryModel_umlPackageImpl::init()
+void LibraryModel_umlPackageImpl::init(std::shared_ptr<uml::Package> libraryModel_uml)
 {
     // Initialize created meta-data
-    initializePackageContents();   
+	setThisPackagePtr(libraryModel_uml);
+	initMetaModel();
+    createPackageContents(libraryModel_uml);
+    initializePackageContents(libraryModel_uml);   
 }
 
 void LibraryModel_umlPackageImpl::initMetaModel()
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageContents()
+void LibraryModel_umlPackageImpl::createPackageContents(std::shared_ptr<uml::Package> libraryModel_uml)
 {
 	if (isCreated)
 	{
@@ -68,8 +70,6 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 	}
 	isCreated = true;
 
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml = std::shared_ptr<LibraryModel_umlPackageImpl>(this, null_deleter());
 	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
 
 	createPackageValueSpecifications(libraryModel_uml, factory);
@@ -81,13 +81,14 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 	createPackageDependencies(libraryModel_uml, factory);
 	createPackagePrimitiveTypes(libraryModel_uml, factory);
 	createPackageEnumerationLiterals(libraryModel_uml, factory);
+	createPackageInterfaceRealizations(libraryModel_uml, factory);
 }
 
-void LibraryModel_umlPackageImpl::createPackageActivities(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageClasses(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
@@ -131,31 +132,35 @@ void LibraryModel_umlPackageImpl::createPackageClasses(std::shared_ptr<LibraryMo
 
 }
 
-void LibraryModel_umlPackageImpl::createPackageDependencies(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageInterfaces(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageStereotypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void LibraryModel_umlPackageImpl::createPackageValueSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+void LibraryModel_umlPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
+
+void LibraryModel_umlPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory)
 {
 	libraryModel_uml_A_Lib_Author_library_lowerValue_LiteralInteger_LibraryModel_uml_A_Lib_Author_library = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_A_Lib_Author_library));
 	libraryModel_uml_A_Lib_Author_library_lowerValue_LiteralInteger_LibraryModel_uml_A_Lib_Author_library->setValue(0);
@@ -218,7 +223,7 @@ void LibraryModel_umlPackageImpl::createPackageValueSpecifications(std::shared_p
 	libraryModel_uml_Picture_pageNumber_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Picture_pageNumber->setValue(1);
 }
 
-void LibraryModel_umlPackageImpl::initializePackageContents()
+void LibraryModel_umlPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> libraryModel_uml)
 {
 	if (isInitialized)
 	{
@@ -230,16 +235,15 @@ void LibraryModel_umlPackageImpl::initializePackageContents()
 	setName(eNAME);
 	setURI(eNS_URI);
 
-	// Add supertypes to classes
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml = std::shared_ptr<LibraryModel_umlPackageImpl>(this, null_deleter());
-
 	initializePackageActivities();
 	initializePackageClasses();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+
+	
 }
 
 //ActivityNodes and Edges
@@ -272,6 +276,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_Book_authors->setType(get_LibraryModel_uml_Author());
 	libraryModel_uml_Book_authors->setLower(0);
 	libraryModel_uml_Book_authors->setUpper(-1);
+	libraryModel_uml_Book_authors->setVisibility(uml::VisibilityKind::PRIVATE);
 	
 	
 	
@@ -279,6 +284,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_Book_pictures->setType(get_LibraryModel_uml_Picture());
 	libraryModel_uml_Book_pictures->setLower(0);
 	libraryModel_uml_Book_pictures->setUpper(-1);
+	libraryModel_uml_Book_pictures->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
 	
@@ -294,6 +300,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_Library_authors->setType(get_LibraryModel_uml_Author());
 	libraryModel_uml_Library_authors->setLower(0);
 	libraryModel_uml_Library_authors->setUpper(-1);
+	libraryModel_uml_Library_authors->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
 	
@@ -301,6 +308,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_Library_books->setType(get_LibraryModel_uml_Book());
 	libraryModel_uml_Library_books->setLower(0);
 	libraryModel_uml_Library_books->setUpper(-1);
+	libraryModel_uml_Library_books->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
 	
@@ -316,6 +324,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_NamedModelElement_name->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	libraryModel_uml_NamedModelElement_name->setLower(0);
 	libraryModel_uml_NamedModelElement_name->setUpper(1);
+	libraryModel_uml_NamedModelElement_name->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
 	
@@ -334,6 +343,7 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	libraryModel_uml_Picture_pageNumber->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	libraryModel_uml_Picture_pageNumber->setLower(0);
 	libraryModel_uml_Picture_pageNumber->setUpper(1);
+	libraryModel_uml_Picture_pageNumber->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	
 	
@@ -345,6 +355,11 @@ void LibraryModel_umlPackageImpl::initializePackageDependencies()
 }
 
 void LibraryModel_umlPackageImpl::initializePackageInstanceSpecifications()
+{
+}
+
+
+void LibraryModel_umlPackageImpl::initializePackageInterfaceRealizations()
 {
 }
 

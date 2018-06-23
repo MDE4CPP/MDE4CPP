@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -137,14 +138,14 @@ std::shared_ptr<ecore::EObject> NamedElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //30
+			return eAny(getName()); //30
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool NamedElementImpl::internalEIsSet(int featureID) const
 {
@@ -155,14 +156,14 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool NamedElementImpl::eSet(int featureID, boost::any newValue)
+bool NamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
-			std::string _Name = boost::any_cast<std::string>(newValue);
+			std::string _Name = newValue->get<std::string>();
 			setName(_Name); //30
 			return true;
 		}

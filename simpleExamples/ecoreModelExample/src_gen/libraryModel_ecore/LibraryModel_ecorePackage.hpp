@@ -59,13 +59,13 @@ namespace libraryModel_ecore
 
 			// Begin Class Book
 			//Class and Feature IDs 
-			static const unsigned int BOOK_ECLASS = 0;
+			static const unsigned int BOOK_ECLASS = 5;
 			static const unsigned int BOOK_ECLASS_FEATURE_COUNT = 4;
 			static const unsigned int BOOK_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int BOOK_EREFERENCE_AUTHORS = 01;
-			static const int BOOK_EREFERENCE_LIBRARY = 02;
-			static const int BOOK_EREFERENCE_PICTURES = 03;
+			static const int BOOK_EREFERENCE_AUTHORS = 501;
+			static const int BOOK_EREFERENCE_LIBRARY = 502;
+			static const int BOOK_EREFERENCE_PICTURES = 503;
 			
 			
 			//Class and Feature Getter
@@ -86,8 +86,8 @@ namespace libraryModel_ecore
 			static const unsigned int LIBRARYMODEL_ECLASS_FEATURE_COUNT = 2;
 			static const unsigned int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 0;
 			
-			static const int LIBRARYMODEL_EREFERENCE_AUTHORS = 21;
-			static const int LIBRARYMODEL_EREFERENCE_BOOK = 20;
+			static const int LIBRARYMODEL_EREFERENCE_AUTHORS = 201;
+			static const int LIBRARYMODEL_EREFERENCE_BOOK = 200;
 			
 			
 			//Class and Feature Getter
@@ -106,7 +106,7 @@ namespace libraryModel_ecore
 			static const unsigned int NAMEDELEMENT_ECLASS = 3;
 			static const unsigned int NAMEDELEMENT_ECLASS_FEATURE_COUNT = 1;
 			static const unsigned int NAMEDELEMENT_ECLASS_OPERATION_COUNT = 0;
-			static const int NAMEDELEMENT_EATTRIBUTE_NAME = 30;
+			static const int NAMEDELEMENT_EATTRIBUTE_NAME = 300;
 			
 			
 			
@@ -125,9 +125,9 @@ namespace libraryModel_ecore
 			static const unsigned int PICTURE_ECLASS = 4;
 			static const unsigned int PICTURE_ECLASS_FEATURE_COUNT = 3;
 			static const unsigned int PICTURE_ECLASS_OPERATION_COUNT = 0;
-			static const int PICTURE_EATTRIBUTE_PAGENUMBER = 42;
+			static const int PICTURE_EATTRIBUTE_PAGENUMBER = 402;
 			
-			static const int PICTURE_EREFERENCE_BOOK = 41;
+			static const int PICTURE_EREFERENCE_BOOK = 401;
 			
 			
 			//Class and Feature Getter

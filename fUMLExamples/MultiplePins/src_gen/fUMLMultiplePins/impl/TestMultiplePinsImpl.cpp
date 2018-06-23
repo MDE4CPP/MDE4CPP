@@ -9,16 +9,16 @@
 #include <iostream>
 
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "fUMLMultiplePins/impl/FUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Activity.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
 
 
 
+
 using namespace fUMLMultiplePins;
-using boost::any_cast;
 
 //*********************************
 // Constructor / Destructor
@@ -58,24 +58,24 @@ std::shared_ptr<uml::Class> TestMultiplePinsImpl::getMetaClass()
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TestMultiplePinsImpl::get(std::shared_ptr<uml::Property> _property) const
+Any TestMultiplePinsImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<boost::any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
-	return boost::any();
+	return eAny(nullptr);
 }
 
-void TestMultiplePinsImpl::set(std::shared_ptr<uml::Property> _property,boost::any value)
+void TestMultiplePinsImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void(boost::any)>>::iterator iter = m_setterMap.find(qName);
+	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
     if(iter != m_setterMap.end())
     {
         //invoke the getter function
@@ -94,6 +94,7 @@ void TestMultiplePinsImpl::unset(std::shared_ptr<uml::Property> _property)
         iter->second();
     }
 }
+
 
 std::shared_ptr<TestMultiplePins> TestMultiplePinsImpl::getThisTestMultiplePinsPtr()
 {

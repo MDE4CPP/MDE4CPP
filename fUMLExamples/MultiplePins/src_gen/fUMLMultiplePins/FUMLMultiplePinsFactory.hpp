@@ -14,10 +14,7 @@ namespace fUMLMultiplePins
 	class TestClass;
 	class FUMLMultiplePinsPackage;
 	class FUMLMultiplePinsFactory;
-}
 
-namespace fUMLMultiplePins
-{
 	class FUMLMultiplePinsFactory : virtual public uml::Factory 
 	{ 
 		protected:

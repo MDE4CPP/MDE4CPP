@@ -17,7 +17,7 @@ std::shared_ptr<FUMLMultiplePinsPackage> FUMLMultiplePinsPackage::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(FUMLMultiplePinsPackageImpl::create());
-		std::dynamic_pointer_cast<FUMLMultiplePinsPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<FUMLMultiplePinsPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

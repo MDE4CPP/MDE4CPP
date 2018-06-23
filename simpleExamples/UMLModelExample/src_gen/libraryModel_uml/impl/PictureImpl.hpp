@@ -14,10 +14,8 @@
 #include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
 #include "uml/Property.hpp"
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 namespace uml
 {
@@ -64,14 +62,15 @@ namespace LibraryModel_uml
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			virtual boost::any get(std::shared_ptr<uml::Property> _property) const ;
-			virtual void set(std::shared_ptr<uml::Property> _property,boost::any value) ;
+			virtual Any get(std::shared_ptr<uml::Property> _property) const ;
+			virtual void set(std::shared_ptr<uml::Property> _property, Any value) ;
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
+			
 		
 		private:
 			std::weak_ptr<Picture> m_thisPicturePtr;
-			std::map<std::string,std::function<boost::any()>> m_getterMap;
-			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
+			std::map<std::string,std::function<Any()>> m_getterMap;
+			std::map<std::string,std::function<void(Any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;
 	};
 }

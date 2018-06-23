@@ -9,8 +9,8 @@
 #include <iostream>
 
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "fUMLMultiplePins/impl/FUMLMultiplePinsPackageImpl.hpp"
 #include "uml/Class.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
@@ -19,8 +19,8 @@
 
 
 
+
 using namespace fUMLMultiplePins;
-using boost::any_cast;
 
 //*********************************
 // Constructor / Destructor
@@ -80,24 +80,24 @@ param_0++;
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TestClassImpl::get(std::shared_ptr<uml::Property> _property) const
+Any TestClassImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<boost::any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
-	return boost::any();
+	return eAny(nullptr);
 }
 
-void TestClassImpl::set(std::shared_ptr<uml::Property> _property,boost::any value)
+void TestClassImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void(boost::any)>>::iterator iter = m_setterMap.find(qName);
+	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
     if(iter != m_setterMap.end())
     {
         //invoke the getter function
@@ -116,6 +116,7 @@ void TestClassImpl::unset(std::shared_ptr<uml::Property> _property)
         iter->second();
     }
 }
+
 
 std::shared_ptr<TestClass> TestClassImpl::getThisTestClassPtr()
 {

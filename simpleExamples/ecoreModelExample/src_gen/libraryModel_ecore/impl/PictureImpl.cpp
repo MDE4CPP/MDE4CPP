@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -169,16 +170,16 @@ std::shared_ptr<ecore::EObject> PictureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PictureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PictureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::PICTURE_EREFERENCE_BOOK:
-			return getBook(); //41
+			return eAny(getBook()); //41
 		case LibraryModel_ecorePackage::PICTURE_EATTRIBUTE_PAGENUMBER:
-			return getPageNumber(); //42
+			return eAny(getPageNumber()); //42
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool PictureImpl::internalEIsSet(int featureID) const
 {
@@ -191,21 +192,21 @@ bool PictureImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool PictureImpl::eSet(int featureID, boost::any newValue)
+bool PictureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case LibraryModel_ecorePackage::PICTURE_EREFERENCE_BOOK:
 		{
 			// BOOST CAST
-			std::shared_ptr<libraryModel_ecore::Book> _book = boost::any_cast<std::shared_ptr<libraryModel_ecore::Book>>(newValue);
+			std::shared_ptr<libraryModel_ecore::Book> _book = newValue->get<std::shared_ptr<libraryModel_ecore::Book>>();
 			setBook(_book); //41
 			return true;
 		}
 		case LibraryModel_ecorePackage::PICTURE_EATTRIBUTE_PAGENUMBER:
 		{
 			// BOOST CAST
-			int _pageNumber = boost::any_cast<int>(newValue);
+			int _pageNumber = newValue->get<int>();
 			setPageNumber(_pageNumber); //42
 			return true;
 		}

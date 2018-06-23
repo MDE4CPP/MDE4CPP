@@ -18,10 +18,7 @@ namespace LibraryModel_uml
 	class Picture;
 	class LibraryModel_umlPackage;
 	class LibraryModel_umlFactory;
-}
 
-namespace LibraryModel_uml
-{
 	class LibraryModel_umlFactory : virtual public uml::Factory 
 	{ 
 		protected:

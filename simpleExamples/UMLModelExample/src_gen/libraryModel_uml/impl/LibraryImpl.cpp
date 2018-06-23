@@ -10,8 +10,8 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
 #include "uml/Class.hpp"
 #include "LibraryModel_uml/Author.hpp"
@@ -19,8 +19,8 @@
 
 
 
+
 using namespace LibraryModel_uml;
-using boost::any_cast;
 
 //*********************************
 // Constructor / Destructor
@@ -30,8 +30,8 @@ LibraryImpl::LibraryImpl()
 	//***********************************
 	// init Get Set
 	//getter init
-	m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("LibraryModel_uml::Library::authors",[this](){ return this->getAuthors();}));
-	m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("LibraryModel_uml::Library::books",[this](){ return this->getBooks();}));
+	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("LibraryModel_uml::Library::authors",[this](){ return eAny(this->getAuthors());}));
+	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("LibraryModel_uml::Library::books",[this](){ return eAny(this->getBooks());}));
 	
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("LibraryModel_uml::Library::authors",[this](){m_authors->clear();}));
@@ -79,24 +79,24 @@ std::shared_ptr<Bag<LibraryModel_uml::Book>> LibraryImpl::getBooks() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LibraryImpl::get(std::shared_ptr<uml::Property> _property) const
+Any LibraryImpl::get(std::shared_ptr<uml::Property> _property) const
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<boost::any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
-	return boost::any();
+	return eAny(nullptr);
 }
 
-void LibraryImpl::set(std::shared_ptr<uml::Property> _property,boost::any value)
+void LibraryImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
 	//TODO: still two times run through map (contains and [])
 	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void(boost::any)>>::iterator iter = m_setterMap.find(qName);
+	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
     if(iter != m_setterMap.end())
     {
         //invoke the getter function
@@ -115,6 +115,7 @@ void LibraryImpl::unset(std::shared_ptr<uml::Property> _property)
         iter->second();
     }
 }
+
 
 std::shared_ptr<Library> LibraryImpl::getThisLibraryPtr()
 {

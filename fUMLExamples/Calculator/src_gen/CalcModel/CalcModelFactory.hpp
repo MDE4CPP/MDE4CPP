@@ -14,10 +14,7 @@ namespace CalcModel
 	class PrimeChecker;
 	class CalcModelPackage;
 	class CalcModelFactory;
-}
 
-namespace CalcModel
-{
 	class CalcModelFactory : virtual public uml::Factory 
 	{ 
 		protected:

@@ -17,7 +17,7 @@ std::shared_ptr<LibraryModel_umlPackage> LibraryModel_umlPackage::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(LibraryModel_umlPackageImpl::create());
-		std::dynamic_pointer_cast<LibraryModel_umlPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<LibraryModel_umlPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }

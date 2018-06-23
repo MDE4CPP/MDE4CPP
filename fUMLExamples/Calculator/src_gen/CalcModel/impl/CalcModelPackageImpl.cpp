@@ -24,6 +24,7 @@
 #include "uml/Property.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
@@ -57,22 +58,23 @@ CalcModelPackage* CalcModelPackageImpl::create()
 	
     // Obtain or create and register package, create package meta-data objects
     CalcModelPackageImpl * metaModelPackage = new CalcModelPackageImpl();
-	metaModelPackage->initMetaModel();
-    metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void CalcModelPackageImpl::init()
+void CalcModelPackageImpl::init(std::shared_ptr<uml::Package> calcModel)
 {
     // Initialize created meta-data
-    initializePackageContents();   
+	setThisPackagePtr(calcModel);
+	initMetaModel();
+    createPackageContents(calcModel);
+    initializePackageContents(calcModel);   
 }
 
 void CalcModelPackageImpl::initMetaModel()
 {
 }
 
-void CalcModelPackageImpl::createPackageContents()
+void CalcModelPackageImpl::createPackageContents(std::shared_ptr<uml::Package> calcModel)
 {
 	if (isCreated)
 	{
@@ -80,8 +82,6 @@ void CalcModelPackageImpl::createPackageContents()
 	}
 	isCreated = true;
 
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<CalcModelPackageImpl> calcModel = std::shared_ptr<CalcModelPackageImpl>(this, null_deleter());
 	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
 
 	createPackageValueSpecifications(calcModel, factory);
@@ -93,9 +93,10 @@ void CalcModelPackageImpl::createPackageContents()
 	createPackageDependencies(calcModel, factory);
 	createPackagePrimitiveTypes(calcModel, factory);
 	createPackageEnumerationLiterals(calcModel, factory);
+	createPackageInterfaceRealizations(calcModel, factory);
 }
 
-void CalcModelPackageImpl::createPackageActivities(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 	calcModel_PrimeChecker_CheckIfPrime = factory->createActivity_in_Package(calcModel);
 	calcModel_PrimeChecker_CheckIfPrime_CalcModel_PrimeChecker_CheckIfPrime_actInputNode = factory->createParameter_in_Behavior(calcModel_PrimeChecker_CheckIfPrime);
@@ -227,7 +228,7 @@ void CalcModelPackageImpl::createPackageActivities(std::shared_ptr<CalcModelPack
 	
 }
 
-void CalcModelPackageImpl::createPackageClasses(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
@@ -256,17 +257,17 @@ void CalcModelPackageImpl::createPackageClasses(std::shared_ptr<CalcModelPackage
 	calcModel_PrimeChecker_printNotPrime_ = factory->createOperation_in_Class(calcModel_PrimeChecker);
 
     // PrimeChecker function behaviors
+	calcModel_PrimeChecker_fbNext = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	
+
 	calcModel_PrimeChecker_fbDivides = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	calcModel_PrimeChecker_fbDivides_isDivisible = factory->createParameter_in_Behavior(calcModel_PrimeChecker_fbDivides);
 	
 
-	calcModel_PrimeChecker_fbNext = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	calcModel_PrimeChecker_fbPrintIsPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	
 
 	calcModel_PrimeChecker_fbPrintNotPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
-	
-
-	calcModel_PrimeChecker_fbPrintIsPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	
 
 	calcModel_PrimeChecker_fbIsOdd = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
@@ -279,31 +280,35 @@ void CalcModelPackageImpl::createPackageClasses(std::shared_ptr<CalcModelPackage
 
 }
 
-void CalcModelPackageImpl::createPackageDependencies(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackageInterfaces(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackageStereotypes(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void CalcModelPackageImpl::createPackageValueSpecifications(std::shared_ptr<CalcModelPackageImpl> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+void CalcModelPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
+
+void CalcModelPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> calcModel, std::shared_ptr<uml::UmlFactory> factory)
 {
 	cF_CalcModel_PrimeChecker_CheckIfPrimeInitial1_CalcModel_PrimeChecker_CheckIfPrimecoaIsOdd_guard_LiteralBoolean_CF_CalcModel_PrimeChecker_CheckIfPrimeInitial1_CalcModel_PrimeChecker_CheckIfPrimecoaIsOdd = factory->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_PrimeChecker_CheckIfPrimeInitial1_CalcModel_PrimeChecker_CheckIfPrimecoaIsOdd));
 	cF_CalcModel_PrimeChecker_CheckIfPrimeInitial1_CalcModel_PrimeChecker_CheckIfPrimecoaIsOdd_guard_LiteralBoolean_CF_CalcModel_PrimeChecker_CheckIfPrimeInitial1_CalcModel_PrimeChecker_CheckIfPrimecoaIsOdd->setValue(true);
@@ -387,7 +392,7 @@ void CalcModelPackageImpl::createPackageValueSpecifications(std::shared_ptr<Calc
 	calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number->setValue(524287);
 }
 
-void CalcModelPackageImpl::initializePackageContents()
+void CalcModelPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> calcModel)
 {
 	if (isInitialized)
 	{
@@ -399,16 +404,15 @@ void CalcModelPackageImpl::initializePackageContents()
 	setName(eNAME);
 	setURI(eNS_URI);
 
-	// Add supertypes to classes
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<CalcModelPackageImpl> calcModel = std::shared_ptr<CalcModelPackageImpl>(this, null_deleter());
-
 	initializePackageActivities();
 	initializePackageClasses();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+
+	
 }
 
 //ActivityNodes and Edges
@@ -555,6 +559,7 @@ void CalcModelPackageImpl::initializePackageClasses()
 	calcModel_PrimeChecker_divider->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	calcModel_PrimeChecker_divider->setLower(1);
 	calcModel_PrimeChecker_divider->setUpper(1);
+	calcModel_PrimeChecker_divider->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	calcModel_PrimeChecker_divider->setDefaultValue(calcModel_PrimeChecker_divider_defaultValue_LiteralInteger_CalcModel_PrimeChecker_divider);
 	
@@ -562,6 +567,7 @@ void CalcModelPackageImpl::initializePackageClasses()
 	calcModel_PrimeChecker_number->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	calcModel_PrimeChecker_number->setLower(1);
 	calcModel_PrimeChecker_number->setUpper(1);
+	calcModel_PrimeChecker_number->setVisibility(uml::VisibilityKind::PUBLIC);
 	
 	calcModel_PrimeChecker_number->setDefaultValue(calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number);
 	
@@ -610,7 +616,12 @@ void CalcModelPackageImpl::initializePackageClasses()
 	
 
     // PrimeChecker function behaviors
+	calcModel_PrimeChecker_fbNext->setName("fbNext");
+	calcModel_PrimeChecker_fbNext->setContext(calcModel_PrimeChecker);
+	
+
 	calcModel_PrimeChecker_fbDivides->setName("fbDivides");
+	calcModel_PrimeChecker_fbDivides->setContext(calcModel_PrimeChecker);
 	// parameter isDivisible
 	calcModel_PrimeChecker_fbDivides_isDivisible->setName("isDivisible");
 	calcModel_PrimeChecker_fbDivides_isDivisible->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -619,16 +630,16 @@ void CalcModelPackageImpl::initializePackageClasses()
 	calcModel_PrimeChecker_fbDivides_isDivisible->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 
-	calcModel_PrimeChecker_fbNext->setName("fbNext");
+	calcModel_PrimeChecker_fbPrintIsPrime->setName("fbPrintIsPrime");
+	calcModel_PrimeChecker_fbPrintIsPrime->setContext(calcModel_PrimeChecker);
 	
 
 	calcModel_PrimeChecker_fbPrintNotPrime->setName("fbPrintNotPrime");
-	
-
-	calcModel_PrimeChecker_fbPrintIsPrime->setName("fbPrintIsPrime");
+	calcModel_PrimeChecker_fbPrintNotPrime->setContext(calcModel_PrimeChecker);
 	
 
 	calcModel_PrimeChecker_fbIsOdd->setName("fbIsOdd");
+	calcModel_PrimeChecker_fbIsOdd->setContext(calcModel_PrimeChecker);
 	// parameter isOdd
 	calcModel_PrimeChecker_fbIsOdd_isOdd->setName("isOdd");
 	calcModel_PrimeChecker_fbIsOdd_isOdd->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -638,6 +649,7 @@ void CalcModelPackageImpl::initializePackageClasses()
 	
 
 	calcModel_PrimeChecker_fbIsNotFinished->setName("fbIsNotFinished");
+	calcModel_PrimeChecker_fbIsNotFinished->setContext(calcModel_PrimeChecker);
 	// parameter isNotFinished
 	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setName("isNotFinished");
 	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
@@ -653,6 +665,11 @@ void CalcModelPackageImpl::initializePackageDependencies()
 }
 
 void CalcModelPackageImpl::initializePackageInstanceSpecifications()
+{
+}
+
+
+void CalcModelPackageImpl::initializePackageInterfaceRealizations()
 {
 }
 
