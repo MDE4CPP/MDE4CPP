@@ -18,8 +18,8 @@
 
 #include <iostream>
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
-#include "boost/any.hpp"
 
 #include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"

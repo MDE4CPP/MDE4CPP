@@ -19,9 +19,6 @@
 #include <iostream>
 #include <sstream> // used for getLevel()
 
-#include "boost/algorithm/string.hpp" // used for string splitting
-#include "boost/exception/to_string.hpp"
-
 #include "ecore/EClass.hpp"
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"

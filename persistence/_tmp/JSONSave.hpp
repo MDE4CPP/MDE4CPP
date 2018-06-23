@@ -9,7 +9,6 @@
 #define JSONSAVE_HPP_
 
 #include "Save.hpp"
-#include "boost/property_tree/json_parser.hpp"
 
 namespace persistence
 {
