@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/Association.hpp"
@@ -50,7 +51,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 				{
 					DEBUG_MESSAGE(std::cout << "Set Base Property " << prop->getQualifiedName() << std::endl;)
 					//set Base
-					stereotype->set(prop, this);
+					stereotype->set(prop, eAny(this));
 				}
 			}
 		}
