@@ -16,7 +16,7 @@
 
 [import UML4CPP::generator::main::helper /]
 
-[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat')/]
+[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural')/]
 [query public isBackReference(aProperty : Property) : Boolean = (not aProperty.association.oclIsUndefined()) and (not aProperty.owner.oclIsKindOf(Association)) and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite /]
 
 [template public generateCppType(aProperty : Property)]
@@ -76,7 +76,7 @@ bool
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'UnlimitedNatural' )]
-int
+unsigned int
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'Integer' or name = 'EInt')]
