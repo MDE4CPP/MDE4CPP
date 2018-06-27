@@ -111,7 +111,10 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
 	[if (not par.type.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
-	assert([par.name/] != nullptr);
+	if([par.name/] != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+	}
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
