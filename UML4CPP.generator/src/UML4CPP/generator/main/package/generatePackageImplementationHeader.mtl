@@ -94,6 +94,7 @@ namespace uml
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackageImpl')/]

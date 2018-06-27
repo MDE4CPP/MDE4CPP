@@ -264,6 +264,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
 }
@@ -342,6 +343,13 @@ void [packageName/]::initializePackageStereotypes()
 [for (aStereotype : Stereotype | aPackage.ownedMember->filter(Stereotype)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aStereotype.ownedAttribute->sortedBy(myQualifiedName()).generateAttributeInitialization()/]
 	[aStereotype.ownedOperation->sortedBy(myQualifiedName()).generateOperationImplementation()/]
+[/for]
+}
+
+void [packageName/]::initializePackageValueSpecifications()
+{
+[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->selectByKind(InstanceValue)->sortedBy(myQualifiedName())) separator ('\n')]
+	[aValueSpecification.generateValueSpecificationInitialization()/]
 [/for]
 }
 
