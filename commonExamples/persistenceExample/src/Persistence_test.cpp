@@ -17,6 +17,8 @@
 	#define getcwd _getcwd
 #else
 	#include <sys/stat.h>
+	#include <dlfcn.h>
+	#include <unistd.h>
 #endif
 #define MAX_CHAR 260
 
