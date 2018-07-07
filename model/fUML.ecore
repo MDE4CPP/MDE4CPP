@@ -111,7 +111,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="value->setLocus(nullptr);&#xD;&#xA;std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->end(),value);"/>
+            value="value->setLocus(nullptr);&#xD;&#xA;&#x9;this->getExtensionalValues()->erase(value);"/>
       </eAnnotations>
       <eParameters
           name="value"
