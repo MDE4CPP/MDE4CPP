@@ -51,11 +51,75 @@ using namespace [anEPackage.name/];
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
+[if (generateObjectMonitoring())]
+	m_createdElements.reset(new Bag<ecore::EObject>());
+[/if]
 }
 
 [className/]::~[className/]()
 {
 }
+[if (generateObjectMonitoring())]
+void [className/]::print()
+{
+	clearCreatedElements();
+
+	std::cout << "fUML objects:" << std::endl;
+	std::cout << "still existing: " << m_createdElements->size() << std::endl;
+
+	std::cout << "pointer - class name - use count (1 by factory)" << std::endl;
+	std::map<std::shared_ptr<ecore::EClass>, int> map;
+	for (std::shared_ptr<ecore::EObject> obj : *m_createdElements)
+	{
+		std::shared_ptr<ecore::EClass> objClass = obj->eClass();
+		std::string className = objClass->getName();
+
+		std::cout << obj << "  " << obj.use_count() << " " << className << std::endl;
+
+		auto iter = map.find(obj->eClass());
+		if (iter != map.end())
+		{
+			iter->second++;
+		}
+		else
+		{
+			map.insert(std::pair<std::shared_ptr<ecore::EClass>, int>(objClass, 1));
+		}
+	}
+	std::cout << "########################" << std::endl;
+	std::cout << "meta clas - count" << std::endl;
+
+	auto iter = map.begin();
+	while (iter != map.end())
+	{
+		std::cout << iter->first->getName() << "  " << iter->second << std::endl;
+		iter++;
+	}
+}
+
+void [className/]::clearCreatedElements()
+{
+	bool found = true;
+	while (found)
+	{
+		found = false;
+		for (std::shared_ptr<ecore::EObject> obj : *m_createdElements)
+		{
+			if (obj.use_count() <= 2)
+			{
+				m_createdElements->erase(obj);
+				found = true;
+			}
+		}
+	}
+}
+
+void [className/]::add(std::shared_ptr<ecore::EObject> obj)
+{
+	clearCreatedElements();
+	m_createdElements->push_back(obj);
+}
+[/if]
 
 [anEPackage.name.toUpperFirst().concat('Factory')/]* [className/]::create()
 {
@@ -66,7 +130,7 @@ using namespace [anEPackage.name/];
 // creators
 //*********************************
 
-std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
+std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container /*= nullptr*/, const unsigned int referenceID/* = -1*/)[if (not generateObjectMonitoring())] const[/if]
 {
 	switch(classID)
 	{
@@ -78,7 +142,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 			if (nullptr == container)
 			{
 [/if]
-				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]());
+				return this->create[aClass.name/]();
 [if(ref->size()>0)]			}
 			else
 			{
@@ -112,12 +176,12 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 	return nullptr;
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class)[if (not generateObjectMonitoring())] const[/if]
 {
 	return create(_class, nullptr);
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container)[if (not generateObjectMonitoring())] const[/if]
 {
 	if(_class->isAbstract())
     {
@@ -128,7 +192,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 	return create(_classID, _container);
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className)[if (not generateObjectMonitoring())] const[/if]
 {
 	auto iter = m_idMap.find(_className);
 	if(iter != m_idMap.end())
@@ -141,7 +205,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
     return nullptr;
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container, const unsigned int referenceID) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container, const unsigned int referenceID)[if (not generateObjectMonitoring())] const[/if]
 {
 	auto iter = m_idMap.find(_className);
 	if(iter != m_idMap.end())
@@ -156,20 +220,23 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]()[if (not generateObjectMonitoring())] const[/if]
 {
 	std::shared_ptr<[aClass.name.toUpperFirst()/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
 	element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+	m_createdElements->push_back(element);
+[/if]
 	return element;
 }
 [let ref : OrderedSet(EReference) = aClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name))]
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/])[if (not generateObjectMonitoring())] const[/if]
 {
 	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, false)/]
 }
 [if(aClass.getClassifierIDName().size() > 0)]
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID) const
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID)[if (not generateObjectMonitoring())] const[/if]
 {
 	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, true)/]
 }[/if]
@@ -212,6 +279,9 @@ if(nullptr != par_[aReference.name/])
 [/let]
 [/if]
 element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+m_createdElements->push_back(element);
+[/if]
 return element;
 
 [/template]

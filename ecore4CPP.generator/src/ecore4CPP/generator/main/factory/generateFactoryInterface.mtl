@@ -50,13 +50,17 @@ namespace [anEPackage.name/]
 			[generateSingletonDecl(packageName)/]
 		
 			//Creator functions
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className) const = 0;
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className, std::shared_ptr<EObject> _container, 	const unsigned int referenceID = -1) const = 0;
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className)[if (not generateObjectMonitoring())] const[/if] = 0;
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className, std::shared_ptr<EObject> _container, 	const unsigned int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
 			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
+[if (generateObjectMonitoring())]
+			virtual void print() = 0;
+			virtual void add(std::shared_ptr<ecore::EObject> obj) = 0;
+[/if]
 	};
 }
 [endGuard(anEPackage,'Factory')/]

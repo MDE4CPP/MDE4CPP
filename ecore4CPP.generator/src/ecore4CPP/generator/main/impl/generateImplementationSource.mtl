@@ -34,6 +34,9 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+[if (generateObjectMonitoring())]
+#include "[ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+[/if]
 
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
@@ -208,6 +211,9 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+	[aClass.ePackage.name.toUpperFirst()/]Factory::eInstance()->add(element);
+[/if]
 	return element;
 }
 

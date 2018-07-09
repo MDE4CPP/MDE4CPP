@@ -231,3 +231,5 @@ template<class T> class Union;[/if]
 [query private existsAndIsSubetUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isSubsetUnion() endif/]
 [query private existsAndIsUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isUnion() and not isSubsetUnion() endif/]
 [query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
+
+[query public generateObjectMonitoring(anEObject : EObject) : Boolean = false/]
