@@ -141,7 +141,8 @@
         name="executor"
         ordered="false"
         eType="#//Executor"
-        containment="true"/>
+        containment="true"
+        eOpposite="#//Executor/locus"/>
     <eStructuralFeatures
         xsi:type="ecore:EReference"
         name="factory"
@@ -381,7 +382,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="    return this->getLocus()->getFactory()->createEvaluation(specification)->evaluate();"/>
+            value="if (auto locus = this->getLocus().lock())&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;return locus->getFactory()->createEvaluation(specification)->evaluate();&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;return nullptr;&#xD;&#xA;&#x9;}"/>
       </eAnnotations>
       <eParameters
           name="specification"
@@ -398,7 +399,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[start] Starting &quot; &lt;&lt; typeid(type).name() &lt;&lt;&quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;fUML::Object> object = this->getLocus()->instantiate(type);&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[start] Object = &quot; &lt;&lt; object&lt;&lt;std::endl;)&#xD;&#xA;    object->startBehavior(type,inputs);&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Reference> reference(fUML::FUMLFactory::eInstance()->createReference());&#xD;&#xA;    reference->setReferent(object);&#xD;&#xA;    return reference;"/>
+            value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[start] Starting &quot; &lt;&lt; typeid(type).name() &lt;&lt;&quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;&#x9;if (auto locus = this->getLocus().lock())&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Object> object = locus->instantiate(type);&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[start] Object = &quot; &lt;&lt; object&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;object->startBehavior(type,inputs);&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;Reference> reference(fUML::FUMLFactory::eInstance()->createReference());&#xD;&#xA;&#x9;&#x9;reference->setReferent(object);&#xD;&#xA;&#x9;&#x9;return reference;&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;return nullptr;&#xD;&#xA;&#x9;}"/>
       </eAnnotations>
       <eParameters
           name="type"
@@ -420,7 +421,7 @@
           source="http://sse.tu-ilmenau.de/codegen">
         <details
             key="body"
-            value="&#x9;std::shared_ptr&lt;Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);&#xD;&#xA;&#xD;&#xA;    if(nullptr == execution)&#xD;&#xA;    {&#xD;&#xA;        std::cerr &lt;&lt; &quot;[execute] Execution is null&quot; &lt;&lt; std::endl;&#xD;&#xA;        return nullptr;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    for(std::shared_ptr&lt;fUML::ParameterValue> parameterValue : *inputs )&#xD;&#xA;    {&#xD;&#xA;        execution->setParameterValue(parameterValue);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    execution->execute();&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ParameterValue> > outputValues = execution->getOutputParameterValues();&#xD;&#xA;    execution->destroy();&#xD;&#xA;&#xD;&#xA;    return outputValues;"/>
+            value="std::shared_ptr&lt;Execution> execution = nullptr;&#xD;&#xA;&#x9;if (auto locus = this->getLocus().lock())&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;execution = locus->getFactory()->createExecution(behavior, context);&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;    if(nullptr == execution)&#xD;&#xA;    {&#xD;&#xA;        std::cerr &lt;&lt; &quot;[execute] Execution is null&quot; &lt;&lt; std::endl;&#xD;&#xA;        return nullptr;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    for(std::shared_ptr&lt;fUML::ParameterValue> parameterValue : *inputs )&#xD;&#xA;    {&#xD;&#xA;        execution->setParameterValue(parameterValue);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    execution->execute();&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ParameterValue> > outputValues = execution->getOutputParameterValues();&#xD;&#xA;    execution->destroy();&#xD;&#xA;&#xD;&#xA;    return outputValues;"/>
       </eAnnotations>
       <eParameters
           name="behavior"
@@ -441,7 +442,8 @@
         xsi:type="ecore:EReference"
         name="locus"
         ordered="false"
-        eType="#//Locus"/>
+        eType="#//Locus"
+        eOpposite="#//Locus/executor"/>
   </eClassifiers>
   <eClassifiers
       xsi:type="ecore:EClass"
