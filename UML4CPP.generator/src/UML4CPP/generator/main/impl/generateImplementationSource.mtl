@@ -51,13 +51,16 @@
 //Included from operation "[aOperation.name/]"
 [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(2)/]
 [/if]
-
 [/if]
 [/for]
 
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 #include "uml/EnumerationLiteral.hpp"
 [/if]
+[for (instVal : InstanceValue | aClass.ownedAttribute->sortedBy(myQualifiedName()).defaultValue->selectByType(InstanceValue)->reject(type.oclIsKindOf(Enumeration)))]
+#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
+[/for]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
@@ -74,6 +77,11 @@
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
 	[/for]
+
+	[for (instVal : InstanceValue | aClass.ownedAttribute->sortedBy(myQualifiedName()).defaultValue->selectByType(InstanceValue)->reject(type.oclIsKindOf(Enumeration)))]
+	[instVal.initPropertyFromInstanceValue()/]
+	[/for]
+	
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]

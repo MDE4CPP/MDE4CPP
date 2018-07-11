@@ -40,6 +40,11 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 
 [/template]
 
+[template public initPropertyFromInstanceValue(instVal : InstanceValue)]
+m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPackageName()/]::[instVal.type._package.getPackageName()/]Factory::eInstance()->create[instVal.type.name.toUpperFirst()/]();
+
+[/template]
+
 [template public generateAttributeGetterDecleration (aProperty : Property, impl : Boolean)]
 virtual [aProperty.generateCppType()/] [aProperty.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
