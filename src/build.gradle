@@ -6,7 +6,7 @@ task buildEcoreModels(dependsOn: ['ecore:ecore:buildEcore', 'ecore:types:buildTy
 }
 
 task buildReflectionModels(dependsOn: ['common:ecoreReflection:buildEcoreReflection', 'common:primitivetypesReflection:buildPrimitivetypesReflection', 'common:umlReflection:buildUmlReflection']) {
-	group 'reflection models'
+	group 'Source'
 	description 'generate and compile reflection models'
 }
 
