@@ -52,6 +52,13 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
     * `createAllGenerators` ... create executables of all generators
     * `create<Generator project name>` ... creates executable of corresponding generator, e.g. createUML4CPP
   * examples can be found in [example](https://github.com/MDE4CPP/examples) or after cloning the repositories in src/examples. Collection of examples can be build with task *buildAllExamples* (most projects are includes).
+  * `generateModel -PModel=<path to model file>`...  universal task to generate C++ projects for ecore or UML models
+  **Note:**
+  	* The model file should be located in `<project folder>/model`
+  	* C++ project will be generated in `<project folder>/src_gen`
+  	* ecore4CPP will be used for .ecore models.
+  	* fUML4CPP will be used for .uml models
+  	* To use UML4CPP (no fUML specific executions, only the structural part), `-PStructureOnly` or `-PSO` has to be added to the command.
 
 7. Model tasks are names using following schema: `<command><modelName> <buildMode>`
   * commands:
