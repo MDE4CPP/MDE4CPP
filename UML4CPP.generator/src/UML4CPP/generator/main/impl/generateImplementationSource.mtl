@@ -103,6 +103,13 @@
 [className/]::~[className/]()
 {
 }
+[if (isSingleton())]
+
+[aClass.name.toUpperFirst()/]* [className/]::create()
+{
+	return new [className/]();
+}
+[/if]
 
 std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass()
 {

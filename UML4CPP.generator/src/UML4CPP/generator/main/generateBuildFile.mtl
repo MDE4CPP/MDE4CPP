@@ -72,6 +72,9 @@ SET(SOURCE_FILES
 	[aPackage.name.toUpperFirst()/]Factory.cpp
 [for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not e.oclIsKindOf(FunctionBehavior))->sortedBy(myQualifiedName()))]
 	impl/[aClass.name.toUpperFirst()/]Impl.cpp
+[if (aClass.isSingleton())]
+	[aClass.name.toUpperFirst()/].cpp
+[/if]
 [/for]
 [/if]
 [if (aPackage.includeEcorePackages())]

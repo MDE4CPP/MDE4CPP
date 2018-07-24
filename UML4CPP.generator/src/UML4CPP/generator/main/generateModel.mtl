@@ -16,6 +16,7 @@
  
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
@@ -114,7 +115,11 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			// Members
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
-	
+[if (isSingleton())]
+
+			//Singleton Instance and Getter
+		[generateSingletonDecl(aClass.name)/]
+[/if]	
 	};
 [if (not aClass.getNearestPackage().ignoreNamespace())]}[/if]
 [endGuard(aClass)/]

@@ -43,7 +43,7 @@
 			virtual std::shared_ptr<uml::Element> create(std::string _className);
 
 			//Creator functions
-			[(aPackage.packagedElement->selectByKind(Class))->sortedBy(myQualifiedName()).generateClassCreate(true)/]
+			[(aPackage.packagedElement->selectByKind(Class))->reject(isSingleton())->sortedBy(myQualifiedName()).generateClassCreate(true)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();

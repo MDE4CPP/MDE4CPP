@@ -28,7 +28,7 @@
 #include "uml/Class.hpp"
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.ownedMember->filter(Class)->reject(isSingleton())->sortedBy(myQualifiedName()))]
 #include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
@@ -39,7 +39,7 @@
 //*********************************
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
 	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
 	[/for]
 }
@@ -79,7 +79,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className)
     return nullptr;
 }
 
-[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/] ()
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());

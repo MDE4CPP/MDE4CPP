@@ -204,4 +204,5 @@ template<class T> class Bag;
 [query public hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
 [query public valueKey(aElement : Element, aKey:String) : String = aElement.getSourceGen().details->select(key = aKey)->first().value /]
 
-[query public ignoreNamespace(aElement : Element) : Boolean = if (aElement.getNearestPackage().hasKey('ignoreNamespace')) then aElement.getNearestPackage().valueKey('ignoreNamespace') = '1' else false endif /]
+[query public ignoreNamespace(anElement : Element) : Boolean = if (anElement.getNearestPackage().hasKey('ignoreNamespace')) then anElement.getNearestPackage().valueKey('ignoreNamespace') = '1' else false endif /]
+[query public isSingleton(anElement : Element) : Boolean = if (anElement.hasKey('singleton')) then anElement.valueKey('singleton') = '1' else false endif /]

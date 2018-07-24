@@ -71,7 +71,11 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
+[if (isSingleton())]
+			friend class [aClass.name.toUpperFirst()/];
+[else]
 			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
+[/if]
 			//constructor
 			[className/]();
 			[aClass.generateGetThisPtr()/]
@@ -114,6 +118,9 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[aClass.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
 		
 		private:
+[if (isSingleton())]
+			static [aClass.name.toUpperFirst()/] * create();
+[/if]
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 			[aClass.generateGetSetMemeberInit()/]
 	};
