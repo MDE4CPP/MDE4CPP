@@ -33,7 +33,9 @@
 #include "uml/Activity.hpp"
 #include "uml/Element.hpp"
 
+[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
 [generateMainIncludes()/]
+[/if]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
 #include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
@@ -80,8 +82,9 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
 
 Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
-
+[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
 	[generateLocusInitialization()/]
+[/if]
 
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
 	if (activity == [act.getNearestPackage().ns()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
