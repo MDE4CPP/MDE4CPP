@@ -21,9 +21,9 @@ namespace util
 			static std::shared_ptr<StereotypeStorage> eInstance();
 
 			void applyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
-			std::shared_ptr<uml::Stereotype> getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName);
-			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(std::shared_ptr<uml::Element> element);
-			bool isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
+			std::shared_ptr<uml::Stereotype> getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName) const;
+			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(std::shared_ptr<uml::Element> element) const;
+			bool isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype) const;
 			void unapplyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
 
 		private:

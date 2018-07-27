@@ -72,7 +72,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 	DEBUG_MESSAGE(std::cout << "Stereotype applied :" << stereotype->getMetaClass()->getQualifiedName() << std::endl;)
 }
 
-std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName)
+std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName) const
 {
 	std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
 	if (list == nullptr)
@@ -89,10 +89,10 @@ std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::sh
 	return nullptr;
 }
 
-std::shared_ptr<Bag<uml::Stereotype>> StereotypeStorage::getAppliedStereotypes(std::shared_ptr<uml::Element> element)
+std::shared_ptr<Bag<uml::Stereotype>> StereotypeStorage::getAppliedStereotypes(std::shared_ptr<uml::Element> element) const
 {
-	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::iterator it = m_stereotypeApplicationMap.begin();
-	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::iterator endIter = m_stereotypeApplicationMap.end();
+	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator it = m_stereotypeApplicationMap.cbegin();
+	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator endIter = m_stereotypeApplicationMap.cend();
 	while (it != endIter)
 	{
 		if (it->first == element)
@@ -104,7 +104,7 @@ std::shared_ptr<Bag<uml::Stereotype>> StereotypeStorage::getAppliedStereotypes(s
 	return nullptr;
 }
 
-bool StereotypeStorage::isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype)
+bool StereotypeStorage::isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype) const
 {
 	std::shared_ptr<Bag<uml::Stereotype>> list = getAppliedStereotypes(element);
 	if (list == nullptr)
