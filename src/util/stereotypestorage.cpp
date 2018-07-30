@@ -135,7 +135,7 @@ void StereotypeStorage::removeInvalidEntries()
 		std::shared_ptr<uml::Element> storedElement = it->first.lock();
 		if (storedElement == nullptr)
 		{
-			m_stereotypeApplicationMap.erase(it);
+			it = m_stereotypeApplicationMap.erase(it);
 		}
 		else
 		{
