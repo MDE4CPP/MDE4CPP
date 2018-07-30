@@ -38,7 +38,7 @@
 [template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
 [if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
 [anEOperation.generateDokumentation()/] 
-virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
+virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if] [abstractSufix(impl)/];[/if]
 
 
 
@@ -46,7 +46,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 
 [template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
 [comment[aOperation.generateDokumentation()/] 
-[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
+[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if]
 {
 [if (hasKey('body'))]
 	//ADD_COUNT(__PRETTY_FUNCTION__)
