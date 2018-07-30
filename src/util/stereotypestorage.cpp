@@ -31,6 +31,8 @@ std::shared_ptr<StereotypeStorage> StereotypeStorage::eInstance()
 
 void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype)
 {
+	removeInvalidEntries();
+
 	if (isStereotypeApplied(element, stereotype))
 	{
 		return;
@@ -62,7 +64,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 	{
 		list.reset(new Bag<uml::Stereotype>());
 		list->push_back(stereotype);
-		m_stereotypeApplicationMap.insert(std::pair<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>(element, list));
+		m_stereotypeApplicationMap.insert(std::pair<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>(element, list));
 	}
 	else
 	{
@@ -91,11 +93,12 @@ std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(std::sh
 
 std::shared_ptr<Bag<uml::Stereotype>> StereotypeStorage::getAppliedStereotypes(std::shared_ptr<uml::Element> element) const
 {
-	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator it = m_stereotypeApplicationMap.cbegin();
-	std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator endIter = m_stereotypeApplicationMap.cend();
+	std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator it = m_stereotypeApplicationMap.cbegin();
+	std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::const_iterator endIter = m_stereotypeApplicationMap.cend();
 	while (it != endIter)
 	{
-		if (it->first == element)
+		std::shared_ptr<uml::Element> storedElement = it->first.lock();
+		if (storedElement == element)
 		{
 			return it->second;
 		}
@@ -123,8 +126,28 @@ bool StereotypeStorage::isStereotypeApplied(std::shared_ptr<uml::Element> elemen
 	return false;
 }
 
+void StereotypeStorage::removeInvalidEntries()
+{
+	std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::iterator it = m_stereotypeApplicationMap.begin();
+	std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>>::iterator endIter = m_stereotypeApplicationMap.end();
+	while (it != endIter)
+	{
+		std::shared_ptr<uml::Element> storedElement = it->first.lock();
+		if (storedElement == nullptr)
+		{
+			m_stereotypeApplicationMap.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+}
+
 void StereotypeStorage::unapplyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype)
 {
+	removeInvalidEntries();
+
 	if (isStereotypeApplied(element, stereotype))
 	{
 		DEBUG_MESSAGE(std::cout << "Stereotype unapplyed :" << stereotype->getMetaClass()->getQualifiedName() << std::endl;)

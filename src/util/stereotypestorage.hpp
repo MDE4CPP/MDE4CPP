@@ -29,8 +29,10 @@ namespace util
 		private:
 			StereotypeStorage();
 
+			void removeInvalidEntries();
+
 			static std::shared_ptr<StereotypeStorage> m_instance;
-			std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>> m_stereotypeApplicationMap;
+			std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>, std::owner_less<std::weak_ptr<uml::Element>>> m_stereotypeApplicationMap;
 	};
 }
 #endif
