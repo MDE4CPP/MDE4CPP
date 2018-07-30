@@ -1374,6 +1374,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), qualifiedName);"/>
+        <details key="const"/>
       </eAnnotations>
       <eParameters name="qualifiedName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1387,6 +1388,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotypes(getThisElementPtr());"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAppliedSubstereotype" ordered="false" eType="#//Stereotype">
