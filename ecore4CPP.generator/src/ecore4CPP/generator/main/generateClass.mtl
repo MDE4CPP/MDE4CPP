@@ -21,12 +21,12 @@
  * Operation to generate create operation in model factory
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]()[if (not generateObjectMonitoring())] const[/if][abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]()[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name))]
 //Add containing object
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/])[if (not generateObjectMonitoring())] const[/if][abstractSufix(impl)/];
-[if(aEClass.getClassifierIDName().size() > 0)]virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID)[if (not generateObjectMonitoring())] const[/if][abstractSufix(impl)/];[/if]
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+[if(aEClass.getClassifierIDName().size() > 0)]virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID)[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];[/if]
 [/for]
 
 [/let]
@@ -63,12 +63,12 @@ std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() 
 [/template]
 
 [template public generateGetThisPtr(aClass : EClass)]
-virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]() const;
 virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
 [template public generateGetThisPtrCPP(aClass: EClass)]
-std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
+std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]() const
 {
 	return m_[generateGetThisPtrPropertyName()/].lock();
 }
