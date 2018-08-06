@@ -32,7 +32,7 @@ virtual public NamedElement
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			NamedElementImpl();
-			virtual std::shared_ptr<NamedElement> getThisNamedElementPtr();
+			virtual std::shared_ptr<NamedElement> getThisNamedElementPtr() const;
 			virtual void setThisNamedElementPtr(std::weak_ptr<NamedElement> thisNamedElementPtr);
 
 

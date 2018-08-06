@@ -125,6 +125,7 @@ namespace LibraryModel_uml
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_UML_METAMODELPACKAGEIMPL_HPP */

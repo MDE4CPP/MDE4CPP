@@ -162,7 +162,7 @@ std::shared_ptr<Bag<libraryModel_ecore::Book>> LibraryModelImpl::getBook() const
 //*********************************
 
 
-std::shared_ptr<LibraryModel> LibraryModelImpl::getThisLibraryModelPtr()
+std::shared_ptr<LibraryModel> LibraryModelImpl::getThisLibraryModelPtr() const
 {
 	return m_thisLibraryModelPtr.lock();
 }

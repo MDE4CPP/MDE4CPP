@@ -35,7 +35,6 @@ namespace LibraryModel_uml
 			//Creator functions
 			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
 
-
 			virtual std::shared_ptr<LibraryModel_uml::Author> createAuthor() = 0;
 			virtual std::shared_ptr<LibraryModel_uml::Author> createAuthor_in_Library(std::shared_ptr<LibraryModel_uml::Library> library) = 0; 
 			

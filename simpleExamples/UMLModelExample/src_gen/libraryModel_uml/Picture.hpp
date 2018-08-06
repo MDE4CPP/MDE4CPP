@@ -47,7 +47,6 @@ namespace LibraryModel_uml
 			//*********************************
 			int m_pageNumber;
 			
-	
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_UML_PICTURE__HPP */

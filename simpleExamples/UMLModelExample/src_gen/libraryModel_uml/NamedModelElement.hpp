@@ -48,7 +48,6 @@ namespace LibraryModel_uml
 			//*********************************
 			std::string m_name;
 			
-	
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_UML_NAMEDMODELELEMENT__HPP */

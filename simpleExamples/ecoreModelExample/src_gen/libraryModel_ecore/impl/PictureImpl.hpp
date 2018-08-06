@@ -30,7 +30,7 @@ namespace libraryModel_ecore
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			PictureImpl();
-			virtual std::shared_ptr<Picture> getThisPicturePtr();
+			virtual std::shared_ptr<Picture> getThisPicturePtr() const;
 			virtual void setThisPicturePtr(std::weak_ptr<Picture> thisPicturePtr);
 
 			//Additional constructors for the containments back reference

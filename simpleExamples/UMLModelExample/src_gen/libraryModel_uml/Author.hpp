@@ -44,7 +44,6 @@ namespace LibraryModel_uml
 			// Members
 			//*********************************
 			
-	
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_UML_AUTHOR__HPP */

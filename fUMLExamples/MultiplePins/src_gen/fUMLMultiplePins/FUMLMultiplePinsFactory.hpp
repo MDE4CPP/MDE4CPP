@@ -31,7 +31,6 @@ namespace fUMLMultiplePins
 			//Creator functions
 			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
 
-
 			virtual std::shared_ptr<fUMLMultiplePins::TestClass> createTestClass() = 0;
 			
 			

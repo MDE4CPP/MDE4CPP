@@ -32,7 +32,7 @@ virtual public LibraryModel
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			LibraryModelImpl();
-			virtual std::shared_ptr<LibraryModel> getThisLibraryModelPtr();
+			virtual std::shared_ptr<LibraryModel> getThisLibraryModelPtr() const;
 			virtual void setThisLibraryModelPtr(std::weak_ptr<LibraryModel> thisLibraryModelPtr);
 
 

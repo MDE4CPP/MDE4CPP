@@ -15,16 +15,10 @@
 #include "uml/Class.hpp"
 
 
-
-
-
-
 //Included from operation "printIsPrime"
 #include <iostream>
-
 //Included from operation "printNotPrime"
 #include <iostream>
-
 
 
 using namespace CalcModel;
@@ -47,6 +41,8 @@ PrimeCheckerImpl::PrimeCheckerImpl()
 
 	// init properties without default
 	
+	
+
 	
 }
 

@@ -30,7 +30,7 @@ namespace libraryModel_ecore
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			AuthorImpl();
-			virtual std::shared_ptr<Author> getThisAuthorPtr();
+			virtual std::shared_ptr<Author> getThisAuthorPtr() const;
 			virtual void setThisAuthorPtr(std::weak_ptr<Author> thisAuthorPtr);
 
 

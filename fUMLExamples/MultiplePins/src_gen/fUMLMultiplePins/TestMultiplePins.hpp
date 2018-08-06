@@ -45,7 +45,6 @@ namespace fUMLMultiplePins
 			// Members
 			//*********************************
 			
-	
 	};
 }
 #endif /* end of include guard: FUMLMULTIPLEPINS_TESTCLASS_TESTMULTIPLEPINS__HPP */

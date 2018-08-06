@@ -341,6 +341,7 @@ namespace fUMLMultiplePins
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: FUMLMULTIPLEPINS_METAMODELPACKAGEIMPL_HPP */

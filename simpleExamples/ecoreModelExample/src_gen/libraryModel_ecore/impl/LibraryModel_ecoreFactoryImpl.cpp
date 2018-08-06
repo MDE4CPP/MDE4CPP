@@ -48,14 +48,14 @@ std::shared_ptr<ecore::EObject> LibraryModel_ecoreFactoryImpl::create(const unsi
 	{
 		case LibraryModel_ecorePackage::AUTHOR_ECLASS:
 		{
-				return std::shared_ptr<Author>(this->createAuthor());
+				return this->createAuthor();
 			
 		}
 		case LibraryModel_ecorePackage::BOOK_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Book>(this->createBook());
+				return this->createBook();
 			}
 			else
 			{
@@ -66,19 +66,19 @@ std::shared_ptr<ecore::EObject> LibraryModel_ecoreFactoryImpl::create(const unsi
 		}
 		case LibraryModel_ecorePackage::LIBRARYMODEL_ECLASS:
 		{
-				return std::shared_ptr<LibraryModel>(this->createLibraryModel());
+				return this->createLibraryModel();
 			
 		}
 		case LibraryModel_ecorePackage::NAMEDELEMENT_ECLASS:
 		{
-				return std::shared_ptr<NamedElement>(this->createNamedElement());
+				return this->createNamedElement();
 			
 		}
 		case LibraryModel_ecorePackage::PICTURE_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Picture>(this->createPicture());
+				return this->createPicture();
 			}
 			else
 			{

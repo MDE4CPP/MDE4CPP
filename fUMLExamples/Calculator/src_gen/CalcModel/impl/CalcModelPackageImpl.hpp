@@ -217,6 +217,7 @@ namespace CalcModel
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: CALCMODEL_METAMODELPACKAGEIMPL_HPP */

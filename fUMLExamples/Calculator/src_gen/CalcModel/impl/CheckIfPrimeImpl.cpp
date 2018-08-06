@@ -33,6 +33,8 @@ CheckIfPrimeImpl::CheckIfPrimeImpl()
 	 
 
 	// init properties without default
+
+	
 }
 
 

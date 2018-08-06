@@ -149,7 +149,7 @@ void PictureImpl::setBook(std::shared_ptr<libraryModel_ecore::Book> _book)
 //*********************************
 
 
-std::shared_ptr<Picture> PictureImpl::getThisPicturePtr()
+std::shared_ptr<Picture> PictureImpl::getThisPicturePtr() const
 {
 	return m_thisPicturePtr.lock();
 }

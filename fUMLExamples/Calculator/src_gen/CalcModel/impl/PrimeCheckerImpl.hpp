@@ -46,12 +46,12 @@ namespace CalcModel
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool divides(  ) ;
-			virtual void next(  ) ;
-			virtual void printIsPrime(  ) ;
-			virtual void printNotPrime(  ) ;
-			virtual bool isOdd(  ) ;
-			virtual bool isNotFinished(  ) ;
+			virtual bool divides() ;
+			virtual void next() ;
+			virtual void printIsPrime() ;
+			virtual void printNotPrime() ;
+			virtual bool isOdd() ;
+			virtual bool isNotFinished() ;
 			
 			
 			//*********************************

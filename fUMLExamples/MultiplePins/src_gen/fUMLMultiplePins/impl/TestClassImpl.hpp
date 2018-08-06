@@ -46,8 +46,8 @@ namespace fUMLMultiplePins
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void do1( std::shared_ptr<fUMLMultiplePins::TestClass> input_1,int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
-			virtual void doAll( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
+			virtual void do1(std::shared_ptr<fUMLMultiplePins::TestClass> input_1, int& param_0, int& param_1, int& param_2, int& param_3, int& param_4, int& param_5, int& param_6, int& param_7, int& param_8, int& param_9) ;
+			virtual void doAll(int& param_0, int& param_1, int& param_2, int& param_3, int& param_4, int& param_5, int& param_6, int& param_7, int& param_8, int& param_9) ;
 			
 			
 			//*********************************

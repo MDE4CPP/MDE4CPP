@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EClass> AuthorImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<Author> AuthorImpl::getThisAuthorPtr()
+std::shared_ptr<Author> AuthorImpl::getThisAuthorPtr() const
 {
 	return m_thisAuthorPtr.lock();
 }

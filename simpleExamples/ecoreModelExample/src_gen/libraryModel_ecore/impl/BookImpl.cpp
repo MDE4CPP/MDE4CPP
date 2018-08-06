@@ -185,7 +185,7 @@ std::shared_ptr<Bag<libraryModel_ecore::Picture>> BookImpl::getPictures() const
 //*********************************
 
 
-std::shared_ptr<Book> BookImpl::getThisBookPtr()
+std::shared_ptr<Book> BookImpl::getThisBookPtr() const
 {
 	return m_thisBookPtr.lock();
 }

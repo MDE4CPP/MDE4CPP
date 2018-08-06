@@ -1,5 +1,6 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -24,23 +25,12 @@ task compileLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	projectFolder = file("./src_gen/LibraryModel_uml")
 }
 
-task generateLibraryModel_uml(type: JavaExec) {
+task generateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'LibraryModel_uml'
 	description 'generate C++ code of LibraryModel_uml.uml model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "LibraryModel_uml.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/LibraryModel_uml.uml")
-	outputs.dir file("src_gen")
 
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
-			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
-		}
-	}
+	modelFilePath = file("./model/LibraryModel_uml.uml")
+	structureOnly = true
 }
 
 compileLibraryModel_uml.mustRunAfter generateLibraryModel_uml

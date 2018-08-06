@@ -30,7 +30,7 @@ namespace libraryModel_ecore
 		protected:
 			friend class LibraryModel_ecoreFactoryImpl;
 			BookImpl();
-			virtual std::shared_ptr<Book> getThisBookPtr();
+			virtual std::shared_ptr<Book> getThisBookPtr() const;
 			virtual void setThisBookPtr(std::weak_ptr<Book> thisBookPtr);
 
 			//Additional constructors for the containments back reference

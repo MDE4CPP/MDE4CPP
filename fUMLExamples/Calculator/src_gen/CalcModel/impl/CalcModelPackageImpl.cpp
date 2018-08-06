@@ -257,25 +257,25 @@ void CalcModelPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ca
 	calcModel_PrimeChecker_printNotPrime_ = factory->createOperation_in_Class(calcModel_PrimeChecker);
 
     // PrimeChecker function behaviors
-	calcModel_PrimeChecker_fbNext = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
-	
-
 	calcModel_PrimeChecker_fbDivides = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	calcModel_PrimeChecker_fbDivides_isDivisible = factory->createParameter_in_Behavior(calcModel_PrimeChecker_fbDivides);
 	
 
-	calcModel_PrimeChecker_fbPrintIsPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
-	
-
-	calcModel_PrimeChecker_fbPrintNotPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	calcModel_PrimeChecker_fbIsNotFinished = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished = factory->createParameter_in_Behavior(calcModel_PrimeChecker_fbIsNotFinished);
 	
 
 	calcModel_PrimeChecker_fbIsOdd = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	calcModel_PrimeChecker_fbIsOdd_isOdd = factory->createParameter_in_Behavior(calcModel_PrimeChecker_fbIsOdd);
 	
 
-	calcModel_PrimeChecker_fbIsNotFinished = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished = factory->createParameter_in_Behavior(calcModel_PrimeChecker_fbIsNotFinished);
+	calcModel_PrimeChecker_fbNext = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	
+
+	calcModel_PrimeChecker_fbPrintIsPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
+	
+
+	calcModel_PrimeChecker_fbPrintNotPrime = factory->createFunctionBehavior_in_BehavioredClassifier(calcModel_PrimeChecker);
 	
 
 }
@@ -411,6 +411,7 @@ void CalcModelPackageImpl::initializePackageContents(std::shared_ptr<uml::Packag
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -616,10 +617,6 @@ void CalcModelPackageImpl::initializePackageClasses()
 	
 
     // PrimeChecker function behaviors
-	calcModel_PrimeChecker_fbNext->setName("fbNext");
-	calcModel_PrimeChecker_fbNext->setContext(calcModel_PrimeChecker);
-	
-
 	calcModel_PrimeChecker_fbDivides->setName("fbDivides");
 	calcModel_PrimeChecker_fbDivides->setContext(calcModel_PrimeChecker);
 	// parameter isDivisible
@@ -630,12 +627,14 @@ void CalcModelPackageImpl::initializePackageClasses()
 	calcModel_PrimeChecker_fbDivides_isDivisible->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 
-	calcModel_PrimeChecker_fbPrintIsPrime->setName("fbPrintIsPrime");
-	calcModel_PrimeChecker_fbPrintIsPrime->setContext(calcModel_PrimeChecker);
-	
-
-	calcModel_PrimeChecker_fbPrintNotPrime->setName("fbPrintNotPrime");
-	calcModel_PrimeChecker_fbPrintNotPrime->setContext(calcModel_PrimeChecker);
+	calcModel_PrimeChecker_fbIsNotFinished->setName("fbIsNotFinished");
+	calcModel_PrimeChecker_fbIsNotFinished->setContext(calcModel_PrimeChecker);
+	// parameter isNotFinished
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setName("isNotFinished");
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setLower(1);
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setUpper(1);
+	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 
 	calcModel_PrimeChecker_fbIsOdd->setName("fbIsOdd");
@@ -648,14 +647,16 @@ void CalcModelPackageImpl::initializePackageClasses()
 	calcModel_PrimeChecker_fbIsOdd_isOdd->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 
-	calcModel_PrimeChecker_fbIsNotFinished->setName("fbIsNotFinished");
-	calcModel_PrimeChecker_fbIsNotFinished->setContext(calcModel_PrimeChecker);
-	// parameter isNotFinished
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setName("isNotFinished");
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setLower(1);
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setUpper(1);
-	calcModel_PrimeChecker_fbIsNotFinished_isNotFinished->setDirection(uml::ParameterDirectionKind::RETURN);
+	calcModel_PrimeChecker_fbNext->setName("fbNext");
+	calcModel_PrimeChecker_fbNext->setContext(calcModel_PrimeChecker);
+	
+
+	calcModel_PrimeChecker_fbPrintIsPrime->setName("fbPrintIsPrime");
+	calcModel_PrimeChecker_fbPrintIsPrime->setContext(calcModel_PrimeChecker);
+	
+
+	calcModel_PrimeChecker_fbPrintNotPrime->setName("fbPrintNotPrime");
+	calcModel_PrimeChecker_fbPrintNotPrime->setContext(calcModel_PrimeChecker);
 	
 
 }
@@ -678,6 +679,10 @@ void CalcModelPackageImpl::initializePackageInterfaces()
 }
 
 void CalcModelPackageImpl::initializePackageStereotypes()
+{
+}
+
+void CalcModelPackageImpl::initializePackageValueSpecifications()
 {
 }
 

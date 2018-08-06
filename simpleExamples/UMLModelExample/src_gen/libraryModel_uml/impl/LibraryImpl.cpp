@@ -43,6 +43,8 @@ LibraryImpl::LibraryImpl()
 	
 	m_books.reset(new Bag<LibraryModel_uml::Book>());
 	
+
+	
 }
 
 

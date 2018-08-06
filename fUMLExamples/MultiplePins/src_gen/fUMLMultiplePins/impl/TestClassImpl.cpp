@@ -18,8 +18,6 @@
 
 
 
-
-
 using namespace fUMLMultiplePins;
 
 //*********************************
@@ -35,6 +33,8 @@ TestClassImpl::TestClassImpl()
 	 
 
 	// init properties without default
+
+	
 }
 
 

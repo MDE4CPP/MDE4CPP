@@ -453,6 +453,7 @@ void FUMLMultiplePinsPackageImpl::initializePackageContents(std::shared_ptr<uml:
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -1181,6 +1182,10 @@ void FUMLMultiplePinsPackageImpl::initializePackageInterfaces()
 }
 
 void FUMLMultiplePinsPackageImpl::initializePackageStereotypes()
+{
+}
+
+void FUMLMultiplePinsPackageImpl::initializePackageValueSpecifications()
 {
 }
 

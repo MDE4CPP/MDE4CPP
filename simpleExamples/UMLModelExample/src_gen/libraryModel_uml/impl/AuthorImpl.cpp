@@ -34,6 +34,8 @@ AuthorImpl::AuthorImpl()
 	 
 
 	// init properties without default
+
+	
 }
 
 

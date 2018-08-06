@@ -45,6 +45,8 @@ BookImpl::BookImpl()
 	
 	m_pictures.reset(new Bag<LibraryModel_uml::Picture>());
 	
+
+	
 }
 
 

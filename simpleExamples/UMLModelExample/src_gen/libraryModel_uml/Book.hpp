@@ -61,7 +61,6 @@ namespace LibraryModel_uml
 			std::shared_ptr<Bag<LibraryModel_uml::Author>> m_authors;
 			std::shared_ptr<Bag<LibraryModel_uml::Picture>> m_pictures;
 			
-	
 	};
 }
 #endif /* end of include guard: LIBRARYMODEL_UML_BOOK__HPP */

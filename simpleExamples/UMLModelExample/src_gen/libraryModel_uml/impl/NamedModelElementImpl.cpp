@@ -35,6 +35,8 @@ NamedModelElementImpl::NamedModelElementImpl()
 
 	// init properties without default
 	
+
+	
 }
 
 

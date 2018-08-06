@@ -37,6 +37,8 @@ PictureImpl::PictureImpl()
 
 	// init properties without default
 	
+
+	
 }
 
 

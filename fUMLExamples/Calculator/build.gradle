@@ -1,5 +1,6 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -17,23 +18,12 @@ task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	projectFolder = file("./src_gen/CalcModel")
 }
 
-task generateCalcModel(type: JavaExec) {
+task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'CalcModel'
 	description 'generate C++ code of CalcModel.uml model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "CalcModel.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/CalcModel.uml")
-	outputs.dir file("src_gen")
-	
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
-			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
-		}
-	}
+
+	modelFilePath = file("./model/CalcModel.uml")
+	structureOnly = false
 }
 
 compileCalcModel.mustRunAfter generateCalcModel

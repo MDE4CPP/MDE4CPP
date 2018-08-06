@@ -242,6 +242,7 @@ void LibraryModel_umlPackageImpl::initializePackageContents(std::shared_ptr<uml:
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -368,6 +369,10 @@ void LibraryModel_umlPackageImpl::initializePackageInterfaces()
 }
 
 void LibraryModel_umlPackageImpl::initializePackageStereotypes()
+{
+}
+
+void LibraryModel_umlPackageImpl::initializePackageValueSpecifications()
 {
 }
 

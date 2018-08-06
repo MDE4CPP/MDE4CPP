@@ -122,7 +122,7 @@ std::string NamedElementImpl::getName() const
 //*********************************
 
 
-std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr()
+std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr() const
 {
 	return m_thisNamedElementPtr.lock();
 }
