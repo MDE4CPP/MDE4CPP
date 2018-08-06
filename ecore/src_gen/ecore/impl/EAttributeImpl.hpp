@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EAttributeImpl();
-			virtual std::shared_ptr<EAttribute> getThisEAttributePtr();
+			virtual std::shared_ptr<EAttribute> getThisEAttributePtr() const;
 			virtual void setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr);
 
 			//Additional constructors for the containments back reference

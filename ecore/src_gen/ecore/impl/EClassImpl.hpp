@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EClassImpl();
-			virtual std::shared_ptr<EClass> getThisEClassPtr();
+			virtual std::shared_ptr<EClass> getThisEClassPtr() const;
 			virtual void setThisEClassPtr(std::weak_ptr<EClass> thisEClassPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,43 +48,43 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EOperation> getEOperation(int operationID)  const  ;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation(int operationID) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(int featureID)  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(int featureID) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(std::string featureName)  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(std::string featureName) const ;
 			
 			/*!
 			 */ 
-			virtual int getFeatureCount()  const  ;
+			virtual int getFeatureCount() const ;
 			
 			/*!
 			 */ 
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			/*!
 			 */ 
-			virtual int getOperationCount()  const  ;
+			virtual int getOperationCount() const ;
 			
 			/*!
 			 */ 
-			virtual int getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const  ;
+			virtual int getOperationID(std::shared_ptr<ecore::EOperation>  operation) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation>  operation)  const  ;
+			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation>  operation) const ;
 			
 			/*!
 			 */ 
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const  ;
+			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const ;
 			
 			
 			

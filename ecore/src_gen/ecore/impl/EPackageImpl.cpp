@@ -198,7 +198,7 @@ std::string EPackageImpl::getNsURI() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name)  const 
+std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -253,7 +253,7 @@ std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 //*********************************
 
 
-std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr()
+std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const
 {
 	return m_thisEPackagePtr.lock();
 }

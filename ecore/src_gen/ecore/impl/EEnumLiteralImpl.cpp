@@ -181,7 +181,7 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 //*********************************
 
 
-std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr()
+std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
 {
 	return m_thisEEnumLiteralPtr.lock();
 }

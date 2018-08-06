@@ -32,7 +32,7 @@ virtual public EStringToStringMapEntry
 		protected:
 			friend class EcoreFactoryImpl;
 			EStringToStringMapEntryImpl();
-			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr();
+			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
 
 

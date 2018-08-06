@@ -95,63 +95,63 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eAllContents()  const  = 0;
+			virtual Bag <   ecore::EObject > eAllContents() const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClass> eClass()  const  = 0;
+			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> eContainer()  = 0;
+			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature()  const  = 0;
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EReference> eContainmentFeature()  const  = 0;
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eContents()  const  = 0;
+			virtual Bag <   ecore::EObject > eContents() const = 0;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eCrossReferences()  const  = 0;
+			virtual Bag <   ecore::EObject > eCrossReferences() const = 0;
 			
 			/*!
 			 */ 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const = 0;
 			
 			/*!
 			 */ 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  = 0;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const = 0;
 			
 			/*!
 			 */ 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments)  const  = 0;
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const = 0;
 			
 			/*!
 			 */ 
-			virtual bool eIsProxy()  const  = 0;
+			virtual bool eIsProxy() const = 0;
 			
 			/*!
 			 */ 
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const = 0;
 			
 			/*!
 			 */ 
-			virtual int eResource()  const  = 0;
+			virtual int eResource() const = 0;
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)  = 0;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue) = 0;
 			
 			/*!
 			 */ 
-			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const = 0;
 			
 			
 			//*********************************

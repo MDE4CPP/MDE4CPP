@@ -100,15 +100,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue)  const  = 0;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const = 0;
 			
 			/*!
 			 */ 
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  = 0;
+			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const = 0;
 			
 			
 			//*********************************

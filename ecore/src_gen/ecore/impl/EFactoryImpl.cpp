@@ -127,19 +127,19 @@ std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue)  const 
+std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass)  const 
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const 
+Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -163,7 +163,7 @@ void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 //*********************************
 
 
-std::shared_ptr<EFactory> EFactoryImpl::getThisEFactoryPtr()
+std::shared_ptr<EFactory> EFactoryImpl::getThisEFactoryPtr() const
 {
 	return m_thisEFactoryPtr.lock();
 }

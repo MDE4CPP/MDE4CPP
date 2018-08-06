@@ -231,7 +231,7 @@ int EOperationImpl::getOperationID() const
 //*********************************
 
 
-bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
+bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -314,7 +314,7 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 //*********************************
 
 
-std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr()
+std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const
 {
 	return m_thisEOperationPtr.lock();
 }

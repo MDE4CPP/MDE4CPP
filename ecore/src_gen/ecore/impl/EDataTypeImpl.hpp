@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EDataTypeImpl();
-			virtual std::shared_ptr<EDataType> getThisEDataTypePtr();
+			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference

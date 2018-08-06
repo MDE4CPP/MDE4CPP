@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 
 
-std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr()
+std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
 {
 	return m_thisEAttributePtr.lock();
 }

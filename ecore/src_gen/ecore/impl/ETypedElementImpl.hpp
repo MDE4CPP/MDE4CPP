@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			ETypedElementImpl();
-			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr();
+			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;
 			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);
 
 

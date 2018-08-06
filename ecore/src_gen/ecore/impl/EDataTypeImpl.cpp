@@ -164,7 +164,7 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 
 
-std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr()
+std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
 {
 	return m_thisEDataTypePtr.lock();
 }

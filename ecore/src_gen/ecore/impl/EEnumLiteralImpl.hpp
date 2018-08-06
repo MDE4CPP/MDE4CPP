@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EEnumLiteralImpl();
-			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr();
+			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr() const;
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference

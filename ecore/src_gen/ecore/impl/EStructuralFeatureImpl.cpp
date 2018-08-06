@@ -241,7 +241,7 @@ bool EStructuralFeatureImpl::isVolatile() const
 //*********************************
 // Operations
 //*********************************
-void * EStructuralFeatureImpl::getContainerClass() 
+void * EStructuralFeatureImpl::getContainerClass()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -264,7 +264,7 @@ std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() cons
 //*********************************
 
 
-std::shared_ptr<EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr()
+std::shared_ptr<EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const
 {
 	return m_thisEStructuralFeaturePtr.lock();
 }

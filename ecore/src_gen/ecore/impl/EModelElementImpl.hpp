@@ -32,7 +32,7 @@ virtual public EModelElement
 		protected:
 			friend class EcoreFactoryImpl;
 			EModelElementImpl();
-			virtual std::shared_ptr<EModelElement> getThisEModelElementPtr();
+			virtual std::shared_ptr<EModelElement> getThisEModelElementPtr() const;
 			virtual void setThisEModelElementPtr(std::weak_ptr<EModelElement> thisEModelElementPtr);
 
 
@@ -46,7 +46,7 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source)  ;
+			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EAnnotationImpl();
-			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr();
+			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr() const;
 			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference

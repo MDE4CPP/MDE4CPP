@@ -166,7 +166,7 @@ std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 //*********************************
 
 
-std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr()
+std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const
 {
 	return m_thisEParameterPtr.lock();
 }

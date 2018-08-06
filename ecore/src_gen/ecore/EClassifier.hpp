@@ -96,7 +96,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isInstance(Any object)  const  = 0;
+			virtual bool isInstance(Any object) const = 0;
 			
 			
 			//*********************************

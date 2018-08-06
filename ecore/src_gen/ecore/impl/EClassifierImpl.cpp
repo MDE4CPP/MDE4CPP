@@ -204,7 +204,7 @@ std::string EClassifierImpl::getInstanceTypeName() const
 //*********************************
 
 
-bool EClassifierImpl::isInstance(Any object)  const 
+bool EClassifierImpl::isInstance(Any object) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -232,7 +232,7 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 //*********************************
 
 
-std::shared_ptr<EClassifier> EClassifierImpl::getThisEClassifierPtr()
+std::shared_ptr<EClassifier> EClassifierImpl::getThisEClassifierPtr() const
 {
 	return m_thisEClassifierPtr.lock();
 }

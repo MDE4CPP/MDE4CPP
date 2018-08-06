@@ -32,7 +32,7 @@ virtual public EGenericType
 		protected:
 			friend class EcoreFactoryImpl;
 			EGenericTypeImpl();
-			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr();
+			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr() const;
 			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);
 
 
@@ -46,7 +46,7 @@ virtual public EGenericType
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(Any object)  const  ;
+			virtual bool isInstance(Any object) const ;
 			
 			
 			

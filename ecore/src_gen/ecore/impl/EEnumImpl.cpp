@@ -162,7 +162,7 @@ std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +177,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name
 	//end of body
 }
 
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  cons
 	//end of body
 }
 
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::string literal)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::string literal) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,7 +223,7 @@ std::shared_ptr<Bag<ecore::EEnumLiteral>> EEnumImpl::getELiterals() const
 //*********************************
 
 
-std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr()
+std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr() const
 {
 	return m_thisEEnumPtr.lock();
 }

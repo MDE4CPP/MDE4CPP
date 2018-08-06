@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EParameterImpl();
-			virtual std::shared_ptr<EParameter> getThisEParameterPtr();
+			virtual std::shared_ptr<EParameter> getThisEParameterPtr() const;
 			virtual void setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr);
 
 			//Additional constructors for the containments back reference

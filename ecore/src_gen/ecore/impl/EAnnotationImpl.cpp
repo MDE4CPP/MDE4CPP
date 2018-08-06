@@ -227,7 +227,7 @@ std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 //*********************************
 
 
-std::shared_ptr<EAnnotation> EAnnotationImpl::getThisEAnnotationPtr()
+std::shared_ptr<EAnnotation> EAnnotationImpl::getThisEAnnotationPtr() const
 {
 	return m_thisEAnnotationPtr.lock();
 }

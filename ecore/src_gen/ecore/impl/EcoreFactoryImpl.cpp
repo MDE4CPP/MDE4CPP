@@ -74,7 +74,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EAnnotation>(this->createEAnnotation());
+				return this->createEAnnotation();
 			}
 			else
 			{
@@ -87,7 +87,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EAttribute>(this->createEAttribute());
+				return this->createEAttribute();
 			}
 			else
 			{
@@ -100,7 +100,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EClass>(this->createEClass());
+				return this->createEClass();
 			}
 			else
 			{
@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EDataType>(this->createEDataType());
+				return this->createEDataType();
 			}
 			else
 			{
@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EEnum>(this->createEEnum());
+				return this->createEEnum();
 			}
 			else
 			{
@@ -139,7 +139,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EEnumLiteral>(this->createEEnumLiteral());
+				return this->createEEnumLiteral();
 			}
 			else
 			{
@@ -150,24 +150,24 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		}
 		case EcorePackage::EFACTORY_ECLASS:
 		{
-				return std::shared_ptr<EFactory>(this->createEFactory());
+				return this->createEFactory();
 			
 		}
 		case EcorePackage::EGENERICTYPE_ECLASS:
 		{
-				return std::shared_ptr<EGenericType>(this->createEGenericType());
+				return this->createEGenericType();
 			
 		}
 		case EcorePackage::EOBJECT_ECLASS:
 		{
-				return std::shared_ptr<EObject>(this->createEObject());
+				return this->createEObject();
 			
 		}
 		case EcorePackage::EOPERATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EOperation>(this->createEOperation());
+				return this->createEOperation();
 			}
 			else
 			{
@@ -180,7 +180,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EPackage>(this->createEPackage());
+				return this->createEPackage();
 			}
 			else
 			{
@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EParameter>(this->createEParameter());
+				return this->createEParameter();
 			}
 			else
 			{
@@ -206,7 +206,7 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EReference>(this->createEReference());
+				return this->createEReference();
 			}
 			else
 			{
@@ -217,12 +217,12 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 		}
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ECLASS:
 		{
-				return std::shared_ptr<EStringToStringMapEntry>(this->createEStringToStringMapEntry());
+				return this->createEStringToStringMapEntry();
 			
 		}
 		case EcorePackage::ETYPEPARAMETER_ECLASS:
 		{
-				return std::shared_ptr<ETypeParameter>(this->createETypeParameter());
+				return this->createETypeParameter();
 			
 		}
 	default:

@@ -228,7 +228,7 @@ void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 //*********************************
 
 
-std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr()
+std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
 {
 	return m_thisETypedElementPtr.lock();
 }

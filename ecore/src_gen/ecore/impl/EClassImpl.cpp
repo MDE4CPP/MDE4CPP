@@ -357,7 +357,7 @@ bool EClassImpl::isInterface() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  const 
+std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -366,7 +366,7 @@ std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  c
 	//end of body
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int featureID)  const 
+std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int featureID) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -375,7 +375,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int
 	//end of body
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std::string featureName)  const 
+std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std::string featureName) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -392,7 +392,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std
 	//end of body
 }
 
-int EClassImpl::getFeatureCount()  const 
+int EClassImpl::getFeatureCount() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -400,7 +400,7 @@ int EClassImpl::getFeatureCount()  const
 	//end of body
 }
 
-int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -425,13 +425,13 @@ int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature
 	//end of body
 }
 
-std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int EClassImpl::getOperationCount()  const 
+int EClassImpl::getOperationCount() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -439,7 +439,7 @@ int EClassImpl::getOperationCount()  const
 	//end of body
 }
 
-int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const 
+int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -464,13 +464,13 @@ int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  c
 	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation)  const 
+std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const 
+bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -649,7 +649,7 @@ std::shared_ptr<Union<ecore::EStructuralFeature>> EClassImpl::getEStructuralFeat
 }
 
 
-std::shared_ptr<EClass> EClassImpl::getThisEClassPtr()
+std::shared_ptr<EClass> EClassImpl::getThisEClassPtr() const
 {
 	return m_thisEClassPtr.lock();
 }

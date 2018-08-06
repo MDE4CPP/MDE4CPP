@@ -31,7 +31,7 @@ virtual public EObject
 		protected:
 			friend class EcoreFactoryImpl;
 			EObjectImpl();
-			virtual std::shared_ptr<EObject> getThisEObjectPtr();
+			virtual std::shared_ptr<EObject> getThisEObjectPtr() const;
 			virtual void setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr);
 
 
@@ -45,63 +45,63 @@ virtual public EObject
 			//*********************************
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eAllContents()  const  ;
+			virtual Bag <   ecore::EObject > eAllContents() const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClass> eClass()  const  ;
+			virtual std::shared_ptr<ecore::EClass> eClass() const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> eContainer()  ;
+			virtual std::shared_ptr<ecore::EObject> eContainer() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature()  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EReference> eContainmentFeature()  const  ;
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eContents()  const  ;
+			virtual Bag <   ecore::EObject > eContents() const ;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eCrossReferences()  const  ;
+			virtual Bag <   ecore::EObject > eCrossReferences() const ;
 			
 			/*!
 			 */ 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			/*!
 			 */ 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const ;
 			
 			/*!
 			 */ 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments)  const  ;
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const ;
 			
 			/*!
 			 */ 
-			virtual bool eIsProxy()  const  ;
+			virtual bool eIsProxy() const ;
 			
 			/*!
 			 */ 
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			/*!
 			 */ 
-			virtual int eResource()  const  ;
+			virtual int eResource() const ;
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)  ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue) ;
 			
 			/*!
 			 */ 
-			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EEnumImpl();
-			virtual std::shared_ptr<EEnum> getThisEEnumPtr();
+			virtual std::shared_ptr<EEnum> getThisEEnumPtr() const;
 			virtual void setThisEEnumPtr(std::weak_ptr<EEnum> thisEEnumPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const ;
 			
 			
 			

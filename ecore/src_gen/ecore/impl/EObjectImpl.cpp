@@ -113,13 +113,13 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Bag <   ecore::EObject > EObjectImpl::eAllContents()  const 
+Bag <   ecore::EObject > EObjectImpl::eAllContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EClass> EObjectImpl::eClass()  const 
+std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -127,37 +127,37 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass()  const
 	//end of body
 }
 
-std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() 
+std::shared_ptr<ecore::EObject> EObjectImpl::eContainer()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature()  const 
+std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature()  const 
+std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eContents()  const 
+Bag <   ecore::EObject > EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eCrossReferences()  const 
+Bag <   ecore::EObject > EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +165,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  cons
 	//end of body
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -173,19 +173,19 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool r
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments)  const 
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsProxy()  const 
+bool EObjectImpl::eIsProxy() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,13 +193,13 @@ bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 	//end of body
 }
 
-int EObjectImpl::eResource()  const 
+int EObjectImpl::eResource() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue) 
+void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any n
 	//end of body
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -222,7 +222,7 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 //*********************************
 
 
-std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr()
+std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
 {
 	return m_thisEObjectPtr.lock();
 }

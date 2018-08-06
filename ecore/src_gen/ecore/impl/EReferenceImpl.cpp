@@ -244,7 +244,7 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //*********************************
 
 
-std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr()
+std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const
 {
 	return m_thisEReferencePtr.lock();
 }

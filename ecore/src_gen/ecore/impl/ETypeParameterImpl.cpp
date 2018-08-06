@@ -148,7 +148,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 //*********************************
 
 
-std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr()
+std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
 {
 	return m_thisETypeParameterPtr.lock();
 }

@@ -119,7 +119,7 @@ std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::string source) 
+std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::string source)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -149,7 +149,7 @@ std::shared_ptr<Bag<ecore::EAnnotation>> EModelElementImpl::getEAnnotations() co
 //*********************************
 
 
-std::shared_ptr<EModelElement> EModelElementImpl::getThisEModelElementPtr()
+std::shared_ptr<EModelElement> EModelElementImpl::getThisEModelElementPtr() const
 {
 	return m_thisEModelElementPtr.lock();
 }

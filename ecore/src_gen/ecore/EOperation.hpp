@@ -115,7 +115,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  = 0;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const = 0;
 			
 			
 			//*********************************

@@ -168,7 +168,7 @@ std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EGenericTypeImpl::isInstance(Any object)  const 
+bool EGenericTypeImpl::isInstance(Any object) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -236,7 +236,7 @@ void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpp
 //*********************************
 
 
-std::shared_ptr<EGenericType> EGenericTypeImpl::getThisEGenericTypePtr()
+std::shared_ptr<EGenericType> EGenericTypeImpl::getThisEGenericTypePtr() const
 {
 	return m_thisEGenericTypePtr.lock();
 }

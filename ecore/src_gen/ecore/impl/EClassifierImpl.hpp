@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EClassifierImpl();
-			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr();
+			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr() const;
 			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);
 
 			//Additional constructors for the containments back reference
@@ -50,7 +50,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isInstance(Any object)  const  ;
+			virtual bool isInstance(Any object) const ;
 			
 			
 			

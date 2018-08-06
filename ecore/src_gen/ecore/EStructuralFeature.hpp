@@ -98,7 +98,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual void * getContainerClass()  = 0;
+			virtual void * getContainerClass() = 0;
 			
 			
 			

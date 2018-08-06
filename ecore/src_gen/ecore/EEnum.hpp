@@ -94,15 +94,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name) const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const = 0;
 			
 			
 			//*********************************

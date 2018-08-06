@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EOperationImpl();
-			virtual std::shared_ptr<EOperation> getThisEOperationPtr();
+			virtual std::shared_ptr<EOperation> getThisEOperationPtr() const;
 			virtual void setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr);
 
 			//Additional constructors for the containments back reference
@@ -50,7 +50,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  ;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const ;
 			
 			
 			

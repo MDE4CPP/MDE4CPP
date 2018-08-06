@@ -134,7 +134,7 @@ std::string EStringToStringMapEntryImpl::getValue() const
 //*********************************
 
 
-std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr()
+std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
 {
 	return m_thisEStringToStringMapEntryPtr.lock();
 }
