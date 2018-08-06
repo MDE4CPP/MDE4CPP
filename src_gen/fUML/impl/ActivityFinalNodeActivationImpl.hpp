@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityFinalNodeActivationImpl();
-			virtual std::shared_ptr<ActivityFinalNodeActivation> getThisActivityFinalNodeActivationPtr();
+			virtual std::shared_ptr<ActivityFinalNodeActivation> getThisActivityFinalNodeActivationPtr() const;
 			virtual void setThisActivityFinalNodeActivationPtr(std::weak_ptr<ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			
 			

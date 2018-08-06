@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadLinkActionActivationImpl::getPin
 }
 
 
-std::shared_ptr<ReadLinkActionActivation> ReadLinkActionActivationImpl::getThisReadLinkActionActivationPtr()
+std::shared_ptr<ReadLinkActionActivation> ReadLinkActionActivationImpl::getThisReadLinkActionActivationPtr() const
 {
 	return m_thisReadLinkActionActivationPtr.lock();
 }

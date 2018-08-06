@@ -32,7 +32,7 @@ virtual public Locus
 		protected:
 			friend class FUMLFactoryImpl;
 			LocusImpl();
-			virtual std::shared_ptr<Locus> getThisLocusPtr();
+			virtual std::shared_ptr<Locus> getThisLocusPtr() const;
 			virtual void setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr);
 
 
@@ -46,31 +46,31 @@ virtual public Locus
 			//*********************************
 			/*!
 			 */ 
-			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value) ;
 			
 			/*!
 			 */ 
-			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor)  ;
+			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor) ;
 			
 			/*!
 			 */ 
-			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  ;
+			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory) ;
 			
 			/*!
 			 */ 
-			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  ;
+			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
 			
 			/*!
 			 */ 
-			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) ;
 			
 			
 			

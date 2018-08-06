@@ -93,11 +93,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token) = 0;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token) = 0;
 			
 			
 			//*********************************

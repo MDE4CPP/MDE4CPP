@@ -131,7 +131,7 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
+void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -139,7 +139,7 @@ void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  
 	//end of body
 }
 
-void ReferenceImpl::destroy() 
+void ReferenceImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,7 +147,7 @@ void ReferenceImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Op
 	//end of body
 }
 
-bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +172,7 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -180,7 +180,7 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ReferenceImpl::new_() 
+std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -188,7 +188,7 @@ std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 	//end of body
 }
 
-std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +196,7 @@ std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::sha
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -204,7 +204,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues()
 	//end of body
 }
 
-void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -212,7 +212,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 	//end of body
 }
 
-void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -220,7 +220,7 @@ void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::s
 	//end of body
 }
 
-std::string ReferenceImpl::toString() 
+std::string ReferenceImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -246,7 +246,7 @@ void ReferenceImpl::setReferent(std::shared_ptr<fUML::Object> _referent)
 //*********************************
 
 
-std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr()
+std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const
 {
 	return m_thisReferencePtr.lock();
 }

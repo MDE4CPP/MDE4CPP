@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr()
+std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
 {
 	return m_thisEventDispatchLoopPtr.lock();
 }

@@ -142,7 +142,7 @@ std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -163,7 +163,7 @@ void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomin
 //*********************************
 
 
-std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr()
+std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr() const
 {
 	return m_thisControlNodeActivationPtr.lock();
 }

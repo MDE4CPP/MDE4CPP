@@ -174,7 +174,7 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ActivityExecutionImpl::execute() 
+void ActivityExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -245,7 +245,7 @@ void ActivityExecutionImpl::execute()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -253,7 +253,7 @@ std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_()
 	//end of body
 }
 
-void ActivityExecutionImpl::terminate() 
+void ActivityExecutionImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -279,7 +279,7 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::ActivityNod
 //*********************************
 
 
-std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr()
+std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr() const
 {
 	return m_thisActivityExecutionPtr.lock();
 }

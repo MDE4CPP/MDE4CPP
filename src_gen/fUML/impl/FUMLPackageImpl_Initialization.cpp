@@ -4048,7 +4048,7 @@ void FUMLPackageImpl::initializeExecutorContent()
 		{
 			m_executor_EReference_locus->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getLocus_EReference_executor();
 		if (otherEnd != nullptr)
 	    {
 	   		m_executor_EReference_locus->setEOpposite(otherEnd);
@@ -5334,7 +5334,7 @@ void FUMLPackageImpl::initializeLocusContent()
 		{
 			m_locus_EReference_executor->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getExecutor_EReference_locus();
 		if (otherEnd != nullptr)
 	    {
 	   		m_locus_EReference_executor->setEOpposite(otherEnd);

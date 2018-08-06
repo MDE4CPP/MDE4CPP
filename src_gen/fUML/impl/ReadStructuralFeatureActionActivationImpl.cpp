@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadStructuralFeatureActionActivatio
 }
 
 
-std::shared_ptr<ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr()
+std::shared_ptr<ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr() const
 {
 	return m_thisReadStructuralFeatureActionActivationPtr.lock();
 }

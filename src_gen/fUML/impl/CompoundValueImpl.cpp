@@ -133,7 +133,7 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
+void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -153,7 +153,7 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
 	//end of body
 }
 
-bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -190,7 +190,7 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) 
+void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -198,7 +198,7 @@ void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  cl
 	//end of body
 }
 
-std::shared_ptr<fUML::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -216,7 +216,7 @@ std::shared_ptr<fUML::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> > CompoundValueImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> > CompoundValueImpl::retrieveFeatureValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +224,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > CompoundValueImpl::retrieveFeatureValu
 	//end of body
 }
 
-std::string CompoundValueImpl::toString() 
+std::string CompoundValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -276,7 +276,7 @@ std::shared_ptr<Bag<fUML::FeatureValue>> CompoundValueImpl::getFeatureValues() c
 //*********************************
 
 
-std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr()
+std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
 {
 	return m_thisCompoundValuePtr.lock();
 }

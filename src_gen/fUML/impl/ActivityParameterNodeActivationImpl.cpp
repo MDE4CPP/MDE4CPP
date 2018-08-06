@@ -149,7 +149,7 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass
 //*********************************
 // Operations
 //*********************************
-void ActivityParameterNodeActivationImpl::clearTokens() 
+void ActivityParameterNodeActivationImpl::clearTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -159,7 +159,7 @@ void ActivityParameterNodeActivationImpl::clearTokens()
 	//end of body
 }
 
-void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -210,7 +210,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 //*********************************
 
 
-std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr()
+std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr() const
 {
 	return m_thisActivityParameterNodeActivationPtr.lock();
 }

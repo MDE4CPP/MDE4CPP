@@ -114,7 +114,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)  = 0;
+			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt) = 0;
 			
 			
 			//*********************************

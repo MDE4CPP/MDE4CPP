@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 //*********************************
 
 
-std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr()
+std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
 {
 	return m_thisFIFOGetNextEventStrategyPtr.lock();
 }

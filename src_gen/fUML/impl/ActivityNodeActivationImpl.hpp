@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationImpl();
-			virtual std::shared_ptr<ActivityNodeActivation> getThisActivityNodeActivationPtr();
+			virtual std::shared_ptr<ActivityNodeActivation> getThisActivityNodeActivationPtr() const;
 			virtual void setThisActivityNodeActivationPtr(std::weak_ptr<ActivityNodeActivation> thisActivityNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,103 +48,103 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
+			virtual void addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) ;
 			
 			/*!
 			 */ 
-			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) ;
 			
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			/*!
 			 */ 
-			virtual void addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens) ;
 			
 			/*!
 			 */ 
-			virtual void clearTokens()  ;
+			virtual void clearTokens() ;
 			
 			/*!
 			 */ 
-			virtual void createEdgeInstances()  ;
+			virtual void createEdgeInstances() ;
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations()  ;
+			virtual void createNodeActivations() ;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityExecution> getActivityExecution()  ;
+			virtual std::shared_ptr<fUML::ActivityExecution> getActivityExecution() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> getExecutionContext()  ;
+			virtual std::shared_ptr<fUML::Object> getExecutionContext() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Locus> getExecutionLocus()  ;
+			virtual std::shared_ptr<fUML::Locus> getExecutionLocus() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
 			/*!
 			 */ 
-			virtual bool getRunning()  ;
+			virtual bool getRunning() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > getTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > getTokens() ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances)  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances) ;
 			
 			/*!
 			 */ 
-			virtual void recieveOffer()  ;
+			virtual void recieveOffer() ;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			/*!
 			 */ 
-			virtual void resume()  ;
+			virtual void resume() ;
 			
 			/*!
 			 */ 
-			virtual void run()  ;
+			virtual void run() ;
 			
 			/*!
 			 */ 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) ;
 			
 			/*!
 			 */ 
-			virtual void suspend()  ;
+			virtual void suspend() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeTokens() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadExtentActionActivationImpl::getP
 }
 
 
-std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr()
+std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
 {
 	return m_thisReadExtentActionActivationPtr.lock();
 }

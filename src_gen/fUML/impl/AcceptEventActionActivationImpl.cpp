@@ -186,13 +186,13 @@ bool AcceptEventActionActivationImpl::isWaiting() const
 //*********************************
 // Operations
 //*********************************
-void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -220,7 +220,7 @@ std::shared_ptr<Union<fUML::PinActivation>> AcceptEventActionActivationImpl::get
 }
 
 
-std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr()
+std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr() const
 {
 	return m_thisAcceptEventActionActivationPtr.lock();
 }

@@ -178,19 +178,19 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue) 
+std::shared_ptr<Bag<fUML::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) 
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -209,7 +209,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StructuralFeatureActionActivationImp
 }
 
 
-std::shared_ptr<StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr()
+std::shared_ptr<StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr() const
 {
 	return m_thisStructuralFeatureActionActivationPtr.lock();
 }

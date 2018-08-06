@@ -254,7 +254,7 @@ bool ActionActivationImpl::isFiring() const
 //*********************************
 // Operations
 //*********************************
-void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
+void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -303,7 +303,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
 	//end of body
 }
 
-void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation) 
+void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -333,7 +333,7 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::completeAction() 
+std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::completeAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -353,7 +353,7 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::completeAction()
 	//end of body
 }
 
-void ActionActivationImpl::createNodeActivations() 
+void ActionActivationImpl::createNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -417,13 +417,13 @@ void ActionActivationImpl::createNodeActivations()
 	//end of body
 }
 
-void ActionActivationImpl::doAction() 
+void ActionActivationImpl::doAction()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -440,7 +440,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingToke
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin>  pin) 
+std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin>  pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -467,7 +467,7 @@ std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::getTokens(std::shared_p
 	//end of body
 }
 
-bool ActionActivationImpl::isFirng() 
+bool ActionActivationImpl::isFirng()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -475,7 +475,7 @@ bool ActionActivationImpl::isFirng()
 	//end of body
 }
 
-bool ActionActivationImpl::isReady() 
+bool ActionActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -525,7 +525,7 @@ bool ActionActivationImpl::isReady()
 	//end of body
 }
 
-bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
+bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -543,7 +543,7 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstanc
 	//end of body
 }
 
-std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool value) 
+std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -553,7 +553,7 @@ std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool 
 	//end of body
 }
 
-void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value) 
+void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -569,7 +569,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::sh
 	//end of body
 }
 
-void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
+void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -580,7 +580,7 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin>  pin,std::s
 	//end of body
 }
 
-std::shared_ptr<fUML::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin>  pin) 
+std::shared_ptr<fUML::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin>  pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -602,7 +602,7 @@ std::shared_ptr<fUML::PinActivation> ActionActivationImpl::retrievePinActivation
 	//end of body
 }
 
-void ActionActivationImpl::run() 
+void ActionActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -620,7 +620,7 @@ void ActionActivationImpl::run()
 	//end of body
 }
 
-void ActionActivationImpl::sendOffers() 
+void ActionActivationImpl::sendOffers()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -642,7 +642,7 @@ void ActionActivationImpl::sendOffers()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -688,7 +688,7 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin>  pin) 
+std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin>  pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -711,7 +711,7 @@ std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::takeTokens(std::shared_
 	//end of body
 }
 
-void ActionActivationImpl::terminate() 
+void ActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -729,7 +729,7 @@ void ActionActivationImpl::terminate()
 	//end of body
 }
 
-bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link) 
+bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -778,7 +778,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ActionActivationImpl::getPinActivati
 }
 
 
-std::shared_ptr<ActionActivation> ActionActivationImpl::getThisActionActivationPtr()
+std::shared_ptr<ActionActivation> ActionActivationImpl::getThisActionActivationPtr() const
 {
 	return m_thisActionActivationPtr.lock();
 }

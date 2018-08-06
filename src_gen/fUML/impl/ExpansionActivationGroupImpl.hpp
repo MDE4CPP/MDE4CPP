@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionActivationGroupImpl();
-			virtual std::shared_ptr<ExpansionActivationGroup> getThisExpansionActivationGroupPtr();
+			virtual std::shared_ptr<ExpansionActivationGroup> getThisExpansionActivationGroupPtr() const;
 			virtual void setThisExpansionActivationGroupPtr(std::weak_ptr<ExpansionActivationGroup> thisExpansionActivationGroupPtr);
 
 			//Additional constructors for the containments back reference

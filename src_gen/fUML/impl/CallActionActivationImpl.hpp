@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CallActionActivationImpl();
-			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr();
+			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr() const;
 			virtual void setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,19 +48,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void doAction() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution() ;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution) ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

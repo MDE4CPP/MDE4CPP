@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ControlNodeActivationImpl();
-			virtual std::shared_ptr<ControlNodeActivation> getThisControlNodeActivationPtr();
+			virtual std::shared_ptr<ControlNodeActivation> getThisControlNodeActivationPtr() const;
 			virtual void setThisControlNodeActivationPtr(std::weak_ptr<ControlNodeActivation> thisControlNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			
 			

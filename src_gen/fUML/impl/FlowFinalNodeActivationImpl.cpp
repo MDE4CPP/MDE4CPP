@@ -151,7 +151,7 @@ std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr()
+std::shared_ptr<FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr() const
 {
 	return m_thisFlowFinalNodeActivationPtr.lock();
 }

@@ -32,7 +32,7 @@ virtual public Offer
 		protected:
 			friend class FUMLFactoryImpl;
 			OfferImpl();
-			virtual std::shared_ptr<Offer> getThisOfferPtr();
+			virtual std::shared_ptr<Offer> getThisOfferPtr() const;
 			virtual void setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr);
 
 
@@ -46,23 +46,23 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedVales()  ;
+			virtual int countOfferedVales() ;
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  ;
+			virtual bool hasTokens() ;
 			
 			/*!
 			 */ 
-			virtual void removeOfferedValues(int count)  ;
+			virtual void removeOfferedValues(int count) ;
 			
 			/*!
 			 */ 
-			virtual void removeWithdrawnTokens()  ;
+			virtual void removeWithdrawnTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens() ;
 			
 			
 			

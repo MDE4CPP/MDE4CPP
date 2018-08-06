@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			UnlimitedNaturalValueImpl();
-			virtual std::shared_ptr<UnlimitedNaturalValue> getThisUnlimitedNaturalValuePtr();
+			virtual std::shared_ptr<UnlimitedNaturalValue> getThisUnlimitedNaturalValuePtr() const;
 			virtual void setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr);
 
 
@@ -44,15 +44,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string toString() ;
 			
 			
 			

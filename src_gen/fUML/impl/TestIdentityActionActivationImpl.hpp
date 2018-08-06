@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			TestIdentityActionActivationImpl();
-			virtual std::shared_ptr<TestIdentityActionActivation> getThisTestIdentityActionActivationPtr();
+			virtual std::shared_ptr<TestIdentityActionActivation> getThisTestIdentityActionActivationPtr() const;
 			virtual void setThisTestIdentityActionActivationPtr(std::weak_ptr<TestIdentityActionActivation> thisTestIdentityActionActivationPtr);
 
 			//Additional constructors for the containments back reference

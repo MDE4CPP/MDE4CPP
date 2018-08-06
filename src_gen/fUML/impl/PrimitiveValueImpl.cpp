@@ -115,7 +115,7 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,7 +147,7 @@ void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 //*********************************
 
 
-std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr()
+std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const
 {
 	return m_thisPrimitiveValuePtr.lock();
 }

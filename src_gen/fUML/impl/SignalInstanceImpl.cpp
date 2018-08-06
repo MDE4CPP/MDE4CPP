@@ -139,7 +139,7 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 //*********************************
 
 
-std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr()
+std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
 {
 	return m_thisSignalInstancePtr.lock();
 }

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LiteralBooleanEvaluationImpl();
-			virtual std::shared_ptr<LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr();
+			virtual std::shared_ptr<LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr() const;
 			virtual void setThisLiteralBooleanEvaluationPtr(std::weak_ptr<LiteralBooleanEvaluation> thisLiteralBooleanEvaluationPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> evaluate() ;
 			
 			
 			

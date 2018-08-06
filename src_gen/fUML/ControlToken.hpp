@@ -83,15 +83,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  other)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
+			virtual std::shared_ptr<fUML::Value> getValue() const = 0;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  = 0;
+			virtual bool isControl() = 0;
 			
 			
 			//*********************************

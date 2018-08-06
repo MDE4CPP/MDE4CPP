@@ -129,7 +129,7 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -146,7 +146,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,7 +157,7 @@ std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
 	//end of body
 }
 
-std::string UnlimitedNaturalValueImpl::toString() 
+std::string UnlimitedNaturalValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +183,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr()
+std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const
 {
 	return m_thisUnlimitedNaturalValuePtr.lock();
 }

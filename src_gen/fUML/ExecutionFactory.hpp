@@ -134,43 +134,43 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  = 0;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) = 0;
 			
 			/*!
 			 */ 
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  = 0;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) = 0;
 			
 			/*!
 			 */ 
-			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  = 0;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
+			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  = 0;
+			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name)  = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name)  = 0;
+			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name) = 0;
 			
 			/*!
 			 */ 
-			virtual int getStrategyIndex(std::string name)  = 0;
+			virtual int getStrategyIndex(std::string name) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  = 0;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  = 0;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
 			
 			
 			//*********************************

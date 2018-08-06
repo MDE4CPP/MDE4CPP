@@ -121,7 +121,7 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExtensionalValueImpl::destroy() 
+void ExtensionalValueImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -150,7 +150,7 @@ void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 //*********************************
 
 
-std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr()
+std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const
 {
 	return m_thisExtensionalValuePtr.lock();
 }

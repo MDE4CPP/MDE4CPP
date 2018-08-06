@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			RemoveStructuralFeatureValueActivationImpl();
-			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr();
+			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr() const;
 			virtual void setThisRemoveStructuralFeatureValueActivationPtr(std::weak_ptr<RemoveStructuralFeatureValueActivation> thisRemoveStructuralFeatureValueActivationPtr);
 
 			//Additional constructors for the containments back reference

@@ -88,27 +88,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  const  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type)  = 0;
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type) = 0;
 			
 			/*!
 			 */ 
-			virtual std::string objectId()  = 0;
+			virtual std::string objectId() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  = 0;
+			virtual std::string toString() = 0;
 			
 			
 			//*********************************

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			FIFOGetNextEventStrategyImpl();
-			virtual std::shared_ptr<FIFOGetNextEventStrategy> getThisFIFOGetNextEventStrategyPtr();
+			virtual std::shared_ptr<FIFOGetNextEventStrategy> getThisFIFOGetNextEventStrategyPtr() const;
 			virtual void setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr);
 
 

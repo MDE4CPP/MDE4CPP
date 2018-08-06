@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> InvocationActionActivationImpl::getP
 }
 
 
-std::shared_ptr<InvocationActionActivation> InvocationActionActivationImpl::getThisInvocationActionActivationPtr()
+std::shared_ptr<InvocationActionActivation> InvocationActionActivationImpl::getThisInvocationActionActivationPtr() const
 {
 	return m_thisInvocationActionActivationPtr.lock();
 }

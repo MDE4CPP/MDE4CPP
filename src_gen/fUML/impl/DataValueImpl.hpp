@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DataValueImpl();
-			virtual std::shared_ptr<DataValue> getThisDataValuePtr();
+			virtual std::shared_ptr<DataValue> getThisDataValuePtr() const;
 			virtual void setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr);
 
 
@@ -44,11 +44,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			
 			

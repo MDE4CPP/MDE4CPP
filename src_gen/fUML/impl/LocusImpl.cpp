@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value) 
+void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +175,7 @@ void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value)
 	//end of body
 }
 
-void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor) 
+void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -184,7 +184,7 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor)
 	//end of body
 }
 
-void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory) 
+void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,7 +193,7 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)
 	//end of body
 }
 
-bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
+bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +215,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type) 
+std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,16 +238,16 @@ std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value) 
+void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	value->setLocus(nullptr);
-std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->end(),value);
+	this->getExtensionalValues()->erase(value);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) 
+std::shared_ptr<Bag<fUML::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -309,7 +309,7 @@ void LocusImpl::setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory)
 //*********************************
 
 
-std::shared_ptr<Locus> LocusImpl::getThisLocusPtr()
+std::shared_ptr<Locus> LocusImpl::getThisLocusPtr() const
 {
 	return m_thisLocusPtr.lock();
 }
@@ -412,10 +412,9 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Executor";
 			}
-			std::shared_ptr<fUML::Executor> executor = std::dynamic_pointer_cast<fUML::Executor>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTOR_EREFERENCE_LOCUS);
 			if (executor != nullptr)
 			{
-				this->setExecutor(executor);
 				loadHandler->handleChild(executor);
 			}
 			return;

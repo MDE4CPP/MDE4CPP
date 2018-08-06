@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -140,7 +140,7 @@ std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> DataValueImpl::new_() 
+std::shared_ptr<fUML::Value> DataValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -166,7 +166,7 @@ void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 //*********************************
 
 
-std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr()
+std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const
 {
 	return m_thisDataValuePtr.lock();
 }

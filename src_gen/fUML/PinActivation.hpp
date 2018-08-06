@@ -99,11 +99,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() = 0;
 			
 			
 			//*********************************

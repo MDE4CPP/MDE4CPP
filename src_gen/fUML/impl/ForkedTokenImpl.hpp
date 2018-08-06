@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ForkedTokenImpl();
-			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr();
+			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr() const;
 			virtual void setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForkedTokenPtr);
 
 
@@ -44,19 +44,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value> getValue() const ;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  ;
+			virtual bool isControl() ;
 			
 			/*!
 			 */ 
-			virtual void withdraw()  ;
+			virtual void withdraw() ;
 			
 			
 			

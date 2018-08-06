@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StringValueImpl();
-			virtual std::shared_ptr<StringValue> getThisStringValuePtr();
+			virtual std::shared_ptr<StringValue> getThisStringValuePtr() const;
 			virtual void setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr);
 
 
@@ -44,15 +44,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string toString() ;
 			
 			
 			

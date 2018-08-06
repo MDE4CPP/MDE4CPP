@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExtensionalValueImpl();
-			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr();
+			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr() const;
 			virtual void setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void destroy() ;
 			
 			
 			

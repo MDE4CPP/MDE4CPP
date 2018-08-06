@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			WriteLinkActionActivationImpl();
-			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr();
+			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr() const;
 			virtual void setThisWriteLinkActionActivationPtr(std::weak_ptr<WriteLinkActionActivation> thisWriteLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference

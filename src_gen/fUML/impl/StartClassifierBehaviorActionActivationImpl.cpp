@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StartClassifierBehaviorActionActivat
 }
 
 
-std::shared_ptr<StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr()
+std::shared_ptr<StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr() const
 {
 	return m_thisStartClassifierBehaviorActionActivationPtr.lock();
 }

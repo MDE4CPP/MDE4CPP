@@ -88,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate()  = 0;
+			virtual std::shared_ptr<fUML::Value> evaluate() = 0;
 			
 			
 			//*********************************

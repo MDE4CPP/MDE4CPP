@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkActionActivationImpl();
-			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr();
+			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr() const;
 			virtual void setThisLinkActionActivationPtr(std::weak_ptr<LinkActionActivation> thisLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> getAssociation()  ;
+			virtual std::shared_ptr<uml::Association> getAssociation() ;
 			
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  ;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) ;
 			
 			
 			

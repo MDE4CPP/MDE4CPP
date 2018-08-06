@@ -197,7 +197,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReduceActionActivationImpl::getPinAc
 }
 
 
-std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr()
+std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr() const
 {
 	return m_thisReduceActionActivationPtr.lock();
 }

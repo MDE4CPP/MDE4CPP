@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DataStoreNodeActivationImpl();
-			virtual std::shared_ptr<DataStoreNodeActivation> getThisDataStoreNodeActivationPtr();
+			virtual std::shared_ptr<DataStoreNodeActivation> getThisDataStoreNodeActivationPtr() const;
 			virtual void setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			
 			

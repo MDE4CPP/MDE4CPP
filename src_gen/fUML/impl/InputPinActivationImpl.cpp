@@ -148,7 +148,7 @@ std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InputPinActivationImpl::isReady() 
+bool InputPinActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -167,7 +167,7 @@ bool InputPinActivationImpl::isReady()
 	//end of body
 }
 
-void InputPinActivationImpl::recieveOffer() 
+void InputPinActivationImpl::recieveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -184,7 +184,7 @@ void InputPinActivationImpl::recieveOffer()
 //*********************************
 
 
-std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr()
+std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
 {
 	return m_thisInputPinActivationPtr.lock();
 }

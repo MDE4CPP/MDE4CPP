@@ -32,7 +32,7 @@ virtual public EventDispatchLoop
 		protected:
 			friend class FUMLFactoryImpl;
 			EventDispatchLoopImpl();
-			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr();
+			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr() const;
 			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr);
 
 

@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +165,7 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -189,7 +189,7 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token
 //*********************************
 
 
-std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr()
+std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
 {
 	return m_thisDataStoreNodeActivationPtr.lock();
 }

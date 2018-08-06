@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +165,7 @@ void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomin
 //*********************************
 
 
-std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr()
+std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr() const
 {
 	return m_thisInitialNodeActivationPtr.lock();
 }

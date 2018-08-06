@@ -133,7 +133,7 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,7 +223,7 @@ std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr()
+std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr() const
 {
 	return m_thisInstanceValueEvaluationPtr.lock();
 }

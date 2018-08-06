@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -130,7 +130,7 @@ std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr()
+std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr() const
 {
 	return m_thisLiteralNullEvaluationPtr.lock();
 }

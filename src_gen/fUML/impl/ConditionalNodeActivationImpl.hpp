@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ConditionalNodeActivationImpl();
-			virtual std::shared_ptr<ConditionalNodeActivation> getThisConditionalNodeActivationPtr();
+			virtual std::shared_ptr<ConditionalNodeActivation> getThisConditionalNodeActivationPtr() const;
 			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) ;
 			
 			/*!
 			 */ 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause) ;
 			
 			/*!
 			 */ 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) ;
 			
 			
 			

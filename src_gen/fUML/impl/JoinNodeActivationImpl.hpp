@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			JoinNodeActivationImpl();
-			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr();
+			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr() const;
 			virtual void setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			
 			

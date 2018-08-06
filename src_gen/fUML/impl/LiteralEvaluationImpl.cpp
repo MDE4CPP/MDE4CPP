@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName) 
+std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -141,7 +141,7 @@ std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string b
 //*********************************
 
 
-std::shared_ptr<LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr()
+std::shared_ptr<LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const
 {
 	return m_thisLiteralEvaluationPtr.lock();
 }

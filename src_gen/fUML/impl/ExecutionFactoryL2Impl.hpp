@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryL2Impl();
-			virtual std::shared_ptr<ExecutionFactoryL2> getThisExecutionFactoryL2Ptr();
+			virtual std::shared_ptr<ExecutionFactoryL2> getThisExecutionFactoryL2Ptr() const;
 			virtual void setThisExecutionFactoryL2Ptr(std::weak_ptr<ExecutionFactoryL2> thisExecutionFactoryL2Ptr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			OpaqueBehaviorExecutionImpl();
-			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr();
+			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr() const;
 			virtual void setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr);
 
 
@@ -44,11 +44,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  ;
+			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters) ;
 			
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void execute() ;
 			
 			
 			

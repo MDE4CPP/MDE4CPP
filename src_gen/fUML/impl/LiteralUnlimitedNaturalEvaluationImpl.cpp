@@ -116,7 +116,7 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -137,7 +137,7 @@ std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr()
+std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalEvaluationPtr.lock();
 }

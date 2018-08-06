@@ -32,7 +32,7 @@ virtual public ActivityNodeActivationGroup
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationGroupImpl();
-			virtual std::shared_ptr<ActivityNodeActivationGroup> getThisActivityNodeActivationGroupPtr();
+			virtual std::shared_ptr<ActivityNodeActivationGroup> getThisActivityNodeActivationGroupPtr() const;
 			virtual void setThisActivityNodeActivationGroupPtr(std::weak_ptr<ActivityNodeActivationGroup> thisActivityNodeActivationGroupPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,71 +54,71 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */ 
-			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode> >  nodes,std::shared_ptr<Bag<uml::ActivityEdge> >  edges)  ;
+			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode> >  nodes,std::shared_ptr<Bag<uml::ActivityEdge> >  edges) ;
 			
 			/*!
 			 */ 
-			virtual void addEdgeInstance(std::shared_ptr<fUML::ActivityEdgeInstance>  instance)  ;
+			virtual void addEdgeInstance(std::shared_ptr<fUML::ActivityEdgeInstance>  instance) ;
 			
 			/*!
 			 */ 
-			virtual void addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			virtual void addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation) ;
 			
 			/*!
 			 */ 
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::ActivityEdgeInstance> >  incomingEdges,std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
+			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::ActivityEdgeInstance> >  incomingEdges,std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations) ;
 			
 			/*!
 			 */ 
-			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge> >  edges)  ;
+			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge> >  edges) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
+			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode> >  nodes) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ActivityParameterNodeActivation> > getOutputParameterNodeActivations()  ;
+			virtual std::shared_ptr<Bag<fUML::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() ;
 			
 			/*!
 			 */ 
-			virtual bool hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual bool hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) ;
 			
 			/*!
 			 */ 
-			virtual bool isSuspended()  ;
+			virtual bool isSuspended() ;
 			
 			/*!
 			 */ 
-			virtual void resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			virtual void resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution()  ;
+			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution() ;
 			
 			/*!
 			 */ 
-			virtual void run(std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
+			virtual void run(std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations) ;
 			
 			/*!
 			 */ 
-			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
+			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode> >  nodes) ;
 			
 			/*!
 			 */ 
-			virtual void suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			virtual void suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation) ;
 			
 			/*!
 			 */ 
-			virtual void terminateAll()  ;
+			virtual void terminateAll() ;
 			
 			
 			

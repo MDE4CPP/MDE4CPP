@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionImpl();
-			virtual std::shared_ptr<Execution> getThisExecutionPtr();
+			virtual std::shared_ptr<Execution> getThisExecutionPtr() const;
 			virtual void setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr);
 
 
@@ -44,31 +44,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void execute() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> getBehavior()  ;
+			virtual std::shared_ptr<uml::Behavior> getBehavior() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ParameterValue> > getOutputParameterValues()  ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> > getOutputParameterValues() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
+			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!
 			 */ 
-			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -357,7 +357,7 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
 //*********************************
 
 
-std::shared_ptr<ExecutionFactoryL2> ExecutionFactoryL2Impl::getThisExecutionFactoryL2Ptr()
+std::shared_ptr<ExecutionFactoryL2> ExecutionFactoryL2Impl::getThisExecutionFactoryL2Ptr() const
 {
 	return m_thisExecutionFactoryL2Ptr.lock();
 }

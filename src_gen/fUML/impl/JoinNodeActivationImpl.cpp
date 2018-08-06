@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeActivationImpl::isReady() 
+bool JoinNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +165,7 @@ bool JoinNodeActivationImpl::isReady()
 //*********************************
 
 
-std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr()
+std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
 {
 	return m_thisJoinNodeActivationPtr.lock();
 }

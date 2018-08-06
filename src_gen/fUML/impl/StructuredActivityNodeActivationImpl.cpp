@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::completeAction() 
+std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::completeAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -206,7 +206,7 @@ std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::complet
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::createEdgeInstances() 
+void StructuredActivityNodeActivationImpl::createEdgeInstances()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +215,7 @@ void StructuredActivityNodeActivationImpl::createEdgeInstances()
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::createNodeActivations() 
+void StructuredActivityNodeActivationImpl::createNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -230,7 +230,7 @@ void StructuredActivityNodeActivationImpl::createNodeActivations()
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::doAction() 
+void StructuredActivityNodeActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -247,7 +247,7 @@ void StructuredActivityNodeActivationImpl::doAction()
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::doStructuredActivity() 
+void StructuredActivityNodeActivationImpl::doStructuredActivity()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -271,7 +271,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
 	//end of body
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
+std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -291,7 +291,7 @@ std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationIm
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin) 
+std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -313,7 +313,7 @@ std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinV
 	//end of body
 }
 
-bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
+bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -325,7 +325,7 @@ bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Act
 	//end of body
 }
 
-bool StructuredActivityNodeActivationImpl::isSuspended() 
+bool StructuredActivityNodeActivationImpl::isSuspended()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -333,7 +333,7 @@ bool StructuredActivityNodeActivationImpl::isSuspended()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) 
+std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -366,7 +366,7 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::m
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
+void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -382,7 +382,7 @@ void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::Out
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::resume() 
+void StructuredActivityNodeActivationImpl::resume()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -398,7 +398,7 @@ void StructuredActivityNodeActivationImpl::resume()
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::terminate() 
+void StructuredActivityNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -407,7 +407,7 @@ void StructuredActivityNodeActivationImpl::terminate()
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::terminateAll() 
+void StructuredActivityNodeActivationImpl::terminateAll()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -437,7 +437,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StructuredActivityNodeActivationImpl
 }
 
 
-std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr()
+std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr() const
 {
 	return m_thisStructuredActivityNodeActivationPtr.lock();
 }

@@ -32,7 +32,7 @@ virtual public TokenSet
 		protected:
 			friend class FUMLFactoryImpl;
 			TokenSetImpl();
-			virtual std::shared_ptr<TokenSet> getThisTokenSetPtr();
+			virtual std::shared_ptr<TokenSet> getThisTokenSetPtr() const;
 			virtual void setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr);
 
 

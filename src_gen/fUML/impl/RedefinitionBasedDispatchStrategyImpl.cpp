@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -139,7 +139,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 //*********************************
 
 
-std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr()
+std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const
 {
 	return m_thisRedefinitionBasedDispatchStrategyPtr.lock();
 }

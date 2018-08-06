@@ -32,7 +32,7 @@ virtual public FeatureValue
 		protected:
 			friend class FUMLFactoryImpl;
 			FeatureValueImpl();
-			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr();
+			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
 			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
 
 
@@ -46,7 +46,7 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */ 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) ;
 			
 			
 			

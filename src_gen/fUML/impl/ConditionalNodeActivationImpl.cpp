@@ -204,19 +204,19 @@ std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause) 
+std::shared_ptr<fUML::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -248,7 +248,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ConditionalNodeActivationImpl::getPi
 }
 
 
-std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr()
+std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
 {
 	return m_thisConditionalNodeActivationPtr.lock();
 }

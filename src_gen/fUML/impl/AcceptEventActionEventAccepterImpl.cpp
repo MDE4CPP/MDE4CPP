@@ -128,7 +128,7 @@ void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUM
 //*********************************
 
 
-std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr()
+std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
 {
 	return m_thisAcceptEventActionEventAccepterPtr.lock();
 }

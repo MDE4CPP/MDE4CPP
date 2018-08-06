@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			OutputPinActivationImpl();
-			virtual std::shared_ptr<OutputPinActivation> getThisOutputPinActivationPtr();
+			virtual std::shared_ptr<OutputPinActivation> getThisOutputPinActivationPtr() const;
 			virtual void setThisOutputPinActivationPtr(std::weak_ptr<OutputPinActivation> thisOutputPinActivationPtr);
 
 			//Additional constructors for the containments back reference

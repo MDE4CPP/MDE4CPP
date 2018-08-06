@@ -32,7 +32,7 @@ virtual public ParameterValue
 		protected:
 			friend class FUMLFactoryImpl;
 			ParameterValueImpl();
-			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr();
+			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr() const;
 			virtual void setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr);
 
 

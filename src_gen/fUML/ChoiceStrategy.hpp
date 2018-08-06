@@ -73,11 +73,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int choose(int size)  = 0;
+			virtual int choose(int size) = 0;
 			
 			/*!
 			 */ 
-			virtual std::string retrieveName()  = 0;
+			virtual std::string retrieveName() = 0;
 			
 			
 			//*********************************

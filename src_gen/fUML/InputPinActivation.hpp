@@ -98,11 +98,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool isReady() = 0;
 			
 			/*!
 			 */ 
-			virtual void recieveOffer()  = 0;
+			virtual void recieveOffer() = 0;
 			
 			
 			//*********************************

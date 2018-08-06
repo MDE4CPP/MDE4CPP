@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ClearAssociationActionActivationImpl();
-			virtual std::shared_ptr<ClearAssociationActionActivation> getThisClearAssociationActionActivationPtr();
+			virtual std::shared_ptr<ClearAssociationActionActivation> getThisClearAssociationActionActivationPtr() const;
 			virtual void setThisClearAssociationActionActivationPtr(std::weak_ptr<ClearAssociationActionActivation> thisClearAssociationActionActivationPtr);
 
 			//Additional constructors for the containments back reference

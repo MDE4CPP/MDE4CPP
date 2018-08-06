@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			InstanceValueEvaluationImpl();
-			virtual std::shared_ptr<InstanceValueEvaluation> getThisInstanceValueEvaluationPtr();
+			virtual std::shared_ptr<InstanceValueEvaluation> getThisInstanceValueEvaluationPtr() const;
 			virtual void setThisInstanceValueEvaluationPtr(std::weak_ptr<InstanceValueEvaluation> thisInstanceValueEvaluationPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> evaluate() ;
 			
 			
 			

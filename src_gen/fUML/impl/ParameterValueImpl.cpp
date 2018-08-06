@@ -154,7 +154,7 @@ std::shared_ptr<Bag<fUML::Value>> ParameterValueImpl::getValues() const
 //*********************************
 
 
-std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr()
+std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
 {
 	return m_thisParameterValuePtr.lock();
 }

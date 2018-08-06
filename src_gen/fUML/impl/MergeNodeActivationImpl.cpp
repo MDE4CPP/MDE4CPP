@@ -151,7 +151,7 @@ std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr()
+std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
 {
 	return m_thisMergeNodeActivationPtr.lock();
 }

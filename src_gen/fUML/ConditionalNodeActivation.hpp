@@ -119,15 +119,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) = 0;
 			
 			/*!
 			 */ 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause) = 0;
 			
 			/*!
 			 */ 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) = 0;
 			
 			
 			//*********************************

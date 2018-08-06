@@ -32,7 +32,7 @@ virtual public SemanticVisitor
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticVisitorImpl();
-			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr();
+			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr() const;
 			virtual void setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr);
 
 
@@ -46,11 +46,11 @@ virtual public SemanticVisitor
 			//*********************************
 			/*!
 			 */ 
-			virtual void _beginIsolation()  ;
+			virtual void _beginIsolation() ;
 			
 			/*!
 			 */ 
-			virtual void _endIsolation()  ;
+			virtual void _endIsolation() ;
 			
 			
 			

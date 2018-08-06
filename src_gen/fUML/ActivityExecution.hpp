@@ -113,15 +113,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  = 0;
+			virtual void execute() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  = 0;
+			virtual std::shared_ptr<fUML::Value> new_() = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void terminate() = 0;
 			
 			
 			//*********************************

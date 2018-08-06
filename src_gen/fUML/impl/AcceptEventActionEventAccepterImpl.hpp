@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			AcceptEventActionEventAccepterImpl();
-			virtual std::shared_ptr<AcceptEventActionEventAccepter> getThisAcceptEventActionEventAccepterPtr();
+			virtual std::shared_ptr<AcceptEventActionEventAccepter> getThisAcceptEventActionEventAccepterPtr() const;
 			virtual void setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr);
 
 

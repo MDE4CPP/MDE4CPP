@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CreateObjectActionActivationImpl::ge
 }
 
 
-std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr()
+std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
 {
 	return m_thisCreateObjectActionActivationPtr.lock();
 }

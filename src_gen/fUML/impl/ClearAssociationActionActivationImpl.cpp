@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ClearAssociationActionActivationImpl
 }
 
 
-std::shared_ptr<ClearAssociationActionActivation> ClearAssociationActionActivationImpl::getThisClearAssociationActionActivationPtr()
+std::shared_ptr<ClearAssociationActionActivation> ClearAssociationActionActivationImpl::getThisClearAssociationActionActivationPtr() const
 {
 	return m_thisClearAssociationActionActivationPtr.lock();
 }

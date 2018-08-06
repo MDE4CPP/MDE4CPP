@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr()
+std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr() const
 {
 	return m_thisOutputPinActivationPtr.lock();
 }

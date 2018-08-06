@@ -99,27 +99,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedValue()  = 0;
+			virtual int countOfferedValue() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasOffer()  = 0;
+			virtual bool hasOffer() = 0;
 			
 			/*!
 			 */ 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount) = 0;
 			
 			
 			//*********************************

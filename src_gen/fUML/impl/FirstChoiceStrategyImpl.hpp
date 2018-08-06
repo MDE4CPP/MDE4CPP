@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			FirstChoiceStrategyImpl();
-			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr();
+			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
 			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int choose(int size)  ;
+			virtual int choose(int size) ;
 			
 			
 			

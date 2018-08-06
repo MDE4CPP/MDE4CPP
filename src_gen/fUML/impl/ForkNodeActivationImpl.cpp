@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,7 +176,7 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTo
 	//end of body
 }
 
-void ForkNodeActivationImpl::terminate() 
+void ForkNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -194,7 +194,7 @@ void ForkNodeActivationImpl::terminate()
 //*********************************
 
 
-std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr()
+std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
 {
 	return m_thisForkNodeActivationPtr.lock();
 }

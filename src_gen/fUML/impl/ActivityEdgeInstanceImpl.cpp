@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int ActivityEdgeInstanceImpl::countOfferedValue() 
+int ActivityEdgeInstanceImpl::countOfferedValue()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -170,7 +170,7 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -198,7 +198,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
 	//end of body
 }
 
-bool ActivityEdgeInstanceImpl::hasOffer() 
+bool ActivityEdgeInstanceImpl::hasOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 	//end of body
 }
 
-void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -226,7 +226,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tok
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -244,7 +244,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount) 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -332,7 +332,7 @@ void ActivityEdgeInstanceImpl::setTarget(std::shared_ptr<fUML::ActivityNodeActiv
 //*********************************
 
 
-std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr()
+std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const
 {
 	return m_thisActivityEdgeInstancePtr.lock();
 }

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReclassifyObjectActionActivationImpl();
-			virtual std::shared_ptr<ReclassifyObjectActionActivation> getThisReclassifyObjectActionActivationPtr();
+			virtual std::shared_ptr<ReclassifyObjectActionActivation> getThisReclassifyObjectActionActivationPtr() const;
 			virtual void setThisReclassifyObjectActionActivationPtr(std::weak_ptr<ReclassifyObjectActionActivation> thisReclassifyObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference

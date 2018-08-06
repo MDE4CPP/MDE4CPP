@@ -108,7 +108,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  = 0;
+			virtual void doAction() = 0;
 			
 			
 			//*********************************

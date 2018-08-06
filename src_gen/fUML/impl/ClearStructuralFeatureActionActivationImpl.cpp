@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ClearStructuralFeatureActionActivati
 }
 
 
-std::shared_ptr<ClearStructuralFeatureActionActivation> ClearStructuralFeatureActionActivationImpl::getThisClearStructuralFeatureActionActivationPtr()
+std::shared_ptr<ClearStructuralFeatureActionActivation> ClearStructuralFeatureActionActivationImpl::getThisClearStructuralFeatureActionActivationPtr() const
 {
 	return m_thisClearStructuralFeatureActionActivationPtr.lock();
 }

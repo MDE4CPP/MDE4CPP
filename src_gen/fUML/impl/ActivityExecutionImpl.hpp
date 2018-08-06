@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityExecutionImpl();
-			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr();
+			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr() const;
 			virtual void setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr);
 
 
@@ -44,15 +44,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void execute() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

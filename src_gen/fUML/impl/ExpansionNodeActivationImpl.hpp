@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionNodeActivationImpl();
-			virtual std::shared_ptr<ExpansionNodeActivation> getThisExpansionNodeActivationPtr();
+			virtual std::shared_ptr<ExpansionNodeActivation> getThisExpansionNodeActivationPtr() const;
 			virtual void setThisExpansionNodeActivationPtr(std::weak_ptr<ExpansionNodeActivation> thisExpansionNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation()  ;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation() ;
 			
 			
 			

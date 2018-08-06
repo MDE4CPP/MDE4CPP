@@ -75,23 +75,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedVales()  = 0;
+			virtual int countOfferedVales() = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  = 0;
+			virtual bool hasTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual void removeOfferedValues(int count)  = 0;
+			virtual void removeOfferedValues(int count) = 0;
 			
 			/*!
 			 */ 
-			virtual void removeWithdrawnTokens()  = 0;
+			virtual void removeWithdrawnTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens() = 0;
 			
 			
 			//*********************************

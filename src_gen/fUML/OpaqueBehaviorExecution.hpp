@@ -104,11 +104,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  = 0;
+			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters) = 0;
 			
 			/*!
 			 */ 
-			virtual void execute()  = 0;
+			virtual void execute() = 0;
 			
 			
 			//*********************************

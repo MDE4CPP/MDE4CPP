@@ -181,7 +181,7 @@ void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Exp
 //*********************************
 
 
-std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr()
+std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr() const
 {
 	return m_thisExpansionActivationGroupPtr.lock();
 }

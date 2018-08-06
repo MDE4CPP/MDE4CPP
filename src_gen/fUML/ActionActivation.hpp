@@ -140,83 +140,83 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  = 0;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) = 0;
 			
 			/*!
 			 */ 
-			virtual void addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)  = 0;
+			virtual void addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > completeAction() = 0;
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations()  = 0;
+			virtual void createNodeActivations() = 0;
 			
 			/*!
 			 */ 
-			virtual void doAction()  = 0;
+			virtual void doAction() = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getTokens(std::shared_ptr<uml::InputPin>  pin)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Value> > getTokens(std::shared_ptr<uml::InputPin>  pin) = 0;
 			
 			/*!
 			 */ 
-			virtual bool isFirng()  = 0;
+			virtual bool isFirng() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool isReady() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  = 0;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> makeBooleanValue(bool value)  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue> makeBooleanValue(bool value) = 0;
 			
 			/*!
 			 */ 
-			virtual void putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)  = 0;
+			virtual void putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value) = 0;
 			
 			/*!
 			 */ 
-			virtual void putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  = 0;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin>  pin)  = 0;
+			virtual std::shared_ptr<fUML::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin>  pin) = 0;
 			
 			/*!
 			 */ 
-			virtual void run()  = 0;
+			virtual void run() = 0;
 			
 			/*!
 			 */ 
-			virtual void sendOffers()  = 0;
+			virtual void sendOffers() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > takeTokens(std::shared_ptr<uml::InputPin>  pin)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Value> > takeTokens(std::shared_ptr<uml::InputPin>  pin) = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void terminate() = 0;
 			
 			/*!
 			 */ 
-			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)  = 0;
+			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link) = 0;
 			
 			
 			//*********************************

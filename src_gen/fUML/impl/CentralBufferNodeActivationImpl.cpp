@@ -142,7 +142,7 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -164,7 +164,7 @@ void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 //*********************************
 
 
-std::shared_ptr<CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr()
+std::shared_ptr<CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr() const
 {
 	return m_thisCentralBufferNodeActivationPtr.lock();
 }

@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> TestIdentityActionActivationImpl::ge
 }
 
 
-std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr()
+std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr() const
 {
 	return m_thisTestIdentityActionActivationPtr.lock();
 }

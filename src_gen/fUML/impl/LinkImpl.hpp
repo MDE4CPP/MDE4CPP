@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkImpl();
-			virtual std::shared_ptr<Link> getThisLinkPtr();
+			virtual std::shared_ptr<Link> getThisLinkPtr() const;
 			virtual void setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr);
 
 
@@ -44,19 +44,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  ;
+			virtual void addTo(std::shared_ptr<fUML::Locus>  locus) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  ;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) ;
 			
 			
 			

@@ -204,25 +204,25 @@ std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-void ExpansionRegionActivationImpl::doStructuredActivity() 
+void ExpansionRegionActivationImpl::doStructuredActivity()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) 
+std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int ExpansionRegionActivationImpl::numberOfValues() 
+int ExpansionRegionActivationImpl::numberOfValues()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) 
+void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -261,7 +261,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ExpansionRegionActivationImpl::getPi
 }
 
 
-std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr()
+std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
 {
 	return m_thisExpansionRegionActivationPtr.lock();
 }

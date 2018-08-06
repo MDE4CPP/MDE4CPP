@@ -32,7 +32,7 @@ virtual public ClassifierBehaviorExecutionActivity
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
-			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr();
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
 			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
 
 

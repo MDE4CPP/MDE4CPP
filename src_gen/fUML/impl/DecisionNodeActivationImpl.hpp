@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DecisionNodeActivationImpl();
-			virtual std::shared_ptr<DecisionNodeActivation> getThisDecisionNodeActivationPtr();
+			virtual std::shared_ptr<DecisionNodeActivation> getThisDecisionNodeActivationPtr() const;
 			virtual void setThisDecisionNodeActivationPtr(std::weak_ptr<DecisionNodeActivation> thisDecisionNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,47 +48,47 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
+			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) ;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance()  ;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue()  ;
+			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			/*!
 			 */ 
-			virtual bool hasObjectFlowInput()  ;
+			virtual bool hasObjectFlowInput() ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			/*!
 			 */ 
-			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) ;
 			
 			
 			

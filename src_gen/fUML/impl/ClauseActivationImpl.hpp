@@ -32,7 +32,7 @@ virtual public ClauseActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ClauseActivationImpl();
-			virtual std::shared_ptr<ClauseActivation> getThisClauseActivationPtr();
+			virtual std::shared_ptr<ClauseActivation> getThisClauseActivationPtr() const;
 			virtual void setThisClauseActivationPtr(std::weak_ptr<ClauseActivation> thisClauseActivationPtr);
 
 
@@ -46,31 +46,31 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> getDecision()  ;
+			virtual std::shared_ptr<fUML::BooleanValue> getDecision() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors() ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			/*!
 			 */ 
-			virtual void recieveControl()  ;
+			virtual void recieveControl() ;
 			
 			/*!
 			 */ 
-			virtual void runTest()  ;
+			virtual void runTest() ;
 			
 			/*!
 			 */ 
-			virtual void selectBody()  ;
+			virtual void selectBody() ;
 			
 			
 			

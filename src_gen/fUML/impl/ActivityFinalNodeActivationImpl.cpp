@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +196,7 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 //*********************************
 
 
-std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr()
+std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr() const
 {
 	return m_thisActivityFinalNodeActivationPtr.lock();
 }

@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,13 +147,13 @@ bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes()  const 
+std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
+bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -171,7 +171,7 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
 	//end of body
 }
 
-std::string ValueImpl::objectId() 
+std::string ValueImpl::objectId()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -180,13 +180,13 @@ std::string ValueImpl::objectId()
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> ValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> ValueImpl::specify()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string ValueImpl::toString() 
+std::string ValueImpl::toString()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -201,7 +201,7 @@ std::string ValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<Value> ValueImpl::getThisValuePtr()
+std::shared_ptr<Value> ValueImpl::getThisValuePtr() const
 {
 	return m_thisValuePtr.lock();
 }

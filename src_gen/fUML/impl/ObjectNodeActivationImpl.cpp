@@ -154,7 +154,7 @@ int ObjectNodeActivationImpl::getOfferedTokenCount() const
 //*********************************
 // Operations
 //*********************************
-void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -166,7 +166,7 @@ void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ObjectNodeActivationImpl::clearTokens() 
+void ObjectNodeActivationImpl::clearTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +175,7 @@ void ObjectNodeActivationImpl::clearTokens()
 	//end of body
 }
 
-int ObjectNodeActivationImpl::countOfferedValues() 
+int ObjectNodeActivationImpl::countOfferedValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -191,7 +191,7 @@ int ObjectNodeActivationImpl::countOfferedValues()
 	//end of body
 }
 
-int ObjectNodeActivationImpl::countUnofferedTokens() 
+int ObjectNodeActivationImpl::countUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -203,7 +203,7 @@ int ObjectNodeActivationImpl::countUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -226,7 +226,7 @@ std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens(
 	//end of body
 }
 
-int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,7 +239,7 @@ int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ObjectNodeActivationImpl::run() 
+void ObjectNodeActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -248,7 +248,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -264,7 +264,7 @@ void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  to
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendUnofferedTokens() 
+void ObjectNodeActivationImpl::sendUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -274,7 +274,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -288,7 +288,7 @@ std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens
 	//end of body
 }
 
-void ObjectNodeActivationImpl::terminate() 
+void ObjectNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -306,7 +306,7 @@ void ObjectNodeActivationImpl::terminate()
 //*********************************
 
 
-std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr()
+std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
 {
 	return m_thisObjectNodeActivationPtr.lock();
 }

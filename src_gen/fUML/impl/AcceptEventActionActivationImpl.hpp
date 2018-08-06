@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			AcceptEventActionActivationImpl();
-			virtual std::shared_ptr<AcceptEventActionActivation> getThisAcceptEventActionActivationPtr();
+			virtual std::shared_ptr<AcceptEventActionActivation> getThisAcceptEventActionActivationPtr() const;
 			virtual void setThisAcceptEventActionActivationPtr(std::weak_ptr<AcceptEventActionActivation> thisAcceptEventActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			
 			

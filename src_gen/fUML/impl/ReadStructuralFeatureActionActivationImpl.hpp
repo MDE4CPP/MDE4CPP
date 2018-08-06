@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReadStructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> getThisReadStructuralFeatureActionActivationPtr();
+			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> getThisReadStructuralFeatureActionActivationPtr() const;
 			virtual void setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference

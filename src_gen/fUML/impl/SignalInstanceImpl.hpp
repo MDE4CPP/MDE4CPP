@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			SignalInstanceImpl();
-			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr();
+			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr() const;
 			virtual void setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr);
 
 

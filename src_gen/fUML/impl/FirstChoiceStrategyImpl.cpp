@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int FirstChoiceStrategyImpl::choose(int size) 
+int FirstChoiceStrategyImpl::choose(int size)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -120,7 +120,7 @@ int FirstChoiceStrategyImpl::choose(int size)
 //*********************************
 
 
-std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr()
+std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr() const
 {
 	return m_thisFirstChoiceStrategyPtr.lock();
 }

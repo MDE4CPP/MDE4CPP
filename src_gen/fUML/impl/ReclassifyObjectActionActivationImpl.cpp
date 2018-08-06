@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReclassifyObjectActionActivationImpl
 }
 
 
-std::shared_ptr<ReclassifyObjectActionActivation> ReclassifyObjectActionActivationImpl::getThisReclassifyObjectActionActivationPtr()
+std::shared_ptr<ReclassifyObjectActionActivation> ReclassifyObjectActionActivationImpl::getThisReclassifyObjectActionActivationPtr() const
 {
 	return m_thisReclassifyObjectActionActivationPtr.lock();
 }

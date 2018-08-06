@@ -174,19 +174,19 @@ std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) 
+bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation() 
+std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) 
+bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -205,7 +205,7 @@ std::shared_ptr<Union<fUML::PinActivation>> LinkActionActivationImpl::getPinActi
 }
 
 
-std::shared_ptr<LinkActionActivation> LinkActionActivationImpl::getThisLinkActionActivationPtr()
+std::shared_ptr<LinkActionActivation> LinkActionActivationImpl::getThisLinkActionActivationPtr() const
 {
 	return m_thisLinkActionActivationPtr.lock();
 }

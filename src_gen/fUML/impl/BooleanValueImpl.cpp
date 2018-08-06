@@ -127,7 +127,7 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 // Operations
 //*********************************
-bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +143,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 	//end of body
 }
 
-std::string BooleanValueImpl::toString() 
+std::string BooleanValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +178,7 @@ std::string BooleanValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr()
+std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
 {
 	return m_thisBooleanValuePtr.lock();
 }

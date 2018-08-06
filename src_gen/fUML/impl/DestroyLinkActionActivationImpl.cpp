@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> DestroyLinkActionActivationImpl::get
 }
 
 
-std::shared_ptr<DestroyLinkActionActivation> DestroyLinkActionActivationImpl::getThisDestroyLinkActionActivationPtr()
+std::shared_ptr<DestroyLinkActionActivation> DestroyLinkActionActivationImpl::getThisDestroyLinkActionActivationPtr() const
 {
 	return m_thisDestroyLinkActionActivationPtr.lock();
 }

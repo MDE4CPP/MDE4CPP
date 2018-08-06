@@ -177,7 +177,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) 
+void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -186,7 +186,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  t
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) 
+void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +195,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::O
 	//end of body
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
+void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -210,7 +210,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy
 	//end of body
 }
 
-std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,7 +223,7 @@ std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::sh
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
+std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -271,7 +271,7 @@ std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shar
 	//end of body
 }
 
-std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -291,7 +291,7 @@ std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::st
 	//end of body
 }
 
-std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::string name) 
+std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -307,7 +307,7 @@ std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::s
 	//end of body
 }
 
-int ExecutionFactoryImpl::getStrategyIndex(std::string name) 
+int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -331,7 +331,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 	//end of body
 }
 
-std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) 
+std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -359,7 +359,7 @@ std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiate
 	//end of body
 }
 
-std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -404,7 +404,7 @@ std::shared_ptr<Bag<fUML::SemanticStrategy>> ExecutionFactoryImpl::getStrategies
 //*********************************
 
 
-std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr()
+std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr() const
 {
 	return m_thisExecutionFactoryPtr.lock();
 }

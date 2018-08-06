@@ -98,7 +98,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation()  = 0;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation() = 0;
 			
 			
 			//*********************************

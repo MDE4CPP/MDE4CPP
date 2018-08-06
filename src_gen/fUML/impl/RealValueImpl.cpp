@@ -128,7 +128,7 @@ float RealValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +144,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 	//end of body
 }
 
-std::string RealValueImpl::toString() 
+std::string RealValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +175,7 @@ std::string RealValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr()
+std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr() const
 {
 	return m_thisRealValuePtr.lock();
 }

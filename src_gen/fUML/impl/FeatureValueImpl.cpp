@@ -142,7 +142,7 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
-bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
+bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -226,7 +226,7 @@ std::shared_ptr<Bag<fUML::Value>> FeatureValueImpl::getValues() const
 //*********************************
 
 
-std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr()
+std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
 {
 	return m_thisFeatureValuePtr.lock();
 }

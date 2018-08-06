@@ -113,7 +113,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) = 0;
 			
 			
 			//*********************************

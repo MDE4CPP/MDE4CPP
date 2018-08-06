@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			SendSignalActionActivationImpl();
-			virtual std::shared_ptr<SendSignalActionActivation> getThisSendSignalActionActivationPtr();
+			virtual std::shared_ptr<SendSignalActionActivation> getThisSendSignalActionActivationPtr() const;
 			virtual void setThisSendSignalActionActivationPtr(std::weak_ptr<SendSignalActionActivation> thisSendSignalActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void doAction() ;
 			
 			
 			

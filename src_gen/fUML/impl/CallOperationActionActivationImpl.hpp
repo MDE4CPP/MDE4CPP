@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CallOperationActionActivationImpl();
-			virtual std::shared_ptr<CallOperationActionActivation> getThisCallOperationActionActivationPtr();
+			virtual std::shared_ptr<CallOperationActionActivation> getThisCallOperationActionActivationPtr() const;
 			virtual void setThisCallOperationActionActivationPtr(std::weak_ptr<CallOperationActionActivation> thisCallOperationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution() ;
 			
 			
 			

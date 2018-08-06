@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CreateLinkActionActivationImpl();
-			virtual std::shared_ptr<CreateLinkActionActivation> getThisCreateLinkActionActivationPtr();
+			virtual std::shared_ptr<CreateLinkActionActivation> getThisCreateLinkActionActivationPtr() const;
 			virtual void setThisCreateLinkActionActivationPtr(std::weak_ptr<CreateLinkActionActivation> thisCreateLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference

@@ -88,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName)  = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) = 0;
 			
 			
 			//*********************************

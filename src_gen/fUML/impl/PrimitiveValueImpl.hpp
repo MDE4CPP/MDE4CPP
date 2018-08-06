@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			PrimitiveValueImpl();
-			virtual std::shared_ptr<PrimitiveValue> getThisPrimitiveValuePtr();
+			virtual std::shared_ptr<PrimitiveValue> getThisPrimitiveValuePtr() const;
 			virtual void setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			
 			

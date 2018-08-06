@@ -99,19 +99,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  = 0;
+			virtual void addTo(std::shared_ptr<fUML::Locus>  locus) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)  = 0;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) = 0;
 			
 			
 			//*********************************

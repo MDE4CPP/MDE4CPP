@@ -88,11 +88,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  = 0;
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
 			
 			
 			//*********************************

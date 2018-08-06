@@ -32,7 +32,7 @@ virtual public Values
 		protected:
 			friend class FUMLFactoryImpl;
 			ValuesImpl();
-			virtual std::shared_ptr<Values> getThisValuesPtr();
+			virtual std::shared_ptr<Values> getThisValuesPtr() const;
 			virtual void setThisValuesPtr(std::weak_ptr<Values> thisValuesPtr);
 
 

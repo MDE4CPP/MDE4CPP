@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int OfferImpl::countOfferedVales() 
+int OfferImpl::countOfferedVales()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -129,7 +129,7 @@ int OfferImpl::countOfferedVales()
 	//end of body
 }
 
-bool OfferImpl::hasTokens() 
+bool OfferImpl::hasTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -138,7 +138,7 @@ bool OfferImpl::hasTokens()
 	//end of body
 }
 
-void OfferImpl::removeOfferedValues(int count) 
+void OfferImpl::removeOfferedValues(int count)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ void OfferImpl::removeOfferedValues(int count)
 	//end of body
 }
 
-void OfferImpl::removeWithdrawnTokens() 
+void OfferImpl::removeWithdrawnTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ void OfferImpl::removeWithdrawnTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > OfferImpl::retrieveOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > OfferImpl::retrieveOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -220,7 +220,7 @@ std::shared_ptr<Bag<fUML::Token>> OfferImpl::getOfferedTokens() const
 //*********************************
 
 
-std::shared_ptr<Offer> OfferImpl::getThisOfferPtr()
+std::shared_ptr<Offer> OfferImpl::getThisOfferPtr() const
 {
 	return m_thisOfferPtr.lock();
 }

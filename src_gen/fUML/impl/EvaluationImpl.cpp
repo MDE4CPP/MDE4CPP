@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> EvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> EvaluationImpl::evaluate()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -153,7 +153,7 @@ void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 //*********************************
 
 
-std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr()
+std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr() const
 {
 	return m_thisEvaluationPtr.lock();
 }

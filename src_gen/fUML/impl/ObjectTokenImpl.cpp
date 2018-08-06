@@ -121,7 +121,7 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -129,7 +129,7 @@ bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 	//end of body
 }
 
-bool ObjectTokenImpl::isControl() 
+bool ObjectTokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Value> _value)
 //*********************************
 
 
-std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr()
+std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
 {
 	return m_thisObjectTokenPtr.lock();
 }

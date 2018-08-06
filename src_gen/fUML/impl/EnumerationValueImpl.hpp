@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			EnumerationValueImpl();
-			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr();
+			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr() const;
 			virtual void setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr);
 
 
@@ -44,23 +44,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string toString() ;
 			
 			
 			

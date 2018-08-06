@@ -32,7 +32,7 @@ virtual public ClassifierBehaviorExecution
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionImpl();
-			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr();
+			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr() const;
 			virtual void setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr);
 
 
@@ -46,15 +46,15 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  ;
+			virtual void _startObjectBehavior() ;
 			
 			/*!
 			 */ 
-			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectImpl();
-			virtual std::shared_ptr<Object> getThisObjectPtr();
+			virtual std::shared_ptr<Object> getThisObjectPtr() const;
 			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
 
 
@@ -44,31 +44,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter) ;
 			
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void destroy() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			/*!
 			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter) ;
 			
 			
 			

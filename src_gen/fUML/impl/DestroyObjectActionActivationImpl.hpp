@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DestroyObjectActionActivationImpl();
-			virtual std::shared_ptr<DestroyObjectActionActivation> getThisDestroyObjectActionActivationPtr();
+			virtual std::shared_ptr<DestroyObjectActionActivation> getThisDestroyObjectActionActivationPtr() const;
 			virtual void setThisDestroyObjectActionActivationPtr(std::weak_ptr<DestroyObjectActionActivation> thisDestroyObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
+			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) ;
 			
 			/*!
 			 */ 
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link) ;
 			
 			
 			

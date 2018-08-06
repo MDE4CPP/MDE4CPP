@@ -128,7 +128,7 @@ std::shared_ptr<Bag<fUML::Value>> ValuesImpl::getValues() const
 //*********************************
 
 
-std::shared_ptr<Values> ValuesImpl::getThisValuesPtr()
+std::shared_ptr<Values> ValuesImpl::getThisValuesPtr() const
 {
 	return m_thisValuesPtr.lock();
 }

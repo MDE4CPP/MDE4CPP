@@ -127,7 +127,7 @@ std::string StringValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +143,7 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 	//end of body
 }
 
-std::string StringValueImpl::toString() 
+std::string StringValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -171,7 +171,7 @@ std::string StringValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr()
+std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const
 {
 	return m_thisStringValuePtr.lock();
 }

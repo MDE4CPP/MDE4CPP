@@ -192,25 +192,25 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList() 
+std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runBody() 
+void LoopNodeActivationImpl::runBody()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runLoopVariables() 
+void LoopNodeActivationImpl::runLoopVariables()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeActivationImpl::runTest() 
+bool LoopNodeActivationImpl::runTest()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -235,7 +235,7 @@ std::shared_ptr<Union<fUML::PinActivation>> LoopNodeActivationImpl::getPinActiva
 }
 
 
-std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr()
+std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
 {
 	return m_thisLoopNodeActivationPtr.lock();
 }

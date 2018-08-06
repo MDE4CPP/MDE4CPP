@@ -126,19 +126,19 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void ClassifierBehaviorExecutionImpl::_startObjectBehavior() 
+void ClassifierBehaviorExecutionImpl::_startObjectBehavior()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::terminate() 
+void ClassifierBehaviorExecutionImpl::terminate()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -182,7 +182,7 @@ void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::
 //*********************************
 
 
-std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr()
+std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr() const
 {
 	return m_thisClassifierBehaviorExecutionPtr.lock();
 }

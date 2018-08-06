@@ -162,7 +162,7 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -173,7 +173,7 @@ void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 	//end of body
 }
 
-void ObjectImpl::destroy() 
+void ObjectImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -188,7 +188,7 @@ void ObjectImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -197,7 +197,7 @@ std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Opera
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ObjectImpl::new_() 
+std::shared_ptr<fUML::Value> ObjectImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +205,7 @@ std::shared_ptr<fUML::Value> ObjectImpl::new_()
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -216,7 +216,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 	//end of body
 }
 
-void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -230,7 +230,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 	//end of body
 }
 
-void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -266,7 +266,7 @@ std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 //*********************************
 
 
-std::shared_ptr<Object> ObjectImpl::getThisObjectPtr()
+std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
 {
 	return m_thisObjectPtr.lock();
 }

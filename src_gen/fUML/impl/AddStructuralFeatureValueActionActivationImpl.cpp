@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> AddStructuralFeatureValueActionActiv
 }
 
 
-std::shared_ptr<AddStructuralFeatureValueActionActivation> AddStructuralFeatureValueActionActivationImpl::getThisAddStructuralFeatureValueActionActivationPtr()
+std::shared_ptr<AddStructuralFeatureValueActionActivation> AddStructuralFeatureValueActionActivationImpl::getThisAddStructuralFeatureValueActionActivationPtr() const
 {
 	return m_thisAddStructuralFeatureValueActionActivationPtr.lock();
 }

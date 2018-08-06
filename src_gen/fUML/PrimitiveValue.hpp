@@ -83,7 +83,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
 			
 			//*********************************

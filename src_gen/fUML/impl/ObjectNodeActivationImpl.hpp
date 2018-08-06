@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectNodeActivationImpl();
-			virtual std::shared_ptr<ObjectNodeActivation> getThisObjectNodeActivationPtr();
+			virtual std::shared_ptr<ObjectNodeActivation> getThisObjectNodeActivationPtr() const;
 			virtual void setThisObjectNodeActivationPtr(std::weak_ptr<ObjectNodeActivation> thisObjectNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,47 +48,47 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			/*!
 			 */ 
-			virtual void clearTokens()  ;
+			virtual void clearTokens() ;
 			
 			/*!
 			 */ 
-			virtual int countOfferedValues()  ;
+			virtual int countOfferedValues() ;
 			
 			/*!
 			 */ 
-			virtual int countUnofferedTokens()  ;
+			virtual int countUnofferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > getUnofferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > getUnofferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token) ;
 			
 			/*!
 			 */ 
-			virtual void run()  ;
+			virtual void run() ;
 			
 			/*!
 			 */ 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) ;
 			
 			/*!
 			 */ 
-			virtual void sendUnofferedTokens()  ;
+			virtual void sendUnofferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeUnofferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeUnofferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			

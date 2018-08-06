@@ -170,7 +170,7 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
+bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -189,7 +189,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadIsClassifiedObjectActionActivati
 }
 
 
-std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr()
+std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionActivationPtr.lock();
 }

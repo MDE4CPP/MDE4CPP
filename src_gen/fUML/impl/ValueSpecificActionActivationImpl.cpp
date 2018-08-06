@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ValueSpecificActionActivationImpl::g
 }
 
 
-std::shared_ptr<ValueSpecificActionActivation> ValueSpecificActionActivationImpl::getThisValueSpecificActionActivationPtr()
+std::shared_ptr<ValueSpecificActionActivation> ValueSpecificActionActivationImpl::getThisValueSpecificActionActivationPtr() const
 {
 	return m_thisValueSpecificActionActivationPtr.lock();
 }

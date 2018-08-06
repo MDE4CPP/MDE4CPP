@@ -124,19 +124,19 @@ bool TokenImpl::isWithdrawn() const
 //*********************************
 // Operations
 //*********************************
-bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Value> TokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> TokenImpl::getValue() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TokenImpl::isControl() 
+bool TokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +144,7 @@ bool TokenImpl::isControl()
 	//end of body
 }
 
-std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) 
+std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -161,7 +161,7 @@ std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityN
 	//end of body
 }
 
-void TokenImpl::withdraw() 
+void TokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +196,7 @@ void TokenImpl::setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder)
 //*********************************
 
 
-std::shared_ptr<Token> TokenImpl::getThisTokenPtr()
+std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
 {
 	return m_thisTokenPtr.lock();
 }

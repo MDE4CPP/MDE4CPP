@@ -171,7 +171,7 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionImpl::execute() 
+void ExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ void ExecutionImpl::execute()
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() 
+std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues() 
+std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +209,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterVal
 	//end of body
 }
 
-std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
+std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,13 +225,13 @@ std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shar
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> ExecutionImpl::new_()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
+void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -250,7 +250,7 @@ void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  par
 	//end of body
 }
 
-void ExecutionImpl::terminate() 
+void ExecutionImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -283,7 +283,7 @@ std::shared_ptr<Bag<fUML::ParameterValue>> ExecutionImpl::getParameterValues() c
 //*********************************
 
 
-std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr()
+std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr() const
 {
 	return m_thisExecutionPtr.lock();
 }

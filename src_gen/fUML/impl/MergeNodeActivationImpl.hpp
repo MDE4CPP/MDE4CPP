@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			MergeNodeActivationImpl();
-			virtual std::shared_ptr<MergeNodeActivation> getThisMergeNodeActivationPtr();
+			virtual std::shared_ptr<MergeNodeActivation> getThisMergeNodeActivationPtr() const;
 			virtual void setThisMergeNodeActivationPtr(std::weak_ptr<MergeNodeActivation> thisMergeNodeActivationPtr);
 
 			//Additional constructors for the containments back reference

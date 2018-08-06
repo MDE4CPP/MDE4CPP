@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			PinActivationImpl();
-			virtual std::shared_ptr<PinActivation> getThisPinActivationPtr();
+			virtual std::shared_ptr<PinActivation> getThisPinActivationPtr() const;
 			virtual void setThisPinActivationPtr(std::weak_ptr<PinActivation> thisPinActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() ;
 			
 			
 			

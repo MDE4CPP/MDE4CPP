@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CreateObjectActionActivationImpl();
-			virtual std::shared_ptr<CreateObjectActionActivation> getThisCreateObjectActionActivationPtr();
+			virtual std::shared_ptr<CreateObjectActionActivation> getThisCreateObjectActionActivationPtr() const;
 			virtual void setThisCreateObjectActionActivationPtr(std::weak_ptr<CreateObjectActionActivation> thisCreateObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference

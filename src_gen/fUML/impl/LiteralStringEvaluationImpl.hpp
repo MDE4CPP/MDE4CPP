@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LiteralStringEvaluationImpl();
-			virtual std::shared_ptr<LiteralStringEvaluation> getThisLiteralStringEvaluationPtr();
+			virtual std::shared_ptr<LiteralStringEvaluation> getThisLiteralStringEvaluationPtr() const;
 			virtual void setThisLiteralStringEvaluationPtr(std::weak_ptr<LiteralStringEvaluation> thisLiteralStringEvaluationPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> evaluate() ;
 			
 			
 			

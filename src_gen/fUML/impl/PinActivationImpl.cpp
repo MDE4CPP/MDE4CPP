@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +160,7 @@ void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +224,7 @@ void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::ActionActivati
 //*********************************
 
 
-std::shared_ptr<PinActivation> PinActivationImpl::getThisPinActivationPtr()
+std::shared_ptr<PinActivation> PinActivationImpl::getThisPinActivationPtr() const
 {
 	return m_thisPinActivationPtr.lock();
 }

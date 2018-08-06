@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void CallActionActivationImpl::doAction() 
+void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -278,7 +278,7 @@ void CallActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -287,7 +287,7 @@ std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution()
 	//end of body
 }
 
-void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
+void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -302,7 +302,7 @@ void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Executi
 	//end of body
 }
 
-void CallActionActivationImpl::terminate() 
+void CallActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -335,7 +335,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CallActionActivationImpl::getPinActi
 }
 
 
-std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr()
+std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr() const
 {
 	return m_thisCallActionActivationPtr.lock();
 }

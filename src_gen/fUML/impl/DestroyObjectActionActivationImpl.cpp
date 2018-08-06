@@ -174,13 +174,13 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) 
+void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link) 
+bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -199,7 +199,7 @@ std::shared_ptr<Union<fUML::PinActivation>> DestroyObjectActionActivationImpl::g
 }
 
 
-std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr()
+std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
 {
 	return m_thisDestroyObjectActionActivationPtr.lock();
 }

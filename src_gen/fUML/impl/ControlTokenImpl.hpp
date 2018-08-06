@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ControlTokenImpl();
-			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr();
+			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr() const;
 			virtual void setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr);
 
 
@@ -44,15 +44,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value> getValue() const ;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  ;
+			virtual bool isControl() ;
 			
 			
 			

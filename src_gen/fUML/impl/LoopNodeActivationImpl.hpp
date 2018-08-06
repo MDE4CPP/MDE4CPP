@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LoopNodeActivationImpl();
-			virtual std::shared_ptr<LoopNodeActivation> getThisLoopNodeActivationPtr();
+			virtual std::shared_ptr<LoopNodeActivation> getThisLoopNodeActivationPtr() const;
 			virtual void setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,19 +48,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList()  ;
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() ;
 			
 			/*!
 			 */ 
-			virtual void runBody()  ;
+			virtual void runBody() ;
 			
 			/*!
 			 */ 
-			virtual void runLoopVariables()  ;
+			virtual void runLoopVariables() ;
 			
 			/*!
 			 */ 
-			virtual bool runTest()  ;
+			virtual bool runTest() ;
 			
 			
 			

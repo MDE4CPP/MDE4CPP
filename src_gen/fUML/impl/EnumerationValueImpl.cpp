@@ -129,7 +129,7 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +143,7 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -153,7 +153,7 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -161,7 +161,7 @@ std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,7 +176,7 @@ std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 	//end of body
 }
 
-std::string EnumerationValueImpl::toString() 
+std::string EnumerationValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -212,7 +212,7 @@ void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 //*********************************
 
 
-std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr()
+std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
 {
 	return m_thisEnumerationValuePtr.lock();
 }

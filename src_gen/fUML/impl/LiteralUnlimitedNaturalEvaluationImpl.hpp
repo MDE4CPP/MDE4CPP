@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LiteralUnlimitedNaturalEvaluationImpl();
-			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr();
+			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr() const;
 			virtual void setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> evaluate() ;
 			
 			
 			

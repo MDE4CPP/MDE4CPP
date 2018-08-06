@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> RemoveStructuralFeatureValueActivati
 }
 
 
-std::shared_ptr<RemoveStructuralFeatureValueActivation> RemoveStructuralFeatureValueActivationImpl::getThisRemoveStructuralFeatureValueActivationPtr()
+std::shared_ptr<RemoveStructuralFeatureValueActivation> RemoveStructuralFeatureValueActivationImpl::getThisRemoveStructuralFeatureValueActivationPtr() const
 {
 	return m_thisRemoveStructuralFeatureValueActivationPtr.lock();
 }

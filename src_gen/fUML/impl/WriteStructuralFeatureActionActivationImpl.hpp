@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			WriteStructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<WriteStructuralFeatureActionActivation> getThisWriteStructuralFeatureActionActivationPtr();
+			virtual std::shared_ptr<WriteStructuralFeatureActionActivation> getThisWriteStructuralFeatureActionActivationPtr() const;
 			virtual void setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)  ;
+			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt) ;
 			
 			
 			

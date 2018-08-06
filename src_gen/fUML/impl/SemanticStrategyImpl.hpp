@@ -32,7 +32,7 @@ virtual public SemanticStrategy
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticStrategyImpl();
-			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr();
+			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr() const;
 			virtual void setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr);
 
 
@@ -46,7 +46,7 @@ virtual public SemanticStrategy
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string retrieveName()  ;
+			virtual std::string retrieveName() ;
 			
 			
 			

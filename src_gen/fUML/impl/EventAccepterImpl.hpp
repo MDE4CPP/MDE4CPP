@@ -32,7 +32,7 @@ virtual public EventAccepter
 		protected:
 			friend class FUMLFactoryImpl;
 			EventAccepterImpl();
-			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr();
+			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr() const;
 			virtual void setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr);
 
 
@@ -46,11 +46,11 @@ virtual public EventAccepter
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			
 			

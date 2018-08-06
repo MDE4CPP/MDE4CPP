@@ -119,43 +119,43 @@ std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::BooleanValue> ClauseActivationImpl::getDecision() 
+std::shared_ptr<fUML::BooleanValue> ClauseActivationImpl::getDecision()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getPredecessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getPredecessors()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getSuccessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getSuccessors()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseActivationImpl::isReady() 
+bool ClauseActivationImpl::isReady()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::recieveControl() 
+void ClauseActivationImpl::recieveControl()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::runTest() 
+void ClauseActivationImpl::runTest()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::selectBody() 
+void ClauseActivationImpl::selectBody()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -189,7 +189,7 @@ void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Co
 //*********************************
 
 
-std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr()
+std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
 {
 	return m_thisClauseActivationPtr.lock();
 }

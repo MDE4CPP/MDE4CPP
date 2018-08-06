@@ -102,7 +102,7 @@ std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void SemanticVisitorImpl::_beginIsolation() 
+void SemanticVisitorImpl::_beginIsolation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -110,7 +110,7 @@ void SemanticVisitorImpl::_beginIsolation()
 	//end of body
 }
 
-void SemanticVisitorImpl::_endIsolation() 
+void SemanticVisitorImpl::_endIsolation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -127,7 +127,7 @@ void SemanticVisitorImpl::_endIsolation()
 //*********************************
 
 
-std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr()
+std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
 {
 	return m_thisSemanticVisitorPtr.lock();
 }

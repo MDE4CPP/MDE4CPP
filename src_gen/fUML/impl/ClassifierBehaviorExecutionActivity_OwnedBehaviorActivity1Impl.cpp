@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 //*********************************
 
 
-std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr()
+std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const
 {
 	return m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr.lock();
 }

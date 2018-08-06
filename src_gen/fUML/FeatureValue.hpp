@@ -85,7 +85,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  = 0;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) = 0;
 			
 			
 			//*********************************

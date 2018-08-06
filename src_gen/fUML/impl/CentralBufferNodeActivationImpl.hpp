@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CentralBufferNodeActivationImpl();
-			virtual std::shared_ptr<CentralBufferNodeActivation> getThisCentralBufferNodeActivationPtr();
+			virtual std::shared_ptr<CentralBufferNodeActivation> getThisCentralBufferNodeActivationPtr() const;
 			virtual void setThisCentralBufferNodeActivationPtr(std::weak_ptr<CentralBufferNodeActivation> thisCentralBufferNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			
 			

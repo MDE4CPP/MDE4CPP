@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StartObjectBehaviorActionActivationI
 }
 
 
-std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr()
+std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
 {
 	return m_thisStartObjectBehaviorActionActivationPtr.lock();
 }

@@ -182,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> WriteLinkActionActivationImpl::getPi
 }
 
 
-std::shared_ptr<WriteLinkActionActivation> WriteLinkActionActivationImpl::getThisWriteLinkActionActivationPtr()
+std::shared_ptr<WriteLinkActionActivation> WriteLinkActionActivationImpl::getThisWriteLinkActionActivationPtr() const
 {
 	return m_thisWriteLinkActionActivationPtr.lock();
 }

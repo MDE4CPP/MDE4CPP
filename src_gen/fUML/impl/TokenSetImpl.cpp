@@ -128,7 +128,7 @@ std::shared_ptr<Bag<fUML::Token>> TokenSetImpl::getTokens() const
 //*********************************
 
 
-std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr()
+std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const
 {
 	return m_thisTokenSetPtr.lock();
 }

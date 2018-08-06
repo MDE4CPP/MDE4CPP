@@ -109,47 +109,47 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  = 0;
+			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance()  = 0;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue()  = 0;
+			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasObjectFlowInput()  = 0;
+			virtual bool hasObjectFlowInput() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool isReady() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void terminate() = 0;
 			
 			/*!
 			 */ 
-			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) = 0;
 			
 			
 			//*********************************

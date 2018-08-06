@@ -131,19 +131,19 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
+void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
+std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,7 +157,7 @@ std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
 	//end of body
 }
 
-bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -199,7 +199,7 @@ void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 
 
-std::shared_ptr<Link> LinkImpl::getThisLinkPtr()
+std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
 {
 	return m_thisLinkPtr.lock();
 }

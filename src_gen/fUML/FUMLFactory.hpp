@@ -284,6 +284,9 @@ namespace fUML
 			
 			
 			virtual std::shared_ptr<Executor> createExecutor() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<Executor> createExecutor_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const = 0;
+			
 			
 			virtual std::shared_ptr<ExpansionActivationGroup> createExpansionActivationGroup() const = 0;
 			//Add containing object

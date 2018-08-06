@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CompoundValueImpl();
-			virtual std::shared_ptr<CompoundValue> getThisCompoundValuePtr();
+			virtual std::shared_ptr<CompoundValue> getThisCompoundValuePtr() const;
 			virtual void setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr);
 
 
@@ -44,27 +44,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) ;
 			
 			/*!
 			 */ 
-			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues() ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string toString() ;
 			
 			
 			

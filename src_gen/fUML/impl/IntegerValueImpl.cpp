@@ -128,7 +128,7 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -145,7 +145,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -158,7 +158,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 	//end of body
 }
 
-std::string IntegerValueImpl::toString() 
+std::string IntegerValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +177,7 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr()
+std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
 {
 	return m_thisIntegerValuePtr.lock();
 }

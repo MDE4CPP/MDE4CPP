@@ -137,7 +137,7 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
-bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
+bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -145,7 +145,7 @@ bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken)
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -153,7 +153,7 @@ std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const
 	//end of body
 }
 
-bool ForkedTokenImpl::isControl() 
+bool ForkedTokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -161,7 +161,7 @@ bool ForkedTokenImpl::isControl()
 	//end of body
 }
 
-void ForkedTokenImpl::withdraw() 
+void ForkedTokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -198,7 +198,7 @@ void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Token> _baseToken)
 //*********************************
 
 
-std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr()
+std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const
 {
 	return m_thisForkedTokenPtr.lock();
 }

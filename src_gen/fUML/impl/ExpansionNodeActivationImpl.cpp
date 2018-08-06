@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::getExpansionRegionActivation() 
+std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::getExpansionRegionActivation()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -159,7 +159,7 @@ std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::ge
 //*********************************
 
 
-std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr()
+std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
 {
 	return m_thisExpansionNodeActivationPtr.lock();
 }

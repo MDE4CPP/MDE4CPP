@@ -129,19 +129,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  = 0;
+			virtual void doStructuredActivity() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  = 0;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) = 0;
 			
 			/*!
 			 */ 
-			virtual int numberOfValues()  = 0;
+			virtual int numberOfValues() = 0;
 			
 			/*!
 			 */ 
-			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  = 0;
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) = 0;
 			
 			
 			//*********************************

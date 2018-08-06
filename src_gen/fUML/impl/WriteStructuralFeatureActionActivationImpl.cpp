@@ -170,7 +170,7 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt) 
+int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -189,7 +189,7 @@ std::shared_ptr<Union<fUML::PinActivation>> WriteStructuralFeatureActionActivati
 }
 
 
-std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr()
+std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr() const
 {
 	return m_thisWriteStructuralFeatureActionActivationPtr.lock();
 }

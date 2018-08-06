@@ -70,7 +70,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string retrieveName()  = 0;
+			virtual std::string retrieveName() = 0;
 			
 			
 			//*********************************

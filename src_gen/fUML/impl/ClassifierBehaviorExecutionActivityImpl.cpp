@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticC
 //*********************************
 
 
-std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr()
+std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
 {
 	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
 }

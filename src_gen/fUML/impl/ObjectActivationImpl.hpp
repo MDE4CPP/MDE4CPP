@@ -32,7 +32,7 @@ virtual public ObjectActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectActivationImpl();
-			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr();
+			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr() const;
 			virtual void setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr);
 
 
@@ -46,39 +46,39 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter) ;
 			
 			/*!
 			 */ 
-			virtual void _send(Any signal)  ;
+			virtual void _send(Any signal) ;
 			
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  ;
+			virtual void _startObjectBehavior() ;
 			
 			/*!
 			 */ 
-			virtual void dispatchNextEvent()  ;
+			virtual void dispatchNextEvent() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent()  ;
+			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent() ;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			/*!
 			 */ 
-			virtual void stop()  ;
+			virtual void stop() ;
 			
 			/*!
 			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter) ;
 			
 			
 			

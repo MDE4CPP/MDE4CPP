@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EClass> CallOperationActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution> CallOperationActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> CallOperationActionActivationImpl::getCallExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -295,7 +295,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CallOperationActionActivationImpl::g
 }
 
 
-std::shared_ptr<CallOperationActionActivation> CallOperationActionActivationImpl::getThisCallOperationActionActivationPtr()
+std::shared_ptr<CallOperationActionActivation> CallOperationActionActivationImpl::getThisCallOperationActionActivationPtr() const
 {
 	return m_thisCallOperationActionActivationPtr.lock();
 }

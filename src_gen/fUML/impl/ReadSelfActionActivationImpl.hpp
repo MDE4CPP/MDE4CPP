@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReadSelfActionActivationImpl();
-			virtual std::shared_ptr<ReadSelfActionActivation> getThisReadSelfActionActivationPtr();
+			virtual std::shared_ptr<ReadSelfActionActivation> getThisReadSelfActionActivationPtr() const;
 			virtual void setThisReadSelfActionActivationPtr(std::weak_ptr<ReadSelfActionActivation> thisReadSelfActionActivationPtr);
 
 			//Additional constructors for the containments back reference

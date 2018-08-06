@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			GetNextEventStrategyImpl();
-			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr();
+			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
 			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  ;
+			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation) ;
 			
 			
 			

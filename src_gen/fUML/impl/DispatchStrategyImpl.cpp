@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -122,7 +122,7 @@ std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -130,7 +130,7 @@ std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_
 	//end of body
 }
 
-std::string DispatchStrategyImpl::retrieveName() 
+std::string DispatchStrategyImpl::retrieveName()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,7 +147,7 @@ std::string DispatchStrategyImpl::retrieveName()
 //*********************************
 
 
-std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr()
+std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const
 {
 	return m_thisDispatchStrategyPtr.lock();
 }
