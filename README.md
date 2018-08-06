@@ -9,7 +9,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
   * Java Development Kit (JDK) version 1.8
   * Eclipse Modeling Tool
     * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
-  * Gradle 4.5.1 or older
+  * Gradle 4.9 or older
 	* Go to ${user folder}/.gradle 
 	* create file gradle.properties
 		* create entry: make_parallel_jobs=number
