@@ -153,6 +153,7 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -186,6 +187,10 @@ void PrimitiveTypesPackageImpl::initializePackageInterfaces()
 }
 
 void PrimitiveTypesPackageImpl::initializePackageStereotypes()
+{
+}
+
+void PrimitiveTypesPackageImpl::initializePackageValueSpecifications()
 {
 }
 

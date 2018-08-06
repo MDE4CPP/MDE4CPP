@@ -75,6 +75,7 @@ namespace PrimitiveTypes
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGEIMPL_HPP */
