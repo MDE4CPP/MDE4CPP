@@ -3,12 +3,18 @@ description 'ecore4CPP project'
 task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:jar']) {
 	group 'Generators'
 	description 'create executable jar for ecore4CPP generator'
+
+	inputs.files file("ecore4CPP.generator/build/classes/java/main"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build")
 }
 
 task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP.generator.compiler:jar']) {
 	description 'generate emtl files for Ecore4CPP generator'	
 	main = "-jar"
 	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
+
+	inputs.files file("ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build/classes/java/main")
 }
 tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter executeCompiler
 executeCompiler.mustRunAfter tasks.getByPath('ecore4CPP.generator:compileJava')
