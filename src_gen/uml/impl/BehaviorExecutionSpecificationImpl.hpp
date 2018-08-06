@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehaviorExecutionSpecificationImpl();
-			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr();
+			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr() const;
 			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference

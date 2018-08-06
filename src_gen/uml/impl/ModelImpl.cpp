@@ -356,7 +356,7 @@ std::string ModelImpl::getViewpoint() const
 //*********************************
 // Operations
 //*********************************
-bool ModelImpl::isMetamodel() 
+bool ModelImpl::isMetamodel()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -391,7 +391,7 @@ std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 }
 
 
-std::shared_ptr<Model> ModelImpl::getThisModelPtr()
+std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
 {
 	return m_thisModelPtr.lock();
 }

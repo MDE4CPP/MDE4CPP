@@ -210,17 +210,17 @@ namespace uml
 			 All features of type ConnectableElement, equivalent to all direct and inherited roles.
 			result = (allFeatures()->select(oclIsKindOf(ConnectableElement))->collect(oclAsType(ConnectableElement))->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles()  = 0;
+			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() = 0;
 			
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) = 0;
 			
 			/*!
 			 Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Property> > getParts()  = 0;
+			virtual std::shared_ptr<Bag<uml::Property> > getParts() = 0;
 			
 			
 			//*********************************

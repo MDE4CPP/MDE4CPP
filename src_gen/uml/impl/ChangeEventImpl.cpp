@@ -250,7 +250,7 @@ std::weak_ptr<uml::Element > ChangeEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<ChangeEvent> ChangeEventImpl::getThisChangeEventPtr()
+std::shared_ptr<ChangeEvent> ChangeEventImpl::getThisChangeEventPtr() const
 {
 	return m_thisChangeEventPtr.lock();
 }

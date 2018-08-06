@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeviceImpl();
-			virtual std::shared_ptr<Device> getThisDevicePtr();
+			virtual std::shared_ptr<Device> getThisDevicePtr() const;
 			virtual void setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr);
 
 			//Additional constructors for the containments back reference

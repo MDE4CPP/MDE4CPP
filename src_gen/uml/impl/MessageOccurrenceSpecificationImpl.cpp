@@ -254,7 +254,7 @@ std::weak_ptr<uml::Element > MessageOccurrenceSpecificationImpl::getOwner() cons
 }
 
 
-std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr()
+std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
 {
 	return m_thisMessageOccurrenceSpecificationPtr.lock();
 }

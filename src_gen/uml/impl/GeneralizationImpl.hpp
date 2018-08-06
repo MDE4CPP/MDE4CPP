@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			GeneralizationImpl();
-			virtual std::shared_ptr<Generalization> getThisGeneralizationPtr();
+			virtual std::shared_ptr<Generalization> getThisGeneralizationPtr() const;
 			virtual void setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr);
 
 			//Additional constructors for the containments back reference

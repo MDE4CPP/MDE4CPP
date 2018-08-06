@@ -325,37 +325,37 @@ std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkActionImpl::navigable_open_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::one_open_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkActionImpl::one_open_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd() 
+std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -403,7 +403,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadLinkActionImpl::getRedefined
 }
 
 
-std::shared_ptr<ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr()
+std::shared_ptr<ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr() const
 {
 	return m_thisReadLinkActionPtr.lock();
 }

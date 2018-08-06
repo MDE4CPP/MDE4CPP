@@ -542,55 +542,55 @@ bool LoopNodeImpl::getIsTestedFirst() const
 //*********************************
 // Operations
 //*********************************
-bool LoopNodeImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::input_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::input_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context) 
+bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -703,7 +703,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> LoopNodeImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<LoopNode> LoopNodeImpl::getThisLoopNodePtr()
+std::shared_ptr<LoopNode> LoopNodeImpl::getThisLoopNodePtr() const
 {
 	return m_thisLoopNodePtr.lock();
 }

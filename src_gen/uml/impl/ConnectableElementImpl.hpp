@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConnectableElementImpl();
-			virtual std::shared_ptr<ConnectableElement> getThisConnectableElementPtr();
+			virtual std::shared_ptr<ConnectableElement> getThisConnectableElementPtr() const;
 			virtual void setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr);
 
 			//Additional constructors for the containments back reference
@@ -59,7 +59,7 @@ namespace uml
 			 Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds()  ;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() ;
 			
 			
 			

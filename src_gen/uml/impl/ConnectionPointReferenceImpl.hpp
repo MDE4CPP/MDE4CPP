@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConnectionPointReferenceImpl();
-			virtual std::shared_ptr<ConnectionPointReference> getThisConnectionPointReferencePtr();
+			virtual std::shared_ptr<ConnectionPointReference> getThisConnectionPointReferencePtr() const;
 			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

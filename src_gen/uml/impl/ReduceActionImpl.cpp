@@ -336,19 +336,19 @@ bool ReduceActionImpl::getIsOrdered() const
 //*********************************
 // Operations
 //*********************************
-bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,7 +416,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReduceActionImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr()
+std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
 {
 	return m_thisReduceActionPtr.lock();
 }

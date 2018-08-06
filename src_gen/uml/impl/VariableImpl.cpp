@@ -262,7 +262,7 @@ std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a) 
+bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -308,7 +308,7 @@ std::weak_ptr<uml::Element > VariableImpl::getOwner() const
 }
 
 
-std::shared_ptr<Variable> VariableImpl::getThisVariablePtr()
+std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
 {
 	return m_thisVariablePtr.lock();
 }

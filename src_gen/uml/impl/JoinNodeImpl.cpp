@@ -282,13 +282,13 @@ bool JoinNodeImpl::getIsCombineDuplicate() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context) 
+bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) 
+bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -328,7 +328,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> JoinNodeImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr()
+std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
 {
 	return m_thisJoinNodePtr.lock();
 }

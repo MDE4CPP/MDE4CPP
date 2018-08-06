@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AddVariableValueActionImpl();
-			virtual std::shared_ptr<AddVariableValueAction> getThisAddVariableValueActionPtr();
+			virtual std::shared_ptr<AddVariableValueAction> getThisAddVariableValueActionPtr() const;
 			virtual void setThisAddVariableValueActionPtr(std::weak_ptr<AddVariableValueAction> thisAddVariableValueActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,12 +66,12 @@ namespace uml
 			  	insertAt<>null and 
 			  	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))
 			endif */ 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A value InputPin is required.
 			value <> null */ 
-			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

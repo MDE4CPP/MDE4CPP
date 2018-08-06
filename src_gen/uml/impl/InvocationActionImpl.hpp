@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InvocationActionImpl();
-			virtual std::shared_ptr<InvocationAction> getThisInvocationActionPtr();
+			virtual std::shared_ptr<InvocationAction> getThisInvocationActionPtr() const;
 			virtual void setThisInvocationActionPtr(std::weak_ptr<InvocationAction> thisInvocationActionPtr);
 
 			//Additional constructors for the containments back reference

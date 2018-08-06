@@ -190,17 +190,17 @@ namespace uml
 				argument->at(i).type.conformsTo(parameter->at(i).type) and 
 				argument->at(i).isOrdered = parameter->at(i).isOrdered and
 				argument->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool argument_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool argument_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
 			
 			/*!
 			 Return the inout, out and return ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
 			
 			/*!
 			 The number of result OutputPins must be the same as the number of output (inout, out and return) ownedParameters of the called Behavior or Operation. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
@@ -210,12 +210,12 @@ namespace uml
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
 				parameter->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous */ 
-			virtual bool synchronous_call(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool synchronous_call(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

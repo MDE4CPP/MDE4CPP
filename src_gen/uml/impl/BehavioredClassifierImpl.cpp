@@ -459,19 +459,19 @@ std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getAllImplementedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getAllImplementedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -537,7 +537,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> BehavioredClassifierImpl::getRed
 }
 
 
-std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr()
+std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
 {
 	return m_thisBehavioredClassifierPtr.lock();
 }

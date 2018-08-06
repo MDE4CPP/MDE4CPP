@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			WriteStructuralFeatureActionImpl();
-			virtual std::shared_ptr<WriteStructuralFeatureAction> getThisWriteStructuralFeatureActionPtr();
+			virtual std::shared_ptr<WriteStructuralFeatureAction> getThisWriteStructuralFeatureActionPtr() const;
 			virtual void setThisWriteStructuralFeatureActionPtr(std::weak_ptr<WriteStructuralFeatureAction> thisWriteStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,22 +61,22 @@ namespace uml
 			/*!
 			 The multiplicity of the result OutputPin must be 1..1.
 			result <> null implies result.is(1,1) */ 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result <> null implies result.type = object.type */ 
-			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the value InputPin must conform to the type of the structuralFeature.
 			value <> null implies value.type.conformsTo(structuralFeature.type) */ 
-			virtual bool type_of_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_of_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

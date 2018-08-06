@@ -136,7 +136,7 @@ namespace uml
 			let o : InteractionOperand = enclosingOperand in o->notEmpty() and 
 			let peerEvents : OrderedSet(OccurrenceSpecification) = covered.events->select(enclosingOperand = o)
 			in peerEvents->last() = self */ 
-			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -548,7 +548,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Executi
 }
 
 
-std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr()
+std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
 {
 	return m_thisExecutionEnvironmentPtr.lock();
 }

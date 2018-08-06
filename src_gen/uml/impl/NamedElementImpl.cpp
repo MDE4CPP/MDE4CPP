@@ -218,7 +218,7 @@ VisibilityKind NamedElementImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const 
+std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -243,37 +243,37 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages() 
+std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier) 
+std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier) 
+std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies() 
+std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::getLabel() 
+std::string NamedElementImpl::getLabel()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::getLabel(bool localize) 
+std::string NamedElementImpl::getLabel(bool localize)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -281,7 +281,7 @@ std::string NamedElementImpl::getLabel(bool localize)
 
 
 
-std::string NamedElementImpl::getQualifiedName()  const 
+std::string NamedElementImpl::getQualifiedName() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,25 +304,25 @@ std::string NamedElementImpl::getQualifiedName()  const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::has_qualified_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool NamedElementImpl::has_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns) 
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::separator()  const 
+std::string NamedElementImpl::separator() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -330,7 +330,7 @@ std::string NamedElementImpl::separator()  const
 	//end of body
 }
 
-bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::map <   Any, Any >  context) 
+bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -376,7 +376,7 @@ std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr()
+std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr() const
 {
 	return m_thisNamedElementPtr.lock();
 }

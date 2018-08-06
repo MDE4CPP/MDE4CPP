@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndCreationDataImpl();
-			virtual std::shared_ptr<LinkEndCreationData> getThisLinkEndCreationDataPtr();
+			virtual std::shared_ptr<LinkEndCreationData> getThisLinkEndCreationDataPtr() const;
 			virtual void setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,7 +54,7 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

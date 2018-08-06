@@ -309,7 +309,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CentralBufferNodeImpl::getRedefi
 }
 
 
-std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr()
+std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
 {
 	return m_thisCentralBufferNodePtr.lock();
 }

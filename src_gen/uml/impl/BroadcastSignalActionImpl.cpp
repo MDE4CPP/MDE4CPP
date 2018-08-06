@@ -313,19 +313,19 @@ std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context) 
+bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <   Any, Any >  context) 
+bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -369,7 +369,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> BroadcastSignalActionImpl::getRe
 }
 
 
-std::shared_ptr<BroadcastSignalAction> BroadcastSignalActionImpl::getThisBroadcastSignalActionPtr()
+std::shared_ptr<BroadcastSignalAction> BroadcastSignalActionImpl::getThisBroadcastSignalActionPtr() const
 {
 	return m_thisBroadcastSignalActionPtr.lock();
 }

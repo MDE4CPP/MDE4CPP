@@ -260,7 +260,7 @@ std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -291,7 +291,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FinalNodeImpl::getRedefinedEleme
 }
 
 
-std::shared_ptr<FinalNode> FinalNodeImpl::getThisFinalNodePtr()
+std::shared_ptr<FinalNode> FinalNodeImpl::getThisFinalNodePtr() const
 {
 	return m_thisFinalNodePtr.lock();
 }

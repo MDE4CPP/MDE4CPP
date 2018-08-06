@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralRealImpl();
-			virtual std::shared_ptr<LiteralReal> getThisLiteralRealPtr();
+			virtual std::shared_ptr<LiteralReal> getThisLiteralRealPtr() const;
 			virtual void setThisLiteralRealPtr(std::weak_ptr<LiteralReal> thisLiteralRealPtr);
 
 			//Additional constructors for the containments back reference

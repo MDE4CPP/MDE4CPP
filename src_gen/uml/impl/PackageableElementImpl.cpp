@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) 
+bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -248,7 +248,7 @@ std::weak_ptr<uml::Element > PackageableElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr()
+std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
 {
 	return m_thisPackageableElementPtr.lock();
 }

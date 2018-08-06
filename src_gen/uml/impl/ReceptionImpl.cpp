@@ -272,13 +272,13 @@ std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -318,7 +318,7 @@ std::weak_ptr<uml::Element > ReceptionImpl::getOwner() const
 }
 
 
-std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr()
+std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const
 {
 	return m_thisReceptionPtr.lock();
 }

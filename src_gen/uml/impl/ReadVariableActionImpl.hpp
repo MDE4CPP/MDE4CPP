@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReadVariableActionImpl();
-			virtual std::shared_ptr<ReadVariableAction> getThisReadVariableActionPtr();
+			virtual std::shared_ptr<ReadVariableAction> getThisReadVariableActionPtr() const;
 			virtual void setThisReadVariableActionPtr(std::weak_ptr<ReadVariableAction> thisReadVariableActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,13 +61,13 @@ namespace uml
 			/*!
 			 The multiplicity of the variable must be compatible with the multiplicity of the output pin.
 			variable.compatibleWith(result) */ 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered */ 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

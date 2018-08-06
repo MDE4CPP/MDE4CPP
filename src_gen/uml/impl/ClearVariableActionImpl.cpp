@@ -324,7 +324,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearVariableActionImpl::getRede
 }
 
 
-std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr()
+std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
 {
 	return m_thisClearVariableActionPtr.lock();
 }

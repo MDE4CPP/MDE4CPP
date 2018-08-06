@@ -429,7 +429,7 @@ std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts() 
+std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -486,7 +486,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Encapsu
 }
 
 
-std::shared_ptr<EncapsulatedClassifier> EncapsulatedClassifierImpl::getThisEncapsulatedClassifierPtr()
+std::shared_ptr<EncapsulatedClassifier> EncapsulatedClassifierImpl::getThisEncapsulatedClassifierPtr() const
 {
 	return m_thisEncapsulatedClassifierPtr.lock();
 }

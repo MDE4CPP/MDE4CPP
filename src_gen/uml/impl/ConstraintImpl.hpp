@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConstraintImpl();
-			virtual std::shared_ptr<Constraint> getThisConstraintPtr();
+			virtual std::shared_ptr<Constraint> getThisConstraintPtr() const;
 			virtual void setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,16 +63,16 @@ namespace uml
 			//*********************************
 			/*!
 			 The ValueSpecification for a Constraint must evaluate to a Boolean value. */ 
-			virtual bool boolean_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool boolean_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Evaluating the ValueSpecification for a Constraint must not have side effects. */ 
-			virtual bool no_side_effects(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_side_effects(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self) */ 
-			virtual bool not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -326,13 +326,13 @@ bool AddVariableValueActionImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool AddVariableValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool AddVariableValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AddVariableValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool AddVariableValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -376,7 +376,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> AddVariableValueActionImpl::getR
 }
 
 
-std::shared_ptr<AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr()
+std::shared_ptr<AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
 {
 	return m_thisAddVariableValueActionPtr.lock();
 }

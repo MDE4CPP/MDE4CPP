@@ -255,7 +255,7 @@ std::weak_ptr<uml::Element > TimeIntervalImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr()
+std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
 {
 	return m_thisTimeIntervalPtr.lock();
 }

@@ -186,22 +186,22 @@ namespace uml
 			 Returns the Association acted on by this LinkAction.
 			result = (endData->asSequence()->first().end.association)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Association> association()  = 0;
+			virtual std::shared_ptr<uml::Association> association() = 0;
 			
 			/*!
 			 The ends of the endData must not be static.
 			endData->forAll(not end.isStatic) */ 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag() */ 
-			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins() */ 
-			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -172,7 +172,7 @@ bool LinkEndCreationDataImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -200,7 +200,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() 
 }
 
 
-std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr()
+std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const
 {
 	return m_thisLinkEndCreationDataPtr.lock();
 }

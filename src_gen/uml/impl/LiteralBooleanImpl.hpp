@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralBooleanImpl();
-			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr();
+			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr() const;
 			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);
 
 			//Additional constructors for the containments back reference

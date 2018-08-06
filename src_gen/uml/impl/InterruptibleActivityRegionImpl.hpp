@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InterruptibleActivityRegionImpl();
-			virtual std::shared_ptr<InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr();
+			virtual std::shared_ptr<InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr() const;
 			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,7 +62,7 @@ namespace uml
 			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
-			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

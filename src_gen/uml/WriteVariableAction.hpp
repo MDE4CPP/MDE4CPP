@@ -180,12 +180,12 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type) */ 
-			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

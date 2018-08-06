@@ -107,7 +107,7 @@ namespace uml
 			/*!
 			 The default must be compatible with the formal TemplateParameter.
 			default <> null implies default.isCompatibleWith(parameteredElement) */ 
-			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

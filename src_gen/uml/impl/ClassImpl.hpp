@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClassImpl();
-			virtual std::shared_ptr<Class> getThisClassPtr();
+			virtual std::shared_ptr<Class> getThisClassPtr() const;
 			virtual void setThisClassPtr(std::weak_ptr<Class> thisClassPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,7 +64,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class. */ 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
 			
 			/*!
 			 Derivation for Class::/extension : Extension
@@ -72,22 +72,22 @@ namespace uml
 			  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier)) in
 			  endTypes->includes(self) or endTypes.allParents()->includes(self) ))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions()  ;
+			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions() ;
 			
 			/*!
 			 Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses()  ;
+			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses() ;
 			
 			/*!
 			 Determines whether this class is a metaclass. */ 
-			virtual bool isMetaclass()  ;
+			virtual bool isMetaclass() ;
 			
 			/*!
 			 Only an active Class may own Receptions and have a classifierBehavior.
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null) */ 
-			virtual bool passive_class(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool passive_class(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

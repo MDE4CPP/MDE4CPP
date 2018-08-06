@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndDestructionDataImpl();
-			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr();
+			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr() const;
 			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,7 +54,7 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -124,7 +124,7 @@ namespace uml
 			/*!
 			 A TimeConstraint has one constrainedElement.
 			constrainedElement->size() = 1 */ 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

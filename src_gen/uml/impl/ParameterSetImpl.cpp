@@ -217,19 +217,19 @@ std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterSetImpl::input(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterSetImpl::input(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterSetImpl::same_parameterized_entity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterSetImpl::same_parameterized_entity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -265,7 +265,7 @@ std::weak_ptr<uml::Element > ParameterSetImpl::getOwner() const
 }
 
 
-std::shared_ptr<ParameterSet> ParameterSetImpl::getThisParameterSetPtr()
+std::shared_ptr<ParameterSet> ParameterSetImpl::getThisParameterSetPtr() const
 {
 	return m_thisParameterSetPtr.lock();
 }

@@ -338,7 +338,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -455,7 +455,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr()
+std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
 {
 	return m_thisActivityEdgePtr.lock();
 }

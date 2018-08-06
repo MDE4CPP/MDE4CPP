@@ -296,7 +296,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -346,7 +346,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExpansionNodeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr()
+std::shared_ptr<ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
 {
 	return m_thisExpansionNodePtr.lock();
 }

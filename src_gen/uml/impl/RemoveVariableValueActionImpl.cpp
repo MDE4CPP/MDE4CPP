@@ -326,7 +326,7 @@ bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -370,7 +370,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RemoveVariableValueActionImpl::g
 }
 
 
-std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr()
+std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
 {
 	return m_thisRemoveVariableValueActionPtr.lock();
 }

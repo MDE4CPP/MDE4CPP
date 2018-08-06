@@ -126,12 +126,12 @@ namespace uml
 			if (constrainedElement->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
 			endif */ 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2 */ 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

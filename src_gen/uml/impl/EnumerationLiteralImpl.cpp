@@ -266,7 +266,7 @@ std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -302,7 +302,7 @@ std::weak_ptr<uml::Element > EnumerationLiteralImpl::getOwner() const
 }
 
 
-std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr()
+std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
 {
 	return m_thisEnumerationLiteralPtr.lock();
 }

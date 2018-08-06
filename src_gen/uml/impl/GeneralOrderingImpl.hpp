@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			GeneralOrderingImpl();
-			virtual std::shared_ptr<GeneralOrdering> getThisGeneralOrderingPtr();
+			virtual std::shared_ptr<GeneralOrdering> getThisGeneralOrderingPtr() const;
 			virtual void setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

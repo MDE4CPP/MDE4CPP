@@ -547,31 +547,31 @@ bool StructuredActivityNodeImpl::getMustIsolate() const
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuredActivityNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::sourceNodes() 
+std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::sourceNodes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes() 
+std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -660,7 +660,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StructuredActivityNodeImpl::getR
 }
 
 
-std::shared_ptr<StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr()
+std::shared_ptr<StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr() const
 {
 	return m_thisStructuredActivityNodePtr.lock();
 }

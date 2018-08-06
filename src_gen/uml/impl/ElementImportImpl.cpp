@@ -197,19 +197,19 @@ VisibilityKind ElementImportImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-std::string ElementImportImpl::getName() 
+std::string ElementImportImpl::getName()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context) 
+bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context) 
+bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -263,7 +263,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getT
 }
 
 
-std::shared_ptr<ElementImport> ElementImportImpl::getThisElementImportPtr()
+std::shared_ptr<ElementImport> ElementImportImpl::getThisElementImportPtr() const
 {
 	return m_thisElementImportPtr.lock();
 }

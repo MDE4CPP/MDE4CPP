@@ -250,7 +250,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::get
 }
 
 
-std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr()
+std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr() const
 {
 	return m_thisGeneralizationPtr.lock();
 }

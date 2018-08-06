@@ -190,13 +190,13 @@ bool ProfileApplicationImpl::getIsStrict() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition() 
+std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -250,7 +250,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl:
 }
 
 
-std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr()
+std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
 {
 	return m_thisProfileApplicationPtr.lock();
 }

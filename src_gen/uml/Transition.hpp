@@ -188,38 +188,38 @@ namespace uml
 			 The query containingStateMachine() returns the StateMachine that contains the Transition either directly or transitively.
 			result = (container.containingStateMachine())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine()  = 0;
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			
 			/*!
 			 A fork segment must not have Guards or Triggers.
 			(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A fork segment must always target a State.
 			(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State)) */ 
-			virtual bool fork_segment_state(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool fork_segment_state(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 An initial Transition at the topmost level Region of a StateMachine that has no Trigger.
 			(source.oclIsKindOf(Pseudostate) and container.stateMachine->notEmpty()) implies
 				trigger->isEmpty() */ 
-			virtual bool initial_transition(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool initial_transition(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A join segment must not have Guards or Triggers.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool join_segment_guards(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool join_segment_guards(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A join segment must always originate from a State.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State)) */ 
-			virtual bool join_segment_state(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool join_segment_state(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Transitions outgoing Pseudostates may not have a Trigger.
 			source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty() */ 
-			virtual bool outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The redefinition context of a Transition is the nearest containing StateMachine.
@@ -230,26 +230,26 @@ namespace uml
 			  sm._'context'
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::Classifier> redefinitionContext()  = 0;
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
 			
 			/*!
 			 A Transition with kind external can source any Vertex except entry points.
 			(kind = TransitionKind::external) implies
 				not (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint) */ 
-			virtual bool state_is_external(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool state_is_external(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A Transition with kind internal must have a State as its source, and its source and target must be equal.
 			(kind = TransitionKind::internal) implies
 					(source.oclIsKindOf (State) and source = target) */ 
-			virtual bool state_is_internal(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool state_is_internal(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A Transition with kind local must have a composite State or an entry point as its source.
 			(kind = TransitionKind::local) implies
 					((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or
 					(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint)) */ 
-			virtual bool state_is_local(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool state_is_local(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

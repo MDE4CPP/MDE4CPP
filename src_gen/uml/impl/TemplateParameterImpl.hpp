@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateParameterImpl();
-			virtual std::shared_ptr<TemplateParameter> getThisTemplateParameterPtr();
+			virtual std::shared_ptr<TemplateParameter> getThisTemplateParameterPtr() const;
 			virtual void setThisTemplateParameterPtr(std::weak_ptr<TemplateParameter> thisTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 The default must be compatible with the formal TemplateParameter.
 			default <> null implies default.isCompatibleWith(parameteredElement) */ 
-			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

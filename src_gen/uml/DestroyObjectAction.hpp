@@ -175,12 +175,12 @@ namespace uml
 			/*!
 			 The multiplicity of the targe IinputPin is 1..1.
 			target.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The target InputPin has no type.
 			target.type= null */ 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

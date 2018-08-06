@@ -112,7 +112,7 @@ namespace uml
 			/*!
 			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
 			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
-			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

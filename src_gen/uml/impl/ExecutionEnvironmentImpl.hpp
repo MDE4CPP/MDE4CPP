@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExecutionEnvironmentImpl();
-			virtual std::shared_ptr<ExecutionEnvironment> getThisExecutionEnvironmentPtr();
+			virtual std::shared_ptr<ExecutionEnvironment> getThisExecutionEnvironmentPtr() const;
 			virtual void setThisExecutionEnvironmentPtr(std::weak_ptr<ExecutionEnvironment> thisExecutionEnvironmentPtr);
 
 			//Additional constructors for the containments back reference

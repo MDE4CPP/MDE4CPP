@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExtensionPointImpl();
-			virtual std::shared_ptr<ExtensionPoint> getThisExtensionPointPtr();
+			virtual std::shared_ptr<ExtensionPoint> getThisExtensionPointPtr() const;
 			virtual void setThisExtensionPointPtr(std::weak_ptr<ExtensionPoint> thisExtensionPointPtr);
 
 			//Additional constructors for the containments back reference
@@ -57,7 +57,7 @@ namespace uml
 			/*!
 			 An ExtensionPoint must have a name.
 			name->notEmpty () */ 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

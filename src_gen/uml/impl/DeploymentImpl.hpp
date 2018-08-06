@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeploymentImpl();
-			virtual std::shared_ptr<Deployment> getThisDeploymentPtr();
+			virtual std::shared_ptr<Deployment> getThisDeploymentPtr() const;
 			virtual void setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr);
 
 			//Additional constructors for the containments back reference

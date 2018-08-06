@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TriggerImpl();
-			virtual std::shared_ptr<Trigger> getThisTriggerPtr();
+			virtual std::shared_ptr<Trigger> getThisTriggerPtr() const;
 			virtual void setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

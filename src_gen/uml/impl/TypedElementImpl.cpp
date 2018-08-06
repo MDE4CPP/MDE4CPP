@@ -206,7 +206,7 @@ std::weak_ptr<uml::Element > TypedElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr()
+std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr() const
 {
 	return m_thisTypedElementPtr.lock();
 }

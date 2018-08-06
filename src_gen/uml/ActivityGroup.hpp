@@ -155,7 +155,7 @@ namespace uml
 			 All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 
 			containedEdge->forAll(activity = self.containingActivity()) */ 
-			virtual bool nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
@@ -163,7 +163,7 @@ namespace uml
 			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
 			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge) */ 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

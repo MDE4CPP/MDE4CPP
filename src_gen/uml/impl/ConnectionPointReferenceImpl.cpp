@@ -238,13 +238,13 @@ std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -294,7 +294,7 @@ std::weak_ptr<uml::Element > ConnectionPointReferenceImpl::getOwner() const
 }
 
 
-std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr()
+std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const
 {
 	return m_thisConnectionPointReferencePtr.lock();
 }

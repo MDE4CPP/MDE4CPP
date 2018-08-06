@@ -578,19 +578,19 @@ bool ClassImpl::getIsActive() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions() 
+std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses() 
+std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -609,13 +609,13 @@ std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
 	//end of body
 }
 
-bool ClassImpl::isMetaclass() 
+bool ClassImpl::isMetaclass()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -700,7 +700,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> ClassIm
 }
 
 
-std::shared_ptr<Class> ClassImpl::getThisClassPtr()
+std::shared_ptr<Class> ClassImpl::getThisClassPtr() const
 {
 	return m_thisClassPtr.lock();
 }

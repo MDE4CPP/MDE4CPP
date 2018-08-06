@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <   Any, Any >  context) 
+bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -199,7 +199,7 @@ std::weak_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
 }
 
 
-std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr()
+std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
 {
 	return m_thisOperationTemplateParameterPtr.lock();
 }

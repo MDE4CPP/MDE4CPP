@@ -127,7 +127,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

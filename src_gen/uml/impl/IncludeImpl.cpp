@@ -260,7 +260,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getTarget(
 }
 
 
-std::shared_ptr<Include> IncludeImpl::getThisIncludePtr()
+std::shared_ptr<Include> IncludeImpl::getThisIncludePtr() const
 {
 	return m_thisIncludePtr.lock();
 }

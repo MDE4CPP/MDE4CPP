@@ -410,13 +410,13 @@ std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActorImpl::associations(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActorImpl::associations(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActorImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActorImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -459,7 +459,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActorImpl::getRedefinedElement()
 }
 
 
-std::shared_ptr<Actor> ActorImpl::getThisActorPtr()
+std::shared_ptr<Actor> ActorImpl::getThisActorPtr() const
 {
 	return m_thisActorPtr.lock();
 }

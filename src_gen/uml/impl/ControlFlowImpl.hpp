@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ControlFlowImpl();
-			virtual std::shared_ptr<ControlFlow> getThisControlFlowPtr();
+			virtual std::shared_ptr<ControlFlow> getThisControlFlowPtr() const;
 			virtual void setThisControlFlowPtr(std::weak_ptr<ControlFlow> thisControlFlowPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,7 +62,7 @@ namespace uml
 			 ControlFlows may not have ObjectNodes at either end, except for ObjectNodes with control type.
 			(source.oclIsKindOf(ObjectNode) implies source.oclAsType(ObjectNode).isControlType) and 
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType) */ 
-			virtual bool object_nodes(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool object_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

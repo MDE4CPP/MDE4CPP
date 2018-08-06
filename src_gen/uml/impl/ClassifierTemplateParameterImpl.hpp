@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClassifierTemplateParameterImpl();
-			virtual std::shared_ptr<ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr();
+			virtual std::shared_ptr<ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr() const;
 			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 The argument to a ClassifierTemplateParameter is a Classifier.
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier)) */ 
-			virtual bool actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
@@ -64,29 +64,29 @@ namespace uml
 			         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))
 			      )
 			) */ 
-			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			constrainingClassifier->forAll(
 			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
 			) */ 
-			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If allowSubstitutable is true, then there must be a constrainingClassifier.
 			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
-			virtual bool has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
 			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
-			virtual bool matching_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool matching_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
 			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
-			virtual bool parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

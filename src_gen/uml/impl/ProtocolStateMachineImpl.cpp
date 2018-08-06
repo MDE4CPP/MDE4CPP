@@ -613,19 +613,19 @@ std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -686,7 +686,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Protoco
 }
 
 
-std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr()
+std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
 {
 	return m_thisProtocolStateMachinePtr.lock();
 }

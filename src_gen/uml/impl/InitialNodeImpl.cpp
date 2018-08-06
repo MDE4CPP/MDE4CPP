@@ -260,13 +260,13 @@ std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InitialNodeImpl::control_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool InitialNodeImpl::control_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InitialNodeImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr()
+std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr() const
 {
 	return m_thisInitialNodePtr.lock();
 }

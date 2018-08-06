@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TimeObservationImpl();
-			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr();
+			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr() const;
 			virtual void setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr);
 
 			//Additional constructors for the containments back reference

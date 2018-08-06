@@ -225,7 +225,7 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -258,7 +258,7 @@ std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 }
 
 
-std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr()
+std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
 {
 	return m_thisDurationObservationPtr.lock();
 }

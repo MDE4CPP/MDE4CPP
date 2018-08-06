@@ -266,7 +266,7 @@ std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(Any diagnostics,std::map <   Any, Any >  context) 
+bool ControlFlowImpl::object_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ControlFlowImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ControlFlow> ControlFlowImpl::getThisControlFlowPtr()
+std::shared_ptr<ControlFlow> ControlFlowImpl::getThisControlFlowPtr() const
 {
 	return m_thisControlFlowPtr.lock();
 }

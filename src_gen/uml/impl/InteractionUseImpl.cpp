@@ -313,37 +313,37 @@ std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::all_lifelines(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::gates_match(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::gates_match(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -413,7 +413,7 @@ std::weak_ptr<uml::Element > InteractionUseImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr()
+std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const
 {
 	return m_thisInteractionUsePtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SubstitutionImpl();
-			virtual std::shared_ptr<Substitution> getThisSubstitutionPtr();
+			virtual std::shared_ptr<Substitution> getThisSubstitutionPtr() const;
 			virtual void setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr);
 
 			//Additional constructors for the containments back reference

@@ -528,19 +528,19 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) 
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths() 
+std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NodeImpl::internal_structure(Any diagnostics,std::map <   Any, Any >  context) 
+bool NodeImpl::internal_structure(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -597,7 +597,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> NodeImp
 }
 
 
-std::shared_ptr<Node> NodeImpl::getThisNodePtr()
+std::shared_ptr<Node> NodeImpl::getThisNodePtr() const
 {
 	return m_thisNodePtr.lock();
 }

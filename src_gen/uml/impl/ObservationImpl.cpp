@@ -229,7 +229,7 @@ std::weak_ptr<uml::Element > ObservationImpl::getOwner() const
 }
 
 
-std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr()
+std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const
 {
 	return m_thisObservationPtr.lock();
 }

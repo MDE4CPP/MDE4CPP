@@ -193,7 +193,7 @@ std::weak_ptr<uml::Element > ConnectableElementTemplateParameterImpl::getOwner()
 }
 
 
-std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr()
+std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
 {
 	return m_thisConnectableElementTemplateParameterPtr.lock();
 }

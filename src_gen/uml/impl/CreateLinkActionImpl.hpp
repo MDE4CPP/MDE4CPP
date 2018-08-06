@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CreateLinkActionImpl();
-			virtual std::shared_ptr<CreateLinkAction> getThisCreateLinkActionPtr();
+			virtual std::shared_ptr<CreateLinkAction> getThisCreateLinkActionPtr() const;
 			virtual void setThisCreateLinkActionPtr(std::weak_ptr<CreateLinkAction> thisCreateLinkActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The Association cannot be an abstract Classifier.
 			not self.association().isAbstract */ 
-			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

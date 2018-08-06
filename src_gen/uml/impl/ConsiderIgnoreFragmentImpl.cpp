@@ -250,13 +250,13 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -289,7 +289,7 @@ std::weak_ptr<uml::Element > ConsiderIgnoreFragmentImpl::getOwner() const
 }
 
 
-std::shared_ptr<ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr()
+std::shared_ptr<ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr() const
 {
 	return m_thisConsiderIgnoreFragmentPtr.lock();
 }

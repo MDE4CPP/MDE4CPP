@@ -231,19 +231,19 @@ bool ContinuationImpl::getSetting() const
 //*********************************
 // Operations
 //*********************************
-bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context) 
+bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::global(Any diagnostics,std::map <   Any, Any >  context) 
+bool ContinuationImpl::global(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::same_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool ContinuationImpl::same_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -270,7 +270,7 @@ std::weak_ptr<uml::Element > ContinuationImpl::getOwner() const
 }
 
 
-std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr()
+std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr() const
 {
 	return m_thisContinuationPtr.lock();
 }

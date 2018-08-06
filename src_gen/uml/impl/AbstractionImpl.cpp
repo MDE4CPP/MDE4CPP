@@ -281,7 +281,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> AbstractionImpl::getTar
 }
 
 
-std::shared_ptr<Abstraction> AbstractionImpl::getThisAbstractionPtr()
+std::shared_ptr<Abstraction> AbstractionImpl::getThisAbstractionPtr() const
 {
 	return m_thisAbstractionPtr.lock();
 }

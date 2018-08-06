@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			WriteVariableActionImpl();
-			virtual std::shared_ptr<WriteVariableAction> getThisWriteVariableActionPtr();
+			virtual std::shared_ptr<WriteVariableAction> getThisWriteVariableActionPtr() const;
 			virtual void setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type) */ 
-			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -169,7 +169,7 @@ std::shared_ptr<Union<uml::Element>> RelationshipImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr()
+std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
 {
 	return m_thisRelationshipPtr.lock();
 }

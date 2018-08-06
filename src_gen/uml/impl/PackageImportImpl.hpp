@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PackageImportImpl();
-			virtual std::shared_ptr<PackageImport> getThisPackageImportPtr();
+			virtual std::shared_ptr<PackageImport> getThisPackageImportPtr() const;
 			virtual void setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 The visibility of a PackageImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

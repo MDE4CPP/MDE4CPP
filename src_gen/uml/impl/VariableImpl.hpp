@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			VariableImpl();
-			virtual std::shared_ptr<Variable> getThisVariablePtr();
+			virtual std::shared_ptr<Variable> getThisVariablePtr() const;
 			virtual void setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr);
 
 			//Additional constructors for the containments back reference
@@ -69,7 +69,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a) ;
 			
 			
 			

@@ -339,25 +339,25 @@ bool ActivityPartitionImpl::getIsExternal() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityPartitionImpl::represents_property(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -436,7 +436,7 @@ std::weak_ptr<uml::ActivityGroup > ActivityPartitionImpl::getSuperGroup() const
 }
 
 
-std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr()
+std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
 {
 	return m_thisActivityPartitionPtr.lock();
 }

@@ -184,17 +184,17 @@ namespace uml
 				selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and
 				selection.outputParameters()->size()=1 and
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type)) */ 
-			virtual bool input_output_parameter(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool object_flow_edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered) */ 
-			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

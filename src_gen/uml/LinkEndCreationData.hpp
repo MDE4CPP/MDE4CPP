@@ -113,7 +113,7 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

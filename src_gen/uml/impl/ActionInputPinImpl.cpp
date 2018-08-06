@@ -360,19 +360,19 @@ std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActionInputPinImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActionInputPinImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -412,7 +412,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActionInputPinImpl::getRedefined
 }
 
 
-std::shared_ptr<ActionInputPin> ActionInputPinImpl::getThisActionInputPinPtr()
+std::shared_ptr<ActionInputPin> ActionInputPinImpl::getThisActionInputPinPtr() const
 {
 	return m_thisActionInputPinPtr.lock();
 }

@@ -348,31 +348,31 @@ bool CallActionImpl::getIsSynchronous() const
 //*********************************
 // Operations
 //*********************************
-bool CallActionImpl::argument_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool CallActionImpl::argument_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::inputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::inputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool CallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  context) 
+bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -417,7 +417,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CallActionImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<CallAction> CallActionImpl::getThisCallActionPtr()
+std::shared_ptr<CallAction> CallActionImpl::getThisCallActionPtr() const
 {
 	return m_thisCallActionPtr.lock();
 }

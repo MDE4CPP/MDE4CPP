@@ -234,25 +234,25 @@ std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context) 
+bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::same_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool LifelineImpl::same_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context) 
+bool LifelineImpl::selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  context) 
+bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -325,7 +325,7 @@ std::weak_ptr<uml::Element > LifelineImpl::getOwner() const
 }
 
 
-std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr()
+std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr() const
 {
 	return m_thisLifelinePtr.lock();
 }

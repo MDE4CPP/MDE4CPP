@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClauseImpl();
-			virtual std::shared_ptr<Clause> getThisClausePtr();
+			virtual std::shared_ptr<Clause> getThisClausePtr() const;
 			virtual void setThisClausePtr(std::weak_ptr<Clause> thisClausePtr);
 
 			//Additional constructors for the containments back reference
@@ -49,19 +49,19 @@ namespace uml
 			/*!
 			 The bodyOutput Pins are OutputPins on Actions in the body of the Clause.
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
 			decider.type = Boolean and
 			decider.is(1,1) */ 
-			virtual bool decider_output(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool decider_output(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty() */ 
-			virtual bool test_and_body(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool test_and_body(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

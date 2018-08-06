@@ -196,37 +196,37 @@ bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -255,7 +255,7 @@ std::weak_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
 }
 
 
-std::shared_ptr<ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr()
+std::shared_ptr<ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr() const
 {
 	return m_thisClassifierTemplateParameterPtr.lock();
 }

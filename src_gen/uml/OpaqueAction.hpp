@@ -175,7 +175,7 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language lists must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

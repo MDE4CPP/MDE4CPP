@@ -263,37 +263,37 @@ std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::global_data(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::global_data(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -339,7 +339,7 @@ std::weak_ptr<uml::Element > InteractionConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr()
+std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
 {
 	return m_thisInteractionConstraintPtr.lock();
 }

@@ -163,13 +163,13 @@ std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) 
+bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterableElementImpl::isTemplateParameter() 
+bool ParameterableElementImpl::isTemplateParameter()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -211,7 +211,7 @@ std::weak_ptr<uml::Element > ParameterableElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr()
+std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
 {
 	return m_thisParameterableElementPtr.lock();
 }

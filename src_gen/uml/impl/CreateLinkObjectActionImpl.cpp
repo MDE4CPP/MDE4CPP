@@ -323,19 +323,19 @@ std::shared_ptr<ecore::EClass> CreateLinkObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkObjectActionImpl::association_class(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateLinkObjectActionImpl::association_class(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateLinkObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateLinkObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -383,7 +383,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateLinkObjectActionImpl::getR
 }
 
 
-std::shared_ptr<CreateLinkObjectAction> CreateLinkObjectActionImpl::getThisCreateLinkObjectActionPtr()
+std::shared_ptr<CreateLinkObjectAction> CreateLinkObjectActionImpl::getThisCreateLinkObjectActionPtr() const
 {
 	return m_thisCreateLinkObjectActionPtr.lock();
 }

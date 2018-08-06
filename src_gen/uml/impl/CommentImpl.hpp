@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CommentImpl();
-			virtual std::shared_ptr<Comment> getThisCommentPtr();
+			virtual std::shared_ptr<Comment> getThisCommentPtr() const;
 			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);
 
 			//Additional constructors for the containments back reference

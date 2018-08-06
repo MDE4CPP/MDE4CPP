@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RaiseExceptionActionImpl();
-			virtual std::shared_ptr<RaiseExceptionAction> getThisRaiseExceptionActionPtr();
+			virtual std::shared_ptr<RaiseExceptionAction> getThisRaiseExceptionActionPtr() const;
 			virtual void setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr);
 
 			//Additional constructors for the containments back reference

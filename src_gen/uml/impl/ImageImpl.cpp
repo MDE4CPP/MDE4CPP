@@ -185,7 +185,7 @@ std::shared_ptr<Union<uml::Element>> ImageImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<Image> ImageImpl::getThisImagePtr()
+std::shared_ptr<Image> ImageImpl::getThisImagePtr() const
 {
 	return m_thisImagePtr.lock();
 }

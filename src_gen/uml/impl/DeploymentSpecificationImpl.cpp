@@ -460,13 +460,13 @@ std::string DeploymentSpecificationImpl::getExecutionLocation() const
 //*********************************
 // Operations
 //*********************************
-bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::map <   Any, Any >  context) 
+bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context) 
+bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -522,7 +522,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DeploymentSpecificationImpl::get
 }
 
 
-std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr()
+std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
 {
 	return m_thisDeploymentSpecificationPtr.lock();
 }

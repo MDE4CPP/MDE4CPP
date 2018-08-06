@@ -192,12 +192,12 @@ namespace uml
 			/*!
 			 The type of the value ValueSpecification must conform to the type of the ValuePin.
 			value.type.conformsTo(type) */ 
-			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

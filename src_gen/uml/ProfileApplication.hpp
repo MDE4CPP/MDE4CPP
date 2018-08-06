@@ -123,11 +123,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Retrieves the definition (Ecore representation) of the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition()  = 0;
+			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() = 0;
 			
 			/*!
 			 Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) = 0;
 			
 			
 			//*********************************

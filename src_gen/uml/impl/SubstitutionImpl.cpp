@@ -319,7 +319,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> SubstitutionImpl::getTa
 }
 
 
-std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr()
+std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
 {
 	return m_thisSubstitutionPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DestructionOccurrenceSpecificationImpl();
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> getThisDestructionOccurrenceSpecificationPtr();
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> getThisDestructionOccurrenceSpecificationPtr() const;
 			virtual void setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			let o : InteractionOperand = enclosingOperand in o->notEmpty() and 
 			let peerEvents : OrderedSet(OccurrenceSpecification) = covered.events->select(enclosingOperand = o)
 			in peerEvents->last() = self */ 
-			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

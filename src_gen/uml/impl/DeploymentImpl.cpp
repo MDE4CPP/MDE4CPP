@@ -360,7 +360,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarg
 }
 
 
-std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr()
+std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
 {
 	return m_thisDeploymentPtr.lock();
 }

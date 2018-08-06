@@ -499,43 +499,43 @@ bool AssociationImpl::getIsDerived() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationImpl::association_ends(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes() 
+std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::isBinary() 
+bool AssociationImpl::isBinary()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -609,7 +609,7 @@ std::shared_ptr<Union<uml::Element>> AssociationImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr()
+std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr() const
 {
 	return m_thisAssociationPtr.lock();
 }

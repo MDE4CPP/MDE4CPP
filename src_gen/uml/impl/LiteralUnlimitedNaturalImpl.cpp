@@ -259,7 +259,7 @@ std::weak_ptr<uml::Element > LiteralUnlimitedNaturalImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralUnlimitedNatural> LiteralUnlimitedNaturalImpl::getThisLiteralUnlimitedNaturalPtr()
+std::shared_ptr<LiteralUnlimitedNatural> LiteralUnlimitedNaturalImpl::getThisLiteralUnlimitedNaturalPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalPtr.lock();
 }

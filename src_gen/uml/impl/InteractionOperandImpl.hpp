@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionOperandImpl();
-			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr();
+			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr() const;
 			virtual void setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,11 +61,11 @@ namespace uml
 			//*********************************
 			/*!
 			 The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction. */ 
-			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand. */ 
-			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

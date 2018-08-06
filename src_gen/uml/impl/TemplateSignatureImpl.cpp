@@ -203,13 +203,13 @@ std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <   Any, Any >  context) 
+bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -255,7 +255,7 @@ std::shared_ptr<Union<uml::TemplateParameter>> TemplateSignatureImpl::getParamet
 }
 
 
-std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr()
+std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const
 {
 	return m_thisTemplateSignaturePtr.lock();
 }

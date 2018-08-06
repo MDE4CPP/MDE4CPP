@@ -132,7 +132,7 @@ namespace uml
 			/*!
 			 An ExtensionPoint must have a name.
 			name->notEmpty () */ 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

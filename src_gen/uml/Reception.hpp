@@ -171,7 +171,7 @@ namespace uml
 			/*!
 			 A Reception has the same name as its signal
 			name = signal.name */ 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -183,7 +183,7 @@ namespace uml
 			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
 			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
 			) */ 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -318,25 +318,25 @@ std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds() 
+std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -401,7 +401,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ProtocolTransitionImpl::getRedef
 }
 
 
-std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr()
+std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
 {
 	return m_thisProtocolTransitionPtr.lock();
 }

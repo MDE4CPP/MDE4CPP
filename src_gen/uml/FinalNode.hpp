@@ -154,7 +154,7 @@ namespace uml
 			/*!
 			 A FinalNode has no outgoing ActivityEdges.
 			outgoing->isEmpty() */ 
-			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

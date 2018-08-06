@@ -343,85 +343,85 @@ bool ParameterImpl::getIsStream() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::connector_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::in_and_out(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::in_and_out(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::isSetDefault() 
+bool ParameterImpl::isSetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::not_exception(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::not_exception(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::object_effect(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::object_effect(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setBooleanDefaultValue(bool value) 
+void ParameterImpl::setBooleanDefaultValue(bool value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setIntegerDefaultValue(int value) 
+void ParameterImpl::setIntegerDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setNullDefaultValue() 
+void ParameterImpl::setNullDefaultValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setRealDefaultValue(double value) 
+void ParameterImpl::setRealDefaultValue(double value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setStringDefaultValue(std::string value) 
+void ParameterImpl::setStringDefaultValue(std::string value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
+void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::stream_and_exception(Any diagnostics,std::map <   Any, Any >  context) 
+bool ParameterImpl::stream_and_exception(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::unsetDefault() 
+void ParameterImpl::unsetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -481,7 +481,7 @@ std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 }
 
 
-std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr()
+std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr() const
 {
 	return m_thisParameterPtr.lock();
 }

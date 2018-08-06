@@ -173,25 +173,25 @@ namespace uml
 			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds()  = 0;
+			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() = 0;
 			
 			/*!
 			 If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif */ 
-			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

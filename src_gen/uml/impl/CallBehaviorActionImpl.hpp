@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CallBehaviorActionImpl();
-			virtual std::shared_ptr<CallBehaviorAction> getThisCallBehaviorActionPtr();
+			virtual std::shared_ptr<CallBehaviorAction> getThisCallBehaviorActionPtr() const;
 			virtual void setThisCallBehaviorActionPtr(std::weak_ptr<CallBehaviorAction> thisCallBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 A CallBehaviorAction may not specify onPort.
 			onPort=null */ 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

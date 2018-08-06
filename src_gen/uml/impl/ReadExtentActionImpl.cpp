@@ -311,13 +311,13 @@ std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -371,7 +371,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadExtentActionImpl::getRedefin
 }
 
 
-std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr()
+std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const
 {
 	return m_thisReadExtentActionPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateSignatureImpl();
-			virtual std::shared_ptr<TemplateSignature> getThisTemplateSignaturePtr();
+			virtual std::shared_ptr<TemplateSignature> getThisTemplateSignaturePtr() const;
 			virtual void setThisTemplateSignaturePtr(std::weak_ptr<TemplateSignature> thisTemplateSignaturePtr);
 
 			//Additional constructors for the containments back reference
@@ -53,13 +53,13 @@ namespace uml
 			/*!
 			 Parameters must own the ParameterableElements they parameter or those ParameterableElements must be owned by the TemplateableElement being templated.
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet()) */ 
-			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name) */ 
-			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

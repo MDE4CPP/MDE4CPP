@@ -272,55 +272,55 @@ MessageSort MessageImpl::getMessageSort() const
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::arguments(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-MessageKind MessageImpl::getMessageKind() 
+MessageKind MessageImpl::getMessageKind()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::occurrence_specifications(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::occurrence_specifications(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_request(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::signature_is_operation_request(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_signal(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::signature_is_signal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  context) 
+bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -403,7 +403,7 @@ std::weak_ptr<uml::Element > MessageImpl::getOwner() const
 }
 
 
-std::shared_ptr<Message> MessageImpl::getThisMessagePtr()
+std::shared_ptr<Message> MessageImpl::getThisMessagePtr() const
 {
 	return m_thisMessagePtr.lock();
 }

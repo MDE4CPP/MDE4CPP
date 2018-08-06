@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RemoveVariableValueActionImpl();
-			virtual std::shared_ptr<RemoveVariableValueAction> getThisRemoveVariableValueActionPtr();
+			virtual std::shared_ptr<RemoveVariableValueAction> getThisRemoveVariableValueActionPtr() const;
 			virtual void setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -68,7 +68,7 @@ namespace uml
 			else
 			  removeAt = null and value <> null
 			endif */ 
-			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

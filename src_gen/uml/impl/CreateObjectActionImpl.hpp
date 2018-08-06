@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CreateObjectActionImpl();
-			virtual std::shared_ptr<CreateObjectAction> getThisCreateObjectActionPtr();
+			virtual std::shared_ptr<CreateObjectAction> getThisCreateObjectActionPtr() const;
 			virtual void setThisCreateObjectActionPtr(std::weak_ptr<CreateObjectAction> thisCreateObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,22 +61,22 @@ namespace uml
 			/*!
 			 The classifier cannot be abstract.
 			not classifier.isAbstract */ 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass) */ 
-			virtual bool classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier */ 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

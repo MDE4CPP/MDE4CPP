@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			UsageImpl();
-			virtual std::shared_ptr<Usage> getThisUsagePtr();
+			virtual std::shared_ptr<Usage> getThisUsagePtr() const;
 			virtual void setThisUsagePtr(std::weak_ptr<Usage> thisUsagePtr);
 
 			//Additional constructors for the containments back reference

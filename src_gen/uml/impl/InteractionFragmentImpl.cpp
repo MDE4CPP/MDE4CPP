@@ -311,7 +311,7 @@ std::weak_ptr<uml::Element > InteractionFragmentImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr()
+std::shared_ptr<InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr() const
 {
 	return m_thisInteractionFragmentPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AbstractionImpl();
-			virtual std::shared_ptr<Abstraction> getThisAbstractionPtr();
+			virtual std::shared_ptr<Abstraction> getThisAbstractionPtr() const;
 			virtual void setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr);
 
 			//Additional constructors for the containments back reference

@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value) 
+void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -280,7 +280,7 @@ std::weak_ptr<uml::Element > OccurrenceSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr()
+std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const
 {
 	return m_thisOccurrenceSpecificationPtr.lock();
 }

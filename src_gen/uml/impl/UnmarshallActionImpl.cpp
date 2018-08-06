@@ -343,31 +343,31 @@ std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) 
+bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool UnmarshallActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context) 
+bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -432,7 +432,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> UnmarshallActionImpl::getRedefin
 }
 
 
-std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr()
+std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr() const
 {
 	return m_thisUnmarshallActionPtr.lock();
 }

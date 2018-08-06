@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PinImpl();
-			virtual std::shared_ptr<Pin> getThisPinPtr();
+			virtual std::shared_ptr<Pin> getThisPinPtr() const;
 			virtual void setThisPinPtr(std::weak_ptr<Pin> thisPinPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,12 +62,12 @@ namespace uml
 			/*!
 			 A control Pin has a control type.
 			isControl implies isControlType */ 
-			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Pin multiplicity is not unique.
 			not isUnique */ 
-			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

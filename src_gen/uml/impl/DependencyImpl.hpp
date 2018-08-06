@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DependencyImpl();
-			virtual std::shared_ptr<Dependency> getThisDependencyPtr();
+			virtual std::shared_ptr<Dependency> getThisDependencyPtr() const;
 			virtual void setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr);
 
 			//Additional constructors for the containments back reference

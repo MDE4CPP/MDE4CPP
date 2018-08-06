@@ -558,19 +558,19 @@ std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FunctionBehaviorImpl::hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d) 
+bool FunctionBehaviorImpl::hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FunctionBehaviorImpl::one_output_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool FunctionBehaviorImpl::one_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FunctionBehaviorImpl::types_of_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool FunctionBehaviorImpl::types_of_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -625,7 +625,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Functio
 }
 
 
-std::shared_ptr<FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr()
+std::shared_ptr<FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr() const
 {
 	return m_thisFunctionBehaviorPtr.lock();
 }

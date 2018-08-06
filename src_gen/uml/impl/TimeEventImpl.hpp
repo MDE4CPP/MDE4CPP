@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TimeEventImpl();
-			virtual std::shared_ptr<TimeEvent> getThisTimeEventPtr();
+			virtual std::shared_ptr<TimeEvent> getThisTimeEventPtr() const;
 			virtual void setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

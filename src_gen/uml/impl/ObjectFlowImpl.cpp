@@ -300,49 +300,49 @@ bool ObjectFlowImpl::getIsMultireceive() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::compatible_types(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::target(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -392,7 +392,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ObjectFlowImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr()
+std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
 {
 	return m_thisObjectFlowPtr.lock();
 }

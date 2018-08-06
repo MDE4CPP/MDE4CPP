@@ -246,7 +246,7 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -286,7 +286,7 @@ std::weak_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
 }
 
 
-std::shared_ptr<InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr()
+std::shared_ptr<InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr() const
 {
 	return m_thisInterruptibleActivityRegionPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CentralBufferNodeImpl();
-			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr();
+			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr() const;
 			virtual void setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr);
 
 			//Additional constructors for the containments back reference

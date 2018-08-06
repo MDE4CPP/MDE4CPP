@@ -340,13 +340,13 @@ bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -394,7 +394,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> AddStructuralFeatureValueActionI
 }
 
 
-std::shared_ptr<AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr()
+std::shared_ptr<AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr() const
 {
 	return m_thisAddStructuralFeatureValueActionPtr.lock();
 }

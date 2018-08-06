@@ -211,19 +211,19 @@ std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(Any diagnostics,std::map <   Any, Any >  context) 
+bool CollaborationUseImpl::client_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::connectors(Any diagnostics,std::map <   Any, Any >  context) 
+bool CollaborationUseImpl::connectors(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  context) 
+bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -262,7 +262,7 @@ std::weak_ptr<uml::Element > CollaborationUseImpl::getOwner() const
 }
 
 
-std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr()
+std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const
 {
 	return m_thisCollaborationUsePtr.lock();
 }

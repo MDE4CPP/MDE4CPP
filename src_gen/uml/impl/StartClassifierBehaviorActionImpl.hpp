@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StartClassifierBehaviorActionImpl();
-			virtual std::shared_ptr<StartClassifierBehaviorAction> getThisStartClassifierBehaviorActionPtr();
+			virtual std::shared_ptr<StartClassifierBehaviorAction> getThisStartClassifierBehaviorActionPtr() const;
 			virtual void setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,13 +61,13 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null) */ 
-			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

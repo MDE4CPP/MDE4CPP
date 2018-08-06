@@ -244,7 +244,7 @@ std::weak_ptr<uml::Element > CallEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr()
+std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const
 {
 	return m_thisCallEventPtr.lock();
 }

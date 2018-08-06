@@ -322,7 +322,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context) 
+bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -370,7 +370,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CallBehaviorActionImpl::getRedef
 }
 
 
-std::shared_ptr<CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr()
+std::shared_ptr<CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
 {
 	return m_thisCallBehaviorActionPtr.lock();
 }

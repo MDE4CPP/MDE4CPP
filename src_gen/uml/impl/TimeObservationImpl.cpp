@@ -254,7 +254,7 @@ std::weak_ptr<uml::Element > TimeObservationImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeObservation> TimeObservationImpl::getThisTimeObservationPtr()
+std::shared_ptr<TimeObservation> TimeObservationImpl::getThisTimeObservationPtr() const
 {
 	return m_thisTimeObservationPtr.lock();
 }

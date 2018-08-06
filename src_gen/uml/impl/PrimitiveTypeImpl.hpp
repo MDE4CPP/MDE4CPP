@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PrimitiveTypeImpl();
-			virtual std::shared_ptr<PrimitiveType> getThisPrimitiveTypePtr();
+			virtual std::shared_ptr<PrimitiveType> getThisPrimitiveTypePtr() const;
 			virtual void setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr);
 
 			//Additional constructors for the containments back reference

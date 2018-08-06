@@ -274,49 +274,49 @@ std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -366,7 +366,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DecisionNodeImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr()
+std::shared_ptr<DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr() const
 {
 	return m_thisDecisionNodePtr.lock();
 }

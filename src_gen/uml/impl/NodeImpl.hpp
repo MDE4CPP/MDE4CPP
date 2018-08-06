@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			NodeImpl();
-			virtual std::shared_ptr<Node> getThisNodePtr();
+			virtual std::shared_ptr<Node> getThisNodePtr() const;
 			virtual void setThisNodePtr(std::weak_ptr<Node> thisNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -64,16 +64,16 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a (binary) communication path between this node and the specified other node, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this node's nearest package. */ 
-			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  ;
+			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
 			
 			/*!
 			 Retrieves the communication paths in which this node is involved. */ 
-			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths()  ;
+			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths() ;
 			
 			/*!
 			 The internal structure of a Node (if defined) consists solely of parts of type Node.
 			part->forAll(oclIsKindOf(Node)) */ 
-			virtual bool internal_structure(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool internal_structure(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SendObjectActionImpl();
-			virtual std::shared_ptr<SendObjectAction> getThisSendObjectActionPtr();
+			virtual std::shared_ptr<SendObjectAction> getThisSendObjectActionPtr() const;
 			virtual void setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
-			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

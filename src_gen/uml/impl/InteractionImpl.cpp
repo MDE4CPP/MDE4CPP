@@ -764,7 +764,7 @@ std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -853,7 +853,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Interac
 }
 
 
-std::shared_ptr<Interaction> InteractionImpl::getThisInteractionPtr()
+std::shared_ptr<Interaction> InteractionImpl::getThisInteractionPtr() const
 {
 	return m_thisInteractionPtr.lock();
 }

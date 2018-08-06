@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConnectableElementTemplateParameterImpl();
-			virtual std::shared_ptr<ConnectableElementTemplateParameter> getThisConnectableElementTemplateParameterPtr();
+			virtual std::shared_ptr<ConnectableElementTemplateParameter> getThisConnectableElementTemplateParameterPtr() const;
 			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference

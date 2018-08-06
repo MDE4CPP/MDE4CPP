@@ -334,25 +334,25 @@ bool ReadIsClassifiedObjectActionImpl::getIsDirect() const
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -420,7 +420,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadIsClassifiedObjectActionImpl
 }
 
 
-std::shared_ptr<ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionImpl::getThisReadIsClassifiedObjectActionPtr()
+std::shared_ptr<ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionImpl::getThisReadIsClassifiedObjectActionPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionPtr.lock();
 }

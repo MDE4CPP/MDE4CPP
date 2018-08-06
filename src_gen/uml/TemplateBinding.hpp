@@ -117,12 +117,12 @@ namespace uml
 			/*!
 			 A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter of the target TemplateSignature.
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1) */ 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal)) */ 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

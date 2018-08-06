@@ -514,25 +514,25 @@ bool PropertyImpl::getIsID() const
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -540,127 +540,127 @@ bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <   Any, 
 
 
 
-std::shared_ptr<uml::Property> PropertyImpl::getOtherEnd() 
+std::shared_ptr<uml::Property> PropertyImpl::getOtherEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isAttribute() 
+bool PropertyImpl::isAttribute()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isComposite() 
+bool PropertyImpl::isComposite()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isNavigable() 
+bool PropertyImpl::isNavigable()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isSetDefault() 
+bool PropertyImpl::isSetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setBooleanDefaultValue(bool value) 
+void PropertyImpl::setBooleanDefaultValue(bool value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setIntegerDefaultValue(int value) 
+void PropertyImpl::setIntegerDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setIsNavigable(bool isNavigable) 
+void PropertyImpl::setIsNavigable(bool isNavigable)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setNullDefaultValue() 
+void PropertyImpl::setNullDefaultValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setRealDefaultValue(double value) 
+void PropertyImpl::setRealDefaultValue(double value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setStringDefaultValue(std::string value) 
+void PropertyImpl::setStringDefaultValue(std::string value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setUnlimitedNaturalDefaultValue(int value) 
+void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext() 
+std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_rules(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::subsetting_rules(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::unsetDefault() 
+void PropertyImpl::unsetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -799,7 +799,7 @@ std::shared_ptr<Union<uml::Classifier>> PropertyImpl::getRedefinitionContext() c
 }
 
 
-std::shared_ptr<Property> PropertyImpl::getThisPropertyPtr()
+std::shared_ptr<Property> PropertyImpl::getThisPropertyPtr() const
 {
 	return m_thisPropertyPtr.lock();
 }

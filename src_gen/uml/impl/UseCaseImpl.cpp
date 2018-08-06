@@ -519,31 +519,31 @@ std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases() 
+std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context) 
+bool UseCaseImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) 
+bool UseCaseImpl::cannot_include_self(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool UseCaseImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) 
+bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -613,7 +613,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> UseCaseImpl::getRedefinedElement
 }
 
 
-std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr()
+std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr() const
 {
 	return m_thisUseCasePtr.lock();
 }

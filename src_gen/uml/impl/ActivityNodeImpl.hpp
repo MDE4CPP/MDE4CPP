@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityNodeImpl();
-			virtual std::shared_ptr<ActivityNode> getThisActivityNodePtr();
+			virtual std::shared_ptr<ActivityNode> getThisActivityNodePtr() const;
 			virtual void setThisActivityNodePtr(std::weak_ptr<ActivityNode> thisActivityNodePtr);
 
 			//Additional constructors for the containments back reference

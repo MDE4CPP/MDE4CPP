@@ -260,13 +260,13 @@ std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool MergeNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool MergeNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) 
+bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> MergeNodeImpl::getRedefinedEleme
 }
 
 
-std::shared_ptr<MergeNode> MergeNodeImpl::getThisMergeNodePtr()
+std::shared_ptr<MergeNode> MergeNodeImpl::getThisMergeNodePtr() const
 {
 	return m_thisMergeNodePtr.lock();
 }

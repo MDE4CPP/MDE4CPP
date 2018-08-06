@@ -244,7 +244,7 @@ std::weak_ptr<uml::Element > SignalEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr()
+std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
 {
 	return m_thisSignalEventPtr.lock();
 }

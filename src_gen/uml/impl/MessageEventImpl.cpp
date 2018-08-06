@@ -229,7 +229,7 @@ std::weak_ptr<uml::Element > MessageEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr()
+std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
 {
 	return m_thisMessageEventPtr.lock();
 }

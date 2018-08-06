@@ -180,37 +180,37 @@ namespace uml
 			/*!
 			 The association of the end must be an AssociationClass.
 			end.association.oclIsKindOf(AssociationClass) */ 
-			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The ends of the association must not be static.
 			end.association.memberEnd->forAll(e | not e.isStatic) */ 
-			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The end Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool property(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool property(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the object InputPin is the AssociationClass that owns the end Property.
 			object.type = end.association */ 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the end Property.
 			result.type = end.type */ 
-			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

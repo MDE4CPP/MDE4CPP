@@ -548,7 +548,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> DeviceI
 }
 
 
-std::shared_ptr<Device> DeviceImpl::getThisDevicePtr()
+std::shared_ptr<Device> DeviceImpl::getThisDevicePtr() const
 {
 	return m_thisDevicePtr.lock();
 }

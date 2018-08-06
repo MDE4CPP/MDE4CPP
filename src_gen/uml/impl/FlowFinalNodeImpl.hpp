@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FlowFinalNodeImpl();
-			virtual std::shared_ptr<FlowFinalNode> getThisFlowFinalNodePtr();
+			virtual std::shared_ptr<FlowFinalNode> getThisFlowFinalNodePtr() const;
 			virtual void setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr);
 
 			//Additional constructors for the containments back reference

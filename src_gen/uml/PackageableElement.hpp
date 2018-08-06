@@ -143,7 +143,7 @@ namespace uml
 			/*!
 			 A PackageableElement owned by a Namespace must have a visibility.
 			visibility = null implies namespace = null */ 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

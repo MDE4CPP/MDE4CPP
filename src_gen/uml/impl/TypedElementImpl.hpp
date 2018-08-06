@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TypedElementImpl();
-			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr();
+			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr() const;
 			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);
 
 			//Additional constructors for the containments back reference

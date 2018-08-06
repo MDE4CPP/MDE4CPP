@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SlotImpl();
-			virtual std::shared_ptr<Slot> getThisSlotPtr();
+			virtual std::shared_ptr<Slot> getThisSlotPtr() const;
 			virtual void setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr);
 
 			//Additional constructors for the containments back reference

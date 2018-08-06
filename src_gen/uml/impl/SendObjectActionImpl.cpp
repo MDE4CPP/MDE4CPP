@@ -330,7 +330,7 @@ std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -384,7 +384,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> SendObjectActionImpl::getRedefin
 }
 
 
-std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr()
+std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
 {
 	return m_thisSendObjectActionPtr.lock();
 }

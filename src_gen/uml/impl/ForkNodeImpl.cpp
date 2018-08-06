@@ -260,13 +260,13 @@ std::shared_ptr<ecore::EClass> ForkNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ForkNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ForkNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ForkNodeImpl::one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context) 
+bool ForkNodeImpl::one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ForkNodeImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<ForkNode> ForkNodeImpl::getThisForkNodePtr()
+std::shared_ptr<ForkNode> ForkNodeImpl::getThisForkNodePtr() const
 {
 	return m_thisForkNodePtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InterfaceRealizationImpl();
-			virtual std::shared_ptr<InterfaceRealization> getThisInterfaceRealizationPtr();
+			virtual std::shared_ptr<InterfaceRealization> getThisInterfaceRealizationPtr() const;
 			virtual void setThisInterfaceRealizationPtr(std::weak_ptr<InterfaceRealization> thisInterfaceRealizationPtr);
 
 			//Additional constructors for the containments back reference

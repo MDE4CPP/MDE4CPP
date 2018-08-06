@@ -185,12 +185,12 @@ namespace uml
 				type=null or 
 					(trigger->forAll(event.oclIsKindOf(SignalEvent)) and 
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type))) */ 
-			virtual bool conforming_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool conforming_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 AcceptEventActions may have no input pins.
 			input->size() = 0 */ 
-			virtual bool no_input_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_input_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
@@ -198,13 +198,13 @@ namespace uml
 			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
 			                             event.oclIsKindOf(CallEvent))))
 			implies output->size() = 0 */ 
-			virtual bool no_output_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1) */ 
-			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
@@ -217,7 +217,7 @@ namespace uml
 					result->at(i).type = attribute->at(i).type and 
 					result->at(i).isOrdered = attribute->at(i).isOrdered and
 					result->at(i).includesMultiplicity(attribute->at(i))) */ 
-			virtual bool unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

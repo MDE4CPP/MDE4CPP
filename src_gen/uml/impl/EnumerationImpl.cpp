@@ -432,7 +432,7 @@ std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(Any diagnostics,std::map <   Any, Any >  context) 
+bool EnumerationImpl::immutable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -485,7 +485,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> EnumerationImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<Enumeration> EnumerationImpl::getThisEnumerationPtr()
+std::shared_ptr<Enumeration> EnumerationImpl::getThisEnumerationPtr() const
 {
 	return m_thisEnumerationPtr.lock();
 }

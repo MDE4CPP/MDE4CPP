@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StereotypeImpl();
-			virtual std::shared_ptr<Stereotype> getThisStereotypePtr();
+			virtual std::shared_ptr<Stereotype> getThisStereotypePtr() const;
 			virtual void setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr);
 
 			//Additional constructors for the containments back reference
@@ -66,74 +66,74 @@ namespace uml
 			ownedAttribute
 			->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))
 			->forAll(opposite.owner = association) */ 
-			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime. */ 
-			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1. */ 
-			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The upper bound of base-properties is exactly 1. */ 
-			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2) */ 
-			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
 			result = (self.namespace.oclAsType(Package).containingProfile())
 			<p>From package UML::Packages.</p> */ 
-			virtual std::shared_ptr<uml::Profile> containingProfile()  ;
+			virtual std::shared_ptr<uml::Profile> containingProfile() ;
 			
 			/*!
 			 Creates a(n) (required) extension of the specified metaclass with this stereotype. */ 
-			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired)  ;
+			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) ;
 			
 			/*!
 			 Creates an icon with the specified location for this stereotype. */ 
-			virtual std::shared_ptr<uml::Image> createIcon(std::string location)  ;
+			virtual std::shared_ptr<uml::Image> createIcon(std::string location) ;
 			
 			/*!
 			 Creates an icon with the specified format and content for this stereotype. */ 
-			virtual std::shared_ptr<uml::Image> createIcon(std::string format,std::string content)  ;
+			virtual std::shared_ptr<uml::Image> createIcon(std::string format,std::string content) ;
 			
 			/*!
 			 A Stereotype may only generalize or specialize another Stereotype.
 			allParents()->forAll(oclIsKindOf(Stereotype)) 
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype)) */ 
-			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes. */ 
-			virtual std::shared_ptr<Bag<uml::Class> > getAllExtendedMetaclasses()  ;
+			virtual std::shared_ptr<Bag<uml::Class> > getAllExtendedMetaclasses() ;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this stereotype. */ 
-			virtual std::shared_ptr<ecore::EClass> getDefinition()  ;
+			virtual std::shared_ptr<ecore::EClass> getDefinition() ;
 			
 			/*!
 			 Retrieves the metaclasses extended by this stereotype. */ 
-			virtual std::shared_ptr<Bag<uml::Class> > getExtendedMetaclasses()  ;
+			virtual std::shared_ptr<Bag<uml::Class> > getExtendedMetaclasses() ;
 			
 			/*!
 			 Retrieves the localized keyword for this stereotype. */ 
-			virtual std::string getKeyword()  ;
+			virtual std::string getKeyword() ;
 			
 			/*!
 			 Retrieves the keyword for this stereotype, localized if indicated. */ 
-			virtual std::string getKeyword(bool localize)  ;
+			virtual std::string getKeyword(bool localize) ;
 			
 			
 			
 			/*!
 			 Stereotype names should not clash with keyword names for the extended model element. */ 
-			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

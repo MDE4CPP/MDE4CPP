@@ -344,67 +344,67 @@ TransitionKind TransitionImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_state(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::fork_segment_state(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::initial_transition(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::initial_transition(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_guards(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::join_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_state(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::join_segment_state(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_external(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::state_is_external(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_internal(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::state_is_internal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  context) 
+bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -509,7 +509,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> TransitionImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr()
+std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr() const
 {
 	return m_thisTransitionPtr.lock();
 }

@@ -291,7 +291,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getT
 }
 
 
-std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr()
+std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
 {
 	return m_thisManifestationPtr.lock();
 }

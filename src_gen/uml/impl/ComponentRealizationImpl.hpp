@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ComponentRealizationImpl();
-			virtual std::shared_ptr<ComponentRealization> getThisComponentRealizationPtr();
+			virtual std::shared_ptr<ComponentRealization> getThisComponentRealizationPtr() const;
 			virtual void setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr);
 
 			//Additional constructors for the containments back reference

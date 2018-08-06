@@ -201,7 +201,7 @@ std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -237,7 +237,7 @@ std::weak_ptr<uml::Element > ExtensionPointImpl::getOwner() const
 }
 
 
-std::shared_ptr<ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr()
+std::shared_ptr<ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr() const
 {
 	return m_thisExtensionPointPtr.lock();
 }

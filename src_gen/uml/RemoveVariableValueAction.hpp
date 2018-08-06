@@ -187,7 +187,7 @@ namespace uml
 			else
 			  removeAt = null and value <> null
 			endif */ 
-			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

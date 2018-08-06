@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateBindingImpl();
-			virtual std::shared_ptr<TemplateBinding> getThisTemplateBindingPtr();
+			virtual std::shared_ptr<TemplateBinding> getThisTemplateBindingPtr() const;
 			virtual void setThisTemplateBindingPtr(std::weak_ptr<TemplateBinding> thisTemplateBindingPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,12 +53,12 @@ namespace uml
 			/*!
 			 A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter of the target TemplateSignature.
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1) */ 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal)) */ 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

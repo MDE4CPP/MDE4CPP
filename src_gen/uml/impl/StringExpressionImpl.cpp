@@ -307,13 +307,13 @@ std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StringExpressionImpl::operands(Any diagnostics,std::map <   Any, Any >  context) 
+bool StringExpressionImpl::operands(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <   Any, Any >  context) 
+bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -356,7 +356,7 @@ std::weak_ptr<uml::Element > StringExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr()
+std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
 {
 	return m_thisStringExpressionPtr.lock();
 }

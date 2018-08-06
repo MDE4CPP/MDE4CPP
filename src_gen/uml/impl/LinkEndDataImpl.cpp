@@ -185,37 +185,37 @@ std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins() 
+std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -260,7 +260,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndDataImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr()
+std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
 {
 	return m_thisLinkEndDataPtr.lock();
 }

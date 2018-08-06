@@ -192,7 +192,7 @@ std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) 
+bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -231,7 +231,7 @@ std::weak_ptr<uml::Element > TriggerImpl::getOwner() const
 }
 
 
-std::shared_ptr<Trigger> TriggerImpl::getThisTriggerPtr()
+std::shared_ptr<Trigger> TriggerImpl::getThisTriggerPtr() const
 {
 	return m_thisTriggerPtr.lock();
 }

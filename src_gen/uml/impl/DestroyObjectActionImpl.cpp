@@ -327,13 +327,13 @@ bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const
 //*********************************
 // Operations
 //*********************************
-bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -377,7 +377,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DestroyObjectActionImpl::getRede
 }
 
 
-std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr()
+std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
 {
 	return m_thisDestroyObjectActionPtr.lock();
 }

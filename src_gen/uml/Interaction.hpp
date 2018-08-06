@@ -302,7 +302,7 @@ namespace uml
 			/*!
 			 An Interaction instance must not be contained within another Interaction instance.
 			enclosingInteraction->isEmpty() */ 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

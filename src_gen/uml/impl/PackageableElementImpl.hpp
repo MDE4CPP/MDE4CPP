@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PackageableElementImpl();
-			virtual std::shared_ptr<PackageableElement> getThisPackageableElementPtr();
+			virtual std::shared_ptr<PackageableElement> getThisPackageableElementPtr() const;
 			virtual void setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,7 +62,7 @@ namespace uml
 			/*!
 			 A PackageableElement owned by a Namespace must have a visibility.
 			visibility = null implies namespace = null */ 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

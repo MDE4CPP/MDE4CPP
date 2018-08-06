@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehavioredClassifierImpl();
-			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr();
+			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr() const;
 			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,15 +64,15 @@ namespace uml
 			/*!
 			 If a behavior is classifier behavior, it does not have a specification.
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty() */ 
-			virtual bool class_behavior(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool class_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency. */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() ;
 			
 			/*!
 			 Retrieves the interfaces on which this behaviored classifier has an interface realization dependency. */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() ;
 			
 			
 			

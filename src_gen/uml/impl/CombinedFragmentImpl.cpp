@@ -294,19 +294,19 @@ InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(Any diagnostics,std::map <   Any, Any >  context) 
+bool CombinedFragmentImpl::break_(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context) 
+bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context) 
+bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -346,7 +346,7 @@ std::weak_ptr<uml::Element > CombinedFragmentImpl::getOwner() const
 }
 
 
-std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr()
+std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
 {
 	return m_thisCombinedFragmentPtr.lock();
 }

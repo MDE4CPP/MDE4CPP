@@ -254,19 +254,19 @@ std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PartDecompositionImpl::assume(Any diagnostics,std::map <   Any, Any >  context) 
+bool PartDecompositionImpl::assume(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::commutativity_of_decomposition(Any diagnostics,std::map <   Any, Any >  context) 
+bool PartDecompositionImpl::commutativity_of_decomposition(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::parts_of_internal_structures(Any diagnostics,std::map <   Any, Any >  context) 
+bool PartDecompositionImpl::parts_of_internal_structures(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +293,7 @@ std::weak_ptr<uml::Element > PartDecompositionImpl::getOwner() const
 }
 
 
-std::shared_ptr<PartDecomposition> PartDecompositionImpl::getThisPartDecompositionPtr()
+std::shared_ptr<PartDecomposition> PartDecompositionImpl::getThisPartDecompositionPtr() const
 {
 	return m_thisPartDecompositionPtr.lock();
 }

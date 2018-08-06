@@ -147,12 +147,12 @@ namespace uml
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

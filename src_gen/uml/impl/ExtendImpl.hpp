@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExtendImpl();
-			virtual std::shared_ptr<Extend> getThisExtendPtr();
+			virtual std::shared_ptr<Extend> getThisExtendPtr() const;
 			virtual void setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr);
 
 			//Additional constructors for the containments back reference
@@ -58,7 +58,7 @@ namespace uml
 			/*!
 			 The ExtensionPoints referenced by the Extend relationship must belong to the UseCase that is being extended.
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp)) */ 
-			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

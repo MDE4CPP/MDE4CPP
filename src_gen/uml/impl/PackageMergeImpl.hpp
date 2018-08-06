@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PackageMergeImpl();
-			virtual std::shared_ptr<PackageMerge> getThisPackageMergePtr();
+			virtual std::shared_ptr<PackageMerge> getThisPackageMergePtr() const;
 			virtual void setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr);
 
 			//Additional constructors for the containments back reference

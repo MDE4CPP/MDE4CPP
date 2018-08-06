@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityFinalNodeImpl();
-			virtual std::shared_ptr<ActivityFinalNode> getThisActivityFinalNodePtr();
+			virtual std::shared_ptr<ActivityFinalNode> getThisActivityFinalNodePtr() const;
 			virtual void setThisActivityFinalNodePtr(std::weak_ptr<ActivityFinalNode> thisActivityFinalNodePtr);
 
 			//Additional constructors for the containments back reference

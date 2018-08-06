@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReclassifyObjectActionImpl();
-			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr();
+			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr() const;
 			virtual void setThisReclassifyObjectActionPtr(std::weak_ptr<ReclassifyObjectAction> thisReclassifyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,17 +61,17 @@ namespace uml
 			/*!
 			 None of the newClassifiers may be abstract.
 			not newClassifier->exists(isAbstract) */ 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

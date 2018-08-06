@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) 
+bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -246,7 +246,7 @@ std::weak_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
 }
 
 
-std::shared_ptr<TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr()
+std::shared_ptr<TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr() const
 {
 	return m_thisTemplateParameterSubstitutionPtr.lock();
 }

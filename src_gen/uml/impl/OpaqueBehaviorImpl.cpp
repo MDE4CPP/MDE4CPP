@@ -617,7 +617,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueB
 }
 
 
-std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr()
+std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
 {
 	return m_thisOpaqueBehaviorPtr.lock();
 }

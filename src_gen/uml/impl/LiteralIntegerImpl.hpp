@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralIntegerImpl();
-			virtual std::shared_ptr<LiteralInteger> getThisLiteralIntegerPtr();
+			virtual std::shared_ptr<LiteralInteger> getThisLiteralIntegerPtr() const;
 			virtual void setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr);
 
 			//Additional constructors for the containments back reference

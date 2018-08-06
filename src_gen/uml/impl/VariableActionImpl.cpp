@@ -301,7 +301,7 @@ std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) 
+bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -341,7 +341,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> VariableActionImpl::getRedefined
 }
 
 
-std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr()
+std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const
 {
 	return m_thisVariableActionPtr.lock();
 }

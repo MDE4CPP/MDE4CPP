@@ -186,7 +186,7 @@ std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context) 
+bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -228,7 +228,7 @@ std::weak_ptr<uml::Element > GeneralOrderingImpl::getOwner() const
 }
 
 
-std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr()
+std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
 {
 	return m_thisGeneralOrderingPtr.lock();
 }

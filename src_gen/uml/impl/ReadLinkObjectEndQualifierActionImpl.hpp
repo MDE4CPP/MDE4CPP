@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReadLinkObjectEndQualifierActionImpl();
-			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> getThisReadLinkObjectEndQualifierActionPtr();
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> getThisReadLinkObjectEndQualifierActionPtr() const;
 			virtual void setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,42 +61,42 @@ namespace uml
 			/*!
 			 The association of the Association end of the qualifier Property must be an AssociationClass.
 			qualifier.associationEnd.association.oclIsKindOf(AssociationClass) */ 
-			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The ends of the Association must not be static.
 			qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic) */ 
-			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the qualifier Property is 1..1.
 			qualifier.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The qualifier Property must be a qualifier of an Association end.
 			qualifier.associationEnd <> null */ 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the qualifier Property.
 			result.type = qualifier.type */ 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
 			object.type = qualifier.associationEnd.association */ 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

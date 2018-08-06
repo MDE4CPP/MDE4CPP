@@ -204,7 +204,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DirectedRelationshipImp
 }
 
 
-std::shared_ptr<DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr()
+std::shared_ptr<DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
 {
 	return m_thisDirectedRelationshipPtr.lock();
 }

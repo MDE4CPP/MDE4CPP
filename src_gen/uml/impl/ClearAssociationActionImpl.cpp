@@ -313,13 +313,13 @@ std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -373,7 +373,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearAssociationActionImpl::getR
 }
 
 
-std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr()
+std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr() const
 {
 	return m_thisClearAssociationActionPtr.lock();
 }

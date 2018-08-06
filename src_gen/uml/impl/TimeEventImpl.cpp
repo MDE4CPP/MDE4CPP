@@ -230,7 +230,7 @@ bool TimeEventImpl::getIsRelative() const
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  context) 
+bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -266,7 +266,7 @@ std::weak_ptr<uml::Element > TimeEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr()
+std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
 {
 	return m_thisTimeEventPtr.lock();
 }

@@ -185,18 +185,18 @@ namespace uml
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
 				parameter->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent) */ 
-			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true */ 
-			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

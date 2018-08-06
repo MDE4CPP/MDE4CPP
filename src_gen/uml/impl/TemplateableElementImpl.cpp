@@ -185,13 +185,13 @@ std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateableElementImpl::isTemplate() 
+bool TemplateableElementImpl::isTemplate()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parameterableElements() 
+std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parameterableElements()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -226,7 +226,7 @@ std::shared_ptr<Union<uml::Element>> TemplateableElementImpl::getOwnedElement() 
 }
 
 
-std::shared_ptr<TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr()
+std::shared_ptr<TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr() const
 {
 	return m_thisTemplateableElementPtr.lock();
 }

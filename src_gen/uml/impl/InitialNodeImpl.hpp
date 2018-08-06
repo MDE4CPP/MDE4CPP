@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InitialNodeImpl();
-			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr();
+			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr() const;
 			virtual void setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
 			outgoing->forAll(oclIsKindOf(ControlFlow)) */ 
-			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

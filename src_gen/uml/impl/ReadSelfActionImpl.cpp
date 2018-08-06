@@ -305,25 +305,25 @@ std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadSelfActionImpl::contained(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadSelfActionImpl::contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadSelfActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -367,7 +367,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadSelfActionImpl::getRedefined
 }
 
 
-std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr()
+std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
 {
 	return m_thisReadSelfActionPtr.lock();
 }

@@ -172,12 +172,12 @@ namespace uml
 			/*!
 			 The aggregation of an ExtensionEnd is composite.
 			self.aggregation = AggregationKind::composite */ 
-			virtual bool aggregation(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool aggregation(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

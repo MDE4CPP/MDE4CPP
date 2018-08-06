@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EnumerationLiteralImpl();
-			virtual std::shared_ptr<EnumerationLiteral> getThisEnumerationLiteralPtr();
+			virtual std::shared_ptr<EnumerationLiteral> getThisEnumerationLiteralPtr() const;
 			virtual void setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,7 +66,7 @@ namespace uml
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() ;
 			
 			
 			

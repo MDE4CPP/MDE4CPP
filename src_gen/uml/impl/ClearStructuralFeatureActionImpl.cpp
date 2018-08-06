@@ -316,13 +316,13 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -370,7 +370,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearStructuralFeatureActionImpl
 }
 
 
-std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr()
+std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
 {
 	return m_thisClearStructuralFeatureActionPtr.lock();
 }

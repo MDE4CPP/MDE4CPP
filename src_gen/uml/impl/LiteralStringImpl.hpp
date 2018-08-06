@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralStringImpl();
-			virtual std::shared_ptr<LiteralString> getThisLiteralStringPtr();
+			virtual std::shared_ptr<LiteralString> getThisLiteralStringPtr() const;
 			virtual void setThisLiteralStringPtr(std::weak_ptr<LiteralString> thisLiteralStringPtr);
 
 			//Additional constructors for the containments back reference

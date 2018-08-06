@@ -335,19 +335,19 @@ bool ReclassifyObjectActionImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -405,7 +405,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReclassifyObjectActionImpl::getR
 }
 
 
-std::shared_ptr<ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr()
+std::shared_ptr<ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr() const
 {
 	return m_thisReclassifyObjectActionPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeploymentTargetImpl();
-			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr();
+			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr() const;
 			virtual void setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,7 +54,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements()  ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() ;
 			
 			
 			

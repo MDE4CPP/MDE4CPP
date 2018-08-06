@@ -217,31 +217,31 @@ std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StateMachine> VertexImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> VertexImpl::containingStateMachine()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getIncomings() 
+std::shared_ptr<Bag<uml::Transition> > VertexImpl::getIncomings()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings() 
+std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r) 
+bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s) 
+bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -291,7 +291,7 @@ std::weak_ptr<uml::Element > VertexImpl::getOwner() const
 }
 
 
-std::shared_ptr<Vertex> VertexImpl::getThisVertexPtr()
+std::shared_ptr<Vertex> VertexImpl::getThisVertexPtr() const
 {
 	return m_thisVertexPtr.lock();
 }

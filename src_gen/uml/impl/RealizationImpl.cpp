@@ -271,7 +271,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> RealizationImpl::getTar
 }
 
 
-std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr()
+std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr() const
 {
 	return m_thisRealizationPtr.lock();
 }

@@ -342,7 +342,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DestroyLinkActionImpl::getRedefi
 }
 
 
-std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr()
+std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
 {
 	return m_thisDestroyLinkActionPtr.lock();
 }

@@ -130,14 +130,14 @@ namespace uml
 			/*!
 			 Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
 			generalization->collect(general)->asSet()->size() <= 1 */ 
-			virtual bool generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
 			  ) */ 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

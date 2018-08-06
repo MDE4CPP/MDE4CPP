@@ -182,25 +182,25 @@ std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 //*********************************
 
 
-bool ConnectorEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -245,7 +245,7 @@ std::shared_ptr<Union<uml::Element>> ConnectorEndImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr()
+std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const
 {
 	return m_thisConnectorEndPtr.lock();
 }

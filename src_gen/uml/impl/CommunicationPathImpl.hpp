@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CommunicationPathImpl();
-			virtual std::shared_ptr<CommunicationPath> getThisCommunicationPathPtr();
+			virtual std::shared_ptr<CommunicationPath> getThisCommunicationPathPtr() const;
 			virtual void setThisCommunicationPathPtr(std::weak_ptr<CommunicationPath> thisCommunicationPathPtr);
 
 			//Additional constructors for the containments back reference

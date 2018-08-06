@@ -273,19 +273,19 @@ ConnectorKind ConnectorImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-ConnectorKind ConnectorImpl::getKind() 
+ConnectorKind ConnectorImpl::getKind()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::roles(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorImpl::roles(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::types(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConnectorImpl::types(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -342,7 +342,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ConnectorImpl::getRedefinedEleme
 }
 
 
-std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr()
+std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr() const
 {
 	return m_thisConnectorPtr.lock();
 }

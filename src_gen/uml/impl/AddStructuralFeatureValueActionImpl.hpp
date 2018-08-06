@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AddStructuralFeatureValueActionImpl();
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> getThisAddStructuralFeatureValueActionPtr();
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> getThisAddStructuralFeatureValueActionPtr() const;
 			virtual void setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,12 +66,12 @@ namespace uml
 			  	insertAt<>null and 
 			  	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))
 			endif */ 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A value InputPin is required.
 			value<>null */ 
-			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

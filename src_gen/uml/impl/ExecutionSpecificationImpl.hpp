@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExecutionSpecificationImpl();
-			virtual std::shared_ptr<ExecutionSpecification> getThisExecutionSpecificationPtr();
+			virtual std::shared_ptr<ExecutionSpecification> getThisExecutionSpecificationPtr() const;
 			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The startEvent and the finishEvent must be on the same Lifeline.
 			start.covered = finish.covered */ 
-			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

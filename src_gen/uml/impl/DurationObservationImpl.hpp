@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DurationObservationImpl();
-			virtual std::shared_ptr<DurationObservation> getThisDurationObservationPtr();
+			virtual std::shared_ptr<DurationObservation> getThisDurationObservationPtr() const;
 			virtual void setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

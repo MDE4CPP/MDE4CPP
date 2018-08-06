@@ -337,37 +337,37 @@ std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FinalStateImpl::cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_regions(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::no_regions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_state_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool FinalStateImpl::no_state_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -406,7 +406,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FinalStateImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr()
+std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
 {
 	return m_thisFinalStatePtr.lock();
 }

@@ -321,19 +321,19 @@ std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::must_conform(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationFlowImpl::must_conform(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -420,7 +420,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::ge
 }
 
 
-std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr()
+std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr() const
 {
 	return m_thisInformationFlowPtr.lock();
 }

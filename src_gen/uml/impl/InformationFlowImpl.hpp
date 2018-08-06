@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InformationFlowImpl();
-			virtual std::shared_ptr<InformationFlow> getThisInformationFlowPtr();
+			virtual std::shared_ptr<InformationFlow> getThisInformationFlowPtr() const;
 			virtual void setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,11 +63,11 @@ namespace uml
 			 An information flow can only convey classifiers that are allowed to represent an information item.
 			self.conveyed->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface)
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)) */ 
-			virtual bool convey_classifiers(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool convey_classifiers(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships. */ 
-			virtual bool must_conform(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool must_conform(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
@@ -85,7 +85,7 @@ namespace uml
 			  oclIsKindOf(Class) or oclIsKindOf(Component) or oclIsKindOf(Port) or oclIsKindOf(Property) or 
 			  oclIsKindOf(Interface) or oclIsKindOf(Package) or oclIsKindOf(ActivityNode) or oclIsKindOf(ActivityPartition) or 
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship))))) */ 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

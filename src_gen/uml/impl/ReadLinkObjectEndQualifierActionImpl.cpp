@@ -326,49 +326,49 @@ std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkObjectEndQualifierActionImpl::association_of_association(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::association_of_association(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -436,7 +436,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadLinkObjectEndQualifierAction
 }
 
 
-std::shared_ptr<ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr()
+std::shared_ptr<ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr() const
 {
 	return m_thisReadLinkObjectEndQualifierActionPtr.lock();
 }

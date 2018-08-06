@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CallOperationActionImpl();
-			virtual std::shared_ptr<CallOperationAction> getThisCallOperationActionPtr();
+			virtual std::shared_ptr<CallOperationAction> getThisCallOperationActionPtr() const;
 			virtual void setThisCallOperationActionPtr(std::weak_ptr<CallOperationAction> thisCallOperationActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			if onPort=null then  target.type.oclAsType(Classifier).allFeatures()->includes(operation)
 			else target.type.oclAsType(Classifier).allFeatures()->includes(onPort) and onPort.provided->union(onPort.required).allFeatures()->includes(operation)
 			endif */ 
-			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

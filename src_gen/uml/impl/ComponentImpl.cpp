@@ -579,49 +579,49 @@ bool ComponentImpl::getIsIndirectlyInstantiated() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name,bool isAbstract)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Enumeration> ComponentImpl::createOwnedEnumeration(std::string name) 
+std::shared_ptr<uml::Enumeration> ComponentImpl::createOwnedEnumeration(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Interface> ComponentImpl::createOwnedInterface(std::string name) 
+std::shared_ptr<uml::Interface> ComponentImpl::createOwnedInterface(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PrimitiveType> ComponentImpl::createOwnedPrimitiveType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> ComponentImpl::createOwnedPrimitiveType(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getProvideds() 
+std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getProvideds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds() 
+std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context) 
+bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context) 
+bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -699,7 +699,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Compone
 }
 
 
-std::shared_ptr<Component> ComponentImpl::getThisComponentPtr()
+std::shared_ptr<Component> ComponentImpl::getThisComponentPtr() const
 {
 	return m_thisComponentPtr.lock();
 }

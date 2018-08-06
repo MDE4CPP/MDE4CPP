@@ -421,7 +421,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityNodeImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<ActivityNode> ActivityNodeImpl::getThisActivityNodePtr()
+std::shared_ptr<ActivityNode> ActivityNodeImpl::getThisActivityNodePtr() const
 {
 	return m_thisActivityNodePtr.lock();
 }

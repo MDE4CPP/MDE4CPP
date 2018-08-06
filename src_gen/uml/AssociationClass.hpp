@@ -251,12 +251,12 @@ namespace uml
 			/*!
 			 An AssociationClass cannot be defined between itself and something else.
 			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self) */ 
-			virtual bool cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The owned attributes and owned ends of an AssociationClass are disjoint.
 			ownedAttribute->intersection(ownedEnd)->isEmpty() */ 
-			virtual bool disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

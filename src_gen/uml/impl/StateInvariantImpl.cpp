@@ -263,7 +263,7 @@ std::weak_ptr<uml::Element > StateInvariantImpl::getOwner() const
 }
 
 
-std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr()
+std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
 {
 	return m_thisStateInvariantPtr.lock();
 }

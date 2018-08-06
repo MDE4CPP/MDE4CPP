@@ -372,7 +372,7 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const
 //*********************************
 // Operations
 //*********************************
-bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context) 
+bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -424,7 +424,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> OpaqueActionImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr()
+std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
 {
 	return m_thisOpaqueActionPtr.lock();
 }

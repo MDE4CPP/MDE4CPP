@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InterfaceImpl();
-			virtual std::shared_ptr<Interface> getThisInterfacePtr();
+			virtual std::shared_ptr<Interface> getThisInterfacePtr() const;
 			virtual void setThisInterfacePtr(std::weak_ptr<Interface> thisInterfacePtr);
 
 			//Additional constructors for the containments back reference
@@ -63,16 +63,16 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this interface. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
 			
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface. */ 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
 			
 			/*!
 			 The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public) */ 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

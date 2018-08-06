@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RelationshipImpl();
-			virtual std::shared_ptr<Relationship> getThisRelationshipPtr();
+			virtual std::shared_ptr<Relationship> getThisRelationshipPtr() const;
 			virtual void setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr);
 
 			//Additional constructors for the containments back reference

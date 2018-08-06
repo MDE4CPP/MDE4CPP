@@ -214,31 +214,31 @@ bool RedefinableElementImpl::getIsLeaf() const
 //*********************************
 // Operations
 //*********************************
-bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) 
+bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) 
+bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) 
+bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) 
+bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) 
+bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -274,7 +274,7 @@ std::shared_ptr<Union<uml::Classifier>> RedefinableElementImpl::getRedefinitionC
 }
 
 
-std::shared_ptr<RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr()
+std::shared_ptr<RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr() const
 {
 	return m_thisRedefinableElementPtr.lock();
 }

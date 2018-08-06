@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClearAssociationActionImpl();
-			virtual std::shared_ptr<ClearAssociationAction> getThisClearAssociationActionPtr();
+			virtual std::shared_ptr<ClearAssociationAction> getThisClearAssociationActionPtr() const;
 			virtual void setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the InputPin must conform to the type of at least one of the memberEnds of the association.
 			association.memberEnd->exists(self.object.type.conformsTo(type)) */ 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

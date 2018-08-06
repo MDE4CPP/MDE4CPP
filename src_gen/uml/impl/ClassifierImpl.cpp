@@ -593,55 +593,55 @@ bool ClassifierImpl::getIsFinalSpecialization() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::allAttributes() 
+std::shared_ptr<Bag<uml::Property> > ClassifierImpl::allAttributes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Feature> > ClassifierImpl::allFeatures() 
+std::shared_ptr<Bag<uml::Feature> > ClassifierImpl::allFeatures()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::allParents() 
+std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::allParents()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allRealizedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allRealizedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatures() 
+std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatures()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyRealizedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyRealizedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes() 
+std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -660,19 +660,19 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations() 
+std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals() 
+std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -680,85 +680,85 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::getInheritedMembers() 
+std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::getInheritedMembers()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes) 
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,bool ignoreCase) 
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,bool ignoreCase)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getOperations() 
+std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getOperations()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getUsedInterfaces() 
+std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getUsedInterfaces()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::hasVisibilityOf(std::shared_ptr<uml::NamedElement>  n) 
+bool ClassifierImpl::hasVisibilityOf(std::shared_ptr<uml::NamedElement>  n)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement> >  inhs) 
+std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement> >  inhs)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inheritableMembers(std::shared_ptr<uml::Classifier>  c) 
+std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inheritableMembers(std::shared_ptr<uml::Classifier>  c)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier>  contract) 
+bool ClassifierImpl::isSubstitutableFor(std::shared_ptr<uml::Classifier>  contract)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier>  c) 
+bool ClassifierImpl::maySpecializeType(std::shared_ptr<uml::Classifier>  c)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::no_cycles_in_generalization(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierImpl::no_cycles_in_generalization(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierImpl::non_final_parents(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierImpl::non_final_parents(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents() 
+std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -773,7 +773,7 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents()
 	//end of body
 }
 
-bool ClassifierImpl::specialize_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClassifierImpl::specialize_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -898,7 +898,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClassifierImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<Classifier> ClassifierImpl::getThisClassifierPtr()
+std::shared_ptr<Classifier> ClassifierImpl::getThisClassifierPtr() const
 {
 	return m_thisClassifierPtr.lock();
 }

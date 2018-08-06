@@ -183,25 +183,25 @@ std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment() 
+std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageEndImpl::isReceive() 
+bool MessageEndImpl::isReceive()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageEndImpl::isSend() 
+bool MessageEndImpl::isSend()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd() 
+std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -233,7 +233,7 @@ std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
 }
 
 
-std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr()
+std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr() const
 {
 	return m_thisMessageEndPtr.lock();
 }

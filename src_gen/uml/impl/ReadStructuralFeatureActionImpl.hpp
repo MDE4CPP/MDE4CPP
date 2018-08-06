@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReadStructuralFeatureActionImpl();
-			virtual std::shared_ptr<ReadStructuralFeatureAction> getThisReadStructuralFeatureActionPtr();
+			virtual std::shared_ptr<ReadStructuralFeatureAction> getThisReadStructuralFeatureActionPtr() const;
 			virtual void setThisReadStructuralFeatureActionPtr(std::weak_ptr<ReadStructuralFeatureAction> thisReadStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,7 +62,7 @@ namespace uml
 			 The type and ordering of the result OutputPin are the same as the type and ordering of the StructuralFeature.
 			result.type =structuralFeature.type and 
 			result.isOrdered = structuralFeature.isOrdered */ 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

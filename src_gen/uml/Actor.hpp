@@ -218,12 +218,12 @@ namespace uml
 			         actorEnd.opposite.class.oclIsKindOf(Behavior))
 			      )
 			  ) */ 
-			virtual bool associations(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 An Actor must have a name.
 			name->notEmpty() */ 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

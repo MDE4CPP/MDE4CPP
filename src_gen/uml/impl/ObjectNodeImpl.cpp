@@ -318,19 +318,19 @@ ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -387,7 +387,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ObjectNodeImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr()
+std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
 {
 	return m_thisObjectNodePtr.lock();
 }

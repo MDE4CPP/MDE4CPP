@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ManifestationImpl();
-			virtual std::shared_ptr<Manifestation> getThisManifestationPtr();
+			virtual std::shared_ptr<Manifestation> getThisManifestationPtr() const;
 			virtual void setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr);
 
 			//Additional constructors for the containments back reference

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FinalNodeImpl();
-			virtual std::shared_ptr<FinalNode> getThisFinalNodePtr();
+			virtual std::shared_ptr<FinalNode> getThisFinalNodePtr() const;
 			virtual void setThisFinalNodePtr(std::weak_ptr<FinalNode> thisFinalNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 A FinalNode has no outgoing ActivityEdges.
 			outgoing->isEmpty() */ 
-			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

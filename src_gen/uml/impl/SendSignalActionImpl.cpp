@@ -325,19 +325,19 @@ std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendSignalActionImpl::number_order(Any diagnostics,std::map <   Any, Any >  context) 
+bool SendSignalActionImpl::number_order(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -391,7 +391,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> SendSignalActionImpl::getRedefin
 }
 
 
-std::shared_ptr<SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr()
+std::shared_ptr<SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr() const
 {
 	return m_thisSendSignalActionPtr.lock();
 }

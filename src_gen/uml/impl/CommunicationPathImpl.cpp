@@ -462,7 +462,7 @@ std::shared_ptr<Union<uml::Element>> CommunicationPathImpl::getRelatedElement() 
 }
 
 
-std::shared_ptr<CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr()
+std::shared_ptr<CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr() const
 {
 	return m_thisCommunicationPathPtr.lock();
 }

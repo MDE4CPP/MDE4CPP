@@ -184,7 +184,7 @@ namespace uml
 			/*!
 			 A CallBehaviorAction may not specify onPort.
 			onPort=null */ 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

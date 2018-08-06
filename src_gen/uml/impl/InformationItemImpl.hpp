@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InformationItemImpl();
-			virtual std::shared_ptr<InformationItem> getThisInformationItemPtr();
+			virtual std::shared_ptr<InformationItem> getThisInformationItemPtr() const;
 			virtual void setThisInformationItemPtr(std::weak_ptr<InformationItem> thisInformationItemPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,12 +64,12 @@ namespace uml
 			/*!
 			 An informationItem has no feature, no generalization, and no associations.
 			self.generalization->isEmpty() and self.feature->isEmpty() */ 
-			virtual bool has_no(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool has_no(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 It is not instantiable.
 			isAbstract */ 
-			virtual bool not_instantiable(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool not_instantiable(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
@@ -78,7 +78,7 @@ namespace uml
 			    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and
 			      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))) */ 
-			virtual bool sources_and_targets(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool sources_and_targets(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

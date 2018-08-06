@@ -263,7 +263,7 @@ std::weak_ptr<uml::Element > BehaviorExecutionSpecificationImpl::getOwner() cons
 }
 
 
-std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr()
+std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
 {
 	return m_thisBehaviorExecutionSpecificationPtr.lock();
 }

@@ -345,13 +345,13 @@ std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -412,7 +412,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReplyActionImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr()
+std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
 {
 	return m_thisReplyActionPtr.lock();
 }

@@ -260,43 +260,43 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const
 //*********************************
 
 
-bool OpaqueExpressionImpl::isIntegral() 
+bool OpaqueExpressionImpl::isIntegral()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::isNonNegative() 
+bool OpaqueExpressionImpl::isNonNegative()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::isPositive() 
+bool OpaqueExpressionImpl::isPositive()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context) 
+bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) 
+bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int OpaqueExpressionImpl::value() 
+int OpaqueExpressionImpl::value()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -339,7 +339,7 @@ std::weak_ptr<uml::Element > OpaqueExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr()
+std::shared_ptr<OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr() const
 {
 	return m_thisOpaqueExpressionPtr.lock();
 }

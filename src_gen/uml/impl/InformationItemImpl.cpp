@@ -389,19 +389,19 @@ std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationItemImpl::has_no(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationItemImpl::has_no(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::not_instantiable(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationItemImpl::not_instantiable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, Any >  context) 
+bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -450,7 +450,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InformationItemImpl::getRedefine
 }
 
 
-std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr()
+std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr() const
 {
 	return m_thisInformationItemPtr.lock();
 }

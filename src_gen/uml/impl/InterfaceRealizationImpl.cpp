@@ -321,7 +321,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InterfaceRealizationImp
 }
 
 
-std::shared_ptr<InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr()
+std::shared_ptr<InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
 {
 	return m_thisInterfaceRealizationPtr.lock();
 }

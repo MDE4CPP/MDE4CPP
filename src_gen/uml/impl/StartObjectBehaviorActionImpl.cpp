@@ -328,25 +328,25 @@ std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior() 
+std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) 
+bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context) 
+bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context) 
+bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -394,7 +394,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StartObjectBehaviorActionImpl::g
 }
 
 
-std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr()
+std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr() const
 {
 	return m_thisStartObjectBehaviorActionPtr.lock();
 }

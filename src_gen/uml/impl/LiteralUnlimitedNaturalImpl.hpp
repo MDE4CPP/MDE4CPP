@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralUnlimitedNaturalImpl();
-			virtual std::shared_ptr<LiteralUnlimitedNatural> getThisLiteralUnlimitedNaturalPtr();
+			virtual std::shared_ptr<LiteralUnlimitedNatural> getThisLiteralUnlimitedNaturalPtr() const;
 			virtual void setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr);
 
 			//Additional constructors for the containments back reference

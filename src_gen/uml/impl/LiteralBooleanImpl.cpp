@@ -259,7 +259,7 @@ std::weak_ptr<uml::Element > LiteralBooleanImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr()
+std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
 {
 	return m_thisLiteralBooleanPtr.lock();
 }

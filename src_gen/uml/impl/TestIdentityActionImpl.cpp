@@ -331,19 +331,19 @@ std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool TestIdentityActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) 
+bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -411,7 +411,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> TestIdentityActionImpl::getRedef
 }
 
 
-std::shared_ptr<TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr()
+std::shared_ptr<TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr() const
 {
 	return m_thisTestIdentityActionPtr.lock();
 }

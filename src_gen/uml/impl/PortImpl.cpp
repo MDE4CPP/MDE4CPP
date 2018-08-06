@@ -452,43 +452,43 @@ bool PortImpl::getIsService() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::default_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool PortImpl::default_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context) 
+bool PortImpl::encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context) 
+bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -557,7 +557,7 @@ std::shared_ptr<Union<uml::Classifier>> PortImpl::getRedefinitionContext() const
 }
 
 
-std::shared_ptr<Port> PortImpl::getThisPortPtr()
+std::shared_ptr<Port> PortImpl::getThisPortPtr() const
 {
 	return m_thisPortPtr.lock();
 }

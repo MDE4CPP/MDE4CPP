@@ -179,7 +179,7 @@ namespace uml
 			/*!
 			 The VariableAction must be in the scope of the variable.
 			variable.isAccessibleBy(self) */ 
-			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			WriteLinkActionImpl();
-			virtual std::shared_ptr<WriteLinkAction> getThisWriteLinkActionPtr();
+			virtual std::shared_ptr<WriteLinkAction> getThisWriteLinkActionPtr() const;
 			virtual void setThisWriteLinkActionPtr(std::weak_ptr<WriteLinkAction> thisWriteLinkActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,7 +66,7 @@ namespace uml
 			  end.visibility=VisibilityKind::protected and
 			  endData.end->exists(other | 
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier)))) */ 
-			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

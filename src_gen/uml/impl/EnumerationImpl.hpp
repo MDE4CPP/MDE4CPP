@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EnumerationImpl();
-			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr();
+			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr() const;
 			virtual void setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			//*********************************
 			/*!
 			 ownedAttribute->forAll(isReadOnly) */ 
-			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -411,7 +411,7 @@ std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -464,7 +464,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> SignalImpl::getRedefinedElement(
 }
 
 
-std::shared_ptr<Signal> SignalImpl::getThisSignalPtr()
+std::shared_ptr<Signal> SignalImpl::getThisSignalPtr() const
 {
 	return m_thisSignalPtr.lock();
 }

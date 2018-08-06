@@ -264,7 +264,7 @@ std::weak_ptr<uml::Element > InstanceValueImpl::getOwner() const
 }
 
 
-std::shared_ptr<InstanceValue> InstanceValueImpl::getThisInstanceValuePtr()
+std::shared_ptr<InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
 {
 	return m_thisInstanceValuePtr.lock();
 }

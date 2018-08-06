@@ -175,17 +175,17 @@ namespace uml
 			/*!
 			 The multiplicity of the InputPins is 1..1.
 			first.is(1,1) and second.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The InputPins have no type.
 			first.type= null and second.type = null */ 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the result OutputPin is Boolean.
 			result.type=Boolean */ 
-			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

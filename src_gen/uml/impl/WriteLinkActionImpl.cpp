@@ -313,7 +313,7 @@ std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool WriteLinkActionImpl::allow_access(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteLinkActionImpl::allow_access(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -348,7 +348,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> WriteLinkActionImpl::getRedefine
 }
 
 
-std::shared_ptr<WriteLinkAction> WriteLinkActionImpl::getThisWriteLinkActionPtr()
+std::shared_ptr<WriteLinkAction> WriteLinkActionImpl::getThisWriteLinkActionPtr() const
 {
 	return m_thisWriteLinkActionPtr.lock();
 }

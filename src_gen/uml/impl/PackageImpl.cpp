@@ -515,145 +515,145 @@ std::string PackageImpl::getURI() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> PackageImpl::containingProfile() 
+std::shared_ptr<uml::Profile> PackageImpl::containingProfile()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Class> PackageImpl::createOwnedClass(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Class> PackageImpl::createOwnedClass(std::string name,bool isAbstract)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Enumeration> PackageImpl::createOwnedEnumeration(std::string name) 
+std::shared_ptr<uml::Enumeration> PackageImpl::createOwnedEnumeration(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Interface> PackageImpl::createOwnedInterface(std::string name) 
+std::shared_ptr<uml::Interface> PackageImpl::createOwnedInterface(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PrimitiveType> PackageImpl::createOwnedPrimitiveType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> PackageImpl::createOwnedPrimitiveType(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string name,bool isAbstract)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context) 
+bool PackageImpl::elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAllAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAllAppliedProfiles()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ProfileApplication> > PackageImpl::getAllProfileApplications() 
+std::shared_ptr<Bag<uml::ProfileApplication> > PackageImpl::getAllProfileApplications()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName) 
+std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse) 
+std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAppliedProfiles()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Package> > PackageImpl::getNestedPackages() 
+std::shared_ptr<Bag<uml::Package> > PackageImpl::getNestedPackages()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::getOwnedStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::getOwnedStereotypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes() 
+std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) 
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::isModelLibrary() 
+bool PackageImpl::isModelLibrary()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile) 
+bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el) 
+bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers() 
+std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -739,7 +739,7 @@ std::weak_ptr<uml::Element > PackageImpl::getOwner() const
 }
 
 
-std::shared_ptr<Package> PackageImpl::getThisPackagePtr()
+std::shared_ptr<Package> PackageImpl::getThisPackagePtr() const
 {
 	return m_thisPackagePtr.lock();
 }

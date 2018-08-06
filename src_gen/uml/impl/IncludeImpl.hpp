@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			IncludeImpl();
-			virtual std::shared_ptr<Include> getThisIncludePtr();
+			virtual std::shared_ptr<Include> getThisIncludePtr() const;
 			virtual void setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr);
 
 			//Additional constructors for the containments back reference

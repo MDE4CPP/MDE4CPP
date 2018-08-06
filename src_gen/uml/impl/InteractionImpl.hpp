@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionImpl();
-			virtual std::shared_ptr<Interaction> getThisInteractionPtr();
+			virtual std::shared_ptr<Interaction> getThisInteractionPtr() const;
 			virtual void setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr);
 
 			//Additional constructors for the containments back reference
@@ -77,7 +77,7 @@ namespace uml
 			/*!
 			 An Interaction instance must not be contained within another Interaction instance.
 			enclosingInteraction->isEmpty() */ 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

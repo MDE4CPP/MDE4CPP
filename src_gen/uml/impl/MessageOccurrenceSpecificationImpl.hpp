@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			MessageOccurrenceSpecificationImpl();
-			virtual std::shared_ptr<MessageOccurrenceSpecification> getThisMessageOccurrenceSpecificationPtr();
+			virtual std::shared_ptr<MessageOccurrenceSpecification> getThisMessageOccurrenceSpecificationPtr() const;
 			virtual void setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference

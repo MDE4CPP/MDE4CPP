@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReadExtentActionImpl();
-			virtual std::shared_ptr<ReadExtentAction> getThisReadExtentActionPtr();
+			virtual std::shared_ptr<ReadExtentAction> getThisReadExtentActionPtr() const;
 			virtual void setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the result OutputPin is 0..*.
 			result.is(0,*) */ 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin is the classifier.
 			result.type = classifier */ 
-			virtual bool type_is_classifier(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_is_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

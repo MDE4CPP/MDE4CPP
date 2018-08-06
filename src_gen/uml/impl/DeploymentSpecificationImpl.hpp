@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeploymentSpecificationImpl();
-			virtual std::shared_ptr<DeploymentSpecification> getThisDeploymentSpecificationPtr();
+			virtual std::shared_ptr<DeploymentSpecification> getThisDeploymentSpecificationPtr() const;
 			virtual void setThisDeploymentSpecificationPtr(std::weak_ptr<DeploymentSpecification> thisDeploymentSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -68,12 +68,12 @@ namespace uml
 			/*!
 			 The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated Deployment-Specification is a kind of Component (i.e., the configured components).
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component))) */ 
-			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment)) */ 
-			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -143,7 +143,7 @@ namespace uml
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
-			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

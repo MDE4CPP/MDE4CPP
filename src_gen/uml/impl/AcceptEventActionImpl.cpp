@@ -368,31 +368,31 @@ bool AcceptEventActionImpl::getIsUnmarshall() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -440,7 +440,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> AcceptEventActionImpl::getRedefi
 }
 
 
-std::shared_ptr<AcceptEventAction> AcceptEventActionImpl::getThisAcceptEventActionPtr()
+std::shared_ptr<AcceptEventAction> AcceptEventActionImpl::getThisAcceptEventActionPtr() const
 {
 	return m_thisAcceptEventActionPtr.lock();
 }

@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AssociationClassImpl();
-			virtual std::shared_ptr<AssociationClass> getThisAssociationClassPtr();
+			virtual std::shared_ptr<AssociationClass> getThisAssociationClassPtr() const;
 			virtual void setThisAssociationClassPtr(std::weak_ptr<AssociationClass> thisAssociationClassPtr);
 
 			//Additional constructors for the containments back reference
@@ -65,12 +65,12 @@ namespace uml
 			/*!
 			 An AssociationClass cannot be defined between itself and something else.
 			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self) */ 
-			virtual bool cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The owned attributes and owned ends of an AssociationClass are disjoint.
 			ownedAttribute->intersection(ownedEnd)->isEmpty() */ 
-			virtual bool disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

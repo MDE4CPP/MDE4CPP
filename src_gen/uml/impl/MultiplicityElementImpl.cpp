@@ -211,73 +211,73 @@ int MultiplicityElementImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) 
+bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) 
+bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::is(int lowerbound,int upperbound) 
+bool MultiplicityElementImpl::is(int lowerbound,int upperbound)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::isMultivalued() 
+bool MultiplicityElementImpl::isMultivalued()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int MultiplicityElementImpl::lowerBound() 
+int MultiplicityElementImpl::lowerBound()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_ge_0(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::lower_ge_0(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int MultiplicityElementImpl::upperBound() 
+int MultiplicityElementImpl::upperBound()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_constant(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::value_specification_constant(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context) 
+bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -315,7 +315,7 @@ std::shared_ptr<Union<uml::Element>> MultiplicityElementImpl::getOwnedElement() 
 }
 
 
-std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr()
+std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
 {
 	return m_thisMultiplicityElementPtr.lock();
 }

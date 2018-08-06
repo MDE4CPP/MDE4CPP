@@ -262,13 +262,13 @@ std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -328,7 +328,7 @@ std::weak_ptr<uml::ActivityGroup > ActivityGroupImpl::getSuperGroup() const
 }
 
 
-std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr()
+std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
 {
 	return m_thisActivityGroupPtr.lock();
 }

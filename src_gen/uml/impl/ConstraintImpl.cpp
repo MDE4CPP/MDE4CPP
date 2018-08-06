@@ -254,19 +254,19 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConstraintImpl::boolean_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -319,7 +319,7 @@ std::weak_ptr<uml::Element > ConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr()
+std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr() const
 {
 	return m_thisConstraintPtr.lock();
 }

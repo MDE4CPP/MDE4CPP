@@ -260,7 +260,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> UsageImpl::getTarget() 
 }
 
 
-std::shared_ptr<Usage> UsageImpl::getThisUsagePtr()
+std::shared_ptr<Usage> UsageImpl::getThisUsagePtr() const
 {
 	return m_thisUsagePtr.lock();
 }

@@ -508,7 +508,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Collabo
 }
 
 
-std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr()
+std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr() const
 {
 	return m_thisCollaborationPtr.lock();
 }

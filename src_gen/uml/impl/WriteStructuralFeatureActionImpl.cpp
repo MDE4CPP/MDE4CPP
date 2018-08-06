@@ -329,25 +329,25 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool WriteStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteStructuralFeatureActionImpl::multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -405,7 +405,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> WriteStructuralFeatureActionImpl
 }
 
 
-std::shared_ptr<WriteStructuralFeatureAction> WriteStructuralFeatureActionImpl::getThisWriteStructuralFeatureActionPtr()
+std::shared_ptr<WriteStructuralFeatureAction> WriteStructuralFeatureActionImpl::getThisWriteStructuralFeatureActionPtr() const
 {
 	return m_thisWriteStructuralFeatureActionPtr.lock();
 }

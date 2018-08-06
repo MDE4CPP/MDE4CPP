@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CreateLinkObjectActionImpl();
-			virtual std::shared_ptr<CreateLinkObjectAction> getThisCreateLinkObjectActionPtr();
+			virtual std::shared_ptr<CreateLinkObjectAction> getThisCreateLinkObjectActionPtr() const;
 			virtual void setThisCreateLinkObjectActionPtr(std::weak_ptr<CreateLinkObjectAction> thisCreateLinkObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,17 +61,17 @@ namespace uml
 			/*!
 			 The Association must be an AssociationClass.
 			self.association().oclIsKindOf(AssociationClass) */ 
-			virtual bool association_class(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool association_class(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
 			result.type = association() */ 
-			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

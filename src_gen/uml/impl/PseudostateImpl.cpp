@@ -246,55 +246,55 @@ PseudostateKind PseudostateImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-bool PseudostateImpl::choice_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::choice_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::fork_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::fork_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::history_vertices(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::history_vertices(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::join_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::join_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::junction_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::junction_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_incoming(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::transitions_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context) 
+bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -340,7 +340,7 @@ std::weak_ptr<uml::Element > PseudostateImpl::getOwner() const
 }
 
 
-std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr()
+std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr() const
 {
 	return m_thisPseudostatePtr.lock();
 }

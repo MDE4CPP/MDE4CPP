@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExecutionOccurrenceSpecificationImpl();
-			virtual std::shared_ptr<ExecutionOccurrenceSpecification> getThisExecutionOccurrenceSpecificationPtr();
+			virtual std::shared_ptr<ExecutionOccurrenceSpecification> getThisExecutionOccurrenceSpecificationPtr() const;
 			virtual void setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference

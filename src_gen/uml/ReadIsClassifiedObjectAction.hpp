@@ -175,22 +175,22 @@ namespace uml
 			/*!
 			 The type of the result OutputPin is Boolean.
 			result.type = Boolean */ 
-			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -208,13 +208,13 @@ std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) 
+bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) 
+bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -275,7 +275,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::ge
 }
 
 
-std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr()
+std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const
 {
 	return m_thisTemplateBindingPtr.lock();
 }

@@ -250,7 +250,7 @@ bool TimeConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) 
+bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -277,7 +277,7 @@ std::weak_ptr<uml::Element > TimeConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr()
+std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
 {
 	return m_thisTimeConstraintPtr.lock();
 }

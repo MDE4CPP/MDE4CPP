@@ -221,7 +221,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getTa
 }
 
 
-std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr()
+std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
 {
 	return m_thisPackageMergePtr.lock();
 }

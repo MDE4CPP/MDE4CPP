@@ -259,7 +259,7 @@ std::weak_ptr<uml::Element > LiteralIntegerImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr()
+std::shared_ptr<LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
 {
 	return m_thisLiteralIntegerPtr.lock();
 }

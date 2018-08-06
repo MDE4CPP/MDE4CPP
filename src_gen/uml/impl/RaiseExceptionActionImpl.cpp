@@ -343,7 +343,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RaiseExceptionActionImpl::getRed
 }
 
 
-std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr()
+std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
 {
 	return m_thisRaiseExceptionActionPtr.lock();
 }

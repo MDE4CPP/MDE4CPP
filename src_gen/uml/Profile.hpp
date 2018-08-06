@@ -204,39 +204,39 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile. */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier>  classifier) = 0;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents. */ 
-			virtual std::shared_ptr<ecore::EPackage> define()  = 0;
+			virtual std::shared_ptr<ecore::EPackage> define() = 0;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context. */ 
-			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this profile. */ 
-			virtual std::shared_ptr<ecore::EPackage> getDefinition()  = 0;
+			virtual std::shared_ptr<ecore::EPackage> getDefinition() = 0;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of the specified named element in this profile. */ 
-			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement>  namedElement) = 0;
 			
 			/*!
 			 Retrieves the extensions owned by this profile, excluding non-required extensions if indicated. */ 
-			virtual std::shared_ptr<Bag<uml::Extension> > getOwnedExtensions(bool requiredOnly)  = 0;
+			virtual std::shared_ptr<Bag<uml::Extension> > getOwnedExtensions(bool requiredOnly) = 0;
 			
 			/*!
 			 Retrieves the metaclasses referenced by this profile. */ 
-			virtual std::shared_ptr<Bag<uml::Class> > getReferencedMetaclasses()  = 0;
+			virtual std::shared_ptr<Bag<uml::Class> > getReferencedMetaclasses() = 0;
 			
 			/*!
 			 Retrieves the metamodels referenced by this profile. */ 
-			virtual std::shared_ptr<Bag<uml::Model> > getReferencedMetamodels()  = 0;
+			virtual std::shared_ptr<Bag<uml::Model> > getReferencedMetamodels() = 0;
 			
 			/*!
 			 Determines whether this profile is defined. */ 
-			virtual bool isDefined()  = 0;
+			virtual bool isDefined() = 0;
 			
 			/*!
 			 An element imported as a metaclassReference is not specialized or generalized in a Profile.
@@ -247,13 +247,13 @@ namespace uml
 			packagedElement->
 			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

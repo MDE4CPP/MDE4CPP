@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds() 
+std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -236,7 +236,7 @@ std::weak_ptr<uml::Element > ConnectableElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr()
+std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
 {
 	return m_thisConnectableElementPtr.lock();
 }

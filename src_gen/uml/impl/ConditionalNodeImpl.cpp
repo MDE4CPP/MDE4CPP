@@ -490,37 +490,37 @@ bool ConditionalNodeImpl::getIsDeterminate() const
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) 
+bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -588,7 +588,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ConditionalNodeImpl::getRedefine
 }
 
 
-std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr()
+std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
 {
 	return m_thisConditionalNodePtr.lock();
 }

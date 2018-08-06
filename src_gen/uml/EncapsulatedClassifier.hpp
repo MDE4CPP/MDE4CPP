@@ -213,7 +213,7 @@ namespace uml
 			 Derivation for EncapsulatedClassifier::/ownedPort : Port
 			result = (ownedAttribute->select(oclIsKindOf(Port))->collect(oclAsType(Port))->asOrderedSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Port> > getOwnedPorts()  = 0;
+			virtual std::shared_ptr<Bag<uml::Port> > getOwnedPorts() = 0;
 			
 			
 			//*********************************

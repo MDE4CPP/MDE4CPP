@@ -198,19 +198,19 @@ std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClauseImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::decider_output(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClauseImpl::decider_output(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::test_and_body(Any diagnostics,std::map <   Any, Any >  context) 
+bool ClauseImpl::test_and_body(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -273,7 +273,7 @@ std::shared_ptr<Union<uml::Element>> ClauseImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<Clause> ClauseImpl::getThisClausePtr()
+std::shared_ptr<Clause> ClauseImpl::getThisClausePtr() const
 {
 	return m_thisClausePtr.lock();
 }

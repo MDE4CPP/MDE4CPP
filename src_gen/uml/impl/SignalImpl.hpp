@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SignalImpl();
-			virtual std::shared_ptr<Signal> getThisSignalPtr();
+			virtual std::shared_ptr<Signal> getThisSignalPtr() const;
 			virtual void setThisSignalPtr(std::weak_ptr<Signal> thisSignalPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this signal. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
 			
 			
 			

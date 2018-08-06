@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			IntervalConstraintImpl();
-			virtual std::shared_ptr<IntervalConstraint> getThisIntervalConstraintPtr();
+			virtual std::shared_ptr<IntervalConstraint> getThisIntervalConstraintPtr() const;
 			virtual void setThisIntervalConstraintPtr(std::weak_ptr<IntervalConstraint> thisIntervalConstraintPtr);
 
 			//Additional constructors for the containments back reference

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SequenceNodeImpl();
-			virtual std::shared_ptr<SequenceNode> getThisSequenceNodePtr();
+			virtual std::shared_ptr<SequenceNode> getThisSequenceNodePtr() const;
 			virtual void setThisSequenceNodePtr(std::weak_ptr<SequenceNode> thisSequenceNodePtr);
 
 			//Additional constructors for the containments back reference

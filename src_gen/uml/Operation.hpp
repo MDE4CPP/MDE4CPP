@@ -240,17 +240,17 @@ namespace uml
 			/*!
 			 An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1 */ 
-			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual int getLower()  = 0;
+			virtual int getLower() = 0;
 			
 			/*!
 			 Retrieves the (only) return result parameter for this operation. */ 
-			virtual std::shared_ptr<uml::Parameter> getReturnResult()  = 0;
+			virtual std::shared_ptr<uml::Parameter> getReturnResult() = 0;
 			
 			
 			
@@ -258,50 +258,50 @@ namespace uml
 			 If this operation has a return parameter, upper equals the value of upper for that parameter. Otherwise upper has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).upper else null endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual int getUpper()  = 0;
+			virtual int getUpper() = 0;
 			
 			/*!
 			 If this operation has a return parameter, isOrdered equals the value of isOrdered for that parameter. Otherwise isOrdered is false.
 			result = (if returnResult()->notEmpty() then returnResult()-> exists(isOrdered) else false endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isOrdered()  = 0;
+			virtual bool isOrdered() = 0;
 			
 			/*!
 			 If this operation has a return parameter, isUnique equals the value of isUnique for that parameter. Otherwise isUnique is true.
 			result = (if returnResult()->notEmpty() then returnResult()->exists(isUnique) else true endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isUnique()  = 0;
+			virtual bool isUnique() = 0;
 			
 			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
-			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > returnResult()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > returnResult() = 0;
 			
 			/*!
 			 */ 
-			virtual void setIsOrdered(bool newIsOrdered)  = 0;
+			virtual void setIsOrdered(bool newIsOrdered) = 0;
 			
 			/*!
 			 */ 
-			virtual void setIsUnique(bool newIsUnique)  = 0;
+			virtual void setIsUnique(bool newIsUnique) = 0;
 			
 			/*!
 			 */ 
-			virtual void setLower(int newLower)  = 0;
+			virtual void setLower(int newLower) = 0;
 			
 			/*!
 			 */ 
-			virtual void setType(std::shared_ptr<uml::Type>  newType)  = 0;
+			virtual void setType(std::shared_ptr<uml::Type>  newType) = 0;
 			
 			/*!
 			 */ 
-			virtual void setUpper(int newUpper)  = 0;
+			virtual void setUpper(int newUpper) = 0;
 			
 			
 			//*********************************

@@ -313,31 +313,31 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StructuralFeatureActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuralFeatureActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuralFeatureActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuralFeatureActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuralFeatureActionImpl::one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context) 
+bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -391,7 +391,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StructuralFeatureActionImpl::get
 }
 
 
-std::shared_ptr<StructuralFeatureAction> StructuralFeatureActionImpl::getThisStructuralFeatureActionPtr()
+std::shared_ptr<StructuralFeatureAction> StructuralFeatureActionImpl::getThisStructuralFeatureActionPtr() const
 {
 	return m_thisStructuralFeatureActionPtr.lock();
 }

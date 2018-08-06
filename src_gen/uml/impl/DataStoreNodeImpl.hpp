@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DataStoreNodeImpl();
-			virtual std::shared_ptr<DataStoreNode> getThisDataStoreNodePtr();
+			virtual std::shared_ptr<DataStoreNode> getThisDataStoreNodePtr() const;
 			virtual void setThisDataStoreNodePtr(std::weak_ptr<DataStoreNode> thisDataStoreNodePtr);
 
 			//Additional constructors for the containments back reference

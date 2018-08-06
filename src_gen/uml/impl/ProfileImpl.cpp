@@ -407,67 +407,67 @@ std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier>  classifier) 
+std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define() 
+std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context) 
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition() 
+std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
+std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly) 
+std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses() 
+std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels() 
+std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::isDefined() 
+bool ProfileImpl::isDefined()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context) 
+bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -515,7 +515,7 @@ std::weak_ptr<uml::Element > ProfileImpl::getOwner() const
 }
 
 
-std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr()
+std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
 {
 	return m_thisProfilePtr.lock();
 }

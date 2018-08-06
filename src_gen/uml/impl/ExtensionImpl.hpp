@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExtensionImpl();
-			virtual std::shared_ptr<Extension> getThisExtensionPtr();
+			virtual std::shared_ptr<Extension> getThisExtensionPtr() const;
 			virtual void setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr);
 
 			//Additional constructors for the containments back reference
@@ -65,33 +65,33 @@ namespace uml
 			
 			/*!
 			 Retrieves the stereotype that extends a metaclass through this extension. */ 
-			virtual std::shared_ptr<uml::Stereotype> getStereotype()  ;
+			virtual std::shared_ptr<uml::Stereotype> getStereotype() ;
 			
 			/*!
 			 Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass). */ 
-			virtual std::shared_ptr<uml::Property> getStereotypeEnd()  ;
+			virtual std::shared_ptr<uml::Property> getStereotypeEnd() ;
 			
 			/*!
 			 The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
 			result = (ownedEnd.lowerBound() = 1)
 			<p>From package UML::Packages.</p> */ 
-			virtual bool isRequired()  ;
+			virtual bool isRequired() ;
 			
 			/*!
 			 An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2 */ 
-			virtual bool is_binary(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool is_binary(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
 			<p>From package UML::Packages.</p> */ 
-			virtual std::shared_ptr<uml::Property> metaclassEnd()  ;
+			virtual std::shared_ptr<uml::Property> metaclassEnd() ;
 			
 			/*!
 			 The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
-			virtual bool non_owned_end(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool non_owned_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

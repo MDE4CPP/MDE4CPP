@@ -182,37 +182,37 @@ std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExceptionHandlerImpl::edge_source_target(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::edge_source_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::exception_input_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::exception_input_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::handler_body_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_owner(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::handler_body_owner(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::one_input(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::one_input(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -271,7 +271,7 @@ std::weak_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
 }
 
 
-std::shared_ptr<ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr()
+std::shared_ptr<ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr() const
 {
 	return m_thisExceptionHandlerPtr.lock();
 }

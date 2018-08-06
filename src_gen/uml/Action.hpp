@@ -184,13 +184,13 @@ namespace uml
 			 Return this Action and all Actions contained directly or indirectly in it. By default only the Action itself is returned, but the operation is overridden for StructuredActivityNodes.
 			result = (self->asSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions()  = 0;
+			virtual std::shared_ptr<Bag<uml::Action> > allActions() = 0;
 			
 			/*!
 			 Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes()  = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() = 0;
 			
 			/*!
 			 result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
@@ -200,7 +200,7 @@ namespace uml
 			endif
 			)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Behavior> containingBehavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior> containingBehavior() = 0;
 			
 			
 			

@@ -221,7 +221,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProtocolConformanceImpl
 }
 
 
-std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr()
+std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
 {
 	return m_thisProtocolConformancePtr.lock();
 }

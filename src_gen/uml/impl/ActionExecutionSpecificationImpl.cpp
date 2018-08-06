@@ -233,7 +233,7 @@ std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -269,7 +269,7 @@ std::weak_ptr<uml::Element > ActionExecutionSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr()
+std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const
 {
 	return m_thisActionExecutionSpecificationPtr.lock();
 }

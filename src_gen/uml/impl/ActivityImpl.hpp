@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityImpl();
-			virtual std::shared_ptr<Activity> getThisActivityPtr();
+			virtual std::shared_ptr<Activity> getThisActivityPtr() const;
 			virtual void setThisActivityPtr(std::weak_ptr<Activity> thisActivityPtr);
 
 			//Additional constructors for the containments back reference
@@ -70,7 +70,7 @@ namespace uml
 			ownedParameter->forAll(p | 
 			   p.direction <> ParameterDirectionKind::inout implies node->select(
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1) */ 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -82,7 +82,7 @@ namespace uml
 			  associatedNodes->select(incoming->notEmpty())->size()<=1 and
 			  associatedNodes->select(outgoing->notEmpty())->size()<=1
 			) */ 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

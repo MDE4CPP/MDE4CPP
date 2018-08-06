@@ -248,13 +248,13 @@ bool GeneralizationSetImpl::getIsDisjoint() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) 
+bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,7 +297,7 @@ std::weak_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
 }
 
 
-std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr()
+std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr() const
 {
 	return m_thisGeneralizationSetPtr.lock();
 }

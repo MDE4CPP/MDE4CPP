@@ -185,7 +185,7 @@ VisibilityKind PackageImportImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(Any diagnostics,std::map <   Any, Any >  context) 
+bool PackageImportImpl::public_or_private(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -239,7 +239,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getT
 }
 
 
-std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr()
+std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr() const
 {
 	return m_thisPackageImportPtr.lock();
 }

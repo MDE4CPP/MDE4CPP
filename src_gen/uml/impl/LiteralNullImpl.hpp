@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralNullImpl();
-			virtual std::shared_ptr<LiteralNull> getThisLiteralNullPtr();
+			virtual std::shared_ptr<LiteralNull> getThisLiteralNullPtr() const;
 			virtual void setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr);
 
 			//Additional constructors for the containments back reference

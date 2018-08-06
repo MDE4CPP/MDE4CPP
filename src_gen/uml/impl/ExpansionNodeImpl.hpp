@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExpansionNodeImpl();
-			virtual std::shared_ptr<ExpansionNode> getThisExpansionNodePtr();
+			virtual std::shared_ptr<ExpansionNode> getThisExpansionNodePtr() const;
 			virtual void setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
-			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

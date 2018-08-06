@@ -311,25 +311,25 @@ std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateObjectActionImpl::classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateObjectActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -383,7 +383,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateObjectActionImpl::getRedef
 }
 
 
-std::shared_ptr<CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr()
+std::shared_ptr<CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr() const
 {
 	return m_thisCreateObjectActionPtr.lock();
 }

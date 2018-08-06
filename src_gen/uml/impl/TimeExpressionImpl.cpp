@@ -250,7 +250,7 @@ std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) 
+bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +293,7 @@ std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr()
+std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const
 {
 	return m_thisTimeExpressionPtr.lock();
 }

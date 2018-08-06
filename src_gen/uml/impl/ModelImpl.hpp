@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ModelImpl();
-			virtual std::shared_ptr<Model> getThisModelPtr();
+			virtual std::shared_ptr<Model> getThisModelPtr() const;
 			virtual void setThisModelPtr(std::weak_ptr<Model> thisModelPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Determines whether this model is a metamodel. */ 
-			virtual bool isMetamodel()  ;
+			virtual bool isMetamodel() ;
 			
 			
 			

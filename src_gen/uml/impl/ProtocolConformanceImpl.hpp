@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ProtocolConformanceImpl();
-			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr();
+			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr() const;
 			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);
 
 			//Additional constructors for the containments back reference

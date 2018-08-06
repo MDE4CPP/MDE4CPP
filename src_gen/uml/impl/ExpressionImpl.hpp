@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExpressionImpl();
-			virtual std::shared_ptr<Expression> getThisExpressionPtr();
+			virtual std::shared_ptr<Expression> getThisExpressionPtr() const;
 			virtual void setThisExpressionPtr(std::weak_ptr<Expression> thisExpressionPtr);
 
 			//Additional constructors for the containments back reference

@@ -283,7 +283,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ControlNodeImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr()
+std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr() const
 {
 	return m_thisControlNodePtr.lock();
 }

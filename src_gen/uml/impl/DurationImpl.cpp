@@ -250,7 +250,7 @@ std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) 
+bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +293,7 @@ std::weak_ptr<uml::Element > DurationImpl::getOwner() const
 }
 
 
-std::shared_ptr<Duration> DurationImpl::getThisDurationPtr()
+std::shared_ptr<Duration> DurationImpl::getThisDurationPtr() const
 {
 	return m_thisDurationPtr.lock();
 }

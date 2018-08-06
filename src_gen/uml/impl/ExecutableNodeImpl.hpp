@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExecutableNodeImpl();
-			virtual std::shared_ptr<ExecutableNode> getThisExecutableNodePtr();
+			virtual std::shared_ptr<ExecutableNode> getThisExecutableNodePtr() const;
 			virtual void setThisExecutableNodePtr(std::weak_ptr<ExecutableNode> thisExecutableNodePtr);
 
 			//Additional constructors for the containments back reference

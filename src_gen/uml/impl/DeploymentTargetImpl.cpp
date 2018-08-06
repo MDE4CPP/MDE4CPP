@@ -216,7 +216,7 @@ std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElements() 
+std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElements()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -252,7 +252,7 @@ std::weak_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
 }
 
 
-std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr()
+std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
 {
 	return m_thisDeploymentTargetPtr.lock();
 }

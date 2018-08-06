@@ -520,13 +520,13 @@ std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context) 
+bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -581,7 +581,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Associa
 }
 
 
-std::shared_ptr<AssociationClass> AssociationClassImpl::getThisAssociationClassPtr()
+std::shared_ptr<AssociationClass> AssociationClassImpl::getThisAssociationClassPtr() const
 {
 	return m_thisAssociationClassPtr.lock();
 }

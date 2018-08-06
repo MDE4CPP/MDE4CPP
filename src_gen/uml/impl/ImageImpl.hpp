@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ImageImpl();
-			virtual std::shared_ptr<Image> getThisImagePtr();
+			virtual std::shared_ptr<Image> getThisImagePtr() const;
 			virtual void setThisImagePtr(std::weak_ptr<Image> thisImagePtr);
 
 			//Additional constructors for the containments back reference

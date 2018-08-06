@@ -259,7 +259,7 @@ std::weak_ptr<uml::Element > LiteralRealImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralReal> LiteralRealImpl::getThisLiteralRealPtr()
+std::shared_ptr<LiteralReal> LiteralRealImpl::getThisLiteralRealPtr() const
 {
 	return m_thisLiteralRealPtr.lock();
 }

@@ -320,7 +320,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExecutableNodeImpl::getRedefined
 }
 
 
-std::shared_ptr<ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr()
+std::shared_ptr<ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr() const
 {
 	return m_thisExecutableNodePtr.lock();
 }

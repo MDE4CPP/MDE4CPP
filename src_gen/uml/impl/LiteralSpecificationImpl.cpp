@@ -249,7 +249,7 @@ std::weak_ptr<uml::Element > LiteralSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr()
+std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
 {
 	return m_thisLiteralSpecificationPtr.lock();
 }

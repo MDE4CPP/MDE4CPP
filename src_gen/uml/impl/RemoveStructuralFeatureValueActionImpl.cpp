@@ -340,7 +340,7 @@ bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) 
+bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -388,7 +388,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RemoveStructuralFeatureValueActi
 }
 
 
-std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr()
+std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr() const
 {
 	return m_thisRemoveStructuralFeatureValueActionPtr.lock();
 }

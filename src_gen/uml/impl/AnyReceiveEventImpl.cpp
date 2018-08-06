@@ -229,7 +229,7 @@ std::weak_ptr<uml::Element > AnyReceiveEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr()
+std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
 {
 	return m_thisAnyReceiveEventPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndDataImpl();
-			virtual std::shared_ptr<LinkEndData> getThisLinkEndDataPtr();
+			virtual std::shared_ptr<LinkEndData> getThisLinkEndDataPtr() const;
 			virtual void setThisLinkEndDataPtr(std::weak_ptr<LinkEndData> thisLinkEndDataPtr);
 
 			//Additional constructors for the containments back reference
@@ -50,32 +50,32 @@ namespace uml
 			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
 			result = (value->asBag()->union(qualifier.value))
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins()  ;
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;
 			
 			/*!
 			 The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value) */ 
-			virtual bool end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool property_is_association_end(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool property_is_association_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier) */ 
-			virtual bool qualifiers(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool qualifiers(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type) */ 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

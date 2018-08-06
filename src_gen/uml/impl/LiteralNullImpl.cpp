@@ -249,7 +249,7 @@ std::weak_ptr<uml::Element > LiteralNullImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr()
+std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
 {
 	return m_thisLiteralNullPtr.lock();
 }

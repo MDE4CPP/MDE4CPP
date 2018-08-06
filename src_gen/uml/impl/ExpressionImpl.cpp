@@ -294,7 +294,7 @@ std::weak_ptr<uml::Element > ExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<Expression> ExpressionImpl::getThisExpressionPtr()
+std::shared_ptr<Expression> ExpressionImpl::getThisExpressionPtr() const
 {
 	return m_thisExpressionPtr.lock();
 }

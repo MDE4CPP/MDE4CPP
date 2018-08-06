@@ -227,22 +227,22 @@ namespace uml
 			 The query allIncludedUseCases() returns the transitive closure of all UseCases (directly or indirectly) included by this UseCase.
 			result = (self.include.addition->union(self.include.addition->collect(uc | uc.allIncludedUseCases()))->asSet())
 			<p>From package UML::UseCases.</p> */ 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases()  = 0;
+			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() = 0;
 			
 			/*!
 			 UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2) */ 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self) */ 
-			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A UseCase must have a name.
 			name -> notEmpty () */ 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 UseCases cannot have Associations to UseCases specifying the same subject.
@@ -252,7 +252,7 @@ namespace uml
 			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
 			   )
 			) */ 
-			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

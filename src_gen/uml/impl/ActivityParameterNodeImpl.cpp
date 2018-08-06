@@ -290,31 +290,31 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -354,7 +354,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityParameterNodeImpl::getRe
 }
 
 
-std::shared_ptr<ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr()
+std::shared_ptr<ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr() const
 {
 	return m_thisActivityParameterNodePtr.lock();
 }

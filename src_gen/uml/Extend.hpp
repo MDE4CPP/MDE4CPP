@@ -145,7 +145,7 @@ namespace uml
 			/*!
 			 The ExtensionPoints referenced by the Extend relationship must belong to the UseCase that is being extended.
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp)) */ 
-			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

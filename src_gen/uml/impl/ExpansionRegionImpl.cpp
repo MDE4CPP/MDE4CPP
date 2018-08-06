@@ -511,7 +511,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExpansionRegionImpl::getRedefine
 }
 
 
-std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr()
+std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
 {
 	return m_thisExpansionRegionPtr.lock();
 }

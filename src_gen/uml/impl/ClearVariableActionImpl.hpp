@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClearVariableActionImpl();
-			virtual std::shared_ptr<ClearVariableAction> getThisClearVariableActionPtr();
+			virtual std::shared_ptr<ClearVariableAction> getThisClearVariableActionPtr() const;
 			virtual void setThisClearVariableActionPtr(std::weak_ptr<ClearVariableAction> thisClearVariableActionPtr);
 
 			//Additional constructors for the containments back reference

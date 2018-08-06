@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			OpaqueBehaviorImpl();
-			virtual std::shared_ptr<OpaqueBehavior> getThisOpaqueBehaviorPtr();
+			virtual std::shared_ptr<OpaqueBehavior> getThisOpaqueBehaviorPtr() const;
 			virtual void setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr);
 
 			//Additional constructors for the containments back reference

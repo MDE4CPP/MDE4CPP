@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LoopNodeImpl();
-			virtual std::shared_ptr<LoopNode> getThisLoopNodePtr();
+			virtual std::shared_ptr<LoopNode> getThisLoopNodePtr() const;
 			virtual void setThisLoopNodePtr(std::weak_ptr<LoopNode> thisLoopNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -68,22 +68,22 @@ namespace uml
 			/*!
 			 The bodyOutput pins are OutputPins on Actions in the body of the LoopNode.
 			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet() */ 
-			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The loopVariableInputs must not have outgoing edges.
 			loopVariableInput.outgoing->isEmpty() */ 
-			virtual bool input_edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool input_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
 			allOwnedNodes()->includesAll(loopVariable.outgoing.target) */ 
-			virtual bool loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
@@ -92,7 +92,7 @@ namespace uml
 			loopVariableInput.isUnique=loopVariable.isUnique and
 			loopVariableInput.lower=loopVariable.lower and
 			loopVariableInput.upper=loopVariable.upper */ 
-			virtual bool matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
@@ -102,7 +102,7 @@ namespace uml
 				bodyOutput->at(i).isOrdered = loopVariable->at(i).isOrdered and
 				bodyOutput->at(i).isUnique = loopVariable->at(i).isUnique and
 				loopVariable->at(i).includesMultiplicity(bodyOutput->at(i))) */ 
-			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
@@ -111,19 +111,19 @@ namespace uml
 			result.isUnique=loopVariable.isUnique and
 			result.lower=loopVariable.lower and
 			result.upper=loopVariable.upper */ 
-			virtual bool matching_result_pins(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool matching_result_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The result OutputPins have no incoming edges.
 			result.incoming->isEmpty() */ 
-			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The test and body parts of a ConditionalNode must be disjoint with each other.
 			setupPart->intersection(test)->isEmpty() and
 			setupPart->intersection(bodyPart)->isEmpty() and
 			test->intersection(bodyPart)->isEmpty() */ 
-			virtual bool setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

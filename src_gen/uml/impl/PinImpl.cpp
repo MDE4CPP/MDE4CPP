@@ -314,13 +314,13 @@ bool PinImpl::getIsControl() const
 //*********************************
 // Operations
 //*********************************
-bool PinImpl::control_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool PinImpl::control_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PinImpl::not_unique(Any diagnostics,std::map <   Any, Any >  context) 
+bool PinImpl::not_unique(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -351,7 +351,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> PinImpl::getRedefinedElement() c
 }
 
 
-std::shared_ptr<Pin> PinImpl::getThisPinPtr()
+std::shared_ptr<Pin> PinImpl::getThisPinPtr() const
 {
 	return m_thisPinPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			MergeNodeImpl();
-			virtual std::shared_ptr<MergeNode> getThisMergeNodePtr();
+			virtual std::shared_ptr<MergeNode> getThisMergeNodePtr() const;
 			virtual void setThisMergeNodePtr(std::weak_ptr<MergeNode> thisMergeNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -62,12 +62,12 @@ namespace uml
 			 The ActivityEdges incoming to and outgoing from a MergeNode must be either all ObjectFlows or all ControlFlows.
 			let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in
 			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A MergeNode has one outgoing ActivityEdge.
 			outgoing->size()=1 */ 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

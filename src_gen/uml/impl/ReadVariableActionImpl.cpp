@@ -309,13 +309,13 @@ std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -359,7 +359,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadVariableActionImpl::getRedef
 }
 
 
-std::shared_ptr<ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr()
+std::shared_ptr<ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr() const
 {
 	return m_thisReadVariableActionPtr.lock();
 }

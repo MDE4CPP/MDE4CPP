@@ -291,12 +291,12 @@ namespace uml
 			endif
 			endif
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element>  from)  = 0;
+			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element>  from) = 0;
 			
 			/*!
 			 The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification) */ 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			
@@ -304,23 +304,23 @@ namespace uml
 			 The in and inout ownedParameters of the Behavior.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
 			
 			/*!
 			 There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1 */ 
-			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
 			
 			/*!
 			 If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size() */ 
-			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

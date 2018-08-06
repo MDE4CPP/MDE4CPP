@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InputPinImpl();
-			virtual std::shared_ptr<InputPin> getThisInputPinPtr();
+			virtual std::shared_ptr<InputPin> getThisInputPinPtr() const;
 			virtual void setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr);
 
 			//Additional constructors for the containments back reference
@@ -76,7 +76,7 @@ namespace uml
 				action<>null and
 				action.oclIsKindOf(StructuredActivityNode) and
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target) */ 
-			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StartObjectBehaviorActionImpl();
-			virtual std::shared_ptr<StartObjectBehaviorAction> getThisStartObjectBehaviorActionPtr();
+			virtual std::shared_ptr<StartObjectBehaviorAction> getThisStartObjectBehaviorActionPtr() const;
 			virtual void setThisStartObjectBehaviorActionPtr(std::weak_ptr<StartObjectBehaviorAction> thisStartObjectBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -69,22 +69,22 @@ namespace uml
 			endif
 			endif)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Behavior> behavior()  ;
+			virtual std::shared_ptr<uml::Behavior> behavior() ;
 			
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty() */ 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null */ 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

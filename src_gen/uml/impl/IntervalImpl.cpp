@@ -278,7 +278,7 @@ std::weak_ptr<uml::Element > IntervalImpl::getOwner() const
 }
 
 
-std::shared_ptr<Interval> IntervalImpl::getThisIntervalPtr()
+std::shared_ptr<Interval> IntervalImpl::getThisIntervalPtr() const
 {
 	return m_thisIntervalPtr.lock();
 }

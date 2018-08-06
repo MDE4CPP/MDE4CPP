@@ -305,13 +305,13 @@ std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool StartClassifierBehaviorActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool StartClassifierBehaviorActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -355,7 +355,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StartClassifierBehaviorActionImp
 }
 
 
-std::shared_ptr<StartClassifierBehaviorAction> StartClassifierBehaviorActionImpl::getThisStartClassifierBehaviorActionPtr()
+std::shared_ptr<StartClassifierBehaviorAction> StartClassifierBehaviorActionImpl::getThisStartClassifierBehaviorActionPtr() const
 {
 	return m_thisStartClassifierBehaviorActionPtr.lock();
 }

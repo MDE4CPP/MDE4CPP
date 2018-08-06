@@ -473,19 +473,19 @@ std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRoles() 
+std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRoles()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts() 
+std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -559,7 +559,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Structu
 }
 
 
-std::shared_ptr<StructuredClassifier> StructuredClassifierImpl::getThisStructuredClassifierPtr()
+std::shared_ptr<StructuredClassifier> StructuredClassifierImpl::getThisStructuredClassifierPtr() const
 {
 	return m_thisStructuredClassifierPtr.lock();
 }

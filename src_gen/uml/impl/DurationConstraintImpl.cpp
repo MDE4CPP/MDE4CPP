@@ -247,13 +247,13 @@ std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) 
+bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -280,7 +280,7 @@ std::weak_ptr<uml::Element > DurationConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr()
+std::shared_ptr<DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const
 {
 	return m_thisDurationConstraintPtr.lock();
 }

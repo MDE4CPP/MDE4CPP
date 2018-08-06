@@ -285,7 +285,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FlowFinalNodeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr()
+std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
 {
 	return m_thisFlowFinalNodePtr.lock();
 }

@@ -231,43 +231,43 @@ std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationImpl::booleanValue() 
+bool ValueSpecificationImpl::booleanValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int ValueSpecificationImpl::integerValue() 
+int ValueSpecificationImpl::integerValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueSpecificationImpl::isComputable() 
+bool ValueSpecificationImpl::isComputable()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueSpecificationImpl::isNull() 
+bool ValueSpecificationImpl::isNull()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-double ValueSpecificationImpl::realValue() 
+double ValueSpecificationImpl::realValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string ValueSpecificationImpl::stringValue() 
+std::string ValueSpecificationImpl::stringValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int ValueSpecificationImpl::unlimitedValue() 
+int ValueSpecificationImpl::unlimitedValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -303,7 +303,7 @@ std::weak_ptr<uml::Element > ValueSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<ValueSpecification> ValueSpecificationImpl::getThisValueSpecificationPtr()
+std::shared_ptr<ValueSpecification> ValueSpecificationImpl::getThisValueSpecificationPtr() const
 {
 	return m_thisValueSpecificationPtr.lock();
 }

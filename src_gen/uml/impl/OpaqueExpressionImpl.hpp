@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			OpaqueExpressionImpl();
-			virtual std::shared_ptr<OpaqueExpression> getThisOpaqueExpressionPtr();
+			virtual std::shared_ptr<OpaqueExpression> getThisOpaqueExpressionPtr() const;
 			virtual void setThisOpaqueExpressionPtr(std::weak_ptr<OpaqueExpression> thisOpaqueExpressionPtr);
 
 			//Additional constructors for the containments back reference
@@ -68,44 +68,44 @@ namespace uml
 			 The query isIntegral() tells whether an expression is intended to produce an Integer.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool isIntegral()  ;
+			virtual bool isIntegral() ;
 			
 			/*!
 			 The query isNonNegative() tells whether an integer expression has a non-negative value.
 			self.isIntegral()
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool isNonNegative()  ;
+			virtual bool isNonNegative() ;
 			
 			/*!
 			 The query isPositive() tells whether an integer expression has a positive value.
 			result = (false)
 			self.isIntegral()
 			<p>From package UML::Values.</p> */ 
-			virtual bool isPositive()  ;
+			virtual bool isPositive() ;
 			
 			/*!
 			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
 			result = (0)
 			<p>From package UML::Values.</p> */ 
-			virtual int value()  ;
+			virtual int value() ;
 			
 			
 			

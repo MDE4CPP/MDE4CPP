@@ -156,19 +156,19 @@ namespace uml
 			endif
 			)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine()  = 0;
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			
 			/*!
 			 Derivation for Vertex::/incoming.
 			result = (Transition.allInstances()->select(target=self))
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings()  = 0;
+			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;
 			
 			/*!
 			 Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings()  = 0;
+			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;
 			
 			/*!
 			 This utility query returns true if the Vertex is contained in the Region r (input argument).
@@ -182,7 +182,7 @@ namespace uml
 				endif
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r)  = 0;
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r) = 0;
 			
 			/*!
 			 This utility operation returns true if the Vertex is contained in the State s (input argument).
@@ -196,7 +196,7 @@ namespace uml
 				endif
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  = 0;
+			virtual bool isContainedInState(std::shared_ptr<uml::State>  s) = 0;
 			
 			
 			//*********************************

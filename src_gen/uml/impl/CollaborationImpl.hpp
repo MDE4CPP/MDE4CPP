@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CollaborationImpl();
-			virtual std::shared_ptr<Collaboration> getThisCollaborationPtr();
+			virtual std::shared_ptr<Collaboration> getThisCollaborationPtr() const;
 			virtual void setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr);
 
 			//Additional constructors for the containments back reference

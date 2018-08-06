@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExpansionRegionImpl();
-			virtual std::shared_ptr<ExpansionRegion> getThisExpansionRegionPtr();
+			virtual std::shared_ptr<ExpansionRegion> getThisExpansionRegionPtr() const;
 			virtual void setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr);
 
 			//Additional constructors for the containments back reference

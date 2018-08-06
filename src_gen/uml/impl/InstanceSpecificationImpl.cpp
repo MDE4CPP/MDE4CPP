@@ -283,25 +283,25 @@ std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::map <   Any, Any >  context) 
+bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::map <   Any, Any >  context) 
+bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context) 
+bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context) 
+bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -351,7 +351,7 @@ std::weak_ptr<uml::Element > InstanceSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr()
+std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const
 {
 	return m_thisInstanceSpecificationPtr.lock();
 }

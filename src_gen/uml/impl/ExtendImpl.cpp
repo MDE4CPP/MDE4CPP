@@ -234,7 +234,7 @@ std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -309,7 +309,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getTarget()
 }
 
 
-std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr()
+std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const
 {
 	return m_thisExtendPtr.lock();
 }

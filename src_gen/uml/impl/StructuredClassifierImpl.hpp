@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StructuredClassifierImpl();
-			virtual std::shared_ptr<StructuredClassifier> getThisStructuredClassifierPtr();
+			virtual std::shared_ptr<StructuredClassifier> getThisStructuredClassifierPtr() const;
 			virtual void setThisStructuredClassifierPtr(std::weak_ptr<StructuredClassifier> thisStructuredClassifierPtr);
 
 			//Additional constructors for the containments back reference
@@ -65,17 +65,17 @@ namespace uml
 			 All features of type ConnectableElement, equivalent to all direct and inherited roles.
 			result = (allFeatures()->select(oclIsKindOf(ConnectableElement))->collect(oclAsType(ConnectableElement))->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles()  ;
+			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() ;
 			
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
 			
 			/*!
 			 Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Property> > getParts()  ;
+			virtual std::shared_ptr<Bag<uml::Property> > getParts() ;
 			
 			
 			

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			VariableActionImpl();
-			virtual std::shared_ptr<VariableAction> getThisVariableActionPtr();
+			virtual std::shared_ptr<VariableAction> getThisVariableActionPtr() const;
 			virtual void setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 The VariableAction must be in the scope of the variable.
 			variable.isAccessibleBy(self) */ 
-			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

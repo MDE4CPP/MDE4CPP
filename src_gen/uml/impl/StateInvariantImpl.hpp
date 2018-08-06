@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StateInvariantImpl();
-			virtual std::shared_ptr<StateInvariant> getThisStateInvariantPtr();
+			virtual std::shared_ptr<StateInvariant> getThisStateInvariantPtr() const;
 			virtual void setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr);
 
 			//Additional constructors for the containments back reference

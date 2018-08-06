@@ -32,7 +32,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StateImpl();
-			virtual std::shared_ptr<State> getThisStatePtr();
+			virtual std::shared_ptr<State> getThisStatePtr() const;
 			virtual void setThisStatePtr(std::weak_ptr<State> thisStatePtr);
 
 			//Additional constructors for the containments back reference
@@ -59,43 +59,43 @@ namespace uml
 			/*!
 			 Only composite States can have entry or exit Pseudostates defined.
 			connectionPoint->notEmpty() implies isComposite */ 
-			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
 			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine))) */ 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A composite State is a State with at least one Region.
 			result = (region->notEmpty())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isComposite()  ;
+			virtual bool isComposite() ;
 			
 			/*!
 			 An orthogonal State is a composite state with at least 2 regions.
 			result = (region->size () > 1)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isOrthogonal()  ;
+			virtual bool isOrthogonal() ;
 			
 			/*!
 			 A simple State is a State without any regions.
 			result = ((region->isEmpty()) and not isSubmachineState())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isSimple()  ;
+			virtual bool isSimple() ;
 			
 			/*!
 			 Only submachine State references another StateMachine.
 			result = (submachine <> null)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isSubmachineState()  ;
+			virtual bool isSubmachineState() ;
 			
 			/*!
 			 The redefinition context of a State is the nearest containing StateMachine.
@@ -106,17 +106,17 @@ namespace uml
 			  sm._'context'
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::Classifier> redefinitionContext()  ;
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext() ;
 			
 			/*!
 			 A State is not allowed to have both a submachine and Regions.
 			isComposite implies not isSubmachineState */ 
-			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( ) */ 
-			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

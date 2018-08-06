@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReduceActionImpl();
-			virtual std::shared_ptr<ReduceAction> getThisReduceActionPtr();
+			virtual std::shared_ptr<ReduceAction> getThisReduceActionPtr() const;
 			virtual void setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -60,12 +60,12 @@ namespace uml
 			//*********************************
 			/*!
 			 The type of the collection InputPin must be a collection. */ 
-			virtual bool input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type)) */ 
-			virtual bool output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
@@ -76,7 +76,7 @@ namespace uml
 				outputs.type->forAll(conformsTo(t)) and 
 				-- Note that the following only checks the case when the collection is via multiple tokens.
 				collection.upperBound()>1 implies collection.type.conformsTo(t)) */ 
-			virtual bool reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

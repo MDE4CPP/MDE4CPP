@@ -233,19 +233,19 @@ std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TypeImpl::conformsTo(std::shared_ptr<uml::Type>  other) 
+bool TypeImpl::conformsTo(std::shared_ptr<uml::Type>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) 
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations() 
+std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -281,7 +281,7 @@ std::weak_ptr<uml::Element > TypeImpl::getOwner() const
 }
 
 
-std::shared_ptr<Type> TypeImpl::getThisTypePtr()
+std::shared_ptr<Type> TypeImpl::getThisTypePtr() const
 {
 	return m_thisTypePtr.lock();
 }

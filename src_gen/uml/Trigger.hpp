@@ -120,7 +120,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

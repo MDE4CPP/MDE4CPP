@@ -481,7 +481,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Abstraction>(this->createAbstraction());
+				return this->createAbstraction();
 			}
 			else
 			{
@@ -520,7 +520,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AcceptCallAction>(this->createAcceptCallAction());
+				return this->createAcceptCallAction();
 			}
 			else
 			{
@@ -559,7 +559,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AcceptEventAction>(this->createAcceptEventAction());
+				return this->createAcceptEventAction();
 			}
 			else
 			{
@@ -598,7 +598,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActionExecutionSpecification>(this->createActionExecutionSpecification());
+				return this->createActionExecutionSpecification();
 			}
 			else
 			{
@@ -637,7 +637,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActionInputPin>(this->createActionInputPin());
+				return this->createActionInputPin();
 			}
 			else
 			{
@@ -694,7 +694,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Activity>(this->createActivity());
+				return this->createActivity();
 			}
 			else
 			{
@@ -745,7 +745,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityFinalNode>(this->createActivityFinalNode());
+				return this->createActivityFinalNode();
 			}
 			else
 			{
@@ -784,7 +784,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityParameterNode>(this->createActivityParameterNode());
+				return this->createActivityParameterNode();
 			}
 			else
 			{
@@ -823,7 +823,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityPartition>(this->createActivityPartition());
+				return this->createActivityPartition();
 			}
 			else
 			{
@@ -868,7 +868,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Actor>(this->createActor());
+				return this->createActor();
 			}
 			else
 			{
@@ -913,7 +913,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AddStructuralFeatureValueAction>(this->createAddStructuralFeatureValueAction());
+				return this->createAddStructuralFeatureValueAction();
 			}
 			else
 			{
@@ -952,7 +952,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AddVariableValueAction>(this->createAddVariableValueAction());
+				return this->createAddVariableValueAction();
 			}
 			else
 			{
@@ -991,7 +991,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AnyReceiveEvent>(this->createAnyReceiveEvent());
+				return this->createAnyReceiveEvent();
 			}
 			else
 			{
@@ -1030,7 +1030,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Artifact>(this->createArtifact());
+				return this->createArtifact();
 			}
 			else
 			{
@@ -1075,7 +1075,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Association>(this->createAssociation());
+				return this->createAssociation();
 			}
 			else
 			{
@@ -1120,7 +1120,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AssociationClass>(this->createAssociationClass());
+				return this->createAssociationClass();
 			}
 			else
 			{
@@ -1165,7 +1165,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<BehaviorExecutionSpecification>(this->createBehaviorExecutionSpecification());
+				return this->createBehaviorExecutionSpecification();
 			}
 			else
 			{
@@ -1204,7 +1204,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<BroadcastSignalAction>(this->createBroadcastSignalAction());
+				return this->createBroadcastSignalAction();
 			}
 			else
 			{
@@ -1243,7 +1243,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CallBehaviorAction>(this->createCallBehaviorAction());
+				return this->createCallBehaviorAction();
 			}
 			else
 			{
@@ -1282,7 +1282,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CallEvent>(this->createCallEvent());
+				return this->createCallEvent();
 			}
 			else
 			{
@@ -1321,7 +1321,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CallOperationAction>(this->createCallOperationAction());
+				return this->createCallOperationAction();
 			}
 			else
 			{
@@ -1360,7 +1360,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CentralBufferNode>(this->createCentralBufferNode());
+				return this->createCentralBufferNode();
 			}
 			else
 			{
@@ -1399,7 +1399,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ChangeEvent>(this->createChangeEvent());
+				return this->createChangeEvent();
 			}
 			else
 			{
@@ -1438,7 +1438,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Class>(this->createClass());
+				return this->createClass();
 			}
 			else
 			{
@@ -1483,7 +1483,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClassifierTemplateParameter>(this->createClassifierTemplateParameter());
+				return this->createClassifierTemplateParameter();
 			}
 			else
 			{
@@ -1510,7 +1510,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Clause>(this->createClause());
+				return this->createClause();
 			}
 			else
 			{
@@ -1523,7 +1523,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClearAssociationAction>(this->createClearAssociationAction());
+				return this->createClearAssociationAction();
 			}
 			else
 			{
@@ -1562,7 +1562,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClearStructuralFeatureAction>(this->createClearStructuralFeatureAction());
+				return this->createClearStructuralFeatureAction();
 			}
 			else
 			{
@@ -1601,7 +1601,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClearVariableAction>(this->createClearVariableAction());
+				return this->createClearVariableAction();
 			}
 			else
 			{
@@ -1640,7 +1640,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Collaboration>(this->createCollaboration());
+				return this->createCollaboration();
 			}
 			else
 			{
@@ -1685,7 +1685,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CollaborationUse>(this->createCollaborationUse());
+				return this->createCollaborationUse();
 			}
 			else
 			{
@@ -1712,7 +1712,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CombinedFragment>(this->createCombinedFragment());
+				return this->createCombinedFragment();
 			}
 			else
 			{
@@ -1751,7 +1751,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Comment>(this->createComment());
+				return this->createComment();
 			}
 			else
 			{
@@ -1764,7 +1764,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CommunicationPath>(this->createCommunicationPath());
+				return this->createCommunicationPath();
 			}
 			else
 			{
@@ -1809,7 +1809,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Component>(this->createComponent());
+				return this->createComponent();
 			}
 			else
 			{
@@ -1854,7 +1854,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ComponentRealization>(this->createComponentRealization());
+				return this->createComponentRealization();
 			}
 			else
 			{
@@ -1899,7 +1899,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConditionalNode>(this->createConditionalNode());
+				return this->createConditionalNode();
 			}
 			else
 			{
@@ -1950,7 +1950,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConnectableElementTemplateParameter>(this->createConnectableElementTemplateParameter());
+				return this->createConnectableElementTemplateParameter();
 			}
 			else
 			{
@@ -1977,7 +1977,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConnectionPointReference>(this->createConnectionPointReference());
+				return this->createConnectionPointReference();
 			}
 			else
 			{
@@ -2016,7 +2016,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Connector>(this->createConnector());
+				return this->createConnector();
 			}
 			else
 			{
@@ -2043,7 +2043,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConnectorEnd>(this->createConnectorEnd());
+				return this->createConnectorEnd();
 			}
 			else
 			{
@@ -2056,7 +2056,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConsiderIgnoreFragment>(this->createConsiderIgnoreFragment());
+				return this->createConsiderIgnoreFragment();
 			}
 			else
 			{
@@ -2095,7 +2095,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Constraint>(this->createConstraint());
+				return this->createConstraint();
 			}
 			else
 			{
@@ -2140,7 +2140,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Continuation>(this->createContinuation());
+				return this->createContinuation();
 			}
 			else
 			{
@@ -2179,7 +2179,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ControlFlow>(this->createControlFlow());
+				return this->createControlFlow();
 			}
 			else
 			{
@@ -2218,7 +2218,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CreateLinkAction>(this->createCreateLinkAction());
+				return this->createCreateLinkAction();
 			}
 			else
 			{
@@ -2257,7 +2257,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CreateLinkObjectAction>(this->createCreateLinkObjectAction());
+				return this->createCreateLinkObjectAction();
 			}
 			else
 			{
@@ -2296,7 +2296,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CreateObjectAction>(this->createCreateObjectAction());
+				return this->createCreateObjectAction();
 			}
 			else
 			{
@@ -2335,7 +2335,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DataStoreNode>(this->createDataStoreNode());
+				return this->createDataStoreNode();
 			}
 			else
 			{
@@ -2374,7 +2374,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DataType>(this->createDataType());
+				return this->createDataType();
 			}
 			else
 			{
@@ -2419,7 +2419,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DecisionNode>(this->createDecisionNode());
+				return this->createDecisionNode();
 			}
 			else
 			{
@@ -2458,7 +2458,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Dependency>(this->createDependency());
+				return this->createDependency();
 			}
 			else
 			{
@@ -2497,7 +2497,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Deployment>(this->createDeployment());
+				return this->createDeployment();
 			}
 			else
 			{
@@ -2542,7 +2542,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DeploymentSpecification>(this->createDeploymentSpecification());
+				return this->createDeploymentSpecification();
 			}
 			else
 			{
@@ -2593,7 +2593,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DestroyLinkAction>(this->createDestroyLinkAction());
+				return this->createDestroyLinkAction();
 			}
 			else
 			{
@@ -2632,7 +2632,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DestroyObjectAction>(this->createDestroyObjectAction());
+				return this->createDestroyObjectAction();
 			}
 			else
 			{
@@ -2671,7 +2671,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DestructionOccurrenceSpecification>(this->createDestructionOccurrenceSpecification());
+				return this->createDestructionOccurrenceSpecification();
 			}
 			else
 			{
@@ -2710,7 +2710,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Device>(this->createDevice());
+				return this->createDevice();
 			}
 			else
 			{
@@ -2755,7 +2755,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Duration>(this->createDuration());
+				return this->createDuration();
 			}
 			else
 			{
@@ -2800,7 +2800,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DurationConstraint>(this->createDurationConstraint());
+				return this->createDurationConstraint();
 			}
 			else
 			{
@@ -2845,7 +2845,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DurationInterval>(this->createDurationInterval());
+				return this->createDurationInterval();
 			}
 			else
 			{
@@ -2890,7 +2890,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DurationObservation>(this->createDurationObservation());
+				return this->createDurationObservation();
 			}
 			else
 			{
@@ -2929,7 +2929,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ElementImport>(this->createElementImport());
+				return this->createElementImport();
 			}
 			else
 			{
@@ -2956,7 +2956,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Enumeration>(this->createEnumeration());
+				return this->createEnumeration();
 			}
 			else
 			{
@@ -3001,7 +3001,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<EnumerationLiteral>(this->createEnumerationLiteral());
+				return this->createEnumerationLiteral();
 			}
 			else
 			{
@@ -3046,7 +3046,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExceptionHandler>(this->createExceptionHandler());
+				return this->createExceptionHandler();
 			}
 			else
 			{
@@ -3073,7 +3073,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExecutionEnvironment>(this->createExecutionEnvironment());
+				return this->createExecutionEnvironment();
 			}
 			else
 			{
@@ -3118,7 +3118,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExecutionOccurrenceSpecification>(this->createExecutionOccurrenceSpecification());
+				return this->createExecutionOccurrenceSpecification();
 			}
 			else
 			{
@@ -3157,7 +3157,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExpansionNode>(this->createExpansionNode());
+				return this->createExpansionNode();
 			}
 			else
 			{
@@ -3196,7 +3196,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExpansionRegion>(this->createExpansionRegion());
+				return this->createExpansionRegion();
 			}
 			else
 			{
@@ -3247,7 +3247,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Expression>(this->createExpression());
+				return this->createExpression();
 			}
 			else
 			{
@@ -3292,7 +3292,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Extend>(this->createExtend());
+				return this->createExtend();
 			}
 			else
 			{
@@ -3325,7 +3325,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Extension>(this->createExtension());
+				return this->createExtension();
 			}
 			else
 			{
@@ -3370,7 +3370,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExtensionEnd>(this->createExtensionEnd());
+				return this->createExtensionEnd();
 			}
 			else
 			{
@@ -3433,7 +3433,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExtensionPoint>(this->createExtensionPoint());
+				return this->createExtensionPoint();
 			}
 			else
 			{
@@ -3466,7 +3466,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Factory>(this->createFactory());
+				return this->createFactory();
 			}
 			else
 			{
@@ -3479,7 +3479,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<FinalState>(this->createFinalState());
+				return this->createFinalState();
 			}
 			else
 			{
@@ -3512,7 +3512,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<FlowFinalNode>(this->createFlowFinalNode());
+				return this->createFlowFinalNode();
 			}
 			else
 			{
@@ -3551,7 +3551,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ForkNode>(this->createForkNode());
+				return this->createForkNode();
 			}
 			else
 			{
@@ -3590,7 +3590,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<FunctionBehavior>(this->createFunctionBehavior());
+				return this->createFunctionBehavior();
 			}
 			else
 			{
@@ -3641,7 +3641,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Gate>(this->createGate());
+				return this->createGate();
 			}
 			else
 			{
@@ -3668,7 +3668,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<GeneralOrdering>(this->createGeneralOrdering());
+				return this->createGeneralOrdering();
 			}
 			else
 			{
@@ -3695,7 +3695,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Generalization>(this->createGeneralization());
+				return this->createGeneralization();
 			}
 			else
 			{
@@ -3722,7 +3722,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<GeneralizationSet>(this->createGeneralizationSet());
+				return this->createGeneralizationSet();
 			}
 			else
 			{
@@ -3761,7 +3761,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Image>(this->createImage());
+				return this->createImage();
 			}
 			else
 			{
@@ -3774,7 +3774,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Include>(this->createInclude());
+				return this->createInclude();
 			}
 			else
 			{
@@ -3807,7 +3807,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InformationFlow>(this->createInformationFlow());
+				return this->createInformationFlow();
 			}
 			else
 			{
@@ -3846,7 +3846,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InformationItem>(this->createInformationItem());
+				return this->createInformationItem();
 			}
 			else
 			{
@@ -3891,7 +3891,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InitialNode>(this->createInitialNode());
+				return this->createInitialNode();
 			}
 			else
 			{
@@ -3930,7 +3930,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InputPin>(this->createInputPin());
+				return this->createInputPin();
 			}
 			else
 			{
@@ -3987,7 +3987,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InstanceSpecification>(this->createInstanceSpecification());
+				return this->createInstanceSpecification();
 			}
 			else
 			{
@@ -4026,7 +4026,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InstanceValue>(this->createInstanceValue());
+				return this->createInstanceValue();
 			}
 			else
 			{
@@ -4071,7 +4071,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Interaction>(this->createInteraction());
+				return this->createInteraction();
 			}
 			else
 			{
@@ -4134,7 +4134,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InteractionConstraint>(this->createInteractionConstraint());
+				return this->createInteractionConstraint();
 			}
 			else
 			{
@@ -4179,7 +4179,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InteractionOperand>(this->createInteractionOperand());
+				return this->createInteractionOperand();
 			}
 			else
 			{
@@ -4218,7 +4218,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InteractionUse>(this->createInteractionUse());
+				return this->createInteractionUse();
 			}
 			else
 			{
@@ -4257,7 +4257,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Interface>(this->createInterface());
+				return this->createInterface();
 			}
 			else
 			{
@@ -4302,7 +4302,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InterfaceRealization>(this->createInterfaceRealization());
+				return this->createInterfaceRealization();
 			}
 			else
 			{
@@ -4347,7 +4347,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InterruptibleActivityRegion>(this->createInterruptibleActivityRegion());
+				return this->createInterruptibleActivityRegion();
 			}
 			else
 			{
@@ -4386,7 +4386,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Interval>(this->createInterval());
+				return this->createInterval();
 			}
 			else
 			{
@@ -4431,7 +4431,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<IntervalConstraint>(this->createIntervalConstraint());
+				return this->createIntervalConstraint();
 			}
 			else
 			{
@@ -4476,7 +4476,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<JoinNode>(this->createJoinNode());
+				return this->createJoinNode();
 			}
 			else
 			{
@@ -4515,7 +4515,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Lifeline>(this->createLifeline());
+				return this->createLifeline();
 			}
 			else
 			{
@@ -4548,7 +4548,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LinkEndCreationData>(this->createLinkEndCreationData());
+				return this->createLinkEndCreationData();
 			}
 			else
 			{
@@ -4561,7 +4561,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LinkEndData>(this->createLinkEndData());
+				return this->createLinkEndData();
 			}
 			else
 			{
@@ -4574,7 +4574,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LinkEndDestructionData>(this->createLinkEndDestructionData());
+				return this->createLinkEndDestructionData();
 			}
 			else
 			{
@@ -4587,7 +4587,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralBoolean>(this->createLiteralBoolean());
+				return this->createLiteralBoolean();
 			}
 			else
 			{
@@ -4632,7 +4632,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralInteger>(this->createLiteralInteger());
+				return this->createLiteralInteger();
 			}
 			else
 			{
@@ -4677,7 +4677,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralNull>(this->createLiteralNull());
+				return this->createLiteralNull();
 			}
 			else
 			{
@@ -4722,7 +4722,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralReal>(this->createLiteralReal());
+				return this->createLiteralReal();
 			}
 			else
 			{
@@ -4767,7 +4767,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralString>(this->createLiteralString());
+				return this->createLiteralString();
 			}
 			else
 			{
@@ -4812,7 +4812,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LiteralUnlimitedNatural>(this->createLiteralUnlimitedNatural());
+				return this->createLiteralUnlimitedNatural();
 			}
 			else
 			{
@@ -4857,7 +4857,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LoopNode>(this->createLoopNode());
+				return this->createLoopNode();
 			}
 			else
 			{
@@ -4908,7 +4908,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Manifestation>(this->createManifestation());
+				return this->createManifestation();
 			}
 			else
 			{
@@ -4947,7 +4947,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<MergeNode>(this->createMergeNode());
+				return this->createMergeNode();
 			}
 			else
 			{
@@ -4986,7 +4986,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Message>(this->createMessage());
+				return this->createMessage();
 			}
 			else
 			{
@@ -5019,7 +5019,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<MessageOccurrenceSpecification>(this->createMessageOccurrenceSpecification());
+				return this->createMessageOccurrenceSpecification();
 			}
 			else
 			{
@@ -5058,7 +5058,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Model>(this->createModel());
+				return this->createModel();
 			}
 			else
 			{
@@ -5103,7 +5103,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Node>(this->createNode());
+				return this->createNode();
 			}
 			else
 			{
@@ -5146,14 +5146,14 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		}
 		case UmlPackage::OBJECT_ECLASS:
 		{
-				return std::shared_ptr<Object>(this->createObject());
+				return this->createObject();
 			
 		}
 		case UmlPackage::OBJECTFLOW_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ObjectFlow>(this->createObjectFlow());
+				return this->createObjectFlow();
 			}
 			else
 			{
@@ -5192,7 +5192,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OccurrenceSpecification>(this->createOccurrenceSpecification());
+				return this->createOccurrenceSpecification();
 			}
 			else
 			{
@@ -5231,7 +5231,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OpaqueAction>(this->createOpaqueAction());
+				return this->createOpaqueAction();
 			}
 			else
 			{
@@ -5270,7 +5270,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OpaqueBehavior>(this->createOpaqueBehavior());
+				return this->createOpaqueBehavior();
 			}
 			else
 			{
@@ -5321,7 +5321,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OpaqueExpression>(this->createOpaqueExpression());
+				return this->createOpaqueExpression();
 			}
 			else
 			{
@@ -5366,7 +5366,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Operation>(this->createOperation());
+				return this->createOperation();
 			}
 			else
 			{
@@ -5417,7 +5417,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OperationTemplateParameter>(this->createOperationTemplateParameter());
+				return this->createOperationTemplateParameter();
 			}
 			else
 			{
@@ -5444,7 +5444,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OutputPin>(this->createOutputPin());
+				return this->createOutputPin();
 			}
 			else
 			{
@@ -5489,7 +5489,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Package>(this->createPackage());
+				return this->createPackage();
 			}
 			else
 			{
@@ -5534,7 +5534,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<PackageImport>(this->createPackageImport());
+				return this->createPackageImport();
 			}
 			else
 			{
@@ -5561,7 +5561,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<PackageMerge>(this->createPackageMerge());
+				return this->createPackageMerge();
 			}
 			else
 			{
@@ -5588,7 +5588,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Parameter>(this->createParameter());
+				return this->createParameter();
 			}
 			else
 			{
@@ -5633,7 +5633,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ParameterSet>(this->createParameterSet());
+				return this->createParameterSet();
 			}
 			else
 			{
@@ -5660,7 +5660,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<PartDecomposition>(this->createPartDecomposition());
+				return this->createPartDecomposition();
 			}
 			else
 			{
@@ -5699,7 +5699,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Port>(this->createPort());
+				return this->createPort();
 			}
 			else
 			{
@@ -5762,7 +5762,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<PrimitiveType>(this->createPrimitiveType());
+				return this->createPrimitiveType();
 			}
 			else
 			{
@@ -5807,7 +5807,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Profile>(this->createProfile());
+				return this->createProfile();
 			}
 			else
 			{
@@ -5852,7 +5852,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ProfileApplication>(this->createProfileApplication());
+				return this->createProfileApplication();
 			}
 			else
 			{
@@ -5879,7 +5879,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Property>(this->createProperty());
+				return this->createProperty();
 			}
 			else
 			{
@@ -5942,7 +5942,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ProtocolConformance>(this->createProtocolConformance());
+				return this->createProtocolConformance();
 			}
 			else
 			{
@@ -5969,7 +5969,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ProtocolStateMachine>(this->createProtocolStateMachine());
+				return this->createProtocolStateMachine();
 			}
 			else
 			{
@@ -6020,7 +6020,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ProtocolTransition>(this->createProtocolTransition());
+				return this->createProtocolTransition();
 			}
 			else
 			{
@@ -6053,7 +6053,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Pseudostate>(this->createPseudostate());
+				return this->createPseudostate();
 			}
 			else
 			{
@@ -6098,7 +6098,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<QualifierValue>(this->createQualifierValue());
+				return this->createQualifierValue();
 			}
 			else
 			{
@@ -6111,7 +6111,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<RaiseExceptionAction>(this->createRaiseExceptionAction());
+				return this->createRaiseExceptionAction();
 			}
 			else
 			{
@@ -6150,7 +6150,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadExtentAction>(this->createReadExtentAction());
+				return this->createReadExtentAction();
 			}
 			else
 			{
@@ -6189,7 +6189,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadIsClassifiedObjectAction>(this->createReadIsClassifiedObjectAction());
+				return this->createReadIsClassifiedObjectAction();
 			}
 			else
 			{
@@ -6228,7 +6228,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadLinkAction>(this->createReadLinkAction());
+				return this->createReadLinkAction();
 			}
 			else
 			{
@@ -6267,7 +6267,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadLinkObjectEndAction>(this->createReadLinkObjectEndAction());
+				return this->createReadLinkObjectEndAction();
 			}
 			else
 			{
@@ -6306,7 +6306,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadLinkObjectEndQualifierAction>(this->createReadLinkObjectEndQualifierAction());
+				return this->createReadLinkObjectEndQualifierAction();
 			}
 			else
 			{
@@ -6345,7 +6345,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadSelfAction>(this->createReadSelfAction());
+				return this->createReadSelfAction();
 			}
 			else
 			{
@@ -6384,7 +6384,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadStructuralFeatureAction>(this->createReadStructuralFeatureAction());
+				return this->createReadStructuralFeatureAction();
 			}
 			else
 			{
@@ -6423,7 +6423,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadVariableAction>(this->createReadVariableAction());
+				return this->createReadVariableAction();
 			}
 			else
 			{
@@ -6462,7 +6462,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Realization>(this->createRealization());
+				return this->createRealization();
 			}
 			else
 			{
@@ -6501,7 +6501,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Reception>(this->createReception());
+				return this->createReception();
 			}
 			else
 			{
@@ -6528,7 +6528,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReclassifyObjectAction>(this->createReclassifyObjectAction());
+				return this->createReclassifyObjectAction();
 			}
 			else
 			{
@@ -6567,7 +6567,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<RedefinableTemplateSignature>(this->createRedefinableTemplateSignature());
+				return this->createRedefinableTemplateSignature();
 			}
 			else
 			{
@@ -6600,7 +6600,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReduceAction>(this->createReduceAction());
+				return this->createReduceAction();
 			}
 			else
 			{
@@ -6639,7 +6639,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Region>(this->createRegion());
+				return this->createRegion();
 			}
 			else
 			{
@@ -6678,7 +6678,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<RemoveStructuralFeatureValueAction>(this->createRemoveStructuralFeatureValueAction());
+				return this->createRemoveStructuralFeatureValueAction();
 			}
 			else
 			{
@@ -6717,7 +6717,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<RemoveVariableValueAction>(this->createRemoveVariableValueAction());
+				return this->createRemoveVariableValueAction();
 			}
 			else
 			{
@@ -6756,7 +6756,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReplyAction>(this->createReplyAction());
+				return this->createReplyAction();
 			}
 			else
 			{
@@ -6795,7 +6795,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<SendObjectAction>(this->createSendObjectAction());
+				return this->createSendObjectAction();
 			}
 			else
 			{
@@ -6834,7 +6834,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<SendSignalAction>(this->createSendSignalAction());
+				return this->createSendSignalAction();
 			}
 			else
 			{
@@ -6873,7 +6873,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<SequenceNode>(this->createSequenceNode());
+				return this->createSequenceNode();
 			}
 			else
 			{
@@ -6924,7 +6924,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Signal>(this->createSignal());
+				return this->createSignal();
 			}
 			else
 			{
@@ -6969,7 +6969,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<SignalEvent>(this->createSignalEvent());
+				return this->createSignalEvent();
 			}
 			else
 			{
@@ -7008,7 +7008,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Slot>(this->createSlot());
+				return this->createSlot();
 			}
 			else
 			{
@@ -7035,7 +7035,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StartClassifierBehaviorAction>(this->createStartClassifierBehaviorAction());
+				return this->createStartClassifierBehaviorAction();
 			}
 			else
 			{
@@ -7074,7 +7074,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StartObjectBehaviorAction>(this->createStartObjectBehaviorAction());
+				return this->createStartObjectBehaviorAction();
 			}
 			else
 			{
@@ -7113,7 +7113,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<State>(this->createState());
+				return this->createState();
 			}
 			else
 			{
@@ -7146,7 +7146,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StateInvariant>(this->createStateInvariant());
+				return this->createStateInvariant();
 			}
 			else
 			{
@@ -7185,7 +7185,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StateMachine>(this->createStateMachine());
+				return this->createStateMachine();
 			}
 			else
 			{
@@ -7236,7 +7236,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Stereotype>(this->createStereotype());
+				return this->createStereotype();
 			}
 			else
 			{
@@ -7281,7 +7281,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StringExpression>(this->createStringExpression());
+				return this->createStringExpression();
 			}
 			else
 			{
@@ -7332,7 +7332,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StructuredActivityNode>(this->createStructuredActivityNode());
+				return this->createStructuredActivityNode();
 			}
 			else
 			{
@@ -7383,7 +7383,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Substitution>(this->createSubstitution());
+				return this->createSubstitution();
 			}
 			else
 			{
@@ -7428,7 +7428,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TemplateBinding>(this->createTemplateBinding());
+				return this->createTemplateBinding();
 			}
 			else
 			{
@@ -7455,7 +7455,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TemplateParameter>(this->createTemplateParameter());
+				return this->createTemplateParameter();
 			}
 			else
 			{
@@ -7482,7 +7482,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TemplateParameterSubstitution>(this->createTemplateParameterSubstitution());
+				return this->createTemplateParameterSubstitution();
 			}
 			else
 			{
@@ -7509,7 +7509,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TemplateSignature>(this->createTemplateSignature());
+				return this->createTemplateSignature();
 			}
 			else
 			{
@@ -7536,7 +7536,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TestIdentityAction>(this->createTestIdentityAction());
+				return this->createTestIdentityAction();
 			}
 			else
 			{
@@ -7575,7 +7575,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TimeConstraint>(this->createTimeConstraint());
+				return this->createTimeConstraint();
 			}
 			else
 			{
@@ -7620,7 +7620,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TimeEvent>(this->createTimeEvent());
+				return this->createTimeEvent();
 			}
 			else
 			{
@@ -7659,7 +7659,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TimeExpression>(this->createTimeExpression());
+				return this->createTimeExpression();
 			}
 			else
 			{
@@ -7704,7 +7704,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TimeInterval>(this->createTimeInterval());
+				return this->createTimeInterval();
 			}
 			else
 			{
@@ -7749,7 +7749,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TimeObservation>(this->createTimeObservation());
+				return this->createTimeObservation();
 			}
 			else
 			{
@@ -7788,7 +7788,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Transition>(this->createTransition());
+				return this->createTransition();
 			}
 			else
 			{
@@ -7821,7 +7821,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Trigger>(this->createTrigger());
+				return this->createTrigger();
 			}
 			else
 			{
@@ -7848,7 +7848,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<UnmarshallAction>(this->createUnmarshallAction());
+				return this->createUnmarshallAction();
 			}
 			else
 			{
@@ -7887,7 +7887,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Usage>(this->createUsage());
+				return this->createUsage();
 			}
 			else
 			{
@@ -7926,7 +7926,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<UseCase>(this->createUseCase());
+				return this->createUseCase();
 			}
 			else
 			{
@@ -7971,7 +7971,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ValuePin>(this->createValuePin());
+				return this->createValuePin();
 			}
 			else
 			{
@@ -8028,7 +8028,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ValueSpecificationAction>(this->createValueSpecificationAction());
+				return this->createValueSpecificationAction();
 			}
 			else
 			{
@@ -8067,7 +8067,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<Variable>(this->createVariable());
+				return this->createVariable();
 			}
 			else
 			{

@@ -331,7 +331,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ComponentRealizationImp
 }
 
 
-std::shared_ptr<ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr()
+std::shared_ptr<ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr() const
 {
 	return m_thisComponentRealizationPtr.lock();
 }

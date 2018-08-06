@@ -666,13 +666,13 @@ bool BehaviorImpl::getIsReentrant() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element>  from) 
+std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element>  from)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -680,25 +680,25 @@ bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <   An
 
 
 
-std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::most_one_behavior(Any diagnostics,std::map <   Any, Any >  context) 
+bool BehaviorImpl::most_one_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::parameters_match(Any diagnostics,std::map <   Any, Any >  context) 
+bool BehaviorImpl::parameters_match(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -817,7 +817,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Behavio
 }
 
 
-std::shared_ptr<Behavior> BehaviorImpl::getThisBehaviorPtr()
+std::shared_ptr<Behavior> BehaviorImpl::getThisBehaviorPtr() const
 {
 	return m_thisBehaviorPtr.lock();
 }

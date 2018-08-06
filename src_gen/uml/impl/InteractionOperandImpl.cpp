@@ -310,13 +310,13 @@ std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) 
+bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -367,7 +367,7 @@ std::weak_ptr<uml::Element > InteractionOperandImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionOperand> InteractionOperandImpl::getThisInteractionOperandPtr()
+std::shared_ptr<InteractionOperand> InteractionOperandImpl::getThisInteractionOperandPtr() const
 {
 	return m_thisInteractionOperandPtr.lock();
 }

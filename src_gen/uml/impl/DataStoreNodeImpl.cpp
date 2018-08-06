@@ -309,7 +309,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DataStoreNodeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr()
+std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr() const
 {
 	return m_thisDataStoreNodePtr.lock();
 }

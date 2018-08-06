@@ -491,7 +491,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> SequenceNodeImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr()
+std::shared_ptr<SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr() const
 {
 	return m_thisSequenceNodePtr.lock();
 }

@@ -324,19 +324,19 @@ std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptCallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptCallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  context) 
+bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -380,7 +380,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> AcceptCallActionImpl::getRedefin
 }
 
 
-std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr()
+std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr() const
 {
 	return m_thisAcceptCallActionPtr.lock();
 }

@@ -313,7 +313,7 @@ std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::map <   Any, Any >  context) 
+bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -348,7 +348,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateLinkActionImpl::getRedefin
 }
 
 
-std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr()
+std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr() const
 {
 	return m_thisCreateLinkActionPtr.lock();
 }

@@ -263,7 +263,7 @@ std::weak_ptr<uml::Element > ExecutionOccurrenceSpecificationImpl::getOwner() co
 }
 
 
-std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr()
+std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr() const
 {
 	return m_thisExecutionOccurrenceSpecificationPtr.lock();
 }

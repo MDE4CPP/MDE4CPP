@@ -438,37 +438,37 @@ bool ExtensionImpl::getIsRequired() const
 //*********************************
 
 
-std::shared_ptr<uml::Stereotype> ExtensionImpl::getStereotype() 
+std::shared_ptr<uml::Stereotype> ExtensionImpl::getStereotype()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> ExtensionImpl::getStereotypeEnd() 
+std::shared_ptr<uml::Property> ExtensionImpl::getStereotypeEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::isRequired() 
+bool ExtensionImpl::isRequired()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::is_binary(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtensionImpl::is_binary(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd() 
+std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -521,7 +521,7 @@ std::shared_ptr<Union<uml::Element>> ExtensionImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr()
+std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr() const
 {
 	return m_thisExtensionPtr.lock();
 }

@@ -172,7 +172,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  = 0;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a) = 0;
 			
 			
 			//*********************************

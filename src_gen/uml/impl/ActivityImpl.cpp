@@ -815,13 +815,13 @@ bool ActivityImpl::getIsSingleExecution() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityImpl::maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityImpl::maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityImpl::maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) 
+bool ActivityImpl::maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -931,7 +931,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Activit
 }
 
 
-std::shared_ptr<Activity> ActivityImpl::getThisActivityPtr()
+std::shared_ptr<Activity> ActivityImpl::getThisActivityPtr() const
 {
 	return m_thisActivityPtr.lock();
 }

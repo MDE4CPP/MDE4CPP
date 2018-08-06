@@ -285,7 +285,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityFinalNodeImpl::getRedefi
 }
 
 
-std::shared_ptr<ActivityFinalNode> ActivityFinalNodeImpl::getThisActivityFinalNodePtr()
+std::shared_ptr<ActivityFinalNode> ActivityFinalNodeImpl::getThisActivityFinalNodePtr() const
 {
 	return m_thisActivityFinalNodePtr.lock();
 }

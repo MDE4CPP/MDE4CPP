@@ -191,7 +191,7 @@ std::weak_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
 }
 
 
-std::shared_ptr<DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr()
+std::shared_ptr<DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr() const
 {
 	return m_thisDeployedArtifactPtr.lock();
 }

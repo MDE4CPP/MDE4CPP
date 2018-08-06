@@ -316,7 +316,7 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) 
+bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -364,7 +364,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadStructuralFeatureActionImpl:
 }
 
 
-std::shared_ptr<ReadStructuralFeatureAction> ReadStructuralFeatureActionImpl::getThisReadStructuralFeatureActionPtr()
+std::shared_ptr<ReadStructuralFeatureAction> ReadStructuralFeatureActionImpl::getThisReadStructuralFeatureActionPtr() const
 {
 	return m_thisReadStructuralFeatureActionPtr.lock();
 }

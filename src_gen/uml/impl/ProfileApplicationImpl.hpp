@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ProfileApplicationImpl();
-			virtual std::shared_ptr<ProfileApplication> getThisProfileApplicationPtr();
+			virtual std::shared_ptr<ProfileApplication> getThisProfileApplicationPtr() const;
 			virtual void setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr);
 
 			//Additional constructors for the containments back reference
@@ -52,11 +52,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Retrieves the definition (Ecore representation) of the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition()  ;
+			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() ;
 			
 			/*!
 			 Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  ;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) ;
 			
 			
 			

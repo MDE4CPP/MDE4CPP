@@ -334,7 +334,7 @@ std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -392,7 +392,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CallOperationActionImpl::getRede
 }
 
 
-std::shared_ptr<CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr()
+std::shared_ptr<CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr() const
 {
 	return m_thisCallOperationActionPtr.lock();
 }

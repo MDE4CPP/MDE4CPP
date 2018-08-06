@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionFragmentImpl();
-			virtual std::shared_ptr<InteractionFragment> getThisInteractionFragmentPtr();
+			virtual std::shared_ptr<InteractionFragment> getThisInteractionFragmentPtr() const;
 			virtual void setThisInteractionFragmentPtr(std::weak_ptr<InteractionFragment> thisInteractionFragmentPtr);
 
 			//Additional constructors for the containments back reference

@@ -502,19 +502,19 @@ int OperationImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(Any diagnostics,std::map <   Any, Any >  context) 
+bool OperationImpl::at_most_one_return(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int OperationImpl::getLower() 
+int OperationImpl::getLower()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult() 
+std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -522,61 +522,61 @@ std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult()
 
 
 
-int OperationImpl::getUpper() 
+int OperationImpl::getUpper()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::isOrdered() 
+bool OperationImpl::isOrdered()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::isUnique() 
+bool OperationImpl::isUnique()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) 
+bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > OperationImpl::returnResult() 
+std::shared_ptr<Bag<uml::Parameter> > OperationImpl::returnResult()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setIsOrdered(bool newIsOrdered) 
+void OperationImpl::setIsOrdered(bool newIsOrdered)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setIsUnique(bool newIsUnique) 
+void OperationImpl::setIsUnique(bool newIsUnique)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setLower(int newLower) 
+void OperationImpl::setLower(int newLower)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setType(std::shared_ptr<uml::Type>  newType) 
+void OperationImpl::setType(std::shared_ptr<uml::Type>  newType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setUpper(int newUpper) 
+void OperationImpl::setUpper(int newUpper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -690,7 +690,7 @@ std::shared_ptr<Union<uml::Classifier>> OperationImpl::getRedefinitionContext() 
 }
 
 
-std::shared_ptr<Operation> OperationImpl::getThisOperationPtr()
+std::shared_ptr<Operation> OperationImpl::getThisOperationPtr() const
 {
 	return m_thisOperationPtr.lock();
 }

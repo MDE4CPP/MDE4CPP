@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralSpecificationImpl();
-			virtual std::shared_ptr<LiteralSpecification> getThisLiteralSpecificationPtr();
+			virtual std::shared_ptr<LiteralSpecification> getThisLiteralSpecificationPtr() const;
 			virtual void setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr);
 
 			//Additional constructors for the containments back reference

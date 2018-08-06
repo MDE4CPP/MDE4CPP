@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TimeConstraintImpl();
-			virtual std::shared_ptr<TimeConstraint> getThisTimeConstraintPtr();
+			virtual std::shared_ptr<TimeConstraint> getThisTimeConstraintPtr() const;
 			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,7 +64,7 @@ namespace uml
 			/*!
 			 A TimeConstraint has one constrainedElement.
 			constrainedElement->size() = 1 */ 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

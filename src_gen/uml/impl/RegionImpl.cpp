@@ -346,43 +346,43 @@ std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool RegionImpl::belongsToPSM() 
+bool RegionImpl::belongsToPSM()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool RegionImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::owned(Any diagnostics,std::map <   Any, Any >  context) 
+bool RegionImpl::owned(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context) 
+bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -464,7 +464,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RegionImpl::getRedefinedElement(
 }
 
 
-std::shared_ptr<Region> RegionImpl::getThisRegionPtr()
+std::shared_ptr<Region> RegionImpl::getThisRegionPtr() const
 {
 	return m_thisRegionPtr.lock();
 }

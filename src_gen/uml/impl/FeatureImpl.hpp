@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FeatureImpl();
-			virtual std::shared_ptr<Feature> getThisFeaturePtr();
+			virtual std::shared_ptr<Feature> getThisFeaturePtr() const;
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
 
 			//Additional constructors for the containments back reference

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConsiderIgnoreFragmentImpl();
-			virtual std::shared_ptr<ConsiderIgnoreFragment> getThisConsiderIgnoreFragmentPtr();
+			virtual std::shared_ptr<ConsiderIgnoreFragment> getThisConsiderIgnoreFragmentPtr() const;
 			virtual void setThisConsiderIgnoreFragmentPtr(std::weak_ptr<ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
-			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
-			virtual bool type(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

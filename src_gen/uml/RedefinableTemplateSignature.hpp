@@ -138,12 +138,12 @@ namespace uml
 			 Derivation for RedefinableTemplateSignature::/inheritedParameter
 			result = (if extendedSignature->isEmpty() then Set{} else extendedSignature.parameter->asSet() endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;
 			
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

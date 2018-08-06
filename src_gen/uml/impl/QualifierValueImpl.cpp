@@ -152,19 +152,19 @@ std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) 
+bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -202,7 +202,7 @@ std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr()
+std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
 {
 	return m_thisQualifierValuePtr.lock();
 }

@@ -134,7 +134,7 @@ namespace uml
 			/*!
 			 The startEvent and the finishEvent must be on the same Lifeline.
 			start.covered = finish.covered */ 
-			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

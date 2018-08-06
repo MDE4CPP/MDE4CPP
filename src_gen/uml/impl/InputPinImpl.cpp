@@ -358,7 +358,7 @@ std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) 
+bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -418,7 +418,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InputPinImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr()
+std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr() const
 {
 	return m_thisInputPinPtr.lock();
 }

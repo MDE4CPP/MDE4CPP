@@ -176,12 +176,12 @@ namespace uml
 			/*!
 			 All the operands of a StringExpression must be LiteralStrings
 			operand->forAll (oclIsKindOf (LiteralString)) */ 
-			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
-			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

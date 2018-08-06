@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DestroyLinkActionImpl();
-			virtual std::shared_ptr<DestroyLinkAction> getThisDestroyLinkActionPtr();
+			virtual std::shared_ptr<DestroyLinkAction> getThisDestroyLinkActionPtr() const;
 			virtual void setThisDestroyLinkActionPtr(std::weak_ptr<DestroyLinkAction> thisDestroyLinkActionPtr);
 
 			//Additional constructors for the containments back reference

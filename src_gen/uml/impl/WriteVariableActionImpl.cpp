@@ -309,13 +309,13 @@ std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -359,7 +359,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> WriteVariableActionImpl::getRede
 }
 
 
-std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr()
+std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr() const
 {
 	return m_thisWriteVariableActionPtr.lock();
 }

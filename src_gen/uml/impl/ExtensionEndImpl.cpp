@@ -366,13 +366,13 @@ std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionEndImpl::aggregation(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtensionEndImpl::aggregation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -411,7 +411,7 @@ std::shared_ptr<Union<uml::Classifier>> ExtensionEndImpl::getRedefinitionContext
 }
 
 
-std::shared_ptr<ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr()
+std::shared_ptr<ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr() const
 {
 	return m_thisExtensionEndPtr.lock();
 }

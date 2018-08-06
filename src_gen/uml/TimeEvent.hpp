@@ -125,7 +125,7 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

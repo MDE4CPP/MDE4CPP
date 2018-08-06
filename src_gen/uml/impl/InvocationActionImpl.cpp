@@ -377,7 +377,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InvocationActionImpl::getRedefin
 }
 
 
-std::shared_ptr<InvocationAction> InvocationActionImpl::getThisInvocationActionPtr()
+std::shared_ptr<InvocationAction> InvocationActionImpl::getThisInvocationActionPtr() const
 {
 	return m_thisInvocationActionPtr.lock();
 }

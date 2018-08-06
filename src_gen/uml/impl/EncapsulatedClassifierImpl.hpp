@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EncapsulatedClassifierImpl();
-			virtual std::shared_ptr<EncapsulatedClassifier> getThisEncapsulatedClassifierPtr();
+			virtual std::shared_ptr<EncapsulatedClassifier> getThisEncapsulatedClassifierPtr() const;
 			virtual void setThisEncapsulatedClassifierPtr(std::weak_ptr<EncapsulatedClassifier> thisEncapsulatedClassifierPtr);
 
 			//Additional constructors for the containments back reference
@@ -65,7 +65,7 @@ namespace uml
 			 Derivation for EncapsulatedClassifier::/ownedPort : Port
 			result = (ownedAttribute->select(oclIsKindOf(Port))->collect(oclAsType(Port))->asOrderedSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Port> > getOwnedPorts()  ;
+			virtual std::shared_ptr<Bag<uml::Port> > getOwnedPorts() ;
 			
 			
 			

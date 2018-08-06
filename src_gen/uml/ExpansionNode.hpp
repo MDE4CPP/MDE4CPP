@@ -181,7 +181,7 @@ namespace uml
 			/*!
 			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
-			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

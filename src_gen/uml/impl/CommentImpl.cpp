@@ -175,7 +175,7 @@ std::shared_ptr<Union<uml::Element>> CommentImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<Comment> CommentImpl::getThisCommentPtr()
+std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const
 {
 	return m_thisCommentPtr.lock();
 }

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AnyReceiveEventImpl();
-			virtual std::shared_ptr<AnyReceiveEvent> getThisAnyReceiveEventPtr();
+			virtual std::shared_ptr<AnyReceiveEvent> getThisAnyReceiveEventPtr() const;
 			virtual void setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr);
 
 			//Additional constructors for the containments back reference

@@ -358,13 +358,13 @@ std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValuePinImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ValuePinImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) 
+bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -404,7 +404,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ValuePinImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr()
+std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr() const
 {
 	return m_thisValuePinPtr.lock();
 }

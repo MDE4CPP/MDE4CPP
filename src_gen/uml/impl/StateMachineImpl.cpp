@@ -643,43 +643,43 @@ std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2) 
+std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex>  v1,std::shared_ptr<uml::Vertex>  v2) 
+std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex>  v1,std::shared_ptr<uml::Vertex>  v2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2) 
+bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::classifier_context(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateMachineImpl::classifier_context(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::connection_points(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateMachineImpl::connection_points(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::context_classifier(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateMachineImpl::context_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::method(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateMachineImpl::method(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -761,7 +761,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StateMa
 }
 
 
-std::shared_ptr<StateMachine> StateMachineImpl::getThisStateMachinePtr()
+std::shared_ptr<StateMachine> StateMachineImpl::getThisStateMachinePtr() const
 {
 	return m_thisStateMachinePtr.lock();
 }

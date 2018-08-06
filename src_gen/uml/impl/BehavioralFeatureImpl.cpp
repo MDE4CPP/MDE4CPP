@@ -345,25 +345,25 @@ bool BehavioralFeatureImpl::getIsAbstract() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) 
+bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) 
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -421,7 +421,7 @@ std::weak_ptr<uml::Element > BehavioralFeatureImpl::getOwner() const
 }
 
 
-std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr()
+std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr() const
 {
 	return m_thisBehavioralFeaturePtr.lock();
 }

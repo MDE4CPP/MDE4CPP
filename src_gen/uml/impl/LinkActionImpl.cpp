@@ -360,25 +360,25 @@ std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> LinkActionImpl::association() 
+std::shared_ptr<uml::Association> LinkActionImpl::association()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_association(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkActionImpl::same_association(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_pins(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkActionImpl::same_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -426,7 +426,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> LinkActionImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<LinkAction> LinkActionImpl::getThisLinkActionPtr()
+std::shared_ptr<LinkAction> LinkActionImpl::getThisLinkActionPtr() const
 {
 	return m_thisLinkActionPtr.lock();
 }

@@ -388,19 +388,19 @@ bool ActionImpl::getIsLocallyReentrant() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Action> > ActionImpl::allActions() 
+std::shared_ptr<Bag<uml::Action> > ActionImpl::allActions()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > ActionImpl::allOwnedNodes() 
+std::shared_ptr<Bag<uml::ActivityNode> > ActionImpl::allOwnedNodes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Behavior> ActionImpl::containingBehavior() 
+std::shared_ptr<uml::Behavior> ActionImpl::containingBehavior()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -467,7 +467,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActionImpl::getRedefinedElement(
 }
 
 
-std::shared_ptr<Action> ActionImpl::getThisActionPtr()
+std::shared_ptr<Action> ActionImpl::getThisActionPtr() const
 {
 	return m_thisActionPtr.lock();
 }

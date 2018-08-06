@@ -172,7 +172,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) 
+bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -200,7 +200,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndDestructionDataImpl::getOwnedElement
 }
 
 
-std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr()
+std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
 {
 	return m_thisLinkEndDestructionDataPtr.lock();
 }

@@ -113,7 +113,7 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

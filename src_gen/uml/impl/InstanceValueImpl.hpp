@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InstanceValueImpl();
-			virtual std::shared_ptr<InstanceValue> getThisInstanceValuePtr();
+			virtual std::shared_ptr<InstanceValue> getThisInstanceValuePtr() const;
 			virtual void setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr);
 
 			//Additional constructors for the containments back reference

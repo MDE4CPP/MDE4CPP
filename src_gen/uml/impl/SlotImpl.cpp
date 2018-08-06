@@ -240,7 +240,7 @@ std::weak_ptr<uml::Element > SlotImpl::getOwner() const
 }
 
 
-std::shared_ptr<Slot> SlotImpl::getThisSlotPtr()
+std::shared_ptr<Slot> SlotImpl::getThisSlotPtr() const
 {
 	return m_thisSlotPtr.lock();
 }

@@ -170,23 +170,23 @@ namespace uml
 			/*!
 			 When isAbstract is true there are no methods.
 			isAbstract implies method->isEmpty() */ 
-			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Creates a return result parameter with the specified name and type. */ 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)  = 0;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) = 0;
 			
 			/*!
 			 The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
 			
 			/*!
 			 The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
 			
 			
 			//*********************************

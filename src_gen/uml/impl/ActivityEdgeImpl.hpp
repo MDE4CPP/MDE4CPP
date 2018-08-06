@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityEdgeImpl();
-			virtual std::shared_ptr<ActivityEdge> getThisActivityEdgePtr();
+			virtual std::shared_ptr<ActivityEdge> getThisActivityEdgePtr() const;
 			virtual void setThisActivityEdgePtr(std::weak_ptr<ActivityEdge> thisActivityEdgePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 If an ActivityEdge is directly owned by an Activity, then its source and target must be directly or indirectly contained in the same Activity.
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity */ 
-			virtual bool source_and_target(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool source_and_target(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

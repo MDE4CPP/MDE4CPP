@@ -176,17 +176,17 @@ namespace uml
 			/*!
 			 None of the newClassifiers may be abstract.
 			not newClassifier->exists(isAbstract) */ 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

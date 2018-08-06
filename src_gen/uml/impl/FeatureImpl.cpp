@@ -228,7 +228,7 @@ std::weak_ptr<uml::Element > FeatureImpl::getOwner() const
 }
 
 
-std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr()
+std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const
 {
 	return m_thisFeaturePtr.lock();
 }

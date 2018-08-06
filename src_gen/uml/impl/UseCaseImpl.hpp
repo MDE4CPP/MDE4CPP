@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			UseCaseImpl();
-			virtual std::shared_ptr<UseCase> getThisUseCasePtr();
+			virtual std::shared_ptr<UseCase> getThisUseCasePtr() const;
 			virtual void setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr);
 
 			//Additional constructors for the containments back reference
@@ -65,22 +65,22 @@ namespace uml
 			 The query allIncludedUseCases() returns the transitive closure of all UseCases (directly or indirectly) included by this UseCase.
 			result = (self.include.addition->union(self.include.addition->collect(uc | uc.allIncludedUseCases()))->asSet())
 			<p>From package UML::UseCases.</p> */ 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases()  ;
+			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() ;
 			
 			/*!
 			 UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2) */ 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self) */ 
-			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A UseCase must have a name.
 			name -> notEmpty () */ 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 UseCases cannot have Associations to UseCases specifying the same subject.
@@ -90,7 +90,7 @@ namespace uml
 			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
 			   )
 			) */ 
-			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context)  ;
+			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			

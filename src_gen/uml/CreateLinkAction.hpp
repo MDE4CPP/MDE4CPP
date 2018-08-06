@@ -179,7 +179,7 @@ namespace uml
 			/*!
 			 The Association cannot be an abstract Classifier.
 			not self.association().isAbstract */ 
-			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

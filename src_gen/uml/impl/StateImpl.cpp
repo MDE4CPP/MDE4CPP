@@ -492,61 +492,61 @@ bool StateImpl::getIsSubmachineState() const
 //*********************************
 // Operations
 //*********************************
-bool StateImpl::composite_states(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateImpl::composite_states(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::entry_or_exit(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateImpl::entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isComposite() 
+bool StateImpl::isComposite()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isOrthogonal() 
+bool StateImpl::isOrthogonal()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isSimple() 
+bool StateImpl::isSimple()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isSubmachineState() 
+bool StateImpl::isSubmachineState()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateImpl::submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  context) 
+bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -672,7 +672,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StateImpl::getRedefinedElement()
 }
 
 
-std::shared_ptr<State> StateImpl::getThisStatePtr()
+std::shared_ptr<State> StateImpl::getThisStatePtr() const
 {
 	return m_thisStatePtr.lock();
 }

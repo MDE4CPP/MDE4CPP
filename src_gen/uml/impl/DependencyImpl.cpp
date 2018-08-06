@@ -307,7 +307,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarg
 }
 
 
-std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr()
+std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
 {
 	return m_thisDependencyPtr.lock();
 }

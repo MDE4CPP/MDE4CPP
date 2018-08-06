@@ -155,12 +155,12 @@ namespace uml
 			 The ActivityEdges incoming to and outgoing from a ForkNode must be either all ObjectFlows or all ControlFlows.
 			let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in
 			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A ForkNode has one incoming ActivityEdge.
 			incoming->size()=1 */ 
-			virtual bool one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

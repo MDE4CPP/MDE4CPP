@@ -209,7 +209,7 @@ namespace uml
 			//*********************************
 			/*!
 			 ownedAttribute->forAll(isReadOnly) */ 
-			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context)  = 0;
+			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

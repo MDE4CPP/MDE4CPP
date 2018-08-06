@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DurationIntervalImpl();
-			virtual std::shared_ptr<DurationInterval> getThisDurationIntervalPtr();
+			virtual std::shared_ptr<DurationInterval> getThisDurationIntervalPtr() const;
 			virtual void setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr);
 
 			//Additional constructors for the containments back reference

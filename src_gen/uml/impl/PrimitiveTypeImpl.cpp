@@ -442,7 +442,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> PrimitiveTypeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr()
+std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
 {
 	return m_thisPrimitiveTypePtr.lock();
 }

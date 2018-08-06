@@ -32,7 +32,7 @@ virtual public ActivityContent
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityContentImpl();
-			virtual std::shared_ptr<ActivityContent> getThisActivityContentPtr();
+			virtual std::shared_ptr<ActivityContent> getThisActivityContentPtr() const;
 			virtual void setThisActivityContentPtr(std::weak_ptr<ActivityContent> thisActivityContentPtr);
 
 
@@ -46,7 +46,7 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity> containingActivity() ;
 			
 			
 			

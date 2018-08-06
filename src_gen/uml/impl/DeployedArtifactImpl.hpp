@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeployedArtifactImpl();
-			virtual std::shared_ptr<DeployedArtifact> getThisDeployedArtifactPtr();
+			virtual std::shared_ptr<DeployedArtifact> getThisDeployedArtifactPtr() const;
 			virtual void setThisDeployedArtifactPtr(std::weak_ptr<DeployedArtifact> thisDeployedArtifactPtr);
 
 			//Additional constructors for the containments back reference

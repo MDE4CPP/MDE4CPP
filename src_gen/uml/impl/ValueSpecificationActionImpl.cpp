@@ -320,13 +320,13 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context) 
+bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context) 
+bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -380,7 +380,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ValueSpecificationActionImpl::ge
 }
 
 
-std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr()
+std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr() const
 {
 	return m_thisValueSpecificationActionPtr.lock();
 }

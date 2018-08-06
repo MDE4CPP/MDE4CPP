@@ -139,7 +139,7 @@ std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class>  metaClass) 
+std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class>  metaClass)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,7 +158,7 @@ std::shared_ptr<Union<uml::Element>> FactoryImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<Factory> FactoryImpl::getThisFactoryPtr()
+std::shared_ptr<Factory> FactoryImpl::getThisFactoryPtr() const
 {
 	return m_thisFactoryPtr.lock();
 }

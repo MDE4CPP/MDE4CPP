@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EventImpl();
-			virtual std::shared_ptr<Event> getThisEventPtr();
+			virtual std::shared_ptr<Event> getThisEventPtr() const;
 			virtual void setThisEventPtr(std::weak_ptr<Event> thisEventPtr);
 
 			//Additional constructors for the containments back reference
