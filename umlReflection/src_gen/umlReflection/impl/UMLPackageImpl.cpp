@@ -16540,6 +16540,7 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -30083,6 +30084,35 @@ void UMLPackageImpl::initializePackageInterfaces()
 
 void UMLPackageImpl::initializePackageStereotypes()
 {
+}
+
+void UMLPackageImpl::initializePackageValueSpecifications()
+{
+	uML_BehavioralFeature_concurrency_defaultValue_InstanceValue->setInstance(uML_CallConcurrencyKind_sequential);
+
+	uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue->setInstance(uML_InteractionOperatorKind_seq);
+
+	uML_ElementImport_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+
+	uML_ExpansionRegion_mode_defaultValue_InstanceValue->setInstance(uML_ExpansionKind_iterative);
+
+	uML_Message_messageKind_defaultValue_InstanceValue->setInstance(uML_MessageKind_unknown);
+
+	uML_Message_messageSort_defaultValue_InstanceValue->setInstance(uML_MessageSort_synchCall);
+
+	uML_ObjectNode_ordering_defaultValue_InstanceValue->setInstance(uML_ObjectNodeOrderingKind_FIFO);
+
+	uML_PackageImport_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+
+	uML_PackageableElement_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+
+	uML_Parameter_direction_defaultValue_InstanceValue->setInstance(uML_ParameterDirectionKind_in);
+
+	uML_Property_aggregation_defaultValue_InstanceValue->setInstance(uML_AggregationKind_none);
+
+	uML_Pseudostate_kind_defaultValue_InstanceValue->setInstance(uML_PseudostateKind_initial);
+
+	uML_Transition_kind_defaultValue_InstanceValue->setInstance(uML_TransitionKind_external);
 }
 
 std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_action_actionExecutionSpecification()

@@ -8799,6 +8799,7 @@ namespace UML
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: UML_METAMODELPACKAGEIMPL_HPP */
