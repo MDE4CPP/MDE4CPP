@@ -159,6 +159,7 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 	description 'generate C++ code of [packageName/].uml model'
 
 	modelFilePath = file("./model/[packageName/].uml")
+	structureOnly = false
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
