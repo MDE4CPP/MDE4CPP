@@ -834,6 +834,7 @@ namespace Ecore
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageStereotypes();
+			void initializePackageValueSpecifications();
 	};
 }
 #endif /* end of include guard: ECORE_METAMODELPACKAGEIMPL_HPP */

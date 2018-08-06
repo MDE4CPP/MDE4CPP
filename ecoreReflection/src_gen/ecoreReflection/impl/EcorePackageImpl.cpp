@@ -1038,6 +1038,7 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
 
 	
 }
@@ -2511,6 +2512,10 @@ void EcorePackageImpl::initializePackageInterfaces()
 }
 
 void EcorePackageImpl::initializePackageStereotypes()
+{
+}
+
+void EcorePackageImpl::initializePackageValueSpecifications()
 {
 }
 
