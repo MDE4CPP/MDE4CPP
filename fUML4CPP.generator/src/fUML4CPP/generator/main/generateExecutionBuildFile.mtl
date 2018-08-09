@@ -136,7 +136,7 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [file ('../build.gradle', false, 'UTF-8')]
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
@@ -160,6 +160,8 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 
 	modelFilePath = file("./model/[packageName/].uml")
 	structureOnly = false
+
+	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
@@ -204,4 +206,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 )
+[/template]
+
+[template private generateRelatedModelNameList(aPackage : Package) post (trim())]
+[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.name))]
+'[packName/]'[/for]
 [/template]
