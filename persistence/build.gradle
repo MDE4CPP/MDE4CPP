@@ -14,7 +14,7 @@ task deliverPersistenceInterface(type: Copy) {
 	}
 	exclude "build", ".gradle"
 	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence/interfaces"
-	inputs.dir file(".")
+	inputs.dir file("./interfaces")
 	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
 }
 
@@ -84,6 +84,10 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 			exclude "pkgconfig"
 		}
 	}
+	
+	inputs.files file("./xerces")
+	outputs.dir System.getenv('MDE4CPP_HOME')+"/application/include/xercesc"
+	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/libxerces-c.dll")
 }
 
 task compilePersistence(dependsOn: compileXerces, type: tui.sse.mde4cpp.MDE4CPPCompile) {
