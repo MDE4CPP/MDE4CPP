@@ -223,7 +223,7 @@ void [packageName/]::createPackageInterfaces(std::shared_ptr<uml::Package> [aPac
 
 void [packageName/]::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (aPrimitiveType : PrimitiveType | aPackage.ownedMember->filter(PrimitiveType)) separator ('\n')]
+[for (aPrimitiveType : PrimitiveType | aPackage.ownedMember->filter(PrimitiveType)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aPrimitiveType.generatePrimitiveTypeCreation()/]
 [/for]
 }
