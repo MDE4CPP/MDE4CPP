@@ -11,9 +11,9 @@ task deliverPluginFrameworkInterface(type: Copy) {
 	from ("./src/pluginFramework") {
 		include "*.hpp"
 	}
-	exclude "build", ".gradle", "impl", "PluginFramework.hpp"
+	exclude "build", ".gradle", "impl", "PluginFramework.hpp", ".cmake"
 	into System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework"
-	inputs.dir file(".")
+	inputs.files file("./src/pluginFramework")
 	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework")
 }
 
