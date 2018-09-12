@@ -1,14 +1,19 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
 description 'Build tasks for project: types'
 
-task buildTypes(dependsOn: ['generateTypes', 'compileTypes']) {
+task buildTypes() {
 	group 'types'
 	description 'build types'
+
+	dependsOn 'generateTypes'
+	dependsOn 'compileTypes'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
 
 task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -16,6 +21,11 @@ task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile types'
 
 	projectFolder = file("./src_gen/types")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
 }
 
 task generateTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -23,6 +33,10 @@ task generateTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of types.ecore model'
 	
 	modelFilePath = file("./model/types.ecore")
+
+	relatedModels = ['ecore']
+
+	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
 }
 
 compileTypes.mustRunAfter generateTypes
