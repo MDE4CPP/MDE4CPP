@@ -142,9 +142,16 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
+task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
+
+	dependsOn 'generate[packageName.toUpperFirst()/]'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
+
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
+[/for]
 }
 
 task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -152,6 +159,11 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	description 'compile [packageName/]'
 
 	projectFolder = file("./src_gen/[packageName/]")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+[/for]
 }
 
 task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -162,6 +174,8 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 	structureOnly = false
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
+
+	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
