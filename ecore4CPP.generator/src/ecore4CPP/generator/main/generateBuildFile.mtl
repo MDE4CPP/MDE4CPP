@@ -141,6 +141,8 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	description 'compile ['ApplicationFor'.concat(packageName)/]'
 
 	projectFolder = file("./application")
+
+	dependsOn 'compile[packageName.toUpperFirst()/]'
 }
 
 [/if]
@@ -168,9 +170,6 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
-[if(aPackage.prepareApplication())] 
-compileApplicationFor[packageName.toUpperFirst()/].mustRunAfter compile[packageName.toUpperFirst()/]
-[/if]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
