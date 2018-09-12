@@ -1,13 +1,24 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
 description 'Build tasks for project: forkNodeTest'
 
-task buildForkNodeTest(dependsOn: ['generateForkNodeTest', 'compileForkNodeTest']) {
+task buildForkNodeTest() {
 	group 'forkNodeTest'
 	description 'build forkNodeTest'
+
+	dependsOn 'generateForkNodeTest'
+	dependsOn 'compileForkNodeTest'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
 task compileForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -15,25 +26,26 @@ task compileForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile forkNodeTest'
 
 	projectFolder = file("./src_gen/forkNodeTest")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+	dependsOn getRootProject().getTasksByName('compileFUML', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
 }
 
-task generateForkNodeTest(type: JavaExec) {
+task generateForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'forkNodeTest'
 	description 'generate C++ code of forkNodeTest.uml model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "forkNodeTest.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/forkNodeTest.uml")
-	outputs.dir file("src_gen")
-	
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
-			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
-		}
-	}
+
+	modelFilePath = file("./model/forkNodeTest.uml")
+	structureOnly = false
+
+	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+
+	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
 }
 
 compileForkNodeTest.mustRunAfter generateForkNodeTest
