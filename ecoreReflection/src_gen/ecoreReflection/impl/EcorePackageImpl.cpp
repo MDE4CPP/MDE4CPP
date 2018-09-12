@@ -441,95 +441,41 @@ void EcorePackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> eco
 
 void EcorePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::UmlFactory> factory)
 {
-	ecore_EByteObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EByteObject->setName("EByteObject");
-
-	ecore_ETreeIterator = factory->createPrimitiveType_in_Package(ecore);
-	ecore_ETreeIterator->setName("ETreeIterator");
-
 	ecore_EBigDecimal = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EBigDecimal->setName("EBigDecimal");
-
-	ecore_EBooleanObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EBooleanObject->setName("EBooleanObject");
-
-	ecore_ELongObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_ELongObject->setName("ELongObject");
 
 	ecore_EBigInteger = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EBigInteger->setName("EBigInteger");
 
-	ecore_EDiagnosticChain = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EDiagnosticChain->setName("EDiagnosticChain");
-
-	ecore_EResource = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EResource->setName("EResource");
-
-	ecore_EChar = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EChar->setName("EChar");
-
-	ecore_EFloat = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EFloat->setName("EFloat");
-
-	ecore_EFloatObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EFloatObject->setName("EFloatObject");
-
-	ecore_ELong = factory->createPrimitiveType_in_Package(ecore);
-	ecore_ELong->setName("ELong");
-
-	ecore_EString = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EString->setName("EString");
-
-	ecore_EJavaObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EJavaObject->setName("EJavaObject");
-
-	ecore_EInt = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EInt->setName("EInt");
-
 	ecore_EBoolean = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EBoolean->setName("EBoolean");
+
+	ecore_EBooleanObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EBooleanObject->setName("EBooleanObject");
 
 	ecore_EByte = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EByte->setName("EByte");
 
-	ecore_EIntegerObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EIntegerObject->setName("EIntegerObject");
+	ecore_EByteArray = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EByteArray->setName("EByteArray");
+
+	ecore_EByteObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EByteObject->setName("EByteObject");
+
+	ecore_EChar = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EChar->setName("EChar");
 
 	ecore_ECharacterObject = factory->createPrimitiveType_in_Package(ecore);
 	ecore_ECharacterObject->setName("ECharacterObject");
 
-	ecore_EFeatureMap = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EFeatureMap->setName("EFeatureMap");
-
-	ecore_EResourceSet = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EResourceSet->setName("EResourceSet");
-
-	ecore_EByteArray = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EByteArray->setName("EByteArray");
-
-	ecore_EMap = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EMap->setName("EMap");
-
-	ecore_EEnumerator = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EEnumerator->setName("EEnumerator");
-
-	ecore_EDouble = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EDouble->setName("EDouble");
-
 	ecore_EDate = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EDate->setName("EDate");
 
-	ecore_EInvocationTargetException = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EInvocationTargetException->setName("EInvocationTargetException");
+	ecore_EDiagnosticChain = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDiagnosticChain->setName("EDiagnosticChain");
 
-	ecore_EShortObject = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EShortObject->setName("EShortObject");
-
-	ecore_EFeatureMapEntry = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EFeatureMapEntry->setName("EFeatureMapEntry");
-
-	ecore_EShort = factory->createPrimitiveType_in_Package(ecore);
-	ecore_EShort->setName("EShort");
+	ecore_EDouble = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EDouble->setName("EDouble");
 
 	ecore_EDoubleObject = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EDoubleObject->setName("EDoubleObject");
@@ -537,8 +483,62 @@ void EcorePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package>
 	ecore_EEList = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EEList->setName("EEList");
 
+	ecore_EEnumerator = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EEnumerator->setName("EEnumerator");
+
+	ecore_EFeatureMap = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFeatureMap->setName("EFeatureMap");
+
+	ecore_EFeatureMapEntry = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFeatureMapEntry->setName("EFeatureMapEntry");
+
+	ecore_EFloat = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFloat->setName("EFloat");
+
+	ecore_EFloatObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EFloatObject->setName("EFloatObject");
+
+	ecore_EInt = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EInt->setName("EInt");
+
+	ecore_EIntegerObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EIntegerObject->setName("EIntegerObject");
+
+	ecore_EInvocationTargetException = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EInvocationTargetException->setName("EInvocationTargetException");
+
 	ecore_EJavaClass = factory->createPrimitiveType_in_Package(ecore);
 	ecore_EJavaClass->setName("EJavaClass");
+
+	ecore_EJavaObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EJavaObject->setName("EJavaObject");
+
+	ecore_ELong = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ELong->setName("ELong");
+
+	ecore_ELongObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ELongObject->setName("ELongObject");
+
+	ecore_EMap = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EMap->setName("EMap");
+
+	ecore_EResource = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EResource->setName("EResource");
+
+	ecore_EResourceSet = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EResourceSet->setName("EResourceSet");
+
+	ecore_EShort = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EShort->setName("EShort");
+
+	ecore_EShortObject = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EShortObject->setName("EShortObject");
+
+	ecore_EString = factory->createPrimitiveType_in_Package(ecore);
+	ecore_EString->setName("EString");
+
+	ecore_ETreeIterator = factory->createPrimitiveType_in_Package(ecore);
+	ecore_ETreeIterator->setName("ETreeIterator");
 }
 
 void EcorePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::UmlFactory> factory)
