@@ -140,6 +140,11 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	description 'compile [packageName/]'
 
 	projectFolder = file("./src_gen/[packageName/]")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+[for (pack : EPackage | aPackage.metaModelLibraries()) before ('\n    // model dependencies\n') ? (not(pack.name = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+[/for]
 }
 
 task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
