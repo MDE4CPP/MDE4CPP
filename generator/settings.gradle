@@ -1,1 +1,0 @@
-include 'ecore4CPP:ecore4CPP.generator', 'ecore4CPP:ecore4CPP.generator.compiler', 'UML4CPP:UML4CPP.generator', 'UML4CPP:UML4CPP.generator.compiler', 'fUML4CPP:fUML4CPP.generator', 'fUML4CPP:fUML4CPP.generator.compiler'
