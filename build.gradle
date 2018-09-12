@@ -4,8 +4,7 @@ task buildAll(dependsOn: ['generator:createAllGenerators', 'src:deliverBasicInte
 	group 'MDE4CPP'
 	description 'build generators and all models'
 }
-tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:createAllGenerators')
-tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('src:deliverBasicInterfaces')
+
 tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
@@ -14,7 +13,6 @@ task compileAll(dependsOn: ['src:deliverBasicInterfaces', 'src:compileEcoreModel
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
 }
-tasks.getByPath('src:compileEcoreModels').mustRunAfter tasks.getByPath('src:deliverBasicInterfaces')
 tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:compileEcoreModels')
 tasks.getByPath('src:compileReflectionModels').mustRunAfter tasks.getByPath('src:compileEcoreModels')
 tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:common:pluginFramework:compilePluginFramework')
