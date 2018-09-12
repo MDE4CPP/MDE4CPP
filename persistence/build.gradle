@@ -90,11 +90,17 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/libxerces-c.dll")
 }
 
-task compilePersistence(dependsOn: compileXerces, type: tui.sse.mde4cpp.MDE4CPPCompile) {
+task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "Persistence"
 	description "compile Persistence"
 
 	projectFolder = file(".")
+	
+	dependsOn 'compileXerces'
+	dependsOn getRootProject().getTasksByName('compilePluginFramework', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
 
 clean.doFirst {
