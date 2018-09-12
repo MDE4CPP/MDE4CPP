@@ -121,9 +121,18 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName.toUpperFirst()/]'[/if][']'/]) {
+task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
+
+	dependsOn 'generate[packageName.toUpperFirst()/]'
+	dependsOn 'compile[packageName.toUpperFirst()/]'
+[if(aPackage.prepareApplication())]
+	dependsOn 'compileApplicationFor[packageName.toUpperFirst()/]'
+[/if]
+[for (pack : EPackage | aPackage.metaModelLibraries()) before ('\n') ? (not(pack.name = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
+[/for]
 }
 
 [if(aPackage.prepareApplication())]
