@@ -149,6 +149,8 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 	modelFilePath = file("./model/[packageName/].ecore")
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
+
+	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
