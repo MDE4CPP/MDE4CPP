@@ -1,1 +1,0 @@
-include 'abstractDataTypes', 'boost', 'persistence', 'pluginFramework', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', 'universalGradleTasks'
