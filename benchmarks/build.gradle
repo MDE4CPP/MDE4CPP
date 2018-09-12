@@ -5,9 +5,13 @@ apply plugin: "base"
 
 description 'Example collection'
 
-task buildBenchmarks(dependsOn: ['compileEcoreBenchmark', 'compileMemoryBenchmarkEcore', 'compileUMLBenchmark']) {
+task buildBenchmarks() {
 	group 'Examples'
-	description 'build all benchmark applications'	
+	description 'build all benchmark applications'
+	
+	dependsOn 'compileEcoreBenchmark'
+	dependsOn 'compileMemoryBenchmarkEcore'
+	dependsOn 'compileUMLBenchmark'
 }
 
 task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -15,6 +19,9 @@ task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile ecoreBenchmark'
 	
 	projectFolder = file("./ecoreBenchmark")
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
 task compileMemoryBenchmarkEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -22,6 +29,9 @@ task compileMemoryBenchmarkEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile memoryBenchmarkEcore'
 	
 	projectFolder = file("./memoryBenchmarkEcore")
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
 task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -29,6 +39,11 @@ task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile UMLBenchmark'
 	
 	projectFolder = file("./UMLBenchmark")
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
 clean.doFirst {

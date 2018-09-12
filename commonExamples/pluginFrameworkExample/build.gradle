@@ -10,6 +10,8 @@ task compileExamplePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description "compile pluginFramework example"
 
 	projectFolder = file("./src")
+	
+	dependsOn getRootProject().getTasksByName('compilePluginFramework', true)
 }
 
 clean.doFirst {

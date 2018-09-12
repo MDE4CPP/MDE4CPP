@@ -1,14 +1,21 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
 description 'Build tasks for project: libraryModel_ecore'
 
-task buildLibraryModel_ecore(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecore', 'compileApplicationForLibraryModel_ecore']) {
+task buildLibraryModel_ecore() {
 	group 'libraryModel_ecore'
 	description 'build libraryModel_ecore'
+
+	dependsOn 'generateLibraryModel_ecore'
+	dependsOn 'compileLibraryModel_ecore'
+	dependsOn 'compileApplicationForLibraryModel_ecore'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
 task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -16,6 +23,8 @@ task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompil
 	description 'compile ApplicationForlibraryModel_ecore'
 
 	projectFolder = file("./application")
+
+	dependsOn 'compileLibraryModel_ecore'
 }
 
 task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -23,6 +32,12 @@ task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile libraryModel_ecore'
 
 	projectFolder = file("./src_gen/libraryModel_ecore")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileTypes', true)
 }
 
 task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -30,10 +45,13 @@ task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	description 'generate C++ code of libraryModel_ecore.ecore model'
 	
 	modelFilePath = file("./model/libraryModel_ecore.ecore")
+
+	relatedModels = ['ecore', 'types']
+
+	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
 }
 
 compileLibraryModel_ecore.mustRunAfter generateLibraryModel_ecore
-compileApplicationForLibraryModel_ecore.mustRunAfter compileLibraryModel_ecore
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/libraryModel_ecore/.cmake/')

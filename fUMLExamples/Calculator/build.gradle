@@ -1,14 +1,24 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
 description 'Build tasks for project: CalcModel'
 
-task buildCalcModel(dependsOn: ['generateCalcModel', 'compileCalcModel']) {
+task buildCalcModel() {
 	group 'CalcModel'
 	description 'build CalcModel'
+
+	dependsOn 'generateCalcModel'
+	dependsOn 'compileCalcModel'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
 task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -16,6 +26,14 @@ task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile CalcModel'
 
 	projectFolder = file("./src_gen/CalcModel")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+	dependsOn getRootProject().getTasksByName('compileFUML', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
 }
 
 task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -24,6 +42,10 @@ task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 
 	modelFilePath = file("./model/CalcModel.uml")
 	structureOnly = false
+
+	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+
+	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
 }
 
 compileCalcModel.mustRunAfter generateCalcModel

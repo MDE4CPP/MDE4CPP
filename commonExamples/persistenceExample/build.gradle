@@ -10,6 +10,11 @@ task compileExamplePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description "compile Persistence"
 
 	projectFolder = file("./src")
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('compilePersistence', true)
 }
 
 clean.doFirst {
