@@ -35,6 +35,10 @@ ENDIF(APPLE)
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 	
+	${CMAKE_DL_LIBS}
+)
+
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
 #-----------------------------------------------------
