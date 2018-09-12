@@ -1,6 +1,6 @@
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.2"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 apply plugin: 'base' 
 
@@ -9,6 +9,13 @@ description 'Build tasks for project: umlReflection'
 task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
 	group 'umlReflection'
 	description 'build umlReflection'
+
+	dependsOn 'generateUmlReflection'
+	dependsOn 'compileUmlReflection'
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 }
 
 task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -16,6 +23,12 @@ task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description 'compile umlReflection'
 
 	projectFolder = file("./src_gen/umlReflection")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 }
 
 task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
@@ -24,6 +37,10 @@ task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 
 	modelFilePath = file("./model/umlReflection.uml")
 	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection']
+
+	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
 }
 
 compileUmlReflection.mustRunAfter generateUmlReflection
