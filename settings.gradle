@@ -1,1 +1,12 @@
-include 'generator', 'src', 'generator:ecore4CPP', 'generator:ecore4CPP:ecore4CPP.generator', 'generator:ecore4CPP:ecore4CPP.generator.compiler', 'generator:UML4CPP:UML4CPP.generator', 'generator:UML4CPP:UML4CPP.generator.compiler', 'generator:fUML4CPP:fUML4CPP.generator', 'generator:fUML4CPP:fUML4CPP.generator.compiler', 'src', 'src:ecore', 'src:ecore:ecore', 'src:ecore:types', 'src:fuml', 'src:uml', 'src:common', 'src:common:abstractDataTypes', 'src:common:boost', 'src:common:persistence', 'src:common:pluginFramework', 'src:common:ecoreReflection', 'src:common:primitivetypesReflection', 'src:common:umlReflection', 'src:common:universalGradleTasks', 'src:util', 'src:examples:benchmarks', 'src:examples:commonExamples', 'src:examples:commonExamples:persistenceExample', 'src:examples:commonExamples:pluginFrameworkExample', 'src:examples:fUMLExamples', 'src:examples:fUMLExamples:Calculator', 'src:examples:fUMLExamples:MultiplePins', 'src:examples:simpleExamples', 'src:examples:simpleExamples:ecoreModelExample', 'src:examples:simpleExamples:UMLModelExample'
+rootProject.name = 'MDE4CPP'
+
+//Search recursivly for all build.gradle file and add the imports
+fileTree('.') {
+	include '**/build.gradle'
+	exclude 'build.gradle' // Exclude the root build file.
+}.collect { 
+	relativePath(it.parent).replace(File.separator, ':') 
+}.each {
+	include(it)
+//  println it
+}
