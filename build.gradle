@@ -1,6 +1,6 @@
 description 'Example collection'
 
-task buildAllExamples() {
+task compileAllExamplesWithoutModel() {
 	group 'Examples'
 	description 'build all example applications'	
 	
@@ -15,18 +15,14 @@ task buildAllExamples() {
 	
 	// ecore examples
 	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
-	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
 	
 	// fuml examples
-	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
-	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
 	
 	// uml examples
 	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
-	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
 }
 
-task buildAllModelExamples() {
+task buildAllExamplesWithModel() {
 	group 'Examples'
 	description 'build all model example applications'	
 	
