@@ -78,6 +78,10 @@ namespace libraryModel_ecore
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void printLibrary() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

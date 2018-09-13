@@ -7,6 +7,7 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 
 // metametamodel factory
@@ -200,6 +201,14 @@ void LibraryModel_ecorePackageImpl::initializeLibraryModelContent()
 	   		m_libraryModel_EReference_book->setEOpposite(otherEnd);
 	    }
 	}
+	
+	m_libraryModel_EOperation_printLibrary->setEType(nullptr);
+	m_libraryModel_EOperation_printLibrary->setName("printLibrary");
+	m_libraryModel_EOperation_printLibrary->setLowerBound(0);
+	m_libraryModel_EOperation_printLibrary->setUpperBound(1);
+	m_libraryModel_EOperation_printLibrary->setUnique(true);
+	m_libraryModel_EOperation_printLibrary->setOrdered(true);
+	
 	
 	
 }

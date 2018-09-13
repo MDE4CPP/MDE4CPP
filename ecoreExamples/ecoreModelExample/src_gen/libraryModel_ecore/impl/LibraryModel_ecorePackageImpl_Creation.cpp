@@ -10,6 +10,7 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 
 //depending model packages
@@ -62,6 +63,7 @@ void LibraryModel_ecorePackageImpl::createLibraryModelContent(std::shared_ptr<ec
 	m_libraryModel_EReference_authors = factory->createEReference_in_EContainingClass(m_libraryModel_EClass, LIBRARYMODEL_EREFERENCE_AUTHORS);
 	m_libraryModel_EReference_book = factory->createEReference_in_EContainingClass(m_libraryModel_EClass, LIBRARYMODEL_EREFERENCE_BOOK);
 	
+	m_libraryModel_EOperation_printLibrary = factory->createEOperation_in_EContainingClass(m_libraryModel_EClass, LIBRARYMODEL_EOPERATION_PRINTLIBRARY);
 	
 }
 

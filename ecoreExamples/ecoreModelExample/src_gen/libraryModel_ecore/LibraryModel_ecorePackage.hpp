@@ -14,6 +14,7 @@ namespace ecore
 	class EAttribute;
 	class EClass;
 	class EDataType;
+	class EOperation;
 	class EReference;
 }
 
@@ -84,11 +85,12 @@ namespace libraryModel_ecore
 			//Class and Feature IDs 
 			static const unsigned int LIBRARYMODEL_ECLASS = 2;
 			static const unsigned int LIBRARYMODEL_ECLASS_FEATURE_COUNT = 2;
-			static const unsigned int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 0;
+			static const unsigned int LIBRARYMODEL_ECLASS_OPERATION_COUNT = 1;
 			
 			static const int LIBRARYMODEL_EREFERENCE_AUTHORS = 201;
 			static const int LIBRARYMODEL_EREFERENCE_BOOK = 200;
 			
+			static const int LIBRARYMODEL_EOPERATION_PRINTLIBRARY = 202;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLibraryModel_EClass() const = 0;
@@ -97,6 +99,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_authors() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_book() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getLibraryModel_EOperation_printLibrary() const = 0;
 			
 			// End Class LibraryModel
 

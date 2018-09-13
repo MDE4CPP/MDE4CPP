@@ -24,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
+#include "libraryModel_ecore/Picture.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -139,6 +140,36 @@ std::shared_ptr<ecore::EClass> LibraryModelImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+void LibraryModelImpl::printLibrary()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<libraryModel_ecore::Book>> books = this->getBook();
+
+	for(Bag<libraryModel_ecore::Book>::const_iterator it=books->begin(); it!=books->end(); it++)
+	{
+		std::cout << "The book " << (*it)->getName() << std::endl;
+		{
+			std::cout << "\twas written by:" << std::endl;
+
+			std::shared_ptr< Bag<Author> > authors= (*it)->getAuthors();
+			for(Bag<Author>::const_iterator itA=authors->begin();itA!=authors->end();itA++)
+			{
+				std::cout << "\t\t- " << (*itA)->getName() << std::endl;
+			}
+		}
+		{
+			std::cout << "\tIndex of Figures:" << std::endl;
+
+			std::shared_ptr< Bag<Picture> > pictures= (*it)->getPictures();
+			for(Bag<Picture>::const_iterator itP=pictures->begin();itP!=pictures->end();itP++)
+			{
+				std::cout << "\t\t- " << (*itP)->getName() << " - Page number: "<< (*itP)->getPageNumber() << std::endl;
+			}
+		}
+	}
+	//end of body
+}
 
 //*********************************
 // References

@@ -44,6 +44,10 @@ virtual public LibraryModel
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void printLibrary() ;
+			
 			
 			
 			//*********************************

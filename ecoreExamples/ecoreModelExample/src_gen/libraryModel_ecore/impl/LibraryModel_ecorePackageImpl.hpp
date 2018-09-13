@@ -69,6 +69,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_authors() const ;
 			virtual std::shared_ptr<ecore::EReference> getLibraryModel_EReference_book() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getLibraryModel_EOperation_printLibrary() const ;
 			
 			// End Class LibraryModel
 
@@ -113,6 +114,7 @@ namespace libraryModel_ecore
 			std::shared_ptr<ecore::EReference> m_book_EReference_library = nullptr;
 			std::shared_ptr<ecore::EReference> m_book_EReference_pictures = nullptr;
 			
+			std::shared_ptr<ecore::EOperation> m_libraryModel_EOperation_printLibrary = nullptr;
 			
 
 			friend class LibraryModel_ecorePackage;

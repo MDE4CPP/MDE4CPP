@@ -7,6 +7,7 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 
 //metamodel factory
@@ -99,6 +100,10 @@ std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getLibraryMode
 	return m_libraryModel_EReference_book;
 }
 
+std::shared_ptr<ecore::EOperation> LibraryModel_ecorePackageImpl::getLibraryModel_EOperation_printLibrary() const
+{
+	return m_libraryModel_EOperation_printLibrary;
+}
 
 // End Class LibraryModel
 
