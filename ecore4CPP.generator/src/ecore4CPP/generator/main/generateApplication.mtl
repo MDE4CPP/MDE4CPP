@@ -35,6 +35,10 @@
 #include "[aPackage.name/]/[anEEnum.name/].hpp"
 [/for]
 
+[if (hasMainSourceIncludes())]
+[getMainSourceIncludes()/]
+
+[/if]
 // [protected ('includes')] 
 // You may manually edit additional includes, won't be overwritten upon generation.
 
