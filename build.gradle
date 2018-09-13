@@ -1,6 +1,27 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['benchmarks:buildBenchmarks',  'commonExamples:buildCommonExamples', 'fUMLExamples:buildFUMLExamples', 'simpleExamples:buildSimpleExamples']) {
+task buildAllExamples() {
 	group 'Examples'
 	description 'build all example applications'	
+	
+	// benchmarks
+	dependsOn getRootProject().getTasksByName('compileEcoreBenchmark', true)
+	dependsOn getRootProject().getTasksByName('compileMemoryBenchmarkEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
+	
+	// common examples
+	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
+	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
+	
+	// ecore examples
+	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
+	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
+	
+	// fuml examples
+	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
+	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
+	
+	// uml examples
+	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
+	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
 }
