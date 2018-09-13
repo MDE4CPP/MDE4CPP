@@ -45,6 +45,8 @@ namespace LibraryModel_uml
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Library();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_authors();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_books();
+			virtual std::shared_ptr<uml::FunctionBehavior> get_LibraryModel_uml_Library_fbPrintLibrary();
+			virtual std::shared_ptr<uml::Operation> get_LibraryModel_uml_Library_printLibrary_();
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_NamedModelElement();
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_NamedModelElement_name();
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Picture();
@@ -84,6 +86,8 @@ namespace LibraryModel_uml
 			std::shared_ptr<uml::Property> libraryModel_uml_Library_books = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_Library_books_lowerValue_LiteralInteger_LibraryModel_uml_Library_books = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> libraryModel_uml_Library_books_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Library_books = nullptr;
+			std::shared_ptr<uml::FunctionBehavior> libraryModel_uml_Library_fbPrintLibrary = nullptr;
+			std::shared_ptr<uml::Operation> libraryModel_uml_Library_printLibrary_ = nullptr;
 			std::shared_ptr<uml::Class> libraryModel_uml_NamedModelElement = nullptr;
 			std::shared_ptr<uml::Property> libraryModel_uml_NamedModelElement_name = nullptr;
 			std::shared_ptr<uml::LiteralInteger> libraryModel_uml_NamedModelElement_name_lowerValue_LiteralInteger_LibraryModel_uml_NamedModelElement_name = nullptr;

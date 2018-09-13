@@ -12,6 +12,8 @@ namespace uml
 {
 	class Association;
 	class Class;
+	class FunctionBehavior;
+	class Operation;
 	class Property;
 }
 
@@ -49,6 +51,8 @@ namespace LibraryModel_uml
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Library() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_authors() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_books() = 0;
+			virtual std::shared_ptr<uml::FunctionBehavior> get_LibraryModel_uml_Library_fbPrintLibrary() = 0;
+			virtual std::shared_ptr<uml::Operation> get_LibraryModel_uml_Library_printLibrary_() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_NamedModelElement() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_NamedModelElement_name() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Picture() = 0;

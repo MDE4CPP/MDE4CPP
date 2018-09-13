@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="LibraryModel_uml">
-  <eAnnotations xmi:id="_emzA0LMsEeeG6co6VmdxTw" source="prepareApplication"/>
+  <eAnnotations xmi:id="_emzA0LMsEeeG6co6VmdxTw" source="prepareApplication">
+    <details xmi:id="_M_IqcLdSEeiD1JRCc1jQkA" key="sourceCodeMain" value="&#x9;std::shared_ptr&lt;Library> lib=factory->createLibrary();&#xA;&#xA;    std::shared_ptr&lt;Book> book = factory->createBook_in_Library(lib);&#xA;    book->setName(&quot;Magritte&quot;);&#xA;&#xA;    std::shared_ptr&lt;Author> author = factory->createAuthor_in_Library(lib);&#xA;    author->setName(&quot;David Sylvester&quot;);&#xA;    book->getAuthors()->add(author);&#xA;&#xA;    std::shared_ptr&lt;Picture> picture = factory->createPicture_in_Book(book);&#xA;    picture->setName(&quot;Der Verrat der Binder (La trahison des images), 1929: Öl, 60x82 cm&quot;);&#xA;    picture->setPageNumber(212);&#xA;&#xA;    lib->printLibrary(lib);"/>
+  </eAnnotations>
   <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
@@ -57,6 +59,36 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bRvzk7MLEeeuncVs6XTh7Q"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bRvzlLMLEeeuncVs6XTh7Q" value="*"/>
     </ownedAttribute>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_adfF8LdSEeiD1JRCc1jQkA" name="fbPrintLibrary" specification="_YKHVILdSEeiD1JRCc1jQkA">
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>	std::shared_ptr&lt; Bag&lt;Book> > books = this->getBooks();&#xD;
+&#xD;
+	for(Bag&lt;Book>::const_iterator it=books->begin();it!=books->end();it++)&#xD;
+	{&#xD;
+		std::cout &lt;&lt; &quot;The book &quot; &lt;&lt; (*it)->getName() &lt;&lt; std::endl;&#xD;
+		{&#xD;
+			std::cout &lt;&lt; &quot;\twas written by:&quot; &lt;&lt; std::endl;&#xD;
+&#xD;
+			std::shared_ptr&lt; Bag&lt;Author> > authors= (*it)->getAuthors();&#xD;
+			for(Bag&lt;Author>::const_iterator itA=authors->begin();itA!=authors->end();itA++)&#xD;
+			{&#xD;
+				std::cout &lt;&lt; &quot;\t\t- &quot; &lt;&lt; (*itA)->getName() &lt;&lt; std::endl;&#xD;
+			}&#xD;
+		}&#xD;
+		{&#xD;
+			std::cout &lt;&lt; &quot;\tIndex of Figures:&quot; &lt;&lt; std::endl;&#xD;
+&#xD;
+			std::shared_ptr&lt; Bag&lt;Picture> > pictures= (*it)->getPictures();&#xD;
+			for(Bag&lt;Picture>::const_iterator itP=pictures->begin();itP!=pictures->end();itP++)&#xD;
+			{&#xD;
+				std::cout &lt;&lt; &quot;\t\t- &quot; &lt;&lt; (*itP)->getName() &lt;&lt; &quot; - Page number: &quot;&lt;&lt; (*itP)->getPageNumber() &lt;&lt; std::endl;&#xD;
+			}&#xD;
+		}&#xD;
+	}</body>
+      <body>#include &quot;LibraryModel_uml/Picture.hpp&quot;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_YKHVILdSEeiD1JRCc1jQkA" name="printLibrary" method="_adfF8LdSEeiD1JRCc1jQkA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_YQ4qoLMLEeeuncVs6XTh7Q" name="A_Lib_Author" memberEnd="_YQ4qobMLEeeuncVs6XTh7Q _YQ54wbMLEeeuncVs6XTh7Q">
     <ownedEnd xmi:id="_YQ4qobMLEeeuncVs6XTh7Q" name="library" type="_ThQSwLMLEeeuncVs6XTh7Q" association="_YQ4qoLMLEeeuncVs6XTh7Q">

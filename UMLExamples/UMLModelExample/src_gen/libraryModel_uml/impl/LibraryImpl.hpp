@@ -46,6 +46,7 @@ namespace LibraryModel_uml
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void printLibrary() ;
 			
 			
 			//*********************************

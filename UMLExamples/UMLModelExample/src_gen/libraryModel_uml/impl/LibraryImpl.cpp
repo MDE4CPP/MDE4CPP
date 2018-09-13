@@ -18,6 +18,8 @@
 #include "LibraryModel_uml/Book.hpp"
 
 
+//Included from operation "printLibrary"
+#include "LibraryModel_uml/Picture.hpp"
 
 
 using namespace LibraryModel_uml;
@@ -77,6 +79,37 @@ std::shared_ptr<Bag<LibraryModel_uml::Book>> LibraryImpl::getBooks() const
 //*********************************
 // Operations
 //*********************************
+void LibraryImpl::printLibrary()
+{
+
+	// Implemented as Function behaviour fbPrintLibrary
+
+	std::shared_ptr< Bag<Book> > books = this->getBooks();
+
+	for(Bag<Book>::const_iterator it=books->begin();it!=books->end();it++)
+	{
+		std::cout << "The book " << (*it)->getName() << std::endl;
+		{
+			std::cout << "\twas written by:" << std::endl;
+
+			std::shared_ptr< Bag<Author> > authors= (*it)->getAuthors();
+			for(Bag<Author>::const_iterator itA=authors->begin();itA!=authors->end();itA++)
+			{
+				std::cout << "\t\t- " << (*itA)->getName() << std::endl;
+			}
+		}
+		{
+			std::cout << "\tIndex of Figures:" << std::endl;
+
+			std::shared_ptr< Bag<Picture> > pictures= (*it)->getPictures();
+			for(Bag<Picture>::const_iterator itP=pictures->begin();itP!=pictures->end();itP++)
+			{
+				std::cout << "\t\t- " << (*itP)->getName() << " - Page number: "<< (*itP)->getPageNumber() << std::endl;
+			}
+		}
+	}
+
+}
 
 //*********************************
 // Structural Feature Getter/Setter

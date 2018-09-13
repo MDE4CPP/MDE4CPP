@@ -3,9 +3,11 @@
 //meta meta model classes
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
+#include "uml/FunctionBehavior.hpp"
 #include "uml/Generalization.hpp"
 #include "uml/LiteralInteger.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/Operation.hpp"
 #include "uml/PackageImport.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Property.hpp"
@@ -113,6 +115,13 @@ void LibraryModel_umlPackageImpl::createPackageClasses(std::shared_ptr<uml::Pack
     // Library attributes
 	libraryModel_uml_Library_authors = factory->createProperty_in_Class(libraryModel_uml_Library);
 	libraryModel_uml_Library_books = factory->createProperty_in_Class(libraryModel_uml_Library);
+
+    // Library operations
+	libraryModel_uml_Library_printLibrary_ = factory->createOperation_in_Class(libraryModel_uml_Library);
+
+    // Library function behaviors
+	libraryModel_uml_Library_fbPrintLibrary = factory->createFunctionBehavior_in_BehavioredClassifier(libraryModel_uml_Library);
+	
 
 
     //-------------------------------------------
@@ -314,6 +323,16 @@ void LibraryModel_umlPackageImpl::initializePackageClasses()
 	
 	
 
+    // Library operations
+	libraryModel_uml_Library_printLibrary_->setName("printLibrary");
+	libraryModel_uml_Library_printLibrary_->getMethod()->push_back(libraryModel_uml_Library_fbPrintLibrary);
+	
+
+    // Library function behaviors
+	libraryModel_uml_Library_fbPrintLibrary->setName("fbPrintLibrary");
+	libraryModel_uml_Library_fbPrintLibrary->setContext(libraryModel_uml_Library);
+	
+
 
     //-------------------------------------------
 	//	class NamedModelElement
@@ -435,6 +454,14 @@ std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml
 std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Library_books()
 {
 	return libraryModel_uml_Library_books;
+}
+std::shared_ptr<uml::FunctionBehavior> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Library_fbPrintLibrary()
+{
+	return libraryModel_uml_Library_fbPrintLibrary;
+}
+std::shared_ptr<uml::Operation> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Library_printLibrary_()
+{
+	return libraryModel_uml_Library_printLibrary_;
 }
 std::shared_ptr<uml::Class> LibraryModel_umlPackageImpl::get_LibraryModel_uml_NamedModelElement()
 {
