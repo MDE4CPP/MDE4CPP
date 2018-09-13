@@ -1,0 +1,22 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: "base"
+
+task compileEcoreExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile Ecore example'
+	
+	projectFolder = file("./src/ecoreExample")
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./src/ecoreExample/.cmake")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
