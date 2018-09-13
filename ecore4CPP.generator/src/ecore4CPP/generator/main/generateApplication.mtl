@@ -25,6 +25,7 @@
 
 #include <iostream>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aPackage.name/]/[packageName.toUpperFirst()/]Factory.hpp"
 #include "[aPackage.name/]/[packageName.toUpperFirst()/]Package.hpp"
 
