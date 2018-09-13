@@ -11,3 +11,6 @@ SubsetUnion/\.idea/
 
 fUMLExample/Calculator/src_gen/cmake-build-debug/
 /SubsetUnion/.settings
+
+.idea
+cmake-build-debug
