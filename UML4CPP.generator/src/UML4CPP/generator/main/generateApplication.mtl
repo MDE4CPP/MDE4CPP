@@ -23,6 +23,8 @@
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 
 #include <iostream>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aPackage.getPackageName()/]/[packageName/]Factory.hpp"
 #include "[aPackage.getPackageName()/]/[packageName/]Package.hpp"
 
