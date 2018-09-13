@@ -1,7 +1,6 @@
 plugins {
   id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 }
-apply plugin: "base"
 
 task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Examples'
@@ -15,10 +14,12 @@ task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
-clean.doFirst {
-	def cmakeFolder = file("./src/UMLBenchmark/.cmake")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
+task clean {
+	doLast {
+		def cmakeFolder = file("./src/UMLBenchmark/.cmake")
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
 	}
 }
