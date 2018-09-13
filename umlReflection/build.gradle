@@ -2,7 +2,6 @@ plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
-apply plugin: 'base' 
 
 description 'Build tasks for project: umlReflection'
 
@@ -45,10 +44,12 @@ task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 
 compileUmlReflection.mustRunAfter generateUmlReflection
 
-clean.doFirst {
-	def cmakeFolder = file('./src_gen/umlReflection/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
+task clean {
+	doLast {
+		def cmakeFolder = file('./src_gen/umlReflection/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
 	}
 }
