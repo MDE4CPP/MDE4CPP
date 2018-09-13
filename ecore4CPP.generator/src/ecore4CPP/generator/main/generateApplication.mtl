@@ -53,6 +53,10 @@ int main ()
 	std::shared_ptr<[packageName.toUpperFirst()/]Factory> factory = [packageName.toUpperFirst()/]Factory::eInstance();
 	std::shared_ptr<[packageName.toUpperFirst()/]Package> package = [packageName.toUpperFirst()/]Package::eInstance();
 
+[if (hasMainSourceCode())]
+[getMainSourceCode()/]
+
+[/if]
 // [protected ('main')]
 // You may manually edit the following lines, won't be overwritten upon generation.
 
