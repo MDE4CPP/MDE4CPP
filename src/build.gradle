@@ -36,13 +36,3 @@ task deliverBasicInterfaces(dependsOn: ['common:abstractDataTypes:deliverAbstrac
 	group 'Basic interfaces'
 	description 'deliver abstractDataTypes, util, persistence and pluginFramework interfaces'
 }
-
-tasks.getByPath('common:umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('common:primitivetypesReflection:buildPrimitivetypesReflection')
-tasks.getByPath('common:umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('common:ecoreReflection:buildEcoreReflection')
-tasks.getByPath('common:umlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('common:primitivetypesReflection:compilePrimitivetypesReflection')
-tasks.getByPath('common:umlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('common:ecoreReflection:compileEcoreReflection')
-
-
-
-
-
