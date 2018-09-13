@@ -117,7 +117,6 @@ plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
-apply plugin: 'base' 
 
 description 'Build tasks for project: [packageName/]'
 
@@ -171,19 +170,22 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
 
-clean.doFirst {
-	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
+task clean {
+	doLast {
+		def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
 [if(aPackage.prepareApplication())] 
-	cmakeFolder = file('./application/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
+	
+		cmakeFolder = file('./application/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
 [/if]
+	}
 }
 [/file]
 [/template]
