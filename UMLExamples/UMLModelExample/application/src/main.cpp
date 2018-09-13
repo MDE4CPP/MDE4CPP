@@ -1,5 +1,7 @@
 
 #include <iostream>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
 #include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
 
@@ -11,7 +13,7 @@
 
 // Start of user code includes 
 // You may manually edit additional includes, won't be overwritten upon generation.
-#include "abstractDataTypes/SubsetUnion.hpp"
+
 // End of user code
 
 using namespace LibraryModel_uml;

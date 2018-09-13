@@ -9,8 +9,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
 # Start of user code project_name
-# Acceleo's Protected Area. You may manually edit the project name, won't be overwritten upon generation.
-PROJECT(umlModelExample)
+# You may manually edit the project name, won't be overwritten upon generation.
+PROJECT(App_LibraryModel_uml)
 # End of user code
 
 IF(NOT CMAKE_BUILD_TYPE) 
@@ -28,9 +28,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 	src/main.cpp
 # Start of user code cpp
-# Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
+# You may manually edit the following lines, won't be overwritten upon generation.
 
-# End of Acceleo's Protected Area.
 # End of user code
 )
 
@@ -45,9 +44,8 @@ INCLUDE_DIRECTORIES(
 	${MDE4CPP_HOME}/application/include/uml
 	${MDE4CPP_HOME}/application/include/LibraryModel_uml
 # Start of user code includes
-# Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
+# You may manually edit the following lines, won't be overwritten upon generation.
 
-# End of Acceleo's Protected Area.
 # End of user code
 )
 
