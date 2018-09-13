@@ -1,6 +1,7 @@
 
 #include <iostream>
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 #include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 
@@ -12,7 +13,7 @@
 
 // Start of user code includes 
 // You may manually edit additional includes, won't be overwritten upon generation.
-#include "abstractDataTypes/SubsetUnion.hpp"
+
 // End of user code
 
 using namespace libraryModel_ecore;

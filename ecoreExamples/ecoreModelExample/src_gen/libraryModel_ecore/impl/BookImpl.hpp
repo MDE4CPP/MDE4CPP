@@ -65,9 +65,9 @@ namespace libraryModel_ecore
 			virtual std::weak_ptr<libraryModel_ecore::LibraryModel > getLibrary() const ;
 			
 			/*!
-			  */
-			 virtual void setLibrary(std::shared_ptr<libraryModel_ecore::LibraryModel> _library_library) ;
-			 /*!
+			 */
+			virtual void setLibrary(std::shared_ptr<libraryModel_ecore::LibraryModel> _library_library) ;
+			/*!
 			 */
 			virtual std::shared_ptr<Bag<libraryModel_ecore::Picture>> getPictures() const ;
 			

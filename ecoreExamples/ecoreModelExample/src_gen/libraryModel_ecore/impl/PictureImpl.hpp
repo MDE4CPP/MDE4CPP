@@ -69,9 +69,9 @@ namespace libraryModel_ecore
 			virtual std::weak_ptr<libraryModel_ecore::Book > getBook() const ;
 			
 			/*!
-			  */
-			 virtual void setBook(std::shared_ptr<libraryModel_ecore::Book> _book_book) ;
-			 				
+			 */
+			virtual void setBook(std::shared_ptr<libraryModel_ecore::Book> _book_book) ;
+							
 			
 			//*********************************
 			// Union Getter

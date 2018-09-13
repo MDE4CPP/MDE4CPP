@@ -10,7 +10,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
 # Start of user code project_name
 # You may manually edit the project name, won't be overwritten upon generation.
-PROJECT(ecoreModelExample)
+PROJECT(App_libraryModel_ecore)
 # End of user code
 
 IF(NOT CMAKE_BUILD_TYPE) 
