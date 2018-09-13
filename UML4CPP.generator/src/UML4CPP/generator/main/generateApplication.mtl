@@ -36,6 +36,10 @@
 #include "[aPackage.getPackageName()/]/[anEnumeration.name/].hpp"
 [/for]
 
+[if (hasMainSourceIncludes())]
+[getMainSourceIncludes()/]
+
+[/if]
 // [protected ('includes')] 
 // You may manually edit additional includes, won't be overwritten upon generation.
 
@@ -54,6 +58,10 @@ int main ()
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
 	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
+[if (hasMainSourceCode())]
+[getMainSourceCode()/]
+
+[/if]
 // [protected ('main')]
 // You may manually edit the following lines, won't be overwritten upon generation.
 

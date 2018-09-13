@@ -25,6 +25,11 @@
  * check if application should be created
 */]
 [query public prepareApplication(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
+[query public hasMainSourceCode(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
+
+[query public hasMainSourceIncludes(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
 
 [**
  * check and get key value from sourcegen eannotation
