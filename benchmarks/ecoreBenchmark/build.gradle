@@ -1,0 +1,22 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+apply plugin: "base"
+
+task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile ecoreBenchmark'
+	
+	projectFolder = file("./src/ecoreBenchmark")
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+}
+
+clean.doFirst {
+	def cmakeFolder = file("./src/ecoreBenchmark/.cmake")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
