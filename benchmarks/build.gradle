@@ -1,67 +1,10 @@
-plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-}
-apply plugin: "base"
-
 description 'Example collection'
 
 task buildBenchmarks() {
 	group 'Examples'
 	description 'build all benchmark applications'
 	
-	dependsOn 'compileEcoreBenchmark'
-	dependsOn 'compileMemoryBenchmarkEcore'
-	dependsOn 'compileUMLBenchmark'
-}
-
-task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'Examples'
-	description 'compile ecoreBenchmark'
-	
-	projectFolder = file("./ecoreBenchmark")
-	
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
-}
-
-task compileMemoryBenchmarkEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'Examples'
-	description 'compile memoryBenchmarkEcore'
-	
-	projectFolder = file("./memoryBenchmarkEcore")
-	
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
-}
-
-task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'Examples'
-	description 'compile UMLBenchmark'
-	
-	projectFolder = file("./UMLBenchmark")
-
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
-}
-
-clean.doFirst {
-	def cmakeFolder = file("./ecoreBenchmark/.cmake")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
-	
-	cmakeFolder = file("./memoryBenchmarkEcore/.cmake")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
-	
-	cmakeFolder = file("./UMLBenchmark/.cmake")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
+	dependsOn getRootProject().getTasksByName('compileEcoreBenchmark', true)
+	dependsOn getRootProject().getTasksByName('compileMemoryBenchmarkEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
 }
