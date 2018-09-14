@@ -1,55 +1,15 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: umlReflection'
 
-task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
+task buildUmlReflection() {
 	group 'umlReflection'
 	description 'build umlReflection'
 
-	dependsOn 'generateUmlReflection'
-	dependsOn 'compileUmlReflection'
+	dependsOn 'model:generateUmlReflection'
+	dependsOn 'src_gen:compileUmlReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 }
 
-task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'umlReflection'
-	description 'compile umlReflection'
-
-	projectFolder = file("./src_gen/umlReflection")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
-	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-}
-
-task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'umlReflection'
-	description 'generate C++ code of umlReflection.uml model'
-
-	modelFilePath = file("./model/umlReflection.uml")
-	structureOnly = true
-
-	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection']
-
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
-}
-
-compileUmlReflection.mustRunAfter generateUmlReflection
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/umlReflection/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')

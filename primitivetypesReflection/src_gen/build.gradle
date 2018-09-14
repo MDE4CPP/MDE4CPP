@@ -1,0 +1,26 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile tasks for project: primitivetypesReflection'
+
+task compilePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'primitivetypesReflection'
+	description 'compile primitivetypesReflection'
+
+	projectFolder = file("./primitivetypesReflection")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./primitivetypesReflection/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

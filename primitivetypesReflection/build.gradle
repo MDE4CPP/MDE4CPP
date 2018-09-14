@@ -1,51 +1,13 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: primitivetypesReflection'
 
-task buildPrimitivetypesReflection(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflection']) {
+task buildPrimitivetypesReflection() {
 	group 'primitivetypesReflection'
 	description 'build primitivetypesReflection'
 
-	dependsOn 'generatePrimitivetypesReflection'
-	dependsOn 'compilePrimitivetypesReflection'
+	dependsOn 'model:generatePrimitivetypesReflection'
+	dependsOn 'src_gen:compilePrimitivetypesReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
 
-task compilePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'primitivetypesReflection'
-	description 'compile primitivetypesReflection'
-
-	projectFolder = file("./src_gen/primitivetypesReflection")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-}
-
-task generatePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'primitivetypesReflection'
-	description 'generate C++ code of primitivetypesReflection.uml model'
-
-	modelFilePath = file("./model/primitivetypesReflection.uml")
-	structureOnly = true
-
-	relatedModels = ['ecore', 'uml']
-
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
-}
-
-compilePrimitivetypesReflection.mustRunAfter generatePrimitivetypesReflection
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/primitivetypesReflection/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compilePrimitivetypesReflection').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')

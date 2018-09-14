@@ -1,0 +1,26 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile tasks for project: ecoreReflection'
+
+task compileEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'ecoreReflection'
+	description 'compile ecoreReflection'
+
+	projectFolder = file("./ecoreReflection")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./ecoreReflection/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

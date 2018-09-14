@@ -1,0 +1,17 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+}
+
+description 'Generate tasks for project: umlReflection'
+
+task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'umlReflection'
+	description 'generate C++ code of umlReflection.uml model'
+
+	modelFilePath = file("./umlReflection.uml")
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection']
+
+	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
+}

@@ -1,51 +1,13 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: ecoreReflection'
 
-task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
+task buildEcoreReflection() {
 	group 'ecoreReflection'
 	description 'build ecoreReflection'
 
-	dependsOn 'generateEcoreReflection'
-	dependsOn 'compileEcoreReflection'
+	dependsOn 'model:generateEcoreReflection'
+	dependsOn 'src_gen:compileEcoreReflection'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
 
-task compileEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'ecoreReflection'
-	description 'compile ecoreReflection'
-
-	projectFolder = file("./src_gen/ecoreReflection")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-}
-
-task generateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'ecoreReflection'
-	description 'generate C++ code of ecoreReflection.uml model'
-
-	modelFilePath = file("./model/ecoreReflection.uml")
-	structureOnly = true
-
-	relatedModels = ['ecore', 'uml']
-
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
-}
-
-compileEcoreReflection.mustRunAfter generateEcoreReflection
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/ecoreReflection/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
