@@ -150,7 +150,7 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
 
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
+	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
 }
 [/file]
 
