@@ -1,69 +1,15 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
-description 'Build tasks for project: libraryModel_ecore'
+description 'Build task for project: libraryModel_ecore'
 
 task buildLibraryModel_ecore() {
 	group 'libraryModel_ecore'
 	description 'build libraryModel_ecore'
 
-	dependsOn 'generateLibraryModel_ecore'
-	dependsOn 'compileLibraryModel_ecore'
-	dependsOn 'compileApplicationForLibraryModel_ecore'
+	dependsOn 'model:generateLibraryModel_ecore'
+	dependsOn 'src_gen:compileLibraryModel_ecore'
+	dependsOn 'application:compileApplicationForLibraryModel_ecore'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
-task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'libraryModel_ecore'
-	description 'compile ApplicationForlibraryModel_ecore'
-
-	projectFolder = file("./application")
-
-	dependsOn 'compileLibraryModel_ecore'
-}
-
-task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'libraryModel_ecore'
-	description 'compile libraryModel_ecore'
-
-	projectFolder = file("./src_gen/libraryModel_ecore")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-    // model dependencies
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileTypes', true)
-}
-
-task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'libraryModel_ecore'
-	description 'generate C++ code of libraryModel_ecore.ecore model'
-	
-	modelFilePath = file("./model/libraryModel_ecore.ecore")
-
-	relatedModels = ['ecore', 'types']
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
-}
-
-compileLibraryModel_ecore.mustRunAfter generateLibraryModel_ecore
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/libraryModel_ecore/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	
-		cmakeFolder = file('./application/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileLibraryModel_ecore').mustRunAfter tasks.getByPath('model:generateLibraryModel_ecore')
