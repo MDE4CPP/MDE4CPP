@@ -133,6 +133,27 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/if]
 [/file]
 
+[comment gradle file for build command /]
+[file ('../build.gradle', false, 'UTF-8')]
+description 'Build tasks for project: [packageName/]'
+
+task build[packageName.toUpperFirst()/]() {
+	group '[packageName/]'
+	description 'build [packageName/]'
+
+	dependsOn 'model:generate[packageName.toUpperFirst()/]'
+	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
+[if(aPackage.prepareApplication())]
+	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
+[/if]
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
+[/for]
+}
+
+tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+[/file]
+
 [comment gradle file for generate command /]
 [file ('../model/build.gradle', false, 'UTF-8')]
 plugins {
