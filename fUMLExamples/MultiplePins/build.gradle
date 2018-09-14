@@ -1,66 +1,16 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: fUMLMultiplePins'
 
 task buildFUMLMultiplePins() {
 	group 'fUMLMultiplePins'
 	description 'build fUMLMultiplePins'
 
-	dependsOn 'generateFUMLMultiplePins'
-	dependsOn 'compileFUMLMultiplePins'
-
+	dependsOn 'model:generateFUMLMultiplePins'
+	dependsOn 'src_gen:compileFUMLMultiplePins'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
-task compileFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'fUMLMultiplePins'
-	description 'compile fUMLMultiplePins'
-
-	projectFolder = file("./src_gen/fUMLMultiplePins")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-	dependsOn getRootProject().getTasksByName('compileFUML', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
-	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
-}
-
-task generateFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'fUMLMultiplePins'
-	description 'generate C++ code of fUMLMultiplePins.uml model'
-
-	modelFilePath = file("./model/fUMLMultiplePins.uml")
-	structureOnly = false
-
-	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-
-	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
-}
-
-compileFUMLMultiplePins.mustRunAfter generateFUMLMultiplePins
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/fUMLMultiplePins/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-
-		def cmakeFolderExec = file('./src_gen/fUMLMultiplePinsExec/.cmake/')
-		if(cmakeFolderExec.exists()) {
-    		delete cmakeFolderExec.absolutePath
-   			println "deleting folder " + cmakeFolderExec.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileFUMLMultiplePins').mustRunAfter tasks.getByPath('model:generateFUMLMultiplePins')
