@@ -1,53 +1,14 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
-description 'Build tasks for project: fUML'
+description 'Build task for project: fUML'
 
 task buildFUML() {
 	group 'fUML'
 	description 'build fUML'
 
-	dependsOn 'generateFUML'
-	dependsOn 'compileFUML'
+	dependsOn 'model:generateFUML'
+	dependsOn 'src_gen:compileFUML'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
 
-task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'fUML'
-	description 'compile fUML'
-
-	projectFolder = file("./src_gen/fUML")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-    // model dependencies
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-}
-
-task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'fUML'
-	description 'generate C++ code of fUML.ecore model'
-	
-	modelFilePath = file("./model/fUML.ecore")
-
-	relatedModels = ['ecore', 'uml']
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
-}
-
-compileFUML.mustRunAfter generateFUML
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/fUML/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileFUML').mustRunAfter tasks.getByPath('model:generateFUML')
