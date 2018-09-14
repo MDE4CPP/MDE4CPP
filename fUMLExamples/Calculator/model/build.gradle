@@ -1,0 +1,17 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+}
+
+description 'Generate tasks for project: CalcModel'
+
+task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'CalcModel'
+	description 'generate C++ code of CalcModel.uml model'
+
+	modelFilePath = file("./CalcModel.uml")
+	structureOnly = false
+
+	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+
+	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
+}
