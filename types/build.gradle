@@ -1,51 +1,13 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
-description 'Build tasks for project: types'
+description 'Build task for project: types'
 
 task buildTypes() {
 	group 'types'
 	description 'build types'
 
-	dependsOn 'generateTypes'
-	dependsOn 'compileTypes'
+	dependsOn 'model:generateTypes'
+	dependsOn 'src_gen:compileTypes'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 }
 
-task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'types'
-	description 'compile types'
-
-	projectFolder = file("./src_gen/types")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-    // model dependencies
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-}
-
-task generateTypes(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'types'
-	description 'generate C++ code of types.ecore model'
-	
-	modelFilePath = file("./model/types.ecore")
-
-	relatedModels = ['ecore']
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
-}
-
-compileTypes.mustRunAfter generateTypes
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/types/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileTypes').mustRunAfter tasks.getByPath('model:generateTypes')

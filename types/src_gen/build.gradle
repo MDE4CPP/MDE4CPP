@@ -1,0 +1,27 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile task for project: types'
+
+task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'types'
+	description 'compile types'
+
+	projectFolder = file("./types")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./types/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}
