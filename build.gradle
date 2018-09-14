@@ -1,36 +1,32 @@
 description 'MDE4CPP root project'
 
-task buildAll(dependsOn: ['generator:createAllGenerators', 'src:deliverBasicInterfaces', 'src:buildEcoreModels', 'src:common:pluginFramework:compilePluginFramework', 'src:common:persistence:compilePersistence', 'src:buildReflectionModels']) {
+task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
+	
+	dependsOn 'generator:createAllGenerators'
+	dependsOn 'src:buildEcoreModels'
+	dependsOn 'src:buildReflectionModels'
+	dependsOn 'src:common:pluginFramework:compilePluginFramework'
+	dependsOn 'src:common:persistence:compilePersistence'
+	dependsOn 'src:deliverBasicInterfaces'
 }
 
-tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:buildEcoreModels')
-tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
-
-//Compile All
-task compileAll(dependsOn: ['src:deliverBasicInterfaces', 'src:compileEcoreModels', 'src:common:pluginFramework:compilePluginFramework', 'src:common:persistence:compilePersistence', 'src:compileReflectionModels']) {
+task compileAll() {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
+	
+	dependsOn 'src:compileEcoreModels'
+	dependsOn 'src:compileReflectionModels'
+	dependsOn 'src:common:pluginFramework:compilePluginFramework'
+	dependsOn 'src:common:persistence:compilePersistence'
+	dependsOn 'src:deliverBasicInterfaces'
 }
-tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:compileEcoreModels')
-tasks.getByPath('src:compileReflectionModels').mustRunAfter tasks.getByPath('src:compileEcoreModels')
-tasks.getByPath('src:common:persistence:compilePersistence').mustRunAfter tasks.getByPath('src:common:pluginFramework:compilePluginFramework')
 
-task generateAll(dependsOn: ['src:generateEcoreModels', 'src:generateReflectionModels']) {
+task generateAll() {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
+	
+	dependsOn 'src:generateEcoreModels'
+	dependsOn 'src:generateReflectionModels'
 }
-
-//Generate All
-task buildEcoreModels(dependsOn: ['generator:ecore4CPP:createEcore4CPP', 'src:buildEcoreModels']) {
-	group 'MDE4CPP'
-	description 'build ecore4CPP generator and all ecore models'
-}
-tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:ecore4CPP:createEcore4CPP')
-
-task buildReflectionModels(dependsOn: ['generator:UML4CPP:createUML4CPP', 'src:buildReflectionModels']) {
-	group 'MDE4CPP'
-	description 'build UML4CPP generator and all reflection models'
-}
-tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('generator:UML4CPP:createUML4CPP')
