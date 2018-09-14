@@ -75,7 +75,7 @@ int main ()
 [/file]
 
 [comment	build application files/]
-[file ('../application/'.concat('CMakeLists.txt'), false, 'UTF-8')]
+[file ('../application/src/CMakeLists.txt', false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by UML4CPP Generator					# 
@@ -105,7 +105,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	src/main.cpp
+	main.cpp
 # [protected ('cpp')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
@@ -164,11 +164,34 @@ ENDIF()
 INSTALL(TARGETS ${PROJECT_NAME} 
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
 )
+[/file]
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
-	FILES_MATCHING PATTERN "*.hpp"
-	PATTERN ".cmake" EXCLUDE
-)
+[comment gradle file for compile command of application /]
+[file ('../application/build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile task for project: App_[packageName/]'
+
+task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group '[packageName/]'
+	description 'compile ['ApplicationFor'.concat(packageName)/]'
+
+	projectFolder = file("./src")
+
+	dependsOn getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./src/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}
 [/file]
 
 [aPackage.generateProjectsFiles(true)/]

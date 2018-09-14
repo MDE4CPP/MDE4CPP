@@ -129,44 +129,61 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 )
 [/file]
 
+[comment gradle file for build command /]
 [file ('../build.gradle', false, 'UTF-8')]
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]'[/if][']'/]) {
+task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
 
-	dependsOn 'generate[packageName.toUpperFirst()/]'
-	dependsOn 'compile[packageName.toUpperFirst()/]'
+	dependsOn 'model:generate[packageName.toUpperFirst()/]'
+	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
 [if(aPackage.prepareApplication())]
-	dependsOn 'compileApplicationFor[packageName.toUpperFirst()/]'
+	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
 [for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 }
 
-[if(aPackage.prepareApplication())]
-task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group '[packageName/]'
-	description 'compile ['ApplicationFor'.concat(packageName)/]'
+tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+[/file]
 
-	projectFolder = file("./application")
-
-	dependsOn 'compile[packageName.toUpperFirst()/]'
+[comment gradle file for generate command /]
+[file ('../model/build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 
-[/if]
+description 'Generate tasks for project: [packageName/]'
+
+task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group '[packageName/]'
+	description 'generate C++ code of [packageName/].uml model'
+
+	modelFilePath = file("./[packageName/].uml")
+	structureOnly = true
+
+	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
+
+	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
+}
+[/file]
+
+[comment gradle file for compile command /]
+[file ('build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile tasks for project: [packageName/]'
+
 task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	projectFolder = file("./src_gen/[packageName/]")
+	projectFolder = file("./[packageName/]")
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 [for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
@@ -174,37 +191,17 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 [/for]
 }
 
-task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group '[packageName/]'
-	description 'generate C++ code of [packageName/].uml model'
-
-	modelFilePath = file("./model/[packageName/].uml")
-	structureOnly = true
-
-	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
-
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
-}
-
-compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
-
 task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
+	doFirst {
+		def cmakeFolder = file('./[packageName/]/.cmake/')
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath
 		}
-[if(aPackage.prepareApplication())] 
-		cmakeFolder = file('./application/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-[/if]
 	}
 }
 [/file]
+
 [/template]
 
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String)]
