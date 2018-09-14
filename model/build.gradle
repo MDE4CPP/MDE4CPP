@@ -11,6 +11,4 @@ task generateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	modelFilePath = file("./uml.ecore")
 
 	relatedModels = ['ecore', 'types']
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
 }
