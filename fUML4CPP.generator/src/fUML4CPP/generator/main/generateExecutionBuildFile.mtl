@@ -133,31 +133,40 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/if]
 [/file]
 
-[file ('../build.gradle', false, 'UTF-8')]
+[comment gradle file for generate command /]
+[file ('../model/build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
 }
 
-description 'Build tasks for project: [packageName/]'
+description 'Generate tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/]() {
+task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group '[packageName/]'
-	description 'build [packageName/]'
+	description 'generate C++ code of [packageName/].uml model'
 
-	dependsOn 'generate[packageName.toUpperFirst()/]'
-	dependsOn 'compile[packageName.toUpperFirst()/]'
+	modelFilePath = file("./[packageName/].uml")
+	structureOnly = false
 
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
-	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
-[/for]
+	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
+
+	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
 }
+[/file]
+
+[comment gradle file for compile command /]
+[file ('build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile tasks for project: [packageName/]'
 
 task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	projectFolder = file("./src_gen/[packageName/]")
+	projectFolder = file("./[packageName/]")
 
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 [for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
@@ -165,29 +174,15 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 [/for]
 }
 
-task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group '[packageName/]'
-	description 'generate C++ code of [packageName/].uml model'
-
-	modelFilePath = file("./model/[packageName/].uml")
-	structureOnly = false
-
-	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
-
-	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
-}
-
-compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
-
 task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
+	doFirst {
+		def cmakeFolder = file('./[packageName/]/.cmake/')
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath
 		}
 
-		def cmakeFolderExec = file('./src_gen/[execPackageName/]/.cmake/')
+		def cmakeFolderExec = file('./[execPackageName/]/.cmake/')
 		if(cmakeFolderExec.exists()) {
     		delete cmakeFolderExec.absolutePath
    			println "deleting folder " + cmakeFolderExec.absolutePath
