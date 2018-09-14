@@ -1,17 +1,12 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: LibraryModel_uml'
 
-task buildLibraryModel_uml(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_uml', 'compileApplicationForLibraryModel_uml']) {
+task buildLibraryModel_uml() {
 	group 'LibraryModel_uml'
 	description 'build LibraryModel_uml'
 
-	dependsOn 'generateLibraryModel_uml'
-	dependsOn 'compileLibraryModel_uml'
-	dependsOn 'compileApplicationForLibraryModel_uml'
+	dependsOn 'model:generateLibraryModel_uml'
+	dependsOn 'src_gen:compileLibraryModel_uml'
+	dependsOn 'application:compileApplicationForLibraryModel_uml'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
@@ -19,54 +14,4 @@ task buildLibraryModel_uml(dependsOn: ['generateLibraryModel_uml', 'compileLibra
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
-task compileApplicationForLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'LibraryModel_uml'
-	description 'compile ApplicationForLibraryModel_uml'
-
-	projectFolder = file("./application")
-
-	dependsOn 'compileLibraryModel_uml'
-}
-
-task compileLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'LibraryModel_uml'
-	description 'compile LibraryModel_uml'
-
-	projectFolder = file("./src_gen/LibraryModel_uml")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
-	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
-}
-
-task generateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'LibraryModel_uml'
-	description 'generate C++ code of LibraryModel_uml.uml model'
-
-	modelFilePath = file("./model/LibraryModel_uml.uml")
-	structureOnly = true
-
-	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-
-	dependsOn getRootProject().getTasksByName('createUML4CPP', true)
-}
-
-compileLibraryModel_uml.mustRunAfter generateLibraryModel_uml
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/LibraryModel_uml/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-		cmakeFolder = file('./application/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileLibraryModel_uml').mustRunAfter tasks.getByPath('model:generateLibraryModel_uml')
