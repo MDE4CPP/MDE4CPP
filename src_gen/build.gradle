@@ -1,0 +1,28 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile task for project: uml'
+
+task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'uml'
+	description 'compile uml'
+
+	projectFolder = file("./uml")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileTypes', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./uml/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

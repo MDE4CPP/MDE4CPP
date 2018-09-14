@@ -1,53 +1,14 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
-description 'Build tasks for project: uml'
+description 'Build task for project: uml'
 
 task buildUml() {
 	group 'uml'
 	description 'build uml'
 
-	dependsOn 'generateUml'
-	dependsOn 'compileUml'
+	dependsOn 'model:generateUml'
+	dependsOn 'src_gen:compileUml'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
-task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'uml'
-	description 'compile uml'
-
-	projectFolder = file("./src_gen/uml")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-    // model dependencies
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileTypes', true)
-}
-
-task generateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'uml'
-	description 'generate C++ code of uml.ecore model'
-	
-	modelFilePath = file("./model/uml.ecore")
-
-	relatedModels = ['ecore', 'types']
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
-}
-
-compileUml.mustRunAfter generateUml
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/uml/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileUml').mustRunAfter tasks.getByPath('model:generateUml')
