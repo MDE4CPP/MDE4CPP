@@ -15,7 +15,7 @@ task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompil
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./application/.cmake/')
+		def cmakeFolder = file('./src/.cmake/')
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath
