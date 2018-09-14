@@ -12,6 +12,4 @@ task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	structureOnly = false
 
 	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-
-	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
 }
