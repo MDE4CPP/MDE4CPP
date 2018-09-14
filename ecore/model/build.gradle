@@ -11,6 +11,4 @@ task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	modelFilePath = file("./ecore.ecore")
 
 	relatedModels = []
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
 }
