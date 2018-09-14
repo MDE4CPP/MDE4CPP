@@ -1,0 +1,36 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile tasks for project: CalcModel'
+
+task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'CalcModel'
+	description 'compile CalcModel'
+
+	projectFolder = file("./CalcModel")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUml', true)
+	dependsOn getRootProject().getTasksByName('compileFUML', true)
+	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./CalcModel/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+
+		def cmakeFolderExec = file('./CalcModelExec/.cmake/')
+		if(cmakeFolderExec.exists()) {
+    		delete cmakeFolderExec.absolutePath
+   			println "deleting folder " + cmakeFolderExec.absolutePath
+		}
+	}
+}

@@ -1,66 +1,16 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: CalcModel'
 
 task buildCalcModel() {
 	group 'CalcModel'
 	description 'build CalcModel'
 
-	dependsOn 'generateCalcModel'
-	dependsOn 'compileCalcModel'
-
+	dependsOn 'model:generateCalcModel'
+	dependsOn 'src_gen:compileCalcModel'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
-task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'CalcModel'
-	description 'compile CalcModel'
-
-	projectFolder = file("./src_gen/CalcModel")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-	dependsOn getRootProject().getTasksByName('compileFUML', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
-	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
-}
-
-task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'CalcModel'
-	description 'generate C++ code of CalcModel.uml model'
-
-	modelFilePath = file("./model/CalcModel.uml")
-	structureOnly = false
-
-	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-
-	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
-}
-
-compileCalcModel.mustRunAfter generateCalcModel
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/CalcModel/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-
-		def cmakeFolderExec = file('./src_gen/CalcModelExec/.cmake/')
-		if(cmakeFolderExec.exists()) {
-    		delete cmakeFolderExec.absolutePath
-   			println "deleting folder " + cmakeFolderExec.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileCalcModel').mustRunAfter tasks.getByPath('model:generateCalcModel')

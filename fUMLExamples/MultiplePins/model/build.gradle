@@ -1,0 +1,17 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+}
+
+description 'Generate tasks for project: fUMLMultiplePins'
+
+task generateFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'fUMLMultiplePins'
+	description 'generate C++ code of fUMLMultiplePins.uml model'
+
+	modelFilePath = file("./fUMLMultiplePins.uml")
+	structureOnly = false
+
+	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+
+	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
+}

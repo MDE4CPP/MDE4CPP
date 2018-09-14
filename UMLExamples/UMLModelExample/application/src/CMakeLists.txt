@@ -26,7 +26,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	src/main.cpp
+	main.cpp
 # Start of user code cpp
 # You may manually edit the following lines, won't be overwritten upon generation.
 
@@ -169,9 +169,4 @@ ENDIF()
 
 INSTALL(TARGETS ${PROJECT_NAME} 
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
-)
-
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
-	FILES_MATCHING PATTERN "*.hpp"
-	PATTERN ".cmake" EXCLUDE
 )

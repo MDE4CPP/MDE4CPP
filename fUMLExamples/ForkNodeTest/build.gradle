@@ -1,66 +1,16 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
 description 'Build tasks for project: forkNodeTest'
 
 task buildForkNodeTest() {
 	group 'forkNodeTest'
 	description 'build forkNodeTest'
 
-	dependsOn 'generateForkNodeTest'
-	dependsOn 'compileForkNodeTest'
-
+	dependsOn 'model:generateForkNodeTest'
+	dependsOn 'src_gen:compileForkNodeTest'
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
-task compileForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'forkNodeTest'
-	description 'compile forkNodeTest'
-
-	projectFolder = file("./src_gen/forkNodeTest")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUml', true)
-	dependsOn getRootProject().getTasksByName('compileFUML', true)
-	dependsOn getRootProject().getTasksByName('compileEcoreReflection', true)
-	dependsOn getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
-	dependsOn getRootProject().getTasksByName('compileUmlReflection', true)
-}
-
-task generateForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'forkNodeTest'
-	description 'generate C++ code of forkNodeTest.uml model'
-
-	modelFilePath = file("./model/forkNodeTest.uml")
-	structureOnly = false
-
-	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
-
-	dependsOn getRootProject().getTasksByName('createFUML4CPP', true)
-}
-
-compileForkNodeTest.mustRunAfter generateForkNodeTest
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/forkNodeTest/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-
-		def cmakeFolderExec = file('./src_gen/forkNodeTestExec/.cmake/')
-		if(cmakeFolderExec.exists()) {
-    		delete cmakeFolderExec.absolutePath
-   			println "deleting folder " + cmakeFolderExec.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileForkNodeTest').mustRunAfter tasks.getByPath('model:generateForkNodeTest')

@@ -2,15 +2,15 @@ plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
 }
 
-description 'Compile task for project: App_libraryModel_ecore'
+description 'Compile task for project: App_LibraryModel_uml'
 
-task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'libraryModel_ecore'
-	description 'compile ApplicationForlibraryModel_ecore'
+task compileApplicationForLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'LibraryModel_uml'
+	description 'compile ApplicationForLibraryModel_uml'
 
 	projectFolder = file("./src")
 
-	dependsOn getRootProject().getTasksByName('compileLibraryModel_ecore', true)
+	dependsOn getRootProject().getTasksByName('compileLibraryModel_uml', true)
 }
 
 task clean {
