@@ -1,0 +1,28 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile task for project: libraryModel_ecore'
+
+task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'libraryModel_ecore'
+	description 'compile libraryModel_ecore'
+
+	projectFolder = file("./libraryModel_ecore")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+	dependsOn getRootProject().getTasksByName('compileEcore', true)
+	dependsOn getRootProject().getTasksByName('compileTypes', true)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./libraryModel_ecore/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

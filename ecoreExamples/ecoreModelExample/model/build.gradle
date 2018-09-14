@@ -1,0 +1,16 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+}
+
+description 'Generate task for project: libraryModel_ecore'
+
+task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'libraryModel_ecore'
+	description 'generate C++ code of libraryModel_ecore.ecore model'
+	
+	modelFilePath = file("./libraryModel_ecore.ecore")
+
+	relatedModels = ['ecore', 'types']
+
+	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
+}
