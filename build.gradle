@@ -22,7 +22,7 @@ task compileAllExamplesWithoutModel() {
 	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
 }
 
-task buildAllExamplesWithModel() {
+task buildAllExamples() {
 	group 'Examples'
 	description 'build all model example applications'	
 	
@@ -32,6 +32,7 @@ task buildAllExamplesWithModel() {
 	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
 	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
+	dependsOn 'compileAllExamplesWithoutModel'
 }
 
 task generateAllModelExamples() {
