@@ -175,7 +175,7 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./application/.cmake/')
+		def cmakeFolder = file('./src/.cmake/')
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath
