@@ -1,0 +1,26 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+}
+
+description 'Compile task for project: ecore'
+
+task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'ecore'
+	description 'compile ecore'
+
+	projectFolder = file("./ecore")
+
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+
+    // model dependencies
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('./ecore/.cmake/')
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

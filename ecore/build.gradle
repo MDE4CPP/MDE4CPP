@@ -1,49 +1,12 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
-}
-
-description 'Build tasks for project: ecore'
+description 'Build task for project: ecore'
 
 task buildEcore() {
 	group 'ecore'
 	description 'build ecore'
 
-	dependsOn 'generateEcore'
-	dependsOn 'compileEcore'
+	dependsOn 'model:generateEcore'
+	dependsOn 'src_gen:compileEcore'
 
 }
 
-task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'ecore'
-	description 'compile ecore'
-
-	projectFolder = file("./src_gen/ecore")
-
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-
-    // model dependencies
-}
-
-task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
-	group 'ecore'
-	description 'generate C++ code of ecore.ecore model'
-	
-	modelFilePath = file("./model/ecore.ecore")
-
-	relatedModels = []
-
-	dependsOn getRootProject().getTasksByName('createEcore4CPP', true)
-}
-
-compileEcore.mustRunAfter generateEcore
-
-task clean {
-	doLast {
-		def cmakeFolder = file('./src_gen/ecore/.cmake/')
-		if(cmakeFolder.exists()) {
-    		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
-		}
-	}
-}
+tasks.getByPath('src_gen:compileEcore').mustRunAfter tasks.getByPath('model:generateEcore')
