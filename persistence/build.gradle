@@ -50,22 +50,12 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 		}
 		exec {
 			workingDir 'xerces/xerces-c-3.2.1/.cmake'
-			if (make_parallel_jobs)
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine '/bin/sh', '-c', 'make install -j' + make_parallel_jobs
-				}
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine '/bin/sh', '-c', 'make install' 
-				}
-			}
+			def count = findProperty('make_parallel_jobs') ?: 1
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + count
+			} else {
+			   commandLine '/bin/sh', '-c', 'make install -j' + count
+			}			
 		}
 		copy {
 			from "xerces/bin"
