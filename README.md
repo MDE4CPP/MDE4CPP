@@ -6,7 +6,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
 
 ## Installation instructions
 1. Install following software:
-  * Java Development Kit (JDK) version 1.8
+  * Java Development Kit (JDK) version 1.10
   * Eclipse Modeling Tool
     * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
   * Gradle 4.9 or older
