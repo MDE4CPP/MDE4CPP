@@ -30,3 +30,14 @@ task generateAll() {
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 }
+
+task initPropertyFile() {
+	doFirst {
+		def propertyFile = file('./gradle.properties')
+		if(!propertyFile.exists()) {
+			def count = findProperty('worker') ?: 1
+		
+			new File("$projectDir/gradle.properties").text = "make_parallel_jobs=" + count
+		}
+	}
+}
