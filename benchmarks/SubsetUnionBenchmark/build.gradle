@@ -1,0 +1,14 @@
+description 'Build task for project: subsetUnionBenchmark'
+
+task buildSubsetUnionBenchmark() {
+	group 'subsetUnionBenchmark'
+	description 'build subsetUnionBenchmark'
+
+	dependsOn 'model:generateSubsetUnionBenchmark'
+	dependsOn 'src_gen:compileSubsetUnionBenchmark'
+	dependsOn 'application:compileApplicationForSubsetUnionBenchmark'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+}
+
+tasks.getByPath('src_gen:compileSubsetUnionBenchmark').mustRunAfter tasks.getByPath('model:generateSubsetUnionBenchmark')

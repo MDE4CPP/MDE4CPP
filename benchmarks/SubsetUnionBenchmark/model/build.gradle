@@ -1,0 +1,14 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate task for project: subsetUnionBenchmark'
+
+task generateSubsetUnionBenchmark(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'subsetUnionBenchmark'
+	description 'generate C++ code of subsetUnionBenchmark.ecore model'
+	
+	modelFilePath = file('.' + File.separator + 'subsetUnionBenchmark.ecore')
+
+	relatedModels = ['ecore']
+}

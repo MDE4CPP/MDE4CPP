@@ -1,1 +1,0 @@
-include 'benchmarks', 'fumlExample:Calculator', 'simpleExamples', 'simpleExamples:ecoreModelExample', 'simpleExamples:UMLModelExample'
