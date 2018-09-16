@@ -26,7 +26,7 @@ task buildAllExamples() {
 	group 'Examples'
 	description 'build all model example applications'	
 	
-	//dependsOn getRootProject().getTasksByName('buildSubsetUnionBenchmark', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnionBenchmark', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
 	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
 	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
