@@ -51,9 +51,7 @@ virtual public EObject
 			 */ 
 			virtual std::shared_ptr<ecore::EClass> eClass() const ;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EObject> eContainer() ;
+			
 			
 			/*!
 			 */ 

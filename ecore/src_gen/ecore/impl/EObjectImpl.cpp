@@ -127,11 +127,7 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 	//end of body
 }
 
-std::shared_ptr<ecore::EObject> EObjectImpl::eContainer()
-{
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
-}
+
 
 std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {

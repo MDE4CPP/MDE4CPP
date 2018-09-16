@@ -328,7 +328,11 @@
         <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="eContainer" eType="#//EObject"/>
+    <eOperations name="eContainer" eType="#//EObject">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="doNotGenerate" value="true"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="eContainingFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="const"/>

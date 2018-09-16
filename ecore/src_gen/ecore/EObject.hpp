@@ -101,9 +101,7 @@ namespace ecore
 			 */ 
 			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
+			
 			
 			/*!
 			 */ 
