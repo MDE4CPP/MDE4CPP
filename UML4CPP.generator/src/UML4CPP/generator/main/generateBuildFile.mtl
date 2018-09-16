@@ -238,10 +238,12 @@ ENDIF()
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
 [for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
-FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[/if][/if][/for]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes('LIBRARY'))]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf('LIBRARY')]
+[if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
+FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])[/if]
 [/template]
@@ -252,10 +254,12 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 [for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
-	[buildModeCMakeProperty(debugMode)/] ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-[/if][/if][/for]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes('LIBRARY'))]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf('LIBRARY')]
+[if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
+	[buildModeCMakeProperty(debugMode)/] ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 	${CMAKE_DL_LIBS}[/if]

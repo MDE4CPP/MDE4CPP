@@ -46,13 +46,14 @@
 [/if][/if]
 
 [for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() >= 2)]
+[if (aOperation.method->notEmpty())]
+[if (aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes('INCLUDE'))]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf('INCLUDE')]
+[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
 //Included from operation "[aOperation.name/]"
-[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(2)/]
-[/if]
-[/if]
-[/for]
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
+[/if][/let][/if][/if][/if][/for]
 
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 #include "uml/EnumerationLiteral.hpp"
