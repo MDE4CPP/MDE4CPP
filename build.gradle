@@ -1,6 +1,6 @@
 description 'UML collection'
 
-task createUML4CPP(dependsOn: ['checkDependencies', 'UML4CPP.generator:compileJava', 'executeCompiler', 'UML4CPP.generator:jar']) {
+task createUML4CPP(dependsOn: ['checkDependencies', 'UML4CPP.generator:compileJava', 'executeCompiler', 'UML4CPP.generator:deliverUML4CPP']) {
 	group 'Generators'
 	description 'create executable jar UML4CPP generator'
 
