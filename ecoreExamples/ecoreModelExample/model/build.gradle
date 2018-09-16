@@ -8,7 +8,7 @@ task generateLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'libraryModel_ecore'
 	description 'generate C++ code of libraryModel_ecore.ecore model'
 	
-	modelFilePath = file("./libraryModel_ecore.ecore")
+	modelFilePath = file('.' + File.separator + 'libraryModel_ecore.ecore')
 
 	relatedModels = ['ecore', 'types']
 }

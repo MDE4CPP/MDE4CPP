@@ -8,7 +8,7 @@ task generateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'LibraryModel_uml'
 	description 'generate C++ code of LibraryModel_uml.uml model'
 
-	modelFilePath = file("./LibraryModel_uml.uml")
+	modelFilePath = file('.' + File.separator + 'LibraryModel_uml.uml')
 	structureOnly = true
 
 	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']

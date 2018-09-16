@@ -8,7 +8,7 @@ task generateFUMLMultiplePins(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'fUMLMultiplePins'
 	description 'generate C++ code of fUMLMultiplePins.uml model'
 
-	modelFilePath = file("./fUMLMultiplePins.uml")
+	modelFilePath = file('.' + File.separator + 'fUMLMultiplePins.uml')
 	structureOnly = false
 
 	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']

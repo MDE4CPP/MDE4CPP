@@ -6,15 +6,31 @@ task compileEcoreExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Examples'
 	description 'compile Ecore example'
 	
-	projectFolder = file("./src/ecoreExample")
+	projectFolder = file('.' + File.separator + 'src' + File.separator + 'ecoreExample')
 	
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	inputs.files(fileTree('.') {
+        exclude 'src/ecoreExample/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + 'ecoreExample' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExample.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreExampled.exe')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
 }
 
 task clean {
 	doLast {
-		def cmakeFolder = file("./src/ecoreExample/.cmake")
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + 'ecoreExample' + File.separator + '.cmake')
 		if(cmakeFolder.exists()) {
 			delete cmakeFolder.absolutePath
 			println "deleting folder " + cmakeFolder.absolutePath

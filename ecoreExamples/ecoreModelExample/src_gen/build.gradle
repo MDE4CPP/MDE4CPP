@@ -8,21 +8,42 @@ task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore'
 
-	projectFolder = file("./libraryModel_ecore")
+	projectFolder = file('.' + File.separator + 'libraryModel_ecore')
 
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	inputs.files(fileTree('.') {
+        exclude 'libraryModel_ecore/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'libraryModel_ecore' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libraryModel_ecore.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libraryModel_ecored.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'libraryModel_ecore')
 
-    // model dependencies
-	dependsOn getRootProject().getTasksByName('compileEcore', true)
-	dependsOn getRootProject().getTasksByName('compileTypes', true)
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
 }
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./libraryModel_ecore/.cmake/')
+		def cmakeFolder = file('.' + File.separator + 'libraryModel_ecore' + File.separator + '.cmake' + File.separator)
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
+   			println 'deleting folder ' + cmakeFolder.absolutePath
 		}
 	}
 }

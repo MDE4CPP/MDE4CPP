@@ -8,7 +8,7 @@ task generateForkNodeTest(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'forkNodeTest'
 	description 'generate C++ code of forkNodeTest.uml model'
 
-	modelFilePath = file("./forkNodeTest.uml")
+	modelFilePath = file('.' + File.separator + 'forkNodeTest.uml')
 	structureOnly = false
 
 	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']

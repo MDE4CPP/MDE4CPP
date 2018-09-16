@@ -8,7 +8,7 @@ task generateCalcModel(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'CalcModel'
 	description 'generate C++ code of CalcModel.uml model'
 
-	modelFilePath = file("./CalcModel.uml")
+	modelFilePath = file('.' + File.separator + 'CalcModel.uml')
 	structureOnly = false
 
 	relatedModels = ['ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
