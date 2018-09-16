@@ -8,7 +8,7 @@ task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'ecore'
 	description 'generate C++ code of ecore.ecore model'
 	
-	modelFilePath = file("./ecore.ecore")
+	modelFilePath = file('.' + File.separator + 'ecore.ecore')
 
 	relatedModels = []
 }
