@@ -1,6 +1,6 @@
 description 'ecore4CPP project'
 
-task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:jar']) {
+task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:deliverEcore4CPP']) {
 	group 'Generators'
 	description 'create executable jar for ecore4CPP generator'
 
