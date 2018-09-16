@@ -1,2 +1,2 @@
 # examples
-Examples for MDE4CPP use
+User projects of MDE4CPP project
