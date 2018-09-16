@@ -168,14 +168,26 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	group '[packageName/]'
 	description 'compile ['ApplicationFor'.concat(packageName)/]'
 
-	projectFolder = file("./src")
+	projectFolder = file('.' + File.separator + 'src')
 
-	dependsOn getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]', true)
+	inputs.files(fileTree('.') {
+        exclude 'src/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'App_[packageName/].exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'App_[packageName/]d.exe')
+
+	// dependency to model '[packageName/]'
+	def [packageName/] = getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]', true)
+	dependsOn [packageName/]
+	inputs.files([packageName/].outputs)
 }
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./src/.cmake/')
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + '.cmake/')
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath

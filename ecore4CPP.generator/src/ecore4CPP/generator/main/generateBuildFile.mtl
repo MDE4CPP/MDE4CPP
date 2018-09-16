@@ -145,7 +145,7 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 	group '[packageName/]'
 	description 'generate C++ code of [packageName/].ecore model'
 	
-	modelFilePath = file("./[packageName/].ecore")
+	modelFilePath = file('.' + File.separator + '[packageName/].ecore')
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
 }
@@ -163,20 +163,39 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	projectFolder = file("./[packageName/]")
+	projectFolder = file('.' + File.separator + '[packageName/]')
 
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
-[for (pack : EPackage | aPackage.metaModelLibraries()) before ('\n    // model dependencies\n') ? (not(pack.name = aPackage.name))]
-	dependsOn getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+	inputs.files(fileTree('.') {
+        exclude '[packageName/]/.cmake/**'
+    })
+	if(!file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/].dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]d.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + '[packageName/]')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+
+	// dependency to model '[pack.name/]'
+	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
+	dependsOn [pack.name/]
+	inputs.files([pack.name/].outputs)
 [/for]
 }
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./[packageName/]/.cmake/')
+		def cmakeFolder = file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator)
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
-   			println "deleting folder " + cmakeFolder.absolutePath
+   			println 'deleting folder ' + cmakeFolder.absolutePath
 		}
 	}
 }
