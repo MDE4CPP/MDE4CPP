@@ -1,5 +1,5 @@
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
 }
 
 description 'Generate task for project: libraryModel_ecore'

@@ -1,5 +1,5 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
 }
 
 task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
