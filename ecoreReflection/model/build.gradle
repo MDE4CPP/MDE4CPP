@@ -8,7 +8,7 @@ task generateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'ecoreReflection'
 	description 'generate C++ code of ecoreReflection.uml model'
 
-	modelFilePath = file("./ecoreReflection.uml")
+	modelFilePath = file('.' + File.separator + 'ecoreReflection.uml')
 	structureOnly = true
 
 	relatedModels = ['ecore', 'uml']

@@ -8,7 +8,7 @@ task generatePrimitivetypesReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'primitivetypesReflection'
 	description 'generate C++ code of primitivetypesReflection.uml model'
 
-	modelFilePath = file("./primitivetypesReflection.uml")
+	modelFilePath = file('.' + File.separator + 'primitivetypesReflection.uml')
 	structureOnly = true
 
 	relatedModels = ['ecore', 'uml']
