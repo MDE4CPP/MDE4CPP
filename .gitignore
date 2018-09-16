@@ -3,3 +3,4 @@ application/*
 /*.bat
 .ssh/
 /gradle.properties
+/userProjects
