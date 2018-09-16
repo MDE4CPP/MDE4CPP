@@ -1,5 +1,5 @@
-#include "SubsetUnionBenchmarkFactory.hpp"
-#include "impl/SubsetUnionBenchmarkFactoryImpl.hpp"
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkFactory.hpp"
+#include "subsetUnionBenchmark/impl/SubsetUnionBenchmarkFactoryImpl.hpp"
 
 using namespace subsetUnionBenchmark;
 
@@ -12,7 +12,6 @@ std::shared_ptr<SubsetUnionBenchmarkFactory>SubsetUnionBenchmarkFactory::eInstan
 	{
 		//create a new Factoryimplementation
 		instance.reset(SubsetUnionBenchmarkFactoryImpl::create());
-		std::dynamic_pointer_cast<SubsetUnionBenchmarkFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

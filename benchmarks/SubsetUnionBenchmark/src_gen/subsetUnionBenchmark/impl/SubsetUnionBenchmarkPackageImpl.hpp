@@ -7,37 +7,31 @@
 #ifndef SUBSETUNIONBENCHMARKPACKAGEIMPL_HPP
 #define SUBSETUNIONBENCHMARKPACKAGEIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkPackage.hpp"
 
-#include <cassert>
+namespace subsetUnionBenchmark 
+{	class Container;
+	class Element;
+	class Element_Level1;
+	class Element_Level10;
+	class Element_Level2;
+	class Element_Level3;
+	class Element_Level4;
+	class Element_Level5;
+	class Element_Level6;
+	class Element_Level7;
+	class Element_Level8;
+	class Element_Level9;
+}
 
-#include "ContainerImpl.hpp"
-#include "ElementImpl.hpp"
-#include "Element_Level1Impl.hpp"
-#include "Element_Level10Impl.hpp"
-#include "Element_Level2Impl.hpp"
-#include "Element_Level3Impl.hpp"
-#include "Element_Level4Impl.hpp"
-#include "Element_Level5Impl.hpp"
-#include "Element_Level6Impl.hpp"
-#include "Element_Level7Impl.hpp"
-#include "Element_Level8Impl.hpp"
-#include "Element_Level9Impl.hpp"
+namespace ecore
+{
+	class EcoreFactory;
+}
 
-#include "SubsetUnionBenchmarkPackage.hpp"
-#include "SubsetUnionBenchmarkPackage.hpp"
-#include "EcorePackage.hpp"
-#include "impl/EPackageImpl.hpp"
 
 namespace subsetUnionBenchmark
 {
@@ -55,28 +49,30 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Container
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getContainer() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getContainer_Name() const ;
+			virtual std::shared_ptr<ecore::EClass> getContainer_EClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset1() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset10() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset2() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset3() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset4() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset5() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset6() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset7() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset8() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset9() const ;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Union() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getContainer_EAttribute_name() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset1() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset10() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset2() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset3() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset4() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset5() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset6() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset7() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset8() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset9() const ;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_unionBag() const ;
 			
 			
 			// End Class Container
 
 			// Begin Class Element
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getElement_Name() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_EClass() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getElement_EAttribute_name() const ;
 			
 			
 			
@@ -84,7 +80,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level1
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level1() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level1_EClass() const ;
+			
 			
 			
 			
@@ -92,7 +89,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level10
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level10() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level10_EClass() const ;
+			
 			
 			
 			
@@ -100,7 +98,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level2
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level2() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level2_EClass() const ;
+			
 			
 			
 			
@@ -108,7 +107,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level3
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level3() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level3_EClass() const ;
+			
 			
 			
 			
@@ -116,7 +116,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level4
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level4() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level4_EClass() const ;
+			
 			
 			
 			
@@ -124,7 +125,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level5
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level5() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level5_EClass() const ;
+			
 			
 			
 			
@@ -132,7 +134,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level6
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level6() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level6_EClass() const ;
+			
 			
 			
 			
@@ -140,7 +143,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level7
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level7() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level7_EClass() const ;
+			
 			
 			
 			
@@ -148,7 +152,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level8
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level8() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level8_EClass() const ;
+			
 			
 			
 			
@@ -156,7 +161,8 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level9
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level9() const ;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level9_EClass() const ;
+			
 			
 			
 			
@@ -165,18 +171,34 @@ namespace subsetUnionBenchmark
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> containerEClass = nullptr;
-			std::shared_ptr<ecore::EClass> elementEClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level1EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level10EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level2EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level3EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level4EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level5EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level6EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level7EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level8EClass = nullptr;
-			std::shared_ptr<ecore::EClass> element_Level9EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_container_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level1_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level10_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level2_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level3_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level4_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level5_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level6_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level7_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level8_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_element_Level9_EClass = nullptr;
+			
+			
+			std::shared_ptr<ecore::EAttribute> m_container_EAttribute_name = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_element_EAttribute_name = nullptr;
+			
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset1 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset10 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset2 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset3 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset4 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset5 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset6 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset7 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset8 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_subset9 = nullptr;
+			std::shared_ptr<ecore::EReference> m_container_EReference_unionBag = nullptr;
 			
 			
 
@@ -187,12 +209,43 @@ namespace subsetUnionBenchmark
 			bool isInitialized = false;
  			bool isCreated = false;
 
-			virtual void init();
+			virtual void init(std::shared_ptr<ecore::EPackage> package);
 
 		public:
+			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
-			void createPackageContents();
+
+		private:
+			void createContainerContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level10Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level2Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level3Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level4Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level5Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level6Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level7Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level8Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createElement_Level9Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+
+			void initializeContainerContent();
+			void initializeElementContent();
+			void initializeElement_Level1Content();
+			void initializeElement_Level10Content();
+			void initializeElement_Level2Content();
+			void initializeElement_Level3Content();
+			void initializeElement_Level4Content();
+			void initializeElement_Level5Content();
+			void initializeElement_Level6Content();
+			void initializeElement_Level7Content();
+			void initializeElement_Level8Content();
+			void initializeElement_Level9Content();
+			void initializePackageEDataTypes();
+
+
+
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARKPACKAGEIMPL_HPP */
-

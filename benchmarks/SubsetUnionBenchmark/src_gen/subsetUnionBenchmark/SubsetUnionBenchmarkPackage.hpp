@@ -7,35 +7,14 @@
 #ifndef SUBSETUNIONBENCHMARKPACKAGE_HPP
 #define SUBSETUNIONBENCHMARKPACKAGE_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/EPackage.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
-
-namespace subsetUnionBenchmark 
-{	class Container;
-	class Element;
-	class Element_Level1;
-	class Element_Level10;
-	class Element_Level2;
-	class Element_Level3;
-	class Element_Level4;
-	class Element_Level5;
-	class Element_Level6;
-	class Element_Level7;
-	class Element_Level8;
-	class Element_Level9;
-	class SubsetUnionBenchmarkPackage;
+namespace ecore 
+{
+	class EAttribute;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace subsetUnionBenchmark 
@@ -63,39 +42,40 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Container
 			//Class and Feature IDs 
-			static const int CONTAINER = 0;
-			static const int CONTAINER_FEATURE_COUNT = 12;
-			static const int CONTAINER_OPERATION_COUNT = 0;
-			static const int CONTAINER_NAME = 01;
+			static const unsigned int CONTAINER_ECLASS = 12;
+			static const unsigned int CONTAINER_ECLASS_FEATURE_COUNT = 12;
+			static const unsigned int CONTAINER_ECLASS_OPERATION_COUNT = 0;
+			static const int CONTAINER_EATTRIBUTE_NAME = 1201;
 			
-			static const int CONTAINER_SUBSET1 = 02;
-			static const int CONTAINER_SUBSET10 = 011;
-			static const int CONTAINER_SUBSET2 = 03;
-			static const int CONTAINER_SUBSET3 = 04;
-			static const int CONTAINER_SUBSET4 = 05;
-			static const int CONTAINER_SUBSET5 = 06;
-			static const int CONTAINER_SUBSET6 = 07;
-			static const int CONTAINER_SUBSET7 = 08;
-			static const int CONTAINER_SUBSET8 = 09;
-			static const int CONTAINER_SUBSET9 = 010;
-			static const int CONTAINER_UNION = 00;
+			static const int CONTAINER_EREFERENCE_SUBSET1 = 1202;
+			static const int CONTAINER_EREFERENCE_SUBSET10 = 1211;
+			static const int CONTAINER_EREFERENCE_SUBSET2 = 1203;
+			static const int CONTAINER_EREFERENCE_SUBSET3 = 1204;
+			static const int CONTAINER_EREFERENCE_SUBSET4 = 1205;
+			static const int CONTAINER_EREFERENCE_SUBSET5 = 1206;
+			static const int CONTAINER_EREFERENCE_SUBSET6 = 1207;
+			static const int CONTAINER_EREFERENCE_SUBSET7 = 1208;
+			static const int CONTAINER_EREFERENCE_SUBSET8 = 1209;
+			static const int CONTAINER_EREFERENCE_SUBSET9 = 1210;
+			static const int CONTAINER_EREFERENCE_UNIONBAG = 1200;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getContainer() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getContainer_Name() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getContainer_EClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset1() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset10() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset2() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset3() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset4() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset5() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset6() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset7() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset8() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Subset9() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getContainer_Union() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getContainer_EAttribute_name() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset1() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset10() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset2() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset3() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset4() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset5() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset6() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset7() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset8() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_subset9() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getContainer_EReference_unionBag() const = 0;
 			
 			
 			// End Class Container
@@ -103,16 +83,17 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element
 			//Class and Feature IDs 
-			static const int ELEMENT = 1;
-			static const int ELEMENT_FEATURE_COUNT = 1;
-			static const int ELEMENT_OPERATION_COUNT = 0;
-			static const int ELEMENT_NAME = 10;
+			static const unsigned int ELEMENT_ECLASS = 1;
+			static const unsigned int ELEMENT_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_ECLASS_OPERATION_COUNT = 0;
+			static const int ELEMENT_EATTRIBUTE_NAME = 100;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getElement_Name() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_EClass() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getElement_EAttribute_name() const = 0;
 			
 			
 			
@@ -121,14 +102,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level1
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL1 = 2;
-			static const int ELEMENT_LEVEL1_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL1_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL1_ECLASS = 2;
+			static const unsigned int ELEMENT_LEVEL1_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL1_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level1() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level1_EClass() const = 0;
+			
 			
 			
 			
@@ -137,14 +119,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level10
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL10 = 11;
-			static const int ELEMENT_LEVEL10_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL10_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL10_ECLASS = 11;
+			static const unsigned int ELEMENT_LEVEL10_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL10_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level10() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level10_EClass() const = 0;
+			
 			
 			
 			
@@ -153,14 +136,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level2
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL2 = 3;
-			static const int ELEMENT_LEVEL2_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL2_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL2_ECLASS = 3;
+			static const unsigned int ELEMENT_LEVEL2_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL2_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level2() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level2_EClass() const = 0;
+			
 			
 			
 			
@@ -169,14 +153,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level3
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL3 = 4;
-			static const int ELEMENT_LEVEL3_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL3_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL3_ECLASS = 4;
+			static const unsigned int ELEMENT_LEVEL3_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL3_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level3() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level3_EClass() const = 0;
+			
 			
 			
 			
@@ -185,14 +170,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level4
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL4 = 5;
-			static const int ELEMENT_LEVEL4_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL4_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL4_ECLASS = 5;
+			static const unsigned int ELEMENT_LEVEL4_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL4_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level4() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level4_EClass() const = 0;
+			
 			
 			
 			
@@ -201,14 +187,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level5
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL5 = 6;
-			static const int ELEMENT_LEVEL5_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL5_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL5_ECLASS = 6;
+			static const unsigned int ELEMENT_LEVEL5_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL5_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level5() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level5_EClass() const = 0;
+			
 			
 			
 			
@@ -217,14 +204,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level6
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL6 = 7;
-			static const int ELEMENT_LEVEL6_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL6_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL6_ECLASS = 7;
+			static const unsigned int ELEMENT_LEVEL6_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL6_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level6() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level6_EClass() const = 0;
+			
 			
 			
 			
@@ -233,14 +221,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level7
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL7 = 8;
-			static const int ELEMENT_LEVEL7_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL7_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL7_ECLASS = 8;
+			static const unsigned int ELEMENT_LEVEL7_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL7_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level7() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level7_EClass() const = 0;
+			
 			
 			
 			
@@ -249,14 +238,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level8
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL8 = 9;
-			static const int ELEMENT_LEVEL8_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL8_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL8_ECLASS = 9;
+			static const unsigned int ELEMENT_LEVEL8_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL8_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level8() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level8_EClass() const = 0;
+			
 			
 			
 			
@@ -265,14 +255,15 @@ namespace subsetUnionBenchmark
 
 			// Begin Class Element_Level9
 			//Class and Feature IDs 
-			static const int ELEMENT_LEVEL9 = 10;
-			static const int ELEMENT_LEVEL9_FEATURE_COUNT = 1;
-			static const int ELEMENT_LEVEL9_OPERATION_COUNT = 0;
+			static const unsigned int ELEMENT_LEVEL9_ECLASS = 10;
+			static const unsigned int ELEMENT_LEVEL9_ECLASS_FEATURE_COUNT = 1;
+			static const unsigned int ELEMENT_LEVEL9_ECLASS_OPERATION_COUNT = 0;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Level9() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getElement_Level9_EClass() const = 0;
+			
 			
 			
 			
@@ -289,4 +280,3 @@ namespace subsetUnionBenchmark
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARKPACKAGE_HPP */
-

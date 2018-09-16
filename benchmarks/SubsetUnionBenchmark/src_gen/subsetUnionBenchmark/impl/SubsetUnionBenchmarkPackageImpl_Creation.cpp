@@ -58,7 +58,7 @@ void SubsetUnionBenchmarkPackageImpl::createContainerContent(std::shared_ptr<eco
 	m_container_EReference_subset7 = factory->createEReference_in_EContainingClass(m_container_EClass, CONTAINER_EREFERENCE_SUBSET7);
 	m_container_EReference_subset8 = factory->createEReference_in_EContainingClass(m_container_EClass, CONTAINER_EREFERENCE_SUBSET8);
 	m_container_EReference_subset9 = factory->createEReference_in_EContainingClass(m_container_EClass, CONTAINER_EREFERENCE_SUBSET9);
-	m_container_EReference_union = factory->createEReference_in_EContainingClass(m_container_EClass, CONTAINER_EREFERENCE_UNION);
+	m_container_EReference_unionBag = factory->createEReference_in_EContainingClass(m_container_EClass, CONTAINER_EREFERENCE_UNIONBAG);
 	
 	
 }

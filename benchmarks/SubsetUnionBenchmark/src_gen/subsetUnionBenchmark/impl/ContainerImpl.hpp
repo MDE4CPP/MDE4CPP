@@ -7,18 +7,6 @@
 #ifndef SUBSETUNIONBENCHMARK_CONTAINERCONTAINERIMPL_HPP
 #define SUBSETUNIONBENCHMARK_CONTAINERCONTAINERIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
@@ -26,11 +14,7 @@
 #include "../Container.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace subsetUnionBenchmark 
@@ -48,6 +32,8 @@ virtual public Container
 		protected:
 			friend class SubsetUnionBenchmarkFactoryImpl;
 			ContainerImpl();
+			virtual std::shared_ptr<Container> getThisContainerPtr() const;
+			virtual void setThisContainerPtr(std::weak_ptr<Container> thisContainerPtr);
 
 
 
@@ -78,43 +64,43 @@ virtual public Container
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level1, subsetUnionBenchmark::Element > > getSubset1() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level1, subsetUnionBenchmark::Element>> getSubset1() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level10, subsetUnionBenchmark::Element > > getSubset10() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level10, subsetUnionBenchmark::Element>> getSubset10() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level2, subsetUnionBenchmark::Element > > getSubset2() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level2, subsetUnionBenchmark::Element>> getSubset2() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level3, subsetUnionBenchmark::Element > > getSubset3() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level3, subsetUnionBenchmark::Element>> getSubset3() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level4, subsetUnionBenchmark::Element > > getSubset4() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level4, subsetUnionBenchmark::Element>> getSubset4() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level5, subsetUnionBenchmark::Element > > getSubset5() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level5, subsetUnionBenchmark::Element>> getSubset5() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level6, subsetUnionBenchmark::Element > > getSubset6() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level6, subsetUnionBenchmark::Element>> getSubset6() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level7, subsetUnionBenchmark::Element > > getSubset7() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level7, subsetUnionBenchmark::Element>> getSubset7() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level8, subsetUnionBenchmark::Element > > getSubset8() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level8, subsetUnionBenchmark::Element>> getSubset8() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level9, subsetUnionBenchmark::Element > > getSubset9() const ;
+			virtual std::shared_ptr<Subset<subsetUnionBenchmark::Element_Level9, subsetUnionBenchmark::Element>> getSubset9() const ;
 			
 			
 							
@@ -124,17 +110,34 @@ virtual public Container
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<subsetUnionBenchmark::Element> > getUnion() const ; 
+			virtual std::shared_ptr<Union<subsetUnionBenchmark::Element>> getUnionBag() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<subsetUnionBenchmark::SubsetUnionBenchmarkFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, Any newValue) ;
+
+		private:
+			std::weak_ptr<Container> m_thisContainerPtr;
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARK_CONTAINERCONTAINERIMPL_HPP */
-

@@ -337,29 +337,29 @@ void SubsetUnionBenchmarkPackageImpl::initializeContainerContent()
 	   		m_container_EReference_subset9->setEOpposite(otherEnd);
 	    }
 	}
-	m_container_EReference_union->setName("union");
-	m_container_EReference_union->setEType(getElement_EClass());
-	m_container_EReference_union->setLowerBound(0);
-	m_container_EReference_union->setUpperBound(-1);
-	m_container_EReference_union->setTransient(false);
-	m_container_EReference_union->setVolatile(false);
-	m_container_EReference_union->setChangeable(true);
-	m_container_EReference_union->setUnsettable(false);
-	m_container_EReference_union->setUnique(true);
-	m_container_EReference_union->setDerived(true);
-	m_container_EReference_union->setOrdered(true);
-	m_container_EReference_union->setContainment(true);
-	m_container_EReference_union->setResolveProxies(true);
+	m_container_EReference_unionBag->setName("unionBag");
+	m_container_EReference_unionBag->setEType(getElement_EClass());
+	m_container_EReference_unionBag->setLowerBound(0);
+	m_container_EReference_unionBag->setUpperBound(-1);
+	m_container_EReference_unionBag->setTransient(false);
+	m_container_EReference_unionBag->setVolatile(false);
+	m_container_EReference_unionBag->setChangeable(true);
+	m_container_EReference_unionBag->setUnsettable(false);
+	m_container_EReference_unionBag->setUnique(true);
+	m_container_EReference_unionBag->setDerived(true);
+	m_container_EReference_unionBag->setOrdered(true);
+	m_container_EReference_unionBag->setContainment(true);
+	m_container_EReference_unionBag->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_container_EReference_union->setDefaultValueLiteral(defaultValue);
+			m_container_EReference_unionBag->setDefaultValueLiteral(defaultValue);
 		}
 		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
 		if (otherEnd != nullptr)
 	    {
-	   		m_container_EReference_union->setEOpposite(otherEnd);
+	   		m_container_EReference_unionBag->setEOpposite(otherEnd);
 	    }
 	}
 	

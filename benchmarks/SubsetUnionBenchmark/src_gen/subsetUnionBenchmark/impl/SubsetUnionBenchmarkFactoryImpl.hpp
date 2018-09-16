@@ -7,34 +7,24 @@
 #ifndef SUBSETUNIONBENCHMARKFACTORYIMPL_HPP
 #define SUBSETUNIONBENCHMARKFACTORYIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
+#include "ecore/impl/EFactoryImpl.hpp"
 
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkFactory.hpp"
 
-#include "impl/EFactoryImpl.hpp"
-
-#include "ContainerImpl.hpp"
-#include "ElementImpl.hpp"
-#include "Element_Level1Impl.hpp"
-#include "Element_Level10Impl.hpp"
-#include "Element_Level2Impl.hpp"
-#include "Element_Level3Impl.hpp"
-#include "Element_Level4Impl.hpp"
-#include "Element_Level5Impl.hpp"
-#include "Element_Level6Impl.hpp"
-#include "Element_Level7Impl.hpp"
-#include "Element_Level8Impl.hpp"
-#include "Element_Level9Impl.hpp"
-
-#include "SubsetUnionBenchmarkFactory.hpp"
+namespace subsetUnionBenchmark 
+{	class Container;
+	class Element;
+	class Element_Level1;
+	class Element_Level10;
+	class Element_Level2;
+	class Element_Level3;
+	class Element_Level4;
+	class Element_Level5;
+	class Element_Level6;
+	class Element_Level7;
+	class Element_Level8;
+	class Element_Level9;
+}
 
 namespace subsetUnionBenchmark 
 {
@@ -53,7 +43,8 @@ namespace subsetUnionBenchmark
 			virtual ~SubsetUnionBenchmarkFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions
@@ -89,9 +80,6 @@ namespace subsetUnionBenchmark
 		private:
 			static SubsetUnionBenchmarkFactory* create();
             std::map<std::string,unsigned int> m_idMap;
-			virtual void init() {}
-
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARKFACTORYIMPL_HPP */
-

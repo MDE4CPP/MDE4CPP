@@ -1,7 +1,25 @@
-#include "SubsetUnionBenchmarkFactoryImpl.hpp"
-#include "SubsetUnionBenchmarkPackage.hpp"
+#include "subsetUnionBenchmark/impl/SubsetUnionBenchmarkFactoryImpl.hpp"
 
-#include "EClass.hpp"
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkPackage.hpp"
+
+#include "ecore/EClass.hpp"
+
+
+#include "subsetUnionBenchmark/impl/ContainerImpl.hpp"
+#include "subsetUnionBenchmark/impl/ElementImpl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level1Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level10Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level2Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level3Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level4Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level5Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level6Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level7Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level8Impl.hpp"
+#include "subsetUnionBenchmark/impl/Element_Level9Impl.hpp"
 
 using namespace subsetUnionBenchmark;
 
@@ -11,18 +29,18 @@ using namespace subsetUnionBenchmark;
 
 SubsetUnionBenchmarkFactoryImpl::SubsetUnionBenchmarkFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("Container", SubsetUnionBenchmarkPackage::CONTAINER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element", SubsetUnionBenchmarkPackage::ELEMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level1", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL1));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level10", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL10));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level2", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL2));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level3", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL3));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level4", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL4));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level5", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL5));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level6", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL6));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level7", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL7));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level8", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL8));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Element_Level9", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL9));
+	m_idMap.insert(std::make_pair("Container", SubsetUnionBenchmarkPackage::CONTAINER_ECLASS));
+	m_idMap.insert(std::make_pair("Element", SubsetUnionBenchmarkPackage::ELEMENT_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level1", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL1_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level10", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL10_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level2", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL2_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level3", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL3_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level4", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL4_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level5", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL5_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level6", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL6_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level7", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL7_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level8", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL8_ECLASS));
+	m_idMap.insert(std::make_pair("Element_Level9", SubsetUnionBenchmarkPackage::ELEMENT_LEVEL9_ECLASS));
 }
 
 SubsetUnionBenchmarkFactoryImpl::~SubsetUnionBenchmarkFactoryImpl()
@@ -42,64 +60,64 @@ std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(const un
 {
 	switch(classID)
 	{
-		case SubsetUnionBenchmarkPackage::CONTAINER:
+		case SubsetUnionBenchmarkPackage::CONTAINER_ECLASS:
 		{
-				return std::shared_ptr<Container>(this->createContainer());
+				return this->createContainer();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT:
+		case SubsetUnionBenchmarkPackage::ELEMENT_ECLASS:
 		{
-				return std::shared_ptr<Element>(this->createElement());
+				return this->createElement();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL1:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL1_ECLASS:
 		{
-				return std::shared_ptr<Element_Level1>(this->createElement_Level1());
+				return this->createElement_Level1();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL10:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL10_ECLASS:
 		{
-				return std::shared_ptr<Element_Level10>(this->createElement_Level10());
+				return this->createElement_Level10();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL2:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL2_ECLASS:
 		{
-				return std::shared_ptr<Element_Level2>(this->createElement_Level2());
+				return this->createElement_Level2();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL3:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL3_ECLASS:
 		{
-				return std::shared_ptr<Element_Level3>(this->createElement_Level3());
+				return this->createElement_Level3();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL4:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL4_ECLASS:
 		{
-				return std::shared_ptr<Element_Level4>(this->createElement_Level4());
+				return this->createElement_Level4();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL5:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL5_ECLASS:
 		{
-				return std::shared_ptr<Element_Level5>(this->createElement_Level5());
+				return this->createElement_Level5();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL6:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL6_ECLASS:
 		{
-				return std::shared_ptr<Element_Level6>(this->createElement_Level6());
+				return this->createElement_Level6();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL7:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL7_ECLASS:
 		{
-				return std::shared_ptr<Element_Level7>(this->createElement_Level7());
+				return this->createElement_Level7();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL8:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL8_ECLASS:
 		{
-				return std::shared_ptr<Element_Level8>(this->createElement_Level8());
+				return this->createElement_Level8();
 			
 		}
-		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL9:
+		case SubsetUnionBenchmarkPackage::ELEMENT_LEVEL9_ECLASS:
 		{
-				return std::shared_ptr<Element_Level9>(this->createElement_Level9());
+				return this->createElement_Level9();
 			
 		}
 	default:
@@ -108,15 +126,20 @@ std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(const un
 	return nullptr;
 }
 
-std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(std::shared_ptr<ecore::EClass> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className, _container);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(std::string _className) const
@@ -148,62 +171,74 @@ std::shared_ptr<ecore::EObject> SubsetUnionBenchmarkFactoryImpl::create(std::str
 
 std::shared_ptr<Container> SubsetUnionBenchmarkFactoryImpl::createContainer() const
 {
-	std::shared_ptr<Container> element(new ContainerImpl());
+	std::shared_ptr<ContainerImpl> element(new ContainerImpl());
+	element->setThisContainerPtr(element);
 	return element;
 }
 std::shared_ptr<Element> SubsetUnionBenchmarkFactoryImpl::createElement() const
 {
-	std::shared_ptr<Element> element(new ElementImpl());
+	std::shared_ptr<ElementImpl> element(new ElementImpl());
+	element->setThisElementPtr(element);
 	return element;
 }
 std::shared_ptr<Element_Level1> SubsetUnionBenchmarkFactoryImpl::createElement_Level1() const
 {
-	std::shared_ptr<Element_Level1> element(new Element_Level1Impl());
+	std::shared_ptr<Element_Level1Impl> element(new Element_Level1Impl());
+	element->setThisElement_Level1Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level10> SubsetUnionBenchmarkFactoryImpl::createElement_Level10() const
 {
-	std::shared_ptr<Element_Level10> element(new Element_Level10Impl());
+	std::shared_ptr<Element_Level10Impl> element(new Element_Level10Impl());
+	element->setThisElement_Level10Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level2> SubsetUnionBenchmarkFactoryImpl::createElement_Level2() const
 {
-	std::shared_ptr<Element_Level2> element(new Element_Level2Impl());
+	std::shared_ptr<Element_Level2Impl> element(new Element_Level2Impl());
+	element->setThisElement_Level2Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level3> SubsetUnionBenchmarkFactoryImpl::createElement_Level3() const
 {
-	std::shared_ptr<Element_Level3> element(new Element_Level3Impl());
+	std::shared_ptr<Element_Level3Impl> element(new Element_Level3Impl());
+	element->setThisElement_Level3Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level4> SubsetUnionBenchmarkFactoryImpl::createElement_Level4() const
 {
-	std::shared_ptr<Element_Level4> element(new Element_Level4Impl());
+	std::shared_ptr<Element_Level4Impl> element(new Element_Level4Impl());
+	element->setThisElement_Level4Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level5> SubsetUnionBenchmarkFactoryImpl::createElement_Level5() const
 {
-	std::shared_ptr<Element_Level5> element(new Element_Level5Impl());
+	std::shared_ptr<Element_Level5Impl> element(new Element_Level5Impl());
+	element->setThisElement_Level5Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level6> SubsetUnionBenchmarkFactoryImpl::createElement_Level6() const
 {
-	std::shared_ptr<Element_Level6> element(new Element_Level6Impl());
+	std::shared_ptr<Element_Level6Impl> element(new Element_Level6Impl());
+	element->setThisElement_Level6Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level7> SubsetUnionBenchmarkFactoryImpl::createElement_Level7() const
 {
-	std::shared_ptr<Element_Level7> element(new Element_Level7Impl());
+	std::shared_ptr<Element_Level7Impl> element(new Element_Level7Impl());
+	element->setThisElement_Level7Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level8> SubsetUnionBenchmarkFactoryImpl::createElement_Level8() const
 {
-	std::shared_ptr<Element_Level8> element(new Element_Level8Impl());
+	std::shared_ptr<Element_Level8Impl> element(new Element_Level8Impl());
+	element->setThisElement_Level8Ptr(element);
 	return element;
 }
 std::shared_ptr<Element_Level9> SubsetUnionBenchmarkFactoryImpl::createElement_Level9() const
 {
-	std::shared_ptr<Element_Level9> element(new Element_Level9Impl());
+	std::shared_ptr<Element_Level9Impl> element(new Element_Level9Impl());
+	element->setThisElement_Level9Ptr(element);
 	return element;
 }
 

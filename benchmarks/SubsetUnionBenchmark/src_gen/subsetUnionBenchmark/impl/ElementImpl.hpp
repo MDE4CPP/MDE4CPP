@@ -7,18 +7,6 @@
 #ifndef SUBSETUNIONBENCHMARK_ELEMENTELEMENTIMPL_HPP
 #define SUBSETUNIONBENCHMARK_ELEMENTELEMENTIMPL_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
 //*********************************
 // generated Includes
 
@@ -26,11 +14,7 @@
 #include "../Element.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
-
-#include "SubsetUnion.hpp"
-
-
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace subsetUnionBenchmark 
@@ -48,6 +32,8 @@ virtual public Element
 		protected:
 			friend class SubsetUnionBenchmarkFactoryImpl;
 			ElementImpl();
+			virtual std::shared_ptr<Element> getThisElementPtr() const;
+			virtual void setThisElementPtr(std::weak_ptr<Element> thisElementPtr);
 
 
 
@@ -86,12 +72,29 @@ virtual public Element
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
+			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<subsetUnionBenchmark::SubsetUnionBenchmarkFactory> modelFactory);
 			
+			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
+			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
+			
+
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool internalEIsSet(int featureID) const ;
+			virtual bool eSet(int featureID, Any newValue) ;
+
+		private:
+			std::weak_ptr<Element> m_thisElementPtr;
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARK_ELEMENTELEMENTIMPL_HPP */
-
