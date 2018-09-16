@@ -122,11 +122,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AcceptCallAction);
-	con->setName("unmarshall");
+	con->setName("result_pins");
 	con->getConstrainedElement()->push_back(uML_AcceptCallAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AcceptCallAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isUnmarshall = true")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter: OrderedSet(Parameter) = trigger.event->asSequence()->first().oclAsType(CallEvent).operation.inputParameters() in"\
+	"result->size() = parameter->size() and"\
+	"Sequence{1..result->size()}->forAll(i | "\
+	"	parameter->at(i).type.conformsTo(result->at(i).type) and "\
+	"	parameter->at(i).isOrdered = result->at(i).isOrdered and"\
+	"	parameter->at(i).compatibleWith(result->at(i)))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_AcceptCallAction);
@@ -147,7 +152,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_AcceptCallAction);
 	
-	con->setName("result_pins");
+	con->setName("unmarshall");
 	
 	con->getConstrainedElement()->push_back(uML_AcceptCallAction);
 	
@@ -155,17 +160,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter: OrderedSet(Parameter) = trigger.event->asSequence()->first().oclAsType(CallEvent).operation.inputParameters() in"\
-	
-	"result->size() = parameter->size() and"\
-	
-	"Sequence{1..result->size()}->forAll(i | "\
-	
-	"	parameter->at(i).type.conformsTo(result->at(i).type) and "\
-	
-	"	parameter->at(i).isOrdered = result->at(i).isOrdered and"\
-	
-	"	parameter->at(i).compatibleWith(result->at(i)))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isUnmarshall = true")));
 	
 	con->setSpecification(oe);
 	
@@ -179,43 +174,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AcceptEventAction);
-	con->setName("unmarshall_signal_events");
-	con->getConstrainedElement()->push_back(uML_AcceptEventAction);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AcceptEventAction));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies"\
-	"	trigger->size()=1 and"\
-	"	trigger->asSequence()->first().event.oclIsKindOf(SignalEvent) and"\
-	"	let attribute: OrderedSet(Property) = trigger->asSequence()->first().event.oclAsType(SignalEvent).signal.allAttributes() in"\
-	"	attribute->size()>0 and result->size() = attribute->size() and"\
-	"	Sequence{1..result->size()}->forAll(i | "\
-	"		result->at(i).type = attribute->at(i).type and "\
-	"		result->at(i).isOrdered = attribute->at(i).isOrdered and"\
-	"		result->at(i).includesMultiplicity(attribute->at(i)))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_AcceptEventAction);
-	
 	con->setName("conforming_type");
-	
 	con->getConstrainedElement()->push_back(uML_AcceptEventAction);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AcceptEventAction));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not isUnmarshall implies "\
-	
 	"	result->isEmpty() or"\
-	
 	"	let type: Type = result->first().type in"\
-	
 	"	type=null or "\
-	
 	"		(trigger->forAll(event.oclIsKindOf(SignalEvent)) and "\
-	
 	"		 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_AcceptEventAction);
@@ -265,6 +233,36 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies "\
 	
 	"	output->size() = 1 and output->first().is(1,1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_AcceptEventAction);
+	
+	con->setName("unmarshall_signal_events");
+	
+	con->getConstrainedElement()->push_back(uML_AcceptEventAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AcceptEventAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies"\
+	
+	"	trigger->size()=1 and"\
+	
+	"	trigger->asSequence()->first().event.oclIsKindOf(SignalEvent) and"\
+	
+	"	let attribute: OrderedSet(Property) = trigger->asSequence()->first().event.oclAsType(SignalEvent).signal.allAttributes() in"\
+	
+	"	attribute->size()>0 and result->size() = attribute->size() and"\
+	
+	"	Sequence{1..result->size()}->forAll(i | "\
+	
+	"		result->at(i).type = attribute->at(i).type and "\
+	
+	"		result->at(i).isOrdered = attribute->at(i).isOrdered and"\
+	
+	"		result->at(i).includesMultiplicity(attribute->at(i)))")));
 	
 	con->setSpecification(oe);
 	
@@ -327,25 +325,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActionInputPin);
-	con->setName("one_output_pin");
-	con->getConstrainedElement()->push_back(uML_ActionInputPin);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActionInputPin));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("fromAction.output->size() = 1")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ActionInputPin);
-	
 	con->setName("input_pin");
-	
 	con->getConstrainedElement()->push_back(uML_ActionInputPin);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActionInputPin));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("fromAction.input->forAll(oclIsKindOf(ActionInputPin))")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ActionInputPin);
@@ -366,6 +350,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_ActionInputPin);
+	
+	con->setName("one_output_pin");
+	
+	con->getConstrainedElement()->push_back(uML_ActionInputPin);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActionInputPin));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("fromAction.output->size() = 1")));
+	
+	con->setSpecification(oe);
+	
     // ActionInputPin attributes
 	uML_ActionInputPin_fromAction = factory->createProperty_in_Class(uML_ActionInputPin);
 
@@ -376,23 +374,18 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Activity);
-	con->setName("maximum_two_parameter_nodes");
+	con->setName("maximum_one_parameter_node");
 	con->getConstrainedElement()->push_back(uML_Activity);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Activity));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("ownedParameter->forAll(p | "\
-	"p.direction = ParameterDirectionKind::inout implies"\
-	"let associatedNodes : Set(ActivityNode) = node->select("\
-	"       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p) in "\
-	"  associatedNodes->size()=2 and"\
-	"  associatedNodes->select(incoming->notEmpty())->size()<=1 and"\
-	"  associatedNodes->select(outgoing->notEmpty())->size()<=1"\
-	")")));
+	"   p.direction <> ParameterDirectionKind::inout implies node->select("\
+	"       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Activity);
 	
-	con->setName("maximum_one_parameter_node");
+	con->setName("maximum_two_parameter_nodes");
 	
 	con->getConstrainedElement()->push_back(uML_Activity);
 	
@@ -402,9 +395,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("ownedParameter->forAll(p | "\
 	
-	"   p.direction <> ParameterDirectionKind::inout implies node->select("\
+	"p.direction = ParameterDirectionKind::inout implies"\
 	
-	"       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)")));
+	"let associatedNodes : Set(ActivityNode) = node->select("\
+	
+	"       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p) in "\
+	
+	"  associatedNodes->size()=2 and"\
+	
+	"  associatedNodes->select(incoming->notEmpty())->size()<=1 and"\
+	
+	"  associatedNodes->select(outgoing->notEmpty())->size()<=1"\
+	
+	")")));
 	
 	con->setSpecification(oe);
 	
@@ -530,14 +533,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
-	con->setName("no_outgoing_edges");
+	con->setName("has_parameters");
 	con->getConstrainedElement()->push_back(uML_ActivityParameterNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityParameterNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->notEmpty() and outgoing->isEmpty()) implies "\
-	"	(parameter.direction = ParameterDirectionKind::out or "\
-	"	 parameter.direction = ParameterDirectionKind::inout or "\
-	"	 parameter.direction = ParameterDirectionKind::return)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("activity.ownedParameter->includes(parameter)")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
+	
+	con->setName("no_edges");
+	
+	con->getConstrainedElement()->push_back(uML_ActivityParameterNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityParameterNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->isEmpty() or outgoing->isEmpty()")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
@@ -560,7 +574,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
 	
-	con->setName("no_edges");
+	con->setName("no_outgoing_edges");
 	
 	con->getConstrainedElement()->push_back(uML_ActivityParameterNode);
 	
@@ -568,7 +582,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->isEmpty() or outgoing->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->notEmpty() and outgoing->isEmpty()) implies "\
+	
+	"	(parameter.direction = ParameterDirectionKind::out or "\
+	
+	"	 parameter.direction = ParameterDirectionKind::inout or "\
+	
+	"	 parameter.direction = ParameterDirectionKind::return)")));
 	
 	con->setSpecification(oe);
 	
@@ -586,20 +606,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
-	
-	con->setName("has_parameters");
-	
-	con->getConstrainedElement()->push_back(uML_ActivityParameterNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityParameterNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("activity.ownedParameter->includes(parameter)")));
-	
-	con->setSpecification(oe);
-	
     // ActivityParameterNode attributes
 	uML_ActivityParameterNode_parameter = factory->createProperty_in_Class(uML_ActivityParameterNode);
 
@@ -610,50 +616,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityPartition);
-	con->setName("represents_classifier");
-	con->getConstrainedElement()->push_back(uML_ActivityPartition);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityPartition));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(not isExternal and represents.oclIsKindOf(Classifier) and superPartition->notEmpty()) implies"\
-	"("\
-	"   let representedClassifier : Classifier = represents.oclAsType(Classifier) in"\
-	"     superPartition.represents.oclIsKindOf(Classifier) and"\
-	"      let representedSuperClassifier : Classifier = superPartition.represents.oclAsType(Classifier) in"\
-	"       (representedSuperClassifier.oclIsKindOf(BehavioredClassifier) and representedClassifier.oclIsKindOf(Behavior) and "\
-	"        representedSuperClassifier.oclAsType(BehavioredClassifier).ownedBehavior->includes(representedClassifier.oclAsType(Behavior))) "\
-	"       or"\
-	"       (representedSuperClassifier.oclIsKindOf(Class) and  representedSuperClassifier.oclAsType(Class).nestedClassifier->includes(representedClassifier))"\
-	"       or"\
-	"       (Association.allInstances()->exists(a | a.memberEnd->exists(end1 | end1.isComposite and end1.type = representedClassifier and "\
-	"                                                                      a.memberEnd->exists(end2 | end1<>end2 and end2.type = representedSuperClassifier))))"\
-	")")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ActivityPartition);
-	
-	con->setName("represents_property_and_is_contained");
-	
-	con->getConstrainedElement()->push_back(uML_ActivityPartition);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityPartition));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(represents.oclIsKindOf(Property) and superPartition->notEmpty()) implies"\
-	
-	"("\
-	
-	"  (superPartition.represents.oclIsKindOf(Classifier) and represents.owner = superPartition.represents) or "\
-	
-	"  (superPartition.represents.oclIsKindOf(Property) and represents.owner = superPartition.represents.oclAsType(Property).type)"\
-	
-	")")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ActivityPartition);
-	
 	con->setName("dimension_not_contained");
+	con->getConstrainedElement()->push_back(uML_ActivityPartition);
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityPartition));
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDimension implies superPartition->isEmpty()")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ActivityPartition);
+	
+	con->setName("represents_classifier");
 	
 	con->getConstrainedElement()->push_back(uML_ActivityPartition);
 	
@@ -661,7 +633,31 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDimension implies superPartition->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(not isExternal and represents.oclIsKindOf(Classifier) and superPartition->notEmpty()) implies"\
+	
+	"("\
+	
+	"   let representedClassifier : Classifier = represents.oclAsType(Classifier) in"\
+	
+	"     superPartition.represents.oclIsKindOf(Classifier) and"\
+	
+	"      let representedSuperClassifier : Classifier = superPartition.represents.oclAsType(Classifier) in"\
+	
+	"       (representedSuperClassifier.oclIsKindOf(BehavioredClassifier) and representedClassifier.oclIsKindOf(Behavior) and "\
+	
+	"        representedSuperClassifier.oclAsType(BehavioredClassifier).ownedBehavior->includes(representedClassifier.oclAsType(Behavior))) "\
+	
+	"       or"\
+	
+	"       (representedSuperClassifier.oclIsKindOf(Class) and  representedSuperClassifier.oclAsType(Class).nestedClassifier->includes(representedClassifier))"\
+	
+	"       or"\
+	
+	"       (Association.allInstances()->exists(a | a.memberEnd->exists(end1 | end1.isComposite and end1.type = representedClassifier and "\
+	
+	"                                                                      a.memberEnd->exists(end2 | end1<>end2 and end2.type = representedSuperClassifier))))"\
+	
+	")")));
 	
 	con->setSpecification(oe);
 	
@@ -686,6 +682,28 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	"    superPartition.subpartition->reject(isExternal)->forAll(p | "\
 	
 	"       p.represents.oclIsKindOf(Property) and p.owner=representedClassifier)"\
+	
+	")")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ActivityPartition);
+	
+	con->setName("represents_property_and_is_contained");
+	
+	con->getConstrainedElement()->push_back(uML_ActivityPartition);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ActivityPartition));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(represents.oclIsKindOf(Property) and superPartition->notEmpty()) implies"\
+	
+	"("\
+	
+	"  (superPartition.represents.oclIsKindOf(Classifier) and represents.owner = superPartition.represents) or "\
+	
+	"  (superPartition.represents.oclIsKindOf(Property) and represents.owner = superPartition.represents.oclAsType(Property).type)"\
 	
 	")")));
 	
@@ -735,16 +753,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AddStructuralFeatureValueAction);
-	con->setName("required_value");
+	con->setName("insertAt_pin");
 	con->getConstrainedElement()->push_back(uML_AddStructuralFeatureValueAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AddStructuralFeatureValueAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if not structuralFeature.isOrdered then insertAt = nullelse   not isReplaceAll implies  	insertAt<>null and   	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))endif")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_AddStructuralFeatureValueAction);
 	
-	con->setName("insertAt_pin");
+	con->setName("required_value");
 	
 	con->getConstrainedElement()->push_back(uML_AddStructuralFeatureValueAction);
 	
@@ -752,7 +770,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if not structuralFeature.isOrdered then insertAt = nullelse   not isReplaceAll implies  	insertAt<>null and   	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))endif")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null")));
 	
 	con->setSpecification(oe);
 	
@@ -767,16 +785,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AddVariableValueAction);
-	con->setName("required_value");
+	con->setName("insertAt_pin");
 	con->getConstrainedElement()->push_back(uML_AddVariableValueAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_AddVariableValueAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if not variable.isOrdered then insertAt = nullelse   not isReplaceAll implies  	insertAt<>null and   	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))endif")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_AddVariableValueAction);
 	
-	con->setName("insertAt_pin");
+	con->setName("required_value");
 	
 	con->getConstrainedElement()->push_back(uML_AddVariableValueAction);
 	
@@ -784,7 +802,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if not variable.isOrdered then insertAt = nullelse   not isReplaceAll implies  	insertAt<>null and   	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))endif")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null")));
 	
 	con->setSpecification(oe);
 	
@@ -823,13 +841,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Association);
-	con->setName("specialized_end_types");
+	con->setName("association_ends");
 	con->getConstrainedElement()->push_back(uML_Association);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Association));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("Sequence{1..memberEnd->size()}->"\
-	"	forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->"\
-	"		forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Association);
@@ -862,20 +878,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Association);
 	
-	con->setName("association_ends");
-	
-	con->getConstrainedElement()->push_back(uML_Association);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Association));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Association);
-	
 	con->setName("specialized_end_number");
 	
 	con->getConstrainedElement()->push_back(uML_Association);
@@ -885,6 +887,24 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Association);
+	
+	con->setName("specialized_end_types");
+	
+	con->getConstrainedElement()->push_back(uML_Association);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Association));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("Sequence{1..memberEnd->size()}->"\
+	
+	"	forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->"\
+	
+	"		forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))")));
 	
 	con->setSpecification(oe);
 	
@@ -937,11 +957,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Behavior);
-	con->setName("parameters_match");
+	con->setName("feature_of_context_classifier");
 	con->getConstrainedElement()->push_back(uML_Behavior);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Behavior));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("specification <> null implies ownedParameter->size() = specification.ownedParameter->size()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'context'.feature->includes(specification)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Behavior);
@@ -960,7 +980,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Behavior);
 	
-	con->setName("feature_of_context_classifier");
+	con->setName("parameters_match");
 	
 	con->getConstrainedElement()->push_back(uML_Behavior);
 	
@@ -968,7 +988,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'context'.feature->includes(specification)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("specification <> null implies ownedParameter->size() = specification.ownedParameter->size()")));
 	
 	con->setSpecification(oe);
 	
@@ -1071,11 +1091,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_BroadcastSignalAction);
-	con->setName("number_of_arguments");
+	con->setName("no_onport");
 	con->getConstrainedElement()->push_back(uML_BroadcastSignalAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_BroadcastSignalAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("onPort=null")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_BroadcastSignalAction);
+	
+	con->setName("number_of_arguments");
+	
+	con->getConstrainedElement()->push_back(uML_BroadcastSignalAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_BroadcastSignalAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("argument->size() = signal.allAttributes()->size()")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_BroadcastSignalAction);
@@ -1100,20 +1134,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_BroadcastSignalAction);
-	
-	con->setName("no_onport");
-	
-	con->getConstrainedElement()->push_back(uML_BroadcastSignalAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_BroadcastSignalAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("onPort=null")));
-	
-	con->setSpecification(oe);
-	
     // BroadcastSignalAction attributes
 	uML_BroadcastSignalAction_signal = factory->createProperty_in_Class(uML_BroadcastSignalAction);
 
@@ -1124,16 +1144,40 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CallAction);
-	con->setName("result_pins");
+	con->setName("argument_pins");
 	con->getConstrainedElement()->push_back(uML_CallAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CallAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter: OrderedSet(Parameter) = self.inputParameters() in"\
+	"argument->size() = parameter->size() and"\
+	"Sequence{1..argument->size()}->forAll(i | "\
+	"	argument->at(i).type.conformsTo(parameter->at(i).type) and "\
+	"	argument->at(i).isOrdered = parameter->at(i).isOrdered and"\
+	"	argument->at(i).compatibleWith(parameter->at(i)))")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_CallAction);
+	
+	con->setName("result_pins");
+	
+	con->getConstrainedElement()->push_back(uML_CallAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CallAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter: OrderedSet(Parameter) = self.outputParameters() in"\
+	
 	"result->size() = parameter->size() and"\
+	
 	"Sequence{1..result->size()}->forAll(i | "\
+	
 	"	parameter->at(i).type.conformsTo(result->at(i).type) and "\
+	
 	"	parameter->at(i).isOrdered = result->at(i).isOrdered and"\
+	
 	"	parameter->at(i).compatibleWith(result->at(i)))")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_CallAction);
@@ -1147,30 +1191,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result->notEmpty() implies isSynchronous")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_CallAction);
-	
-	con->setName("argument_pins");
-	
-	con->getConstrainedElement()->push_back(uML_CallAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CallAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter: OrderedSet(Parameter) = self.inputParameters() in"\
-	
-	"argument->size() = parameter->size() and"\
-	
-	"Sequence{1..argument->size()}->forAll(i | "\
-	
-	"	argument->at(i).type.conformsTo(parameter->at(i).type) and "\
-	
-	"	argument->at(i).isOrdered = parameter->at(i).isOrdered and"\
-	
-	"	argument->at(i).compatibleWith(parameter->at(i)))")));
 	
 	con->setSpecification(oe);
 	
@@ -1301,25 +1321,14 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Classifier);
-	con->setName("specialize_type");
+	con->setName("maps_to_generalization_set");
 	con->getConstrainedElement()->push_back(uML_Classifier);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Classifier));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->forAll(c | self.maySpecializeType(c))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Classifier);
-	
-	con->setName("non_final_parents");
-	
-	con->getConstrainedElement()->push_back(uML_Classifier);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Classifier));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->forAll(not isFinalSpecialization)")));
-	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("powertypeExtent->forAll( gs | "\
+	"  gs.generalization->forAll( gen | "\
+	"    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) "\
+	"  ))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Classifier);
@@ -1338,7 +1347,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Classifier);
 	
-	con->setName("maps_to_generalization_set");
+	con->setName("non_final_parents");
 	
 	con->getConstrainedElement()->push_back(uML_Classifier);
 	
@@ -1346,13 +1355,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("powertypeExtent->forAll( gs | "\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->forAll(not isFinalSpecialization)")));
 	
-	"  gs.generalization->forAll( gen | "\
+	con->setSpecification(oe);
 	
-	"    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) "\
+	con = factory->createConstraint_in_Context(uML_Classifier);
 	
-	"  ))")));
+	con->setName("specialize_type");
+	
+	con->getConstrainedElement()->push_back(uML_Classifier);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Classifier));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->forAll(c | self.maySpecializeType(c))")));
 	
 	con->setSpecification(oe);
 	
@@ -1457,36 +1474,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
-	con->setName("constraining_classifiers_constrain_args");
-	con->getConstrainedElement()->push_back(uML_ClassifierTemplateParameter);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ClassifierTemplateParameter));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("templateParameterSubstitution.actual->forAll( a |"\
-	"  let arg : Classifier = a.oclAsType(Classifier) in"\
-	"    constrainingClassifier->forAll("\
-	"      cc |  "\
-	"         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))"\
-	"      )"\
-	")")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
-	
 	con->setName("actual_is_classifier");
-	
 	con->getConstrainedElement()->push_back(uML_ClassifierTemplateParameter);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ClassifierTemplateParameter));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string(" templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
 	
-	con->setName("has_constraining_classifier");
+	con->setName("constraining_classifiers_constrain_args");
 	
 	con->getConstrainedElement()->push_back(uML_ClassifierTemplateParameter);
 	
@@ -1494,7 +1491,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allowSubstitutable implies constrainingClassifier->notEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("templateParameterSubstitution.actual->forAll( a |"\
+	
+	"  let arg : Classifier = a.oclAsType(Classifier) in"\
+	
+	"    constrainingClassifier->forAll("\
+	
+	"      cc |  "\
+	
+	"         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))"\
+	
+	"      )"\
+	
+	")")));
 	
 	con->setSpecification(oe);
 	
@@ -1518,7 +1527,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
 	
-	con->setName("parametered_element_no_features");
+	con->setName("has_constraining_classifier");
 	
 	con->getConstrainedElement()->push_back(uML_ClassifierTemplateParameter);
 	
@@ -1526,7 +1535,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allowSubstitutable implies constrainingClassifier->notEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -1544,6 +1553,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
+	
+	con->setName("parametered_element_no_features");
+	
+	con->getConstrainedElement()->push_back(uML_ClassifierTemplateParameter);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ClassifierTemplateParameter));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())")));
+	
+	con->setSpecification(oe);
+	
     // ClassifierTemplateParameter attributes
 	uML_ClassifierTemplateParameter_allowSubstitutable = factory->createProperty_in_Class(uML_ClassifierTemplateParameter);
 	uML_ClassifierTemplateParameter_constrainingClassifier = factory->createProperty_in_Class(uML_ClassifierTemplateParameter);
@@ -1556,18 +1579,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Clause);
-	con->setName("decider_output");
+	con->setName("body_output_pins");
 	con->getConstrainedElement()->push_back(uML_Clause);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Clause));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("test.oclAsType(Action).allActions().output->includes(decider) and"\
-	"decider.type = Boolean and"\
-	"decider.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Clause);
 	
-	con->setName("body_output_pins");
+	con->setName("decider_output");
 	
 	con->getConstrainedElement()->push_back(uML_Clause);
 	
@@ -1575,7 +1596,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("test.oclAsType(Action).allActions().output->includes(decider) and"\
+	
+	"decider.type = Boolean and"\
+	
+	"decider.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -1608,16 +1633,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ClearAssociationAction);
-	con->setName("same_type");
+	con->setName("multiplicity");
 	con->getConstrainedElement()->push_back(uML_ClearAssociationAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ClearAssociationAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("association.memberEnd->exists(self.object.type.conformsTo(type))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ClearAssociationAction);
 	
-	con->setName("multiplicity");
+	con->setName("same_type");
 	
 	con->getConstrainedElement()->push_back(uML_ClearAssociationAction);
 	
@@ -1625,7 +1650,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("association.memberEnd->exists(self.object.type.conformsTo(type))")));
 	
 	con->setSpecification(oe);
 	
@@ -1701,20 +1726,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_CollaborationUse);
 	
-	con->setName("every_role");
-	
-	con->getConstrainedElement()->push_back(uML_CollaborationUse);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CollaborationUse));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_CollaborationUse);
-	
 	con->setName("connectors");
 	
 	con->getConstrainedElement()->push_back(uML_CollaborationUse);
@@ -1743,6 +1754,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_CollaborationUse);
+	
+	con->setName("every_role");
+	
+	con->getConstrainedElement()->push_back(uML_CollaborationUse);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CollaborationUse));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))")));
+	
+	con->setSpecification(oe);
+	
     // CollaborationUse attributes
 	uML_CollaborationUse_roleBinding = factory->createProperty_in_Class(uML_CollaborationUse);
 	uML_CollaborationUse_type = factory->createProperty_in_Class(uML_CollaborationUse);
@@ -1754,14 +1779,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CombinedFragment);
-	con->setName("opt_loop_break_neg");
+	con->setName("break");
 	con->getConstrainedElement()->push_back(uML_CombinedFragment);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CombinedFragment));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or"\
-	"interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or"\
-	"interactionOperator = InteractionOperatorKind::neg)"\
-	"implies operand->size()=1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("interactionOperator=InteractionOperatorKind::break  implies   "\
+	"enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union("\
+	"   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_CombinedFragment);
@@ -1780,7 +1804,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_CombinedFragment);
 	
-	con->setName("break");
+	con->setName("opt_loop_break_neg");
 	
 	con->getConstrainedElement()->push_back(uML_CombinedFragment);
 	
@@ -1788,11 +1812,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("interactionOperator=InteractionOperatorKind::break  implies   "\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or"\
 	
-	"enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union("\
+	"interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or"\
 	
-	"   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()")));
+	"interactionOperator = InteractionOperatorKind::neg)"\
+	
+	"implies operand->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -1831,16 +1857,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Component);
-	con->setName("no_packaged_elements");
+	con->setName("no_nested_classifiers");
 	con->getConstrainedElement()->push_back(uML_Component);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Component));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("nestingClass <> null implies packagedElement->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("nestedClassifier->isEmpty()")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Component);
 	
-	con->setName("no_nested_classifiers");
+	con->setName("no_packaged_elements");
 	
 	con->getConstrainedElement()->push_back(uML_Component);
 	
@@ -1848,7 +1874,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("nestedClassifier->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("nestingClass <> null implies packagedElement->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -1903,6 +1929,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ConditionalNode);
 	
+	con->setName("executable_nodes");
+	
+	con->getConstrainedElement()->push_back(uML_ConditionalNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ConditionalNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ConditionalNode);
+	
 	con->setName("matching_output_pins");
 	
 	con->getConstrainedElement()->push_back(uML_ConditionalNode);
@@ -1943,20 +1983,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ConditionalNode);
 	
-	con->setName("result_no_incoming");
-	
-	con->getConstrainedElement()->push_back(uML_ConditionalNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ConditionalNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ConditionalNode);
-	
 	con->setName("one_clause_with_executable_node");
 	
 	con->getConstrainedElement()->push_back(uML_ConditionalNode);
@@ -1973,7 +1999,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ConditionalNode);
 	
-	con->setName("executable_nodes");
+	con->setName("result_no_incoming");
 	
 	con->getConstrainedElement()->push_back(uML_ConditionalNode);
 	
@@ -1981,7 +2007,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -2023,16 +2049,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ConnectionPointReference);
-	con->setName("exit_pseudostates");
+	con->setName("entry_pseudostates");
 	con->getConstrainedElement()->push_back(uML_ConnectionPointReference);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ConnectionPointReference));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exit->forAll(kind = PseudostateKind::exitPoint)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("entry->forAll(kind = PseudostateKind::entryPoint)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ConnectionPointReference);
 	
-	con->setName("entry_pseudostates");
+	con->setName("exit_pseudostates");
 	
 	con->getConstrainedElement()->push_back(uML_ConnectionPointReference);
 	
@@ -2040,7 +2066,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("entry->forAll(kind = PseudostateKind::entryPoint)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exit->forAll(kind = PseudostateKind::exitPoint)")));
 	
 	con->setSpecification(oe);
 	
@@ -2112,7 +2138,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ConnectorEnd);
 	
-	con->setName("self_part_with_port");
+	con->setName("part_with_port_empty");
 	
 	con->getConstrainedElement()->push_back(uML_ConnectorEnd);
 	
@@ -2120,7 +2146,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -2142,7 +2168,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ConnectorEnd);
 	
-	con->setName("part_with_port_empty");
+	con->setName("self_part_with_port");
 	
 	con->getConstrainedElement()->push_back(uML_ConnectorEnd);
 	
@@ -2150,7 +2176,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)")));
 	
 	con->setSpecification(oe);
 	
@@ -2201,11 +2227,9 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Constraint);
-	con->setName("not_apply_to_self");
+	con->setName("boolean_value");
 	con->getConstrainedElement()->push_back(uML_Constraint);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Constraint));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not constrainedElement->includes(self)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Constraint);
@@ -2220,11 +2244,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Constraint);
 	
-	con->setName("boolean_value");
+	con->setName("not_apply_to_self");
 	
 	con->getConstrainedElement()->push_back(uML_Constraint);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Constraint));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not constrainedElement->includes(self)")));
 	
 	con->setSpecification(oe);
 	
@@ -2240,14 +2268,34 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Continuation);
-	con->setName("global");
+	con->setName("first_or_last_interaction_fragment");
 	con->getConstrainedElement()->push_back(uML_Continuation);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Continuation));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string(" enclosingOperand->notEmpty() and "\
+	" let peerFragments : OrderedSet(InteractionFragment) =  enclosingOperand.fragment in "\
+	"   ( peerFragments->notEmpty() and "\
+	"   ((peerFragments->first() = self) or  (peerFragments->last() = self)))")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Continuation);
+	
+	con->setName("global");
+	
+	con->getConstrainedElement()->push_back(uML_Continuation);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Continuation));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("enclosingOperand->notEmpty() and"\
+	
 	"  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in "\
+	
 	"    (operandLifelines->notEmpty() and "\
+	
 	"    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol)))")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Continuation);
@@ -2310,26 +2358,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_Continuation);
-	
-	con->setName("first_or_last_interaction_fragment");
-	
-	con->getConstrainedElement()->push_back(uML_Continuation);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Continuation));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string(" enclosingOperand->notEmpty() and "\
-	
-	" let peerFragments : OrderedSet(InteractionFragment) =  enclosingOperand.fragment in "\
-	
-	"   ( peerFragments->notEmpty() and "\
-	
-	"   ((peerFragments->first() = self) or  (peerFragments->last() = self)))")));
-	
-	con->setSpecification(oe);
-	
     // Continuation attributes
 	uML_Continuation_setting = factory->createProperty_in_Class(uML_Continuation);
 
@@ -2377,11 +2405,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CreateLinkObjectAction);
-	con->setName("multiplicity");
+	con->setName("association_class");
 	con->getConstrainedElement()->push_back(uML_CreateLinkObjectAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateLinkObjectAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.association().oclIsKindOf(AssociationClass)")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_CreateLinkObjectAction);
+	
+	con->setName("multiplicity");
+	
+	con->getConstrainedElement()->push_back(uML_CreateLinkObjectAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateLinkObjectAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_CreateLinkObjectAction);
@@ -2398,20 +2440,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_CreateLinkObjectAction);
-	
-	con->setName("association_class");
-	
-	con->getConstrainedElement()->push_back(uML_CreateLinkObjectAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateLinkObjectAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.association().oclIsKindOf(AssociationClass)")));
-	
-	con->setSpecification(oe);
-	
     // CreateLinkObjectAction attributes
 	uML_CreateLinkObjectAction_result = factory->createProperty_in_Class(uML_CreateLinkObjectAction);
 
@@ -2422,39 +2450,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
-	con->setName("multiplicity");
-	con->getConstrainedElement()->push_back(uML_CreateObjectAction);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateObjectAction));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
-	
-	con->setName("same_type");
-	
-	con->getConstrainedElement()->push_back(uML_CreateObjectAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateObjectAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = classifier")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
-	
 	con->setName("classifier_not_abstract");
-	
 	con->getConstrainedElement()->push_back(uML_CreateObjectAction);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateObjectAction));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not classifier.isAbstract")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
@@ -2468,6 +2468,34 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not classifier.oclIsKindOf(AssociationClass)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
+	
+	con->setName("multiplicity");
+	
+	con->getConstrainedElement()->push_back(uML_CreateObjectAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateObjectAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
+	
+	con->setName("same_type");
+	
+	con->getConstrainedElement()->push_back(uML_CreateObjectAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_CreateObjectAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = classifier")));
 	
 	con->setSpecification(oe);
 	
@@ -2503,16 +2531,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
-	con->setName("incoming_outgoing_edges");
+	con->setName("decision_input_flow_incoming");
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_DecisionNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->includes(decisionInputFlow)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
 	
-	con->setName("incoming_object_one_input_parameter");
+	con->setName("edges");
 	
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
@@ -2520,25 +2548,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies"\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges: Set(ActivityEdge) = incoming->union(outgoing) in"\
 	
-	"	decisionInput.inputParameters()->size()=1")));
+	"let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in"\
 	
-	con->setSpecification(oe);
+	"allRelevantEdges->forAll(oclIsKindOf(ControlFlow)) or allRelevantEdges->forAll(oclIsKindOf(ObjectFlow))"\
 	
-	con = factory->createConstraint_in_Context(uML_DecisionNode);
-	
-	con->setName("two_input_parameters");
-	
-	con->getConstrainedElement()->push_back(uML_DecisionNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_DecisionNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies"\
-	
-	"	decisionInput.inputParameters()->size()=2")));
+	"")));
 	
 	con->setSpecification(oe);
 	
@@ -2560,7 +2576,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
 	
-	con->setName("zero_input_parameters");
+	con->setName("incoming_object_one_input_parameter");
 	
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
@@ -2568,15 +2584,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies"\
 	
-	"   decisionInput.inputParameters()->isEmpty()")));
+	"	decisionInput.inputParameters()->size()=1")));
 	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
 	
-	con->setName("decision_input_flow_incoming");
+	con->setName("incoming_outgoing_edges");
 	
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
@@ -2584,7 +2600,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->includes(decisionInputFlow)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0")));
 	
 	con->setSpecification(oe);
 	
@@ -2614,7 +2630,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
 	
-	con->setName("edges");
+	con->setName("two_input_parameters");
 	
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
@@ -2622,13 +2638,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges: Set(ActivityEdge) = incoming->union(outgoing) in"\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies"\
 	
-	"let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in"\
+	"	decisionInput.inputParameters()->size()=2")));
 	
-	"allRelevantEdges->forAll(oclIsKindOf(ControlFlow)) or allRelevantEdges->forAll(oclIsKindOf(ObjectFlow))"\
+	con->setSpecification(oe);
 	
-	"")));
+	con = factory->createConstraint_in_Context(uML_DecisionNode);
+	
+	con->setName("zero_input_parameters");
+	
+	con->getConstrainedElement()->push_back(uML_DecisionNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_DecisionNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
+	
+	"   decisionInput.inputParameters()->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -2806,16 +2834,18 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DurationConstraint);
-	con->setName("has_one_or_two_constrainedElements");
+	con->setName("first_event_multiplicity");
 	con->getConstrainedElement()->push_back(uML_DurationConstraint);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_DurationConstraint));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("constrainedElement->size() = 1 or constrainedElement->size()=2")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if (constrainedElement->size() = 2)"\
+	"  then (firstEvent->size() = 2) else (firstEvent->size() = 0) "\
+	"endif")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_DurationConstraint);
 	
-	con->setName("first_event_multiplicity");
+	con->setName("has_one_or_two_constrainedElements");
 	
 	con->getConstrainedElement()->push_back(uML_DurationConstraint);
 	
@@ -2823,11 +2853,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if (constrainedElement->size() = 2)"\
-	
-	"  then (firstEvent->size() = 2) else (firstEvent->size() = 0) "\
-	
-	"endif")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("constrainedElement->size() = 1 or constrainedElement->size()=2")));
 	
 	con->setSpecification(oe);
 	
@@ -3006,16 +3032,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ElementImport);
-	con->setName("visibility_public_or_private");
+	con->setName("imported_element_is_public");
 	con->getConstrainedElement()->push_back(uML_ElementImport);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ElementImport));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("visibility = VisibilityKind::public or visibility = VisibilityKind::private")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ElementImport);
 	
-	con->setName("imported_element_is_public");
+	con->setName("visibility_public_or_private");
 	
 	con->getConstrainedElement()->push_back(uML_ElementImport);
 	
@@ -3023,7 +3049,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("visibility = VisibilityKind::public or visibility = VisibilityKind::private")));
 	
 	con->setSpecification(oe);
 	
@@ -3105,6 +3131,36 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
 	
+	con->setName("exception_input_type");
+	
+	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ExceptionHandler));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exceptionInput.type=null or "\
+	
+	"exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
+	
+	con->setName("handler_body_edges");
+	
+	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ExceptionHandler));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
+	
 	con->setName("handler_body_owner");
 	
 	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
@@ -3119,7 +3175,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
 	
-	con->setName("exception_input_type");
+	con->setName("one_input");
 	
 	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
 	
@@ -3127,9 +3183,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exceptionInput.type=null or "\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("handlerBody.oclIsKindOf(Action) and"\
 	
-	"exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))")));
+	"let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in"\
+	
+	"inputs->size()=1 and inputs->first()=exceptionInput")));
 	
 	con->setSpecification(oe);
 	
@@ -3164,38 +3222,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	"    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))"\
 	
 	")")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
-	
-	con->setName("handler_body_edges");
-	
-	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ExceptionHandler));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
-	
-	con->setName("one_input");
-	
-	con->getConstrainedElement()->push_back(uML_ExceptionHandler);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ExceptionHandler));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("handlerBody.oclIsKindOf(Action) and"\
-	
-	"let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in"\
-	
-	"inputs->size()=1 and inputs->first()=exceptionInput")));
 	
 	con->setSpecification(oe);
 	
@@ -3448,6 +3474,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_FinalState);
 	
+	con->setName("no_entry_behavior");
+	
+	con->getConstrainedElement()->push_back(uML_FinalState);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_FinalState));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("entry->isEmpty()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_FinalState);
+	
 	con->setName("no_exit_behavior");
 	
 	con->getConstrainedElement()->push_back(uML_FinalState);
@@ -3462,7 +3502,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_FinalState);
 	
-	con->setName("no_state_behavior");
+	con->setName("no_outgoing_transitions");
 	
 	con->getConstrainedElement()->push_back(uML_FinalState);
 	
@@ -3470,21 +3510,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("doActivity->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_FinalState);
-	
-	con->setName("no_entry_behavior");
-	
-	con->getConstrainedElement()->push_back(uML_FinalState);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_FinalState));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("entry->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size() = 0")));
 	
 	con->setSpecification(oe);
 	
@@ -3504,7 +3530,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_FinalState);
 	
-	con->setName("no_outgoing_transitions");
+	con->setName("no_state_behavior");
 	
 	con->getConstrainedElement()->push_back(uML_FinalState);
 	
@@ -3512,7 +3538,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size() = 0")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("doActivity->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -3528,16 +3554,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ForkNode);
-	con->setName("one_incoming_edge");
+	con->setName("edges");
 	con->getConstrainedElement()->push_back(uML_ForkNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ForkNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->size()=1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in"\
+	"allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ForkNode);
 	
-	con->setName("edges");
+	con->setName("one_incoming_edge");
 	
 	con->getConstrainedElement()->push_back(uML_ForkNode);
 	
@@ -3545,9 +3572,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in"\
-	
-	"allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("incoming->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -3602,6 +3627,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Gate);
 	
+	con->setName("actual_gate_matched");
+	
+	con->getConstrainedElement()->push_back(uML_Gate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Gate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("interactionUse->notEmpty() implies interactionUse.refersTo.formalGate->select(matches(self))->size()=1")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Gate);
+	
 	con->setName("formal_gate_distinguishable");
 	
 	con->getConstrainedElement()->push_back(uML_Gate);
@@ -3611,6 +3650,24 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isFormal() implies interaction.formalGate->select(getName() = self.getName())->size()=1")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Gate);
+	
+	con->setName("inside_cf_gate_distinguishable");
+	
+	con->getConstrainedElement()->push_back(uML_Gate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Gate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isInsideCF() implies"\
+	
+	"let selfOperand : InteractionOperand = self.getOperand() in"\
+	
+	"  combinedFragment.cfragmentGate->select(isInsideCF() and getName() = self.getName())->select(getOperand() = selfOperand)->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -3630,7 +3687,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Gate);
 	
-	con->setName("inside_cf_gate_distinguishable");
+	con->setName("outside_cf_gate_distinguishable");
 	
 	con->getConstrainedElement()->push_back(uML_Gate);
 	
@@ -3638,11 +3695,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isInsideCF() implies"\
-	
-	"let selfOperand : InteractionOperand = self.getOperand() in"\
-	
-	"  combinedFragment.cfragmentGate->select(isInsideCF() and getName() = self.getName())->select(getOperand() = selfOperand)->size()=1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isOutsideCF() implies combinedFragment.cfragmentGate->select(getName() = self.getName())->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -3669,34 +3722,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	" else  self.combinedFragment.cfragmentGate->select(isInsideCF() and matches(self))->size()=1"\
 	
 	" endif")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Gate);
-	
-	con->setName("actual_gate_matched");
-	
-	con->getConstrainedElement()->push_back(uML_Gate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Gate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("interactionUse->notEmpty() implies interactionUse.refersTo.formalGate->select(matches(self))->size()=1")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Gate);
-	
-	con->setName("outside_cf_gate_distinguishable");
-	
-	con->getConstrainedElement()->push_back(uML_Gate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Gate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isOutsideCF() implies combinedFragment.cfragmentGate->select(getName() = self.getName())->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -3828,6 +3853,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_InformationFlow);
 	
+	con->setName("must_conform");
+	
+	con->getConstrainedElement()->push_back(uML_InformationFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InformationFlow));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InformationFlow);
+	
 	con->setName("sources_and_targets_kind");
 	
 	con->getConstrainedElement()->push_back(uML_InformationFlow);
@@ -3864,16 +3899,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_InformationFlow);
-	
-	con->setName("must_conform");
-	
-	con->getConstrainedElement()->push_back(uML_InformationFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InformationFlow));
-	
-	con->setSpecification(oe);
-	
     // InformationFlow attributes
 	uML_InformationFlow_conveyed = factory->createProperty_in_Class(uML_InformationFlow);
 	uML_InformationFlow_informationSource = factory->createProperty_in_Class(uML_InformationFlow);
@@ -3890,29 +3915,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InformationItem);
-	con->setName("sources_and_targets");
-	con->getConstrainedElement()->push_back(uML_InformationItem);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InformationItem));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |"\
-	"  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and"\
-	"    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and"\
-	"      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or"\
-	"        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InformationItem);
-	
 	con->setName("has_no");
-	
 	con->getConstrainedElement()->push_back(uML_InformationItem);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InformationItem));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.generalization->isEmpty() and self.feature->isEmpty()")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_InformationItem);
@@ -3926,6 +3933,28 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isAbstract")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InformationItem);
+	
+	con->setName("sources_and_targets");
+	
+	con->getConstrainedElement()->push_back(uML_InformationItem);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InformationItem));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |"\
+	
+	"  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and"\
+	
+	"    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and"\
+	
+	"      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or"\
+	
+	"        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))")));
 	
 	con->setSpecification(oe);
 	
@@ -3984,25 +4013,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InstanceSpecification);
-	con->setName("deployment_target");
-	con->getConstrainedElement()->push_back(uML_InstanceSpecification);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InstanceSpecification));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node)))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InstanceSpecification);
-	
 	con->setName("defining_feature");
-	
 	con->getConstrainedElement()->push_back(uML_InstanceSpecification);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InstanceSpecification));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature)))")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_InstanceSpecification);
@@ -4016,6 +4031,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InstanceSpecification);
+	
+	con->setName("deployment_target");
+	
+	con->getConstrainedElement()->push_back(uML_InstanceSpecification);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InstanceSpecification));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node)))")));
 	
 	con->setSpecification(oe);
 	
@@ -4078,12 +4107,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
-	con->setName("maxint_positive");
+	con->setName("dynamic_variables");
 	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionConstraint));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("maxint->notEmpty() implies "\
-	"maxint->asSequence()->first().integerValue() > 0")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
+	
+	con->setName("global_data");
+	
+	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionConstraint));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
@@ -4106,6 +4142,22 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
 	
+	con->setName("maxint_positive");
+	
+	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionConstraint));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("maxint->notEmpty() implies "\
+	
+	"maxint->asSequence()->first().integerValue() > 0")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
+	
 	con->setName("minint_maxint");
 	
 	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
@@ -4119,26 +4171,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	"interactionOperand.combinedFragment.interactionOperator ="\
 	
 	"InteractionOperatorKind::loop")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
-	
-	con->setName("dynamic_variables");
-	
-	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionConstraint));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
-	
-	con->setName("global_data");
-	
-	con->getConstrainedElement()->push_back(uML_InteractionConstraint);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionConstraint));
 	
 	con->setSpecification(oe);
 	
@@ -4206,20 +4238,40 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InteractionUse);
-	con->setName("returnValueRecipient_coverage");
+	con->setName("all_lifelines");
 	con->getConstrainedElement()->push_back(uML_InteractionUse);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionUse));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("returnValueRecipient->asSet()->notEmpty() implies"\
-	"let covCE : Set(ConnectableElement) = covered.represents->asSet() in "\
-	"covCE->notEmpty() and let classes:Set(Classifier) = covCE.type.oclIsKindOf(Classifier).oclAsType(Classifier)->asSet() in "\
-	"let allProps : Set(Property) = classes.attribute->union(classes.allParents().attribute)->asSet() in "\
-	"allProps->includes(returnValueRecipient)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parentInteraction : Set(Interaction) = enclosingInteraction->asSet()->"\
+	"union(enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->"\
+	"collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in"\
+	"parentInteraction->size()=1 and let refInteraction : Interaction = refersTo in"\
+	"parentInteraction.covered-> forAll(intLifeline : Lifeline | refInteraction.covered->"\
+	"forAll( refLifeline : Lifeline | refLifeline.represents = intLifeline.represents and "\
+	"("\
+	"( refLifeline.selector.oclIsKindOf(LiteralString) implies"\
+	"  intLifeline.selector.oclIsKindOf(LiteralString) and "\
+	"  refLifeline.selector.oclAsType(LiteralString).value = intLifeline.selector.oclAsType(LiteralString).value ) and"\
+	"( refLifeline.selector.oclIsKindOf(LiteralInteger) implies"\
+	"  intLifeline.selector.oclIsKindOf(LiteralInteger) and "\
+	"  refLifeline.selector.oclAsType(LiteralInteger).value = intLifeline.selector.oclAsType(LiteralInteger).value )"\
+	")"\
+	" implies self.covered->asSet()->includes(intLifeline)))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_InteractionUse);
 	
 	con->setName("arguments_are_constants");
+	
+	con->getConstrainedElement()->push_back(uML_InteractionUse);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionUse));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InteractionUse);
+	
+	con->setName("arguments_correspond_to_parameters");
 	
 	con->getConstrainedElement()->push_back(uML_InteractionUse);
 	
@@ -4247,6 +4299,28 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_InteractionUse);
 	
+	con->setName("returnValueRecipient_coverage");
+	
+	con->getConstrainedElement()->push_back(uML_InteractionUse);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionUse));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("returnValueRecipient->asSet()->notEmpty() implies"\
+	
+	"let covCE : Set(ConnectableElement) = covered.represents->asSet() in "\
+	
+	"covCE->notEmpty() and let classes:Set(Classifier) = covCE.type.oclIsKindOf(Classifier).oclAsType(Classifier)->asSet() in "\
+	
+	"let allProps : Set(Property) = classes.attribute->union(classes.allParents().attribute)->asSet() in "\
+	
+	"allProps->includes(returnValueRecipient)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_InteractionUse);
+	
 	con->setName("returnValue_type_recipient_correspondence");
 	
 	con->getConstrainedElement()->push_back(uML_InteractionUse);
@@ -4256,58 +4330,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InteractionUse);
-	
-	con->setName("arguments_correspond_to_parameters");
-	
-	con->getConstrainedElement()->push_back(uML_InteractionUse);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionUse));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_InteractionUse);
-	
-	con->setName("all_lifelines");
-	
-	con->getConstrainedElement()->push_back(uML_InteractionUse);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_InteractionUse));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parentInteraction : Set(Interaction) = enclosingInteraction->asSet()->"\
-	
-	"union(enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->"\
-	
-	"collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in"\
-	
-	"parentInteraction->size()=1 and let refInteraction : Interaction = refersTo in"\
-	
-	"parentInteraction.covered-> forAll(intLifeline : Lifeline | refInteraction.covered->"\
-	
-	"forAll( refLifeline : Lifeline | refLifeline.represents = intLifeline.represents and "\
-	
-	"("\
-	
-	"( refLifeline.selector.oclIsKindOf(LiteralString) implies"\
-	
-	"  intLifeline.selector.oclIsKindOf(LiteralString) and "\
-	
-	"  refLifeline.selector.oclAsType(LiteralString).value = intLifeline.selector.oclAsType(LiteralString).value ) and"\
-	
-	"( refLifeline.selector.oclIsKindOf(LiteralInteger) implies"\
-	
-	"  intLifeline.selector.oclIsKindOf(LiteralInteger) and "\
-	
-	"  refLifeline.selector.oclAsType(LiteralInteger).value = intLifeline.selector.oclAsType(LiteralInteger).value )"\
-	
-	")"\
-	
-	" implies self.covered->asSet()->includes(intLifeline)))")));
 	
 	con->setSpecification(oe);
 	
@@ -4408,16 +4430,18 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_JoinNode);
-	con->setName("one_outgoing_edge");
+	con->setName("incoming_object_flow");
 	con->getConstrainedElement()->push_back(uML_JoinNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_JoinNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size() = 1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))"\
+	"else outgoing->forAll(oclIsKindOf(ControlFlow))"\
+	"endif")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_JoinNode);
 	
-	con->setName("incoming_object_flow");
+	con->setName("one_outgoing_edge");
 	
 	con->getConstrainedElement()->push_back(uML_JoinNode);
 	
@@ -4425,11 +4449,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))"\
-	
-	"else outgoing->forAll(oclIsKindOf(ControlFlow))"\
-	
-	"endif")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size() = 1")));
 	
 	con->setSpecification(oe);
 	
@@ -4490,6 +4510,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Lifeline);
 	
+	con->setName("same_classifier");
+	
+	con->getConstrainedElement()->push_back(uML_Lifeline);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Lifeline));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("represents.namespace->closure(namespace)->includes(interaction._'context')")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Lifeline);
+	
 	con->setName("selector_int_or_string");
 	
 	con->getConstrainedElement()->push_back(uML_Lifeline);
@@ -4520,20 +4554,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_Lifeline);
-	
-	con->setName("same_classifier");
-	
-	con->getConstrainedElement()->push_back(uML_Lifeline);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Lifeline));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("represents.namespace->closure(namespace)->includes(interaction._'context')")));
-	
-	con->setSpecification(oe);
-	
     // Lifeline attributes
 	uML_Lifeline_coveredBy = factory->createProperty_in_Class(uML_Lifeline);
 	uML_Lifeline_decomposedAs = factory->createProperty_in_Class(uML_Lifeline);
@@ -4548,16 +4568,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkAction);
-	con->setName("same_association");
+	con->setName("not_static");
 	con->getConstrainedElement()->push_back(uML_LinkAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LinkAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("endData.end = self.association().memberEnd->asBag()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("endData->forAll(not end.isStatic)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_LinkAction);
 	
-	con->setName("not_static");
+	con->setName("same_association");
 	
 	con->getConstrainedElement()->push_back(uML_LinkAction);
 	
@@ -4565,7 +4585,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("endData->forAll(not end.isStatic)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("endData.end = self.association().memberEnd->asBag()")));
 	
 	con->setSpecification(oe);
 	
@@ -4620,11 +4640,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkEndData);
-	con->setName("same_type");
+	con->setName("end_object_input_pin");
 	con->getConstrainedElement()->push_back(uML_LinkEndData);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LinkEndData));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null implies value.type.conformsTo(end.type)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value->excludesAll(qualifier.value)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_LinkEndData);
@@ -4657,20 +4677,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_LinkEndData);
 	
-	con->setName("end_object_input_pin");
-	
-	con->getConstrainedElement()->push_back(uML_LinkEndData);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LinkEndData));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value->excludesAll(qualifier.value)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LinkEndData);
-	
 	con->setName("qualifiers");
 	
 	con->getConstrainedElement()->push_back(uML_LinkEndData);
@@ -4680,6 +4686,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("end.qualifier->includesAll(qualifier.qualifier)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_LinkEndData);
+	
+	con->setName("same_type");
+	
+	con->getConstrainedElement()->push_back(uML_LinkEndData);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LinkEndData));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null implies value.type.conformsTo(end.type)")));
 	
 	con->setSpecification(oe);
 	
@@ -4836,11 +4856,53 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LoopNode);
-	con->setName("result_no_incoming");
+	con->setName("body_output_pins");
 	con->getConstrainedElement()->push_back(uML_LoopNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_LoopNode);
+	
+	con->setName("executable_nodes");
+	
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_LoopNode);
+	
+	con->setName("input_edges");
+	
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("loopVariableInput.outgoing->isEmpty()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_LoopNode);
+	
+	con->setName("loop_variable_outgoing");
+	
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allOwnedNodes()->includesAll(loopVariable.outgoing.target)")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_LoopNode);
@@ -4862,80 +4924,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	"loopVariableInput.lower=loopVariable.lower and"\
 	
 	"loopVariableInput.upper=loopVariable.upper")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LoopNode);
-	
-	con->setName("loop_variable_outgoing");
-	
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allOwnedNodes()->includesAll(loopVariable.outgoing.target)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LoopNode);
-	
-	con->setName("input_edges");
-	
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("loopVariableInput.outgoing->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LoopNode);
-	
-	con->setName("body_output_pins");
-	
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LoopNode);
-	
-	con->setName("setup_test_and_body");
-	
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("setupPart->intersection(test)->isEmpty() and"\
-	
-	"setupPart->intersection(bodyPart)->isEmpty() and"\
-	
-	"test->intersection(bodyPart)->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_LoopNode);
-	
-	con->setName("executable_nodes");
-	
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()")));
 	
 	con->setSpecification(oe);
 	
@@ -4985,6 +4973,38 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_LoopNode);
+	
+	con->setName("result_no_incoming");
+	
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_LoopNode);
+	
+	con->setName("setup_test_and_body");
+	
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_LoopNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("setupPart->intersection(test)->isEmpty() and"\
+	
+	"setupPart->intersection(bodyPart)->isEmpty() and"\
+	
+	"test->intersection(bodyPart)->isEmpty()")));
+	
+	con->setSpecification(oe);
+	
     // LoopNode attributes
 	uML_LoopNode_bodyOutput = factory->createProperty_in_Class(uML_LoopNode);
 	uML_LoopNode_bodyPart = factory->createProperty_in_Class(uML_LoopNode);
@@ -5018,16 +5038,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_MergeNode);
-	con->setName("one_outgoing_edge");
+	con->setName("edges");
 	con->getConstrainedElement()->push_back(uML_MergeNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_MergeNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size()=1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in"\
+	"allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_MergeNode);
 	
-	con->setName("edges");
+	con->setName("one_outgoing_edge");
 	
 	con->getConstrainedElement()->push_back(uML_MergeNode);
 	
@@ -5035,9 +5056,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in"\
-	
-	"allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("outgoing->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -5048,54 +5067,9 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Message);
-	con->setName("signature_is_signal");
-	con->getConstrainedElement()->push_back(uML_Message);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(messageSort = MessageSort::asynchSignal ) and signature.oclIsKindOf(Signal) implies"\
-	"   let signalAttributes : OrderedSet(Property) = signature.oclAsType(Signal).inheritedMember()->"\
-	"             select(n:NamedElement | n.oclIsTypeOf(Property))->collect(oclAsType(Property))->asOrderedSet()"\
-	"   in signalAttributes->size() = self.argument->size()"\
-	"   and self.argument->forAll( o: ValueSpecification |"\
-	"          not (o.oclIsKindOf(Expression)"\
-	"          and o.oclAsType(Expression).symbol->size()=0"\
-	"          and o.oclAsType(Expression).operand->isEmpty() ) implies"\
-	"              let p : Property = signalAttributes->at(self.argument->indexOf(o))"\
-	"              in o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier)))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Message);
-	
-	con->setName("sending_receiving_message_event");
-	
-	con->getConstrainedElement()->push_back(uML_Message);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("receiveEvent.oclIsKindOf(MessageOccurrenceSpecification)"\
-	
-	"implies"\
-	
-	"let f :  Lifeline = sendEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered in"\
-	
-	"f = receiveEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered  implies"\
-	
-	"f.events->indexOf(sendEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) < "\
-	
-	"f.events->indexOf(receiveEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() )")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Message);
-	
 	con->setName("arguments");
-	
 	con->getConstrainedElement()->push_back(uML_Message);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Message);
@@ -5136,6 +5110,30 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Message);
 	
+	con->setName("sending_receiving_message_event");
+	
+	con->getConstrainedElement()->push_back(uML_Message);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("receiveEvent.oclIsKindOf(MessageOccurrenceSpecification)"\
+	
+	"implies"\
+	
+	"let f :  Lifeline = sendEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered in"\
+	
+	"f = receiveEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered  implies"\
+	
+	"f.events->indexOf(sendEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) < "\
+	
+	"f.events->indexOf(receiveEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() )")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Message);
+	
 	con->setName("signature_is_operation_reply");
 	
 	con->getConstrainedElement()->push_back(uML_Message);
@@ -5166,28 +5164,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Message);
 	
-	con->setName("signature_refer_to");
-	
-	con->getConstrainedElement()->push_back(uML_Message);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("signature->notEmpty() implies "\
-	
-	"((signature.oclIsKindOf(Operation) and "\
-	
-	"(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall or messageSort = MessageSort::reply) "\
-	
-	") or (signature.oclIsKindOf(Signal)  and messageSort = MessageSort::asynchSignal )"\
-	
-	" ) and name = signature.name")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Message);
-	
 	con->setName("signature_is_operation_request");
 	
 	con->getConstrainedElement()->push_back(uML_Message);
@@ -5213,6 +5189,60 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	"o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier))"\
 	
 	")")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Message);
+	
+	con->setName("signature_is_signal");
+	
+	con->getConstrainedElement()->push_back(uML_Message);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(messageSort = MessageSort::asynchSignal ) and signature.oclIsKindOf(Signal) implies"\
+	
+	"   let signalAttributes : OrderedSet(Property) = signature.oclAsType(Signal).inheritedMember()->"\
+	
+	"             select(n:NamedElement | n.oclIsTypeOf(Property))->collect(oclAsType(Property))->asOrderedSet()"\
+	
+	"   in signalAttributes->size() = self.argument->size()"\
+	
+	"   and self.argument->forAll( o: ValueSpecification |"\
+	
+	"          not (o.oclIsKindOf(Expression)"\
+	
+	"          and o.oclAsType(Expression).symbol->size()=0"\
+	
+	"          and o.oclAsType(Expression).operand->isEmpty() ) implies"\
+	
+	"              let p : Property = signalAttributes->at(self.argument->indexOf(o))"\
+	
+	"              in o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier)))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Message);
+	
+	con->setName("signature_refer_to");
+	
+	con->getConstrainedElement()->push_back(uML_Message);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Message));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("signature->notEmpty() implies "\
+	
+	"((signature.oclIsKindOf(Operation) and "\
+	
+	"(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall or messageSort = MessageSort::reply) "\
+	
+	") or (signature.oclIsKindOf(Signal)  and messageSort = MessageSort::asynchSignal )"\
+	
+	" ) and name = signature.name")));
 	
 	con->setSpecification(oe);
 	
@@ -5283,20 +5313,24 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
-	con->setName("lower_is_integer");
+	con->setName("lower_ge_0");
 	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_MultiplicityElement));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("lowerValue <> null implies lowerValue.integerValue() <> null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("lowerBound() >= 0")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
 	
-	con->setName("value_specification_no_side_effects");
+	con->setName("lower_is_integer");
 	
 	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_MultiplicityElement));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("lowerValue <> null implies lowerValue.integerValue() <> null")));
 	
 	con->setSpecification(oe);
 	
@@ -5311,20 +5345,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("upperBound() >= lowerBound()")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
-	
-	con->setName("lower_ge_0");
-	
-	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_MultiplicityElement));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("lowerBound() >= 0")));
 	
 	con->setSpecification(oe);
 	
@@ -5345,6 +5365,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
 	
 	con->setName("value_specification_constant");
+	
+	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_MultiplicityElement));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
+	
+	con->setName("value_specification_no_side_effects");
 	
 	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
 	
@@ -5407,20 +5437,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_NamedElement);
 	
-	con->setName("visibility_needs_ownership");
-	
-	con->getConstrainedElement()->push_back(uML_NamedElement);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_NamedElement));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(namespace = null and owner <> null) implies visibility = null")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_NamedElement);
-	
 	con->setName("has_qualified_name");
 	
 	con->getConstrainedElement()->push_back(uML_NamedElement);
@@ -5430,6 +5446,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_NamedElement);
+	
+	con->setName("visibility_needs_ownership");
+	
+	con->getConstrainedElement()->push_back(uML_NamedElement);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_NamedElement));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(namespace = null and owner <> null) implies visibility = null")));
 	
 	con->setSpecification(oe);
 	
@@ -5482,25 +5512,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Namespace);
-	con->setName("members_distinguishable");
-	con->getConstrainedElement()->push_back(uML_Namespace);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Namespace));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("membersAreDistinguishable()")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Namespace);
-	
 	con->setName("cannot_import_ownedMembers");
-	
 	con->getConstrainedElement()->push_back(uML_Namespace);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Namespace));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Namespace);
@@ -5514,6 +5530,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("packageImport.importedPackage.oclAsType(Namespace)->excludes(self)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Namespace);
+	
+	con->setName("members_distinguishable");
+	
+	con->getConstrainedElement()->push_back(uML_Namespace);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Namespace));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("membersAreDistinguishable()")));
 	
 	con->setSpecification(oe);
 	
@@ -5587,11 +5617,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ObjectFlow);
-	con->setName("is_multicast_or_is_multireceive");
+	con->setName("compatible_types");
 	con->getConstrainedElement()->push_back(uML_ObjectFlow);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ObjectFlow);
+	
+	con->setName("input_and_output_parameter");
+	
+	con->getConstrainedElement()->push_back(uML_ObjectFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
+	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies"\
+	
+	"	selection.inputParameters()->size()=1 and"\
+	
+	"	selection.inputParameters()->forAll(not isUnique and is(0,*)) and"\
+	
+	"	selection.outputParameters()->size()=1")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ObjectFlow);
+	
+	con->setName("is_multicast_or_is_multireceive");
+	
+	con->getConstrainedElement()->push_back(uML_ObjectFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not (isMulticast and isMultireceive)")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ObjectFlow);
@@ -5605,6 +5667,30 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ObjectFlow);
+	
+	con->setName("same_upper_bounds");
+	
+	con->getConstrainedElement()->push_back(uML_ObjectFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ObjectFlow);
+	
+	con->setName("selection_behavior");
+	
+	con->getConstrainedElement()->push_back(uML_ObjectFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies source.oclIsKindOf(ObjectNode)")));
 	
 	con->setSpecification(oe);
 	
@@ -5636,60 +5722,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_ObjectFlow);
-	
-	con->setName("selection_behavior");
-	
-	con->getConstrainedElement()->push_back(uML_ObjectFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies source.oclIsKindOf(ObjectNode)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ObjectFlow);
-	
-	con->setName("input_and_output_parameter");
-	
-	con->getConstrainedElement()->push_back(uML_ObjectFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies"\
-	
-	"	selection.inputParameters()->size()=1 and"\
-	
-	"	selection.inputParameters()->forAll(not isUnique and is(0,*)) and"\
-	
-	"	selection.outputParameters()->size()=1")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ObjectFlow);
-	
-	con->setName("same_upper_bounds");
-	
-	con->getConstrainedElement()->push_back(uML_ObjectFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ObjectFlow);
-	
-	con->setName("compatible_types");
-	
-	con->getConstrainedElement()->push_back(uML_ObjectFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectFlow));
-	
-	con->setSpecification(oe);
-	
     // ObjectFlow attributes
 	uML_ObjectFlow_isMulticast = factory->createProperty_in_Class(uML_ObjectFlow);
 	uML_ObjectFlow_isMultireceive = factory->createProperty_in_Class(uML_ObjectFlow);
@@ -5703,11 +5735,29 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ObjectNode);
-	con->setName("object_flow_edges");
+	con->setName("input_output_parameter");
 	con->getConstrainedElement()->push_back(uML_ObjectNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies"\
+	"	selection.inputParameters()->size()=1 and"\
+	"	selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and"\
+	"	selection.outputParameters()->size()=1 and"\
+	"		selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ObjectNode);
+	
+	con->setName("object_flow_edges");
+	
+	con->getConstrainedElement()->push_back(uML_ObjectNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectNode));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ObjectNode);
@@ -5721,28 +5771,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ObjectNode);
-	
-	con->setName("input_output_parameter");
-	
-	con->getConstrainedElement()->push_back(uML_ObjectNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ObjectNode));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("selection<>null implies"\
-	
-	"	selection.inputParameters()->size()=1 and"\
-	
-	"	selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and"\
-	
-	"	selection.outputParameters()->size()=1 and"\
-	
-	"		selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))")));
 	
 	con->setSpecification(oe);
 	
@@ -5811,25 +5839,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_OpaqueExpression);
-	con->setName("only_return_result_parameters");
-	con->getConstrainedElement()->push_back(uML_OpaqueExpression);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_OpaqueExpression));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_OpaqueExpression);
-	
 	con->setName("language_body_size");
-	
 	con->getConstrainedElement()->push_back(uML_OpaqueExpression);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_OpaqueExpression));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("language->notEmpty() implies (_'body'->size() = language->size())")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_OpaqueExpression);
@@ -5845,6 +5859,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("behavior <> null implies"\
 	
 	"   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_OpaqueExpression);
+	
+	con->setName("only_return_result_parameters");
+	
+	con->getConstrainedElement()->push_back(uML_OpaqueExpression);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_OpaqueExpression));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -5880,16 +5908,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Operation);
-	con->setName("only_body_for_query");
+	con->setName("at_most_one_return");
 	con->getConstrainedElement()->push_back(uML_Operation);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Operation));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("bodyCondition <> null implies isQuery")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Operation);
 	
-	con->setName("at_most_one_return");
+	con->setName("only_body_for_query");
 	
 	con->getConstrainedElement()->push_back(uML_Operation);
 	
@@ -5897,7 +5925,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("bodyCondition <> null implies isQuery")));
 	
 	con->setSpecification(oe);
 	
@@ -6173,6 +6201,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Parameter);
 	
+	con->setName("not_exception");
+	
+	con->getConstrainedElement()->push_back(uML_Parameter);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Parameter));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Parameter);
+	
 	con->setName("object_effect");
 	
 	con->getConstrainedElement()->push_back(uML_Parameter);
@@ -6210,20 +6252,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not (isException and isStream)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Parameter);
-	
-	con->setName("not_exception");
-	
-	con->getConstrainedElement()->push_back(uML_Parameter);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Parameter));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)")));
 	
 	con->setSpecification(oe);
 	
@@ -6273,11 +6301,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ParameterSet);
-	con->setName("two_parameter_sets");
+	con->setName("input");
 	con->getConstrainedElement()->push_back(uML_ParameterSet);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ParameterSet));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("((parameter->exists(direction = ParameterDirectionKind::_'in')) implies "\
+	"    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::_'in' and p.parameterSet->isEmpty())->forAll(isStream))"\
+	"    and"\
+	"((parameter->exists(direction = ParameterDirectionKind::out)) implies "\
+	"    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ParameterSet);
@@ -6296,7 +6328,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ParameterSet);
 	
-	con->setName("input");
+	con->setName("two_parameter_sets");
 	
 	con->getConstrainedElement()->push_back(uML_ParameterSet);
 	
@@ -6304,15 +6336,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("((parameter->exists(direction = ParameterDirectionKind::_'in')) implies "\
-	
-	"    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::_'in' and p.parameterSet->isEmpty())->forAll(isStream))"\
-	
-	"    and"\
-	
-	"((parameter->exists(direction = ParameterDirectionKind::out)) implies "\
-	
-	"    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))")));
 	
 	con->setSpecification(oe);
 	
@@ -6406,11 +6430,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Port);
-	con->setName("port_aggregation");
+	con->setName("default_value");
 	con->getConstrainedElement()->push_back(uML_Port);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Port));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("aggregation = AggregationKind::composite")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("type.oclIsKindOf(Interface) implies defaultValue->isEmpty()")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Port);
@@ -6429,7 +6453,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Port);
 	
-	con->setName("default_value");
+	con->setName("port_aggregation");
 	
 	con->getConstrainedElement()->push_back(uML_Port);
 	
@@ -6437,7 +6461,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("type.oclIsKindOf(Interface) implies defaultValue->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("aggregation = AggregationKind::composite")));
 	
 	con->setSpecification(oe);
 	
@@ -6475,17 +6499,22 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Profile);
-	con->setName("references_same_metamodel");
+	con->setName("metaclass_reference_not_specialized");
 	con->getConstrainedElement()->push_back(uML_Profile);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Profile));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->"\
-	"  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("metaclassReference.importedElement->"\
+	"	select(c | c.oclIsKindOf(Classifier) and"\
+	"		(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()"\
+	"and "\
+	"packagedElement->"\
+	"    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->"\
+	"       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Profile);
 	
-	con->setName("metaclass_reference_not_specialized");
+	con->setName("references_same_metamodel");
 	
 	con->getConstrainedElement()->push_back(uML_Profile);
 	
@@ -6493,19 +6522,9 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("metaclassReference.importedElement->"\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->"\
 	
-	"	select(c | c.oclIsKindOf(Classifier) and"\
-	
-	"		(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()"\
-	
-	"and "\
-	
-	"packagedElement->"\
-	
-	"    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->"\
-	
-	"       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()")));
+	"  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -6562,61 +6581,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Property);
-	con->setName("subsetting_context_conforms");
+	con->setName("binding_to_attribute");
 	con->getConstrainedElement()->push_back(uML_Property);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->notEmpty() implies  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |    subsettedProperty->forAll(sp |      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Property);
-	
-	con->setName("derived_union_is_derived");
-	
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDerivedUnion implies isDerived")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Property);
-	
-	con->setName("redefined_property_inherited");
-	
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(redefinedProperty->notEmpty()) implies"\
-	
-	"  (redefinitionContext->notEmpty() and"\
-	
-	"      redefinedProperty->forAll(rp|"\
-	
-	"        ((redefinitionContext->collect(fc|"\
-	
-	"          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Property);
-	
-	con->setName("qualified_is_association_end");
-	
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier->notEmpty() implies association->notEmpty()")));
-	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.isAttribute()"\
+	"and (templateParameterSubstitution->notEmpty())"\
+	"implies (templateParameterSubstitution->forAll(ts |"\
+	"    ts.formal.oclIsKindOf(Property)"\
+	"    and ts.formal.oclAsType(Property).isAttribute())))")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Property);
@@ -6635,7 +6608,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Property);
 	
-	con->setName("binding_to_attribute");
+	con->setName("derived_union_is_derived");
 	
 	con->getConstrainedElement()->push_back(uML_Property);
 	
@@ -6643,43 +6616,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.isAttribute()"\
-	
-	"and (templateParameterSubstitution->notEmpty())"\
-	
-	"implies (templateParameterSubstitution->forAll(ts |"\
-	
-	"    ts.formal.oclIsKindOf(Property)"\
-	
-	"    and ts.formal.oclAsType(Property).isAttribute())))")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Property);
-	
-	con->setName("type_of_opposite_end");
-	
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Property);
-	
-	con->setName("subsetting_rules");
-	
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->forAll(sp |  self.type.conformsTo(sp.type) and    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies      self.upperBound() <= sp.upperBound() ))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDerivedUnion implies isDerived")));
 	
 	con->setSpecification(oe);
 	
@@ -6713,6 +6650,42 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Property);
 	
+	con->setName("qualified_is_association_end");
+	
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier->notEmpty() implies association->notEmpty()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Property);
+	
+	con->setName("redefined_property_inherited");
+	
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(redefinedProperty->notEmpty()) implies"\
+	
+	"  (redefinitionContext->notEmpty() and"\
+	
+	"      redefinedProperty->forAll(rp|"\
+	
+	"        ((redefinitionContext->collect(fc|"\
+	
+	"          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Property);
+	
 	con->setName("subsetted_property_names");
 	
 	con->getConstrainedElement()->push_back(uML_Property);
@@ -6722,6 +6695,48 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->forAll(sp | sp.name <> name)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Property);
+	
+	con->setName("subsetting_context_conforms");
+	
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->notEmpty() implies  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |    subsettedProperty->forAll(sp |      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Property);
+	
+	con->setName("subsetting_rules");
+	
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->forAll(sp |  self.type.conformsTo(sp.type) and    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies      self.upperBound() <= sp.upperBound() ))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Property);
+	
+	con->setName("type_of_opposite_end");
+	
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Property));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type")));
 	
 	con->setSpecification(oe);
 	
@@ -6822,16 +6837,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ProtocolStateMachine);
-	con->setName("deep_or_shallow_history");
+	con->setName("classifier_context");
 	con->getConstrainedElement()->push_back(uML_ProtocolStateMachine);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ProtocolStateMachine));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'context' <> null and specification = null")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ProtocolStateMachine);
 	
-	con->setName("protocol_transitions");
+	con->setName("deep_or_shallow_history");
 	
 	con->getConstrainedElement()->push_back(uML_ProtocolStateMachine);
 	
@@ -6839,7 +6854,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))")));
 	
 	con->setSpecification(oe);
 	
@@ -6859,7 +6874,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ProtocolStateMachine);
 	
-	con->setName("classifier_context");
+	con->setName("protocol_transitions");
 	
 	con->getConstrainedElement()->push_back(uML_ProtocolStateMachine);
 	
@@ -6867,7 +6882,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'context' <> null and specification = null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))")));
 	
 	con->setSpecification(oe);
 	
@@ -6881,16 +6896,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ProtocolTransition);
-	con->setName("belongs_to_psm");
+	con->setName("associated_actions");
 	con->getConstrainedElement()->push_back(uML_ProtocolTransition);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ProtocolTransition));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("container.belongsToPSM()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("effect = null")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ProtocolTransition);
 	
-	con->setName("associated_actions");
+	con->setName("belongs_to_psm");
 	
 	con->getConstrainedElement()->push_back(uML_ProtocolTransition);
 	
@@ -6898,7 +6913,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("effect = null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("container.belongsToPSM()")));
 	
 	con->setSpecification(oe);
 	
@@ -6936,11 +6951,109 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	con->setName("fork_vertex");
+	con->setName("choice_vertex");
 	con->getConstrainedElement()->push_back(uML_Pseudostate);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("fork_vertex");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("history_vertices");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("initial_vertex");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("join_vertex");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("junction_vertex");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("outgoing_from_initial");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Pseudostate);
+	
+	con->setName("transitions_incoming");
+	
+	con->getConstrainedElement()->push_back(uML_Pseudostate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies-- for any pair of incoming transitions there exists an orthogonal state which contains the source vetices of these transitions -- such that these source vertices belong to different regions of that orthogonal state incoming->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.source, t2.source) in	((contState <> null) and (contState.region		->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Pseudostate);
@@ -6971,104 +7084,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("transitions_incoming");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies-- for any pair of incoming transitions there exists an orthogonal state which contains the source vetices of these transitions -- such that these source vertices belong to different regions of that orthogonal state incoming->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.source, t2.source) in	((contState <> null) and (contState.region		->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("junction_vertex");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("history_vertices");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("outgoing_from_initial");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("join_vertex");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("choice_vertex");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Pseudostate);
-	
-	con->setName("initial_vertex");
-	
-	con->getConstrainedElement()->push_back(uML_Pseudostate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Pseudostate));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)")));
-	
-	con->setSpecification(oe);
-	
     // Pseudostate attributes
 	uML_Pseudostate_kind = factory->createProperty_in_Class(uML_Pseudostate);
 	uML_Pseudostate_state = factory->createProperty_in_Class(uML_Pseudostate);
@@ -7081,25 +7096,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_QualifierValue);
-	con->setName("type_of_qualifier");
-	con->getConstrainedElement()->push_back(uML_QualifierValue);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_QualifierValue));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value.type.conformsTo(qualifier.type)")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_QualifierValue);
-	
 	con->setName("multiplicity_of_qualifier");
-	
 	con->getConstrainedElement()->push_back(uML_QualifierValue);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_QualifierValue));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value.is(1,1)")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_QualifierValue);
@@ -7113,6 +7114,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("linkEndData.end.qualifier->includes(qualifier)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_QualifierValue);
+	
+	con->setName("type_of_qualifier");
+	
+	con->getConstrainedElement()->push_back(uML_QualifierValue);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_QualifierValue));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value.type.conformsTo(qualifier.type)")));
 	
 	con->setSpecification(oe);
 	
@@ -7167,11 +7182,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
-	con->setName("no_type");
+	con->setName("boolean_result");
 	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadIsClassifiedObjectAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = Boolean")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
+	
+	con->setName("multiplicity_of_input");
+	
+	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadIsClassifiedObjectAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
@@ -7190,7 +7219,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
 	
-	con->setName("boolean_result");
+	con->setName("no_type");
 	
 	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
 	
@@ -7198,21 +7227,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = Boolean")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
-	
-	con->setName("multiplicity_of_input");
-	
-	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadIsClassifiedObjectAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = null")));
 	
 	con->setSpecification(oe);
 	
@@ -7229,25 +7244,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
-	con->setName("one_open_end");
+	con->setName("compatible_multiplicity");
 	con->getConstrainedElement()->push_back(uML_ReadLinkAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.openEnd()->size() = 1")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
-	
-	con->setName("visibility");
-	
-	con->getConstrainedElement()->push_back(uML_ReadLinkAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let openEnd : Property = self.openEnd()->first() in  openEnd.visibility = VisibilityKind::public or   endData->exists(oed |     oed.end<>openEnd and     (_'context' = oed.end.type or       (openEnd.visibility = VisibilityKind::protected and         _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))")));
-	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.openEnd()->first().compatibleWith(result)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
@@ -7261,6 +7262,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.openEnd()->first().isNavigable()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
+	
+	con->setName("one_open_end");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.openEnd()->size() = 1")));
 	
 	con->setSpecification(oe);
 	
@@ -7280,7 +7295,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
 	
-	con->setName("compatible_multiplicity");
+	con->setName("visibility");
 	
 	con->getConstrainedElement()->push_back(uML_ReadLinkAction);
 	
@@ -7288,7 +7303,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.openEnd()->first().compatibleWith(result)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let openEnd : Property = self.openEnd()->first() in  openEnd.visibility = VisibilityKind::public or   endData->exists(oed |     oed.end<>openEnd and     (_'context' = oed.end.type or       (openEnd.visibility = VisibilityKind::protected and         _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))")));
 	
 	con->setSpecification(oe);
 	
@@ -7306,16 +7321,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
-	con->setName("multiplicity_of_result");
+	con->setName("association_of_association");
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("end.association.oclIsKindOf(AssociationClass)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
 	
-	con->setName("type_of_result");
+	con->setName("ends_of_association");
 	
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
 	
@@ -7323,7 +7338,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = end.type")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("end.association.memberEnd->forAll(e | not e.isStatic)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
+	
+	con->setName("multiplicity_of_object");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
+	
+	con->setName("multiplicity_of_result");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -7343,34 +7386,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
 	
-	con->setName("multiplicity_of_object");
-	
-	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
-	
-	con->setName("association_of_association");
-	
-	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("end.association.oclIsKindOf(AssociationClass)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
-	
 	con->setName("type_of_object");
 	
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
@@ -7385,7 +7400,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
 	
-	con->setName("ends_of_association");
+	con->setName("type_of_result");
 	
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndAction);
 	
@@ -7393,7 +7408,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("end.association.memberEnd->forAll(e | not e.isStatic)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = end.type")));
 	
 	con->setSpecification(oe);
 	
@@ -7409,53 +7424,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
-	con->setName("qualifier_attribute");
-	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.associationEnd <> null")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
-	
-	con->setName("multiplicity_of_object");
-	
-	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
-	
 	con->setName("association_of_association");
-	
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.associationEnd.association.oclIsKindOf(AssociationClass)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
-	
-	con->setName("same_type");
-	
-	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = qualifier.type")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
@@ -7474,7 +7447,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
 	
-	con->setName("type_of_object");
+	con->setName("multiplicity_of_object");
 	
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
 	
@@ -7482,7 +7455,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = qualifier.associationEnd.association")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -7514,6 +7487,48 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
+	
+	con->setName("qualifier_attribute");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.associationEnd <> null")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
+	
+	con->setName("same_type");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type = qualifier.type")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
+	
+	con->setName("type_of_object");
+	
+	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadLinkObjectEndQualifierAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = qualifier.associationEnd.association")));
+	
+	con->setSpecification(oe);
+	
     // ReadLinkObjectEndQualifierAction attributes
 	uML_ReadLinkObjectEndQualifierAction_object = factory->createProperty_in_Class(uML_ReadLinkObjectEndQualifierAction);
 	uML_ReadLinkObjectEndQualifierAction_qualifier = factory->createProperty_in_Class(uML_ReadLinkObjectEndQualifierAction);
@@ -7535,6 +7550,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReadSelfAction);
 	
+	con->setName("multiplicity");
+	
+	con->getConstrainedElement()->push_back(uML_ReadSelfAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadSelfAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReadSelfAction);
+	
 	con->setName("not_static");
 	
 	con->getConstrainedElement()->push_back(uML_ReadSelfAction);
@@ -7546,20 +7575,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let behavior: Behavior = self.containingBehavior() in"\
 	
 	"behavior.specification<>null implies not behavior.specification.isStatic")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReadSelfAction);
-	
-	con->setName("multiplicity");
-	
-	con->getConstrainedElement()->push_back(uML_ReadSelfAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadSelfAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -7618,16 +7633,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadVariableAction);
-	con->setName("type_and_ordering");
+	con->setName("compatible_multiplicity");
 	con->getConstrainedElement()->push_back(uML_ReadVariableAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReadVariableAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type =variable.type and result.isOrdered = variable.isOrdered")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("variable.compatibleWith(result)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReadVariableAction);
 	
-	con->setName("compatible_multiplicity");
+	con->setName("type_and_ordering");
 	
 	con->getConstrainedElement()->push_back(uML_ReadVariableAction);
 	
@@ -7635,7 +7650,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("variable.compatibleWith(result)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type =variable.type and result.isOrdered = variable.isOrdered")));
 	
 	con->setSpecification(oe);
 	
@@ -7654,23 +7669,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Reception);
-	con->setName("same_structure_as_signal");
+	con->setName("same_name_as_signal");
 	con->getConstrainedElement()->push_back(uML_Reception);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Reception));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("signal.ownedAttribute->size() = ownedParameter->size() and"\
-	"Sequence{1..signal.ownedAttribute->size()}->forAll( i | "\
-	"    ownedParameter->at(i).direction = ParameterDirectionKind::_'in' and "\
-	"    ownedParameter->at(i).name = signal.ownedAttribute->at(i).name and"\
-	"    ownedParameter->at(i).type = signal.ownedAttribute->at(i).type and"\
-	"    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and"\
-	"    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()"\
-	")")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("name = signal.name")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Reception);
 	
-	con->setName("same_name_as_signal");
+	con->setName("same_structure_as_signal");
 	
 	con->getConstrainedElement()->push_back(uML_Reception);
 	
@@ -7678,7 +7686,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("name = signal.name")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("signal.ownedAttribute->size() = ownedParameter->size() and"\
+	
+	"Sequence{1..signal.ownedAttribute->size()}->forAll( i | "\
+	
+	"    ownedParameter->at(i).direction = ParameterDirectionKind::_'in' and "\
+	
+	"    ownedParameter->at(i).name = signal.ownedAttribute->at(i).name and"\
+	
+	"    ownedParameter->at(i).type = signal.ownedAttribute->at(i).type and"\
+	
+	"    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and"\
+	
+	"    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()"\
+	
+	")")));
 	
 	con->setSpecification(oe);
 	
@@ -7701,20 +7723,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_ReclassifyObjectAction);
 	
-	con->setName("multiplicity");
-	
-	con->getConstrainedElement()->push_back(uML_ReclassifyObjectAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReclassifyObjectAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_ReclassifyObjectAction);
-	
 	con->setName("input_pin");
 	
 	con->getConstrainedElement()->push_back(uML_ReclassifyObjectAction);
@@ -7724,6 +7732,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = null")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReclassifyObjectAction);
+	
+	con->setName("multiplicity");
+	
+	con->getConstrainedElement()->push_back(uML_ReclassifyObjectAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReclassifyObjectAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -7740,16 +7762,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_RedefinableElement);
-	con->setName("redefinition_consistent");
+	con->setName("non_leaf_redefinition");
 	con->getConstrainedElement()->push_back(uML_RedefinableElement);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_RedefinableElement));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | re.isConsistentWith(self))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | not re.isLeaf)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_RedefinableElement);
 	
-	con->setName("non_leaf_redefinition");
+	con->setName("redefinition_consistent");
 	
 	con->getConstrainedElement()->push_back(uML_RedefinableElement);
 	
@@ -7757,7 +7779,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | not re.isLeaf)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | re.isConsistentWith(self))")));
 	
 	con->setSpecification(oe);
 	
@@ -7820,11 +7842,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReduceAction);
-	con->setName("output_types_are_compatible");
+	con->setName("input_type_is_collection");
 	con->getConstrainedElement()->push_back(uML_ReduceAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReduceAction));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_ReduceAction);
+	
+	con->setName("output_types_are_compatible");
+	
+	con->getConstrainedElement()->push_back(uML_ReduceAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReduceAction));
+	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("reducer.outputParameters().type->forAll(conformsTo(result.type))")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReduceAction);
@@ -7853,16 +7887,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_ReduceAction);
-	
-	con->setName("input_type_is_collection");
-	
-	con->getConstrainedElement()->push_back(uML_ReduceAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReduceAction));
-	
-	con->setSpecification(oe);
-	
     // ReduceAction attributes
 	uML_ReduceAction_collection = factory->createProperty_in_Class(uML_ReduceAction);
 	uML_ReduceAction_isOrdered = factory->createProperty_in_Class(uML_ReduceAction);
@@ -7876,16 +7900,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Region);
-	con->setName("owned");
+	con->setName("deep_history_vertex");
 	con->getConstrainedElement()->push_back(uML_Region);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Region));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->   select(kind = PseudostateKind::deepHistory)->size() <= 1")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Region);
 	
-	con->setName("deep_history_vertex");
+	con->setName("initial_vertex");
 	
 	con->getConstrainedElement()->push_back(uML_Region);
 	
@@ -7893,7 +7917,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->   select(kind = PseudostateKind::deepHistory)->size() <= 1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->  select(kind = PseudostateKind::initial)->size() <= 1")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Region);
+	
+	con->setName("owned");
+	
+	con->getConstrainedElement()->push_back(uML_Region);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Region));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)")));
 	
 	con->setSpecification(oe);
 	
@@ -7908,20 +7946,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->  select(kind = PseudostateKind::shallowHistory)->size() <= 1")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Region);
-	
-	con->setName("initial_vertex");
-	
-	con->getConstrainedElement()->push_back(uML_Region);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Region));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->  select(kind = PseudostateKind::initial)->size() <= 1")));
 	
 	con->setSpecification(oe);
 	
@@ -8014,21 +8038,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReplyAction);
-	con->setName("pins_match_parameter");
+	con->setName("event_on_reply_to_call_trigger");
 	con->getConstrainedElement()->push_back(uML_ReplyAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ReplyAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in"\
-	"replyValue->size()=parameter->size() and"\
-	"Sequence{1..replyValue->size()}->forAll(i |"\
-	"	replyValue->at(i).type.conformsTo(parameter->at(i).type) and"\
-	"	replyValue->at(i).isOrdered=parameter->at(i).isOrdered and"\
-	"	replyValue->at(i).compatibleWith(parameter->at(i)))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("replyToCall.event.oclIsKindOf(CallEvent)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ReplyAction);
 	
-	con->setName("event_on_reply_to_call_trigger");
+	con->setName("pins_match_parameter");
 	
 	con->getConstrainedElement()->push_back(uML_ReplyAction);
 	
@@ -8036,7 +8055,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("replyToCall.event.oclIsKindOf(CallEvent)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in"\
+	
+	"replyValue->size()=parameter->size() and"\
+	
+	"Sequence{1..replyValue->size()}->forAll(i |"\
+	
+	"	replyValue->at(i).type.conformsTo(parameter->at(i).type) and"\
+	
+	"	replyValue->at(i).isOrdered=parameter->at(i).isOrdered and"\
+	
+	"	replyValue->at(i).compatibleWith(parameter->at(i)))")));
 	
 	con->setSpecification(oe);
 	
@@ -8195,16 +8224,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StartObjectBehaviorAction);
-	con->setName("no_onport");
+	con->setName("multiplicity_of_object");
 	con->getConstrainedElement()->push_back(uML_StartObjectBehaviorAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StartObjectBehaviorAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("onPort->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_StartObjectBehaviorAction);
 	
-	con->setName("multiplicity_of_object");
+	con->setName("no_onport");
 	
 	con->getConstrainedElement()->push_back(uML_StartObjectBehaviorAction);
 	
@@ -8212,7 +8241,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("onPort->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -8375,30 +8404,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StateMachine);
-	con->setName("connection_points");
-	con->getConstrainedElement()->push_back(uML_StateMachine);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StateMachine));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_StateMachine);
-	
 	con->setName("classifier_context");
-	
 	con->getConstrainedElement()->push_back(uML_StateMachine);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StateMachine));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("_'context' <> null implies not _'context'.oclIsKindOf(Interface)")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_StateMachine);
 	
-	con->setName("method");
+	con->setName("connection_points");
 	
 	con->getConstrainedElement()->push_back(uML_StateMachine);
 	
@@ -8406,7 +8421,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("specification <> null implies connectionPoint->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)")));
 	
 	con->setSpecification(oe);
 	
@@ -8421,6 +8436,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context'))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_StateMachine);
+	
+	con->setName("method");
+	
+	con->getConstrainedElement()->push_back(uML_StateMachine);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StateMachine));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("specification <> null implies connectionPoint->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -8453,27 +8482,28 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Stereotype);
-	con->setName("generalize");
+	con->setName("associationEndOwnership");
 	con->getConstrainedElement()->push_back(uML_Stereotype);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Stereotype));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allParents()->forAll(oclIsKindOf(Stereotype)) "\
-	"and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Stereotype);
-	
-	con->setName("name_not_clash");
-	
-	con->getConstrainedElement()->push_back(uML_Stereotype);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Stereotype));
-	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("ownedAttribute"\
+	"->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))"\
+	"->forAll(opposite.owner = association)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Stereotype);
 	
 	con->setName("base_property_multiplicity_multiple_extension");
+	
+	con->getConstrainedElement()->push_back(uML_Stereotype);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Stereotype));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Stereotype);
+	
+	con->setName("base_property_multiplicity_single_extension");
 	
 	con->getConstrainedElement()->push_back(uML_Stereotype);
 	
@@ -8507,7 +8537,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Stereotype);
 	
-	con->setName("associationEndOwnership");
+	con->setName("generalize");
 	
 	con->getConstrainedElement()->push_back(uML_Stereotype);
 	
@@ -8515,17 +8545,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("ownedAttribute"\
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("allParents()->forAll(oclIsKindOf(Stereotype)) "\
 	
-	"->select(association->notEmpty() and not association.oclIsKindOf(Extension) and not type.oclIsKindOf(Stereotype))"\
-	
-	"->forAll(opposite.owner = association)")));
+	"and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))")));
 	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Stereotype);
 	
-	con->setName("base_property_multiplicity_single_extension");
+	con->setName("name_not_clash");
 	
 	con->getConstrainedElement()->push_back(uML_Stereotype);
 	
@@ -8642,20 +8670,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_StructuralFeatureAction);
 	
-	con->setName("visibility");
-	
-	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StructuralFeatureAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("structuralFeature.visibility = VisibilityKind::public or_'context'.allFeatures()->includes(structuralFeature) orstructuralFeature.visibility=VisibilityKind::protected and_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_StructuralFeatureAction);
-	
 	con->setName("object_type");
 	
 	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
@@ -8684,6 +8698,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
+	con = factory->createConstraint_in_Context(uML_StructuralFeatureAction);
+	
+	con->setName("visibility");
+	
+	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StructuralFeatureAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("structuralFeature.visibility = VisibilityKind::public or_'context'.allFeatures()->includes(structuralFeature) orstructuralFeature.visibility=VisibilityKind::protected and_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))")));
+	
+	con->setSpecification(oe);
+	
     // StructuralFeatureAction attributes
 	uML_StructuralFeatureAction_object = factory->createProperty_in_Class(uML_StructuralFeatureAction);
 	uML_StructuralFeatureAction_structuralFeature = factory->createProperty_in_Class(uML_StructuralFeatureAction);
@@ -8695,11 +8723,12 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StructuredActivityNode);
-	con->setName("output_pin_edges");
+	con->setName("edges");
 	con->getConstrainedElement()->push_back(uML_StructuredActivityNode);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_StructuredActivityNode));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("output.outgoing.target->excludesAll(allOwnedNodes()-input)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("edge=self.sourceNodes().outgoing->intersection(self.allOwnedNodes().incoming)->"\
+	"	union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_StructuredActivityNode);
@@ -8718,7 +8747,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_StructuredActivityNode);
 	
-	con->setName("edges");
+	con->setName("output_pin_edges");
 	
 	con->getConstrainedElement()->push_back(uML_StructuredActivityNode);
 	
@@ -8726,9 +8755,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("edge=self.sourceNodes().outgoing->intersection(self.allOwnedNodes().incoming)->"\
-	
-	"	union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("output.outgoing.target->excludesAll(allOwnedNodes()-input)")));
 	
 	con->setSpecification(oe);
 	
@@ -8919,11 +8946,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TestIdentityAction);
-	con->setName("no_type");
+	con->setName("multiplicity");
 	con->getConstrainedElement()->push_back(uML_TestIdentityAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_TestIdentityAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("first.is(1,1) and second.is(1,1)")));
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_TestIdentityAction);
+	
+	con->setName("no_type");
+	
+	con->getConstrainedElement()->push_back(uML_TestIdentityAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_TestIdentityAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("first.type= null and second.type = null")));
+	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_TestIdentityAction);
@@ -8937,20 +8978,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.type=Boolean")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_TestIdentityAction);
-	
-	con->setName("multiplicity");
-	
-	con->getConstrainedElement()->push_back(uML_TestIdentityAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_TestIdentityAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("first.is(1,1) and second.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -9042,18 +9069,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Transition);
-	con->setName("state_is_local");
+	con->setName("fork_segment_guards");
 	con->getConstrainedElement()->push_back(uML_Transition);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Transition));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = TransitionKind::local) implies"\
-	"		((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or"\
-	"		(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty())")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_Transition);
 	
-	con->setName("join_segment_state");
+	con->setName("fork_segment_state");
 	
 	con->getConstrainedElement()->push_back(uML_Transition);
 	
@@ -9061,7 +9086,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State))")));
 	
 	con->setSpecification(oe);
 	
@@ -9081,7 +9106,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Transition);
 	
-	con->setName("fork_segment_guards");
+	con->setName("join_segment_guards");
 	
 	con->getConstrainedElement()->push_back(uML_Transition);
 	
@@ -9089,7 +9114,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty())")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty())")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Transition);
+	
+	con->setName("join_segment_state");
+	
+	con->getConstrainedElement()->push_back(uML_Transition);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Transition));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_Transition);
+	
+	con->setName("outgoing_pseudostates");
+	
+	con->getConstrainedElement()->push_back(uML_Transition);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Transition));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -9111,20 +9164,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Transition);
 	
-	con->setName("join_segment_guards");
-	
-	con->getConstrainedElement()->push_back(uML_Transition);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Transition));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty())")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_Transition);
-	
 	con->setName("state_is_internal");
 	
 	con->getConstrainedElement()->push_back(uML_Transition);
@@ -9141,7 +9180,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_Transition);
 	
-	con->setName("outgoing_pseudostates");
+	con->setName("state_is_local");
 	
 	con->getConstrainedElement()->push_back(uML_Transition);
 	
@@ -9149,21 +9188,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = TransitionKind::local) implies"\
 	
-	con->setSpecification(oe);
+	"		((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or"\
 	
-	con = factory->createConstraint_in_Context(uML_Transition);
-	
-	con->setName("fork_segment_state");
-	
-	con->getConstrainedElement()->push_back(uML_Transition);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_Transition));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State))")));
+	"		(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint))")));
 	
 	con->setSpecification(oe);
 	
@@ -9239,11 +9268,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
-	con->setName("structural_feature");
+	con->setName("multiplicity_of_object");
 	con->getConstrainedElement()->push_back(uML_UnmarshallAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UnmarshallAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("unmarshallType.allAttributes()->size() >= 1")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
@@ -9257,6 +9286,34 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("unmarshallType.allAttributes()->size() = result->size()")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
+	
+	con->setName("object_type");
+	
+	con->getConstrainedElement()->push_back(uML_UnmarshallAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UnmarshallAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type.conformsTo(unmarshallType)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
+	
+	con->setName("structural_feature");
+	
+	con->getConstrainedElement()->push_back(uML_UnmarshallAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UnmarshallAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("unmarshallType.allAttributes()->size() >= 1")));
 	
 	con->setSpecification(oe);
 	
@@ -9282,34 +9339,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con->setSpecification(oe);
 	
-	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
-	
-	con->setName("object_type");
-	
-	con->getConstrainedElement()->push_back(uML_UnmarshallAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UnmarshallAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type.conformsTo(unmarshallType)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
-	
-	con->setName("multiplicity_of_object");
-	
-	con->getConstrainedElement()->push_back(uML_UnmarshallAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UnmarshallAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
-	
-	con->setSpecification(oe);
-	
     // UnmarshallAction attributes
 	uML_UnmarshallAction_object = factory->createProperty_in_Class(uML_UnmarshallAction);
 	uML_UnmarshallAction_result = factory->createProperty_in_Class(uML_UnmarshallAction);
@@ -9327,25 +9356,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_UseCase);
-	con->setName("must_have_name");
-	con->getConstrainedElement()->push_back(uML_UseCase);
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UseCase));
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("name -> notEmpty ()")));
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_UseCase);
-	
 	con->setName("binary_associations");
-	
 	con->getConstrainedElement()->push_back(uML_UseCase);
-	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UseCase));
-	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)")));
-	
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_UseCase);
@@ -9359,6 +9374,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("not allIncludedUseCases()->includes(self)")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_UseCase);
+	
+	con->setName("must_have_name");
+	
+	con->getConstrainedElement()->push_back(uML_UseCase);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_UseCase));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("name -> notEmpty ()")));
 	
 	con->setSpecification(oe);
 	
@@ -9464,16 +9493,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ValueSpecificationAction);
-	con->setName("multiplicity");
+	con->setName("compatible_type");
 	con->getConstrainedElement()->push_back(uML_ValueSpecificationAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_ValueSpecificationAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value.type.conformsTo(result.type)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_ValueSpecificationAction);
 	
-	con->setName("compatible_type");
+	con->setName("multiplicity");
 	
 	con->getConstrainedElement()->push_back(uML_ValueSpecificationAction);
 	
@@ -9481,7 +9510,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value.type.conformsTo(result.type)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -9571,11 +9600,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	//constraints
 	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
-	con->setName("type_of_value");
+	con->setName("multiplicity_of_result");
 	con->getConstrainedElement()->push_back(uML_WriteStructuralFeatureAction);
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_WriteStructuralFeatureAction));
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null implies value.type.conformsTo(structuralFeature.type)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result <> null implies result.is(1,1)")));
 	con->setSpecification(oe);
 	
 	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
@@ -9594,20 +9623,6 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
 	
-	con->setName("multiplicity_of_result");
-	
-	con->getConstrainedElement()->push_back(uML_WriteStructuralFeatureAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_WriteStructuralFeatureAction));
-	
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result <> null implies result.is(1,1)")));
-	
-	con->setSpecification(oe);
-	
-	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
-	
 	con->setName("type_of_result");
 	
 	con->getConstrainedElement()->push_back(uML_WriteStructuralFeatureAction);
@@ -9617,6 +9632,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result <> null implies result.type = object.type")));
+	
+	con->setSpecification(oe);
+	
+	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
+	
+	con->setName("type_of_value");
+	
+	con->getConstrainedElement()->push_back(uML_WriteStructuralFeatureAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner(uML_WriteStructuralFeatureAction));
+	
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null implies value.type.conformsTo(structuralFeature.type)")));
 	
 	con->setSpecification(oe);
 	
