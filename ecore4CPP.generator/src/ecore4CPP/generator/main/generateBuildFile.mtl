@@ -136,7 +136,7 @@ tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tas
 [comment gradle file for generate command /]
 [file ('../model/build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
 }
 
 description 'Generate task for project: [packageName/]'
@@ -154,7 +154,7 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 [comment gradle file for compile command of model /]
 [file ('build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
 }
 
 description 'Compile task for project: [packageName/]'
