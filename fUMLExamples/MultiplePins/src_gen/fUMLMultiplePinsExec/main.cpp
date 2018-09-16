@@ -8,7 +8,6 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include <omp.h>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Executor.hpp"
@@ -31,8 +30,8 @@
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 
 #include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp" 
-#include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+#include "fUMLMultiplePins/FUMLMultiplePinsPackage.hpp"
 
 //OpaqueBehaviourExecutions
 #include "fUMLMultiplePinsExec/FbDo1Execution.hpp"
@@ -60,10 +59,6 @@ using namespace fUMLMultiplePins;
 
 int main()
 {	
-
-	//OMP parallelization.
-	omp_set_num_threads(omp_get_num_procs());
-
 	DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 	std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
 	std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());

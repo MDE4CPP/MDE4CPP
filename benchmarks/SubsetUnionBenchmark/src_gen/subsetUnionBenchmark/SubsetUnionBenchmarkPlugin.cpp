@@ -1,6 +1,6 @@
 
-#include "SubsetUnionBenchmarkPlugin.hpp"
-#include "impl/SubsetUnionBenchmarkPluginImpl.hpp"
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkPlugin.hpp"
+#include "subsetUnionBenchmark/impl/SubsetUnionBenchmarkPluginImpl.hpp"
 
 using namespace subsetUnionBenchmark;
 

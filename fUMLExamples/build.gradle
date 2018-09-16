@@ -1,7 +1,0 @@
-description 'Example collection'
-
-task buildFUMLExamples(dependsOn: ['Calculator:buildCalcModel', 'MultiplePins:buildFUMLMultiplePins']) {
-	group 'Examples'
-	description 'build all fUML example applications'	
-}
-

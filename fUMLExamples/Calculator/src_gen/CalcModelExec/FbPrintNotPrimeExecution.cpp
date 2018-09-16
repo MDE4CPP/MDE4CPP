@@ -20,6 +20,8 @@
 
 
 
+
+
 using namespace CalcModel;
 
 FbPrintNotPrimeExecution::FbPrintNotPrimeExecution()
@@ -52,7 +54,8 @@ void FbPrintNotPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> 
 
     //Body of the Opaquebehavior
     //Start ---------------------------
-		//Function Behaviour from a Call Behavior Action
+		//Function Behaviour from a Call Behavior Action false
+
    		std::cout<<"Number is not prime";
     //End -----------------------------
 

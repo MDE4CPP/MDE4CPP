@@ -45,7 +45,6 @@ namespace CalcModel
 			// Members
 			//*********************************
 			
-	
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER_CHECKIFPRIME__HPP */

@@ -19,6 +19,8 @@
 #include "fUMLMultiplePins/TestClass.hpp"
 #include "fUMLMultiplePinsExec/TestClassObject.hpp"
 
+
+
 #include "fUML/Reference.hpp"
 #include "fUMLMultiplePins/TestClass.hpp"
 #include "fUMLMultiplePinsExec/TestClassObject.hpp"
@@ -66,7 +68,10 @@ void FbDo1Execution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPar
     std::shared_ptr<fUML::Reference> input_1Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at(0)->getValues()->front());
 
 	input_1 = std::dynamic_pointer_cast<TestClassObject>(input_1Value->getReferent())->getUmlValue();
-	assert(input_1 != nullptr);
+	if(input_1 != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type fUMLMultiplePins::TestClass is null" << std::endl;);
+	}
 
 	//Call Operation action target
 	std::shared_ptr<fUMLMultiplePins::TestClass> target = std::dynamic_pointer_cast<TestClassObject>(this->getContext())->getUmlValue();

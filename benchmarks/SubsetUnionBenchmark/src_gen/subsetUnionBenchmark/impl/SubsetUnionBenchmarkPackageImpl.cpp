@@ -1,18 +1,19 @@
-#include "SubsetUnionBenchmarkPackageImpl.hpp"
+#include "subsetUnionBenchmark/impl/SubsetUnionBenchmarkPackageImpl.hpp"
 
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "SubsetUnionBenchmarkFactory.hpp"
+#include "subsetUnionBenchmark/SubsetUnionBenchmarkFactory.hpp"
 
 //depending model packages
-#include "EcorePackage.hpp"
+#include "ecore/EcorePackage.hpp"
 
 using namespace subsetUnionBenchmark;
 
@@ -25,20 +26,6 @@ SubsetUnionBenchmarkPackageImpl::SubsetUnionBenchmarkPackageImpl()
 
 SubsetUnionBenchmarkPackageImpl::~SubsetUnionBenchmarkPackageImpl()
 {
-	containerEClass.reset();
-	elementEClass.reset();
-	element_Level1EClass.reset();
-	element_Level2EClass.reset();
-	element_Level3EClass.reset();
-	element_Level4EClass.reset();
-	element_Level5EClass.reset();
-	element_Level6EClass.reset();
-	element_Level7EClass.reset();
-	element_Level8EClass.reset();
-	element_Level9EClass.reset();
-	element_Level10EClass.reset();
-	
-	
 }
 
 SubsetUnionBenchmarkPackage* SubsetUnionBenchmarkPackageImpl::create()
@@ -51,294 +38,85 @@ SubsetUnionBenchmarkPackage* SubsetUnionBenchmarkPackageImpl::create()
 	 
     // Obtain or create package and create package meta-data objects
     SubsetUnionBenchmarkPackageImpl * metaModelPackage = new SubsetUnionBenchmarkPackageImpl();
-	metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void SubsetUnionBenchmarkPackageImpl::init()
+void SubsetUnionBenchmarkPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 {
     // Initialize created meta-data
+	createPackageContents(package);
+	setThisEPackagePtr(package);
     initializePackageContents();   
 }
 
-void SubsetUnionBenchmarkPackageImpl::createPackageContents()
-{
-	if (isCreated) 
-	{
-		return;
-	}
-	isCreated = true;
-
-	containerEClass = createEClass(CONTAINER);
-	createEAttribute(containerEClass, CONTAINER_NAME);
-	
-	createEReference(containerEClass, CONTAINER_SUBSET1);
-	createEReference(containerEClass, CONTAINER_SUBSET10);
-	createEReference(containerEClass, CONTAINER_SUBSET2);
-	createEReference(containerEClass, CONTAINER_SUBSET3);
-	createEReference(containerEClass, CONTAINER_SUBSET4);
-	createEReference(containerEClass, CONTAINER_SUBSET5);
-	createEReference(containerEClass, CONTAINER_SUBSET6);
-	createEReference(containerEClass, CONTAINER_SUBSET7);
-	createEReference(containerEClass, CONTAINER_SUBSET8);
-	createEReference(containerEClass, CONTAINER_SUBSET9);
-	createEReference(containerEClass, CONTAINER_UNION);
-	
-	
-
-	elementEClass = createEClass(ELEMENT);
-	createEAttribute(elementEClass, ELEMENT_NAME);
-	
-	
-	
-
-	element_Level1EClass = createEClass(ELEMENT_LEVEL1);
-	
-	
-	
-
-	element_Level10EClass = createEClass(ELEMENT_LEVEL10);
-	
-	
-	
-
-	element_Level2EClass = createEClass(ELEMENT_LEVEL2);
-	
-	
-	
-
-	element_Level3EClass = createEClass(ELEMENT_LEVEL3);
-	
-	
-	
-
-	element_Level4EClass = createEClass(ELEMENT_LEVEL4);
-	
-	
-	
-
-	element_Level5EClass = createEClass(ELEMENT_LEVEL5);
-	
-	
-	
-
-	element_Level6EClass = createEClass(ELEMENT_LEVEL6);
-	
-	
-	
-
-	element_Level7EClass = createEClass(ELEMENT_LEVEL7);
-	
-	
-	
-
-	element_Level8EClass = createEClass(ELEMENT_LEVEL8);
-	
-	
-	
-
-	element_Level9EClass = createEClass(ELEMENT_LEVEL9);
-	
-	
-	
-
-	
-}
-
-void SubsetUnionBenchmarkPackageImpl::initializePackageContents()
-{
-	if (isInitialized)
-	{
-		return;
-	}
-	isInitialized = true;
-
-	// Initialize package
-	setName(eNAME);
-	setNsPrefix(eNS_PREFIX);
-	setNsURI(eNS_URI);
-	
-	// Add supertypes to classes
-	element_Level1EClass->getESuperTypes()->push_back(getElement());
-	element_Level10EClass->getESuperTypes()->push_back(getElement());
-	element_Level2EClass->getESuperTypes()->push_back(getElement());
-	element_Level3EClass->getESuperTypes()->push_back(getElement());
-	element_Level4EClass->getESuperTypes()->push_back(getElement());
-	element_Level5EClass->getESuperTypes()->push_back(getElement());
-	element_Level6EClass->getESuperTypes()->push_back(getElement());
-	element_Level7EClass->getESuperTypes()->push_back(getElement());
-	element_Level8EClass->getESuperTypes()->push_back(getElement());
-	element_Level9EClass->getESuperTypes()->push_back(getElement());
-	
-	std::shared_ptr<ecore::EOperation> op;
-
- 	// Initialize classes and features; add operations and parameters
-	// Begin Class Container
-	initEClass(containerEClass, nullptr, "Container", false, false, true);
-	initEAttribute(getContainer_Name(),ecore::EcorePackage::eInstance()->getEString(),"name","",0,1, false,false, true, false, false, true, false, true);
-	
-	initEReference(getContainer_Subset1(),getElement_Level1(),nullptr,"subset1","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset10(),getElement_Level10(),nullptr,"subset10","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset2(),getElement_Level2(),nullptr,"subset2","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset3(),getElement_Level3(),nullptr,"subset3","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset4(),getElement_Level4(),nullptr,"subset4","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset5(),getElement_Level5(),nullptr,"subset5","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset6(),getElement_Level6(),nullptr,"subset6","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset7(),getElement_Level7(),nullptr,"subset7","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset8(),getElement_Level8(),nullptr,"subset8","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Subset9(),getElement_Level9(),nullptr,"subset9","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getContainer_Union(),getElement(),nullptr,"union","",0,-1, false,false, true, true, true, false, true, true,true);
-	
-	
-	// End Class Container
-
-	// Begin Class Element
-	initEClass(elementEClass, nullptr, "Element", false, false, true);
-	initEAttribute(getElement_Name(),ecore::EcorePackage::eInstance()->getEString(),"name","",0,1, false,false, true, false, false, true, false, true);
-	
-	
-	
-	// End Class Element
-
-	// Begin Class Element_Level1
-	initEClass(element_Level1EClass, nullptr, "Element_Level1", false, false, true);
-	
-	
-	
-	// End Class Element_Level1
-
-	// Begin Class Element_Level10
-	initEClass(element_Level10EClass, nullptr, "Element_Level10", false, false, true);
-	
-	
-	
-	// End Class Element_Level10
-
-	// Begin Class Element_Level2
-	initEClass(element_Level2EClass, nullptr, "Element_Level2", false, false, true);
-	
-	
-	
-	// End Class Element_Level2
-
-	// Begin Class Element_Level3
-	initEClass(element_Level3EClass, nullptr, "Element_Level3", false, false, true);
-	
-	
-	
-	// End Class Element_Level3
-
-	// Begin Class Element_Level4
-	initEClass(element_Level4EClass, nullptr, "Element_Level4", false, false, true);
-	
-	
-	
-	// End Class Element_Level4
-
-	// Begin Class Element_Level5
-	initEClass(element_Level5EClass, nullptr, "Element_Level5", false, false, true);
-	
-	
-	
-	// End Class Element_Level5
-
-	// Begin Class Element_Level6
-	initEClass(element_Level6EClass, nullptr, "Element_Level6", false, false, true);
-	
-	
-	
-	// End Class Element_Level6
-
-	// Begin Class Element_Level7
-	initEClass(element_Level7EClass, nullptr, "Element_Level7", false, false, true);
-	
-	
-	
-	// End Class Element_Level7
-
-	// Begin Class Element_Level8
-	initEClass(element_Level8EClass, nullptr, "Element_Level8", false, false, true);
-	
-	
-	
-	// End Class Element_Level8
-
-	// Begin Class Element_Level9
-	initEClass(element_Level9EClass, nullptr, "Element_Level9", false, false, true);
-	
-	
-	
-	// End Class Element_Level9
-
-	
-}
-
 // Begin Class Container
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getContainer() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getContainer_EClass() const
 {
-	return containerEClass;
-}
-std::shared_ptr<ecore::EAttribute> SubsetUnionBenchmarkPackageImpl::getContainer_Name() const
-{
-	return std::dynamic_pointer_cast<ecore::EAttribute>(containerEClass->getEStructuralFeatures()->at(0));
+	return m_container_EClass;
 }
 
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset1() const
+std::shared_ptr<ecore::EAttribute> SubsetUnionBenchmarkPackageImpl::getContainer_EAttribute_name() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(1));
+	return m_container_EAttribute_name;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset10() const
+
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset1() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(2));
+	return m_container_EReference_subset1;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset2() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset10() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(3));
+	return m_container_EReference_subset10;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset3() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset2() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(4));
+	return m_container_EReference_subset2;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset4() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset3() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(5));
+	return m_container_EReference_subset3;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset5() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset4() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(6));
+	return m_container_EReference_subset4;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset6() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset5() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(7));
+	return m_container_EReference_subset5;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset7() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset6() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(8));
+	return m_container_EReference_subset6;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset8() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset7() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(9));
+	return m_container_EReference_subset7;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Subset9() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset8() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(10));
+	return m_container_EReference_subset8;
 }
-std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_Union() const
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_subset9() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(containerEClass->getEStructuralFeatures()->at(11));
+	return m_container_EReference_subset9;
+}
+std::shared_ptr<ecore::EReference> SubsetUnionBenchmarkPackageImpl::getContainer_EReference_unionBag() const
+{
+	return m_container_EReference_unionBag;
 }
 
 
 // End Class Container
 
 // Begin Class Element
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_EClass() const
 {
-	return elementEClass;
+	return m_element_EClass;
 }
-std::shared_ptr<ecore::EAttribute> SubsetUnionBenchmarkPackageImpl::getElement_Name() const
+
+std::shared_ptr<ecore::EAttribute> SubsetUnionBenchmarkPackageImpl::getElement_EAttribute_name() const
 {
-	return std::dynamic_pointer_cast<ecore::EAttribute>(elementEClass->getEStructuralFeatures()->at(0));
+	return m_element_EAttribute_name;
 }
 
 
@@ -346,100 +124,110 @@ std::shared_ptr<ecore::EAttribute> SubsetUnionBenchmarkPackageImpl::getElement_N
 // End Class Element
 
 // Begin Class Element_Level1
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level1() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level1_EClass() const
 {
-	return element_Level1EClass;
+	return m_element_Level1_EClass;
 }
+
 
 
 
 // End Class Element_Level1
 
 // Begin Class Element_Level10
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level10() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level10_EClass() const
 {
-	return element_Level10EClass;
+	return m_element_Level10_EClass;
 }
+
 
 
 
 // End Class Element_Level10
 
 // Begin Class Element_Level2
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level2() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level2_EClass() const
 {
-	return element_Level2EClass;
+	return m_element_Level2_EClass;
 }
+
 
 
 
 // End Class Element_Level2
 
 // Begin Class Element_Level3
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level3() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level3_EClass() const
 {
-	return element_Level3EClass;
+	return m_element_Level3_EClass;
 }
+
 
 
 
 // End Class Element_Level3
 
 // Begin Class Element_Level4
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level4() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level4_EClass() const
 {
-	return element_Level4EClass;
+	return m_element_Level4_EClass;
 }
+
 
 
 
 // End Class Element_Level4
 
 // Begin Class Element_Level5
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level5() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level5_EClass() const
 {
-	return element_Level5EClass;
+	return m_element_Level5_EClass;
 }
+
 
 
 
 // End Class Element_Level5
 
 // Begin Class Element_Level6
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level6() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level6_EClass() const
 {
-	return element_Level6EClass;
+	return m_element_Level6_EClass;
 }
+
 
 
 
 // End Class Element_Level6
 
 // Begin Class Element_Level7
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level7() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level7_EClass() const
 {
-	return element_Level7EClass;
+	return m_element_Level7_EClass;
 }
+
 
 
 
 // End Class Element_Level7
 
 // Begin Class Element_Level8
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level8() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level8_EClass() const
 {
-	return element_Level8EClass;
+	return m_element_Level8_EClass;
 }
+
 
 
 
 // End Class Element_Level8
 
 // Begin Class Element_Level9
-std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level9() const
+std::shared_ptr<ecore::EClass> SubsetUnionBenchmarkPackageImpl::getElement_Level9_EClass() const
 {
-	return element_Level9EClass;
+	return m_element_Level9_EClass;
 }
+
 
 
 

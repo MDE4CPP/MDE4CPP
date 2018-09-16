@@ -17,6 +17,8 @@
 
 
 
+
+
 #include "fUML/IntegerValue.hpp"
 #include "fUML/BooleanValue.hpp"
 
@@ -57,7 +59,8 @@ void IstEndeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputP
 
     //Body of the Opaquebehavior
     //Start ---------------------------
-		//Function Behaviour from a Call Behavior Action
+		//Function Behaviour from a Call Behavior Action false
+
    		if(inParam>100000)
 {
 	outParam=true;

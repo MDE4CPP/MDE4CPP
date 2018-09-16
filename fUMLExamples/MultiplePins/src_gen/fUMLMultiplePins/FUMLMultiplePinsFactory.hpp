@@ -14,10 +14,7 @@ namespace fUMLMultiplePins
 	class TestClass;
 	class FUMLMultiplePinsPackage;
 	class FUMLMultiplePinsFactory;
-}
 
-namespace fUMLMultiplePins
-{
 	class FUMLMultiplePinsFactory : virtual public uml::Factory 
 	{ 
 		protected:
@@ -33,7 +30,6 @@ namespace fUMLMultiplePins
 
 			//Creator functions
 			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
-
 
 			virtual std::shared_ptr<fUMLMultiplePins::TestClass> createTestClass() = 0;
 			

@@ -1,7 +1,6 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
 }
-apply plugin: 'base' 
 
 description 'Example collection'
 
@@ -10,12 +9,48 @@ task compileExamplePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	description "compile Persistence"
 
 	projectFolder = file("./src")
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'examplePersistence.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'examplePersistenced.exe')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('compileUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+
+	// dependency to model 'persistence'
+	def persistence = getRootProject().getTasksByName('compilePersistence', true)
+	dependsOn persistence
+	inputs.files(persistence.outputs)
+	
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('compilePersistence', true)
 }
 
-clean.doFirst {
-	def cmakeFolder = file("./src/.cmake/")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
+task clean {
+	doLast {
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + '.cmake')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
 	}
 }

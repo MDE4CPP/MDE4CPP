@@ -7,20 +7,10 @@
 #ifndef SUBSETUNIONBENCHMARKFACTORY_HPP
 #define SUBSETUNIONBENCHMARKFACTORY_HPP
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
-
-#ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) a
-#else
-    #define ACT_DEBUG(a) /**/
-#endif
-
-#include "EFactory.hpp"
+#include <map>
 #include <memory>
+
+#include "ecore/EFactory.hpp"
 
 namespace subsetUnionBenchmark 
 {	class Container;
@@ -36,7 +26,6 @@ namespace subsetUnionBenchmark
 	class Element_Level8;
 	class Element_Level9;
 	class SubsetUnionBenchmarkPackage;
-	class SubsetUnionBenchmarkFactory;
 }
 
 namespace subsetUnionBenchmark 
@@ -90,4 +79,3 @@ namespace subsetUnionBenchmark
 	};
 }
 #endif /* end of include guard: SUBSETUNIONBENCHMARKFACTORY_HPP */
-

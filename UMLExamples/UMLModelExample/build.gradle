@@ -1,0 +1,17 @@
+description 'Build tasks for project: LibraryModel_uml'
+
+task buildLibraryModel_uml() {
+	group 'LibraryModel_uml'
+	description 'build LibraryModel_uml'
+
+	dependsOn 'model:generateLibraryModel_uml'
+	dependsOn 'src_gen:compileLibraryModel_uml'
+	dependsOn 'application:compileApplicationForLibraryModel_uml'
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
+}
+
+tasks.getByPath('src_gen:compileLibraryModel_uml').mustRunAfter tasks.getByPath('model:generateLibraryModel_uml')

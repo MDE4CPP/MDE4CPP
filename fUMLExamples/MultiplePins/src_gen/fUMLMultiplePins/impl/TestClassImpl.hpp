@@ -14,10 +14,8 @@
 #include "uml/impl/ClassImpl.hpp"
 #include "uml/Property.hpp"
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 namespace uml
 {
@@ -48,8 +46,8 @@ namespace fUMLMultiplePins
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void do1( std::shared_ptr<fUMLMultiplePins::TestClass> input_1,int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
-			virtual void doAll( int& param_0,int& param_1,int& param_2,int& param_3,int& param_4,int& param_5,int& param_6,int& param_7,int& param_8,int& param_9 ) ;
+			virtual void do1(std::shared_ptr<fUMLMultiplePins::TestClass> input_1, int& param_0, int& param_1, int& param_2, int& param_3, int& param_4, int& param_5, int& param_6, int& param_7, int& param_8, int& param_9) ;
+			virtual void doAll(int& param_0, int& param_1, int& param_2, int& param_3, int& param_4, int& param_5, int& param_6, int& param_7, int& param_8, int& param_9) ;
 			
 			
 			//*********************************
@@ -64,14 +62,15 @@ namespace fUMLMultiplePins
 			//*********************************
 			// Structural Feature Getter/Setter
 			//*********************************
-			virtual boost::any get(std::shared_ptr<uml::Property> _property) const ;
-			virtual void set(std::shared_ptr<uml::Property> _property,boost::any value) ;
+			virtual Any get(std::shared_ptr<uml::Property> _property) const ;
+			virtual void set(std::shared_ptr<uml::Property> _property, Any value) ;
 			virtual void unset(std::shared_ptr<uml::Property> _property) ;
+			
 		
 		private:
 			std::weak_ptr<TestClass> m_thisTestClassPtr;
-			std::map<std::string,std::function<boost::any()>> m_getterMap;
-			std::map<std::string,std::function<void(boost::any)>> m_setterMap;
+			std::map<std::string,std::function<Any()>> m_getterMap;
+			std::map<std::string,std::function<void(Any)>> m_setterMap;
 			std::map<std::string,std::function<void()>> m_unsetterMap;
 	};
 }

@@ -20,6 +20,7 @@
 #include "uml/PrimitiveType.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "uml/VisibilityKind.hpp"
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
@@ -53,22 +54,23 @@ FUMLMultiplePinsPackage* FUMLMultiplePinsPackageImpl::create()
 	
     // Obtain or create and register package, create package meta-data objects
     FUMLMultiplePinsPackageImpl * metaModelPackage = new FUMLMultiplePinsPackageImpl();
-	metaModelPackage->initMetaModel();
-    metaModelPackage->createPackageContents();
     return metaModelPackage;
 }
 
-void FUMLMultiplePinsPackageImpl::init()
+void FUMLMultiplePinsPackageImpl::init(std::shared_ptr<uml::Package> fUMLMultiplePins)
 {
     // Initialize created meta-data
-    initializePackageContents();   
+	setThisPackagePtr(fUMLMultiplePins);
+	initMetaModel();
+    createPackageContents(fUMLMultiplePins);
+    initializePackageContents(fUMLMultiplePins);   
 }
 
 void FUMLMultiplePinsPackageImpl::initMetaModel()
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageContents()
+void FUMLMultiplePinsPackageImpl::createPackageContents(std::shared_ptr<uml::Package> fUMLMultiplePins)
 {
 	if (isCreated)
 	{
@@ -76,8 +78,6 @@ void FUMLMultiplePinsPackageImpl::createPackageContents()
 	}
 	isCreated = true;
 
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins = std::shared_ptr<FUMLMultiplePinsPackageImpl>(this, null_deleter());
 	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
 
 	createPackageValueSpecifications(fUMLMultiplePins, factory);
@@ -89,9 +89,10 @@ void FUMLMultiplePinsPackageImpl::createPackageContents()
 	createPackageDependencies(fUMLMultiplePins, factory);
 	createPackagePrimitiveTypes(fUMLMultiplePins, factory);
 	createPackageEnumerationLiterals(fUMLMultiplePins, factory);
+	createPackageInterfaceRealizations(fUMLMultiplePins, factory);
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageActivities(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 	fUMLMultiplePins_TestClass_TestMultiplePins = factory->createActivity_in_Package(fUMLMultiplePins);
 	fUMLMultiplePins_TestClass_TestMultiplePins_fUMLMultiplePins_TestClass_TestMultiplePins_startParam = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_TestMultiplePins);
@@ -311,7 +312,7 @@ void FUMLMultiplePinsPackageImpl::createPackageActivities(std::shared_ptr<FUMLMu
 	
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageClasses(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
@@ -327,34 +328,6 @@ void FUMLMultiplePinsPackageImpl::createPackageClasses(std::shared_ptr<FUMLMulti
 	fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_0 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_1 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_2 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_3 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_4 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_5 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_6 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_7 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_8 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_fUMLMultiplePins_TestClass_doAll_param_9 = factory->createParameter_in_Operation(fUMLMultiplePins_TestClass_doAll_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer);
 
     // TestClass function behaviors
-	fUMLMultiplePins_TestClass_istEnde = factory->createFunctionBehavior_in_BehavioredClassifier(fUMLMultiplePins_TestClass);
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_istEnde);
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_istEnde);
-	
-
-	fUMLMultiplePins_TestClass_fbDoAll = factory->createFunctionBehavior_in_BehavioredClassifier(fUMLMultiplePins_TestClass);
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
-	
-
 	fUMLMultiplePins_TestClass_fbDo1 = factory->createFunctionBehavior_in_BehavioredClassifier(fUMLMultiplePins_TestClass);
 	fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_input_1 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDo1);
 	
@@ -379,33 +352,65 @@ void FUMLMultiplePinsPackageImpl::createPackageClasses(std::shared_ptr<FUMLMulti
 	fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_param_9 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDo1);
 	
 
+	fUMLMultiplePins_TestClass_fbDoAll = factory->createFunctionBehavior_in_BehavioredClassifier(fUMLMultiplePins_TestClass);
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9 = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_fbDoAll);
+	
+
+	fUMLMultiplePins_TestClass_istEnde = factory->createFunctionBehavior_in_BehavioredClassifier(fUMLMultiplePins_TestClass);
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_istEnde);
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam = factory->createParameter_in_Behavior(fUMLMultiplePins_TestClass_istEnde);
+	
+
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageDependencies(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageInterfaces(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageStereotypes(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 }
 
-void FUMLMultiplePinsPackageImpl::createPackageValueSpecifications(std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+void FUMLMultiplePinsPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
+
+void FUMLMultiplePinsPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> fUMLMultiplePins, std::shared_ptr<uml::UmlFactory> factory)
 {
 	inputPin_do1_callinput_1_lowerValue_LiteralInteger_InputPin_do1_callinput_1 = factory->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(inputPin_do1_callinput_1));
 	inputPin_do1_callinput_1_lowerValue_LiteralInteger_InputPin_do1_callinput_1->setValue(0);
@@ -429,7 +434,7 @@ void FUMLMultiplePinsPackageImpl::createPackageValueSpecifications(std::shared_p
 	fUMLMultiplePins_TestClass_TestMultiplePinsstartParam_upperBound_LiteralInteger_fUMLMultiplePins_TestClass_TestMultiplePinsstartParam->setValue(1);
 }
 
-void FUMLMultiplePinsPackageImpl::initializePackageContents()
+void FUMLMultiplePinsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> fUMLMultiplePins)
 {
 	if (isInitialized)
 	{
@@ -441,16 +446,16 @@ void FUMLMultiplePinsPackageImpl::initializePackageContents()
 	setName(eNAME);
 	setURI(eNS_URI);
 
-	// Add supertypes to classes
-	struct null_deleter{void operator()(void const *) const {} };
-	std::shared_ptr<FUMLMultiplePinsPackageImpl> fUMLMultiplePins = std::shared_ptr<FUMLMultiplePinsPackageImpl>(this, null_deleter());
-
 	initializePackageActivities();
 	initializePackageClasses();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
+	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageStereotypes();
+	initializePackageValueSpecifications();
+
+	
 }
 
 //ActivityNodes and Edges
@@ -887,145 +892,8 @@ void FUMLMultiplePinsPackageImpl::initializePackageClasses()
 	
 
     // TestClass function behaviors
-	fUMLMultiplePins_TestClass_istEnde->setName("istEnde");
-	// parameter inParam
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setName("inParam");
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setLower(1);
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setUpper(1);
-	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter outParam
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam->setName("outParam");
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam->setLower(1);
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_istEnde_outParam->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-
-	fUMLMultiplePins_TestClass_fbDoAll->setName("fbDoAll");
-	// parameter param_0
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setName("param_0");
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setLower(1);
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setUpper(1);
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_1
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setName("param_1");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_2
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setName("param_2");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_3
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setName("param_3");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_4
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setName("param_4");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_5
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setName("param_5");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_6
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setName("param_6");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_7
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setName("param_7");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_8
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setName("param_8");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-	// parameter param_9
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setName("param_9");
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setLower(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setUpper(1);
-	
-	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setDirection(uml::ParameterDirectionKind::INOUT);
-	
-
 	fUMLMultiplePins_TestClass_fbDo1->setName("fbDo1");
+	fUMLMultiplePins_TestClass_fbDo1->setContext(fUMLMultiplePins_TestClass);
 	// parameter input_1
 	fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_input_1->setName("input_1");
 	fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_input_1->setType(get_fUMLMultiplePins_TestClass());
@@ -1154,6 +1022,146 @@ void FUMLMultiplePinsPackageImpl::initializePackageClasses()
 	fUMLMultiplePins_TestClass_fbDo1_fUMLMultiplePins_TestClass_fbDo1_param_9->setDirection(uml::ParameterDirectionKind::OUT);
 	
 
+	fUMLMultiplePins_TestClass_fbDoAll->setName("fbDoAll");
+	fUMLMultiplePins_TestClass_fbDoAll->setContext(fUMLMultiplePins_TestClass);
+	// parameter param_0
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setName("param_0");
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setLower(1);
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setUpper(1);
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_0->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_1
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setName("param_1");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_1->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_2
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setName("param_2");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_2->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_3
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setName("param_3");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_3->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_4
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setName("param_4");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_4->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_5
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setName("param_5");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_5->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_6
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setName("param_6");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_6->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_7
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setName("param_7");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_7->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_8
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setName("param_8");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_8->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+	// parameter param_9
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setName("param_9");
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setLower(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_fbDoAll_fUMLMultiplePins_TestClass_fbDoAll_param_9->setDirection(uml::ParameterDirectionKind::INOUT);
+	
+
+	fUMLMultiplePins_TestClass_istEnde->setName("istEnde");
+	fUMLMultiplePins_TestClass_istEnde->setContext(fUMLMultiplePins_TestClass);
+	// parameter inParam
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setName("inParam");
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setLower(1);
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setUpper(1);
+	fUMLMultiplePins_TestClass_istEnde_fUMLMultiplePins_TestClass_istEnde_inParam->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter outParam
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam->setName("outParam");
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam->setLower(1);
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam->setUpper(1);
+	
+	fUMLMultiplePins_TestClass_istEnde_outParam->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+
 }
 
 void FUMLMultiplePinsPackageImpl::initializePackageDependencies()
@@ -1164,11 +1172,20 @@ void FUMLMultiplePinsPackageImpl::initializePackageInstanceSpecifications()
 {
 }
 
+
+void FUMLMultiplePinsPackageImpl::initializePackageInterfaceRealizations()
+{
+}
+
 void FUMLMultiplePinsPackageImpl::initializePackageInterfaces()
 {
 }
 
 void FUMLMultiplePinsPackageImpl::initializePackageStereotypes()
+{
+}
+
+void FUMLMultiplePinsPackageImpl::initializePackageValueSpecifications()
 {
 }
 

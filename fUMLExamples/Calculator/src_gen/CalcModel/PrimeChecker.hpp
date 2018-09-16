@@ -42,12 +42,12 @@ namespace CalcModel
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool divides(  )  = 0;
-			virtual bool isNotFinished(  )  = 0;
-			virtual bool isOdd(  )  = 0;
-			virtual void next(  )  = 0;
-			virtual void printIsPrime(  )  = 0;
-			virtual void printNotPrime(  )  = 0;
+			virtual bool divides()  = 0;
+			virtual bool isNotFinished()  = 0;
+			virtual bool isOdd()  = 0;
+			virtual void next()  = 0;
+			virtual void printIsPrime()  = 0;
+			virtual void printNotPrime()  = 0;
 			
 			
 		protected:
@@ -57,7 +57,6 @@ namespace CalcModel
 			int m_divider= 3 /*defined default value*/;
 			int m_number= 524287 /*defined default value*/;
 			
-	
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER__HPP */

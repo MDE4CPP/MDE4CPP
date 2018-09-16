@@ -36,7 +36,7 @@ std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::shared_ptr<uml::
     }
 
 	//TODO: still two times run through map
-	std::string _className = _class->getQualifiedName();
+	std::string _className = _class->getName();
 	return create(_className);
 }
 
