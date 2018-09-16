@@ -1,5 +1,5 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
 }
 
 description "Build task for project: pluginFramework"
@@ -27,7 +27,6 @@ task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
     })	
 	if(!file('.' + File.separator + 'src' + File.separator + 'pluginFramework' + File.separator + '.cmake' + File.separator).exists()) {
 		outputs.upToDateWhen { false }
-		println 'asdasd'
 	}
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFramework.dll')
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFrameworkd.dll')
