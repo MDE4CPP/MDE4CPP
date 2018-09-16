@@ -12,8 +12,8 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
   * Gradle 4.9 or older
 	* Go to ${user folder}/.gradle 
 	* create file gradle.properties
-		* create entry: make_parallel_jobs=number
-		* number ... count of parallel build jobs
+		* create entry: workerCount=number
+		* number ... count of worker for parallel compile tasks
   * MinGW:
 	* for building 32 bit applications: (choose one)
 		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
