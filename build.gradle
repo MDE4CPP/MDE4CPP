@@ -1,6 +1,6 @@
 description 'fUML collection'
 
-task createFUML4CPP(dependsOn: ['checkDependencies', 'fUML4CPP.generator:compileJava', 'executeCompiler', 'fUML4CPP.generator:jar']) {
+task createFUML4CPP(dependsOn: ['checkDependencies', 'fUML4CPP.generator:compileJava', 'executeCompiler', 'fUML4CPP.generator:deliverFUML4CPP']) {
 	group 'Generators'
 	description 'create executable jar fUML4CPP generator'
 
