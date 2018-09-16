@@ -33,14 +33,11 @@ task generateAll() {
 
 task initPropertyFile() {
 	doFirst {
-		def propertyFile = file('./gradle.properties')
-		if(!propertyFile.exists()) {
-			def count = findProperty('worker') ?: 1
-			def content = "workerCount=" + count
-			if (getProject().hasProperty('parallel')) {
-				content += System.lineSeparator() + "org.gradle.parallel=true"
-			}		
-			new File("$projectDir/gradle.properties").text = content
-		}
+		def count = findProperty('worker') ?: 1
+		def content = "workerCount=" + count
+		if (getProject().hasProperty('parallel')) {
+			content += System.lineSeparator() + "org.gradle.parallel=true"
+		}		
+		new File("$projectDir/gradle.properties").text = content
 	}
 }
