@@ -36,14 +36,12 @@
 #include "fUML/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 
-[if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
-[let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
-	[if (fb._body->asOrderedSet()->size() = 2)]
-//Included from function behavior "[fb.name/]"
-[fb._body->asOrderedSet()->at(2)/]
-	[/if]
-[/let]
-[/if]
+[if (anOpaqueBehavior.language->includes('INCLUDE'))]
+[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('INCLUDE')]
+[if (0 < index and index <= anOpaqueBehavior._body->size())]
+//Included from function behavior "[anOpaqueBehavior.name/]"
+[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+[/if][/let][/if]
 
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
@@ -164,7 +162,15 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.ns()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 		[/if]
 
-   		[anOpaqueBehavior._body->first()/]
+   		[if (anOpaqueBehavior.language->includes('CPP'))]
+		[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('CPP') ]
+		[if (0 < index and index <= anOpaqueBehavior._body->size())]
+		[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+		[/if][/let]
+		[else]
+			std::cout << __PRETTY_FUNCTION__ << std::endl;
+			throw "UnsupportedOperationException";
+		[/if]
 		[elseif (not anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
 		// getBehavior generated
 [if (anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclIsKindOf(Property))]
