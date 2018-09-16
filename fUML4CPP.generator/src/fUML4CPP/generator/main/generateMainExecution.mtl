@@ -113,10 +113,10 @@ int main()
 //include Model package
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
-[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
+[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name))]
 #include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
-[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet())]
+[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
