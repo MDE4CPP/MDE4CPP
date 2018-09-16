@@ -162,7 +162,7 @@ task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate
 	group '[packageName/]'
 	description 'generate C++ code of [packageName/].uml model'
 
-	modelFilePath = file("./[packageName/].uml")
+	modelFilePath = file('.' + File.separator + '[packageName/].uml')
 	structureOnly = true
 
 	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
@@ -181,17 +181,36 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	projectFolder = file("./[packageName/]")
+	projectFolder = file('.' + File.separator + '[packageName/]')
 
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
+	inputs.files(fileTree('.') {
+        exclude '[packageName/]/.cmake/**'
+    })
+	if(!file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/].dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]d.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + '[packageName/]')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
 [for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
-	dependsOn getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+
+	// dependency to model '[packName/]'
+	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+	dependsOn [packName/]
+	inputs.files([packName/].outputs)
 [/for]
 }
 
 task clean {
 	doFirst {
-		def cmakeFolder = file('./[packageName/]/.cmake/')
+		def cmakeFolder = file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator)
 		if(cmakeFolder.exists()) {
     		delete cmakeFolder.absolutePath
    			println "deleting folder " + cmakeFolder.absolutePath
