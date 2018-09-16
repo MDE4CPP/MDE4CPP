@@ -49,7 +49,7 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 		}
 		exec {
 			workingDir 'xerces/xerces-c-3.2.1/.cmake'
-			def count = findProperty('make_parallel_jobs') ?: 1
+			def count = findProperty('workerCount') ?: 1
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
 				commandLine 'cmd', '/c', 'mingw32-make install -j' + count
 			} else {
