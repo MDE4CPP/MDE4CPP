@@ -69,9 +69,8 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
       <language>CPP</language>
-      <body>std::cout &lt;&lt; &quot;init&quot; &lt;&lt; std::endl;&#xD;
-input_1=0;&#xD;
-</body>
+      <body>std::cout &lt;&lt; &quot;init:&quot; &lt;&lt; input_1 &lt;&lt; std::endl;&#xD;
+param_0=0;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_roBB4BV4Eeizx8YA6wZ-UA" name="istEnde">
       <ownedParameter xmi:id="_hQgsYBZFEeisfP-nBA5Rfg" name="inParam">
@@ -81,9 +80,11 @@ input_1=0;&#xD;
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
       <language>CPP</language>
-      <body>if(inParam>100000)&#xD;
+      <body>//std::cout &lt;&lt; &quot;istEnde&quot; &lt;&lt; inParam&lt;&lt; std::endl;&#xD;
+if(inParam>100000)&#xD;
 {&#xD;
 	outParam=true;&#xD;
+	std::cout &lt;&lt; &quot;Ende!!!&quot; &lt;&lt; std::endl;&#xD;
 }&#xD;
 else&#xD;
 {&#xD;
