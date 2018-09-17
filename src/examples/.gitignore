@@ -1,8 +1,0 @@
-.gradle/
-build/
-SubsetUnion/Debug/
-.cmake
-.idea
-cmake-build-debug
-cmake-build-release
-.settings

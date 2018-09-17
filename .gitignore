@@ -1,6 +1,12 @@
+.cmake/
 .gradle/
-application/*
-/*.bat
+.idea/
+.settings/
 .ssh/
+bin/
+build/
+userProjects/
+*.bat
+/application/
 /gradle.properties
-/userProjects
+xerces

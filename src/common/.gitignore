@@ -1,6 +1,0 @@
-.gradle/
-build/
-.cmake
-/persistence/xerces
-/boost/src
-/boost/boost.zip

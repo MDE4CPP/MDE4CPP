@@ -1,6 +1,0 @@
-.gradle/
-.cmake
-
-ecore/src_gen/ecore/cmake-build-debug/
-
-ecore/src_gen/ecore/\.idea/
