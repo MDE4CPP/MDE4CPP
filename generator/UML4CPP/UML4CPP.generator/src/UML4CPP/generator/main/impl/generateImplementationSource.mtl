@@ -1,0 +1,147 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
+
+[template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
+[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
+
+[defineDebugMacro()/]
+
+#include <iostream>
+
+[generateAbstractDataTypesIncludes()/]
+#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
+[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
+#include "[cl.getNearestPackage().ns()/]/[cl.name.toUpperFirst()/].hpp"
+[/for]
+
+[if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if][/if]
+
+[for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty())]
+[if (aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes('INCLUDE'))]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf('INCLUDE')]
+[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
+//Included from operation "[aOperation.name/]"
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
+[/if][/let][/if][/if][/if][/for]
+
+[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+#include "uml/EnumerationLiteral.hpp"
+[/if]
+[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
+#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
+[/for]
+
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[className/]::[className/]()
+{
+	//***********************************
+	// init Get Set
+	[aClass.generateGetSetInit()/] 
+
+	// init properties without default
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
+	[/for]
+
+	[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
+	[instVal.initPropertyFromInstanceValue()/]
+	[/for]
+	
+}
+
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+[className/]::[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+:[className/]()
+{
+    m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
+}
+[/if]
+[/let]
+[/let]
+[/for]
+
+
+
+[className/]::~[className/]()
+{
+}
+[if (isSingleton())]
+
+[aClass.name.toUpperFirst()/]* [className/]::create()
+{
+	return new [className/]();
+}
+[/if]
+
+std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass()
+{
+	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.packageGetter(aClass)/];
+}
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
+[aAttribute.generateAttributeSetterImplementationCpp()/]
+[aAttribute.generateAttributeGetterImplementationCpp()/]
+[/for]
+[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
+[aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
+[/if][/for][/for]
+
+//*********************************
+// Operations
+//*********************************
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
+[aOperation.generateOperationImplementation()/]
+[/for]
+
+//*********************************
+// Structural Feature Getter/Setter
+//*********************************
+[aClass.generateeGetSetImpl()/]
+[aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationImpl(aClass)/]
+
+[aClass.generateGetThisPtrCPP()/]
+[/file]
+[/template]

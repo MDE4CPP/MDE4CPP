@@ -1,0 +1,130 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
+virtual public uml::StereotypeImpl
+[/template]
+
+[template public baseClass(aClass : Class) ?(not oclIsKindOf(Stereotype))]
+virtual public uml::ClassImpl
+[/template]
+
+[template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
+[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[startGuard(className)/]
+
+#include <functional>
+
+//Model includes
+#include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
+[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
+[/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+#include "uml/impl/ClassImpl.hpp"
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+#include "uml/impl/StereotypeImpl.hpp"
+[/if]
+#include "uml/Property.hpp"
+
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
+
+namespace uml
+{
+	class Property;
+[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+	class EnumerationLiteral;
+[/if]
+}
+
+//*********************************
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+{
+[/if]
+	class [className/] [for (sClass : Class | aClass.superClass) before (':') separator (',')]
+virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superClass->isEmpty())]
+ : [aClass.baseClass()/][/if], virtual public [aClass.name.toUpperFirst()/]
+	{
+		private:    
+			[className/]([className/] const&) = delete;
+			[className/]& operator=([className/] const&) = delete;
+
+		protected:
+[if (isSingleton())]
+			friend class [aClass.name.toUpperFirst()/];
+[else]
+			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
+[/if]
+			//constructor
+			[className/]();
+			[aClass.generateGetThisPtr()/]
+
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+			[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/]);
+[/if] 
+[/let]
+[/let]
+[/for]
+
+		public:
+			//destructor
+			virtual ~[className/]();
+
+			//*********************************
+			// Operations
+			//*********************************
+			[aClass.ownedOperation.generateOperationDecl(true)/]
+			
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aClass.ownedAttribute.generateAttributeAccessorsDecl(true)/]
+			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+			[aAttribute.generateAttributeAccessorsDecl(true)/]
+			[/if][/for][/for]
+
+		protected:
+			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass();
+
+		public:
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
+			[aClass.generateeGetSetDel(true)/]
+			[aClass.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
+		
+		private:
+[if (isSingleton())]
+			static [aClass.name.toUpperFirst()/] * create();
+[/if]
+			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
+			[aClass.generateGetSetMemeberInit()/]
+	};
+[if (not aPackage.ignoreNamespace())]}[/if]
+[endGuard(className)/]
+[/file]
+[/template]

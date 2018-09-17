@@ -1,0 +1,125 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[template public baseInterface(aInterface : Interface) ?(oclIsKindOf(Stereotype))]
+virtual public uml::Stereotype
+[/template]
+
+[template public baseInterface(aInterface : Interface) ?(not oclIsKindOf(Stereotype))]
+virtual public uml::Element
+[/template]
+
+[template public generateInterfaceCreation(anInterface : Interface)]
+[memberName(anInterface)/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
+
+[/template]
+
+[template public generateInterfaceInitialization(anInterface : Interface)]
+[memberName(anInterface)/]->setName("[anInterface.name/]");
+[memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
+
+[/template]
+
+[template public generateModel(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
+[file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aInterface)/]
+
+#include <memory>
+#include <string> 
+
+//*********************************
+// generated Includes
+
+[generateAbstractDataTypesForwardDeclaration()/]
+
+//Forward Declaration for used types
+[for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/]
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+
+[if (aInterface.oclIsKindOf(Stereotype))]
+#include "uml/Stereotype.hpp"
+[/if]
+// enum includes
+[for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.concat('.hpp')/]"[/for]
+
+//*********************************
+
+[if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
+{
+[/if]
+	class [aInterface.name/] [for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [InterfaceWithNamespace(aInterface,aClassifier)/][/for]
+
+	{
+		protected:
+			[aInterface.name/](){}
+
+		public:
+			//destructor
+			virtual ~[aInterface.name/]() {}
+			
+			//*********************************
+			// Getter Setter
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeAccessorsDecl(false)/]
+			
+			//*********************************
+			// Operations
+			//*********************************
+			[aInterface.ownedOperation.generateOperationDecl(false)/]
+
+		protected:
+			//*********************************
+			// Members
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeProtectedMember()/]
+	};
+[if (not aInterface.getNearestPackage().ignoreNamespace())]}[/if]
+[endGuard(aInterface)/]
+[/file]
+[/template]
+
