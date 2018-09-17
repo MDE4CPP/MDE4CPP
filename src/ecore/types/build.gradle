@@ -1,0 +1,13 @@
+description 'Build task for project: types'
+
+task buildTypes() {
+	group 'types'
+	description 'build types'
+
+	dependsOn 'model:generateTypes'
+	dependsOn 'src_gen:compileTypes'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+}
+
+tasks.getByPath('src_gen:compileTypes').mustRunAfter tasks.getByPath('model:generateTypes')
