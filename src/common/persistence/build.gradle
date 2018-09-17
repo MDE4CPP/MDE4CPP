@@ -1,0 +1,138 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
+	id "de.undercouch.download" version "3.4.2"
+}
+
+description 'Common collection'
+
+task deliverPersistenceInterface(type: Copy) {
+	group 'Persistence'
+	description 'deliver persistence interface header to %MDE4CPP_HOME%/application/include/persistence/interfaces'
+	from ("./interfaces") {
+		include "*.hpp"
+	}
+	exclude "build", ".gradle"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence/interfaces"
+	inputs.dir file("./interfaces")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
+}
+
+task downloadFile(type: Download) {
+	description 'download xerces'
+    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.1.zip'
+    dest new File(file('./xerces/xerces-c-3.2.1.zip').absolutePath)
+    onlyIfModified true
+}
+
+task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
+	description 'download and unzip xerces'
+	from zipTree('xerces/xerces-c-3.2.1.zip')
+	into 'xerces'
+}
+
+task compileXerces(dependsOn: downloadAndUnzipFile) {
+	description 'download, unzip and compile xerces'
+
+	def folder = new File(file('./xerces/xerces-c-3.2.1/.cmake').absolutePath)
+	if( !folder.exists()) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+			} else {
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.1").absolutePath
+			}
+		}
+		exec {
+			workingDir 'xerces/xerces-c-3.2.1/.cmake'
+			def count = findProperty('workerCount') ?: 1
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + count
+			} else {
+			   commandLine '/bin/sh', '-c', 'make install -j' + count
+			}			
+		}
+		copy {
+			from "xerces/bin"
+			into System.getenv('MDE4CPP_HOME')+"/application"
+			include "**/*.hpp", "**/*.dll", "**/*.a", "**/*.c"
+			exclude "cmake"
+			exclude "lib/cmake"
+			exclude "lib/pkgconfig"
+			exclude "share"
+		}
+		copy {
+			from "xerces/bin/lib"
+			into System.getenv('MDE4CPP_HOME')+"/application/bin"
+			include "**/*.so", "**/*.dylib"
+			exclude "cmake"
+			exclude "pkgconfig"
+		}
+	}
+	
+	inputs.files(fileTree('.' + File.separator + 'xerces' + File.separator + 'xerces-c-3.2.1') {
+        exclude '.cmake/**'
+    })
+	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libxerces-c.dll')	
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'xercesc')
+}
+
+task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Persistence"
+	description "compile Persistence"
+
+	projectFolder = file('.')
+	
+	inputs.files(fileTree('.') {
+        exclude '.cmake/**'
+    })
+	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'persistence.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'persistenced.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to 'xerces'
+	def xerces = getRootProject().getTasksByName('compileXerces', true)
+	dependsOn xerces
+	inputs.files(xerces.outputs)
+
+	// dependency to 'pluginFramwork'
+	def pluginFramwork = getRootProject().getTasksByName('compilePluginFramework', true)
+	dependsOn pluginFramwork
+	inputs.files(pluginFramwork.outputs)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+		
+		cmakeFolder = file('.' + File.separator + 'xerces' + File.separator + 'xerces-c-3.2.1' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

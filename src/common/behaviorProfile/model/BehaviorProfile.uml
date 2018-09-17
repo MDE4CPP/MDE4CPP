@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_cH83QGowEei2VcQn_z8IFw" name="BehaviorProfile" metaclassReference="_OnSSIGoxEei2VcQn_z8IFw">
+  <eAnnotations xmi:id="_CFrg0GozEei2VcQn_z8IFw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_CFrg0WozEei2VcQn_z8IFw" name="BehaviorProfile" nsURI="http:///schemas/BehaviorProfile/_CFodgGozEei2VcQn_z8IFw/0" nsPrefix="BehaviorProfile">
+      <eAnnotations xmi:id="_CFsH4GozEei2VcQn_z8IFw" source="UMLDesignerProfileVersion">
+        <details xmi:id="_CFsH4WozEei2VcQn_z8IFw" key="Version" value="0.0.1"/>
+        <details xmi:id="_CFsH4mozEei2VcQn_z8IFw" key="Date" value="2018-06-07"/>
+        <details xmi:id="_CFsH42ozEei2VcQn_z8IFw" key="Author" value=""/>
+        <details xmi:id="_CFsH5GozEei2VcQn_z8IFw" key="Copyright" value=""/>
+        <details xmi:id="_CFsH5WozEei2VcQn_z8IFw" key="Comment" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CFrg0mozEei2VcQn_z8IFw" name="getBehavior">
+        <eAnnotations xmi:id="_CFrg02ozEei2VcQn_z8IFw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PV99EGoxEei2VcQn_z8IFw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CFrg1GozEei2VcQn_z8IFw" name="property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CFrg1mozEei2VcQn_z8IFw" name="base_OpaqueBehavior" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CFrg2GozEei2VcQn_z8IFw" name="setBehavior">
+        <eAnnotations xmi:id="_CFrg2WozEei2VcQn_z8IFw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_gspVAGoxEei2VcQn_z8IFw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CFrg2mozEei2VcQn_z8IFw" name="property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CFrg3GozEei2VcQn_z8IFw" name="base_OpaqueBehavior" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//OpaqueBehavior"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_OnSSIGoxEei2VcQn_z8IFw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#OpaqueBehavior"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_PV99EGoxEei2VcQn_z8IFw" name="getBehavior">
+    <ownedAttribute xmi:id="_W14EMGoxEei2VcQn_z8IFw" name="property">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="__gNTYGoyEei2VcQn_z8IFw" name="base_OpaqueBehavior" association="__gN6cGoyEei2VcQn_z8IFw">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#OpaqueBehavior"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_gspVAGoxEei2VcQn_z8IFw" name="setBehavior">
+    <ownedAttribute xmi:id="_iOTVAGoxEei2VcQn_z8IFw" name="property">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_AJUh0GozEei2VcQn_z8IFw" name="base_OpaqueBehavior" association="_AJUh0WozEei2VcQn_z8IFw">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#OpaqueBehavior"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="__gN6cGoyEei2VcQn_z8IFw" memberEnd="__gN6cWoyEei2VcQn_z8IFw __gNTYGoyEei2VcQn_z8IFw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="__gN6cWoyEei2VcQn_z8IFw" name="extension_getBehavior" type="_PV99EGoxEei2VcQn_z8IFw" association="__gN6cGoyEei2VcQn_z8IFw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_AJUh0WozEei2VcQn_z8IFw" memberEnd="_AJUh0mozEei2VcQn_z8IFw _AJUh0GozEei2VcQn_z8IFw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_AJUh0mozEei2VcQn_z8IFw" name="extension_setBehavior" type="_gspVAGoxEei2VcQn_z8IFw" association="_AJUh0WozEei2VcQn_z8IFw"/>
+  </packagedElement>
+</uml:Profile>
