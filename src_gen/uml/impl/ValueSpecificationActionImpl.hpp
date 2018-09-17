@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ValueSpecificationActionImpl();
-			virtual std::shared_ptr<ValueSpecificationAction> getThisValueSpecificationActionPtr();
+			virtual std::shared_ptr<ValueSpecificationAction> getThisValueSpecificationActionPtr() const;
 			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The type of the value ValueSpecification must conform to the type of the result OutputPin.
 			value.type.conformsTo(result.type) */ 
-			virtual bool compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ValueSpecificationAction> m_thisValueSpecificationActionPtr;

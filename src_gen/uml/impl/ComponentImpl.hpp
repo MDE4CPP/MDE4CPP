@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ComponentImpl();
-			virtual std::shared_ptr<Component> getThisComponentPtr();
+			virtual std::shared_ptr<Component> getThisComponentPtr() const;
 			virtual void setThisComponentPtr(std::weak_ptr<Component> thisComponentPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,19 +63,19 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a(n) (abstract) class with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract)  ;
+			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) ;
 			
 			/*!
 			 Creates a enumeration with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name)  ;
+			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name) ;
 			
 			/*!
 			 Creates an interface with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name)  ;
+			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name) ;
 			
 			/*!
 			 Creates a primitive type with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name) ;
 			
 			/*!
 			 Derivation for Component::/provided
@@ -87,7 +87,7 @@ namespace uml
 			        providedByPorts : Set(Interface) = ports.provided->asSet()
 			in     ris->union(realizingClassifierInterfaces) ->union(providedByPorts)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() ;
 			
 			/*!
 			 Derivation for Component::/required
@@ -100,17 +100,17 @@ namespace uml
 			in	    uis->union(realizingClassifierInterfaces)->union(usedByPorts)->asSet()
 			)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() ;
 			
 			/*!
 			 A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty() */ 
-			virtual bool no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty() */ 
-			virtual bool no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -206,9 +206,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Component> m_thisComponentPtr;

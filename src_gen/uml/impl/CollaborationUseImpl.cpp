@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -107,6 +108,7 @@ CollaborationUseImpl::~CollaborationUseImpl()
 			:CollaborationUseImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -209,19 +211,19 @@ std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::client_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::connectors(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -260,7 +262,7 @@ std::weak_ptr<uml::Element > CollaborationUseImpl::getOwner() const
 }
 
 
-std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr()
+std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const
 {
 	return m_thisCollaborationUsePtr.lock();
 }
@@ -286,16 +288,16 @@ std::shared_ptr<ecore::EObject> CollaborationUseImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
-			return getRoleBinding(); //9010
+			return eAny(getRoleBinding()); //9010
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
-			return getType(); //9011
+			return eAny(getType()); //9011
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool CollaborationUseImpl::internalEIsSet(int featureID) const
 {
@@ -308,14 +310,14 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool CollaborationUseImpl::eSet(int featureID, boost::any newValue)
+bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Collaboration> _type = boost::any_cast<std::shared_ptr<uml::Collaboration>>(newValue);
+			std::shared_ptr<uml::Collaboration> _type = newValue->get<std::shared_ptr<uml::Collaboration>>();
 			setType(_type); //9011
 			return true;
 		}

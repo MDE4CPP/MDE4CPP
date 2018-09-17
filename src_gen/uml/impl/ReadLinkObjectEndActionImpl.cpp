@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -125,6 +126,7 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			:ReadLinkObjectEndActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -136,6 +138,7 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			:ReadLinkObjectEndActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -147,6 +150,7 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			:ReadLinkObjectEndActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -322,43 +326,43 @@ std::shared_ptr<ecore::EClass> ReadLinkObjectEndActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkObjectEndActionImpl::association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::association_of_association(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::ends_of_association(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::property(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::property(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -426,7 +430,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadLinkObjectEndActionImpl::get
 }
 
 
-std::shared_ptr<ReadLinkObjectEndAction> ReadLinkObjectEndActionImpl::getThisReadLinkObjectEndActionPtr()
+std::shared_ptr<ReadLinkObjectEndAction> ReadLinkObjectEndActionImpl::getThisReadLinkObjectEndActionPtr() const
 {
 	return m_thisReadLinkObjectEndActionPtr.lock();
 }
@@ -462,18 +466,18 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
-			return getEnd(); //16228
+			return eAny(getEnd()); //16228
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
-			return getObject(); //16229
+			return eAny(getObject()); //16229
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
-			return getResult(); //16230
+			return eAny(getResult()); //16230
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 {
@@ -488,28 +492,28 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReadLinkObjectEndActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
 			setEnd(_end); //16228
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //16229
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16230
 			return true;
 		}

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -187,7 +185,7 @@ namespace uml
 			/*!
 			 The number and order of argument InputPins must be the same as the number and order of attributes of the signal.
 			argument->size()=signal.allAttributes()->size() */ 
-			virtual bool number_order(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool number_order(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
@@ -196,12 +194,12 @@ namespace uml
 				argument->at(i).type.conformsTo(attribute->at(i).type) and 
 				argument->at(i).isOrdered = attribute->at(i).isOrdered and
 				argument->at(i).compatibleWith(attribute->at(i))) */ 
-			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

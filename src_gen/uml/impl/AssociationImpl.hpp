@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AssociationImpl();
-			virtual std::shared_ptr<Association> getThisAssociationPtr();
+			virtual std::shared_ptr<Association> getThisAssociationPtr() const;
 			virtual void setThisAssociationPtr(std::weak_ptr<Association> thisAssociationPtr);
 
 			//Additional constructors for the containments back reference
@@ -65,38 +65,38 @@ namespace uml
 			/*!
 			 Ends of Associations with more than two ends must be owned by the Association itself.
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd) */ 
-			virtual bool association_ends(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool association_ends(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none)) */ 
-			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 memberEnd->forAll(type->notEmpty()) */ 
-			virtual bool ends_must_be_typed(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() ;
 			
 			/*!
 			 Determines whether this association is a binary association, i.e. whether it has exactly two member ends. */ 
-			virtual bool isBinary()  ;
+			virtual bool isBinary() ;
 			
 			/*!
 			 An Association specializing another Association has the same number of ends as the other Association.
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size()) */ 
-			virtual bool specialized_end_number(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
 				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type))) */ 
-			virtual bool specialized_end_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -189,9 +189,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Association> m_thisAssociationPtr;

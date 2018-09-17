@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -124,6 +125,7 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 			:ProtocolTransitionImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -135,6 +137,7 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 			:ProtocolTransitionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -315,25 +318,25 @@ std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds() 
+std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -398,7 +401,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ProtocolTransitionImpl::getRedef
 }
 
 
-std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr()
+std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
 {
 	return m_thisProtocolTransitionPtr.lock();
 }
@@ -429,18 +432,18 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
-			return getPostCondition(); //23727
+			return eAny(getPostCondition()); //23727
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
-			return getPreCondition(); //23728
+			return eAny(getPreCondition()); //23728
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
-			return getReferred(); //23729
+			return eAny(getReferred()); //23729
 	}
-	return TransitionImpl::internalEIsSet(featureID);
+	return TransitionImpl::eGet(featureID, resolve, coreType);
 }
 bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 {
@@ -455,21 +458,21 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 	}
 	return TransitionImpl::internalEIsSet(featureID);
 }
-bool ProtocolTransitionImpl::eSet(int featureID, boost::any newValue)
+bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _postCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _postCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setPostCondition(_postCondition); //23727
 			return true;
 		}
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _preCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _preCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setPreCondition(_preCondition); //23728
 			return true;
 		}

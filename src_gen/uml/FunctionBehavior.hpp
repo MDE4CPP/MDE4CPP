@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -274,19 +272,19 @@ namespace uml
 			    a.type.oclIsKindOf(DataType) and
 			      hasAllDataTypeAttributes(a.type.oclAsType(DataType))))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d)  = 0;
+			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d) = 0;
 			
 			/*!
 			 A FunctionBehavior has at least one output Parameter.
 			self.ownedParameter->
 			  select(p | p.direction = ParameterDirectionKind::out or p.direction= ParameterDirectionKind::inout or p.direction= ParameterDirectionKind::return)->size() >= 1 */ 
-			virtual bool one_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_output_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The types of the ownedParameters are all DataTypes, which may not nest anything but other DataTypes.
 			ownedParameter->forAll(p | p.type <> null and
 			  p.type.oclIsTypeOf(DataType) and hasAllDataTypeAttributes(p.type.oclAsType(DataType))) */ 
-			virtual bool types_of_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool types_of_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -168,7 +169,7 @@ std::shared_ptr<Union<uml::Element>> RelationshipImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr()
+std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
 {
 	return m_thisRelationshipPtr.lock();
 }
@@ -189,14 +190,14 @@ std::shared_ptr<ecore::EObject> RelationshipImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return getRelatedElement(); //214
+			return eAny(getRelatedElement()); //214
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool RelationshipImpl::internalEIsSet(int featureID) const
 {
@@ -207,7 +208,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool RelationshipImpl::eSet(int featureID, boost::any newValue)
+bool RelationshipImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

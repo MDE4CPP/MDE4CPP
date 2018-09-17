@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -259,7 +257,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class. */ 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)  = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) = 0;
 			
 			/*!
 			 Derivation for Class::/extension : Extension
@@ -267,22 +265,22 @@ namespace uml
 			  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier)) in
 			  endTypes->includes(self) or endTypes.allParents()->includes(self) ))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions()  = 0;
+			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions() = 0;
 			
 			/*!
 			 Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses()  = 0;
+			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses() = 0;
 			
 			/*!
 			 Determines whether this class is a metaclass. */ 
-			virtual bool isMetaclass()  = 0;
+			virtual bool isMetaclass() = 0;
 			
 			/*!
 			 Only an active Class may own Receptions and have a classifierBehavior.
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null) */ 
-			virtual bool passive_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool passive_class(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

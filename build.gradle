@@ -1,47 +1,14 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-}
-apply plugin: 'base' 
+description 'Build task for project: uml'
 
-description 'Build tasks for project: uml'
-
-task buildUml(dependsOn: ['generateUml', 'compileUml']) {
+task buildUml() {
 	group 'uml'
 	description 'build uml'
+
+	dependsOn 'model:generateUml'
+	dependsOn 'src_gen:compileUml'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 }
 
-task compileUml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'uml'
-	description 'compile uml'
-
-	projectFolder = file("./src_gen/uml")
-}
-
-task generateUml(type: JavaExec) {
-	group 'uml'
-	description 'generate C++ code of uml.ecore model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "uml.ecore", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/uml.ecore")
-	outputs.dir file("src_gen")
-	
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
-			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
-		}
-	}
-}
-
-compileUml.mustRunAfter generateUml
-
-clean.doFirst {
-	def cmakeFolder = file('./src_gen/uml/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
-}
+tasks.getByPath('src_gen:compileUml').mustRunAfter tasks.getByPath('model:generateUml')

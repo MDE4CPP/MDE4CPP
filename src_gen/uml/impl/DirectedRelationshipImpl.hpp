@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DirectedRelationshipImpl();
-			virtual std::shared_ptr<DirectedRelationship> getThisDirectedRelationshipPtr();
+			virtual std::shared_ptr<DirectedRelationship> getThisDirectedRelationshipPtr() const;
 			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr);
 
 			//Additional constructors for the containments back reference
@@ -97,9 +97,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DirectedRelationship> m_thisDirectedRelationshipPtr;

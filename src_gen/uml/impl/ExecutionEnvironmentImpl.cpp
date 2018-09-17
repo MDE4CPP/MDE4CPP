@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -142,6 +143,7 @@ ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
 			:ExecutionEnvironmentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -166,10 +168,12 @@ ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -186,6 +190,7 @@ ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
 			:ExecutionEnvironmentImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -543,7 +548,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Executi
 }
 
 
-std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr()
+std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
 {
 	return m_thisExecutionEnvironmentPtr.lock();
 }
@@ -584,12 +589,12 @@ std::shared_ptr<ecore::EObject> ExecutionEnvironmentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return NodeImpl::internalEIsSet(featureID);
+	return NodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionEnvironmentImpl::internalEIsSet(int featureID) const
 {
@@ -598,7 +603,7 @@ bool ExecutionEnvironmentImpl::internalEIsSet(int featureID) const
 	}
 	return NodeImpl::internalEIsSet(featureID);
 }
-bool ExecutionEnvironmentImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionEnvironmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

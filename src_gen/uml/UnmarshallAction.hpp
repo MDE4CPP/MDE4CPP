@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,22 +175,22 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size() */ 
-			virtual bool number_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool number_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType) */ 
-			virtual bool object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1 */ 
-			virtual bool structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool structural_feature(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
@@ -201,7 +199,7 @@ namespace uml
 				attribute->at(i).type.conformsTo(result->at(i).type) and
 				attribute->at(i).isOrdered=result->at(i).isOrdered and
 				attribute->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool type_ordering_and_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

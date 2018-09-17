@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			:RemoveStructuralFeatureValueActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			:RemoveStructuralFeatureValueActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			:RemoveStructuralFeatureValueActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -336,7 +340,7 @@ bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -384,7 +388,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RemoveStructuralFeatureValueActi
 }
 
 
-std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr()
+std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr() const
 {
 	return m_thisRemoveStructuralFeatureValueActionPtr.lock();
 }
@@ -420,16 +424,16 @@ std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionImpl::eContain
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates(); //16932
+			return eAny(getIsRemoveDuplicates()); //16932
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt(); //16933
+			return eAny(getRemoveAt()); //16933
 	}
-	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
+	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
 bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
@@ -442,21 +446,21 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
-bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, boost::any newValue)
+bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
-			bool _isRemoveDuplicates = boost::any_cast<bool>(newValue);
+			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //16932
 			return true;
 		}
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _removeAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setRemoveAt(_removeAt); //16933
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -143,6 +144,7 @@ AssociationClassImpl::~AssociationClassImpl()
 			:AssociationClassImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -167,10 +169,12 @@ AssociationClassImpl::~AssociationClassImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -187,6 +191,7 @@ AssociationClassImpl::~AssociationClassImpl()
 			:AssociationClassImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -515,13 +520,13 @@ std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationClassImpl::cannot_be_defined(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationClassImpl::disjoint_attributes_ends(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -576,7 +581,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Associa
 }
 
 
-std::shared_ptr<AssociationClass> AssociationClassImpl::getThisAssociationClassPtr()
+std::shared_ptr<AssociationClass> AssociationClassImpl::getThisAssociationClassPtr() const
 {
 	return m_thisAssociationClassPtr.lock();
 }
@@ -618,18 +623,18 @@ std::shared_ptr<ecore::EObject> AssociationClassImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AssociationClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AssociationClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	boost::any result;
-	result = AssociationImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = AssociationImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ClassImpl::internalEIsSet(featureID);
+	result = ClassImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool AssociationClassImpl::internalEIsSet(int featureID) const
@@ -646,7 +651,7 @@ bool AssociationClassImpl::internalEIsSet(int featureID) const
 	result = ClassImpl::internalEIsSet(featureID);
 	return result;
 }
-bool AssociationClassImpl::eSet(int featureID, boost::any newValue)
+bool AssociationClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

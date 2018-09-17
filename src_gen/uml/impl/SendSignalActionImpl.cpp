@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -123,6 +124,7 @@ SendSignalActionImpl::~SendSignalActionImpl()
 			:SendSignalActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -134,6 +136,7 @@ SendSignalActionImpl::~SendSignalActionImpl()
 			:SendSignalActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -145,6 +148,7 @@ SendSignalActionImpl::~SendSignalActionImpl()
 			:SendSignalActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -321,19 +325,19 @@ std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendSignalActionImpl::number_order(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool SendSignalActionImpl::number_order(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -387,7 +391,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> SendSignalActionImpl::getRedefin
 }
 
 
-std::shared_ptr<SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr()
+std::shared_ptr<SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr() const
 {
 	return m_thisSendSignalActionPtr.lock();
 }
@@ -423,16 +427,16 @@ std::shared_ptr<ecore::EObject> SendSignalActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
-			return getSignal(); //17330
+			return eAny(getSignal()); //17330
 		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
-			return getTarget(); //17331
+			return eAny(getTarget()); //17331
 	}
-	return InvocationActionImpl::internalEIsSet(featureID);
+	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
 bool SendSignalActionImpl::internalEIsSet(int featureID) const
 {
@@ -445,21 +449,21 @@ bool SendSignalActionImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
-bool SendSignalActionImpl::eSet(int featureID, boost::any newValue)
+bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
 			setSignal(_signal); //17330
 			return true;
 		}
 		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setTarget(_target); //17331
 			return true;
 		}

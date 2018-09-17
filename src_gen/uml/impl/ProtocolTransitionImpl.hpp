@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ProtocolTransitionImpl();
-			virtual std::shared_ptr<ProtocolTransition> getThisProtocolTransitionPtr();
+			virtual std::shared_ptr<ProtocolTransition> getThisProtocolTransitionPtr() const;
 			virtual void setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr);
 
 			//Additional constructors for the containments back reference
@@ -57,25 +57,25 @@ namespace uml
 			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds()  ;
+			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() ;
 			
 			/*!
 			 If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif */ 
-			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -155,9 +155,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ProtocolTransition> m_thisProtocolTransitionPtr;

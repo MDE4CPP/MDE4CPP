@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -237,6 +238,7 @@ BehaviorImpl::~BehaviorImpl()
 			:BehaviorImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -248,6 +250,7 @@ BehaviorImpl::~BehaviorImpl()
 			:BehaviorImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -272,10 +275,12 @@ BehaviorImpl::~BehaviorImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -292,6 +297,7 @@ BehaviorImpl::~BehaviorImpl()
 			:BehaviorImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -660,13 +666,13 @@ bool BehaviorImpl::getIsReentrant() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element>  from) 
+std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element>  from)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::feature_of_context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -674,25 +680,25 @@ bool BehaviorImpl::feature_of_context_classifier(boost::any diagnostics,std::map
 
 
 
-std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::most_one_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BehaviorImpl::most_one_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::parameters_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BehaviorImpl::parameters_match(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -716,7 +722,10 @@ std::shared_ptr<uml::BehavioredClassifier > BehaviorImpl::getContext() const
 
     return m_context;
 }
-
+void BehaviorImpl::setContext(std::shared_ptr<uml::BehavioredClassifier> _context)
+{
+    m_context = _context;
+}
 
 std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehaviorImpl::getOwnedParameter() const
 {
@@ -808,7 +817,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Behavio
 }
 
 
-std::shared_ptr<Behavior> BehaviorImpl::getThisBehaviorPtr()
+std::shared_ptr<Behavior> BehaviorImpl::getThisBehaviorPtr() const
 {
 	return m_thisBehaviorPtr.lock();
 }
@@ -854,30 +863,30 @@ std::shared_ptr<ecore::EObject> BehaviorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier(); //261
+			return eAny(getBehavioredClassifier()); //261
 		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
-			return getContext(); //254
+			return eAny(getContext()); //254
 		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
-			return getIsReentrant(); //255
+			return eAny(getIsReentrant()); //255
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter(); //256
+			return eAny(getOwnedParameter()); //256
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet(); //257
+			return eAny(getOwnedParameterSet()); //257
 		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
-			return getPostcondition(); //258
+			return eAny(getPostcondition()); //258
 		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
-			return getPrecondition(); //259
+			return eAny(getPrecondition()); //259
 		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior(); //260
+			return eAny(getRedefinedBehavior()); //260
 		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
-			return getSpecification(); //253
+			return eAny(getSpecification()); //253
 	}
-	return ClassImpl::internalEIsSet(featureID);
+	return ClassImpl::eGet(featureID, resolve, coreType);
 }
 bool BehaviorImpl::internalEIsSet(int featureID) const
 {
@@ -904,28 +913,35 @@ bool BehaviorImpl::internalEIsSet(int featureID) const
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
-bool BehaviorImpl::eSet(int featureID, boost::any newValue)
+bool BehaviorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = boost::any_cast<std::shared_ptr<uml::BehavioredClassifier>>(newValue);
+			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
 			setBehavioredClassifier(_behavioredClassifier); //261
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::BehavioredClassifier> _context = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
+			setContext(_context); //254
 			return true;
 		}
 		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
 		{
 			// BOOST CAST
-			bool _isReentrant = boost::any_cast<bool>(newValue);
+			bool _isReentrant = newValue->get<bool>();
 			setIsReentrant(_isReentrant); //255
 			return true;
 		}
 		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioralFeature> _specification = boost::any_cast<std::shared_ptr<uml::BehavioralFeature>>(newValue);
+			std::shared_ptr<uml::BehavioralFeature> _specification = newValue->get<std::shared_ptr<uml::BehavioralFeature>>();
 			setSpecification(_specification); //253
 			return true;
 		}
@@ -969,6 +985,13 @@ void BehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 			this->setIsReentrant(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("context");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("context")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("postcondition");
 		if ( iter != attr_list.end() )
 		{
@@ -1069,6 +1092,18 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 				// Cast object to correct type
 				std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>( references.front() );
 				setBehavioredClassifier(_behavioredClassifier);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::BehavioredClassifier> _context = std::dynamic_pointer_cast<uml::BehavioredClassifier>( references.front() );
+				setContext(_context);
 			}
 			
 			return;
@@ -1197,6 +1232,7 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 		// Add references
+		saveHandler->addReference("context", this->getContext());
 		std::shared_ptr<Bag<uml::Constraint>> postcondition_list = this->getPostcondition();
 		for (std::shared_ptr<uml::Constraint > object : *postcondition_list)
 		{ 

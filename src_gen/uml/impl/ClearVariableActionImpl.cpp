@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -114,6 +115,7 @@ ClearVariableActionImpl::~ClearVariableActionImpl()
 			:ClearVariableActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -125,6 +127,7 @@ ClearVariableActionImpl::~ClearVariableActionImpl()
 			:ClearVariableActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -136,6 +139,7 @@ ClearVariableActionImpl::~ClearVariableActionImpl()
 			:ClearVariableActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -320,7 +324,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearVariableActionImpl::getRede
 }
 
 
-std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr()
+std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
 {
 	return m_thisClearVariableActionPtr.lock();
 }
@@ -356,12 +360,12 @@ std::shared_ptr<ecore::EObject> ClearVariableActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClearVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return VariableActionImpl::internalEIsSet(featureID);
+	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ClearVariableActionImpl::internalEIsSet(int featureID) const
 {
@@ -370,7 +374,7 @@ bool ClearVariableActionImpl::internalEIsSet(int featureID) const
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
-bool ClearVariableActionImpl::eSet(int featureID, boost::any newValue)
+bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

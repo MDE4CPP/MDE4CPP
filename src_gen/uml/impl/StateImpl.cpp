@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -206,6 +207,7 @@ StateImpl::~StateImpl()
 			:StateImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -217,6 +219,7 @@ StateImpl::~StateImpl()
 			:StateImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -489,61 +492,61 @@ bool StateImpl::getIsSubmachineState() const
 //*********************************
 // Operations
 //*********************************
-bool StateImpl::composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::composite_states(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isComposite() 
+bool StateImpl::isComposite()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isOrthogonal() 
+bool StateImpl::isOrthogonal()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isSimple() 
+bool StateImpl::isSimple()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::isSubmachineState() 
+bool StateImpl::isSubmachineState()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -669,7 +672,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StateImpl::getRedefinedElement()
 }
 
 
-std::shared_ptr<State> StateImpl::getThisStatePtr()
+std::shared_ptr<State> StateImpl::getThisStatePtr() const
 {
 	return m_thisStatePtr.lock();
 }
@@ -702,51 +705,51 @@ std::shared_ptr<ecore::EObject> StateImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STATE_EREFERENCE_CONNECTION:
-			return getConnection(); //6322
+			return eAny(getConnection()); //6322
 		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
-			return getConnectionPoint(); //6323
+			return eAny(getConnectionPoint()); //6323
 		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
-			return getDeferrableTrigger(); //6324
+			return eAny(getDeferrableTrigger()); //6324
 		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
-			return getDoActivity(); //6325
+			return eAny(getDoActivity()); //6325
 		case UmlPackage::STATE_EREFERENCE_ENTRY:
-			return getEntry(); //6326
+			return eAny(getEntry()); //6326
 		case UmlPackage::STATE_EREFERENCE_EXIT:
-			return getExit(); //6327
+			return eAny(getExit()); //6327
 		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite(); //6328
+			return eAny(getIsComposite()); //6328
 		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
-			return getIsOrthogonal(); //6329
+			return eAny(getIsOrthogonal()); //6329
 		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
-			return getIsSimple(); //6330
+			return eAny(getIsSimple()); //6330
 		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
-			return getIsSubmachineState(); //6331
+			return eAny(getIsSubmachineState()); //6331
 		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
-			return getRedefinedState(); //6332
+			return eAny(getRedefinedState()); //6332
 		case UmlPackage::STATE_EREFERENCE_REGION:
-			return getRegion(); //6335
+			return eAny(getRegion()); //6335
 		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
-			return getStateInvariant(); //6333
+			return eAny(getStateInvariant()); //6333
 		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
-			return getSubmachine(); //6334
+			return eAny(getSubmachine()); //6334
 	}
-	boost::any result;
-	result = NamespaceImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = RedefinableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = VertexImpl::internalEIsSet(featureID);
+	result = VertexImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool StateImpl::internalEIsSet(int featureID) const
@@ -796,49 +799,49 @@ bool StateImpl::internalEIsSet(int featureID) const
 	result = VertexImpl::internalEIsSet(featureID);
 	return result;
 }
-bool StateImpl::eSet(int featureID, boost::any newValue)
+bool StateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _doActivity = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _doActivity = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setDoActivity(_doActivity); //6325
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_ENTRY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _entry = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _entry = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setEntry(_entry); //6326
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_EXIT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _exit = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _exit = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setExit(_exit); //6327
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _redefinedState = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			std::shared_ptr<uml::State> _redefinedState = newValue->get<std::shared_ptr<uml::State>>();
 			setRedefinedState(_redefinedState); //6332
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _stateInvariant = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _stateInvariant = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setStateInvariant(_stateInvariant); //6333
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _submachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
+			std::shared_ptr<uml::StateMachine> _submachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
 			setSubmachine(_submachine); //6334
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -137,6 +138,7 @@ ReplyActionImpl::~ReplyActionImpl()
 			:ReplyActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -148,6 +150,7 @@ ReplyActionImpl::~ReplyActionImpl()
 			:ReplyActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -159,6 +162,7 @@ ReplyActionImpl::~ReplyActionImpl()
 			:ReplyActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -341,13 +345,13 @@ std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReplyActionImpl::event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReplyActionImpl::pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -408,7 +412,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReplyActionImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr()
+std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
 {
 	return m_thisReplyActionPtr.lock();
 }
@@ -444,18 +448,18 @@ std::shared_ptr<ecore::EObject> ReplyActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return getReplyToCall(); //17128
+			return eAny(getReplyToCall()); //17128
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return getReplyValue(); //17129
+			return eAny(getReplyValue()); //17129
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation(); //17130
+			return eAny(getReturnInformation()); //17130
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReplyActionImpl::internalEIsSet(int featureID) const
 {
@@ -470,21 +474,21 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReplyActionImpl::eSet(int featureID, boost::any newValue)
+bool ReplyActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Trigger> _replyToCall = boost::any_cast<std::shared_ptr<uml::Trigger>>(newValue);
+			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
 			setReplyToCall(_replyToCall); //17128
 			return true;
 		}
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _returnInformation = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setReturnInformation(_returnInformation); //17130
 			return true;
 		}

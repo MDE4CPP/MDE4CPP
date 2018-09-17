@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -191,7 +189,7 @@ namespace uml
 			  state <> null  implies  state.container.belongsToPSM()
 			endif )
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool belongsToPSM()  = 0;
+			virtual bool belongsToPSM() = 0;
 			
 			/*!
 			 The operation containingStateMachine() returns the StateMachine in which this Region is defined.
@@ -202,24 +200,24 @@ namespace uml
 			  stateMachine
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine()  = 0;
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			
 			/*!
 			 A Region can have at most one deep history Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1 */ 
-			virtual bool deep_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A Region can have at most one initial Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::initial)->size() <= 1 */ 
-			virtual bool initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null) */ 
-			virtual bool owned(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool owned(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The redefinition context of a Region is the nearest containing StateMachine.
@@ -230,13 +228,13 @@ namespace uml
 			  sm._'context'
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::Classifier> redefinitionContext()  = 0;
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
 			
 			/*!
 			 A Region can have at most one shallow history Vertex.
 			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1 */ 
-			virtual bool shallow_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

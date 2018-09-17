@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -115,6 +116,7 @@ FinalStateImpl::~FinalStateImpl()
 			:FinalStateImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -126,6 +128,7 @@ FinalStateImpl::~FinalStateImpl()
 			:FinalStateImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -334,37 +337,37 @@ std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FinalStateImpl::cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_regions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool FinalStateImpl::no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_state_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -403,7 +406,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FinalStateImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr()
+std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
 {
 	return m_thisFinalStatePtr.lock();
 }
@@ -434,12 +437,12 @@ std::shared_ptr<ecore::EObject> FinalStateImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FinalStateImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FinalStateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return StateImpl::internalEIsSet(featureID);
+	return StateImpl::eGet(featureID, resolve, coreType);
 }
 bool FinalStateImpl::internalEIsSet(int featureID) const
 {
@@ -448,7 +451,7 @@ bool FinalStateImpl::internalEIsSet(int featureID) const
 	}
 	return StateImpl::internalEIsSet(featureID);
 }
-bool FinalStateImpl::eSet(int featureID, boost::any newValue)
+bool FinalStateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

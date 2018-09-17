@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -187,12 +185,12 @@ namespace uml
 			  	insertAt<>null and 
 			  	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))
 			endif */ 
-			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A value InputPin is required.
 			value<>null */ 
-			virtual bool required_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

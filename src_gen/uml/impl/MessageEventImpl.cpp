@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -90,6 +91,7 @@ MessageEventImpl::~MessageEventImpl()
 			:MessageEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -112,6 +114,7 @@ MessageEventImpl::~MessageEventImpl()
 			:MessageEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -123,6 +126,7 @@ MessageEventImpl::~MessageEventImpl()
 			:MessageEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -225,7 +229,7 @@ std::weak_ptr<uml::Element > MessageEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr()
+std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
 {
 	return m_thisMessageEventPtr.lock();
 }
@@ -261,12 +265,12 @@ std::shared_ptr<ecore::EObject> MessageEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return EventImpl::internalEIsSet(featureID);
+	return EventImpl::eGet(featureID, resolve, coreType);
 }
 bool MessageEventImpl::internalEIsSet(int featureID) const
 {
@@ -275,7 +279,7 @@ bool MessageEventImpl::internalEIsSet(int featureID) const
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
-bool MessageEventImpl::eSet(int featureID, boost::any newValue)
+bool MessageEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

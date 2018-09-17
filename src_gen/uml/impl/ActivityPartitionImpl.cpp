@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -150,6 +151,7 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 			:ActivityPartitionImpl()
 			{
 			    m_inActivity = par_inActivity;
+				m_owner = par_inActivity;
 			}
 
 
@@ -161,6 +163,7 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 			:ActivityPartitionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -183,6 +186,7 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 			:ActivityPartitionImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -194,6 +198,7 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 			:ActivityPartitionImpl()
 			{
 			    m_superPartition = par_superPartition;
+				m_superGroup = par_superPartition;
 			}
 
 
@@ -334,25 +339,25 @@ bool ActivityPartitionImpl::getIsExternal() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityPartitionImpl::dimension_not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_property(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property_and_is_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -431,7 +436,7 @@ std::weak_ptr<uml::ActivityGroup > ActivityPartitionImpl::getSuperGroup() const
 }
 
 
-std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr()
+std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
 {
 	return m_thisActivityPartitionPtr.lock();
 }
@@ -472,26 +477,26 @@ std::shared_ptr<ecore::EObject> ActivityPartitionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
-			return getEdge(); //10921
+			return eAny(getEdge()); //10921
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
-			return getIsDimension(); //10915
+			return eAny(getIsDimension()); //10915
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
-			return getIsExternal(); //10916
+			return eAny(getIsExternal()); //10916
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
-			return getNode(); //10917
+			return eAny(getNode()); //10917
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
-			return getRepresents(); //10918
+			return eAny(getRepresents()); //10918
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
-			return getSubpartition(); //10919
+			return eAny(getSubpartition()); //10919
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
-			return getSuperPartition(); //10920
+			return eAny(getSuperPartition()); //10920
 	}
-	return ActivityGroupImpl::internalEIsSet(featureID);
+	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 {
@@ -514,35 +519,35 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
-bool ActivityPartitionImpl::eSet(int featureID, boost::any newValue)
+bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
 		{
 			// BOOST CAST
-			bool _isDimension = boost::any_cast<bool>(newValue);
+			bool _isDimension = newValue->get<bool>();
 			setIsDimension(_isDimension); //10915
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
-			bool _isExternal = boost::any_cast<bool>(newValue);
+			bool _isExternal = newValue->get<bool>();
 			setIsExternal(_isExternal); //10916
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Element> _represents = boost::any_cast<std::shared_ptr<uml::Element>>(newValue);
+			std::shared_ptr<uml::Element> _represents = newValue->get<std::shared_ptr<uml::Element>>();
 			setRepresents(_represents); //10918
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityPartition> _superPartition = boost::any_cast<std::shared_ptr<uml::ActivityPartition>>(newValue);
+			std::shared_ptr<uml::ActivityPartition> _superPartition = newValue->get<std::shared_ptr<uml::ActivityPartition>>();
 			setSuperPartition(_superPartition); //10920
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -109,6 +110,7 @@ JoinNodeImpl::~JoinNodeImpl()
 			:JoinNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -120,6 +122,7 @@ JoinNodeImpl::~JoinNodeImpl()
 			:JoinNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -131,6 +134,7 @@ JoinNodeImpl::~JoinNodeImpl()
 			:JoinNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -278,13 +282,13 @@ bool JoinNodeImpl::getIsCombineDuplicate() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeImpl::incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool JoinNodeImpl::one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -324,7 +328,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> JoinNodeImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr()
+std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
 {
 	return m_thisJoinNodePtr.lock();
 }
@@ -360,16 +364,16 @@ std::shared_ptr<ecore::EObject> JoinNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate(); //19221
+			return eAny(getIsCombineDuplicate()); //19221
 		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
-			return getJoinSpec(); //19222
+			return eAny(getJoinSpec()); //19222
 	}
-	return ControlNodeImpl::internalEIsSet(featureID);
+	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool JoinNodeImpl::internalEIsSet(int featureID) const
 {
@@ -382,21 +386,21 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
-bool JoinNodeImpl::eSet(int featureID, boost::any newValue)
+bool JoinNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
 			// BOOST CAST
-			bool _isCombineDuplicate = boost::any_cast<bool>(newValue);
+			bool _isCombineDuplicate = newValue->get<bool>();
 			setIsCombineDuplicate(_isCombineDuplicate); //19221
 			return true;
 		}
 		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _joinSpec = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _joinSpec = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setJoinSpec(_joinSpec); //19222
 			return true;
 		}

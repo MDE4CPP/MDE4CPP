@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralSpecificationImpl::~LiteralSpecificationImpl()
 			:LiteralSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralSpecificationImpl::~LiteralSpecificationImpl()
 			:LiteralSpecificationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralSpecificationImpl::~LiteralSpecificationImpl()
 			:LiteralSpecificationImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralSpecificationImpl::~LiteralSpecificationImpl()
 			:LiteralSpecificationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -244,7 +249,7 @@ std::weak_ptr<uml::Element > LiteralSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr()
+std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
 {
 	return m_thisLiteralSpecificationPtr.lock();
 }
@@ -285,12 +290,12 @@ std::shared_ptr<ecore::EObject> LiteralSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -299,7 +304,7 @@ bool LiteralSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool LiteralSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

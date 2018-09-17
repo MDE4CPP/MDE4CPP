@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -141,6 +142,7 @@ ActivityGroupImpl::~ActivityGroupImpl()
 			:ActivityGroupImpl()
 			{
 			    m_inActivity = par_inActivity;
+				m_owner = par_inActivity;
 			}
 
 
@@ -152,6 +154,7 @@ ActivityGroupImpl::~ActivityGroupImpl()
 			:ActivityGroupImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -174,6 +177,7 @@ ActivityGroupImpl::~ActivityGroupImpl()
 			:ActivityGroupImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -258,13 +262,13 @@ std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityGroupImpl::nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -324,7 +328,7 @@ std::weak_ptr<uml::ActivityGroup > ActivityGroupImpl::getSuperGroup() const
 }
 
 
-std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr()
+std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
 {
 	return m_thisActivityGroupPtr.lock();
 }
@@ -361,28 +365,28 @@ std::shared_ptr<ecore::EObject> ActivityGroupImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
-			return getContainedEdge(); //10710
+			return eAny(getContainedEdge()); //10710
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
-			return getContainedNode(); //10711
+			return eAny(getContainedNode()); //10711
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-			return getInActivity(); //10712
+			return eAny(getInActivity()); //10712
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
-			return getSubgroup(); //10713
+			return eAny(getSubgroup()); //10713
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
-			return getSuperGroup(); //10714
+			return eAny(getSuperGroup()); //10714
 	}
-	boost::any result;
-	result = ActivityContentImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamedElementImpl::internalEIsSet(featureID);
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ActivityGroupImpl::internalEIsSet(int featureID) const
@@ -409,14 +413,14 @@ bool ActivityGroupImpl::internalEIsSet(int featureID) const
 	result = NamedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ActivityGroupImpl::eSet(int featureID, boost::any newValue)
+bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Activity> _inActivity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			std::shared_ptr<uml::Activity> _inActivity = newValue->get<std::shared_ptr<uml::Activity>>();
 			setInActivity(_inActivity); //10712
 			return true;
 		}

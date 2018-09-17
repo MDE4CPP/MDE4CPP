@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -101,6 +102,7 @@ ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
 			:ActionExecutionSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -112,6 +114,7 @@ ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
 			:ActionExecutionSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -123,6 +126,7 @@ ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
 			:ActionExecutionSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -229,7 +233,7 @@ std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ActionExecutionSpecificationImpl::action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -265,7 +269,7 @@ std::weak_ptr<uml::Element > ActionExecutionSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr()
+std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const
 {
 	return m_thisActionExecutionSpecificationPtr.lock();
 }
@@ -301,14 +305,14 @@ std::shared_ptr<ecore::EObject> ActionExecutionSpecificationImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
-			return getAction(); //22516
+			return eAny(getAction()); //22516
 	}
-	return ExecutionSpecificationImpl::internalEIsSet(featureID);
+	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -319,14 +323,14 @@ bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
-bool ActionExecutionSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Action> _action = boost::any_cast<std::shared_ptr<uml::Action>>(newValue);
+			std::shared_ptr<uml::Action> _action = newValue->get<std::shared_ptr<uml::Action>>();
 			setAction(_action); //22516
 			return true;
 		}

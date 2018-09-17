@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -123,6 +124,7 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			:ReadIsClassifiedObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -134,6 +136,7 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			:ReadIsClassifiedObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -145,6 +148,7 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			:ReadIsClassifiedObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -330,25 +334,25 @@ bool ReadIsClassifiedObjectActionImpl::getIsDirect() const
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionImpl::boolean_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,7 +420,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadIsClassifiedObjectActionImpl
 }
 
 
-std::shared_ptr<ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionImpl::getThisReadIsClassifiedObjectActionPtr()
+std::shared_ptr<ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionImpl::getThisReadIsClassifiedObjectActionPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionPtr.lock();
 }
@@ -452,20 +456,20 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier(); //16028
+			return eAny(getClassifier()); //16028
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
-			return getIsDirect(); //16029
+			return eAny(getIsDirect()); //16029
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
-			return getObject(); //16030
+			return eAny(getObject()); //16030
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
-			return getResult(); //16031
+			return eAny(getResult()); //16031
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -482,35 +486,35 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setClassifier(_classifier); //16028
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
 		{
 			// BOOST CAST
-			bool _isDirect = boost::any_cast<bool>(newValue);
+			bool _isDirect = newValue->get<bool>();
 			setIsDirect(_isDirect); //16029
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //16030
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16031
 			return true;
 		}

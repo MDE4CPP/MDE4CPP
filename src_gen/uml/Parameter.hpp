@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -179,66 +177,66 @@ namespace uml
 			/*!
 			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
 			end->notEmpty() implies collaboration->notEmpty() */ 
-			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool connector_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return)) */ 
-			virtual bool in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool in_and_out(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 */ 
-			virtual bool isSetDefault()  = 0;
+			virtual bool isSetDefault() = 0;
 			
 			/*!
 			 An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
-			virtual bool not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_exception(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null) */ 
-			virtual bool object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool object_effect(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant */ 
-			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified Boolean value. */ 
-			virtual void setBooleanDefaultValue(bool value)  = 0;
+			virtual void setBooleanDefaultValue(bool value) = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified integer value. */ 
-			virtual void setIntegerDefaultValue(int value)  = 0;
+			virtual void setIntegerDefaultValue(int value) = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the null value. */ 
-			virtual void setNullDefaultValue()  = 0;
+			virtual void setNullDefaultValue() = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified real value. */ 
-			virtual void setRealDefaultValue(double value)  = 0;
+			virtual void setRealDefaultValue(double value) = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified string value. */ 
-			virtual void setStringDefaultValue(std::string value)  = 0;
+			virtual void setStringDefaultValue(std::string value) = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value)  = 0;
+			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
 			
 			/*!
 			 A Parameter cannot be a stream and exception at the same time.
 			not (isException and isStream) */ 
-			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool stream_and_exception(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 */ 
-			virtual void unsetDefault()  = 0;
+			virtual void unsetDefault() = 0;
 			
 			
 			//*********************************

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -107,32 +105,32 @@ namespace uml
 			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
 			result = (value->asBag()->union(qualifier.value))
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins()  = 0;
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() = 0;
 			
 			/*!
 			 The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value) */ 
-			virtual bool end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool property_is_association_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier) */ 
-			virtual bool qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool qualifiers(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type) */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

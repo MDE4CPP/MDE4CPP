@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -186,6 +187,7 @@ NamespaceImpl::~NamespaceImpl()
 			:NamespaceImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -329,79 +331,79 @@ std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::cannot_import_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamespaceImpl::cannot_import_self(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement>  element,VisibilityKind visibility) 
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement>  element,VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package>  package_,VisibilityKind visibility) 
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package>  package_,VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps) 
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedElements() 
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedElements()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedMembers() 
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedMembers()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages() 
+std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement>  element) 
+std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement>  element)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers() 
+std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps) 
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::membersAreDistinguishable() 
+bool NamespaceImpl::membersAreDistinguishable()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::members_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -465,7 +467,7 @@ std::weak_ptr<uml::Element > NamespaceImpl::getOwner() const
 }
 
 
-std::shared_ptr<Namespace> NamespaceImpl::getThisNamespacePtr()
+std::shared_ptr<Namespace> NamespaceImpl::getThisNamespacePtr() const
 {
 	return m_thisNamespacePtr.lock();
 }
@@ -491,24 +493,24 @@ std::shared_ptr<ecore::EObject> NamespaceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return getElementImport(); //611
+			return eAny(getElementImport()); //611
 		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return getImportedMember(); //614
+			return eAny(getImportedMember()); //614
 		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return getMember(); //615
+			return eAny(getMember()); //615
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return getOwnedMember(); //613
+			return eAny(getOwnedMember()); //613
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return getOwnedRule(); //610
+			return eAny(getOwnedRule()); //610
 		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return getPackageImport(); //612
+			return eAny(getPackageImport()); //612
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool NamespaceImpl::internalEIsSet(int featureID) const
 {
@@ -529,7 +531,7 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool NamespaceImpl::eSet(int featureID, boost::any newValue)
+bool NamespaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

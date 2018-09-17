@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TypedElementImpl();
-			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr();
+			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr() const;
 			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);
 
 			//Additional constructors for the containments back reference
@@ -102,9 +102,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TypedElement> m_thisTypedElementPtr;

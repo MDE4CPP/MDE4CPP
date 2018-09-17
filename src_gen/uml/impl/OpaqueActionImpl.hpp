@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			OpaqueActionImpl();
-			virtual std::shared_ptr<OpaqueAction> getThisOpaqueActionPtr();
+			virtual std::shared_ptr<OpaqueAction> getThisOpaqueActionPtr() const;
 			virtual void setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,7 +61,7 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language lists must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<OpaqueAction> m_thisOpaqueActionPtr;

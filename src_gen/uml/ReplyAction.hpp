@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -182,7 +180,7 @@ namespace uml
 			/*!
 			 The event of the replyToCall Trigger must be a CallEvent.
 			replyToCall.event.oclIsKindOf(CallEvent) */ 
-			virtual bool event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
@@ -192,7 +190,7 @@ namespace uml
 				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
 				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
 				replyValue->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

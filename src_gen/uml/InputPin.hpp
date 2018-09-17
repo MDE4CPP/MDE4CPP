@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -225,7 +223,7 @@ namespace uml
 				action<>null and
 				action.oclIsKindOf(StructuredActivityNode) and
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target) */ 
-			virtual bool outgoing_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

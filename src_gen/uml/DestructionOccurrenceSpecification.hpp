@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -138,7 +136,7 @@ namespace uml
 			let o : InteractionOperand = enclosingOperand in o->notEmpty() and 
 			let peerEvents : OrderedSet(OccurrenceSpecification) = covered.events->select(enclosingOperand = o)
 			in peerEvents->last() = self */ 
-			virtual bool no_occurrence_specifications_below(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

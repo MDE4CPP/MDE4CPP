@@ -1,0 +1,14 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate task for project: uml'
+
+task generateUml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'uml'
+	description 'generate C++ code of uml.ecore model'
+	
+	modelFilePath = file('.' + File.separator + 'uml.ecore')
+
+	relatedModels = ['ecore', 'types']
+}

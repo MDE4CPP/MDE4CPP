@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -115,6 +116,7 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			:ReadSelfActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -126,6 +128,7 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			:ReadSelfActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -137,6 +140,7 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			:ReadSelfActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -301,25 +305,25 @@ std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadSelfActionImpl::contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadSelfActionImpl::contained(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadSelfActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -363,7 +367,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadSelfActionImpl::getRedefined
 }
 
 
-std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr()
+std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
 {
 	return m_thisReadSelfActionPtr.lock();
 }
@@ -399,14 +403,14 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
-			return getResult(); //16428
+			return eAny(getResult()); //16428
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 {
@@ -417,14 +421,14 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReadSelfActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16428
 			return true;
 		}

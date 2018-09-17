@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			MessageEndImpl();
-			virtual std::shared_ptr<MessageEnd> getThisMessageEndPtr();
+			virtual std::shared_ptr<MessageEnd> getThisMessageEndPtr() const;
 			virtual void setThisMessageEndPtr(std::weak_ptr<MessageEnd> thisMessageEndPtr);
 
 			//Additional constructors for the containments back reference
@@ -82,28 +82,28 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment()  ;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isReceive()  ;
+			virtual bool isReceive() ;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isSend()  ;
+			virtual bool isSend() ;
 			
 			/*!
 			 This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd()  ;
+			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() ;
 			
 			
 			
@@ -157,9 +157,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<MessageEnd> m_thisMessageEndPtr;

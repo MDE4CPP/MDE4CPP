@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -113,6 +114,7 @@ ReceptionImpl::~ReceptionImpl()
 			:ReceptionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -270,13 +272,13 @@ std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReceptionImpl::same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReceptionImpl::same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -316,7 +318,7 @@ std::weak_ptr<uml::Element > ReceptionImpl::getOwner() const
 }
 
 
-std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr()
+std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const
 {
 	return m_thisReceptionPtr.lock();
 }
@@ -342,14 +344,14 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
-			return getSignal(); //5627
+			return eAny(getSignal()); //5627
 	}
-	return BehavioralFeatureImpl::internalEIsSet(featureID);
+	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }
 bool ReceptionImpl::internalEIsSet(int featureID) const
 {
@@ -360,14 +362,14 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
-bool ReceptionImpl::eSet(int featureID, boost::any newValue)
+bool ReceptionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
 			setSignal(_signal); //5627
 			return true;
 		}

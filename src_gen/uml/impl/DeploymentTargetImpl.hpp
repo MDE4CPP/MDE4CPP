@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeploymentTargetImpl();
-			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr();
+			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr() const;
 			virtual void setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,7 +54,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements()  ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() ;
 			
 			
 			
@@ -109,9 +109,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DeploymentTarget> m_thisDeploymentTargetPtr;

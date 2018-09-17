@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,10 +95,12 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					 m_context = par_Namespace;
+					m_context = par_Namespace;
+					m_namespace = par_Namespace;
 					 return;
 				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					 m_namespace = par_Namespace;
+					m_namespace = par_Namespace;
+					m_owner = par_Namespace;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -131,6 +134,7 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 			:IntervalConstraintImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -142,6 +146,7 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 			:IntervalConstraintImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -256,7 +261,7 @@ std::weak_ptr<uml::Element > IntervalConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr()
+std::shared_ptr<IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr() const
 {
 	return m_thisIntervalConstraintPtr.lock();
 }
@@ -297,12 +302,12 @@ std::shared_ptr<ecore::EObject> IntervalConstraintImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IntervalConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any IntervalConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ConstraintImpl::internalEIsSet(featureID);
+	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
 bool IntervalConstraintImpl::internalEIsSet(int featureID) const
 {
@@ -311,7 +316,7 @@ bool IntervalConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
-bool IntervalConstraintImpl::eSet(int featureID, boost::any newValue)
+bool IntervalConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

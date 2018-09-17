@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActorImpl();
-			virtual std::shared_ptr<Actor> getThisActorPtr();
+			virtual std::shared_ptr<Actor> getThisActorPtr() const;
 			virtual void setThisActorPtr(std::weak_ptr<Actor> thisActorPtr);
 
 			//Additional constructors for the containments back reference
@@ -73,12 +73,12 @@ namespace uml
 			         actorEnd.opposite.class.oclIsKindOf(Behavior))
 			      )
 			  ) */ 
-			virtual bool associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool associations(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 An Actor must have a name.
 			name->notEmpty() */ 
-			virtual bool must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -138,9 +138,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Actor> m_thisActorPtr;

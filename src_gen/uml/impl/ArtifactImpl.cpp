@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -192,6 +193,7 @@ ArtifactImpl::~ArtifactImpl()
 			:ArtifactImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -216,10 +218,12 @@ ArtifactImpl::~ArtifactImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -236,6 +240,7 @@ ArtifactImpl::~ArtifactImpl()
 			:ArtifactImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -520,13 +525,13 @@ std::string ArtifactImpl::getFileName() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -600,7 +605,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ArtifactImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<Artifact> ArtifactImpl::getThisArtifactPtr()
+std::shared_ptr<Artifact> ArtifactImpl::getThisArtifactPtr() const
 {
 	return m_thisArtifactPtr.lock();
 }
@@ -642,28 +647,28 @@ std::shared_ptr<ecore::EObject> ArtifactImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
-			return getFileName(); //3939
+			return eAny(getFileName()); //3939
 		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
-			return getManifestation(); //3940
+			return eAny(getManifestation()); //3940
 		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
-			return getNestedArtifact(); //3941
+			return eAny(getNestedArtifact()); //3941
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //3942
+			return eAny(getOwnedAttribute()); //3942
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation(); //3943
+			return eAny(getOwnedOperation()); //3943
 	}
-	boost::any result;
-	result = ClassifierImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ClassifierImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = DeployedArtifactImpl::internalEIsSet(featureID);
+	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ArtifactImpl::internalEIsSet(int featureID) const
@@ -690,14 +695,14 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ArtifactImpl::eSet(int featureID, boost::any newValue)
+bool ArtifactImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
 		{
 			// BOOST CAST
-			std::string _fileName = boost::any_cast<std::string>(newValue);
+			std::string _fileName = newValue->get<std::string>();
 			setFileName(_fileName); //3939
 			return true;
 		}

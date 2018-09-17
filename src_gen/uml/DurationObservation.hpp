@@ -17,10 +17,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -129,7 +127,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

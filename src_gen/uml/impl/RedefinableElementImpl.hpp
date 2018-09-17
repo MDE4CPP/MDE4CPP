@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RedefinableElementImpl();
-			virtual std::shared_ptr<RedefinableElement> getThisRedefinableElementPtr();
+			virtual std::shared_ptr<RedefinableElement> getThisRedefinableElementPtr() const;
 			virtual void setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr);
 
 			//Additional constructors for the containments back reference
@@ -55,28 +55,28 @@ namespace uml
 			result = (false)
 			redefiningElement.isRedefinitionContextValid(self)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement)  ;
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) ;
 			
 			/*!
 			 The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement)  ;
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) ;
 			
 			/*!
 			 A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf) */ 
-			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
-			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
-			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -139,9 +139,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<RedefinableElement> m_thisRedefinableElementPtr;

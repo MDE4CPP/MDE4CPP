@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
 			:RemoveVariableValueActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
 			:RemoveVariableValueActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
 			:RemoveVariableValueActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -322,7 +326,7 @@ bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveVariableValueActionImpl::removeAt_and_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -366,7 +370,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RemoveVariableValueActionImpl::g
 }
 
 
-std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr()
+std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
 {
 	return m_thisRemoveVariableValueActionPtr.lock();
 }
@@ -402,16 +406,16 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::eContainer() cons
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates(); //17030
+			return eAny(getIsRemoveDuplicates()); //17030
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt(); //17031
+			return eAny(getRemoveAt()); //17031
 	}
-	return WriteVariableActionImpl::internalEIsSet(featureID);
+	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
 bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 {
@@ -424,21 +428,21 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
-bool RemoveVariableValueActionImpl::eSet(int featureID, boost::any newValue)
+bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
-			bool _isRemoveDuplicates = boost::any_cast<bool>(newValue);
+			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //17030
 			return true;
 		}
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _removeAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setRemoveAt(_removeAt); //17031
 			return true;
 		}

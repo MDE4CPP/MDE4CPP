@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -129,6 +130,7 @@ ReclassifyObjectActionImpl::~ReclassifyObjectActionImpl()
 			:ReclassifyObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -140,6 +142,7 @@ ReclassifyObjectActionImpl::~ReclassifyObjectActionImpl()
 			:ReclassifyObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -151,6 +154,7 @@ ReclassifyObjectActionImpl::~ReclassifyObjectActionImpl()
 			:ReclassifyObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -331,19 +335,19 @@ bool ReclassifyObjectActionImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool ReclassifyObjectActionImpl::classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -401,7 +405,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReclassifyObjectActionImpl::getR
 }
 
 
-std::shared_ptr<ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr()
+std::shared_ptr<ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr() const
 {
 	return m_thisReclassifyObjectActionPtr.lock();
 }
@@ -437,20 +441,20 @@ std::shared_ptr<ecore::EObject> ReclassifyObjectActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll(); //16728
+			return eAny(getIsReplaceAll()); //16728
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
-			return getNewClassifier(); //16729
+			return eAny(getNewClassifier()); //16729
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
-			return getObject(); //16730
+			return eAny(getObject()); //16730
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
-			return getOldClassifier(); //16731
+			return eAny(getOldClassifier()); //16731
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -467,21 +471,21 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReclassifyObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
-			bool _isReplaceAll = boost::any_cast<bool>(newValue);
+			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //16728
 			return true;
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //16730
 			return true;
 		}

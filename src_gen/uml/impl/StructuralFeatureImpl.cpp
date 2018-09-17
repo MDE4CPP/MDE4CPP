@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 			:StructuralFeatureImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -242,7 +244,7 @@ std::weak_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
 }
 
 
-std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr()
+std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
 {
 	return m_thisStructuralFeaturePtr.lock();
 }
@@ -270,25 +272,25 @@ std::shared_ptr<ecore::EObject> StructuralFeatureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly(); //7322
+			return eAny(getIsReadOnly()); //7322
 	}
-	boost::any result;
-	result = FeatureImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = FeatureImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TypedElementImpl::internalEIsSet(featureID);
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool StructuralFeatureImpl::internalEIsSet(int featureID) const
@@ -312,14 +314,14 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 	result = TypedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool StructuralFeatureImpl::eSet(int featureID, boost::any newValue)
+bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
-			bool _isReadOnly = boost::any_cast<bool>(newValue);
+			bool _isReadOnly = newValue->get<bool>();
 			setIsReadOnly(_isReadOnly); //7322
 			return true;
 		}

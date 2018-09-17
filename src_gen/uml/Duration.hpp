@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -138,7 +136,7 @@ namespace uml
 			/*!
 			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
-			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

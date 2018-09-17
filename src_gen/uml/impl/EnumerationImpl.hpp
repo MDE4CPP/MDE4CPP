@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EnumerationImpl();
-			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr();
+			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr() const;
 			virtual void setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			//*********************************
 			/*!
 			 ownedAttribute->forAll(isReadOnly) */ 
-			virtual bool immutable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -131,9 +131,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Enumeration> m_thisEnumerationPtr;

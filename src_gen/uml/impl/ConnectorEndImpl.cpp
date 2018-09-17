@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -181,25 +182,25 @@ std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 //*********************************
 
 
-bool ConnectorEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -244,7 +245,7 @@ std::shared_ptr<Union<uml::Element>> ConnectorEndImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr()
+std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const
 {
 	return m_thisConnectorEndPtr.lock();
 }
@@ -265,18 +266,18 @@ std::shared_ptr<ecore::EObject> ConnectorEndImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
-			return getDefiningEnd(); //3110
+			return eAny(getDefiningEnd()); //3110
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
-			return getPartWithPort(); //3111
+			return eAny(getPartWithPort()); //3111
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
-			return getRole(); //3112
+			return eAny(getRole()); //3112
 	}
-	return MultiplicityElementImpl::internalEIsSet(featureID);
+	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ConnectorEndImpl::internalEIsSet(int featureID) const
 {
@@ -291,21 +292,21 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
-bool ConnectorEndImpl::eSet(int featureID, boost::any newValue)
+bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _partWithPort = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _partWithPort = newValue->get<std::shared_ptr<uml::Property>>();
 			setPartWithPort(_partWithPort); //3111
 			return true;
 		}
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ConnectableElement> _role = boost::any_cast<std::shared_ptr<uml::ConnectableElement>>(newValue);
+			std::shared_ptr<uml::ConnectableElement> _role = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
 			setRole(_role); //3112
 			return true;
 		}

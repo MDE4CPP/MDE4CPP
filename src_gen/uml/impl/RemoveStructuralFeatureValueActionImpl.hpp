@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RemoveStructuralFeatureValueActionImpl();
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> getThisRemoveStructuralFeatureValueActionPtr();
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> getThisRemoveStructuralFeatureValueActionPtr() const;
 			virtual void setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -68,7 +68,7 @@ namespace uml
 			else
 			  removeAt = null and value <> null
 			endif */ 
-			virtual bool removeAt_and_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -144,9 +144,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<RemoveStructuralFeatureValueAction> m_thisRemoveStructuralFeatureValueActionPtr;

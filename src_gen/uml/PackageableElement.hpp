@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -145,7 +143,7 @@ namespace uml
 			/*!
 			 A PackageableElement owned by a Namespace must have a visibility.
 			visibility = null implies namespace = null */ 
-			virtual bool namespace_needs_visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

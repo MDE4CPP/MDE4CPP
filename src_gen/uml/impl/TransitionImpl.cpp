@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -149,6 +150,7 @@ TransitionImpl::~TransitionImpl()
 			:TransitionImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -160,6 +162,7 @@ TransitionImpl::~TransitionImpl()
 			:TransitionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -341,67 +344,67 @@ TransitionKind TransitionImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::fork_segment_state(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::initial_transition(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::join_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::join_segment_state(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_external(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_internal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -506,7 +509,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> TransitionImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr()
+std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr() const
 {
 	return m_thisTransitionPtr.lock();
 }
@@ -538,34 +541,34 @@ std::shared_ptr<ecore::EObject> TransitionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
-			return getContainer(); //6826
+			return eAny(getContainer()); //6826
 		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
-			return getEffect(); //6819
+			return eAny(getEffect()); //6819
 		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
-			return getGuard(); //6820
+			return eAny(getGuard()); //6820
 		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
-			return getKind(); //6821
+			return eAny(getKind()); //6821
 		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
-			return getRedefinedTransition(); //6822
+			return eAny(getRedefinedTransition()); //6822
 		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
-			return getSource(); //6823
+			return eAny(getSource()); //6823
 		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
-			return getTarget(); //6824
+			return eAny(getTarget()); //6824
 		case UmlPackage::TRANSITION_EREFERENCE_TRIGGER:
-			return getTrigger(); //6825
+			return eAny(getTrigger()); //6825
 	}
-	boost::any result;
-	result = NamespaceImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = RedefinableElementImpl::internalEIsSet(featureID);
+	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool TransitionImpl::internalEIsSet(int featureID) const
@@ -598,56 +601,56 @@ bool TransitionImpl::internalEIsSet(int featureID) const
 	result = RedefinableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool TransitionImpl::eSet(int featureID, boost::any newValue)
+bool TransitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
 			setContainer(_container); //6826
 			return true;
 		}
 		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _effect = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _effect = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setEffect(_effect); //6819
 			return true;
 		}
 		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _guard = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _guard = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setGuard(_guard); //6820
 			return true;
 		}
 		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			TransitionKind _kind = boost::any_cast<TransitionKind>(newValue);
+			TransitionKind _kind = newValue->get<TransitionKind>();
 			setKind(_kind); //6821
 			return true;
 		}
 		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Transition> _redefinedTransition = boost::any_cast<std::shared_ptr<uml::Transition>>(newValue);
+			std::shared_ptr<uml::Transition> _redefinedTransition = newValue->get<std::shared_ptr<uml::Transition>>();
 			setRedefinedTransition(_redefinedTransition); //6822
 			return true;
 		}
 		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Vertex> _source = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
+			std::shared_ptr<uml::Vertex> _source = newValue->get<std::shared_ptr<uml::Vertex>>();
 			setSource(_source); //6823
 			return true;
 		}
 		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Vertex> _target = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
+			std::shared_ptr<uml::Vertex> _target = newValue->get<std::shared_ptr<uml::Vertex>>();
 			setTarget(_target); //6824
 			return true;
 		}

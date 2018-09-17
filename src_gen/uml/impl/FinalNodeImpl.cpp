@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -105,6 +106,7 @@ FinalNodeImpl::~FinalNodeImpl()
 			:FinalNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -116,6 +118,7 @@ FinalNodeImpl::~FinalNodeImpl()
 			:FinalNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -127,6 +130,7 @@ FinalNodeImpl::~FinalNodeImpl()
 			:FinalNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -256,7 +260,7 @@ std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FinalNodeImpl::no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -287,7 +291,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FinalNodeImpl::getRedefinedEleme
 }
 
 
-std::shared_ptr<FinalNode> FinalNodeImpl::getThisFinalNodePtr()
+std::shared_ptr<FinalNode> FinalNodeImpl::getThisFinalNodePtr() const
 {
 	return m_thisFinalNodePtr.lock();
 }
@@ -323,12 +327,12 @@ std::shared_ptr<ecore::EObject> FinalNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ControlNodeImpl::internalEIsSet(featureID);
+	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool FinalNodeImpl::internalEIsSet(int featureID) const
 {
@@ -337,7 +341,7 @@ bool FinalNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
-bool FinalNodeImpl::eSet(int featureID, boost::any newValue)
+bool FinalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

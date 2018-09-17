@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FeatureImpl();
-			virtual std::shared_ptr<Feature> getThisFeaturePtr();
+			virtual std::shared_ptr<Feature> getThisFeaturePtr() const;
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
 
 			//Additional constructors for the containments back reference
@@ -107,9 +107,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Feature> m_thisFeaturePtr;

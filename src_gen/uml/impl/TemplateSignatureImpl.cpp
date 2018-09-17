@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -122,6 +123,7 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 			:TemplateSignatureImpl()
 			{
 			    m_template = par_template;
+				m_owner = par_template;
 			}
 
 
@@ -201,13 +203,13 @@ std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -253,7 +255,7 @@ std::shared_ptr<Union<uml::TemplateParameter>> TemplateSignatureImpl::getParamet
 }
 
 
-std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr()
+std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const
 {
 	return m_thisTemplateSignaturePtr.lock();
 }
@@ -279,18 +281,18 @@ std::shared_ptr<ecore::EObject> TemplateSignatureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter(); //176
+			return eAny(getOwnedParameter()); //176
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
-			return getParameter(); //174
+			return eAny(getParameter()); //174
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
-			return getTemplate(); //175
+			return eAny(getTemplate()); //175
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 {
@@ -305,14 +307,14 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateableElement> _template = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
+			std::shared_ptr<uml::TemplateableElement> _template = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
 			setTemplate(_template); //175
 			return true;
 		}

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -115,6 +116,7 @@ CreateLinkActionImpl::~CreateLinkActionImpl()
 			:CreateLinkActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -126,6 +128,7 @@ CreateLinkActionImpl::~CreateLinkActionImpl()
 			:CreateLinkActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -137,6 +140,7 @@ CreateLinkActionImpl::~CreateLinkActionImpl()
 			:CreateLinkActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -309,7 +313,7 @@ std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkActionImpl::association_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -344,7 +348,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateLinkActionImpl::getRedefin
 }
 
 
-std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr()
+std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr() const
 {
 	return m_thisCreateLinkActionPtr.lock();
 }
@@ -380,12 +384,12 @@ std::shared_ptr<ecore::EObject> CreateLinkActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CreateLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CreateLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return WriteLinkActionImpl::internalEIsSet(featureID);
+	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CreateLinkActionImpl::internalEIsSet(int featureID) const
 {
@@ -394,7 +398,7 @@ bool CreateLinkActionImpl::internalEIsSet(int featureID) const
 	}
 	return WriteLinkActionImpl::internalEIsSet(featureID);
 }
-bool CreateLinkActionImpl::eSet(int featureID, boost::any newValue)
+bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

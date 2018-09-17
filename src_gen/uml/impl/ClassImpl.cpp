@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -205,6 +206,7 @@ ClassImpl::~ClassImpl()
 			:ClassImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -229,10 +231,12 @@ ClassImpl::~ClassImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -249,6 +253,7 @@ ClassImpl::~ClassImpl()
 			:ClassImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -573,19 +578,19 @@ bool ClassImpl::getIsActive() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions() 
+std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses() 
+std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -604,13 +609,13 @@ std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
 	//end of body
 }
 
-bool ClassImpl::isMetaclass() 
+bool ClassImpl::isMetaclass()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassImpl::passive_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -695,7 +700,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> ClassIm
 }
 
 
-std::shared_ptr<Class> ClassImpl::getThisClassPtr()
+std::shared_ptr<Class> ClassImpl::getThisClassPtr() const
 {
 	return m_thisClassPtr.lock();
 }
@@ -737,30 +742,30 @@ std::shared_ptr<ecore::EObject> ClassImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return getExtension(); //348
+			return eAny(getExtension()); //348
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return getIsActive(); //349
+			return eAny(getIsActive()); //349
 		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier(); //350
+			return eAny(getNestedClassifier()); //350
 		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation(); //347
+			return eAny(getOwnedOperation()); //347
 		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception(); //351
+			return eAny(getOwnedReception()); //351
 		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return getSuperClass(); //352
+			return eAny(getSuperClass()); //352
 	}
-	boost::any result;
-	result = BehavioredClassifierImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = EncapsulatedClassifierImpl::internalEIsSet(featureID);
+	result = EncapsulatedClassifierImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ClassImpl::internalEIsSet(int featureID) const
@@ -789,14 +794,14 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	result = EncapsulatedClassifierImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ClassImpl::eSet(int featureID, boost::any newValue)
+bool ClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
 		{
 			// BOOST CAST
-			bool _isActive = boost::any_cast<bool>(newValue);
+			bool _isActive = newValue->get<bool>();
 			setIsActive(_isActive); //349
 			return true;
 		}

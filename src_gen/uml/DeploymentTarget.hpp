@@ -119,7 +119,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements()  = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() = 0;
 			
 			
 			//*********************************

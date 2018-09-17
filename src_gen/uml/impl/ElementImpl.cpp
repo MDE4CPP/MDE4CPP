@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -196,19 +197,19 @@ std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ElementImpl::addKeyword(std::string keyword) 
+bool ElementImpl::addKeyword(std::string keyword)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements() 
+std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> ElementImpl::applyStereotype(std::shared_ptr<uml::Stereotype>  stereotype) 
+std::shared_ptr<ecore::EObject> ElementImpl::applyStereotype(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,37 +218,37 @@ std::shared_ptr<ecore::EObject> ElementImpl::applyStereotype(std::shared_ptr<uml
 	//end of body
 }
 
-std::shared_ptr<uml::Element> ElementImpl::container() 
+std::shared_ptr<uml::Element> ElementImpl::container()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EAnnotation> ElementImpl::createEAnnotation(std::string source) 
+std::shared_ptr<ecore::EAnnotation> ElementImpl::createEAnnotation(std::string source)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ElementImpl::destroy() 
+void ElementImpl::destroy()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype> ElementImpl::getApplicableStereotype(std::string qualifiedName) 
+std::shared_ptr<uml::Stereotype> ElementImpl::getApplicableStereotype(std::string qualifiedName)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getApplicableStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getApplicableStereotypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string qualifiedName) 
+std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string qualifiedName) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -255,7 +256,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string q
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -263,110 +264,110 @@ std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes()
 	//end of body
 }
 
-std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedSubstereotype(std::shared_ptr<uml::Stereotype>  stereotype,std::string qualifiedName) 
+std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedSubstereotype(std::shared_ptr<uml::Stereotype>  stereotype,std::string qualifiedName)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype>  stereotype) 
+std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords() 
+std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Class> ElementImpl::getMetaClass() 
+std::shared_ptr<uml::Class> ElementImpl::getMetaClass()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Model> ElementImpl::getModel() 
+std::shared_ptr<uml::Model> ElementImpl::getModel()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Package> ElementImpl::getNearestPackage() 
+std::shared_ptr<uml::Package> ElementImpl::getNearestPackage()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships() 
+std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships(std::shared_ptr<ecore::EClass>  eClass) 
+std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships(std::shared_ptr<ecore::EClass>  eClass)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype> ElementImpl::getRequiredStereotype(std::string qualifiedName) 
+std::shared_ptr<uml::Stereotype> ElementImpl::getRequiredStereotype(std::string qualifiedName)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getRequiredStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getRequiredStereotypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships() 
+std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships(std::shared_ptr<ecore::EClass>  eClass) 
+std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships(std::shared_ptr<ecore::EClass>  eClass)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> ElementImpl::getStereotypeApplication(std::shared_ptr<uml::Stereotype>  stereotype) 
+std::shared_ptr<ecore::EObject> ElementImpl::getStereotypeApplication(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> > ElementImpl::getStereotypeApplications() 
+std::shared_ptr<Bag<ecore::EObject> > ElementImpl::getStereotypeApplications()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships() 
+std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships(std::shared_ptr<ecore::EClass>  eClass) 
+std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships(std::shared_ptr<ecore::EClass>  eClass)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName) 
+Any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());
 	if(stereoInstance == nullptr)
 	{
-	   return boost::any();
+	   return Any();
 	}
 
 	std::shared_ptr<Bag<uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();
@@ -377,35 +378,35 @@ boost::any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,st
 			return stereoInstance->get(p);
 		}
 	}
-	return boost::any();
+	return Any();
 	//end of body
 }
 
-bool ElementImpl::hasKeyword(std::string keyword) 
+bool ElementImpl::hasKeyword(std::string keyword)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName) 
+bool ElementImpl::hasValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::has_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ElementImpl::has_owner(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::isStereotypeApplicable(std::shared_ptr<uml::Stereotype>  stereotype) 
+bool ElementImpl::isStereotypeApplicable(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::isStereotypeApplied(std::shared_ptr<uml::Stereotype>  stereotype) 
+bool ElementImpl::isStereotypeApplied(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -413,31 +414,31 @@ bool ElementImpl::isStereotypeApplied(std::shared_ptr<uml::Stereotype>  stereoty
 	//end of body
 }
 
-bool ElementImpl::isStereotypeRequired(std::shared_ptr<uml::Stereotype>  stereotype) 
+bool ElementImpl::isStereotypeRequired(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::mustBeOwned() 
+bool ElementImpl::mustBeOwned()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::not_own_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ElementImpl::not_own_self(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImpl::removeKeyword(std::string keyword) 
+bool ElementImpl::removeKeyword(std::string keyword)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,boost::any newValue) 
+void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,Any newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -451,7 +452,7 @@ if(elem)
 	//end of body
 }
 
-std::shared_ptr<ecore::EObject> ElementImpl::unapplyStereotype(std::shared_ptr<uml::Stereotype>  stereotype) 
+std::shared_ptr<ecore::EObject> ElementImpl::unapplyStereotype(std::shared_ptr<uml::Stereotype>  stereotype)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -486,7 +487,7 @@ std::weak_ptr<uml::Element > ElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<Element> ElementImpl::getThisElementPtr()
+std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
 {
 	return m_thisElementPtr.lock();
 }
@@ -508,24 +509,24 @@ std::shared_ptr<ecore::EObject> ElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment(); //81
+			return eAny(getOwnedComment()); //81
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement(); //82
+			return eAny(getOwnedElement()); //82
 		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner(); //83
+			return eAny(getOwner()); //83
 	}
-	boost::any result;
-	result = ecore::EModelElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ecore::EModelElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = ObjectImpl::internalEIsSet(featureID);
+	result = ObjectImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ElementImpl::internalEIsSet(int featureID) const
@@ -548,7 +549,7 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	result = ObjectImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ElementImpl::eSet(int featureID, boost::any newValue)
+bool ElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

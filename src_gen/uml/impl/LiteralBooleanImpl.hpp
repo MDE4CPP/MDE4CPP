@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LiteralBooleanImpl();
-			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr();
+			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr() const;
 			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);
 
 			//Additional constructors for the containments back reference
@@ -118,9 +118,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LiteralBoolean> m_thisLiteralBooleanPtr;

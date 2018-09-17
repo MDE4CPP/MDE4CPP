@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -106,6 +107,7 @@ DurationImpl::~DurationImpl()
 			:DurationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -128,6 +130,7 @@ DurationImpl::~DurationImpl()
 			:DurationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -139,6 +142,7 @@ DurationImpl::~DurationImpl()
 			:DurationImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -150,6 +154,7 @@ DurationImpl::~DurationImpl()
 			:DurationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -245,7 +250,7 @@ std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DurationImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -288,7 +293,7 @@ std::weak_ptr<uml::Element > DurationImpl::getOwner() const
 }
 
 
-std::shared_ptr<Duration> DurationImpl::getThisDurationPtr()
+std::shared_ptr<Duration> DurationImpl::getThisDurationPtr() const
 {
 	return m_thisDurationPtr.lock();
 }
@@ -329,16 +334,16 @@ std::shared_ptr<ecore::EObject> DurationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DURATION_EREFERENCE_EXPR:
-			return getExpr(); //24215
+			return eAny(getExpr()); //24215
 		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
-			return getObservation(); //24216
+			return eAny(getObservation()); //24216
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool DurationImpl::internalEIsSet(int featureID) const
 {
@@ -351,14 +356,14 @@ bool DurationImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool DurationImpl::eSet(int featureID, boost::any newValue)
+bool DurationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::DURATION_EREFERENCE_EXPR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _expr = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setExpr(_expr); //24215
 			return true;
 		}

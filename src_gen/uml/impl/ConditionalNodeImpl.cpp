@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -147,10 +148,12 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					 m_activity = par_Activity;
+					m_activity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					 m_inActivity = par_Activity;
+					m_inActivity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -173,6 +176,7 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 			:ConditionalNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -184,6 +188,7 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 			:ConditionalNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -206,6 +211,7 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 			:ConditionalNodeImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -484,37 +490,37 @@ bool ConditionalNodeImpl::getIsDeterminate() const
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::matching_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::result_no_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -582,7 +588,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ConditionalNodeImpl::getRedefine
 }
 
 
-std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr()
+std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
 {
 	return m_thisConditionalNodePtr.lock();
 }
@@ -628,20 +634,20 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return getClause(); //14645
+			return eAny(getClause()); //14645
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return getIsAssured(); //14646
+			return eAny(getIsAssured()); //14646
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate(); //14647
+			return eAny(getIsDeterminate()); //14647
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return getResult(); //14648
+			return eAny(getResult()); //14648
 	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 {
@@ -658,21 +664,21 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
-bool ConditionalNodeImpl::eSet(int featureID, boost::any newValue)
+bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
 		{
 			// BOOST CAST
-			bool _isAssured = boost::any_cast<bool>(newValue);
+			bool _isAssured = newValue->get<bool>();
 			setIsAssured(_isAssured); //14646
 			return true;
 		}
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
-			bool _isDeterminate = boost::any_cast<bool>(newValue);
+			bool _isDeterminate = newValue->get<bool>();
 			setIsDeterminate(_isDeterminate); //14647
 			return true;
 		}

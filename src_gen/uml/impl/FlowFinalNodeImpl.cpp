@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -104,6 +105,7 @@ FlowFinalNodeImpl::~FlowFinalNodeImpl()
 			:FlowFinalNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -115,6 +117,7 @@ FlowFinalNodeImpl::~FlowFinalNodeImpl()
 			:FlowFinalNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -126,6 +129,7 @@ FlowFinalNodeImpl::~FlowFinalNodeImpl()
 			:FlowFinalNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -281,7 +285,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> FlowFinalNodeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr()
+std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
 {
 	return m_thisFlowFinalNodePtr.lock();
 }
@@ -317,12 +321,12 @@ std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FlowFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FlowFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return FinalNodeImpl::internalEIsSet(featureID);
+	return FinalNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
 {
@@ -331,7 +335,7 @@ bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
 	}
 	return FinalNodeImpl::internalEIsSet(featureID);
 }
-bool FlowFinalNodeImpl::eSet(int featureID, boost::any newValue)
+bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

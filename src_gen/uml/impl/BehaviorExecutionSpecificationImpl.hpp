@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehaviorExecutionSpecificationImpl();
-			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr();
+			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr() const;
 			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -113,9 +113,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<BehaviorExecutionSpecification> m_thisBehaviorExecutionSpecificationPtr;

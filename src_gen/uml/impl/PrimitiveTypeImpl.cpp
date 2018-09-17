@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -124,6 +125,7 @@ PrimitiveTypeImpl::~PrimitiveTypeImpl()
 			:PrimitiveTypeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -148,10 +150,12 @@ PrimitiveTypeImpl::~PrimitiveTypeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -168,6 +172,7 @@ PrimitiveTypeImpl::~PrimitiveTypeImpl()
 			:PrimitiveTypeImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -437,7 +442,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> PrimitiveTypeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr()
+std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
 {
 	return m_thisPrimitiveTypePtr.lock();
 }
@@ -478,12 +483,12 @@ std::shared_ptr<ecore::EObject> PrimitiveTypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PrimitiveTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PrimitiveTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return DataTypeImpl::internalEIsSet(featureID);
+	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }
 bool PrimitiveTypeImpl::internalEIsSet(int featureID) const
 {
@@ -492,7 +497,7 @@ bool PrimitiveTypeImpl::internalEIsSet(int featureID) const
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }
-bool PrimitiveTypeImpl::eSet(int featureID, boost::any newValue)
+bool PrimitiveTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

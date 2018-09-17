@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,12 +175,12 @@ namespace uml
 			/*!
 			 The multiplicity of the targe IinputPin is 1..1.
 			target.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The target InputPin has no type.
 			target.type= null */ 
-			virtual bool no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

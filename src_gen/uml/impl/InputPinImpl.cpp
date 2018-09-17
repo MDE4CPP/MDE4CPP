@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -129,6 +130,7 @@ InputPinImpl::~InputPinImpl()
 			:InputPinImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -151,6 +153,7 @@ InputPinImpl::~InputPinImpl()
 			:InputPinImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -173,6 +176,7 @@ InputPinImpl::~InputPinImpl()
 			:InputPinImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -354,7 +358,7 @@ std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InputPinImpl::outgoing_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -414,7 +418,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InputPinImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr()
+std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr() const
 {
 	return m_thisInputPinPtr.lock();
 }
@@ -465,18 +469,18 @@ std::shared_ptr<ecore::EObject> InputPinImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return getCallOperationAction(); //11835
+			return eAny(getCallOperationAction()); //11835
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return getInvocationAction(); //11836
+			return eAny(getInvocationAction()); //11836
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction(); //11834
+			return eAny(getStructuralFeatureAction()); //11834
 	}
-	return PinImpl::internalEIsSet(featureID);
+	return PinImpl::eGet(featureID, resolve, coreType);
 }
 bool InputPinImpl::internalEIsSet(int featureID) const
 {
@@ -491,28 +495,28 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
-bool InputPinImpl::eSet(int featureID, boost::any newValue)
+bool InputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::CallOperationAction> _callOperationAction = boost::any_cast<std::shared_ptr<uml::CallOperationAction>>(newValue);
+			std::shared_ptr<uml::CallOperationAction> _callOperationAction = newValue->get<std::shared_ptr<uml::CallOperationAction>>();
 			setCallOperationAction(_callOperationAction); //11835
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InvocationAction> _invocationAction = boost::any_cast<std::shared_ptr<uml::InvocationAction>>(newValue);
+			std::shared_ptr<uml::InvocationAction> _invocationAction = newValue->get<std::shared_ptr<uml::InvocationAction>>();
 			setInvocationAction(_invocationAction); //11836
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = boost::any_cast<std::shared_ptr<uml::StructuralFeatureAction>>(newValue);
+			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = newValue->get<std::shared_ptr<uml::StructuralFeatureAction>>();
 			setStructuralFeatureAction(_structuralFeatureAction); //11834
 			return true;
 		}

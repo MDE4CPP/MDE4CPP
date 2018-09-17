@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -127,6 +128,7 @@ CombinedFragmentImpl::~CombinedFragmentImpl()
 			:CombinedFragmentImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -138,6 +140,7 @@ CombinedFragmentImpl::~CombinedFragmentImpl()
 			:CombinedFragmentImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -149,6 +152,7 @@ CombinedFragmentImpl::~CombinedFragmentImpl()
 			:CombinedFragmentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -290,19 +294,19 @@ InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CombinedFragmentImpl::break_(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -342,7 +346,7 @@ std::weak_ptr<uml::Element > CombinedFragmentImpl::getOwner() const
 }
 
 
-std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr()
+std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
 {
 	return m_thisCombinedFragmentPtr.lock();
 }
@@ -378,18 +382,18 @@ std::shared_ptr<ecore::EObject> CombinedFragmentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
-			return getCfragmentGate(); //22814
+			return eAny(getCfragmentGate()); //22814
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
-			return getInteractionOperator(); //22815
+			return eAny(getInteractionOperator()); //22815
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
-			return getOperand(); //22816
+			return eAny(getOperand()); //22816
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 {
@@ -404,14 +408,14 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool CombinedFragmentImpl::eSet(int featureID, boost::any newValue)
+bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
 		{
 			// BOOST CAST
-			InteractionOperatorKind _interactionOperator = boost::any_cast<InteractionOperatorKind>(newValue);
+			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
 			setInteractionOperator(_interactionOperator); //22815
 			return true;
 		}

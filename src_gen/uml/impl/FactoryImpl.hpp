@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FactoryImpl();
-			virtual std::shared_ptr<Factory> getThisFactoryPtr();
+			virtual std::shared_ptr<Factory> getThisFactoryPtr() const;
 			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);
 
 			//Additional constructors for the containments back reference
@@ -51,7 +51,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass)  ;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) ;
 			
 			
 			
@@ -93,9 +93,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Factory> m_thisFactoryPtr;

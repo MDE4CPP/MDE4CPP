@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -105,6 +106,7 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 			:GeneralizationSetImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -127,6 +129,7 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 			:GeneralizationSetImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -138,6 +141,7 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 			:GeneralizationSetImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -244,13 +248,13 @@ bool GeneralizationSetImpl::getIsDisjoint() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralizationSetImpl::generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +297,7 @@ std::weak_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
 }
 
 
-std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr()
+std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr() const
 {
 	return m_thisGeneralizationSetPtr.lock();
 }
@@ -329,20 +333,20 @@ std::shared_ptr<ecore::EObject> GeneralizationSetImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return getGeneralization(); //9616
+			return eAny(getGeneralization()); //9616
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return getIsCovering(); //9613
+			return eAny(getIsCovering()); //9613
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint(); //9614
+			return eAny(getIsDisjoint()); //9614
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return getPowertype(); //9615
+			return eAny(getPowertype()); //9615
 	}
-	return PackageableElementImpl::internalEIsSet(featureID);
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 {
@@ -359,28 +363,28 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
-bool GeneralizationSetImpl::eSet(int featureID, boost::any newValue)
+bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
 		{
 			// BOOST CAST
-			bool _isCovering = boost::any_cast<bool>(newValue);
+			bool _isCovering = newValue->get<bool>();
 			setIsCovering(_isCovering); //9613
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
-			bool _isDisjoint = boost::any_cast<bool>(newValue);
+			bool _isDisjoint = newValue->get<bool>();
 			setIsDisjoint(_isDisjoint); //9614
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _powertype = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _powertype = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setPowertype(_powertype); //9615
 			return true;
 		}

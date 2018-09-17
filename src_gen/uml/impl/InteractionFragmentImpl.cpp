@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -123,6 +124,7 @@ InteractionFragmentImpl::~InteractionFragmentImpl()
 			:InteractionFragmentImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -134,6 +136,7 @@ InteractionFragmentImpl::~InteractionFragmentImpl()
 			:InteractionFragmentImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -145,6 +148,7 @@ InteractionFragmentImpl::~InteractionFragmentImpl()
 			:InteractionFragmentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -307,7 +311,7 @@ std::weak_ptr<uml::Element > InteractionFragmentImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr()
+std::shared_ptr<InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr() const
 {
 	return m_thisInteractionFragmentPtr.lock();
 }
@@ -343,20 +347,20 @@ std::shared_ptr<ecore::EObject> InteractionFragmentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered(); //21210
+			return eAny(getCovered()); //21210
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction(); //21212
+			return eAny(getEnclosingInteraction()); //21212
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand(); //21211
+			return eAny(getEnclosingOperand()); //21211
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering(); //21213
+			return eAny(getGeneralOrdering()); //21213
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 {
@@ -373,21 +377,21 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool InteractionFragmentImpl::eSet(int featureID, boost::any newValue)
+bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
+			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setEnclosingInteraction(_enclosingInteraction); //21212
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
+			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
 			setEnclosingOperand(_enclosingOperand); //21211
 			return true;
 		}

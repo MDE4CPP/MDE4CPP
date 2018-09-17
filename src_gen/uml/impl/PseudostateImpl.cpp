@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -101,6 +102,7 @@ PseudostateImpl::~PseudostateImpl()
 			:PseudostateImpl()
 			{
 			    m_container = par_container;
+				m_namespace = par_container;
 			}
 
 
@@ -112,6 +114,7 @@ PseudostateImpl::~PseudostateImpl()
 			:PseudostateImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -134,6 +137,7 @@ PseudostateImpl::~PseudostateImpl()
 			:PseudostateImpl()
 			{
 			    m_state = par_state;
+				m_namespace = par_state;
 			}
 
 
@@ -145,6 +149,7 @@ PseudostateImpl::~PseudostateImpl()
 			:PseudostateImpl()
 			{
 			    m_stateMachine = par_stateMachine;
+				m_namespace = par_stateMachine;
 			}
 
 
@@ -241,55 +246,55 @@ PseudostateKind PseudostateImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-bool PseudostateImpl::choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::choice_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::fork_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::history_vertices(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::join_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::junction_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::transitions_incoming(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -335,7 +340,7 @@ std::weak_ptr<uml::Element > PseudostateImpl::getOwner() const
 }
 
 
-std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr()
+std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr() const
 {
 	return m_thisPseudostatePtr.lock();
 }
@@ -376,18 +381,18 @@ std::shared_ptr<ecore::EObject> PseudostateImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
-			return getKind(); //6014
+			return eAny(getKind()); //6014
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
-			return getState(); //6013
+			return eAny(getState()); //6013
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
-			return getStateMachine(); //6015
+			return eAny(getStateMachine()); //6015
 	}
-	return VertexImpl::internalEIsSet(featureID);
+	return VertexImpl::eGet(featureID, resolve, coreType);
 }
 bool PseudostateImpl::internalEIsSet(int featureID) const
 {
@@ -402,28 +407,28 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
-bool PseudostateImpl::eSet(int featureID, boost::any newValue)
+bool PseudostateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			PseudostateKind _kind = boost::any_cast<PseudostateKind>(newValue);
+			PseudostateKind _kind = newValue->get<PseudostateKind>();
 			setKind(_kind); //6014
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
 			setState(_state); //6013
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _stateMachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
+			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
 			setStateMachine(_stateMachine); //6015
 			return true;
 		}

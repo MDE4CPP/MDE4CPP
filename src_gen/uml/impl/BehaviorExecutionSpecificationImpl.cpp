@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -100,6 +101,7 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 			:BehaviorExecutionSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -111,6 +113,7 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 			:BehaviorExecutionSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -122,6 +125,7 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 			:BehaviorExecutionSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -259,7 +263,7 @@ std::weak_ptr<uml::Element > BehaviorExecutionSpecificationImpl::getOwner() cons
 }
 
 
-std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr()
+std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
 {
 	return m_thisBehaviorExecutionSpecificationPtr.lock();
 }
@@ -295,14 +299,14 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::eContainer()
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
-			return getBehavior(); //22716
+			return eAny(getBehavior()); //22716
 	}
-	return ExecutionSpecificationImpl::internalEIsSet(featureID);
+	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +317,14 @@ bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
-bool BehaviorExecutionSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_EREFERENCE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setBehavior(_behavior); //22716
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -136,10 +137,12 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					 m_activity = par_Activity;
+					m_activity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					 m_inActivity = par_Activity;
+					m_inActivity = par_Activity;
+					m_owner = par_Activity;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -162,6 +165,7 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 			:ExpansionRegionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -173,6 +177,7 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 			:ExpansionRegionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -195,6 +200,7 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 			:ExpansionRegionImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -505,7 +511,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExpansionRegionImpl::getRedefine
 }
 
 
-std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr()
+std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
 {
 	return m_thisExpansionRegionPtr.lock();
 }
@@ -551,18 +557,18 @@ std::shared_ptr<ecore::EObject> ExpansionRegionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return getInputElement(); //15547
+			return eAny(getInputElement()); //15547
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return getMode(); //15545
+			return eAny(getMode()); //15545
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return getOutputElement(); //15546
+			return eAny(getOutputElement()); //15546
 	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 {
@@ -577,14 +583,14 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
-bool ExpansionRegionImpl::eSet(int featureID, boost::any newValue)
+bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
 		{
 			// BOOST CAST
-			ExpansionKind _mode = boost::any_cast<ExpansionKind>(newValue);
+			ExpansionKind _mode = newValue->get<ExpansionKind>();
 			setMode(_mode); //15545
 			return true;
 		}

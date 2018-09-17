@@ -32,7 +32,7 @@ virtual public ActivityContent
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityContentImpl();
-			virtual std::shared_ptr<ActivityContent> getThisActivityContentPtr();
+			virtual std::shared_ptr<ActivityContent> getThisActivityContentPtr() const;
 			virtual void setThisActivityContentPtr(std::weak_ptr<ActivityContent> thisActivityContentPtr);
 
 
@@ -46,7 +46,7 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity> containingActivity() ;
 			
 			
 			
@@ -85,9 +85,9 @@ virtual public ActivityContent
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityContent> m_thisActivityContentPtr;

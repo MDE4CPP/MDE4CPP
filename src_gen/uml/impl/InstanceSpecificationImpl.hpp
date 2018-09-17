@@ -32,7 +32,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InstanceSpecificationImpl();
-			virtual std::shared_ptr<InstanceSpecification> getThisInstanceSpecificationPtr();
+			virtual std::shared_ptr<InstanceSpecification> getThisInstanceSpecificationPtr() const;
 			virtual void setThisInstanceSpecificationPtr(std::weak_ptr<InstanceSpecification> thisInstanceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,22 +63,22 @@ namespace uml
 			/*!
 			 The definingFeature of each slot is a StructuralFeature related to a classifier of the InstanceSpecification, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
 			slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature))) */ 
-			virtual bool defining_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool defining_feature(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
 			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact)) */ 
-			virtual bool deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool deployment_artifact(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 An InstanceSpecification can act as a DeploymentTarget if it represents an instance of a Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node))) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 No more than one slot in an InstanceSpecification may have the same definingFeature.
 			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1))) */ 
-			virtual bool structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool structural_feature(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -145,9 +145,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InstanceSpecification> m_thisInstanceSpecificationPtr;

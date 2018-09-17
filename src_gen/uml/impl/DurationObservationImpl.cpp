@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -98,6 +99,7 @@ DurationObservationImpl::~DurationObservationImpl()
 			:DurationObservationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -120,6 +122,7 @@ DurationObservationImpl::~DurationObservationImpl()
 			:DurationObservationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -131,6 +134,7 @@ DurationObservationImpl::~DurationObservationImpl()
 			:DurationObservationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -221,7 +225,7 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -254,7 +258,7 @@ std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 }
 
 
-std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr()
+std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
 {
 	return m_thisDurationObservationPtr.lock();
 }
@@ -290,16 +294,16 @@ std::shared_ptr<ecore::EObject> DurationObservationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
-			return getEvent(); //24713
+			return eAny(getEvent()); //24713
 		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent(); //24714
+			return eAny(getFirstEvent()); //24714
 	}
-	return ObservationImpl::internalEIsSet(featureID);
+	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
 bool DurationObservationImpl::internalEIsSet(int featureID) const
 {
@@ -312,7 +316,7 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
-bool DurationObservationImpl::eSet(int featureID, boost::any newValue)
+bool DurationObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
@@ -447,7 +451,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 		{
 			for (std::shared_ptr<bool> value : *m_firstEvent)
 			{
-				saveHandler->addAttributeAsNode("firstEvent", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}
 		}
 

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -147,6 +148,7 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			:OpaqueBehaviorImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -158,6 +160,7 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			:OpaqueBehaviorImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -182,10 +185,12 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -202,6 +207,7 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			:OpaqueBehaviorImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -611,7 +617,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueB
 }
 
 
-std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr()
+std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
 {
 	return m_thisOpaqueBehaviorPtr.lock();
 }
@@ -657,16 +663,16 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
-			return getBody(); //20062
+			return eAny(getBody()); //20062
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
-			return getLanguage(); //20063
+			return eAny(getLanguage()); //20063
 	}
-	return BehaviorImpl::internalEIsSet(featureID);
+	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
 bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 {
@@ -679,7 +685,7 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
-bool OpaqueBehaviorImpl::eSet(int featureID, boost::any newValue)
+bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
@@ -808,7 +814,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		{
 			for (std::shared_ptr<std::string> value : *m_body)
 			{
-				saveHandler->addAttributeAsNode("body", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("body", *value);
 			}
 		}
 
@@ -816,7 +822,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		{
 			for (std::shared_ptr<std::string> value : *m_language)
 			{
-				saveHandler->addAttributeAsNode("language", boost::to_string(*value));
+				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
 

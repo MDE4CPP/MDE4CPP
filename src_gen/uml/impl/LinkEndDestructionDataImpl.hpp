@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndDestructionDataImpl();
-			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr();
+			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr() const;
 			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);
 
 			//Additional constructors for the containments back reference
@@ -54,7 +54,7 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -115,9 +115,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LinkEndDestructionData> m_thisLinkEndDestructionDataPtr;

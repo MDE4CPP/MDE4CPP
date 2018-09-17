@@ -19,10 +19,8 @@ template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -231,60 +229,60 @@ namespace uml
 			implies (templateParameterSubstitution->forAll(ts |
 			    ts.formal.oclIsKindOf(Property)
 			    and ts.formal.oclAsType(Property).isAttribute()))) */ 
-			virtual bool binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self)) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A derived union is derived.
 			isDerivedUnion implies isDerived */ 
-			virtual bool derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A derived union is read only.
 			isDerivedUnion implies isReadOnly */ 
-			virtual bool derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			
 			/*!
 			 Retrieves the other end of the (binary) association in which this property is a member end. */ 
-			virtual std::shared_ptr<uml::Property> getOtherEnd()  = 0;
+			virtual std::shared_ptr<uml::Property> getOtherEnd() = 0;
 			
 			/*!
 			 The query isAttribute() is true if the Property is defined as an attribute of some Classifier.
 			result = (not classifier->isEmpty())
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isAttribute()  = 0;
+			virtual bool isAttribute() = 0;
 			
 			/*!
 			 The value of isComposite is true only if aggregation is composite.
 			result = (aggregation = AggregationKind::composite)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isComposite()  = 0;
+			virtual bool isComposite() = 0;
 			
 			/*!
 			 The query isNavigable() indicates whether it is possible to navigate across the property.
 			result = (not classifier->isEmpty() or association.navigableOwnedEnd->includes(self))
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isNavigable()  = 0;
+			virtual bool isNavigable() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isSetDefault()  = 0;
+			virtual bool isSetDefault() = 0;
 			
 			/*!
 			 A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.
 			isComposite and association <> null implies opposite.upperBound() <= 1 */ 
-			virtual bool multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty() */ 
-			virtual bool qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A redefined Property must be inherited from a more general Classifier.
@@ -293,40 +291,40 @@ namespace uml
 			      redefinedProperty->forAll(rp|
 			        ((redefinitionContext->collect(fc|
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp))) */ 
-			virtual bool redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Sets the default value for this property to the specified Boolean value. */ 
-			virtual void setBooleanDefaultValue(bool value)  = 0;
+			virtual void setBooleanDefaultValue(bool value) = 0;
 			
 			/*!
 			 Sets the default value for this property to the specified integer value. */ 
-			virtual void setIntegerDefaultValue(int value)  = 0;
+			virtual void setIntegerDefaultValue(int value) = 0;
 			
 			/*!
 			 Sets the navigability of this property as indicated. */ 
-			virtual void setIsNavigable(bool isNavigable)  = 0;
+			virtual void setIsNavigable(bool isNavigable) = 0;
 			
 			/*!
 			 Sets the default value for this property to the null value. */ 
-			virtual void setNullDefaultValue()  = 0;
+			virtual void setNullDefaultValue() = 0;
 			
 			/*!
 			 Sets the default value for this property to the specified real value. */ 
-			virtual void setRealDefaultValue(double value)  = 0;
+			virtual void setRealDefaultValue(double value) = 0;
 			
 			/*!
 			 Sets the default value for this property to the specified string value. */ 
-			virtual void setStringDefaultValue(std::string value)  = 0;
+			virtual void setStringDefaultValue(std::string value) = 0;
 			
 			/*!
 			 Sets the default value for this property to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value)  = 0;
+			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
 			
 			/*!
 			 A Property may not subset a Property with the same name.
 			subsettedProperty->forAll(sp | sp.name <> name) */ 
-			virtual bool subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
@@ -339,7 +337,7 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Type> > subsettingContext()  = 0;
+			virtual std::shared_ptr<Bag<uml::Type> > subsettingContext() = 0;
 			
 			/*!
 			 Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.
@@ -347,7 +345,7 @@ namespace uml
 			  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
 			    subsettedProperty->forAll(sp |
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c))))) */ 
-			virtual bool subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
@@ -355,16 +353,16 @@ namespace uml
 			  self.type.conformsTo(sp.type) and
 			    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
 			      self.upperBound() <= sp.upperBound() )) */ 
-			virtual bool subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool subsetting_rules(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type */ 
-			virtual bool type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 */ 
-			virtual void unsetDefault()  = 0;
+			virtual void unsetDefault() = 0;
 			
 			
 			//*********************************

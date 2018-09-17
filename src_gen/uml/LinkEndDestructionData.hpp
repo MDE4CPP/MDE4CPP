@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -115,7 +113,7 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

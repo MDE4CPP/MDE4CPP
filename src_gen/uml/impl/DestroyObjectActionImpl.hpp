@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DestroyObjectActionImpl();
-			virtual std::shared_ptr<DestroyObjectAction> getThisDestroyObjectActionPtr();
+			virtual std::shared_ptr<DestroyObjectAction> getThisDestroyObjectActionPtr() const;
 			virtual void setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the targe IinputPin is 1..1.
 			target.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The target InputPin has no type.
 			target.type= null */ 
-			virtual bool no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -149,9 +149,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DestroyObjectAction> m_thisDestroyObjectActionPtr;

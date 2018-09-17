@@ -74,7 +74,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> containingActivity()  = 0;
+			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
 			
 			
 			//*********************************

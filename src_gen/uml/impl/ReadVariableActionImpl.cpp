@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			:ReadVariableActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			:ReadVariableActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			:ReadVariableActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -305,13 +309,13 @@ std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadVariableActionImpl::compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadVariableActionImpl::type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -355,7 +359,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadVariableActionImpl::getRedef
 }
 
 
-std::shared_ptr<ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr()
+std::shared_ptr<ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr() const
 {
 	return m_thisReadVariableActionPtr.lock();
 }
@@ -391,14 +395,14 @@ std::shared_ptr<ecore::EObject> ReadVariableActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READVARIABLEACTION_EREFERENCE_RESULT:
-			return getResult(); //16629
+			return eAny(getResult()); //16629
 	}
-	return VariableActionImpl::internalEIsSet(featureID);
+	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 {
@@ -409,14 +413,14 @@ bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
-bool ReadVariableActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READVARIABLEACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16629
 			return true;
 		}

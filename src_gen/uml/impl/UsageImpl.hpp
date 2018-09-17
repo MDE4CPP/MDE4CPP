@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			UsageImpl();
-			virtual std::shared_ptr<Usage> getThisUsagePtr();
+			virtual std::shared_ptr<Usage> getThisUsagePtr() const;
 			virtual void setThisUsagePtr(std::weak_ptr<Usage> thisUsagePtr);
 
 			//Additional constructors for the containments back reference
@@ -113,9 +113,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Usage> m_thisUsagePtr;

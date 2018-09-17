@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -136,7 +134,7 @@ namespace uml
 			/*!
 			 The startEvent and the finishEvent must be on the same Lifeline.
 			start.covered = finish.covered */ 
-			virtual bool same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityGroupImpl();
-			virtual std::shared_ptr<ActivityGroup> getThisActivityGroupPtr();
+			virtual std::shared_ptr<ActivityGroup> getThisActivityGroupPtr() const;
 			virtual void setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			 All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 
 			containedEdge->forAll(activity = self.containingActivity()) */ 
-			virtual bool nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
@@ -71,7 +71,7 @@ namespace uml
 			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
 			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge) */ 
-			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -141,9 +141,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityGroup> m_thisActivityGroupPtr;

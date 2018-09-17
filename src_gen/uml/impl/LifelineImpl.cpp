@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -118,6 +119,7 @@ LifelineImpl::~LifelineImpl()
 			:LifelineImpl()
 			{
 			    m_interaction = par_interaction;
+				m_namespace = par_interaction;
 			}
 
 
@@ -129,6 +131,7 @@ LifelineImpl::~LifelineImpl()
 			:LifelineImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -231,25 +234,25 @@ std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::same_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -322,7 +325,7 @@ std::weak_ptr<uml::Element > LifelineImpl::getOwner() const
 }
 
 
-std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr()
+std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr() const
 {
 	return m_thisLifelinePtr.lock();
 }
@@ -353,22 +356,22 @@ std::shared_ptr<ecore::EObject> LifelineImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
-			return getCoveredBy(); //21314
+			return eAny(getCoveredBy()); //21314
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
-			return getDecomposedAs(); //21310
+			return eAny(getDecomposedAs()); //21310
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
-			return getInteraction(); //21311
+			return eAny(getInteraction()); //21311
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
-			return getRepresents(); //21312
+			return eAny(getRepresents()); //21312
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
-			return getSelector(); //21313
+			return eAny(getSelector()); //21313
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool LifelineImpl::internalEIsSet(int featureID) const
 {
@@ -387,35 +390,35 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool LifelineImpl::eSet(int featureID, boost::any newValue)
+bool LifelineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::PartDecomposition> _decomposedAs = boost::any_cast<std::shared_ptr<uml::PartDecomposition>>(newValue);
+			std::shared_ptr<uml::PartDecomposition> _decomposedAs = newValue->get<std::shared_ptr<uml::PartDecomposition>>();
 			setDecomposedAs(_decomposedAs); //21310
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _interaction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
+			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setInteraction(_interaction); //21311
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ConnectableElement> _represents = boost::any_cast<std::shared_ptr<uml::ConnectableElement>>(newValue);
+			std::shared_ptr<uml::ConnectableElement> _represents = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
 			setRepresents(_represents); //21312
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _selector = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _selector = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setSelector(_selector); //21313
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -154,6 +155,7 @@ DataTypeImpl::~DataTypeImpl()
 			:DataTypeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -178,10 +180,12 @@ DataTypeImpl::~DataTypeImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -198,6 +202,7 @@ DataTypeImpl::~DataTypeImpl()
 			:DataTypeImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -440,13 +445,13 @@ std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
+std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -506,7 +511,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DataTypeImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<DataType> DataTypeImpl::getThisDataTypePtr()
+std::shared_ptr<DataType> DataTypeImpl::getThisDataTypePtr() const
 {
 	return m_thisDataTypePtr.lock();
 }
@@ -547,16 +552,16 @@ std::shared_ptr<ecore::EObject> DataTypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DATATYPE_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //5439
+			return eAny(getOwnedAttribute()); //5439
 		case UmlPackage::DATATYPE_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation(); //5440
+			return eAny(getOwnedOperation()); //5440
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool DataTypeImpl::internalEIsSet(int featureID) const
 {
@@ -569,7 +574,7 @@ bool DataTypeImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool DataTypeImpl::eSet(int featureID, boost::any newValue)
+bool DataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

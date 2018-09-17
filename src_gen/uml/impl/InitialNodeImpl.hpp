@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InitialNodeImpl();
-			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr();
+			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr() const;
 			virtual void setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
 			outgoing->forAll(oclIsKindOf(ControlFlow)) */ 
-			virtual bool control_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -117,9 +117,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InitialNode> m_thisInitialNodePtr;

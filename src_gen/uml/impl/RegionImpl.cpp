@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -151,6 +152,7 @@ RegionImpl::~RegionImpl()
 			:RegionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -173,6 +175,7 @@ RegionImpl::~RegionImpl()
 			:RegionImpl()
 			{
 			    m_state = par_state;
+				m_namespace = par_state;
 			}
 
 
@@ -184,6 +187,7 @@ RegionImpl::~RegionImpl()
 			:RegionImpl()
 			{
 			    m_stateMachine = par_stateMachine;
+				m_namespace = par_stateMachine;
 			}
 
 
@@ -342,43 +346,43 @@ std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool RegionImpl::belongsToPSM() 
+bool RegionImpl::belongsToPSM()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::deep_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::owned(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::owned(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::shallow_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -460,7 +464,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> RegionImpl::getRedefinedElement(
 }
 
 
-std::shared_ptr<Region> RegionImpl::getThisRegionPtr()
+std::shared_ptr<Region> RegionImpl::getThisRegionPtr() const
 {
 	return m_thisRegionPtr.lock();
 }
@@ -497,28 +501,28 @@ std::shared_ptr<ecore::EObject> RegionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return getExtendedRegion(); //6219
+			return eAny(getExtendedRegion()); //6219
 		case UmlPackage::REGION_EREFERENCE_STATE:
-			return getState(); //6220
+			return eAny(getState()); //6220
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return getStateMachine(); //6221
+			return eAny(getStateMachine()); //6221
 		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return getSubvertex(); //6223
+			return eAny(getSubvertex()); //6223
 		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return getTransition(); //6222
+			return eAny(getTransition()); //6222
 	}
-	boost::any result;
-	result = NamespaceImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = RedefinableElementImpl::internalEIsSet(featureID);
+	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool RegionImpl::internalEIsSet(int featureID) const
@@ -545,28 +549,28 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	result = RedefinableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool RegionImpl::eSet(int featureID, boost::any newValue)
+bool RegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _extendedRegion = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			std::shared_ptr<uml::Region> _extendedRegion = newValue->get<std::shared_ptr<uml::Region>>();
 			setExtendedRegion(_extendedRegion); //6219
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
 			setState(_state); //6220
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _stateMachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
+			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
 			setStateMachine(_stateMachine); //6221
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -99,6 +100,7 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 			:ProtocolConformanceImpl()
 			{
 			    m_specificMachine = par_specificMachine;
+				m_owner = par_specificMachine;
 			}
 
 
@@ -219,7 +221,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProtocolConformanceImpl
 }
 
 
-std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr()
+std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
 {
 	return m_thisProtocolConformancePtr.lock();
 }
@@ -245,16 +247,16 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
-			return getGeneralMachine(); //717
+			return eAny(getGeneralMachine()); //717
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
-			return getSpecificMachine(); //718
+			return eAny(getSpecificMachine()); //718
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 {
@@ -267,21 +269,21 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool ProtocolConformanceImpl::eSet(int featureID, boost::any newValue)
+bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
 			setGeneralMachine(_generalMachine); //717
 			return true;
 		}
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
 			setSpecificMachine(_specificMachine); //718
 			return true;
 		}

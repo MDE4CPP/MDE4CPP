@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkActionImpl();
-			virtual std::shared_ptr<LinkAction> getThisLinkActionPtr();
+			virtual std::shared_ptr<LinkAction> getThisLinkActionPtr() const;
 			virtual void setThisLinkActionPtr(std::weak_ptr<LinkAction> thisLinkActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,22 +62,22 @@ namespace uml
 			 Returns the Association acted on by this LinkAction.
 			result = (endData->asSequence()->first().end.association)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Association> association()  ;
+			virtual std::shared_ptr<uml::Association> association() ;
 			
 			/*!
 			 The ends of the endData must not be static.
 			endData->forAll(not end.isStatic) */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag() */ 
-			virtual bool same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins() */ 
-			virtual bool same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -141,9 +141,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LinkAction> m_thisLinkActionPtr;

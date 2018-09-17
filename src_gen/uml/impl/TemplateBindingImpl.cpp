@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -109,6 +110,7 @@ TemplateBindingImpl::~TemplateBindingImpl()
 			:TemplateBindingImpl()
 			{
 			    m_boundElement = par_boundElement;
+				m_owner = par_boundElement;
 			}
 
 
@@ -206,13 +208,13 @@ std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -273,7 +275,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::ge
 }
 
 
-std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr()
+std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const
 {
 	return m_thisTemplateBindingPtr.lock();
 }
@@ -299,18 +301,18 @@ std::shared_ptr<ecore::EObject> TemplateBindingImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
-			return getBoundElement(); //199
+			return eAny(getBoundElement()); //199
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
-			return getParameterSubstitution(); //197
+			return eAny(getParameterSubstitution()); //197
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
-			return getSignature(); //198
+			return eAny(getSignature()); //198
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool TemplateBindingImpl::internalEIsSet(int featureID) const
 {
@@ -325,21 +327,21 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool TemplateBindingImpl::eSet(int featureID, boost::any newValue)
+bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateableElement> _boundElement = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
+			std::shared_ptr<uml::TemplateableElement> _boundElement = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
 			setBoundElement(_boundElement); //199
 			return true;
 		}
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
+			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
 			setSignature(_signature); //198
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			:ExecutionOccurrenceSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -109,6 +111,7 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			:ExecutionOccurrenceSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -120,6 +123,7 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			:ExecutionOccurrenceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -259,7 +263,7 @@ std::weak_ptr<uml::Element > ExecutionOccurrenceSpecificationImpl::getOwner() co
 }
 
 
-std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr()
+std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr() const
 {
 	return m_thisExecutionOccurrenceSpecificationPtr.lock();
 }
@@ -295,14 +299,14 @@ std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationImpl::eContainer
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
-			return getExecution(); //23416
+			return eAny(getExecution()); //23416
 	}
-	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
+	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +317,14 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
-bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutionSpecification> _execution = boost::any_cast<std::shared_ptr<uml::ExecutionSpecification>>(newValue);
+			std::shared_ptr<uml::ExecutionSpecification> _execution = newValue->get<std::shared_ptr<uml::ExecutionSpecification>>();
 			setExecution(_execution); //23416
 			return true;
 		}

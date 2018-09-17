@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			EventImpl();
-			virtual std::shared_ptr<Event> getThisEventPtr();
+			virtual std::shared_ptr<Event> getThisEventPtr() const;
 			virtual void setThisEventPtr(std::weak_ptr<Event> thisEventPtr);
 
 			//Additional constructors for the containments back reference
@@ -104,9 +104,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Event> m_thisEventPtr;

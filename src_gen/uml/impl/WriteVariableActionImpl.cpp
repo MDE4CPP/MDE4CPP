@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ WriteVariableActionImpl::~WriteVariableActionImpl()
 			:WriteVariableActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ WriteVariableActionImpl::~WriteVariableActionImpl()
 			:WriteVariableActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ WriteVariableActionImpl::~WriteVariableActionImpl()
 			:WriteVariableActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -305,13 +309,13 @@ std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool WriteVariableActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteVariableActionImpl::value_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -355,7 +359,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> WriteVariableActionImpl::getRede
 }
 
 
-std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr()
+std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr() const
 {
 	return m_thisWriteVariableActionPtr.lock();
 }
@@ -391,14 +395,14 @@ std::shared_ptr<ecore::EObject> WriteVariableActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
-			return getValue(); //13029
+			return eAny(getValue()); //13029
 	}
-	return VariableActionImpl::internalEIsSet(featureID);
+	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
 bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 {
@@ -409,14 +413,14 @@ bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
-bool WriteVariableActionImpl::eSet(int featureID, boost::any newValue)
+bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setValue(_value); //13029
 			return true;
 		}

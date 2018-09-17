@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -195,22 +193,22 @@ namespace uml
 			endif
 			endif)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Behavior> behavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior> behavior() = 0;
 			
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty() */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null */ 
-			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

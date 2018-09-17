@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -177,13 +175,13 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null) */ 
-			virtual bool type_has_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -171,6 +172,7 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 			:ProtocolStateMachineImpl()
 			{
 			    m_behavioredClassifier = par_behavioredClassifier;
+				m_namespace = par_behavioredClassifier;
 			}
 
 
@@ -182,6 +184,7 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 			:ProtocolStateMachineImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -206,10 +209,12 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -226,6 +231,7 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 			:ProtocolStateMachineImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -607,19 +613,19 @@ std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolStateMachineImpl::deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -680,7 +686,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Protoco
 }
 
 
-std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr()
+std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
 {
 	return m_thisProtocolStateMachinePtr.lock();
 }
@@ -726,14 +732,14 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
-			return getConformance(); //5866
+			return eAny(getConformance()); //5866
 	}
-	return StateMachineImpl::internalEIsSet(featureID);
+	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }
 bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 {
@@ -744,7 +750,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }
-bool ProtocolStateMachineImpl::eSet(int featureID, boost::any newValue)
+bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

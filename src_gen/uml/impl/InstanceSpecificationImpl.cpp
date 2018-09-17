@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -128,6 +129,7 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			:InstanceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -150,6 +152,7 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			:InstanceSpecificationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -161,6 +164,7 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			:InstanceSpecificationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -279,25 +283,25 @@ std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -347,7 +351,7 @@ std::weak_ptr<uml::Element > InstanceSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr()
+std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const
 {
 	return m_thisInstanceSpecificationPtr.lock();
 }
@@ -385,29 +389,29 @@ std::shared_ptr<ecore::EObject> InstanceSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return getClassifier(); //7915
+			return eAny(getClassifier()); //7915
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return getSlot(); //7916
+			return eAny(getSlot()); //7916
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return getSpecification(); //7917
+			return eAny(getSpecification()); //7917
 	}
-	boost::any result;
-	result = DeployedArtifactImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = DeploymentTargetImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	result = DeploymentTargetImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = PackageableElementImpl::internalEIsSet(featureID);
+	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
@@ -435,14 +439,14 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 	result = PackageableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool InstanceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setSpecification(_specification); //7917
 			return true;
 		}

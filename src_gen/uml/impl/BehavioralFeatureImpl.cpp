@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -154,6 +155,7 @@ BehavioralFeatureImpl::~BehavioralFeatureImpl()
 			:BehavioralFeatureImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -343,25 +345,25 @@ bool BehavioralFeatureImpl::getIsAbstract() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) 
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters() 
+std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -419,7 +421,7 @@ std::weak_ptr<uml::Element > BehavioralFeatureImpl::getOwner() const
 }
 
 
-std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr()
+std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr() const
 {
 	return m_thisBehavioralFeaturePtr.lock();
 }
@@ -446,30 +448,30 @@ std::shared_ptr<ecore::EObject> BehavioralFeatureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
-			return getConcurrency(); //4821
+			return eAny(getConcurrency()); //4821
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
-			return getIsAbstract(); //4822
+			return eAny(getIsAbstract()); //4822
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_METHOD:
-			return getMethod(); //4823
+			return eAny(getMethod()); //4823
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter(); //4824
+			return eAny(getOwnedParameter()); //4824
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet(); //4825
+			return eAny(getOwnedParameterSet()); //4825
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_RAISEDEXCEPTION:
-			return getRaisedException(); //4826
+			return eAny(getRaisedException()); //4826
 	}
-	boost::any result;
-	result = FeatureImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = FeatureImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamespaceImpl::internalEIsSet(featureID);
+	result = NamespaceImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
@@ -498,21 +500,21 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	result = NamespaceImpl::internalEIsSet(featureID);
 	return result;
 }
-bool BehavioralFeatureImpl::eSet(int featureID, boost::any newValue)
+bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
 		{
 			// BOOST CAST
-			CallConcurrencyKind _concurrency = boost::any_cast<CallConcurrencyKind>(newValue);
+			CallConcurrencyKind _concurrency = newValue->get<CallConcurrencyKind>();
 			setConcurrency(_concurrency); //4821
 			return true;
 		}
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
-			bool _isAbstract = boost::any_cast<bool>(newValue);
+			bool _isAbstract = newValue->get<bool>();
 			setIsAbstract(_isAbstract); //4822
 			return true;
 		}

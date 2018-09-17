@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -100,17 +98,17 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier) */ 
-			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type) */ 
-			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

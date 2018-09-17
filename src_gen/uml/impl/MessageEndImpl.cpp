@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ MessageEndImpl::~MessageEndImpl()
 			:MessageEndImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -181,25 +183,25 @@ std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment() 
+std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageEndImpl::isReceive() 
+bool MessageEndImpl::isReceive()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageEndImpl::isSend() 
+bool MessageEndImpl::isSend()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd() 
+std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -231,7 +233,7 @@ std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
 }
 
 
-std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr()
+std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr() const
 {
 	return m_thisMessageEndPtr.lock();
 }
@@ -257,14 +259,14 @@ std::shared_ptr<ecore::EObject> MessageEndImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return getMessage(); //21710
+			return eAny(getMessage()); //21710
 	}
-	return NamedElementImpl::internalEIsSet(featureID);
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool MessageEndImpl::internalEIsSet(int featureID) const
 {
@@ -275,14 +277,14 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
-bool MessageEndImpl::eSet(int featureID, boost::any newValue)
+bool MessageEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Message> _message = boost::any_cast<std::shared_ptr<uml::Message>>(newValue);
+			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
 			setMessage(_message); //21710
 			return true;
 		}

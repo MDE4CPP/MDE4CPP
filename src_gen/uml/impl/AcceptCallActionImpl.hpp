@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AcceptCallActionImpl();
-			virtual std::shared_ptr<AcceptCallAction> getThisAcceptCallActionPtr();
+			virtual std::shared_ptr<AcceptCallAction> getThisAcceptCallActionPtr() const;
 			virtual void setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,18 +66,18 @@ namespace uml
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
 				parameter->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent) */ 
-			virtual bool trigger_call_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true */ 
-			virtual bool unmarshall(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -140,9 +140,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<AcceptCallAction> m_thisAcceptCallActionPtr;

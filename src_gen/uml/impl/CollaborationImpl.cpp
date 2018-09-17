@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -146,6 +147,7 @@ CollaborationImpl::~CollaborationImpl()
 			:CollaborationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -170,10 +172,12 @@ CollaborationImpl::~CollaborationImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -190,6 +194,7 @@ CollaborationImpl::~CollaborationImpl()
 			:CollaborationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -503,7 +508,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Collabo
 }
 
 
-std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr()
+std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr() const
 {
 	return m_thisCollaborationPtr.lock();
 }
@@ -545,20 +550,20 @@ std::shared_ptr<ecore::EObject> CollaborationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
-			return getCollaborationRole(); //9146
+			return eAny(getCollaborationRole()); //9146
 	}
-	boost::any result;
-	result = BehavioredClassifierImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = StructuredClassifierImpl::internalEIsSet(featureID);
+	result = StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool CollaborationImpl::internalEIsSet(int featureID) const
@@ -577,7 +582,7 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 	result = StructuredClassifierImpl::internalEIsSet(featureID);
 	return result;
 }
-bool CollaborationImpl::eSet(int featureID, boost::any newValue)
+bool CollaborationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

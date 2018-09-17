@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -132,6 +133,7 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 			:DeploymentSpecificationImpl()
 			{
 			    m_deployment = par_deployment;
+				m_owner = par_deployment;
 			}
 
 
@@ -143,6 +145,7 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 			:DeploymentSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -167,10 +170,12 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -187,6 +192,7 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 			:DeploymentSpecificationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -454,13 +460,13 @@ std::string DeploymentSpecificationImpl::getExecutionLocation() const
 //*********************************
 // Operations
 //*********************************
-bool DeploymentSpecificationImpl::deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DeploymentSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -516,7 +522,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DeploymentSpecificationImpl::get
 }
 
 
-std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr()
+std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
 {
 	return m_thisDeploymentSpecificationPtr.lock();
 }
@@ -562,18 +568,18 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
-			return getDeployment(); //3846
+			return eAny(getDeployment()); //3846
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
-			return getDeploymentLocation(); //3844
+			return eAny(getDeploymentLocation()); //3844
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
-			return getExecutionLocation(); //3845
+			return eAny(getExecutionLocation()); //3845
 	}
-	return ArtifactImpl::internalEIsSet(featureID);
+	return ArtifactImpl::eGet(featureID, resolve, coreType);
 }
 bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -588,28 +594,28 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return ArtifactImpl::internalEIsSet(featureID);
 }
-bool DeploymentSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Deployment> _deployment = boost::any_cast<std::shared_ptr<uml::Deployment>>(newValue);
+			std::shared_ptr<uml::Deployment> _deployment = newValue->get<std::shared_ptr<uml::Deployment>>();
 			setDeployment(_deployment); //3846
 			return true;
 		}
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
 		{
 			// BOOST CAST
-			std::string _deploymentLocation = boost::any_cast<std::string>(newValue);
+			std::string _deploymentLocation = newValue->get<std::string>();
 			setDeploymentLocation(_deploymentLocation); //3844
 			return true;
 		}
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
 		{
 			// BOOST CAST
-			std::string _executionLocation = boost::any_cast<std::string>(newValue);
+			std::string _executionLocation = newValue->get<std::string>();
 			setExecutionLocation(_executionLocation); //3845
 			return true;
 		}

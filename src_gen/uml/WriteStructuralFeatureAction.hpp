@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -182,22 +180,22 @@ namespace uml
 			/*!
 			 The multiplicity of the result OutputPin must be 1..1.
 			result <> null implies result.is(1,1) */ 
-			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity_of_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result <> null implies result.type = object.type */ 
-			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The type of the value InputPin must conform to the type of the structuralFeature.
 			value <> null implies value.type.conformsTo(structuralFeature.type) */ 
-			virtual bool type_of_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_of_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

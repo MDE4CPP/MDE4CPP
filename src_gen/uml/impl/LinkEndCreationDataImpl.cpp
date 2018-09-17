@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -171,7 +172,7 @@ bool LinkEndCreationDataImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -199,7 +200,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() 
 }
 
 
-std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr()
+std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const
 {
 	return m_thisLinkEndCreationDataPtr.lock();
 }
@@ -220,16 +221,16 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
-			return getInsertAt(); //1487
+			return eAny(getInsertAt()); //1487
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll(); //1488
+			return eAny(getIsReplaceAll()); //1488
 	}
-	return LinkEndDataImpl::internalEIsSet(featureID);
+	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 {
@@ -242,21 +243,21 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
-bool LinkEndCreationDataImpl::eSet(int featureID, boost::any newValue)
+bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _insertAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setInsertAt(_insertAt); //1487
 			return true;
 		}
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
-			bool _isReplaceAll = boost::any_cast<bool>(newValue);
+			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //1488
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ StateInvariantImpl::~StateInvariantImpl()
 			:StateInvariantImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -109,6 +111,7 @@ StateInvariantImpl::~StateInvariantImpl()
 			:StateInvariantImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -120,6 +123,7 @@ StateInvariantImpl::~StateInvariantImpl()
 			:StateInvariantImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -259,7 +263,7 @@ std::weak_ptr<uml::Element > StateInvariantImpl::getOwner() const
 }
 
 
-std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr()
+std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
 {
 	return m_thisStateInvariantPtr.lock();
 }
@@ -295,14 +299,14 @@ std::shared_ptr<ecore::EObject> StateInvariantImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
-			return getInvariant(); //23514
+			return eAny(getInvariant()); //23514
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool StateInvariantImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +317,14 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool StateInvariantImpl::eSet(int featureID, boost::any newValue)
+bool StateInvariantImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _invariant = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _invariant = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setInvariant(_invariant); //23514
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -124,6 +125,7 @@ CommunicationPathImpl::~CommunicationPathImpl()
 			:CommunicationPathImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -148,10 +150,12 @@ CommunicationPathImpl::~CommunicationPathImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -168,6 +172,7 @@ CommunicationPathImpl::~CommunicationPathImpl()
 			:CommunicationPathImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -457,7 +462,7 @@ std::shared_ptr<Union<uml::Element>> CommunicationPathImpl::getRelatedElement() 
 }
 
 
-std::shared_ptr<CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr()
+std::shared_ptr<CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr() const
 {
 	return m_thisCommunicationPathPtr.lock();
 }
@@ -498,12 +503,12 @@ std::shared_ptr<ecore::EObject> CommunicationPathImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CommunicationPathImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CommunicationPathImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return AssociationImpl::internalEIsSet(featureID);
+	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
 bool CommunicationPathImpl::internalEIsSet(int featureID) const
 {
@@ -512,7 +517,7 @@ bool CommunicationPathImpl::internalEIsSet(int featureID) const
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
-bool CommunicationPathImpl::eSet(int featureID, boost::any newValue)
+bool CommunicationPathImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

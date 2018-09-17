@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -135,6 +136,7 @@ UnmarshallActionImpl::~UnmarshallActionImpl()
 			:UnmarshallActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -146,6 +148,7 @@ UnmarshallActionImpl::~UnmarshallActionImpl()
 			:UnmarshallActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -157,6 +160,7 @@ UnmarshallActionImpl::~UnmarshallActionImpl()
 			:UnmarshallActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -339,31 +343,31 @@ std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool UnmarshallActionImpl::multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::number_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UnmarshallActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::type_ordering_and_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -428,7 +432,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> UnmarshallActionImpl::getRedefin
 }
 
 
-std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr()
+std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr() const
 {
 	return m_thisUnmarshallActionPtr.lock();
 }
@@ -464,18 +468,18 @@ std::shared_ptr<ecore::EObject> UnmarshallActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
-			return getObject(); //17828
+			return eAny(getObject()); //17828
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
-			return getResult(); //17829
+			return eAny(getResult()); //17829
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
-			return getUnmarshallType(); //17830
+			return eAny(getUnmarshallType()); //17830
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 {
@@ -490,21 +494,21 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool UnmarshallActionImpl::eSet(int featureID, boost::any newValue)
+bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //17828
 			return true;
 		}
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _unmarshallType = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _unmarshallType = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setUnmarshallType(_unmarshallType); //17830
 			return true;
 		}

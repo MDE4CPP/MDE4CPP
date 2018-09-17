@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -123,6 +124,7 @@ CallOperationActionImpl::~CallOperationActionImpl()
 			:CallOperationActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -134,6 +136,7 @@ CallOperationActionImpl::~CallOperationActionImpl()
 			:CallOperationActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -145,6 +148,7 @@ CallOperationActionImpl::~CallOperationActionImpl()
 			:CallOperationActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -330,7 +334,7 @@ std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallOperationActionImpl::type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -388,7 +392,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CallOperationActionImpl::getRede
 }
 
 
-std::shared_ptr<CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr()
+std::shared_ptr<CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr() const
 {
 	return m_thisCallOperationActionPtr.lock();
 }
@@ -424,16 +428,16 @@ std::shared_ptr<ecore::EObject> CallOperationActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_OPERATION:
-			return getOperation(); //14132
+			return eAny(getOperation()); //14132
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_TARGET:
-			return getTarget(); //14133
+			return eAny(getTarget()); //14133
 	}
-	return CallActionImpl::internalEIsSet(featureID);
+	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CallOperationActionImpl::internalEIsSet(int featureID) const
 {
@@ -446,21 +450,21 @@ bool CallOperationActionImpl::internalEIsSet(int featureID) const
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
-bool CallOperationActionImpl::eSet(int featureID, boost::any newValue)
+bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_OPERATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Operation> _operation = boost::any_cast<std::shared_ptr<uml::Operation>>(newValue);
+			std::shared_ptr<uml::Operation> _operation = newValue->get<std::shared_ptr<uml::Operation>>();
 			setOperation(_operation); //14132
 			return true;
 		}
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setTarget(_target); //14133
 			return true;
 		}

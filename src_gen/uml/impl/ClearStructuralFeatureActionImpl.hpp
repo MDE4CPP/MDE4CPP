@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ClearStructuralFeatureActionImpl();
-			virtual std::shared_ptr<ClearStructuralFeatureAction> getThisClearStructuralFeatureActionPtr();
+			virtual std::shared_ptr<ClearStructuralFeatureAction> getThisClearStructuralFeatureActionPtr() const;
 			virtual void setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,12 +61,12 @@ namespace uml
 			/*!
 			 The multiplicity of the result OutputPin must be 1..1.
 			result<>null implies result.is(1,1) */ 
-			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result<>null implies result.type = object.type */ 
-			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -132,9 +132,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ClearStructuralFeatureAction> m_thisClearStructuralFeatureActionPtr;

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -112,6 +113,7 @@ ExtendImpl::~ExtendImpl()
 			:ExtendImpl()
 			{
 			    m_extension = par_extension;
+				m_namespace = par_extension;
 			}
 
 
@@ -123,6 +125,7 @@ ExtendImpl::~ExtendImpl()
 			:ExtendImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -231,7 +234,7 @@ std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -306,7 +309,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getTarget()
 }
 
 
-std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr()
+std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const
 {
 	return m_thisExtendPtr.lock();
 }
@@ -338,26 +341,26 @@ std::shared_ptr<ecore::EObject> ExtendImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
-			return getCondition(); //9913
+			return eAny(getCondition()); //9913
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
-			return getExtendedCase(); //9914
+			return eAny(getExtendedCase()); //9914
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
-			return getExtension(); //9916
+			return eAny(getExtension()); //9916
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
-			return getExtensionLocation(); //9915
+			return eAny(getExtensionLocation()); //9915
 	}
-	boost::any result;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = NamedElementImpl::internalEIsSet(featureID);
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ExtendImpl::internalEIsSet(int featureID) const
@@ -382,28 +385,28 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	result = NamedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ExtendImpl::eSet(int featureID, boost::any newValue)
+bool ExtendImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _condition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			std::shared_ptr<uml::Constraint> _condition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setCondition(_condition); //9913
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _extendedCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			std::shared_ptr<uml::UseCase> _extendedCase = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setExtendedCase(_extendedCase); //9914
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _extension = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			std::shared_ptr<uml::UseCase> _extension = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setExtension(_extension); //9916
 			return true;
 		}

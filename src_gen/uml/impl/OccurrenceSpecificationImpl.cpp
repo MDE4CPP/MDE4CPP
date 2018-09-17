@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -106,6 +107,7 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			:OccurrenceSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -117,6 +119,7 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			:OccurrenceSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -128,6 +131,7 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			:OccurrenceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -236,7 +240,7 @@ std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value) 
+void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -276,7 +280,7 @@ std::weak_ptr<uml::Element > OccurrenceSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr()
+std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const
 {
 	return m_thisOccurrenceSpecificationPtr.lock();
 }
@@ -312,16 +316,16 @@ std::shared_ptr<ecore::EObject> OccurrenceSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
-			return getToAfter(); //22114
+			return eAny(getToAfter()); //22114
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
-			return getToBefore(); //22115
+			return eAny(getToBefore()); //22115
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -334,7 +338,7 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool OccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

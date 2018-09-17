@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -171,7 +172,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -199,7 +200,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndDestructionDataImpl::getOwnedElement
 }
 
 
-std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr()
+std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
 {
 	return m_thisLinkEndDestructionDataPtr.lock();
 }
@@ -220,16 +221,16 @@ std::shared_ptr<ecore::EObject> LinkEndDestructionDataImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
-			return getDestroyAt(); //1527
+			return eAny(getDestroyAt()); //1527
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
-			return getIsDestroyDuplicates(); //1528
+			return eAny(getIsDestroyDuplicates()); //1528
 	}
-	return LinkEndDataImpl::internalEIsSet(featureID);
+	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 {
@@ -242,21 +243,21 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
-bool LinkEndDestructionDataImpl::eSet(int featureID, boost::any newValue)
+bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _destroyAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _destroyAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setDestroyAt(_destroyAt); //1527
 			return true;
 		}
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
-			bool _isDestroyDuplicates = boost::any_cast<bool>(newValue);
+			bool _isDestroyDuplicates = newValue->get<bool>();
 			setIsDestroyDuplicates(_isDestroyDuplicates); //1528
 			return true;
 		}

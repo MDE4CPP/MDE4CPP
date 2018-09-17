@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -155,6 +156,7 @@ ProfileImpl::~ProfileImpl()
 			:ProfileImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -168,10 +170,12 @@ ProfileImpl::~ProfileImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-					 m_nestingPackage = par_Package;
+					m_nestingPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -205,6 +209,7 @@ ProfileImpl::~ProfileImpl()
 			:ProfileImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -402,67 +407,67 @@ std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier>  classifier) 
+std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define() 
+std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition() 
+std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
+std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly) 
+std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses() 
+std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels() 
+std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::isDefined() 
+bool ProfileImpl::isDefined()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -510,7 +515,7 @@ std::weak_ptr<uml::Element > ProfileImpl::getOwner() const
 }
 
 
-std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr()
+std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
 {
 	return m_thisProfilePtr.lock();
 }
@@ -551,16 +556,16 @@ std::shared_ptr<ecore::EObject> ProfileImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
-			return getMetaclassReference(); //1229
+			return eAny(getMetaclassReference()); //1229
 		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
-			return getMetamodelReference(); //1230
+			return eAny(getMetamodelReference()); //1230
 	}
-	return PackageImpl::internalEIsSet(featureID);
+	return PackageImpl::eGet(featureID, resolve, coreType);
 }
 bool ProfileImpl::internalEIsSet(int featureID) const
 {
@@ -573,7 +578,7 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
-bool ProfileImpl::eSet(int featureID, boost::any newValue)
+bool ProfileImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

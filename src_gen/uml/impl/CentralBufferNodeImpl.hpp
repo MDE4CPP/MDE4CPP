@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CentralBufferNodeImpl();
-			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr();
+			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr() const;
 			virtual void setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -107,9 +107,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CentralBufferNode> m_thisCentralBufferNodePtr;

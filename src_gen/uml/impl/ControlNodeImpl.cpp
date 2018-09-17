@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -102,6 +103,7 @@ ControlNodeImpl::~ControlNodeImpl()
 			:ControlNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -113,6 +115,7 @@ ControlNodeImpl::~ControlNodeImpl()
 			:ControlNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -124,6 +127,7 @@ ControlNodeImpl::~ControlNodeImpl()
 			:ControlNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -279,7 +283,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ControlNodeImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr()
+std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr() const
 {
 	return m_thisControlNodePtr.lock();
 }
@@ -315,12 +319,12 @@ std::shared_ptr<ecore::EObject> ControlNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ControlNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ControlNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActivityNodeImpl::internalEIsSet(featureID);
+	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool ControlNodeImpl::internalEIsSet(int featureID) const
 {
@@ -329,7 +333,7 @@ bool ControlNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
-bool ControlNodeImpl::eSet(int featureID, boost::any newValue)
+bool ControlNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

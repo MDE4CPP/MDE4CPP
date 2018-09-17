@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -183,7 +181,7 @@ namespace uml
 			 The type and ordering of the result OutputPin are the same as the type and ordering of the StructuralFeature.
 			result.type =structuralFeature.type and 
 			result.isOrdered = structuralFeature.isOrdered */ 
-			virtual bool type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

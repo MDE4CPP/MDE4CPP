@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -117,30 +115,30 @@ namespace uml
 			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
 			nodes.outgoing->forAll(nodes->includes(target)) and
 			nodes.incoming->forAll(nodes->includes(source)) */ 
-			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool edge_source_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
-			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool exception_input_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
-			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool handler_body_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner */ 
-			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool handler_body_owner(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
 			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
 			inputs->size()=1 and inputs->first()=exceptionInput */ 
-			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -155,7 +153,7 @@ namespace uml
 			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
 			) */ 
-			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ StringExpressionImpl::~StringExpressionImpl()
 			:StringExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -143,6 +145,7 @@ StringExpressionImpl::~StringExpressionImpl()
 			:StringExpressionImpl()
 			{
 			    m_owningExpression = par_owningExpression;
+				m_owner = par_owningExpression;
 			}
 
 
@@ -154,6 +157,7 @@ StringExpressionImpl::~StringExpressionImpl()
 			:StringExpressionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -165,6 +169,7 @@ StringExpressionImpl::~StringExpressionImpl()
 			:StringExpressionImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -176,6 +181,7 @@ StringExpressionImpl::~StringExpressionImpl()
 			:StringExpressionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -301,13 +307,13 @@ std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StringExpressionImpl::operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StringExpressionImpl::operands(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -350,7 +356,7 @@ std::weak_ptr<uml::Element > StringExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr()
+std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
 {
 	return m_thisStringExpressionPtr.lock();
 }
@@ -397,22 +403,22 @@ std::shared_ptr<ecore::EObject> StringExpressionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
-			return getOwningExpression(); //8719
+			return eAny(getOwningExpression()); //8719
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
-			return getSubExpression(); //8720
+			return eAny(getSubExpression()); //8720
 	}
-	boost::any result;
-	result = ExpressionImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ExpressionImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TemplateableElementImpl::internalEIsSet(featureID);
+	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool StringExpressionImpl::internalEIsSet(int featureID) const
@@ -433,14 +439,14 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 	result = TemplateableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool StringExpressionImpl::eSet(int featureID, boost::any newValue)
+bool StringExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _owningExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			std::shared_ptr<uml::StringExpression> _owningExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
 			setOwningExpression(_owningExpression); //8719
 			return true;
 		}

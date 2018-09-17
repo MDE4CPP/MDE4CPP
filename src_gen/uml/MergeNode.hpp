@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -157,12 +155,12 @@ namespace uml
 			 The ActivityEdges incoming to and outgoing from a MergeNode must be either all ObjectFlows or all ControlFlows.
 			let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in
 			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A MergeNode has one outgoing ActivityEdge.
 			outgoing->size()=1 */ 
-			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImp
 			:ConnectableElementTemplateParameterImpl()
 			{
 			    m_signature = par_signature;
+				m_owner = par_signature;
 			}
 
 
@@ -191,7 +193,7 @@ std::weak_ptr<uml::Element > ConnectableElementTemplateParameterImpl::getOwner()
 }
 
 
-std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr()
+std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
 {
 	return m_thisConnectableElementTemplateParameterPtr.lock();
 }
@@ -217,12 +219,12 @@ std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterImpl::eContai
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return TemplateParameterImpl::internalEIsSet(featureID);
+	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
 bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) const
 {
@@ -231,7 +233,7 @@ bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) cons
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
-bool ConnectableElementTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

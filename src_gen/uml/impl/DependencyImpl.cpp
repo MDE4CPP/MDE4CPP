@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -124,6 +125,7 @@ DependencyImpl::~DependencyImpl()
 			:DependencyImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -146,6 +148,7 @@ DependencyImpl::~DependencyImpl()
 			:DependencyImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -157,6 +160,7 @@ DependencyImpl::~DependencyImpl()
 			:DependencyImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -303,7 +307,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarg
 }
 
 
-std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr()
+std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
 {
 	return m_thisDependencyPtr.lock();
 }
@@ -340,22 +344,22 @@ std::shared_ptr<ecore::EObject> DependencyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
-			return getClient(); //3716
+			return eAny(getClient()); //3716
 		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
-			return getSupplier(); //3717
+			return eAny(getSupplier()); //3717
 	}
-	boost::any result;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = PackageableElementImpl::internalEIsSet(featureID);
+	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool DependencyImpl::internalEIsSet(int featureID) const
@@ -376,7 +380,7 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	result = PackageableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool DependencyImpl::eSet(int featureID, boost::any newValue)
+bool DependencyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

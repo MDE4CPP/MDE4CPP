@@ -130,7 +130,7 @@ namespace uml
 			 Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds()  = 0;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() = 0;
 			
 			
 			//*********************************

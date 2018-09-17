@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -131,6 +132,7 @@ RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
 			:RedefinableTemplateSignatureImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -153,6 +155,7 @@ RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
 			:RedefinableTemplateSignatureImpl()
 			{
 			    m_template = par_template;
+				m_owner = par_template;
 			}
 
 
@@ -270,13 +273,13 @@ std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters() 
+std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableTemplateSignatureImpl::redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -331,7 +334,7 @@ std::shared_ptr<Union<uml::Classifier>> RedefinableTemplateSignatureImpl::getRed
 }
 
 
-std::shared_ptr<RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr()
+std::shared_ptr<RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr() const
 {
 	return m_thisRedefinableTemplateSignaturePtr.lock();
 }
@@ -363,24 +366,24 @@ std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
-			return getClassifier(); //9718
+			return eAny(getClassifier()); //9718
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
-			return getExtendedSignature(); //9716
+			return eAny(getExtendedSignature()); //9716
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
-			return getInheritedParameter(); //9717
+			return eAny(getInheritedParameter()); //9717
 	}
-	boost::any result;
-	result = RedefinableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TemplateSignatureImpl::internalEIsSet(featureID);
+	result = TemplateSignatureImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
@@ -403,7 +406,7 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	result = TemplateSignatureImpl::internalEIsSet(featureID);
 	return result;
 }
-bool RedefinableTemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

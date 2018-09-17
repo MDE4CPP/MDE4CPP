@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionOperandImpl();
-			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr();
+			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr() const;
 			virtual void setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,11 +61,11 @@ namespace uml
 			//*********************************
 			/*!
 			 The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction. */ 
-			virtual bool guard_contain_references(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand. */ 
-			virtual bool guard_directly_prior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -133,9 +133,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InteractionOperand> m_thisInteractionOperandPtr;

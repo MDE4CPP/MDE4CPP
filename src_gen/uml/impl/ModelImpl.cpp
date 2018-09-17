@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -110,6 +111,7 @@ ModelImpl::~ModelImpl()
 			:ModelImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -123,10 +125,12 @@ ModelImpl::~ModelImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-					 m_nestingPackage = par_Package;
+					m_nestingPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -160,6 +164,7 @@ ModelImpl::~ModelImpl()
 			:ModelImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -351,7 +356,7 @@ std::string ModelImpl::getViewpoint() const
 //*********************************
 // Operations
 //*********************************
-bool ModelImpl::isMetamodel() 
+bool ModelImpl::isMetamodel()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -386,7 +391,7 @@ std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 }
 
 
-std::shared_ptr<Model> ModelImpl::getThisModelPtr()
+std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
 {
 	return m_thisModelPtr.lock();
 }
@@ -427,14 +432,14 @@ std::shared_ptr<ecore::EObject> ModelImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
-			return getViewpoint(); //8629
+			return eAny(getViewpoint()); //8629
 	}
-	return PackageImpl::internalEIsSet(featureID);
+	return PackageImpl::eGet(featureID, resolve, coreType);
 }
 bool ModelImpl::internalEIsSet(int featureID) const
 {
@@ -445,14 +450,14 @@ bool ModelImpl::internalEIsSet(int featureID) const
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
-bool ModelImpl::eSet(int featureID, boost::any newValue)
+bool ModelImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
 		{
 			// BOOST CAST
-			std::string _viewpoint = boost::any_cast<std::string>(newValue);
+			std::string _viewpoint = newValue->get<std::string>();
 			setViewpoint(_viewpoint); //8629
 			return true;
 		}

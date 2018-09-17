@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
 			:StartObjectBehaviorActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
 			:StartObjectBehaviorActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
 			:StartObjectBehaviorActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -324,25 +328,25 @@ std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior() 
+std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -390,7 +394,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> StartObjectBehaviorActionImpl::g
 }
 
 
-std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr()
+std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr() const
 {
 	return m_thisStartObjectBehaviorActionPtr.lock();
 }
@@ -426,14 +430,14 @@ std::shared_ptr<ecore::EObject> StartObjectBehaviorActionImpl::eContainer() cons
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
-			return getObject(); //17632
+			return eAny(getObject()); //17632
 	}
-	return CallActionImpl::internalEIsSet(featureID);
+	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
 bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 {
@@ -444,14 +448,14 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
-bool StartObjectBehaviorActionImpl::eSet(int featureID, boost::any newValue)
+bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //17632
 			return true;
 		}

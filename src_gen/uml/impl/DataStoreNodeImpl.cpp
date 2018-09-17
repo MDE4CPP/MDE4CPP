@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -112,6 +113,7 @@ DataStoreNodeImpl::~DataStoreNodeImpl()
 			:DataStoreNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -123,6 +125,7 @@ DataStoreNodeImpl::~DataStoreNodeImpl()
 			:DataStoreNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -134,6 +137,7 @@ DataStoreNodeImpl::~DataStoreNodeImpl()
 			:DataStoreNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -305,7 +309,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DataStoreNodeImpl::getRedefinedE
 }
 
 
-std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr()
+std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr() const
 {
 	return m_thisDataStoreNodePtr.lock();
 }
@@ -341,12 +345,12 @@ std::shared_ptr<ecore::EObject> DataStoreNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataStoreNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DataStoreNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return CentralBufferNodeImpl::internalEIsSet(featureID);
+	return CentralBufferNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool DataStoreNodeImpl::internalEIsSet(int featureID) const
 {
@@ -355,7 +359,7 @@ bool DataStoreNodeImpl::internalEIsSet(int featureID) const
 	}
 	return CentralBufferNodeImpl::internalEIsSet(featureID);
 }
-bool DataStoreNodeImpl::eSet(int featureID, boost::any newValue)
+bool DataStoreNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ ValuePinImpl::~ValuePinImpl()
 			:ValuePinImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -143,6 +145,7 @@ ValuePinImpl::~ValuePinImpl()
 			:ValuePinImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -165,6 +168,7 @@ ValuePinImpl::~ValuePinImpl()
 			:ValuePinImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -354,13 +358,13 @@ std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValuePinImpl::compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ValuePinImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValuePinImpl::no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -400,7 +404,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ValuePinImpl::getRedefinedElemen
 }
 
 
-std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr()
+std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr() const
 {
 	return m_thisValuePinPtr.lock();
 }
@@ -451,14 +455,14 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return getValue(); //17937
+			return eAny(getValue()); //17937
 	}
-	return InputPinImpl::internalEIsSet(featureID);
+	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
 bool ValuePinImpl::internalEIsSet(int featureID) const
 {
@@ -469,14 +473,14 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
-bool ValuePinImpl::eSet(int featureID, boost::any newValue)
+bool ValuePinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _value = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setValue(_value); //17937
 			return true;
 		}

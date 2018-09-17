@@ -17,10 +17,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -106,19 +104,19 @@ namespace uml
 			/*!
 			 The bodyOutput Pins are OutputPins on Actions in the body of the Clause.
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
-			virtual bool body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
 			decider.type = Boolean and
 			decider.is(1,1) */ 
-			virtual bool decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool decider_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty() */ 
-			virtual bool test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool test_and_body(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

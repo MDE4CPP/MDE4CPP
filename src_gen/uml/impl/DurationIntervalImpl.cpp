@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -96,6 +97,7 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			:DurationIntervalImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -118,6 +120,7 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			:DurationIntervalImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -129,6 +132,7 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			:DurationIntervalImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -140,6 +144,7 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			:DurationIntervalImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -250,7 +255,7 @@ std::weak_ptr<uml::Element > DurationIntervalImpl::getOwner() const
 }
 
 
-std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr()
+std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const
 {
 	return m_thisDurationIntervalPtr.lock();
 }
@@ -291,12 +296,12 @@ std::shared_ptr<ecore::EObject> DurationIntervalImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DurationIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DurationIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return IntervalImpl::internalEIsSet(featureID);
+	return IntervalImpl::eGet(featureID, resolve, coreType);
 }
 bool DurationIntervalImpl::internalEIsSet(int featureID) const
 {
@@ -305,7 +310,7 @@ bool DurationIntervalImpl::internalEIsSet(int featureID) const
 	}
 	return IntervalImpl::internalEIsSet(featureID);
 }
-bool DurationIntervalImpl::eSet(int featureID, boost::any newValue)
+bool DurationIntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -129,7 +127,7 @@ namespace uml
 			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
-			virtual bool interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

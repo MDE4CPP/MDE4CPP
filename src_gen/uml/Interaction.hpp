@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -304,7 +302,7 @@ namespace uml
 			/*!
 			 An Interaction instance must not be contained within another Interaction instance.
 			enclosingInteraction->isEmpty() */ 
-			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

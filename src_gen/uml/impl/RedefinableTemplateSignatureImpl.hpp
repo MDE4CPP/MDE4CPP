@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			RedefinableTemplateSignatureImpl();
-			virtual std::shared_ptr<RedefinableTemplateSignature> getThisRedefinableTemplateSignaturePtr();
+			virtual std::shared_ptr<RedefinableTemplateSignature> getThisRedefinableTemplateSignaturePtr() const;
 			virtual void setThisRedefinableTemplateSignaturePtr(std::weak_ptr<RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr);
 
 			//Additional constructors for the containments back reference
@@ -59,12 +59,12 @@ namespace uml
 			 Derivation for RedefinableTemplateSignature::/inheritedParameter
 			result = (if extendedSignature->isEmpty() then Set{} else extendedSignature.parameter->asSet() endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters()  ;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() ;
 			
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -133,9 +133,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<RedefinableTemplateSignature> m_thisRedefinableTemplateSignaturePtr;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -130,6 +131,7 @@ DeploymentImpl::~DeploymentImpl()
 			:DeploymentImpl()
 			{
 			    m_location = par_location;
+				m_owner = par_location;
 			}
 
 
@@ -141,6 +143,7 @@ DeploymentImpl::~DeploymentImpl()
 			:DeploymentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -163,6 +166,7 @@ DeploymentImpl::~DeploymentImpl()
 			:DeploymentImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -174,6 +178,7 @@ DeploymentImpl::~DeploymentImpl()
 			:DeploymentImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -355,7 +360,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarg
 }
 
 
-std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr()
+std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
 {
 	return m_thisDeploymentPtr.lock();
 }
@@ -396,18 +401,18 @@ std::shared_ptr<ecore::EObject> DeploymentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENT_EREFERENCE_CONFIGURATION:
-			return getConfiguration(); //3618
+			return eAny(getConfiguration()); //3618
 		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact(); //3619
+			return eAny(getDeployedArtifact()); //3619
 		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
-			return getLocation(); //3620
+			return eAny(getLocation()); //3620
 	}
-	return DependencyImpl::internalEIsSet(featureID);
+	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
 bool DeploymentImpl::internalEIsSet(int featureID) const
 {
@@ -422,14 +427,14 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
-bool DeploymentImpl::eSet(int featureID, boost::any newValue)
+bool DeploymentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DeploymentTarget> _location = boost::any_cast<std::shared_ptr<uml::DeploymentTarget>>(newValue);
+			std::shared_ptr<uml::DeploymentTarget> _location = newValue->get<std::shared_ptr<uml::DeploymentTarget>>();
 			setLocation(_location); //3620
 			return true;
 		}

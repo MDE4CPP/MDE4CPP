@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -116,6 +117,7 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			:DestroyObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -127,6 +129,7 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			:DestroyObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -138,6 +141,7 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			:DestroyObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -323,13 +327,13 @@ bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const
 //*********************************
 // Operations
 //*********************************
-bool DestroyObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DestroyObjectActionImpl::no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -373,7 +377,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> DestroyObjectActionImpl::getRede
 }
 
 
-std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr()
+std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
 {
 	return m_thisDestroyObjectActionPtr.lock();
 }
@@ -409,18 +413,18 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks(); //15328
+			return eAny(getIsDestroyLinks()); //15328
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects(); //15329
+			return eAny(getIsDestroyOwnedObjects()); //15329
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget(); //15330
+			return eAny(getTarget()); //15330
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -435,28 +439,28 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool DestroyObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
 		{
 			// BOOST CAST
-			bool _isDestroyLinks = boost::any_cast<bool>(newValue);
+			bool _isDestroyLinks = newValue->get<bool>();
 			setIsDestroyLinks(_isDestroyLinks); //15328
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
-			bool _isDestroyOwnedObjects = boost::any_cast<bool>(newValue);
+			bool _isDestroyOwnedObjects = newValue->get<bool>();
 			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //15329
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setTarget(_target); //15330
 			return true;
 		}

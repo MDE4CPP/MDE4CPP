@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -114,6 +115,7 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 			:InterruptibleActivityRegionImpl()
 			{
 			    m_inActivity = par_inActivity;
+				m_owner = par_inActivity;
 			}
 
 
@@ -125,6 +127,7 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 			:InterruptibleActivityRegionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -147,6 +150,7 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 			:InterruptibleActivityRegionImpl()
 			{
 			    m_superGroup = par_superGroup;
+				m_owner = par_superGroup;
 			}
 
 
@@ -242,7 +246,7 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -282,7 +286,7 @@ std::weak_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
 }
 
 
-std::shared_ptr<InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr()
+std::shared_ptr<InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr() const
 {
 	return m_thisInterruptibleActivityRegionPtr.lock();
 }
@@ -318,16 +322,16 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::eContainer() co
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
-			return getInterruptingEdge(); //11115
+			return eAny(getInterruptingEdge()); //11115
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
-			return getNode(); //11116
+			return eAny(getNode()); //11116
 	}
-	return ActivityGroupImpl::internalEIsSet(featureID);
+	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
 bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 {
@@ -340,7 +344,7 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
-bool InterruptibleActivityRegionImpl::eSet(int featureID, boost::any newValue)
+bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

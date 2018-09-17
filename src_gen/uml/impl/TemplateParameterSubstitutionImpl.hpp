@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateParameterSubstitutionImpl();
-			virtual std::shared_ptr<TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr();
+			virtual std::shared_ptr<TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr() const;
 			virtual void setThisTemplateParameterSubstitutionPtr(std::weak_ptr<TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,7 +53,7 @@ namespace uml
 			/*!
 			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
 			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
-			virtual bool must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -134,9 +134,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TemplateParameterSubstitution> m_thisTemplateParameterSubstitutionPtr;

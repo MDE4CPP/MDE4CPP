@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -156,12 +154,12 @@ namespace uml
 			/*!
 			 All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
 			outgoing->forAll(oclIsKindOf(ControlFlow)) */ 
-			virtual bool control_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

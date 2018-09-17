@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralNullImpl::~LiteralNullImpl()
 			:LiteralNullImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralNullImpl::~LiteralNullImpl()
 			:LiteralNullImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralNullImpl::~LiteralNullImpl()
 			:LiteralNullImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralNullImpl::~LiteralNullImpl()
 			:LiteralNullImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -244,7 +249,7 @@ std::weak_ptr<uml::Element > LiteralNullImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr()
+std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
 {
 	return m_thisLiteralNullPtr.lock();
 }
@@ -285,12 +290,12 @@ std::shared_ptr<ecore::EObject> LiteralNullImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralNullImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralNullImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralNullImpl::internalEIsSet(int featureID) const
 {
@@ -299,7 +304,7 @@ bool LiteralNullImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralNullImpl::eSet(int featureID, boost::any newValue)
+bool LiteralNullImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

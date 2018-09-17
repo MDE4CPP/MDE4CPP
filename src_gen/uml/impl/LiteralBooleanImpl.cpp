@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 			:LiteralBooleanImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 			:LiteralBooleanImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 			:LiteralBooleanImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -138,6 +142,7 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 			:LiteralBooleanImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -254,7 +259,7 @@ std::weak_ptr<uml::Element > LiteralBooleanImpl::getOwner() const
 }
 
 
-std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr()
+std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
 {
 	return m_thisLiteralBooleanPtr.lock();
 }
@@ -295,14 +300,14 @@ std::shared_ptr<ecore::EObject> LiteralBooleanImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALBOOLEAN_EATTRIBUTE_VALUE:
-			return getValue(); //24815
+			return eAny(getValue()); //24815
 	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 {
@@ -313,14 +318,14 @@ bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
-bool LiteralBooleanImpl::eSet(int featureID, boost::any newValue)
+bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LITERALBOOLEAN_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			bool _value = boost::any_cast<bool>(newValue);
+			bool _value = newValue->get<bool>();
 			setValue(_value); //24815
 			return true;
 		}

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CombinedFragmentImpl();
-			virtual std::shared_ptr<CombinedFragment> getThisCombinedFragmentPtr();
+			virtual std::shared_ptr<CombinedFragment> getThisCombinedFragmentPtr() const;
 			virtual void setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,12 +63,12 @@ namespace uml
 			interactionOperator=InteractionOperatorKind::break  implies   
 			enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union(
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet() */ 
-			virtual bool break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool break_(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment) */ 
-			virtual bool consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
@@ -76,7 +76,7 @@ namespace uml
 			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
 			interactionOperator = InteractionOperatorKind::neg)
 			implies operand->size()=1 */ 
-			virtual bool opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -144,9 +144,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CombinedFragment> m_thisCombinedFragmentPtr;

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			QualifierValueImpl();
-			virtual std::shared_ptr<QualifierValue> getThisQualifierValuePtr();
+			virtual std::shared_ptr<QualifierValue> getThisQualifierValuePtr() const;
 			virtual void setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr);
 
 			//Additional constructors for the containments back reference
@@ -49,17 +49,17 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier) */ 
-			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type) */ 
-			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -119,9 +119,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<QualifierValue> m_thisQualifierValuePtr;

@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -189,7 +187,7 @@ namespace uml
 			if onPort=null then  target.type.oclAsType(Classifier).allFeatures()->includes(operation)
 			else target.type.oclAsType(Classifier).allFeatures()->includes(onPort) and onPort.provided->union(onPort.required).allFeatures()->includes(operation)
 			endif */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

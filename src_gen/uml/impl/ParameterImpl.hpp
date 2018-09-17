@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ParameterImpl();
-			virtual std::shared_ptr<Parameter> getThisParameterPtr();
+			virtual std::shared_ptr<Parameter> getThisParameterPtr() const;
 			virtual void setThisParameterPtr(std::weak_ptr<Parameter> thisParameterPtr);
 
 			//Additional constructors for the containments back reference
@@ -66,66 +66,66 @@ namespace uml
 			/*!
 			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
 			end->notEmpty() implies collaboration->notEmpty() */ 
-			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool connector_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return)) */ 
-			virtual bool in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool in_and_out(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 */ 
-			virtual bool isSetDefault()  ;
+			virtual bool isSetDefault() ;
 			
 			/*!
 			 An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
-			virtual bool not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_exception(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null) */ 
-			virtual bool object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool object_effect(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant */ 
-			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified Boolean value. */ 
-			virtual void setBooleanDefaultValue(bool value)  ;
+			virtual void setBooleanDefaultValue(bool value) ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified integer value. */ 
-			virtual void setIntegerDefaultValue(int value)  ;
+			virtual void setIntegerDefaultValue(int value) ;
 			
 			/*!
 			 Sets the default value for this parameter to the null value. */ 
-			virtual void setNullDefaultValue()  ;
+			virtual void setNullDefaultValue() ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified real value. */ 
-			virtual void setRealDefaultValue(double value)  ;
+			virtual void setRealDefaultValue(double value) ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified string value. */ 
-			virtual void setStringDefaultValue(std::string value)  ;
+			virtual void setStringDefaultValue(std::string value) ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value)  ;
+			virtual void setUnlimitedNaturalDefaultValue(int value) ;
 			
 			/*!
 			 A Parameter cannot be a stream and exception at the same time.
 			not (isException and isStream) */ 
-			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool stream_and_exception(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 */ 
-			virtual void unsetDefault()  ;
+			virtual void unsetDefault() ;
 			
 			
 			
@@ -249,9 +249,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Parameter> m_thisParameterPtr;

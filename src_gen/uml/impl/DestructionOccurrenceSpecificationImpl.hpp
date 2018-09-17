@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DestructionOccurrenceSpecificationImpl();
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> getThisDestructionOccurrenceSpecificationPtr();
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> getThisDestructionOccurrenceSpecificationPtr() const;
 			virtual void setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -63,7 +63,7 @@ namespace uml
 			let o : InteractionOperand = enclosingOperand in o->notEmpty() and 
 			let peerEvents : OrderedSet(OccurrenceSpecification) = covered.events->select(enclosingOperand = o)
 			in peerEvents->last() = self */ 
-			virtual bool no_occurrence_specifications_below(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -111,9 +111,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DestructionOccurrenceSpecification> m_thisDestructionOccurrenceSpecificationPtr;

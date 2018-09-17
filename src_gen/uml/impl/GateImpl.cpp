@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -93,6 +94,7 @@ GateImpl::~GateImpl()
 			:GateImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -180,85 +182,85 @@ std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GateImpl::actual_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::actual_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::actual_gate_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::actual_gate_matched(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::formal_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::formal_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string GateImpl::getName()  const 
+std::string GateImpl::getName() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::InteractionOperand> GateImpl::getOperand() 
+std::shared_ptr<uml::InteractionOperand> GateImpl::getOperand()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::inside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::inside_cf_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::inside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::inside_cf_matched(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::isActual() 
+bool GateImpl::isActual()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::isFormal() 
+bool GateImpl::isFormal()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::isInsideCF() 
+bool GateImpl::isInsideCF()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::isOutsideCF() 
+bool GateImpl::isOutsideCF()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::matches(std::shared_ptr<uml::Gate>  gateToMatch) 
+bool GateImpl::matches(std::shared_ptr<uml::Gate>  gateToMatch)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::outside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::outside_cf_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::outside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GateImpl::outside_cf_matched(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -281,7 +283,7 @@ std::weak_ptr<uml::Element > GateImpl::getOwner() const
 }
 
 
-std::shared_ptr<Gate> GateImpl::getThisGatePtr()
+std::shared_ptr<Gate> GateImpl::getThisGatePtr() const
 {
 	return m_thisGatePtr.lock();
 }
@@ -307,12 +309,12 @@ std::shared_ptr<ecore::EObject> GateImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GateImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return MessageEndImpl::internalEIsSet(featureID);
+	return MessageEndImpl::eGet(featureID, resolve, coreType);
 }
 bool GateImpl::internalEIsSet(int featureID) const
 {
@@ -321,7 +323,7 @@ bool GateImpl::internalEIsSet(int featureID) const
 	}
 	return MessageEndImpl::internalEIsSet(featureID);
 }
-bool GateImpl::eSet(int featureID, boost::any newValue)
+bool GateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

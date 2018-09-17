@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -186,7 +184,7 @@ namespace uml
 			  end.visibility=VisibilityKind::protected and
 			  endData.end->exists(other | 
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier)))) */ 
-			virtual bool allow_access(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

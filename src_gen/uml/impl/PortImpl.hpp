@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PortImpl();
-			virtual std::shared_ptr<Port> getThisPortPtr();
+			virtual std::shared_ptr<Port> getThisPortPtr() const;
 			virtual void setThisPortPtr(std::weak_ptr<Port> thisPortPtr);
 
 			//Additional constructors for the containments back reference
@@ -81,40 +81,40 @@ namespace uml
 			else type.oclAsType(Classifier).allRealizedInterfaces() 
 			endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided() ;
 			
 			/*!
 			 The union of the sets of Interfaces used by the type of the Port and its supertypes.
 			result = ( type.oclAsType(Classifier).allUsedInterfaces() )
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired() ;
 			
 			/*!
 			 A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty() */ 
-			virtual bool default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool default_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier */ 
-			virtual bool encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Derivation for Port::/provided
 			result = (if isConjugated then basicRequired() else basicProvided() endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() ;
 			
 			/*!
 			 Derivation for Port::/required
 			result = (if isConjugated then basicProvided() else basicRequired() endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() ;
 			
 			/*!
 			 Port.aggregation must be composite.
 			aggregation = AggregationKind::composite */ 
-			virtual bool port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool port_aggregation(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -225,9 +225,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Port> m_thisPortPtr;

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -187,6 +188,7 @@ AssociationImpl::~AssociationImpl()
 			:AssociationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -211,10 +213,12 @@ AssociationImpl::~AssociationImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -231,6 +235,7 @@ AssociationImpl::~AssociationImpl()
 			:AssociationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -494,43 +499,43 @@ bool AssociationImpl::getIsDerived() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationImpl::association_ends(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::ends_must_be_typed(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes() 
+std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::isBinary() 
+bool AssociationImpl::isBinary()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_number(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -604,7 +609,7 @@ std::shared_ptr<Union<uml::Element>> AssociationImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr()
+std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr() const
 {
 	return m_thisAssociationPtr.lock();
 }
@@ -646,28 +651,28 @@ std::shared_ptr<ecore::EObject> AssociationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
-			return getEndType(); //2740
+			return eAny(getEndType()); //2740
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
-			return getIsDerived(); //2741
+			return eAny(getIsDerived()); //2741
 		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
-			return getMemberEnd(); //2742
+			return eAny(getMemberEnd()); //2742
 		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
-			return getNavigableOwnedEnd(); //2744
+			return eAny(getNavigableOwnedEnd()); //2744
 		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
-			return getOwnedEnd(); //2743
+			return eAny(getOwnedEnd()); //2743
 	}
-	boost::any result;
-	result = ClassifierImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ClassifierImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = RelationshipImpl::internalEIsSet(featureID);
+	result = RelationshipImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool AssociationImpl::internalEIsSet(int featureID) const
@@ -694,14 +699,14 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	result = RelationshipImpl::internalEIsSet(featureID);
 	return result;
 }
-bool AssociationImpl::eSet(int featureID, boost::any newValue)
+bool AssociationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
 		{
 			// BOOST CAST
-			bool _isDerived = boost::any_cast<bool>(newValue);
+			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //2741
 			return true;
 		}

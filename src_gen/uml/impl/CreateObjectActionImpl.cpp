@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ CreateObjectActionImpl::~CreateObjectActionImpl()
 			:CreateObjectActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ CreateObjectActionImpl::~CreateObjectActionImpl()
 			:CreateObjectActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ CreateObjectActionImpl::~CreateObjectActionImpl()
 			:CreateObjectActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -307,25 +311,25 @@ std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateObjectActionImpl::classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::classifier_not_association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateObjectActionImpl::classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CreateObjectActionImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CreateObjectActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -379,7 +383,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateObjectActionImpl::getRedef
 }
 
 
-std::shared_ptr<CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr()
+std::shared_ptr<CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr() const
 {
 	return m_thisCreateObjectActionPtr.lock();
 }
@@ -415,16 +419,16 @@ std::shared_ptr<ecore::EObject> CreateObjectActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier(); //15028
+			return eAny(getClassifier()); //15028
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
-			return getResult(); //15029
+			return eAny(getResult()); //15029
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 {
@@ -437,21 +441,21 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool CreateObjectActionImpl::eSet(int featureID, boost::any newValue)
+bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setClassifier(_classifier); //15028
 			return true;
 		}
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //15029
 			return true;
 		}

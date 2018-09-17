@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -99,6 +100,7 @@ ConnectableElementImpl::~ConnectableElementImpl()
 			:ConnectableElementImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -121,6 +123,7 @@ ConnectableElementImpl::~ConnectableElementImpl()
 			:ConnectableElementImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -204,7 +207,7 @@ std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds() 
+std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -233,7 +236,7 @@ std::weak_ptr<uml::Element > ConnectableElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr()
+std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
 {
 	return m_thisConnectableElementPtr.lock();
 }
@@ -265,20 +268,20 @@ std::shared_ptr<ecore::EObject> ConnectableElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return getEnd(); //2913
+			return eAny(getEnd()); //2913
 	}
-	boost::any result;
-	result = ParameterableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = TypedElementImpl::internalEIsSet(featureID);
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ConnectableElementImpl::internalEIsSet(int featureID) const
@@ -297,7 +300,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	result = TypedElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ConnectableElementImpl::eSet(int featureID, boost::any newValue)
+bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

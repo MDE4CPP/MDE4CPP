@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ArtifactImpl();
-			virtual std::shared_ptr<Artifact> getThisArtifactPtr();
+			virtual std::shared_ptr<Artifact> getThisArtifactPtr() const;
 			virtual void setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,11 +64,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this artifact. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
 			
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact. */ 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
 			
 			
 			
@@ -161,9 +161,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Artifact> m_thisArtifactPtr;

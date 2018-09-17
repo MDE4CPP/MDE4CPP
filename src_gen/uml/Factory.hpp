@@ -94,7 +94,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass)  = 0;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) = 0;
 			
 			
 			//*********************************

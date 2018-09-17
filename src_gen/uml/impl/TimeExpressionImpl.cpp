@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -106,6 +107,7 @@ TimeExpressionImpl::~TimeExpressionImpl()
 			:TimeExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -128,6 +130,7 @@ TimeExpressionImpl::~TimeExpressionImpl()
 			:TimeExpressionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -139,6 +142,7 @@ TimeExpressionImpl::~TimeExpressionImpl()
 			:TimeExpressionImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -150,6 +154,7 @@ TimeExpressionImpl::~TimeExpressionImpl()
 			:TimeExpressionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -245,7 +250,7 @@ std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -288,7 +293,7 @@ std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr()
+std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const
 {
 	return m_thisTimeExpressionPtr.lock();
 }
@@ -329,16 +334,16 @@ std::shared_ptr<ecore::EObject> TimeExpressionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
-			return getExpr(); //20315
+			return eAny(getExpr()); //20315
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
-			return getObservation(); //20316
+			return eAny(getObservation()); //20316
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool TimeExpressionImpl::internalEIsSet(int featureID) const
 {
@@ -351,14 +356,14 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool TimeExpressionImpl::eSet(int featureID, boost::any newValue)
+bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _expr = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setExpr(_expr); //20315
 			return true;
 		}

@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StringExpressionImpl();
-			virtual std::shared_ptr<StringExpression> getThisStringExpressionPtr();
+			virtual std::shared_ptr<StringExpression> getThisStringExpressionPtr() const;
 			virtual void setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr);
 
 			//Additional constructors for the containments back reference
@@ -70,12 +70,12 @@ namespace uml
 			/*!
 			 All the operands of a StringExpression must be LiteralStrings
 			operand->forAll (oclIsKindOf (LiteralString)) */ 
-			virtual bool operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
-			virtual bool subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -137,9 +137,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StringExpression> m_thisStringExpressionPtr;

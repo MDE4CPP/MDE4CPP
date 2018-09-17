@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ MessageOccurrenceSpecificationImpl::~MessageOccurrenceSpecificationImpl()
 			:MessageOccurrenceSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -109,6 +111,7 @@ MessageOccurrenceSpecificationImpl::~MessageOccurrenceSpecificationImpl()
 			:MessageOccurrenceSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -120,6 +123,7 @@ MessageOccurrenceSpecificationImpl::~MessageOccurrenceSpecificationImpl()
 			:MessageOccurrenceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -250,7 +254,7 @@ std::weak_ptr<uml::Element > MessageOccurrenceSpecificationImpl::getOwner() cons
 }
 
 
-std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr()
+std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
 {
 	return m_thisMessageOccurrenceSpecificationPtr.lock();
 }
@@ -287,18 +291,18 @@ std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationImpl::eContainer()
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MessageOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any MessageOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	boost::any result;
-	result = MessageEndImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = MessageEndImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = OccurrenceSpecificationImpl::internalEIsSet(featureID);
+	result = OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool MessageOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
@@ -315,7 +319,7 @@ bool MessageOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	result = OccurrenceSpecificationImpl::internalEIsSet(featureID);
 	return result;
 }
-bool MessageOccurrenceSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool MessageOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -121,6 +122,7 @@ ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
 			:ValueSpecificationActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -132,6 +134,7 @@ ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
 			:ValueSpecificationActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -143,6 +146,7 @@ ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
 			:ValueSpecificationActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -316,13 +320,13 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueSpecificationActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -376,7 +380,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ValueSpecificationActionImpl::ge
 }
 
 
-std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr()
+std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr() const
 {
 	return m_thisValueSpecificationActionPtr.lock();
 }
@@ -412,16 +416,16 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
-			return getResult(); //12228
+			return eAny(getResult()); //12228
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
-			return getValue(); //12229
+			return eAny(getValue()); //12229
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 {
@@ -434,21 +438,21 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ValueSpecificationActionImpl::eSet(int featureID, boost::any newValue)
+bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //12228
 			return true;
 		}
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _value = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setValue(_value); //12229
 			return true;
 		}

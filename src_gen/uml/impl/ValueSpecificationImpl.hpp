@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ValueSpecificationImpl();
-			virtual std::shared_ptr<ValueSpecification> getThisValueSpecificationPtr();
+			virtual std::shared_ptr<ValueSpecification> getThisValueSpecificationPtr() const;
 			virtual void setThisValueSpecificationPtr(std::weak_ptr<ValueSpecification> thisValueSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -67,43 +67,43 @@ namespace uml
 			 The query booleanValue() gives a single Boolean value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual bool booleanValue()  ;
+			virtual bool booleanValue() ;
 			
 			/*!
 			 The query integerValue() gives a single Integer value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual int integerValue()  ;
+			virtual int integerValue() ;
 			
 			/*!
 			 The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool isComputable()  ;
+			virtual bool isComputable() ;
 			
 			/*!
 			 The query isNull() returns true when it can be computed that the value is null.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool isNull()  ;
+			virtual bool isNull() ;
 			
 			/*!
 			 The query realValue() gives a single Real value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual double realValue()  ;
+			virtual double realValue() ;
 			
 			/*!
 			 The query stringValue() gives a single String value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual std::string stringValue()  ;
+			virtual std::string stringValue() ;
 			
 			/*!
 			 The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual int unlimitedValue()  ;
+			virtual int unlimitedValue() ;
 			
 			
 			
@@ -158,9 +158,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ValueSpecification> m_thisValueSpecificationPtr;

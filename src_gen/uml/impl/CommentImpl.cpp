@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -174,7 +175,7 @@ std::shared_ptr<Union<uml::Element>> CommentImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<Comment> CommentImpl::getThisCommentPtr()
+std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const
 {
 	return m_thisCommentPtr.lock();
 }
@@ -195,16 +196,16 @@ std::shared_ptr<ecore::EObject> CommentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
-			return getAnnotatedElement(); //94
+			return eAny(getAnnotatedElement()); //94
 		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
-			return getBody(); //95
+			return eAny(getBody()); //95
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool CommentImpl::internalEIsSet(int featureID) const
 {
@@ -217,14 +218,14 @@ bool CommentImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool CommentImpl::eSet(int featureID, boost::any newValue)
+bool CommentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
 		{
 			// BOOST CAST
-			std::string _body = boost::any_cast<std::string>(newValue);
+			std::string _body = newValue->get<std::string>();
 			setBody(_body); //95
 			return true;
 		}

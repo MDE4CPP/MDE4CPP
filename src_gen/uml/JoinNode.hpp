@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -164,12 +162,12 @@ namespace uml
 			if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))
 			else outgoing->forAll(oclIsKindOf(ControlFlow))
 			endif */ 
-			virtual bool incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1 */ 
-			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

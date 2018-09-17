@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -126,6 +127,7 @@ InformationItemImpl::~InformationItemImpl()
 			:InformationItemImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -150,10 +152,12 @@ InformationItemImpl::~InformationItemImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -170,6 +174,7 @@ InformationItemImpl::~InformationItemImpl()
 			:InformationItemImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -384,19 +389,19 @@ std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationItemImpl::has_no(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::has_no(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::not_instantiable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::not_instantiable(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::sources_and_targets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -445,7 +450,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InformationItemImpl::getRedefine
 }
 
 
-std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr()
+std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr() const
 {
 	return m_thisInformationItemPtr.lock();
 }
@@ -486,14 +491,14 @@ std::shared_ptr<ecore::EObject> InformationItemImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return getRepresented(); //22439
+			return eAny(getRepresented()); //22439
 	}
-	return ClassifierImpl::internalEIsSet(featureID);
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool InformationItemImpl::internalEIsSet(int featureID) const
 {
@@ -504,7 +509,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
-bool InformationItemImpl::eSet(int featureID, boost::any newValue)
+bool InformationItemImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

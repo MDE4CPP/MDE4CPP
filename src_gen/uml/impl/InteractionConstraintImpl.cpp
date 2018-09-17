@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -101,10 +102,12 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					 m_context = par_Namespace;
+					m_context = par_Namespace;
+					m_namespace = par_Namespace;
 					 return;
 				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					 m_namespace = par_Namespace;
+					m_namespace = par_Namespace;
+					m_owner = par_Namespace;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -138,6 +141,7 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 			:InteractionConstraintImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -149,6 +153,7 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 			:InteractionConstraintImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -258,37 +263,37 @@ std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionConstraintImpl::dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::global_data(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -334,7 +339,7 @@ std::weak_ptr<uml::Element > InteractionConstraintImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr()
+std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
 {
 	return m_thisInteractionConstraintPtr.lock();
 }
@@ -375,16 +380,16 @@ std::shared_ptr<ecore::EObject> InteractionConstraintImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return getMaxint(); //21916
+			return eAny(getMaxint()); //21916
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return getMinint(); //21917
+			return eAny(getMinint()); //21917
 	}
-	return ConstraintImpl::internalEIsSet(featureID);
+	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
 bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
@@ -397,21 +402,21 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
-bool InteractionConstraintImpl::eSet(int featureID, boost::any newValue)
+bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _maxint = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMaxint(_maxint); //21916
 			return true;
 		}
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _minint = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMinint(_minint); //21917
 			return true;
 		}

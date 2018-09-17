@@ -17,10 +17,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -144,12 +142,12 @@ namespace uml
 			/*!
 			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
-			virtual bool consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
-			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

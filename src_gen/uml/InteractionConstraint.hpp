@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -126,37 +124,37 @@ namespace uml
 			//*********************************
 			/*!
 			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
-			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool dynamic_variables(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 The constraint may contain references to global data or write-once data. */ 
-			virtual bool global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool global_data(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() ) */ 
-			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0 */ 
-			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool maxint_positive(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
 			InteractionOperatorKind::loop */ 
-			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool minint_maxint(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0 */ 
-			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool minint_non_negative(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

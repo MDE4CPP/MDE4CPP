@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			:ReadExtentActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			:ReadExtentActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			:ReadExtentActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -307,13 +311,13 @@ std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadExtentActionImpl::multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadExtentActionImpl::type_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -367,7 +371,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadExtentActionImpl::getRedefin
 }
 
 
-std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr()
+std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const
 {
 	return m_thisReadExtentActionPtr.lock();
 }
@@ -403,16 +407,16 @@ std::shared_ptr<ecore::EObject> ReadExtentActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier(); //15928
+			return eAny(getClassifier()); //15928
 		case UmlPackage::READEXTENTACTION_EREFERENCE_RESULT:
-			return getResult(); //15929
+			return eAny(getResult()); //15929
 	}
-	return ActionImpl::internalEIsSet(featureID);
+	return ActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadExtentActionImpl::internalEIsSet(int featureID) const
 {
@@ -425,21 +429,21 @@ bool ReadExtentActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
-bool ReadExtentActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setClassifier(_classifier); //15928
 			return true;
 		}
 		case UmlPackage::READEXTENTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //15929
 			return true;
 		}

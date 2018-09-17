@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -186,7 +184,7 @@ namespace uml
 			/*!
 			 A CallBehaviorAction may not specify onPort.
 			onPort=null */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReadLinkActionImpl();
-			virtual std::shared_ptr<ReadLinkAction> getThisReadLinkActionPtr();
+			virtual std::shared_ptr<ReadLinkAction> getThisReadLinkActionPtr() const;
 			virtual void setThisReadLinkActionPtr(std::weak_ptr<ReadLinkAction> thisReadLinkActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,28 +61,28 @@ namespace uml
 			/*!
 			 The multiplicity of the open Association end must be compatible with the multiplicity of the result OutputPin.
 			self.openEnd()->first().compatibleWith(result) */ 
-			virtual bool compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The open end must be navigable.
 			self.openEnd()->first().isNavigable() */ 
-			virtual bool navigable_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1 */ 
-			virtual bool one_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
 			result = (endData->select(value=null).end->asOrderedSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Property> > openEnd()  ;
+			virtual std::shared_ptr<Bag<uml::Property> > openEnd() ;
 			
 			/*!
 			 The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered) */ 
-			virtual bool type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Visibility of the open end must allow access from the object performing the action.
@@ -93,7 +93,7 @@ namespace uml
 			    (_'context' = oed.end.type or 
 			      (openEnd.visibility = VisibilityKind::protected and 
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier))))) */ 
-			virtual bool visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -159,9 +159,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadLinkAction> m_thisReadLinkActionPtr;

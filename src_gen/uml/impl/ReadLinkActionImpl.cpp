@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -119,6 +120,7 @@ ReadLinkActionImpl::~ReadLinkActionImpl()
 			:ReadLinkActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -130,6 +132,7 @@ ReadLinkActionImpl::~ReadLinkActionImpl()
 			:ReadLinkActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -141,6 +144,7 @@ ReadLinkActionImpl::~ReadLinkActionImpl()
 			:ReadLinkActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -321,37 +325,37 @@ std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkActionImpl::compatible_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::navigable_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkActionImpl::navigable_open_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::one_open_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkActionImpl::one_open_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd() 
+std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::type_and_ordering(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -399,7 +403,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadLinkActionImpl::getRedefined
 }
 
 
-std::shared_ptr<ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr()
+std::shared_ptr<ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr() const
 {
 	return m_thisReadLinkActionPtr.lock();
 }
@@ -435,14 +439,14 @@ std::shared_ptr<ecore::EObject> ReadLinkActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
-			return getResult(); //16130
+			return eAny(getResult()); //16130
 	}
-	return LinkActionImpl::internalEIsSet(featureID);
+	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 {
@@ -453,14 +457,14 @@ bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 	}
 	return LinkActionImpl::internalEIsSet(featureID);
 }
-bool ReadLinkActionImpl::eSet(int featureID, boost::any newValue)
+bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //16130
 			return true;
 		}

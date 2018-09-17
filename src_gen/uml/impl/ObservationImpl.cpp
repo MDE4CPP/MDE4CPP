@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -90,6 +91,7 @@ ObservationImpl::~ObservationImpl()
 			:ObservationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -112,6 +114,7 @@ ObservationImpl::~ObservationImpl()
 			:ObservationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -123,6 +126,7 @@ ObservationImpl::~ObservationImpl()
 			:ObservationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -225,7 +229,7 @@ std::weak_ptr<uml::Element > ObservationImpl::getOwner() const
 }
 
 
-std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr()
+std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const
 {
 	return m_thisObservationPtr.lock();
 }
@@ -261,12 +265,12 @@ std::shared_ptr<ecore::EObject> ObservationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return PackageableElementImpl::internalEIsSet(featureID);
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ObservationImpl::internalEIsSet(int featureID) const
 {
@@ -275,7 +279,7 @@ bool ObservationImpl::internalEIsSet(int featureID) const
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
-bool ObservationImpl::eSet(int featureID, boost::any newValue)
+bool ObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

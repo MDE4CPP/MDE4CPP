@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -94,6 +95,7 @@ RealizationImpl::~RealizationImpl()
 			:RealizationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -116,6 +118,7 @@ RealizationImpl::~RealizationImpl()
 			:RealizationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -127,6 +130,7 @@ RealizationImpl::~RealizationImpl()
 			:RealizationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -267,7 +271,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> RealizationImpl::getTar
 }
 
 
-std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr()
+std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr() const
 {
 	return m_thisRealizationPtr.lock();
 }
@@ -303,12 +307,12 @@ std::shared_ptr<ecore::EObject> RealizationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return AbstractionImpl::internalEIsSet(featureID);
+	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
 bool RealizationImpl::internalEIsSet(int featureID) const
 {
@@ -317,7 +321,7 @@ bool RealizationImpl::internalEIsSet(int featureID) const
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
 }
-bool RealizationImpl::eSet(int featureID, boost::any newValue)
+bool RealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

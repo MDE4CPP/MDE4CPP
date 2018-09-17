@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TimeObservationImpl();
-			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr();
+			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr() const;
 			virtual void setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr);
 
 			//Additional constructors for the containments back reference
@@ -123,9 +123,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TimeObservation> m_thisTimeObservationPtr;

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -105,6 +106,7 @@ ControlFlowImpl::~ControlFlowImpl()
 			:ControlFlowImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -116,6 +118,7 @@ ControlFlowImpl::~ControlFlowImpl()
 			:ControlFlowImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -127,6 +130,7 @@ ControlFlowImpl::~ControlFlowImpl()
 			:ControlFlowImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -262,7 +266,7 @@ std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ControlFlowImpl::object_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ControlFlowImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<ControlFlow> ControlFlowImpl::getThisControlFlowPtr()
+std::shared_ptr<ControlFlow> ControlFlowImpl::getThisControlFlowPtr() const
 {
 	return m_thisControlFlowPtr.lock();
 }
@@ -329,12 +333,12 @@ std::shared_ptr<ecore::EObject> ControlFlowImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ControlFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ControlFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActivityEdgeImpl::internalEIsSet(featureID);
+	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
 bool ControlFlowImpl::internalEIsSet(int featureID) const
 {
@@ -343,7 +347,7 @@ bool ControlFlowImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
-bool ControlFlowImpl::eSet(int featureID, boost::any newValue)
+bool ControlFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

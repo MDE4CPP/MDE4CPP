@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			OccurrenceSpecificationImpl();
-			virtual std::shared_ptr<OccurrenceSpecification> getThisOccurrenceSpecificationPtr();
+			virtual std::shared_ptr<OccurrenceSpecification> getThisOccurrenceSpecificationPtr() const;
 			virtual void setThisOccurrenceSpecificationPtr(std::weak_ptr<OccurrenceSpecification> thisOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
@@ -62,7 +62,7 @@ namespace uml
 			
 			/*!
 			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
-			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value)  ;
+			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value) ;
 			
 			
 			
@@ -120,9 +120,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<OccurrenceSpecification> m_thisOccurrenceSpecificationPtr;

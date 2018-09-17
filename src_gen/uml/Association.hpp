@@ -18,10 +18,8 @@ template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -210,38 +208,38 @@ namespace uml
 			/*!
 			 Ends of Associations with more than two ends must be owned by the Association itself.
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd) */ 
-			virtual bool association_ends(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool association_ends(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none)) */ 
-			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 memberEnd->forAll(type->notEmpty()) */ 
-			virtual bool ends_must_be_typed(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes()  = 0;
+			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() = 0;
 			
 			/*!
 			 Determines whether this association is a binary association, i.e. whether it has exactly two member ends. */ 
-			virtual bool isBinary()  = 0;
+			virtual bool isBinary() = 0;
 			
 			/*!
 			 An Association specializing another Association has the same number of ends as the other Association.
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size()) */ 
-			virtual bool specialized_end_number(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
 			 When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
 				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type))) */ 
-			virtual bool specialized_end_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

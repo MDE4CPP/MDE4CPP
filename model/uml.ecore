@@ -236,8 +236,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
-        eType="#//BehavioredClassifier" changeable="false" volatile="true" transient="true"
-        derived="true">
+        eType="#//BehavioredClassifier" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
@@ -602,6 +601,9 @@
     <eOperations name="getAllAttributes" ordered="false" upperBound="-1" eType="#//Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves all the attributes of this classifier, including those inherited from its parents."/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;uml::Property>> eAllAttributes(new Bag&lt;uml::Property>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Property>> attributeList = this->getAttribute();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;Classifier> > classList = this->getGenerals();&#xD;&#xA;    for (std::shared_ptr&lt;Classifier> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;Property> > attributeList = c->getAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
@@ -1061,6 +1063,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A NamedElement is an Element in a model that may have a name. The name may be given directly and/or via the use of a StringExpression.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &lt;algorithm>"/>
+    </eAnnotations>
     <eOperations name="visibility_needs_ownership" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides mustBeOwned()) may have a visibility.&#xA;(namespace = null and owner &lt;> null) implies visibility = null"/>
@@ -1192,7 +1197,7 @@
         <details key="originalName" value="qualifiedName"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret = ns->getName() + separator() + ret;&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret += ns->getName() + separator();&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>
@@ -1369,6 +1374,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), qualifiedName);"/>
+        <details key="const"/>
       </eAnnotations>
       <eParameters name="qualifiedName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1382,6 +1388,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return util::StereotypeStorage::eInstance()->getAppliedStereotypes(getThisElementPtr());"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAppliedSubstereotype" ordered="false" eType="#//Stereotype">
@@ -1504,7 +1511,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return boost::any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return boost::any();"/>
+        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return Any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return Any();"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -2766,6 +2773,9 @@
     <eOperations name="get" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the&#xD;&#xA;Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the&#xD;&#xA;Property. If there are no values, the ReflectiveCollection returned is empty. "/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="const"/>
       </eAnnotations>
       <eParameters name="property" eType="#//Property"/>
     </eOperations>

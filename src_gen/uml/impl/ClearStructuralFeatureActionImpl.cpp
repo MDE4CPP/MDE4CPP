@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ ClearStructuralFeatureActionImpl::~ClearStructuralFeatureActionImpl()
 			:ClearStructuralFeatureActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ ClearStructuralFeatureActionImpl::~ClearStructuralFeatureActionImpl()
 			:ClearStructuralFeatureActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ ClearStructuralFeatureActionImpl::~ClearStructuralFeatureActionImpl()
 			:ClearStructuralFeatureActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -312,13 +316,13 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ClearStructuralFeatureActionImpl::multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearStructuralFeatureActionImpl::type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -366,7 +370,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearStructuralFeatureActionImpl
 }
 
 
-std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr()
+std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
 {
 	return m_thisClearStructuralFeatureActionPtr.lock();
 }
@@ -402,14 +406,14 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult(); //14430
+			return eAny(getResult()); //14430
 	}
-	return StructuralFeatureActionImpl::internalEIsSet(featureID);
+	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
 bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
@@ -420,14 +424,14 @@ bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
-bool ClearStructuralFeatureActionImpl::eSet(int featureID, boost::any newValue)
+bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //14430
 			return true;
 		}

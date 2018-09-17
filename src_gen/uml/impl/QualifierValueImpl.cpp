@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -151,19 +152,19 @@ std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -201,7 +202,7 @@ std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr()
+std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
 {
 	return m_thisQualifierValuePtr.lock();
 }
@@ -222,16 +223,16 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
-			return getQualifier(); //1274
+			return eAny(getQualifier()); //1274
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
-			return getValue(); //1275
+			return eAny(getValue()); //1275
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool QualifierValueImpl::internalEIsSet(int featureID) const
 {
@@ -244,21 +245,21 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool QualifierValueImpl::eSet(int featureID, boost::any newValue)
+bool QualifierValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _qualifier = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
 			setQualifier(_qualifier); //1274
 			return true;
 		}
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setValue(_value); //1275
 			return true;
 		}

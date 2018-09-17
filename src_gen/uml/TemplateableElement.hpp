@@ -102,13 +102,13 @@ namespace uml
 			 The query isTemplate() returns whether this TemplateableElement is actually a template.
 			result = (ownedTemplateSignature <> null)
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isTemplate()  = 0;
+			virtual bool isTemplate() = 0;
 			
 			/*!
 			 The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
 			result = (self.allOwnedElements()->select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements()  = 0;
+			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements() = 0;
 			
 			
 			//*********************************

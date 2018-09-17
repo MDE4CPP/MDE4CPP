@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -105,6 +106,7 @@ InitialNodeImpl::~InitialNodeImpl()
 			:InitialNodeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -116,6 +118,7 @@ InitialNodeImpl::~InitialNodeImpl()
 			:InitialNodeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -127,6 +130,7 @@ InitialNodeImpl::~InitialNodeImpl()
 			:InitialNodeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -256,13 +260,13 @@ std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InitialNodeImpl::control_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InitialNodeImpl::control_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InitialNodeImpl::no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,7 +297,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> InitialNodeImpl::getRedefinedEle
 }
 
 
-std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr()
+std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr() const
 {
 	return m_thisInitialNodePtr.lock();
 }
@@ -329,12 +333,12 @@ std::shared_ptr<ecore::EObject> InitialNodeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InitialNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InitialNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ControlNodeImpl::internalEIsSet(featureID);
+	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
 bool InitialNodeImpl::internalEIsSet(int featureID) const
 {
@@ -343,7 +347,7 @@ bool InitialNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
-bool InitialNodeImpl::eSet(int featureID, boost::any newValue)
+bool InitialNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -143,6 +144,7 @@ InteractionUseImpl::~InteractionUseImpl()
 			:InteractionUseImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -154,6 +156,7 @@ InteractionUseImpl::~InteractionUseImpl()
 			:InteractionUseImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -165,6 +168,7 @@ InteractionUseImpl::~InteractionUseImpl()
 			:InteractionUseImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -309,37 +313,37 @@ std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::all_lifelines(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_are_constants(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_correspond_to_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::gates_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::gates_match(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValueRecipient_coverage(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -409,7 +413,7 @@ std::weak_ptr<uml::Element > InteractionUseImpl::getOwner() const
 }
 
 
-std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr()
+std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const
 {
 	return m_thisInteractionUsePtr.lock();
 }
@@ -445,22 +449,22 @@ std::shared_ptr<ecore::EObject> InteractionUseImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
-			return getActualGate(); //21514
+			return eAny(getActualGate()); //21514
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
-			return getArgument(); //21515
+			return eAny(getArgument()); //21515
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
-			return getRefersTo(); //21516
+			return eAny(getRefersTo()); //21516
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
-			return getReturnValue(); //21517
+			return eAny(getReturnValue()); //21517
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient(); //21518
+			return eAny(getReturnValueRecipient()); //21518
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool InteractionUseImpl::internalEIsSet(int featureID) const
 {
@@ -479,28 +483,28 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool InteractionUseImpl::eSet(int featureID, boost::any newValue)
+bool InteractionUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _refersTo = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
+			std::shared_ptr<uml::Interaction> _refersTo = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setRefersTo(_refersTo); //21516
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _returnValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _returnValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setReturnValue(_returnValue); //21517
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _returnValueRecipient = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _returnValueRecipient = newValue->get<std::shared_ptr<uml::Property>>();
 			setReturnValueRecipient(_returnValueRecipient); //21518
 			return true;
 		}

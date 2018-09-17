@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -170,6 +171,7 @@ InformationFlowImpl::~InformationFlowImpl()
 			:InformationFlowImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -192,6 +194,7 @@ InformationFlowImpl::~InformationFlowImpl()
 			:InformationFlowImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -203,6 +206,7 @@ InformationFlowImpl::~InformationFlowImpl()
 			:InformationFlowImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -317,19 +321,19 @@ std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::must_conform(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationFlowImpl::must_conform(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,7 +420,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::ge
 }
 
 
-std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr()
+std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr() const
 {
 	return m_thisInformationFlowPtr.lock();
 }
@@ -453,32 +457,32 @@ std::shared_ptr<ecore::EObject> InformationFlowImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
-			return getConveyed(); //20916
+			return eAny(getConveyed()); //20916
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
-			return getInformationSource(); //20917
+			return eAny(getInformationSource()); //20917
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
-			return getInformationTarget(); //20918
+			return eAny(getInformationTarget()); //20918
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
-			return getRealization(); //20919
+			return eAny(getRealization()); //20919
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
-			return getRealizingActivityEdge(); //20920
+			return eAny(getRealizingActivityEdge()); //20920
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
-			return getRealizingConnector(); //20921
+			return eAny(getRealizingConnector()); //20921
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
-			return getRealizingMessage(); //20922
+			return eAny(getRealizingMessage()); //20922
 	}
-	boost::any result;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = PackageableElementImpl::internalEIsSet(featureID);
+	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool InformationFlowImpl::internalEIsSet(int featureID) const
@@ -509,7 +513,7 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	result = PackageableElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool InformationFlowImpl::eSet(int featureID, boost::any newValue)
+bool InformationFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

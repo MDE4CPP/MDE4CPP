@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -108,6 +109,7 @@ ExpressionImpl::~ExpressionImpl()
 			:ExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -130,6 +132,7 @@ ExpressionImpl::~ExpressionImpl()
 			:ExpressionImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -141,6 +144,7 @@ ExpressionImpl::~ExpressionImpl()
 			:ExpressionImpl()
 			{
 			    m_owningSlot = par_owningSlot;
+				m_owner = par_owningSlot;
 			}
 
 
@@ -152,6 +156,7 @@ ExpressionImpl::~ExpressionImpl()
 			:ExpressionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -289,7 +294,7 @@ std::weak_ptr<uml::Element > ExpressionImpl::getOwner() const
 }
 
 
-std::shared_ptr<Expression> ExpressionImpl::getThisExpressionPtr()
+std::shared_ptr<Expression> ExpressionImpl::getThisExpressionPtr() const
 {
 	return m_thisExpressionPtr.lock();
 }
@@ -330,16 +335,16 @@ std::shared_ptr<ecore::EObject> ExpressionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return getOperand(); //8815
+			return eAny(getOperand()); //8815
 		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return getSymbol(); //8816
+			return eAny(getSymbol()); //8816
 	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpressionImpl::internalEIsSet(int featureID) const
 {
@@ -352,14 +357,14 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
-bool ExpressionImpl::eSet(int featureID, boost::any newValue)
+bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST
-			std::string _symbol = boost::any_cast<std::string>(newValue);
+			std::string _symbol = newValue->get<std::string>();
 			setSymbol(_symbol); //8816
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -90,6 +91,7 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 			:AnyReceiveEventImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -112,6 +114,7 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 			:AnyReceiveEventImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -123,6 +126,7 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 			:AnyReceiveEventImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -225,7 +229,7 @@ std::weak_ptr<uml::Element > AnyReceiveEventImpl::getOwner() const
 }
 
 
-std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr()
+std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
 {
 	return m_thisAnyReceiveEventPtr.lock();
 }
@@ -261,12 +265,12 @@ std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AnyReceiveEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AnyReceiveEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return MessageEventImpl::internalEIsSet(featureID);
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
 bool AnyReceiveEventImpl::internalEIsSet(int featureID) const
 {
@@ -275,7 +279,7 @@ bool AnyReceiveEventImpl::internalEIsSet(int featureID) const
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
-bool AnyReceiveEventImpl::eSet(int featureID, boost::any newValue)
+bool AnyReceiveEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

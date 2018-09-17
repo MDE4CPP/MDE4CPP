@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -98,6 +99,7 @@ ManifestationImpl::~ManifestationImpl()
 			:ManifestationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -120,6 +122,7 @@ ManifestationImpl::~ManifestationImpl()
 			:ManifestationImpl()
 			{
 			    m_owningPackage = par_owningPackage;
+				m_namespace = par_owningPackage;
 			}
 
 
@@ -131,6 +134,7 @@ ManifestationImpl::~ManifestationImpl()
 			:ManifestationImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -287,7 +291,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getT
 }
 
 
-std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr()
+std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
 {
 	return m_thisManifestationPtr.lock();
 }
@@ -323,14 +327,14 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
-			return getUtilizedElement(); //4119
+			return eAny(getUtilizedElement()); //4119
 	}
-	return AbstractionImpl::internalEIsSet(featureID);
+	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
 bool ManifestationImpl::internalEIsSet(int featureID) const
 {
@@ -341,14 +345,14 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
 }
-bool ManifestationImpl::eSet(int featureID, boost::any newValue)
+bool ManifestationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::PackageableElement> _utilizedElement = boost::any_cast<std::shared_ptr<uml::PackageableElement>>(newValue);
+			std::shared_ptr<uml::PackageableElement> _utilizedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
 			setUtilizedElement(_utilizedElement); //4119
 			return true;
 		}

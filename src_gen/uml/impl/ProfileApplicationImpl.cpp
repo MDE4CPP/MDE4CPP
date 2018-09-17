@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -96,6 +97,7 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 			:ProfileApplicationImpl()
 			{
 			    m_applyingPackage = par_applyingPackage;
+				m_owner = par_applyingPackage;
 			}
 
 
@@ -188,13 +190,13 @@ bool ProfileApplicationImpl::getIsStrict() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition() 
+std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -248,7 +250,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl:
 }
 
 
-std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr()
+std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
 {
 	return m_thisProfileApplicationPtr.lock();
 }
@@ -274,18 +276,18 @@ std::shared_ptr<ecore::EObject> ProfileApplicationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
-			return getAppliedProfile(); //767
+			return eAny(getAppliedProfile()); //767
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
-			return getApplyingPackage(); //769
+			return eAny(getApplyingPackage()); //769
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
-			return getIsStrict(); //768
+			return eAny(getIsStrict()); //768
 	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
 bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 {
@@ -300,28 +302,28 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
-bool ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
+bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Profile> _appliedProfile = boost::any_cast<std::shared_ptr<uml::Profile>>(newValue);
+			std::shared_ptr<uml::Profile> _appliedProfile = newValue->get<std::shared_ptr<uml::Profile>>();
 			setAppliedProfile(_appliedProfile); //767
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _applyingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			std::shared_ptr<uml::Package> _applyingPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setApplyingPackage(_applyingPackage); //769
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
-			bool _isStrict = boost::any_cast<bool>(newValue);
+			bool _isStrict = newValue->get<bool>();
 			setIsStrict(_isStrict); //768
 			return true;
 		}

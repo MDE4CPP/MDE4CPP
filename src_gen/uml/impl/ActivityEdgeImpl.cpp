@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -174,6 +175,7 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 			:ActivityEdgeImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -185,6 +187,7 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 			:ActivityEdgeImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -196,6 +199,7 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 			:ActivityEdgeImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -334,7 +338,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -451,7 +455,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEl
 }
 
 
-std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr()
+std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
 {
 	return m_thisActivityEdgePtr.lock();
 }
@@ -487,32 +491,32 @@ std::shared_ptr<ecore::EObject> ActivityEdgeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
-			return getActivity(); //10813
+			return eAny(getActivity()); //10813
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
-			return getGuard(); //10814
+			return eAny(getGuard()); //10814
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
-			return getInGroup(); //10822
+			return eAny(getInGroup()); //10822
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
-			return getInPartition(); //10815
+			return eAny(getInPartition()); //10815
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode(); //10817
+			return eAny(getInStructuredNode()); //10817
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
-			return getInterrupts(); //10816
+			return eAny(getInterrupts()); //10816
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
-			return getRedefinedEdge(); //10820
+			return eAny(getRedefinedEdge()); //10820
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
-			return getSource(); //10819
+			return eAny(getSource()); //10819
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
-			return getTarget(); //10818
+			return eAny(getTarget()); //10818
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
-			return getWeight(); //10821
+			return eAny(getWeight()); //10821
 	}
-	return RedefinableElementImpl::internalEIsSet(featureID);
+	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 {
@@ -541,56 +545,56 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
-bool ActivityEdgeImpl::eSet(int featureID, boost::any newValue)
+bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
 			setActivity(_activity); //10813
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _guard = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _guard = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setGuard(_guard); //10814
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
 			setInStructuredNode(_inStructuredNode); //10817
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = boost::any_cast<std::shared_ptr<uml::InterruptibleActivityRegion>>(newValue);
+			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = newValue->get<std::shared_ptr<uml::InterruptibleActivityRegion>>();
 			setInterrupts(_interrupts); //10816
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _source = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			std::shared_ptr<uml::ActivityNode> _source = newValue->get<std::shared_ptr<uml::ActivityNode>>();
 			setSource(_source); //10819
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _target = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			std::shared_ptr<uml::ActivityNode> _target = newValue->get<std::shared_ptr<uml::ActivityNode>>();
 			setTarget(_target); //10818
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _weight = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _weight = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setWeight(_weight); //10821
 			return true;
 		}

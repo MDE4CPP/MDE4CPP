@@ -16,12 +16,13 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -184,37 +185,37 @@ std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins() 
+std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -259,7 +260,7 @@ std::shared_ptr<Union<uml::Element>> LinkEndDataImpl::getOwnedElement() const
 }
 
 
-std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr()
+std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
 {
 	return m_thisLinkEndDataPtr.lock();
 }
@@ -280,18 +281,18 @@ std::shared_ptr<ecore::EObject> LinkEndDataImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDATA_EREFERENCE_END:
-			return getEnd(); //1264
+			return eAny(getEnd()); //1264
 		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
-			return getQualifier(); //1265
+			return eAny(getQualifier()); //1265
 		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
-			return getValue(); //1266
+			return eAny(getValue()); //1266
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkEndDataImpl::internalEIsSet(int featureID) const
 {
@@ -306,21 +307,21 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool LinkEndDataImpl::eSet(int featureID, boost::any newValue)
+bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
 			setEnd(_end); //1264
 			return true;
 		}
 		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setValue(_value); //1266
 			return true;
 		}

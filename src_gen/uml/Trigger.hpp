@@ -17,10 +17,8 @@
 template<class T> class Bag;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -122,7 +120,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

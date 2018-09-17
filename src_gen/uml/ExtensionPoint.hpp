@@ -17,10 +17,8 @@
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -134,7 +132,7 @@ namespace uml
 			/*!
 			 An ExtensionPoint must have a name.
 			name->notEmpty () */ 
-			virtual bool must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

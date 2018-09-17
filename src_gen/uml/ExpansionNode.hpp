@@ -16,10 +16,8 @@
 // forward declarations
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -183,7 +181,7 @@ namespace uml
 			/*!
 			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
-			virtual bool region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

@@ -16,16 +16,18 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
+#include <algorithm>
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -106,6 +108,7 @@ NamedElementImpl::~NamedElementImpl()
 			:NamedElementImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -215,7 +218,7 @@ VisibilityKind NamedElementImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const 
+std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,37 +243,37 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages() 
+std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier) 
+std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier) 
+std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies() 
+std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::getLabel() 
+std::string NamedElementImpl::getLabel()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::getLabel(bool localize) 
+std::string NamedElementImpl::getLabel(bool localize)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -278,7 +281,7 @@ std::string NamedElementImpl::getLabel(bool localize)
 
 
 
-std::string NamedElementImpl::getQualifiedName()  const 
+std::string NamedElementImpl::getQualifiedName() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -289,7 +292,7 @@ std::string NamedElementImpl::getQualifiedName()  const
         std::string ret;
         for(std::shared_ptr<uml::Namespace> ns : *allNS )
         {
-            ret = ns->getName() + separator() + ret;
+            ret += ns->getName() + separator();
         }
         ret += getName();
         return ret;
@@ -301,25 +304,25 @@ std::string NamedElementImpl::getQualifiedName()  const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::has_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamedElementImpl::has_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns) 
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string NamedElementImpl::separator()  const 
+std::string NamedElementImpl::separator() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -327,7 +330,7 @@ std::string NamedElementImpl::separator()  const
 	//end of body
 }
 
-bool NamedElementImpl::visibility_needs_ownership(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -373,7 +376,7 @@ std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
 }
 
 
-std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr()
+std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr() const
 {
 	return m_thisNamedElementPtr.lock();
 }
@@ -399,24 +402,24 @@ std::shared_ptr<ecore::EObject> NamedElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency(); //74
+			return eAny(getClientDependency()); //74
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName(); //75
+			return eAny(getName()); //75
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression(); //76
+			return eAny(getNameExpression()); //76
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace(); //77
+			return eAny(getNamespace()); //77
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName(); //78
+			return eAny(getQualifiedName()); //78
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return getVisibility(); //79
+			return eAny(getVisibility()); //79
 	}
-	return ElementImpl::internalEIsSet(featureID);
+	return ElementImpl::eGet(featureID, resolve, coreType);
 }
 bool NamedElementImpl::internalEIsSet(int featureID) const
 {
@@ -437,28 +440,28 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
-bool NamedElementImpl::eSet(int featureID, boost::any newValue)
+bool NamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
-			std::string _name = boost::any_cast<std::string>(newValue);
+			std::string _name = newValue->get<std::string>();
 			setName(_name); //75
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			std::shared_ptr<uml::StringExpression> _nameExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
 			setNameExpression(_nameExpression); //76
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			VisibilityKind _visibility = newValue->get<VisibilityKind>();
 			setVisibility(_visibility); //79
 			return true;
 		}

@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReclassifyObjectActionImpl();
-			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr();
+			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr() const;
 			virtual void setThisReclassifyObjectActionPtr(std::weak_ptr<ReclassifyObjectAction> thisReclassifyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
@@ -61,17 +61,17 @@ namespace uml
 			/*!
 			 None of the newClassifiers may be abstract.
 			not newClassifier->exists(isAbstract) */ 
-			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
 			
@@ -154,9 +154,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReclassifyObjectAction> m_thisReclassifyObjectActionPtr;

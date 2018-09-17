@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -191,6 +192,7 @@ ComponentImpl::~ComponentImpl()
 			:ComponentImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -215,10 +217,12 @@ ComponentImpl::~ComponentImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -235,6 +239,7 @@ ComponentImpl::~ComponentImpl()
 			:ComponentImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -574,49 +579,49 @@ bool ComponentImpl::getIsIndirectlyInstantiated() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name,bool isAbstract)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Enumeration> ComponentImpl::createOwnedEnumeration(std::string name) 
+std::shared_ptr<uml::Enumeration> ComponentImpl::createOwnedEnumeration(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Interface> ComponentImpl::createOwnedInterface(std::string name) 
+std::shared_ptr<uml::Interface> ComponentImpl::createOwnedInterface(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PrimitiveType> ComponentImpl::createOwnedPrimitiveType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> ComponentImpl::createOwnedPrimitiveType(std::string name)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getProvideds() 
+std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getProvideds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds() 
+std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -694,7 +699,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Compone
 }
 
 
-std::shared_ptr<Component> ComponentImpl::getThisComponentPtr()
+std::shared_ptr<Component> ComponentImpl::getThisComponentPtr() const
 {
 	return m_thisComponentPtr.lock();
 }
@@ -735,22 +740,22 @@ std::shared_ptr<ecore::EObject> ComponentImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
-			return getIsIndirectlyInstantiated(); //23953
+			return eAny(getIsIndirectlyInstantiated()); //23953
 		case UmlPackage::COMPONENT_EREFERENCE_PACKAGEDELEMENT:
-			return getPackagedElement(); //23954
+			return eAny(getPackagedElement()); //23954
 		case UmlPackage::COMPONENT_EREFERENCE_PROVIDED:
-			return getProvided(); //23955
+			return eAny(getProvided()); //23955
 		case UmlPackage::COMPONENT_EREFERENCE_REALIZATION:
-			return getRealization(); //23956
+			return eAny(getRealization()); //23956
 		case UmlPackage::COMPONENT_EREFERENCE_REQUIRED:
-			return getRequired(); //23957
+			return eAny(getRequired()); //23957
 	}
-	return ClassImpl::internalEIsSet(featureID);
+	return ClassImpl::eGet(featureID, resolve, coreType);
 }
 bool ComponentImpl::internalEIsSet(int featureID) const
 {
@@ -769,14 +774,14 @@ bool ComponentImpl::internalEIsSet(int featureID) const
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
-bool ComponentImpl::eSet(int featureID, boost::any newValue)
+bool ComponentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 		{
 			// BOOST CAST
-			bool _isIndirectlyInstantiated = boost::any_cast<bool>(newValue);
+			bool _isIndirectlyInstantiated = newValue->get<bool>();
 			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //23953
 			return true;
 		}

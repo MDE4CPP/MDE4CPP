@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -131,6 +132,7 @@ ExtensionImpl::~ExtensionImpl()
 			:ExtensionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -155,10 +157,12 @@ ExtensionImpl::~ExtensionImpl()
 				switch(reference_id)
 				{	
 				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					 m_owningPackage = par_Package;
+					m_owningPackage = par_Package;
+					m_namespace = par_Package;
 					 return;
 				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					 m_package = par_Package;
+					m_package = par_Package;
+					m_namespace = par_Package;
 					 return;
 				default:
 				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
@@ -175,6 +179,7 @@ ExtensionImpl::~ExtensionImpl()
 			:ExtensionImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -433,37 +438,37 @@ bool ExtensionImpl::getIsRequired() const
 //*********************************
 
 
-std::shared_ptr<uml::Stereotype> ExtensionImpl::getStereotype() 
+std::shared_ptr<uml::Stereotype> ExtensionImpl::getStereotype()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> ExtensionImpl::getStereotypeEnd() 
+std::shared_ptr<uml::Property> ExtensionImpl::getStereotypeEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::isRequired() 
+bool ExtensionImpl::isRequired()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::is_binary(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionImpl::is_binary(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd() 
+std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::non_owned_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -516,7 +521,7 @@ std::shared_ptr<Union<uml::Element>> ExtensionImpl::getRelatedElement() const
 }
 
 
-std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr()
+std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr() const
 {
 	return m_thisExtensionPtr.lock();
 }
@@ -557,16 +562,16 @@ std::shared_ptr<ecore::EObject> ExtensionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return getIsRequired(); //8445
+			return eAny(getIsRequired()); //8445
 		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return getMetaclass(); //8446
+			return eAny(getMetaclass()); //8446
 	}
-	return AssociationImpl::internalEIsSet(featureID);
+	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
 bool ExtensionImpl::internalEIsSet(int featureID) const
 {
@@ -579,7 +584,7 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
-bool ExtensionImpl::eSet(int featureID, boost::any newValue)
+bool ExtensionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -165,7 +165,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Determines whether this model is a metamodel. */ 
-			virtual bool isMetamodel()  = 0;
+			virtual bool isMetamodel() = 0;
 			
 			
 			//*********************************

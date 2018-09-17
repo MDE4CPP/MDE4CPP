@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -103,6 +104,7 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 			:ExecutionSpecificationImpl()
 			{
 			    m_enclosingInteraction = par_enclosingInteraction;
+				m_namespace = par_enclosingInteraction;
 			}
 
 
@@ -114,6 +116,7 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 			:ExecutionSpecificationImpl()
 			{
 			    m_enclosingOperand = par_enclosingOperand;
+				m_namespace = par_enclosingOperand;
 			}
 
 
@@ -125,6 +128,7 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 			:ExecutionSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -229,7 +233,7 @@ std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExecutionSpecificationImpl::same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -275,7 +279,7 @@ std::weak_ptr<uml::Element > ExecutionSpecificationImpl::getOwner() const
 }
 
 
-std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr()
+std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
 {
 	return m_thisExecutionSpecificationPtr.lock();
 }
@@ -311,16 +315,16 @@ std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
-			return getFinish(); //22614
+			return eAny(getFinish()); //22614
 		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
-			return getStart(); //22615
+			return eAny(getStart()); //22615
 	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
@@ -333,21 +337,21 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
-bool ExecutionSpecificationImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _finish = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			std::shared_ptr<uml::OccurrenceSpecification> _finish = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
 			setFinish(_finish); //22614
 			return true;
 		}
 		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _start = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
+			std::shared_ptr<uml::OccurrenceSpecification> _start = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
 			setStart(_start); //22615
 			return true;
 		}

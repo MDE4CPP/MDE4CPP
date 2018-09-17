@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -124,6 +125,7 @@ ParameterImpl::~ParameterImpl()
 			:ParameterImpl()
 			{
 			    m_behavior = par_behavior;
+				m_namespace = par_behavior;
 			}
 
 
@@ -135,6 +137,7 @@ ParameterImpl::~ParameterImpl()
 			:ParameterImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -146,6 +149,7 @@ ParameterImpl::~ParameterImpl()
 			:ParameterImpl()
 			{
 			    m_operation = par_operation;
+				m_namespace = par_operation;
 			}
 
 
@@ -168,6 +172,7 @@ ParameterImpl::~ParameterImpl()
 			:ParameterImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -338,85 +343,85 @@ bool ParameterImpl::getIsStream() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::connector_end(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::in_and_out(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::isSetDefault() 
+bool ParameterImpl::isSetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::not_exception(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::object_effect(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setBooleanDefaultValue(bool value) 
+void ParameterImpl::setBooleanDefaultValue(bool value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setIntegerDefaultValue(int value) 
+void ParameterImpl::setIntegerDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setNullDefaultValue() 
+void ParameterImpl::setNullDefaultValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setRealDefaultValue(double value) 
+void ParameterImpl::setRealDefaultValue(double value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setStringDefaultValue(std::string value) 
+void ParameterImpl::setStringDefaultValue(std::string value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
+void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::stream_and_exception(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::unsetDefault() 
+void ParameterImpl::unsetDefault()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -476,7 +481,7 @@ std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 }
 
 
-std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr()
+std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr() const
 {
 	return m_thisParameterPtr.lock();
 }
@@ -518,36 +523,36 @@ std::shared_ptr<ecore::EObject> ParameterImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
-			return getBehavior(); //4428
+			return eAny(getBehavior()); //4428
 		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
-			return getDefault(); //4420
+			return eAny(getDefault()); //4420
 		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
-			return getDefaultValue(); //4421
+			return eAny(getDefaultValue()); //4421
 		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
-			return getDirection(); //4422
+			return eAny(getDirection()); //4422
 		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
-			return getEffect(); //4423
+			return eAny(getEffect()); //4423
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
-			return getIsException(); //4424
+			return eAny(getIsException()); //4424
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
-			return getIsStream(); //4425
+			return eAny(getIsStream()); //4425
 		case UmlPackage::PARAMETER_EREFERENCE_OPERATION:
-			return getOperation(); //4426
+			return eAny(getOperation()); //4426
 		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
-			return getParameterSet(); //4427
+			return eAny(getParameterSet()); //4427
 	}
-	boost::any result;
-	result = ConnectableElementImpl::internalEIsSet(featureID);
-	if (!result.empty())
+	Any result;
+	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
+	if (!result->isEmpty())
 	{
 		return result;
 	}
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
 bool ParameterImpl::internalEIsSet(int featureID) const
@@ -582,56 +587,56 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 	result = MultiplicityElementImpl::internalEIsSet(featureID);
 	return result;
 }
-bool ParameterImpl::eSet(int featureID, boost::any newValue)
+bool ParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setBehavior(_behavior); //4428
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
-			std::string _default = boost::any_cast<std::string>(newValue);
+			std::string _default = newValue->get<std::string>();
 			setDefault(_default); //4420
 			return true;
 		}
 		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setDefaultValue(_defaultValue); //4421
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
 		{
 			// BOOST CAST
-			ParameterDirectionKind _direction = boost::any_cast<ParameterDirectionKind>(newValue);
+			ParameterDirectionKind _direction = newValue->get<ParameterDirectionKind>();
 			setDirection(_direction); //4422
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
-			ParameterEffectKind _effect = boost::any_cast<ParameterEffectKind>(newValue);
+			ParameterEffectKind _effect = newValue->get<ParameterEffectKind>();
 			setEffect(_effect); //4423
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
 		{
 			// BOOST CAST
-			bool _isException = boost::any_cast<bool>(newValue);
+			bool _isException = newValue->get<bool>();
 			setIsException(_isException); //4424
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
 		{
 			// BOOST CAST
-			bool _isStream = boost::any_cast<bool>(newValue);
+			bool _isStream = newValue->get<bool>();
 			setIsStream(_isStream); //4425
 			return true;
 		}

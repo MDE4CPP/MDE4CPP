@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -114,6 +115,7 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			:ObjectFlowImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -125,6 +127,7 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			:ObjectFlowImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -136,6 +139,7 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			:ObjectFlowImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -296,49 +300,49 @@ bool ObjectFlowImpl::getIsMultireceive() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::compatible_types(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::target(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -388,7 +392,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> ObjectFlowImpl::getRedefinedElem
 }
 
 
-std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr()
+std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
 {
 	return m_thisObjectFlowPtr.lock();
 }
@@ -424,20 +428,20 @@ std::shared_ptr<ecore::EObject> ObjectFlowImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
-			return getIsMulticast(); //18823
+			return eAny(getIsMulticast()); //18823
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
-			return getIsMultireceive(); //18824
+			return eAny(getIsMultireceive()); //18824
 		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
-			return getSelection(); //18825
+			return eAny(getSelection()); //18825
 		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
-			return getTransformation(); //18826
+			return eAny(getTransformation()); //18826
 	}
-	return ActivityEdgeImpl::internalEIsSet(featureID);
+	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectFlowImpl::internalEIsSet(int featureID) const
 {
@@ -454,35 +458,35 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
-bool ObjectFlowImpl::eSet(int featureID, boost::any newValue)
+bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
 		{
 			// BOOST CAST
-			bool _isMulticast = boost::any_cast<bool>(newValue);
+			bool _isMulticast = newValue->get<bool>();
 			setIsMulticast(_isMulticast); //18823
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
-			bool _isMultireceive = boost::any_cast<bool>(newValue);
+			bool _isMultireceive = newValue->get<bool>();
 			setIsMultireceive(_isMultireceive); //18824
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setSelection(_selection); //18825
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _transformation = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			std::shared_ptr<uml::Behavior> _transformation = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setTransformation(_transformation); //18826
 			return true;
 		}

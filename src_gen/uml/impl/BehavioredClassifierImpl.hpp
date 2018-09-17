@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehavioredClassifierImpl();
-			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr();
+			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr() const;
 			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr);
 
 			//Additional constructors for the containments back reference
@@ -64,15 +64,15 @@ namespace uml
 			/*!
 			 If a behavior is classifier behavior, it does not have a specification.
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty() */ 
-			virtual bool class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool class_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency. */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() ;
 			
 			/*!
 			 Retrieves the interfaces on which this behaviored classifier has an interface realization dependency. */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() ;
 			
 			
 			
@@ -151,9 +151,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<BehavioredClassifier> m_thisBehavioredClassifierPtr;

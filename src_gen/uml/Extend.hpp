@@ -18,10 +18,8 @@ template<class T> class Bag;
 template<class T, class ... U> class Subset;
 
 
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -147,7 +145,7 @@ namespace uml
 			/*!
 			 The ExtensionPoints referenced by the Extend relationship must belong to the UseCase that is being extended.
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp)) */ 
-			virtual bool extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
 			//*********************************

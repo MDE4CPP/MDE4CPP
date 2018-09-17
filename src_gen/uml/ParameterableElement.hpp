@@ -105,13 +105,13 @@ namespace uml
 			 The query isCompatibleWith() determines if this ParameterableElement is compatible with the specified ParameterableElement. By default, this ParameterableElement is compatible with another ParameterableElement p if the kind of this ParameterableElement is the same as or a subtype of the kind of p. Subclasses of ParameterableElement should override this operation to specify different compatibility constraints.
 			result = (self.oclIsKindOf(p.oclType()))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)  = 0;
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) = 0;
 			
 			/*!
 			 The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isTemplateParameter()  = 0;
+			virtual bool isTemplateParameter() = 0;
 			
 			
 			//*********************************

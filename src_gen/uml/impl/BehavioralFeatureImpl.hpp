@@ -31,7 +31,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			BehavioralFeatureImpl();
-			virtual std::shared_ptr<BehavioralFeature> getThisBehavioralFeaturePtr();
+			virtual std::shared_ptr<BehavioralFeature> getThisBehavioralFeaturePtr() const;
 			virtual void setThisBehavioralFeaturePtr(std::weak_ptr<BehavioralFeature> thisBehavioralFeaturePtr);
 
 			//Additional constructors for the containments back reference
@@ -54,23 +54,23 @@ namespace uml
 			/*!
 			 When isAbstract is true there are no methods.
 			isAbstract implies method->isEmpty() */ 
-			virtual bool abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
 			 Creates a return result parameter with the specified name and type. */ 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)  ;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) ;
 			
 			/*!
 			 The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters()  ;
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
 			
 			/*!
 			 The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters()  ;
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
 			
 			
 			
@@ -161,9 +161,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<BehavioralFeature> m_thisBehavioralFeaturePtr;

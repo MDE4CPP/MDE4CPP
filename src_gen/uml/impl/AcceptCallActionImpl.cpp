@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -117,6 +118,7 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			:AcceptCallActionImpl()
 			{
 			    m_activity = par_activity;
+				m_owner = par_activity;
 			}
 
 
@@ -128,6 +130,7 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			:AcceptCallActionImpl()
 			{
 			    m_inStructuredNode = par_inStructuredNode;
+				m_owner = par_inStructuredNode;
 			}
 
 
@@ -139,6 +142,7 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			:AcceptCallActionImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -320,19 +324,19 @@ std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptCallActionImpl::result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptCallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::trigger_call_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::unmarshall(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -376,7 +380,7 @@ std::shared_ptr<Union<uml::RedefinableElement>> AcceptCallActionImpl::getRedefin
 }
 
 
-std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr()
+std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr() const
 {
 	return m_thisAcceptCallActionPtr.lock();
 }
@@ -412,14 +416,14 @@ std::shared_ptr<ecore::EObject> AcceptCallActionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation(); //13231
+			return eAny(getReturnInformation()); //13231
 	}
-	return AcceptEventActionImpl::internalEIsSet(featureID);
+	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }
 bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
@@ -430,14 +434,14 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
 }
-bool AcceptCallActionImpl::eSet(int featureID, boost::any newValue)
+bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _returnInformation = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
+			std::shared_ptr<uml::OutputPin> _returnInformation = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setReturnInformation(_returnInformation); //13231
 			return true;
 		}

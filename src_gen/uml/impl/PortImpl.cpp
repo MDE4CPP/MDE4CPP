@@ -16,13 +16,14 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -149,6 +150,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_associationEnd = par_associationEnd;
+				m_owner = par_associationEnd;
 			}
 
 
@@ -160,6 +162,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_class = par_class;
+				m_namespace = par_class;
 			}
 
 
@@ -171,6 +174,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_datatype = par_datatype;
+				m_namespace = par_datatype;
 			}
 
 
@@ -182,6 +186,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_interface = par_interface;
+				m_namespace = par_interface;
 			}
 
 
@@ -193,6 +198,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_namespace = par_namespace;
+				m_owner = par_namespace;
 			}
 
 
@@ -215,6 +221,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_owningAssociation = par_owningAssociation;
+				m_namespace = par_owningAssociation;
 			}
 
 
@@ -226,6 +233,7 @@ PortImpl::~PortImpl()
 			:PortImpl()
 			{
 			    m_owningTemplateParameter = par_owningTemplateParameter;
+				m_owner = par_owningTemplateParameter;
 			}
 
 
@@ -444,43 +452,43 @@ bool PortImpl::getIsService() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PortImpl::default_value(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PortImpl::encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds() 
+std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -549,7 +557,7 @@ std::shared_ptr<Union<uml::Classifier>> PortImpl::getRedefinitionContext() const
 }
 
 
-std::shared_ptr<Port> PortImpl::getThisPortPtr()
+std::shared_ptr<Port> PortImpl::getThisPortPtr() const
 {
 	return m_thisPortPtr.lock();
 }
@@ -605,26 +613,26 @@ std::shared_ptr<ecore::EObject> PortImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
-			return getIsBehavior(); //6745
+			return eAny(getIsBehavior()); //6745
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
-			return getIsConjugated(); //6746
+			return eAny(getIsConjugated()); //6746
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
-			return getIsService(); //6747
+			return eAny(getIsService()); //6747
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
-			return getProtocol(); //6748
+			return eAny(getProtocol()); //6748
 		case UmlPackage::PORT_EREFERENCE_PROVIDED:
-			return getProvided(); //6749
+			return eAny(getProvided()); //6749
 		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
-			return getRedefinedPort(); //6750
+			return eAny(getRedefinedPort()); //6750
 		case UmlPackage::PORT_EREFERENCE_REQUIRED:
-			return getRequired(); //6751
+			return eAny(getRequired()); //6751
 	}
-	return PropertyImpl::internalEIsSet(featureID);
+	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
 bool PortImpl::internalEIsSet(int featureID) const
 {
@@ -647,35 +655,35 @@ bool PortImpl::internalEIsSet(int featureID) const
 	}
 	return PropertyImpl::internalEIsSet(featureID);
 }
-bool PortImpl::eSet(int featureID, boost::any newValue)
+bool PortImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
 		{
 			// BOOST CAST
-			bool _isBehavior = boost::any_cast<bool>(newValue);
+			bool _isBehavior = newValue->get<bool>();
 			setIsBehavior(_isBehavior); //6745
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
 		{
 			// BOOST CAST
-			bool _isConjugated = boost::any_cast<bool>(newValue);
+			bool _isConjugated = newValue->get<bool>();
 			setIsConjugated(_isConjugated); //6746
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
 		{
 			// BOOST CAST
-			bool _isService = boost::any_cast<bool>(newValue);
+			bool _isService = newValue->get<bool>();
 			setIsService(_isService); //6747
 			return true;
 		}
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _protocol = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
 			setProtocol(_protocol); //6748
 			return true;
 		}

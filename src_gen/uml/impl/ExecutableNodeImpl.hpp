@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExecutableNodeImpl();
-			virtual std::shared_ptr<ExecutableNode> getThisExecutableNodePtr();
+			virtual std::shared_ptr<ExecutableNode> getThisExecutableNodePtr() const;
 			virtual void setThisExecutableNodePtr(std::weak_ptr<ExecutableNode> thisExecutableNodePtr);
 
 			//Additional constructors for the containments back reference
@@ -112,9 +112,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExecutableNode> m_thisExecutableNodePtr;

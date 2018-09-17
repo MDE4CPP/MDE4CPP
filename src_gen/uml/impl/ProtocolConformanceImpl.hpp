@@ -30,7 +30,7 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ProtocolConformanceImpl();
-			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr();
+			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr() const;
 			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);
 
 			//Additional constructors for the containments back reference
@@ -120,9 +120,9 @@ namespace uml
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ProtocolConformance> m_thisProtocolConformancePtr;
