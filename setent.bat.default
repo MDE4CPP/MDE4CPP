@@ -1,0 +1,58 @@
+@echo off
+
+REM ########################################
+REM # Environment configuration of MDE4CPP #
+REM ########################################
+
+REM ###############################
+REM # configure MDE4CPP variables #
+REM ###############################
+
+REM path to MDE4CPP home folder
+SET MDE4CPP_HOME=%cd%
+
+REM path to eclipse home folder including Acceleo plugins
+REM required for creating the generators
+SET MDE4CPP_ECLIPSE_HOME=C:\Tools\eclipse
+
+
+REM #######################################
+REM # configure Gradle project properties #
+REM #######################################
+
+REM count of worker for each compile task 
+REM (if two compiling tasks are performed in parallel, 2xworkerCount processes are executed)
+SET ORG_GRADLE_PROJECT_workerCount=1
+
+REM enable parallel execution of Gradle tasks permanently
+SET ORG_GRADLE_PROJECT_org.gradle.parallel=true
+
+
+REM ##########################
+REM # configure program path #
+REM ##########################
+
+REM path to gradle home folder
+SET GRADLE_HOME=C:\Tools\gradle
+
+REM path to cmake home folder
+SET CMAKE_HOME=C:\Tools\CMake
+
+REM path to compiler home folder
+SET COMPILER_HOME=C:\Tools\MinGW
+
+REM path to java jdk
+SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_161
+
+
+REM ##################
+REM # configure PATH #
+REM ##################
+
+REM set path with minimal set of programs (system paths and MDE4CPP required programs) temporary (only in called cmd and further child processes)
+SET PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
+
+IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%GRADLE_HOME%\bin)
+IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%CMAKE_HOME%\bin)
+IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%COMPILER_HOME%\bin)
+IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%JAVA_HOME%\bin)
