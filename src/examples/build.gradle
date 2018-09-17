@@ -22,19 +22,6 @@ task compileAllExamplesWithoutModel() {
 	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
 }
 
-task buildAllExamples() {
-	group 'Examples'
-	description 'build all model example applications'	
-	
-	dependsOn getRootProject().getTasksByName('buildSubsetUnionBenchmark', true)
-	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
-	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
-	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
-	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
-	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
-	dependsOn 'compileAllExamplesWithoutModel'
-}
-
 task generateAllModelExamples() {
 	group 'Examples'
 	description 'generate all model examples using there generate.bat file'	
@@ -83,4 +70,16 @@ task generateAllModelExamples() {
 			commandLine = ['cmd', '/C', 'generate.bat']
 		}
     }
+}
+
+task buildAllExamplesWithModel() {
+	group 'Examples'
+	description 'build all model example applications'
+	
+	dependsOn getRootProject().getTasksByName('buildSubsetUnionBenchmark', true)
+	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
+	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
+	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
+	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
+	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
 }
