@@ -1,0 +1,19 @@
+activity isPrime( ) {
+  let number:Integer = 9951;
+  let divider:Integer = 3;
+  if(number % 2 != 0)
+  {
+  do{
+    if(number % divider == 0){
+      WriteLine("Number is not prime");
+      return;
+    }
+    divider = divider + 2;
+  }while(divider <= number / 2);
+    WriteLine("Number is prime");
+  }
+  else
+  {
+    WriteLine("Number is not prime");
+  }
+}

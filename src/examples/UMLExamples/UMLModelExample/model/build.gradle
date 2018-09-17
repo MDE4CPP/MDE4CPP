@@ -1,0 +1,15 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate tasks for project: LibraryModel_uml'
+
+task generateLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'LibraryModel_uml'
+	description 'generate C++ code of LibraryModel_uml.uml model'
+
+	modelFilePath = file('.' + File.separator + 'LibraryModel_uml.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+}

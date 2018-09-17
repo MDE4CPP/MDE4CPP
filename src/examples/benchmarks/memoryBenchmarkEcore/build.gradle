@@ -1,0 +1,39 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
+}
+
+task compileMemoryBenchmarkEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile memoryBenchmarkEcore'
+	
+	projectFolder = file('.' + File.separator + 'src' + File.separator + 'memoryBenchmarkEcore')
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/memoryBenchmarkEcore/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + 'memoryBenchmarkEcore' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'memoryBenchmarkEcore.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'memoryBenchmarkEcored.exe')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+}
+
+task clean {
+	doLast {
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + 'memoryBenchmarkEcore' + File.separator + '.cmake')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}
