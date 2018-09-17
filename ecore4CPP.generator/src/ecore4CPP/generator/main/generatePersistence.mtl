@@ -420,7 +420,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 	[elseif (aAttribute.upperBound <> 1)]
 			for (std::shared_ptr<[aAttribute.eType.transformType()/]> value : *m_[aAttribute.name/])
 			{
-				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType = 'String' or aAttribute.eType = 'EString'))]boost::to_string([/if]*value[if (not (aAttribute.eType = 'String' or aAttribute.eType = 'EString'))])[/if]);
+				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
 	[else]
 			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());

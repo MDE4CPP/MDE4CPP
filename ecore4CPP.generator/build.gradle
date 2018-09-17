@@ -53,6 +53,6 @@ task deliverEcore4CPP(type: Copy) {
 	from 'build/libs'
 	into System.getenv('MDE4CPP_HOME') + '/application/generator'
 	include jar.archiveName
+	
+	dependsOn 'jar'
 }
-
-jar.finalizedBy(deliverEcore4CPP)

@@ -24,3 +24,4 @@ Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: ecore4CPP.generator;uses:="org.osgi.framework,org.eclipse.core.runtime",
  ecore4CPP.generator.main;uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.acceleo.engine.service,  org.eclipse.emf.ecore.resource,  org.eclipse.acceleo.engine.generation.strategy"
+Automatic-Module-Name: ecore4CPP.generator

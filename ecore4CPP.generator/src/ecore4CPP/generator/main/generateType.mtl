@@ -39,7 +39,7 @@ void[else]
 
 [template public generateType(anEDataType : EClassifier)]
 [if (anEDataType.oclIsUndefined())]
-boost::any[else]
+Any[else]
 [anEDataType.transformType()/][/if]
 [/template]
 
@@ -126,7 +126,7 @@ std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [else]
  * Transformation Javatypes to C++
 */]
 [template public transformType(anEClassifier : EClassifier) ? (oclIsUndefined())]
-boost::any
+Any
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
@@ -182,7 +182,7 @@ std::map
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaObject')]
-boost::any
+Any
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (name = 'ETreeIterator')]
@@ -194,7 +194,7 @@ void *
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
-boost::any
+Any
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? ((name = 'EString') or (name = 'String'))]

@@ -37,17 +37,15 @@
 #include <string>
 
 [if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
 [/if]
 
 // forward declarations
 [generateAbstractDataTypesForwardDeclaration()/]
 
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
-namespace boost
-{
-	class any;
-}
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
 [/if]
 
 //*********************************

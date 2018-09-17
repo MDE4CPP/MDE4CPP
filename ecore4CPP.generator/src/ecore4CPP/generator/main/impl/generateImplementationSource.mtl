@@ -33,12 +33,16 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
+[if (generateObjectMonitoring())]
+#include "[ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+[/if]
 
 [generateAbstractDataTypesIncludes()/]
-#include "abstractDataTypes/SubsetUnion.hpp"
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
-#include "boost/any.hpp"
+#include "abstractDataTypes/Any.hpp"
 [/if]
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "[aClass.ePackage.name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
@@ -114,7 +118,11 @@ using namespace [aClass.ePackage.name/];
 				{	
 				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
 				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
-					 m_[multipleRef.name/] = par_[aReference.eType.name/];
+					m_[multipleRef.name/] = par_[aReference.eType.name/];
+					[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
+					[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+					m_[m.name/] = par_[aReference.eType.name/];
+					[/for][/if]
 					 return;
 				[/for]
 				default:
@@ -128,6 +136,10 @@ using namespace [aClass.ePackage.name/];
 			:[className/]()
 			{
 			    m_[aReference.name/] = par_[aReference.name/];
+				[if (aReference.hasSubset() and aReference.upperBound = 1)]
+					[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+				m_[m.name/] = par_[aReference.name/];
+				[/for][/if]
 			}
 	[/if]
 
@@ -199,6 +211,9 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+	[aClass.ePackage.name.toUpperFirst()/]Factory::eInstance()->add(element);
+[/if]
 	return element;
 }
 

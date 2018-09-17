@@ -25,6 +25,11 @@
  * check if application should be prepared
 */]
 [query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
+[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
+
+[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
 
 [**
  * Helper for sourcegen annotations
@@ -193,6 +198,7 @@
 
 [query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '_'.concat(aOperation.singlemultipleParameter()) else '' endif /]
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
+[query public getMyClassifierID(anEClassifier : EClassifier) : EInt = if (anEClassifier.getClassifierID() = 0) then anEClassifier.ePackage.eClassifiers->selectByKind(EClassifier)->size() else anEClassifier.getClassifierID() endif/]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
 [if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
@@ -230,3 +236,5 @@ template<class T> class Union;[/if]
 [query private existsAndIsSubetUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isSubsetUnion() endif/]
 [query private existsAndIsUnion(anEReference : EReference) : Boolean = if (anEReference.oclIsUndefined()) then false else anEReference.isUnion() and not isSubsetUnion() endif/]
 [query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
+
+[query public generateObjectMonitoring(anEObject : EObject) : Boolean = false/]
