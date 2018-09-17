@@ -18,6 +18,8 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
+
+[query public hasGenerateOwnerVariable(aElement : Element) : Boolean = if (hasSourceGen()) then getSourceGen().details->select(key = 'generateOwnerVariable')->first().value = 'true' else false endif/]
 [template public generateBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
 
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
@@ -34,17 +36,15 @@
 #include "fUML/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 
-[if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
-[let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
-	[if (fb._body->asOrderedSet()->size() = 2)]
-//Included from function behavior "[fb.name/]"
-[fb._body->asOrderedSet()->at(2)/]
-	[/if]
-[/let]
-[/if]
+[if (anOpaqueBehavior.language->includes('INCLUDE'))]
+[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('INCLUDE')]
+[if (0 < index and index <= anOpaqueBehavior._body->size())]
+//Included from function behavior "[anOpaqueBehavior.name/]"
+[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+[/if][/let][/if]
 
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
-[let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
+[let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 [if (cOpSet.target.name.startsWith('self'))]
 [if (cOpSet.target.name.startsWith('self.'))]
@@ -59,6 +59,12 @@
 [/if]
 [/let]
 [/if]
+
+[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+[/if]
+
 
 [if (anOpaqueBehavior.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
@@ -103,7 +109,10 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
 	[if (not par.type.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
-	assert([par.name/] != nullptr);
+	if([par.name/] != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+	}
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
@@ -112,7 +121,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
-	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
+	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 [if (cOpSet.target.name.startsWith('self'))]
 	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
@@ -124,8 +133,8 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
     //Body of the Opaquebehavior
     //Start ---------------------------
-	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
-	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
+	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
+	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 	
 	//Calling the associated operation.
 [if (target.name.startsWith('self.'))]
@@ -147,11 +156,28 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 [/if]
 	[/for]
 	[else]
-		[if (anOpaqueBehavior.getAppliedStereotype('setBehaviour').oclIsUndefined() )]
-		//Function Behaviour from a Call Behavior Action
-   		[anOpaqueBehavior._body->first()/]
+		[if (anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::setBehavior').oclIsUndefined() and anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
+		//Function Behaviour from a Call Behavior Action [anOpaqueBehavior.hasGenerateOwnerVariable()/]
+		[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.ns()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+		[/if]
+
+   		[if (anOpaqueBehavior.language->includes('CPP'))]
+		[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('CPP') ]
+		[if (0 < index and index <= anOpaqueBehavior._body->size())]
+		[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+		[/if][/let]
 		[else]
-		[anOpaqueBehavior.inputParameters()->selectByType(InputPin).name/]->set[anOpaqueBehavior.name/]([anOpaqueBehavior.inputParameters()->selectByType(ValuePin).value.oclAsType(LiteralInteger).value/]);
+			std::cout << __PRETTY_FUNCTION__ << std::endl;
+			throw "UnsupportedOperationException";
+		[/if]
+		[elseif (not anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
+		// getBehavior generated
+[if (anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclIsKindOf(Property))]
+		[anOpaqueBehavior.outputParameters()->select(direction = ParameterDirectionKind::return)->first().name/] = [anOpaqueBehavior.inputParameters()->first().name/]->get[anOpaqueBehavior.getValue(anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior'), 'property').oclAsType(Property).name.toUpperFirst()/]();
+[/if]
+		[else]
+		// setBehavior generated - TODO
 		[/if]
 	[/if]
     //End -----------------------------

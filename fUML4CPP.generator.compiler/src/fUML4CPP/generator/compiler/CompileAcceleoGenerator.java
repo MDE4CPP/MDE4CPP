@@ -159,7 +159,7 @@ public class CompileAcceleoGenerator
 		}
 	}
 	
-	 public static void main(String[] args) {
+	 public static void main(final String[] args) {
         try 
         {
             if (args.length != 3) 

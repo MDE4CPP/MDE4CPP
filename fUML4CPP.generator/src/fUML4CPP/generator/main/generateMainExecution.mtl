@@ -28,7 +28,6 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include <omp.h>
 
 [generateMainIncludes()/]
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
@@ -48,10 +47,6 @@ using namespace [aPackage.getPackageName()/];
 
 int main()
 {	
-
-	//OMP parallelization.
-	omp_set_num_threads(omp_get_num_procs());
-
 	[generateLocusInitialization()/]
 
 	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
@@ -118,10 +113,10 @@ int main()
 //include Model package
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
-[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
+[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name))]
 #include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
-[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet())]
+[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
@@ -207,7 +202,7 @@ std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue
 pList->push_back([par.name/]P);
 
 [/for]
-[if (objectUsed)]
+[if (objectUsed and anActivity.owner.oclIsKindOf(Class))]
 std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object());
 object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]ObjectPtr(object);
 object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.ns()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));

@@ -49,8 +49,6 @@ public class GenerateAll {
 	 *            is the output folder
 	 * @param arguments
 	 *            are the other arguments
-	 * @throws IOException
-	 *             Thrown when the output cannot be saved.
 	 * @generated NOT
 	 */
 	public GenerateAll(URI modelURI, File targetFolder, List<? extends Object> arguments) {

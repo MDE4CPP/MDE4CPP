@@ -505,8 +505,10 @@ public class Generate extends AbstractAcceleoGenerator {
          {
 	 		 resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new EMtlResourceFactoryImpl()
 	         {
-				String startFUMLPath = "/plugin/fUML4CPP.generator/bin/";
-				String startUMLPath = "/plugin/UML4CPP/UML4CPP.generator/bin/";
+				String startFUMLPath_bin = "/plugin/fUML4CPP.generator/bin/";
+				String startFUMLPath_build = "/plugin/fUML4CPP.generator/build/classes/java/main/";
+				String startUMLPath_bin = "/plugin/UML4CPP/UML4CPP.generator/bin/";
+				String startUMLPath_build = "/plugin/UML4CPP/UML4CPP.generator/build/classes/java/main/";
 				String patternCD = "../";
 				String emptyString = "";
 				String patternUMLFactory = "generateFactory";
@@ -542,13 +544,21 @@ public class Generate extends AbstractAcceleoGenerator {
 	        			{
 	        				uriString = uriString.replace(patternRsrc, rsrc);
 	        			}
-	        			else if (uriString.startsWith(startUMLPath))
+	        			else if (uriString.startsWith(startUMLPath_bin))
         				{
-        					uriString = uriString.replace(startUMLPath, rsrc);
+        					uriString = uriString.replace(startUMLPath_bin, rsrc);
         				}
-        				else if (uriString.startsWith(startFUMLPath))
+	        			else if (uriString.startsWith(startUMLPath_build))
         				{
-        					uriString = uriString.replace(startFUMLPath, rsrc);
+        					uriString = uriString.replace(startUMLPath_build, rsrc);
+        				}
+        				else if (uriString.startsWith(startFUMLPath_bin))
+        				{
+        					uriString = uriString.replace(startFUMLPath_bin, rsrc);
+        				}
+        				else if (uriString.startsWith(startFUMLPath_build))
+        				{
+        					uriString = uriString.replace(startFUMLPath_build, rsrc);
         				}
         				else if ((uriString.contains(patternFUMLExecution) || uriString.contains(patternFUMLObject) ||uriString.contains(patternFUMLparamHelper)) && !uriString.contains(patternFUMLPlugin))
         				{
