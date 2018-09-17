@@ -2,37 +2,34 @@
 **Welcome to MDE4CPP project**
 
 ## Content
-Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde4cpp)
+Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4cpp)
 
 ## Installation instructions
 1. Install following software:
   * Java Development Kit (JDK) version 1.8
   * Eclipse Modeling Tool
     * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
-  * Gradle 4.9 or older
-	* Go to ${user folder}/.gradle 
-	* create file gradle.properties
-		* create entry: workerCount=number
-		* number ... count of worker for parallel compile tasks
+  * Gradle 4.10.1
   * MinGW:
 	* for building 32 bit applications: (choose one)
-		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
+		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc
 		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = i686 during installation
 	* for building 64 bit applications:
 		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = x86_64 during installation
   * CMake
   	
-2. checkout a repository with one of the following options:
-  * clone [MDE4CPP] (https://github.com/MDE4CPP/MDE4CPP) respository and update submodules
-  * clone one or more subrepositories of MDE4CPP according to your requirements
-  
-3. Open Advanced System Settings
-  * modify system environment variable PATH: add CMake bin folder, Gradle bin folder and MinGW bin folder
-    * create environment variable `MDE4CPP_ECLIPSE_HOME` with path to root folder of Eclipse modeling Tool
-  * create environment variable `MDE4CPP_HOME` with path to MDE4CPP root folder
-	  (Please note, that the root folder include the subfolder "application" with 
-    * binaries inside `${MDE4CPP_HOME}/application/bin` and 
-    * header files inside `${MDE4CPP_HOME}/application/include/{model name}`.)
+2. checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
+
+3. Configure environment
+  * Copy the pattern file and remove the extension `default`
+		* for Windows systems: `setenv.bat.default`
+		* for Unix systems: `setenv.default`
+  * Open this file and configure the variables:
+    * `MDE4CPP_ECLIPSE_HOME` ... path to eclipse home folder of Eclipse Modeling Tool with Acceleo
+    * `MDE4CPP_HOME` ... path to MDE4CPP home folder
+		Please note, that the root folder include the subfolder "application" with
+    	* binaries inside `${MDE4CPP_HOME}/application/bin`
+    	* header files inside `${MDE4CPP_HOME}/application/include/{model name}`
 
 4. If you want to use Prebuild libraries, packages are downloadable on github. Package with all libraries and header files are available at MDE4CPP repository. All C++ libraries are avaiable in
   * debug version (compiler flag -ggdb)
