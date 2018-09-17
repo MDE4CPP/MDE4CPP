@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.uml"
+            id="fUML4CPP.generator.ui.popupMenus.contribution.IFile">
+         <menu id="org.eclipse.acceleo.module.menu" label="MDE4CPP Generators" path="additionsAcceleo">
+               <groupMarker name="acceleo"/> 
+         </menu>
+         <action
+               class="fUML4CPP.generator.ui.popupMenus.AcceleoGeneratefUMLGeneratorAction"
+               enablesFor="+"
+               id="fUML4CPP.generator.ui.popupMenus.acceleoGeneratefUMLGeneratorAction"
+               icon="icons/default.gif"
+               label="Generate with fUML4CPP"
+               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
+      </objectContribution>
+   </extension>
+</plugin>

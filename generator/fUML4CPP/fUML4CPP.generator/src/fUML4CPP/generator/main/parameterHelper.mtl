@@ -1,0 +1,85 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module parameterHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
+[query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
+[query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
+
+[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
+
+[query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not type.supportedTypes())->asSet()->size()>0 /]
+
+[query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.ownedElement->filter(Class), 
+				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface), 
+				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class)	
+			}->flatten()->reject(oclIsKindOf(Activity))/]
+
+[comment]INPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.name.oclIsUndefined())]
+#error There is an input parameter that doesn't have a name set. Fix the model and generate the code again.
+//Here some info that might help you to find it: [par/]
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.type.name.oclIsUndefined())]
+#error Input parameter [par.name/] does not have a type set. Fix the model and generate the code again.
+//Here some additional info that might help you to find it: [par/]
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (not par.type.supportedTypes()) ]
+std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at([index/])->getValues()->front());
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.type.supportedTypes())]
+std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(inputParameters->at([index/])->getValues()->front());
+[/template]
+
+
+[comment]OUTPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateOutputParameter(par : Parameter) ? (par.name.oclIsUndefined())]
+#error There is an output parameter that doesn't have a name set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.type.name.oclIsUndefined())]
+#error Output parameter [par.name/] doesn't have a type set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.type.supportedTypes())]
+std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory::eInstance()->create[par.type.name/]Value());
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (not par.type.supportedTypes())]
+[if (not (par.direction = ParameterDirectionKind::inout))]
+std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
+[/if]
+std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/]));
+[par.name/]UmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]UmlLinker);
+[/template]
+
+
+[comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (not supportedTypes())]
+#include "[type.getNearestPackage().ns()/]/[type.name/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[/template]
+
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
+#include "fUML/[type.name/]Value.hpp"
+[/template]
