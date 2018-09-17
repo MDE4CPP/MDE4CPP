@@ -1,0 +1,100 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOperation('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateType /] 
+[import ecore4CPP::generator::main::helper /]
+
+[**
+ * Helper for finding hidden functions (currently unused)
+*/]
+[query public getSuperClassOperations(aOperation : EOperation) : Set(EOperation) = aOperation.eContainingClass.eAllOperations->select(not (aOperation.eContainingClass = eContainingClass))->flatten() /]
+[query public hasOverrideInClass(aOperation : EOperation, aClass: EClass) : Boolean = aClass.eOperations->forAll(op | op.isOverrideOf(aOperation) ) /]
+
+[query public getHiddenFunctions(aOperation : EOperation) : Set(EOperation) = getSuperClassOperations()->select(op | not aOperation.isOverrideOf(op) and (aOperation.name = op.name) and (op.hasOverrideInClass(aOperation.eContainingClass) ))->flatten() /]
+[query public getClassWithHiddenFunctions(aOperation : EOperation) : Set(EClass) = aOperation.getHiddenFunctions().eContainingClass->asOrderedSet()->flatten()->sortedBy(name)/]
+
+[query public isOverride(aOperation : EOperation) : Boolean = not aOperation.getSuperClassOperations()->forAll(op | not aOperation.isOverrideOf(op) )/]
+[query public getOverideSuffix(aOperation : EOperation) : String = if aOperation.isOverride() then 'override' else '' endif  /]
+
+
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the model factory
+*/]
+
+[template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
+[if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
+[anEOperation.generateDokumentation()/] 
+virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if] [abstractSufix(impl)/];[/if]
+
+
+
+[/template]
+
+[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
+[comment[aOperation.generateDokumentation()/] 
+[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if]
+{
+[if (hasKey('body'))]
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	[valueKey('body')/]
+	//end of body
+[else]
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+[/if]
+}
+[/template]
+
+
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the metamodel package
+*/]
+
+[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.getMemberNameUpperFirst()).concat('()') endif/]
+
+[template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
+[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
+
+[/template]
+
+[template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
+[anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
+[anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
+[anEOperation.getClassMemberName()/]->setLowerBound([anEOperation.lowerBound/]);
+[anEOperation.getClassMemberName()/]->setUpperBound([anEOperation.upperBound/]);
+[anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
+[anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
+
+[for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
+{
+	std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
+	parameter->setName("[anEParameter.name/]");
+	parameter->setEType([anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]);
+	parameter->setLowerBound(0);
+	parameter->setUpperBound(1);
+	parameter->setUnique(true);
+	parameter->setOrdered(true);
+}
+[/for]
+
+[/template]
+
+[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/];
+
+[/template]
