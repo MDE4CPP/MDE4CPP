@@ -21,16 +21,18 @@ namespace util
 			static std::shared_ptr<StereotypeStorage> eInstance();
 
 			void applyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
-			std::shared_ptr<uml::Stereotype> getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName);
-			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(std::shared_ptr<uml::Element> element);
-			bool isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
+			std::shared_ptr<uml::Stereotype> getAppliedStereotype(std::shared_ptr<uml::Element> element, std::string qualifiedName) const;
+			std::shared_ptr<Bag<uml::Stereotype>> getAppliedStereotypes(std::shared_ptr<uml::Element> element) const;
+			bool isStereotypeApplied(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype) const;
 			void unapplyStereotype(std::shared_ptr<uml::Element> element, std::shared_ptr<uml::Stereotype> stereotype);
 
 		private:
 			StereotypeStorage();
 
+			void removeInvalidEntries();
+
 			static std::shared_ptr<StereotypeStorage> m_instance;
-			std::map<std::shared_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>> m_stereotypeApplicationMap;
+			std::map<std::weak_ptr<uml::Element>, std::shared_ptr<Bag<uml::Stereotype>>, std::owner_less<std::weak_ptr<uml::Element>>> m_stereotypeApplicationMap;
 	};
 }
 #endif
