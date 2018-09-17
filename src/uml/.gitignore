@@ -1,0 +1,5 @@
+.gradle/
+.cmake
+src_gen/uml/\.idea/
+
+src_gen/uml/cmake-build-debug/
