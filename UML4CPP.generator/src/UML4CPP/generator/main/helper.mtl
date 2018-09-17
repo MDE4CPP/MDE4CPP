@@ -14,8 +14,6 @@
  */]
 [module helper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
-[import UML4CPP::generator::main::generateType /]
-
 [**
  * Helper for c++ abstract function sufix
 */]
@@ -27,6 +25,11 @@
  * check if application should be created
 */]
 [query public prepareApplication(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
+[query public hasMainSourceCode(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
+
+[query public hasMainSourceIncludes(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
 
 [**
  * check and get key value from sourcegen eannotation
@@ -97,7 +100,8 @@
 
 [query public metamodelClassTypeString(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().generateTypeClass() else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().generateTypeClass()) endif /]
 
-[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.ns() = base.namespace.ns() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
+[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.ns() = base.namespace.ns() or aClass.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
+[query public InterfaceWithNamespace(anInterface : Interface, base : Classifier) : String = if anInterface.namespace.ns() = base.namespace.ns() or anInterface.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.ns().concat('::').concat(base.name.toUpperFirst()) endif /]
  
 [query public creatorFunction(aType : Type) : String =  metaModelFactory(aType).concat('create').concat(aType.name.toUpperFirst()).concat('()')/]
 [query public metaModelFactory(aType : Type) : String = aType.getNearestPackage().name.concat('::').concat(aType.getNearestPackage().name).concat('Factory::eInstance()->')/]
@@ -115,6 +119,14 @@
 [query public isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
 [query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
+
+[template public generateTypeClass(anEDataType : ecore::EClass)]
+[anEDataType.name/]
+[/template]
+
+[template public ns(ns : Namespace)]
+[if (ns.name='UML')]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
+[/template]
 
 [**
  * Helper for include guard
@@ -177,6 +189,12 @@ template<class T> class Bag;
 [/if]
 [/template]
 
+[template public generateAbstractDataTypesForwardDeclaration(anInterface : Interface)]
+[if (anInterface.ownedAttribute->select(upper <> 1)->size() > 0 or anInterface.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+template<class T> class Bag;
+[/if]
+[/template]
+
 [template public generateAbstractDataTypesIncludes(aClass : Class)]
 [if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
@@ -188,3 +206,8 @@ template<class T> class Bag;
 */]
 [query public hasSourceGen(aElement : Element) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()/]
 [query public getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->first()/]
+[query public hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aKey:String) : String = aElement.getSourceGen().details->select(key = aKey)->first().value /]
+
+[query public ignoreNamespace(anElement : Element) : Boolean = if (anElement.getNearestPackage().hasKey('ignoreNamespace')) then anElement.getNearestPackage().valueKey('ignoreNamespace') = '1' else false endif /]
+[query public isSingleton(anElement : Element) : Boolean = if (anElement.hasKey('singleton')) then anElement.valueKey('singleton') = '1' else false endif /]

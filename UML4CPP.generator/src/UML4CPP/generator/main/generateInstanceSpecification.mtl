@@ -43,7 +43,7 @@
 [template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
-[memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
+[memberName(anInstSpec)/]->getClassifier()->push_back([aClassifer.packageGetter(anInstSpec)/]);
 
 [for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
 [aSlot.generateSlotCreation(anInstSpec)/]

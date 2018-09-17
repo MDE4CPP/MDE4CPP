@@ -16,6 +16,7 @@
  
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
@@ -48,10 +49,11 @@ virtual public uml::Class
 [if (OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->size() > 0)]
 //Forward Declaration for used types
 [for (element : Classifier | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
 {
+[/if]
 	class [element.name.toUpperFirst()/];
-}
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 [/if]
 
@@ -79,8 +81,10 @@ namespace [element.namespace.ns()/]
 #include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 [/if]
 
+[if (not aClass.getNearestPackage().ignoreNamespace())]
 namespace [aPackage.name/]
 {
+[/if]
 	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
 [else][for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
@@ -111,9 +115,13 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			// Members
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
-	
+[if (isSingleton())]
+
+			//Singleton Instance and Getter
+		[generateSingletonDecl(aClass.name)/]
+[/if]	
 	};
-}
+[if (not aClass.getNearestPackage().ignoreNamespace())]}[/if]
 [endGuard(aClass)/]
 [/file]
 [/template]

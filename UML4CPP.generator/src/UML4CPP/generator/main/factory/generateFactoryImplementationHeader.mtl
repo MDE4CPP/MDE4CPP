@@ -27,8 +27,9 @@
 #include "uml/impl/FactoryImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
-namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
+[/if]
 	class [aPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.toUpperFirst().concat('Factory')/] 
 	{
 		protected:
@@ -42,7 +43,7 @@ namespace [aPackage.name/]
 			virtual std::shared_ptr<uml::Element> create(std::string _className);
 
 			//Creator functions
-			[(aPackage.packagedElement->selectByKind(Class))->sortedBy(myQualifiedName()).generateClassCreate(true)/]
+			[(aPackage.packagedElement->selectByKind(Class))->reject(isSingleton())->sortedBy(myQualifiedName()).generateClassCreate(true)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();
@@ -53,7 +54,7 @@ namespace [aPackage.name/]
 
 			virtual void init() {}
 	};
-}
+[if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'FactoryImpl')/]
 [/file]
 [/template]

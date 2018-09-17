@@ -22,7 +22,7 @@
 #include "[aPackage.getPackageName()/]/[packageName/].hpp"
 #include "[aPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [aPackage.name/];
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
 //static initialisation
 const std::string [packageName/]::eNAME ="[aPackage.name/]";
@@ -30,6 +30,6 @@ const std::string [packageName/]::eNS_URI ="[aPackage.URI/]";
 const std::string [packageName/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
 
 //Singleton 
-[generateSingletonImpl(packageName)/]
+[generateSingletonImpl(packageName, true)/]
 [/file]
 [/template]

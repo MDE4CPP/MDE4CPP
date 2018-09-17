@@ -12,22 +12,20 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateImplementation('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateImplModelSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::impl::generateImplModelSource /]
-[import UML4CPP::generator::main::impl::generateImplementationHeader /]
-[import UML4CPP::generator::main::impl::generateImplementationSource /]
+[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helper /]
 
+[template public generateClassCpp(aClass : Class)  {className : String = aClass.name.toUpperFirst(); }]
+[file  (aClass._package.getPackageName().concat('/').concat(className).concat('.cpp'), false, 'UTF-8')]
 
-[**
- * The documentation of the template generateElement.
- * @param anEClass
- */]
-[template public generateImplementation(aClass : Class)]
-[aClass.generateImplementationHeader()/]
-[aClass.generateImplementationSource()/]
-[if (aClass.isSingleton())]
-[aClass.generateClassCpp()/]
-[/if]
+#include "[aClass._package.getPackageName()/]/[className/].hpp"
+#include "[aClass._package.getPackageName()/]/impl/[className.concat('Impl')/].hpp"
+
+[if (not aClass._package.ignoreNamespace())]using namespace [aClass._package.name/];[/if]
+
+//static initialisation
+[generateSingletonImpl(className, false)/]
+[/file]
 [/template]

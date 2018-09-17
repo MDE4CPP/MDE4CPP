@@ -22,6 +22,11 @@
 [aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);[/if]
 [/template]
 
+[template public generateValueSpecificationInitialization(aValueSpecification : ValueSpecification)]
+[if (aValueSpecification.oclIsKindOf(InstanceValue))][aValueSpecification.memberName()/]->setInstance([aValueSpecification.oclAsType(InstanceValue).instance.memberName()/]);[/if]
+[/template]
+
+
 [template public generateLiteralValue( aLiteralspec : LiteralSpecification) ? (oclIsKindOf(LiteralInteger))]
 [aLiteralspec.integerValue()/]
 [/template]

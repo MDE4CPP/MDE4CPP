@@ -48,26 +48,35 @@ virtual public uml::Element
 //*********************************
 // generated Includes
 
+[generateAbstractDataTypesForwardDeclaration()/]
+
 //Forward Declaration for used types
 [for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
 {
+[/if]
 	class [element.name/];
-}
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 
 [for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
 {
+[/if]
 	class [element.name/];
-}
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 
 [for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/]
 {
+[/if]
 	class [element.name/];
-}
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aInterface.oclIsKindOf(Stereotype))]
@@ -79,9 +88,12 @@ namespace [element.namespace.ns()/]
 
 //*********************************
 
-namespace [aPackage.name/] 
+[if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
 {
-	class [aInterface.name/] 
+[/if]
+	class [aInterface.name/] [for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [InterfaceWithNamespace(aInterface,aClassifier)/][/for]
+
 	{
 		protected:
 			[aInterface.name/](){}
@@ -106,7 +118,7 @@ namespace [aPackage.name/]
 			//*********************************
 			[aInterface.ownedAttribute.generateAttributeProtectedMember()/]
 	};
-}
+[if (not aInterface.getNearestPackage().ignoreNamespace())]}[/if]
 [endGuard(aInterface)/]
 [/file]
 [/template]

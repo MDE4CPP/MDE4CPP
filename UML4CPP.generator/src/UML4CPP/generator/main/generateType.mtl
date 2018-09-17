@@ -14,7 +14,9 @@
  */]
 [module generateType('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat')/]
+[import UML4CPP::generator::main::helper /]
+
+[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural')/]
 [query public isBackReference(aProperty : Property) : Boolean = (not aProperty.association.oclIsUndefined()) and (not aProperty.owner.oclIsKindOf(Association)) and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite /]
 
 [template public generateCppType(aProperty : Property)]
@@ -62,10 +64,6 @@ QVariant[else]
 [aType.transformType()/][/if]
 [/template]
 
-[template public generateTypeClass(anEDataType : ecore::EClass)]
-[anEDataType.name/]
-[/template]
-
 [**
  * Transformation uml to C++
 */]
@@ -78,7 +76,7 @@ bool
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'UnlimitedNatural' )]
-int
+unsigned int
 [/template]
 
 [template public transformType(aType : Type) ? (name = 'Integer' or name = 'EInt')]
@@ -94,13 +92,9 @@ std::string
 [/template]
 
 [template public transformType(aType : Type) ? (oclIsKindOf(Enumeration))]
-[aType.namespace.ns()/]::[aType.name.toUpperFirst()/]
+[if (not aType.getNearestPackage().ignoreNamespace())][aType.namespace.ns()/]::[/if][aType.name.toUpperFirst()/]
 [/template]
 
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
-[aType.namespace.ns()/]::[aType.name.toUpperFirst()/]
-[/template]
-
-[template public ns(ns : Namespace)]
-[if (ns.name='UML')]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
+[if (not aType.ignoreNamespace())][aType.namespace.ns()/]::[/if][aType.name.toUpperFirst()/]
 [/template]

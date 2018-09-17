@@ -25,17 +25,15 @@
 #include "uml/Factory.hpp"
 
 [comment  Generate Includes for the Factory/]
-namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
-[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->sortedBy(myQualifiedName())) separator ('\n')]
+[/if]
+[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 	class [aPackage.name.toUpperFirst().concat('Package')/];
 	class [packageName/];
-}
 
-namespace [aPackage.name/]
-{
 	class [packageName/] : virtual public uml::Factory 
 	{ 
 		protected:
@@ -48,13 +46,12 @@ namespace [aPackage.name/]
 			//Creator functions
 			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
 
-
-			[(aPackage.ownedMember->selectByKind(Class))->sortedBy(name).generateClassCreate(false)/]
+			[(aPackage.ownedMember->selectByKind(Class))->reject(isSingleton())->sortedBy(name).generateClassCreate(false)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
 	};
-}
+[if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'Factory')/]
 [/file]
 [/template]
