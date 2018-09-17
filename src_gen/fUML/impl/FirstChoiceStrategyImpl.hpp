@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			FirstChoiceStrategyImpl();
-			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr();
+			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
 			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int choose(int size)  ;
+			virtual int choose(int size) ;
 			
 			
 			
@@ -83,9 +83,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<FirstChoiceStrategy> m_thisFirstChoiceStrategyPtr;

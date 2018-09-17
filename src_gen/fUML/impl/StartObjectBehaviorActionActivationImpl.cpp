@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StartObjectBehaviorActionActivationI
 }
 
 
-std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr()
+std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
 {
 	return m_thisStartObjectBehaviorActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> StartObjectBehaviorActionActivationImpl::eContai
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StartObjectBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StartObjectBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool StartObjectBehaviorActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool StartObjectBehaviorActionActivationImpl::internalEIsSet(int featureID) cons
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
-bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

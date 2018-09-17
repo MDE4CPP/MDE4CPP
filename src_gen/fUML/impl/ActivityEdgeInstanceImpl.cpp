@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,7 +24,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
- #include "fUML/FUMLFactory.hpp"
+#include <algorithm> 
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -154,7 +156,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int ActivityEdgeInstanceImpl::countOfferedValue() 
+int ActivityEdgeInstanceImpl::countOfferedValue()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -168,7 +170,7 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +198,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
 	//end of body
 }
 
-bool ActivityEdgeInstanceImpl::hasOffer() 
+bool ActivityEdgeInstanceImpl::hasOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +207,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 	//end of body
 }
 
-void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +226,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tok
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -242,7 +244,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount) 
+std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -330,7 +332,7 @@ void ActivityEdgeInstanceImpl::setTarget(std::shared_ptr<fUML::ActivityNodeActiv
 //*********************************
 
 
-std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr()
+std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const
 {
 	return m_thisActivityEdgeInstancePtr.lock();
 }
@@ -350,22 +352,22 @@ std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
-			return getEdge(); //510
+			return eAny(getEdge()); //510
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
-			return getGroup(); //514
+			return eAny(getGroup()); //514
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
-			return getOffers(); //513
+			return eAny(getOffers()); //513
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
-			return getSource(); //511
+			return eAny(getSource()); //511
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
-			return getTarget(); //512
+			return eAny(getTarget()); //512
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 {
@@ -384,35 +386,35 @@ bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ActivityEdgeInstanceImpl::eSet(int featureID, boost::any newValue)
+bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityEdge> _edge = boost::any_cast<std::shared_ptr<uml::ActivityEdge>>(newValue);
+			std::shared_ptr<uml::ActivityEdge> _edge = newValue->get<std::shared_ptr<uml::ActivityEdge>>();
 			setEdge(_edge); //510
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setGroup(_group); //514
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _source = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivation> _source = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
 			setSource(_source); //511
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _target = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivation> _target = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
 			setTarget(_target); //512
 			return true;
 		}

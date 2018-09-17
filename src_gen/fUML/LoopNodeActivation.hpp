@@ -114,19 +114,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList()  = 0;
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() = 0;
 			
 			/*!
 			 */ 
-			virtual void runBody()  = 0;
+			virtual void runBody() = 0;
 			
 			/*!
 			 */ 
-			virtual void runLoopVariables()  = 0;
+			virtual void runLoopVariables() = 0;
 			
 			/*!
 			 */ 
-			virtual bool runTest()  = 0;
+			virtual bool runTest() = 0;
 			
 			
 			//*********************************

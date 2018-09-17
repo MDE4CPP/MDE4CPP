@@ -32,7 +32,7 @@ virtual public ExecutionFactory
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryImpl();
-			virtual std::shared_ptr<ExecutionFactory> getThisExecutionFactoryPtr();
+			virtual std::shared_ptr<ExecutionFactory> getThisExecutionFactoryPtr() const;
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr);
 
 			//Additional constructors for the containments back reference
@@ -50,43 +50,43 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */ 
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) ;
 			
 			/*!
 			 */ 
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) ;
 			
 			/*!
 			 */ 
-			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
+			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
+			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name)  ;
+			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name) ;
 			
 			/*!
 			 */ 
-			virtual int getStrategyIndex(std::string name)  ;
+			virtual int getStrategyIndex(std::string name) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
 			
@@ -144,9 +144,9 @@ virtual public ExecutionFactory
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExecutionFactory> m_thisExecutionFactoryPtr;

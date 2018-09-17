@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -118,43 +119,43 @@ std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::BooleanValue> ClauseActivationImpl::getDecision() 
+std::shared_ptr<fUML::BooleanValue> ClauseActivationImpl::getDecision()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getPredecessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getPredecessors()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getSuccessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getSuccessors()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseActivationImpl::isReady() 
+bool ClauseActivationImpl::isReady()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::recieveControl() 
+void ClauseActivationImpl::recieveControl()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::runTest() 
+void ClauseActivationImpl::runTest()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::selectBody() 
+void ClauseActivationImpl::selectBody()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -188,7 +189,7 @@ void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Co
 //*********************************
 
 
-std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr()
+std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
 {
 	return m_thisClauseActivationPtr.lock();
 }
@@ -204,16 +205,16 @@ std::shared_ptr<ecore::EObject> ClauseActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
-			return getClause(); //700
+			return eAny(getClause()); //700
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
-			return getConditionalNodeActivation(); //701
+			return eAny(getConditionalNodeActivation()); //701
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ClauseActivationImpl::internalEIsSet(int featureID) const
 {
@@ -226,21 +227,21 @@ bool ClauseActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ClauseActivationImpl::eSet(int featureID, boost::any newValue)
+bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Clause> _clause = boost::any_cast<std::shared_ptr<uml::Clause>>(newValue);
+			std::shared_ptr<uml::Clause> _clause = newValue->get<std::shared_ptr<uml::Clause>>();
 			setClause(_clause); //700
 			return true;
 		}
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = boost::any_cast<std::shared_ptr<fUML::ConditionalNodeActivation>>(newValue);
+			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = newValue->get<std::shared_ptr<fUML::ConditionalNodeActivation>>();
 			setConditionalNodeActivation(_conditionalNodeActivation); //701
 			return true;
 		}

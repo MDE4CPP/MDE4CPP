@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityExecutionImpl();
-			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr();
+			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr() const;
 			virtual void setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr);
 
 
@@ -44,15 +44,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void execute() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			
@@ -98,9 +98,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityExecution> m_thisActivityExecutionPtr;

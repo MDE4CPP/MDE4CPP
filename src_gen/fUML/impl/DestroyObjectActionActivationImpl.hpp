@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DestroyObjectActionActivationImpl();
-			virtual std::shared_ptr<DestroyObjectActionActivation> getThisDestroyObjectActionActivationPtr();
+			virtual std::shared_ptr<DestroyObjectActionActivation> getThisDestroyObjectActionActivationPtr() const;
 			virtual void setThisDestroyObjectActionActivationPtr(std::weak_ptr<DestroyObjectActionActivation> thisDestroyObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
+			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) ;
 			
 			/*!
 			 */ 
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link) ;
 			
 			
 			
@@ -93,9 +93,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<DestroyObjectActionActivation> m_thisDestroyObjectActionActivationPtr;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -161,7 +162,7 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +173,7 @@ void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 	//end of body
 }
 
-void ObjectImpl::destroy() 
+void ObjectImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +188,7 @@ void ObjectImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +197,7 @@ std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Opera
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ObjectImpl::new_() 
+std::shared_ptr<fUML::Value> ObjectImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -204,7 +205,7 @@ std::shared_ptr<fUML::Value> ObjectImpl::new_()
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +216,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 	//end of body
 }
 
-void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -229,7 +230,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 	//end of body
 }
 
-void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -265,7 +266,7 @@ std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 //*********************************
 
 
-std::shared_ptr<Object> ObjectImpl::getThisObjectPtr()
+std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
 {
 	return m_thisObjectPtr.lock();
 }
@@ -282,16 +283,16 @@ std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation(); //373
+			return eAny(getObjectActivation()); //373
 		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes(); //372
+			return eAny(getTypes()); //372
 	}
-	return ExtensionalValueImpl::internalEIsSet(featureID);
+	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectImpl::internalEIsSet(int featureID) const
 {
@@ -304,14 +305,14 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
-bool ObjectImpl::eSet(int featureID, boost::any newValue)
+bool ObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
 			setObjectActivation(_objectActivation); //373
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -120,7 +121,7 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -128,7 +129,7 @@ bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 	//end of body
 }
 
-bool ObjectTokenImpl::isControl() 
+bool ObjectTokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +155,7 @@ void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Value> _value)
 //*********************************
 
 
-std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr()
+std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
 {
 	return m_thisObjectTokenPtr.lock();
 }
@@ -171,14 +172,14 @@ std::shared_ptr<ecore::EObject> ObjectTokenImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
-			return getValue(); //542
+			return eAny(getValue()); //542
 	}
-	return TokenImpl::internalEIsSet(featureID);
+	return TokenImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectTokenImpl::internalEIsSet(int featureID) const
 {
@@ -189,14 +190,14 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
-bool ObjectTokenImpl::eSet(int featureID, boost::any newValue)
+bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Value> _value = boost::any_cast<std::shared_ptr<fUML::Value>>(newValue);
+			std::shared_ptr<fUML::Value> _value = newValue->get<std::shared_ptr<fUML::Value>>();
 			setValue(_value); //542
 			return true;
 		}

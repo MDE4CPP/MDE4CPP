@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -129,7 +130,7 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -139,7 +140,7 @@ std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> DataValueImpl::new_() 
+std::shared_ptr<fUML::Value> DataValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +166,7 @@ void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 //*********************************
 
 
-std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr()
+std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const
 {
 	return m_thisDataValuePtr.lock();
 }
@@ -182,14 +183,14 @@ std::shared_ptr<ecore::EObject> DataValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
-			return getType(); //341
+			return eAny(getType()); //341
 	}
-	return CompoundValueImpl::internalEIsSet(featureID);
+	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
 bool DataValueImpl::internalEIsSet(int featureID) const
 {
@@ -200,14 +201,14 @@ bool DataValueImpl::internalEIsSet(int featureID) const
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
-bool DataValueImpl::eSet(int featureID, boost::any newValue)
+bool DataValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _type = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
+			std::shared_ptr<uml::DataType> _type = newValue->get<std::shared_ptr<uml::DataType>>();
 			setType(_type); //341
 			return true;
 		}

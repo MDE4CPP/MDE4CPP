@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -112,7 +113,7 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -138,7 +139,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +179,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 //*********************************
 
 
-std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr()
+std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const
 {
 	return m_thisRedefinitionBasedDispatchStrategyPtr.lock();
 }
@@ -195,12 +196,12 @@ std::shared_ptr<ecore::EObject> RedefinitionBasedDispatchStrategyImpl::eContaine
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RedefinitionBasedDispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any RedefinitionBasedDispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return DispatchStrategyImpl::internalEIsSet(featureID);
+	return DispatchStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool RedefinitionBasedDispatchStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -209,7 +210,7 @@ bool RedefinitionBasedDispatchStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return DispatchStrategyImpl::internalEIsSet(featureID);
 }
-bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

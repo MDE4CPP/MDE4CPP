@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -127,7 +128,7 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +145,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,7 +158,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 	//end of body
 }
 
-std::string IntegerValueImpl::toString() 
+std::string IntegerValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,7 +177,7 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr()
+std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
 {
 	return m_thisIntegerValuePtr.lock();
 }
@@ -193,14 +194,14 @@ std::shared_ptr<ecore::EObject> IntegerValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
-			return getValue(); //181
+			return eAny(getValue()); //181
 	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
 bool IntegerValueImpl::internalEIsSet(int featureID) const
 {
@@ -211,14 +212,14 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-bool IntegerValueImpl::eSet(int featureID, boost::any newValue)
+bool IntegerValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			int _value = boost::any_cast<int>(newValue);
+			int _value = newValue->get<int>();
 			setValue(_value); //181
 			return true;
 		}

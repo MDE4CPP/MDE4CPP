@@ -32,7 +32,7 @@ virtual public FeatureValue
 		protected:
 			friend class FUMLFactoryImpl;
 			FeatureValueImpl();
-			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr();
+			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
 			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
 
 
@@ -46,7 +46,7 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */ 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) ;
 			
 			
 			
@@ -104,9 +104,9 @@ virtual public FeatureValue
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<FeatureValue> m_thisFeatureValuePtr;

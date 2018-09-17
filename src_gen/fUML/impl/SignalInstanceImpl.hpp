@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			SignalInstanceImpl();
-			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr();
+			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr() const;
 			virtual void setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr);
 
 
@@ -86,9 +86,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<SignalInstance> m_thisSignalInstancePtr;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -101,7 +102,7 @@ std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string SemanticStrategyImpl::retrieveName() 
+std::string SemanticStrategyImpl::retrieveName()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -116,7 +117,7 @@ std::string SemanticStrategyImpl::retrieveName()
 //*********************************
 
 
-std::shared_ptr<SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr()
+std::shared_ptr<SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr() const
 {
 	return m_thisSemanticStrategyPtr.lock();
 }
@@ -132,12 +133,12 @@ std::shared_ptr<ecore::EObject> SemanticStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SemanticStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SemanticStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool SemanticStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -146,7 +147,7 @@ bool SemanticStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool SemanticStrategyImpl::eSet(int featureID, boost::any newValue)
+bool SemanticStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -173,13 +174,13 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) 
+void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link) 
+bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -198,7 +199,7 @@ std::shared_ptr<Union<fUML::PinActivation>> DestroyObjectActionActivationImpl::g
 }
 
 
-std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr()
+std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
 {
 	return m_thisDestroyObjectActionActivationPtr.lock();
 }
@@ -219,12 +220,12 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::eContainer() 
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool DestroyObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -233,7 +234,7 @@ bool DestroyObjectActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool DestroyObjectActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

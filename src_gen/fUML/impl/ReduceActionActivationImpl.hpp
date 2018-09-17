@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReduceActionActivationImpl();
-			virtual std::shared_ptr<ReduceActionActivation> getThisReduceActionActivationPtr();
+			virtual std::shared_ptr<ReduceActionActivation> getThisReduceActionActivationPtr() const;
 			virtual void setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -92,9 +92,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReduceActionActivation> m_thisReduceActionActivationPtr;

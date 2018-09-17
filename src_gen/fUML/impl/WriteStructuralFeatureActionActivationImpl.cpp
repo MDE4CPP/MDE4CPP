@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -169,7 +170,7 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt) 
+int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -188,7 +189,7 @@ std::shared_ptr<Union<fUML::PinActivation>> WriteStructuralFeatureActionActivati
 }
 
 
-std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr()
+std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr() const
 {
 	return m_thisWriteStructuralFeatureActionActivationPtr.lock();
 }
@@ -209,12 +210,12 @@ std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::eCon
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -223,7 +224,7 @@ bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
-bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

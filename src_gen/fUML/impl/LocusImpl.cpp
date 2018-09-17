@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include "uml/Classifier.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -164,7 +166,7 @@ std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value) 
+void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -173,7 +175,7 @@ void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value)
 	//end of body
 }
 
-void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor) 
+void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +184,7 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor)
 	//end of body
 }
 
-void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory) 
+void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -191,7 +193,7 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)
 	//end of body
 }
 
-bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
+bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -213,7 +215,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type) 
+std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -236,16 +238,16 @@ std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value) 
+void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	value->setLocus(nullptr);
-std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->end(),value);
+	this->getExtensionalValues()->erase(value);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) 
+std::shared_ptr<Bag<fUML::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -307,7 +309,7 @@ void LocusImpl::setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory)
 //*********************************
 
 
-std::shared_ptr<Locus> LocusImpl::getThisLocusPtr()
+std::shared_ptr<Locus> LocusImpl::getThisLocusPtr() const
 {
 	return m_thisLocusPtr.lock();
 }
@@ -323,48 +325,48 @@ std::shared_ptr<ecore::EObject> LocusImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return getExecutor(); //00
+			return eAny(getExecutor()); //1140
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return getExtensionalValues(); //02
+			return eAny(getExtensionalValues()); //1142
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return getFactory(); //01
+			return eAny(getFactory()); //1141
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool LocusImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return getExecutor() != nullptr; //00
+			return getExecutor() != nullptr; //1140
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //02
+			return getExtensionalValues() != nullptr; //1142
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return getFactory() != nullptr; //01
+			return getFactory() != nullptr; //1141
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool LocusImpl::eSet(int featureID, boost::any newValue)
+bool LocusImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Executor> _executor = boost::any_cast<std::shared_ptr<fUML::Executor>>(newValue);
-			setExecutor(_executor); //00
+			std::shared_ptr<fUML::Executor> _executor = newValue->get<std::shared_ptr<fUML::Executor>>();
+			setExecutor(_executor); //1140
 			return true;
 		}
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ExecutionFactory> _factory = boost::any_cast<std::shared_ptr<fUML::ExecutionFactory>>(newValue);
-			setFactory(_factory); //01
+			std::shared_ptr<fUML::ExecutionFactory> _factory = newValue->get<std::shared_ptr<fUML::ExecutionFactory>>();
+			setFactory(_factory); //1141
 			return true;
 		}
 	}
@@ -410,10 +412,9 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Executor";
 			}
-			std::shared_ptr<fUML::Executor> executor = std::dynamic_pointer_cast<fUML::Executor>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTOR_EREFERENCE_LOCUS);
 			if (executor != nullptr)
 			{
-				this->setExecutor(executor);
 				loadHandler->handleChild(executor);
 			}
 			return;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -141,7 +142,7 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
-bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
+bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,7 +226,7 @@ std::shared_ptr<Bag<fUML::Value>> FeatureValueImpl::getValues() const
 //*********************************
 
 
-std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr()
+std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
 {
 	return m_thisFeatureValuePtr.lock();
 }
@@ -241,18 +242,18 @@ std::shared_ptr<ecore::EObject> FeatureValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
-			return getFeature(); //142
+			return eAny(getFeature()); //142
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
-			return getPosition(); //141
+			return eAny(getPosition()); //141
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
-			return getValues(); //140
+			return eAny(getValues()); //140
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool FeatureValueImpl::internalEIsSet(int featureID) const
 {
@@ -267,21 +268,21 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool FeatureValueImpl::eSet(int featureID, boost::any newValue)
+bool FeatureValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeature> _feature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
+			std::shared_ptr<uml::StructuralFeature> _feature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
 			setFeature(_feature); //142
 			return true;
 		}
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
-			int _position = boost::any_cast<int>(newValue);
+			int _position = newValue->get<int>();
 			setPosition(_position); //141
 			return true;
 		}

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CreateLinkActionActivationImpl();
-			virtual std::shared_ptr<CreateLinkActionActivation> getThisCreateLinkActionActivationPtr();
+			virtual std::shared_ptr<CreateLinkActionActivation> getThisCreateLinkActionActivationPtr() const;
 			virtual void setThisCreateLinkActionActivationPtr(std::weak_ptr<CreateLinkActionActivation> thisCreateLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -85,9 +85,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CreateLinkActionActivation> m_thisCreateLinkActionActivationPtr;

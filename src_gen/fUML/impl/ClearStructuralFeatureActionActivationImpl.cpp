@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ClearStructuralFeatureActionActivati
 }
 
 
-std::shared_ptr<ClearStructuralFeatureActionActivation> ClearStructuralFeatureActionActivationImpl::getThisClearStructuralFeatureActionActivationPtr()
+std::shared_ptr<ClearStructuralFeatureActionActivation> ClearStructuralFeatureActionActivationImpl::getThisClearStructuralFeatureActionActivationPtr() const
 {
 	return m_thisClearStructuralFeatureActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionActivationImpl::eCon
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	}
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
-bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

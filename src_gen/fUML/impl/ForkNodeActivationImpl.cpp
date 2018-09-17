@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -143,7 +144,7 @@ std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +176,7 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTo
 	//end of body
 }
 
-void ForkNodeActivationImpl::terminate() 
+void ForkNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,7 +194,7 @@ void ForkNodeActivationImpl::terminate()
 //*********************************
 
 
-std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr()
+std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
 {
 	return m_thisForkNodeActivationPtr.lock();
 }
@@ -214,12 +215,12 @@ std::shared_ptr<ecore::EObject> ForkNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ForkNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ForkNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ForkNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -228,7 +229,7 @@ bool ForkNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ForkNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ForkNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

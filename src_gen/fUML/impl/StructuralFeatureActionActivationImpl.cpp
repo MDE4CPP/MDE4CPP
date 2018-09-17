@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -177,19 +178,19 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue) 
+std::shared_ptr<Bag<fUML::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) 
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -208,7 +209,7 @@ std::shared_ptr<Union<fUML::PinActivation>> StructuralFeatureActionActivationImp
 }
 
 
-std::shared_ptr<StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr()
+std::shared_ptr<StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr() const
 {
 	return m_thisStructuralFeatureActionActivationPtr.lock();
 }
@@ -229,12 +230,12 @@ std::shared_ptr<ecore::EObject> StructuralFeatureActionActivationImpl::eContaine
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any StructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool StructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -243,7 +244,7 @@ bool StructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool StructuralFeatureActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

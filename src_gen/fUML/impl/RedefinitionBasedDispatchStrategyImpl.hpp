@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			RedefinitionBasedDispatchStrategyImpl();
-			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr();
+			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr() const;
 			virtual void setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr);
 
 
@@ -44,11 +44,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<RedefinitionBasedDispatchStrategy> m_thisRedefinitionBasedDispatchStrategyPtr;

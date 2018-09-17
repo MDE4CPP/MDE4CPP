@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -130,19 +131,19 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
+void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
+std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -156,7 +157,7 @@ std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
 	//end of body
 }
 
-bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -198,7 +199,7 @@ void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 
 
-std::shared_ptr<Link> LinkImpl::getThisLinkPtr()
+std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
 {
 	return m_thisLinkPtr.lock();
 }
@@ -215,14 +216,14 @@ std::shared_ptr<ecore::EObject> LinkImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
-			return getType(); //322
+			return eAny(getType()); //322
 	}
-	return ExtensionalValueImpl::internalEIsSet(featureID);
+	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkImpl::internalEIsSet(int featureID) const
 {
@@ -233,14 +234,14 @@ bool LinkImpl::internalEIsSet(int featureID) const
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
-bool LinkImpl::eSet(int featureID, boost::any newValue)
+bool LinkImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
 			setType(_type); //322
 			return true;
 		}

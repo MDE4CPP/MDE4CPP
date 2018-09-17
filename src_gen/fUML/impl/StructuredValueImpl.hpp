@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredValueImpl();
-			virtual std::shared_ptr<StructuredValue> getThisStructuredValuePtr();
+			virtual std::shared_ptr<StructuredValue> getThisStructuredValuePtr() const;
 			virtual void setThisStructuredValuePtr(std::weak_ptr<StructuredValue> thisStructuredValuePtr);
 
 
@@ -44,23 +44,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) ;
 			
 			/*!
 			 */ 
-			virtual void createFeatureValues()  ;
+			virtual void createFeatureValues() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
 			
 			
@@ -99,9 +99,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StructuredValue> m_thisStructuredValuePtr;

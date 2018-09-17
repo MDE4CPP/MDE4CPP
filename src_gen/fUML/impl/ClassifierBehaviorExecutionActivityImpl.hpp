@@ -32,7 +32,7 @@ virtual public ClassifierBehaviorExecutionActivity
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
-			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr();
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
 			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
 
 
@@ -81,9 +81,9 @@ virtual public ClassifierBehaviorExecutionActivity
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ClassifierBehaviorExecutionActivity> m_thisClassifierBehaviorExecutionActivityPtr;

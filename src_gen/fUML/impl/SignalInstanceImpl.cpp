@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -138,7 +139,7 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 //*********************************
 
 
-std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr()
+std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
 {
 	return m_thisSignalInstancePtr.lock();
 }
@@ -155,14 +156,14 @@ std::shared_ptr<ecore::EObject> SignalInstanceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
-			return getType(); //451
+			return eAny(getType()); //451
 	}
-	return CompoundValueImpl::internalEIsSet(featureID);
+	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
 bool SignalInstanceImpl::internalEIsSet(int featureID) const
 {
@@ -173,14 +174,14 @@ bool SignalInstanceImpl::internalEIsSet(int featureID) const
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
-bool SignalInstanceImpl::eSet(int featureID, boost::any newValue)
+bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _type = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			std::shared_ptr<uml::Signal> _type = newValue->get<std::shared_ptr<uml::Signal>>();
 			setType(_type); //451
 			return true;
 		}

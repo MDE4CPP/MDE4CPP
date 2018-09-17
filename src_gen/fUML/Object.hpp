@@ -129,31 +129,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter) = 0;
 			
 			/*!
 			 */ 
-			virtual void destroy()  = 0;
+			virtual void destroy() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  = 0;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  = 0;
+			virtual std::shared_ptr<fUML::Value> new_() = 0;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance) = 0;
 			
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) = 0;
 			
 			/*!
 			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter) = 0;
 			
 			
 			//*********************************

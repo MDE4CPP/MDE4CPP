@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadExtentActionActivationImpl::getP
 }
 
 
-std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr()
+std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
 {
 	return m_thisReadExtentActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> ReadExtentActionActivationImpl::eContainer() con
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadExtentActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadExtentActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ReadExtentActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ReadExtentActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

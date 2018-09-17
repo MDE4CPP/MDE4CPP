@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -113,7 +114,7 @@ std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -121,7 +122,7 @@ std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -129,7 +130,7 @@ std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_
 	//end of body
 }
 
-std::string DispatchStrategyImpl::retrieveName() 
+std::string DispatchStrategyImpl::retrieveName()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -146,7 +147,7 @@ std::string DispatchStrategyImpl::retrieveName()
 //*********************************
 
 
-std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr()
+std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const
 {
 	return m_thisDispatchStrategyPtr.lock();
 }
@@ -163,12 +164,12 @@ std::shared_ptr<ecore::EObject> DispatchStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -177,7 +178,7 @@ bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-bool DispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

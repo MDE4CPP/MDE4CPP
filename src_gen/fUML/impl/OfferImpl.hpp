@@ -32,7 +32,7 @@ virtual public Offer
 		protected:
 			friend class FUMLFactoryImpl;
 			OfferImpl();
-			virtual std::shared_ptr<Offer> getThisOfferPtr();
+			virtual std::shared_ptr<Offer> getThisOfferPtr() const;
 			virtual void setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr);
 
 
@@ -46,23 +46,23 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedVales()  ;
+			virtual int countOfferedVales() ;
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  ;
+			virtual bool hasTokens() ;
 			
 			/*!
 			 */ 
-			virtual void removeOfferedValues(int count)  ;
+			virtual void removeOfferedValues(int count) ;
 			
 			/*!
 			 */ 
-			virtual void removeWithdrawnTokens()  ;
+			virtual void removeWithdrawnTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens() ;
 			
 			
 			
@@ -105,9 +105,9 @@ virtual public Offer
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Offer> m_thisOfferPtr;

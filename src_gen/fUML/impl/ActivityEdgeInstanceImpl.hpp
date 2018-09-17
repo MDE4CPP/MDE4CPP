@@ -32,7 +32,7 @@ virtual public ActivityEdgeInstance
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityEdgeInstanceImpl();
-			virtual std::shared_ptr<ActivityEdgeInstance> getThisActivityEdgeInstancePtr();
+			virtual std::shared_ptr<ActivityEdgeInstance> getThisActivityEdgeInstancePtr() const;
 			virtual void setThisActivityEdgeInstancePtr(std::weak_ptr<ActivityEdgeInstance> thisActivityEdgeInstancePtr);
 
 			//Additional constructors for the containments back reference
@@ -50,27 +50,27 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedValue()  ;
+			virtual int countOfferedValue() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual bool hasOffer()  ;
+			virtual bool hasOffer() ;
 			
 			/*!
 			 */ 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount) ;
 			
 			
 			
@@ -141,9 +141,9 @@ virtual public ActivityEdgeInstance
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ActivityEdgeInstance> m_thisActivityEdgeInstancePtr;

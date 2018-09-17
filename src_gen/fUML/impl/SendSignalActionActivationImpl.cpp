@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -167,7 +168,7 @@ std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-void SendSignalActionActivationImpl::doAction() 
+void SendSignalActionActivationImpl::doAction()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -186,7 +187,7 @@ std::shared_ptr<Union<fUML::PinActivation>> SendSignalActionActivationImpl::getP
 }
 
 
-std::shared_ptr<SendSignalActionActivation> SendSignalActionActivationImpl::getThisSendSignalActionActivationPtr()
+std::shared_ptr<SendSignalActionActivation> SendSignalActionActivationImpl::getThisSendSignalActionActivationPtr() const
 {
 	return m_thisSendSignalActionActivationPtr.lock();
 }
@@ -207,12 +208,12 @@ std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::eContainer() con
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -221,7 +222,7 @@ bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
-bool SendSignalActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

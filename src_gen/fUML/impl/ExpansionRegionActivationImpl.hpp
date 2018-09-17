@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionRegionActivationImpl();
-			virtual std::shared_ptr<ExpansionRegionActivation> getThisExpansionRegionActivationPtr();
+			virtual std::shared_ptr<ExpansionRegionActivation> getThisExpansionRegionActivationPtr() const;
 			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,19 +48,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  ;
+			virtual void doStructuredActivity() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  ;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) ;
 			
 			/*!
 			 */ 
-			virtual int numberOfValues()  ;
+			virtual int numberOfValues() ;
 			
 			/*!
 			 */ 
-			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) ;
 			
 			
 			
@@ -113,9 +113,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;

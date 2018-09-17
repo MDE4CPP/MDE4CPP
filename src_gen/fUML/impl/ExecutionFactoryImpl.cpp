@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -176,7 +177,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) 
+void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,7 +186,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  t
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) 
+void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -194,7 +195,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::O
 	//end of body
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
+void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +210,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy
 	//end of body
 }
 
-std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -222,7 +223,7 @@ std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::sh
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
+std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -270,7 +271,7 @@ std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shar
 	//end of body
 }
 
-std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -290,7 +291,7 @@ std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::st
 	//end of body
 }
 
-std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::string name) 
+std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -306,7 +307,7 @@ std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::s
 	//end of body
 }
 
-int ExecutionFactoryImpl::getStrategyIndex(std::string name) 
+int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -330,7 +331,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 	//end of body
 }
 
-std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) 
+std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -358,7 +359,7 @@ std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiate
 	//end of body
 }
 
-std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -403,7 +404,7 @@ std::shared_ptr<Bag<fUML::SemanticStrategy>> ExecutionFactoryImpl::getStrategies
 //*********************************
 
 
-std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr()
+std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr() const
 {
 	return m_thisExecutionFactoryPtr.lock();
 }
@@ -423,20 +424,20 @@ std::shared_ptr<ecore::EObject> ExecutionFactoryImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
-			return getBuiltInTypes(); //13
+			return eAny(getBuiltInTypes()); //13
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
-			return getLocus(); //10
+			return eAny(getLocus()); //10
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes(); //12
+			return eAny(getPrimitiveBehaviorPrototypes()); //12
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
-			return getStrategies(); //11
+			return eAny(getStrategies()); //11
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 {
@@ -453,14 +454,14 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ExecutionFactoryImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
 			setLocus(_locus); //10
 			return true;
 		}

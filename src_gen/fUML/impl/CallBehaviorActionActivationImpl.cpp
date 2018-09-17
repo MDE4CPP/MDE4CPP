@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution> CallBehaviorActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> CallBehaviorActionActivationImpl::getCallExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -218,7 +219,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CallBehaviorActionActivationImpl::ge
 }
 
 
-std::shared_ptr<CallBehaviorActionActivation> CallBehaviorActionActivationImpl::getThisCallBehaviorActionActivationPtr()
+std::shared_ptr<CallBehaviorActionActivation> CallBehaviorActionActivationImpl::getThisCallBehaviorActionActivationPtr() const
 {
 	return m_thisCallBehaviorActionActivationPtr.lock();
 }
@@ -239,12 +240,12 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionActivationImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return CallActionActivationImpl::internalEIsSet(featureID);
+	return CallActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool CallBehaviorActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -253,7 +254,7 @@ bool CallBehaviorActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return CallActionActivationImpl::internalEIsSet(featureID);
 }
-bool CallBehaviorActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

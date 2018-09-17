@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReadIsClassifiedObjectActionActivationImpl();
-			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> getThisReadIsClassifiedObjectActionActivationPtr();
+			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> getThisReadIsClassifiedObjectActionActivationPtr() const;
 			virtual void setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
 			
 			
 			
@@ -89,9 +89,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ReadIsClassifiedObjectActionActivation> m_thisReadIsClassifiedObjectActionActivationPtr;

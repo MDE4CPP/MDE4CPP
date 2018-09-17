@@ -114,19 +114,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  = 0;
+			virtual void doAction() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> getCallExecution()  = 0;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution() = 0;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  = 0;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution) = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void terminate() = 0;
 			
 			
 			//*********************************

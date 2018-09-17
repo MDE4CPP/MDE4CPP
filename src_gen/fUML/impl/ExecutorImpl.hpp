@@ -32,8 +32,12 @@ virtual public Executor
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutorImpl();
-			virtual std::shared_ptr<Executor> getThisExecutorPtr();
+			virtual std::shared_ptr<Executor> getThisExecutorPtr() const;
 			virtual void setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr);
+
+			//Additional constructors for the containments back reference
+			ExecutorImpl(std::weak_ptr<fUML::Locus > par_locus);
+
 
 
 
@@ -46,15 +50,15 @@ virtual public Executor
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  ;
+			virtual std::shared_ptr<fUML::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual std::shared_ptr<fUML::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			
 			
@@ -68,7 +72,7 @@ virtual public Executor
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
+			virtual std::weak_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
@@ -100,9 +104,9 @@ virtual public Executor
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Executor> m_thisExecutorPtr;

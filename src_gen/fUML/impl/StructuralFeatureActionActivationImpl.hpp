@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<StructuralFeatureActionActivation> getThisStructuralFeatureActionActivationPtr();
+			virtual std::shared_ptr<StructuralFeatureActionActivation> getThisStructuralFeatureActionActivationPtr() const;
 			virtual void setThisStructuralFeatureActionActivationPtr(std::weak_ptr<StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  ;
+			virtual std::shared_ptr<Bag<fUML::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  ;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) ;
 			
 			
 			
@@ -97,9 +97,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StructuralFeatureActionActivation> m_thisStructuralFeatureActionActivationPtr;

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -191,25 +192,25 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList() 
+std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runBody() 
+void LoopNodeActivationImpl::runBody()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runLoopVariables() 
+void LoopNodeActivationImpl::runLoopVariables()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeActivationImpl::runTest() 
+bool LoopNodeActivationImpl::runTest()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -234,7 +235,7 @@ std::shared_ptr<Union<fUML::PinActivation>> LoopNodeActivationImpl::getPinActiva
 }
 
 
-std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr()
+std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
 {
 	return m_thisLoopNodeActivationPtr.lock();
 }
@@ -255,14 +256,14 @@ std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS:
-			return getBodyOutputLists(); //7211
+			return eAny(getBodyOutputLists()); //7211
 	}
-	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -273,7 +274,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool LoopNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

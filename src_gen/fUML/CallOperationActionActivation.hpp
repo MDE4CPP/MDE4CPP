@@ -113,7 +113,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> getCallExecution()  = 0;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution() = 0;
 			
 			
 			//*********************************

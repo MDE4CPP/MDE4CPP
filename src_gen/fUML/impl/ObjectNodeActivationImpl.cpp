@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -153,7 +154,7 @@ int ObjectNodeActivationImpl::getOfferedTokenCount() const
 //*********************************
 // Operations
 //*********************************
-void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +166,7 @@ void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ObjectNodeActivationImpl::clearTokens() 
+void ObjectNodeActivationImpl::clearTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -174,7 +175,7 @@ void ObjectNodeActivationImpl::clearTokens()
 	//end of body
 }
 
-int ObjectNodeActivationImpl::countOfferedValues() 
+int ObjectNodeActivationImpl::countOfferedValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -190,7 +191,7 @@ int ObjectNodeActivationImpl::countOfferedValues()
 	//end of body
 }
 
-int ObjectNodeActivationImpl::countUnofferedTokens() 
+int ObjectNodeActivationImpl::countUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +203,7 @@ int ObjectNodeActivationImpl::countUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,7 +226,7 @@ std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens(
 	//end of body
 }
 
-int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,7 +239,7 @@ int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ObjectNodeActivationImpl::run() 
+void ObjectNodeActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -247,7 +248,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -263,7 +264,7 @@ void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  to
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendUnofferedTokens() 
+void ObjectNodeActivationImpl::sendUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -273,7 +274,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -287,7 +288,7 @@ std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens
 	//end of body
 }
 
-void ObjectNodeActivationImpl::terminate() 
+void ObjectNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -305,7 +306,7 @@ void ObjectNodeActivationImpl::terminate()
 //*********************************
 
 
-std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr()
+std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
 {
 	return m_thisObjectNodeActivationPtr.lock();
 }
@@ -326,14 +327,14 @@ std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //596
+			return eAny(getOfferedTokenCount()); //596
 	}
-	return ActivityNodeActivationImpl::internalEIsSet(featureID);
+	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -344,14 +345,14 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ObjectNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
 			// BOOST CAST
-			int _offeredTokenCount = boost::any_cast<int>(newValue);
+			int _offeredTokenCount = newValue->get<int>();
 			setOfferedTokenCount(_offeredTokenCount); //596
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -192,7 +193,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -356,7 +357,7 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
 //*********************************
 
 
-std::shared_ptr<ExecutionFactoryL2> ExecutionFactoryL2Impl::getThisExecutionFactoryL2Ptr()
+std::shared_ptr<ExecutionFactoryL2> ExecutionFactoryL2Impl::getThisExecutionFactoryL2Ptr() const
 {
 	return m_thisExecutionFactoryL2Ptr.lock();
 }
@@ -377,12 +378,12 @@ std::shared_ptr<ecore::EObject> ExecutionFactoryL2Impl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionFactoryL2Impl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionFactoryL2Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ExecutionFactoryL1Impl::internalEIsSet(featureID);
+	return ExecutionFactoryL1Impl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionFactoryL2Impl::internalEIsSet(int featureID) const
 {
@@ -391,7 +392,7 @@ bool ExecutionFactoryL2Impl::internalEIsSet(int featureID) const
 	}
 	return ExecutionFactoryL1Impl::internalEIsSet(featureID);
 }
-bool ExecutionFactoryL2Impl::eSet(int featureID, boost::any newValue)
+bool ExecutionFactoryL2Impl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

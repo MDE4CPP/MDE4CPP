@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			AcceptEventActionActivationImpl();
-			virtual std::shared_ptr<AcceptEventActionActivation> getThisAcceptEventActionActivationPtr();
+			virtual std::shared_ptr<AcceptEventActionActivation> getThisAcceptEventActionActivationPtr() const;
 			virtual void setThisAcceptEventActionActivationPtr(std::weak_ptr<AcceptEventActionActivation> thisAcceptEventActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance) ;
 			
 			
 			
@@ -108,9 +108,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<AcceptEventActionActivation> m_thisAcceptEventActionActivationPtr;

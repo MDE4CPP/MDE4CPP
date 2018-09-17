@@ -83,7 +83,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroy()  = 0;
+			virtual void destroy() = 0;
 			
 			
 			//*********************************

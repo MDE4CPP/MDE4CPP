@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -23,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include <algorithm>
 #include <uml/Parameter.hpp>
 #include <uml/ParameterDirectionKind.hpp>
 #include <fUML/ParameterValue.hpp>
@@ -169,7 +171,7 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionImpl::execute() 
+void ExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +179,7 @@ void ExecutionImpl::execute()
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() 
+std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,7 +187,7 @@ std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues() 
+std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +209,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterVal
 	//end of body
 }
 
-std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
+std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,13 +225,13 @@ std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shar
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> ExecutionImpl::new_()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
+void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -248,7 +250,7 @@ void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  par
 	//end of body
 }
 
-void ExecutionImpl::terminate() 
+void ExecutionImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -281,7 +283,7 @@ std::shared_ptr<Bag<fUML::ParameterValue>> ExecutionImpl::getParameterValues() c
 //*********************************
 
 
-std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr()
+std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr() const
 {
 	return m_thisExecutionPtr.lock();
 }
@@ -298,16 +300,16 @@ std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return getContext(); //384
+			return eAny(getContext()); //384
 		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return getParameterValues(); //385
+			return eAny(getParameterValues()); //385
 	}
-	return ObjectImpl::internalEIsSet(featureID);
+	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ExecutionImpl::internalEIsSet(int featureID) const
 {
@@ -320,14 +322,14 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }
-bool ExecutionImpl::eSet(int featureID, boost::any newValue)
+bool ExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			std::shared_ptr<fUML::Object> _context = newValue->get<std::shared_ptr<fUML::Object>>();
 			setContext(_context); //384
 			return true;
 		}

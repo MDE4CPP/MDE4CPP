@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -173,7 +174,7 @@ std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
+std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,7 +241,7 @@ std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBeh
 	//end of body
 }
 
-void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -279,7 +280,7 @@ void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomi
 	//end of body
 }
 
-std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
+std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecisionInputFlowInstance()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,7 +305,7 @@ std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecis
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowValue() 
+std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowValue()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -324,7 +325,7 @@ std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowVal
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -359,7 +360,7 @@ std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues
 	//end of body
 }
 
-bool DecisionNodeActivationImpl::hasObjectFlowInput() 
+bool DecisionNodeActivationImpl::hasObjectFlowInput()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -377,7 +378,7 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 	//end of body
 }
 
-bool DecisionNodeActivationImpl::isReady() 
+bool DecisionNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -393,7 +394,7 @@ bool DecisionNodeActivationImpl::isReady()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -419,7 +420,7 @@ std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedContr
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -444,7 +445,7 @@ std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens
 	//end of body
 }
 
-void DecisionNodeActivationImpl::terminate() 
+void DecisionNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -456,7 +457,7 @@ void DecisionNodeActivationImpl::terminate()
 	//end of body
 }
 
-bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) 
+bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -488,7 +489,7 @@ void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML:
 //*********************************
 
 
-std::shared_ptr<DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr()
+std::shared_ptr<DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr() const
 {
 	return m_thisDecisionNodeActivationPtr.lock();
 }
@@ -509,14 +510,14 @@ std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
-			return getDecisionInputExecution(); //666
+			return eAny(getDecisionInputExecution()); //666
 	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -527,14 +528,14 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-bool DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _decisionInputExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
+			std::shared_ptr<fUML::Execution> _decisionInputExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
 			setDecisionInputExecution(_decisionInputExecution); //666
 			return true;
 		}

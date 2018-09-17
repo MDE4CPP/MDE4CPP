@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExtensionalValueListImpl();
-			virtual std::shared_ptr<ExtensionalValueList> getThisExtensionalValueListPtr();
+			virtual std::shared_ptr<ExtensionalValueList> getThisExtensionalValueListPtr() const;
 			virtual void setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr);
 
 
@@ -44,23 +44,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool addValue(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual bool addValue(std::shared_ptr<fUML::ExtensionalValue>  value) ;
 			
 			/*!
 			 */ 
-			virtual void addValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
+			virtual void addValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExtensionalValue> getValue()  ;
+			virtual std::shared_ptr<fUML::ExtensionalValue> getValue() ;
 			
 			/*!
 			 */ 
-			virtual std::string removeValue(int i)  ;
+			virtual std::string removeValue(int i) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
+			virtual std::shared_ptr<fUML::Value> setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i) ;
 			
 			
 			
@@ -99,9 +99,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExtensionalValueList> m_thisExtensionalValueListPtr;

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			WriteLinkActionActivationImpl();
-			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr();
+			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr() const;
 			virtual void setThisWriteLinkActionActivationPtr(std::weak_ptr<WriteLinkActionActivation> thisWriteLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -85,9 +85,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<WriteLinkActionActivation> m_thisWriteLinkActionActivationPtr;

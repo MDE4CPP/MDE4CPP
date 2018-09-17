@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -111,7 +112,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 //*********************************
 
 
-std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr()
+std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const
 {
 	return m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr.lock();
 }
@@ -127,12 +128,12 @@ std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivity_OwnedBehavio
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eGet(int featureID, bool resolve, bool coreType) const
+Any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::internalEIsSet(int featureID) const
 {
@@ -141,7 +142,7 @@ bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::internalEIs
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int featureID, boost::any newValue)
+bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

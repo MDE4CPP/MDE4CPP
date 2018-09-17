@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -140,7 +141,7 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeActivationImpl::isReady() 
+bool JoinNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -164,7 +165,7 @@ bool JoinNodeActivationImpl::isReady()
 //*********************************
 
 
-std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr()
+std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
 {
 	return m_thisJoinNodeActivationPtr.lock();
 }
@@ -185,12 +186,12 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any JoinNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any JoinNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool JoinNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -199,7 +200,7 @@ bool JoinNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
-bool JoinNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

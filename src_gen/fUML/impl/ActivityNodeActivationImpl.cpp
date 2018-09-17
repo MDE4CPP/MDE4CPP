@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -191,7 +192,7 @@ bool ActivityNodeActivationImpl::isRunning() const
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
+void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -203,7 +204,7 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityE
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
+void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +216,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityE
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -250,7 +251,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -261,7 +262,7 @@ void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Token> >  t
 	//end of body
 }
 
-void ActivityNodeActivationImpl::clearTokens() 
+void ActivityNodeActivationImpl::clearTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -271,7 +272,7 @@ void ActivityNodeActivationImpl::clearTokens()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::createEdgeInstances() 
+void ActivityNodeActivationImpl::createEdgeInstances()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -279,7 +280,7 @@ void ActivityNodeActivationImpl::createEdgeInstances()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::createNodeActivations() 
+void ActivityNodeActivationImpl::createNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -287,13 +288,13 @@ void ActivityNodeActivationImpl::createNodeActivations()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivityExecution() 
+std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivityExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -313,7 +314,7 @@ std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivity
 	//end of body
 }
 
-std::shared_ptr<fUML::Object> ActivityNodeActivationImpl::getExecutionContext() 
+std::shared_ptr<fUML::Object> ActivityNodeActivationImpl::getExecutionContext()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -321,7 +322,7 @@ std::shared_ptr<fUML::Object> ActivityNodeActivationImpl::getExecutionContext()
 	//end of body
 }
 
-std::shared_ptr<fUML::Locus> ActivityNodeActivationImpl::getExecutionLocus() 
+std::shared_ptr<fUML::Locus> ActivityNodeActivationImpl::getExecutionLocus()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -329,7 +330,7 @@ std::shared_ptr<fUML::Locus> ActivityNodeActivationImpl::getExecutionLocus()
 	//end of body
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
+std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -344,7 +345,7 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNod
 	//end of body
 }
 
-bool ActivityNodeActivationImpl::getRunning() 
+bool ActivityNodeActivationImpl::getRunning()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -352,7 +353,7 @@ bool ActivityNodeActivationImpl::getRunning()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::getTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::getTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -368,7 +369,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::getTokens()
 	//end of body
 }
 
-bool ActivityNodeActivationImpl::isReady() 
+bool ActivityNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -376,7 +377,7 @@ bool ActivityNodeActivationImpl::isReady()
 	//end of body
 }
 
-bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances) 
+bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -384,7 +385,7 @@ bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeI
 	//end of body
 }
 
-void ActivityNodeActivationImpl::recieveOffer() 
+void ActivityNodeActivationImpl::recieveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -416,7 +417,7 @@ void ActivityNodeActivationImpl::recieveOffer()
 	//end of body
 }
 
-int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -461,7 +462,7 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-void ActivityNodeActivationImpl::resume() 
+void ActivityNodeActivationImpl::resume()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -478,7 +479,7 @@ void ActivityNodeActivationImpl::resume()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::run() 
+void ActivityNodeActivationImpl::run()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -492,7 +493,7 @@ void ActivityNodeActivationImpl::run()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -526,7 +527,7 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  
 	//end of body
 }
 
-void ActivityNodeActivationImpl::suspend() 
+void ActivityNodeActivationImpl::suspend()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -542,7 +543,7 @@ void ActivityNodeActivationImpl::suspend()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -557,7 +558,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeOfferedTokens
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens() 
+std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -568,7 +569,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::terminate() 
+void ActivityNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -633,7 +634,7 @@ std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> ActivityNodeActivationImpl::get
 //*********************************
 
 
-std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr()
+std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
 {
 	return m_thisActivityNodeActivationPtr.lock();
 }
@@ -654,24 +655,24 @@ std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup(); //583
+			return eAny(getGroup()); //583
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens(); //582
+			return eAny(getHeldTokens()); //582
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges(); //581
+			return eAny(getIncomingEdges()); //581
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode(); //584
+			return eAny(getNode()); //584
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges(); //580
+			return eAny(getOutgoingEdges()); //580
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning(); //585
+			return eAny(isRunning()); //585
 	}
-	return SemanticVisitorImpl::internalEIsSet(featureID);
+	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -692,28 +693,28 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
-bool ActivityNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setGroup(_group); //583
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			std::shared_ptr<uml::ActivityNode> _node = newValue->get<std::shared_ptr<uml::ActivityNode>>();
 			setNode(_node); //584
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
-			bool _running = boost::any_cast<bool>(newValue);
+			bool _running = newValue->get<bool>();
 			setRunning(_running); //585
 			return true;
 		}

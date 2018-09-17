@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -173,19 +174,19 @@ std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) 
+bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation() 
+std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) 
+bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -204,7 +205,7 @@ std::shared_ptr<Union<fUML::PinActivation>> LinkActionActivationImpl::getPinActi
 }
 
 
-std::shared_ptr<LinkActionActivation> LinkActionActivationImpl::getThisLinkActionActivationPtr()
+std::shared_ptr<LinkActionActivation> LinkActionActivationImpl::getThisLinkActionActivationPtr() const
 {
 	return m_thisLinkActionActivationPtr.lock();
 }
@@ -225,12 +226,12 @@ std::shared_ptr<ecore::EObject> LinkActionActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool LinkActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -239,7 +240,7 @@ bool LinkActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool LinkActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

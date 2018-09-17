@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -169,7 +170,7 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
+bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -188,7 +189,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ReadIsClassifiedObjectActionActivati
 }
 
 
-std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr()
+std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionActivationPtr.lock();
 }
@@ -209,12 +210,12 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionActivationImpl::eCon
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ReadIsClassifiedObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -223,7 +224,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) c
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

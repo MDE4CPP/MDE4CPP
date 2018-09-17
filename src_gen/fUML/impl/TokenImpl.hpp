@@ -32,7 +32,7 @@ virtual public Token
 		protected:
 			friend class FUMLFactoryImpl;
 			TokenImpl();
-			virtual std::shared_ptr<Token> getThisTokenPtr();
+			virtual std::shared_ptr<Token> getThisTokenPtr() const;
 			virtual void setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr);
 
 
@@ -46,23 +46,23 @@ virtual public Token
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value> getValue() const ;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  ;
+			virtual bool isControl() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
+			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) ;
 			
 			/*!
 			 */ 
-			virtual void withdraw()  ;
+			virtual void withdraw() ;
 			
 			
 			
@@ -116,9 +116,9 @@ virtual public Token
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Token> m_thisTokenPtr;

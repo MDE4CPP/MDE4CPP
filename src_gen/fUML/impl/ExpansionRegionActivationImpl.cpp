@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -203,25 +204,25 @@ std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-void ExpansionRegionActivationImpl::doStructuredActivity() 
+void ExpansionRegionActivationImpl::doStructuredActivity()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) 
+std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int ExpansionRegionActivationImpl::numberOfValues() 
+int ExpansionRegionActivationImpl::numberOfValues()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) 
+void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -260,7 +261,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ExpansionRegionActivationImpl::getPi
 }
 
 
-std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr()
+std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
 {
 	return m_thisExpansionRegionActivationPtr.lock();
 }
@@ -281,18 +282,18 @@ std::shared_ptr<ecore::EObject> ExpansionRegionActivationImpl::eContainer() cons
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS:
-			return getActivationGroups(); //7612
+			return eAny(getActivationGroups()); //7612
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS:
-			return getInputExpansionTokens(); //7611
+			return eAny(getInputExpansionTokens()); //7611
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS:
-			return getInputTokens(); //7610
+			return eAny(getInputTokens()); //7610
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -307,7 +308,7 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ExpansionRegionActivationImpl::eSet(int featureID, boost::any newValue)
+bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

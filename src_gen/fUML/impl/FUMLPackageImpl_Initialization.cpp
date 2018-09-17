@@ -251,7 +251,6 @@ void FUMLPackageImpl::initializePackageContents()
 
 void FUMLPackageImpl::initializeAcceptEventActionActivationContent()
 {
-	m_acceptEventActionActivation_EClass->setInstanceClass(nullptr);
 	m_acceptEventActionActivation_EClass->setName("AcceptEventActionActivation");
 	m_acceptEventActionActivation_EClass->setAbstract(false);
 	m_acceptEventActionActivation_EClass->setInterface(false);
@@ -342,7 +341,6 @@ void FUMLPackageImpl::initializeAcceptEventActionActivationContent()
 
 void FUMLPackageImpl::initializeAcceptEventActionEventAccepterContent()
 {
-	m_acceptEventActionEventAccepter_EClass->setInstanceClass(nullptr);
 	m_acceptEventActionEventAccepter_EClass->setName("AcceptEventActionEventAccepter");
 	m_acceptEventActionEventAccepter_EClass->setAbstract(false);
 	m_acceptEventActionEventAccepter_EClass->setInterface(false);
@@ -379,7 +377,6 @@ void FUMLPackageImpl::initializeAcceptEventActionEventAccepterContent()
 
 void FUMLPackageImpl::initializeActionActivationContent()
 {
-	m_actionActivation_EClass->setInstanceClass(nullptr);
 	m_actionActivation_EClass->setName("ActionActivation");
 	m_actionActivation_EClass->setAbstract(true);
 	m_actionActivation_EClass->setInterface(false);
@@ -775,7 +772,6 @@ void FUMLPackageImpl::initializeActionActivationContent()
 
 void FUMLPackageImpl::initializeActivityEdgeInstanceContent()
 {
-	m_activityEdgeInstance_EClass->setInstanceClass(nullptr);
 	m_activityEdgeInstance_EClass->setName("ActivityEdgeInstance");
 	m_activityEdgeInstance_EClass->setAbstract(false);
 	m_activityEdgeInstance_EClass->setInterface(false);
@@ -978,7 +974,6 @@ void FUMLPackageImpl::initializeActivityEdgeInstanceContent()
 
 void FUMLPackageImpl::initializeActivityExecutionContent()
 {
-	m_activityExecution_EClass->setInstanceClass(nullptr);
 	m_activityExecution_EClass->setName("ActivityExecution");
 	m_activityExecution_EClass->setAbstract(false);
 	m_activityExecution_EClass->setInterface(false);
@@ -1039,7 +1034,6 @@ void FUMLPackageImpl::initializeActivityExecutionContent()
 
 void FUMLPackageImpl::initializeActivityFinalNodeActivationContent()
 {
-	m_activityFinalNodeActivation_EClass->setInstanceClass(nullptr);
 	m_activityFinalNodeActivation_EClass->setName("ActivityFinalNodeActivation");
 	m_activityFinalNodeActivation_EClass->setAbstract(false);
 	m_activityFinalNodeActivation_EClass->setInterface(false);
@@ -1068,7 +1062,6 @@ void FUMLPackageImpl::initializeActivityFinalNodeActivationContent()
 
 void FUMLPackageImpl::initializeActivityNodeActivationContent()
 {
-	m_activityNodeActivation_EClass->setInstanceClass(nullptr);
 	m_activityNodeActivation_EClass->setName("ActivityNodeActivation");
 	m_activityNodeActivation_EClass->setAbstract(true);
 	m_activityNodeActivation_EClass->setInterface(false);
@@ -1506,7 +1499,6 @@ void FUMLPackageImpl::initializeActivityNodeActivationContent()
 
 void FUMLPackageImpl::initializeActivityNodeActivationGroupContent()
 {
-	m_activityNodeActivationGroup_EClass->setInstanceClass(nullptr);
 	m_activityNodeActivationGroup_EClass->setName("ActivityNodeActivationGroup");
 	m_activityNodeActivationGroup_EClass->setAbstract(false);
 	m_activityNodeActivationGroup_EClass->setInterface(false);
@@ -1916,7 +1908,6 @@ void FUMLPackageImpl::initializeActivityNodeActivationGroupContent()
 
 void FUMLPackageImpl::initializeActivityParameterNodeActivationContent()
 {
-	m_activityParameterNodeActivation_EClass->setInstanceClass(nullptr);
 	m_activityParameterNodeActivation_EClass->setName("ActivityParameterNodeActivation");
 	m_activityParameterNodeActivation_EClass->setAbstract(false);
 	m_activityParameterNodeActivation_EClass->setInterface(false);
@@ -1953,7 +1944,6 @@ void FUMLPackageImpl::initializeActivityParameterNodeActivationContent()
 
 void FUMLPackageImpl::initializeAddStructuralFeatureValueActionActivationContent()
 {
-	m_addStructuralFeatureValueActionActivation_EClass->setInstanceClass(nullptr);
 	m_addStructuralFeatureValueActionActivation_EClass->setName("AddStructuralFeatureValueActionActivation");
 	m_addStructuralFeatureValueActionActivation_EClass->setAbstract(false);
 	m_addStructuralFeatureValueActionActivation_EClass->setInterface(false);
@@ -1965,7 +1955,6 @@ void FUMLPackageImpl::initializeAddStructuralFeatureValueActionActivationContent
 
 void FUMLPackageImpl::initializeBooleanValueContent()
 {
-	m_booleanValue_EClass->setInstanceClass(nullptr);
 	m_booleanValue_EClass->setName("BooleanValue");
 	m_booleanValue_EClass->setAbstract(false);
 	m_booleanValue_EClass->setInterface(false);
@@ -2030,7 +2019,6 @@ void FUMLPackageImpl::initializeBooleanValueContent()
 
 void FUMLPackageImpl::initializeCallActionActivationContent()
 {
-	m_callActionActivation_EClass->setInstanceClass(nullptr);
 	m_callActionActivation_EClass->setName("CallActionActivation");
 	m_callActionActivation_EClass->setAbstract(true);
 	m_callActionActivation_EClass->setInterface(false);
@@ -2108,7 +2096,6 @@ void FUMLPackageImpl::initializeCallActionActivationContent()
 
 void FUMLPackageImpl::initializeCallBehaviorActionActivationContent()
 {
-	m_callBehaviorActionActivation_EClass->setInstanceClass(nullptr);
 	m_callBehaviorActionActivation_EClass->setName("CallBehaviorActionActivation");
 	m_callBehaviorActionActivation_EClass->setAbstract(false);
 	m_callBehaviorActionActivation_EClass->setInterface(false);
@@ -2128,7 +2115,6 @@ void FUMLPackageImpl::initializeCallBehaviorActionActivationContent()
 
 void FUMLPackageImpl::initializeCallOperationActionActivationContent()
 {
-	m_callOperationActionActivation_EClass->setInstanceClass(nullptr);
 	m_callOperationActionActivation_EClass->setName("CallOperationActionActivation");
 	m_callOperationActionActivation_EClass->setAbstract(false);
 	m_callOperationActionActivation_EClass->setInterface(false);
@@ -2148,7 +2134,6 @@ void FUMLPackageImpl::initializeCallOperationActionActivationContent()
 
 void FUMLPackageImpl::initializeCentralBufferNodeActivationContent()
 {
-	m_centralBufferNodeActivation_EClass->setInstanceClass(nullptr);
 	m_centralBufferNodeActivation_EClass->setName("CentralBufferNodeActivation");
 	m_centralBufferNodeActivation_EClass->setAbstract(false);
 	m_centralBufferNodeActivation_EClass->setInterface(false);
@@ -2177,7 +2162,6 @@ void FUMLPackageImpl::initializeCentralBufferNodeActivationContent()
 
 void FUMLPackageImpl::initializeChoiceStrategyContent()
 {
-	m_choiceStrategy_EClass->setInstanceClass(nullptr);
 	m_choiceStrategy_EClass->setName("ChoiceStrategy");
 	m_choiceStrategy_EClass->setAbstract(true);
 	m_choiceStrategy_EClass->setInterface(false);
@@ -2214,7 +2198,6 @@ void FUMLPackageImpl::initializeChoiceStrategyContent()
 
 void FUMLPackageImpl::initializeClassifierBehaviorExecutionContent()
 {
-	m_classifierBehaviorExecution_EClass->setInstanceClass(nullptr);
 	m_classifierBehaviorExecution_EClass->setName("ClassifierBehaviorExecution");
 	m_classifierBehaviorExecution_EClass->setAbstract(false);
 	m_classifierBehaviorExecution_EClass->setInterface(false);
@@ -2344,7 +2327,6 @@ void FUMLPackageImpl::initializeClassifierBehaviorExecutionContent()
 
 void FUMLPackageImpl::initializeClassifierBehaviorExecutionActivityContent()
 {
-	m_classifierBehaviorExecutionActivity_EClass->setInstanceClass(nullptr);
 	m_classifierBehaviorExecutionActivity_EClass->setName("ClassifierBehaviorExecutionActivity");
 	m_classifierBehaviorExecutionActivity_EClass->setAbstract(false);
 	m_classifierBehaviorExecutionActivity_EClass->setInterface(false);
@@ -2356,7 +2338,6 @@ void FUMLPackageImpl::initializeClassifierBehaviorExecutionActivityContent()
 
 void FUMLPackageImpl::initializeClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content()
 {
-	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass->setInstanceClass(nullptr);
 	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass->setName("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1");
 	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass->setAbstract(false);
 	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass->setInterface(false);
@@ -2368,7 +2349,6 @@ void FUMLPackageImpl::initializeClassifierBehaviorExecutionActivity_OwnedBehavio
 
 void FUMLPackageImpl::initializeClauseActivationContent()
 {
-	m_clauseActivation_EClass->setInstanceClass(nullptr);
 	m_clauseActivation_EClass->setName("ClauseActivation");
 	m_clauseActivation_EClass->setAbstract(false);
 	m_clauseActivation_EClass->setInterface(false);
@@ -2486,7 +2466,6 @@ void FUMLPackageImpl::initializeClauseActivationContent()
 
 void FUMLPackageImpl::initializeClearAssociationActionActivationContent()
 {
-	m_clearAssociationActionActivation_EClass->setInstanceClass(nullptr);
 	m_clearAssociationActionActivation_EClass->setName("ClearAssociationActionActivation");
 	m_clearAssociationActionActivation_EClass->setAbstract(false);
 	m_clearAssociationActionActivation_EClass->setInterface(false);
@@ -2498,7 +2477,6 @@ void FUMLPackageImpl::initializeClearAssociationActionActivationContent()
 
 void FUMLPackageImpl::initializeClearStructuralFeatureActionActivationContent()
 {
-	m_clearStructuralFeatureActionActivation_EClass->setInstanceClass(nullptr);
 	m_clearStructuralFeatureActionActivation_EClass->setName("ClearStructuralFeatureActionActivation");
 	m_clearStructuralFeatureActionActivation_EClass->setAbstract(false);
 	m_clearStructuralFeatureActionActivation_EClass->setInterface(false);
@@ -2510,7 +2488,6 @@ void FUMLPackageImpl::initializeClearStructuralFeatureActionActivationContent()
 
 void FUMLPackageImpl::initializeCompoundValueContent()
 {
-	m_compoundValue_EClass->setInstanceClass(nullptr);
 	m_compoundValue_EClass->setName("CompoundValue");
 	m_compoundValue_EClass->setAbstract(true);
 	m_compoundValue_EClass->setInterface(false);
@@ -2651,7 +2628,6 @@ void FUMLPackageImpl::initializeCompoundValueContent()
 
 void FUMLPackageImpl::initializeConditionalNodeActivationContent()
 {
-	m_conditionalNodeActivation_EClass->setInstanceClass(nullptr);
 	m_conditionalNodeActivation_EClass->setName("ConditionalNodeActivation");
 	m_conditionalNodeActivation_EClass->setAbstract(false);
 	m_conditionalNodeActivation_EClass->setInterface(false);
@@ -2764,7 +2740,6 @@ void FUMLPackageImpl::initializeConditionalNodeActivationContent()
 
 void FUMLPackageImpl::initializeControlNodeActivationContent()
 {
-	m_controlNodeActivation_EClass->setInstanceClass(nullptr);
 	m_controlNodeActivation_EClass->setName("ControlNodeActivation");
 	m_controlNodeActivation_EClass->setAbstract(true);
 	m_controlNodeActivation_EClass->setInterface(false);
@@ -2793,7 +2768,6 @@ void FUMLPackageImpl::initializeControlNodeActivationContent()
 
 void FUMLPackageImpl::initializeControlTokenContent()
 {
-	m_controlToken_EClass->setInstanceClass(nullptr);
 	m_controlToken_EClass->setName("ControlToken");
 	m_controlToken_EClass->setAbstract(false);
 	m_controlToken_EClass->setInterface(false);
@@ -2838,7 +2812,6 @@ void FUMLPackageImpl::initializeControlTokenContent()
 
 void FUMLPackageImpl::initializeCreateLinkActionActivationContent()
 {
-	m_createLinkActionActivation_EClass->setInstanceClass(nullptr);
 	m_createLinkActionActivation_EClass->setName("CreateLinkActionActivation");
 	m_createLinkActionActivation_EClass->setAbstract(false);
 	m_createLinkActionActivation_EClass->setInterface(false);
@@ -2850,7 +2823,6 @@ void FUMLPackageImpl::initializeCreateLinkActionActivationContent()
 
 void FUMLPackageImpl::initializeCreateObjectActionActivationContent()
 {
-	m_createObjectActionActivation_EClass->setInstanceClass(nullptr);
 	m_createObjectActionActivation_EClass->setName("CreateObjectActionActivation");
 	m_createObjectActionActivation_EClass->setAbstract(false);
 	m_createObjectActionActivation_EClass->setInterface(false);
@@ -2862,7 +2834,6 @@ void FUMLPackageImpl::initializeCreateObjectActionActivationContent()
 
 void FUMLPackageImpl::initializeDataStoreNodeActivationContent()
 {
-	m_dataStoreNodeActivation_EClass->setInstanceClass(nullptr);
 	m_dataStoreNodeActivation_EClass->setName("DataStoreNodeActivation");
 	m_dataStoreNodeActivation_EClass->setAbstract(false);
 	m_dataStoreNodeActivation_EClass->setInterface(false);
@@ -2908,7 +2879,6 @@ void FUMLPackageImpl::initializeDataStoreNodeActivationContent()
 
 void FUMLPackageImpl::initializeDataValueContent()
 {
-	m_dataValue_EClass->setInstanceClass(nullptr);
 	m_dataValue_EClass->setName("DataValue");
 	m_dataValue_EClass->setAbstract(false);
 	m_dataValue_EClass->setInterface(false);
@@ -2961,7 +2931,6 @@ void FUMLPackageImpl::initializeDataValueContent()
 
 void FUMLPackageImpl::initializeDecisionNodeActivationContent()
 {
-	m_decisionNodeActivation_EClass->setInstanceClass(nullptr);
 	m_decisionNodeActivation_EClass->setName("DecisionNodeActivation");
 	m_decisionNodeActivation_EClass->setAbstract(false);
 	m_decisionNodeActivation_EClass->setInterface(false);
@@ -3151,7 +3120,6 @@ void FUMLPackageImpl::initializeDecisionNodeActivationContent()
 
 void FUMLPackageImpl::initializeDestroyLinkActionActivationContent()
 {
-	m_destroyLinkActionActivation_EClass->setInstanceClass(nullptr);
 	m_destroyLinkActionActivation_EClass->setName("DestroyLinkActionActivation");
 	m_destroyLinkActionActivation_EClass->setAbstract(false);
 	m_destroyLinkActionActivation_EClass->setInterface(false);
@@ -3163,7 +3131,6 @@ void FUMLPackageImpl::initializeDestroyLinkActionActivationContent()
 
 void FUMLPackageImpl::initializeDestroyObjectActionActivationContent()
 {
-	m_destroyObjectActionActivation_EClass->setInstanceClass(nullptr);
 	m_destroyObjectActionActivation_EClass->setName("DestroyObjectActionActivation");
 	m_destroyObjectActionActivation_EClass->setAbstract(false);
 	m_destroyObjectActionActivation_EClass->setInterface(false);
@@ -3239,7 +3206,6 @@ void FUMLPackageImpl::initializeDestroyObjectActionActivationContent()
 
 void FUMLPackageImpl::initializeDispatchStrategyContent()
 {
-	m_dispatchStrategy_EClass->setInstanceClass(nullptr);
 	m_dispatchStrategy_EClass->setName("DispatchStrategy");
 	m_dispatchStrategy_EClass->setAbstract(false);
 	m_dispatchStrategy_EClass->setInterface(false);
@@ -3313,7 +3279,6 @@ void FUMLPackageImpl::initializeDispatchStrategyContent()
 
 void FUMLPackageImpl::initializeEnumerationValueContent()
 {
-	m_enumerationValue_EClass->setInstanceClass(nullptr);
 	m_enumerationValue_EClass->setName("EnumerationValue");
 	m_enumerationValue_EClass->setAbstract(false);
 	m_enumerationValue_EClass->setInterface(false);
@@ -3424,7 +3389,6 @@ void FUMLPackageImpl::initializeEnumerationValueContent()
 
 void FUMLPackageImpl::initializeEvaluationContent()
 {
-	m_evaluation_EClass->setInstanceClass(nullptr);
 	m_evaluation_EClass->setName("Evaluation");
 	m_evaluation_EClass->setAbstract(true);
 	m_evaluation_EClass->setInterface(false);
@@ -3494,7 +3458,6 @@ void FUMLPackageImpl::initializeEvaluationContent()
 
 void FUMLPackageImpl::initializeEventAccepterContent()
 {
-	m_eventAccepter_EClass->setInstanceClass(nullptr);
 	m_eventAccepter_EClass->setName("EventAccepter");
 	m_eventAccepter_EClass->setAbstract(true);
 	m_eventAccepter_EClass->setInterface(false);
@@ -3540,7 +3503,6 @@ void FUMLPackageImpl::initializeEventAccepterContent()
 
 void FUMLPackageImpl::initializeEventDispatchLoopContent()
 {
-	m_eventDispatchLoop_EClass->setInstanceClass(nullptr);
 	m_eventDispatchLoop_EClass->setName("EventDispatchLoop");
 	m_eventDispatchLoop_EClass->setAbstract(false);
 	m_eventDispatchLoop_EClass->setInterface(false);
@@ -3552,7 +3514,6 @@ void FUMLPackageImpl::initializeEventDispatchLoopContent()
 
 void FUMLPackageImpl::initializeExecutionContent()
 {
-	m_execution_EClass->setInstanceClass(nullptr);
 	m_execution_EClass->setName("Execution");
 	m_execution_EClass->setAbstract(true);
 	m_execution_EClass->setInterface(false);
@@ -3688,7 +3649,6 @@ void FUMLPackageImpl::initializeExecutionContent()
 
 void FUMLPackageImpl::initializeExecutionFactoryContent()
 {
-	m_executionFactory_EClass->setInstanceClass(nullptr);
 	m_executionFactory_EClass->setName("ExecutionFactory");
 	m_executionFactory_EClass->setAbstract(true);
 	m_executionFactory_EClass->setInterface(false);
@@ -3980,7 +3940,6 @@ void FUMLPackageImpl::initializeExecutionFactoryContent()
 
 void FUMLPackageImpl::initializeExecutionFactoryL1Content()
 {
-	m_executionFactoryL1_EClass->setInstanceClass(nullptr);
 	m_executionFactoryL1_EClass->setName("ExecutionFactoryL1");
 	m_executionFactoryL1_EClass->setAbstract(false);
 	m_executionFactoryL1_EClass->setInterface(false);
@@ -4009,7 +3968,6 @@ void FUMLPackageImpl::initializeExecutionFactoryL1Content()
 
 void FUMLPackageImpl::initializeExecutionFactoryL2Content()
 {
-	m_executionFactoryL2_EClass->setInstanceClass(nullptr);
 	m_executionFactoryL2_EClass->setName("ExecutionFactoryL2");
 	m_executionFactoryL2_EClass->setAbstract(false);
 	m_executionFactoryL2_EClass->setInterface(false);
@@ -4038,7 +3996,6 @@ void FUMLPackageImpl::initializeExecutionFactoryL2Content()
 
 void FUMLPackageImpl::initializeExecutionFactoryL3Content()
 {
-	m_executionFactoryL3_EClass->setInstanceClass(nullptr);
 	m_executionFactoryL3_EClass->setName("ExecutionFactoryL3");
 	m_executionFactoryL3_EClass->setAbstract(false);
 	m_executionFactoryL3_EClass->setInterface(false);
@@ -4067,7 +4024,6 @@ void FUMLPackageImpl::initializeExecutionFactoryL3Content()
 
 void FUMLPackageImpl::initializeExecutorContent()
 {
-	m_executor_EClass->setInstanceClass(nullptr);
 	m_executor_EClass->setName("Executor");
 	m_executor_EClass->setAbstract(false);
 	m_executor_EClass->setInterface(false);
@@ -4092,7 +4048,7 @@ void FUMLPackageImpl::initializeExecutorContent()
 		{
 			m_executor_EReference_locus->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getLocus_EReference_executor();
 		if (otherEnd != nullptr)
 	    {
 	   		m_executor_EReference_locus->setEOpposite(otherEnd);
@@ -4185,7 +4141,6 @@ void FUMLPackageImpl::initializeExecutorContent()
 
 void FUMLPackageImpl::initializeExpansionActivationGroupContent()
 {
-	m_expansionActivationGroup_EClass->setInstanceClass(nullptr);
 	m_expansionActivationGroup_EClass->setName("ExpansionActivationGroup");
 	m_expansionActivationGroup_EClass->setAbstract(false);
 	m_expansionActivationGroup_EClass->setInterface(false);
@@ -4222,7 +4177,6 @@ void FUMLPackageImpl::initializeExpansionActivationGroupContent()
 
 void FUMLPackageImpl::initializeExpansionNodeActivationContent()
 {
-	m_expansionNodeActivation_EClass->setInstanceClass(nullptr);
 	m_expansionNodeActivation_EClass->setName("ExpansionNodeActivation");
 	m_expansionNodeActivation_EClass->setAbstract(false);
 	m_expansionNodeActivation_EClass->setInterface(false);
@@ -4242,7 +4196,6 @@ void FUMLPackageImpl::initializeExpansionNodeActivationContent()
 
 void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 {
-	m_expansionRegionActivation_EClass->setInstanceClass(nullptr);
 	m_expansionRegionActivation_EClass->setName("ExpansionRegionActivation");
 	m_expansionRegionActivation_EClass->setAbstract(false);
 	m_expansionRegionActivation_EClass->setInterface(false);
@@ -4379,7 +4332,6 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 
 void FUMLPackageImpl::initializeExtensionalValueContent()
 {
-	m_extensionalValue_EClass->setInstanceClass(nullptr);
 	m_extensionalValue_EClass->setName("ExtensionalValue");
 	m_extensionalValue_EClass->setAbstract(true);
 	m_extensionalValue_EClass->setInterface(false);
@@ -4424,7 +4376,6 @@ void FUMLPackageImpl::initializeExtensionalValueContent()
 
 void FUMLPackageImpl::initializeExtensionalValueListContent()
 {
-	m_extensionalValueList_EClass->setInstanceClass(nullptr);
 	m_extensionalValueList_EClass->setName("ExtensionalValueList");
 	m_extensionalValueList_EClass->setAbstract(false);
 	m_extensionalValueList_EClass->setInterface(false);
@@ -4532,7 +4483,6 @@ void FUMLPackageImpl::initializeExtensionalValueListContent()
 
 void FUMLPackageImpl::initializeFIFOGetNextEventStrategyContent()
 {
-	m_fIFOGetNextEventStrategy_EClass->setInstanceClass(nullptr);
 	m_fIFOGetNextEventStrategy_EClass->setName("FIFOGetNextEventStrategy");
 	m_fIFOGetNextEventStrategy_EClass->setAbstract(false);
 	m_fIFOGetNextEventStrategy_EClass->setInterface(false);
@@ -4544,7 +4494,6 @@ void FUMLPackageImpl::initializeFIFOGetNextEventStrategyContent()
 
 void FUMLPackageImpl::initializeFeatureValueContent()
 {
-	m_featureValue_EClass->setInstanceClass(nullptr);
 	m_featureValue_EClass->setName("FeatureValue");
 	m_featureValue_EClass->setAbstract(false);
 	m_featureValue_EClass->setInterface(false);
@@ -4643,7 +4592,6 @@ void FUMLPackageImpl::initializeFeatureValueContent()
 
 void FUMLPackageImpl::initializeFirstChoiceStrategyContent()
 {
-	m_firstChoiceStrategy_EClass->setInstanceClass(nullptr);
 	m_firstChoiceStrategy_EClass->setName("FirstChoiceStrategy");
 	m_firstChoiceStrategy_EClass->setAbstract(false);
 	m_firstChoiceStrategy_EClass->setInterface(false);
@@ -4672,7 +4620,6 @@ void FUMLPackageImpl::initializeFirstChoiceStrategyContent()
 
 void FUMLPackageImpl::initializeFlowFinalNodeActivationContent()
 {
-	m_flowFinalNodeActivation_EClass->setInstanceClass(nullptr);
 	m_flowFinalNodeActivation_EClass->setName("FlowFinalNodeActivation");
 	m_flowFinalNodeActivation_EClass->setAbstract(false);
 	m_flowFinalNodeActivation_EClass->setInterface(false);
@@ -4684,7 +4631,6 @@ void FUMLPackageImpl::initializeFlowFinalNodeActivationContent()
 
 void FUMLPackageImpl::initializeForkNodeActivationContent()
 {
-	m_forkNodeActivation_EClass->setInstanceClass(nullptr);
 	m_forkNodeActivation_EClass->setName("ForkNodeActivation");
 	m_forkNodeActivation_EClass->setAbstract(false);
 	m_forkNodeActivation_EClass->setInterface(false);
@@ -4721,7 +4667,6 @@ void FUMLPackageImpl::initializeForkNodeActivationContent()
 
 void FUMLPackageImpl::initializeForkedTokenContent()
 {
-	m_forkedToken_EClass->setInstanceClass(nullptr);
 	m_forkedToken_EClass->setName("ForkedToken");
 	m_forkedToken_EClass->setAbstract(false);
 	m_forkedToken_EClass->setInterface(false);
@@ -4839,7 +4784,6 @@ void FUMLPackageImpl::initializeForkedTokenContent()
 
 void FUMLPackageImpl::initializeGetNextEventStrategyContent()
 {
-	m_getNextEventStrategy_EClass->setInstanceClass(nullptr);
 	m_getNextEventStrategy_EClass->setName("GetNextEventStrategy");
 	m_getNextEventStrategy_EClass->setAbstract(true);
 	m_getNextEventStrategy_EClass->setInterface(false);
@@ -4868,7 +4812,6 @@ void FUMLPackageImpl::initializeGetNextEventStrategyContent()
 
 void FUMLPackageImpl::initializeInitialNodeActivationContent()
 {
-	m_initialNodeActivation_EClass->setInstanceClass(nullptr);
 	m_initialNodeActivation_EClass->setName("InitialNodeActivation");
 	m_initialNodeActivation_EClass->setAbstract(false);
 	m_initialNodeActivation_EClass->setInterface(false);
@@ -4897,7 +4840,6 @@ void FUMLPackageImpl::initializeInitialNodeActivationContent()
 
 void FUMLPackageImpl::initializeInputPinActivationContent()
 {
-	m_inputPinActivation_EClass->setInstanceClass(nullptr);
 	m_inputPinActivation_EClass->setName("InputPinActivation");
 	m_inputPinActivation_EClass->setAbstract(false);
 	m_inputPinActivation_EClass->setInterface(false);
@@ -4925,7 +4867,6 @@ void FUMLPackageImpl::initializeInputPinActivationContent()
 
 void FUMLPackageImpl::initializeInstanceValueEvaluationContent()
 {
-	m_instanceValueEvaluation_EClass->setInstanceClass(nullptr);
 	m_instanceValueEvaluation_EClass->setName("InstanceValueEvaluation");
 	m_instanceValueEvaluation_EClass->setAbstract(false);
 	m_instanceValueEvaluation_EClass->setInterface(false);
@@ -4945,7 +4886,6 @@ void FUMLPackageImpl::initializeInstanceValueEvaluationContent()
 
 void FUMLPackageImpl::initializeIntegerValueContent()
 {
-	m_integerValue_EClass->setInstanceClass(nullptr);
 	m_integerValue_EClass->setName("IntegerValue");
 	m_integerValue_EClass->setAbstract(false);
 	m_integerValue_EClass->setInterface(false);
@@ -5010,7 +4950,6 @@ void FUMLPackageImpl::initializeIntegerValueContent()
 
 void FUMLPackageImpl::initializeInvocationActionActivationContent()
 {
-	m_invocationActionActivation_EClass->setInstanceClass(nullptr);
 	m_invocationActionActivation_EClass->setName("InvocationActionActivation");
 	m_invocationActionActivation_EClass->setAbstract(true);
 	m_invocationActionActivation_EClass->setInterface(false);
@@ -5022,7 +4961,6 @@ void FUMLPackageImpl::initializeInvocationActionActivationContent()
 
 void FUMLPackageImpl::initializeJoinNodeActivationContent()
 {
-	m_joinNodeActivation_EClass->setInstanceClass(nullptr);
 	m_joinNodeActivation_EClass->setName("JoinNodeActivation");
 	m_joinNodeActivation_EClass->setAbstract(false);
 	m_joinNodeActivation_EClass->setInterface(false);
@@ -5042,7 +4980,6 @@ void FUMLPackageImpl::initializeJoinNodeActivationContent()
 
 void FUMLPackageImpl::initializeLinkContent()
 {
-	m_link_EClass->setInstanceClass(nullptr);
 	m_link_EClass->setName("Link");
 	m_link_EClass->setAbstract(false);
 	m_link_EClass->setInterface(false);
@@ -5158,7 +5095,6 @@ void FUMLPackageImpl::initializeLinkContent()
 
 void FUMLPackageImpl::initializeLinkActionActivationContent()
 {
-	m_linkActionActivation_EClass->setInstanceClass(nullptr);
 	m_linkActionActivation_EClass->setName("LinkActionActivation");
 	m_linkActionActivation_EClass->setAbstract(true);
 	m_linkActionActivation_EClass->setInterface(false);
@@ -5232,7 +5168,6 @@ void FUMLPackageImpl::initializeLinkActionActivationContent()
 
 void FUMLPackageImpl::initializeLiteralBooleanEvaluationContent()
 {
-	m_literalBooleanEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalBooleanEvaluation_EClass->setName("LiteralBooleanEvaluation");
 	m_literalBooleanEvaluation_EClass->setAbstract(false);
 	m_literalBooleanEvaluation_EClass->setInterface(false);
@@ -5252,7 +5187,6 @@ void FUMLPackageImpl::initializeLiteralBooleanEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralEvaluationContent()
 {
-	m_literalEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalEvaluation_EClass->setName("LiteralEvaluation");
 	m_literalEvaluation_EClass->setAbstract(true);
 	m_literalEvaluation_EClass->setInterface(false);
@@ -5281,7 +5215,6 @@ void FUMLPackageImpl::initializeLiteralEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralIntegerEvaluationContent()
 {
-	m_literalIntegerEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalIntegerEvaluation_EClass->setName("LiteralIntegerEvaluation");
 	m_literalIntegerEvaluation_EClass->setAbstract(false);
 	m_literalIntegerEvaluation_EClass->setInterface(false);
@@ -5301,7 +5234,6 @@ void FUMLPackageImpl::initializeLiteralIntegerEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralNullEvaluationContent()
 {
-	m_literalNullEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalNullEvaluation_EClass->setName("LiteralNullEvaluation");
 	m_literalNullEvaluation_EClass->setAbstract(false);
 	m_literalNullEvaluation_EClass->setInterface(false);
@@ -5321,7 +5253,6 @@ void FUMLPackageImpl::initializeLiteralNullEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralRealEvaluationContent()
 {
-	m_literalRealEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalRealEvaluation_EClass->setName("LiteralRealEvaluation");
 	m_literalRealEvaluation_EClass->setAbstract(false);
 	m_literalRealEvaluation_EClass->setInterface(false);
@@ -5341,7 +5272,6 @@ void FUMLPackageImpl::initializeLiteralRealEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralStringEvaluationContent()
 {
-	m_literalStringEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalStringEvaluation_EClass->setName("LiteralStringEvaluation");
 	m_literalStringEvaluation_EClass->setAbstract(false);
 	m_literalStringEvaluation_EClass->setInterface(false);
@@ -5361,7 +5291,6 @@ void FUMLPackageImpl::initializeLiteralStringEvaluationContent()
 
 void FUMLPackageImpl::initializeLiteralUnlimitedNaturalEvaluationContent()
 {
-	m_literalUnlimitedNaturalEvaluation_EClass->setInstanceClass(nullptr);
 	m_literalUnlimitedNaturalEvaluation_EClass->setName("LiteralUnlimitedNaturalEvaluation");
 	m_literalUnlimitedNaturalEvaluation_EClass->setAbstract(false);
 	m_literalUnlimitedNaturalEvaluation_EClass->setInterface(false);
@@ -5381,7 +5310,6 @@ void FUMLPackageImpl::initializeLiteralUnlimitedNaturalEvaluationContent()
 
 void FUMLPackageImpl::initializeLocusContent()
 {
-	m_locus_EClass->setInstanceClass(nullptr);
 	m_locus_EClass->setName("Locus");
 	m_locus_EClass->setAbstract(false);
 	m_locus_EClass->setInterface(false);
@@ -5406,7 +5334,7 @@ void FUMLPackageImpl::initializeLocusContent()
 		{
 			m_locus_EReference_executor->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getExecutor_EReference_locus();
 		if (otherEnd != nullptr)
 	    {
 	   		m_locus_EReference_executor->setEOpposite(otherEnd);
@@ -5597,7 +5525,6 @@ void FUMLPackageImpl::initializeLocusContent()
 
 void FUMLPackageImpl::initializeLoopNodeActivationContent()
 {
-	m_loopNodeActivation_EClass->setInstanceClass(nullptr);
 	m_loopNodeActivation_EClass->setName("LoopNodeActivation");
 	m_loopNodeActivation_EClass->setAbstract(false);
 	m_loopNodeActivation_EClass->setInterface(false);
@@ -5666,7 +5593,6 @@ void FUMLPackageImpl::initializeLoopNodeActivationContent()
 
 void FUMLPackageImpl::initializeMergeNodeActivationContent()
 {
-	m_mergeNodeActivation_EClass->setInstanceClass(nullptr);
 	m_mergeNodeActivation_EClass->setName("MergeNodeActivation");
 	m_mergeNodeActivation_EClass->setAbstract(false);
 	m_mergeNodeActivation_EClass->setInterface(false);
@@ -5678,7 +5604,6 @@ void FUMLPackageImpl::initializeMergeNodeActivationContent()
 
 void FUMLPackageImpl::initializeObjectContent()
 {
-	m_object_EClass->setInstanceClass(nullptr);
 	m_object_EClass->setName("Object");
 	m_object_EClass->setAbstract(false);
 	m_object_EClass->setInterface(false);
@@ -5851,7 +5776,6 @@ void FUMLPackageImpl::initializeObjectContent()
 
 void FUMLPackageImpl::initializeObjectActivationContent()
 {
-	m_objectActivation_EClass->setInstanceClass(nullptr);
 	m_objectActivation_EClass->setName("ObjectActivation");
 	m_objectActivation_EClass->setAbstract(false);
 	m_objectActivation_EClass->setInterface(false);
@@ -6090,7 +6014,6 @@ void FUMLPackageImpl::initializeObjectActivationContent()
 
 void FUMLPackageImpl::initializeObjectNodeActivationContent()
 {
-	m_objectNodeActivation_EClass->setInstanceClass(nullptr);
 	m_objectNodeActivation_EClass->setName("ObjectNodeActivation");
 	m_objectNodeActivation_EClass->setAbstract(true);
 	m_objectNodeActivation_EClass->setInterface(false);
@@ -6237,7 +6160,6 @@ void FUMLPackageImpl::initializeObjectNodeActivationContent()
 
 void FUMLPackageImpl::initializeObjectTokenContent()
 {
-	m_objectToken_EClass->setInstanceClass(nullptr);
 	m_objectToken_EClass->setName("ObjectToken");
 	m_objectToken_EClass->setAbstract(false);
 	m_objectToken_EClass->setInterface(false);
@@ -6299,7 +6221,6 @@ void FUMLPackageImpl::initializeObjectTokenContent()
 
 void FUMLPackageImpl::initializeOfferContent()
 {
-	m_offer_EClass->setInstanceClass(nullptr);
 	m_offer_EClass->setName("Offer");
 	m_offer_EClass->setAbstract(false);
 	m_offer_EClass->setInterface(false);
@@ -6385,7 +6306,6 @@ void FUMLPackageImpl::initializeOfferContent()
 
 void FUMLPackageImpl::initializeOpaqueBehaviorExecutionContent()
 {
-	m_opaqueBehaviorExecution_EClass->setInstanceClass(nullptr);
 	m_opaqueBehaviorExecution_EClass->setName("OpaqueBehaviorExecution");
 	m_opaqueBehaviorExecution_EClass->setAbstract(true);
 	m_opaqueBehaviorExecution_EClass->setInterface(false);
@@ -6432,7 +6352,6 @@ void FUMLPackageImpl::initializeOpaqueBehaviorExecutionContent()
 
 void FUMLPackageImpl::initializeOutputPinActivationContent()
 {
-	m_outputPinActivation_EClass->setInstanceClass(nullptr);
 	m_outputPinActivation_EClass->setName("OutputPinActivation");
 	m_outputPinActivation_EClass->setAbstract(false);
 	m_outputPinActivation_EClass->setInterface(false);
@@ -6444,7 +6363,6 @@ void FUMLPackageImpl::initializeOutputPinActivationContent()
 
 void FUMLPackageImpl::initializeParameterValueContent()
 {
-	m_parameterValue_EClass->setInstanceClass(nullptr);
 	m_parameterValue_EClass->setName("ParameterValue");
 	m_parameterValue_EClass->setAbstract(false);
 	m_parameterValue_EClass->setInterface(false);
@@ -6506,7 +6424,6 @@ void FUMLPackageImpl::initializeParameterValueContent()
 
 void FUMLPackageImpl::initializePinActivationContent()
 {
-	m_pinActivation_EClass->setInstanceClass(nullptr);
 	m_pinActivation_EClass->setName("PinActivation");
 	m_pinActivation_EClass->setAbstract(true);
 	m_pinActivation_EClass->setInterface(false);
@@ -6568,7 +6485,6 @@ void FUMLPackageImpl::initializePinActivationContent()
 
 void FUMLPackageImpl::initializePrimitiveValueContent()
 {
-	m_primitiveValue_EClass->setInstanceClass(nullptr);
 	m_primitiveValue_EClass->setName("PrimitiveValue");
 	m_primitiveValue_EClass->setAbstract(true);
 	m_primitiveValue_EClass->setInterface(false);
@@ -6613,7 +6529,6 @@ void FUMLPackageImpl::initializePrimitiveValueContent()
 
 void FUMLPackageImpl::initializeReadExtentActionActivationContent()
 {
-	m_readExtentActionActivation_EClass->setInstanceClass(nullptr);
 	m_readExtentActionActivation_EClass->setName("ReadExtentActionActivation");
 	m_readExtentActionActivation_EClass->setAbstract(false);
 	m_readExtentActionActivation_EClass->setInterface(false);
@@ -6625,7 +6540,6 @@ void FUMLPackageImpl::initializeReadExtentActionActivationContent()
 
 void FUMLPackageImpl::initializeReadIsClassifiedObjectActionActivationContent()
 {
-	m_readIsClassifiedObjectActionActivation_EClass->setInstanceClass(nullptr);
 	m_readIsClassifiedObjectActionActivation_EClass->setName("ReadIsClassifiedObjectActionActivation");
 	m_readIsClassifiedObjectActionActivation_EClass->setAbstract(false);
 	m_readIsClassifiedObjectActionActivation_EClass->setInterface(false);
@@ -6664,7 +6578,6 @@ void FUMLPackageImpl::initializeReadIsClassifiedObjectActionActivationContent()
 
 void FUMLPackageImpl::initializeReadLinkActionActivationContent()
 {
-	m_readLinkActionActivation_EClass->setInstanceClass(nullptr);
 	m_readLinkActionActivation_EClass->setName("ReadLinkActionActivation");
 	m_readLinkActionActivation_EClass->setAbstract(false);
 	m_readLinkActionActivation_EClass->setInterface(false);
@@ -6676,7 +6589,6 @@ void FUMLPackageImpl::initializeReadLinkActionActivationContent()
 
 void FUMLPackageImpl::initializeReadSelfActionActivationContent()
 {
-	m_readSelfActionActivation_EClass->setInstanceClass(nullptr);
 	m_readSelfActionActivation_EClass->setName("ReadSelfActionActivation");
 	m_readSelfActionActivation_EClass->setAbstract(false);
 	m_readSelfActionActivation_EClass->setInterface(false);
@@ -6688,7 +6600,6 @@ void FUMLPackageImpl::initializeReadSelfActionActivationContent()
 
 void FUMLPackageImpl::initializeReadStructuralFeatureActionActivationContent()
 {
-	m_readStructuralFeatureActionActivation_EClass->setInstanceClass(nullptr);
 	m_readStructuralFeatureActionActivation_EClass->setName("ReadStructuralFeatureActionActivation");
 	m_readStructuralFeatureActionActivation_EClass->setAbstract(false);
 	m_readStructuralFeatureActionActivation_EClass->setInterface(false);
@@ -6700,7 +6611,6 @@ void FUMLPackageImpl::initializeReadStructuralFeatureActionActivationContent()
 
 void FUMLPackageImpl::initializeRealValueContent()
 {
-	m_realValue_EClass->setInstanceClass(nullptr);
 	m_realValue_EClass->setName("RealValue");
 	m_realValue_EClass->setAbstract(false);
 	m_realValue_EClass->setInterface(false);
@@ -6765,7 +6675,6 @@ void FUMLPackageImpl::initializeRealValueContent()
 
 void FUMLPackageImpl::initializeReclassifyObjectActionActivationContent()
 {
-	m_reclassifyObjectActionActivation_EClass->setInstanceClass(nullptr);
 	m_reclassifyObjectActionActivation_EClass->setName("ReclassifyObjectActionActivation");
 	m_reclassifyObjectActionActivation_EClass->setAbstract(false);
 	m_reclassifyObjectActionActivation_EClass->setInterface(false);
@@ -6777,7 +6686,6 @@ void FUMLPackageImpl::initializeReclassifyObjectActionActivationContent()
 
 void FUMLPackageImpl::initializeRedefinitionBasedDispatchStrategyContent()
 {
-	m_redefinitionBasedDispatchStrategy_EClass->setInstanceClass(nullptr);
 	m_redefinitionBasedDispatchStrategy_EClass->setName("RedefinitionBasedDispatchStrategy");
 	m_redefinitionBasedDispatchStrategy_EClass->setAbstract(false);
 	m_redefinitionBasedDispatchStrategy_EClass->setInterface(false);
@@ -6843,7 +6751,6 @@ void FUMLPackageImpl::initializeRedefinitionBasedDispatchStrategyContent()
 
 void FUMLPackageImpl::initializeReduceActionActivationContent()
 {
-	m_reduceActionActivation_EClass->setInstanceClass(nullptr);
 	m_reduceActionActivation_EClass->setName("ReduceActionActivation");
 	m_reduceActionActivation_EClass->setAbstract(false);
 	m_reduceActionActivation_EClass->setInterface(false);
@@ -6880,7 +6787,6 @@ void FUMLPackageImpl::initializeReduceActionActivationContent()
 
 void FUMLPackageImpl::initializeReferenceContent()
 {
-	m_reference_EClass->setInstanceClass(nullptr);
 	m_reference_EClass->setName("Reference");
 	m_reference_EClass->setAbstract(false);
 	m_reference_EClass->setInterface(false);
@@ -7089,7 +6995,6 @@ void FUMLPackageImpl::initializeReferenceContent()
 
 void FUMLPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
 {
-	m_removeStructuralFeatureValueActivation_EClass->setInstanceClass(nullptr);
 	m_removeStructuralFeatureValueActivation_EClass->setName("RemoveStructuralFeatureValueActivation");
 	m_removeStructuralFeatureValueActivation_EClass->setAbstract(false);
 	m_removeStructuralFeatureValueActivation_EClass->setInterface(false);
@@ -7101,7 +7006,6 @@ void FUMLPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
 
 void FUMLPackageImpl::initializeSemanticStrategyContent()
 {
-	m_semanticStrategy_EClass->setInstanceClass(nullptr);
 	m_semanticStrategy_EClass->setName("SemanticStrategy");
 	m_semanticStrategy_EClass->setAbstract(true);
 	m_semanticStrategy_EClass->setInterface(false);
@@ -7121,7 +7025,6 @@ void FUMLPackageImpl::initializeSemanticStrategyContent()
 
 void FUMLPackageImpl::initializeSemanticVisitorContent()
 {
-	m_semanticVisitor_EClass->setInstanceClass(nullptr);
 	m_semanticVisitor_EClass->setName("SemanticVisitor");
 	m_semanticVisitor_EClass->setAbstract(true);
 	m_semanticVisitor_EClass->setInterface(false);
@@ -7149,7 +7052,6 @@ void FUMLPackageImpl::initializeSemanticVisitorContent()
 
 void FUMLPackageImpl::initializeSendSignalActionActivationContent()
 {
-	m_sendSignalActionActivation_EClass->setInstanceClass(nullptr);
 	m_sendSignalActionActivation_EClass->setName("SendSignalActionActivation");
 	m_sendSignalActionActivation_EClass->setAbstract(false);
 	m_sendSignalActionActivation_EClass->setInterface(false);
@@ -7169,7 +7071,6 @@ void FUMLPackageImpl::initializeSendSignalActionActivationContent()
 
 void FUMLPackageImpl::initializeSignalInstanceContent()
 {
-	m_signalInstance_EClass->setInstanceClass(nullptr);
 	m_signalInstance_EClass->setName("SignalInstance");
 	m_signalInstance_EClass->setAbstract(false);
 	m_signalInstance_EClass->setInterface(false);
@@ -7206,7 +7107,6 @@ void FUMLPackageImpl::initializeSignalInstanceContent()
 
 void FUMLPackageImpl::initializeStartClassifierBehaviorActionActivationContent()
 {
-	m_startClassifierBehaviorActionActivation_EClass->setInstanceClass(nullptr);
 	m_startClassifierBehaviorActionActivation_EClass->setName("StartClassifierBehaviorActionActivation");
 	m_startClassifierBehaviorActionActivation_EClass->setAbstract(false);
 	m_startClassifierBehaviorActionActivation_EClass->setInterface(false);
@@ -7218,7 +7118,6 @@ void FUMLPackageImpl::initializeStartClassifierBehaviorActionActivationContent()
 
 void FUMLPackageImpl::initializeStartObjectBehaviorActionActivationContent()
 {
-	m_startObjectBehaviorActionActivation_EClass->setInstanceClass(nullptr);
 	m_startObjectBehaviorActionActivation_EClass->setName("StartObjectBehaviorActionActivation");
 	m_startObjectBehaviorActionActivation_EClass->setAbstract(false);
 	m_startObjectBehaviorActionActivation_EClass->setInterface(false);
@@ -7230,7 +7129,6 @@ void FUMLPackageImpl::initializeStartObjectBehaviorActionActivationContent()
 
 void FUMLPackageImpl::initializeStringValueContent()
 {
-	m_stringValue_EClass->setInstanceClass(nullptr);
 	m_stringValue_EClass->setName("StringValue");
 	m_stringValue_EClass->setAbstract(false);
 	m_stringValue_EClass->setInterface(false);
@@ -7295,7 +7193,6 @@ void FUMLPackageImpl::initializeStringValueContent()
 
 void FUMLPackageImpl::initializeStructuralFeatureActionActivationContent()
 {
-	m_structuralFeatureActionActivation_EClass->setInstanceClass(nullptr);
 	m_structuralFeatureActionActivation_EClass->setName("StructuralFeatureActionActivation");
 	m_structuralFeatureActionActivation_EClass->setAbstract(true);
 	m_structuralFeatureActionActivation_EClass->setInterface(false);
@@ -7388,7 +7285,6 @@ void FUMLPackageImpl::initializeStructuralFeatureActionActivationContent()
 
 void FUMLPackageImpl::initializeStructuredActivityNodeActivationContent()
 {
-	m_structuredActivityNodeActivation_EClass->setInstanceClass(nullptr);
 	m_structuredActivityNodeActivation_EClass->setName("StructuredActivityNodeActivation");
 	m_structuredActivityNodeActivation_EClass->setAbstract(false);
 	m_structuredActivityNodeActivation_EClass->setInterface(false);
@@ -7592,7 +7488,6 @@ void FUMLPackageImpl::initializeStructuredActivityNodeActivationContent()
 
 void FUMLPackageImpl::initializeStructuredValueContent()
 {
-	m_structuredValue_EClass->setInstanceClass(nullptr);
 	m_structuredValue_EClass->setName("StructuredValue");
 	m_structuredValue_EClass->setAbstract(true);
 	m_structuredValue_EClass->setInterface(false);
@@ -7682,7 +7577,6 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 
 void FUMLPackageImpl::initializeTestIdentityActionActivationContent()
 {
-	m_testIdentityActionActivation_EClass->setInstanceClass(nullptr);
 	m_testIdentityActionActivation_EClass->setName("TestIdentityActionActivation");
 	m_testIdentityActionActivation_EClass->setAbstract(false);
 	m_testIdentityActionActivation_EClass->setInterface(false);
@@ -7694,7 +7588,6 @@ void FUMLPackageImpl::initializeTestIdentityActionActivationContent()
 
 void FUMLPackageImpl::initializeTokenContent()
 {
-	m_token_EClass->setInstanceClass(nullptr);
 	m_token_EClass->setName("Token");
 	m_token_EClass->setAbstract(true);
 	m_token_EClass->setInterface(false);
@@ -7809,7 +7702,6 @@ void FUMLPackageImpl::initializeTokenContent()
 
 void FUMLPackageImpl::initializeTokenSetContent()
 {
-	m_tokenSet_EClass->setInstanceClass(nullptr);
 	m_tokenSet_EClass->setName("TokenSet");
 	m_tokenSet_EClass->setAbstract(false);
 	m_tokenSet_EClass->setInterface(false);
@@ -7846,7 +7738,6 @@ void FUMLPackageImpl::initializeTokenSetContent()
 
 void FUMLPackageImpl::initializeUnlimitedNaturalValueContent()
 {
-	m_unlimitedNaturalValue_EClass->setInstanceClass(nullptr);
 	m_unlimitedNaturalValue_EClass->setName("UnlimitedNaturalValue");
 	m_unlimitedNaturalValue_EClass->setAbstract(false);
 	m_unlimitedNaturalValue_EClass->setInterface(false);
@@ -7911,7 +7802,6 @@ void FUMLPackageImpl::initializeUnlimitedNaturalValueContent()
 
 void FUMLPackageImpl::initializeValueContent()
 {
-	m_value_EClass->setInstanceClass(nullptr);
 	m_value_EClass->setName("Value");
 	m_value_EClass->setAbstract(true);
 	m_value_EClass->setInterface(false);
@@ -7989,7 +7879,6 @@ void FUMLPackageImpl::initializeValueContent()
 
 void FUMLPackageImpl::initializeValueSpecificActionActivationContent()
 {
-	m_valueSpecificActionActivation_EClass->setInstanceClass(nullptr);
 	m_valueSpecificActionActivation_EClass->setName("ValueSpecificActionActivation");
 	m_valueSpecificActionActivation_EClass->setAbstract(false);
 	m_valueSpecificActionActivation_EClass->setInterface(false);
@@ -8001,7 +7890,6 @@ void FUMLPackageImpl::initializeValueSpecificActionActivationContent()
 
 void FUMLPackageImpl::initializeValuesContent()
 {
-	m_values_EClass->setInstanceClass(nullptr);
 	m_values_EClass->setName("Values");
 	m_values_EClass->setAbstract(false);
 	m_values_EClass->setInterface(false);
@@ -8038,7 +7926,6 @@ void FUMLPackageImpl::initializeValuesContent()
 
 void FUMLPackageImpl::initializeWriteLinkActionActivationContent()
 {
-	m_writeLinkActionActivation_EClass->setInstanceClass(nullptr);
 	m_writeLinkActionActivation_EClass->setName("WriteLinkActionActivation");
 	m_writeLinkActionActivation_EClass->setAbstract(true);
 	m_writeLinkActionActivation_EClass->setInterface(false);
@@ -8050,7 +7937,6 @@ void FUMLPackageImpl::initializeWriteLinkActionActivationContent()
 
 void FUMLPackageImpl::initializeWriteStructuralFeatureActionActivationContent()
 {
-	m_writeStructuralFeatureActionActivation_EClass->setInstanceClass(nullptr);
 	m_writeStructuralFeatureActionActivation_EClass->setName("WriteStructuralFeatureActionActivation");
 	m_writeStructuralFeatureActionActivation_EClass->setAbstract(true);
 	m_writeStructuralFeatureActionActivation_EClass->setInterface(false);

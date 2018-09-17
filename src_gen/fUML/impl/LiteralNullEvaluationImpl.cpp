@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -112,7 +113,7 @@ std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -129,7 +130,7 @@ std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr()
+std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr() const
 {
 	return m_thisLiteralNullEvaluationPtr.lock();
 }
@@ -146,12 +147,12 @@ std::shared_ptr<ecore::EObject> LiteralNullEvaluationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralNullEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralNullEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return LiteralEvaluationImpl::internalEIsSet(featureID);
+	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralNullEvaluationImpl::internalEIsSet(int featureID) const
 {
@@ -160,7 +161,7 @@ bool LiteralNullEvaluationImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
-bool LiteralNullEvaluationImpl::eSet(int featureID, boost::any newValue)
+bool LiteralNullEvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

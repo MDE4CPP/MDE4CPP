@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -143,7 +144,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::getExpansionRegionActivation() 
+std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::getExpansionRegionActivation()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,7 +159,7 @@ std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionNodeActivationImpl::ge
 //*********************************
 
 
-std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr()
+std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
 {
 	return m_thisExpansionNodeActivationPtr.lock();
 }
@@ -179,12 +180,12 @@ std::shared_ptr<ecore::EObject> ExpansionNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpansionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ObjectNodeActivationImpl::internalEIsSet(featureID);
+	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpansionNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -193,7 +194,7 @@ bool ExpansionNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ExpansionNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ExpansionNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

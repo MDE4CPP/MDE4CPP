@@ -93,7 +93,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool isReady() = 0;
 			
 			
 			//*********************************

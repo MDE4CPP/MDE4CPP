@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CallActionActivationImpl();
-			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr();
+			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr() const;
 			virtual void setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,19 +48,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void doAction() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution() ;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution) ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			
@@ -105,9 +105,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<CallActionActivation> m_thisCallActionActivationPtr;

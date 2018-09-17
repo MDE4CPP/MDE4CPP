@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -203,19 +204,19 @@ std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause) 
+std::shared_ptr<fUML::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -247,7 +248,7 @@ std::shared_ptr<Union<fUML::PinActivation>> ConditionalNodeActivationImpl::getPi
 }
 
 
-std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr()
+std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
 {
 	return m_thisConditionalNodeActivationPtr.lock();
 }
@@ -268,16 +269,16 @@ std::shared_ptr<ecore::EObject> ConditionalNodeActivationImpl::eContainer() cons
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
-			return getClauseActivations(); //7311
+			return eAny(getClauseActivations()); //7311
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
-			return getSelectedClauses(); //7312
+			return eAny(getSelectedClauses()); //7312
 	}
-	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
+	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -290,7 +291,7 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ConditionalNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

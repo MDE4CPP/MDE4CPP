@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CreateLinkActionActivationImpl::getP
 }
 
 
-std::shared_ptr<CreateLinkActionActivation> CreateLinkActionActivationImpl::getThisCreateLinkActionActivationPtr()
+std::shared_ptr<CreateLinkActionActivation> CreateLinkActionActivationImpl::getThisCreateLinkActionActivationPtr() const
 {
 	return m_thisCreateLinkActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> CreateLinkActionActivationImpl::eContainer() con
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CreateLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CreateLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return WriteLinkActionActivationImpl::internalEIsSet(featureID);
+	return WriteLinkActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool CreateLinkActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool CreateLinkActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return WriteLinkActionActivationImpl::internalEIsSet(featureID);
 }
-bool CreateLinkActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool CreateLinkActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

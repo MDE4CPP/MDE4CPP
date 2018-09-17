@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkImpl();
-			virtual std::shared_ptr<Link> getThisLinkPtr();
+			virtual std::shared_ptr<Link> getThisLinkPtr() const;
 			virtual void setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr);
 
 
@@ -44,19 +44,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  ;
+			virtual void addTo(std::shared_ptr<fUML::Locus>  locus) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  ;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) ;
 			
 			
 			
@@ -102,9 +102,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Link> m_thisLinkPtr;

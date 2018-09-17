@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			GetNextEventStrategyImpl();
-			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr();
+			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
 			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  ;
+			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation) ;
 			
 			
 			
@@ -83,9 +83,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<GetNextEventStrategy> m_thisGetNextEventStrategyPtr;

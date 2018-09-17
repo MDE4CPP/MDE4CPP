@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -193,7 +194,7 @@ std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void CallActionActivationImpl::doAction() 
+void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -277,7 +278,7 @@ void CallActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -286,7 +287,7 @@ std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution()
 	//end of body
 }
 
-void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
+void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -301,7 +302,7 @@ void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Executi
 	//end of body
 }
 
-void CallActionActivationImpl::terminate() 
+void CallActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -334,7 +335,7 @@ std::shared_ptr<Union<fUML::PinActivation>> CallActionActivationImpl::getPinActi
 }
 
 
-std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr()
+std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr() const
 {
 	return m_thisCallActionActivationPtr.lock();
 }
@@ -355,14 +356,14 @@ std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
-			return getCallExecutions(); //8110
+			return eAny(getCallExecutions()); //8110
 	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool CallActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -373,7 +374,7 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
-bool CallActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

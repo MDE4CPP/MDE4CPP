@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -127,7 +128,7 @@ std::shared_ptr<Bag<fUML::Token>> TokenSetImpl::getTokens() const
 //*********************************
 
 
-std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr()
+std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const
 {
 	return m_thisTokenSetPtr.lock();
 }
@@ -143,14 +144,14 @@ std::shared_ptr<ecore::EObject> TokenSetImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::TOKENSET_EREFERENCE_TOKENS:
-			return getTokens(); //740
+			return eAny(getTokens()); //740
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool TokenSetImpl::internalEIsSet(int featureID) const
 {
@@ -161,7 +162,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool TokenSetImpl::eSet(int featureID, boost::any newValue)
+bool TokenSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -141,7 +142,7 @@ std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -162,7 +163,7 @@ void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomin
 //*********************************
 
 
-std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr()
+std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr() const
 {
 	return m_thisControlNodeActivationPtr.lock();
 }
@@ -183,12 +184,12 @@ std::shared_ptr<ecore::EObject> ControlNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ControlNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ControlNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActivityNodeActivationImpl::internalEIsSet(featureID);
+	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool ControlNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -197,7 +198,7 @@ bool ControlNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
-bool ControlNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool ControlNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

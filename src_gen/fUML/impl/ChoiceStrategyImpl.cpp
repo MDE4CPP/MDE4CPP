@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -102,13 +103,13 @@ std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int ChoiceStrategyImpl::choose(int size) 
+int ChoiceStrategyImpl::choose(int size)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string ChoiceStrategyImpl::retrieveName() 
+std::string ChoiceStrategyImpl::retrieveName()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -125,7 +126,7 @@ std::string ChoiceStrategyImpl::retrieveName()
 //*********************************
 
 
-std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr()
+std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
 {
 	return m_thisChoiceStrategyPtr.lock();
 }
@@ -142,12 +143,12 @@ std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool ChoiceStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -156,7 +157,7 @@ bool ChoiceStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-bool ChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

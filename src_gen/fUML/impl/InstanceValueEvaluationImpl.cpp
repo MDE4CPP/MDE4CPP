@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -132,7 +133,7 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -222,7 +223,7 @@ std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr()
+std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr() const
 {
 	return m_thisInstanceValueEvaluationPtr.lock();
 }
@@ -239,12 +240,12 @@ std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return EvaluationImpl::internalEIsSet(featureID);
+	return EvaluationImpl::eGet(featureID, resolve, coreType);
 }
 bool InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
 {
@@ -253,7 +254,7 @@ bool InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
 	}
 	return EvaluationImpl::internalEIsSet(featureID);
 }
-bool InstanceValueEvaluationImpl::eSet(int featureID, boost::any newValue)
+bool InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

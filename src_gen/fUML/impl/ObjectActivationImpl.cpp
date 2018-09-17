@@ -16,11 +16,12 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
@@ -167,7 +168,7 @@ std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +179,7 @@ void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accep
 	//end of body
 }
 
-void ObjectActivationImpl::_send(boost::any signal) 
+void ObjectActivationImpl::_send(Any signal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -186,7 +187,7 @@ void ObjectActivationImpl::_send(boost::any signal)
 	//end of body
 }
 
-void ObjectActivationImpl::_startObjectBehavior() 
+void ObjectActivationImpl::_startObjectBehavior()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -194,7 +195,7 @@ void ObjectActivationImpl::_startObjectBehavior()
 	//end of body
 }
 
-void ObjectActivationImpl::dispatchNextEvent() 
+void ObjectActivationImpl::dispatchNextEvent()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,13 +203,13 @@ void ObjectActivationImpl::dispatchNextEvent()
 	//end of body
 }
 
-std::shared_ptr<fUML::SignalInstance> ObjectActivationImpl::retrieveNextEvent() 
+std::shared_ptr<fUML::SignalInstance> ObjectActivationImpl::retrieveNextEvent()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,7 +218,7 @@ void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalIns
 	//end of body
 }
 
-void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -262,7 +263,7 @@ void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier
 	//end of body
 }
 
-void ObjectActivationImpl::stop() 
+void ObjectActivationImpl::stop()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -275,7 +276,7 @@ void ObjectActivationImpl::stop()
 	//end of body
 }
 
-void ObjectActivationImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectActivationImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -333,7 +334,7 @@ std::shared_ptr<Bag<fUML::EventAccepter>> ObjectActivationImpl::getWaitingEventA
 //*********************************
 
 
-std::shared_ptr<ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr()
+std::shared_ptr<ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr() const
 {
 	return m_thisObjectActivationPtr.lock();
 }
@@ -349,20 +350,20 @@ std::shared_ptr<ecore::EObject> ObjectActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return getClassifierBehaviorExecutions(); //473
+			return eAny(getClassifierBehaviorExecutions()); //473
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
-			return getEventPool(); //471
+			return eAny(getEventPool()); //471
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
-			return getObject(); //472
+			return eAny(getObject()); //472
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
-			return getWaitingEventAccepters(); //470
+			return eAny(getWaitingEventAccepters()); //470
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ObjectActivationImpl::internalEIsSet(int featureID) const
 {
@@ -379,14 +380,14 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool ObjectActivationImpl::eSet(int featureID, boost::any newValue)
+bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _object = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			std::shared_ptr<fUML::Object> _object = newValue->get<std::shared_ptr<fUML::Object>>();
 			setObject(_object); //472
 			return true;
 		}

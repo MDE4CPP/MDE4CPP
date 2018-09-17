@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -106,7 +107,7 @@ std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SignalInstance> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation) 
+std::shared_ptr<fUML::SignalInstance> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -121,7 +122,7 @@ std::shared_ptr<fUML::SignalInstance> GetNextEventStrategyImpl::retrieveNextEven
 //*********************************
 
 
-std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr()
+std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const
 {
 	return m_thisGetNextEventStrategyPtr.lock();
 }
@@ -138,12 +139,12 @@ std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 {
@@ -152,7 +153,7 @@ bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
-bool GetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

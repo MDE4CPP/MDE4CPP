@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -115,7 +116,7 @@ std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -136,7 +137,7 @@ std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate()
 //*********************************
 
 
-std::shared_ptr<LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr()
+std::shared_ptr<LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr() const
 {
 	return m_thisLiteralStringEvaluationPtr.lock();
 }
@@ -153,12 +154,12 @@ std::shared_ptr<ecore::EObject> LiteralStringEvaluationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralStringEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any LiteralStringEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return LiteralEvaluationImpl::internalEIsSet(featureID);
+	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
 }
 bool LiteralStringEvaluationImpl::internalEIsSet(int featureID) const
 {
@@ -167,7 +168,7 @@ bool LiteralStringEvaluationImpl::internalEIsSet(int featureID) const
 	}
 	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
-bool LiteralStringEvaluationImpl::eSet(int featureID, boost::any newValue)
+bool LiteralStringEvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			InitialNodeActivationImpl();
-			virtual std::shared_ptr<InitialNodeActivation> getThisInitialNodeActivationPtr();
+			virtual std::shared_ptr<InitialNodeActivation> getThisInitialNodeActivationPtr() const;
 			virtual void setThisInitialNodeActivationPtr(std::weak_ptr<InitialNodeActivation> thisInitialNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InitialNodeActivation> m_thisInitialNodeActivationPtr;

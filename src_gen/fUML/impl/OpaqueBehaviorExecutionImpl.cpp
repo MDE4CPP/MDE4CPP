@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -151,13 +152,13 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters) 
+void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OpaqueBehaviorExecutionImpl::execute() 
+void OpaqueBehaviorExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -206,7 +207,7 @@ void OpaqueBehaviorExecutionImpl::execute()
 //*********************************
 
 
-std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr()
+std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
 {
 	return m_thisOpaqueBehaviorExecutionPtr.lock();
 }
@@ -223,12 +224,12 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ExecutionImpl::internalEIsSet(featureID);
+	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
 bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 {
@@ -237,7 +238,7 @@ bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
-bool OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

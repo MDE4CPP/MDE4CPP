@@ -17,13 +17,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
-ELSE()
-	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-ENDIF()
-
+SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 

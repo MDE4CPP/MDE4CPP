@@ -32,7 +32,7 @@ virtual public ClassifierBehaviorExecution
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionImpl();
-			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr();
+			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr() const;
 			virtual void setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr);
 
 
@@ -46,15 +46,15 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  ;
+			virtual void _startObjectBehavior() ;
 			
 			/*!
 			 */ 
-			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			
 			
@@ -114,9 +114,9 @@ virtual public ClassifierBehaviorExecution
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ClassifierBehaviorExecution> m_thisClassifierBehaviorExecutionPtr;

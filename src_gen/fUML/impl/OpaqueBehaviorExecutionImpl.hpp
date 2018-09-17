@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			OpaqueBehaviorExecutionImpl();
-			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr();
+			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr() const;
 			virtual void setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr);
 
 
@@ -44,11 +44,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  ;
+			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters) ;
 			
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void execute() ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<OpaqueBehaviorExecution> m_thisOpaqueBehaviorExecutionPtr;

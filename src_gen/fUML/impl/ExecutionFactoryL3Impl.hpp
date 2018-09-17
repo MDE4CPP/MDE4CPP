@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryL3Impl();
-			virtual std::shared_ptr<ExecutionFactoryL3> getThisExecutionFactoryL3Ptr();
+			virtual std::shared_ptr<ExecutionFactoryL3> getThisExecutionFactoryL3Ptr() const;
 			virtual void setThisExecutionFactoryL3Ptr(std::weak_ptr<ExecutionFactoryL3> thisExecutionFactoryL3Ptr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExecutionFactoryL3> m_thisExecutionFactoryL3Ptr;

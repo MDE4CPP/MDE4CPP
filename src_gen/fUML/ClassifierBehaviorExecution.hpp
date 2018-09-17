@@ -90,15 +90,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  = 0;
+			virtual void _startObjectBehavior() = 0;
 			
 			/*!
 			 */ 
-			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
+			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void terminate() = 0;
 			
 			
 			//*********************************

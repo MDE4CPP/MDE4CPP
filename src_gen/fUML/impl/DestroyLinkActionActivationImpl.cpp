@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> DestroyLinkActionActivationImpl::get
 }
 
 
-std::shared_ptr<DestroyLinkActionActivation> DestroyLinkActionActivationImpl::getThisDestroyLinkActionActivationPtr()
+std::shared_ptr<DestroyLinkActionActivation> DestroyLinkActionActivationImpl::getThisDestroyLinkActionActivationPtr() const
 {
 	return m_thisDestroyLinkActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> DestroyLinkActionActivationImpl::eContainer() co
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DestroyLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DestroyLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return WriteLinkActionActivationImpl::internalEIsSet(featureID);
+	return WriteLinkActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool DestroyLinkActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool DestroyLinkActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return WriteLinkActionActivationImpl::internalEIsSet(featureID);
 }
-bool DestroyLinkActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool DestroyLinkActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

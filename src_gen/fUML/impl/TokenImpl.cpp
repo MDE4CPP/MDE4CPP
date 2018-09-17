@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -123,19 +124,19 @@ bool TokenImpl::isWithdrawn() const
 //*********************************
 // Operations
 //*********************************
-bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Value> TokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> TokenImpl::getValue() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TokenImpl::isControl() 
+bool TokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +144,7 @@ bool TokenImpl::isControl()
 	//end of body
 }
 
-std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) 
+std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +161,7 @@ std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityN
 	//end of body
 }
 
-void TokenImpl::withdraw() 
+void TokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +196,7 @@ void TokenImpl::setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder)
 //*********************************
 
 
-std::shared_ptr<Token> TokenImpl::getThisTokenPtr()
+std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
 {
 	return m_thisTokenPtr.lock();
 }
@@ -211,16 +212,16 @@ std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-			return getHolder(); //530
+			return eAny(getHolder()); //530
 		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-			return isWithdrawn(); //531
+			return eAny(isWithdrawn()); //531
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool TokenImpl::internalEIsSet(int featureID) const
 {
@@ -233,21 +234,21 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool TokenImpl::eSet(int featureID, boost::any newValue)
+bool TokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			std::shared_ptr<fUML::ActivityNodeActivation> _holder = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
 			setHolder(_holder); //530
 			return true;
 		}
 		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
-			bool _withdrawn = boost::any_cast<bool>(newValue);
+			bool _withdrawn = newValue->get<bool>();
 			setWithdrawn(_withdrawn); //531
 			return true;
 		}

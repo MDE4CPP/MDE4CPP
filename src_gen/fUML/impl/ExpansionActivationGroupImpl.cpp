@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -180,7 +181,7 @@ void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Exp
 //*********************************
 
 
-std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr()
+std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr() const
 {
 	return m_thisExpansionActivationGroupPtr.lock();
 }
@@ -206,14 +207,14 @@ std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
-			return getRegionActivation(); //755
+			return eAny(getRegionActivation()); //755
 	}
-	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
+	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
 bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 {
@@ -224,14 +225,14 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
-bool ExpansionActivationGroupImpl::eSet(int featureID, boost::any newValue)
+bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = boost::any_cast<std::shared_ptr<fUML::ExpansionRegionActivation>>(newValue);
+			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = newValue->get<std::shared_ptr<fUML::ExpansionRegionActivation>>();
 			setRegionActivation(_regionActivation); //755
 			return true;
 		}

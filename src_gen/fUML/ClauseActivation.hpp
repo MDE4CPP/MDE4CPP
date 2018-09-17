@@ -89,31 +89,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> getDecision()  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue> getDecision() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors() = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool isReady() = 0;
 			
 			/*!
 			 */ 
-			virtual void recieveControl()  = 0;
+			virtual void recieveControl() = 0;
 			
 			/*!
 			 */ 
-			virtual void runTest()  = 0;
+			virtual void runTest() = 0;
 			
 			/*!
 			 */ 
-			virtual void selectBody()  = 0;
+			virtual void selectBody() = 0;
 			
 			
 			//*********************************

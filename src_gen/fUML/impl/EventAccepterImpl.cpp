@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -102,13 +103,13 @@ std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -123,7 +124,7 @@ bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInsta
 //*********************************
 
 
-std::shared_ptr<EventAccepter> EventAccepterImpl::getThisEventAccepterPtr()
+std::shared_ptr<EventAccepter> EventAccepterImpl::getThisEventAccepterPtr() const
 {
 	return m_thisEventAccepterPtr.lock();
 }
@@ -139,12 +140,12 @@ std::shared_ptr<ecore::EObject> EventAccepterImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool EventAccepterImpl::internalEIsSet(int featureID) const
 {
@@ -153,7 +154,7 @@ bool EventAccepterImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool EventAccepterImpl::eSet(int featureID, boost::any newValue)
+bool EventAccepterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

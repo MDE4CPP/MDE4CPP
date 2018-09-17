@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			TestIdentityActionActivationImpl();
-			virtual std::shared_ptr<TestIdentityActionActivation> getThisTestIdentityActionActivationPtr();
+			virtual std::shared_ptr<TestIdentityActionActivation> getThisTestIdentityActionActivationPtr() const;
 			virtual void setThisTestIdentityActionActivationPtr(std::weak_ptr<TestIdentityActionActivation> thisTestIdentityActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -85,9 +85,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<TestIdentityActionActivation> m_thisTestIdentityActionActivationPtr;

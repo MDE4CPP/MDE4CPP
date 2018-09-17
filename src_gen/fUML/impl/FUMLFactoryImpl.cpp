@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AcceptEventActionActivation>(this->createAcceptEventActionActivation());
+				return this->createAcceptEventActionActivation();
 			}
 			else
 			{
@@ -252,14 +252,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS:
 		{
-				return std::shared_ptr<AcceptEventActionEventAccepter>(this->createAcceptEventActionEventAccepter());
+				return this->createAcceptEventActionEventAccepter();
 			
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance());
+				return this->createActivityEdgeInstance();
 			}
 			else
 			{
@@ -270,14 +270,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
 		{
-				return std::shared_ptr<ActivityExecution>(this->createActivityExecution());
+				return this->createActivityExecution();
 			
 		}
 		case FUMLPackage::ACTIVITYFINALNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation());
+				return this->createActivityFinalNodeActivation();
 			}
 			else
 			{
@@ -290,7 +290,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityNodeActivationGroup>(this->createActivityNodeActivationGroup());
+				return this->createActivityNodeActivationGroup();
 			}
 			else
 			{
@@ -317,7 +317,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation());
+				return this->createActivityParameterNodeActivation();
 			}
 			else
 			{
@@ -330,7 +330,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation());
+				return this->createAddStructuralFeatureValueActionActivation();
 			}
 			else
 			{
@@ -341,14 +341,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::BOOLEANVALUE_ECLASS:
 		{
-				return std::shared_ptr<BooleanValue>(this->createBooleanValue());
+				return this->createBooleanValue();
 			
 		}
 		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CallBehaviorActionActivation>(this->createCallBehaviorActionActivation());
+				return this->createCallBehaviorActionActivation();
 			}
 			else
 			{
@@ -361,7 +361,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CallOperationActionActivation>(this->createCallOperationActionActivation());
+				return this->createCallOperationActionActivation();
 			}
 			else
 			{
@@ -374,7 +374,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CentralBufferNodeActivation>(this->createCentralBufferNodeActivation());
+				return this->createCentralBufferNodeActivation();
 			}
 			else
 			{
@@ -385,29 +385,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS:
 		{
-				return std::shared_ptr<ClassifierBehaviorExecution>(this->createClassifierBehaviorExecution());
+				return this->createClassifierBehaviorExecution();
 			
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_ECLASS:
 		{
-				return std::shared_ptr<ClassifierBehaviorExecutionActivity>(this->createClassifierBehaviorExecutionActivity());
+				return this->createClassifierBehaviorExecutionActivity();
 			
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_ECLASS:
 		{
-				return std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1>(this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1());
+				return this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1();
 			
 		}
 		case FUMLPackage::CLAUSEACTIVATION_ECLASS:
 		{
-				return std::shared_ptr<ClauseActivation>(this->createClauseActivation());
+				return this->createClauseActivation();
 			
 		}
 		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClearAssociationActionActivation>(this->createClearAssociationActionActivation());
+				return this->createClearAssociationActionActivation();
 			}
 			else
 			{
@@ -420,7 +420,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation());
+				return this->createClearStructuralFeatureActionActivation();
 			}
 			else
 			{
@@ -433,7 +433,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ConditionalNodeActivation>(this->createConditionalNodeActivation());
+				return this->createConditionalNodeActivation();
 			}
 			else
 			{
@@ -444,14 +444,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::CONTROLTOKEN_ECLASS:
 		{
-				return std::shared_ptr<ControlToken>(this->createControlToken());
+				return this->createControlToken();
 			
 		}
 		case FUMLPackage::CREATELINKACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CreateLinkActionActivation>(this->createCreateLinkActionActivation());
+				return this->createCreateLinkActionActivation();
 			}
 			else
 			{
@@ -464,7 +464,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<CreateObjectActionActivation>(this->createCreateObjectActionActivation());
+				return this->createCreateObjectActionActivation();
 			}
 			else
 			{
@@ -477,7 +477,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DataStoreNodeActivation>(this->createDataStoreNodeActivation());
+				return this->createDataStoreNodeActivation();
 			}
 			else
 			{
@@ -488,14 +488,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::DATAVALUE_ECLASS:
 		{
-				return std::shared_ptr<DataValue>(this->createDataValue());
+				return this->createDataValue();
 			
 		}
 		case FUMLPackage::DECISIONNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DecisionNodeActivation>(this->createDecisionNodeActivation());
+				return this->createDecisionNodeActivation();
 			}
 			else
 			{
@@ -508,7 +508,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DestroyLinkActionActivation>(this->createDestroyLinkActionActivation());
+				return this->createDestroyLinkActionActivation();
 			}
 			else
 			{
@@ -521,7 +521,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<DestroyObjectActionActivation>(this->createDestroyObjectActionActivation());
+				return this->createDestroyObjectActionActivation();
 			}
 			else
 			{
@@ -532,24 +532,24 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::DISPATCHSTRATEGY_ECLASS:
 		{
-				return std::shared_ptr<DispatchStrategy>(this->createDispatchStrategy());
+				return this->createDispatchStrategy();
 			
 		}
 		case FUMLPackage::ENUMERATIONVALUE_ECLASS:
 		{
-				return std::shared_ptr<EnumerationValue>(this->createEnumerationValue());
+				return this->createEnumerationValue();
 			
 		}
 		case FUMLPackage::EVENTDISPATCHLOOP_ECLASS:
 		{
-				return std::shared_ptr<EventDispatchLoop>(this->createEventDispatchLoop());
+				return this->createEventDispatchLoop();
 			
 		}
 		case FUMLPackage::EXECUTIONFACTORYL1_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExecutionFactoryL1>(this->createExecutionFactoryL1());
+				return this->createExecutionFactoryL1();
 			}
 			else
 			{
@@ -562,7 +562,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExecutionFactoryL2>(this->createExecutionFactoryL2());
+				return this->createExecutionFactoryL2();
 			}
 			else
 			{
@@ -575,7 +575,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExecutionFactoryL3>(this->createExecutionFactoryL3());
+				return this->createExecutionFactoryL3();
 			}
 			else
 			{
@@ -586,14 +586,22 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::EXECUTOR_ECLASS:
 		{
-				return std::shared_ptr<Executor>(this->createExecutor());
-			
+			if (nullptr == container)
+			{
+				return this->createExecutor();
+			}
+			else
+			{
+				auto castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
+				assert(castedContainer);
+				return std::shared_ptr<Executor>(this->createExecutor_in_Locus(castedContainer));
+			}
 		}
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExpansionActivationGroup>(this->createExpansionActivationGroup());
+				return this->createExpansionActivationGroup();
 			}
 			else
 			{
@@ -620,7 +628,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExpansionNodeActivation>(this->createExpansionNodeActivation());
+				return this->createExpansionNodeActivation();
 			}
 			else
 			{
@@ -633,7 +641,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ExpansionRegionActivation>(this->createExpansionRegionActivation());
+				return this->createExpansionRegionActivation();
 			}
 			else
 			{
@@ -644,29 +652,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::EXTENSIONALVALUELIST_ECLASS:
 		{
-				return std::shared_ptr<ExtensionalValueList>(this->createExtensionalValueList());
+				return this->createExtensionalValueList();
 			
 		}
 		case FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_ECLASS:
 		{
-				return std::shared_ptr<FIFOGetNextEventStrategy>(this->createFIFOGetNextEventStrategy());
+				return this->createFIFOGetNextEventStrategy();
 			
 		}
 		case FUMLPackage::FEATUREVALUE_ECLASS:
 		{
-				return std::shared_ptr<FeatureValue>(this->createFeatureValue());
+				return this->createFeatureValue();
 			
 		}
 		case FUMLPackage::FIRSTCHOICESTRATEGY_ECLASS:
 		{
-				return std::shared_ptr<FirstChoiceStrategy>(this->createFirstChoiceStrategy());
+				return this->createFirstChoiceStrategy();
 			
 		}
 		case FUMLPackage::FLOWFINALNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<FlowFinalNodeActivation>(this->createFlowFinalNodeActivation());
+				return this->createFlowFinalNodeActivation();
 			}
 			else
 			{
@@ -679,7 +687,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ForkNodeActivation>(this->createForkNodeActivation());
+				return this->createForkNodeActivation();
 			}
 			else
 			{
@@ -690,14 +698,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::FORKEDTOKEN_ECLASS:
 		{
-				return std::shared_ptr<ForkedToken>(this->createForkedToken());
+				return this->createForkedToken();
 			
 		}
 		case FUMLPackage::INITIALNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InitialNodeActivation>(this->createInitialNodeActivation());
+				return this->createInitialNodeActivation();
 			}
 			else
 			{
@@ -710,7 +718,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation());
+				return this->createInputPinActivation();
 			}
 			else
 			{
@@ -721,19 +729,19 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<InstanceValueEvaluation>(this->createInstanceValueEvaluation());
+				return this->createInstanceValueEvaluation();
 			
 		}
 		case FUMLPackage::INTEGERVALUE_ECLASS:
 		{
-				return std::shared_ptr<IntegerValue>(this->createIntegerValue());
+				return this->createIntegerValue();
 			
 		}
 		case FUMLPackage::JOINNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<JoinNodeActivation>(this->createJoinNodeActivation());
+				return this->createJoinNodeActivation();
 			}
 			else
 			{
@@ -744,49 +752,49 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::LINK_ECLASS:
 		{
-				return std::shared_ptr<Link>(this->createLink());
+				return this->createLink();
 			
 		}
 		case FUMLPackage::LITERALBOOLEANEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralBooleanEvaluation>(this->createLiteralBooleanEvaluation());
+				return this->createLiteralBooleanEvaluation();
 			
 		}
 		case FUMLPackage::LITERALINTEGEREVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralIntegerEvaluation>(this->createLiteralIntegerEvaluation());
+				return this->createLiteralIntegerEvaluation();
 			
 		}
 		case FUMLPackage::LITERALNULLEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralNullEvaluation>(this->createLiteralNullEvaluation());
+				return this->createLiteralNullEvaluation();
 			
 		}
 		case FUMLPackage::LITERALREALEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralRealEvaluation>(this->createLiteralRealEvaluation());
+				return this->createLiteralRealEvaluation();
 			
 		}
 		case FUMLPackage::LITERALSTRINGEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralStringEvaluation>(this->createLiteralStringEvaluation());
+				return this->createLiteralStringEvaluation();
 			
 		}
 		case FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_ECLASS:
 		{
-				return std::shared_ptr<LiteralUnlimitedNaturalEvaluation>(this->createLiteralUnlimitedNaturalEvaluation());
+				return this->createLiteralUnlimitedNaturalEvaluation();
 			
 		}
 		case FUMLPackage::LOCUS_ECLASS:
 		{
-				return std::shared_ptr<Locus>(this->createLocus());
+				return this->createLocus();
 			
 		}
 		case FUMLPackage::LOOPNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<LoopNodeActivation>(this->createLoopNodeActivation());
+				return this->createLoopNodeActivation();
 			}
 			else
 			{
@@ -799,7 +807,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<MergeNodeActivation>(this->createMergeNodeActivation());
+				return this->createMergeNodeActivation();
 			}
 			else
 			{
@@ -810,29 +818,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::OBJECT_ECLASS:
 		{
-				return std::shared_ptr<Object>(this->createObject());
+				return this->createObject();
 			
 		}
 		case FUMLPackage::OBJECTACTIVATION_ECLASS:
 		{
-				return std::shared_ptr<ObjectActivation>(this->createObjectActivation());
+				return this->createObjectActivation();
 			
 		}
 		case FUMLPackage::OBJECTTOKEN_ECLASS:
 		{
-				return std::shared_ptr<ObjectToken>(this->createObjectToken());
+				return this->createObjectToken();
 			
 		}
 		case FUMLPackage::OFFER_ECLASS:
 		{
-				return std::shared_ptr<Offer>(this->createOffer());
+				return this->createOffer();
 			
 		}
 		case FUMLPackage::OUTPUTPINACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation());
+				return this->createOutputPinActivation();
 			}
 			else
 			{
@@ -843,14 +851,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::PARAMETERVALUE_ECLASS:
 		{
-				return std::shared_ptr<ParameterValue>(this->createParameterValue());
+				return this->createParameterValue();
 			
 		}
 		case FUMLPackage::READEXTENTACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadExtentActionActivation>(this->createReadExtentActionActivation());
+				return this->createReadExtentActionActivation();
 			}
 			else
 			{
@@ -863,7 +871,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation());
+				return this->createReadIsClassifiedObjectActionActivation();
 			}
 			else
 			{
@@ -876,7 +884,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadLinkActionActivation>(this->createReadLinkActionActivation());
+				return this->createReadLinkActionActivation();
 			}
 			else
 			{
@@ -889,7 +897,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadSelfActionActivation>(this->createReadSelfActionActivation());
+				return this->createReadSelfActionActivation();
 			}
 			else
 			{
@@ -902,7 +910,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation());
+				return this->createReadStructuralFeatureActionActivation();
 			}
 			else
 			{
@@ -913,14 +921,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::REALVALUE_ECLASS:
 		{
-				return std::shared_ptr<RealValue>(this->createRealValue());
+				return this->createRealValue();
 			
 		}
 		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation());
+				return this->createReclassifyObjectActionActivation();
 			}
 			else
 			{
@@ -931,14 +939,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS:
 		{
-				return std::shared_ptr<RedefinitionBasedDispatchStrategy>(this->createRedefinitionBasedDispatchStrategy());
+				return this->createRedefinitionBasedDispatchStrategy();
 			
 		}
 		case FUMLPackage::REDUCEACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ReduceActionActivation>(this->createReduceActionActivation());
+				return this->createReduceActionActivation();
 			}
 			else
 			{
@@ -949,14 +957,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::REFERENCE_ECLASS:
 		{
-				return std::shared_ptr<Reference>(this->createReference());
+				return this->createReference();
 			
 		}
 		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation());
+				return this->createRemoveStructuralFeatureValueActivation();
 			}
 			else
 			{
@@ -969,7 +977,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<SendSignalActionActivation>(this->createSendSignalActionActivation());
+				return this->createSendSignalActionActivation();
 			}
 			else
 			{
@@ -980,14 +988,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::SIGNALINSTANCE_ECLASS:
 		{
-				return std::shared_ptr<SignalInstance>(this->createSignalInstance());
+				return this->createSignalInstance();
 			
 		}
 		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation());
+				return this->createStartClassifierBehaviorActionActivation();
 			}
 			else
 			{
@@ -1000,7 +1008,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation());
+				return this->createStartObjectBehaviorActionActivation();
 			}
 			else
 			{
@@ -1011,14 +1019,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::STRINGVALUE_ECLASS:
 		{
-				return std::shared_ptr<StringValue>(this->createStringValue());
+				return this->createStringValue();
 			
 		}
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation());
+				return this->createStructuredActivityNodeActivation();
 			}
 			else
 			{
@@ -1031,7 +1039,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<TestIdentityActionActivation>(this->createTestIdentityActionActivation());
+				return this->createTestIdentityActionActivation();
 			}
 			else
 			{
@@ -1042,19 +1050,19 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::TOKENSET_ECLASS:
 		{
-				return std::shared_ptr<TokenSet>(this->createTokenSet());
+				return this->createTokenSet();
 			
 		}
 		case FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS:
 		{
-				return std::shared_ptr<UnlimitedNaturalValue>(this->createUnlimitedNaturalValue());
+				return this->createUnlimitedNaturalValue();
 			
 		}
 		case FUMLPackage::VALUESPECIFICACTIONACTIVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
-				return std::shared_ptr<ValueSpecificActionActivation>(this->createValueSpecificActionActivation());
+				return this->createValueSpecificActionActivation();
 			}
 			else
 			{
@@ -1065,7 +1073,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 		}
 		case FUMLPackage::VALUES_ECLASS:
 		{
-				return std::shared_ptr<Values>(this->createValues());
+				return this->createValues();
 			
 		}
 	default:
@@ -1585,6 +1593,18 @@ std::shared_ptr<Executor> FUMLFactoryImpl::createExecutor() const
 	element->setThisExecutorPtr(element);
 	return element;
 }
+std::shared_ptr<Executor> FUMLFactoryImpl::createExecutor_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const
+{
+	std::shared_ptr<ExecutorImpl> element(new ExecutorImpl(par_locus));
+	if(auto wp = par_locus.lock())
+	{
+			wp->setExecutor(element);
+	}
+	element->setThisExecutorPtr(element);
+	return element;
+	
+}
+
 std::shared_ptr<ExpansionActivationGroup> FUMLFactoryImpl::createExpansionActivationGroup() const
 {
 	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl());

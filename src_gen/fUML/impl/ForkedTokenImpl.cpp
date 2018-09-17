@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -136,7 +137,7 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
-bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
+bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +145,7 @@ bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken)
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +153,7 @@ std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const
 	//end of body
 }
 
-bool ForkedTokenImpl::isControl() 
+bool ForkedTokenImpl::isControl()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +161,7 @@ bool ForkedTokenImpl::isControl()
 	//end of body
 }
 
-void ForkedTokenImpl::withdraw() 
+void ForkedTokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -197,7 +198,7 @@ void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Token> _baseToken)
 //*********************************
 
 
-std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr()
+std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const
 {
 	return m_thisForkedTokenPtr.lock();
 }
@@ -214,18 +215,18 @@ std::shared_ptr<ecore::EObject> ForkedTokenImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
-			return getBaseToken(); //552
+			return eAny(getBaseToken()); //552
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
-			return isBaseTokenIsWithdrawn(); //554
+			return eAny(isBaseTokenIsWithdrawn()); //554
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
-			return getRemainingOffersCount(); //553
+			return eAny(getRemainingOffersCount()); //553
 	}
-	return TokenImpl::internalEIsSet(featureID);
+	return TokenImpl::eGet(featureID, resolve, coreType);
 }
 bool ForkedTokenImpl::internalEIsSet(int featureID) const
 {
@@ -240,28 +241,28 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
-bool ForkedTokenImpl::eSet(int featureID, boost::any newValue)
+bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Token> _baseToken = boost::any_cast<std::shared_ptr<fUML::Token>>(newValue);
+			std::shared_ptr<fUML::Token> _baseToken = newValue->get<std::shared_ptr<fUML::Token>>();
 			setBaseToken(_baseToken); //552
 			return true;
 		}
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
 			// BOOST CAST
-			bool _baseTokenIsWithdrawn = boost::any_cast<bool>(newValue);
+			bool _baseTokenIsWithdrawn = newValue->get<bool>();
 			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //554
 			return true;
 		}
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
 			// BOOST CAST
-			int _remainingOffersCount = boost::any_cast<int>(newValue);
+			int _remainingOffersCount = newValue->get<int>();
 			setRemainingOffersCount(_remainingOffersCount); //553
 			return true;
 		}

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -142,7 +143,7 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -164,7 +165,7 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	//end of body
 }
 
-int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -188,7 +189,7 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token
 //*********************************
 
 
-std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr()
+std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
 {
 	return m_thisDataStoreNodeActivationPtr.lock();
 }
@@ -209,12 +210,12 @@ std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataStoreNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any DataStoreNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
+	return CentralBufferNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
 {
@@ -223,7 +224,7 @@ bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
 }
-bool DataStoreNodeActivationImpl::eSet(int featureID, boost::any newValue)
+bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionActivationGroupImpl();
-			virtual std::shared_ptr<ExpansionActivationGroup> getThisExpansionActivationGroupPtr();
+			virtual std::shared_ptr<ExpansionActivationGroup> getThisExpansionActivationGroupPtr() const;
 			virtual void setThisExpansionActivationGroupPtr(std::weak_ptr<ExpansionActivationGroup> thisExpansionActivationGroupPtr);
 
 			//Additional constructors for the containments back reference
@@ -94,9 +94,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExpansionActivationGroup> m_thisExpansionActivationGroupPtr;

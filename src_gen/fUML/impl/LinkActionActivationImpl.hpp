@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkActionActivationImpl();
-			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr();
+			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr() const;
 			virtual void setThisLinkActionActivationPtr(std::weak_ptr<LinkActionActivation> thisLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> getAssociation()  ;
+			virtual std::shared_ptr<uml::Association> getAssociation() ;
 			
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  ;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) ;
 			
 			
 			
@@ -97,9 +97,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LinkActionActivation> m_thisLinkActionActivationPtr;

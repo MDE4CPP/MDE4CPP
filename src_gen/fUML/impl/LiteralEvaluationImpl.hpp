@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LiteralEvaluationImpl();
-			virtual std::shared_ptr<LiteralEvaluation> getThisLiteralEvaluationPtr();
+			virtual std::shared_ptr<LiteralEvaluation> getThisLiteralEvaluationPtr() const;
 			virtual void setThisLiteralEvaluationPtr(std::weak_ptr<LiteralEvaluation> thisLiteralEvaluationPtr);
 
 
@@ -44,7 +44,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) ;
 			
 			
 			
@@ -83,9 +83,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<LiteralEvaluation> m_thisLiteralEvaluationPtr;

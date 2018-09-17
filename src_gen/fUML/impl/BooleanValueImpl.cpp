@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -126,7 +127,7 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 // Operations
 //*********************************
-bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -142,7 +143,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -153,7 +154,7 @@ std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 	//end of body
 }
 
-std::string BooleanValueImpl::toString() 
+std::string BooleanValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +178,7 @@ std::string BooleanValueImpl::toString()
 //*********************************
 
 
-std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr()
+std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
 {
 	return m_thisBooleanValuePtr.lock();
 }
@@ -194,14 +195,14 @@ std::shared_ptr<ecore::EObject> BooleanValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
-			return isValue(); //201
+			return eAny(isValue()); //201
 	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
 bool BooleanValueImpl::internalEIsSet(int featureID) const
 {
@@ -212,14 +213,14 @@ bool BooleanValueImpl::internalEIsSet(int featureID) const
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
-bool BooleanValueImpl::eSet(int featureID, boost::any newValue)
+bool BooleanValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			bool _value = boost::any_cast<bool>(newValue);
+			bool _value = newValue->get<bool>();
 			setValue(_value); //201
 			return true;
 		}

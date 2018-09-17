@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -181,7 +182,7 @@ std::shared_ptr<Union<fUML::PinActivation>> TestIdentityActionActivationImpl::ge
 }
 
 
-std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr()
+std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr() const
 {
 	return m_thisTestIdentityActionActivationPtr.lock();
 }
@@ -202,12 +203,12 @@ std::shared_ptr<ecore::EObject> TestIdentityActionActivationImpl::eContainer() c
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TestIdentityActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any TestIdentityActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ActionActivationImpl::internalEIsSet(featureID);
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool TestIdentityActionActivationImpl::internalEIsSet(int featureID) const
 {
@@ -216,7 +217,7 @@ bool TestIdentityActionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool TestIdentityActionActivationImpl::eSet(int featureID, boost::any newValue)
+bool TestIdentityActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

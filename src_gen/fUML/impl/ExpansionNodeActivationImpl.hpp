@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionNodeActivationImpl();
-			virtual std::shared_ptr<ExpansionNodeActivation> getThisExpansionNodeActivationPtr();
+			virtual std::shared_ptr<ExpansionNodeActivation> getThisExpansionNodeActivationPtr() const;
 			virtual void setThisExpansionNodeActivationPtr(std::weak_ptr<ExpansionNodeActivation> thisExpansionNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation()  ;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getExpansionRegionActivation() ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ExpansionNodeActivation> m_thisExpansionNodeActivationPtr;

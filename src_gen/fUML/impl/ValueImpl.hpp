@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ValueImpl();
-			virtual std::shared_ptr<Value> getThisValuePtr();
+			virtual std::shared_ptr<Value> getThisValuePtr() const;
 			virtual void setThisValuePtr(std::weak_ptr<Value> thisValuePtr);
 
 
@@ -44,27 +44,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  const  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
 			
 			/*!
 			 */ 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type) ;
 			
 			/*!
 			 */ 
-			virtual std::string objectId()  ;
+			virtual std::string objectId() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string toString() ;
 			
 			
 			
@@ -103,9 +103,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<Value> m_thisValuePtr;

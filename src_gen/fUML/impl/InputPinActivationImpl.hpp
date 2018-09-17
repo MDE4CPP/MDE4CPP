@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			InputPinActivationImpl();
-			virtual std::shared_ptr<InputPinActivation> getThisInputPinActivationPtr();
+			virtual std::shared_ptr<InputPinActivation> getThisInputPinActivationPtr() const;
 			virtual void setThisInputPinActivationPtr(std::weak_ptr<InputPinActivation> thisInputPinActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			/*!
 			 */ 
-			virtual void recieveOffer()  ;
+			virtual void recieveOffer() ;
 			
 			
 			
@@ -91,9 +91,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<InputPinActivation> m_thisInputPinActivationPtr;

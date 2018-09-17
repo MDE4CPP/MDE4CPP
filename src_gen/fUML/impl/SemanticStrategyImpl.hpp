@@ -32,7 +32,7 @@ virtual public SemanticStrategy
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticStrategyImpl();
-			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr();
+			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr() const;
 			virtual void setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr);
 
 
@@ -46,7 +46,7 @@ virtual public SemanticStrategy
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string retrieveName()  ;
+			virtual std::string retrieveName() ;
 			
 			
 			
@@ -85,9 +85,9 @@ virtual public SemanticStrategy
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<SemanticStrategy> m_thisSemanticStrategyPtr;

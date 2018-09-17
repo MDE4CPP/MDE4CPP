@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -128,7 +129,7 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -142,7 +143,7 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +153,7 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +161,7 @@ std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +176,7 @@ std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 	//end of body
 }
 
-std::string EnumerationValueImpl::toString() 
+std::string EnumerationValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -211,7 +212,7 @@ void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 //*********************************
 
 
-std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr()
+std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
 {
 	return m_thisEnumerationValuePtr.lock();
 }
@@ -228,16 +229,16 @@ std::shared_ptr<ecore::EObject> EnumerationValueImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
-			return getLiteral(); //330
+			return eAny(getLiteral()); //330
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
-			return getType(); //331
+			return eAny(getType()); //331
 	}
-	return ValueImpl::internalEIsSet(featureID);
+	return ValueImpl::eGet(featureID, resolve, coreType);
 }
 bool EnumerationValueImpl::internalEIsSet(int featureID) const
 {
@@ -250,21 +251,21 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
-bool EnumerationValueImpl::eSet(int featureID, boost::any newValue)
+bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::EnumerationLiteral> _literal = boost::any_cast<std::shared_ptr<uml::EnumerationLiteral>>(newValue);
+			std::shared_ptr<uml::EnumerationLiteral> _literal = newValue->get<std::shared_ptr<uml::EnumerationLiteral>>();
 			setLiteral(_literal); //330
 			return true;
 		}
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Enumeration> _type = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			std::shared_ptr<uml::Enumeration> _type = newValue->get<std::shared_ptr<uml::Enumeration>>();
 			setType(_type); //331
 			return true;
 		}

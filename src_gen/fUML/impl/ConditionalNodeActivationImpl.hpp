@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ConditionalNodeActivationImpl();
-			virtual std::shared_ptr<ConditionalNodeActivation> getThisConditionalNodeActivationPtr();
+			virtual std::shared_ptr<ConditionalNodeActivation> getThisConditionalNodeActivationPtr() const;
 			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) ;
 			
 			/*!
 			 */ 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause) ;
 			
 			/*!
 			 */ 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) ;
 			
 			
 			
@@ -105,9 +105,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ConditionalNodeActivation> m_thisConditionalNodeActivationPtr;

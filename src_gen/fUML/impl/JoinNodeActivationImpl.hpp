@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			JoinNodeActivationImpl();
-			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr();
+			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr() const;
 			virtual void setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool isReady() ;
 			
 			
 			
@@ -87,9 +87,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<JoinNodeActivation> m_thisJoinNodeActivationPtr;

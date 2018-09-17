@@ -30,7 +30,7 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredActivityNodeActivationImpl();
-			virtual std::shared_ptr<StructuredActivityNodeActivation> getThisStructuredActivityNodeActivationPtr();
+			virtual std::shared_ptr<StructuredActivityNodeActivation> getThisStructuredActivityNodeActivationPtr() const;
 			virtual void setThisStructuredActivityNodeActivationPtr(std::weak_ptr<StructuredActivityNodeActivation> thisStructuredActivityNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
@@ -48,59 +48,59 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > completeAction() ;
 			
 			/*!
 			 */ 
-			virtual void createEdgeInstances()  ;
+			virtual void createEdgeInstances() ;
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations()  ;
+			virtual void createNodeActivations() ;
 			
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void doAction() ;
 			
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  ;
+			virtual void doStructuredActivity() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin) ;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) ;
 			
 			/*!
 			 */ 
-			virtual bool isSuspended()  ;
+			virtual bool isSuspended() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) ;
 			
 			/*!
 			 */ 
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) ;
 			
 			/*!
 			 */ 
-			virtual void resume()  ;
+			virtual void resume() ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void terminate() ;
 			
 			/*!
 			 */ 
-			virtual void terminateAll()  ;
+			virtual void terminateAll() ;
 			
 			
 			
@@ -148,9 +148,9 @@ namespace fUML
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<StructuredActivityNodeActivation> m_thisStructuredActivityNodeActivationPtr;

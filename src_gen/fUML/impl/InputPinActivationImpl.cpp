@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -147,7 +148,7 @@ std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InputPinActivationImpl::isReady() 
+bool InputPinActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -166,7 +167,7 @@ bool InputPinActivationImpl::isReady()
 	//end of body
 }
 
-void InputPinActivationImpl::recieveOffer() 
+void InputPinActivationImpl::recieveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +184,7 @@ void InputPinActivationImpl::recieveOffer()
 //*********************************
 
 
-std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr()
+std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
 {
 	return m_thisInputPinActivationPtr.lock();
 }
@@ -204,12 +205,12 @@ std::shared_ptr<ecore::EObject> InputPinActivationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any InputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return PinActivationImpl::internalEIsSet(featureID);
+	return PinActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool InputPinActivationImpl::internalEIsSet(int featureID) const
 {
@@ -218,7 +219,7 @@ bool InputPinActivationImpl::internalEIsSet(int featureID) const
 	}
 	return PinActivationImpl::internalEIsSet(featureID);
 }
-bool InputPinActivationImpl::eSet(int featureID, boost::any newValue)
+bool InputPinActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

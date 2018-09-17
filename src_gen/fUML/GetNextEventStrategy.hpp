@@ -83,7 +83,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  = 0;
+			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation) = 0;
 			
 			
 			//*********************************

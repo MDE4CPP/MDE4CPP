@@ -32,7 +32,7 @@ virtual public SemanticVisitor
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticVisitorImpl();
-			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr();
+			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr() const;
 			virtual void setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr);
 
 
@@ -46,11 +46,11 @@ virtual public SemanticVisitor
 			//*********************************
 			/*!
 			 */ 
-			virtual void _beginIsolation()  ;
+			virtual void _beginIsolation() ;
 			
 			/*!
 			 */ 
-			virtual void _endIsolation()  ;
+			virtual void _endIsolation() ;
 			
 			
 			
@@ -89,9 +89,9 @@ virtual public SemanticVisitor
 
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<SemanticVisitor> m_thisSemanticVisitorPtr;

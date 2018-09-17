@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -101,7 +102,7 @@ std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void SemanticVisitorImpl::_beginIsolation() 
+void SemanticVisitorImpl::_beginIsolation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -109,7 +110,7 @@ void SemanticVisitorImpl::_beginIsolation()
 	//end of body
 }
 
-void SemanticVisitorImpl::_endIsolation() 
+void SemanticVisitorImpl::_endIsolation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -126,7 +127,7 @@ void SemanticVisitorImpl::_endIsolation()
 //*********************************
 
 
-std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr()
+std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
 {
 	return m_thisSemanticVisitorPtr.lock();
 }
@@ -142,12 +143,12 @@ std::shared_ptr<ecore::EObject> SemanticVisitorImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SemanticVisitorImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any SemanticVisitorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool SemanticVisitorImpl::internalEIsSet(int featureID) const
 {
@@ -156,7 +157,7 @@ bool SemanticVisitorImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
-bool SemanticVisitorImpl::eSet(int featureID, boost::any newValue)
+bool SemanticVisitorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
