@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -114,7 +115,6 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 	#endif
 	m_changeable = obj.isChangeable();
 	m_container = obj.isContainer();
-	m_containerClass = obj.getContainerClass();
 	m_containment = obj.isContainment();
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
@@ -244,7 +244,7 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //*********************************
 
 
-std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr()
+std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const
 {
 	return m_thisEReferencePtr.lock();
 }
@@ -265,67 +265,67 @@ std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
-			return isContainer(); //1421
+			return eAny(isContainer()); //1420
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
-			return isContainment(); //1420
+			return eAny(isContainment()); //1419
 		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
-			return getEKeys(); //1425
+			return eAny(getEKeys()); //1424
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
-			return getEOpposite(); //1423
+			return eAny(getEOpposite()); //1422
 		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
-			return getEReferenceType(); //1424
+			return eAny(getEReferenceType()); //1423
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
-			return isResolveProxies(); //1422
+			return eAny(isResolveProxies()); //1421
 	}
-	return EStructuralFeatureImpl::internalEIsSet(featureID);
+	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
 bool EReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
-			return isContainer() != false; //1421
+			return isContainer() != false; //1420
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
-			return isContainment() != false; //1420
+			return isContainment() != false; //1419
 		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
-			return getEKeys() != nullptr; //1425
+			return getEKeys() != nullptr; //1424
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
-			return getEOpposite() != nullptr; //1423
+			return getEOpposite() != nullptr; //1422
 		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
-			return getEReferenceType() != nullptr; //1424
+			return getEReferenceType() != nullptr; //1423
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
-			return isResolveProxies() != true; //1422
+			return isResolveProxies() != true; //1421
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
-bool EReferenceImpl::eSet(int featureID, boost::any newValue)
+bool EReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
 		{
 			// BOOST CAST
-			bool _containment = boost::any_cast<bool>(newValue);
-			setContainment(_containment); //1420
+			bool _containment = newValue->get<bool>();
+			setContainment(_containment); //1419
 			return true;
 		}
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EReference> _eOpposite = boost::any_cast<std::shared_ptr<ecore::EReference>>(newValue);
-			setEOpposite(_eOpposite); //1423
+			std::shared_ptr<ecore::EReference> _eOpposite = newValue->get<std::shared_ptr<ecore::EReference>>();
+			setEOpposite(_eOpposite); //1422
 			return true;
 		}
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
-			bool _resolveProxies = boost::any_cast<bool>(newValue);
-			setResolveProxies(_resolveProxies); //1422
+			bool _resolveProxies = newValue->get<bool>();
+			setResolveProxies(_resolveProxies); //1421
 			return true;
 		}
 	}

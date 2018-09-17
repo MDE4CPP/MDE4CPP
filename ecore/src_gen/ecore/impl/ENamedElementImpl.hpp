@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			ENamedElementImpl();
-			virtual std::shared_ptr<ENamedElement> getThisENamedElementPtr();
+			virtual std::shared_ptr<ENamedElement> getThisENamedElementPtr() const;
 			virtual void setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr);
 
 
@@ -87,9 +87,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ENamedElement> m_thisENamedElementPtr;

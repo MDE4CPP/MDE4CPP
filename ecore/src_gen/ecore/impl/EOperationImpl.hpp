@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EOperationImpl();
-			virtual std::shared_ptr<EOperation> getThisEOperationPtr();
+			virtual std::shared_ptr<EOperation> getThisEOperationPtr() const;
 			virtual void setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr);
 
 			//Additional constructors for the containments back reference
@@ -46,9 +46,11 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			
+			
 			/*!
 			 */ 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  ;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const ;
 			
 			
 			
@@ -115,9 +117,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EOperation> m_thisEOperationPtr;

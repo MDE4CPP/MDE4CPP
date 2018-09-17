@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -197,7 +198,7 @@ std::string EPackageImpl::getNsURI() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name)  const 
+std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -252,7 +253,7 @@ std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 //*********************************
 
 
-std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr()
+std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const
 {
 	return m_thisEPackagePtr.lock();
 }
@@ -273,24 +274,24 @@ std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EPACKAGE_EREFERENCE_ECLASSIFIERS:
-			return getEClassifiers(); //125
+			return eAny(getEClassifiers()); //125
 		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
-			return getEFactoryInstance(); //124
+			return eAny(getEFactoryInstance()); //124
 		case EcorePackage::EPACKAGE_EREFERENCE_ESUBPACKAGES:
-			return getESubpackages(); //126
+			return eAny(getESubpackages()); //126
 		case EcorePackage::EPACKAGE_EREFERENCE_ESUPERPACKAGE:
-			return getESuperPackage(); //127
+			return eAny(getESuperPackage()); //127
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
-			return getNsPrefix(); //123
+			return eAny(getNsPrefix()); //123
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
-			return getNsURI(); //122
+			return eAny(getNsURI()); //122
 	}
-	return ENamedElementImpl::internalEIsSet(featureID);
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EPackageImpl::internalEIsSet(int featureID) const
 {
@@ -311,28 +312,28 @@ bool EPackageImpl::internalEIsSet(int featureID) const
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
-bool EPackageImpl::eSet(int featureID, boost::any newValue)
+bool EPackageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EPACKAGE_EREFERENCE_EFACTORYINSTANCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EFactory> _eFactoryInstance = boost::any_cast<std::shared_ptr<ecore::EFactory>>(newValue);
+			std::shared_ptr<ecore::EFactory> _eFactoryInstance = newValue->get<std::shared_ptr<ecore::EFactory>>();
 			setEFactoryInstance(_eFactoryInstance); //124
 			return true;
 		}
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSPREFIX:
 		{
 			// BOOST CAST
-			std::string _nsPrefix = boost::any_cast<std::string>(newValue);
+			std::string _nsPrefix = newValue->get<std::string>();
 			setNsPrefix(_nsPrefix); //123
 			return true;
 		}
 		case EcorePackage::EPACKAGE_EATTRIBUTE_NSURI:
 		{
 			// BOOST CAST
-			std::string _nsURI = boost::any_cast<std::string>(newValue);
+			std::string _nsURI = newValue->get<std::string>();
 			setNsURI(_nsURI); //122
 			return true;
 		}

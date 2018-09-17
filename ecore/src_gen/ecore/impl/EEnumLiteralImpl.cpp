@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -131,12 +132,12 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EEnumLiteralImpl::setInstance(boost::any _instance)
+void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
 } 
 
-boost::any EEnumLiteralImpl::getInstance() const 
+Any EEnumLiteralImpl::getInstance() const 
 {
 	return m_instance;
 }
@@ -180,7 +181,7 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 //*********************************
 
 
-std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr()
+std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
 {
 	return m_thisEEnumLiteralPtr.lock();
 }
@@ -201,20 +202,20 @@ std::shared_ptr<ecore::EObject> EEnumLiteralImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
-			return getEEnum(); //65
+			return eAny(getEEnum()); //65
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
-			return getInstance(); //63
+			return eAny(getInstance()); //63
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
-			return getLiteral(); //64
+			return eAny(getLiteral()); //64
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
-			return getValue(); //62
+			return eAny(getValue()); //62
 	}
-	return ENamedElementImpl::internalEIsSet(featureID);
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 {
@@ -223,7 +224,7 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
 			return getEEnum().lock() != nullptr; //65
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
-			return !getInstance().empty(); //63
+			return !getInstance()->isEmpty(); //63
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 			return getLiteral() != ""; //64
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
@@ -231,28 +232,28 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
-bool EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
+bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
-			boost::any _instance = boost::any_cast<boost::any>(newValue);
+			Any _instance = newValue->get<Any>();
 			setInstance(_instance); //63
 			return true;
 		}
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
-			std::string _literal = boost::any_cast<std::string>(newValue);
+			std::string _literal = newValue->get<std::string>();
 			setLiteral(_literal); //64
 			return true;
 		}
 		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			int _value = boost::any_cast<int>(newValue);
+			int _value = newValue->get<int>();
 			setValue(_value); //62
 			return true;
 		}

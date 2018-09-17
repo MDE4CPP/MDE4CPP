@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EEnumLiteralImpl();
-			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr();
+			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr() const;
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
@@ -53,11 +53,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual boost::any getInstance() const ;
+			virtual Any getInstance() const ;
 			
 			/*!
 			 */ 
-			virtual void setInstance (boost::any _instance); 
+			virtual void setInstance (Any _instance); 
 			
 			/*!
 			 */ 
@@ -111,9 +111,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EEnumLiteral> m_thisEEnumLiteralPtr;

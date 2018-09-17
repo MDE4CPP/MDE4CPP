@@ -40,13 +40,11 @@ void EcorePackageImpl::initializePackageContents()
 	m_eEnum_EClass->getESuperTypes()->push_back(getEDataType_EClass());
 	m_eEnumLiteral_EClass->getESuperTypes()->push_back(getENamedElement_EClass());
 	m_eFactory_EClass->getESuperTypes()->push_back(getEModelElement_EClass());
-	m_eGenericType_EClass->getESuperTypes()->push_back(getEObject_EClass());
 	m_eNamedElement_EClass->getESuperTypes()->push_back(getEModelElement_EClass());
 	m_eOperation_EClass->getESuperTypes()->push_back(getETypedElement_EClass());
 	m_ePackage_EClass->getESuperTypes()->push_back(getENamedElement_EClass());
 	m_eParameter_EClass->getESuperTypes()->push_back(getETypedElement_EClass());
 	m_eReference_EClass->getESuperTypes()->push_back(getEStructuralFeature_EClass());
-	m_eStringToStringMapEntry_EClass->getESuperTypes()->push_back(getEObject_EClass());
 	m_eStructuralFeature_EClass->getESuperTypes()->push_back(getETypedElement_EClass());
 	m_eTypeParameter_EClass->getESuperTypes()->push_back(getENamedElement_EClass());
 	m_eTypedElement_EClass->getESuperTypes()->push_back(getENamedElement_EClass());
@@ -79,7 +77,6 @@ void EcorePackageImpl::initializePackageContents()
 
 void EcorePackageImpl::initializeEAnnotationContent()
 {
-	m_eAnnotation_EClass->setInstanceClass(nullptr);
 	m_eAnnotation_EClass->setName("EAnnotation");
 	m_eAnnotation_EClass->setAbstract(false);
 	m_eAnnotation_EClass->setInterface(false);
@@ -211,7 +208,6 @@ void EcorePackageImpl::initializeEAnnotationContent()
 
 void EcorePackageImpl::initializeEAttributeContent()
 {
-	m_eAttribute_EClass->setInstanceClass(nullptr);
 	m_eAttribute_EClass->setName("EAttribute");
 	m_eAttribute_EClass->setAbstract(false);
 	m_eAttribute_EClass->setInterface(false);
@@ -268,7 +264,6 @@ void EcorePackageImpl::initializeEAttributeContent()
 
 void EcorePackageImpl::initializeEClassContent()
 {
-	m_eClass_EClass->setInstanceClass(nullptr);
 	m_eClass_EClass->setName("EClass");
 	m_eClass_EClass->setAbstract(false);
 	m_eClass_EClass->setInterface(false);
@@ -822,7 +817,6 @@ void EcorePackageImpl::initializeEClassContent()
 
 void EcorePackageImpl::initializeEClassifierContent()
 {
-	m_eClassifier_EClass->setInstanceClass(nullptr);
 	m_eClassifier_EClass->setName("EClassifier");
 	m_eClassifier_EClass->setAbstract(true);
 	m_eClassifier_EClass->setInterface(false);
@@ -874,10 +868,10 @@ void EcorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_EAttribute_instanceClass->setUpperBound(1);
 	m_eClassifier_EAttribute_instanceClass->setTransient(true);
 	m_eClassifier_EAttribute_instanceClass->setVolatile(true);
-	m_eClassifier_EAttribute_instanceClass->setChangeable(true);
+	m_eClassifier_EAttribute_instanceClass->setChangeable(false);
 	m_eClassifier_EAttribute_instanceClass->setUnsettable(false);
 	m_eClassifier_EAttribute_instanceClass->setUnique(true);
-	m_eClassifier_EAttribute_instanceClass->setDerived(false);
+	m_eClassifier_EAttribute_instanceClass->setDerived(true);
 	m_eClassifier_EAttribute_instanceClass->setOrdered(true);
 	m_eClassifier_EAttribute_instanceClass->setID(false);
 	{
@@ -934,7 +928,7 @@ void EcorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_EReference_ePackage->setUpperBound(1);
 	m_eClassifier_EReference_ePackage->setTransient(true);
 	m_eClassifier_EReference_ePackage->setVolatile(false);
-	m_eClassifier_EReference_ePackage->setChangeable(true);
+	m_eClassifier_EReference_ePackage->setChangeable(false);
 	m_eClassifier_EReference_ePackage->setUnsettable(false);
 	m_eClassifier_EReference_ePackage->setUnique(true);
 	m_eClassifier_EReference_ePackage->setDerived(false);
@@ -979,6 +973,14 @@ void EcorePackageImpl::initializeEClassifierContent()
 	    }
 	}
 	
+	m_eClassifier_EOperation_getClassifierID->setEType(getEInt_EDataType());
+	m_eClassifier_EOperation_getClassifierID->setName("getClassifierID");
+	m_eClassifier_EOperation_getClassifierID->setLowerBound(0);
+	m_eClassifier_EOperation_getClassifierID->setUpperBound(1);
+	m_eClassifier_EOperation_getClassifierID->setUnique(true);
+	m_eClassifier_EOperation_getClassifierID->setOrdered(true);
+	
+	
 	m_eClassifier_EOperation_isInstance_EJavaObject->setEType(getEBoolean_EDataType());
 	m_eClassifier_EOperation_isInstance_EJavaObject->setName("isInstance");
 	m_eClassifier_EOperation_isInstance_EJavaObject->setLowerBound(0);
@@ -1001,7 +1003,6 @@ void EcorePackageImpl::initializeEClassifierContent()
 
 void EcorePackageImpl::initializeEDataTypeContent()
 {
-	m_eDataType_EClass->setInstanceClass(nullptr);
 	m_eDataType_EClass->setName("EDataType");
 	m_eDataType_EClass->setAbstract(false);
 	m_eDataType_EClass->setInterface(false);
@@ -1033,7 +1034,6 @@ void EcorePackageImpl::initializeEDataTypeContent()
 
 void EcorePackageImpl::initializeEEnumContent()
 {
-	m_eEnum_EClass->setInstanceClass(nullptr);
 	m_eEnum_EClass->setName("EEnum");
 	m_eEnum_EClass->setAbstract(false);
 	m_eEnum_EClass->setInterface(false);
@@ -1121,7 +1121,6 @@ void EcorePackageImpl::initializeEEnumContent()
 
 void EcorePackageImpl::initializeEEnumLiteralContent()
 {
-	m_eEnumLiteral_EClass->setInstanceClass(nullptr);
 	m_eEnumLiteral_EClass->setName("EEnumLiteral");
 	m_eEnumLiteral_EClass->setAbstract(false);
 	m_eEnumLiteral_EClass->setInterface(false);
@@ -1218,7 +1217,6 @@ void EcorePackageImpl::initializeEEnumLiteralContent()
 
 void EcorePackageImpl::initializeEFactoryContent()
 {
-	m_eFactory_EClass->setInstanceClass(nullptr);
 	m_eFactory_EClass->setName("EFactory");
 	m_eFactory_EClass->setAbstract(false);
 	m_eFactory_EClass->setInterface(false);
@@ -1277,27 +1275,17 @@ void EcorePackageImpl::initializeEFactoryContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_eFactory_EOperation_create_EClass_EObject->setEType(getEObject_EClass());
-	m_eFactory_EOperation_create_EClass_EObject->setName("create");
-	m_eFactory_EOperation_create_EClass_EObject->setLowerBound(0);
-	m_eFactory_EOperation_create_EClass_EObject->setUpperBound(1);
-	m_eFactory_EOperation_create_EClass_EObject->setUnique(true);
-	m_eFactory_EOperation_create_EClass_EObject->setOrdered(true);
+	m_eFactory_EOperation_create_EClass->setEType(getEObject_EClass());
+	m_eFactory_EOperation_create_EClass->setName("create");
+	m_eFactory_EOperation_create_EClass->setLowerBound(0);
+	m_eFactory_EOperation_create_EClass->setUpperBound(1);
+	m_eFactory_EOperation_create_EClass->setUnique(true);
+	m_eFactory_EOperation_create_EClass->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_EOperation_create_EClass_EObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_EOperation_create_EClass);
 		parameter->setName("eClass");
 		parameter->setEType(getEClass_EClass());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_EOperation_create_EClass_EObject);
-		parameter->setName("container");
-		parameter->setEType(getEObject_EClass());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -1336,7 +1324,6 @@ void EcorePackageImpl::initializeEFactoryContent()
 
 void EcorePackageImpl::initializeEGenericTypeContent()
 {
-	m_eGenericType_EClass->setInstanceClass(nullptr);
 	m_eGenericType_EClass->setName("EGenericType");
 	m_eGenericType_EClass->setAbstract(false);
 	m_eGenericType_EClass->setInterface(false);
@@ -1515,7 +1502,6 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 
 void EcorePackageImpl::initializeEModelElementContent()
 {
-	m_eModelElement_EClass->setInstanceClass(nullptr);
 	m_eModelElement_EClass->setName("EModelElement");
 	m_eModelElement_EClass->setAbstract(true);
 	m_eModelElement_EClass->setInterface(false);
@@ -1569,7 +1555,6 @@ void EcorePackageImpl::initializeEModelElementContent()
 
 void EcorePackageImpl::initializeENamedElementContent()
 {
-	m_eNamedElement_EClass->setInstanceClass(nullptr);
 	m_eNamedElement_EClass->setName("ENamedElement");
 	m_eNamedElement_EClass->setAbstract(true);
 	m_eNamedElement_EClass->setInterface(false);
@@ -1601,37 +1586,11 @@ void EcorePackageImpl::initializeENamedElementContent()
 
 void EcorePackageImpl::initializeEObjectContent()
 {
-	m_eObject_EClass->setInstanceClass(nullptr);
 	m_eObject_EClass->setName("EObject");
 	m_eObject_EClass->setAbstract(false);
 	m_eObject_EClass->setInterface(false);
 	
 	
-	m_eObject_EReference_eContainer->setName("eContainer");
-	m_eObject_EReference_eContainer->setEType(getEObject_EClass());
-	m_eObject_EReference_eContainer->setLowerBound(0);
-	m_eObject_EReference_eContainer->setUpperBound(1);
-	m_eObject_EReference_eContainer->setTransient(false);
-	m_eObject_EReference_eContainer->setVolatile(false);
-	m_eObject_EReference_eContainer->setChangeable(false);
-	m_eObject_EReference_eContainer->setUnsettable(false);
-	m_eObject_EReference_eContainer->setUnique(true);
-	m_eObject_EReference_eContainer->setDerived(false);
-	m_eObject_EReference_eContainer->setOrdered(true);
-	m_eObject_EReference_eContainer->setContainment(false);
-	m_eObject_EReference_eContainer->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_eObject_EReference_eContainer->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eObject_EReference_eContainer->setEOpposite(otherEnd);
-	    }
-	}
 	
 	m_eObject_EOperation_eAllContents->setEType(getETreeIterator_EDataType());
 	m_eObject_EOperation_eAllContents->setName("eAllContents");
@@ -1647,6 +1606,14 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_EOperation_eClass->setUpperBound(1);
 	m_eObject_EOperation_eClass->setUnique(true);
 	m_eObject_EOperation_eClass->setOrdered(true);
+	
+	
+	m_eObject_EOperation_eContainer->setEType(getEObject_EClass());
+	m_eObject_EOperation_eContainer->setName("eContainer");
+	m_eObject_EOperation_eContainer->setLowerBound(0);
+	m_eObject_EOperation_eContainer->setUpperBound(1);
+	m_eObject_EOperation_eContainer->setUnique(true);
+	m_eObject_EOperation_eContainer->setOrdered(true);
 	
 	
 	m_eObject_EOperation_eContainingFeature->setEType(getEStructuralFeature_EClass());
@@ -1834,7 +1801,6 @@ void EcorePackageImpl::initializeEObjectContent()
 
 void EcorePackageImpl::initializeEOperationContent()
 {
-	m_eOperation_EClass->setInstanceClass(nullptr);
 	m_eOperation_EClass->setName("EOperation");
 	m_eOperation_EClass->setAbstract(false);
 	m_eOperation_EClass->setInterface(false);
@@ -1986,6 +1952,14 @@ void EcorePackageImpl::initializeEOperationContent()
 	    }
 	}
 	
+	m_eOperation_EOperation_getOperationID->setEType(getEInt_EDataType());
+	m_eOperation_EOperation_getOperationID->setName("getOperationID");
+	m_eOperation_EOperation_getOperationID->setLowerBound(0);
+	m_eOperation_EOperation_getOperationID->setUpperBound(1);
+	m_eOperation_EOperation_getOperationID->setUnique(true);
+	m_eOperation_EOperation_getOperationID->setOrdered(true);
+	
+	
 	m_eOperation_EOperation_isOverrideOf_EOperation->setEType(getEBoolean_EDataType());
 	m_eOperation_EOperation_isOverrideOf_EOperation->setName("isOverrideOf");
 	m_eOperation_EOperation_isOverrideOf_EOperation->setLowerBound(0);
@@ -2008,7 +1982,6 @@ void EcorePackageImpl::initializeEOperationContent()
 
 void EcorePackageImpl::initializeEPackageContent()
 {
-	m_ePackage_EClass->setInstanceClass(nullptr);
 	m_ePackage_EClass->setName("EPackage");
 	m_ePackage_EClass->setAbstract(false);
 	m_ePackage_EClass->setInterface(false);
@@ -2177,7 +2150,6 @@ void EcorePackageImpl::initializeEPackageContent()
 
 void EcorePackageImpl::initializeEParameterContent()
 {
-	m_eParameter_EClass->setInstanceClass(nullptr);
 	m_eParameter_EClass->setName("EParameter");
 	m_eParameter_EClass->setAbstract(false);
 	m_eParameter_EClass->setInterface(false);
@@ -2214,7 +2186,6 @@ void EcorePackageImpl::initializeEParameterContent()
 
 void EcorePackageImpl::initializeEReferenceContent()
 {
-	m_eReference_EClass->setInstanceClass(nullptr);
 	m_eReference_EClass->setName("EReference");
 	m_eReference_EClass->setAbstract(false);
 	m_eReference_EClass->setInterface(false);
@@ -2361,7 +2332,6 @@ void EcorePackageImpl::initializeEReferenceContent()
 
 void EcorePackageImpl::initializeEStringToStringMapEntryContent()
 {
-	m_eStringToStringMapEntry_EClass->setInstanceClass(nullptr);
 	m_eStringToStringMapEntry_EClass->setName("EStringToStringMapEntry");
 	m_eStringToStringMapEntry_EClass->setAbstract(false);
 	m_eStringToStringMapEntry_EClass->setInterface(false);
@@ -2413,7 +2383,6 @@ void EcorePackageImpl::initializeEStringToStringMapEntryContent()
 
 void EcorePackageImpl::initializeEStructuralFeatureContent()
 {
-	m_eStructuralFeature_EClass->setInstanceClass(nullptr);
 	m_eStructuralFeature_EClass->setName("EStructuralFeature");
 	m_eStructuralFeature_EClass->setAbstract(true);
 	m_eStructuralFeature_EClass->setInterface(false);
@@ -2436,26 +2405,6 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 		if (!defaultValue.empty())
 		{
 		   m_eStructuralFeature_EAttribute_changeable->setDefaultValueLiteral(defaultValue);
-		}
-	}
-	m_eStructuralFeature_EAttribute_containerClass = getEStructuralFeature_EAttribute_containerClass();
-	m_eStructuralFeature_EAttribute_containerClass->setName("containerClass");
-	m_eStructuralFeature_EAttribute_containerClass->setEType(getEJavaClass_EDataType());
-	m_eStructuralFeature_EAttribute_containerClass->setLowerBound(0);
-	m_eStructuralFeature_EAttribute_containerClass->setUpperBound(1);
-	m_eStructuralFeature_EAttribute_containerClass->setTransient(false);
-	m_eStructuralFeature_EAttribute_containerClass->setVolatile(false);
-	m_eStructuralFeature_EAttribute_containerClass->setChangeable(false);
-	m_eStructuralFeature_EAttribute_containerClass->setUnsettable(false);
-	m_eStructuralFeature_EAttribute_containerClass->setUnique(true);
-	m_eStructuralFeature_EAttribute_containerClass->setDerived(false);
-	m_eStructuralFeature_EAttribute_containerClass->setOrdered(true);
-	m_eStructuralFeature_EAttribute_containerClass->setID(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-		   m_eStructuralFeature_EAttribute_containerClass->setDefaultValueLiteral(defaultValue);
 		}
 	}
 	m_eStructuralFeature_EAttribute_defaultValue = getEStructuralFeature_EAttribute_defaultValue();
@@ -2625,12 +2574,27 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 	    }
 	}
 	
+	m_eStructuralFeature_EOperation_getContainerClass->setEType(getEJavaClass_EDataType());
+	m_eStructuralFeature_EOperation_getContainerClass->setName("getContainerClass");
+	m_eStructuralFeature_EOperation_getContainerClass->setLowerBound(0);
+	m_eStructuralFeature_EOperation_getContainerClass->setUpperBound(1);
+	m_eStructuralFeature_EOperation_getContainerClass->setUnique(true);
+	m_eStructuralFeature_EOperation_getContainerClass->setOrdered(true);
+	
+	
+	m_eStructuralFeature_EOperation_getFeatureID->setEType(getEInt_EDataType());
+	m_eStructuralFeature_EOperation_getFeatureID->setName("getFeatureID");
+	m_eStructuralFeature_EOperation_getFeatureID->setLowerBound(0);
+	m_eStructuralFeature_EOperation_getFeatureID->setUpperBound(1);
+	m_eStructuralFeature_EOperation_getFeatureID->setUnique(true);
+	m_eStructuralFeature_EOperation_getFeatureID->setOrdered(true);
+	
+	
 	
 }
 
 void EcorePackageImpl::initializeETypeParameterContent()
 {
-	m_eTypeParameter_EClass->setInstanceClass(nullptr);
 	m_eTypeParameter_EClass->setName("ETypeParameter");
 	m_eTypeParameter_EClass->setAbstract(false);
 	m_eTypeParameter_EClass->setInterface(false);
@@ -2667,7 +2631,6 @@ void EcorePackageImpl::initializeETypeParameterContent()
 
 void EcorePackageImpl::initializeETypedElementContent()
 {
-	m_eTypedElement_EClass->setInstanceClass(nullptr);
 	m_eTypedElement_EClass->setName("ETypedElement");
 	m_eTypedElement_EClass->setAbstract(true);
 	m_eTypedElement_EClass->setInterface(false);
@@ -2849,103 +2812,70 @@ void EcorePackageImpl::initializeETypedElementContent()
 
 void EcorePackageImpl::initializePackageEDataTypes()
 {
-	m_eBigDecimal_EDataType->setInstanceClass(nullptr);
 	m_eBigDecimal_EDataType->setName("EBigDecimal");
 	m_eBigDecimal_EDataType->setSerializable(true);
-	m_eBigInteger_EDataType->setInstanceClass(nullptr);
 	m_eBigInteger_EDataType->setName("EBigInteger");
 	m_eBigInteger_EDataType->setSerializable(true);
-	m_eBoolean_EDataType->setInstanceClass(nullptr);
 	m_eBoolean_EDataType->setName("EBoolean");
 	m_eBoolean_EDataType->setSerializable(true);
-	m_eBooleanObject_EDataType->setInstanceClass(nullptr);
 	m_eBooleanObject_EDataType->setName("EBooleanObject");
 	m_eBooleanObject_EDataType->setSerializable(true);
-	m_eByte_EDataType->setInstanceClass(nullptr);
 	m_eByte_EDataType->setName("EByte");
 	m_eByte_EDataType->setSerializable(true);
-	m_eByteArray_EDataType->setInstanceClass(nullptr);
 	m_eByteArray_EDataType->setName("EByteArray");
 	m_eByteArray_EDataType->setSerializable(true);
-	m_eByteObject_EDataType->setInstanceClass(nullptr);
 	m_eByteObject_EDataType->setName("EByteObject");
 	m_eByteObject_EDataType->setSerializable(true);
-	m_eChar_EDataType->setInstanceClass(nullptr);
 	m_eChar_EDataType->setName("EChar");
 	m_eChar_EDataType->setSerializable(true);
-	m_eCharacterObject_EDataType->setInstanceClass(nullptr);
 	m_eCharacterObject_EDataType->setName("ECharacterObject");
 	m_eCharacterObject_EDataType->setSerializable(true);
-	m_eDate_EDataType->setInstanceClass(nullptr);
 	m_eDate_EDataType->setName("EDate");
 	m_eDate_EDataType->setSerializable(true);
-	m_eDiagnosticChain_EDataType->setInstanceClass(nullptr);
 	m_eDiagnosticChain_EDataType->setName("EDiagnosticChain");
 	m_eDiagnosticChain_EDataType->setSerializable(false);
-	m_eDouble_EDataType->setInstanceClass(nullptr);
 	m_eDouble_EDataType->setName("EDouble");
 	m_eDouble_EDataType->setSerializable(true);
-	m_eDoubleObject_EDataType->setInstanceClass(nullptr);
 	m_eDoubleObject_EDataType->setName("EDoubleObject");
 	m_eDoubleObject_EDataType->setSerializable(true);
-	m_eEList_EDataType->setInstanceClass(nullptr);
 	m_eEList_EDataType->setName("EEList");
 	m_eEList_EDataType->setSerializable(false);
-	m_eEnumerator_EDataType->setInstanceClass(nullptr);
 	m_eEnumerator_EDataType->setName("EEnumerator");
 	m_eEnumerator_EDataType->setSerializable(false);
-	m_eFeatureMap_EDataType->setInstanceClass(nullptr);
 	m_eFeatureMap_EDataType->setName("EFeatureMap");
 	m_eFeatureMap_EDataType->setSerializable(false);
-	m_eFeatureMapEntry_EDataType->setInstanceClass(nullptr);
 	m_eFeatureMapEntry_EDataType->setName("EFeatureMapEntry");
 	m_eFeatureMapEntry_EDataType->setSerializable(false);
-	m_eFloat_EDataType->setInstanceClass(nullptr);
 	m_eFloat_EDataType->setName("EFloat");
 	m_eFloat_EDataType->setSerializable(true);
-	m_eFloatObject_EDataType->setInstanceClass(nullptr);
 	m_eFloatObject_EDataType->setName("EFloatObject");
 	m_eFloatObject_EDataType->setSerializable(true);
-	m_eInt_EDataType->setInstanceClass(nullptr);
 	m_eInt_EDataType->setName("EInt");
 	m_eInt_EDataType->setSerializable(true);
-	m_eIntegerObject_EDataType->setInstanceClass(nullptr);
 	m_eIntegerObject_EDataType->setName("EIntegerObject");
 	m_eIntegerObject_EDataType->setSerializable(true);
-	m_eInvocationTargetException_EDataType->setInstanceClass(nullptr);
 	m_eInvocationTargetException_EDataType->setName("EInvocationTargetException");
 	m_eInvocationTargetException_EDataType->setSerializable(false);
-	m_eJavaClass_EDataType->setInstanceClass(nullptr);
 	m_eJavaClass_EDataType->setName("EJavaClass");
 	m_eJavaClass_EDataType->setSerializable(true);
-	m_eJavaObject_EDataType->setInstanceClass(nullptr);
 	m_eJavaObject_EDataType->setName("EJavaObject");
 	m_eJavaObject_EDataType->setSerializable(true);
-	m_eLong_EDataType->setInstanceClass(nullptr);
 	m_eLong_EDataType->setName("ELong");
 	m_eLong_EDataType->setSerializable(true);
-	m_eLongObject_EDataType->setInstanceClass(nullptr);
 	m_eLongObject_EDataType->setName("ELongObject");
 	m_eLongObject_EDataType->setSerializable(true);
-	m_eMap_EDataType->setInstanceClass(nullptr);
 	m_eMap_EDataType->setName("EMap");
 	m_eMap_EDataType->setSerializable(false);
-	m_eResource_EDataType->setInstanceClass(nullptr);
 	m_eResource_EDataType->setName("EResource");
 	m_eResource_EDataType->setSerializable(false);
-	m_eResourceSet_EDataType->setInstanceClass(nullptr);
 	m_eResourceSet_EDataType->setName("EResourceSet");
 	m_eResourceSet_EDataType->setSerializable(false);
-	m_eShort_EDataType->setInstanceClass(nullptr);
 	m_eShort_EDataType->setName("EShort");
 	m_eShort_EDataType->setSerializable(true);
-	m_eShortObject_EDataType->setInstanceClass(nullptr);
 	m_eShortObject_EDataType->setName("EShortObject");
 	m_eShortObject_EDataType->setSerializable(true);
-	m_eString_EDataType->setInstanceClass(nullptr);
 	m_eString_EDataType->setName("EString");
 	m_eString_EDataType->setSerializable(true);
-	m_eTreeIterator_EDataType->setInstanceClass(nullptr);
 	m_eTreeIterator_EDataType->setName("ETreeIterator");
 	m_eTreeIterator_EDataType->setSerializable(false);
 	

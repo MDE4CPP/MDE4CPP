@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EPackageImpl();
-			virtual std::shared_ptr<EPackage> getThisEPackagePtr();
+			virtual std::shared_ptr<EPackage> getThisEPackagePtr() const;
 			virtual void setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr);
 
 			//Additional constructors for the containments back reference
@@ -48,7 +48,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  ;
+			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const ;
 			
 			
 			
@@ -122,9 +122,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EPackage> m_thisEPackagePtr;

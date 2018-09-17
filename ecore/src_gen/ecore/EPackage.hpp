@@ -98,7 +98,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const = 0;
 			
 			
 			//*********************************

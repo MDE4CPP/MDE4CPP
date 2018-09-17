@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			ETypeParameterImpl();
-			virtual std::shared_ptr<ETypeParameter> getThisETypeParameterPtr();
+			virtual std::shared_ptr<ETypeParameter> getThisETypeParameterPtr() const;
 			virtual void setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr);
 
 
@@ -83,9 +83,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<ETypeParameter> m_thisETypeParameterPtr;

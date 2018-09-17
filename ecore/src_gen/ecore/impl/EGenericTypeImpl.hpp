@@ -13,12 +13,14 @@
 //Model includes
 #include "../EGenericType.hpp"
 
+
 #include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EGenericTypeImpl :virtual public EObjectImpl, virtual public EGenericType 
+	class EGenericTypeImpl :virtual public ecore::EObjectImpl,
+virtual public EGenericType 
 	{
 		public: 
 			EGenericTypeImpl(const EGenericTypeImpl & obj);
@@ -30,7 +32,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EGenericTypeImpl();
-			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr();
+			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr() const;
 			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);
 
 
@@ -44,7 +46,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  ;
+			virtual bool isInstance(Any object) const ;
 			
 			
 			
@@ -119,9 +121,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EGenericType> m_thisEGenericTypePtr;

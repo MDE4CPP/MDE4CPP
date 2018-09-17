@@ -37,19 +37,14 @@ void TypesPackageImpl::initializePackageContents()
 
 void TypesPackageImpl::initializePackageEDataTypes()
 {
-	m_boolean_EDataType->setInstanceClass(nullptr);
 	m_boolean_EDataType->setName("Boolean");
 	m_boolean_EDataType->setSerializable(true);
-	m_integer_EDataType->setInstanceClass(nullptr);
 	m_integer_EDataType->setName("Integer");
 	m_integer_EDataType->setSerializable(true);
-	m_real_EDataType->setInstanceClass(nullptr);
 	m_real_EDataType->setName("Real");
 	m_real_EDataType->setSerializable(true);
-	m_string_EDataType->setInstanceClass(nullptr);
 	m_string_EDataType->setName("String");
 	m_string_EDataType->setSerializable(true);
-	m_unlimitedNatural_EDataType->setInstanceClass(nullptr);
 	m_unlimitedNatural_EDataType->setName("UnlimitedNatural");
 	m_unlimitedNatural_EDataType->setSerializable(true);
 	

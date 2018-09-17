@@ -251,6 +251,10 @@ std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClassifier_EReference_e
 	return m_eClassifier_EReference_eTypeParameters;
 }
 
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClassifier_EOperation_getClassifierID() const
+{
+	return m_eClassifier_EOperation_getClassifierID;
+}
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClassifier_EOperation_isInstance_EJavaObject() const
 {
 	return m_eClassifier_EOperation_isInstance_EJavaObject;
@@ -343,9 +347,9 @@ std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory_EOperation_conv
 {
 	return m_eFactory_EOperation_convertToString_EDataType_EJavaObject;
 }
-std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory_EOperation_create_EClass_EObject() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory_EOperation_create_EClass() const
 {
-	return m_eFactory_EOperation_create_EClass_EObject;
+	return m_eFactory_EOperation_create_EClass;
 }
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory_EOperation_createFromString_EDataType_EString() const
 {
@@ -434,10 +438,6 @@ std::shared_ptr<ecore::EClass> EcorePackageImpl::getEObject_EClass() const
 }
 
 
-std::shared_ptr<ecore::EReference> EcorePackageImpl::getEObject_EReference_eContainer() const
-{
-	return m_eObject_EReference_eContainer;
-}
 
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eAllContents() const
 {
@@ -446,6 +446,10 @@ std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eAllC
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eClass() const
 {
 	return m_eObject_EOperation_eClass;
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eContainer() const
+{
+	return m_eObject_EOperation_eContainer;
 }
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eContainingFeature() const
 {
@@ -530,6 +534,10 @@ std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_EReference_eT
 	return m_eOperation_EReference_eTypeParameters;
 }
 
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEOperation_EOperation_getOperationID() const
+{
+	return m_eOperation_EOperation_getOperationID;
+}
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEOperation_EOperation_isOverrideOf_EOperation() const
 {
 	return m_eOperation_EOperation_isOverrideOf_EOperation;
@@ -655,10 +663,6 @@ std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_EAttr
 {
 	return m_eStructuralFeature_EAttribute_changeable;
 }
-std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_EAttribute_containerClass() const
-{
-	return m_eStructuralFeature_EAttribute_containerClass;
-}
 std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_EAttribute_defaultValue() const
 {
 	return m_eStructuralFeature_EAttribute_defaultValue;
@@ -693,6 +697,14 @@ std::shared_ptr<ecore::EReference> EcorePackageImpl::getEStructuralFeature_ERefe
 	return m_eStructuralFeature_EReference_eContainingClass;
 }
 
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEStructuralFeature_EOperation_getContainerClass() const
+{
+	return m_eStructuralFeature_EOperation_getContainerClass;
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEStructuralFeature_EOperation_getFeatureID() const
+{
+	return m_eStructuralFeature_EOperation_getFeatureID;
+}
 
 // End Class EStructuralFeature
 

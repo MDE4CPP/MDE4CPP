@@ -36,23 +36,20 @@ namespace ecore
 }
 
 //Forward Declaration for used types
-namespace ecore 
-{
-	class EObject;
-}
 
 // base class includes
-#include "ecore/EObject.hpp"
 
 // enum includes
 
+#include "ecore/EObject.hpp"
 
 //*********************************
 namespace ecore 
 {
 	/*!
 	 */
-	class EStringToStringMapEntry:virtual public EObject
+	class EStringToStringMapEntry : virtual public ecore::EObject 
+
 	{
 		public:
  			EStringToStringMapEntry(const EStringToStringMapEntry &) {}

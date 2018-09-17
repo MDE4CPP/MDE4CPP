@@ -13,12 +13,14 @@
 //Model includes
 #include "../EStringToStringMapEntry.hpp"
 
+
 #include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl :virtual public EObjectImpl, virtual public EStringToStringMapEntry 
+	class EStringToStringMapEntryImpl :virtual public ecore::EObjectImpl,
+virtual public EStringToStringMapEntry 
 	{
 		public: 
 			EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj);
@@ -30,7 +32,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EStringToStringMapEntryImpl();
-			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr();
+			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
 
 
@@ -95,9 +97,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EStringToStringMapEntry> m_thisEStringToStringMapEntryPtr;

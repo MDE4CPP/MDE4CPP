@@ -1,0 +1,14 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate task for project: ecore'
+
+task generateEcore(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'ecore'
+	description 'generate C++ code of ecore.ecore model'
+	
+	modelFilePath = file('.' + File.separator + 'ecore.ecore')
+
+	relatedModels = []
+}

@@ -16,11 +16,12 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
+#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/any.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/impl/EcorePackageImpl.hpp"
@@ -64,10 +65,8 @@ EObjectImpl::EObjectImpl()
 	// Reference Members
 	//*********************************
 	//References
-	
 
 	//Init references
-	
 }
 
 EObjectImpl::~EObjectImpl()
@@ -89,8 +88,6 @@ EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.eContainer();
-
 
 	//Clone references with containment (deep copy)
 
@@ -116,13 +113,13 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Bag <   ecore::EObject > EObjectImpl::eAllContents()  const 
+Bag <   ecore::EObject > EObjectImpl::eAllContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EClass> EObjectImpl::eClass()  const 
+std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -130,31 +127,33 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass()  const
 	//end of body
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature()  const 
+
+
+std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature()  const 
+std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eContents()  const 
+Bag <   ecore::EObject > EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eCrossReferences()  const 
+Bag <   ecore::EObject > EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -162,7 +161,7 @@ boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature
 	//end of body
 }
 
-boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -170,19 +169,19 @@ boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature
 	//end of body
 }
 
-boost::any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   boost::any >  arguments)  const 
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsProxy()  const 
+bool EObjectImpl::eIsProxy() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -190,13 +189,13 @@ bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 	//end of body
 }
 
-int EObjectImpl::eResource()  const 
+int EObjectImpl::eResource() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue) 
+void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -204,7 +203,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost
 	//end of body
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -214,14 +213,12 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 // References
 //*********************************
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
 
-std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr()
+std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
 {
 	return m_thisEObjectPtr.lock();
 }
@@ -237,27 +234,23 @@ std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOBJECT_EREFERENCE_ECONTAINER:
-			return eContainer(); //100
 	}
-	boost::any result;
+	Any result;
 	return result;
 }
 bool EObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOBJECT_EREFERENCE_ECONTAINER:
-			return eContainer() != nullptr; //100
 	}
 	bool result = false;
 	return result;
 }
-bool EObjectImpl::eSet(int featureID, boost::any newValue)
+bool EObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

@@ -121,6 +121,7 @@ void EcorePackageImpl::createEClassifierContent(std::shared_ptr<ecore::EPackage>
 	m_eClassifier_EReference_ePackage = factory->createEReference_in_EContainingClass(m_eClassifier_EClass, ECLASSIFIER_EREFERENCE_EPACKAGE);
 	m_eClassifier_EReference_eTypeParameters = factory->createEReference_in_EContainingClass(m_eClassifier_EClass, ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS);
 	
+	m_eClassifier_EOperation_getClassifierID = factory->createEOperation_in_EContainingClass(m_eClassifier_EClass, ECLASSIFIER_EOPERATION_GETCLASSIFIERID);
 	m_eClassifier_EOperation_isInstance_EJavaObject = factory->createEOperation_in_EContainingClass(m_eClassifier_EClass, ECLASSIFIER_EOPERATION_ISINSTANCE_EJAVAOBJECT);
 	
 }
@@ -165,7 +166,7 @@ void EcorePackageImpl::createEFactoryContent(std::shared_ptr<ecore::EPackage> pa
 	m_eFactory_EReference_ePackage = factory->createEReference_in_EContainingClass(m_eFactory_EClass, EFACTORY_EREFERENCE_EPACKAGE);
 	
 	m_eFactory_EOperation_convertToString_EDataType_EJavaObject = factory->createEOperation_in_EContainingClass(m_eFactory_EClass, EFACTORY_EOPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT);
-	m_eFactory_EOperation_create_EClass_EObject = factory->createEOperation_in_EContainingClass(m_eFactory_EClass, EFACTORY_EOPERATION_CREATE_ECLASS_EOBJECT);
+	m_eFactory_EOperation_create_EClass = factory->createEOperation_in_EContainingClass(m_eFactory_EClass, EFACTORY_EOPERATION_CREATE_ECLASS);
 	m_eFactory_EOperation_createFromString_EDataType_EString = factory->createEOperation_in_EContainingClass(m_eFactory_EClass, EFACTORY_EOPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING);
 	
 }
@@ -208,10 +209,10 @@ void EcorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 {
 	m_eObject_EClass = factory->createEClass_in_EPackage(package, EOBJECT_ECLASS);
 	
-	m_eObject_EReference_eContainer = factory->createEReference_in_EContainingClass(m_eObject_EClass, EOBJECT_EREFERENCE_ECONTAINER);
 	
 	m_eObject_EOperation_eAllContents = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_EALLCONTENTS);
 	m_eObject_EOperation_eClass = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECLASS);
+	m_eObject_EOperation_eContainer = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECONTAINER);
 	m_eObject_EOperation_eContainingFeature = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECONTAININGFEATURE);
 	m_eObject_EOperation_eContainmentFeature = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECONTAINMENTFEATURE);
 	m_eObject_EOperation_eContents = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECONTENTS);
@@ -238,6 +239,7 @@ void EcorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> 
 	m_eOperation_EReference_eParameters = factory->createEReference_in_EContainingClass(m_eOperation_EClass, EOPERATION_EREFERENCE_EPARAMETERS);
 	m_eOperation_EReference_eTypeParameters = factory->createEReference_in_EContainingClass(m_eOperation_EClass, EOPERATION_EREFERENCE_ETYPEPARAMETERS);
 	
+	m_eOperation_EOperation_getOperationID = factory->createEOperation_in_EContainingClass(m_eOperation_EClass, EOPERATION_EOPERATION_GETOPERATIONID);
 	m_eOperation_EOperation_isOverrideOf_EOperation = factory->createEOperation_in_EContainingClass(m_eOperation_EClass, EOPERATION_EOPERATION_ISOVERRIDEOF_EOPERATION);
 	
 }
@@ -294,7 +296,6 @@ void EcorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EP
 {
 	m_eStructuralFeature_EClass = factory->createEClass_in_EPackage(package, ESTRUCTURALFEATURE_ECLASS);
 	m_eStructuralFeature_EAttribute_changeable = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE);
-	m_eStructuralFeature_EAttribute_containerClass = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EATTRIBUTE_CONTAINERCLASS);
 	m_eStructuralFeature_EAttribute_defaultValue = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE);
 	m_eStructuralFeature_EAttribute_defaultValueLiteral = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL);
 	m_eStructuralFeature_EAttribute_derived = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED);
@@ -305,6 +306,8 @@ void EcorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EP
 	
 	m_eStructuralFeature_EReference_eContainingClass = factory->createEReference_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS);
 	
+	m_eStructuralFeature_EOperation_getContainerClass = factory->createEOperation_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EOPERATION_GETCONTAINERCLASS);
+	m_eStructuralFeature_EOperation_getFeatureID = factory->createEOperation_in_EContainingClass(m_eStructuralFeature_EClass, ESTRUCTURALFEATURE_EOPERATION_GETFEATUREID);
 	
 }
 

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -163,7 +164,7 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 
 
-std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr()
+std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
 {
 	return m_thisEDataTypePtr.lock();
 }
@@ -184,14 +185,14 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
-			return isSerializable(); //49
+			return eAny(isSerializable()); //49
 	}
-	return EClassifierImpl::internalEIsSet(featureID);
+	return EClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool EDataTypeImpl::internalEIsSet(int featureID) const
 {
@@ -202,14 +203,14 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
 }
-bool EDataTypeImpl::eSet(int featureID, boost::any newValue)
+bool EDataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
 		{
 			// BOOST CAST
-			bool _serializable = boost::any_cast<bool>(newValue);
+			bool _serializable = newValue->get<bool>();
 			setSerializable(_serializable); //49
 			return true;
 		}

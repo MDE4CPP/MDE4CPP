@@ -37,7 +37,7 @@ namespace types
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-			static const int BOOLEAN_EDATATYPE = 0;
+			static const int BOOLEAN_EDATATYPE = 5;
 			static const int INTEGER_EDATATYPE = 1;
 			static const int REAL_EDATATYPE = 2;
 			static const int STRING_EDATATYPE = 3;

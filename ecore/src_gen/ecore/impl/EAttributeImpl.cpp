@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -98,7 +99,6 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAttribute "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	m_changeable = obj.isChangeable();
-	m_containerClass = obj.getContainerClass();
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
 	m_derived = obj.isDerived();
@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 
 
-std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr()
+std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
 {
 	return m_thisEAttributePtr.lock();
 }
@@ -209,37 +209,37 @@ std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return getEAttributeType(); //021
+			return eAny(getEAttributeType()); //5320
 		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return isID(); //020
+			return eAny(isID()); //5319
 	}
-	return EStructuralFeatureImpl::internalEIsSet(featureID);
+	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
 bool EAttributeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return getEAttributeType() != nullptr; //021
+			return getEAttributeType() != nullptr; //5320
 		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return isID() != false; //020
+			return isID() != false; //5319
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
-bool EAttributeImpl::eSet(int featureID, boost::any newValue)
+bool EAttributeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
 		{
 			// BOOST CAST
-			bool _iD = boost::any_cast<bool>(newValue);
-			setID(_iD); //020
+			bool _iD = newValue->get<bool>();
+			setID(_iD); //5319
 			return true;
 		}
 	}

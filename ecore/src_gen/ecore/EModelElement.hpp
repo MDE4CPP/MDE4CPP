@@ -75,7 +75,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source)  = 0;
+			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) = 0;
 			
 			
 			//*********************************

@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -161,7 +162,7 @@ std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,7 +177,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name
 	//end of body
 }
 
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -192,7 +193,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  cons
 	//end of body
 }
 
-std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::string literal)  const 
+std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::string literal) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -222,7 +223,7 @@ std::shared_ptr<Bag<ecore::EEnumLiteral>> EEnumImpl::getELiterals() const
 //*********************************
 
 
-std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr()
+std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr() const
 {
 	return m_thisEEnumPtr.lock();
 }
@@ -243,14 +244,14 @@ std::shared_ptr<ecore::EObject> EEnumImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
-			return getELiterals(); //510
+			return eAny(getELiterals()); //510
 	}
-	return EDataTypeImpl::internalEIsSet(featureID);
+	return EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
 bool EEnumImpl::internalEIsSet(int featureID) const
 {
@@ -261,7 +262,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
-bool EEnumImpl::eSet(int featureID, boost::any newValue)
+bool EEnumImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

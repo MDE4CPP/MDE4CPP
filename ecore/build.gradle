@@ -1,47 +1,12 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-}
-apply plugin: 'base' 
+description 'Build task for project: ecore'
 
-description 'Build tasks for project: ecore'
-
-task buildEcore(dependsOn: ['generateEcore', 'compileEcore']) {
+task buildEcore() {
 	group 'ecore'
 	description 'build ecore'
+
+	dependsOn 'model:generateEcore'
+	dependsOn 'src_gen:compileEcore'
+
 }
 
-task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'ecore'
-	description 'compile ecore'
-
-	projectFolder = file("./src_gen/ecore")
-}
-
-task generateEcore(type: JavaExec) {
-	group 'ecore'
-	description 'generate C++ code of ecore.ecore model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "ecore.ecore", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/ecore.ecore")
-	outputs.dir file("src_gen")
-	
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
-			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
-		}
-	}
-}
-
-compileEcore.mustRunAfter generateEcore
-
-clean.doFirst {
-	def cmakeFolder = file('./src_gen/ecore/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
-}
+tasks.getByPath('src_gen:compileEcore').mustRunAfter tasks.getByPath('model:generateEcore')

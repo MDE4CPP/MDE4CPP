@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
@@ -356,7 +357,7 @@ bool EClassImpl::isInterface() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  const 
+std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -365,7 +366,7 @@ std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  c
 	//end of body
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int featureID)  const 
+std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int featureID) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -374,7 +375,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int
 	//end of body
 }
 
-std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std::string featureName)  const 
+std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std::string featureName) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -391,7 +392,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std
 	//end of body
 }
 
-int EClassImpl::getFeatureCount()  const 
+int EClassImpl::getFeatureCount() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -399,7 +400,7 @@ int EClassImpl::getFeatureCount()  const
 	//end of body
 }
 
-int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -424,13 +425,13 @@ int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature
 	//end of body
 }
 
-std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int EClassImpl::getOperationCount()  const 
+int EClassImpl::getOperationCount() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -438,7 +439,7 @@ int EClassImpl::getOperationCount()  const
 	//end of body
 }
 
-int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const 
+int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -463,13 +464,13 @@ int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  c
 	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation)  const 
+std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const 
+bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -648,7 +649,7 @@ std::shared_ptr<Union<ecore::EStructuralFeature>> EClassImpl::getEStructuralFeat
 }
 
 
-std::shared_ptr<EClass> EClassImpl::getThisEClassPtr()
+std::shared_ptr<EClass> EClassImpl::getThisEClassPtr() const
 {
 	return m_thisEClassPtr.lock();
 }
@@ -669,44 +670,44 @@ std::shared_ptr<ecore::EObject> EClassImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
-			return isAbstract(); //29
+			return eAny(isAbstract()); //29
 		case EcorePackage::ECLASS_EREFERENCE_EALLATTRIBUTES:
-			return getEAllAttributes(); //213
+			return eAny(getEAllAttributes()); //213
 		case EcorePackage::ECLASS_EREFERENCE_EALLCONTAINMENTS:
-			return getEAllContainments(); //217
+			return eAny(getEAllContainments()); //217
 		case EcorePackage::ECLASS_EREFERENCE_EALLGENERICSUPERTYPES:
-			return getEAllGenericSuperTypes(); //224
+			return eAny(getEAllGenericSuperTypes()); //224
 		case EcorePackage::ECLASS_EREFERENCE_EALLOPERATIONS:
-			return getEAllOperations(); //218
+			return eAny(getEAllOperations()); //218
 		case EcorePackage::ECLASS_EREFERENCE_EALLREFERENCES:
-			return getEAllReferences(); //214
+			return eAny(getEAllReferences()); //214
 		case EcorePackage::ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES:
-			return getEAllStructuralFeatures(); //219
+			return eAny(getEAllStructuralFeatures()); //219
 		case EcorePackage::ECLASS_EREFERENCE_EALLSUPERTYPES:
-			return getEAllSuperTypes(); //220
+			return eAny(getEAllSuperTypes()); //220
 		case EcorePackage::ECLASS_EREFERENCE_EATTRIBUTES:
-			return getEAttributes(); //216
+			return eAny(getEAttributes()); //216
 		case EcorePackage::ECLASS_EREFERENCE_EGENERICSUPERTYPES:
-			return getEGenericSuperTypes(); //223
+			return eAny(getEGenericSuperTypes()); //223
 		case EcorePackage::ECLASS_EREFERENCE_EIDATTRIBUTE:
-			return getEIDAttribute(); //221
+			return eAny(getEIDAttribute()); //221
 		case EcorePackage::ECLASS_EREFERENCE_EOPERATIONS:
-			return getEOperations(); //212
+			return eAny(getEOperations()); //212
 		case EcorePackage::ECLASS_EREFERENCE_EREFERENCES:
-			return getEReferences(); //215
+			return eAny(getEReferences()); //215
 		case EcorePackage::ECLASS_EREFERENCE_ESTRUCTURALFEATURES:
-			return getEStructuralFeatures(); //222
+			return eAny(getEStructuralFeatures()); //222
 		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
-			return getESuperTypes(); //211
+			return eAny(getESuperTypes()); //211
 		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
-			return isInterface(); //210
+			return eAny(isInterface()); //210
 	}
-	return EClassifierImpl::internalEIsSet(featureID);
+	return EClassifierImpl::eGet(featureID, resolve, coreType);
 }
 bool EClassImpl::internalEIsSet(int featureID) const
 {
@@ -747,21 +748,21 @@ bool EClassImpl::internalEIsSet(int featureID) const
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
 }
-bool EClassImpl::eSet(int featureID, boost::any newValue)
+bool EClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
 		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
 		{
 			// BOOST CAST
-			bool _abstract = boost::any_cast<bool>(newValue);
+			bool _abstract = newValue->get<bool>();
 			setAbstract(_abstract); //29
 			return true;
 		}
 		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
-			bool _interface = boost::any_cast<bool>(newValue);
+			bool _interface = newValue->get<bool>();
 			setInterface(_interface); //210
 			return true;
 		}

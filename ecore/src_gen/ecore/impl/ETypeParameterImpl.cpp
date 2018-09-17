@@ -16,6 +16,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -147,7 +148,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 //*********************************
 
 
-std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr()
+std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
 {
 	return m_thisETypeParameterPtr.lock();
 }
@@ -164,14 +165,14 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEPARAMETER_EREFERENCE_EBOUNDS:
-			return getEBounds(); //512
+			return eAny(getEBounds()); //512
 	}
-	return ENamedElementImpl::internalEIsSet(featureID);
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ETypeParameterImpl::internalEIsSet(int featureID) const
 {
@@ -182,7 +183,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
-bool ETypeParameterImpl::eSet(int featureID, boost::any newValue)
+bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{

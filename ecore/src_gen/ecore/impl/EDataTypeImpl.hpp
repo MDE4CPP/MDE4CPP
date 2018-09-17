@@ -30,7 +30,7 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EDataTypeImpl();
-			virtual std::shared_ptr<EDataType> getThisEDataTypePtr();
+			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference
@@ -91,9 +91,9 @@ namespace ecore
 
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
-			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
-			virtual bool eSet(int featureID, boost::any newValue) ;
+			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
 			std::weak_ptr<EDataType> m_thisEDataTypePtr;
