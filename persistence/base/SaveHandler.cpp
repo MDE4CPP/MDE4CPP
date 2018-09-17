@@ -20,7 +20,6 @@
 #include <string>
 #include <sstream> // used for addReferences()
 
-#include "boost/algorithm/string.hpp" // used for string splitting
 #include "ecore/EObject.hpp"
 #include "persistence/base/HandlerHelper.hpp"
 

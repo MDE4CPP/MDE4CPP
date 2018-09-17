@@ -24,7 +24,6 @@ namespace persistence
 
 		bool JSONSave::write(const std::string &filename)
 		{
-			//boost::property_tree::write_json( filename, m_tree, std::locale(), true );
 
 			return true;
 		}

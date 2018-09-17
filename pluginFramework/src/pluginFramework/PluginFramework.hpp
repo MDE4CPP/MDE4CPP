@@ -10,6 +10,7 @@
 
 #include <memory>
 
+template<class T> class Bag;
 class MDE4CPPPlugin;
 
 class PluginFramework
@@ -28,6 +29,7 @@ class PluginFramework
 		virtual void clear() = 0;
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByName(const std::string name) const = 0;
 		virtual std::shared_ptr<MDE4CPPPlugin> findPluginByUri(const std::string uri) const = 0;
+		virtual std::shared_ptr<Bag<MDE4CPPPlugin>> getAllPlugins() const = 0;
 
 	private:
 		static std::shared_ptr<PluginFramework> instance;

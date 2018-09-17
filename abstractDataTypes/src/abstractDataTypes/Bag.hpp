@@ -18,7 +18,6 @@
 #include <vector>
 #include <iostream>
 #include <stdexcept>
-#include <omp.h>
 
 template <class T>
 class Bag
@@ -56,7 +55,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
 				}
 			}
 #endif
@@ -71,7 +70,7 @@ class Bag
 			{
 				if (find(*i) > -1)
 				{
-					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+			//			DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
 				}
 			}
 #endif
@@ -86,7 +85,7 @@ class Bag
 
 			if (i > -1)
 			{
-				DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
 			}
 #endif
 			m_bag.insert(a, b);
@@ -105,13 +104,10 @@ class Bag
 		void clear()
 		{
 			const unsigned int size = m_bag.size();
-
-			#pragma omp parallel for if(size > 39)
 			for (unsigned int i = 0; i < size; i++)
 			{
 				m_bag[i].reset();
 			}
-
 			m_bag.clear();
 		}
 
@@ -149,7 +145,7 @@ class Bag
 			// The debug version check if an inserted element is already present in the collection.
 			if (find(el) > -1)
 			{
-				DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
+			//		DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
 			}
 #endif
 			m_bag.push_back(el);
@@ -187,34 +183,28 @@ class Bag
 			volatile bool found = false;
 			int first_index     = -1;
 			int iteration       = 0;
+			int my_index = -1;
+			int i;
 
-			#pragma omp parallel if(size >=40)
+			do
 			{
-				int my_index = -1;
-				int i;
-
-				do
 				{
-        			#pragma omp critical(iteration)
-					{
-						i = iteration++;
-					}
-
-					if (i < size && m_bag[i] == el)
-					{
-						found    = true;
-						my_index = i;
-					}
+					i = iteration++;
 				}
-				while (!found && i < size);
 
-      	  	  	#pragma omp critical(reduction)
-				if (my_index != -1)
+				if (i < size && m_bag[i] == el)
 				{
-					if (first_index == -1 || my_index < first_index)
-					{
-						first_index = my_index;
-					}
+					found    = true;
+					my_index = i;
+				}
+			}
+			while (!found && i < size);
+
+			if (my_index != -1)
+			{
+				if (first_index == -1 || my_index < first_index)
+				{
+					first_index = my_index;
 				}
 			}
 			return first_index;

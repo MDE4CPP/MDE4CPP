@@ -1,33 +1,44 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
 }
-apply plugin: "base"
 
 description "Build task for project: pluginFramework"
 
 task deliverPluginFrameworkInterface(type: Copy) {
 	group 'pluginFramework'
 	description 'deliver pluginFramework interface header to %MDE4CPP_HOME%/application/include/pluginFramework'
-	from ("./src/pluginFramework") {
-		include "*.hpp"
+	from ('.' + File.separator + 'src' + File.separator + 'pluginFramework') {
+		include '*.hpp'
 	}
-	exclude "build", ".gradle", "impl", "PluginFramework.hpp"
-	into System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework"
-	inputs.dir file(".")
-	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/pluginFramework")
+	exclude 'build', '.gradle', 'impl', 'PluginFramework.hpp', '.cmake'
+	into System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework'
+	inputs.files file('.' + File.separator + 'src' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
 }
 
 task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "pluginFramework"
 	description "compile pluginFramework"
 
-	projectFolder = file("./src/pluginFramework")
+	projectFolder = file('.' + File.separator + 'src' + File.separator + 'pluginFramework')
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/pluginFramework/.cmake/**'
+    })	
+	if(!file('.' + File.separator + 'src' + File.separator + 'pluginFramework' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFramework.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFrameworkd.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
 }
 
-clean.doFirst {
-	def cmakeFolder = file("./src/pluginFramework/.cmake/")
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + 'pluginFramework' + File.separator + '.cmake/')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
 	}
 }

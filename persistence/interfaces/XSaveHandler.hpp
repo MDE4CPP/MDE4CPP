@@ -13,7 +13,6 @@
 #include <string>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "boost/exception/to_string.hpp"
 
 namespace ecore
 {
@@ -40,7 +39,7 @@ namespace persistence
 				template<typename T>
 				void addAttribute(const std::string& name, T value)
 				{
-					addAttribute(name, boost::to_string(value));
+					addAttribute(name, std::to_string(value));
 				}
 				virtual void addAttribute(const std::string &name, bool value) = 0;
 				virtual void addAttribute(const std::string &name, const std::string& value) = 0;

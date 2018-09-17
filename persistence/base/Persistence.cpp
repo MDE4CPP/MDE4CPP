@@ -25,7 +25,6 @@ Persistence::~Persistence()
 
 bool Persistence::isValidFile(const std::string& filename)
 {
-	//boost::filesystem::path file( filename );
 	// TODO needs implementation
 	MSG_WARNING(MSG_FLF << " is not implemented!");
 

@@ -11,13 +11,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 
 SET(CMAKE_CXX_STANDARD 14)
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
-ELSE()
-	SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
-	SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-ENDIF()
-
+SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
@@ -40,6 +34,10 @@ ENDIF(APPLE)
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 	
+	${CMAKE_DL_LIBS}
+)
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}

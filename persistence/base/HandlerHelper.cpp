@@ -211,9 +211,9 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 
 			else
 			{
-				boost::any _any = prev->eGet( esf );
+				Any _any = prev->eGet( esf );
 
-				std::shared_ptr<Bag<ecore::EObject>> ef = boost::any_cast<std::shared_ptr<Bag<ecore::EObject>>>( _any );
+				std::shared_ptr<Bag<ecore::EObject>> ef = _any.get<std::shared_ptr<Bag<ecore::EObject>>>();
 
 				// calculate the index of back at father's collection
 				size_t index_of = 0;

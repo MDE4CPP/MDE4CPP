@@ -18,10 +18,10 @@
 
 #include <iostream>
 #include <sstream> // used for getLevel()
+#include <cassert>
 
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
-#include "boost/algorithm/string.hpp" // used for string splitting
 #include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EObject.hpp"
@@ -268,7 +268,16 @@ void LoadHandler::resolveReferences()
 				std::list<std::string> _strs;
 				std::string _tmpStr;
 
-				boost::split(_strs, name, boost::is_any_of(" "));
+				size_t pos = name.find(" ");
+				size_t initPos = 0;
+				while( pos != std::string::npos )
+				{
+					_strs.push_back( name.substr( initPos, pos - initPos ) );
+					initPos = pos + 1;
+
+					pos = name.find( " ", initPos );
+				}
+
 				while (_strs.size() > 0)
 				{
 					_tmpStr = _strs.front();

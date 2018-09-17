@@ -1,47 +1,15 @@
-plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.3"
-}
-apply plugin: 'base' 
-
 description 'Build tasks for project: umlReflection'
 
-task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
+task buildUmlReflection() {
 	group 'umlReflection'
 	description 'build umlReflection'
+
+	dependsOn 'model:generateUmlReflection'
+	dependsOn 'src_gen:compileUmlReflection'
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 }
 
-task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'umlReflection'
-	description 'compile umlReflection'
-
-	projectFolder = file("./src_gen/umlReflection")
-}
-
-task generateUmlReflection(type: JavaExec) {
-	group 'umlReflection'
-	description 'generate C++ code of umlReflection.uml model'
-	main = "-jar"
-	workingDir "./model"
-	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "umlReflection.uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/umlReflection.uml")
-	outputs.dir file("src_gen")
-
-	doFirst {
-		if (System.getenv('MDE4CPP_HOME') == null) {
-			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
-		}
-		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
-			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
-		}
-	}
-}
-
-compileUmlReflection.mustRunAfter generateUmlReflection
-
-clean.doFirst {
-	def cmakeFolder = file('./src_gen/umlReflection/.cmake/')
-	if(cmakeFolder.exists()) {
-    	delete cmakeFolder.absolutePath
-   		println "deleting folder " + cmakeFolder.absolutePath
-	}
-}
+tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')

@@ -17,7 +17,7 @@ std::shared_ptr<UMLPackage> UMLPackage::eInstance()
 	{
 		//create a new Singelton Instance
 		instance.reset(UMLPackageImpl::create());
-		std::dynamic_pointer_cast<UMLPackageImpl>(instance)->init();
+		std::dynamic_pointer_cast<UMLPackageImpl>(instance)->init(instance);
 	}	
 	return instance;
 }
