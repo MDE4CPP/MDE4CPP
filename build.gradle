@@ -32,12 +32,39 @@ task generateAll() {
 }
 
 task initPropertyFile() {
+	group 'MDE4CPP'
+
+	description 'Create file \'gradle.property\' in root folder\n\n' +
+				'Following parameter are available:\n' +
+				'\t-Pworker=<int> ... count of worker for each compile task\n' +
+				'\t-Pparallel ... enable parallel Gradle task execution permanently\n' +
+				'\t-Prelease ... enable compile option \'RELEASE\' permanently\n' +
+				'\t-Pdebug ... enable compile option \'DEBUG\' permanently\n'
+	
+	if (!file("$projectDir/gradle.properties").exists()) {
+		println '##############################################################################'
+		println '#                             Welcome to MDE4CPP                             #'
+		println '##############################################################################'
+		println 'It is recommended to execute the task initPropertyFile first.'
+		println 'This task allows to specify the count of compiler worker for one compile task.'
+		println 'Type \'gradle initPropertyFile -Pworker=<count of worker>\' for execution.'
+		println 'For more information see \'gradle help --task initPropertyFile\''
+		println ''
+		println ''
+	}
+
 	doFirst {
 		def count = findProperty('worker') ?: 1
 		def content = "workerCount=" + count
 		if (getProject().hasProperty('parallel')) {
 			content += System.lineSeparator() + "org.gradle.parallel=true"
-		}		
+		}
+		if (getProject().hasProperty('release')) {
+			content += System.lineSeparator() + "RELEASE"
+		}
+		if (getProject().hasProperty('debug')) {
+			content += System.lineSeparator() + "DEBUG"
+		}
 		new File("$projectDir/gradle.properties").text = content
 	}
 }
