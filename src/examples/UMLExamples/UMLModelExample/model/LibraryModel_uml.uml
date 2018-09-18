@@ -30,7 +30,7 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_tprpELAqEeert7O7oCVCsA" name="Author" visibility="public">
     <generalization xmi:id="_vEzjQLAqEeert7O7oCVCsA" general="_pEeYgLAqEeert7O7oCVCsA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_yoCZcLAqEeert7O7oCVCsA" memberEnd="_yoCZcbAqEeert7O7oCVCsA _yoCZdLAqEeert7O7oCVCsA">
+  <packagedElement xmi:type="uml:Association" xmi:id="_yoCZcLAqEeert7O7oCVCsA" name="A_books_authors" memberEnd="_yoCZcbAqEeert7O7oCVCsA _yoCZdLAqEeert7O7oCVCsA">
     <ownedEnd xmi:id="_yoCZcbAqEeert7O7oCVCsA" name="books" type="_aPikkLAqEeert7O7oCVCsA" association="_yoCZcLAqEeert7O7oCVCsA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yoCZcrAqEeert7O7oCVCsA"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yoCZc7AqEeert7O7oCVCsA" value="*"/>

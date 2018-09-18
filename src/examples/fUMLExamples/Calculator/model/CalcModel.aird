@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_N4vjYKH6EeeTK-b87Aiybw" selectedViews="_OInLYKH6EeeTK-b87Aiybw _OI77gKH6EeeTK-b87Aiybw _OJCCIKH6EeeTK-b87Aiybw _OJR5wKH6EeeTK-b87Aiybw _OJYAYKH6EeeTK-b87Aiybw" version="11.1.0.201608251200">
+  <viewpoint:DAnalysis xmi:id="_N4vjYKH6EeeTK-b87Aiybw" selectedViews="_OInLYKH6EeeTK-b87Aiybw _OI77gKH6EeeTK-b87Aiybw _OJCCIKH6EeeTK-b87Aiybw _OJR5wKH6EeeTK-b87Aiybw _OJYAYKH6EeeTK-b87Aiybw" version="12.1.0.201708031200">
     <semanticResources>CalcModel.uml</semanticResources>
     <semanticResources>pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml</semanticResources>
     <semanticResources>pathmap://UML_PROFILES/UML2.profile.uml</semanticResources>
@@ -21,7 +21,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_OJCCIKH6EeeTK-b87Aiybw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_QxM-QKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram" representation="_QxPagKH6EeeTK-b87Aiybw">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_QxM-QKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram" repPath="#_m_cT4LsyEeiBwb2dAYPAfQ">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Activity%20Diagram']"/>
         <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
       </ownedRepresentationDescriptors>
@@ -33,7 +33,7 @@
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Extend']"/>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram xmi:id="_QxPagKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram">
+  <diagram:DSemanticDiagram xmi:id="_QxPagKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram" uid="_m_cT4LsyEeiBwb2dAYPAfQ">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_QxQBkKH6EeeTK-b87Aiybw" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_QxQBkaH6EeeTK-b87Aiybw"/>
     </ownedAnnotationEntries>
@@ -274,7 +274,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_QzTQAqH6EeeTK-b87Aiybw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_QykQMKH6EeeTK-b87Aiybw" fontName="Segoe UI"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QykQMaH6EeeTK-b87Aiybw" x="280" y="150" width="1033" height="368"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QykQMaH6EeeTK-b87Aiybw" x="224" y="77" width="1088" height="388"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_QyG9MqH6EeeTK-b87Aiybw"/>
         <edges xmi:type="notation:Edge" xmi:id="_Q1K4QKH6EeeTK-b87Aiybw" type="4001" element="_QxQBxqH6EeeTK-b87Aiybw" source="_Qz9-Y6H6EeeTK-b87Aiybw" target="_Q0EFAKH6EeeTK-b87Aiybw">
@@ -321,7 +321,7 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_Q1irsaH6EeeTK-b87Aiybw" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_Q1irsqH6EeeTK-b87Aiybw" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q1irs6H6EeeTK-b87Aiybw" points="[52, -17, -51, -1]$[88, -17, -15, -1]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q1irs6H6EeeTK-b87Aiybw" points="[53, -9, -49, 8]$[70, -9, -32, 8]$[70, -15, -32, 2]$[87, -15, -15, 2]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q1jSwKH6EeeTK-b87Aiybw" id="(0.5873015873015873,0.9714285714285714)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q1jSwaH6EeeTK-b87Aiybw" id="(0.5,0.5)"/>
         </edges>
@@ -433,7 +433,7 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_Q1qAcaH6EeeTK-b87Aiybw" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_Q1qAcqH6EeeTK-b87Aiybw" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q1qAc6H6EeeTK-b87Aiybw" points="[10, 8, -132, -36]$[68, 8, -74, -36]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q1qAc6H6EeeTK-b87Aiybw" points="[0, 0, -143, -46]$[0, 23, -143, -23]$[143, 23, 0, -23]$[143, 46, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q1qngKH6EeeTK-b87Aiybw" id="(0.5,0.0)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q1qngaH6EeeTK-b87Aiybw" id="(0.5284090909090908,1.0)"/>
         </edges>
