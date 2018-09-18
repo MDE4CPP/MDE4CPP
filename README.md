@@ -88,8 +88,9 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   
 ## License
 
-The projects is generally subject to the **MIT** license.
-Exclude from this license are the following folders, which are subjected to **Eclipse Public License - v 1.0**:
+The projects is generally subjected to the **MIT** license.
+
+Excluded from this license are the following folders, which are subjected to **Eclipse Public License - v 1.0**:
 - src/common/ecoreReflection/model
 - src/common/primitivetypesReflection/model
 - src/common/umlReflection/model
