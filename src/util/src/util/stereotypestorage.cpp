@@ -1,9 +1,9 @@
 #include "util/stereotypestorage.hpp"
 
-#ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
-#else
+#ifdef DEBUG_ON
 	#define DEBUG_MESSAGE(a) a
+#else
+	#define DEBUG_MESSAGE(a) /**/
 #endif
 
 #include <iostream>
