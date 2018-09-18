@@ -13,7 +13,7 @@ SET MDE4CPP_HOME=%cd%
 
 REM path to eclipse home folder including Acceleo plugins
 REM required for creating the generators
-SET MDE4CPP_ECLIPSE_HOME=C:\Tools\eclipse
+SET MDE4CPP_ECLIPSE_HOME=C:\tools\eclipse
 
 
 REM #######################################
@@ -24,8 +24,8 @@ REM count of worker for each compile task
 REM (if two compiling tasks are performed in parallel, 2xworkerCount processes are executed)
 SET ORG_GRADLE_PROJECT_workerCount=1
 
-REM enable parallel execution of Gradle tasks permanently
-SET ORG_GRADLE_PROJECT_org.gradle.parallel=true
+REM enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
+SET GRADLE_OPTS=-Dorg.gradle.parallel=true
 
 
 REM ##########################
@@ -33,16 +33,24 @@ REM # configure program path #
 REM ##########################
 
 REM path to gradle home folder
-SET GRADLE_HOME=C:\Tools\gradle
+SET GRADLE_HOME=C:\tools\gradle
 
 REM path to cmake home folder
-SET CMAKE_HOME=C:\Tools\CMake
+SET CMAKE_HOME=C:\tools\CMake
 
 REM path to compiler home folder
-SET COMPILER_HOME=C:\Tools\MinGW
+SET COMPILER_HOME=C:\tools\MinGW
+
+REM delivery name of compiler, only necessary for include path generation for Eclipse Project file
+REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+SET COMPILER_DELIVERY_NAME=x86_64-w64-mingw32
+
+REM compiler version, only necessary for include path generation for Eclipse Project file
+REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+SET COMPILER_VERSION=8.1.0
 
 REM path to java jdk
-SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_161
+SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_162
 
 
 REM ##################
