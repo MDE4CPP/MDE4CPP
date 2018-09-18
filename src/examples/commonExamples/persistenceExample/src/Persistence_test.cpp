@@ -22,10 +22,10 @@
 #endif
 #define MAX_CHAR 260
 
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
+#ifdef DEBUG_ON
 #define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
+#else
+#define MSG_DEBUG(a) /**/
 #endif
 #define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
 #define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl

@@ -7,10 +7,10 @@
 
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
-#ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+#ifdef DEBUG_ON
+#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
 #else
-	#define DEBUG_MESSAGE(a) a
+#define MSG_DEBUG(a) /**/
 #endif
 
 #ifdef _WIN32
@@ -51,10 +51,10 @@ PluginFrameworkImpl::PluginFrameworkImpl():
 	m_endingRelease = "";
 #endif
 
-#ifdef NDEBUG
-	m_debugMode = false;
-#else
+#ifdef DEBUG_ON
 	m_debugMode = true;
+#else
+	m_debugMode = false;
 #endif
 }
 

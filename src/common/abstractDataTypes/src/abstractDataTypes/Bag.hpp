@@ -8,10 +8,10 @@
 #ifndef ABSTRACTDATATPYES_BAG_HPP
 #define ABSTRACTDATATPYES_BAG_HPP
 
-#ifdef NDEBUG
-# define DEBUG_MESSAGE(a) /**/
+#ifdef DEBUG_ON
+	#define DEBUG_MESSAGE(a) a
 #else
-# define DEBUG_MESSAGE(a) a
+	#define DEBUG_MESSAGE(a) /**/
 #endif
 
 #include <memory>
@@ -49,7 +49,7 @@ class Bag
 
 		void insert(const Bag<T> &b)
 		{
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			// The debug version check if an inserted element is already present in the collection.
 			for (auto i = b.cbegin(); i != b.cend(); i++)
 			{
@@ -64,7 +64,7 @@ class Bag
 
 		void insert(iterator a, iterator b, iterator c)
 		{
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			// The debug version check if an inserted element is already present in the collection.
 			for (auto i = b; i != c; i++)
 			{
@@ -79,7 +79,7 @@ class Bag
 
 		void insert(iterator a, std::shared_ptr<T> b)
 		{
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			// The debug version check if an inserted element is already present in the collection.
 			int i = find(b);
 
@@ -128,12 +128,12 @@ class Bag
 
 		const std::shared_ptr<T> at(unsigned int n) const
 		{
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			if (n < m_bag.size())
 			{
 #endif
 				return m_bag[n];
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			}
 			throw std::invalid_argument("Bag.hpp: index out of range");
 #endif
@@ -141,7 +141,7 @@ class Bag
 
 		virtual void add(std::shared_ptr<T> el)
 		{
-#ifndef NDEBUG
+#ifdef DEBUG_ON
 			// The debug version check if an inserted element is already present in the collection.
 			if (find(el) > -1)
 			{
