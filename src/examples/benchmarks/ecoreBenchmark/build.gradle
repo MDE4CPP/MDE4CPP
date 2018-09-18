@@ -18,12 +18,12 @@ task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecoreBenchmarkd.exe')
 	
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	def ecore = getRootProject().getTasksByName('buildEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 
 	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
+	def types = getRootProject().getTasksByName('buildTypes', true)
 	dependsOn types
 	inputs.files(types.outputs)
 }
