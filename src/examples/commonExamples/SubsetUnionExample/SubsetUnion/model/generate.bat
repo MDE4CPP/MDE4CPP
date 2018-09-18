@@ -1,7 +1,7 @@
 @echo off
 
 SET modelFolder=%cd%
-SET modelFile=%modelFolder%/subsetUnionBenchmark.ecore
+SET modelFile=%modelFolder%/subsetUnion.ecore
 
 :: Go to folder, in which the gradle task 'generateModel' is callable, e.g. the MDE4CPP home folder
 :: 'generateModel' is defined in %MDE4CPP_HOME%/src/common/universalGradleTasks/build.gradle
