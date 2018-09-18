@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
   <viewpoint:DAnalysis xmi:id="_-L3RULSxEeeSe6jd06zZAA" selectedViews="_-b9i0LSxEeeSe6jd06zZAA _x3KosLS1EeeyycAmsWR9bw _x31-ILS1EeeyycAmsWR9bw _x5QTYLS1EeeyycAmsWR9bw" version="12.1.0.201708031200">
-    <semanticResources>subsetUnionBenchmark.ecore</semanticResources>
-    <semanticResources>subsetUnionBenchmark.genmodel</semanticResources>
     <semanticResources>subsetUnion.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_-b9i0LSxEeeSe6jd06zZAA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_MPbz4LsYEeiijv2Nt8xO6Q" name="subsetUnionBenchmark class diagram" repPath="#_MPJgALsYEeiijv2Nt8xO6Q">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_MPbz4LsYEeiijv2Nt8xO6Q" name="subsetUnion class diagram" repPath="#_MPJgALsYEeiijv2Nt8xO6Q">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="subsetUnion.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -22,7 +20,7 @@
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Generation']"/>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram xmi:id="_MPbM0LsYEeiijv2Nt8xO6Q" name="subsetUnionBenchmark class diagram" uid="_MPJgALsYEeiijv2Nt8xO6Q">
+  <diagram:DSemanticDiagram xmi:id="_MPbM0LsYEeiijv2Nt8xO6Q" name="subsetUnion class diagram" uid="_MPJgALsYEeiijv2Nt8xO6Q">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_MPbM0bsYEeiijv2Nt8xO6Q" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_MPbM0rsYEeiijv2Nt8xO6Q">
         <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_SerkYLsYEeiijv2Nt8xO6Q" sourceArrow="FillDiamond" routingStyle="manhattan">
