@@ -85,3 +85,15 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
 		* `compileEcore -PRELEASE -PDEBUG=0` - compile generated code of ecore.ecore in release version (debug is disabled)
 
   All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks. 
+  
+## License
+
+The projects is generally subject to the **MIT** license.
+Exclude from this license are the following folders, which are subjected to **Eclipse Public License - v 1.0**:
+- src/common/ecoreReflection/model
+- src/common/primitivetypesReflection/model
+- src/common/umlReflection/model
+- src/ecore/ecore/model
+- src/ecore/types/model
+- src/ecore/fuml/model
+- src/ecore/uml/model
