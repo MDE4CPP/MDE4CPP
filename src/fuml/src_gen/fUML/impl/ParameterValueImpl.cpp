@@ -1,9 +1,9 @@
 #include "fUML/impl/ParameterValueImpl.hpp"
 
-#ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
-#else
+#ifdef DEBUG_ON
 	#define DEBUG_MESSAGE(a) a
+#else
+	#define DEBUG_MESSAGE(a) /**/
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON

@@ -1,9 +1,9 @@
 #include "ecoreReflection/impl/EcorePluginImpl.hpp"
 
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
+#ifdef DEBUG_ON
+	#define DEBUG_MESSAGE(a) a
 #else
-  #define DEBUG_MESSAGE(a) a
+	#define DEBUG_MESSAGE(a) /**/
 #endif
 
 
