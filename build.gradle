@@ -45,7 +45,7 @@ task installationInstruction() {
 		'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
 		'A pattern is prepared for it:\n' +
 		'- for Windows systems: setenv.bat.default\n' +
-		'- for Unix systems: setenv.default.\n' +
+		'- for Unix systems: setenv.sh.default.\n' +
 		'Copy the file and remove the extension \'default\' first.\n' +
 		'Open this file and configure the variables afterwards.\n' +
 		'Run the file in a console. Note, that the environment is set inside the console\n' +
@@ -55,7 +55,12 @@ task installationInstruction() {
 	
 	def files = file("$projectDir").listFiles(new FileFilter() {
 		public boolean accept(File pathname) {
-			return pathname.getName().endsWith(".bat");
+			def extension = ".sh"
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				extension = ".bat"
+			}
+		
+			return pathname.getName().endsWith(extension);
 		}
 	})
 	

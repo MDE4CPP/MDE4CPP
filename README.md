@@ -23,7 +23,7 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 3. Configure environment
   * Copy the pattern file and remove the extension `default`
 		* for Windows systems: `setenv.bat.default`
-		* for Unix systems: `setenv.default`
+		* for Unix systems: `setenv.sh.default`
   * Open this file and configure the variables:
     * `MDE4CPP_ECLIPSE_HOME` ... path to eclipse home folder of Eclipse Modeling Tool with Acceleo
     * `MDE4CPP_HOME` ... path to MDE4CPP home folder

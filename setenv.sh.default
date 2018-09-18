@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ########################################
+# # Environment configuration of MDE4CPP #
+# ########################################
+
+# ###############################
+# # configure MDE4CPP variables #
+# ###############################
+
+# path to MDE4CPP home folder
+export MDE4CPP_HOME=$PWD
+
+# path to eclipse home folder including Acceleo plugins
+# required for creating the generators
+export MDE4CPP_ECLIPSE_HOME=~/eclipse_modeling
+
+
+# #######################################
+# # configure Gradle project properties #
+# #######################################
+
+# count of worker for each compile task 
+# (if two compiling tasks are performed in parallel, 2xworkerCount processes are executed)
+export ORG_GRADLE_PROJECT_workerCount=1
+
+# enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
+export GRADLE_OPTS=-Dorg.gradle.parallel=true
+
+
+# ##############################################################################
+# # configure compiler information for include path setting inside cpp eclipse #
+# ##############################################################################
+
+# The generators create eclipse cpp projects files including include path.
+# Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+# Configuration is only necessary for eclipse.
+
+# path to compiler home folder
+#export COMPILER_HOME=
+
+# delivery name of compiler, only necessary for include path generation for Eclipse Project file
+#export COMPILER_DELIVERY_NAME=
+
+# compiler version, only necessary for include path generation for Eclipse Project file
+#export COMPILER_VERSION=
+
+# #############################
+# # configure LD_LIBRARY_PATH #
+# #############################
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/application/bin
