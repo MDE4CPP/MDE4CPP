@@ -52,7 +52,7 @@ REM ##################
 REM set path with minimal set of programs (system paths and MDE4CPP required programs) temporary (only in called cmd and further child processes)
 SET PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
 
-IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%GRADLE_HOME%\bin)
-IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%CMAKE_HOME%\bin)
-IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%COMPILER_HOME%\bin)
-IF DEFINED GRADLE_HOME (SET PATH=%PATH%;%JAVA_HOME%\bin)
+IF DEFINED GRADLE_HOME (SET PATH=%GRADLE_HOME%\bin;%PATH%)
+IF DEFINED CMAKE_HOME (SET PATH=%CMAKE_HOME%\bin;%PATH%)
+IF DEFINED COMPILER_HOME (SET PATH=%COMPILER_HOME%\bin;%PATH%)
+IF DEFINED JAVA_HOME (SET PATH=%JAVA_HOME%\bin;%PATH%)
