@@ -28,13 +28,21 @@ task generateAllModelExamples() {
 	
 	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
 	
-//    doLast {
-//		exec
-//		{
-//			workingDir = file('./benchmarks/SubsetUnionBenchmark/model/')
-//			commandLine = ['cmd', '/C', 'generate.bat']
-//		}
-//    }	
+    doLast {
+		exec
+		{
+			workingDir = file('./commonExamples/SubsetUnionExample/SubsetUnion/model/')
+			commandLine = ['cmd', '/C', 'generate.bat']
+		}
+    }	
+    doLast {
+		exec
+		{
+			workingDir = file('./commonExamples/SubsetUnionExample/SubsetUnionDepth/model/')
+			commandLine = ['cmd', '/C', 'generate.bat']
+		}
+    }	
+
     doLast {
 		exec
 		{
@@ -76,7 +84,8 @@ task buildAllModelExamples() {
 	group 'Examples'
 	description 'build all model example applications'
 	
-//	dependsOn getRootProject().getTasksByName('buildSubsetUnionBenchmark', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
 	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
 	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
