@@ -34,20 +34,24 @@ task generateAll() {
 task installationInstruction() {
 	group 'MDE4CPP'
 
-	description	'##############################################################################\n' +
-				'#                    Installation instruction for MDE4CPP                    #\n' +
-				'##############################################################################\n' +
-				'\n' +
-				'Welcome to MDE4CPP framework!\n' +
-				'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
-				'A pattern is prepared for it:\n' +
-				'- for Windows systems: setenv.bat.default\n' +
-				'- for Unix systems: setenv.default.\n' +
-				'Copy the file and remove the extension \'default\' first.\n' +
-				'Open this file and configure the variables afterwards.\n' +
-				'Run the file in a console. Note, that the environment is set inside the console\n' +
-				'and has to be redone at each season start\n' +
-				'\n'
+	description	'installation instruction'
+	
+	def instructionMessage = '' + 
+		'##############################################################################\n' +
+		'#                    Installation instruction for MDE4CPP                    #\n' +
+		'##############################################################################\n' +
+		'\n' +
+		'Welcome to MDE4CPP framework!\n' +
+		'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
+		'A pattern is prepared for it:\n' +
+		'- for Windows systems: setenv.bat.default\n' +
+		'- for Unix systems: setenv.default.\n' +
+		'Copy the file and remove the extension \'default\' first.\n' +
+		'Open this file and configure the variables afterwards.\n' +
+		'Run the file in a console. Note, that the environment is set inside the console\n' +
+		'and has to be redone at each season start\n' +
+		'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
+		'\n'
 	
 	def files = file("$projectDir").listFiles(new FileFilter() {
 		public boolean accept(File pathname) {
@@ -56,10 +60,10 @@ task installationInstruction() {
 	})
 	
 	if (files.length == 0) {
-		println description
+		println instructionMessage
 	} else {
 		doFirst {
-			println description
+			println instructionMessage
 		}
 	}
 }
