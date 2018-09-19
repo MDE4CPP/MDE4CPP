@@ -4,10 +4,6 @@
 # # Environment configuration of MDE4CPP #
 # ########################################
 
-# ###############################
-# # configure MDE4CPP variables #
-# ###############################
-
 # path to MDE4CPP home folder
 export MDE4CPP_HOME=$PWD
 
@@ -15,26 +11,33 @@ export MDE4CPP_HOME=$PWD
 # required for creating the generators
 export MDE4CPP_ECLIPSE_HOME=~/eclipse_modeling
 
-REM enable debug messages of fUML model, values = {0,1}
-SET DEBUG_MESSAGE_FUML=0
 
+# ##################################################
+# # configure Gradle tasks and compiling processes #
+# ##################################################
 
-# #######################################
-# # configure Gradle project properties #
-# #######################################
-
-# count of worker for each compile task 
-# (if two compiling tasks are performed in parallel, 2xworkerCount processes are executed)
-export ORG_GRADLE_PROJECT_workerCount=1
-
-# enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
+# enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false'
 export GRADLE_OPTS=-Dorg.gradle.parallel=true
 
-# specify, if release version should be compiled, values = {0,1}
+# configure count of worker for each compile task 
+# (if two compiling tasks are performed in parallel, 2 x WORKER processes are executed)
+export ORG_GRADLE_PROJECT_WORKER=1
+
+# release version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
 export ORG_GRADLE_PROJECT_RELEASE=1
 
-# specify, if debug version should be compiled, values = {0,1}
+# debug version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
 export ORG_GRADLE_PROJECT_DEBUG=1
+
+# debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
+export ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
+
+# #############################
+# # configure LD_LIBRARY_PATH #
+# #############################
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/application/bin
+
 
 # ##############################################################################
 # # configure compiler information for include path setting inside cpp eclipse #
@@ -42,7 +45,7 @@ export ORG_GRADLE_PROJECT_DEBUG=1
 
 # The generators create eclipse cpp projects files including include path.
 # Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
-# Configuration is only necessary for eclipse.
+# Configuration is only necessary for eclipse use.
 
 # path to compiler home folder
 #export COMPILER_HOME=
@@ -52,9 +55,3 @@ export ORG_GRADLE_PROJECT_DEBUG=1
 
 # compiler version, only necessary for include path generation for Eclipse Project file
 #export COMPILER_VERSION=
-
-# #############################
-# # configure LD_LIBRARY_PATH #
-# #############################
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/application/bin

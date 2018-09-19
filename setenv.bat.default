@@ -4,10 +4,6 @@ REM ########################################
 REM # Environment configuration of MDE4CPP #
 REM ########################################
 
-REM ###############################
-REM # configure MDE4CPP variables #
-REM ###############################
-
 REM path to MDE4CPP home folder
 SET MDE4CPP_HOME=%cd%
 
@@ -15,31 +11,33 @@ REM path to eclipse home folder including Acceleo plugins
 REM required for creating the generators
 SET MDE4CPP_ECLIPSE_HOME=C:\tools\eclipse
 
-REM enable debug messages of fUML model, values = {0,1}
-SET DEBUG_MESSAGE_FUML=0
 
+REM ##################################################
+REM # configure Gradle tasks and compiling processes #
+REM ##################################################
 
-REM #######################################
-REM # configure Gradle project properties #
-REM #######################################
-
-REM count of worker for each compile task 
-REM (if two compiling tasks are performed in parallel, 2xworkerCount processes are executed)
-SET ORG_GRADLE_PROJECT_workerCount=1
-
-REM enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
+REM enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false'
 SET GRADLE_OPTS=-Dorg.gradle.parallel=true
 
-REM specify, if release version should be compiled, values = {0,1}
+REM configure count of worker for each compile task 
+REM (if two compiling tasks are performed in parallel, 2 x WORKER processes are executed)
+SET ORG_GRADLE_PROJECT_WORKER=1
+
+REM release version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
 SET ORG_GRADLE_PROJECT_RELEASE=1
 
-REM specify, if debug version should be compiled, values = {0,1}
+REM debug version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
 SET ORG_GRADLE_PROJECT_DEBUG=1
 
+REM debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
+SET ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
 
-REM ##########################
-REM # configure program path #
-REM ##########################
+
+REM #####################################################
+REM # configure PATH variable with minimal set of paths #
+REM #####################################################
+
+REM To avoid conflicts, in special with other C++ installations, it is recommended to specify a clean path environment
 
 REM path to gradle home folder
 SET GRADLE_HOME=C:\tools\gradle
@@ -50,21 +48,8 @@ SET CMAKE_HOME=C:\tools\CMake
 REM path to compiler home folder
 SET COMPILER_HOME=C:\tools\MinGW
 
-REM delivery name of compiler, only necessary for include path generation for Eclipse Project file
-REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
-SET COMPILER_DELIVERY_NAME=x86_64-w64-mingw32
-
-REM compiler version, only necessary for include path generation for Eclipse Project file
-REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
-SET COMPILER_VERSION=8.1.0
-
 REM path to java jdk
 SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_162
-
-
-REM ##################
-REM # configure PATH #
-REM ##################
 
 REM set path with minimal set of programs (system paths and MDE4CPP required programs) temporary (only in called cmd and further child processes)
 SET PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
@@ -73,3 +58,20 @@ IF DEFINED GRADLE_HOME (SET PATH=%GRADLE_HOME%\bin;%PATH%)
 IF DEFINED CMAKE_HOME (SET PATH=%CMAKE_HOME%\bin;%PATH%)
 IF DEFINED COMPILER_HOME (SET PATH=%COMPILER_HOME%\bin;%PATH%)
 IF DEFINED JAVA_HOME (SET PATH=%JAVA_HOME%\bin;%PATH%)
+
+
+REM ##############################################################################
+REM # configure compiler information for include path setting inside cpp eclipse #
+REM ##############################################################################
+
+REM The generators create eclipse cpp projects files including include path.
+REM Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+REM Configuration is only necessary for eclipse.
+
+REM delivery name of compiler, only necessary for include path generation for Eclipse Project file
+REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+SET COMPILER_DELIVERY_NAME=x86_64-w64-mingw32
+
+REM compiler version, only necessary for include path generation for Eclipse Project file
+REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+SET COMPILER_VERSION=8.1.0
