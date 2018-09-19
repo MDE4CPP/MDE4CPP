@@ -19,7 +19,7 @@ task deliverPersistenceInterface(type: Copy) {
 
 task downloadFile(type: Download) {
 	description 'download xerces'
-    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.1.zip'
+    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.2.zip'
     dest new File(file('./xerces/xerces-c-3.2.1.zip').absolutePath)
     onlyIfModified true
 }
