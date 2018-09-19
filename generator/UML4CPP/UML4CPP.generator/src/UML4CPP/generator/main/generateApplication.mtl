@@ -169,7 +169,7 @@ INSTALL(TARGETS ${PROJECT_NAME}
 [comment gradle file for compile command of application /]
 [file ('../application/build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.4"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
 }
 
 description 'Compile task for project: App_[packageName/]'
