@@ -21,6 +21,7 @@ SET DEBUG_ACTIVITY=0
 REM enable debug messages of fUML model, values = {0,1}
 SET DEBUG_FUML=0
 
+
 REM #######################################
 REM # configure Gradle project properties #
 REM #######################################
