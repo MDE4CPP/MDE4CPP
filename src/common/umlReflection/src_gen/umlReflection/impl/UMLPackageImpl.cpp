@@ -9692,80 +9692,6 @@ void UMLPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> uML
 
 void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory)
 {
-	uML_MessageKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_MessageKind->setName("MessageKind");
-	
-	uML_MessageKind_complete = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
-	uML_MessageKind_complete->setName("complete");
-	uML_MessageKind_found = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
-	uML_MessageKind_found->setName("found");
-	uML_MessageKind_lost = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
-	uML_MessageKind_lost->setName("lost");
-	uML_MessageKind_unknown = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
-	uML_MessageKind_unknown->setName("unknown");
-	uML_ParameterEffectKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_ParameterEffectKind->setName("ParameterEffectKind");
-	
-	uML_ParameterEffectKind_create = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
-	uML_ParameterEffectKind_create->setName("create");
-	uML_ParameterEffectKind_delete = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
-	uML_ParameterEffectKind_delete->setName("delete");
-	uML_ParameterEffectKind_read = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
-	uML_ParameterEffectKind_read->setName("read");
-	uML_ParameterEffectKind_update = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
-	uML_ParameterEffectKind_update->setName("update");
-	uML_ParameterDirectionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_ParameterDirectionKind->setName("ParameterDirectionKind");
-	
-	uML_ParameterDirectionKind_in = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
-	uML_ParameterDirectionKind_in->setName("in");
-	uML_ParameterDirectionKind_inout = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
-	uML_ParameterDirectionKind_inout->setName("inout");
-	uML_ParameterDirectionKind_out = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
-	uML_ParameterDirectionKind_out->setName("out");
-	uML_ParameterDirectionKind_return = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
-	uML_ParameterDirectionKind_return->setName("return");
-	uML_PseudostateKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_PseudostateKind->setName("PseudostateKind");
-	
-	uML_PseudostateKind_choice = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_choice->setName("choice");
-	uML_PseudostateKind_deepHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_deepHistory->setName("deepHistory");
-	uML_PseudostateKind_entryPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_entryPoint->setName("entryPoint");
-	uML_PseudostateKind_exitPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_exitPoint->setName("exitPoint");
-	uML_PseudostateKind_fork = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_fork->setName("fork");
-	uML_PseudostateKind_initial = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_initial->setName("initial");
-	uML_PseudostateKind_join = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_join->setName("join");
-	uML_PseudostateKind_junction = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_junction->setName("junction");
-	uML_PseudostateKind_shallowHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_shallowHistory->setName("shallowHistory");
-	uML_PseudostateKind_terminate = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
-	uML_PseudostateKind_terminate->setName("terminate");
-	uML_TransitionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_TransitionKind->setName("TransitionKind");
-	
-	uML_TransitionKind_external = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
-	uML_TransitionKind_external->setName("external");
-	uML_TransitionKind_internal = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
-	uML_TransitionKind_internal->setName("internal");
-	uML_TransitionKind_local = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
-	uML_TransitionKind_local->setName("local");
-	uML_CallConcurrencyKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_CallConcurrencyKind->setName("CallConcurrencyKind");
-	
-	uML_CallConcurrencyKind_concurrent = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
-	uML_CallConcurrencyKind_concurrent->setName("concurrent");
-	uML_CallConcurrencyKind_guarded = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
-	uML_CallConcurrencyKind_guarded->setName("guarded");
-	uML_CallConcurrencyKind_sequential = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
-	uML_CallConcurrencyKind_sequential->setName("sequential");
 	uML_AggregationKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_AggregationKind->setName("AggregationKind");
 	
@@ -9775,6 +9701,22 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_AggregationKind_none->setName("none");
 	uML_AggregationKind_shared = factory->createEnumerationLiteral_in_Enumeration(uML_AggregationKind);
 	uML_AggregationKind_shared->setName("shared");
+	uML_CallConcurrencyKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_CallConcurrencyKind->setName("CallConcurrencyKind");
+	
+	uML_CallConcurrencyKind_concurrent = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
+	uML_CallConcurrencyKind_concurrent->setName("concurrent");
+	uML_CallConcurrencyKind_guarded = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
+	uML_CallConcurrencyKind_guarded->setName("guarded");
+	uML_CallConcurrencyKind_sequential = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
+	uML_CallConcurrencyKind_sequential->setName("sequential");
+	uML_ConnectorKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_ConnectorKind->setName("ConnectorKind");
+	
+	uML_ConnectorKind_assembly = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
+	uML_ConnectorKind_assembly->setName("assembly");
+	uML_ConnectorKind_delegation = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
+	uML_ConnectorKind_delegation->setName("delegation");
 	uML_ExpansionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ExpansionKind->setName("ExpansionKind");
 	
@@ -9811,6 +9753,17 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_InteractionOperatorKind_seq->setName("seq");
 	uML_InteractionOperatorKind_strict = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_strict->setName("strict");
+	uML_MessageKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_MessageKind->setName("MessageKind");
+	
+	uML_MessageKind_complete = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
+	uML_MessageKind_complete->setName("complete");
+	uML_MessageKind_found = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
+	uML_MessageKind_found->setName("found");
+	uML_MessageKind_lost = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
+	uML_MessageKind_lost->setName("lost");
+	uML_MessageKind_unknown = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
+	uML_MessageKind_unknown->setName("unknown");
 	uML_MessageSort = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_MessageSort->setName("MessageSort");
 	
@@ -9826,13 +9779,6 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_MessageSort_reply->setName("reply");
 	uML_MessageSort_synchCall = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_synchCall->setName("synchCall");
-	uML_ConnectorKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
-	uML_ConnectorKind->setName("ConnectorKind");
-	
-	uML_ConnectorKind_assembly = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
-	uML_ConnectorKind_assembly->setName("assembly");
-	uML_ConnectorKind_delegation = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
-	uML_ConnectorKind_delegation->setName("delegation");
 	uML_ObjectNodeOrderingKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ObjectNodeOrderingKind->setName("ObjectNodeOrderingKind");
 	
@@ -9844,6 +9790,60 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_ObjectNodeOrderingKind_ordered->setName("ordered");
 	uML_ObjectNodeOrderingKind_unordered = factory->createEnumerationLiteral_in_Enumeration(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_unordered->setName("unordered");
+	uML_ParameterDirectionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_ParameterDirectionKind->setName("ParameterDirectionKind");
+	
+	uML_ParameterDirectionKind_in = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
+	uML_ParameterDirectionKind_in->setName("in");
+	uML_ParameterDirectionKind_inout = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
+	uML_ParameterDirectionKind_inout->setName("inout");
+	uML_ParameterDirectionKind_out = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
+	uML_ParameterDirectionKind_out->setName("out");
+	uML_ParameterDirectionKind_return = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
+	uML_ParameterDirectionKind_return->setName("return");
+	uML_ParameterEffectKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_ParameterEffectKind->setName("ParameterEffectKind");
+	
+	uML_ParameterEffectKind_create = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
+	uML_ParameterEffectKind_create->setName("create");
+	uML_ParameterEffectKind_delete = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
+	uML_ParameterEffectKind_delete->setName("delete");
+	uML_ParameterEffectKind_read = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
+	uML_ParameterEffectKind_read->setName("read");
+	uML_ParameterEffectKind_update = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
+	uML_ParameterEffectKind_update->setName("update");
+	uML_PseudostateKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_PseudostateKind->setName("PseudostateKind");
+	
+	uML_PseudostateKind_choice = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_choice->setName("choice");
+	uML_PseudostateKind_deepHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_deepHistory->setName("deepHistory");
+	uML_PseudostateKind_entryPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_entryPoint->setName("entryPoint");
+	uML_PseudostateKind_exitPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_exitPoint->setName("exitPoint");
+	uML_PseudostateKind_fork = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_fork->setName("fork");
+	uML_PseudostateKind_initial = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_initial->setName("initial");
+	uML_PseudostateKind_join = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_join->setName("join");
+	uML_PseudostateKind_junction = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_junction->setName("junction");
+	uML_PseudostateKind_shallowHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_shallowHistory->setName("shallowHistory");
+	uML_PseudostateKind_terminate = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
+	uML_PseudostateKind_terminate->setName("terminate");
+	uML_TransitionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
+	uML_TransitionKind->setName("TransitionKind");
+	
+	uML_TransitionKind_external = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
+	uML_TransitionKind_external->setName("external");
+	uML_TransitionKind_internal = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
+	uML_TransitionKind_internal->setName("internal");
+	uML_TransitionKind_local = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
+	uML_TransitionKind_local->setName("local");
 	uML_VisibilityKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_VisibilityKind->setName("VisibilityKind");
 	
