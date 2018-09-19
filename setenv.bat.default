@@ -30,6 +30,12 @@ SET ORG_GRADLE_PROJECT_workerCount=1
 REM enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
 SET GRADLE_OPTS=-Dorg.gradle.parallel=true
 
+REM specify, if release version should be compiled, values = {0,1}
+SET ORG_GRADLE_PROJECT_RELEASE=1
+
+REM specify, if debug version should be compiled, values = {0,1}
+SET ORG_GRADLE_PROJECT_DEBUG=1
+
 
 REM ##########################
 REM # configure program path #

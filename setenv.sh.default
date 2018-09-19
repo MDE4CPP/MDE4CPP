@@ -30,6 +30,11 @@ export ORG_GRADLE_PROJECT_workerCount=1
 # enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false' or disable set command
 export GRADLE_OPTS=-Dorg.gradle.parallel=true
 
+# specify, if release version should be compiled, values = {0,1}
+export ORG_GRADLE_PROJECT_RELEASE=1
+
+# specify, if debug version should be compiled, values = {0,1}
+export ORG_GRADLE_PROJECT_DEBUG=1
 
 # ##############################################################################
 # # configure compiler information for include path setting inside cpp eclipse #
