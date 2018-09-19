@@ -15,6 +15,9 @@ REM path to eclipse home folder including Acceleo plugins
 REM required for creating the generators
 SET MDE4CPP_ECLIPSE_HOME=C:\tools\eclipse
 
+REM enable debug messages of fUML model, values = {0,1}
+SET DEBUG_MESSAGE_FUML=0
+
 
 REM #######################################
 REM # configure Gradle project properties #

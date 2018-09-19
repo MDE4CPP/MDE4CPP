@@ -15,6 +15,9 @@ export MDE4CPP_HOME=$PWD
 # required for creating the generators
 export MDE4CPP_ECLIPSE_HOME=~/eclipse_modeling
 
+REM enable debug messages of fUML model, values = {0,1}
+SET DEBUG_MESSAGE_FUML=0
+
 
 # #######################################
 # # configure Gradle project properties #
