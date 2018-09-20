@@ -21,15 +21,12 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 2. checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
 
 3. Configure environment
-  * Copy the pattern file and remove the extension `default`
+  * Copy the prepared environment settings file and remove the extension `default`
 		* for Windows systems: `setenv.bat.default`
 		* for Unix systems: `setenv.sh.default`
   * Open this file and configure the variables:
-    * `MDE4CPP_ECLIPSE_HOME` ... path to eclipse home folder of Eclipse Modeling Tool with Acceleo
     * `MDE4CPP_HOME` ... path to MDE4CPP home folder
-		Please note, that the root folder include the subfolder "application" with
-    	* binaries inside `${MDE4CPP_HOME}/application/bin`
-    	* header files inside `${MDE4CPP_HOME}/application/include/{model name}`
+    * `MDE4CPP_ECLIPSE_HOME` ... path to home folder of Eclipse Modeling Tool package with Acceleo
 
 4. If you want to use Prebuild libraries, packages are downloadable on github. Package with all libraries and header files are available at MDE4CPP repository. All C++ libraries are avaiable in
   * debug version (compiler flag -ggdb)
@@ -42,7 +39,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   * `gradle help` ... gradle help
   * `gradle <task name>` ... run task <task name>
 
-6. List of top level tasks (MDE4CPP tasks):
+6. List of top level tasks (group MDE4CPP):
   * `buildAll` ... create executables of all generators and build all base models
   * use `gradle tasks` to find all top level commands under `MDE4CPP tasks`
   * generator tasks:
@@ -57,7 +54,11 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   	* fUML4CPP will be used for .uml models
   	* To use UML4CPP (no fUML specific executions, only the structural part), `-PStructureOnly` or `-PSO` has to be added to the command.
 
-7. Model tasks are names using following schema: `<command><modelName> <buildMode>`
+7. There are variour dependencies between tasks as well as projects and models. For instance, a generator has to be compiled before source code of a model can be generated or the meta model has to be compiled before model can be compiled.
+All dependencies of a task are specified. It is not necessary to start or perform all dependencies manually. Gradle is able to performed this tasks automatically. Thus, it is sufficient to perform a desired task.
+For instance, to compile the example project `ecoreExample`, just call `gradle compileEcoreExample` on command line and all dependencies like delivering basing interfaces, generating and compiling ecore model and creating generator file are performed by gradle.
+
+8. Model tasks are names using following schema: `<command><modelName> <buildMode>`
   * commands:
     * `build` ... execute commands generate and compile
     * `generate` ... generate C++ code using our generator (independent of build mode)
