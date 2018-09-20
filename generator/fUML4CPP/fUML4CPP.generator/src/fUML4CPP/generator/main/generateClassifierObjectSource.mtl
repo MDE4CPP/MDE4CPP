@@ -1,0 +1,92 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::generateType /]
+
+[query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
+
+[template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
+	className : String = objectClassName();
+	pointerName : String = pointerName(aPackage);
+}]
+[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+
+#include "abstractDataTypes/Bag.hpp"
+#include "[aClassifier.getNearestPackage().ns()/]/[aClassifier.name.toUpperFirst()/].hpp"
+
+using namespace [aPackage.name/];
+
+[className/]::[className/](std::shared_ptr<[pointerName/]> _element):
+	m_umlValue(_element),
+	m_umlValues(nullptr)
+{
+}
+
+[className/]::[className/](std::shared_ptr<Bag<[pointerName/]>> _element):
+	m_umlValue(nullptr),
+	m_umlValues(_element)
+{
+}
+
+[className/]::[className/]([className/] &obj):
+	ObjectImpl(obj)
+{
+}
+
+[className/]::[className/]()
+{
+}
+
+[className/]::~[className/]()
+{
+}
+
+std::shared_ptr<ecore::EObject> [className/]::copy()
+{
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->setThis[className/]Ptr(element);
+	return element;
+}
+
+std::shared_ptr<[pointerName/]> [className/]::getUmlValue() const
+{
+	return m_umlValue;
+}
+
+std::shared_ptr<Bag<[pointerName/]>> [className/]::getUmlValues() const
+{
+	return m_umlValues;
+}
+
+void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
+{
+	m_umlValue = _element;
+}
+
+void [className/]::setUmlValues(std::shared_ptr<Bag<[pointerName/]>> _element)
+{
+	m_umlValues = _element;
+}
+
+void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
+{
+	setThisObjectPtr(thisObjectPtr);
+}
+[/file]
+[/template]

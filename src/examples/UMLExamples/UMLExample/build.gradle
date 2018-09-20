@@ -1,0 +1,49 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+task compileUMLExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile Ecore example'
+	
+	projectFolder = file('.' + File.separator + 'src' + File.separator + 'UMLExample')
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/UMLExample/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + 'UMLExample' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExample.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLExampled.exe')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('buildTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('buildUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+
+	// dependency to model 'umlReflection'
+	def umlReflection = getRootProject().getTasksByName('buildUmlReflection', true)
+	dependsOn umlReflection
+	inputs.files(umlReflection.outputs)
+}
+
+task clean {
+	doLast {
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + 'UMLExample' + File.separator + '.cmake')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

@@ -1,0 +1,44 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+description 'Compile task for project: types'
+
+task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'types'
+	description 'compile types'
+
+	projectFolder = file('.' + File.separator + 'types')
+
+	inputs.files(fileTree('.') {
+        exclude 'types/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'types' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'types.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'typesd.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'types')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + 'types' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println 'deleting folder ' + cmakeFolder.absolutePath
+		}
+	}
+}

@@ -1,0 +1,60 @@
+description 'ecore4CPP project'
+
+task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:deliverEcore4CPP']) {
+	group 'Generators'
+	description 'create executable jar for ecore4CPP generator'
+
+	inputs.files file("ecore4CPP.generator/build/classes/java/main"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build")
+}
+
+task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP.generator.compiler:jar']) {
+	description 'generate emtl files for Ecore4CPP generator'	
+	main = "-jar"
+	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
+
+	inputs.files file("ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build/classes/java/main")
+}
+tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter executeCompiler
+executeCompiler.mustRunAfter tasks.getByPath('ecore4CPP.generator:compileJava')
+
+task checkDependencies {
+	if (System.getenv('MDE4CPP_HOME') == null) {
+		throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+	}
+	if (System.getenv('MDE4CPP_ECLIPSE_HOME') == null) {
+		throw new GradleException('System environment variable "MDE4CPP_ECLIPSE_HOME" is not defined')
+	}
+	
+	[	'com.google.guava_*.jar',
+		'javax.inject_*.jar',
+		'lpg.runtime.java_*.jar',
+		'org.eclipse.acceleo.common_*.jar',
+		'org.eclipse.acceleo.engine_*.jar',
+		'org.eclipse.acceleo.model_*.jar',
+		'org.eclipse.acceleo.parser_*.jar',
+		'org.eclipse.core.runtime_*.jar',
+		'org.eclipse.emf.common_*.jar',
+		'org.eclipse.emf.ecore.xmi_*.jar',
+		'org.eclipse.emf.ecore_*.jar',
+		'org.eclipse.equinox.app_*.jar',
+		'org.eclipse.equinox.common_*.jar',
+		'org.eclipse.equinox.preferences_*.jar',
+		'org.eclipse.equinox.registry_*.jar',
+		'org.eclipse.ocl.common_*.jar',
+		'org.eclipse.ocl.ecore_*.jar',
+		'org.eclipse.ocl_*.jar',
+		'org.eclipse.osgi_*.jar',
+		'org.eclipse.uml2.common_*.jar',
+		'org.eclipse.uml2.uml_*.jar',
+		'org.eclipse.uml2.types_*.jar'
+	].each { jarName ->
+		FileTree tree = fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: "${jarName}")
+		if(tree.isEmpty()) {
+			throw new GradleException(System.getenv('MDE4CPP_ECLIPSE_HOME') + "/plugins/${jarName} is not found")
+		}
+	}
+	
+}
+executeCompiler.mustRunAfter(checkDependencies)

@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# ########################################
+# # Environment configuration of MDE4CPP #
+# ########################################
+
+# path to MDE4CPP home folder
+export MDE4CPP_HOME=$PWD
+
+# path to eclipse home folder including Acceleo plugins
+# required for creating the generators
+export MDE4CPP_ECLIPSE_HOME=~/eclipse_modeling
+
+
+# ##################################################
+# # configure Gradle tasks and compiling processes #
+# ##################################################
+
+# enable parallel execution of Gradle tasks permanently with value 'true', otherwise 'false'
+export GRADLE_OPTS=-Dorg.gradle.parallel=true
+
+# configure count of worker for each compile task 
+# (if two compiling tasks are performed in parallel, 2 x WORKER processes are executed)
+export ORG_GRADLE_PROJECT_WORKER=1
+
+# release version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
+export ORG_GRADLE_PROJECT_RELEASE=1
+
+# debug version will be compiled with value unequal '0' or if ORG_GRADLE_PROJECT_RELEASE and ORG_GRADLE_PROJECT_DEBUG are undefined
+export ORG_GRADLE_PROJECT_DEBUG=1
+
+# debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
+export ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
+
+# update the PATH variable locally to be able to call the executable and scripts from all subfolders
+export PATH="$MDE4CPP_HOME/application/bin:$MDE4CPP_HOME/application/tools:$PATH"
+
+# #############################
+# # configure LD_LIBRARY_PATH #
+# #############################
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/application/bin
+
+
+# ##############################################################################
+# # configure compiler information for include path setting inside cpp eclipse #
+# ##############################################################################
+
+# The generators create eclipse cpp projects files including include path.
+# Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
+# Configuration is only necessary for eclipse use.
+
+# path to compiler home folder
+#export COMPILER_HOME=
+
+# delivery name of compiler, only necessary for include path generation for Eclipse Project file
+#export COMPILER_DELIVERY_NAME=
+
+# compiler version, only necessary for include path generation for Eclipse Project file
+#export COMPILER_VERSION=

@@ -1,0 +1,234 @@
+#include "uml/impl/ObjectImpl.hpp"
+
+#ifdef NDEBUG
+	#define DEBUG_MESSAGE(a) /**/
+#else
+	#define DEBUG_MESSAGE(a) a
+#endif
+
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
+//#include "util/ProfileCallCount.hpp"
+
+#include <cassert>
+#include <iostream>
+#include <sstream>
+
+
+#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
+
+//Forward declaration includes
+#include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
+#include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include <exception> // used in Persistence
+
+#include "uml/Property.hpp"
+
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+
+using namespace uml;
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+ObjectImpl::ObjectImpl()
+{
+	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
+	// Reference Members
+	//*********************************
+	//References
+
+	//Init references
+}
+
+ObjectImpl::~ObjectImpl()
+{
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
+}
+
+
+
+
+ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+
+	//copy references with no containment (soft copy)
+	
+
+	//Clone references with containment (deep copy)
+
+
+}
+
+std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
+{
+	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
+	element->setThisObjectPtr(element);
+	return element;
+}
+
+std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
+{
+	return UmlPackageImpl::eInstance()->getObject_EClass();
+}
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+
+//*********************************
+// Operations
+//*********************************
+Any ObjectImpl::get(std::shared_ptr<uml::Property>  property) const
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void ObjectImpl::set(std::shared_ptr<uml::Property>  property,Any value)
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void ObjectImpl::unset(std::shared_ptr<uml::Property>  property)
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+//*********************************
+// References
+//*********************************
+
+//*********************************
+// Union Getter
+//*********************************
+
+
+std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
+{
+	return m_thisObjectPtr.lock();
+}
+void ObjectImpl::setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr)
+{
+	m_thisObjectPtr = thisObjectPtr;
+}
+std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
+{
+	return nullptr;
+}
+
+//*********************************
+// Structural Feature Getter/Setter
+//*********************************
+Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+bool ObjectImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+bool ObjectImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Persistence Functions
+//*********************************
+void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get UmlFactory
+	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+	}
+}		
+
+void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+{
+
+
+	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+}
+
+void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+{
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void ObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+	
+}
+
+void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+
+	
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+

@@ -1,0 +1,13 @@
+src_gen/
+application/
+
+**/model/build.gradle
+/fumlExamples/**/.cproject
+/fumlExamples/**/.project
+/fumlExamples/**/build.gradle
+/commonExamples/SubsetUnionExample/**/.cproject
+/commonExamples/SubsetUnionExample/**/.project
+/commonExamples/SubsetUnionExample/**/build.gradle
+**/*Model*/.cproject
+**/*Model*/.project
+**/*Model*/build.gradle

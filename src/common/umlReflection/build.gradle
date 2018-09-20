@@ -1,0 +1,15 @@
+description 'Build tasks for project: umlReflection'
+
+task buildUmlReflection() {
+	group 'umlReflection'
+	description 'build umlReflection'
+
+	dependsOn 'model:generateUmlReflection'
+	dependsOn 'src_gen:compileUmlReflection'
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+}
+
+tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')

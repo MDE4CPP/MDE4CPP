@@ -1,0 +1,15 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate tasks for project: ecoreReflection'
+
+task generateEcoreReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'ecoreReflection'
+	description 'generate C++ code of ecoreReflection.uml model'
+
+	modelFilePath = file('.' + File.separator + 'ecoreReflection.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml']
+}

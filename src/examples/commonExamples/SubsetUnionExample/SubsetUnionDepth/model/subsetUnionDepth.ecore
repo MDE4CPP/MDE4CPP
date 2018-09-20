@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="subsetUnionDepth" nsURI="http://www.example.org/subsetUnionDepth"
+    nsPrefix="subsetUnionDepth">
+  <eAnnotations source="prepareApplication">
+    <details key="sourceCodeIncludes" value="#include &quot;ecore/EClass.hpp&quot;&#xD;&#xA;&#xD;&#xA;#define TO_STR2(x) #x&#xD;&#xA;#define TO_STR(x) TO_STR2(x)&#xD;&#xA;#define createEl(X) std::shared_ptr&lt; Element_Level##X > e##X = factory->createElement_Level##X(); e##X->setName(&quot;Element&quot; TO_STR(X));   \&#xD;&#xA;                    c->getSubset##X()->add(e##X); \&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;c->getSubset&quot;&lt;&lt; TO_STR(X) &lt;&lt;&quot;()->add(e&quot; &lt;&lt;  TO_STR(X) &lt;&lt;&quot;); size:&quot; &lt;&lt; c->getSubset##X()->size() &lt;&lt;std::endl; \&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;Union size:&quot; &lt;&lt; c->getUnionBag()->size() &lt;&lt;std::endl;&#xD;&#xA;&#xD;&#xA;#define printSubset(X)      std::cout &lt;&lt; &quot;Printing out subset of level &quot; TO_STR(X) &lt;&lt; std::endl;\&#xD;&#xA;                            auto s##X = c->getSubset##X(); \&#xD;&#xA;                            for(auto it= s##X->begin(); it != s##X->end(); ++it){ \&#xD;&#xA;                                std::cout &lt;&lt; &quot;Name: &quot; &lt;&lt; (*it)->getName() &lt;&lt; &quot; Type of: &quot; &lt;&lt; (*it)->eClass()->getName() &lt;&lt; std::endl; \&#xD;&#xA;                            }\&#xD;&#xA;                            std::cout &lt;&lt; &quot;-------------------&quot; &lt;&lt; std::endl;&#xD;&#xA;"/>
+    <details key="sourceCodeMain" value="    std::shared_ptr&lt; Container_Level10 > c = factory->createContainer_Level10();&#xD;&#xA;    c->setName(&quot;Container10&quot;);&#xD;&#xA;&#xD;&#xA;    auto e = factory->createElement();&#xD;&#xA;    e->setName(&quot;Element0&quot;);&#xD;&#xA;    c->getUnionBag()->push_back(e);&#xD;&#xA;&#xD;&#xA;    createEl(1)&#xD;&#xA;    createEl(2)&#xD;&#xA;    createEl(3)&#xD;&#xA;    createEl(4)&#xD;&#xA;    createEl(5)&#xD;&#xA;    createEl(6)&#xD;&#xA;    createEl(7)&#xD;&#xA;    createEl(8)&#xD;&#xA;    createEl(9)&#xD;&#xA;    createEl(10)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    printSubset(1)&#xD;&#xA;    printSubset(2)&#xD;&#xA;    printSubset(3)&#xD;&#xA;    printSubset(4)&#xD;&#xA;    printSubset(5)&#xD;&#xA;    printSubset(6)&#xD;&#xA;    printSubset(7)&#xD;&#xA;    printSubset(8)&#xD;&#xA;    printSubset(9)&#xD;&#xA;    printSubset(10)&#xD;&#xA;&#xD;&#xA;    auto u = c->getUnionBag();&#xD;&#xA;    std::cout &lt;&lt; &quot;Printing out the Union. Size: &quot; &lt;&lt; u->size() &lt;&lt; std::endl;&#xD;&#xA;&#xD;&#xA;    for(auto it= u->begin(); it != u->end(); ++it){&#xD;&#xA;        std::cout &lt;&lt; &quot;Name: &quot; &lt;&lt; (*it)->getName() &lt;&lt; std::endl;&#xD;&#xA;    }&#xD;&#xA;    std::cout &lt;&lt; &quot;-------------------&quot; &lt;&lt; std::endl;&#xD;&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Container">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unionBag" upperBound="-1"
+        eType="#//Element" derived="true" containment="true">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level1" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level1" eSuperTypes="#//Container">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset1" upperBound="-1"
+        eType="#//Element_Level1" containment="true">
+      <eAnnotations source="subsets" references="#//Container/unionBag"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level2" eSuperTypes="#//Element_Level1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level2" eSuperTypes="#//Container_Level1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset2" upperBound="-1"
+        eType="#//Element_Level2" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level1/subset1"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level3" eSuperTypes="#//Element_Level2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level3" eSuperTypes="#//Container_Level2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset3" upperBound="-1"
+        eType="#//Element_Level3" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level2/subset2"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level4" eSuperTypes="#//Element_Level3"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level4" eSuperTypes="#//Container_Level3">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset4" upperBound="-1"
+        eType="#//Element_Level4" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level3/subset3"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level5" eSuperTypes="#//Container_Level4">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset5" upperBound="-1"
+        eType="#//Element_Level5" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level4/subset4"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level5" eSuperTypes="#//Element_Level4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level6" eSuperTypes="#//Element_Level5"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level6" eSuperTypes="#//Container_Level5">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset6" upperBound="-1"
+        eType="#//Element_Level6" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level5/subset5"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level7" eSuperTypes="#//Element_Level6"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level7" eSuperTypes="#//Container_Level6">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset7" upperBound="-1"
+        eType="#//Element_Level7" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level6/subset6"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level8" eSuperTypes="#//Container_Level7">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset8" upperBound="-1"
+        eType="#//Element_Level8" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level7/subset7"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level8" eSuperTypes="#//Element_Level7"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level9" eSuperTypes="#//Element_Level8"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level9" eSuperTypes="#//Container_Level8">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset9" upperBound="-1"
+        eType="#//Element_Level9" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level8/subset8"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level10" eSuperTypes="#//Element_Level9"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container_Level10" eSuperTypes="#//Container_Level9">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset10" upperBound="-1"
+        eType="#//Element_Level10" containment="true">
+      <eAnnotations source="subsets" references="#//Container_Level9/subset9"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

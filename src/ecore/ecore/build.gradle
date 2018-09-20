@@ -1,0 +1,12 @@
+description 'Build task for project: ecore'
+
+task buildEcore() {
+	group 'ecore'
+	description 'build ecore'
+
+	dependsOn 'model:generateEcore'
+	dependsOn 'src_gen:compileEcore'
+
+}
+
+tasks.getByPath('src_gen:compileEcore').mustRunAfter tasks.getByPath('model:generateEcore')

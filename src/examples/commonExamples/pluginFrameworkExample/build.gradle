@@ -1,0 +1,36 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+description 'Example collection'
+
+task compileExamplePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group "Examples"
+	description "compile pluginFramework example"
+
+	projectFolder = file("./src")
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'src' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'examplePluginFramework.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'examplePluginFrameworkd.exe')
+	
+	// dependency to model 'pluginFramework'
+	def pluginFramework = getRootProject().getTasksByName('compilePluginFramework', true)
+	dependsOn pluginFramework
+	inputs.files(pluginFramework.outputs)
+}
+
+task clean {
+	doLast {
+		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + '.cmake')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}

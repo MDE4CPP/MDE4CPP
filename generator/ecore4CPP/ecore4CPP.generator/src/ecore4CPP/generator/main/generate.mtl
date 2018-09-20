@@ -1,0 +1,49 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generate('http://www.eclipse.org/emf/2002/Ecore')/]
+
+[import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
+[import ecore4CPP::generator::main::generateApplication/]
+[import ecore4CPP::generator::main::generateBuildFile/]
+[import ecore4CPP::generator::main::generateEnum /]
+[import ecore4CPP::generator::main::generateModel/]
+[import ecore4CPP::generator::main::generateProjectFiles/]
+[import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::impl::generateImplementation/]
+[import ecore4CPP::generator::main::package::generateMetamodelPackage/]
+[import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
+
+[template public generateModel(aPackage : ecore::EPackage)]
+[comment @main/]
+[for (aClass : EClass | aPackage.eAllContents(EClass))]
+	[aClass.generateModel()/]
+	[aClass.generateImplementation()/]
+[/for]
+
+[for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
+	[anEEnum.generateEnum()/]
+[/for]
+
+[aPackage.generateFactoryImpl()/]
+[aPackage.generatePackageImpl()/]
+[aPackage.generateEcorePlugin()/]
+
+[aPackage.generateBuildFile()/]
+[aPackage.generateProjectsFiles()/]
+
+[if (aPackage.prepareApplication())]
+[aPackage.generateApplication()/]
+[/if]
+[/template]

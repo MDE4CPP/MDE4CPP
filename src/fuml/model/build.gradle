@@ -1,0 +1,14 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate task for project: fUML'
+
+task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'fUML'
+	description 'generate C++ code of fUML.ecore model'
+	
+	modelFilePath = file('.' + File.separator + 'fUML.ecore')
+
+	relatedModels = ['ecore', 'uml']
+}
