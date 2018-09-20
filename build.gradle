@@ -3,7 +3,7 @@ description 'MDE4CPP root project'
 task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
-	
+
 	dependsOn 'generator:createAllGenerators'
 	dependsOn 'src:buildEcoreModels'
 	dependsOn 'src:buildReflectionModels'
@@ -15,7 +15,7 @@ task buildAll() {
 task compileAll() {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
-	
+
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
@@ -26,7 +26,7 @@ task compileAll() {
 task generateAll() {
 	group 'MDE4CPP'
 	description 'compile all models without generating the models'
-	
+
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 }
@@ -35,8 +35,8 @@ task installationInstruction() {
 	group 'MDE4CPP'
 
 	description	'installation instruction'
-	
-	def instructionMessage = '' + 
+
+	def instructionMessage = '' +
 		'##############################################################################\n' +
 		'#                    Installation instruction for MDE4CPP                    #\n' +
 		'##############################################################################\n' +
@@ -45,30 +45,30 @@ task installationInstruction() {
 		'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
 		'A pattern is prepared for it:\n' +
 		'- for Windows systems: setenv.bat.default\n' +
-		'- for Unix systems: setenv.sh.default.\n' +
+		'- for Unix systems: setenv.default.\n' +
 		'Copy the file and remove the extension \'default\' first.\n' +
 		'Open this file and configure the variables afterwards.\n' +
 		'Run the file in a console. Note, that the environment is set inside the console\n' +
 		'and has to be redone at each season start\n' +
 		'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
 		'\n'
-	
-	def files = file("$projectDir").listFiles(new FileFilter() {
+
+	/*def files = file("$projectDir").listFiles(new FileFilter() {
 		public boolean accept(File pathname) {
 			def extension = ".sh"
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
 				extension = ".bat"
 			}
-		
+
 			return pathname.getName().endsWith(extension);
 		}
-	})
-	
-	if (files.length == 0) {
+	})*/
+
+	/*if (files.length == 0) {
 		println instructionMessage
-	} else {
+	} else {*/
 		doFirst {
 			println instructionMessage
 		}
-	}
+	//}
 }

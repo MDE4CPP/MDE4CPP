@@ -7,7 +7,7 @@ bin/
 build/
 userProjects/
 *.bat
+setenv*
 /application/
 /gradle.properties
 xerces
-!/application/tools

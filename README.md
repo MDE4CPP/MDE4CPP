@@ -22,7 +22,7 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 3. Configure environment
   * Copy the prepared environment settings file and remove the extension `default`
 		* for Windows systems: `setenv.bat.default`
-		* for Unix systems: `setenv.sh.default`
+		* for Unix systems: `setenv.default`
   * Open this file and configure the variables:
     * `MDE4CPP_HOME` ... path to MDE4CPP home folder
     * `MDE4CPP_ECLIPSE_HOME` ... path to home folder of Eclipse Modeling Tool package with Acceleo
