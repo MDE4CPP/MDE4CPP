@@ -1,6 +1,6 @@
 # Example model "SubsetUnion"
 
-The functionality of the subset union implementation of MDE4CPP will be demonstrated in this example. The main implementation is located in the annotation 'prepareApplication' using the key 'sourceCodeMain'. The algorithm create an object for each 'Element_Level' class and put it only into the appropriate subset. The content of all subsets and the union will be printed out.
+The functionality of the subset union implementation of MDE4CPP will be demonstrated in this example. The main implementation is located in the annotation 'prepareApplication' using the key 'sourceCodeMain'. The algorithm creates an object for each 'Element_Level' class and puts it only into the appropriate subset. The content of all subsets and the union will be printed out.
 
 To create the gradle project use:
 
