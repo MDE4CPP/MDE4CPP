@@ -3,7 +3,7 @@ This example includes a library DSL, which is shown in the following figure. The
 
 To create the gradle project use:
 
-> gradle generateModel -PModel=%MDE4CPP_HOME%/src/examples/ecoreExamples/ecoreModelExample/model/libraryModel_ecore.ecore
+> gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/ecoreExamples/ecoreModelExample/model/libraryModel_ecore.ecore
 
 or
 
@@ -13,7 +13,7 @@ in the model folder.
 
 To compile the example use:
 
-> gradle buildLibraryModel_ecore
+> gradlew buildLibraryModel_ecore
 
 
 ![Class diagramm example library model *ecoreModelExample*](diagram.png)

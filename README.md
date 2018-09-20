@@ -9,7 +9,6 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
   * Java Development Kit (JDK) version 1.8
   * Eclipse Modeling Tool
     * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
-  * Gradle 4.10.1
   * MinGW:
 	* for building 32 bit applications: (choose one)
 		* [MinGW](http://www.mingw.org/) with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc
@@ -17,7 +16,7 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 	* for building 64 bit applications:
 		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = x86_64 during installation
   * CMake
-  	
+
 2. checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
 
 3. Configure environment
@@ -34,14 +33,14 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
 
 5. If you want to build by yourself, be familar with gradle. Some basics are described below. Basic gradle tasks:
-  * `gradle tasks` ... list of available tasks is available.
-  * `gradle projects` ... package overview is available
-  * `gradle help` ... gradle help
-  * `gradle <task name>` ... run task <task name>
+  * `gradlew tasks` ... list of available tasks is available.
+  * `gradlew projects` ... package overview is available
+  * `gradlew help` ... gradle help
+  * `gradlew <task name>` ... run task <task name>
 
 6. List of top level tasks (group MDE4CPP):
   * `buildAll` ... create executables of all generators and build all base models
-  * use `gradle tasks` to find all top level commands under `MDE4CPP tasks`
+  * use `gradlew tasks` to find all top level commands under `MDE4CPP tasks`
   * generator tasks:
     * `createAllGenerators` ... create executables of all generators
     * `create<Generator project name>` ... creates executable of corresponding generator, e.g. createUML4CPP
@@ -56,7 +55,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
 
 7. There are various dependencies between tasks as well as projects and models. For instance, a generator has to be compiled before source code of a model can be generated or the meta model has to be compiled before model can be compiled.
 All dependencies of a task are specified. It is not necessary to start or perform all dependencies manually. Gradle is able to performed this tasks automatically. Thus, it is sufficient to perform a desired task.
-For instance, to compile the example project `ecoreExample`, just call `gradle compileEcoreExample` on command line and all dependencies like delivering basing interfaces, generating and compiling ecore model and creating generator file are performed by gradle.
+For instance, to compile the example project `ecoreExample`, just call `gradlew compileEcoreExample` on command line and all dependencies like delivering basing interfaces, generating and compiling ecore model and creating generator file are performed by gradle.
 
 8. Model tasks are names using following schema: `<command><modelName> <buildMode>`
   * commands:
@@ -69,24 +68,24 @@ For instance, to compile the example project `ecoreExample`, just call `gradle c
     * `-PDEBUG` or `-PD` ... debug version -> compiler flags -g -ggdb is used
     * `-PRELEASE` or `-PR` ... release version -> mostly with compiler flag O3, debug messages are disabled
 	* The build mode can be preconfigured in file ${user folder}/.gradle/gradle.properties by adding
-		* DEBUG or D ... build debug version 
+		* DEBUG or D ... build debug version
 		* RELEASE or R ... build release version
 		* This build mode is always used when compiling.
 	* A build mode can be disabled by setting the value `0`. For instance, the debug version is not built if `-PDEBUG=0` is defined in a gradle command.
 	* Further information for configuration and execution of compile tasks can be found on [MDE4CPPCompile-Plugin](https://github.com/MDE4CPP/MDE4CPPGradlePlugins).
   * examples:
-	* no preconfigured build mode inside gradle.properies: 
+	* no preconfigured build mode inside gradle.properies:
 		* `buildEcore` - generate and compile ecore.ecore in debug and release
 		* `generateEcore` - generate C++ code for ecore.ecore
 		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release version
-	* gradle.properies includes DEBUG	
+	* gradle.properies includes DEBUG
 		* `buildEcore` - generate and compile ecore.ecore in debug
 		* `generateEcore` - generate C++ code for ecore.ecore
 		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release and debug version
 		* `compileEcore -PRELEASE -PDEBUG=0` - compile generated code of ecore.ecore in release version (debug is disabled)
 
-  All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks. 
-  
+  All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks.
+
 ## License
 
 The projects is generally subjected to the **MIT** license.

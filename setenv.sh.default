@@ -32,6 +32,9 @@ export ORG_GRADLE_PROJECT_DEBUG=1
 # debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
 export ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
 
+# update the PATH variable locally to be able to call the executable and scripts from all subfolders
+export PATH="$MDE4CPP_HOME/application/bin:$MDE4CPP_HOME/application/tools:$PATH"
+
 # #############################
 # # configure LD_LIBRARY_PATH #
 # #############################

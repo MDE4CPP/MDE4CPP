@@ -4,7 +4,7 @@ The functionality of the subset union implementation of MDE4CPP will be demonstr
 
 To create the gradle project use:
 
-> gradle generateModel -PModel=%MDE4CPP_HOME%/src/examples/commonExamples/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
+> gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/commonExamples/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
 
 or
 
@@ -14,7 +14,7 @@ in the model folder.
 
 To compile the example use:
 
-> gradle buildSubsetUnion
+> gradlew buildSubsetUnion
 
 ![Class diagramm of model *SubsetUnion*](diagram.png)
 

@@ -3,7 +3,7 @@ This example defines a library DSL, which is shown in the following figure. The 
 
 To create the gradle project use:
 
-> gradle generateModel -PModel=%MDE4CPP_HOME%/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml
+> gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml
 
 or
 
@@ -13,6 +13,6 @@ in the model folder.
 
 To compile the example use:
 
-> gradle buildLibraryModel_uml
+> gradlew buildLibraryModel_uml
 
 ![Class diagramm of model *umlModelExample*](diagram.png)

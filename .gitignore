@@ -10,3 +10,4 @@ userProjects/
 /application/
 /gradle.properties
 xerces
+!/application/tools

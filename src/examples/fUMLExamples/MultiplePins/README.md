@@ -4,7 +4,7 @@ This is an example for testing the functionality of pins. The stop condition is 
 
 To create the gradle project use:
 
-> gradle generateModel -PModel=%MDE4CPP_HOME%/src/examples/fUMLExamples/MultiplePins/model/fUMLMultiplePins.uml
+> gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/fUMLExamples/MultiplePins/model/fUMLMultiplePins.uml
 
 or
 
@@ -14,7 +14,7 @@ in the model folder.
 
 To compile the example use:
 
-> gradle buildFUMLMultiplePins
+> gradlew buildFUMLMultiplePins
 
 ![Activity diagram with two actions to test the behavior of pins.](diagram.png)
 
