@@ -22,11 +22,12 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 3. Configure environment
   * Copy the prepared environment settings file and remove the extension `default`
 	* for Windows systems: `setenv.bat.default`
-	* for Unix systems: `setenv.default`
+	* for Unix systems: `setenv.default` and provide to the file the permission to be executed with `chmod +h setenv`.
   * Open this file and configure the variables:
     * `MDE4CPP_HOME` ... path to MDE4CPP home folder
     * variables for compiler and Gradle tasks configuration
     * tool path configuration
+  * Note for Unix users; you must call the bash like this: `. ./setenv` to allow the script change the variables inside your shell.
 
 4. If you want to use Prebuild libraries, packages are downloadable on github. Package with all libraries and header files are available at MDE4CPP repository. All C++ libraries are avaiable in
   * debug version (compiler flag -ggdb)
@@ -38,6 +39,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   * `gradlew projects` ... package overview is available
   * `gradlew help` ... gradle help
   * `gradlew <task name>` ... run task <task name>
+Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +h application/tools/gradlew`
 
 6. List of top level tasks (group MDE4CPP):
   * `buildAll` ... create executables of all generators and build all base models
