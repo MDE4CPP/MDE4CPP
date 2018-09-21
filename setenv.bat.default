@@ -45,7 +45,7 @@ SET CMAKE_HOME=C:\tools\CMake
 REM path to compiler home folder
 SET COMPILER_HOME=C:\tools\MinGW
 
-REM path to java jdk
+REM path to java development kit
 SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_162
 
 REM if you want, set path with minimal set of programs (system paths and MDE4CPP required programs) temporary (only in called cmd and further child processes)

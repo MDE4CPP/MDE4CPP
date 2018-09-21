@@ -17,7 +17,7 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 		* [mingw-w64](https://mingw-w64.org/doku.php), select architecture = x86_64 during installation
   * CMake
 
-2. checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
+2. Checkout the [MDE4CPP respository](https://github.com/MDE4CPP/MDE4CPP)
 
 3. Configure environment
   * Copy the prepared environment settings file and remove the extension `default`
@@ -70,18 +70,18 @@ For instance, to compile the example project `ecoreExample`, just call `gradlew 
     * not specified ... build debug and release version
     * `-PDEBUG` or `-PD` ... debug version -> compiler flags -g -ggdb is used
     * `-PRELEASE` or `-PR` ... release version -> mostly with compiler flag O3, debug messages are disabled
-	* The build mode can be preconfigured in file ${user folder}/.gradle/gradle.properties by adding
-		* DEBUG or D ... build debug version
-		* RELEASE or R ... build release version
+	* The build mode can be preconfigured in environment settings files by configuring
+		* ORG_GRADLE_PROJECT_DEBUG=1 ... build debug version
+		* ORG_GRADLE_PROJECT_RELEASE=1 ... build release version
 		* This build mode is always used when compiling.
-	* A build mode can be disabled by setting the value `0`. For instance, the debug version is not built if `-PDEBUG=0` is defined in a gradle command.
+	* A build mode can be disabled by setting the variable to `0`. For instance, the debug version is not built if `ORG_GRADLE_PROJECT_RELEASE=0` is defined in environment settings files or `-PDEBUG=0` is defined in a gradle command.
 	* Further information for configuration and execution of compile tasks can be found on [MDE4CPPCompile-Plugin](https://github.com/MDE4CPP/MDE4CPPGradlePlugins).
   * examples:
 	* no preconfigured build mode inside gradle.properies:
 		* `buildEcore` - generate and compile ecore.ecore in debug and release
 		* `generateEcore` - generate C++ code for ecore.ecore
 		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release version
-	* gradle.properies includes DEBUG
+	* environment settings files defines ORG_GRADLE_PROJECT_DEBUG=1
 		* `buildEcore` - generate and compile ecore.ecore in debug
 		* `generateEcore` - generate C++ code for ecore.ecore
 		* `compileEcore -PRELEASE` - compile generated code of ecore.ecore in release and debug version
