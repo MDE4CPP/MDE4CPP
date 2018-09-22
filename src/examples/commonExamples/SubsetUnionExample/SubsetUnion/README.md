@@ -1,24 +1,51 @@
 # Example model "SubsetUnion"
 
-The functionality of the subset union implementation of MDE4CPP will be demonstrated in this example. The main implementation is located in the annotation 'prepareApplication' using the key 'sourceCodeMain'. The algorithm creates an object for each 'Element_Level' class and puts it only into the appropriate subset. The content of all subsets and the union will be printed out.
+The functionality of the subset union implementation of MDE4CPP will be demonstrated in this example. The main implementation is located in the annotation `prepareApplication` using the key `sourceCodeMain`. The algorithm creates an object for each `Element_Level` class and puts it only into the appropriate subset. The content of all subsets and the union will be printed out.
 
-To create the gradle project use:
 
-> gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/commonExamples/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
+To generate the c++ project as well as gradle build files, execute:
+```
+Windows:
+  gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/commonExamples/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
 
-or
+Unix:
+  gradlew generateModel -PModel=$MDE4CPP_HOME/src/examples/commonExamples/SubsetUnionExample/SubsetUnion/model/subsetUnion.ecore
+```
+in MDE4CPP home folder or call script file:
+```
+Windows:
+  generate
 
-> generate
+Unix:
+  ./generate
+```
+in model folder.
 
-in the model folder.
+Following tasks are available after first code generation (build.gradle files are generated):
+ * To compile the generated c++ project (executable and library), use:
+```
+gradlew compileApplicationForSubsetUnion
+```
+ * To compile the generated c++ library (without executable), use:
+```
+gradlew compileSubsetUnion
+```
+ * To generate the model again, use:
+```
+gradlew generateSubsetUnion
+```
+ * To generate and compile with single command, use:
+```
+gradlew buildSubsetUnion
+```
 
-To compile the example use:
+Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
-> gradlew buildSubsetUnion
+## Model figures
 
 ![Class diagramm of model *SubsetUnion*](diagram.png)
 
-Result:
+## Execution result:
 ```
 Printing out subset of level 1
 Container name:
