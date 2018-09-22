@@ -39,6 +39,6 @@ gradlew buildLibraryModel_ecore
 
 Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
-##Model figures
+## Model figures
 
 ![Class diagramm example library model *ecoreModelExample*](diagram.png)

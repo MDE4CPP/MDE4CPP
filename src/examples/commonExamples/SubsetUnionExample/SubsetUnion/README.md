@@ -41,11 +41,11 @@ gradlew buildSubsetUnion
 
 Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
-##Model figures
+## Model figures
 
 ![Class diagramm of model *SubsetUnion*](diagram.png)
 
-##Execution result:
+## Execution result:
 ```
 Printing out subset of level 1
 Container name:

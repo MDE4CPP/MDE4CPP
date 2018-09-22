@@ -37,7 +37,7 @@ gradlew buildFUMLMultiplePins
 Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
 
-##Model figures
+## Model figures
 
 ![Activity diagram with two actions to test the behavior of pins.](diagram.png)
 

@@ -36,6 +36,6 @@ gradlew buildCalcModel
 
 Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
-##Model figures
+## Model figures
 
 ![Activity diagramm of prime checker calc model to determine if a given number is prime.](diagram.png)

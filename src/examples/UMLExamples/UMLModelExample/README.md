@@ -39,6 +39,6 @@ gradlew buildLibraryModel_uml
 
 Resulting executables and libraries will be delivered to folder `%MDE4CPP_HOME%/application/bin` and can be executed there.
 
-##Model figures
+## Model figures
 
 ![Class diagramm of model *umlModelExample*](diagram.png)
