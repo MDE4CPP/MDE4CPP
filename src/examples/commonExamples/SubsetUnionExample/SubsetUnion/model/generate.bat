@@ -11,5 +11,5 @@ REM Call the task 'generateModel' with model path as parameter
 REM generator will be detected automatically (ecore4CPP is used here)
 CALL gradlew generateModel -PModel=%modelFile%
 
-REM Go back to initial folder
+REM Go back to model folder
 CD /D %modelFolder%
