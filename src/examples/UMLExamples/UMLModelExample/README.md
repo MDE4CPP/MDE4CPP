@@ -4,10 +4,10 @@ This example defines a library DSL, which is shown in the following figure. The 
 To generate the c++ project as well as gradle build files, execute:
 ```
 Windows:
-  gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml
+  gradlew generateModel -PModel=%MDE4CPP_HOME%/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml -PSO
 
 Unix:
-  gradlew generateModel -PModel=$MDE4CPP_HOME/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml
+  gradlew generateModel -PModel=$MDE4CPP_HOME/src/examples/UMLExamples/UMLModelExample/model/LibraryModel_uml.uml -PSO
 ```
 in MDE4CPP home folder or call script file:
 ```

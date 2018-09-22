@@ -7,7 +7,7 @@ cd $MDE4CPP_HOME
 
 # Call the task 'generateModel' with model path as parameter
 # generator will be detected automatically (UML4CPP is used because parameter SO (struktureOnly) is defined)
-gradlew generateModel --model=$modelFile
+gradlew generateModel --model=$modelFile -PSO
 
 # Go back to model folder
 cd $modelFolder
