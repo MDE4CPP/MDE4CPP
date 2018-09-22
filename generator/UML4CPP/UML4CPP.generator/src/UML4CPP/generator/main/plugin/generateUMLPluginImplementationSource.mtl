@@ -56,7 +56,7 @@ std::shared_ptr<uml::Package> [packageName/]::getPackage()
 
 std::string [packageName/]::eclipseURI()
 {
-	return "[getEclipseURI()/]";
+	return "[valueKey('eclipseURI')/]";
 }
 
 std::string [packageName/]::eNAME()
@@ -75,6 +75,3 @@ std::string [packageName/]::eNS_PREFIX()
 }
 [/file]
 [/template]
-
-[query private hasEclipseURI(aPackage : Package) : Boolean = if (hasSourceGen()) then getSourceGen().details->select(key = 'eclipseURI')->notEmpty() else false endif/]
-[query private getEclipseURI(aPackage : Package) : String = if (hasEclipseURI()) then getSourceGen().details->select(key = 'eclipseURI')->first().value else '' endif/]
