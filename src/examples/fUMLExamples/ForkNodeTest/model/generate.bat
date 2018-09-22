@@ -9,7 +9,7 @@ CD /D %MDE4CPP_HOME%
 
 :: Call the gradle task with model path as parameter
 :: 'FUML4CPP' will be used. To use 'UML4CPP' add parameter -PSO
-CALL gradle generateModel -PModel=%modelFile%
+CALL gradlew generateModel -PModel=%modelFile%
 
 :: Go back to initial folder
 CD /D %modelFolder%
