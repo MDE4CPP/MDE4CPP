@@ -24,59 +24,35 @@ task compileAllExamplesWithoutModel() {
 
 task generateAllModelExamples() {
 	group 'Examples'
-	description 'generate all model examples using there generate.bat file'	
+	description 'generate all model examples using there generate file'	
 	
 	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
 	
-    doLast {
-		exec
-		{
-			workingDir = file('./commonExamples/SubsetUnionExample/SubsetUnion/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-    doLast {
-		exec
-		{
-			workingDir = file('./commonExamples/SubsetUnionExample/SubsetUnionDepth/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-
-    doLast {
-		exec
-		{
-			workingDir = file('./ecoreExamples/ecoreModelExample/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-    doLast {
-		exec
-		{
-			workingDir = file('./fUMLExamples/Calculator/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-    doLast {
-		exec
-		{
-			workingDir = file('./fUMLExamples/ForkNodeTest/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-    doLast {
-		exec
-		{
-			workingDir = file('./fUMLExamples/MultiplePins/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
-    }	
-    doLast {
-		exec
-		{
-			workingDir = file('./UMLExamples/UMLModelExample/model/')
-			commandLine = ['cmd', '/C', 'generate.bat']
-		}
+		[  	'./commonExamples/SubsetUnionExample/SubsetUnion/model/', 
+			'./commonExamples/SubsetUnionExample/SubsetUnionDepth/model/', 
+			'./ecoreExamples/ecoreModelExample/model/', 
+			'./fUMLExamples/Calculator/model/', 
+			'./fUMLExamples/ForkNodeTest/model/', 
+			'./fUMLExamples/MultiplePins/model/', 
+			'./UMLExamples/UMLModelExample/model/'
+		].each { path ->
+			exec
+			{
+				workingDir = file("${path}")
+				commandLine = [tool, command, prefix + 'generate']
+			}
+		} 		
     }
 }
 
