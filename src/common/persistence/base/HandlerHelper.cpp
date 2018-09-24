@@ -18,6 +18,8 @@
 
 #include <sstream> // used for extractType()
 
+#include "abstractDataTypes/SubsetUnion.hpp"
+
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"
@@ -155,7 +157,7 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 				int count = 0;
 				int meetingIndex = 0;
 
-				std::shared_ptr<Bag<ecore::EStructuralFeature>> structFeastureList = classObj->getEStructuralFeatures();
+				std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> structFeastureList = classObj->getEStructuralFeatures();
 				for (std::shared_ptr<ecore::EStructuralFeature> structFeat : *structFeastureList)
 				{
 					if (structFeat->getName() == targetObj->getName())

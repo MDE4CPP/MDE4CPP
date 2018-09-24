@@ -37,6 +37,8 @@
 #include "pluginFramework/EcoreModelPlugin.hpp"
 #include "pluginFramework/UMLModelPlugin.hpp"
 
+#include "abstractDataTypes/SubsetUnion.hpp"
+
 using namespace persistence::base;
 
 LoadHandler::LoadHandler()
@@ -366,7 +368,7 @@ void LoadHandler::loadTypes(const std::string& name)
 
 void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri)
 {
-	std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
+	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiers = package->getEClassifiers();
 	for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
 	{
 		// Filter only EDataType objects and add to handler's internal map
