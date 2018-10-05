@@ -6,15 +6,7 @@
  */
 
 #include "persistence/base/LoadHandler.hpp"
-
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
-#endif
-#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
-#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
-#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+#include "PersistenceDefine.hpp"
 
 #include <iostream>
 #include <sstream> // used for getLevel()
@@ -122,8 +114,6 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 
 			MSG_DEBUG("Add to map: '" << ref << "'  eClass: '" << object->eClass()->getName() << "'");
 		}
-
-
 	}
 }
 /**/
@@ -270,27 +260,36 @@ void LoadHandler::resolveReferences()
 				std::list<std::string> _strs;
 				std::string _tmpStr;
 
-				size_t pos = name.find(" ");
-				size_t initPos = 0;
-				while( pos != std::string::npos )
+				int nameSize=name.size();
+				if(nameSize>0)
 				{
-					_strs.push_back( name.substr( initPos, pos - initPos ) );
-					initPos = pos + 1;
+					size_t pos = name.find(" ");
+					size_t initPos = 0;
 
-					pos = name.find( " ", initPos );
-				}
-
-				while (_strs.size() > 0)
-				{
-					_tmpStr = _strs.front();
-					if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
+					while( pos != std::string::npos )
 					{
-						solve(_tmpStr, references, object, esf);
+						_strs.push_back( name.substr( initPos, pos - initPos ) );
+
+						initPos = pos + 1;
+
+						pos = name.find( " ", initPos );
 					}
-					_strs.pop_front();
+
+					// Add last reference
+					_strs.push_back( name.substr( initPos, nameSize - initPos ) );
+
+					while (_strs.size() > 0)
+					{
+						_tmpStr = _strs.front();
+						if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
+						{
+							solve(_tmpStr, references, object, esf);
+						}
+						_strs.pop_front();
+					}
+					// Call resolveReferences() of corresponding 'object'
+					object->resolveReferences(esf->getFeatureID(), references);
 				}
-				// Call resolveReferences() of corresponding 'object'
-				object->resolveReferences(esf->getFeatureID(), references);
 			}
 		}
 		catch (std::exception& e)
