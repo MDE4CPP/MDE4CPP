@@ -32,7 +32,7 @@ namespace persistence
 				virtual std::map<std::string, std::shared_ptr<ecore::EObject>> getObjectReferenceMap();
 
 			protected:
-				bool isValidFile(const std::string &filename);
+				virtual bool isValidFile(const std::string &filename) =0;
 				std::map<std::string, std::shared_ptr<ecore::EObject>> m_refToObject_map;
 
 		};
