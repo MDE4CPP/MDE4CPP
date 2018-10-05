@@ -48,7 +48,7 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	MSG_DEBUG( m_handler->extractType( model ) );
 
 	model->save( m_handler );
-	m_handler->release();
+	m_handler->finalize();
 
 	// Call write() method in corresponding derived class
 	return write( filename );

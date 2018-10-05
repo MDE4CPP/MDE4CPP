@@ -32,19 +32,23 @@ namespace persistence
 
 				DOMDocument *getDOMDocument();
 
-				bool createRootNode(const std::string& name, const std::string& ns_uri);
-				bool createRootNode(const std::string& prefix, const std::string& name, const std::string& ns_uri);
-				bool createRootNode(const std::string& name, const std::string& ns_uri, DOMDocumentType *doctype);
-				bool createRootNode(const std::string& prefix, const std::string& name, const std::string& ns_uri, DOMDocumentType *doctype);
+				virtual bool createRootNode(const std::string& name, const std::string& ns_uri);
+				virtual bool createRootNode(const std::string& prefix, const std::string& name, const std::string& ns_uri);
+				virtual bool createRootNode(const std::string& name, const std::string& ns_uri, DOMDocumentType *doctype);
+				virtual bool createRootNode(const std::string& prefix, const std::string& name, const std::string& ns_uri, DOMDocumentType *doctype);
 
-				bool createAndAddElement(const std::string& name);
+				virtual bool createAndAddElement(const std::string& name);
 
-				void addAttribute(const std::string &name, const std::string& value);
+				virtual void addAttribute(const std::string &name, const std::string& value);
 
-				void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object);
+				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object);
+				virtual void addReference(const std::string &name, std::shared_ptr<ecore::EObject> object);
+				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired);
 
-				void release();
+				virtual void release();
+				virtual void finalize();
 				virtual void addTypeReference(const std::string& href, const std::string& xmitype);
+
 				virtual void addAttributeAsNode(const std::string& name, const std::string& value);
 
 			private:
@@ -52,7 +56,12 @@ namespace persistence
 				DOMDocument *m_doc;
 				DOMElement *m_currentElement;
 
+				std::map<std::shared_ptr<ecore::EObject>, std::shared_ptr< std::list<std::pair<DOMElement*, std::string> > > > m_unresolvedReferences;
+
 				void addChild(DOMElement *parent_elem, DOMElement *child_elem);
+
+				virtual std::string getVersion();
+				virtual std::string getXmlnsXMI();
 		};
 	} /* namespace xml */
 } /* namespace persistence */

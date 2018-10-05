@@ -322,12 +322,28 @@ void LoadHandler::solve(const std::string& name, std::list<std::shared_ptr<ecore
 		}
 		else
 		{
-			if (libraryLoaded)
+			std::string adr= std::to_string ((long)(&(*object)));
+			std::string adrName="#//";
+			adrName=adrName+ object->eClass()->getName() + "_" +adr;
+
+			std::shared_ptr<ecore::EObject> resolved_object = this->getObjectByRef(adrName);
+			if (resolved_object)
 			{
-				return;
+				references.push_back(resolved_object);
+				// Call resolveReferences() of corresponding 'object'
+				object->resolveReferences(esf->getFeatureID(), references);
+				found = true;
 			}
-			loadTypes(name);
-			libraryLoaded = true;
+			else
+			{
+
+				if (libraryLoaded)
+				{
+					return;
+				}
+				loadTypes(name);
+				libraryLoaded = true;
+			}
 		}
 	}
 }
