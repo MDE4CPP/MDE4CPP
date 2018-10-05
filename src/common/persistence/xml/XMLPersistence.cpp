@@ -6,6 +6,8 @@
  */
 
 #include "persistence/xml/XMLPersistence.hpp"
+#include "persistence/base/Persistence.hpp"
+#include "persistence/base/PersistenceDefine.hpp"
 
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
@@ -15,15 +17,6 @@
 #include "persistence/xml/XMLLoad.hpp"
 
 using namespace persistence::xml;
-
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
-#endif
-#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
-#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
-#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
 
 #include <iostream>
 
@@ -65,4 +58,13 @@ bool XMLPersistence::save(const std::string& filename, std::shared_ptr<ecore::EO
 	std::shared_ptr<persistence::xml::XMLSave> xmlSave(new persistence::xml::XMLSave());
 	xmlSave->setTypesMap(m_refToObject_map);
 	return xmlSave->save(filename, model, metaMetaPackage, xsiMode);
+}
+
+
+bool XMLPersistence::isValidFile(const std::string& filename)
+{
+	// TODO needs implementation
+	MSG_WARNING(MSG_FLF << " is not implemented!");
+
+	return true;
 }

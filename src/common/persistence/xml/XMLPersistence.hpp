@@ -29,9 +29,10 @@ namespace persistence
 				XMLPersistence();
 				virtual ~XMLPersistence();
 
-				std::shared_ptr<ecore::EObject> load(const std::string &filename);
-				bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true);
-
+				virtual std::shared_ptr<ecore::EObject> load(const std::string &filename);
+				virtual bool save(const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage, bool xsiMode = true);
+			protected:
+				virtual bool isValidFile(const std::string &filename);
 			private:
 
 		};
