@@ -357,7 +357,7 @@ void XMLSaveHandler::finalize()
 		}
 		while(objRefList!=unresolvedRef.second->end()) // all objects after prior for loop are unresolved References, added in operation addReferences
 		{
-			MSG_ERROR( MSG_FLF << "Unresolved Reference to element: " << objRefList->second << ". Oject not included into main model element?");
+			MSG_ERROR( MSG_FLF << "Unresolved Reference to element: " << objRefList->second << ". Oject not included in main model element?");
 			objRefList++;
 		}
 	}
