@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PSSM_Semantics" nsURI="http://www.omg.org/spec/PSSM/20161101"
+    nsPrefix="PSSM_Semantics">
+  <eSubpackages name="Semantics" nsURI="http:///PSSM_Semantics/Semantics.ecore" nsPrefix="PSSM_Semantics.Semantics">
+    <eSubpackages name="Values" nsURI="http:///PSSM_Semantics/Semantics/Values.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.Values">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_OpaqueExpressionEvaluation">
+        <eOperations name="executeExpressionBehavior" ordered="false" upperBound="-1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="initialize" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="getParameterValue" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="parameter" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Parameter"/>
+        </eOperations>
+        <eOperations name="setParameterValue" ordered="false" lowerBound="1">
+          <eParameters name="parameterValue" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
+            eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" ordered="false"
+            upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="StructuredClassifiers" nsURI="http:///PSSM_Semantics/Semantics/StructuredClassifiers.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.StructuredClassifiers">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_Object">
+        <eOperations name="startBehavior" ordered="false" lowerBound="1">
+          <eParameters name="classifier" ordered="false" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="destroy" ordered="false" lowerBound="1"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SM_RedefinitionBasedDispatchStrategy">
+        <eOperations name="getMethod" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+          <eParameters name="object" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+        </eOperations>
+        <eOperations name="dispatch" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="object" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="CommonBehavior" nsURI="http:///PSSM_Semantics/Semantics/CommonBehavior.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.CommonBehavior">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_ObjectActivation">
+        <eOperations name="getNextCompletionEvent" ordered="false" lowerBound="1"
+            eType="#//Semantics/StateMachines/CompletionEventOccurrence"/>
+        <eOperations name="getDeferredEventInsertionIndex" ordered="false" lowerBound="1"
+            eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
+        <eOperations name="registerCompletionEvent" ordered="false" lowerBound="1">
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+        <eOperations name="releaseDeferredEvents" ordered="false" lowerBound="1">
+          <eParameters name="deferringState" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+        <eOperations name="registerDeferredEvent" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+        <eOperations name="getNextEvent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="deferredEventPool"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/DeferredEventOccurrence"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EventTriggeredExecution">
+        <eOperations name="finalize" ordered="false" lowerBound="1"/>
+        <eOperations name="execute" ordered="false" lowerBound="1">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Execute the behavior given by the type of this execution. &#xD;&#xA;The parameterValues for any input (in or in-out) parameters of the behavior should be set before the execution.&#xD;&#xA;The parameteValues for any output (in-out, out or return) parameters of the behavior will be set by the execution.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="initialize" ordered="false" lowerBound="1"/>
+        <eOperations name="copy" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="new_" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Create a new execution with no behavior or parameterValues.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="wrappedExecution" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="triggeringEventOccurrence"
+            ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CallEventExecution">
+        <eOperations name="_send" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventOccurrence"/>
+        </eOperations>
+        <eOperations name="_suspend" ordered="false" lowerBound="1"/>
+        <eOperations name="execute" ordered="false" lowerBound="1">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Execute the behavior given by the type of this execution. &#xD;&#xA;The parameterValues for any input (in or in-out) parameters of the behavior should be set before the execution.&#xD;&#xA;The parameteValues for any output (in-out, out or return) parameters of the behavior will be set by the execution.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getBehavior" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+        <eOperations name="new_" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Create a new execution with no behavior or parameterValues.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="releaseCaller" ordered="false" lowerBound="1"/>
+        <eOperations name="getInputParameterValues" ordered="false" upperBound="-1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="callerSuspended" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="callerContext" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CallEventOccurrence">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="execution" ordered="false"
+            lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventExecution"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="StateMachines" nsURI="http:///PSSM_Semantics/Semantics/StateMachines.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.StateMachines">
+      <eClassifiers xsi:type="ecore:EClass" name="RegionActivation" eSuperTypes="#//Semantics/StateMachines/StateMachineSemanticVisitor">
+        <eOperations name="terminate" ordered="false" lowerBound="1"/>
+        <eOperations name="getOrigin" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/InitialPseudostateActivation"/>
+        <eOperations name="getVertexActivations" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="getTransitionActivations" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/TransitionActivation"/>
+        <eOperations name="getVertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation">
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+        </eOperations>
+        <eOperations name="isRedefined" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="vertices" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+        </eOperations>
+        <eOperations name="isRedefined" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="transitions" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
+          <eParameters name="transition" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
+        </eOperations>
+        <eOperations name="enter" ordered="false" lowerBound="1">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="exit" ordered="false" lowerBound="1">
+          <eParameters name="exitingTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="canPropagateExecution" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="transitionActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCompleted" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vertexActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/VertexActivation"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="history" ordered="false"
+            eType="#//Semantics/StateMachines/StateActivation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachineSemanticVisitor" abstract="true">
+        <eOperations name="activate" ordered="false" lowerBound="1"/>
+        <eOperations name="activateTransitions" ordered="false" lowerBound="1"/>
+        <eOperations name="getNode" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+        <eOperations name="getExecutionLocus" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="getParent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="setParent" ordered="false" lowerBound="1">
+          <eParameters name="parent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="setNode" ordered="false" lowerBound="1">
+          <eParameters name="_" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+        </eOperations>
+        <eOperations name="getStateMachineExecution" ordered="false" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="getContextChain" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eOperations name="isVisitorFor" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+        </eOperations>
+        <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="triggers" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Trigger"/>
+        </eOperations>
+        <eOperations name="getExecutionFor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="behavior" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="node" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parent" ordered="false"
+            eType="ecore:EClass ../../fuml/model/fUML.ecore#//SemanticVisitor"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TransitionActivation" abstract="true"
+          eSuperTypes="#//Semantics/StateMachines/StateMachineSemanticVisitor">
+        <eOperations name="isReached" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="isGuarded" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="getStatus" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+        <eOperations name="setStatus" ordered="false" lowerBound="1">
+          <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+        </eOperations>
+        <eOperations name="getSourceActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="getTargetActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="fire" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="isTraversed" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="isTriggered" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="exitSource" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="getLeastCommonAncestor" ordered="false" lowerBound="1"
+            eType="#//Semantics/StateMachines/RegionActivation"/>
+        <eOperations name="enterTarget" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="tryExecuteEffect" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="setSourceActivation" ordered="false" lowerBound="1">
+          <eParameters name="_" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="setTargetActivation" ordered="false" lowerBound="1">
+          <eParameters name="_" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="canFireOn" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="hasTrigger" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="evaluateGuard" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="canPropagateExecution" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVertexActivation"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"
+            eOpposite="#//Semantics/StateMachines/VertexActivation/outgoingTransitionActivations"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="targetVertexActivation"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"
+            eOpposite="#//Semantics/StateMachines/VertexActivation/incomingTransitionActivations"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="analyticalStatus" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastPropagation" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="leastCommonAncestor"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/RegionActivation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lastTriggeringEventOccurrence"
+            ordered="false" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="TransitionMetadata">
+        <eLiterals name="none"/>
+        <eLiterals name="reached" value="1"/>
+        <eLiterals name="traversed" value="2"/>
+        <eLiterals name="completed" value="3"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="VertexActivation" abstract="true"
+          eSuperTypes="#//Semantics/StateMachines/StateMachineSemanticVisitor">
+        <eOperations name="terminate" ordered="false" lowerBound="1"/>
+        <eOperations name="isActive" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="getStatus" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMetadata"/>
+        <eOperations name="setStatus" ordered="false" lowerBound="1">
+          <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMetadata"/>
+        </eOperations>
+        <eOperations name="getParentVertexActivation" ordered="false" lowerBound="1"
+            eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="getAscendingHierarchy" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="getOwningRegionActivation" ordered="false" lowerBound="1"
+            eType="#//Semantics/StateMachines/RegionActivation"/>
+        <eOperations name="getIncomingTransitions" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/TransitionActivation"/>
+        <eOperations name="getOutgoingTransitions" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/TransitionActivation"/>
+        <eOperations name="getVertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation">
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+        </eOperations>
+        <eOperations name="addIncomingTransition" ordered="false" lowerBound="1">
+          <eParameters name="transitionActivation" ordered="false" lowerBound="1"
+              eType="#//Semantics/StateMachines/TransitionActivation"/>
+        </eOperations>
+        <eOperations name="addOutgoingTransition" ordered="false" lowerBound="1">
+          <eParameters name="transitionActivation" ordered="false" lowerBound="1"
+              eType="#//Semantics/StateMachines/TransitionActivation"/>
+        </eOperations>
+        <eOperations name="tagOutgoingTransition" ordered="false" lowerBound="1">
+          <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="tagIncomingTransition" ordered="false" lowerBound="1">
+          <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="getLeastCommonAncestor" ordered="false" lowerBound="1"
+            eType="#//Semantics/StateMachines/RegionActivation">
+          <eParameters name="vertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="isExitable" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="exitingTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="isEnterable" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="staticCheck" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        </eOperations>
+        <eOperations name="exit" ordered="false" lowerBound="1">
+          <eParameters name="exitingTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+        <eOperations name="enter" ordered="false" lowerBound="1">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+        <eOperations name="canPropagateExecution" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+        <eOperations name="getRegionActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/RegionActivation">
+          <eParameters name="semanticVisitor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/StateMetadata"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitionActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation"
+            eOpposite="#//Semantics/StateMachines/TransitionActivation/targetVertexActivation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitionActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation"
+            eOpposite="#//Semantics/StateMachines/TransitionActivation/sourceVertexActivation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="StateMetadata">
+        <eLiterals name="idle"/>
+        <eLiterals name="active" value="1"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StateActivation" eSuperTypes="#//Semantics/StateMachines/VertexActivation">
+        <eOperations name="notifyCompletion" ordered="false" lowerBound="1"/>
+        <eOperations name="releaseDeferredEvents" ordered="false" lowerBound="1"/>
+        <eOperations name="hasCompleted" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="defer" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="getRegionActivation" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/RegionActivation"/>
+        <eOperations name="tryExecuteExit" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="tryExecuteEntry" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="canDefer" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="tryInvokeDoActivity" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="getConnectionPointActivation" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/ConnectionPointActivation"/>
+        <eOperations name="getConnectionPointActivation" ordered="false" eType="#//Semantics/StateMachines/ConnectionPointActivation">
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+        </eOperations>
+        <eOperations name="getFireableTransitions" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/TransitionActivation">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="enterRegions" ordered="false" lowerBound="1">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="getEntry" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+        <eOperations name="getExit" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+        <eOperations name="getDoActivity" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="connectionPointActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/ConnectionPointActivation"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivations"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/RegionActivation"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDoActivityCompleted"
+            ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEntryCompleted" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isExitCompleted" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="doActivityContextObject"
+            ordered="false" eType="#//Semantics/StateMachines/DoActivityContextObject"
+            eOpposite="#//Semantics/StateMachines/DoActivityContextObject/owner"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ConnectionPointActivation" abstract="true"
+          eSuperTypes="#//Semantics/StateMachines/PseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PseudostateActivation" abstract="true"
+          eSuperTypes="#//Semantics/StateMachines/VertexActivation">
+        <eOperations name="evaluateAllGuards" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="fireableTransitions"
+            ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DoActivityContextObject">
+        <eOperations name="getFeatureValue" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//StructuralFeature"/>
+        </eOperations>
+        <eOperations name="setFeatureValue" ordered="false" lowerBound="1">
+          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//StructuralFeature"/>
+          <eParameters name="values" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="position" ordered="false" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
+        </eOperations>
+        <eOperations name="dispatch" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+        </eOperations>
+        <eOperations name="send" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="unregister" ordered="false" lowerBound="1">
+          <eParameters name="accepter" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="register" ordered="false" lowerBound="1">
+          <eParameters name="accepter" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="destroy" ordered="false" lowerBound="1"/>
+        <eOperations name="unregisterFromContext" ordered="false" lowerBound="1">
+          <eParameters name="encapsulatedAccepter" ordered="false" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="initialize" ordered="false" lowerBound="1">
+          <eParameters name="context" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="startBehavior" ordered="false" lowerBound="1">
+          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
+            lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/StateActivation" eOpposite="#//Semantics/StateMachines/StateActivation/doActivityContextObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="InitialPseudostateActivation" eSuperTypes="#//Semantics/StateMachines/PseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachineExecution">
+        <eOperations name="execute" ordered="false" lowerBound="1">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Execute the behavior given by the type of this execution. &#xD;&#xA;The parameterValues for any input (in or in-out) parameters of the behavior should be set before the execution.&#xD;&#xA;The parameteValues for any output (in-out, out or return) parameters of the behavior will be set by the execution.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Create a new execution with no behavior or parameterValues.&#xD;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="initRegions" ordered="false" lowerBound="1"/>
+        <eOperations name="getConfiguration" ordered="false" lowerBound="1"/>
+        <eOperations name="getVertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation">
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+        </eOperations>
+        <eOperations name="getRegionActivation" ordered="false" lowerBound="1" upperBound="-1"
+            eType="#//Semantics/StateMachines/RegionActivation"/>
+        <eOperations name="terminate" ordered="false" lowerBound="1"/>
+        <eOperations name="startBehavior" ordered="false" lowerBound="1">
+          <eParameters name="classifier" ordered="false" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivations"
+            ordered="false" lowerBound="1" upperBound="-1" eType="#//Semantics/StateMachines/RegionActivation"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/StateMachineConfiguration"
+            containment="true" eOpposite="#//Semantics/StateMachines/StateMachineConfiguration/execution"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachineConfiguration">
+        <eOperations name="getRoot" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        <eOperations name="getExecution" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMachineExecution"/>
+        <eOperations name="getVertexActivationsAtLevel" ordered="false" upperBound="-1"
+            eType="#//Semantics/StateMachines/VertexActivation">
+          <eParameters name="level" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
+        </eOperations>
+        <eOperations name="register" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+        <eOperations name="unregister" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+        <eOperations name="isStable" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="isActive" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="remove" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="vertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="add" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rootConfiguration"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"
+            eOpposite="#//Semantics/StateMachines/StateConfiguration/completeConfiguration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="execution" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/StateMachineExecution"
+            eOpposite="#//Semantics/StateMachines/StateMachineExecution/configuration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StateConfiguration">
+        <eOperations name="getLevel" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
+        <eOperations name="getChildren" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        <eOperations name="getParent" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        <eOperations name="getVertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eOperations name="setParent" ordered="false" lowerBound="1">
+          <eParameters name="stateConfiguration" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        </eOperations>
+        <eOperations name="getContext" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/VertexActivation">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="removeChild" ordered="false" lowerBound="1">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="remove" ordered="false" lowerBound="1">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+          <eParameters name="context" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="addChild" ordered="false" lowerBound="1">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="add" ordered="false" lowerBound="1">
+          <eParameters name="activation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+          <eParameters name="context" ordered="false" lowerBound="1" upperBound="-1"
+              eType="#//Semantics/StateMachines/VertexActivation"/>
+        </eOperations>
+        <eOperations name="isActive" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" ordered="false"
+            lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vertexActivation" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+            upperBound="-1" eType="#//Semantics/StateMachines/StateConfiguration"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="completeConfiguration"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMachineConfiguration"
+            eOpposite="#//Semantics/StateMachines/StateMachineConfiguration/rootConfiguration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="FinalStateActivation" eSuperTypes="#//Semantics/StateMachines/StateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ExternalTransitionActivation" eSuperTypes="#//Semantics/StateMachines/TransitionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InternalTransitionActivation" eSuperTypes="#//Semantics/StateMachines/TransitionActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="LocalTransitionActivation" eSuperTypes="#//Semantics/StateMachines/TransitionActivation">
+        <eOperations name="getContainingState" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntryPointPseudostateActivation"
+          eSuperTypes="#//Semantics/StateMachines/ConnectionPointActivation">
+        <eOperations name="_enter" ordered="false" lowerBound="1">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ExitPointPseudostateActivation"
+          eSuperTypes="#//Semantics/StateMachines/ConnectionPointActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ChoicePseudostateActivation" eSuperTypes="#//Semantics/StateMachines/ConditionalPseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ConditionalPseudostateActivation"
+          abstract="true" eSuperTypes="#//Semantics/StateMachines/PseudostateActivation">
+        <eOperations name="isElseTransition" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="transitionActivation" ordered="false" lowerBound="1"
+              eType="#//Semantics/StateMachines/TransitionActivation"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ForkPseudostateActivation" eSuperTypes="#//Semantics/StateMachines/PseudostateActivation">
+        <eOperations name="_canPropagateExecution" ordered="false" lowerBound="1"
+            eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="JoinPseudostateActivation" eSuperTypes="#//Semantics/StateMachines/PseudostateActivation">
+        <eOperations name="_canPropagateExecution" ordered="false" lowerBound="1"
+            eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TerminatePseudostateActivation"
+          eSuperTypes="#//Semantics/StateMachines/PseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CompletionEventOccurrence">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="stateActivation" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachineEventAccepter">
+        <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="accept" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="select" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="_select" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/TransitionActivation">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="stateConfiguration" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        </eOperations>
+        <eOperations name="isDeferred" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="_isDeferred" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="stateConfiguration" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        </eOperations>
+        <eOperations name="defer" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="_defer" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="stateConfiguration" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration"/>
+        </eOperations>
+        <eOperations name="isTriggering" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="registrationContext"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMachineExecution"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DoActivityExecutionEventAccepter">
+        <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="accept" ordered="false" lowerBound="1">
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
+            lowerBound="1" eType="#//Semantics/StateMachines/DoActivityContextObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="encapsulatedAccepter"
+            ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventAccepter"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DoActivityContextObjectActivation">
+        <eOperations name="dispatchNextEvent" ordered="false" lowerBound="1"/>
+        <eOperations name="startBehavior" ordered="false" lowerBound="1">
+          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="HistoryPseudostateActivation" abstract="true"
+          eSuperTypes="#//Semantics/StateMachines/PseudostateActivation">
+        <eOperations name="hasDefaultTransition" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+        <eOperations name="restore" ordered="false" lowerBound="1">
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+        <eOperations name="restore" ordered="false" lowerBound="1">
+          <eParameters name="regionActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/RegionActivation"/>
+          <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="JunctionPseudostateActivation" eSuperTypes="#//Semantics/StateMachines/ConditionalPseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DeepHistoryPseudostateActivation"
+          eSuperTypes="#//Semantics/StateMachines/HistoryPseudostateActivation">
+        <eOperations name="canRestore" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+          <eParameters name="stateActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ShallowHistoryPseudostateActivation"
+          eSuperTypes="#//Semantics/StateMachines/HistoryPseudostateActivation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DeferredEventOccurrence">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="constrainingStateActivation"
+            ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateActivation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="deferredEventOccurrence"
+            ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Loci" nsURI="http:///PSSM_Semantics/Semantics/Loci.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.Loci">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory">
+        <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+          <eParameters name="element" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Element"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SM_Locus">
+        <eOperations name="instantiate" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object">
+          <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Actions" nsURI="http:///PSSM_Semantics/Semantics/Actions.ecore"
+        nsPrefix="PSSM_Semantics.Semantics.Actions">
+      <eClassifiers xsi:type="ecore:EClass" name="SM_ReadSelfActionActivation">
+        <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
