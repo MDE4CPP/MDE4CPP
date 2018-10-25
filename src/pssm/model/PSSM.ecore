@@ -1036,7 +1036,7 @@
             <details key="body" value="// Convenience method. Java does no allow a call to an explicit super class method. For documentation&#xA;// developpers must have a look to: VertexActivation::canPropagateExecution(...)&#xA;boolean propagate = true;&#xA;if(leastCommonAncestor != null){&#xA;&#x9;RegionActivation parentRegionActivation = this.getOwningRegionActivation();&#xA;&#x9;if(leastCommonAncestor!=parentRegionActivation){&#xA;&#x9;&#x9;VertexActivation vertexActivation = (VertexActivation) parentRegionActivation.getParent();&#xA;&#x9;&#x9;if(vertexActivation != null){&#xA;&#x9;&#x9;&#x9;propagate = vertexActivation.canPropagateExecution(enteringTransition, eventOccurrence, leastCommonAncestor);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return propagate;&#xA;"/>
           </eAnnotations>
           <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
-          <eParameters name="eventOccurrence" ordered="false" lowerBound="1"/>
+          <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
           <eParameters name="leastCommonAncestor" ordered="false" eType="#//Semantics/StateMachines/RegionActivation"/>
         </eOperations>
       </eClassifiers>
