@@ -36,6 +36,7 @@
 */]
 [query private getNamespace(aEPackage : EPackage, separator : String) : String = if(eSuperPackage.oclIsUndefined()) then aEPackage.name else eSuperPackage.getNamespace(separator).concat(separator).concat(aEPackage.name) endif/]
 [query public generateNamespacePath(aEPackage : EPackage) : String = getNamespace('/').concat('/') /]
+[query public generateNamespaceDefinition(aEPackage : EPackage) : String = getNamespace('::') /]
 
 
 

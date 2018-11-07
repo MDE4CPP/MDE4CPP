@@ -24,7 +24,7 @@
 [file (anEEnum.ePackage.generateNamespacePath().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEEnum)/] 
 
-namespace [anEEnum.ePackage.name/] 
+namespace [anEEnum.ePackage.generateNamespaceDefinition()/] 
 {
 	enum [anEEnum.name/] {
 [for (lit : EEnumLiteral | anEEnum.eLiterals->asOrderedSet()->sortedBy(name)) separator (',\n')]

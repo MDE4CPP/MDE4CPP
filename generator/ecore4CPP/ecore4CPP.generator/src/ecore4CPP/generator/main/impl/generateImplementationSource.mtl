@@ -65,7 +65,7 @@
 #include "ecore/EStructuralFeature.hpp"
 
 [comment namespace /]
-using namespace [aClass.ePackage.name/];
+using namespace [aClass.ePackage.generateNamespaceDefinition()/];
 
 //*********************************
 // Constructor / Destructor

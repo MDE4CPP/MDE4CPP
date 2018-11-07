@@ -76,7 +76,7 @@ namespace [element.ePackage.name/]
 [/if]
 
 //*********************************
-namespace [aClass.ePackage.name/] 
+namespace [aClass.ePackage.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDokumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 

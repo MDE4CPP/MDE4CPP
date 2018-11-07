@@ -43,7 +43,7 @@
 
 //*********************************
 [comment namespace /]
-namespace [aClass.ePackage.name/] 
+namespace [aClass.ePackage.generateNamespaceDefinition()/] 
 {
 	class [className/] :[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
