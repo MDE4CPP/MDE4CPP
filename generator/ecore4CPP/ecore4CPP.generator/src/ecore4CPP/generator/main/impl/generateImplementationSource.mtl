@@ -35,7 +35,7 @@
 #include <iostream>
 #include <sstream>
 [if (generateObjectMonitoring())]
-#include "[ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[ePackage.name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 [/if]
 
 [generateAbstractDataTypesIncludes()/]
@@ -57,10 +57,10 @@
 #include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
-#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Package.hpp"
-#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Package.hpp"
+#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
-	[aClass.ePackage.name.toUpperFirst()/]Factory::eInstance()->add(element);
+	[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()->add(element);
 [/if]
 	return element;
 }

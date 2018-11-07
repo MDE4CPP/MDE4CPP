@@ -58,7 +58,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
-			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
+			friend class [aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
 			[aClass.generateGetThisPtr()/]
 
