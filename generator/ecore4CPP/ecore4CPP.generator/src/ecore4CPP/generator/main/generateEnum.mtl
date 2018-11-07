@@ -21,10 +21,10 @@
  * @param anEEnum
  */]
 [template public generateEnum(anEEnum : EEnum)]
-[file (anEEnum.ePackage.generateNamespacePath().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
+[file (anEEnum.generateNamespacePath().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEEnum)/] 
 
-namespace [anEEnum.ePackage.generateNamespaceDefinition()/] 
+namespace [anEEnum.generateNamespaceDefinition()/] 
 {
 	enum [anEEnum.name/] {
 [for (lit : EEnumLiteral | anEEnum.eLiterals->asOrderedSet()->sortedBy(name)) separator (',\n')]

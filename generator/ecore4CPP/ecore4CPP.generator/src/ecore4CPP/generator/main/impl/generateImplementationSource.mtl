@@ -26,8 +26,8 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
-[file (aClass.ePackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aClass.ePackage.name/]/impl/[className.concat('.hpp')/]"
+[file (aClass.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aClass.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacros()/]
 
@@ -35,7 +35,7 @@
 #include <iostream>
 #include <sstream>
 [if (generateObjectMonitoring())]
-#include "[ePackage.name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 [/if]
 
 [generateAbstractDataTypesIncludes()/]
@@ -45,7 +45,7 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "[aClass.ePackage.name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[getRootPackage().name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
@@ -54,7 +54,7 @@
 [generatePersistenceInclude()/]
 
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
+#include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 #include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Package.hpp"
@@ -65,7 +65,7 @@
 #include "ecore/EStructuralFeature.hpp"
 
 [comment namespace /]
-using namespace [aClass.ePackage.generateNamespaceDefinition()/];
+using namespace [aClass.generateNamespaceDefinition()/];
 
 //*********************************
 // Constructor / Destructor
@@ -117,7 +117,7 @@ using namespace [aClass.ePackage.generateNamespaceDefinition()/];
 				switch(reference_id)
 				{	
 				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
+				case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
 					m_[multipleRef.name/] = par_[aReference.eType.name/];
 					[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
 					[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
@@ -219,7 +219,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.ePackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************

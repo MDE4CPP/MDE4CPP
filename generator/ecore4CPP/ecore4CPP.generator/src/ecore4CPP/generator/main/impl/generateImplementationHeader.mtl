@@ -25,7 +25,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateImplementationHeader(aClass : EClass){ className : String = aClass.name.toUpperFirst().concat('Impl'); }]
-[file (aClass.ePackage.generateNamespacePath().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aClass.generateNamespacePath().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
 //*********************************
@@ -35,7 +35,7 @@
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
 [for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[aEClass.ePackage.name/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
+#include "[aEClass.getRootPackage().name/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
 #include "ecore/impl/EObjectImpl.hpp"
@@ -43,7 +43,7 @@
 
 //*********************************
 [comment namespace /]
-namespace [aClass.ePackage.generateNamespaceDefinition()/] 
+namespace [aClass.generateNamespaceDefinition()/] 
 {
 	class [className/] :[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]

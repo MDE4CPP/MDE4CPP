@@ -35,8 +35,8 @@
  * namespace generation
 */]
 [query private getNamespace(aEPackage : EPackage, separator : String) : String = if(eSuperPackage.oclIsUndefined()) then aEPackage.name else eSuperPackage.getNamespace(separator).concat(separator).concat(aEPackage.name) endif/]
-[query public generateNamespacePath(aEPackage : EPackage) : String = getNamespace('/').concat('/') /]
-[query public generateNamespaceDefinition(aEPackage : EPackage) : String = getNamespace('::') /]
+[query public generateNamespacePath(aEClassifier : EClassifier) : String = aEClassifier.ePackage.getNamespace('/') /]
+[query public generateNamespaceDefinition(aEClassifier : EClassifier) : String = aEClassifier.ePackage.getNamespace('::') /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
 [query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(ePackage.oclIsUndefined()) then ePackage else ePackage.getRootPackage() endif /]
 
@@ -73,7 +73,7 @@
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
-[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.ePackage  ) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.ePackage.name.concat('::').concat(aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst()) endif/]
+[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.getRootPackage().name.concat('::').concat(aStructural.eContainingClass.getRootPackage().name.concat('Package').toUpperFirst()) endif/]
 
 [**
  * Get a string of the getterfunction for the element in the corresponding metamodel package 
@@ -81,7 +81,7 @@
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
 [query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
 [query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
-[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name )then '' else  aClassifier1.ePackage.nsPrefix.concat('::').concat(aClassifier1.ePackage.name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
+[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name) then '' else  aClassifier1.getRootPackage().name.concat('::').concat(aClassifier1.getRootPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
 [**
  * Subset Union helper queries
@@ -103,20 +103,20 @@
 [anEDataType.name/]
 [/template]
 
-[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().ePackage.name.concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
-[query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().ePackage.name.concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
+[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().generateNamespaceDefinition().concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
+[query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().generateNamespaceDefinition().concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
 
 [query public metaModelTypeString(aClass : EClassifier) : String = metaModelTypeString(aClass, aClass.ePackage) /]
-[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().ePackage.name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
+[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().getRootPackage().name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
-[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.ePackage.name = base.ePackage.name then base.name else base.ePackage.name.concat('::').concat(base.name) endif /]
+[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.ePackage.name = base.ePackage.name then base.name else base.generateNamespaceDefinition().concat('::').concat(base.name) endif /]
 
 [query private getGuardName(namedelement : ENamedElement, sufix: String) : String = 
 		if (namedelement.eContainer().oclIsUndefined()) 
 		then namedelement.name.concat(sufix).concat('_hpp').toUpperCase() 
-		else namedelement.eContainer().oclAsType(EPackage).name.concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
+		else namedelement.eContainer().oclAsType(EPackage).getNamespace('_').concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
 		endif/]
 
 [**

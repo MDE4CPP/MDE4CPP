@@ -202,7 +202,7 @@ std::string
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (not oclIsKindOf(EDataType))]
-[anEClassifier.ePackage.name/]::[anEClassifier.name/]
+[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]

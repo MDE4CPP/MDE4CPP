@@ -92,7 +92,7 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	// Create new objects (from references (containment == true))
 	//
 	// get [aClass.getRootPackage().name.toUpperFirst()/]Factory
-	std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory = [aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance();
+	std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory> modelFactory = [aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -263,7 +263,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " '[aReference.name/]' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> [aReference.name/];
 			[for(aBackReference : EReference | ref->select(eType = aClass)->sortedBy(name))]
-				[aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.ePackage.name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
+				[aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
 			[/for]
 			[else]
 			std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName));
@@ -375,7 +375,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 {
 	try
 	{
-		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();
+		std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Package> package = [aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Package::eInstance();
 
 [let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
