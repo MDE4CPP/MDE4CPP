@@ -32,6 +32,14 @@
 [query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
 
 [**
+ * namespace generation
+*/]
+[query private getNamespace(aEPackage : EPackage, separator : String) : String = if(eSuperPackage.oclIsUndefined()) then aEPackage.name else eSuperPackage.getNamespace(separator).concat(separator).concat(aEPackage.name) endif/]
+[query public generateNamespacePath(aEPackage : EPackage) : String = getNamespace('/').concat('/') /]
+
+
+
+[**
  * Helper for sourcegen annotations
 */]
 [query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()  /]

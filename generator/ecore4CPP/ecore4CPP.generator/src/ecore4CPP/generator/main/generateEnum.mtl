@@ -21,7 +21,7 @@
  * @param anEEnum
  */]
 [template public generateEnum(anEEnum : EEnum)]
-[file (anEEnum.ePackage.name.concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
+[file (anEEnum.ePackage.generateNamespacePath().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEEnum)/] 
 
 namespace [anEEnum.ePackage.name/] 

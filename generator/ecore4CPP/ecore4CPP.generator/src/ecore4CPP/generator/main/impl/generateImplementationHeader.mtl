@@ -25,7 +25,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateImplementationHeader(aClass : EClass){ className : String = aClass.name.toUpperFirst().concat('Impl'); }]
-[file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aClass.ePackage.generateNamespacePath().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
 //*********************************
