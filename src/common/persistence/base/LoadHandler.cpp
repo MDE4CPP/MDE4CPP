@@ -321,7 +321,7 @@ void LoadHandler::solve(const std::string& name, std::list<std::shared_ptr<ecore
 		}
 		else
 		{
-			std::string adr= std::to_string ((long)(&(*object)));
+			std::string adr= std::to_string ((long long)(&(*object)));
 			std::string adrName="#//";
 			adrName=adrName+ object->eClass()->getName() + "_" +adr;
 
