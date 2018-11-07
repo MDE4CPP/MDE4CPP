@@ -99,15 +99,15 @@
 [**
  * 
 */]
-[template public generateTypeClass(anEDataType : EClass)]
-[anEDataType.name/]
-[/template]
 
-[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().generateNamespaceDefinition().concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
-[query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().generateNamespaceDefinition().concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
+[query public generateTypeClass(anEClass : EClass, ignoreNamespace : Boolean) : String = if (ignoreNamespace) then anEClass.name else anEClass.generateNamespaceDefinition().concat('::').concat(anEClass.name) endif /]
+[query public generateTypeClass(anEClass : EClass) : String = anEClass.generateTypeClass(anEClass.ePackage = anEClass.getRootPackage()) /]
+
+[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = aStructuralFeature.eClass().generateTypeClass(aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage) /]
+[query public metamodelaTypedElementString(aOperation : EOperation) : String = aOperation.eClass().generateTypeClass(aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage) /]
 
 [query public metaModelTypeString(aClass : EClassifier) : String = metaModelTypeString(aClass, aClass.ePackage) /]
-[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().getRootPackage().name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
+[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = anENamedElement.eClass().generateTypeClass(anEPackage = anENamedElement.eClass()) /]
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
