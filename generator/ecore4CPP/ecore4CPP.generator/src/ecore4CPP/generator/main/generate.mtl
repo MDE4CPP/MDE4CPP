@@ -36,6 +36,7 @@
 	[anEEnum.generateEnum()/]
 [/for]
 
+[if (aPackage.eSuperPackage.oclIsUndefined())]
 [aPackage.generateFactoryImpl()/]
 [aPackage.generatePackageImpl()/]
 [aPackage.generateEcorePlugin()/]
@@ -45,5 +46,6 @@
 
 [if (aPackage.prepareApplication())]
 [aPackage.generateApplication()/]
+[/if]
 [/if]
 [/template]
