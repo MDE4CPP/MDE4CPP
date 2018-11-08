@@ -22,7 +22,7 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
-[query public metaModelIncludes(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents(EClass).eAllSuperTypes.ePackage,anEPackage.eAllContents(EStructuralFeature).eType.ePackage,anEPackage.eAllContents(EParameter).eType.ePackage}->flatten() /]
+[query public metaModelIncludes(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten() /]
 
 [template public generatePackageImplSource(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('PackageImpl').toUpperFirst(); }]
 [file (anEPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
