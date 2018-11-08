@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PSSM_Semantics" nsURI="http://www.omg.org/spec/PSSM/20161101"
-    nsPrefix="PSSM_Semantics">
-  <eSubpackages name="Semantics" nsURI="http:///PSSM_Semantics/Semantics.ecore" nsPrefix="PSSM_Semantics.Semantics">
-    <eSubpackages name="Values" nsURI="http:///PSSM_Semantics/Semantics/Values.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.Values">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PSSM" nsURI="http://www.omg.org/spec/PSSM/20161101"
+    nsPrefix="PSSM">
+  <eSubpackages name="Semantics" nsURI="http:///PSSM/Semantics.ecore" nsPrefix="PSSM.Semantics">
+    <eSubpackages name="Values" nsURI="http:///PSSM/Semantics/Values.ecore"
+        nsPrefix="PSSM.Semantics.Values">
       <eClassifiers xsi:type="ecore:EClass" name="SM_OpaqueExpressionEvaluation">
         <eOperations name="executeExpressionBehavior" ordered="false" upperBound="-1"
             eType="ecore:EClass ../../fuml/model/fUML.ecore#//Value">
@@ -36,8 +36,8 @@
             upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="StructuredClassifiers" nsURI="http:///PSSM_Semantics/Semantics/StructuredClassifiers.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.StructuredClassifiers">
+    <eSubpackages name="StructuredClassifiers" nsURI="http:///PSSM/Semantics/StructuredClassifiers.ecore"
+        nsPrefix="PSSM.Semantics.StructuredClassifiers">
       <eClassifiers xsi:type="ecore:EClass" name="SM_Object">
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -69,8 +69,8 @@
         </eOperations>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="CommonBehavior" nsURI="http:///PSSM_Semantics/Semantics/CommonBehavior.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.CommonBehavior">
+    <eSubpackages name="CommonBehavior" nsURI="http:///PSSM/Semantics/CommonBehavior.ecore"
+        nsPrefix="PSSM.Semantics.CommonBehavior">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ObjectActivation">
         <eOperations name="getNextCompletionEvent" ordered="false" lowerBound="1"
             eType="#//Semantics/StateMachines/CompletionEventOccurrence">
@@ -195,8 +195,8 @@
             lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventExecution"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="StateMachines" nsURI="http:///PSSM_Semantics/Semantics/StateMachines.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.StateMachines">
+    <eSubpackages name="StateMachines" nsURI="http:///PSSM/Semantics/StateMachines.ecore"
+        nsPrefix="PSSM.Semantics.StateMachines">
       <eClassifiers xsi:type="ecore:EClass" name="RegionActivation" eSuperTypes="#//Semantics/StateMachines/StateMachineSemanticVisitor">
         <eOperations name="terminate" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1180,8 +1180,8 @@
             ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="Loci" nsURI="http:///PSSM_Semantics/Semantics/Loci.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.Loci">
+    <eSubpackages name="Loci" nsURI="http:///PSSM/Semantics/Loci.ecore"
+        nsPrefix="PSSM.Semantics.Loci">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory">
         <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//SemanticVisitor">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1199,8 +1199,8 @@
         </eOperations>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="Actions" nsURI="http:///PSSM_Semantics/Semantics/Actions.ecore"
-        nsPrefix="PSSM_Semantics.Semantics.Actions">
+    <eSubpackages name="Actions" nsURI="http:///PSSM/Semantics/Actions.ecore"
+        nsPrefix="PSSM.Semantics.Actions">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ReadSelfActionActivation">
         <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
