@@ -158,9 +158,9 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
 				[elseif(ref->size()=1)]
-				auto castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
+				[ref->first().generateReferenceType()/] castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
 				assert(castedContainer);
-				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
+				return std::shared_ptr<[aClass.generateType()/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
 				[/if]
 			[if(ref->size()>0)]}[/if]
 		}
@@ -218,7 +218,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]()[if (not generateObjectMonitoring())] const[/if]
 {
-	std::shared_ptr<[aClass.name.toUpperFirst()/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
+	std::shared_ptr<[aClass.generateTypeClass()/]Impl> element(new [aClass.generateTypeClass()/]Impl());
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
 	m_createdElements->push_back(element);
@@ -250,9 +250,9 @@ std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/
 
 [template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage, addID : Boolean)]
 [if(ref->select(eType = aReference.eType)->size()>1)]
-std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]));
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]));
 [else]
-std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.name/]));
 [/if]
 [if(addID)]
 element->set[anEClass.getClassifierIDName()/]ID(classID);
