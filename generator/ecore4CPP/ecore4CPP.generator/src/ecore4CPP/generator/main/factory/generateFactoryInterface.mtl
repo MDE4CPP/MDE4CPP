@@ -28,12 +28,7 @@
 #include "ecore/EFactory.hpp"
 
 [comment  Generate Includes for the Factory/]
-namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	class [elements.name/];[/for]
-
-	class [anEPackage.name.toUpperFirst().concat('Package')/];
-}
+[anEPackage.generateForwardDeclarations()/]
 
 [comment namespace /]
 namespace [anEPackage.name/] 
@@ -65,4 +60,21 @@ namespace [anEPackage.name/]
 }
 [endGuard(anEPackage,'Factory')/]
 [/file]
+[/template]
+
+[template public generateForwardDeclarations(anEPackage : EPackage)]
+[if (not anEPackage.eClassifiers->selectByKind(EClass)->isEmpty() or anEPackage.eSuperPackage.oclIsUndefined())]
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
+	class [elements.name/];
+[/for]
+[if (anEPackage.eSuperPackage.oclIsUndefined())]
+	class [anEPackage.name.toUpperFirst().concat('Package')/];
+[/if]
+}
+[/if]
+[for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
+[subPackage.generateForwardDeclarations()/]
+[/for]
 [/template]
