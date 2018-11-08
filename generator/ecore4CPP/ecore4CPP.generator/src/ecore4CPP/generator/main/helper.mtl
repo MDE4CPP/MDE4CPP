@@ -34,14 +34,15 @@
 [**
  * namespace generation
 */]
-[query private getNamespace(aEPackage : EPackage, separator : String) : String = if(eSuperPackage.oclIsUndefined()) then aEPackage.name else eSuperPackage.getNamespace(separator).concat(separator).concat(aEPackage.name) endif/]
-[query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/') /]
-[query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::') /]
-[query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::') /]
+[query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else anEPackage.name endif /]
+[query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif/]
+[query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', false) /]
+[query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::', false) /]
+[query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
 [query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(ePackage.oclIsUndefined()) then ePackage else ePackage.getRootPackage() endif /]
 
-
+[query public getNamespacePathWithoutRoot(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', true).concat('/').substring(2) /] [comment first char is '/', which should be removed, index starts at 1 /] 
 
 [**
  * Helper for sourcegen annotations
@@ -118,7 +119,7 @@
 [query private getGuardName(namedelement : ENamedElement, sufix: String) : String = 
 		if (namedelement.eContainer().oclIsUndefined()) 
 		then namedelement.name.concat(sufix).concat('_hpp').toUpperCase() 
-		else namedelement.eContainer().oclAsType(EPackage).getNamespace('_').concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
+		else namedelement.eContainer().oclAsType(EPackage).getNamespace('_', false).concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
 		endif/]
 
 [**

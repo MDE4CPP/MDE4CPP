@@ -66,7 +66,7 @@ SET(SOURCE_FILES
 	impl/[packageName.toUpperFirst()/]PluginImpl.cpp
 	[packageName.toUpperFirst()/]Plugin.cpp
 [for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-	impl/[aClass.name.toUpperFirst()/]Impl.cpp
+	[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [/for]
 [if (packageName='uml')]
 	${MDE4CPP_HOME}/application/include/util/util.cpp
