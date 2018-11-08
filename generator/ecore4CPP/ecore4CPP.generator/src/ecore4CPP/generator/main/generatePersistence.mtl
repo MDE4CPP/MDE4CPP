@@ -47,6 +47,11 @@ namespace [aClass.getRootPackage().name/]
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
 #include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 #include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
+[for (anEPackage : EPackage | aClass.eReferences->select(eRef: EReference|(eRef.containment = true)).eType.getRootPackage()->sortedBy(name)->flatten()) ? (not (aClass.getRootPackage() = anEPackage))]
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Package.hpp"
+[/for]
+
 #include <exception> // used in Persistence
 [/template]
 
