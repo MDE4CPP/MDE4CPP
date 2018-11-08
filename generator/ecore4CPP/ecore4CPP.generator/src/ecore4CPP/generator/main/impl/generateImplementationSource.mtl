@@ -45,7 +45,7 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "[getRootPackage().name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[getRootPackage().name/]/impl/[aClass.getRootPackage().name.toUpperFirst().concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
