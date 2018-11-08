@@ -16,7 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 
-[query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().ePackage,anEPackage.eAllContents(EClass).eAllSuperTypes.ePackage,anEPackage.eAllContents(EStructuralFeature).eType.ePackage,anEPackage.eAllContents(EParameter).eType.ePackage}->flatten()->sortedBy(name) /]
+[query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
 [template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.name; }]
 [comment	generate CMakeLists.txt for model libary/]
