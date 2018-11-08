@@ -22,7 +22,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Return the parameter value corresponding to the given parameter.&#xA;// Null is returned if no parameter value associated with the parameter&#xA;// is found.&#xA;int i = 0;&#xA;ParameterValue parameterValue = null;&#xA;while(parameterValue == null &amp;&amp; i &lt; this.parameterValues.size()){&#xA;&#x9;if(this.parameterValues.get(i).parameter == parameter){&#xA;&#x9;&#x9;parameterValue = this.parameterValues.get(i);&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;return parameterValue;&#xA;"/>
           </eAnnotations>
-          <eParameters name="parameter" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Parameter"/>
+          <eParameters name="parameter" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
         </eOperations>
         <eOperations name="setParameterValue" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -43,7 +43,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// The behavior captured here is almost identical to the one provide by Object_.&#xA;// Instead of using a simple ObjectActivation we use a StateMachineObjectActivation.&#xA;// This specialized kind of ObjectActivation allows the registering of completion events.&#xA;if (this.objectActivation == null) {&#xA;&#x9;this.objectActivation = new SM_ObjectActivation();&#xA;&#x9;this.objectActivation.object = this;&#xA;}&#xA;this.objectActivation.startBehavior(classifier, inputs);&#xA;"/>
           </eAnnotations>
-          <eParameters name="classifier" ordered="false" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="classifier" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
         </eOperations>
         <eOperations name="destroy" ordered="false" lowerBound="1">
@@ -53,19 +53,19 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SM_RedefinitionBasedDispatchStrategy">
-        <eOperations name="getMethod" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+        <eOperations name="getMethod" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Behaves as in fUML and PSCS except that if no method is declared&#xA;// for the operation then null is returned.&#xA;Behavior method = null;&#xA;int i = 1;&#xA;while (method == null &amp; i &lt;= object.types.size()) {&#xA;&#x9;Class type = object.types.get(i - 1);&#xA;&#x9;List&lt;NamedElement> members = type.getMembers();&#xA;&#x9;int j = 1;&#xA;&#x9;while (method == null &amp; j &lt;= members.size()) {&#xA;&#x9;&#x9;NamedElement member = members.get(j - 1);&#xA;&#x9;&#x9;if (member instanceof Operation) {&#xA;&#x9;&#x9;&#x9;Operation memberOperation = (Operation) member;&#xA;&#x9;&#x9;&#x9;if (this.operationsMatch(memberOperation, operation)) {&#xA;&#x9;&#x9;&#x9;&#x9;if(memberOperation.getMethods().size() > 0){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;method = memberOperation.getMethods().get(0);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;j = j + 1;&#xA;&#x9;}&#xA;&#x9;i = i + 1;&#xA;}&#xA;return method;&#xA;"/>
           </eAnnotations>
           <eParameters name="object" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
-          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
         </eOperations>
         <eOperations name="dispatch" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Execution">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Try to dispatch the operation has specified in fUML. If no method is defined&#xA;// for the dispatched operation then null is returned. In this situation, the&#xA;// dispatching of the operation is computed as being by with using the&#xA;// call event semantics.&#xA;Execution execution = null;&#xA;Behavior method = this.getMethod(object, operation);&#xA;if(method == null){&#xA;&#x9;execution = new CallEventExecution();&#xA;&#x9;execution.context = object;&#xA;&#x9;((CallEventExecution)execution).operation = operation;&#xA;}else{&#xA;&#x9;execution = object.locus.factory.createExecution(method, object);&#xA;}&#xA;return execution;&#xA;"/>
           </eAnnotations>
           <eParameters name="object" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
-          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
         </eOperations>
       </eClassifiers>
     </eSubpackages>
@@ -159,7 +159,7 @@
             <details key="body" value="// The execution consists in placing a new CallEventOccurrence&#xA;// within the event pool of the target active object. Not that&#xA;// the call will not be executed if the target is not an active&#xA;// object. This is due to the fact that the call event could&#xA;// not placed anywhere since a passive object has no event pool.&#xA;// The caller is expected to be suspended until the RTC step using&#xA;// the event occurrence terminates.&#xA;CallEventOccurrence eventOccurrence = new CallEventOccurrence();&#xA;eventOccurrence.execution = this;&#xA;this.callerSuspended = true;&#xA;this._send(eventOccurrence);&#xA;this._suspend();&#xA;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="getBehavior" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+        <eOperations name="getBehavior" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Compute a behavior signature corresponding to the operation&#xA;if(this.behavior == null){&#xA;&#x9;this.behavior = UMLFactory.eINSTANCE.createFunctionBehavior();&#xA;&#x9;for(int i = 0; i &lt; this.operation.getOwnedParameters().size(); i++){&#xA;&#x9;&#x9;Parameter operationParameter = this.operation.getOwnedParameters().get(i);&#xA;&#x9;&#x9;Parameter parameter = UMLFactory.eINSTANCE.createParameter();&#xA;&#x9;&#x9;parameter.setName(operationParameter.getName());&#xA;&#x9;&#x9;parameter.setType(operationParameter.getType());&#xA;&#x9;&#x9;parameter.setLower(operationParameter.getLower());&#xA;&#x9;&#x9;parameter.setUpper(operationParameter.getUpper());&#xA;&#x9;&#x9;parameter.setDirection(operationParameter.getDirection());&#xA;&#x9;&#x9;this.behavior.getOwnedParameters().add(parameter);&#xA;&#x9;}&#xA;}&#xA;return this.behavior;&#xA;"/>
           </eAnnotations>
@@ -186,9 +186,9 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="callerContext" ordered="false"
             lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="operation" ordered="false"
-            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+            lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" ordered="false"
-            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+            lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallEventOccurrence">
         <eStructuralFeatures xsi:type="ecore:EReference" name="execution" ordered="false"
@@ -223,18 +223,18 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Recursive search through the hierarchy of visitors materializing&#xA;// the sub-set of the state-machine represented by this region.&#xA;// The search is realized in two steps:&#xA;// &#x9;1 - Search a matching activation in set of vertex activations owned by the region activation&#xA;//  2 - If no match, then the search is propagated to each vertex activation owned by the region activation&#xA;// Matching rules (or):&#xA;//  1 - A vertex matches a vertex activation if the node for which this activation is an&#xA;//      an interpreter is the vertex.&#xA;//  2 - A vertex matches a vertex activation if the node for which this activation is an&#xA;//      interpreter redefines the vertex &#xA;int i = 0;&#xA;VertexActivation activation = null;&#xA;while(activation==null &amp;&amp; i &lt; this.vertexActivations.size()){&#xA;&#x9;if(vertexActivations.get(i).isVisitorFor(vertex)){&#xA;&#x9;&#x9;activation = this.vertexActivations.get(i);&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;i = 0;&#xA;while(activation==null &amp;&amp; i &lt; this.vertexActivations.size()){&#xA;&#x9;if(this.vertexActivations.get(i).isVisitorFor(vertex)){&#xA;&#x9;&#x9;activation = this.vertexActivations.get(i);&#xA;&#x9;}else{&#xA;&#x9;&#x9;activation = this.vertexActivations.get(i).getVertexActivation(vertex);&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;return activation;&#xA;"/>
           </eAnnotations>
-          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
         </eOperations>
         <eOperations name="isRedefined" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../org.eclipse.uml2.types/model/Types.ecore#//Boolean">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Ensure that the given transition is not redefined by another transition&#xA;// already included in the transition list.&#xA;boolean isRedefined = false;&#xA;int i = 0;&#xA;while(!isRedefined &amp;&amp; i &lt; transitions.size()){&#xA;&#x9;Transition currentTransition = transitions.get(i).getRedefinedTransition();&#xA;&#x9;while(!isRedefined &amp;&amp; currentTransition != null){&#xA;&#x9;&#x9;isRedefined = currentTransition == transition;&#xA;&#x9;&#x9;currentTransition = currentTransition.getRedefinedTransition();&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;return isRedefined;&#xA;"/>
           </eAnnotations>
-          <eParameters name="vertices" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
-          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertices" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
         </eOperations>
         <eOperations name="isRedefined" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-          <eParameters name="transitions" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
-          <eParameters name="transition" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Transition"/>
+          <eParameters name="transitions" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
+          <eParameters name="transition" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Transition"/>
         </eOperations>
         <eOperations name="enter" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -279,7 +279,7 @@
             <details key="body" value="// ActivateTransition is intended to be overridden by sub-classes. It will capture the instantiation&#xA;// of transitions visitors as well as the linking between these visitors and the required vertices&#xA;// activation. By default activate does nothing.&#xA;return;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="getNode" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement">
+        <eOperations name="getNode" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return node;&#xA;"/>
           </eAnnotations>
@@ -309,7 +309,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="this.node = node;&#xA;"/>
           </eAnnotations>
-          <eParameters name="_" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+          <eParameters name="_" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
         </eOperations>
         <eOperations name="getStateMachineExecution" ordered="false" lowerBound="1"
             eType="ecore:EClass ../../fuml/model/fUML.ecore#//Execution">
@@ -326,24 +326,24 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// A visitor is the interpreter for a model if the node given as parameter is the&#xA;// this model element.&#xA;return this.node == node;&#xA;"/>
           </eAnnotations>
-          <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+          <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
         </eOperations>
         <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../org.eclipse.uml2.types/model/Types.ecore#//Boolean">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Check if the event occurrence matches one of the trigger in the list.&#xA;// The matching rule are the following:&#xA;// &#x9;&#x9;1. If the event occurrence is a signal event occurrence then type&#xA;//&#x9;&#x9;   of the signal must conforms to the type referenced by the event&#xA;//&#x9;&#x9;   In addition, if the trigger defines ports through wich the event occurrence&#xA;//         is allowed to arrive then the arrival port of the event occurrence&#xA;//&#x9;&#x9;   must be one the referenced port.&#xA;// &#x9;&#x9;2. If the event occurrence is a call event occurrence then the operation&#xA;// &#x9;&#x9;   that is referenced must be the same than the one specified in the call&#xA;//&#x9;&#x9;   event.&#xA;// NOTE: CallEventOccurrence are not related to an arrival port. This limitation is&#xA;// introduced by a limitation in the current PSCS semantic model.&#xA;// &#xA;// If a match is found then true is returned, false otherwise.&#xA;boolean match = false;&#xA;int i = 0;&#xA;while(!match &amp;&amp; i &lt; triggers.size()){&#xA;&#x9;Trigger trigger = triggers.get(i);&#xA;&#x9;if(eventOccurrence instanceof SignalEventOccurrence&#xA;&#x9;&#x9;&#x9;&amp;&amp; trigger.getEvent() instanceof SignalEvent){&#xA;&#x9;&#x9;SignalEventOccurrence signalEventOccurrence = (SignalEventOccurrence) eventOccurrence;&#xA;&#x9;&#x9;SignalEvent event = (SignalEvent) trigger.getEvent();&#xA;&#x9;&#x9;if(event.getSignal() == signalEventOccurrence.signalInstance.type){&#xA;&#x9;&#x9;&#x9;match = true;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if(match  &amp;&amp; trigger.getPorts().size() > 0){&#xA;&#x9;&#x9;&#x9;int j = 0;&#xA;&#x9;&#x9;&#x9;boolean matchingPort = false; &#xA;&#x9;&#x9;&#x9;while(j &lt; trigger.getPorts().size() &amp; !matchingPort){&#xA;&#x9;&#x9;&#x9;&#x9;if(((CS_SignalInstance)signalEventOccurrence.signalInstance).interactionPoint.definingPort == trigger.getPorts().get(j)){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;matchingPort = true;&#xA;&#x9;&#x9;&#x9;&#x9;} &#xA;&#x9;&#x9;&#x9;&#x9;j = j + 1;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;if(!matchingPort){&#xA;&#x9;&#x9;&#x9;&#x9;match = matchingPort;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}else if(eventOccurrence instanceof CallEventOccurrence&#xA;&#x9;&#x9;&#x9;&amp;&amp; trigger.getEvent() instanceof CallEvent){&#xA;&#x9;&#x9;CallEvent event = (CallEvent) trigger.getEvent();&#xA;&#x9;&#x9;CallEventOccurrence callEventOccurrence = (CallEventOccurrence) eventOccurrence;&#xA;&#x9;&#x9;if(event.getOperation() == callEventOccurrence.execution.operation){&#xA;&#x9;&#x9;&#x9;match = true;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;return match;&#xA;"/>
           </eAnnotations>
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
-          <eParameters name="triggers" ordered="false" upperBound="-1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Trigger"/>
+          <eParameters name="triggers" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
         </eOperations>
         <eOperations name="getExecutionFor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Create an Execution for the specified behavior. In addition to the creation of this&#xA;// Execution, if the behavior execution is triggered by the dispatching of an event (i.e.&#xA;// a CallEvent or a SignalEvent) then an EventTriggeredExecution is provided. This&#xA;// execution wraps the original execution and ensures passing of event data to the&#xA;// wrapped execution.&#xA;Execution execution = null;&#xA;if(behavior != null){&#xA;&#x9;Execution originalExecution = this.getExecutionLocus().factory.createExecution(behavior, this.getExecutionContext());&#xA;&#x9;if(eventOccurrence != null){&#xA;&#x9;&#x9;EventTriggeredExecution containerExecution = new EventTriggeredExecution();&#xA;&#x9;&#x9;containerExecution.triggeringEventOccurrence = eventOccurrence;&#xA;&#x9;&#x9;containerExecution.wrappedExecution = originalExecution;&#xA;&#x9;&#x9;containerExecution.context = originalExecution.context;&#xA;&#x9;&#x9;execution = containerExecution;&#xA;&#x9;}else{&#xA;&#x9;&#x9;execution = originalExecution;&#xA;&#x9;}&#xA;}&#xA;return execution;&#xA;"/>
           </eAnnotations>
-          <eParameters name="behavior" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior"/>
+          <eParameters name="behavior" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="node" ordered="false"
-            lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+            lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="parent" ordered="false"
             eType="ecore:EClass ../../fuml/model/fUML.ecore#//SemanticVisitor"/>
       </eClassifiers>
@@ -532,7 +532,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// By default return nothing. Must be overridden by state activation;&#xA;return null;&#xA;"/>
           </eAnnotations>
-          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
         </eOperations>
         <eOperations name="addIncomingTransition" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -678,7 +678,7 @@
           </eAnnotations>
         </eOperations>
         <eOperations name="getConnectionPointActivation" ordered="false" eType="#//Semantics/StateMachines/ConnectionPointActivation">
-          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
         </eOperations>
         <eOperations name="getFireableTransitions" ordered="false" upperBound="-1"
             eType="#//Semantics/StateMachines/TransitionActivation">
@@ -694,17 +694,17 @@
           <eParameters name="enteringTransition" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionActivation"/>
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
         </eOperations>
-        <eOperations name="getEntry" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+        <eOperations name="getEntry" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Return the entry behavior of the state or one inherited&#xA;// from a redefined state. If no entry can be found null is&#xA;// returned.&#xA;State state = (State) this.getNode();&#xA;Behavior entry = state.getEntry();&#xA;while(entry  == null &amp;&amp; state.getRedefinedState() != null){&#xA;&#x9;state = state.getRedefinedState();&#xA;&#x9;entry = state.getEntry();&#xA;}&#xA;return entry;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="getExit" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+        <eOperations name="getExit" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Return the exit behavior of the state or one inherited&#xA;// from a redefined state. If no exit can be found null is&#xA;// returned.&#xA;State state = (State) this.getNode();&#xA;Behavior exit = state.getExit();&#xA;while(exit  == null &amp;&amp; state.getRedefinedState() != null){&#xA;&#x9;state = state.getRedefinedState();&#xA;&#x9;exit = state.getExit();&#xA;}&#xA;return exit;&#xA;"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="getDoActivity" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Behavior">
+        <eOperations name="getDoActivity" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Return the doActivity behavior of the state or one inherited&#xA;// from a redefined state. If no doActivity can be found null is&#xA;// returned.&#xA;State state = (State) this.getNode();&#xA;Behavior doActivity = state.getDoActivity();&#xA;while(doActivity == null &amp;&amp; state.getRedefinedState() != null){&#xA;&#x9;state = state.getRedefinedState();&#xA;&#x9;doActivity = state.getDoActivity();&#xA;}&#xA;return doActivity;&#xA;"/>
           </eAnnotations>
@@ -743,13 +743,13 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Delegate read of a particular feature to the state-machine context&#xA;FeatureValue featureValue = null;&#xA;if(this.context!=null){&#xA;&#x9;featureValue = this.context.getFeatureValue(feature);&#xA;}&#xA;return featureValue;&#xA;"/>
           </eAnnotations>
-          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//StructuralFeature"/>
+          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
         <eOperations name="setFeatureValue" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Delegate write of particular feature to the state-machine context&#xA;if(this.context!=null){&#xA;&#x9;this.context.setFeatureValue(feature, values, position);&#xA;}&#xA;"/>
           </eAnnotations>
-          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//StructuralFeature"/>
+          <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
           <eParameters name="values" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Value"/>
           <eParameters name="position" ordered="false" eType="ecore:EDataType ../../../org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
         </eOperations>
@@ -757,7 +757,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Delegate operation call to the state-machine context&#xA;Execution execution = null;&#xA;if(this.context!=null){&#xA;&#x9;execution = this.context.dispatch(operation);&#xA;}&#xA;return execution;&#xA;"/>
           </eAnnotations>
-          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+          <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
         </eOperations>
         <eOperations name="send" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -796,7 +796,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Starts the behavior of a DoActivityContextObject. It behaves the&#xA;// same than in fUML except that for object is associated to a specific&#xA;// type of object activation: DoActivityContextObjectActivation&#xA;if(this.objectActivation == null){&#xA;&#x9;this.objectActivation = new DoActivityContextObjectActivation();&#xA;&#x9;this.objectActivation.object = this;&#xA;}&#xA;this.objectActivation.startBehavior(classifier, inputs);&#xA;"/>
           </eAnnotations>
-          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
@@ -832,7 +832,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Find the vertex activation corresponding to the given vertex.&#xA;// Search goes through the overall hierarchy of visitors until&#xA;// the activation is found. Null is returned if no activation&#xA;// could be found.&#xA;int i = 0;&#xA;VertexActivation vertexActivation = null;&#xA;while(vertexActivation==null &amp;&amp; i &lt; this.regionActivation.size()){&#xA;&#x9; vertexActivation = this.regionActivation.get(i).getVertexActivation(vertex);&#xA;&#x9; i++;&#xA;}&#xA;return vertexActivation;&#xA;"/>
           </eAnnotations>
-          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Vertex"/>
+          <eParameters name="vertex" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Vertex"/>
         </eOperations>
         <eOperations name="getRegionActivation" ordered="false" lowerBound="1" upperBound="-1"
             eType="#//Semantics/StateMachines/RegionActivation">
@@ -849,7 +849,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// The behavior captured here is almost identical to the one provide by Object_.&#xA;// Instead of using a simple ObjectActivation we use a StateMachineObjectActivation.&#xA;// This specialized kind of ObjectActivation allows the registering of completion events.&#xA;if (this.objectActivation == null) {&#xA;&#x9;this.objectActivation = new SM_ObjectActivation();&#xA;&#x9;this.objectActivation.object = this;&#xA;}&#xA;this.objectActivation.startBehavior(classifier, inputs);&#xA;"/>
           </eAnnotations>
-          <eParameters name="classifier" ordered="false" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="classifier" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivations"
@@ -1136,7 +1136,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// The expected classifier is the doActivity behavior. The doActivity&#xA;// behavior is executed as if it was the classifier of a class typing&#xA;// the doActivity context object. It only exists one doActivity executed&#xA;// as a classifier behavior for a DoActivityContextObject.&#xA;if(classifier != null &#xA;&#x9;&amp;&amp; classifier instanceof Behavior&#xA;&#x9;&amp;&amp; this.classifierBehaviorInvocations.isEmpty()){&#xA;&#x9;ClassifierBehaviorInvocationEventAccepter newInvocation = new ClassifierBehaviorInvocationEventAccepter();&#xA;&#x9;newInvocation.objectActivation = this;&#xA;&#x9;newInvocation.classifier = classifier;&#xA;&#x9;Execution doActivityExecution = this.object.locus.factory.createExecution((Behavior)classifier, this.object); &#xA;&#x9;if(inputs != null){&#xA;&#x9;&#x9;for(int i = 0; i &lt; inputs.size(); i++){&#xA;&#x9;&#x9;&#x9;doActivityExecution.setParameterValue(inputs.get(i));&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;newInvocation.execution = doActivityExecution;&#xA;&#x9;this.classifierBehaviorInvocations.add(newInvocation);&#xA;&#x9;this.register(newInvocation);&#xA;&#x9;InvocationEventOccurrence invocationEventOccurrence = new InvocationEventOccurrence();&#xA;&#x9;invocationEventOccurrence.execution = newInvocation.execution;&#xA;&#x9;this.eventPool.add(invocationEventOccurrence);&#xA;&#x9;this._send(new ArrivalSignal());&#xA;}&#xA;"/>
           </eAnnotations>
-          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//ParameterValue"/>
         </eOperations>
       </eClassifiers>
@@ -1187,7 +1187,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Return the semantic visitor corresponding to the given model element.&#xA;// If no visitor can be created for this model element then null is &#xA;// returned.&#xA;SemanticVisitor visitor = null ;&#xA;if(element instanceof StateMachine){&#xA;&#x9;visitor = new StateMachineExecution();&#xA;}else if (element instanceof Pseudostate) {&#xA;&#x9;Pseudostate pseudostate = (Pseudostate) element;&#xA;&#x9;switch(pseudostate.getKind()){&#xA;&#x9;&#x9;case INITIAL_LITERAL: visitor = new InitialPseudostateActivation(); break;&#xA;&#x9;&#x9;case ENTRY_POINT_LITERAL: visitor = new EntryPointPseudostateActivation(); break;&#xA;&#x9;&#x9;case EXIT_POINT_LITERAL: visitor = new ExitPointPseudostateActivation(); break;&#xA;&#x9;&#x9;case CHOICE_LITERAL: visitor = new ChoicePseudostateActivation(); break;&#xA;&#x9;&#x9;case FORK_LITERAL: visitor = new ForkPseudostateActivation(); break;&#xA;&#x9;&#x9;case JOIN_LITERAL: visitor = new JoinPseudostateActivation(); break;&#xA;&#x9;&#x9;case TERMINATE_LITERAL: visitor = new TerminatePseudostateActivation(); break;&#xA;&#x9;&#x9;case DEEP_HISTORY_LITERAL: visitor = new DeepHistoryPseudostateActivation(); break;&#xA;&#x9;&#x9;case SHALLOW_HISTORY_LITERAL: visitor = new ShallowHistoryPseudostateActivation(); break;&#xA;&#x9;&#x9;case JUNCTION_LITERAL: visitor = new JunctionPseudostateActivation(); break;&#xA;&#x9;}&#xA;}else if (element instanceof State) {&#xA;&#x9;if(element instanceof FinalState){&#xA;&#x9;&#x9;visitor = new FinalStateActivation();&#xA;&#x9;}else{&#xA;&#x9;&#x9;visitor = new StateActivation() ;&#xA;&#x9;}&#xA;}else if (element instanceof Transition) {&#xA;&#x9;Transition transition = (Transition) element;&#xA;&#x9;switch(transition.getKind()){&#xA;&#x9;&#x9;case EXTERNAL_LITERAL: visitor = new ExternalTransitionActivation(); break;&#xA;&#x9;&#x9;case INTERNAL_LITERAL: visitor = new InternalTransitionActivation(); break;&#xA;&#x9;&#x9;case LOCAL_LITERAL: visitor = new LocalTransitionActivation(); break;&#xA;&#x9;}&#xA;}else if (element instanceof Region) {&#xA;&#x9;visitor = new RegionActivation();&#xA;}else if(element instanceof OpaqueExpression) {&#xA;&#x9;visitor = new SM_OpaqueExpressionEvaluation();&#xA;}else if(element instanceof ReadSelfAction){&#xA;&#x9;visitor = new SM_ReadSelfActionActivation();&#xA;}else {&#xA;&#x9;visitor = super.instantiateVisitor(element);&#xA;}&#xA;return visitor;&#xA;"/>
           </eAnnotations>
-          <eParameters name="element" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Element"/>
+          <eParameters name="element" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SM_Locus">
@@ -1195,7 +1195,7 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Behaves like in fUML except that type instance are not&#xA;// Object_ but SM_Object.&#xA;Object_ object = null;&#xA;if (type instanceof Behavior) {&#xA;&#x9;object = super.instantiate(type);&#xA;} else {&#xA;&#x9;object = new SM_Object();&#xA;&#x9;object.types.add(type);&#xA;&#x9;object.createFeatureValues();&#xA;&#x9;this.add(object);&#xA;}&#xA;return object;&#xA;"/>
           </eAnnotations>
-          <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass ../../../org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+          <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
         </eOperations>
       </eClassifiers>
     </eSubpackages>
