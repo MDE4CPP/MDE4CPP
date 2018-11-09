@@ -34,6 +34,9 @@
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
+[if (not (aClass.ePackage = aClass.getRootPackage()))]
+#include "[aClass.getRootPackage().name/]/impl/[aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/].hpp"
+[/if]
 [for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[aEClass.generateNamespacePath()/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
@@ -58,7 +61,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
-			friend class [aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/];
+			friend class [if (not (aClass.ePackage = aClass.getRootPackage()))][aClass.getRootPackage().name/]::[/if][aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
 			[aClass.generateGetThisPtr()/]
 
