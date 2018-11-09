@@ -464,13 +464,13 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
 		if ([aReference.name/] != nullptr)
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != [if (aReference.eType.getRootPackage().name = aClass.getRootPackage().name)]package->[/if][aReference.eType.packageGetter(aClass)/]);
 		}
 	[else]
 		[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
 		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *list_[aReference.name/]) 
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != [if (aReference.eType.getRootPackage().name = aClass.getRootPackage().name)]package->[/if][aReference.eType.packageGetter(aClass)/]);
 		}
 	[/if]
 [/for][/if][/let]
