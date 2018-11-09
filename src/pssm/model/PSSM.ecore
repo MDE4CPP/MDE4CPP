@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PSSM" nsURI="http://www.omg.org/spec/PSSM/20161101"
-    nsPrefix="PSSM">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PSSM" nsURI="http://www.omg.org/spec/PSSM/20161101" nsPrefix="PSSM">
   <eSubpackages name="Semantics" nsURI="http:///PSSM/Semantics.ecore" nsPrefix="PSSM.Semantics">
-    <eSubpackages name="Values" nsURI="http:///PSSM/Semantics/Values.ecore"
-        nsPrefix="PSSM.Semantics.Values">
+    <eSubpackages name="Values" nsURI="http:///PSSM/Semantics/Values.ecore" nsPrefix="PSSM.Semantics.Values">
       <eClassifiers xsi:type="ecore:EClass" name="SM_OpaqueExpressionEvaluation">
         <eOperations name="executeExpressionBehavior" ordered="false" upperBound="-1"
             eType="ecore:EClass ../../fuml/model/fUML.ecore#//Value">
@@ -163,6 +161,9 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Compute a behavior signature corresponding to the operation&#xA;if(this.behavior == null){&#xA;&#x9;this.behavior = UMLFactory.eINSTANCE.createFunctionBehavior();&#xA;&#x9;for(int i = 0; i &lt; this.operation.getOwnedParameters().size(); i++){&#xA;&#x9;&#x9;Parameter operationParameter = this.operation.getOwnedParameters().get(i);&#xA;&#x9;&#x9;Parameter parameter = UMLFactory.eINSTANCE.createParameter();&#xA;&#x9;&#x9;parameter.setName(operationParameter.getName());&#xA;&#x9;&#x9;parameter.setType(operationParameter.getType());&#xA;&#x9;&#x9;parameter.setLower(operationParameter.getLower());&#xA;&#x9;&#x9;parameter.setUpper(operationParameter.getUpper());&#xA;&#x9;&#x9;parameter.setDirection(operationParameter.getDirection());&#xA;&#x9;&#x9;this.behavior.getOwnedParameters().add(parameter);&#xA;&#x9;}&#xA;}&#xA;return this.behavior;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="new_" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Value">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -211,6 +212,9 @@
         <eOperations name="getVertexActivations" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/VertexActivation">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return vertexActivations;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getTransitionActivations" ordered="false" upperBound="-1"
@@ -283,6 +287,9 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return node;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="getExecutionLocus" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Locus">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -292,6 +299,9 @@
         <eOperations name="getParent" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//SemanticVisitor">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return parent;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object">
@@ -303,11 +313,17 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="this.parent = parent;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
           <eParameters name="parent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="setNode" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="this.node = node;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
           <eParameters name="_" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
         </eOperations>
@@ -363,10 +379,16 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return status;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="setStatus" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="this.status = state;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
           <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/TransitionMetadata"/>
         </eOperations>
@@ -491,10 +513,16 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return this.status;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="setStatus" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="this.status = state;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
           <eParameters name="status" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateMetadata"/>
         </eOperations>
@@ -768,7 +796,7 @@
         <eOperations name="unregister" ordered="false" lowerBound="1">
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventAccepter"/>
         </eOperations>
-        <eOperations name="register" ordered="false" lowerBound="1">
+        <eOperations name="_register" ordered="false" lowerBound="1">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// When the executing doActivity registers an accepter it searches through the deferred event&#xA;// pool of the object activation associated to the state-machine context.&#xA;// 1. If the accepter being registered matches one of the deferred events then this event is&#xA;//    transferred into the event pool of the doActivity object activation. This implies the&#xA;//    event will be dispatched in a RTC step performed by the doActivity object activation. &#xA;// 2. If the accepter being registered does not match one of the deferred events then this latter&#xA;//    is wrapped in another accepter which is registered by the state machine context object activation.&#xA;//    This is realized in order to guarantee that the doActivity will have a chance to match an event&#xA;//    received by the state-machine context object.&#xA;super.register(accepter);&#xA;SM_ObjectActivation contextObjectActivation = (SM_ObjectActivation) this.context.objectActivation;&#xA;int i = 1;&#xA;DeferredEventOccurrence matchedDeferredEvent = null; &#xA;while(matchedDeferredEvent == null &amp;&amp; i &lt;= contextObjectActivation.deferredEventPool.size()){&#xA;&#x9;DeferredEventOccurrence eventOccurrence = contextObjectActivation.deferredEventPool.get(i-1);&#xA;&#x9;if(this.owner == eventOccurrence.constrainingStateActivation  &amp;&amp; accepter.match(eventOccurrence.deferredEventOccurrence)){&#xA;&#x9;&#x9;matchedDeferredEvent = eventOccurrence;&#xA;&#x9;}&#xA;&#x9;i++;&#xA;}&#xA;if(matchedDeferredEvent == null){&#xA;&#x9;DoActivityExecutionEventAccepter encapsulatingAccepter = new DoActivityExecutionEventAccepter();&#xA;&#x9;encapsulatingAccepter.encapsulatedAccepter = accepter;&#xA;&#x9;encapsulatingAccepter.context = this;&#xA;&#x9;this.context.register(encapsulatingAccepter);&#xA;}else{&#xA;&#x9;contextObjectActivation.deferredEventPool.remove(matchedDeferredEvent);&#xA;&#x9;this.objectActivation.eventPool.add(matchedDeferredEvent.deferredEventOccurrence);&#xA;&#x9;this.objectActivation._send(new ArrivalSignal());&#xA;}&#xA;"/>
           </eAnnotations>
@@ -827,6 +855,9 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return this.configuration;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="getVertexActivation" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/VertexActivation">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -869,12 +900,15 @@
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return this.execution;&#xA;"/>
           </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="getVertexActivationsAtLevel" ordered="false" upperBound="-1"
             eType="#//Semantics/StateMachines/VertexActivation">
           <eParameters name="level" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
         </eOperations>
-        <eOperations name="register" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+        <eOperations name="_register" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="// Register the given state activation in the state-machine configuration.&#xA;// This occurs when the state activation is entered.&#xA;return this.add(stateActivation);&#xA;"/>
           </eAnnotations>
@@ -921,6 +955,9 @@
         <eOperations name="getChildren" ordered="false" upperBound="-1" eType="#//Semantics/StateMachines/StateConfiguration">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="body" value="return this.children;&#xA;"/>
+          </eAnnotations>
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="doNotGenerate" value="true"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getParent" ordered="false" lowerBound="1" eType="#//Semantics/StateMachines/StateConfiguration">
@@ -1180,8 +1217,7 @@
             ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//EventOccurrence"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="Loci" nsURI="http:///PSSM/Semantics/Loci.ecore"
-        nsPrefix="PSSM.Semantics.Loci">
+    <eSubpackages name="Loci" nsURI="http:///PSSM/Semantics/Loci.ecore" nsPrefix="PSSM.Semantics.Loci">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ExecutionFactory">
         <eOperations name="instantiateVisitor" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//SemanticVisitor">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1199,8 +1235,7 @@
         </eOperations>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="Actions" nsURI="http:///PSSM/Semantics/Actions.ecore"
-        nsPrefix="PSSM.Semantics.Actions">
+    <eSubpackages name="Actions" nsURI="http:///PSSM/Semantics/Actions.ecore" nsPrefix="PSSM.Semantics.Actions">
       <eClassifiers xsi:type="ecore:EClass" name="SM_ReadSelfActionActivation">
         <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//Object">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
