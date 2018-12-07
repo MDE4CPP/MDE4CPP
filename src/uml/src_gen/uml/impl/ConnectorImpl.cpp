@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -373,15 +374,15 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
-			return eAny(getContract()); //9315
+			return eAny(getContract()); //5315
 		case UmlPackage::CONNECTOR_EREFERENCE_END:
-			return eAny(getEnd()); //9316
+			return eAny(getEnd()); //5316
 		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
-			return eAny(getKind()); //9317
+			return eAny(getKind()); //5317
 		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
-			return eAny(getRedefinedConnector()); //9318
+			return eAny(getRedefinedConnector()); //5318
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
-			return eAny(getType()); //9319
+			return eAny(getType()); //5319
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -390,15 +391,15 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
-			return getContract() != nullptr; //9315
+			return getContract() != nullptr; //5315
 		case UmlPackage::CONNECTOR_EREFERENCE_END:
-			return getEnd() != nullptr; //9316
+			return getEnd() != nullptr; //5316
 		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //9317
+			return m_kind != ConnectorKind::ASSEMBLY;; //5317
 		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector() != nullptr; //9318
+			return getRedefinedConnector() != nullptr; //5318
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
-			return getType() != nullptr; //9319
+			return getType() != nullptr; //5319
 	}
 	return FeatureImpl::internalEIsSet(featureID);
 }
@@ -410,7 +411,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
-			setType(_type); //9319
+			setType(_type); //5319
 			return true;
 		}
 	}

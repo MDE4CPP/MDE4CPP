@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -339,9 +340,9 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
-			return eAny(getExpr()); //20315
+			return eAny(getExpr()); //23815
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
-			return eAny(getObservation()); //20316
+			return eAny(getObservation()); //23816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -350,9 +351,9 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
-			return getExpr() != nullptr; //20315
+			return getExpr() != nullptr; //23815
 		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
-			return getObservation() != nullptr; //20316
+			return getObservation() != nullptr; //23816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -364,7 +365,7 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setExpr(_expr); //20315
+			setExpr(_expr); //23815
 			return true;
 		}
 	}

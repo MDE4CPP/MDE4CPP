@@ -11,7 +11,9 @@
 
 namespace ecore 
 {
+	class EAnnotation;
 	class EDataType;
+	class EStringToStringMapEntry;
 }
 
 namespace types 
@@ -37,11 +39,11 @@ namespace types
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-			static const int BOOLEAN_EDATATYPE = 5;
-			static const int INTEGER_EDATATYPE = 1;
-			static const int REAL_EDATATYPE = 2;
-			static const int STRING_EDATATYPE = 3;
-			static const int UNLIMITEDNATURAL_EDATATYPE = 4;
+			static const int BOOLEAN_EDATATYPE = 1;
+			static const int INTEGER_EDATATYPE = 2;
+			static const int REAL_EDATATYPE = 3;
+			static const int STRING_EDATATYPE = 4;
+			static const int UNLIMITEDNATURAL_EDATATYPE = 5;
 			
 			virtual std::shared_ptr<ecore::EDataType> getBoolean_EDataType() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getInteger_EDataType() const = 0;

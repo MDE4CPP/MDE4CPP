@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -230,9 +231,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return eAny(getSource()); //205
+			return eAny(getSource()); //765
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return eAny(getTarget()); //206
+			return eAny(getTarget()); //766
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -241,9 +242,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //205
+			return getSource() != nullptr; //765
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //206
+			return getTarget() != nullptr; //766
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }

@@ -44,6 +44,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
@@ -301,7 +302,7 @@ Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup()); //576
+			return eAny(getActivationGroup()); //56
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -310,7 +311,7 @@ bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //576
+			return getActivationGroup() != nullptr; //56
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
@@ -322,7 +323,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
-			setActivationGroup(_activationGroup); //576
+			setActivationGroup(_activationGroup); //56
 			return true;
 		}
 	}

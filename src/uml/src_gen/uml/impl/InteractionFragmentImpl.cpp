@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -352,13 +353,13 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return eAny(getCovered()); //21210
+			return eAny(getCovered()); //12110
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return eAny(getEnclosingInteraction()); //21212
+			return eAny(getEnclosingInteraction()); //12112
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return eAny(getEnclosingOperand()); //21211
+			return eAny(getEnclosingOperand()); //12111
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return eAny(getGeneralOrdering()); //21213
+			return eAny(getGeneralOrdering()); //12113
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -367,13 +368,13 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered() != nullptr; //21210
+			return getCovered() != nullptr; //12110
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction().lock() != nullptr; //21212
+			return getEnclosingInteraction().lock() != nullptr; //12112
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand().lock() != nullptr; //21211
+			return getEnclosingOperand().lock() != nullptr; //12111
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering() != nullptr; //21213
+			return getGeneralOrdering() != nullptr; //12113
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -385,14 +386,14 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setEnclosingInteraction(_enclosingInteraction); //21212
+			setEnclosingInteraction(_enclosingInteraction); //12112
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
-			setEnclosingOperand(_enclosingOperand); //21211
+			setEnclosingOperand(_enclosingOperand); //12111
 			return true;
 		}
 	}

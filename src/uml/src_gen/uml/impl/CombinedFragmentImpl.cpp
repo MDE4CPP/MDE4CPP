@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -387,11 +388,11 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
-			return eAny(getCfragmentGate()); //22814
+			return eAny(getCfragmentGate()); //4414
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
-			return eAny(getInteractionOperator()); //22815
+			return eAny(getInteractionOperator()); //4415
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
-			return eAny(getOperand()); //22816
+			return eAny(getOperand()); //4416
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,11 +401,11 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
-			return getCfragmentGate() != nullptr; //22814
+			return getCfragmentGate() != nullptr; //4414
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
-			return m_interactionOperator != InteractionOperatorKind::SEQ;; //22815
+			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4415
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
-			return getOperand() != nullptr; //22816
+			return getOperand() != nullptr; //4416
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -416,7 +417,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
-			setInteractionOperator(_interactionOperator); //22815
+			setInteractionOperator(_interactionOperator); //4415
 			return true;
 		}
 	}

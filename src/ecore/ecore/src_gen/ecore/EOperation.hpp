@@ -14,6 +14,7 @@
 
 // forward declarations
 template<class T> class Bag;
+template<class T, class ... U> class Subset;
 
 
 
@@ -59,6 +60,11 @@ namespace ecore
 
 namespace ecore 
 {
+	class EObject;
+}
+
+namespace ecore 
+{
 	class EOperation;
 }
 
@@ -97,6 +103,10 @@ namespace ecore
 		protected:
 			EOperation(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EOperation(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
 
@@ -143,7 +153,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EParameter>> getEParameters() const = 0;
+			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const = 0;
 			
 			/*!
 			 */
@@ -174,7 +184,7 @@ namespace ecore
 			std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EParameter>> m_eParameters;
+			std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
 			/*!
 			 */
 			std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
@@ -184,7 +194,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

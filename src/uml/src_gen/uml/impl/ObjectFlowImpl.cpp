@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -433,13 +434,13 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
-			return eAny(getIsMulticast()); //18823
+			return eAny(getIsMulticast()); //15923
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
-			return eAny(getIsMultireceive()); //18824
+			return eAny(getIsMultireceive()); //15924
 		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
-			return eAny(getSelection()); //18825
+			return eAny(getSelection()); //15925
 		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
-			return eAny(getTransformation()); //18826
+			return eAny(getTransformation()); //15926
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
@@ -448,13 +449,13 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
-			return getIsMulticast() != false; //18823
+			return getIsMulticast() != false; //15923
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
-			return getIsMultireceive() != false; //18824
+			return getIsMultireceive() != false; //15924
 		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
-			return getSelection() != nullptr; //18825
+			return getSelection() != nullptr; //15925
 		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
-			return getTransformation() != nullptr; //18826
+			return getTransformation() != nullptr; //15926
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
@@ -466,28 +467,28 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isMulticast = newValue->get<bool>();
-			setIsMulticast(_isMulticast); //18823
+			setIsMulticast(_isMulticast); //15923
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
 			bool _isMultireceive = newValue->get<bool>();
-			setIsMultireceive(_isMultireceive); //18824
+			setIsMultireceive(_isMultireceive); //15924
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setSelection(_selection); //18825
+			setSelection(_selection); //15925
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _transformation = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setTransformation(_transformation); //18826
+			setTransformation(_transformation); //15926
 			return true;
 		}
 	}

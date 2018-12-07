@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -474,11 +475,11 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return eAny(getCallOperationAction()); //11835
+			return eAny(getCallOperationAction()); //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return eAny(getInvocationAction()); //11836
+			return eAny(getInvocationAction()); //11636
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return eAny(getStructuralFeatureAction()); //11834
+			return eAny(getStructuralFeatureAction()); //11634
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -487,11 +488,11 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return getCallOperationAction().lock() != nullptr; //11835
+			return getCallOperationAction().lock() != nullptr; //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return getInvocationAction().lock() != nullptr; //11836
+			return getInvocationAction().lock() != nullptr; //11636
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction().lock() != nullptr; //11834
+			return getStructuralFeatureAction().lock() != nullptr; //11634
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -503,21 +504,21 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = newValue->get<std::shared_ptr<uml::CallOperationAction>>();
-			setCallOperationAction(_callOperationAction); //11835
+			setCallOperationAction(_callOperationAction); //11635
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InvocationAction> _invocationAction = newValue->get<std::shared_ptr<uml::InvocationAction>>();
-			setInvocationAction(_invocationAction); //11836
+			setInvocationAction(_invocationAction); //11636
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = newValue->get<std::shared_ptr<uml::StructuralFeatureAction>>();
-			setStructuralFeatureAction(_structuralFeatureAction); //11834
+			setStructuralFeatureAction(_structuralFeatureAction); //11634
 			return true;
 		}
 	}

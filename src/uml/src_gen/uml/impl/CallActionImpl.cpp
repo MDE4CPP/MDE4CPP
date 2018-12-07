@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -458,9 +459,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //13930
+			return eAny(getIsSynchronous()); //2830
 		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //13931
+			return eAny(getResult()); //2831
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -469,9 +470,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //13930
+			return getIsSynchronous() != true; //2830
 		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //13931
+			return getResult() != nullptr; //2831
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -483,7 +484,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //13930
+			setIsSynchronous(_isSynchronous); //2830
 			return true;
 		}
 	}

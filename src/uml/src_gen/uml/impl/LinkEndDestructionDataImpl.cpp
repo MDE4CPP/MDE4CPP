@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -226,9 +227,9 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
-			return eAny(getDestroyAt()); //1527
+			return eAny(getDestroyAt()); //1367
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
-			return eAny(getIsDestroyDuplicates()); //1528
+			return eAny(getIsDestroyDuplicates()); //1368
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -237,9 +238,9 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
-			return getDestroyAt() != nullptr; //1527
+			return getDestroyAt() != nullptr; //1367
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
-			return getIsDestroyDuplicates() != false; //1528
+			return getIsDestroyDuplicates() != false; //1368
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -251,14 +252,14 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _destroyAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setDestroyAt(_destroyAt); //1527
+			setDestroyAt(_destroyAt); //1367
 			return true;
 		}
 		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isDestroyDuplicates = newValue->get<bool>();
-			setIsDestroyDuplicates(_isDestroyDuplicates); //1528
+			setIsDestroyDuplicates(_isDestroyDuplicates); //1368
 			return true;
 		}
 	}

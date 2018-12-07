@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -212,7 +213,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
-			return eAny(getRegionActivation()); //755
+			return eAny(getRegionActivation()); //465
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -221,7 +222,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
-			return getRegionActivation() != nullptr; //755
+			return getRegionActivation() != nullptr; //465
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
@@ -233,7 +234,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = newValue->get<std::shared_ptr<fUML::ExpansionRegionActivation>>();
-			setRegionActivation(_regionActivation); //755
+			setRegionActivation(_regionActivation); //465
 			return true;
 		}
 	}

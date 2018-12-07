@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Parameter.hpp"
@@ -175,9 +176,9 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PARAMETERVALUE_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //390
+			return eAny(getParameter()); //830
 		case FUMLPackage::PARAMETERVALUE_EREFERENCE_VALUES:
-			return eAny(getValues()); //391
+			return eAny(getValues()); //831
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -186,9 +187,9 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::PARAMETERVALUE_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //390
+			return getParameter() != nullptr; //830
 		case FUMLPackage::PARAMETERVALUE_EREFERENCE_VALUES:
-			return getValues() != nullptr; //391
+			return getValues() != nullptr; //831
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -200,7 +201,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
-			setParameter(_parameter); //390
+			setParameter(_parameter); //830
 			return true;
 		}
 	}

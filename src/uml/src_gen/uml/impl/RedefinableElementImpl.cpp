@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -305,11 +306,11 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return eAny(getIsLeaf()); //5010
+			return eAny(getIsLeaf()); //20410
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return eAny(getRedefinedElement()); //5011
+			return eAny(getRedefinedElement()); //20411
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return eAny(getRedefinitionContext()); //5012
+			return eAny(getRedefinitionContext()); //20412
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,11 +319,11 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf() != false; //5010
+			return getIsLeaf() != false; //20410
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement() != nullptr; //5011
+			return getRedefinedElement() != nullptr; //20411
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext() != nullptr; //5012
+			return getRedefinitionContext() != nullptr; //20412
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -334,7 +335,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
-			setIsLeaf(_isLeaf); //5010
+			setIsLeaf(_isLeaf); //20410
 			return true;
 		}
 	}

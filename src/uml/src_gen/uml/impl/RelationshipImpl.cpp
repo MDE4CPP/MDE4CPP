@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -195,7 +196,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return eAny(getRelatedElement()); //214
+			return eAny(getRelatedElement()); //2084
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -204,7 +205,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //214
+			return getRelatedElement() != nullptr; //2084
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }

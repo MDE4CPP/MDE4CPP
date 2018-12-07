@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -286,11 +287,11 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDATA_EREFERENCE_END:
-			return eAny(getEnd()); //1264
+			return eAny(getEnd()); //1354
 		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //1265
+			return eAny(getQualifier()); //1355
 		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
-			return eAny(getValue()); //1266
+			return eAny(getValue()); //1356
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,11 +300,11 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDATA_EREFERENCE_END:
-			return getEnd() != nullptr; //1264
+			return getEnd() != nullptr; //1354
 		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //1265
+			return getQualifier() != nullptr; //1355
 		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
-			return getValue() != nullptr; //1266
+			return getValue() != nullptr; //1356
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -315,14 +316,14 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
-			setEnd(_end); //1264
+			setEnd(_end); //1354
 			return true;
 		}
 		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //1266
+			setValue(_value); //1356
 			return true;
 		}
 	}

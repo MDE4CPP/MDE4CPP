@@ -36,6 +36,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
@@ -199,7 +200,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //181
+			return eAny(getValue()); //611
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -208,7 +209,7 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
-			return getValue() != 0; //181
+			return getValue() != 0; //611
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -220,7 +221,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //181
+			setValue(_value); //611
 			return true;
 		}
 	}

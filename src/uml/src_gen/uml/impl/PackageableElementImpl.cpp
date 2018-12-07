@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -290,7 +291,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return eAny(getOwningPackage()); //1412
+			return eAny(getOwningPackage()); //17312
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -306,7 +307,7 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage().lock() != nullptr; //1412
+			return getOwningPackage().lock() != nullptr; //17312
 	}
 	bool result = false;
 	result = NamedElementImpl::internalEIsSet(featureID);
@@ -325,7 +326,7 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _owningPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setOwningPackage(_owningPackage); //1412
+			setOwningPackage(_owningPackage); //17312
 			return true;
 		}
 	}

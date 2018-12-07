@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -508,17 +509,17 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //11322
+			return eAny(getContext()); //422
 		case UmlPackage::ACTION_EREFERENCE_INPUT:
-			return eAny(getInput()); //11323
+			return eAny(getInput()); //423
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
-			return eAny(getIsLocallyReentrant()); //11324
+			return eAny(getIsLocallyReentrant()); //424
 		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
-			return eAny(getLocalPostcondition()); //11325
+			return eAny(getLocalPostcondition()); //425
 		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
-			return eAny(getLocalPrecondition()); //11326
+			return eAny(getLocalPrecondition()); //426
 		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
-			return eAny(getOutput()); //11327
+			return eAny(getOutput()); //427
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -527,17 +528,17 @@ bool ActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
-			return getContext() != nullptr; //11322
+			return getContext() != nullptr; //422
 		case UmlPackage::ACTION_EREFERENCE_INPUT:
-			return getInput() != nullptr; //11323
+			return getInput() != nullptr; //423
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant() != false; //11324
+			return getIsLocallyReentrant() != false; //424
 		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
-			return getLocalPostcondition() != nullptr; //11325
+			return getLocalPostcondition() != nullptr; //425
 		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
-			return getLocalPrecondition() != nullptr; //11326
+			return getLocalPrecondition() != nullptr; //426
 		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
-			return getOutput() != nullptr; //11327
+			return getOutput() != nullptr; //427
 	}
 	return ExecutableNodeImpl::internalEIsSet(featureID);
 }
@@ -549,7 +550,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = newValue->get<bool>();
-			setIsLocallyReentrant(_isLocallyReentrant); //11324
+			setIsLocallyReentrant(_isLocallyReentrant); //424
 			return true;
 		}
 	}

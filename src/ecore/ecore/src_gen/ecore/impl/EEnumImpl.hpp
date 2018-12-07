@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEEnumPtr(std::weak_ptr<EEnum> thisEEnumPtr);
 
 			//Additional constructors for the containments back reference
+			EEnumImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 
@@ -70,14 +74,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EEnumLiteral>> getELiterals() const ;
+			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const ;
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

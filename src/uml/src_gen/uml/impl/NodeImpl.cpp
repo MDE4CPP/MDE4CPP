@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -644,7 +645,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return eAny(getNestedNode()); //20755
+			return eAny(getNestedNode()); //15755
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
@@ -660,7 +661,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return getNestedNode() != nullptr; //20755
+			return getNestedNode() != nullptr; //15755
 	}
 	bool result = false;
 	result = ClassImpl::internalEIsSet(featureID);

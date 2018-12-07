@@ -13,7 +13,8 @@
 #include "ecore/EFactory.hpp"
 
 namespace uml 
-{	class Abstraction;
+{
+	class Abstraction;
 	class AcceptCallAction;
 	class AcceptEventAction;
 	class Action;
@@ -260,6 +261,7 @@ namespace uml
 	class WriteVariableAction;
 	class UmlPackage;
 }
+
 
 namespace uml 
 {

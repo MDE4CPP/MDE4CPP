@@ -37,6 +37,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -234,9 +235,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
-			return eAny(getLiteral()); //330
+			return eAny(getLiteral()); //350
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
-			return eAny(getType()); //331
+			return eAny(getType()); //351
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -245,9 +246,9 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
-			return getLiteral() != nullptr; //330
+			return getLiteral() != nullptr; //350
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
-			return getType() != nullptr; //331
+			return getType() != nullptr; //351
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
@@ -259,14 +260,14 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::EnumerationLiteral> _literal = newValue->get<std::shared_ptr<uml::EnumerationLiteral>>();
-			setLiteral(_literal); //330
+			setLiteral(_literal); //350
 			return true;
 		}
 		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Enumeration> _type = newValue->get<std::shared_ptr<uml::Enumeration>>();
-			setType(_type); //331
+			setType(_type); //351
 			return true;
 		}
 	}

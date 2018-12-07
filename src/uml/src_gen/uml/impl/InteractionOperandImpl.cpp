@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -409,9 +410,9 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
-			return eAny(getFragment()); //21820
+			return eAny(getFragment()); //12220
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
-			return eAny(getGuard()); //21821
+			return eAny(getGuard()); //12221
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -427,9 +428,9 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
-			return getFragment() != nullptr; //21820
+			return getFragment() != nullptr; //12220
 		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
-			return getGuard() != nullptr; //21821
+			return getGuard() != nullptr; //12221
 	}
 	bool result = false;
 	result = InteractionFragmentImpl::internalEIsSet(featureID);
@@ -448,7 +449,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionConstraint> _guard = newValue->get<std::shared_ptr<uml::InteractionConstraint>>();
-			setGuard(_guard); //21821
+			setGuard(_guard); //12221
 			return true;
 		}
 	}

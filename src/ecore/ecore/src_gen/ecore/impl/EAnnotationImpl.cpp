@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -62,7 +64,11 @@ EAnnotationImpl::EAnnotationImpl()
 	// Reference Members
 	//*********************************
 	//References
-		m_contents.reset(new Bag<ecore::EObject>());
+		/*Subset*/
+		m_contents.reset(new Subset<ecore::EObject, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >()" << std::endl;
+		#endif
 	
 	
 
@@ -77,6 +83,11 @@ EAnnotationImpl::EAnnotationImpl()
 	
 
 	//Init references
+		/*Subset*/
+		m_contents->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 
@@ -95,6 +106,17 @@ EAnnotationImpl::~EAnnotationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EAnnotation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EAnnotationImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -119,6 +141,8 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eModelElement  = obj.getEModelElement();
 
 	std::shared_ptr<Bag<ecore::EObject>> _references = obj.getReferences();
@@ -152,6 +176,11 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
+		/*Subset*/
+		m_contents->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 
@@ -191,7 +220,7 @@ std::string EAnnotationImpl::getSource() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getContents() const
+std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getContents() const
 {
 
     return m_contents;
@@ -225,6 +254,10 @@ std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EAnnotationImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EAnnotation> EAnnotationImpl::getThisEAnnotationPtr() const
@@ -238,6 +271,11 @@ void EAnnotationImpl::setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnno
 }
 std::shared_ptr<ecore::EObject> EAnnotationImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eModelElement.lock())
 	{
 		return wp;
@@ -253,15 +291,15 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
-			return eAny(getContents()); //14
+			return eAny(getContents()); //16
 		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
-			return eAny(getDetails()); //12
+			return eAny(getDetails()); //14
 		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
-			return eAny(getEModelElement()); //13
+			return eAny(getEModelElement()); //15
 		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
-			return eAny(getReferences()); //15
+			return eAny(getReferences()); //17
 		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
-			return eAny(getSource()); //11
+			return eAny(getSource()); //13
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -270,15 +308,15 @@ bool EAnnotationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
-			return getContents() != nullptr; //14
+			return getContents() != nullptr; //16
 		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
-			return getDetails() != nullptr; //12
+			return getDetails() != nullptr; //14
 		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
-			return getEModelElement().lock() != nullptr; //13
+			return getEModelElement().lock() != nullptr; //15
 		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
-			return getReferences() != nullptr; //15
+			return getReferences() != nullptr; //17
 		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
-			return getSource() != ""; //11
+			return getSource() != ""; //13
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -290,14 +328,14 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EModelElement> _eModelElement = newValue->get<std::shared_ptr<ecore::EModelElement>>();
-			setEModelElement(_eModelElement); //13
+			setEModelElement(_eModelElement); //15
 			return true;
 		}
 		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::string _source = newValue->get<std::string>();
-			setSource(_source); //11
+			setSource(_source); //13
 			return true;
 		}
 	}
@@ -374,7 +412,7 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			std::shared_ptr<ecore::EObject> contents = std::dynamic_pointer_cast<ecore::EObject>(modelFactory->create(typeName));
 			if (contents != nullptr)
 			{
-				std::shared_ptr<Bag<ecore::EObject>> list_contents = this->getContents();
+				std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> list_contents = this->getContents();
 				list_contents->push_back(contents);
 				loadHandler->handleChild(contents);
 			}
@@ -449,7 +487,10 @@ void EAnnotationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 }
 
@@ -459,6 +500,11 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
 
+		// Save 'contents'
+		for (std::shared_ptr<ecore::EObject> contents : *this->getContents()) 
+		{
+			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_EClass());
+		}
 	
  
 		// Add attributes
@@ -479,13 +525,6 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'contents'
-		std::shared_ptr<Bag<ecore::EObject>> list_contents = this->getContents();
-		for (std::shared_ptr<ecore::EObject> contents : *list_contents) 
-		{
-			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_EClass());
-		}
-
 		// Save 'details'
 		std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_details = this->getDetails();
 		for (std::shared_ptr<ecore::EStringToStringMapEntry> details : *list_details) 

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -322,7 +323,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return eAny(getMapping()); //4218
+			return eAny(getMapping()); //118
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -331,7 +332,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return getMapping() != nullptr; //4218
+			return getMapping() != nullptr; //118
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -343,7 +344,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
-			setMapping(_mapping); //4218
+			setMapping(_mapping); //118
 			return true;
 		}
 	}

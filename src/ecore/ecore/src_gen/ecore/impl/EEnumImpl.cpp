@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -37,6 +39,8 @@
 #include "ecore/EDataType.hpp"
 
 #include "ecore/EEnumLiteral.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -64,11 +68,20 @@ EEnumImpl::EEnumImpl()
 	// Reference Members
 	//*********************************
 	//References
-		m_eLiterals.reset(new Bag<ecore::EEnumLiteral>());
+		/*Subset*/
+		m_eLiterals.reset(new Subset<ecore::EEnumLiteral, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >()" << std::endl;
+		#endif
 	
 	
 
 	//Init references
+		/*Subset*/
+		m_eLiterals->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 }
@@ -79,6 +92,17 @@ EEnumImpl::~EEnumImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EEnum "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EEnumImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -109,6 +133,8 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_ePackage  = obj.getEPackage();
 
 
@@ -139,6 +165,11 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
+		/*Subset*/
+		m_eLiterals->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 }
@@ -211,7 +242,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::st
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Bag<ecore::EEnumLiteral>> EEnumImpl::getELiterals() const
+std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELiterals() const
 {
 
     return m_eLiterals;
@@ -221,6 +252,10 @@ std::shared_ptr<Bag<ecore::EEnumLiteral>> EEnumImpl::getELiterals() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EEnumImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr() const
@@ -234,6 +269,11 @@ void EEnumImpl::setThisEEnumPtr(std::weak_ptr<EEnum> thisEEnumPtr)
 }
 std::shared_ptr<ecore::EObject> EEnumImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -249,7 +289,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
-			return eAny(getELiterals()); //510
+			return eAny(getELiterals()); //2012
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -258,7 +298,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
-			return getELiterals() != nullptr; //510
+			return getELiterals() != nullptr; //2012
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -346,7 +386,10 @@ void EEnumImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	
@@ -359,19 +402,13 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
 
-	
-
-
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eLiterals'
-		std::shared_ptr<Bag<ecore::EEnumLiteral>> list_eLiterals = this->getELiterals();
-		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *list_eLiterals) 
+		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *this->getELiterals()) 
 		{
 			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_EClass());
 		}
+	
+
 	}
 	catch (std::exception& e)
 	{

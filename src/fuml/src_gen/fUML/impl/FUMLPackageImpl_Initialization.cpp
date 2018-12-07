@@ -4,12 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/EcoreFactory.hpp"
@@ -169,6 +172,7 @@ void FUMLPackageImpl::initializePackageContents()
 	initializeEvaluationContent();
 	initializeEventAccepterContent();
 	initializeEventDispatchLoopContent();
+	initializeEventOccurrenceContent();
 	initializeExecutionContent();
 	initializeExecutionFactoryContent();
 	initializeExecutionFactoryL1Content();
@@ -3506,6 +3510,17 @@ void FUMLPackageImpl::initializeEventDispatchLoopContent()
 	m_eventDispatchLoop_EClass->setName("EventDispatchLoop");
 	m_eventDispatchLoop_EClass->setAbstract(false);
 	m_eventDispatchLoop_EClass->setInterface(false);
+	
+	
+	
+	
+}
+
+void FUMLPackageImpl::initializeEventOccurrenceContent()
+{
+	m_eventOccurrence_EClass->setName("EventOccurrence");
+	m_eventOccurrence_EClass->setAbstract(false);
+	m_eventOccurrence_EClass->setInterface(false);
 	
 	
 	

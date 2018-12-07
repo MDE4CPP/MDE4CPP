@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -555,7 +556,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
-			return eAny(getCollaborationRole()); //9146
+			return eAny(getCollaborationRole()); //4246
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -571,7 +572,7 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
-			return getCollaborationRole() != nullptr; //9146
+			return getCollaborationRole() != nullptr; //4246
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);

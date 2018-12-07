@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -477,11 +478,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //16328
+			return eAny(getObject()); //19728
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //16329
+			return eAny(getQualifier()); //19729
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16330
+			return eAny(getResult()); //19730
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -490,11 +491,11 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //16328
+			return getObject() != nullptr; //19728
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //16329
+			return getQualifier() != nullptr; //19729
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16330
+			return getResult() != nullptr; //19730
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -506,21 +507,21 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //16328
+			setObject(_object); //19728
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
-			setQualifier(_qualifier); //16329
+			setQualifier(_qualifier); //19729
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16330
+			setResult(_result); //19730
 			return true;
 		}
 	}

@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -242,9 +243,9 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return eAny(getOwningTemplateParameter()); //154
+			return eAny(getOwningTemplateParameter()); //1784
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return eAny(getTemplateParameter()); //155
+			return eAny(getTemplateParameter()); //1785
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -253,9 +254,9 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter().lock() != nullptr; //154
+			return getOwningTemplateParameter().lock() != nullptr; //1784
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter() != nullptr; //155
+			return getTemplateParameter() != nullptr; //1785
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -267,14 +268,14 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setOwningTemplateParameter(_owningTemplateParameter); //154
+			setOwningTemplateParameter(_owningTemplateParameter); //1784
 			return true;
 		}
 		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setTemplateParameter(_templateParameter); //155
+			setTemplateParameter(_templateParameter); //1785
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -338,13 +339,13 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return eAny(getGeneralization()); //9616
+			return eAny(getGeneralization()); //11016
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //9613
+			return eAny(getIsCovering()); //11013
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //9614
+			return eAny(getIsDisjoint()); //11014
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return eAny(getPowertype()); //9615
+			return eAny(getPowertype()); //11015
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -353,13 +354,13 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return getGeneralization() != nullptr; //9616
+			return getGeneralization() != nullptr; //11016
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return getIsCovering() != false; //9613
+			return getIsCovering() != false; //11013
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint() != false; //9614
+			return getIsDisjoint() != false; //11014
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return getPowertype() != nullptr; //9615
+			return getPowertype() != nullptr; //11015
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -371,21 +372,21 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCovering = newValue->get<bool>();
-			setIsCovering(_isCovering); //9613
+			setIsCovering(_isCovering); //11013
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = newValue->get<bool>();
-			setIsDisjoint(_isDisjoint); //9614
+			setIsDisjoint(_isDisjoint); //11014
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _powertype = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setPowertype(_powertype); //9615
+			setPowertype(_powertype); //11015
 			return true;
 		}
 	}

@@ -13,7 +13,8 @@
 #include "ecore/EFactory.hpp"
 
 namespace fUML 
-{	class AcceptEventActionActivation;
+{
+	class AcceptEventActionActivation;
 	class AcceptEventActionEventAccepter;
 	class ActionActivation;
 	class ActivityEdgeInstance;
@@ -51,6 +52,7 @@ namespace fUML
 	class Evaluation;
 	class EventAccepter;
 	class EventDispatchLoop;
+	class EventOccurrence;
 	class Execution;
 	class ExecutionFactory;
 	class ExecutionFactoryL1;
@@ -129,6 +131,7 @@ namespace fUML
 	class WriteStructuralFeatureActionActivation;
 	class FUMLPackage;
 }
+
 
 namespace fUML 
 {
@@ -267,6 +270,8 @@ namespace fUML
 			virtual std::shared_ptr<EnumerationValue> createEnumerationValue() const = 0;
 			
 			virtual std::shared_ptr<EventDispatchLoop> createEventDispatchLoop() const = 0;
+			
+			virtual std::shared_ptr<EventOccurrence> createEventOccurrence() const = 0;
 			
 			virtual std::shared_ptr<ExecutionFactoryL1> createExecutionFactoryL1() const = 0;
 			//Add containing object

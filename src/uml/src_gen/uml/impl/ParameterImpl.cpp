@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -528,23 +529,23 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
-			return eAny(getBehavior()); //4428
+			return eAny(getBehavior()); //17428
 		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //4420
+			return eAny(getDefault()); //17420
 		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //4421
+			return eAny(getDefaultValue()); //17421
 		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
-			return eAny(getDirection()); //4422
+			return eAny(getDirection()); //17422
 		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
-			return eAny(getEffect()); //4423
+			return eAny(getEffect()); //17423
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
-			return eAny(getIsException()); //4424
+			return eAny(getIsException()); //17424
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
-			return eAny(getIsStream()); //4425
+			return eAny(getIsStream()); //17425
 		case UmlPackage::PARAMETER_EREFERENCE_OPERATION:
-			return eAny(getOperation()); //4426
+			return eAny(getOperation()); //17426
 		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
-			return eAny(getParameterSet()); //4427
+			return eAny(getParameterSet()); //17427
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -560,23 +561,23 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR:
-			return getBehavior().lock() != nullptr; //4428
+			return getBehavior().lock() != nullptr; //17428
 		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
-			return getDefault() != ""; //4420
+			return getDefault() != ""; //17420
 		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
-			return getDefaultValue() != nullptr; //4421
+			return getDefaultValue() != nullptr; //17421
 		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
-			return m_direction != ParameterDirectionKind::IN;; //4422
+			return m_direction != ParameterDirectionKind::IN;; //17422
 		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
-			return m_effect != ParameterEffectKind::CREATE;; //4423
+			return m_effect != ParameterEffectKind::CREATE;; //17423
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
-			return getIsException() != false; //4424
+			return getIsException() != false; //17424
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
-			return getIsStream() != false; //4425
+			return getIsStream() != false; //17425
 		case UmlPackage::PARAMETER_EREFERENCE_OPERATION:
-			return getOperation().lock() != nullptr; //4426
+			return getOperation().lock() != nullptr; //17426
 		case UmlPackage::PARAMETER_EREFERENCE_PARAMETERSET:
-			return getParameterSet() != nullptr; //4427
+			return getParameterSet() != nullptr; //17427
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -595,49 +596,49 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setBehavior(_behavior); //4428
+			setBehavior(_behavior); //17428
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
 			std::string _default = newValue->get<std::string>();
-			setDefault(_default); //4420
+			setDefault(_default); //17420
 			return true;
 		}
 		case UmlPackage::PARAMETER_EREFERENCE_DEFAULTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _defaultValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setDefaultValue(_defaultValue); //4421
+			setDefaultValue(_defaultValue); //17421
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_DIRECTION:
 		{
 			// BOOST CAST
 			ParameterDirectionKind _direction = newValue->get<ParameterDirectionKind>();
-			setDirection(_direction); //4422
+			setDirection(_direction); //17422
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
 			ParameterEffectKind _effect = newValue->get<ParameterEffectKind>();
-			setEffect(_effect); //4423
+			setEffect(_effect); //17423
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISEXCEPTION:
 		{
 			// BOOST CAST
 			bool _isException = newValue->get<bool>();
-			setIsException(_isException); //4424
+			setIsException(_isException); //17424
 			return true;
 		}
 		case UmlPackage::PARAMETER_EATTRIBUTE_ISSTREAM:
 		{
 			// BOOST CAST
 			bool _isStream = newValue->get<bool>();
-			setIsStream(_isStream); //4425
+			setIsStream(_isStream); //17425
 			return true;
 		}
 	}

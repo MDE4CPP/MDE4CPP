@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -39,6 +41,8 @@
 #include "ecore/EGenericType.hpp"
 
 #include "ecore/ENamedElement.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -85,6 +89,16 @@ ETypedElementImpl::~ETypedElementImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:ETypedElementImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
 
 
 ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
@@ -103,6 +117,8 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElemen
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eType  = obj.getEType();
 
 
@@ -226,6 +242,10 @@ void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> ETypedElementImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
@@ -239,6 +259,10 @@ void ETypedElementImpl::setThisETypedElementPtr(std::weak_ptr<ETypedElement> thi
 }
 std::shared_ptr<ecore::EObject> ETypedElementImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -250,21 +274,21 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return eAny(getEGenericType()); //169
+			return eAny(getEGenericType()); //5311
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return eAny(getEType()); //168
+			return eAny(getEType()); //5310
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return eAny(getLowerBound()); //164
+			return eAny(getLowerBound()); //536
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return eAny(isMany()); //166
+			return eAny(isMany()); //538
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return eAny(isOrdered()); //162
+			return eAny(isOrdered()); //534
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return eAny(isRequired()); //167
+			return eAny(isRequired()); //539
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return eAny(isUnique()); //163
+			return eAny(isUnique()); //535
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return eAny(getUpperBound()); //165
+			return eAny(getUpperBound()); //537
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -273,21 +297,21 @@ bool ETypedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return getEGenericType() != nullptr; //169
+			return getEGenericType() != nullptr; //5311
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return getEType() != nullptr; //168
+			return getEType() != nullptr; //5310
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return getLowerBound() != 0; //164
+			return getLowerBound() != 0; //536
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return isMany() != false; //166
+			return isMany() != false; //538
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return isOrdered() != true; //162
+			return isOrdered() != true; //534
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return isRequired() != false; //167
+			return isRequired() != false; //539
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return isUnique() != true; //163
+			return isUnique() != true; //535
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return getUpperBound() != 1; //165
+			return getUpperBound() != 1; //537
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -299,42 +323,42 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eGenericType = newValue->get<std::shared_ptr<ecore::EGenericType>>();
-			setEGenericType(_eGenericType); //169
+			setEGenericType(_eGenericType); //5311
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EClassifier> _eType = newValue->get<std::shared_ptr<ecore::EClassifier>>();
-			setEType(_eType); //168
+			setEType(_eType); //5310
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
 		{
 			// BOOST CAST
 			int _lowerBound = newValue->get<int>();
-			setLowerBound(_lowerBound); //164
+			setLowerBound(_lowerBound); //536
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
 		{
 			// BOOST CAST
 			bool _ordered = newValue->get<bool>();
-			setOrdered(_ordered); //162
+			setOrdered(_ordered); //534
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
 		{
 			// BOOST CAST
 			bool _unique = newValue->get<bool>();
-			setUnique(_unique); //163
+			setUnique(_unique); //535
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			int _upperBound = newValue->get<int>();
-			setUpperBound(_upperBound); //165
+			setUpperBound(_upperBound); //537
 			return true;
 		}
 	}
@@ -483,7 +507,10 @@ void ETypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 }

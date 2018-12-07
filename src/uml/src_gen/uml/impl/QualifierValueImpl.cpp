@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -228,9 +229,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //1274
+			return eAny(getQualifier()); //1914
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
-			return eAny(getValue()); //1275
+			return eAny(getValue()); //1915
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -239,9 +240,9 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //1274
+			return getQualifier() != nullptr; //1914
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
-			return getValue() != nullptr; //1275
+			return getValue() != nullptr; //1915
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -253,14 +254,14 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
-			setQualifier(_qualifier); //1274
+			setQualifier(_qualifier); //1914
 			return true;
 		}
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //1275
+			setValue(_value); //1915
 			return true;
 		}
 	}

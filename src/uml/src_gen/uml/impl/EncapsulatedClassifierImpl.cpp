@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -532,7 +533,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::ENCAPSULATEDCLASSIFIER_EREFERENCE_OWNEDPORT:
-			return eAny(getOwnedPort()); //10643
+			return eAny(getOwnedPort()); //8343
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -541,7 +542,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ENCAPSULATEDCLASSIFIER_EREFERENCE_OWNEDPORT:
-			return getOwnedPort() != nullptr; //10643
+			return getOwnedPort() != nullptr; //8343
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);
 }

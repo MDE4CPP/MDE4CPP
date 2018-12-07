@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -273,7 +274,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return eAny(getEnd()); //2913
+			return eAny(getEnd()); //5013
 	}
 	Any result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
@@ -289,7 +290,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return getEnd() != nullptr; //2913
+			return getEnd() != nullptr; //5013
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);

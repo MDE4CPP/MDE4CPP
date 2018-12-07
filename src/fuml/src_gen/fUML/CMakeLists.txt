@@ -79,6 +79,7 @@ SET(SOURCE_FILES
 	impl/EvaluationImpl.cpp
 	impl/EventAccepterImpl.cpp
 	impl/EventDispatchLoopImpl.cpp
+	impl/EventOccurrenceImpl.cpp
 	impl/ExecutionImpl.cpp
 	impl/ExecutionFactoryImpl.cpp
 	impl/ExecutionFactoryL1Impl.cpp

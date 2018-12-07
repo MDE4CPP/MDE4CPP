@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -285,7 +286,7 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
-			return eAny(getOperation()); //19713
+			return eAny(getOperation()); //3113
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,7 +295,7 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
-			return getOperation() != nullptr; //19713
+			return getOperation() != nullptr; //3113
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
@@ -306,7 +307,7 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Operation> _operation = newValue->get<std::shared_ptr<uml::Operation>>();
-			setOperation(_operation); //19713
+			setOperation(_operation); //3113
 			return true;
 		}
 	}

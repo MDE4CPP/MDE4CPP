@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -567,9 +568,9 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //8445
+			return eAny(getIsRequired()); //9745
 		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return eAny(getMetaclass()); //8446
+			return eAny(getMetaclass()); //9746
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -578,9 +579,9 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //8445
+			return getIsRequired() != false; //9745
 		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return getMetaclass() != nullptr; //8446
+			return getMetaclass() != nullptr; //9746
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }

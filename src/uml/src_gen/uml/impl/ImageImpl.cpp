@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -211,11 +212,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return eAny(getContent()); //114
+			return eAny(getContent()); //1114
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //115
+			return eAny(getFormat()); //1115
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //116
+			return eAny(getLocation()); //1116
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -224,11 +225,11 @@ bool ImageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return getContent() != ""; //114
+			return getContent() != ""; //1114
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return getFormat() != ""; //115
+			return getFormat() != ""; //1115
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return getLocation() != ""; //116
+			return getLocation() != ""; //1116
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -240,21 +241,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
-			setContent(_content); //114
+			setContent(_content); //1114
 			return true;
 		}
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //115
+			setFormat(_format); //1115
 			return true;
 		}
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //116
+			setLocation(_location); //1116
 			return true;
 		}
 	}

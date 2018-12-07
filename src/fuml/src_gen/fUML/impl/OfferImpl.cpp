@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/Token.hpp"
@@ -241,7 +242,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
-			return eAny(getOfferedTokens()); //520
+			return eAny(getOfferedTokens()); //800
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -250,7 +251,7 @@ bool OfferImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
-			return getOfferedTokens() != nullptr; //520
+			return getOfferedTokens() != nullptr; //800
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -723,9 +724,9 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return eAny(getIcon()); //1053
+			return eAny(getIcon()); //22353
 		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return eAny(getProfile()); //1054
+			return eAny(getProfile()); //22354
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -734,9 +735,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return getIcon() != nullptr; //1053
+			return getIcon() != nullptr; //22353
 		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return getProfile() != nullptr; //1054
+			return getProfile() != nullptr; //22354
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }

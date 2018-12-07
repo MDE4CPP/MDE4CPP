@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -341,17 +342,17 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //324
+			return eAny(getIsOrdered()); //1544
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //325
+			return eAny(getIsUnique()); //1545
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-			return eAny(getLower()); //326
+			return eAny(getLower()); //1546
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-			return eAny(getLowerValue()); //327
+			return eAny(getLowerValue()); //1547
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-			return eAny(getUpper()); //328
+			return eAny(getUpper()); //1548
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-			return eAny(getUpperValue()); //329
+			return eAny(getUpperValue()); //1549
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -360,17 +361,17 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //324
+			return getIsOrdered() != false; //1544
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //325
+			return getIsUnique() != true; //1545
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
-			return getLower() != 1; //326
+			return getLower() != 1; //1546
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
-			return getLowerValue() != nullptr; //327
+			return getLowerValue() != nullptr; //1547
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
-			return getUpper() != 1; //328
+			return getUpper() != 1; //1548
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
-			return getUpperValue() != nullptr; //329
+			return getUpperValue() != nullptr; //1549
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -382,42 +383,42 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //324
+			setIsOrdered(_isOrdered); //1544
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
 		{
 			// BOOST CAST
 			bool _isUnique = newValue->get<bool>();
-			setIsUnique(_isUnique); //325
+			setIsUnique(_isUnique); //1545
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
 		{
 			// BOOST CAST
 			int _lower = newValue->get<int>();
-			setLower(_lower); //326
+			setLower(_lower); //1546
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _lowerValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setLowerValue(_lowerValue); //327
+			setLowerValue(_lowerValue); //1547
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
 			int _upper = newValue->get<int>();
-			setUpper(_upper); //328
+			setUpper(_upper); //1548
 			return true;
 		}
 		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setUpperValue(_upperValue); //329
+			setUpperValue(_upperValue); //1549
 			return true;
 		}
 	}

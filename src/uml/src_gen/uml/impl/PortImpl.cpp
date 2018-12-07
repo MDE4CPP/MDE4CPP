@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -618,19 +619,19 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
-			return eAny(getIsBehavior()); //6745
+			return eAny(getIsBehavior()); //18145
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
-			return eAny(getIsConjugated()); //6746
+			return eAny(getIsConjugated()); //18146
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
-			return eAny(getIsService()); //6747
+			return eAny(getIsService()); //18147
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
-			return eAny(getProtocol()); //6748
+			return eAny(getProtocol()); //18148
 		case UmlPackage::PORT_EREFERENCE_PROVIDED:
-			return eAny(getProvided()); //6749
+			return eAny(getProvided()); //18149
 		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
-			return eAny(getRedefinedPort()); //6750
+			return eAny(getRedefinedPort()); //18150
 		case UmlPackage::PORT_EREFERENCE_REQUIRED:
-			return eAny(getRequired()); //6751
+			return eAny(getRequired()); //18151
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
@@ -639,19 +640,19 @@ bool PortImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
-			return getIsBehavior() != false; //6745
+			return getIsBehavior() != false; //18145
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
-			return getIsConjugated() != false; //6746
+			return getIsConjugated() != false; //18146
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
-			return getIsService() != true; //6747
+			return getIsService() != true; //18147
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
-			return getProtocol() != nullptr; //6748
+			return getProtocol() != nullptr; //18148
 		case UmlPackage::PORT_EREFERENCE_PROVIDED:
-			return getProvided() != nullptr; //6749
+			return getProvided() != nullptr; //18149
 		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
-			return getRedefinedPort() != nullptr; //6750
+			return getRedefinedPort() != nullptr; //18150
 		case UmlPackage::PORT_EREFERENCE_REQUIRED:
-			return getRequired() != nullptr; //6751
+			return getRequired() != nullptr; //18151
 	}
 	return PropertyImpl::internalEIsSet(featureID);
 }
@@ -663,28 +664,28 @@ bool PortImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isBehavior = newValue->get<bool>();
-			setIsBehavior(_isBehavior); //6745
+			setIsBehavior(_isBehavior); //18145
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
 		{
 			// BOOST CAST
 			bool _isConjugated = newValue->get<bool>();
-			setIsConjugated(_isConjugated); //6746
+			setIsConjugated(_isConjugated); //18146
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
 		{
 			// BOOST CAST
 			bool _isService = newValue->get<bool>();
-			setIsService(_isService); //6747
+			setIsService(_isService); //18147
 			return true;
 		}
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setProtocol(_protocol); //6748
+			setProtocol(_protocol); //18148
 			return true;
 		}
 	}

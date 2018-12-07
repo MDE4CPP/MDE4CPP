@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -201,9 +202,9 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
-			return eAny(getAnnotatedElement()); //94
+			return eAny(getAnnotatedElement()); //454
 		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
-			return eAny(getBody()); //95
+			return eAny(getBody()); //455
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -212,9 +213,9 @@ bool CommentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
-			return getAnnotatedElement() != nullptr; //94
+			return getAnnotatedElement() != nullptr; //454
 		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
-			return getBody() != ""; //95
+			return getBody() != ""; //455
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -226,7 +227,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _body = newValue->get<std::string>();
-			setBody(_body); //95
+			setBody(_body); //455
 			return true;
 		}
 	}

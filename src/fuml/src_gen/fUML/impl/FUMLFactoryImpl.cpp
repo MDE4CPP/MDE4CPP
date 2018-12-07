@@ -3,11 +3,9 @@
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/FUMLPackage.hpp"
-
 #include "ecore/EClass.hpp"
 
-
+#include "fUML/FUMLPackage.hpp"
 #include "fUML/impl/AcceptEventActionActivationImpl.hpp"
 #include "fUML/impl/AcceptEventActionEventAccepterImpl.hpp"
 #include "fUML/impl/ActionActivationImpl.hpp"
@@ -46,6 +44,7 @@
 #include "fUML/impl/EvaluationImpl.hpp"
 #include "fUML/impl/EventAccepterImpl.hpp"
 #include "fUML/impl/EventDispatchLoopImpl.hpp"
+#include "fUML/impl/EventOccurrenceImpl.hpp"
 #include "fUML/impl/ExecutionImpl.hpp"
 #include "fUML/impl/ExecutionFactoryImpl.hpp"
 #include "fUML/impl/ExecutionFactoryL1Impl.hpp"
@@ -123,6 +122,7 @@
 #include "fUML/impl/WriteLinkActionActivationImpl.hpp"
 #include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
 
+
 using namespace fUML;
 
 //*********************************
@@ -161,6 +161,7 @@ FUMLFactoryImpl::FUMLFactoryImpl()
 	m_idMap.insert(std::make_pair("DispatchStrategy", FUMLPackage::DISPATCHSTRATEGY_ECLASS));
 	m_idMap.insert(std::make_pair("EnumerationValue", FUMLPackage::ENUMERATIONVALUE_ECLASS));
 	m_idMap.insert(std::make_pair("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_ECLASS));
+	m_idMap.insert(std::make_pair("EventOccurrence", FUMLPackage::EVENTOCCURRENCE_ECLASS));
 	m_idMap.insert(std::make_pair("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_ECLASS));
 	m_idMap.insert(std::make_pair("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_ECLASS));
 	m_idMap.insert(std::make_pair("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_ECLASS));
@@ -245,9 +246,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<AcceptEventActionActivation>(this->createAcceptEventActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::AcceptEventActionActivation>(this->createAcceptEventActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ECLASS:
@@ -263,9 +264,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ActivityEdgeInstance>(this->createActivityEdgeInstance_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ActivityEdgeInstance>(this->createActivityEdgeInstance_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_ECLASS:
@@ -281,9 +282,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ActivityFinalNodeActivation>(this->createActivityFinalNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ECLASS:
@@ -321,9 +322,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ActivityParameterNodeActivation>(this->createActivityParameterNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ECLASS:
@@ -334,9 +335,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::AddStructuralFeatureValueActionActivation>(this->createAddStructuralFeatureValueActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::BOOLEANVALUE_ECLASS:
@@ -352,9 +353,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<CallBehaviorActionActivation>(this->createCallBehaviorActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::CallBehaviorActionActivation>(this->createCallBehaviorActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CALLOPERATIONACTIONACTIVATION_ECLASS:
@@ -365,9 +366,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<CallOperationActionActivation>(this->createCallOperationActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::CallOperationActionActivation>(this->createCallOperationActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CENTRALBUFFERNODEACTIVATION_ECLASS:
@@ -378,9 +379,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<CentralBufferNodeActivation>(this->createCentralBufferNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::CentralBufferNodeActivation>(this->createCentralBufferNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ECLASS:
@@ -411,9 +412,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ClearAssociationActionActivation>(this->createClearAssociationActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ClearAssociationActionActivation>(this->createClearAssociationActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
@@ -424,9 +425,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ClearStructuralFeatureActionActivation>(this->createClearStructuralFeatureActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CONDITIONALNODEACTIVATION_ECLASS:
@@ -437,9 +438,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ConditionalNodeActivation>(this->createConditionalNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ConditionalNodeActivation>(this->createConditionalNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CONTROLTOKEN_ECLASS:
@@ -455,9 +456,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<CreateLinkActionActivation>(this->createCreateLinkActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::CreateLinkActionActivation>(this->createCreateLinkActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::CREATEOBJECTACTIONACTIVATION_ECLASS:
@@ -468,9 +469,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<CreateObjectActionActivation>(this->createCreateObjectActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::CreateObjectActionActivation>(this->createCreateObjectActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::DATASTORENODEACTIVATION_ECLASS:
@@ -481,9 +482,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<DataStoreNodeActivation>(this->createDataStoreNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::DataStoreNodeActivation>(this->createDataStoreNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::DATAVALUE_ECLASS:
@@ -499,9 +500,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<DecisionNodeActivation>(this->createDecisionNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::DecisionNodeActivation>(this->createDecisionNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::DESTROYLINKACTIONACTIVATION_ECLASS:
@@ -512,9 +513,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<DestroyLinkActionActivation>(this->createDestroyLinkActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::DestroyLinkActionActivation>(this->createDestroyLinkActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::DESTROYOBJECTACTIONACTIVATION_ECLASS:
@@ -525,9 +526,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<DestroyObjectActionActivation>(this->createDestroyObjectActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::DestroyObjectActionActivation>(this->createDestroyObjectActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::DISPATCHSTRATEGY_ECLASS:
@@ -545,6 +546,11 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 				return this->createEventDispatchLoop();
 			
 		}
+		case FUMLPackage::EVENTOCCURRENCE_ECLASS:
+		{
+				return this->createEventOccurrence();
+			
+		}
 		case FUMLPackage::EXECUTIONFACTORYL1_ECLASS:
 		{
 			if (nullptr == container)
@@ -553,9 +559,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
+				std::weak_ptr<fUML::Locus > castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ExecutionFactoryL1>(this->createExecutionFactoryL1_in_Locus(castedContainer));
+				return std::shared_ptr<fUML::ExecutionFactoryL1>(this->createExecutionFactoryL1_in_Locus(castedContainer));
 			}
 		}
 		case FUMLPackage::EXECUTIONFACTORYL2_ECLASS:
@@ -566,9 +572,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
+				std::weak_ptr<fUML::Locus > castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ExecutionFactoryL2>(this->createExecutionFactoryL2_in_Locus(castedContainer));
+				return std::shared_ptr<fUML::ExecutionFactoryL2>(this->createExecutionFactoryL2_in_Locus(castedContainer));
 			}
 		}
 		case FUMLPackage::EXECUTIONFACTORYL3_ECLASS:
@@ -579,9 +585,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
+				std::weak_ptr<fUML::Locus > castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ExecutionFactoryL3>(this->createExecutionFactoryL3_in_Locus(castedContainer));
+				return std::shared_ptr<fUML::ExecutionFactoryL3>(this->createExecutionFactoryL3_in_Locus(castedContainer));
 			}
 		}
 		case FUMLPackage::EXECUTOR_ECLASS:
@@ -592,9 +598,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
+				std::weak_ptr<fUML::Locus > castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
 				assert(castedContainer);
-				return std::shared_ptr<Executor>(this->createExecutor_in_Locus(castedContainer));
+				return std::shared_ptr<fUML::Executor>(this->createExecutor_in_Locus(castedContainer));
 			}
 		}
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ECLASS:
@@ -632,9 +638,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ExpansionNodeActivation>(this->createExpansionNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ExpansionNodeActivation>(this->createExpansionNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ECLASS:
@@ -645,9 +651,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ExpansionRegionActivation>(this->createExpansionRegionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ExpansionRegionActivation>(this->createExpansionRegionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::EXTENSIONALVALUELIST_ECLASS:
@@ -678,9 +684,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<FlowFinalNodeActivation>(this->createFlowFinalNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::FlowFinalNodeActivation>(this->createFlowFinalNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::FORKNODEACTIVATION_ECLASS:
@@ -691,9 +697,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ForkNodeActivation>(this->createForkNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ForkNodeActivation>(this->createForkNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::FORKEDTOKEN_ECLASS:
@@ -709,9 +715,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<InitialNodeActivation>(this->createInitialNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::InitialNodeActivation>(this->createInitialNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
@@ -722,9 +728,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<InputPinActivation>(this->createInputPinActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::InputPinActivation>(this->createInputPinActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_ECLASS:
@@ -745,9 +751,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<JoinNodeActivation>(this->createJoinNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::JoinNodeActivation>(this->createJoinNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::LINK_ECLASS:
@@ -798,9 +804,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<LoopNodeActivation>(this->createLoopNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::LoopNodeActivation>(this->createLoopNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::MERGENODEACTIVATION_ECLASS:
@@ -811,9 +817,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<MergeNodeActivation>(this->createMergeNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::MergeNodeActivation>(this->createMergeNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::OBJECT_ECLASS:
@@ -844,9 +850,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<OutputPinActivation>(this->createOutputPinActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::OutputPinActivation>(this->createOutputPinActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::PARAMETERVALUE_ECLASS:
@@ -862,9 +868,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReadExtentActionActivation>(this->createReadExtentActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReadExtentActionActivation>(this->createReadExtentActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ECLASS:
@@ -875,9 +881,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReadIsClassifiedObjectActionActivation>(this->createReadIsClassifiedObjectActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::READLINKACTIONACTIVATION_ECLASS:
@@ -888,9 +894,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReadLinkActionActivation>(this->createReadLinkActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReadLinkActionActivation>(this->createReadLinkActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::READSELFACTIONACTIVATION_ECLASS:
@@ -901,9 +907,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReadSelfActionActivation>(this->createReadSelfActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReadSelfActionActivation>(this->createReadSelfActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ECLASS:
@@ -914,9 +920,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReadStructuralFeatureActionActivation>(this->createReadStructuralFeatureActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::REALVALUE_ECLASS:
@@ -932,9 +938,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReclassifyObjectActionActivation>(this->createReclassifyObjectActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_ECLASS:
@@ -950,9 +956,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ReduceActionActivation>(this->createReduceActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ReduceActionActivation>(this->createReduceActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::REFERENCE_ECLASS:
@@ -968,9 +974,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::RemoveStructuralFeatureValueActivation>(this->createRemoveStructuralFeatureValueActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::SENDSIGNALACTIONACTIVATION_ECLASS:
@@ -981,9 +987,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<SendSignalActionActivation>(this->createSendSignalActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::SendSignalActionActivation>(this->createSendSignalActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::SIGNALINSTANCE_ECLASS:
@@ -999,9 +1005,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::StartClassifierBehaviorActionActivation>(this->createStartClassifierBehaviorActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS:
@@ -1012,9 +1018,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::StartObjectBehaviorActionActivation>(this->createStartObjectBehaviorActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::STRINGVALUE_ECLASS:
@@ -1030,9 +1036,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::StructuredActivityNodeActivation>(this->createStructuredActivityNodeActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::TESTIDENTITYACTIONACTIVATION_ECLASS:
@@ -1043,9 +1049,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<TestIdentityActionActivation>(this->createTestIdentityActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::TestIdentityActionActivation>(this->createTestIdentityActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::TOKENSET_ECLASS:
@@ -1066,9 +1072,9 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
+				std::weak_ptr<fUML::ActivityNodeActivationGroup > castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ValueSpecificActionActivation>(this->createValueSpecificActionActivation_in_Group(castedContainer));
+				return std::shared_ptr<fUML::ValueSpecificActionActivation>(this->createValueSpecificActionActivation_in_Group(castedContainer));
 			}
 		}
 		case FUMLPackage::VALUES_ECLASS:
@@ -1531,6 +1537,12 @@ std::shared_ptr<EventDispatchLoop> FUMLFactoryImpl::createEventDispatchLoop() co
 {
 	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl());
 	element->setThisEventDispatchLoopPtr(element);
+	return element;
+}
+std::shared_ptr<EventOccurrence> FUMLFactoryImpl::createEventOccurrence() const
+{
+	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl());
+	element->setThisEventOccurrencePtr(element);
 	return element;
 }
 std::shared_ptr<ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1() const

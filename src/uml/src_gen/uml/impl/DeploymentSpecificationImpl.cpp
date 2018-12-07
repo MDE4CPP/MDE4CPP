@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Artifact.hpp"
@@ -573,11 +574,11 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
-			return eAny(getDeployment()); //3846
+			return eAny(getDeployment()); //7046
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
-			return eAny(getDeploymentLocation()); //3844
+			return eAny(getDeploymentLocation()); //7044
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
-			return eAny(getExecutionLocation()); //3845
+			return eAny(getExecutionLocation()); //7045
 	}
 	return ArtifactImpl::eGet(featureID, resolve, coreType);
 }
@@ -586,11 +587,11 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
-			return getDeployment().lock() != nullptr; //3846
+			return getDeployment().lock() != nullptr; //7046
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
-			return getDeploymentLocation() != ""; //3844
+			return getDeploymentLocation() != ""; //7044
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
-			return getExecutionLocation() != ""; //3845
+			return getExecutionLocation() != ""; //7045
 	}
 	return ArtifactImpl::internalEIsSet(featureID);
 }
@@ -602,21 +603,21 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Deployment> _deployment = newValue->get<std::shared_ptr<uml::Deployment>>();
-			setDeployment(_deployment); //3846
+			setDeployment(_deployment); //7046
 			return true;
 		}
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
 		{
 			// BOOST CAST
 			std::string _deploymentLocation = newValue->get<std::string>();
-			setDeploymentLocation(_deploymentLocation); //3844
+			setDeploymentLocation(_deploymentLocation); //7044
 			return true;
 		}
 		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
 		{
 			// BOOST CAST
 			std::string _executionLocation = newValue->get<std::string>();
-			setExecutionLocation(_executionLocation); //3845
+			setExecutionLocation(_executionLocation); //7045
 			return true;
 		}
 	}

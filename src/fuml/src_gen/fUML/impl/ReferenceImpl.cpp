@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -268,7 +269,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
-			return eAny(getReferent()); //120
+			return eAny(getReferent()); //950
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,7 +278,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
-			return getReferent() != nullptr; //120
+			return getReferent() != nullptr; //950
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
@@ -289,7 +290,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _referent = newValue->get<std::shared_ptr<fUML::Object>>();
-			setReferent(_referent); //120
+			setReferent(_referent); //950
 			return true;
 		}
 	}

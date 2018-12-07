@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -369,9 +370,9 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //19221
+			return eAny(getIsCombineDuplicate()); //13121
 		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
-			return eAny(getJoinSpec()); //19222
+			return eAny(getJoinSpec()); //13122
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -380,9 +381,9 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //19221
+			return getIsCombineDuplicate() != true; //13121
 		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
-			return getJoinSpec() != nullptr; //19222
+			return getJoinSpec() != nullptr; //13122
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -394,14 +395,14 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //19221
+			setIsCombineDuplicate(_isCombineDuplicate); //13121
 			return true;
 		}
 		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setJoinSpec(_joinSpec); //19222
+			setJoinSpec(_joinSpec); //13122
 			return true;
 		}
 	}

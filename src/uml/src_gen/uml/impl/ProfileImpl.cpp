@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -561,9 +562,9 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
-			return eAny(getMetaclassReference()); //1229
+			return eAny(getMetaclassReference()); //18329
 		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
-			return eAny(getMetamodelReference()); //1230
+			return eAny(getMetamodelReference()); //18330
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -572,9 +573,9 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
-			return getMetaclassReference() != nullptr; //1229
+			return getMetaclassReference() != nullptr; //18329
 		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
-			return getMetamodelReference() != nullptr; //1230
+			return getMetamodelReference() != nullptr; //18330
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }

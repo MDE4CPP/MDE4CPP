@@ -37,6 +37,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
@@ -205,7 +206,7 @@ Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //161
+			return eAny(getValue()); //1101
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -214,7 +215,7 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
-			return getValue() != 0; //161
+			return getValue() != 0; //1101
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -226,7 +227,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //161
+			setValue(_value); //1101
 			return true;
 		}
 	}

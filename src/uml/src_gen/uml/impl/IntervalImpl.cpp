@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -324,9 +325,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return eAny(getMax()); //24515
+			return eAny(getMax()); //12815
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return eAny(getMin()); //24516
+			return eAny(getMin()); //12816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -335,9 +336,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return getMax() != nullptr; //24515
+			return getMax() != nullptr; //12815
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return getMin() != nullptr; //24516
+			return getMin() != nullptr; //12816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -349,14 +350,14 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMax(_max); //24515
+			setMax(_max); //12815
 			return true;
 		}
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMin(_min); //24516
+			setMin(_min); //12816
 			return true;
 		}
 	}

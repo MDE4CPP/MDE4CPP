@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -429,15 +430,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return eAny(getInState()); //11622
+			return eAny(getInState()); //16022
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //11623
+			return eAny(getIsControlType()); //16023
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //11624
+			return eAny(getOrdering()); //16024
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return eAny(getSelection()); //11625
+			return eAny(getSelection()); //16025
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return eAny(getUpperBound()); //11626
+			return eAny(getUpperBound()); //16026
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -453,15 +454,15 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return getInState() != nullptr; //11622
+			return getInState() != nullptr; //16022
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType() != false; //11623
+			return getIsControlType() != false; //16023
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //11624
+			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16024
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return getSelection() != nullptr; //11625
+			return getSelection() != nullptr; //16025
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return getUpperBound() != nullptr; //11626
+			return getUpperBound() != nullptr; //16026
 	}
 	bool result = false;
 	result = ActivityNodeImpl::internalEIsSet(featureID);
@@ -480,28 +481,28 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isControlType = newValue->get<bool>();
-			setIsControlType(_isControlType); //11623
+			setIsControlType(_isControlType); //16023
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			ObjectNodeOrderingKind _ordering = newValue->get<ObjectNodeOrderingKind>();
-			setOrdering(_ordering); //11624
+			setOrdering(_ordering); //16024
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setSelection(_selection); //11625
+			setSelection(_selection); //16025
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperBound = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setUpperBound(_upperBound); //11626
+			setUpperBound(_upperBound); //16026
 			return true;
 		}
 	}

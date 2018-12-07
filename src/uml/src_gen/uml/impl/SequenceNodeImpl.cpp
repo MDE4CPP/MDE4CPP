@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -542,7 +543,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
-			return eAny(getExecutableNode()); //17445
+			return eAny(getExecutableNode()); //21445
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -551,7 +552,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
-			return getExecutableNode() != nullptr; //17445
+			return getExecutableNode() != nullptr; //21445
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }

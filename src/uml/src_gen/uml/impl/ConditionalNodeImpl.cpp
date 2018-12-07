@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -639,13 +640,13 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return eAny(getClause()); //14645
+			return eAny(getClause()); //4945
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //14646
+			return eAny(getIsAssured()); //4946
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //14647
+			return eAny(getIsDeterminate()); //4947
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return eAny(getResult()); //14648
+			return eAny(getResult()); //4948
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -654,13 +655,13 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return getClause() != nullptr; //14645
+			return getClause() != nullptr; //4945
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //14646
+			return getIsAssured() != false; //4946
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //14647
+			return getIsDeterminate() != false; //4947
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return getResult() != nullptr; //14648
+			return getResult() != nullptr; //4948
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -672,14 +673,14 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //14646
+			setIsAssured(_isAssured); //4946
 			return true;
 		}
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //14647
+			setIsDeterminate(_isDeterminate); //4947
 			return true;
 		}
 	}

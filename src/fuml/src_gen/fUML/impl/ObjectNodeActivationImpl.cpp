@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -332,7 +333,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return eAny(getOfferedTokenCount()); //596
+			return eAny(getOfferedTokenCount()); //786
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -341,7 +342,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount() != 0; //596
+			return getOfferedTokenCount() != 0; //786
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -353,7 +354,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _offeredTokenCount = newValue->get<int>();
-			setOfferedTokenCount(_offeredTokenCount); //596
+			setOfferedTokenCount(_offeredTokenCount); //786
 			return true;
 		}
 	}

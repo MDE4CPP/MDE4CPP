@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -468,7 +469,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return eAny(getFromAction()); //13437
+			return eAny(getFromAction()); //637
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -477,7 +478,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return getFromAction() != nullptr; //13437
+			return getFromAction() != nullptr; //637
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -489,7 +490,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _fromAction = newValue->get<std::shared_ptr<uml::Action>>();
-			setFromAction(_fromAction); //13437
+			setFromAction(_fromAction); //637
 			return true;
 		}
 	}

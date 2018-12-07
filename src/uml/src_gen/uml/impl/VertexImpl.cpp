@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -327,11 +328,11 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return eAny(getContainer()); //6110
+			return eAny(getContainer()); //25410
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return eAny(getIncoming()); //6111
+			return eAny(getIncoming()); //25411
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return eAny(getOutgoing()); //6112
+			return eAny(getOutgoing()); //25412
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -340,11 +341,11 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return getContainer().lock() != nullptr; //6110
+			return getContainer().lock() != nullptr; //25410
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return getIncoming() != nullptr; //6111
+			return getIncoming() != nullptr; //25411
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return getOutgoing() != nullptr; //6112
+			return getOutgoing() != nullptr; //25412
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -356,7 +357,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
-			setContainer(_container); //6110
+			setContainer(_container); //25410
 			return true;
 		}
 	}

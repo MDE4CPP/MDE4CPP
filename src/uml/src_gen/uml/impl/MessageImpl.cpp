@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -439,21 +440,21 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGE_EREFERENCE_ARGUMENT:
-			return eAny(getArgument()); //21010
+			return eAny(getArgument()); //14710
 		case UmlPackage::MESSAGE_EREFERENCE_CONNECTOR:
-			return eAny(getConnector()); //21011
+			return eAny(getConnector()); //14711
 		case UmlPackage::MESSAGE_EREFERENCE_INTERACTION:
-			return eAny(getInteraction()); //21012
+			return eAny(getInteraction()); //14712
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGEKIND:
-			return eAny(getMessageKind()); //21013
+			return eAny(getMessageKind()); //14713
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGESORT:
-			return eAny(getMessageSort()); //21014
+			return eAny(getMessageSort()); //14714
 		case UmlPackage::MESSAGE_EREFERENCE_RECEIVEEVENT:
-			return eAny(getReceiveEvent()); //21015
+			return eAny(getReceiveEvent()); //14715
 		case UmlPackage::MESSAGE_EREFERENCE_SENDEVENT:
-			return eAny(getSendEvent()); //21016
+			return eAny(getSendEvent()); //14716
 		case UmlPackage::MESSAGE_EREFERENCE_SIGNATURE:
-			return eAny(getSignature()); //21017
+			return eAny(getSignature()); //14717
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -462,21 +463,21 @@ bool MessageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGE_EREFERENCE_ARGUMENT:
-			return getArgument() != nullptr; //21010
+			return getArgument() != nullptr; //14710
 		case UmlPackage::MESSAGE_EREFERENCE_CONNECTOR:
-			return getConnector() != nullptr; //21011
+			return getConnector() != nullptr; //14711
 		case UmlPackage::MESSAGE_EREFERENCE_INTERACTION:
-			return getInteraction().lock() != nullptr; //21012
+			return getInteraction().lock() != nullptr; //14712
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGEKIND:
-			return m_messageKind != MessageKind::UNKNOWN;; //21013
+			return m_messageKind != MessageKind::UNKNOWN;; //14713
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGESORT:
-			return m_messageSort != MessageSort::SYNCHCALL;; //21014
+			return m_messageSort != MessageSort::SYNCHCALL;; //14714
 		case UmlPackage::MESSAGE_EREFERENCE_RECEIVEEVENT:
-			return getReceiveEvent() != nullptr; //21015
+			return getReceiveEvent() != nullptr; //14715
 		case UmlPackage::MESSAGE_EREFERENCE_SENDEVENT:
-			return getSendEvent() != nullptr; //21016
+			return getSendEvent() != nullptr; //14716
 		case UmlPackage::MESSAGE_EREFERENCE_SIGNATURE:
-			return getSignature() != nullptr; //21017
+			return getSignature() != nullptr; //14717
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -488,42 +489,42 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Connector> _connector = newValue->get<std::shared_ptr<uml::Connector>>();
-			setConnector(_connector); //21011
+			setConnector(_connector); //14711
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setInteraction(_interaction); //21012
+			setInteraction(_interaction); //14712
 			return true;
 		}
 		case UmlPackage::MESSAGE_EATTRIBUTE_MESSAGESORT:
 		{
 			// BOOST CAST
 			MessageSort _messageSort = newValue->get<MessageSort>();
-			setMessageSort(_messageSort); //21014
+			setMessageSort(_messageSort); //14714
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_RECEIVEEVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::MessageEnd> _receiveEvent = newValue->get<std::shared_ptr<uml::MessageEnd>>();
-			setReceiveEvent(_receiveEvent); //21015
+			setReceiveEvent(_receiveEvent); //14715
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_SENDEVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::MessageEnd> _sendEvent = newValue->get<std::shared_ptr<uml::MessageEnd>>();
-			setSendEvent(_sendEvent); //21016
+			setSendEvent(_sendEvent); //14716
 			return true;
 		}
 		case UmlPackage::MESSAGE_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::NamedElement> _signature = newValue->get<std::shared_ptr<uml::NamedElement>>();
-			setSignature(_signature); //21017
+			setSignature(_signature); //14717
 			return true;
 		}
 	}

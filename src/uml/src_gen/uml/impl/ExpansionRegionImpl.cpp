@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -562,11 +563,11 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return eAny(getInputElement()); //15547
+			return eAny(getInputElement()); //9447
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return eAny(getMode()); //15545
+			return eAny(getMode()); //9445
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return eAny(getOutputElement()); //15546
+			return eAny(getOutputElement()); //9446
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -575,11 +576,11 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return getInputElement() != nullptr; //15547
+			return getInputElement() != nullptr; //9447
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //15545
+			return m_mode != ExpansionKind::ITERATIVE;; //9445
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //15546
+			return getOutputElement() != nullptr; //9446
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -591,7 +592,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			ExpansionKind _mode = newValue->get<ExpansionKind>();
-			setMode(_mode); //15545
+			setMode(_mode); //9445
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -271,11 +272,11 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
-			return eAny(getDefiningEnd()); //3110
+			return eAny(getDefiningEnd()); //5410
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
-			return eAny(getPartWithPort()); //3111
+			return eAny(getPartWithPort()); //5411
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
-			return eAny(getRole()); //3112
+			return eAny(getRole()); //5412
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,11 +285,11 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
-			return getDefiningEnd() != nullptr; //3110
+			return getDefiningEnd() != nullptr; //5410
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
-			return getPartWithPort() != nullptr; //3111
+			return getPartWithPort() != nullptr; //5411
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
-			return getRole() != nullptr; //3112
+			return getRole() != nullptr; //5412
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
@@ -300,14 +301,14 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _partWithPort = newValue->get<std::shared_ptr<uml::Property>>();
-			setPartWithPort(_partWithPort); //3111
+			setPartWithPort(_partWithPort); //5411
 			return true;
 		}
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _role = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
-			setRole(_role); //3112
+			setRole(_role); //5412
 			return true;
 		}
 	}

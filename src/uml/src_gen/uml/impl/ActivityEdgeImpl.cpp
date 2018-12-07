@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -496,25 +497,25 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
-			return eAny(getActivity()); //10813
+			return eAny(getActivity()); //913
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
-			return eAny(getGuard()); //10814
+			return eAny(getGuard()); //914
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
-			return eAny(getInGroup()); //10822
+			return eAny(getInGroup()); //922
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
-			return eAny(getInPartition()); //10815
+			return eAny(getInPartition()); //915
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
-			return eAny(getInStructuredNode()); //10817
+			return eAny(getInStructuredNode()); //917
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
-			return eAny(getInterrupts()); //10816
+			return eAny(getInterrupts()); //916
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
-			return eAny(getRedefinedEdge()); //10820
+			return eAny(getRedefinedEdge()); //920
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
-			return eAny(getSource()); //10819
+			return eAny(getSource()); //919
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
-			return eAny(getTarget()); //10818
+			return eAny(getTarget()); //918
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
-			return eAny(getWeight()); //10821
+			return eAny(getWeight()); //921
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -523,25 +524,25 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
-			return getActivity().lock() != nullptr; //10813
+			return getActivity().lock() != nullptr; //913
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
-			return getGuard() != nullptr; //10814
+			return getGuard() != nullptr; //914
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
-			return getInGroup() != nullptr; //10822
+			return getInGroup() != nullptr; //922
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
-			return getInPartition() != nullptr; //10815
+			return getInPartition() != nullptr; //915
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode().lock() != nullptr; //10817
+			return getInStructuredNode().lock() != nullptr; //917
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
-			return getInterrupts() != nullptr; //10816
+			return getInterrupts() != nullptr; //916
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
-			return getRedefinedEdge() != nullptr; //10820
+			return getRedefinedEdge() != nullptr; //920
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //10819
+			return getSource() != nullptr; //919
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //10818
+			return getTarget() != nullptr; //918
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
-			return getWeight() != nullptr; //10821
+			return getWeight() != nullptr; //921
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -553,49 +554,49 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivity(_activity); //10813
+			setActivity(_activity); //913
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _guard = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setGuard(_guard); //10814
+			setGuard(_guard); //914
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setInStructuredNode(_inStructuredNode); //10817
+			setInStructuredNode(_inStructuredNode); //917
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = newValue->get<std::shared_ptr<uml::InterruptibleActivityRegion>>();
-			setInterrupts(_interrupts); //10816
+			setInterrupts(_interrupts); //916
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _source = newValue->get<std::shared_ptr<uml::ActivityNode>>();
-			setSource(_source); //10819
+			setSource(_source); //919
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _target = newValue->get<std::shared_ptr<uml::ActivityNode>>();
-			setTarget(_target); //10818
+			setTarget(_target); //918
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _weight = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setWeight(_weight); //10821
+			setWeight(_weight); //921
 			return true;
 		}
 	}

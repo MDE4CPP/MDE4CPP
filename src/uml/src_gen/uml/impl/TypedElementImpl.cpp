@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -237,7 +238,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return eAny(getType()); //3010
+			return eAny(getType()); //24510
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -246,7 +247,7 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType() != nullptr; //3010
+			return getType() != nullptr; //24510
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -258,7 +259,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
-			setType(_type); //3010
+			setType(_type); //24510
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -226,9 +227,9 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
-			return eAny(getInsertAt()); //1487
+			return eAny(getInsertAt()); //1347
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1488
+			return eAny(getIsReplaceAll()); //1348
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -237,9 +238,9 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
-			return getInsertAt() != nullptr; //1487
+			return getInsertAt() != nullptr; //1347
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1488
+			return getIsReplaceAll() != false; //1348
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -251,14 +252,14 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setInsertAt(_insertAt); //1487
+			setInsertAt(_insertAt); //1347
 			return true;
 		}
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1488
+			setIsReplaceAll(_isReplaceAll); //1348
 			return true;
 		}
 	}

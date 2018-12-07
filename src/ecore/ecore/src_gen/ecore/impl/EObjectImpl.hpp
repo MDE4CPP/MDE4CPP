@@ -34,6 +34,10 @@ virtual public EObject
 			virtual std::shared_ptr<EObject> getThisEObjectPtr() const;
 			virtual void setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr);
 
+			//Additional constructors for the containments back reference
+			EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
 
 
 		public:
@@ -45,7 +49,7 @@ virtual public EObject
 			//*********************************
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eAllContents() const ;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eAllContents() const ;
 			
 			/*!
 			 */ 
@@ -63,11 +67,11 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eContents() const ;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eContents() const ;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eCrossReferences() const ;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eCrossReferences() const ;
 			
 			/*!
 			 */ 
@@ -111,12 +115,22 @@ virtual public EObject
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<ecore::EObject > getEContainer() const ;
+			
+			/*!
+			 */
+			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

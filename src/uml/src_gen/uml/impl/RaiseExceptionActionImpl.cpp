@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -384,7 +385,7 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
-			return eAny(getException()); //15828
+			return eAny(getException()); //19228
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -393,7 +394,7 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
-			return getException() != nullptr; //15828
+			return getException() != nullptr; //19228
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -405,7 +406,7 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _exception = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setException(_exception); //15828
+			setException(_exception); //19228
 			return true;
 		}
 	}

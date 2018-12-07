@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -395,7 +396,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //18327
+			return eAny(getParameter()); //1327
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -404,7 +405,7 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //18327
+			return getParameter() != nullptr; //1327
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -416,7 +417,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
-			setParameter(_parameter); //18327
+			setParameter(_parameter); //1327
 			return true;
 		}
 	}

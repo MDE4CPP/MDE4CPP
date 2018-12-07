@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -327,9 +328,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
-			return eAny(getInterruptingEdge()); //11115
+			return eAny(getInterruptingEdge()); //12715
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
-			return eAny(getNode()); //11116
+			return eAny(getNode()); //12716
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,9 +339,9 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
-			return getInterruptingEdge() != nullptr; //11115
+			return getInterruptingEdge() != nullptr; //12715
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
-			return getNode() != nullptr; //11116
+			return getNode() != nullptr; //12716
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }

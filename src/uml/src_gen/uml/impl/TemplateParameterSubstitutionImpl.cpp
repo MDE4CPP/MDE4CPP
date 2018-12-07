@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -277,13 +278,13 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_ACTUAL:
-			return eAny(getActual()); //224
+			return eAny(getActual()); //2324
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
-			return eAny(getFormal()); //225
+			return eAny(getFormal()); //2325
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
-			return eAny(getOwnedActual()); //226
+			return eAny(getOwnedActual()); //2326
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
-			return eAny(getTemplateBinding()); //227
+			return eAny(getTemplateBinding()); //2327
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -292,13 +293,13 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_ACTUAL:
-			return getActual() != nullptr; //224
+			return getActual() != nullptr; //2324
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
-			return getFormal() != nullptr; //225
+			return getFormal() != nullptr; //2325
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
-			return getOwnedActual() != nullptr; //226
+			return getOwnedActual() != nullptr; //2326
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
-			return getTemplateBinding().lock() != nullptr; //227
+			return getTemplateBinding().lock() != nullptr; //2327
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -310,28 +311,28 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _actual = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setActual(_actual); //224
+			setActual(_actual); //2324
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _formal = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setFormal(_formal); //225
+			setFormal(_formal); //2325
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedActual = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setOwnedActual(_ownedActual); //226
+			setOwnedActual(_ownedActual); //2326
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateBinding> _templateBinding = newValue->get<std::shared_ptr<uml::TemplateBinding>>();
-			setTemplateBinding(_templateBinding); //227
+			setTemplateBinding(_templateBinding); //2327
 			return true;
 		}
 	}

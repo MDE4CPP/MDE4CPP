@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -421,9 +422,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //12228
+			return eAny(getResult()); //25128
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //12229
+			return eAny(getValue()); //25129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -432,9 +433,9 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //12228
+			return getResult() != nullptr; //25128
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //12229
+			return getValue() != nullptr; //25129
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -446,14 +447,14 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //12228
+			setResult(_result); //25128
 			return true;
 		}
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setValue(_value); //12229
+			setValue(_value); //25129
 			return true;
 		}
 	}

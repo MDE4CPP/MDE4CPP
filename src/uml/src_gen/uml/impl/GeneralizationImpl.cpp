@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -281,13 +282,13 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
-			return eAny(getGeneral()); //957
+			return eAny(getGeneral()); //1097
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
-			return eAny(getGeneralizationSet()); //958
+			return eAny(getGeneralizationSet()); //1098
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
-			return eAny(getIsSubstitutable()); //959
+			return eAny(getIsSubstitutable()); //1099
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
-			return eAny(getSpecific()); //9510
+			return eAny(getSpecific()); //10910
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -296,13 +297,13 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
-			return getGeneral() != nullptr; //957
+			return getGeneral() != nullptr; //1097
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
-			return getGeneralizationSet() != nullptr; //958
+			return getGeneralizationSet() != nullptr; //1098
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
-			return getIsSubstitutable() != true; //959
+			return getIsSubstitutable() != true; //1099
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
-			return getSpecific().lock() != nullptr; //9510
+			return getSpecific().lock() != nullptr; //10910
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -314,21 +315,21 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _general = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setGeneral(_general); //957
+			setGeneral(_general); //1097
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _isSubstitutable = newValue->get<bool>();
-			setIsSubstitutable(_isSubstitutable); //959
+			setIsSubstitutable(_isSubstitutable); //1099
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _specific = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setSpecific(_specific); //9510
+			setSpecific(_specific); //10910
 			return true;
 		}
 	}

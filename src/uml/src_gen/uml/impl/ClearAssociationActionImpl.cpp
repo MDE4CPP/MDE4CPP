@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -414,9 +415,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
-			return eAny(getAssociation()); //14328
+			return eAny(getAssociation()); //3928
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //14329
+			return eAny(getObject()); //3929
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -425,9 +426,9 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
-			return getAssociation() != nullptr; //14328
+			return getAssociation() != nullptr; //3928
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //14329
+			return getObject() != nullptr; //3929
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -439,14 +440,14 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
-			setAssociation(_association); //14328
+			setAssociation(_association); //3928
 			return true;
 		}
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //14329
+			setObject(_object); //3929
 			return true;
 		}
 	}

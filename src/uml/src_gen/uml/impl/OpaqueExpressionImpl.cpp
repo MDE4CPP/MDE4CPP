@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -385,13 +386,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
-			return eAny(getBehavior()); //4315
+			return eAny(getBehavior()); //16615
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
-			return eAny(getBody()); //4316
+			return eAny(getBody()); //16616
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //4317
+			return eAny(getLanguage()); //16617
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
-			return eAny(getResult()); //4318
+			return eAny(getResult()); //16618
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,13 +401,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
-			return getBehavior() != nullptr; //4315
+			return getBehavior() != nullptr; //16615
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
-			return !getBody()->empty(); //4316
+			return !getBody()->empty(); //16616
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //4317
+			return !getLanguage()->empty(); //16617
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //4318
+			return getResult() != nullptr; //16618
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -418,7 +419,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setBehavior(_behavior); //4315
+			setBehavior(_behavior); //16615
 			return true;
 		}
 	}

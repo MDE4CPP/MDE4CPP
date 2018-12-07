@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -259,9 +260,9 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
-			return eAny(getFeaturingClassifier()); //4913
+			return eAny(getFeaturingClassifier()); //10113
 		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //4914
+			return eAny(getIsStatic()); //10114
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -270,9 +271,9 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //4913
+			return getFeaturingClassifier() != nullptr; //10113
 		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //4914
+			return getIsStatic() != false; //10114
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -284,7 +285,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //4914
+			setIsStatic(_isStatic); //10114
 			return true;
 		}
 	}

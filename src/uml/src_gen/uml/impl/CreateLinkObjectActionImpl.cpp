@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -424,7 +425,7 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //14930
+			return eAny(getResult()); //6230
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -433,7 +434,7 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //14930
+			return getResult() != nullptr; //6230
 	}
 	return CreateLinkActionImpl::internalEIsSet(featureID);
 }
@@ -445,7 +446,7 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //14930
+			setResult(_result); //6230
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -605,13 +606,13 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //9239
+			return eAny(getOwnedAttribute()); //22839
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
-			return eAny(getOwnedConnector()); //9240
+			return eAny(getOwnedConnector()); //22840
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
-			return eAny(getPart()); //9241
+			return eAny(getPart()); //22841
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
-			return eAny(getRole()); //9242
+			return eAny(getRole()); //22842
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -620,13 +621,13 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //9239
+			return getOwnedAttribute() != nullptr; //22839
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
-			return getOwnedConnector() != nullptr; //9240
+			return getOwnedConnector() != nullptr; //22840
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
-			return getPart() != nullptr; //9241
+			return getPart() != nullptr; //22841
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
-			return getRole() != nullptr; //9242
+			return getRole() != nullptr; //22842
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

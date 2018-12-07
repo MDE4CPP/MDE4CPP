@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -471,11 +472,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
-			return eAny(getEnd()); //16228
+			return eAny(getEnd()); //19628
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //16229
+			return eAny(getObject()); //19629
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16230
+			return eAny(getResult()); //19630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,11 +485,11 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
-			return getEnd() != nullptr; //16228
+			return getEnd() != nullptr; //19628
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //16229
+			return getObject() != nullptr; //19629
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16230
+			return getResult() != nullptr; //19630
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -500,21 +501,21 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
-			setEnd(_end); //16228
+			setEnd(_end); //19628
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //16229
+			setObject(_object); //19629
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16230
+			setResult(_result); //19630
 			return true;
 		}
 	}

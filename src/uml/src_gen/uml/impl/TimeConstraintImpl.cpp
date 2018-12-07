@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -323,7 +324,7 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //25516
+			return eAny(getFirstEvent()); //23616
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,7 +333,7 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //25516
+			return getFirstEvent() != true; //23616
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -344,7 +345,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //25516
+			setFirstEvent(_firstEvent); //23616
 			return true;
 		}
 	}

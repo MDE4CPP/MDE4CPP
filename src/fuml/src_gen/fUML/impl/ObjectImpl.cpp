@@ -36,6 +36,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -288,9 +289,9 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //373
+			return eAny(getObjectActivation()); //763
 		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return eAny(getTypes()); //372
+			return eAny(getTypes()); //762
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,9 +300,9 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //373
+			return getObjectActivation() != nullptr; //763
 		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
-			return getTypes() != nullptr; //372
+			return getTypes() != nullptr; //762
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
@@ -313,7 +314,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
-			setObjectActivation(_objectActivation); //373
+			setObjectActivation(_objectActivation); //763
 			return true;
 		}
 	}

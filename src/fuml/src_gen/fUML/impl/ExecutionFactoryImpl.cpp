@@ -37,6 +37,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -429,13 +430,13 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
-			return eAny(getBuiltInTypes()); //13
+			return eAny(getBuiltInTypes()); //413
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
-			return eAny(getLocus()); //10
+			return eAny(getLocus()); //410
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return eAny(getPrimitiveBehaviorPrototypes()); //12
+			return eAny(getPrimitiveBehaviorPrototypes()); //412
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
-			return eAny(getStrategies()); //11
+			return eAny(getStrategies()); //411
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,13 +445,13 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
-			return getBuiltInTypes() != nullptr; //13
+			return getBuiltInTypes() != nullptr; //413
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
-			return getLocus().lock() != nullptr; //10
+			return getLocus().lock() != nullptr; //410
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes() != nullptr; //12
+			return getPrimitiveBehaviorPrototypes() != nullptr; //412
 		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
-			return getStrategies() != nullptr; //11
+			return getStrategies() != nullptr; //411
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -462,7 +463,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
-			setLocus(_locus); //10
+			setLocus(_locus); //410
 			return true;
 		}
 	}

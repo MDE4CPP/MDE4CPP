@@ -3,12 +3,10 @@
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "uml/UmlPackage.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "uml/impl/ElementImpl.hpp"
 
+#include "uml/UmlPackage.hpp"
 #include "uml/impl/AbstractionImpl.hpp"
 #include "uml/impl/AcceptCallActionImpl.hpp"
 #include "uml/impl/AcceptEventActionImpl.hpp"
@@ -254,6 +252,7 @@
 #include "uml/impl/WriteLinkActionImpl.hpp"
 #include "uml/impl/WriteStructuralFeatureActionImpl.hpp"
 #include "uml/impl/WriteVariableActionImpl.hpp"
+
 
 using namespace uml;
 
@@ -1514,9 +1513,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<Clause>(this->createClause_in_Owner(castedContainer));
+				return std::shared_ptr<uml::Clause>(this->createClause_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::CLEARASSOCIATIONACTION_ECLASS:
@@ -1755,9 +1754,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<Comment>(this->createComment_in_Owner(castedContainer));
+				return std::shared_ptr<uml::Comment>(this->createComment_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::COMMUNICATIONPATH_ECLASS:
@@ -2047,9 +2046,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<ConnectorEnd>(this->createConnectorEnd_in_Owner(castedContainer));
+				return std::shared_ptr<uml::ConnectorEnd>(this->createConnectorEnd_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_ECLASS:
@@ -3470,9 +3469,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<Factory>(this->createFactory_in_Owner(castedContainer));
+				return std::shared_ptr<uml::Factory>(this->createFactory_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::FINALSTATE_ECLASS:
@@ -3765,9 +3764,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<Image>(this->createImage_in_Owner(castedContainer));
+				return std::shared_ptr<uml::Image>(this->createImage_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::INCLUDE_ECLASS:
@@ -4552,9 +4551,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<LinkEndCreationData>(this->createLinkEndCreationData_in_Owner(castedContainer));
+				return std::shared_ptr<uml::LinkEndCreationData>(this->createLinkEndCreationData_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::LINKENDDATA_ECLASS:
@@ -4565,9 +4564,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<LinkEndData>(this->createLinkEndData_in_Owner(castedContainer));
+				return std::shared_ptr<uml::LinkEndData>(this->createLinkEndData_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::LINKENDDESTRUCTIONDATA_ECLASS:
@@ -4578,9 +4577,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<LinkEndDestructionData>(this->createLinkEndDestructionData_in_Owner(castedContainer));
+				return std::shared_ptr<uml::LinkEndDestructionData>(this->createLinkEndDestructionData_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::LITERALBOOLEAN_ECLASS:
@@ -6102,9 +6101,9 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			}
 			else
 			{
-				auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+				std::weak_ptr<uml::Element > castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 				assert(castedContainer);
-				return std::shared_ptr<QualifierValue>(this->createQualifierValue_in_Owner(castedContainer));
+				return std::shared_ptr<uml::QualifierValue>(this->createQualifierValue_in_Owner(castedContainer));
 			}
 		}
 		case UmlPackage::RAISEEXCEPTIONACTION_ECLASS:

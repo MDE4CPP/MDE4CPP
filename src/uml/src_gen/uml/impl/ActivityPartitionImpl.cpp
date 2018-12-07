@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -482,19 +483,19 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
-			return eAny(getEdge()); //10921
+			return eAny(getEdge()); //1421
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
-			return eAny(getIsDimension()); //10915
+			return eAny(getIsDimension()); //1415
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
-			return eAny(getIsExternal()); //10916
+			return eAny(getIsExternal()); //1416
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
-			return eAny(getNode()); //10917
+			return eAny(getNode()); //1417
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
-			return eAny(getRepresents()); //10918
+			return eAny(getRepresents()); //1418
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
-			return eAny(getSubpartition()); //10919
+			return eAny(getSubpartition()); //1419
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
-			return eAny(getSuperPartition()); //10920
+			return eAny(getSuperPartition()); //1420
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -503,19 +504,19 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //10921
+			return getEdge() != nullptr; //1421
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
-			return getIsDimension() != false; //10915
+			return getIsDimension() != false; //1415
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
-			return getIsExternal() != false; //10916
+			return getIsExternal() != false; //1416
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
-			return getNode() != nullptr; //10917
+			return getNode() != nullptr; //1417
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
-			return getRepresents() != nullptr; //10918
+			return getRepresents() != nullptr; //1418
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
-			return getSubpartition() != nullptr; //10919
+			return getSubpartition() != nullptr; //1419
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
-			return getSuperPartition().lock() != nullptr; //10920
+			return getSuperPartition().lock() != nullptr; //1420
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -527,28 +528,28 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDimension = newValue->get<bool>();
-			setIsDimension(_isDimension); //10915
+			setIsDimension(_isDimension); //1415
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
 			bool _isExternal = newValue->get<bool>();
-			setIsExternal(_isExternal); //10916
+			setIsExternal(_isExternal); //1416
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Element> _represents = newValue->get<std::shared_ptr<uml::Element>>();
-			setRepresents(_represents); //10918
+			setRepresents(_represents); //1418
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityPartition> _superPartition = newValue->get<std::shared_ptr<uml::ActivityPartition>>();
-			setSuperPartition(_superPartition); //10920
+			setSuperPartition(_superPartition); //1420
 			return true;
 		}
 	}

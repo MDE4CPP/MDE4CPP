@@ -29,6 +29,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/AcceptEventActionActivation.hpp"
@@ -150,7 +151,7 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
-			return eAny(getActionActivation()); //1110
+			return eAny(getActionActivation()); //20
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }
@@ -159,7 +160,7 @@ bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
-			return getActionActivation() != nullptr; //1110
+			return getActionActivation() != nullptr; //20
 	}
 	return EventAccepterImpl::internalEIsSet(featureID);
 }
@@ -171,7 +172,7 @@ bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::AcceptEventActionActivation>>();
-			setActionActivation(_actionActivation); //1110
+			setActionActivation(_actionActivation); //20
 			return true;
 		}
 	}

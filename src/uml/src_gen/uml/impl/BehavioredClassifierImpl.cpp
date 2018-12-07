@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -583,11 +584,11 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
-			return eAny(getClassifierBehavior()); //439
+			return eAny(getClassifierBehavior()); //2639
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
-			return eAny(getInterfaceRealization()); //440
+			return eAny(getInterfaceRealization()); //2640
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
-			return eAny(getOwnedBehavior()); //441
+			return eAny(getOwnedBehavior()); //2641
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -596,11 +597,11 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior() != nullptr; //439
+			return getClassifierBehavior() != nullptr; //2639
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
-			return getInterfaceRealization() != nullptr; //440
+			return getInterfaceRealization() != nullptr; //2640
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
-			return getOwnedBehavior() != nullptr; //441
+			return getOwnedBehavior() != nullptr; //2641
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -612,7 +613,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _classifierBehavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setClassifierBehavior(_classifierBehavior); //439
+			setClassifierBehavior(_classifierBehavior); //2639
 			return true;
 		}
 	}

@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
 
 
@@ -131,7 +135,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -270,11 +271,11 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
-			return eAny(getImportedPackage()); //837
+			return eAny(getImportedPackage()); //1717
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return eAny(getImportingNamespace()); //838
+			return eAny(getImportingNamespace()); //1718
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //839
+			return eAny(getVisibility()); //1719
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,11 +284,11 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
-			return getImportedPackage() != nullptr; //837
+			return getImportedPackage() != nullptr; //1717
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //838
+			return getImportingNamespace().lock() != nullptr; //1718
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //839
+			return m_visibility != VisibilityKind::PUBLIC;; //1719
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -299,21 +300,21 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _importedPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setImportedPackage(_importedPackage); //837
+			setImportedPackage(_importedPackage); //1717
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setImportingNamespace(_importingNamespace); //838
+			setImportingNamespace(_importingNamespace); //1718
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //839
+			setVisibility(_visibility); //1719
 			return true;
 		}
 	}

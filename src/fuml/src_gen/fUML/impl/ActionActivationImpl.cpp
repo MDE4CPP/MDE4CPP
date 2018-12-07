@@ -55,6 +55,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -804,13 +805,13 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return eAny(isFiring()); //787
+			return eAny(isFiring()); //37
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return eAny(getInputPinActivation()); //788
+			return eAny(getInputPinActivation()); //38
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return eAny(getOutputPinActivation()); //789
+			return eAny(getOutputPinActivation()); //39
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return eAny(getPinActivation()); //786
+			return eAny(getPinActivation()); //36
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -819,13 +820,13 @@ bool ActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
-			return isFiring() != false; //787
+			return isFiring() != false; //37
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
-			return getInputPinActivation() != nullptr; //788
+			return getInputPinActivation() != nullptr; //38
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
-			return getOutputPinActivation() != nullptr; //789
+			return getOutputPinActivation() != nullptr; //39
 		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
-			return getPinActivation() != nullptr; //786
+			return getPinActivation() != nullptr; //36
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -837,7 +838,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _firing = newValue->get<bool>();
-			setFiring(_firing); //787
+			setFiring(_firing); //37
 			return true;
 		}
 	}

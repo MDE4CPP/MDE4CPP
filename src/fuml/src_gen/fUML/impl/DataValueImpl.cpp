@@ -36,6 +36,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -188,7 +189,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
-			return eAny(getType()); //341
+			return eAny(getType()); //301
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -197,7 +198,7 @@ bool DataValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_EREFERENCE_TYPE:
-			return getType() != nullptr; //341
+			return getType() != nullptr; //301
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
@@ -209,7 +210,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DataType> _type = newValue->get<std::shared_ptr<uml::DataType>>();
-			setType(_type); //341
+			setType(_type); //301
 			return true;
 		}
 	}

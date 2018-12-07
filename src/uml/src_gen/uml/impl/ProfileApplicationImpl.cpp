@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -281,11 +282,11 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
-			return eAny(getAppliedProfile()); //767
+			return eAny(getAppliedProfile()); //1847
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
-			return eAny(getApplyingPackage()); //769
+			return eAny(getApplyingPackage()); //1849
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
-			return eAny(getIsStrict()); //768
+			return eAny(getIsStrict()); //1848
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,11 +295,11 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
-			return getAppliedProfile() != nullptr; //767
+			return getAppliedProfile() != nullptr; //1847
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
-			return getApplyingPackage().lock() != nullptr; //769
+			return getApplyingPackage().lock() != nullptr; //1849
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
-			return getIsStrict() != false; //768
+			return getIsStrict() != false; //1848
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -310,21 +311,21 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Profile> _appliedProfile = newValue->get<std::shared_ptr<uml::Profile>>();
-			setAppliedProfile(_appliedProfile); //767
+			setAppliedProfile(_appliedProfile); //1847
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _applyingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setApplyingPackage(_applyingPackage); //769
+			setApplyingPackage(_applyingPackage); //1849
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = newValue->get<bool>();
-			setIsStrict(_isStrict); //768
+			setIsStrict(_isStrict); //1848
 			return true;
 		}
 	}

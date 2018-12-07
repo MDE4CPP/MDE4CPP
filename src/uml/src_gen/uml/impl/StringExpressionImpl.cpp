@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -408,9 +409,9 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
-			return eAny(getOwningExpression()); //8719
+			return eAny(getOwningExpression()); //22419
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
-			return eAny(getSubExpression()); //8720
+			return eAny(getSubExpression()); //22420
 	}
 	Any result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);
@@ -426,9 +427,9 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
-			return getOwningExpression().lock() != nullptr; //8719
+			return getOwningExpression().lock() != nullptr; //22419
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
-			return getSubExpression() != nullptr; //8720
+			return getSubExpression() != nullptr; //22420
 	}
 	bool result = false;
 	result = ExpressionImpl::internalEIsSet(featureID);
@@ -447,7 +448,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _owningExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
-			setOwningExpression(_owningExpression); //8719
+			setOwningExpression(_owningExpression); //22419
 			return true;
 		}
 	}

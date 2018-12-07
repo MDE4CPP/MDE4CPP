@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,11 +31,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/ENamedElement.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -88,6 +92,17 @@ EClassifierImpl::~EClassifierImpl()
 
 
 //Additional constructor for the containments back reference
+			EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EClassifierImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 			:EClassifierImpl()
 			{
@@ -114,6 +129,8 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_ePackage  = obj.getEPackage();
 
 
@@ -230,6 +247,10 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EClassifierImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EClassifier> EClassifierImpl::getThisEClassifierPtr() const
@@ -243,6 +264,11 @@ void EClassifierImpl::setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClas
 }
 std::shared_ptr<ecore::EObject> EClassifierImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -258,19 +284,19 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
-			return eAny(getClassifierID()); //35
+			return eAny(getClassifierID()); //137
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //34
+			return eAny(getDefaultValue()); //136
 		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-			return eAny(getEPackage()); //37
+			return eAny(getEPackage()); //139
 		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
-			return eAny(getETypeParameters()); //38
+			return eAny(getETypeParameters()); //1310
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-			return eAny(getInstanceClass()); //33
+			return eAny(getInstanceClass()); //135
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
-			return eAny(getInstanceClassName()); //32
+			return eAny(getInstanceClassName()); //134
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
-			return eAny(getInstanceTypeName()); //36
+			return eAny(getInstanceTypeName()); //138
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -279,19 +305,19 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_CLASSIFIERID:
-			return getClassifierID() != -1; //35
+			return getClassifierID() != -1; //137
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE:
-			return !getDefaultValue()->isEmpty(); //34
+			return !getDefaultValue()->isEmpty(); //136
 		case EcorePackage::ECLASSIFIER_EREFERENCE_EPACKAGE:
-			return getEPackage().lock() != nullptr; //37
+			return getEPackage().lock() != nullptr; //139
 		case EcorePackage::ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //38
+			return getETypeParameters() != nullptr; //1310
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASS:
-			return getInstanceClass() != nullptr; //33
+			return getInstanceClass() != nullptr; //135
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME:
-			return getInstanceClassName() != ""; //32
+			return getInstanceClassName() != ""; //134
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
-			return getInstanceTypeName() != ""; //36
+			return getInstanceTypeName() != ""; //138
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -303,14 +329,14 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _instanceClassName = newValue->get<std::string>();
-			setInstanceClassName(_instanceClassName); //32
+			setInstanceClassName(_instanceClassName); //134
 			return true;
 		}
 		case EcorePackage::ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME:
 		{
 			// BOOST CAST
 			std::string _instanceTypeName = newValue->get<std::string>();
-			setInstanceTypeName(_instanceTypeName); //36
+			setInstanceTypeName(_instanceTypeName); //138
 			return true;
 		}
 	}
@@ -430,7 +456,10 @@ void EClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 }

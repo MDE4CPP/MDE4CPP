@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -446,13 +447,13 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //16728
+			return eAny(getIsReplaceAll()); //20328
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
-			return eAny(getNewClassifier()); //16729
+			return eAny(getNewClassifier()); //20329
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //16730
+			return eAny(getObject()); //20330
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
-			return eAny(getOldClassifier()); //16731
+			return eAny(getOldClassifier()); //20331
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -461,13 +462,13 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //16728
+			return getIsReplaceAll() != false; //20328
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
-			return getNewClassifier() != nullptr; //16729
+			return getNewClassifier() != nullptr; //20329
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //16730
+			return getObject() != nullptr; //20330
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
-			return getOldClassifier() != nullptr; //16731
+			return getOldClassifier() != nullptr; //20331
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -479,14 +480,14 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //16728
+			setIsReplaceAll(_isReplaceAll); //20328
 			return true;
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //16730
+			setObject(_object); //20330
 			return true;
 		}
 	}

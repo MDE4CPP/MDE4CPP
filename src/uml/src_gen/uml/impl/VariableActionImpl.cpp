@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -382,7 +383,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //12328
+			return eAny(getVariable()); //25328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -391,7 +392,7 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //12328
+			return getVariable() != nullptr; //25328
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -403,7 +404,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Variable> _variable = newValue->get<std::shared_ptr<uml::Variable>>();
-			setVariable(_variable); //12328
+			setVariable(_variable); //25328
 			return true;
 		}
 	}

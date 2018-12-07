@@ -29,6 +29,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 
@@ -155,9 +156,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
-			return eAny(getKey()); //480
+			return eAny(getKey()); //490
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //481
+			return eAny(getValue()); //491
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -166,9 +167,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
-			return getKey() != ""; //480
+			return getKey() != ""; //490
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
-			return getValue() != ""; //481
+			return getValue() != ""; //491
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -180,14 +181,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _key = newValue->get<std::string>();
-			setKey(_key); //480
+			setKey(_key); //490
 			return true;
 		}
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //481
+			setValue(_value); //491
 			return true;
 		}
 	}

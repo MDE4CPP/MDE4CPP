@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -370,15 +371,15 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
-			return eAny(getContainedEdge()); //10710
+			return eAny(getContainedEdge()); //1110
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
-			return eAny(getContainedNode()); //10711
+			return eAny(getContainedNode()); //1111
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-			return eAny(getInActivity()); //10712
+			return eAny(getInActivity()); //1112
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
-			return eAny(getSubgroup()); //10713
+			return eAny(getSubgroup()); //1113
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
-			return eAny(getSuperGroup()); //10714
+			return eAny(getSuperGroup()); //1114
 	}
 	Any result;
 	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
@@ -394,15 +395,15 @@ bool ActivityGroupImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
-			return getContainedEdge() != nullptr; //10710
+			return getContainedEdge() != nullptr; //1110
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
-			return getContainedNode() != nullptr; //10711
+			return getContainedNode() != nullptr; //1111
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-			return getInActivity().lock() != nullptr; //10712
+			return getInActivity().lock() != nullptr; //1112
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
-			return getSubgroup() != nullptr; //10713
+			return getSubgroup() != nullptr; //1113
 		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
-			return getSuperGroup().lock() != nullptr; //10714
+			return getSuperGroup().lock() != nullptr; //1114
 	}
 	bool result = false;
 	result = ActivityContentImpl::internalEIsSet(featureID);
@@ -421,7 +422,7 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _inActivity = newValue->get<std::shared_ptr<uml::Activity>>();
-			setInActivity(_inActivity); //10712
+			setInActivity(_inActivity); //1112
 			return true;
 		}
 	}

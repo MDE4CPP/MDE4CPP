@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -463,21 +464,21 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-			return eAny(getActivity()); //11013
+			return eAny(getActivity()); //1213
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
-			return eAny(getInGroup()); //11014
+			return eAny(getInGroup()); //1214
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
-			return eAny(getInInterruptibleRegion()); //11015
+			return eAny(getInInterruptibleRegion()); //1215
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
-			return eAny(getInPartition()); //11020
+			return eAny(getInPartition()); //1220
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-			return eAny(getInStructuredNode()); //11016
+			return eAny(getInStructuredNode()); //1216
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
-			return eAny(getIncoming()); //11017
+			return eAny(getIncoming()); //1217
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
-			return eAny(getOutgoing()); //11018
+			return eAny(getOutgoing()); //1218
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
-			return eAny(getRedefinedNode()); //11019
+			return eAny(getRedefinedNode()); //1219
 	}
 	Any result;
 	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
@@ -493,21 +494,21 @@ bool ActivityNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-			return getActivity().lock() != nullptr; //11013
+			return getActivity().lock() != nullptr; //1213
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
-			return getInGroup() != nullptr; //11014
+			return getInGroup() != nullptr; //1214
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion() != nullptr; //11015
+			return getInInterruptibleRegion() != nullptr; //1215
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
-			return getInPartition() != nullptr; //11020
+			return getInPartition() != nullptr; //1220
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode().lock() != nullptr; //11016
+			return getInStructuredNode().lock() != nullptr; //1216
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
-			return getIncoming() != nullptr; //11017
+			return getIncoming() != nullptr; //1217
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
-			return getOutgoing() != nullptr; //11018
+			return getOutgoing() != nullptr; //1218
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
-			return getRedefinedNode() != nullptr; //11019
+			return getRedefinedNode() != nullptr; //1219
 	}
 	bool result = false;
 	result = ActivityContentImpl::internalEIsSet(featureID);
@@ -526,14 +527,14 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivity(_activity); //11013
+			setActivity(_activity); //1213
 			return true;
 		}
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setInStructuredNode(_inStructuredNode); //11016
+			setInStructuredNode(_inStructuredNode); //1216
 			return true;
 		}
 	}

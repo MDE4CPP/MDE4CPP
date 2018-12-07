@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -264,7 +265,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //21710
+			return eAny(getMessage()); //14810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -273,7 +274,7 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //21710
+			return getMessage() != nullptr; //14810
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -285,7 +286,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
-			setMessage(_message); //21710
+			setMessage(_message); //14810
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -259,9 +260,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
-			return eAny(getAfter()); //22010
+			return eAny(getAfter()); //10810
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
-			return eAny(getBefore()); //22011
+			return eAny(getBefore()); //10811
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -270,9 +271,9 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
-			return getAfter() != nullptr; //22010
+			return getAfter() != nullptr; //10810
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
-			return getBefore() != nullptr; //22011
+			return getBefore() != nullptr; //10811
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -284,14 +285,14 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _after = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
-			setAfter(_after); //22010
+			setAfter(_after); //10810
 			return true;
 		}
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _before = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
-			setBefore(_before); //22011
+			setBefore(_before); //10811
 			return true;
 		}
 	}

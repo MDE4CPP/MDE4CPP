@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,11 +31,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -75,6 +79,17 @@ EDataTypeImpl::~EDataTypeImpl()
 
 
 //Additional constructor for the containments back reference
+			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EDataTypeImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 			:EDataTypeImpl()
 			{
@@ -102,6 +117,8 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_ePackage  = obj.getEPackage();
 
 
@@ -162,6 +179,10 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EDataTypeImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
@@ -175,6 +196,11 @@ void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePt
 }
 std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -190,7 +216,7 @@ Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
-			return eAny(isSerializable()); //49
+			return eAny(isSerializable()); //1411
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -199,7 +225,7 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
-			return isSerializable() != true; //49
+			return isSerializable() != true; //1411
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
 }
@@ -211,7 +237,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _serializable = newValue->get<bool>();
-			setSerializable(_serializable); //49
+			setSerializable(_serializable); //1411
 			return true;
 		}
 	}
@@ -288,7 +314,10 @@ void EDataTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	

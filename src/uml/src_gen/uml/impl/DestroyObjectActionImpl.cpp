@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -418,11 +419,11 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return eAny(getIsDestroyLinks()); //15328
+			return eAny(getIsDestroyLinks()); //7328
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return eAny(getIsDestroyOwnedObjects()); //15329
+			return eAny(getIsDestroyOwnedObjects()); //7329
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //15330
+			return eAny(getTarget()); //7330
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -431,11 +432,11 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks() != false; //15328
+			return getIsDestroyLinks() != false; //7328
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects() != false; //15329
+			return getIsDestroyOwnedObjects() != false; //7329
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //15330
+			return getTarget() != nullptr; //7330
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -447,21 +448,21 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
-			setIsDestroyLinks(_isDestroyLinks); //15328
+			setIsDestroyLinks(_isDestroyLinks); //7328
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
-			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //15329
+			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7329
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //15330
+			setTarget(_target); //7330
 			return true;
 		}
 	}

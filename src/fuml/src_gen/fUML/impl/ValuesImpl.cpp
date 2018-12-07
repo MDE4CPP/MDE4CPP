@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/Value.hpp"
@@ -149,7 +150,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::VALUES_EREFERENCE_VALUES:
-			return eAny(getValues()); //690
+			return eAny(getValues()); //1130
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -158,7 +159,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::VALUES_EREFERENCE_VALUES:
-			return getValues() != nullptr; //690
+			return getValues() != nullptr; //1130
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

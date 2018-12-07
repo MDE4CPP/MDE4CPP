@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -252,9 +253,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
-			return eAny(getGeneralMachine()); //717
+			return eAny(getGeneralMachine()); //1867
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
-			return eAny(getSpecificMachine()); //718
+			return eAny(getSpecificMachine()); //1868
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -263,9 +264,9 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
-			return getGeneralMachine() != nullptr; //717
+			return getGeneralMachine() != nullptr; //1867
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
-			return getSpecificMachine().lock() != nullptr; //718
+			return getSpecificMachine().lock() != nullptr; //1868
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -277,14 +278,14 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setGeneralMachine(_generalMachine); //717
+			setGeneralMachine(_generalMachine); //1867
 			return true;
 		}
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setSpecificMachine(_specificMachine); //718
+			setSpecificMachine(_specificMachine); //1868
 			return true;
 		}
 	}

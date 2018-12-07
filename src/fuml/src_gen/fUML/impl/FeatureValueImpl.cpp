@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/FeatureValue.hpp"
@@ -247,11 +248,11 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
-			return eAny(getFeature()); //142
+			return eAny(getFeature()); //522
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
-			return eAny(getPosition()); //141
+			return eAny(getPosition()); //521
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
-			return eAny(getValues()); //140
+			return eAny(getValues()); //520
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -260,11 +261,11 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
-			return getFeature() != nullptr; //142
+			return getFeature() != nullptr; //522
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
-			return getPosition() != 0; //141
+			return getPosition() != 0; //521
 		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
-			return getValues() != nullptr; //140
+			return getValues() != nullptr; //520
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -276,14 +277,14 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _feature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
-			setFeature(_feature); //142
+			setFeature(_feature); //522
 			return true;
 		}
 		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = newValue->get<int>();
-			setPosition(_position); //141
+			setPosition(_position); //521
 			return true;
 		}
 	}

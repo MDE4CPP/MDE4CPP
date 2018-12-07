@@ -4,12 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "fUML/FUMLFactory.hpp"
@@ -1185,6 +1188,17 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventDispatchLoop_EClass() co
 
 
 // End Class EventDispatchLoop
+
+// Begin Class EventOccurrence
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventOccurrence_EClass() const
+{
+	return m_eventOccurrence_EClass;
+}
+
+
+
+
+// End Class EventOccurrence
 
 // Begin Class Execution
 std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecution_EClass() const

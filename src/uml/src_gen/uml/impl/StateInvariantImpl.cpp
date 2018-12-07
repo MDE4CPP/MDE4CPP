@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -304,7 +305,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
-			return eAny(getInvariant()); //23514
+			return eAny(getInvariant()); //22114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,7 +314,7 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
-			return getInvariant() != nullptr; //23514
+			return getInvariant() != nullptr; //22114
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -325,7 +326,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _invariant = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setInvariant(_invariant); //23514
+			setInvariant(_invariant); //22114
 			return true;
 		}
 	}

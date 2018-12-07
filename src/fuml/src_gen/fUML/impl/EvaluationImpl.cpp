@@ -29,6 +29,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/Locus.hpp"
@@ -175,9 +176,9 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
-			return eAny(getLocus()); //231
+			return eAny(getLocus()); //361
 		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //230
+			return eAny(getSpecification()); //360
 	}
 	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
@@ -186,9 +187,9 @@ bool EvaluationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
-			return getLocus() != nullptr; //231
+			return getLocus() != nullptr; //361
 		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //230
+			return getSpecification() != nullptr; //360
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
@@ -200,14 +201,14 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
-			setLocus(_locus); //231
+			setLocus(_locus); //361
 			return true;
 		}
 		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //230
+			setSpecification(_specification); //360
 			return true;
 		}
 	}

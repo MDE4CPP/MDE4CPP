@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -271,11 +272,11 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
-			return eAny(getDefiningFeature()); //804
+			return eAny(getDefiningFeature()); //2174
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
-			return eAny(getOwningInstance()); //806
+			return eAny(getOwningInstance()); //2176
 		case UmlPackage::SLOT_EREFERENCE_VALUE:
-			return eAny(getValue()); //805
+			return eAny(getValue()); //2175
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,11 +285,11 @@ bool SlotImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
-			return getDefiningFeature() != nullptr; //804
+			return getDefiningFeature() != nullptr; //2174
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
-			return getOwningInstance().lock() != nullptr; //806
+			return getOwningInstance().lock() != nullptr; //2176
 		case UmlPackage::SLOT_EREFERENCE_VALUE:
-			return getValue() != nullptr; //805
+			return getValue() != nullptr; //2175
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -300,14 +301,14 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
-			setDefiningFeature(_definingFeature); //804
+			setDefiningFeature(_definingFeature); //2174
 			return true;
 		}
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
-			setOwningInstance(_owningInstance); //806
+			setOwningInstance(_owningInstance); //2176
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -481,11 +482,11 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
-			return eAny(getIsUnmarshall()); //13328
+			return eAny(getIsUnmarshall()); //328
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //13329
+			return eAny(getResult()); //329
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_TRIGGER:
-			return eAny(getTrigger()); //13330
+			return eAny(getTrigger()); //330
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -494,11 +495,11 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
-			return getIsUnmarshall() != false; //13328
+			return getIsUnmarshall() != false; //328
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //13329
+			return getResult() != nullptr; //329
 		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_TRIGGER:
-			return getTrigger() != nullptr; //13330
+			return getTrigger() != nullptr; //330
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -510,7 +511,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isUnmarshall = newValue->get<bool>();
-			setIsUnmarshall(_isUnmarshall); //13328
+			setIsUnmarshall(_isUnmarshall); //328
 			return true;
 		}
 	}

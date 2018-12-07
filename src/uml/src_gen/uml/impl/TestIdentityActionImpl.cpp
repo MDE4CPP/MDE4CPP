@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -452,11 +453,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
-			return eAny(getFirst()); //17728
+			return eAny(getFirst()); //23528
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //17729
+			return eAny(getResult()); //23529
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
-			return eAny(getSecond()); //17730
+			return eAny(getSecond()); //23530
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -465,11 +466,11 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
-			return getFirst() != nullptr; //17728
+			return getFirst() != nullptr; //23528
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //17729
+			return getResult() != nullptr; //23529
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
-			return getSecond() != nullptr; //17730
+			return getSecond() != nullptr; //23530
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -481,21 +482,21 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _first = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setFirst(_first); //17728
+			setFirst(_first); //23528
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //17729
+			setResult(_result); //23529
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _second = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setSecond(_second); //17730
+			setSecond(_second); //23530
 			return true;
 		}
 	}

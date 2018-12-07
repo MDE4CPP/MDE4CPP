@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -446,9 +447,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //12830
+			return eAny(getResult()); //25730
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //12831
+			return eAny(getValue()); //25731
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -457,9 +458,9 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //12830
+			return getResult() != nullptr; //25730
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //12831
+			return getValue() != nullptr; //25731
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -471,14 +472,14 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //12830
+			setResult(_result); //25730
 			return true;
 		}
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //12831
+			setValue(_value); //25731
 			return true;
 		}
 	}

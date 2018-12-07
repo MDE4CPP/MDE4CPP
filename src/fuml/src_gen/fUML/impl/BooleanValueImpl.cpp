@@ -35,6 +35,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
@@ -200,7 +201,7 @@ Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
-			return eAny(isValue()); //201
+			return eAny(isValue()); //111
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -209,7 +210,7 @@ bool BooleanValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
-			return isValue() != false; //201
+			return isValue() != false; //111
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -221,7 +222,7 @@ bool BooleanValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _value = newValue->get<bool>();
-			setValue(_value); //201
+			setValue(_value); //111
 			return true;
 		}
 	}

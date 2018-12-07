@@ -14,7 +14,7 @@
 
 // forward declarations
 template<class T> class Bag;
-
+template<class T> class Union;
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
@@ -84,6 +84,10 @@ namespace ecore
 			EObject(){}
 
 
+			//Additional constructors for the containments back reference
+
+			EObject(std::weak_ptr<ecore::EObject > par_eContainer);
+
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
@@ -95,7 +99,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eAllContents() const = 0;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eAllContents() const = 0;
 			
 			/*!
 			 */ 
@@ -113,11 +117,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eContents() const = 0;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eContents() const = 0;
 			
 			/*!
 			 */ 
-			virtual Bag <   ecore::EObject > eCrossReferences() const = 0;
+			virtual std::shared_ptr<Bag <   ecore::EObject > > eCrossReferences() const = 0;
 			
 			/*!
 			 */ 
@@ -159,6 +163,14 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<ecore::EObject > getEContainer() const = 0;
+			
+			/*!
+			 */
+			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) = 0;
+			
 			
 
 		protected:
@@ -170,13 +182,21 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<ecore::EObject > m_eContainer;
+			/*!
+			 */
+			std::shared_ptr<Union<ecore::EObject>> m_eContens;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

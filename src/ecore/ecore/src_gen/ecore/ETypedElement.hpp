@@ -56,6 +56,11 @@ namespace ecore
 	class ENamedElement;
 }
 
+namespace ecore 
+{
+	class EObject;
+}
+
 // base class includes
 #include "ecore/ENamedElement.hpp"
 
@@ -189,7 +194,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

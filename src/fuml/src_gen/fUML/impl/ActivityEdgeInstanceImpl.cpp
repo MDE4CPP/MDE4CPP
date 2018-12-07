@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
@@ -357,15 +358,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
-			return eAny(getEdge()); //510
+			return eAny(getEdge()); //40
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
-			return eAny(getGroup()); //514
+			return eAny(getGroup()); //44
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
-			return eAny(getOffers()); //513
+			return eAny(getOffers()); //43
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
-			return eAny(getSource()); //511
+			return eAny(getSource()); //41
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
-			return eAny(getTarget()); //512
+			return eAny(getTarget()); //42
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -374,15 +375,15 @@ bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //510
+			return getEdge() != nullptr; //40
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
-			return getGroup().lock() != nullptr; //514
+			return getGroup().lock() != nullptr; //44
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
-			return getOffers() != nullptr; //513
+			return getOffers() != nullptr; //43
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
-			return getSource().lock() != nullptr; //511
+			return getSource().lock() != nullptr; //41
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
-			return getTarget().lock() != nullptr; //512
+			return getTarget().lock() != nullptr; //42
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -394,28 +395,28 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityEdge> _edge = newValue->get<std::shared_ptr<uml::ActivityEdge>>();
-			setEdge(_edge); //510
+			setEdge(_edge); //40
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
-			setGroup(_group); //514
+			setGroup(_group); //44
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _source = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
-			setSource(_source); //511
+			setSource(_source); //41
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _target = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
-			setTarget(_target); //512
+			setTarget(_target); //42
 			return true;
 		}
 	}

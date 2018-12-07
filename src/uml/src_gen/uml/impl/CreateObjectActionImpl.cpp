@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -424,9 +425,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //15028
+			return eAny(getClassifier()); //6328
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //15029
+			return eAny(getResult()); //6329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,9 +436,9 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //15028
+			return getClassifier() != nullptr; //6328
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //15029
+			return getResult() != nullptr; //6329
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -449,14 +450,14 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setClassifier(_classifier); //15028
+			setClassifier(_classifier); //6328
 			return true;
 		}
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //15029
+			setResult(_result); //6329
 			return true;
 		}
 	}

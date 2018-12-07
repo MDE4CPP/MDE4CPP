@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -531,7 +532,7 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATION_EREFERENCE_OWNEDLITERAL:
-			return eAny(getOwnedLiteral()); //7741
+			return eAny(getOwnedLiteral()); //8441
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -540,7 +541,7 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATION_EREFERENCE_OWNEDLITERAL:
-			return getOwnedLiteral() != nullptr; //7741
+			return getOwnedLiteral() != nullptr; //8441
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }

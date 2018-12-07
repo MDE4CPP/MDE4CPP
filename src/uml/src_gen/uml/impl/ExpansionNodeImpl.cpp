@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -387,9 +388,9 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
-			return eAny(getRegionAsInput()); //15427
+			return eAny(getRegionAsInput()); //9327
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
-			return eAny(getRegionAsOutput()); //15428
+			return eAny(getRegionAsOutput()); //9328
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -398,9 +399,9 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
-			return getRegionAsInput() != nullptr; //15427
+			return getRegionAsInput() != nullptr; //9327
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
-			return getRegionAsOutput() != nullptr; //15428
+			return getRegionAsOutput() != nullptr; //9328
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -412,14 +413,14 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
-			setRegionAsInput(_regionAsInput); //15427
+			setRegionAsInput(_regionAsInput); //9327
 			return true;
 		}
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
-			setRegionAsOutput(_regionAsOutput); //15428
+			setRegionAsOutput(_regionAsOutput); //9328
 			return true;
 		}
 	}

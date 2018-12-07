@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -435,7 +436,7 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //17632
+			return eAny(getObject()); //21932
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,7 +445,7 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //17632
+			return getObject() != nullptr; //21932
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -456,7 +457,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //17632
+			setObject(_object); //21932
 			return true;
 		}
 	}

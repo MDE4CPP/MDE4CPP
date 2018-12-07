@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -305,7 +306,7 @@ Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //25215
+			return eAny(getValue()); //14015
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -314,7 +315,7 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
-			return getValue() != 0; //25215
+			return getValue() != 0; //14015
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -326,7 +327,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			double _value = newValue->get<double>();
-			setValue(_value); //25215
+			setValue(_value); //14015
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/BehavioredClassifier.hpp"
@@ -367,9 +368,9 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
-			return eAny(getContract()); //10519
+			return eAny(getContract()); //12619
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
-			return eAny(getImplementingClassifier()); //10520
+			return eAny(getImplementingClassifier()); //12620
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -378,9 +379,9 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
-			return getContract() != nullptr; //10519
+			return getContract() != nullptr; //12619
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
-			return getImplementingClassifier().lock() != nullptr; //10520
+			return getImplementingClassifier().lock() != nullptr; //12620
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -392,14 +393,14 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interface> _contract = newValue->get<std::shared_ptr<uml::Interface>>();
-			setContract(_contract); //10519
+			setContract(_contract); //12619
 			return true;
 		}
 		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
-			setImplementingClassifier(_implementingClassifier); //10520
+			setImplementingClassifier(_implementingClassifier); //12620
 			return true;
 		}
 	}

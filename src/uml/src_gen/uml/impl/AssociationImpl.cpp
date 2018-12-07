@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -656,15 +657,15 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
-			return eAny(getEndType()); //2740
+			return eAny(getEndType()); //2140
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //2741
+			return eAny(getIsDerived()); //2141
 		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
-			return eAny(getMemberEnd()); //2742
+			return eAny(getMemberEnd()); //2142
 		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
-			return eAny(getNavigableOwnedEnd()); //2744
+			return eAny(getNavigableOwnedEnd()); //2144
 		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
-			return eAny(getOwnedEnd()); //2743
+			return eAny(getOwnedEnd()); //2143
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -680,15 +681,15 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
-			return getEndType() != nullptr; //2740
+			return getEndType() != nullptr; //2140
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
-			return getIsDerived() != false; //2741
+			return getIsDerived() != false; //2141
 		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
-			return getMemberEnd() != nullptr; //2742
+			return getMemberEnd() != nullptr; //2142
 		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
-			return getNavigableOwnedEnd() != nullptr; //2744
+			return getNavigableOwnedEnd() != nullptr; //2144
 		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
-			return getOwnedEnd() != nullptr; //2743
+			return getOwnedEnd() != nullptr; //2143
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -707,7 +708,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
-			setIsDerived(_isDerived); //2741
+			setIsDerived(_isDerived); //2141
 			return true;
 		}
 	}

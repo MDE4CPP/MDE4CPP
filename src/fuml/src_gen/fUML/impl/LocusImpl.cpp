@@ -41,6 +41,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -330,11 +331,11 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return eAny(getExecutor()); //1140
+			return eAny(getExecutor()); //730
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return eAny(getExtensionalValues()); //1142
+			return eAny(getExtensionalValues()); //732
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return eAny(getFactory()); //1141
+			return eAny(getFactory()); //731
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -343,11 +344,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
-			return getExecutor() != nullptr; //1140
+			return getExecutor() != nullptr; //730
 		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //1142
+			return getExtensionalValues() != nullptr; //732
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
-			return getFactory() != nullptr; //1141
+			return getFactory() != nullptr; //731
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -359,14 +360,14 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Executor> _executor = newValue->get<std::shared_ptr<fUML::Executor>>();
-			setExecutor(_executor); //1140
+			setExecutor(_executor); //730
 			return true;
 		}
 		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExecutionFactory> _factory = newValue->get<std::shared_ptr<fUML::ExecutionFactory>>();
-			setFactory(_factory); //1141
+			setFactory(_factory); //731
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -311,7 +312,7 @@ Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
-			return eAny(getSetting()); //23114
+			return eAny(getSetting()); //5814
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -320,7 +321,7 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
-			return getSetting() != true; //23114
+			return getSetting() != true; //5814
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -332,7 +333,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _setting = newValue->get<bool>();
-			setSetting(_setting); //23114
+			setSetting(_setting); //5814
 			return true;
 		}
 	}

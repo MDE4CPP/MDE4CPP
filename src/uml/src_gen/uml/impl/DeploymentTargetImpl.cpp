@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -283,9 +284,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
-			return eAny(getDeployedElement()); //3510
+			return eAny(getDeployedElement()); //7110
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
-			return eAny(getDeployment()); //3511
+			return eAny(getDeployment()); //7111
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,9 +295,9 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //3510
+			return getDeployedElement() != nullptr; //7110
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
-			return getDeployment() != nullptr; //3511
+			return getDeployment() != nullptr; //7111
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

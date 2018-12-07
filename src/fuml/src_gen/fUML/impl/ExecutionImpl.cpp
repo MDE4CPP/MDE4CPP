@@ -40,6 +40,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -305,9 +306,9 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //384
+			return eAny(getContext()); //404
 		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return eAny(getParameterValues()); //385
+			return eAny(getParameterValues()); //405
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -316,9 +317,9 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
-			return getContext() != nullptr; //384
+			return getContext() != nullptr; //404
 		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
-			return getParameterValues() != nullptr; //385
+			return getParameterValues() != nullptr; //405
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }
@@ -330,7 +331,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = newValue->get<std::shared_ptr<fUML::Object>>();
-			setContext(_context); //384
+			setContext(_context); //404
 			return true;
 		}
 	}

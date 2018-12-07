@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -453,11 +454,11 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return eAny(getReplyToCall()); //17128
+			return eAny(getReplyToCall()); //21128
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return eAny(getReplyValue()); //17129
+			return eAny(getReplyValue()); //21129
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //17130
+			return eAny(getReturnInformation()); //21130
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -466,11 +467,11 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return getReplyToCall() != nullptr; //17128
+			return getReplyToCall() != nullptr; //21128
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return getReplyValue() != nullptr; //17129
+			return getReplyValue() != nullptr; //21129
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //17130
+			return getReturnInformation() != nullptr; //21130
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -482,14 +483,14 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
-			setReplyToCall(_replyToCall); //17128
+			setReplyToCall(_replyToCall); //21128
 			return true;
 		}
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setReturnInformation(_returnInformation); //17130
+			setReturnInformation(_returnInformation); //21130
 			return true;
 		}
 	}

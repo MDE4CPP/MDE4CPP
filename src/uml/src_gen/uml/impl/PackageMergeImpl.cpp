@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -252,9 +253,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
-			return eAny(getMergedPackage()); //757
+			return eAny(getMergedPackage()); //1727
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
-			return eAny(getReceivingPackage()); //758
+			return eAny(getReceivingPackage()); //1728
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -263,9 +264,9 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
-			return getMergedPackage() != nullptr; //757
+			return getMergedPackage() != nullptr; //1727
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
-			return getReceivingPackage().lock() != nullptr; //758
+			return getReceivingPackage().lock() != nullptr; //1728
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -277,14 +278,14 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _mergedPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setMergedPackage(_mergedPackage); //757
+			setMergedPackage(_mergedPackage); //1727
 			return true;
 		}
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _receivingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setReceivingPackage(_receivingPackage); //758
+			setReceivingPackage(_receivingPackage); //1728
 			return true;
 		}
 	}

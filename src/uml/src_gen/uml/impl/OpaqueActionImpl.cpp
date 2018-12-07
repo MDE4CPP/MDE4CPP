@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -465,13 +466,13 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
-			return eAny(getBody()); //15728
+			return eAny(getBody()); //16428
 		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
-			return eAny(getInputValue()); //15729
+			return eAny(getInputValue()); //16429
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //15730
+			return eAny(getLanguage()); //16430
 		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
-			return eAny(getOutputValue()); //15731
+			return eAny(getOutputValue()); //16431
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -480,13 +481,13 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
-			return !getBody()->empty(); //15728
+			return !getBody()->empty(); //16428
 		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue() != nullptr; //15729
+			return getInputValue() != nullptr; //16429
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //15730
+			return !getLanguage()->empty(); //16430
 		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //15731
+			return getOutputValue() != nullptr; //16431
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }

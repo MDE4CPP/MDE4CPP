@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -713,17 +714,17 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
-			return eAny(getEdge()); //11239
+			return eAny(getEdge()); //22739
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
-			return eAny(getMustIsolate()); //11240
+			return eAny(getMustIsolate()); //22740
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
-			return eAny(getNode()); //11244
+			return eAny(getNode()); //22744
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
-			return eAny(getStructuredNodeInput()); //11241
+			return eAny(getStructuredNodeInput()); //22741
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
-			return eAny(getStructuredNodeOutput()); //11242
+			return eAny(getStructuredNodeOutput()); //22742
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //11243
+			return eAny(getVariable()); //22743
 	}
 	Any result;
 	result = ActionImpl::eGet(featureID, resolve, coreType);
@@ -744,17 +745,17 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //11239
+			return getEdge() != nullptr; //22739
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
-			return getMustIsolate() != false; //11240
+			return getMustIsolate() != false; //22740
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
-			return getNode() != nullptr; //11244
+			return getNode() != nullptr; //22744
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput() != nullptr; //11241
+			return getStructuredNodeInput() != nullptr; //22741
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput() != nullptr; //11242
+			return getStructuredNodeOutput() != nullptr; //22742
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //11243
+			return getVariable() != nullptr; //22743
 	}
 	bool result = false;
 	result = ActionImpl::internalEIsSet(featureID);
@@ -778,7 +779,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _mustIsolate = newValue->get<bool>();
-			setMustIsolate(_mustIsolate); //11240
+			setMustIsolate(_mustIsolate); //22740
 			return true;
 		}
 	}

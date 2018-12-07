@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -203,11 +204,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //461
+			return eAny(getClassifier()); //171
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
-			return eAny(getExecution()); //460
+			return eAny(getExecution()); //170
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //462
+			return eAny(getObjectActivation()); //172
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -216,11 +217,11 @@ bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //461
+			return getClassifier() != nullptr; //171
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
-			return getExecution() != nullptr; //460
+			return getExecution() != nullptr; //170
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //462
+			return getObjectActivation() != nullptr; //172
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -232,21 +233,21 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _classifier = newValue->get<std::shared_ptr<uml::Class>>();
-			setClassifier(_classifier); //461
+			setClassifier(_classifier); //171
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _execution = newValue->get<std::shared_ptr<fUML::Execution>>();
-			setExecution(_execution); //460
+			setExecution(_execution); //170
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
-			setObjectActivation(_objectActivation); //462
+			setObjectActivation(_objectActivation); //172
 			return true;
 		}
 	}

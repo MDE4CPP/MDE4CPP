@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityNodeActivation.hpp"
@@ -220,11 +221,11 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
-			return eAny(getBaseToken()); //552
+			return eAny(getBaseToken()); //562
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
-			return eAny(isBaseTokenIsWithdrawn()); //554
+			return eAny(isBaseTokenIsWithdrawn()); //564
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
-			return eAny(getRemainingOffersCount()); //553
+			return eAny(getRemainingOffersCount()); //563
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,11 +234,11 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
-			return getBaseToken() != nullptr; //552
+			return getBaseToken() != nullptr; //562
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
-			return isBaseTokenIsWithdrawn() != false; //554
+			return isBaseTokenIsWithdrawn() != false; //564
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
-			return getRemainingOffersCount() != 0; //553
+			return getRemainingOffersCount() != 0; //563
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -249,21 +250,21 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Token> _baseToken = newValue->get<std::shared_ptr<fUML::Token>>();
-			setBaseToken(_baseToken); //552
+			setBaseToken(_baseToken); //562
 			return true;
 		}
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
 			// BOOST CAST
 			bool _baseTokenIsWithdrawn = newValue->get<bool>();
-			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //554
+			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //564
 			return true;
 		}
 		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
 			// BOOST CAST
 			int _remainingOffersCount = newValue->get<int>();
-			setRemainingOffersCount(_remainingOffersCount); //553
+			setRemainingOffersCount(_remainingOffersCount); //563
 			return true;
 		}
 	}

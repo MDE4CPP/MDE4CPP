@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -417,9 +418,9 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
-			return eAny(getInsertAt()); //13630
+			return eAny(getInsertAt()); //1730
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //13631
+			return eAny(getIsReplaceAll()); //1731
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -428,9 +429,9 @@ bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
-			return getInsertAt() != nullptr; //13630
+			return getInsertAt() != nullptr; //1730
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //13631
+			return getIsReplaceAll() != false; //1731
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -442,14 +443,14 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setInsertAt(_insertAt); //13630
+			setInsertAt(_insertAt); //1730
 			return true;
 		}
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //13631
+			setIsReplaceAll(_isReplaceAll); //1731
 			return true;
 		}
 	}

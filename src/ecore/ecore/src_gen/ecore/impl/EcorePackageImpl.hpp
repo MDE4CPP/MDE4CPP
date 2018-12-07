@@ -223,6 +223,8 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EClass> getEObject_EClass() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getEObject_EReference_eContainer() const ;
+			virtual std::shared_ptr<ecore::EReference> getEObject_EReference_eContens() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eAllContents() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eClass() const ;
@@ -501,8 +503,10 @@ namespace ecore
 			std::shared_ptr<ecore::EReference> m_eTypeParameter_EReference_eBounds = nullptr;
 			std::shared_ptr<ecore::EReference> m_eGenericType_EReference_eClassifier = nullptr;
 			std::shared_ptr<ecore::EReference> m_ePackage_EReference_eClassifiers = nullptr;
+			std::shared_ptr<ecore::EReference> m_eObject_EReference_eContainer = nullptr;
 			std::shared_ptr<ecore::EReference> m_eOperation_EReference_eContainingClass = nullptr;
 			std::shared_ptr<ecore::EReference> m_eStructuralFeature_EReference_eContainingClass = nullptr;
+			std::shared_ptr<ecore::EReference> m_eObject_EReference_eContens = nullptr;
 			std::shared_ptr<ecore::EReference> m_eEnumLiteral_EReference_eEnum = nullptr;
 			std::shared_ptr<ecore::EReference> m_eOperation_EReference_eExceptions = nullptr;
 			std::shared_ptr<ecore::EReference> m_ePackage_EReference_eFactoryInstance = nullptr;

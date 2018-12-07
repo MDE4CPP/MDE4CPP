@@ -35,6 +35,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -660,17 +661,17 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return eAny(getGroup()); //583
+			return eAny(getGroup()); //73
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return eAny(getHeldTokens()); //582
+			return eAny(getHeldTokens()); //72
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return eAny(getIncomingEdges()); //581
+			return eAny(getIncomingEdges()); //71
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return eAny(getNode()); //584
+			return eAny(getNode()); //74
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return eAny(getOutgoingEdges()); //580
+			return eAny(getOutgoingEdges()); //70
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return eAny(isRunning()); //585
+			return eAny(isRunning()); //75
 	}
 	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
@@ -679,17 +680,17 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
-			return getGroup().lock() != nullptr; //583
+			return getGroup().lock() != nullptr; //73
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
-			return getHeldTokens() != nullptr; //582
+			return getHeldTokens() != nullptr; //72
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
-			return getIncomingEdges() != nullptr; //581
+			return getIncomingEdges() != nullptr; //71
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
-			return getNode() != nullptr; //584
+			return getNode() != nullptr; //74
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
-			return getOutgoingEdges() != nullptr; //580
+			return getOutgoingEdges() != nullptr; //70
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
-			return isRunning() != false; //585
+			return isRunning() != false; //75
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
@@ -701,21 +702,21 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
-			setGroup(_group); //583
+			setGroup(_group); //73
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = newValue->get<std::shared_ptr<uml::ActivityNode>>();
-			setNode(_node); //584
+			setNode(_node); //74
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = newValue->get<bool>();
-			setRunning(_running); //585
+			setRunning(_running); //75
 			return true;
 		}
 	}

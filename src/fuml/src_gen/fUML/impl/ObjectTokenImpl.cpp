@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityNodeActivation.hpp"
@@ -177,7 +178,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
-			return eAny(getValue()); //542
+			return eAny(getValue()); //792
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -186,7 +187,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
-			return getValue() != nullptr; //542
+			return getValue() != nullptr; //792
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -198,7 +199,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Value> _value = newValue->get<std::shared_ptr<fUML::Value>>();
-			setValue(_value); //542
+			setValue(_value); //792
 			return true;
 		}
 	}

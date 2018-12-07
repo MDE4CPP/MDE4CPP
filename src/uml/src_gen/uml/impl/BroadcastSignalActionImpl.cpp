@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -410,7 +411,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
-			return eAny(getSignal()); //13730
+			return eAny(getSignal()); //2730
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,7 +420,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
-			return getSignal() != nullptr; //13730
+			return getSignal() != nullptr; //2730
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -431,7 +432,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
-			setSignal(_signal); //13730
+			setSignal(_signal); //2730
 			return true;
 		}
 	}

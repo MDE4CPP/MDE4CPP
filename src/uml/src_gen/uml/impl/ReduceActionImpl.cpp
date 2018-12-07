@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -457,13 +458,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
-			return eAny(getCollection()); //16828
+			return eAny(getCollection()); //20628
 		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //16829
+			return eAny(getIsOrdered()); //20629
 		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
-			return eAny(getReducer()); //16830
+			return eAny(getReducer()); //20630
 		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16831
+			return eAny(getResult()); //20631
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -472,13 +473,13 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
-			return getCollection() != nullptr; //16828
+			return getCollection() != nullptr; //20628
 		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //16829
+			return getIsOrdered() != false; //20629
 		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
-			return getReducer() != nullptr; //16830
+			return getReducer() != nullptr; //20630
 		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16831
+			return getResult() != nullptr; //20631
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -490,28 +491,28 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _collection = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setCollection(_collection); //16828
+			setCollection(_collection); //20628
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //16829
+			setIsOrdered(_isOrdered); //20629
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _reducer = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setReducer(_reducer); //16830
+			setReducer(_reducer); //20630
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16831
+			setResult(_result); //20631
 			return true;
 		}
 	}

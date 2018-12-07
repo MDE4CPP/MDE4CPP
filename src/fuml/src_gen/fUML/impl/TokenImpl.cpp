@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityNodeActivation.hpp"
@@ -217,9 +218,9 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-			return eAny(getHolder()); //530
+			return eAny(getHolder()); //1080
 		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn()); //531
+			return eAny(isWithdrawn()); //1081
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -228,9 +229,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
-			return getHolder().lock() != nullptr; //530
+			return getHolder().lock() != nullptr; //1080
 		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //531
+			return isWithdrawn() != true; //1081
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -242,14 +243,14 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _holder = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
-			setHolder(_holder); //530
+			setHolder(_holder); //1080
 			return true;
 		}
 		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = newValue->get<bool>();
-			setWithdrawn(_withdrawn); //531
+			setWithdrawn(_withdrawn); //1081
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -393,7 +394,7 @@ Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return eAny(getIsControl()); //11933
+			return eAny(getIsControl()); //18033
 	}
 	Any result;
 	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
@@ -409,7 +410,7 @@ bool PinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return getIsControl() != false; //11933
+			return getIsControl() != false; //18033
 	}
 	bool result = false;
 	result = MultiplicityElementImpl::internalEIsSet(featureID);
@@ -428,7 +429,7 @@ bool PinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isControl = newValue->get<bool>();
-			setIsControl(_isControl); //11933
+			setIsControl(_isControl); //18033
 			return true;
 		}
 	}

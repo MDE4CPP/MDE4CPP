@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -365,9 +366,9 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
-			return eAny(getContract()); //10219
+			return eAny(getContract()); //22919
 		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
-			return eAny(getSubstitutingClassifier()); //10220
+			return eAny(getSubstitutingClassifier()); //22920
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -376,9 +377,9 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
-			return getContract() != nullptr; //10219
+			return getContract() != nullptr; //22919
 		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier().lock() != nullptr; //10220
+			return getSubstitutingClassifier().lock() != nullptr; //22920
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -390,14 +391,14 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _contract = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setContract(_contract); //10219
+			setContract(_contract); //22919
 			return true;
 		}
 		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _substitutingClassifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setSubstitutingClassifier(_substitutingClassifier); //10220
+			setSubstitutingClassifier(_substitutingClassifier); //22920
 			return true;
 		}
 	}

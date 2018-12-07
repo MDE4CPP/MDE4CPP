@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -386,11 +387,11 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
-			return eAny(getKind()); //6014
+			return eAny(getKind()); //18914
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
-			return eAny(getState()); //6013
+			return eAny(getState()); //18913
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
-			return eAny(getStateMachine()); //6015
+			return eAny(getStateMachine()); //18915
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -399,11 +400,11 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
-			return m_kind != PseudostateKind::INITIAL;; //6014
+			return m_kind != PseudostateKind::INITIAL;; //18914
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //6013
+			return getState().lock() != nullptr; //18913
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //6015
+			return getStateMachine().lock() != nullptr; //18915
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -415,21 +416,21 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			PseudostateKind _kind = newValue->get<PseudostateKind>();
-			setKind(_kind); //6014
+			setKind(_kind); //18914
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //6013
+			setState(_state); //18913
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setStateMachine(_stateMachine); //6015
+			setStateMachine(_stateMachine); //18915
 			return true;
 		}
 	}

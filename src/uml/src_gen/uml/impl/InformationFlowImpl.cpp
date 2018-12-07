@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
@@ -462,19 +463,19 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
-			return eAny(getConveyed()); //20916
+			return eAny(getConveyed()); //11316
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
-			return eAny(getInformationSource()); //20917
+			return eAny(getInformationSource()); //11317
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
-			return eAny(getInformationTarget()); //20918
+			return eAny(getInformationTarget()); //11318
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
-			return eAny(getRealization()); //20919
+			return eAny(getRealization()); //11319
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
-			return eAny(getRealizingActivityEdge()); //20920
+			return eAny(getRealizingActivityEdge()); //11320
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
-			return eAny(getRealizingConnector()); //20921
+			return eAny(getRealizingConnector()); //11321
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
-			return eAny(getRealizingMessage()); //20922
+			return eAny(getRealizingMessage()); //11322
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -490,19 +491,19 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
-			return getConveyed() != nullptr; //20916
+			return getConveyed() != nullptr; //11316
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
-			return getInformationSource() != nullptr; //20917
+			return getInformationSource() != nullptr; //11317
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
-			return getInformationTarget() != nullptr; //20918
+			return getInformationTarget() != nullptr; //11318
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
-			return getRealization() != nullptr; //20919
+			return getRealization() != nullptr; //11319
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
-			return getRealizingActivityEdge() != nullptr; //20920
+			return getRealizingActivityEdge() != nullptr; //11320
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
-			return getRealizingConnector() != nullptr; //20921
+			return getRealizingConnector() != nullptr; //11321
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
-			return getRealizingMessage() != nullptr; //20922
+			return getRealizingMessage() != nullptr; //11322
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);

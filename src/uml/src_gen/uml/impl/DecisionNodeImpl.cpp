@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -407,9 +408,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
-			return eAny(getDecisionInput()); //18721
+			return eAny(getDecisionInput()); //6621
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
-			return eAny(getDecisionInputFlow()); //18722
+			return eAny(getDecisionInputFlow()); //6622
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -418,9 +419,9 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
-			return getDecisionInput() != nullptr; //18721
+			return getDecisionInput() != nullptr; //6621
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
-			return getDecisionInputFlow() != nullptr; //18722
+			return getDecisionInputFlow() != nullptr; //6622
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -432,14 +433,14 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _decisionInput = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setDecisionInput(_decisionInput); //18721
+			setDecisionInput(_decisionInput); //6621
 			return true;
 		}
 		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = newValue->get<std::shared_ptr<uml::ObjectFlow>>();
-			setDecisionInputFlow(_decisionInputFlow); //18722
+			setDecisionInputFlow(_decisionInputFlow); //6622
 			return true;
 		}
 	}

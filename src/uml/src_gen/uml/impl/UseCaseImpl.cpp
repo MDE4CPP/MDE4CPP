@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -659,13 +660,13 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::USECASE_EREFERENCE_EXTEND:
-			return eAny(getExtend()); //9842
+			return eAny(getExtend()); //24842
 		case UmlPackage::USECASE_EREFERENCE_EXTENSIONPOINT:
-			return eAny(getExtensionPoint()); //9843
+			return eAny(getExtensionPoint()); //24843
 		case UmlPackage::USECASE_EREFERENCE_INCLUDE:
-			return eAny(getInclude()); //9844
+			return eAny(getInclude()); //24844
 		case UmlPackage::USECASE_EREFERENCE_SUBJECT:
-			return eAny(getSubject()); //9845
+			return eAny(getSubject()); //24845
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -674,13 +675,13 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::USECASE_EREFERENCE_EXTEND:
-			return getExtend() != nullptr; //9842
+			return getExtend() != nullptr; //24842
 		case UmlPackage::USECASE_EREFERENCE_EXTENSIONPOINT:
-			return getExtensionPoint() != nullptr; //9843
+			return getExtensionPoint() != nullptr; //24843
 		case UmlPackage::USECASE_EREFERENCE_INCLUDE:
-			return getInclude() != nullptr; //9844
+			return getInclude() != nullptr; //24844
 		case UmlPackage::USECASE_EREFERENCE_SUBJECT:
-			return getSubject() != nullptr; //9845
+			return getSubject() != nullptr; //24845
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }

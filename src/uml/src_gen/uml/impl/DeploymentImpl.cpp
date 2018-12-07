@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -406,11 +407,11 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENT_EREFERENCE_CONFIGURATION:
-			return eAny(getConfiguration()); //3618
+			return eAny(getConfiguration()); //6918
 		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
-			return eAny(getDeployedArtifact()); //3619
+			return eAny(getDeployedArtifact()); //6919
 		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
-			return eAny(getLocation()); //3620
+			return eAny(getLocation()); //6920
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,11 +420,11 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENT_EREFERENCE_CONFIGURATION:
-			return getConfiguration() != nullptr; //3618
+			return getConfiguration() != nullptr; //6918
 		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact() != nullptr; //3619
+			return getDeployedArtifact() != nullptr; //6919
 		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
-			return getLocation().lock() != nullptr; //3620
+			return getLocation().lock() != nullptr; //6920
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -435,7 +436,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DeploymentTarget> _location = newValue->get<std::shared_ptr<uml::DeploymentTarget>>();
-			setLocation(_location); //3620
+			setLocation(_location); //6920
 			return true;
 		}
 	}

@@ -34,6 +34,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -407,17 +408,17 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return eAny(getClientDependency()); //74
+			return eAny(getClientDependency()); //1554
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return eAny(getName()); //75
+			return eAny(getName()); //1555
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return eAny(getNameExpression()); //76
+			return eAny(getNameExpression()); //1556
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return eAny(getNamespace()); //77
+			return eAny(getNamespace()); //1557
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return eAny(getQualifiedName()); //78
+			return eAny(getQualifiedName()); //1558
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //79
+			return eAny(getVisibility()); //1559
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,17 +427,17 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency() != nullptr; //74
+			return getClientDependency() != nullptr; //1554
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName() != ""; //75
+			return getName() != ""; //1555
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression() != nullptr; //76
+			return getNameExpression() != nullptr; //1556
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace().lock() != nullptr; //77
+			return getNamespace().lock() != nullptr; //1557
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName() != ""; //78
+			return getQualifiedName() != ""; //1558
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //79
+			return m_visibility != VisibilityKind::PUBLIC;; //1559
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -448,21 +449,21 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //75
+			setName(_name); //1555
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
-			setNameExpression(_nameExpression); //76
+			setNameExpression(_nameExpression); //1556
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //79
+			setVisibility(_visibility); //1559
 			return true;
 		}
 	}

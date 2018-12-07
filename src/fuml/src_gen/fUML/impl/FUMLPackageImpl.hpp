@@ -51,6 +51,7 @@ namespace fUML
 	class Evaluation;
 	class EventAccepter;
 	class EventDispatchLoop;
+	class EventOccurrence;
 	class Execution;
 	class ExecutionFactory;
 	class ExecutionFactoryL1;
@@ -669,6 +670,15 @@ namespace fUML
 			
 			
 			// End Class EventDispatchLoop
+
+			// Begin Class EventOccurrence
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getEventOccurrence_EClass() const ;
+			
+			
+			
+			
+			// End Class EventOccurrence
 
 			// Begin Class Execution
 			//Class and Feature Getter
@@ -1619,6 +1629,7 @@ namespace fUML
 			std::shared_ptr<ecore::EClass> m_evaluation_EClass = nullptr;
 			std::shared_ptr<ecore::EClass> m_eventAccepter_EClass = nullptr;
 			std::shared_ptr<ecore::EClass> m_eventDispatchLoop_EClass = nullptr;
+			std::shared_ptr<ecore::EClass> m_eventOccurrence_EClass = nullptr;
 			std::shared_ptr<ecore::EClass> m_execution_EClass = nullptr;
 			std::shared_ptr<ecore::EClass> m_executionFactory_EClass = nullptr;
 			std::shared_ptr<ecore::EClass> m_executionFactoryL1_EClass = nullptr;
@@ -2156,6 +2167,7 @@ namespace fUML
 			void createEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutionFactoryL1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
@@ -2272,6 +2284,7 @@ namespace fUML
 			void initializeEvaluationContent();
 			void initializeEventAccepterContent();
 			void initializeEventDispatchLoopContent();
+			void initializeEventOccurrenceContent();
 			void initializeExecutionContent();
 			void initializeExecutionFactoryContent();
 			void initializeExecutionFactoryL1Content();

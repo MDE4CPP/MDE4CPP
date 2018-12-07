@@ -19,6 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -30,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -41,6 +44,8 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EReference.hpp"
 
@@ -96,6 +101,17 @@ EReferenceImpl::~EReferenceImpl()
 
 
 //Additional constructor for the containments back reference
+			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EReferenceImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
 			:EReferenceImpl()
 			{
@@ -134,6 +150,8 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eContainingClass  = obj.getEContainingClass();
 
 	std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = obj.getEKeys();
@@ -242,6 +260,10 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EReferenceImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const
@@ -255,6 +277,11 @@ void EReferenceImpl::setThisEReferencePtr(std::weak_ptr<EReference> thisEReferen
 }
 std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eContainingClass.lock())
 	{
 		return wp;
@@ -270,17 +297,17 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
-			return eAny(isContainer()); //1420
+			return eAny(isContainer()); //4322
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
-			return eAny(isContainment()); //1419
+			return eAny(isContainment()); //4321
 		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
-			return eAny(getEKeys()); //1424
+			return eAny(getEKeys()); //4326
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
-			return eAny(getEOpposite()); //1422
+			return eAny(getEOpposite()); //4324
 		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
-			return eAny(getEReferenceType()); //1423
+			return eAny(getEReferenceType()); //4325
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
-			return eAny(isResolveProxies()); //1421
+			return eAny(isResolveProxies()); //4323
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -289,17 +316,17 @@ bool EReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINER:
-			return isContainer() != false; //1420
+			return isContainer() != false; //4322
 		case EcorePackage::EREFERENCE_EATTRIBUTE_CONTAINMENT:
-			return isContainment() != false; //1419
+			return isContainment() != false; //4321
 		case EcorePackage::EREFERENCE_EREFERENCE_EKEYS:
-			return getEKeys() != nullptr; //1424
+			return getEKeys() != nullptr; //4326
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
-			return getEOpposite() != nullptr; //1422
+			return getEOpposite() != nullptr; //4324
 		case EcorePackage::EREFERENCE_EREFERENCE_EREFERENCETYPE:
-			return getEReferenceType() != nullptr; //1423
+			return getEReferenceType() != nullptr; //4325
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
-			return isResolveProxies() != true; //1421
+			return isResolveProxies() != true; //4323
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -311,21 +338,21 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _containment = newValue->get<bool>();
-			setContainment(_containment); //1419
+			setContainment(_containment); //4321
 			return true;
 		}
 		case EcorePackage::EREFERENCE_EREFERENCE_EOPPOSITE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EReference> _eOpposite = newValue->get<std::shared_ptr<ecore::EReference>>();
-			setEOpposite(_eOpposite); //1422
+			setEOpposite(_eOpposite); //4324
 			return true;
 		}
 		case EcorePackage::EREFERENCE_EATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
 			bool _resolveProxies = newValue->get<bool>();
-			setResolveProxies(_resolveProxies); //1421
+			setResolveProxies(_resolveProxies); //4323
 			return true;
 		}
 	}
@@ -455,7 +482,10 @@ void EReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	

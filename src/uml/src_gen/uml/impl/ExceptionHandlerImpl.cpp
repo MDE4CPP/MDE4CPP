@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -302,13 +303,13 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
-			return eAny(getExceptionInput()); //1154
+			return eAny(getExceptionInput()); //874
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
-			return eAny(getExceptionType()); //1155
+			return eAny(getExceptionType()); //875
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
-			return eAny(getHandlerBody()); //1156
+			return eAny(getHandlerBody()); //876
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
-			return eAny(getProtectedNode()); //1157
+			return eAny(getProtectedNode()); //877
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -317,13 +318,13 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
-			return getExceptionInput() != nullptr; //1154
+			return getExceptionInput() != nullptr; //874
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
-			return getExceptionType() != nullptr; //1155
+			return getExceptionType() != nullptr; //875
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
-			return getHandlerBody() != nullptr; //1156
+			return getHandlerBody() != nullptr; //876
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
-			return getProtectedNode().lock() != nullptr; //1157
+			return getProtectedNode().lock() != nullptr; //877
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -335,21 +336,21 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = newValue->get<std::shared_ptr<uml::ObjectNode>>();
-			setExceptionInput(_exceptionInput); //1154
+			setExceptionInput(_exceptionInput); //874
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
-			setHandlerBody(_handlerBody); //1156
+			setHandlerBody(_handlerBody); //876
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
-			setProtectedNode(_protectedNode); //1157
+			setProtectedNode(_protectedNode); //877
 			return true;
 		}
 	}

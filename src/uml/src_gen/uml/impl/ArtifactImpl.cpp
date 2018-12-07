@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Artifact.hpp"
@@ -652,15 +653,15 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
-			return eAny(getFileName()); //3939
+			return eAny(getFileName()); //2039
 		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
-			return eAny(getManifestation()); //3940
+			return eAny(getManifestation()); //2040
 		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
-			return eAny(getNestedArtifact()); //3941
+			return eAny(getNestedArtifact()); //2041
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //3942
+			return eAny(getOwnedAttribute()); //2042
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //3943
+			return eAny(getOwnedOperation()); //2043
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -676,15 +677,15 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
-			return getFileName() != ""; //3939
+			return getFileName() != ""; //2039
 		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
-			return getManifestation() != nullptr; //3940
+			return getManifestation() != nullptr; //2040
 		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
-			return getNestedArtifact() != nullptr; //3941
+			return getNestedArtifact() != nullptr; //2041
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //3942
+			return getOwnedAttribute() != nullptr; //2042
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //3943
+			return getOwnedOperation() != nullptr; //2043
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -703,7 +704,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //3939
+			setFileName(_fileName); //2039
 			return true;
 		}
 	}

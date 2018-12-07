@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -296,9 +297,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
-			return eAny(getCondition()); //5210
+			return eAny(getCondition()); //17710
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //5211
+			return eAny(getParameter()); //17711
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -307,9 +308,9 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
-			return getCondition() != nullptr; //5210
+			return getCondition() != nullptr; //17710
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //5211
+			return getParameter() != nullptr; //17711
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

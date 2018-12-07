@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -340,9 +341,9 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return eAny(getOperand()); //8815
+			return eAny(getOperand()); //9515
 		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //8816
+			return eAny(getSymbol()); //9516
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -351,9 +352,9 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return getOperand() != nullptr; //8815
+			return getOperand() != nullptr; //9515
 		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //8816
+			return getSymbol() != ""; //9516
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -365,7 +366,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //8816
+			setSymbol(_symbol); //9516
 			return true;
 		}
 	}

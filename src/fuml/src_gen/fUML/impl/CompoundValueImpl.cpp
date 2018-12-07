@@ -36,6 +36,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -298,7 +299,7 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return eAny(getFeatureValues()); //130
+			return eAny(getFeatureValues()); //230
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -307,7 +308,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
-			return getFeatureValues() != nullptr; //130
+			return getFeatureValues() != nullptr; //230
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }

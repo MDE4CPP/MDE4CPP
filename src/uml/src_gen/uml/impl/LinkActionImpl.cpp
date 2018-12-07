@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -467,9 +468,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return eAny(getEndData()); //12528
+			return eAny(getEndData()); //13328
 		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return eAny(getInputValue()); //12529
+			return eAny(getInputValue()); //13329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -478,9 +479,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return getEndData() != nullptr; //12528
+			return getEndData() != nullptr; //13328
 		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue() != nullptr; //12529
+			return getInputValue() != nullptr; //13329
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }

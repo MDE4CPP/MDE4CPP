@@ -15,7 +15,8 @@
 // forward declarations
 template<class T> class Bag;
 template<class T, class ... U> class Subset;
-template<class T> class Union;
+template<class T, class ... U> class SubsetUnion;
+
 
 
 //*********************************
@@ -61,6 +62,11 @@ namespace ecore
 namespace ecore 
 {
 	class EGenericType;
+}
+
+namespace ecore 
+{
+	class EObject;
 }
 
 namespace ecore 
@@ -224,7 +230,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EOperation>> getEOperations() const = 0;
+			virtual std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> getEOperations() const = 0;
 			
 			/*!
 			 */
@@ -284,13 +290,13 @@ namespace ecore
 			std::shared_ptr<ecore::EAttribute > m_eIDAttribute;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EOperation>> m_eOperations;
+			std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> m_eOperations;
 			/*!
 			 */
 			std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> m_eReferences;
 			/*!
 			 */
-			std::shared_ptr<Union<ecore::EStructuralFeature>> m_eStructuralFeatures;
+			std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> m_eStructuralFeatures;
 			/*!
 			 */
 			std::shared_ptr<Bag<ecore::EClass>> m_eSuperTypes;
@@ -302,7 +308,9 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<ecore::EStructuralFeature>> getEStructuralFeatures() const = 0;
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;/*!
+			 */
+			virtual std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> getEStructuralFeatures() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

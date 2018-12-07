@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -361,15 +362,15 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
-			return eAny(getCoveredBy()); //21314
+			return eAny(getCoveredBy()); //13214
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
-			return eAny(getDecomposedAs()); //21310
+			return eAny(getDecomposedAs()); //13210
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
-			return eAny(getInteraction()); //21311
+			return eAny(getInteraction()); //13211
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
-			return eAny(getRepresents()); //21312
+			return eAny(getRepresents()); //13212
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
-			return eAny(getSelector()); //21313
+			return eAny(getSelector()); //13213
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -378,15 +379,15 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
-			return getCoveredBy() != nullptr; //21314
+			return getCoveredBy() != nullptr; //13214
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
-			return getDecomposedAs() != nullptr; //21310
+			return getDecomposedAs() != nullptr; //13210
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
-			return getInteraction().lock() != nullptr; //21311
+			return getInteraction().lock() != nullptr; //13211
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
-			return getRepresents() != nullptr; //21312
+			return getRepresents() != nullptr; //13212
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
-			return getSelector() != nullptr; //21313
+			return getSelector() != nullptr; //13213
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -398,28 +399,28 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = newValue->get<std::shared_ptr<uml::PartDecomposition>>();
-			setDecomposedAs(_decomposedAs); //21310
+			setDecomposedAs(_decomposedAs); //13210
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setInteraction(_interaction); //21311
+			setInteraction(_interaction); //13211
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _represents = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
-			setRepresents(_represents); //21312
+			setRepresents(_represents); //13212
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _selector = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSelector(_selector); //21313
+			setSelector(_selector); //13213
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -350,7 +351,7 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return eAny(getOwningSlot()); //3314
+			return eAny(getOwningSlot()); //25014
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -366,7 +367,7 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return getOwningSlot().lock() != nullptr; //3314
+			return getOwningSlot().lock() != nullptr; //25014
 	}
 	bool result = false;
 	result = PackageableElementImpl::internalEIsSet(featureID);
@@ -385,7 +386,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Slot> _owningSlot = newValue->get<std::shared_ptr<uml::Slot>>();
-			setOwningSlot(_owningSlot); //3314
+			setOwningSlot(_owningSlot); //25014
 			return true;
 		}
 	}

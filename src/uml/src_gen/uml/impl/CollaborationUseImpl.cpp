@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Collaboration.hpp"
@@ -293,9 +294,9 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
-			return eAny(getRoleBinding()); //9010
+			return eAny(getRoleBinding()); //4310
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
-			return eAny(getType()); //9011
+			return eAny(getType()); //4311
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -304,9 +305,9 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
-			return getRoleBinding() != nullptr; //9010
+			return getRoleBinding() != nullptr; //4310
 		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
-			return getType() != nullptr; //9011
+			return getType() != nullptr; //4311
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -318,7 +319,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Collaboration> _type = newValue->get<std::shared_ptr<uml::Collaboration>>();
-			setType(_type); //9011
+			setType(_type); //4311
 			return true;
 		}
 	}

@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -310,7 +311,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
-			return eAny(getInstance()); //19415
+			return eAny(getInstance()); //11815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,7 +320,7 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
-			return getInstance() != nullptr; //19415
+			return getInstance() != nullptr; //11815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -331,7 +332,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _instance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
-			setInstance(_instance); //19415
+			setInstance(_instance); //11815
 			return true;
 		}
 	}

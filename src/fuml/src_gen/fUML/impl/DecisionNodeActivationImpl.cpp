@@ -47,6 +47,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -515,7 +516,7 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
-			return eAny(getDecisionInputExecution()); //666
+			return eAny(getDecisionInputExecution()); //316
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -524,7 +525,7 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
-			return getDecisionInputExecution() != nullptr; //666
+			return getDecisionInputExecution() != nullptr; //316
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -536,7 +537,7 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _decisionInputExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
-			setDecisionInputExecution(_decisionInputExecution); //666
+			setDecisionInputExecution(_decisionInputExecution); //316
 			return true;
 		}
 	}

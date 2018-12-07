@@ -29,6 +29,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/BooleanValue.hpp"
@@ -210,9 +211,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
-			return eAny(getClause()); //700
+			return eAny(getClause()); //200
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
-			return eAny(getConditionalNodeActivation()); //701
+			return eAny(getConditionalNodeActivation()); //201
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -221,9 +222,9 @@ bool ClauseActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
-			return getClause() != nullptr; //700
+			return getClause() != nullptr; //200
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
-			return getConditionalNodeActivation() != nullptr; //701
+			return getConditionalNodeActivation() != nullptr; //201
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -235,14 +236,14 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Clause> _clause = newValue->get<std::shared_ptr<uml::Clause>>();
-			setClause(_clause); //700
+			setClause(_clause); //200
 			return true;
 		}
 		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = newValue->get<std::shared_ptr<fUML::ConditionalNodeActivation>>();
-			setConditionalNodeActivation(_conditionalNodeActivation); //701
+			setConditionalNodeActivation(_conditionalNodeActivation); //201
 			return true;
 		}
 	}

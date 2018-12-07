@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -385,9 +386,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return eAny(getMaxint()); //21916
+			return eAny(getMaxint()); //12016
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return eAny(getMinint()); //21917
+			return eAny(getMinint()); //12017
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -396,9 +397,9 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return getMaxint() != nullptr; //21916
+			return getMaxint() != nullptr; //12016
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return getMinint() != nullptr; //21917
+			return getMinint() != nullptr; //12017
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
@@ -410,14 +411,14 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMaxint(_maxint); //21916
+			setMaxint(_maxint); //12016
 			return true;
 		}
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMinint(_minint); //21917
+			setMinint(_minint); //12017
 			return true;
 		}
 	}

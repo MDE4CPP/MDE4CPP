@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -306,11 +307,11 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
-			return eAny(getBoundElement()); //199
+			return eAny(getBoundElement()); //2309
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
-			return eAny(getParameterSubstitution()); //197
+			return eAny(getParameterSubstitution()); //2307
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
-			return eAny(getSignature()); //198
+			return eAny(getSignature()); //2308
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,11 +320,11 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
-			return getBoundElement().lock() != nullptr; //199
+			return getBoundElement().lock() != nullptr; //2309
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
-			return getParameterSubstitution() != nullptr; //197
+			return getParameterSubstitution() != nullptr; //2307
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
-			return getSignature() != nullptr; //198
+			return getSignature() != nullptr; //2308
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -335,14 +336,14 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _boundElement = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
-			setBoundElement(_boundElement); //199
+			setBoundElement(_boundElement); //2309
 			return true;
 		}
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
-			setSignature(_signature); //198
+			setSignature(_signature); //2308
 			return true;
 		}
 	}

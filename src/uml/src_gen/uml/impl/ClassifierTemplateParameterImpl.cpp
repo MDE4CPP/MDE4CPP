@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -286,9 +287,9 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return eAny(getAllowSubstitutable()); //1049
+			return eAny(getAllowSubstitutable()); //379
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
-			return eAny(getConstrainingClassifier()); //10410
+			return eAny(getConstrainingClassifier()); //3710
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
@@ -297,9 +298,9 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return getAllowSubstitutable() != true; //1049
+			return getAllowSubstitutable() != true; //379
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
-			return getConstrainingClassifier() != nullptr; //10410
+			return getConstrainingClassifier() != nullptr; //3710
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
@@ -311,7 +312,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _allowSubstitutable = newValue->get<bool>();
-			setAllowSubstitutable(_allowSubstitutable); //1049
+			setAllowSubstitutable(_allowSubstitutable); //379
 			return true;
 		}
 	}

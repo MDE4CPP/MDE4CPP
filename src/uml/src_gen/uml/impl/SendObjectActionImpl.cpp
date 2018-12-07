@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -425,9 +426,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return eAny(getRequest()); //17230
+			return eAny(getRequest()); //21230
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //17231
+			return eAny(getTarget()); //21231
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,9 +437,9 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return getRequest() != nullptr; //17230
+			return getRequest() != nullptr; //21230
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //17231
+			return getTarget() != nullptr; //21231
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -450,14 +451,14 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _request = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRequest(_request); //17230
+			setRequest(_request); //21230
 			return true;
 		}
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //17231
+			setTarget(_target); //21231
 			return true;
 		}
 	}

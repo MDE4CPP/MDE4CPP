@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -297,9 +298,9 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
-			return eAny(getAddition()); //10113
+			return eAny(getAddition()); //11213
 		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
-			return eAny(getIncludingCase()); //10114
+			return eAny(getIncludingCase()); //11214
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -315,9 +316,9 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
-			return getAddition() != nullptr; //10113
+			return getAddition() != nullptr; //11213
 		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
-			return getIncludingCase().lock() != nullptr; //10114
+			return getIncludingCase().lock() != nullptr; //11214
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -336,14 +337,14 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _addition = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setAddition(_addition); //10113
+			setAddition(_addition); //11213
 			return true;
 		}
 		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _includingCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setIncludingCase(_includingCase); //10114
+			setIncludingCase(_includingCase); //11214
 			return true;
 		}
 	}

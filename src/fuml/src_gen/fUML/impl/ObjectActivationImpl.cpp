@@ -35,6 +35,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -355,13 +356,13 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return eAny(getClassifierBehaviorExecutions()); //473
+			return eAny(getClassifierBehaviorExecutions()); //773
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
-			return eAny(getEventPool()); //471
+			return eAny(getEventPool()); //771
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //472
+			return eAny(getObject()); //772
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
-			return eAny(getWaitingEventAccepters()); //470
+			return eAny(getWaitingEventAccepters()); //770
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -370,13 +371,13 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return getClassifierBehaviorExecutions() != nullptr; //473
+			return getClassifierBehaviorExecutions() != nullptr; //773
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
-			return getEventPool() != nullptr; //471
+			return getEventPool() != nullptr; //771
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //472
+			return getObject() != nullptr; //772
 		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
-			return getWaitingEventAccepters() != nullptr; //470
+			return getWaitingEventAccepters() != nullptr; //770
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -388,7 +389,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _object = newValue->get<std::shared_ptr<fUML::Object>>();
-			setObject(_object); //472
+			setObject(_object); //772
 			return true;
 		}
 	}

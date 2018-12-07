@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -286,11 +287,11 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
-			return eAny(getOwnedParameter()); //176
+			return eAny(getOwnedParameter()); //2336
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //174
+			return eAny(getParameter()); //2334
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
-			return eAny(getTemplate()); //175
+			return eAny(getTemplate()); //2335
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,11 +300,11 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //176
+			return getOwnedParameter() != nullptr; //2336
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //174
+			return getParameter() != nullptr; //2334
 		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
-			return getTemplate().lock() != nullptr; //175
+			return getTemplate().lock() != nullptr; //2335
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -315,7 +316,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _template = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
-			setTemplate(_template); //175
+			setTemplate(_template); //2335
 			return true;
 		}
 	}

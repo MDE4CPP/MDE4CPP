@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -787,21 +788,21 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
-			return eAny(getURI()); //1321
+			return eAny(getURI()); //17021
 		case UmlPackage::PACKAGE_EREFERENCE_NESTEDPACKAGE:
-			return eAny(getNestedPackage()); //1322
+			return eAny(getNestedPackage()); //17022
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-			return eAny(getNestingPackage()); //1323
+			return eAny(getNestingPackage()); //17023
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDSTEREOTYPE:
-			return eAny(getOwnedStereotype()); //1324
+			return eAny(getOwnedStereotype()); //17024
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDTYPE:
-			return eAny(getOwnedType()); //1325
+			return eAny(getOwnedType()); //17025
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEMERGE:
-			return eAny(getPackageMerge()); //1326
+			return eAny(getPackageMerge()); //17026
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEDELEMENT:
-			return eAny(getPackagedElement()); //1327
+			return eAny(getPackagedElement()); //17027
 		case UmlPackage::PACKAGE_EREFERENCE_PROFILEAPPLICATION:
-			return eAny(getProfileApplication()); //1328
+			return eAny(getProfileApplication()); //17028
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -822,21 +823,21 @@ bool PackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
-			return getURI() != ""; //1321
+			return getURI() != ""; //17021
 		case UmlPackage::PACKAGE_EREFERENCE_NESTEDPACKAGE:
-			return getNestedPackage() != nullptr; //1322
+			return getNestedPackage() != nullptr; //17022
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-			return getNestingPackage().lock() != nullptr; //1323
+			return getNestingPackage().lock() != nullptr; //17023
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype() != nullptr; //1324
+			return getOwnedStereotype() != nullptr; //17024
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDTYPE:
-			return getOwnedType() != nullptr; //1325
+			return getOwnedType() != nullptr; //17025
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEMERGE:
-			return getPackageMerge() != nullptr; //1326
+			return getPackageMerge() != nullptr; //17026
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //1327
+			return getPackagedElement() != nullptr; //17027
 		case UmlPackage::PACKAGE_EREFERENCE_PROFILEAPPLICATION:
-			return getProfileApplication() != nullptr; //1328
+			return getProfileApplication() != nullptr; //17028
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -860,14 +861,14 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _URI = newValue->get<std::string>();
-			setURI(_URI); //1321
+			setURI(_URI); //17021
 			return true;
 		}
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _nestingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setNestingPackage(_nestingPackage); //1323
+			setNestingPackage(_nestingPackage); //17023
 			return true;
 		}
 	}

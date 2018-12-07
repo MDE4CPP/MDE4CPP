@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -411,9 +412,9 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //17030
+			return eAny(getIsRemoveDuplicates()); //21030
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
-			return eAny(getRemoveAt()); //17031
+			return eAny(getRemoveAt()); //21031
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,9 +423,9 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //17030
+			return getIsRemoveDuplicates() != false; //21030
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt() != nullptr; //17031
+			return getRemoveAt() != nullptr; //21031
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -436,14 +437,14 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //17030
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21030
 			return true;
 		}
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRemoveAt(_removeAt); //17031
+			setRemoveAt(_removeAt); //21031
 			return true;
 		}
 	}

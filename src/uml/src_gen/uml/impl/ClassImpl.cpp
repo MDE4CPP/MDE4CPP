@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -747,17 +748,17 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return eAny(getExtension()); //348
+			return eAny(getExtension()); //3548
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //349
+			return eAny(getIsActive()); //3549
 		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return eAny(getNestedClassifier()); //350
+			return eAny(getNestedClassifier()); //3550
 		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //347
+			return eAny(getOwnedOperation()); //3547
 		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return eAny(getOwnedReception()); //351
+			return eAny(getOwnedReception()); //3551
 		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return eAny(getSuperClass()); //352
+			return eAny(getSuperClass()); //3552
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -773,17 +774,17 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return getExtension() != nullptr; //348
+			return getExtension() != nullptr; //3548
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return getIsActive() != false; //349
+			return getIsActive() != false; //3549
 		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //350
+			return getNestedClassifier() != nullptr; //3550
 		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //347
+			return getOwnedOperation() != nullptr; //3547
 		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //351
+			return getOwnedReception() != nullptr; //3551
 		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return getSuperClass() != nullptr; //352
+			return getSuperClass() != nullptr; //3552
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -802,7 +803,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
-			setIsActive(_isActive); //349
+			setIsActive(_isActive); //3549
 			return true;
 		}
 	}

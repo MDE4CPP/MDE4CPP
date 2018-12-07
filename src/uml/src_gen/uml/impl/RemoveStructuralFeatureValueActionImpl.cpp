@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -429,9 +430,9 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //16932
+			return eAny(getIsRemoveDuplicates()); //20932
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
-			return eAny(getRemoveAt()); //16933
+			return eAny(getRemoveAt()); //20933
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -440,9 +441,9 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //16932
+			return getIsRemoveDuplicates() != false; //20932
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt() != nullptr; //16933
+			return getRemoveAt() != nullptr; //20933
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -454,14 +455,14 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //16932
+			setIsRemoveDuplicates(_isRemoveDuplicates); //20932
 			return true;
 		}
 		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRemoveAt(_removeAt); //16933
+			setRemoveAt(_removeAt); //20933
 			return true;
 		}
 	}

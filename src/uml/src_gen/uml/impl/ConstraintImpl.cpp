@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -365,11 +366,11 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return eAny(getConstrainedElement()); //5313
+			return eAny(getConstrainedElement()); //5713
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //5314
+			return eAny(getContext()); //5714
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //5315
+			return eAny(getSpecification()); //5715
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -378,11 +379,11 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return getConstrainedElement() != nullptr; //5313
+			return getConstrainedElement() != nullptr; //5713
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return getContext().lock() != nullptr; //5314
+			return getContext().lock() != nullptr; //5714
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //5315
+			return getSpecification() != nullptr; //5715
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -394,14 +395,14 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setContext(_context); //5314
+			setContext(_context); //5714
 			return true;
 		}
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //5315
+			setSpecification(_specification); //5715
 			return true;
 		}
 	}

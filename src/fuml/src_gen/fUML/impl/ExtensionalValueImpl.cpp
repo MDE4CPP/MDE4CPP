@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/CompoundValue.hpp"
@@ -172,7 +173,7 @@ Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return eAny(getLocus()); //211
+			return eAny(getLocus()); //491
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -181,7 +182,7 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
-			return getLocus() != nullptr; //211
+			return getLocus() != nullptr; //491
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
@@ -193,7 +194,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
-			setLocus(_locus); //211
+			setLocus(_locus); //491
 			return true;
 		}
 	}

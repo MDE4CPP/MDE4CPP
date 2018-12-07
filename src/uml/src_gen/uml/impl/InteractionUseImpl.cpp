@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -454,15 +455,15 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
-			return eAny(getActualGate()); //21514
+			return eAny(getActualGate()); //12414
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
-			return eAny(getArgument()); //21515
+			return eAny(getArgument()); //12415
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
-			return eAny(getRefersTo()); //21516
+			return eAny(getRefersTo()); //12416
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
-			return eAny(getReturnValue()); //21517
+			return eAny(getReturnValue()); //12417
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
-			return eAny(getReturnValueRecipient()); //21518
+			return eAny(getReturnValueRecipient()); //12418
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -471,15 +472,15 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
-			return getActualGate() != nullptr; //21514
+			return getActualGate() != nullptr; //12414
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
-			return getArgument() != nullptr; //21515
+			return getArgument() != nullptr; //12415
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
-			return getRefersTo() != nullptr; //21516
+			return getRefersTo() != nullptr; //12416
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
-			return getReturnValue() != nullptr; //21517
+			return getReturnValue() != nullptr; //12417
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient() != nullptr; //21518
+			return getReturnValueRecipient() != nullptr; //12418
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -491,21 +492,21 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _refersTo = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setRefersTo(_refersTo); //21516
+			setRefersTo(_refersTo); //12416
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _returnValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setReturnValue(_returnValue); //21517
+			setReturnValue(_returnValue); //12417
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _returnValueRecipient = newValue->get<std::shared_ptr<uml::Property>>();
-			setReturnValueRecipient(_returnValueRecipient); //21518
+			setReturnValueRecipient(_returnValueRecipient); //12418
 			return true;
 		}
 	}

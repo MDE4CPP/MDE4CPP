@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/CombinedFragment.hpp"
@@ -330,7 +331,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //23017
+			return eAny(getMessage()); //5617
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -339,7 +340,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //23017
+			return getMessage() != nullptr; //5617
 	}
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }

@@ -7,12 +7,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/ETypeParameter.hpp"
 
 //depending model packages
 
@@ -209,6 +213,8 @@ void EcorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 {
 	m_eObject_EClass = factory->createEClass_in_EPackage(package, EOBJECT_ECLASS);
 	
+	m_eObject_EReference_eContainer = factory->createEReference_in_EContainingClass(m_eObject_EClass, EOBJECT_EREFERENCE_ECONTAINER);
+	m_eObject_EReference_eContens = factory->createEReference_in_EContainingClass(m_eObject_EClass, EOBJECT_EREFERENCE_ECONTENS);
 	
 	m_eObject_EOperation_eAllContents = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_EALLCONTENTS);
 	m_eObject_EOperation_eClass = factory->createEOperation_in_EContainingClass(m_eObject_EClass, EOBJECT_EOPERATION_ECLASS);

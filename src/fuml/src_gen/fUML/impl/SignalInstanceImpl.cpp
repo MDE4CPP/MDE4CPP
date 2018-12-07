@@ -30,6 +30,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/CompoundValue.hpp"
@@ -161,7 +162,7 @@ Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
-			return eAny(getType()); //451
+			return eAny(getType()); //1001
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -170,7 +171,7 @@ bool SignalInstanceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
-			return getType() != nullptr; //451
+			return getType() != nullptr; //1001
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
@@ -182,7 +183,7 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _type = newValue->get<std::shared_ptr<uml::Signal>>();
-			setType(_type); //451
+			setType(_type); //1001
 			return true;
 		}
 	}

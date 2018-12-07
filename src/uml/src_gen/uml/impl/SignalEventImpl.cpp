@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -285,7 +286,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
-			return eAny(getSignal()); //20113
+			return eAny(getSignal()); //21613
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,7 +295,7 @@ bool SignalEventImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
-			return getSignal() != nullptr; //20113
+			return getSignal() != nullptr; //21613
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
@@ -306,7 +307,7 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
-			setSignal(_signal); //20113
+			setSignal(_signal); //21613
 			return true;
 		}
 	}

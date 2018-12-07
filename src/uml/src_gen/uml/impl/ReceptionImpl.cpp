@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -349,7 +350,7 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
-			return eAny(getSignal()); //5627
+			return eAny(getSignal()); //20227
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -358,7 +359,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
-			return getSignal() != nullptr; //5627
+			return getSignal() != nullptr; //20227
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
@@ -370,7 +371,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
-			setSignal(_signal); //5627
+			setSignal(_signal); //20227
 			return true;
 		}
 	}

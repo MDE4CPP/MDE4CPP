@@ -33,6 +33,10 @@ namespace ecore
 			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;
 			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);
 
+			//Additional constructors for the containments back reference
+			ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
 
 
 		public:
@@ -111,7 +115,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

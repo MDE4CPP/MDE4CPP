@@ -4,12 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/ETypeParameter.hpp"
 
 //metamodel factory
 #include "ecore/EcoreFactory.hpp"
@@ -438,6 +442,14 @@ std::shared_ptr<ecore::EClass> EcorePackageImpl::getEObject_EClass() const
 }
 
 
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEObject_EReference_eContainer() const
+{
+	return m_eObject_EReference_eContainer;
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEObject_EReference_eContens() const
+{
+	return m_eObject_EReference_eContens;
+}
 
 std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject_EOperation_eAllContents() const
 {

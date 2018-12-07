@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -335,11 +336,11 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
-			return eAny(getEntry()); //6413
+			return eAny(getEntry()); //5213
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
-			return eAny(getExit()); //6414
+			return eAny(getExit()); //5214
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
-			return eAny(getState()); //6415
+			return eAny(getState()); //5215
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -348,11 +349,11 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
-			return getEntry() != nullptr; //6413
+			return getEntry() != nullptr; //5213
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
-			return getExit() != nullptr; //6414
+			return getExit() != nullptr; //5214
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //6415
+			return getState().lock() != nullptr; //5215
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -364,7 +365,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //6415
+			setState(_state); //5215
 			return true;
 		}
 	}

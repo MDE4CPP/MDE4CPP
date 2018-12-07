@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -460,7 +461,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return eAny(getValue()); //17937
+			return eAny(getValue()); //24937
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -469,7 +470,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return getValue() != nullptr; //17937
+			return getValue() != nullptr; //24937
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -481,7 +482,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setValue(_value); //17937
+			setValue(_value); //24937
 			return true;
 		}
 	}

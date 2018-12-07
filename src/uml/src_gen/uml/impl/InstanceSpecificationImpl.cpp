@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -394,11 +395,11 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //7915
+			return eAny(getClassifier()); //11715
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return eAny(getSlot()); //7916
+			return eAny(getSlot()); //11716
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //7917
+			return eAny(getSpecification()); //11717
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -419,11 +420,11 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //7915
+			return getClassifier() != nullptr; //11715
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return getSlot() != nullptr; //7916
+			return getSlot() != nullptr; //11716
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //7917
+			return getSpecification() != nullptr; //11717
 	}
 	bool result = false;
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
@@ -447,7 +448,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //7917
+			setSpecification(_specification); //11717
 			return true;
 		}
 	}

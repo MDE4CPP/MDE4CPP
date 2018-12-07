@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -408,7 +409,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16428
+			return eAny(getResult()); //19828
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -417,7 +418,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16428
+			return getResult() != nullptr; //19828
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -429,7 +430,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16428
+			setResult(_result); //19828
 			return true;
 		}
 	}

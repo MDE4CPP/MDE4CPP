@@ -19,6 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -30,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -39,6 +42,8 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/ETypedElement.hpp"
 
@@ -86,6 +91,17 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 
 
 //Additional constructor for the containments back reference
+			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EStructuralFeatureImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
 			:EStructuralFeatureImpl()
 			{
@@ -121,6 +137,8 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eContainingClass  = obj.getEContainingClass();
 
 	m_eType  = obj.getEType();
@@ -262,6 +280,10 @@ std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() cons
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EStructuralFeatureImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const
@@ -275,6 +297,11 @@ void EStructuralFeatureImpl::setThisEStructuralFeaturePtr(std::weak_ptr<EStructu
 }
 std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eContainingClass.lock())
 	{
 		return wp;
@@ -290,23 +317,23 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-			return eAny(isChangeable()); //1510
+			return eAny(isChangeable()); //5012
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //1514
+			return eAny(getDefaultValue()); //5016
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-			return eAny(getDefaultValueLiteral()); //1513
+			return eAny(getDefaultValueLiteral()); //5015
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-			return eAny(isDerived()); //1516
+			return eAny(isDerived()); //5018
 		case EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS:
-			return eAny(getEContainingClass()); //1518
+			return eAny(getEContainingClass()); //5020
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID:
-			return eAny(getFeatureID()); //1517
+			return eAny(getFeatureID()); //5019
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-			return eAny(isTransient()); //1512
+			return eAny(isTransient()); //5014
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-			return eAny(isUnsettable()); //1515
+			return eAny(isUnsettable()); //5017
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-			return eAny(isVolatile()); //1511
+			return eAny(isVolatile()); //5013
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,23 +342,23 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE:
-			return isChangeable() != true; //1510
+			return isChangeable() != true; //5012
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE:
-			return !getDefaultValue()->isEmpty(); //1514
+			return !getDefaultValue()->isEmpty(); //5016
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
-			return getDefaultValueLiteral() != ""; //1513
+			return getDefaultValueLiteral() != ""; //5015
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
-			return isDerived() != false; //1516
+			return isDerived() != false; //5018
 		case EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //1518
+			return getEContainingClass().lock() != nullptr; //5020
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID:
-			return getFeatureID() != -1; //1517
+			return getFeatureID() != -1; //5019
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
-			return isTransient() != false; //1512
+			return isTransient() != false; //5014
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
-			return isUnsettable() != false; //1515
+			return isUnsettable() != false; //5017
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
-			return isVolatile() != false; //1511
+			return isVolatile() != false; //5013
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -343,42 +370,42 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _changeable = newValue->get<bool>();
-			setChangeable(_changeable); //1510
+			setChangeable(_changeable); //5012
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL:
 		{
 			// BOOST CAST
 			std::string _defaultValueLiteral = newValue->get<std::string>();
-			setDefaultValueLiteral(_defaultValueLiteral); //1513
+			setDefaultValueLiteral(_defaultValueLiteral); //5015
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED:
 		{
 			// BOOST CAST
 			bool _derived = newValue->get<bool>();
-			setDerived(_derived); //1516
+			setDerived(_derived); //5018
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT:
 		{
 			// BOOST CAST
 			bool _transient = newValue->get<bool>();
-			setTransient(_transient); //1512
+			setTransient(_transient); //5014
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE:
 		{
 			// BOOST CAST
 			bool _unsettable = newValue->get<bool>();
-			setUnsettable(_unsettable); //1515
+			setUnsettable(_unsettable); //5017
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE:
 		{
 			// BOOST CAST
 			bool _volatile = newValue->get<bool>();
-			setVolatile(_volatile); //1511
+			setVolatile(_volatile); //5013
 			return true;
 		}
 	}
@@ -509,7 +536,10 @@ void EStructuralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	

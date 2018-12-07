@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -299,9 +300,9 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
-			return eAny(getEvent()); //24713
+			return eAny(getEvent()); //8013
 		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //24714
+			return eAny(getFirstEvent()); //8014
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -310,9 +311,9 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
-			return getEvent() != nullptr; //24713
+			return getEvent() != nullptr; //8013
 		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //24714
+			return !getFirstEvent()->empty(); //8014
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }

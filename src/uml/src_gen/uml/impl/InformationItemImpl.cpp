@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -496,7 +497,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return eAny(getRepresented()); //22439
+			return eAny(getRepresented()); //11439
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -505,7 +506,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return getRepresented() != nullptr; //22439
+			return getRepresented() != nullptr; //11439
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

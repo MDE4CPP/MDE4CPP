@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -743,31 +744,31 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
-			return eAny(getBodyCondition()); //4731
+			return eAny(getBodyCondition()); //16731
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
-			return eAny(getClass()); //4732
+			return eAny(getClass()); //16732
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
-			return eAny(getDatatype()); //4733
+			return eAny(getDatatype()); //16733
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
-			return eAny(getInterface()); //4734
+			return eAny(getInterface()); //16734
 		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //4735
+			return eAny(getIsOrdered()); //16735
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
-			return eAny(getIsQuery()); //4736
+			return eAny(getIsQuery()); //16736
 		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //4737
+			return eAny(getIsUnique()); //16737
 		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
-			return eAny(getLower()); //4738
+			return eAny(getLower()); //16738
 		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
-			return eAny(getPostcondition()); //4739
+			return eAny(getPostcondition()); //16739
 		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
-			return eAny(getPrecondition()); //4740
+			return eAny(getPrecondition()); //16740
 		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
-			return eAny(getRedefinedOperation()); //4741
+			return eAny(getRedefinedOperation()); //16741
 		case UmlPackage::OPERATION_EREFERENCE_TYPE:
-			return eAny(getType()); //4742
+			return eAny(getType()); //16742
 		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
-			return eAny(getUpper()); //4743
+			return eAny(getUpper()); //16743
 	}
 	Any result;
 	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -788,31 +789,31 @@ bool OperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
-			return getBodyCondition() != nullptr; //4731
+			return getBodyCondition() != nullptr; //16731
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
-			return getClass().lock() != nullptr; //4732
+			return getClass().lock() != nullptr; //16732
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
-			return getDatatype().lock() != nullptr; //4733
+			return getDatatype().lock() != nullptr; //16733
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
-			return getInterface().lock() != nullptr; //4734
+			return getInterface().lock() != nullptr; //16734
 		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //4735
+			return getIsOrdered() != false; //16735
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
-			return getIsQuery() != false; //4736
+			return getIsQuery() != false; //16736
 		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //4737
+			return getIsUnique() != true; //16737
 		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
-			return getLower() != 1; //4738
+			return getLower() != 1; //16738
 		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
-			return getPostcondition() != nullptr; //4739
+			return getPostcondition() != nullptr; //16739
 		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
-			return getPrecondition() != nullptr; //4740
+			return getPrecondition() != nullptr; //16740
 		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
-			return getRedefinedOperation() != nullptr; //4741
+			return getRedefinedOperation() != nullptr; //16741
 		case UmlPackage::OPERATION_EREFERENCE_TYPE:
-			return getType() != nullptr; //4742
+			return getType() != nullptr; //16742
 		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
-			return getUpper() != 1; //4743
+			return getUpper() != 1; //16743
 	}
 	bool result = false;
 	result = BehavioralFeatureImpl::internalEIsSet(featureID);
@@ -836,35 +837,35 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _bodyCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setBodyCondition(_bodyCondition); //4731
+			setBodyCondition(_bodyCondition); //16731
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
-			setClass(_class); //4732
+			setClass(_class); //16732
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
-			setDatatype(_datatype); //4733
+			setDatatype(_datatype); //16733
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
-			setInterface(_interface); //4734
+			setInterface(_interface); //16734
 			return true;
 		}
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
 		{
 			// BOOST CAST
 			bool _isQuery = newValue->get<bool>();
-			setIsQuery(_isQuery); //4736
+			setIsQuery(_isQuery); //16736
 			return true;
 		}
 	}

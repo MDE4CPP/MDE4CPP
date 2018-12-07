@@ -3,10 +3,9 @@
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "types/TypesPackage.hpp"
-
 #include "ecore/EClass.hpp"
 
+#include "types/TypesPackage.hpp"
 
 
 using namespace types;

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -737,7 +738,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
-			return eAny(getConformance()); //5866
+			return eAny(getConformance()); //18766
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }
@@ -746,7 +747,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
-			return getConformance() != nullptr; //5866
+			return getConformance() != nullptr; //18766
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }

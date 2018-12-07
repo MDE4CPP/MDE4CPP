@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -506,15 +507,15 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return eAny(getExtendedRegion()); //6219
+			return eAny(getExtendedRegion()); //20719
 		case UmlPackage::REGION_EREFERENCE_STATE:
-			return eAny(getState()); //6220
+			return eAny(getState()); //20720
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return eAny(getStateMachine()); //6221
+			return eAny(getStateMachine()); //20721
 		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return eAny(getSubvertex()); //6223
+			return eAny(getSubvertex()); //20723
 		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return eAny(getTransition()); //6222
+			return eAny(getTransition()); //20722
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -530,15 +531,15 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return getExtendedRegion() != nullptr; //6219
+			return getExtendedRegion() != nullptr; //20719
 		case UmlPackage::REGION_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //6220
+			return getState().lock() != nullptr; //20720
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //6221
+			return getStateMachine().lock() != nullptr; //20721
 		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return getSubvertex() != nullptr; //6223
+			return getSubvertex() != nullptr; //20723
 		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return getTransition() != nullptr; //6222
+			return getTransition() != nullptr; //20722
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -557,21 +558,21 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _extendedRegion = newValue->get<std::shared_ptr<uml::Region>>();
-			setExtendedRegion(_extendedRegion); //6219
+			setExtendedRegion(_extendedRegion); //20719
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //6220
+			setState(_state); //20720
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setStateMachine(_stateMachine); //6221
+			setStateMachine(_stateMachine); //20721
 			return true;
 		}
 	}

@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -221,7 +222,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
-			return eAny(getType()); //322
+			return eAny(getType()); //642
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -230,7 +231,7 @@ bool LinkImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::LINK_EREFERENCE_TYPE:
-			return getType() != nullptr; //322
+			return getType() != nullptr; //642
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
@@ -242,7 +243,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
-			setType(_type); //322
+			setType(_type); //642
 			return true;
 		}
 	}

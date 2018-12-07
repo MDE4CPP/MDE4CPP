@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -498,17 +499,17 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return eAny(getElementImport()); //611
+			return eAny(getElementImport()); //15611
 		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return eAny(getImportedMember()); //614
+			return eAny(getImportedMember()); //15614
 		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return eAny(getMember()); //615
+			return eAny(getMember()); //15615
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return eAny(getOwnedMember()); //613
+			return eAny(getOwnedMember()); //15613
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return eAny(getOwnedRule()); //610
+			return eAny(getOwnedRule()); //15610
 		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return eAny(getPackageImport()); //612
+			return eAny(getPackageImport()); //15612
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -517,17 +518,17 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return getElementImport() != nullptr; //611
+			return getElementImport() != nullptr; //15611
 		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return getImportedMember() != nullptr; //614
+			return getImportedMember() != nullptr; //15614
 		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return getMember() != nullptr; //615
+			return getMember() != nullptr; //15615
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return getOwnedMember() != nullptr; //613
+			return getOwnedMember() != nullptr; //15613
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return getOwnedRule() != nullptr; //610
+			return getOwnedRule() != nullptr; //15610
 		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return getPackageImport() != nullptr; //612
+			return getPackageImport() != nullptr; //15612
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

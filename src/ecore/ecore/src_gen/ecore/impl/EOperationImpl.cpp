@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -39,6 +41,8 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EOperation.hpp"
 
@@ -80,7 +84,11 @@ EOperationImpl::EOperationImpl()
 	
 	
 
-		m_eParameters.reset(new Bag<ecore::EParameter>());
+		/*Subset*/
+		m_eParameters.reset(new Subset<ecore::EParameter, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >()" << std::endl;
+		#endif
 	
 	
 
@@ -97,6 +105,11 @@ EOperationImpl::EOperationImpl()
 	
 	
 
+		/*Subset*/
+		m_eParameters->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 
@@ -110,6 +123,17 @@ EOperationImpl::~EOperationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EOperation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EOperationImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -141,6 +165,8 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eContainingClass  = obj.getEContainingClass();
 
 	std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = obj.getEExceptions();
@@ -194,6 +220,11 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	
 	
 
+		/*Subset*/
+		m_eParameters->initSubset(m_eContens);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(m_eContens)" << std::endl;
+		#endif
 	
 	
 
@@ -295,7 +326,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 }
 
 
-std::shared_ptr<Bag<ecore::EParameter>> EOperationImpl::getEParameters() const
+std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
 {
 
     return m_eParameters;
@@ -312,6 +343,10 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EOperationImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const
@@ -325,6 +360,11 @@ void EOperationImpl::setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperati
 }
 std::shared_ptr<ecore::EObject> EOperationImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eContainingClass.lock())
 	{
 		return wp;
@@ -340,17 +380,17 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
-			return eAny(getEContainingClass()); //1111
+			return eAny(getEContainingClass()); //4013
 		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
-			return eAny(getEExceptions()); //1114
+			return eAny(getEExceptions()); //4016
 		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
-			return eAny(getEGenericExceptions()); //1115
+			return eAny(getEGenericExceptions()); //4017
 		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
-			return eAny(getEParameters()); //1113
+			return eAny(getEParameters()); //4015
 		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
-			return eAny(getETypeParameters()); //1112
+			return eAny(getETypeParameters()); //4014
 		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID()); //1110
+			return eAny(getOperationID()); //4012
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,17 +399,17 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //1111
+			return getEContainingClass().lock() != nullptr; //4013
 		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //1114
+			return getEExceptions() != nullptr; //4016
 		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //1115
+			return getEGenericExceptions() != nullptr; //4017
 		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
-			return getEParameters() != nullptr; //1113
+			return getEParameters() != nullptr; //4015
 		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //1112
+			return getETypeParameters() != nullptr; //4014
 		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //1110
+			return getOperationID() != -1; //4012
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -533,7 +573,10 @@ void EOperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	
@@ -545,6 +588,11 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
 
+		// Save 'eParameters'
+		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
+		{
+			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_EClass());
+		}
 	
  
 		// Add attributes
@@ -570,13 +618,6 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		for (std::shared_ptr<ecore::EGenericType> eGenericExceptions : *list_eGenericExceptions) 
 		{
 			saveHandler->addReference(eGenericExceptions, "eGenericExceptions", eGenericExceptions->eClass() != package->getEGenericType_EClass());
-		}
-
-		// Save 'eParameters'
-		std::shared_ptr<Bag<ecore::EParameter>> list_eParameters = this->getEParameters();
-		for (std::shared_ptr<ecore::EParameter> eParameters : *list_eParameters) 
-		{
-			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_EClass());
 		}
 
 		// Save 'eTypeParameters'

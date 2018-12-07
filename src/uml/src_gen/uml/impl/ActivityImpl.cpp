@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
@@ -982,25 +983,25 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return eAny(getEdge()); //163
+			return eAny(getEdge()); //763
 		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return eAny(getGroup()); //166
+			return eAny(getGroup()); //766
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //168
+			return eAny(getIsReadOnly()); //768
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return eAny(getIsSingleExecution()); //169
+			return eAny(getIsSingleExecution()); //769
 		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return eAny(getNode()); //164
+			return eAny(getNode()); //764
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return eAny(getOwnedGroup()); //162
+			return eAny(getOwnedGroup()); //762
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return eAny(getOwnedNode()); //167
+			return eAny(getOwnedNode()); //767
 		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return eAny(getPartition()); //170
+			return eAny(getPartition()); //770
 		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return eAny(getStructuredNode()); //171
+			return eAny(getStructuredNode()); //771
 		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //165
+			return eAny(getVariable()); //765
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -1009,25 +1010,25 @@ bool ActivityImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //163
+			return getEdge() != nullptr; //763
 		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return getGroup() != nullptr; //166
+			return getGroup() != nullptr; //766
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //168
+			return getIsReadOnly() != false; //768
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return getIsSingleExecution() != false; //169
+			return getIsSingleExecution() != false; //769
 		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return getNode() != nullptr; //164
+			return getNode() != nullptr; //764
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return getOwnedGroup() != nullptr; //162
+			return getOwnedGroup() != nullptr; //762
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return getOwnedNode() != nullptr; //167
+			return getOwnedNode() != nullptr; //767
 		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return getPartition() != nullptr; //170
+			return getPartition() != nullptr; //770
 		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return getStructuredNode() != nullptr; //171
+			return getStructuredNode() != nullptr; //771
 		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //165
+			return getVariable() != nullptr; //765
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -1039,14 +1040,14 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //168
+			setIsReadOnly(_isReadOnly); //768
 			return true;
 		}
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
 		{
 			// BOOST CAST
 			bool _isSingleExecution = newValue->get<bool>();
-			setIsSingleExecution(_isSingleExecution); //169
+			setIsSingleExecution(_isSingleExecution); //769
 			return true;
 		}
 	}

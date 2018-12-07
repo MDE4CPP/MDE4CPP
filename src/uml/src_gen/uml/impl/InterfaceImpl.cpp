@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -702,17 +703,17 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACE_EREFERENCE_NESTEDCLASSIFIER:
-			return eAny(getNestedClassifier()); //5539
+			return eAny(getNestedClassifier()); //12539
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //5540
+			return eAny(getOwnedAttribute()); //12540
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //5544
+			return eAny(getOwnedOperation()); //12544
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDRECEPTION:
-			return eAny(getOwnedReception()); //5541
+			return eAny(getOwnedReception()); //12541
 		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
-			return eAny(getProtocol()); //5542
+			return eAny(getProtocol()); //12542
 		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
-			return eAny(getRedefinedInterface()); //5543
+			return eAny(getRedefinedInterface()); //12543
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -721,17 +722,17 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACE_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //5539
+			return getNestedClassifier() != nullptr; //12539
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //5540
+			return getOwnedAttribute() != nullptr; //12540
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //5544
+			return getOwnedOperation() != nullptr; //12544
 		case UmlPackage::INTERFACE_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //5541
+			return getOwnedReception() != nullptr; //12541
 		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
-			return getProtocol() != nullptr; //5542
+			return getProtocol() != nullptr; //12542
 		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
-			return getRedefinedInterface() != nullptr; //5543
+			return getRedefinedInterface() != nullptr; //12543
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -743,7 +744,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setProtocol(_protocol); //5542
+			setProtocol(_protocol); //12542
 			return true;
 		}
 	}

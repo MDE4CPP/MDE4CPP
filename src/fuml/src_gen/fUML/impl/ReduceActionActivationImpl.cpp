@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActionActivation.hpp"
@@ -223,7 +224,7 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
-			return eAny(getCurrentExecution()); //10510
+			return eAny(getCurrentExecution()); //9410
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -232,7 +233,7 @@ bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
-			return getCurrentExecution() != nullptr; //10510
+			return getCurrentExecution() != nullptr; //9410
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -244,7 +245,7 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _currentExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
-			setCurrentExecution(_currentExecution); //10510
+			setCurrentExecution(_currentExecution); //9410
 			return true;
 		}
 	}

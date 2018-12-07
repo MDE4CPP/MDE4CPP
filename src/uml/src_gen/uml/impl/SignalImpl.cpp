@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -510,7 +511,7 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SIGNAL_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //5739
+			return eAny(getOwnedAttribute()); //21539
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -519,7 +520,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SIGNAL_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //5739
+			return getOwnedAttribute() != nullptr; //21539
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

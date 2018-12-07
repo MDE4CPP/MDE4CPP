@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -377,9 +378,9 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
-			return eAny(getAbstraction()); //24020
+			return eAny(getAbstraction()); //4820
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
-			return eAny(getRealizingClassifier()); //24019
+			return eAny(getRealizingClassifier()); //4819
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -388,9 +389,9 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
-			return getAbstraction().lock() != nullptr; //24020
+			return getAbstraction().lock() != nullptr; //4820
 		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
-			return getRealizingClassifier() != nullptr; //24019
+			return getRealizingClassifier() != nullptr; //4819
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -402,7 +403,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Component> _abstraction = newValue->get<std::shared_ptr<uml::Component>>();
-			setAbstraction(_abstraction); //24020
+			setAbstraction(_abstraction); //4820
 			return true;
 		}
 	}

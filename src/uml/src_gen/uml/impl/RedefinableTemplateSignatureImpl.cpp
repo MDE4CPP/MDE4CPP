@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -371,11 +372,11 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //9718
+			return eAny(getClassifier()); //20518
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
-			return eAny(getExtendedSignature()); //9716
+			return eAny(getExtendedSignature()); //20516
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
-			return eAny(getInheritedParameter()); //9717
+			return eAny(getInheritedParameter()); //20517
 	}
 	Any result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -391,11 +392,11 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //9718
+			return getClassifier() != nullptr; //20518
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
-			return getExtendedSignature() != nullptr; //9716
+			return getExtendedSignature() != nullptr; //20516
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
-			return getInheritedParameter() != nullptr; //9717
+			return getInheritedParameter() != nullptr; //20517
 	}
 	bool result = false;
 	result = RedefinableElementImpl::internalEIsSet(featureID);

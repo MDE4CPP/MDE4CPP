@@ -48,6 +48,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
@@ -666,15 +667,15 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
-			return eAny(getActivityExecution()); //502
+			return eAny(getActivityExecution()); //82
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
-			return eAny(getContainingNodeActivation()); //503
+			return eAny(getContainingNodeActivation()); //83
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_EDGEINSTANCES:
-			return eAny(getEdgeInstances()); //500
+			return eAny(getEdgeInstances()); //80
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_NODEACTIVATIONS:
-			return eAny(getNodeActivations()); //501
+			return eAny(getNodeActivations()); //81
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
-			return eAny(getSuspendedActivations()); //504
+			return eAny(getSuspendedActivations()); //84
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -683,15 +684,15 @@ bool ActivityNodeActivationGroupImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION:
-			return getActivityExecution().lock() != nullptr; //502
+			return getActivityExecution().lock() != nullptr; //82
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
-			return getContainingNodeActivation().lock() != nullptr; //503
+			return getContainingNodeActivation().lock() != nullptr; //83
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_EDGEINSTANCES:
-			return getEdgeInstances() != nullptr; //500
+			return getEdgeInstances() != nullptr; //80
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_NODEACTIVATIONS:
-			return getNodeActivations() != nullptr; //501
+			return getNodeActivations() != nullptr; //81
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_SUSPENDEDACTIVATIONS:
-			return getSuspendedActivations() != nullptr; //504
+			return getSuspendedActivations() != nullptr; //84
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -703,14 +704,14 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityExecution> _activityExecution = newValue->get<std::shared_ptr<fUML::ActivityExecution>>();
-			setActivityExecution(_activityExecution); //502
+			setActivityExecution(_activityExecution); //82
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = newValue->get<std::shared_ptr<fUML::StructuredActivityNodeActivation>>();
-			setContainingNodeActivation(_containingNodeActivation); //503
+			setContainingNodeActivation(_containingNodeActivation); //83
 			return true;
 		}
 	}

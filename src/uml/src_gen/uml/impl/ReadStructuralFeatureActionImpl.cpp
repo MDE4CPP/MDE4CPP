@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -405,7 +406,7 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16530
+			return eAny(getResult()); //19930
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -414,7 +415,7 @@ bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16530
+			return getResult() != nullptr; //19930
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -426,7 +427,7 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16530
+			setResult(_result); //19930
 			return true;
 		}
 	}

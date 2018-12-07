@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -321,9 +322,9 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
-			return eAny(getToAfter()); //22114
+			return eAny(getToAfter()); //16314
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
-			return eAny(getToBefore()); //22115
+			return eAny(getToBefore()); //16315
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,9 +333,9 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
-			return getToAfter() != nullptr; //22114
+			return getToAfter() != nullptr; //16314
 		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
-			return getToBefore() != nullptr; //22115
+			return getToBefore() != nullptr; //16315
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }

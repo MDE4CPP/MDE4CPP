@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/AcceptEventActionEventAccepter.hpp"
@@ -246,9 +247,9 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
-			return eAny(getEventAccepter()); //10910
+			return eAny(getEventAccepter()); //110
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
-			return eAny(isWaiting()); //10911
+			return eAny(isWaiting()); //111
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -257,9 +258,9 @@ bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
-			return getEventAccepter() != nullptr; //10910
+			return getEventAccepter() != nullptr; //110
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
-			return isWaiting() != false; //10911
+			return isWaiting() != false; //111
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -271,14 +272,14 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = newValue->get<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>();
-			setEventAccepter(_eventAccepter); //10910
+			setEventAccepter(_eventAccepter); //110
 			return true;
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
 		{
 			// BOOST CAST
 			bool _waiting = newValue->get<bool>();
-			setWaiting(_waiting); //10911
+			setWaiting(_waiting); //111
 			return true;
 		}
 	}

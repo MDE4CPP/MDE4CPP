@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -437,11 +438,11 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
-			return eAny(getPostCondition()); //23727
+			return eAny(getPostCondition()); //18827
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
-			return eAny(getPreCondition()); //23728
+			return eAny(getPreCondition()); //18828
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
-			return eAny(getReferred()); //23729
+			return eAny(getReferred()); //18829
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
 }
@@ -450,11 +451,11 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
-			return getPostCondition() != nullptr; //23727
+			return getPostCondition() != nullptr; //18827
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
-			return getPreCondition() != nullptr; //23728
+			return getPreCondition() != nullptr; //18828
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
-			return getReferred() != nullptr; //23729
+			return getReferred() != nullptr; //18829
 	}
 	return TransitionImpl::internalEIsSet(featureID);
 }
@@ -466,14 +467,14 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _postCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setPostCondition(_postCondition); //23727
+			setPostCondition(_postCondition); //18827
 			return true;
 		}
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _preCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setPreCondition(_preCondition); //23728
+			setPreCondition(_preCondition); //18828
 			return true;
 		}
 	}

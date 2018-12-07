@@ -50,6 +50,7 @@ namespace fUML
 	class Evaluation;
 	class EventAccepter;
 	class EventDispatchLoop;
+	class EventOccurrence;
 	class Execution;
 	class ExecutionFactory;
 	class ExecutionFactoryL1;
@@ -266,6 +267,8 @@ namespace fUML
 			virtual std::shared_ptr<EnumerationValue> createEnumerationValue() const ;
 			
 			virtual std::shared_ptr<EventDispatchLoop> createEventDispatchLoop() const ;
+			
+			virtual std::shared_ptr<EventOccurrence> createEventOccurrence() const ;
 			
 			virtual std::shared_ptr<ExecutionFactoryL1> createExecutionFactoryL1() const ;
 			//Add containing object

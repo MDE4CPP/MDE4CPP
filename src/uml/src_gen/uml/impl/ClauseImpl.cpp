@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Clause.hpp"
@@ -299,17 +300,17 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_BODY:
-			return eAny(getBody()); //1424
+			return eAny(getBody()); //384
 		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
-			return eAny(getBodyOutput()); //1425
+			return eAny(getBodyOutput()); //385
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
-			return eAny(getDecider()); //1426
+			return eAny(getDecider()); //386
 		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
-			return eAny(getPredecessorClause()); //1427
+			return eAny(getPredecessorClause()); //387
 		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
-			return eAny(getSuccessorClause()); //1428
+			return eAny(getSuccessorClause()); //388
 		case UmlPackage::CLAUSE_EREFERENCE_TEST:
-			return eAny(getTest()); //1429
+			return eAny(getTest()); //389
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,17 +319,17 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_BODY:
-			return getBody() != nullptr; //1424
+			return getBody() != nullptr; //384
 		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //1425
+			return getBodyOutput() != nullptr; //385
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
-			return getDecider() != nullptr; //1426
+			return getDecider() != nullptr; //386
 		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
-			return getPredecessorClause() != nullptr; //1427
+			return getPredecessorClause() != nullptr; //387
 		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
-			return getSuccessorClause() != nullptr; //1428
+			return getSuccessorClause() != nullptr; //388
 		case UmlPackage::CLAUSE_EREFERENCE_TEST:
-			return getTest() != nullptr; //1429
+			return getTest() != nullptr; //389
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -340,7 +341,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setDecider(_decider); //1426
+			setDecider(_decider); //386
 			return true;
 		}
 	}

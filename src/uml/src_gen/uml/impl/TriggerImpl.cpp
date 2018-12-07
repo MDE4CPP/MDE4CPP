@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -262,9 +263,9 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
-			return eAny(getEvent()); //6510
+			return eAny(getEvent()); //24310
 		case UmlPackage::TRIGGER_EREFERENCE_PORT:
-			return eAny(getPort()); //6511
+			return eAny(getPort()); //24311
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -273,9 +274,9 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
-			return getEvent() != nullptr; //6510
+			return getEvent() != nullptr; //24310
 		case UmlPackage::TRIGGER_EREFERENCE_PORT:
-			return getPort() != nullptr; //6511
+			return getPort() != nullptr; //24311
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -287,7 +288,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Event> _event = newValue->get<std::shared_ptr<uml::Event>>();
-			setEvent(_event); //6510
+			setEvent(_event); //24310
 			return true;
 		}
 	}

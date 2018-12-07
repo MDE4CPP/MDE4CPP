@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -710,33 +711,33 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STATE_EREFERENCE_CONNECTION:
-			return eAny(getConnection()); //6322
+			return eAny(getConnection()); //22022
 		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
-			return eAny(getConnectionPoint()); //6323
+			return eAny(getConnectionPoint()); //22023
 		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
-			return eAny(getDeferrableTrigger()); //6324
+			return eAny(getDeferrableTrigger()); //22024
 		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
-			return eAny(getDoActivity()); //6325
+			return eAny(getDoActivity()); //22025
 		case UmlPackage::STATE_EREFERENCE_ENTRY:
-			return eAny(getEntry()); //6326
+			return eAny(getEntry()); //22026
 		case UmlPackage::STATE_EREFERENCE_EXIT:
-			return eAny(getExit()); //6327
+			return eAny(getExit()); //22027
 		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite()); //6328
+			return eAny(getIsComposite()); //22028
 		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
-			return eAny(getIsOrthogonal()); //6329
+			return eAny(getIsOrthogonal()); //22029
 		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
-			return eAny(getIsSimple()); //6330
+			return eAny(getIsSimple()); //22030
 		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
-			return eAny(getIsSubmachineState()); //6331
+			return eAny(getIsSubmachineState()); //22031
 		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
-			return eAny(getRedefinedState()); //6332
+			return eAny(getRedefinedState()); //22032
 		case UmlPackage::STATE_EREFERENCE_REGION:
-			return eAny(getRegion()); //6335
+			return eAny(getRegion()); //22035
 		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
-			return eAny(getStateInvariant()); //6333
+			return eAny(getStateInvariant()); //22033
 		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
-			return eAny(getSubmachine()); //6334
+			return eAny(getSubmachine()); //22034
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -757,33 +758,33 @@ bool StateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STATE_EREFERENCE_CONNECTION:
-			return getConnection() != nullptr; //6322
+			return getConnection() != nullptr; //22022
 		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //6323
+			return getConnectionPoint() != nullptr; //22023
 		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
-			return getDeferrableTrigger() != nullptr; //6324
+			return getDeferrableTrigger() != nullptr; //22024
 		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
-			return getDoActivity() != nullptr; //6325
+			return getDoActivity() != nullptr; //22025
 		case UmlPackage::STATE_EREFERENCE_ENTRY:
-			return getEntry() != nullptr; //6326
+			return getEntry() != nullptr; //22026
 		case UmlPackage::STATE_EREFERENCE_EXIT:
-			return getExit() != nullptr; //6327
+			return getExit() != nullptr; //22027
 		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite() != false; //6328
+			return getIsComposite() != false; //22028
 		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
-			return getIsOrthogonal() != false; //6329
+			return getIsOrthogonal() != false; //22029
 		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
-			return getIsSimple() != true; //6330
+			return getIsSimple() != true; //22030
 		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
-			return getIsSubmachineState() != false; //6331
+			return getIsSubmachineState() != false; //22031
 		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
-			return getRedefinedState() != nullptr; //6332
+			return getRedefinedState() != nullptr; //22032
 		case UmlPackage::STATE_EREFERENCE_REGION:
-			return getRegion() != nullptr; //6335
+			return getRegion() != nullptr; //22035
 		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
-			return getStateInvariant() != nullptr; //6333
+			return getStateInvariant() != nullptr; //22033
 		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
-			return getSubmachine() != nullptr; //6334
+			return getSubmachine() != nullptr; //22034
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -807,42 +808,42 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _doActivity = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setDoActivity(_doActivity); //6325
+			setDoActivity(_doActivity); //22025
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_ENTRY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _entry = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setEntry(_entry); //6326
+			setEntry(_entry); //22026
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_EXIT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _exit = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setExit(_exit); //6327
+			setExit(_exit); //22027
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _redefinedState = newValue->get<std::shared_ptr<uml::State>>();
-			setRedefinedState(_redefinedState); //6332
+			setRedefinedState(_redefinedState); //22032
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _stateInvariant = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setStateInvariant(_stateInvariant); //6333
+			setStateInvariant(_stateInvariant); //22033
 			return true;
 		}
 		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _submachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setSubmachine(_submachine); //6334
+			setSubmachine(_submachine); //22034
 			return true;
 		}
 	}

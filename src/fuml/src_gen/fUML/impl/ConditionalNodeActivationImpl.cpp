@@ -31,6 +31,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -274,9 +275,9 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
-			return eAny(getClauseActivations()); //7311
+			return eAny(getClauseActivations()); //2411
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
-			return eAny(getSelectedClauses()); //7312
+			return eAny(getSelectedClauses()); //2412
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,9 +286,9 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
-			return getClauseActivations() != nullptr; //7311
+			return getClauseActivations() != nullptr; //2411
 		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
-			return getSelectedClauses() != nullptr; //7312
+			return getSelectedClauses() != nullptr; //2412
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }

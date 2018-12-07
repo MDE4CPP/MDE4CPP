@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -169,7 +170,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-			return eAny(getType()); //150
+			return eAny(getType()); //850
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -178,7 +179,7 @@ bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
-			return getType() != nullptr; //150
+			return getType() != nullptr; //850
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
@@ -190,7 +191,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = newValue->get<std::shared_ptr<uml::PrimitiveType>>();
-			setType(_type); //150
+			setType(_type); //850
 			return true;
 		}
 	}

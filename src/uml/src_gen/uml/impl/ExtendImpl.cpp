@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -346,13 +347,13 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
-			return eAny(getCondition()); //9913
+			return eAny(getCondition()); //9613
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
-			return eAny(getExtendedCase()); //9914
+			return eAny(getExtendedCase()); //9614
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
-			return eAny(getExtension()); //9916
+			return eAny(getExtension()); //9616
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
-			return eAny(getExtensionLocation()); //9915
+			return eAny(getExtensionLocation()); //9615
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -368,13 +369,13 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
-			return getCondition() != nullptr; //9913
+			return getCondition() != nullptr; //9613
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
-			return getExtendedCase() != nullptr; //9914
+			return getExtendedCase() != nullptr; //9614
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
-			return getExtension().lock() != nullptr; //9916
+			return getExtension().lock() != nullptr; //9616
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
-			return getExtensionLocation() != nullptr; //9915
+			return getExtensionLocation() != nullptr; //9615
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -393,21 +394,21 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _condition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setCondition(_condition); //9913
+			setCondition(_condition); //9613
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extendedCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setExtendedCase(_extendedCase); //9914
+			setExtendedCase(_extendedCase); //9614
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extension = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setExtension(_extension); //9916
+			setExtension(_extension); //9616
 			return true;
 		}
 	}

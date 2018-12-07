@@ -7,12 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/EcorePackage.hpp"
@@ -68,6 +71,7 @@ void FUMLPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	createEvaluationContent(package, factory);
 	createEventAccepterContent(package, factory);
 	createEventDispatchLoopContent(package, factory);
+	createEventOccurrenceContent(package, factory);
 	createExecutionContent(package, factory);
 	createExecutionFactoryContent(package, factory);
 	createExecutionFactoryL1Content(package, factory);
@@ -626,6 +630,14 @@ void FUMLPackageImpl::createEventAccepterContent(std::shared_ptr<ecore::EPackage
 void FUMLPackageImpl::createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_eventDispatchLoop_EClass = factory->createEClass_in_EPackage(package, EVENTDISPATCHLOOP_ECLASS);
+	
+	
+	
+}
+
+void FUMLPackageImpl::createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_eventOccurrence_EClass = factory->createEClass_in_EPackage(package, EVENTOCCURRENCE_ECLASS);
 	
 	
 	

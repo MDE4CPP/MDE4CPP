@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -273,7 +274,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return eAny(getUseCase()); //10013
+			return eAny(getUseCase()); //9913
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -282,7 +283,7 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return getUseCase().lock() != nullptr; //10013
+			return getUseCase().lock() != nullptr; //9913
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -294,7 +295,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setUseCase(_useCase); //10013
+			setUseCase(_useCase); //9913
 			return true;
 		}
 	}

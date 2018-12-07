@@ -35,6 +35,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -248,7 +249,7 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
-			return eAny(getLocus()); //20
+			return eAny(getLocus()); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -257,7 +258,7 @@ bool ExecutorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
-			return getLocus().lock() != nullptr; //20
+			return getLocus().lock() != nullptr; //450
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -269,7 +270,7 @@ bool ExecutorImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
-			setLocus(_locus); //20
+			setLocus(_locus); //450
 			return true;
 		}
 	}

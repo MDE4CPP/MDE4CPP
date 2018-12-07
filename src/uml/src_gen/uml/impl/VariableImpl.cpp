@@ -32,6 +32,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -355,9 +356,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return eAny(getActivityScope()); //12120
+			return eAny(getActivityScope()); //25220
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return eAny(getScope()); //12121
+			return eAny(getScope()); //25221
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -373,9 +374,9 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //12120
+			return getActivityScope().lock() != nullptr; //25220
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return getScope().lock() != nullptr; //12121
+			return getScope().lock() != nullptr; //25221
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -394,14 +395,14 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activityScope = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivityScope(_activityScope); //12120
+			setActivityScope(_activityScope); //25220
 			return true;
 		}
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _scope = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setScope(_scope); //12121
+			setScope(_scope); //25221
 			return true;
 		}
 	}

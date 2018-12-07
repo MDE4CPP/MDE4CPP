@@ -40,6 +40,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "fUML/ActivityEdgeInstance.hpp"
@@ -361,7 +362,7 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
-			return eAny(getCallExecutions()); //8110
+			return eAny(getCallExecutions()); //1210
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -370,7 +371,7 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
-			return getCallExecutions() != nullptr; //8110
+			return getCallExecutions() != nullptr; //1210
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }

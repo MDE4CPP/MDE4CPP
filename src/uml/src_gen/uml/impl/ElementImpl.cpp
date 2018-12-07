@@ -35,6 +35,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -514,11 +515,11 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return eAny(getOwnedComment()); //81
+			return eAny(getOwnedComment()); //811
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return eAny(getOwnedElement()); //82
+			return eAny(getOwnedElement()); //812
 		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return eAny(getOwner()); //83
+			return eAny(getOwner()); //813
 	}
 	Any result;
 	result = ecore::EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -534,11 +535,11 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment() != nullptr; //81
+			return getOwnedComment() != nullptr; //811
 		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement() != nullptr; //82
+			return getOwnedElement() != nullptr; //812
 		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner().lock() != nullptr; //83
+			return getOwner().lock() != nullptr; //813
 	}
 	bool result = false;
 	result = ecore::EModelElementImpl::internalEIsSet(featureID);

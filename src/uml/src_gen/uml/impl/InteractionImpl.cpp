@@ -33,6 +33,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -915,15 +916,15 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return eAny(getAction()); //21168
+			return eAny(getAction()); //11968
 		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return eAny(getFormalGate()); //21169
+			return eAny(getFormalGate()); //11969
 		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return eAny(getFragment()); //21167
+			return eAny(getFragment()); //11967
 		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return eAny(getLifeline()); //21166
+			return eAny(getLifeline()); //11966
 		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //21170
+			return eAny(getMessage()); //11970
 	}
 	Any result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -939,15 +940,15 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return getAction() != nullptr; //21168
+			return getAction() != nullptr; //11968
 		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return getFormalGate() != nullptr; //21169
+			return getFormalGate() != nullptr; //11969
 		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return getFragment() != nullptr; //21167
+			return getFragment() != nullptr; //11967
 		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return getLifeline() != nullptr; //21166
+			return getLifeline() != nullptr; //11966
 		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //21170
+			return getMessage() != nullptr; //11970
 	}
 	bool result = false;
 	result = BehaviorImpl::internalEIsSet(featureID);
