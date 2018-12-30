@@ -1,0 +1,7 @@
+[comment encoding = UTF-8 /]
+[module keywords('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[comment	keywords for attribute 'language' of element 'FunctionBehavior'/]
+[query public keyLibrary (any : OclAny) : String = 'LIBRARY'/]	[comment	indicates a library specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+[query public keyInclude (any : OclAny) : String = 'INCLUDE'/]	[comment	indicates a header include specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+[query public keyCPP (any : OclAny) : String = 'CPP'/]	[comment	indicates a source code specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
