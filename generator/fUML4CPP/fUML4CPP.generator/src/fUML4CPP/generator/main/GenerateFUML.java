@@ -48,7 +48,7 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/fUML4CPP/generator/main/generate";
+    public static final String MODULE_FILE_NAME = "/fUML4CPP/generator/main/generateFUML";
 
     /**
      * The name of the templates that are to be generated.
