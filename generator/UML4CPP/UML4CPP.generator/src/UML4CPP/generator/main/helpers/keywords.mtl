@@ -5,3 +5,6 @@
 [query public keyLibrary (any : OclAny) : String = 'LIBRARY'/]	[comment	indicates a library specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
 [query public keyInclude (any : OclAny) : String = 'INCLUDE'/]	[comment	indicates a header include specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
 [query public keyCPP (any : OclAny) : String = 'CPP'/]	[comment	indicates a source code specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+
+[comment	keywords for model names /]
+[query public keyUML(any : OclAny) : String = 'UML' /]	[comment	original name of UML model /]
