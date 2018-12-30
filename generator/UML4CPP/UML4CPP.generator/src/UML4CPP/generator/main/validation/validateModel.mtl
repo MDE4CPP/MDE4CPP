@@ -1,0 +1,22 @@
+[comment encoding = UTF-8 /]
+[module validateModel('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[query public ValidationService(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'ValidationService()', Sequence{})
+/]
+
+[query public registerError(message : String) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'registerError(java.lang.String)', Sequence{message}).toString()
+/]
+
+[query public printErrors(aPackage : Package) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'printErrors(org.eclipse.uml2.uml.Package)', Sequence{aPackage})
+/]
+
+[query public closeWithErrorExit(aPackage : Package, number : Integer) : OclVoid
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'closeWithErrorExit(org.eclipse.uml2.uml.Package, int)', Sequence{aPackage, number})
+/]
+
+[query public errorExisting(aPackage : Package) : Boolean
+	= invoke('UML4CPP.generator.main.validation.ValidationService', 'errorExisting(org.eclipse.uml2.uml.Package)', Sequence{aPackage})
+/]

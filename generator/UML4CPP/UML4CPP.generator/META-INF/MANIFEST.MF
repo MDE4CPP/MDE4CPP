@@ -23,7 +23,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-10
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: UML4CPP.generator,
- UML4CPP.generator.main
+ UML4CPP.generator.main,
+ UML4CPP.generator.main.validation
 Import-Package: org.eclipse.pde.internal.core.bundle,
  org.eclipse.swt.widgets,
  org.eclipse.uml2.uml
