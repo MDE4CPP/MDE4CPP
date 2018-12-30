@@ -14,10 +14,10 @@
  */]
 [module generateApplication('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateBuildFile /]
+[import UML4CPP::generator::main::configuration::generateEclipseFiles /]
 [import UML4CPP::generator::main::generateParameter /]
-[import UML4CPP::generator::main::generateProjectFiles /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::configurationHelper /]
 
 [template public generateApplication(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
@@ -206,7 +206,7 @@ task clean {
 }
 [/file]
 
-[aPackage.generateProjectsFiles(true)/]
+[aPackage.generateEclipseFiles(true)/]
 [/template]
 
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String, system : String)]

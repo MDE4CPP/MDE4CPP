@@ -30,6 +30,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::generateValueSpecification /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
@@ -65,7 +66,7 @@
 //depending model packages
 [for (pack : Package | aPackage.metaModelIncludes()->reject(oclIsUndefined())->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
 [if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
-[if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
+[if ((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
@@ -73,7 +74,7 @@
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if][/if]
 [/if]
-[if (not((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='StandardProfile')))]
+[if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='StandardProfile')))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Factory').toUpperFirst()/].hpp"
 [/if]
 [/for]
@@ -212,7 +213,7 @@ void [packageName/]::createPackageInterfaceRealizations(std::shared_ptr<uml::Pac
 
 void [packageName/]::createPackageInterfaces(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[if (not (aPackage.name='UML'))]
+[if (not (aPackage.name = keyUML()))]
 [for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aInterface.generateInterfaceCreation()/]
 	[aInterface.ownedAttribute.generateAttributeCreation()/]
@@ -328,7 +329,7 @@ void [packageName/]::initializePackageInterfaceRealizations()
 
 void [packageName/]::initializePackageInterfaces()
 {
-[if (not (aPackage.name='UML'))]
+[if (not (aPackage.name = keyUML()))]
 [for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aInterface.generateInterfaceInitialization()/]
 	[aInterface.ownedAttribute->sortedBy(myQualifiedName()).generateAttributeInitialization()/]

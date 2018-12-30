@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [template public generateClassCreate(aStereotype : Stereotype,impl : Boolean)]
 virtual [aStereotype.generateCppType()/] create[aStereotype.name/]()[abstractSufix(impl)/];
@@ -34,7 +35,7 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
 [/template]
 
-[template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name='UML') or (aElement.getNearestPackage().name='PrimitiveTypes'))))]
+[template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name = keyUML()) or (aElement.getNearestPackage().name='PrimitiveTypes'))))]
 [for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 {
 	//apply Stereotype	[stereo.name/]
