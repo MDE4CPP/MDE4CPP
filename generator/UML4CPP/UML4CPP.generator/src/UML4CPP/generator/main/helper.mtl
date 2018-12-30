@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -50,7 +51,9 @@
 
 [query public classNumberName(aEClass : Class) : String = aEClass.name.toUpperCase() /]
 
-[query public packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if oclIsUndefined() then 'nullptr' else needMetaModelPackageGetter(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
+[query public packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else anElement1.packageGetterHelper(anElement2) endif /]
+[query private packageGetterHelper(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.getNearestPackage().oclIsUndefined()) then anElement1.handlePackageGetterError(anElement2.myName()) else needMetaModelPackageGetter(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
+
 
 [query public packageGetter(anElement1 : NamedElement) : String = if oclIsUndefined() then 'nullptr' else MetaModelPackageGetter(anElement1).concat('get_').concat(anElement1.myQualifiedName().sanitize()).concat('()') endif /]
 [query public MetaModelPackageGetter(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
@@ -168,3 +171,7 @@ template<class T> class Bag;
 
 [query public ignoreNamespace(anElement : Element) : Boolean = if (anElement.getNearestPackage().hasKey('ignoreNamespace')) then anElement.getNearestPackage().valueKey('ignoreNamespace') = '1' else false endif /]
 [query public isSingleton(anElement : Element) : Boolean = if (anElement.hasKey('singleton')) then anElement.valueKey('singleton') = '1' else false endif /]
+
+[template private handlePackageGetterError(failureElement : NamedElement, name : String)]
+nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
+[/template]
