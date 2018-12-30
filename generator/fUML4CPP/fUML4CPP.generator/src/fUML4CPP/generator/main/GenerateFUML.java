@@ -15,23 +15,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.acceleo.engine.event.IAcceleoTextGenerationListener;
 import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
-import org.eclipse.acceleo.model.mtl.resource.EMtlResourceFactoryImpl;
-import org.eclipse.acceleo.model.mtl.resource.EMtlResourceImpl;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.types.TypesPackage;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -503,106 +498,8 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
          resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
          
          if (!EMFPlugin.IS_ECLIPSE_RUNNING)
-         {
-        	 Map<String, String> moduleMap = new HashMap<String, String>();
-        	 moduleMap.put("configurationHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/configurationHelper.emtl");
-        	 moduleMap.put("generate.emtl", "rsrc:UML4CPP/generator/main/generate.emtl");
-        	 moduleMap.put("generateActivity.emtl", "rsrc:UML4CPP/generator/main/generateActivity.emtl");
-        	 moduleMap.put("generateActivityEdge.emtl", "rsrc:UML4CPP/generator/main/generateActivityEdge.emtl");
-        	 moduleMap.put("generateActivityNode.emtl", "rsrc:UML4CPP/generator/main/generateActivityNode.emtl");
-        	 moduleMap.put("generateApplication.emtl", "rsrc:UML4CPP/generator/main/generateApplication.emtl");
-        	 moduleMap.put("generateAttribute.emtl", "rsrc:UML4CPP/generator/main/generateAttribute.emtl");
-        	 moduleMap.put("generateBehaviorExecutionHeader.emtl", "rsrc:fUML4CPP/generator/main/generateBehaviorExecutionHeader.emtl");
-        	 moduleMap.put("generateBehaviorExecutionSource.emtl", "rsrc:fUML4CPP/generator/main/generateBehaviorExecutionSource.emtl");
-        	 moduleMap.put("generateCMakeFiles.emtl", "rsrc:UML4CPP/generator/main/configuration/generateCMakeFiles.emtl");
-        	 moduleMap.put("generateCallOperationActionExecutionHeader.emtl", "rsrc:fUML4CPP/generator/main/generateCallOperationActionExecutionHeader.emtl");
-        	 moduleMap.put("generateCallOperationActionExecutionSource.emtl", "rsrc:fUML4CPP/generator/main/generateCallOperationActionExecutionSource.emtl");
-        	 moduleMap.put("generateClass.emtl", "rsrc:UML4CPP/generator/main/generateClass.emtl");
-        	 moduleMap.put("generateClassifierObjectHeader.emtl", "rsrc:fUML4CPP/generator/main/generateClassifierObjectHeader.emtl");
-        	 moduleMap.put("generateClassifierObjectSource.emtl", "rsrc:fUML4CPP/generator/main/generateClassifierObjectSource.emtl");
-        	 moduleMap.put("generateConfigurationFiles.emtl", "rsrc:UML4CPP/generator/main/configuration/generateConfigurationFiles.emtl");
-        	 moduleMap.put("generateConstraint.emtl", "rsrc:UML4CPP/generator/main/generateConstraint.emtl");
-        	 moduleMap.put("generateEclipseFiles.emtl", "rsrc:UML4CPP/generator/main/configuration/generateEclipseFiles.emtl");
-        	 moduleMap.put("generateEnum.emtl", "rsrc:UML4CPP/generator/main/generateEnum.emtl");
-        	 moduleMap.put("generateExecutionBuildFile.emtl", "rsrc:fUML4CPP/generator/main/generateExecutionBuildFile.emtl");
-        	 moduleMap.put("generateExecutionPlugin.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPlugin.emtl");
-        	 moduleMap.put("generateExecutionPluginImplementationHeader.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationHeader.emtl");
-        	 moduleMap.put("generateExecutionPluginImplementationSource.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationSource.emtl");
-        	 moduleMap.put("generateExecutionPluginInterfaceHeader.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginInterfaceHeader.emtl");
-        	 moduleMap.put("generateExecutionPluginInterfaceSource.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginInterfaceSource.emtl");
-        	 moduleMap.put("generateExecutionProjectFiles.emtl", "rsrc:fUML4CPP/generator/main/generateExecutionProjectFiles.emtl");
-        	 moduleMap.put("generateFactoryImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryImplementationHeader.emtl");
-        	 moduleMap.put("generateFactoryImplementationSource.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryImplementationSource.emtl");
-        	 moduleMap.put("generateFactoryInterface.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterface.emtl");
-        	 moduleMap.put("generateFactoryInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterfaceSource.emtl");
-        	 moduleMap.put("generateFUML.emtl", "rsrc:fUML4CPP/generator/main/generateFUML.emtl");
-        	 moduleMap.put("generateFunctionBehavior.emtl", "rsrc:UML4CPP/generator/main/generateFunctionBehavior.emtl");
-        	 moduleMap.put("generateGradleFiles.emtl", "rsrc:UML4CPP/generator/main/configuration/generateGradleFiles.emtl");
-        	 moduleMap.put("generateImplModelSource.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplModelSource.emtl");
-        	 moduleMap.put("generateImplementation.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplementation.emtl");
-        	 moduleMap.put("generateImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplementationHeader.emtl");
-        	 moduleMap.put("generateImplementationSource.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplementationSource.emtl");
-        	 moduleMap.put("generateInstanceSpecification.emtl", "rsrc:UML4CPP/generator/main/generateInstanceSpecification.emtl");
-        	 moduleMap.put("generateInterface.emtl", "rsrc:UML4CPP/generator/main/generateInterface.emtl");
-        	 moduleMap.put("generateInterfaceRealization.emtl", "rsrc:UML4CPP/generator/main/generateInterfaceRealization.emtl");
-        	 moduleMap.put("generateMainExecution.emtl", "rsrc:fUML4CPP/generator/main/generateMainExecution.emtl");
-        	 moduleMap.put("generateFactory.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactory.emtl");
-        	 moduleMap.put("generateMetamodelPackage.emtl", "rsrc:UML4CPP/generator/main/package/generateMetamodelPackage.emtl");
-        	 moduleMap.put("generateModel.emtl", "rsrc:UML4CPP/generator/main/generateModel.emtl");
-        	 moduleMap.put("generateOpaqueBehaviorExecution.emtl", "rsrc:fUML4CPP/generator/main/generateOpaqueBehaviorExecution.emtl");
-        	 moduleMap.put("generateOperation.emtl", "rsrc:UML4CPP/generator/main/generateOperation.emtl");
-        	 moduleMap.put("generatePackageImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationHeader.emtl");
-        	 moduleMap.put("generatePackageImplementationSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationSource.emtl");
-        	 moduleMap.put("generatePackageInterface.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterface.emtl");
-        	 moduleMap.put("generatePackageInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterfaceSource.emtl");
-        	 moduleMap.put("generateParameter.emtl", "rsrc:UML4CPP/generator/main/generateParameter.emtl");
-        	 moduleMap.put("generatePrimitivetype.emtl", "rsrc:UML4CPP/generator/main/generatePrimitivetype.emtl");
-        	 moduleMap.put("generateSetGet.emtl", "rsrc:UML4CPP/generator/main/generateSetGet.emtl");
-        	 moduleMap.put("generateSingleton.emtl", "rsrc:UML4CPP/generator/main/generateSingleton.emtl");
-        	 moduleMap.put("generateStereotype.emtl", "rsrc:UML4CPP/generator/main/generateStereotype.emtl");
-        	 moduleMap.put("generateType.emtl", "rsrc:UML4CPP/generator/main/generateType.emtl");
-        	 moduleMap.put("generateUMLPlugin.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPlugin.emtl");
-        	 moduleMap.put("generateUMLPluginImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationHeader.emtl");
-        	 moduleMap.put("generateUMLPluginImplementationSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationSource.emtl");
-        	 moduleMap.put("generateUMLPluginInterfaceHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceHeader.emtl");
-        	 moduleMap.put("generateUMLPluginInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceSource.emtl");
-        	 moduleMap.put("generateValueSpecification.emtl", "rsrc:UML4CPP/generator/main/generateValueSpecification.emtl");
-        	 moduleMap.put("helper.emtl", "rsrc:UML4CPP/generator/main/helper.emtl");
-        	 moduleMap.put("keywords.emtl", "rsrc:UML4CPP/generator/main/helpers/keywords.emtl");
-        	 moduleMap.put("parameterHelper.emtl", "rsrc:fUML4CPP/generator/main/parameterHelper.emtl");
-        	 moduleMap.put("validateModel.emtl", "rsrc:UML4CPP/generator/main/validation/validateModel.emtl");
-        	 
-	 		 resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new EMtlResourceFactoryImpl()
-	         {
-				Map<URI, Resource> resourceMap = new HashMap<URI, Resource>();
-				
-	        	public Resource createResource(URI uri)
-	        	{
-	        		if (resourceMap.containsKey(uri))
-	        		{
-	        			return resourceMap.get(uri);
-	        		}
-	        		else
-	        		{
-	        			String uriString = uri.path();
-	        			//System.out.print(uriString + "\t\t");
-	        			Set<String> keySet = moduleMap.keySet();
-	        			for (String key : keySet)
-	        			{
-	        				if (uriString.endsWith(key))
-	        				{
-	        					uriString = moduleMap.get(key);
-	        					break;
-	        				}
-	        			}
-	        			
-	        			//System.out.println(uriString);
-						EMtlResourceImpl xmiResource = new EMtlResourceImpl(URI.createURI(uriString));
-						resourceMap.put(uri, xmiResource);
-		        		return xmiResource;
-	        		}
-	        	}
-	        });
+         {        	 
+	 		 resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new FUML4CPPEMtlResourceFactory());
          }
     }
 }
