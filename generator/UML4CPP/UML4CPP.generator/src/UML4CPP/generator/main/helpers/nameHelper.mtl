@@ -45,6 +45,8 @@
 
 [query private myAssociationName(anElement : NamedElement) : String = if(oclIsKindOf(Association) and (name.oclIsUndefined() or ''=name)) then 'A_'.concat(oclAsType(Association).memberEnd->first().myPropertyName()).concat('_').concat(oclAsType(Association).memberEnd->last().myPropertyName()) else myObjectFlowName() endif/]
 
+[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name or '' = qualifiedName) then type.qualifiedName.toLowerFirst() else myName() endif /]
+
 [query private myObjectFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ObjectFlow) and (name.oclIsUndefined() or ''=name)) then 'OF_'.concat(oclAsType(ObjectFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ObjectFlow).target.myQualifiedName()) else myControlFlowName() endif/]
 
 [query private myControlFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ControlFlow) and (name.oclIsUndefined() or ''=name)) then 'CF_'.concat(oclAsType(ControlFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ControlFlow).target.myQualifiedName()) else myExtensionEndName() endif/]
@@ -61,10 +63,9 @@
 
 [query private myDependencyName(anElement : NamedElement) : String = if (oclIsKindOf(Dependency)) then 'Dependency_'.concat(oclAsType(Dependency).client->asOrderedSet()->first().myQualifiedName()).concat('_').concat(oclAsType(Dependency).supplier->asOrderedSet()->first().myQualifiedName()) else myName() endif /]
 
-[query public myName(anElement : NamedElement) : String = if ((qualifiedName.oclIsUndefined() or ''=qualifiedName) and not name.oclIsUndefined()) then oclAsType(Property).type.myQualifiedName().concat('_').concat(anElement.name) else anElement.qualifiedName endif/] 
+[query public myName(anElement : NamedElement) : String = if ((qualifiedName.oclIsUndefined() or ''=qualifiedName) and not name.oclIsUndefined()) then oclAsType(Property).type.myQualifiedName().concat('_').concat(anElement.name) else myName2() endif/] 
 
-[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name or '' = qualifiedName) then type.qualifiedName.toLowerFirst() else myName() endif /]
-
+[query private myName2(anElement : NamedElement) : String = if (qualifiedName.oclIsUndefined()) then handleUndefinedElement() else qualifiedName endif /]
 
 [template public generateParameterTypeList(anOperation : Operation)]
 [for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][sParameter.type.name/][/for]
