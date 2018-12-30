@@ -41,7 +41,8 @@ dependencies {
 sourceSets {
 	main {
 		java {
-			srcDir 'src'
+			srcDirs = ['src', '../../UML4CPP/UML4CPP.generator/src']
+			excludes = ['UML4CPP/generator/Activator.java', 'UML4CPP/generator/main/Generate.java']
 		}
 	}
 }
