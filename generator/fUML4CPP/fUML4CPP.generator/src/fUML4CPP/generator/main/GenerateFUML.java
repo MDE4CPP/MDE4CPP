@@ -546,7 +546,7 @@ public class GenerateFUML extends AbstractAcceleoGenerator {
         	 moduleMap.put("generateInterface.emtl", "rsrc:UML4CPP/generator/main/generateInterface.emtl");
         	 moduleMap.put("generateInterfaceRealization.emtl", "rsrc:UML4CPP/generator/main/generateInterfaceRealization.emtl");
         	 moduleMap.put("generateMainExecution.emtl", "rsrc:fUML4CPP/generator/main/generateMainExecution.emtl");
-        	 moduleMap.put("generateMetamodelFactory.emtl", "rsrc:UML4CPP/generator/main/factory/generateMetamodelFactory.emtl");
+        	 moduleMap.put("generateFactory.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactory.emtl");
         	 moduleMap.put("generateMetamodelPackage.emtl", "rsrc:UML4CPP/generator/main/package/generateMetamodelPackage.emtl");
         	 moduleMap.put("generateModel.emtl", "rsrc:UML4CPP/generator/main/generateModel.emtl");
         	 moduleMap.put("generateOpaqueBehaviorExecution.emtl", "rsrc:fUML4CPP/generator/main/generateOpaqueBehaviorExecution.emtl");
