@@ -16,6 +16,7 @@
  
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateValueSpecification /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
 {

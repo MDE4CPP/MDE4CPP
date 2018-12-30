@@ -15,6 +15,7 @@
 [module generateEnum('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateEnum(anEEnum : Enumeration)]
 [file (anEEnum._package.getPackageName().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]

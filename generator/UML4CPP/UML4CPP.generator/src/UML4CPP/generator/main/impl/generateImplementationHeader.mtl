@@ -20,6 +20,7 @@
 [import UML4CPP::generator::main::generateSetGet /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
 virtual public uml::StereotypeImpl

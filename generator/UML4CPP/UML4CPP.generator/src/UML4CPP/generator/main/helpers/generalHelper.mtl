@@ -11,25 +11,13 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for name check and qualified name generation
+ * 
  */]
-[module generateUMLPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generalHelper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
-[import UML4CPP::generator::main::plugin::generateUMLPluginInterfaceHeader /]
-[import UML4CPP::generator::main::plugin::generateUMLPluginInterfaceSource /]
-[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationHeader /]
-[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationSource /]
-
-[template public generateUMLPluginFiles(aPackage : Package, packOnly:Boolean)]
-[aPackage.generateUMLPluginInterfaceHeader()/]
-[aPackage.generateUMLPluginInterfaceSource()/]
-[aPackage.generateUMLPluginImplHeader()/]
-[aPackage.generateUMLPluginImplSource(packOnly)/]
-[/template]
-
-
-
-
-
-
-
+[import UML4CPP::generator::main::helpers::keywords /]
 

@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::configurationHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateCMakeLists(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.getPackageName(); }]
 [file (packageName.concat('/').concat('CMakeLists.txt'), false, 'UTF-8')]

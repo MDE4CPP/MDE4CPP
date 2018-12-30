@@ -30,14 +30,20 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		 {
 			 String uriString = uri.path();
 			 //System.out.print(uriString + "\t\t");
+			 boolean found = false;
 			 Set<String> keySet = m_emtlFilePathMap.keySet();
 			 for (String key : keySet)
 			 {
 				 if (uriString.endsWith(key))
 				 {
 					 uriString = m_emtlFilePathMap.get(key);
+					 found = true;
 					 break;
 				 }
+			 }
+			 if (!found)
+			 {
+				 System.err.println(uriString + " not found!");
 			 }
 		
 			 //System.out.println(uriString);
@@ -52,12 +58,13 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initalizeGeneralEmtls();
 		initializeConfigurationEmtls();
 		initializeFactoryEmtls();
+		initializeHelpersEmtls();
 		initializePackageEmtls();
+		initializePluginEmtls();
 	}
 	
 	private void initalizeGeneralEmtls()
 	{
-	  	 m_emtlFilePathMap.put("configurationHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/configurationHelper.emtl");
 	   	 m_emtlFilePathMap.put("generate.emtl", "rsrc:UML4CPP/generator/main/generate.emtl");
 	   	 m_emtlFilePathMap.put("generateActivity.emtl", "rsrc:UML4CPP/generator/main/generateActivity.emtl");
 	   	 m_emtlFilePathMap.put("generateActivityEdge.emtl", "rsrc:UML4CPP/generator/main/generateActivityEdge.emtl");
@@ -88,14 +95,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	   	 m_emtlFilePathMap.put("generateSingleton.emtl", "rsrc:UML4CPP/generator/main/generateSingleton.emtl");
 	   	 m_emtlFilePathMap.put("generateStereotype.emtl", "rsrc:UML4CPP/generator/main/generateStereotype.emtl");
 	   	 m_emtlFilePathMap.put("generateType.emtl", "rsrc:UML4CPP/generator/main/generateType.emtl");
-	   	 m_emtlFilePathMap.put("generateUMLPlugin.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPlugin.emtl");
-	   	 m_emtlFilePathMap.put("generateUMLPluginImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationHeader.emtl");
-	   	 m_emtlFilePathMap.put("generateUMLPluginImplementationSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationSource.emtl");
-	   	 m_emtlFilePathMap.put("generateUMLPluginInterfaceHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceHeader.emtl");
-	   	 m_emtlFilePathMap.put("generateUMLPluginInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceSource.emtl");
 	   	 m_emtlFilePathMap.put("generateValueSpecification.emtl", "rsrc:UML4CPP/generator/main/generateValueSpecification.emtl");
 	   	 m_emtlFilePathMap.put("helper.emtl", "rsrc:UML4CPP/generator/main/helper.emtl");
-	   	 m_emtlFilePathMap.put("keywords.emtl", "rsrc:UML4CPP/generator/main/helpers/keywords.emtl");
 	   	 m_emtlFilePathMap.put("validateModel.emtl", "rsrc:UML4CPP/generator/main/validation/validateModel.emtl");
 	}
 	
@@ -114,8 +115,16 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		m_emtlFilePathMap.put("generateFactoryImplementationSource.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryImplementationSource.emtl");
 		m_emtlFilePathMap.put("generateFactoryInterface.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterface.emtl");
 		m_emtlFilePathMap.put("generateFactoryInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterfaceSource.emtl");
-	   	 	
 	}
+	
+	private void initializeHelpersEmtls()
+	{
+	  	 m_emtlFilePathMap.put("configurationHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/configurationHelper.emtl");
+		 m_emtlFilePathMap.put("generalHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/generalHelper.emtl");
+		 m_emtlFilePathMap.put("keywords.emtl", "rsrc:UML4CPP/generator/main/helpers/keywords.emtl");
+		 m_emtlFilePathMap.put("nameHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/nameHelper.emtl");
+	}
+
 	
 	private void initializePackageEmtls()
 	{
@@ -125,5 +134,13 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	   	 m_emtlFilePathMap.put("generatePackageInterface.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterface.emtl");
 	   	 m_emtlFilePathMap.put("generatePackageInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterfaceSource.emtl");
 	}
-}
+	
+	private void initializePluginEmtls()
+	{
+		 m_emtlFilePathMap.put("generateUMLPlugin.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPlugin.emtl");
+	   	 m_emtlFilePathMap.put("generateUMLPluginImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationHeader.emtl");
+	   	 m_emtlFilePathMap.put("generateUMLPluginImplementationSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginImplementationSource.emtl");
+	   	 m_emtlFilePathMap.put("generateUMLPluginInterfaceHeader.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceHeader.emtl");
+	   	 m_emtlFilePathMap.put("generateUMLPluginInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/plugin/generateUMLPluginInterfaceSource.emtl");
+	}}
 

@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::generateParameter /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::configurationHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateApplication(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]

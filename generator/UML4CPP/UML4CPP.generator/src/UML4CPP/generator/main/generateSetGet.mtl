@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
 

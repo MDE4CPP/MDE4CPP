@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
  
 [template public generateConstraintCreation(aConstraint : Constraint)]
 con = factory->createConstraint_in_Context([memberName(aConstraint.owner.oclAsType(Class))/]);

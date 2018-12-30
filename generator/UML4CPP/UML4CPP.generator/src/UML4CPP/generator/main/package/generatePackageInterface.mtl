@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public baseClass(aPackage : Package) ? (oclIsKindOf(Profile))]
 virtual public uml::Profile
