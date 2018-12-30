@@ -21,8 +21,9 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
-[query public myQualifiedName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then myInputPinName().substituteAll('::','_') else myElementQualifiedName().substituteAll('::','_') endif /]
+[query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then handleUndefinedElement() else myInputPinName() endif/] 
 
 [query private myInputPinName (anElement : NamedElement) : String = if(oclIsKindOf(InputPin)) then 'InputPin'.concat('_').concat(anElement.myElementQualifiedName())  else myOutputPinName() endif/]
 
@@ -71,4 +72,8 @@
 
 [template public generateTypeClass(anEDataType : ecore::EClass)]
 [anEDataType.name/]
+[/template]
+
+[template private handleUndefinedElement(anElement : Element)]
+['undefined element found '.concat(anElement.toString()).registerError()/]
 [/template]
