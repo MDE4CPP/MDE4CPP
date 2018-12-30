@@ -50,7 +50,7 @@ sourceSets {
 jar.archiveName = 'fUML4CPP.jar'
 
 executableJar {
-   mainClass 'fUML4CPP.generator.main.Generate'
+   mainClass 'fUML4CPP.generator.main.GenerateFUML'
 }
 task deliverFUML4CPP(type: Copy) {
 	description 'deliver fUML4CPP.jar to %MDE4CPP_HOME%/application/generator'

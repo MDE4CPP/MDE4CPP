@@ -41,7 +41,7 @@ import org.eclipse.uml2.uml.resource.UMLResource;
  *
  * @generated NOT
  */
-public class Generate extends AbstractAcceleoGenerator {
+public class GenerateFUML extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
@@ -82,7 +82,7 @@ public class Generate extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public Generate() {
+    public GenerateFUML() {
         // Empty implementation
     }
 
@@ -102,7 +102,7 @@ public class Generate extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated NOT
      */
-    public Generate(URI modelURI, File targetFolder,
+    public GenerateFUML(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
     	if (arguments.size() > 0)
     	{
@@ -129,7 +129,7 @@ public class Generate extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public Generate(EObject model, File targetFolder,
+    public GenerateFUML(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -179,7 +179,7 @@ public class Generate extends AbstractAcceleoGenerator {
                 	}
 				}
 
-                Generate generator = new Generate(modelURI, folder, arguments);
+                GenerateFUML generator = new GenerateFUML(modelURI, folder, arguments);
 
                 /*
                  * Add the properties from the launch arguments.
