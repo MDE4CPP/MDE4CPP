@@ -23,7 +23,7 @@
 [import UML4CPP::generator::main::generateModel /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::impl::generateImplementation /]
-[import UML4CPP::generator::main::package::generateMetamodelPackage /]
+[import UML4CPP::generator::main::package::generatePackage /]
 [import UML4CPP::generator::main::plugin::generateUMLPlugin /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
@@ -55,7 +55,7 @@
 	[aPackage.generateUMLPlugin(false)/]
 [/if]
 
-[aPackage.generatePackageImpl()/]
+[aPackage.generatePackageFiles()/]
 
 [if (aPackage.prepareApplication())]
 	[aPackage.generateApplication()/]

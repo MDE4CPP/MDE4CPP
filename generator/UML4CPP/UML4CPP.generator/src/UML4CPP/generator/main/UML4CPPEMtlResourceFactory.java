@@ -52,6 +52,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initalizeGeneralEmtls();
 		initializeConfigurationEmtls();
 		initializeFactoryEmtls();
+		initializePackageEmtls();
 	}
 	
 	private void initalizeGeneralEmtls()
@@ -79,13 +80,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	   	 m_emtlFilePathMap.put("generateInterface.emtl", "rsrc:UML4CPP/generator/main/generateInterface.emtl");
 	   	 m_emtlFilePathMap.put("generateInterfaceRealization.emtl", "rsrc:UML4CPP/generator/main/generateInterfaceRealization.emtl");
 	   	 m_emtlFilePathMap.put("generateMainExecution.emtl", "rsrc:fUML4CPP/generator/main/generateMainExecution.emtl");
-	   	 m_emtlFilePathMap.put("generateMetamodelPackage.emtl", "rsrc:UML4CPP/generator/main/package/generateMetamodelPackage.emtl");
 	   	 m_emtlFilePathMap.put("generateModel.emtl", "rsrc:UML4CPP/generator/main/generateModel.emtl");
 	   	 m_emtlFilePathMap.put("generateOperation.emtl", "rsrc:UML4CPP/generator/main/generateOperation.emtl");
-	   	 m_emtlFilePathMap.put("generatePackageImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationHeader.emtl");
-	   	 m_emtlFilePathMap.put("generatePackageImplementationSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationSource.emtl");
-	   	 m_emtlFilePathMap.put("generatePackageInterface.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterface.emtl");
-	   	 m_emtlFilePathMap.put("generatePackageInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterfaceSource.emtl");
 	   	 m_emtlFilePathMap.put("generateParameter.emtl", "rsrc:UML4CPP/generator/main/generateParameter.emtl");
 	   	 m_emtlFilePathMap.put("generatePrimitivetype.emtl", "rsrc:UML4CPP/generator/main/generatePrimitivetype.emtl");
 	   	 m_emtlFilePathMap.put("generateSetGet.emtl", "rsrc:UML4CPP/generator/main/generateSetGet.emtl");
@@ -119,6 +115,15 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		m_emtlFilePathMap.put("generateFactoryInterface.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterface.emtl");
 		m_emtlFilePathMap.put("generateFactoryInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/factory/generateFactoryInterfaceSource.emtl");
 	   	 	
+	}
+	
+	private void initializePackageEmtls()
+	{
+	   	 m_emtlFilePathMap.put("generatePackage.emtl", "rsrc:UML4CPP/generator/main/package/generatePackage.emtl");
+	   	 m_emtlFilePathMap.put("generatePackageImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationHeader.emtl");
+	   	 m_emtlFilePathMap.put("generatePackageImplementationSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageImplementationSource.emtl");
+	   	 m_emtlFilePathMap.put("generatePackageInterface.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterface.emtl");
+	   	 m_emtlFilePathMap.put("generatePackageInterfaceSource.emtl", "rsrc:UML4CPP/generator/main/package/generatePackageInterfaceSource.emtl");
 	}
 }
 
