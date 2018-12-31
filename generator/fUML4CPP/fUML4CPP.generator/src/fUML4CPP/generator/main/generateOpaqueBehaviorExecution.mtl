@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
 		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asSet().operation.method->select(oclIsKindOf(OpaqueBehavior))->asSet(),

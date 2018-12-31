@@ -17,8 +17,9 @@
 [import UML4CPP::generator::main::helper /]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import UML4CPP::generator::main::generateType /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
