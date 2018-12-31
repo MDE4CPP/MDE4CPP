@@ -15,6 +15,8 @@
 [module generateInterfaceRealization('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [template public generateInterfaceRealizationCreation(anInterfaceRealization : InterfaceRealization)]
 [memberName(anInterfaceRealization)/] = factory->createInterfaceRealization_in_ImplementingClassifier([anInterfaceRealization.owner.oclAsType(NamedElement).memberName()/]);
@@ -31,5 +33,15 @@
 [memberName(anInterfaceRealization)/]->setContract([anInterfaceRealization.contract.packageGetter(anInterfaceRealization)/]);
 [for (aSupplier : NamedElement | anInterfaceRealization.supplier)]
 [memberName(anInterfaceRealization)/]->getSupplier()->push_back([aSupplier.packageGetter(anInterfaceRealization)/]);
+[/for]
+[/template]
+
+[template public generateInterfaceExtensions(aClass : Class) post (trim())]
+[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))]
+[for (aSupplier : NamedElement | interfaceR.supplier->select(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
+['class '.concat(aClass.name).concat(': interface realization cannot be generated because interface is undefined (').concat(aSupplier.toString()).concat(')').registerError()/]
+[/for]
+[for (aSupplier : NamedElement | interfaceR.supplier->reject(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
+public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.namespace.ns()/]::[/if][aSupplier.name/][/for]
 [/for]
 [/template]
