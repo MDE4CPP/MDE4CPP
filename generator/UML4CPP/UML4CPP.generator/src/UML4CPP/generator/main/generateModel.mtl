@@ -20,6 +20,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
 
@@ -50,11 +51,15 @@ virtual public uml::Class
 [if (OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->size() > 0)]
 //Forward Declaration for used types
 [for (element : Classifier | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (element.oclIsUndefined() or element.name.oclIsUndefined())]
+// undefined  [element.eClass().name/] ([element.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(element.eClass().name).concat(' ').concat(element.toString()).registerError()/]
+[else]
 [if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
 {
 [/if]
 	class [element.name.toUpperFirst()/];
 [if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/if]
 [/for]
 [/if]
 
@@ -72,7 +77,9 @@ virtual public uml::Class
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[anInterfaceRealization.supplier.getNearestPackage().ns()/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"
+[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(oclIsUndefined() and name.oclIsUndefined()))]
+#include "[aNamedElement.getNearestPackage().ns()/]/[aNamedElement.name.toUpperFirst()/].hpp"
+[/for]
 [/for]
 [/if]
 
