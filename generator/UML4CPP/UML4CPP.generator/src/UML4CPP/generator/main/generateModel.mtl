@@ -82,7 +82,10 @@ virtual public uml::Class
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName()))]
-[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(oclIsUndefined() and name.oclIsUndefined()))]
+[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(oclIsUndefined() or name.oclIsUndefined()))]
+// undefined interface realization supplier [aNamedElement.toString()/]['class: '.concat(aClass.name).concat(': undefined interface realization supplier: ').concat(aNamedElement.toString()).registerError()/]
+[/for]
+[for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(not oclIsUndefined() and not name.oclIsUndefined()))]
 #include "[aNamedElement.getNearestPackage().ns()/]/[aNamedElement.name.toUpperFirst()/].hpp"
 [/for]
 [/for]
