@@ -51,7 +51,6 @@
 [query public creatorFunction(aType : Type) : String =  metaModelFactory(aType).concat('create').concat(aType.name.toUpperFirst()).concat('()')/]
 [query public metaModelFactory(aType : Type) : String = aType.getNearestPackage().name.concat('::').concat(aType.getNearestPackage().name).concat('Factory::eInstance()->')/]
 
-[query public getPackageName(pack : Package) : String = if (pack.name = keyUML()) or (pack.name='Ecore') or (pack.name = 'PrimitiveTypes') then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
 
 
 [**

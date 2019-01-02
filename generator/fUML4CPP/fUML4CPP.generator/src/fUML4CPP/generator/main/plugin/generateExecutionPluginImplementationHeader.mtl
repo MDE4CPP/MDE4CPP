@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateExecutionPluginImplHeader(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]

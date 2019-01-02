@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]

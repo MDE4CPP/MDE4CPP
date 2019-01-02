@@ -15,6 +15,7 @@
 [module generateExecutionProjectFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 
 [template public generateExecutionProjectFiles(aPackage : Package) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]

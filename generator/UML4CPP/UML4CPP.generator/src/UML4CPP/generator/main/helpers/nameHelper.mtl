@@ -72,6 +72,13 @@
 [query public myNamespaceName(aNamespace : Namespace) : String = if (aNamespace.name = keyUML() or aNamespace.name = keyEcore()) then aNamespace.name.toLowerCase() else aNamespace.name endif /]
 
 [**
+ * query generate package name
+ * - add suffix 'Reflection' to ecore/ uml/ primitiveTypes model name
+ * - otherwise original package name
+*/]
+[query public getPackageName(pack : Package) : String = if (pack.name = keyUML()) or (pack.name = keyEcore()) or (pack.name = keyPrimitiveTypes()) then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
+
+[**
  *  generate substring of a qualified name, name is made up of parameter type names
 */]
 [template private generateParameterTypeList(anOperation : Operation)]

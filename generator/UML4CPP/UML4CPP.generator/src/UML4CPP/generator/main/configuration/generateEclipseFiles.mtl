@@ -19,7 +19,7 @@
  */]
 [module generateEclipseFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
  
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateEclipseFiles(aPackage : Package, prepareApplication : Boolean) { packageName : String = getPackageName().toUpperFirst(); }]
 [aPackage.generateCProject(prepareApplication)/]
