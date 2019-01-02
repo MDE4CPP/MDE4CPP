@@ -79,13 +79,6 @@
 [/template]
 
 [**
- * generate name of EClass elements
-*/]
-[template public generateTypeClass(anEClass : ecore::EClass)]
-[anEClass.name/]
-[/template]
-
-[**
  *  create error for an undefined element (in special for elements, which are valid but have invalid name
 */]
 [template private handleUndefinedElement(anElement : Element)]
