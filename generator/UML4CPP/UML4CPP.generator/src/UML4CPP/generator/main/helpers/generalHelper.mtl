@@ -120,3 +120,8 @@ template<class T> class Bag;
 #endif
 [/template]
 
+[** 
+ * generate the instanciation of a model element by using model factory create function 
+*/]
+[query public generateCreateFunction(aType : Type) : String =  aType.getModelFactory().concat('create').concat(aType.name.toUpperFirst()).concat('()')/]
+[query private getModelFactory(aType : Type) : String = aType.getNearestPackage().name.concat('::').concat(aType.getNearestPackage().name).concat('Factory::eInstance()->')/]
