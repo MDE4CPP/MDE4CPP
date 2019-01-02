@@ -15,6 +15,7 @@
 [module generateCallOperationActionExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateCallOperationActionExecutionHeader(anCallOperationAction : CallOperationAction, aPackage :Package) {
 	className : String = anCallOperationAction.name.toUpperFirst().concat('Execution');

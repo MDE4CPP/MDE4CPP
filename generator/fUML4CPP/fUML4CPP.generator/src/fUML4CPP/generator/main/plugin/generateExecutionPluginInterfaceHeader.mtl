@@ -15,6 +15,7 @@
 [module generateExecutionPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
