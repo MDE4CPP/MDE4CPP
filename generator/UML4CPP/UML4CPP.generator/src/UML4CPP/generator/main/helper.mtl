@@ -58,15 +58,6 @@
  * helper for container based creation
 */]
 
-[** get all associations where aClass is memberType */]
-[query public getAssociationsToClass(aClass : Class) : Set(Association) = aClass.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
-[query public isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
-[query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
-
-
-
-
-
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
