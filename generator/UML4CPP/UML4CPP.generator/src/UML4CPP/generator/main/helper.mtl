@@ -45,13 +45,6 @@
 
 [query public metamodelClassTypeString(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
 
-[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.myNamespaceName() = base.namespace.myNamespaceName() or aClass.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.myNamespaceName().concat('::').concat(base.name.toUpperFirst()) endif /]
-[query public InterfaceWithNamespace(anInterface : Interface, base : Classifier) : String = if anInterface.namespace.myNamespaceName() = base.namespace.myNamespaceName() or anInterface.getNearestPackage().ignoreNamespace() then base.name.toUpperFirst() else base.namespace.myNamespaceName().concat('::').concat(base.name.toUpperFirst()) endif /]
- 
-
-
-
-
 [**
  * helper for container based creation
 */]

@@ -79,6 +79,14 @@
 [query public getPackageName(pack : Package) : String = if (pack.name = keyUML()) or (pack.name = keyEcore()) or (pack.name = keyPrimitiveTypes()) then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
 
 [**
+ * generate name of classifier with namespace, if namespace of 'aClassifier' is different to classifier of 'base'
+ * if namespaces are equal, namespace is not necessary and is not generated
+ * if flag 'ignoreNamespace' is true, namespace is also not generated 
+*/]
+[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
+
+
+[**
  *  generate substring of a qualified name, name is made up of parameter type names
 */]
 [template private generateParameterTypeList(anOperation : Operation)]

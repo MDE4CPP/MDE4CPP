@@ -70,7 +70,7 @@ namespace uml
 {
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superClass->isEmpty())]
+virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[/for][if (aClass.superClass->isEmpty())]
  : [aClass.baseClass()/][/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		private:    

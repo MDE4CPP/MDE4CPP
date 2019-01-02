@@ -104,7 +104,7 @@ namespace [aPackage.name/]
 [/if]
 	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [aClass.generateInterfaceExtensions()/]
 [else][for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for]
 [/if]
 	{
 		private:    
