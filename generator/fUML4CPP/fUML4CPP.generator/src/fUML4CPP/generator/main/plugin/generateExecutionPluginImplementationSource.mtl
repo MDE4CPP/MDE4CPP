@@ -89,7 +89,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/if]
 
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
-	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
+	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
 		[act.generateParameterFromAny(aPackage)/]
 		[act.generateStartActivityExecution(aPackage, true)/]   

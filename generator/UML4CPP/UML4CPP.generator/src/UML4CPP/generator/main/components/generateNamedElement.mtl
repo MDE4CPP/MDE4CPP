@@ -24,12 +24,12 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generatePackageMemberGetter(anElement : NamedElement,impl : Boolean)]
-virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];
+virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.generatePackageGetterCall(anElement)/][abstractSuffix(impl)/];
 
 [/template]
 
 [template public generatePackageMemberGetterImpl(anElement : NamedElement)]
-std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.generatePackageGetterCall(anElement)/]
 {
 	return [anElement.memberName()/];
 }

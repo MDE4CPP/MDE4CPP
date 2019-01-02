@@ -86,7 +86,7 @@ static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOpe
 [memberName(aClass)/]->setName("[aClass.name/]");
 [memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
-gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.packageGetter(aClass)/]);
-gen->setGeneral([superClass.packageGetter(aClass)/]);
+gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
+gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
 [/for]
 [/template]

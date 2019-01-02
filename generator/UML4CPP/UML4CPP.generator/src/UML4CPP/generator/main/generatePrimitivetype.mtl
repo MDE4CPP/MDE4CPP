@@ -14,7 +14,7 @@
  */]
 [module generatePrimitivetype('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generatePrimitiveTypeCreation(aPrimitiveType : PrimitiveType)]
 [aPrimitiveType.memberName()/] = factory->createPrimitiveType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);

@@ -16,7 +16,7 @@
 
 
 [import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
 [memberName(anActivityNode)/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
@@ -83,14 +83,14 @@
 [/template]
  
 [template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction))]
-[memberName(anActivityNode)/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.packageGetter()/]);
+[memberName(anActivityNode)/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.generatePackageGetterCall()/]);
 [anActivityNode.oclAsType(CallBehaviorAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallBehaviorAction).output.initializePin()/]
 
 [/template]
 
 [template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
-[memberName(anActivityNode)/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.packageGetter()/]);
+[memberName(anActivityNode)/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
 [anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
 

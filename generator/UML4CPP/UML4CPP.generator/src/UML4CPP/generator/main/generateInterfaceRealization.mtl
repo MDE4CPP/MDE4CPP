@@ -14,7 +14,7 @@
  */]
 [module generateInterfaceRealization('http://www.eclipse.org/uml2/5.0.0/UML')]
  
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
@@ -30,9 +30,9 @@
 [for (aClient : NamedElement | anInterfaceRealization.client)]
 [memberName(anInterfaceRealization)/]->getClient()->push_back([memberName(aClient)/]);
 [/for]
-[memberName(anInterfaceRealization)/]->setContract([anInterfaceRealization.contract.packageGetter(anInterfaceRealization)/]);
+[memberName(anInterfaceRealization)/]->setContract([anInterfaceRealization.contract.generatePackageGetterCall(anInterfaceRealization)/]);
 [for (aSupplier : NamedElement | anInterfaceRealization.supplier)]
-[memberName(anInterfaceRealization)/]->getSupplier()->push_back([aSupplier.packageGetter(anInterfaceRealization)/]);
+[memberName(anInterfaceRealization)/]->getSupplier()->push_back([aSupplier.generatePackageGetterCall(anInterfaceRealization)/]);
 [/for]
 [/template]
 

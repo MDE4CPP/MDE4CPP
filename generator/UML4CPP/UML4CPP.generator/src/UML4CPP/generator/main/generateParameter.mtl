@@ -14,7 +14,7 @@
  */]
 [module generateParameter('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateParameterCreation(aParameter : Parameter) post(trim())]
 [if(aParameter.owner.oclIsKindOf(Operation))]
@@ -26,7 +26,7 @@
 [template public generateParameterInitialization(aParameter : Parameter)]
 // parameter [aParameter.name/]
 [memberName(aParameter)/]->setName("[aParameter.name/]");
-[memberName(aParameter)/]->setType([aParameter.type.packageGetter(aParameter)/]);
+[memberName(aParameter)/]->setType([aParameter.type.generatePackageGetterCall(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);

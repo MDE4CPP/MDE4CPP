@@ -14,13 +14,11 @@
  */]
 [module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helper /]
-
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::parameterHelper /]
 
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
@@ -192,7 +190,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>(
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //INput parameter [par.name/] 
 std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
-[par.name/]P->setParameter([par.packageGetter()/]);
+[par.name/]P->setParameter([par.generatePackageGetterCall()/]);
 [par.generateOutputParameter()/]
 [if(par.type.supportedTypes())]
 [par.name/]Value->setValue([par.name.toLowerFirst()/]);
@@ -210,7 +208,7 @@ object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Obje
 object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
 object->setLocus(locus);
 [/if]
-std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.packageGetter()/], [if (objectUsed)]object[else]nullptr[/if], pList);
+std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (objectUsed)]object[else]nullptr[/if], pList);
 
 [if (aPackage.getCallOperationActions()->size() > 0)]
 [aPackage.getCallOperationActions().generateCallOperationActionClearing()/]

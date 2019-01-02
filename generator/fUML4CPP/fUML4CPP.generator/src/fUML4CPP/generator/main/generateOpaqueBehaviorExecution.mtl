@@ -15,7 +15,7 @@
 [module generateOpaqueBehaviorExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
@@ -39,7 +39,7 @@
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
 std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
 [memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
-[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
+[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
 [memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus().lock());
 factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
 [/if]
@@ -52,12 +52,12 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 [if (not aCallOperationAction.name.oclIsUndefined())]
 std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createFunctionBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
-[aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->push_back([aCallOperationAction.getFBPackageElement()/]);
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->push_back([aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
 std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
 [memberName(aParameter)/]->setName("[aParameter.name/]");
-[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.packageGetter(aParameter)/]);
+[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
@@ -75,7 +75,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [/template]
 
 [template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod()) ]
-[aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
 
 [/template]
 

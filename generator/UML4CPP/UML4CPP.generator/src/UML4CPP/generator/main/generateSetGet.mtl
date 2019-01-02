@@ -74,7 +74,7 @@ virtual void [aProperty.setterName()/] (std::shared_ptr<uml::EnumerationLiteral>
 void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
 {
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
-	if (literal == [literal.packageGetter()/])
+	if (literal == [literal.generatePackageGetterCall()/])
 	{	
 		[aProperty.setterName()/]([literal.enumeration.name/]::[literal.name.toUpper()/]);
 		return;
