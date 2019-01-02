@@ -17,6 +17,8 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
 
 [query public hasGenerateOwnerVariable(aElement : Element) : Boolean = aElement.valueKey('generateOwnerVariable') = 'true'/]
 [template public generateBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]

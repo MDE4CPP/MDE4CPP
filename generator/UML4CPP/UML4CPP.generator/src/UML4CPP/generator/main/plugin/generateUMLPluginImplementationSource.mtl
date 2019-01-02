@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]

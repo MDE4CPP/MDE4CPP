@@ -21,5 +21,15 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 
-[comment query to generate c++ abstract suffix /]
+[**
+ *  query to generate c++ abstract suffix
+*/]
 [query public abstractSuffix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
+
+[** 
+ * queries to read out values of source gen annotation 
+*/]
+[query private hasSourceGen(aElement : Element) : Boolean = eAnnotations->select(source = keySourceGen())->notEmpty()/]
+[query private getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = keySourceGen())->first()/]
+[query private hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aKey:String) : String = if (hasKey(aKey)) then aElement.getSourceGen().details->select(key = aKey)->first().value else '' endif/]
