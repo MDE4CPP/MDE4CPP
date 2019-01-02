@@ -103,7 +103,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeComponentsEmtls()
 	{
-		m_emtlFilePathMap.put("generateNamedElement.emtl", "rsrc:UML4CPP/generator/main/configuration/generateNamedElement.emtl");
+		m_emtlFilePathMap.put("generateNamedElement.emtl", "rsrc:UML4CPP/generator/main/components/generateNamedElement.emtl");
 	}
 	
 	private void initializeConfigurationEmtls()
