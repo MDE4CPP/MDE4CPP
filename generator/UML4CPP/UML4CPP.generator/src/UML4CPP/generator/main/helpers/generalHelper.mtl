@@ -27,15 +27,17 @@
 [query public abstractSuffix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
 
 [** 
- * queries to read out values of source gen annotation 
+ * queries to read out annotaion values, default source is the annotation 'codeGen' 
 */]
-[query private hasSourceGen(aElement : Element) : Boolean = eAnnotations->select(source = keySourceGen())->notEmpty()/]
-[query private getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = keySourceGen())->first()/]
-[query private hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
-[query public valueKey(aElement : Element, aKey:String) : String = if (hasKey(aKey)) then aElement.getSourceGen().details->select(key = aKey)->first().value else '' endif/]
+[query private hasSourceGen(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
+[query private getSourceGen(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
+[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasSourceGen(aSource) then aElement.getSourceGen(aSource).details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getSourceGen(aSource).details->select(key = aKey)->first().value else '' endif/]
+[query public valueKey(aElement : Element, aKey:String) : String = aElement.valueKey(sourceNameCodeGen(), aKey) /]
 
 [**
  * queries to check values of codeGen annotation keys
 */]
-[query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
-[query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]
+[query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(sourceNameCodeGen(), keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
+[query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]
+
