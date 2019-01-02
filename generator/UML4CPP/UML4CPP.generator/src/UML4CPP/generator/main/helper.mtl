@@ -53,7 +53,6 @@
 
 [query public getPackageName(pack : Package) : String = if (pack.name = keyUML()) or (pack.name='Ecore') or (pack.name = 'PrimitiveTypes') then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
 
-[query public sanitize(str : String) : String = str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') /] 
 
 [**
  * helper for container based creation
@@ -120,6 +119,7 @@ std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.memberName()/
 [template public endGuard(namedelement : NamedElement,sufix: String)]
 #endif /* end of include guard: [namedelement.myQualifiedName().substituteAll('::','_').concat('_').concat(sufix).concat('_hpp').toUpperCase()/] */
 [/template]
+
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
