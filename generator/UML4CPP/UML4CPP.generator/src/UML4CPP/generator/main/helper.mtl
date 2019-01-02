@@ -14,6 +14,7 @@
  */]
 [module helper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
@@ -21,7 +22,6 @@
 [**
  * Helper for c++ abstract function sufix
 */]
-[query public abstractSufix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
 [query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
 
 
@@ -117,7 +117,7 @@
 [/template]
 
 [template public generateGetter(anElement : NamedElement,impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];
 
 [/template]
 

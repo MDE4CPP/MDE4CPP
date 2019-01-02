@@ -21,3 +21,5 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 
+[comment query to generate c++ abstract suffix /]
+[query public abstractSuffix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]

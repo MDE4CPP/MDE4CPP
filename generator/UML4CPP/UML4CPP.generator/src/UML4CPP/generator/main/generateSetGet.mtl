@@ -18,14 +18,15 @@
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
 
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
-virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSufix(impl)/];
-virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSufix(impl)/];
-virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSufix(impl)/];
+virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
+virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
+virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 [/template]
 
 [template public generateGetSetMemeberInit(aClass : Class)]

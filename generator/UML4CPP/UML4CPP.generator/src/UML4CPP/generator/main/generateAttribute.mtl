@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::generateStereotype /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly/]
 
@@ -46,11 +47,11 @@ m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPack
 [/template]
 
 [template public generateAttributeGetterDecleration (aProperty : Property, impl : Boolean)]
-virtual [aProperty.generateCppType()/] [aProperty.GetterName()/]() const [abstractSufix(impl)/];
+virtual [aProperty.generateCppType()/] [aProperty.GetterName()/]() const [abstractSuffix(impl)/];
 [/template]
 
 [template public generateAttributeSetterDecleration(aProperty : Property, impl : Boolean) ? (aProperty.upper=1 )]
-virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSufix(impl)/]; 
+virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/]; 
 [/template]
 
 [***

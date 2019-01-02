@@ -16,11 +16,12 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateClassCreate(aStereotype : Stereotype,impl : Boolean)]
-virtual [aStereotype.generateCppType()/] create[aStereotype.name/]()[abstractSufix(impl)/];
+virtual [aStereotype.generateCppType()/] create[aStereotype.name/]()[abstractSuffix(impl)/];
 
 [/template]
 
