@@ -69,13 +69,7 @@
 [if (ns.name = keyUML())]uml[elseif (ns.name='Ecore')]ecore[else][ns.name/][/if]
 [/template]
 
-[template public defineDebugMacro(namedelement : NamedElement)]
-#ifdef NDEBUG
-  #define DEBUG_MESSAGE(a) /**/
-#else
-  #define DEBUG_MESSAGE(a) a
-#endif
-[/template]
+
 
 [template public generateGetter(anElement : NamedElement,impl : Boolean)]
 virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];

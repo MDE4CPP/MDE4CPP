@@ -19,6 +19,7 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateMain(aPackage : Package)]

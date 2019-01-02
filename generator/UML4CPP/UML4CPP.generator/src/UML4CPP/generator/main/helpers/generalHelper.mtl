@@ -109,3 +109,14 @@ template<class T> class Bag;
 #endif /* end of include guard: [namedelement.myQualifiedName().sanitize().concat('_').concat(suffix).concat('_hpp').toUpperCase()/] */
 [/template]
 
+[** 
+ * template to generate a macro for enable/ disable printing of messages
+*/]
+[template public defineDebugMacro(namedelement : NamedElement)]
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+[/template]
+
