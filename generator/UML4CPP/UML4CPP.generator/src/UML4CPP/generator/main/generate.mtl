@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::generateInterface /]
 [import UML4CPP::generator::main::generateModel /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::impl::generateImplementation /]
 [import UML4CPP::generator::main::package::generatePackage /]
 [import UML4CPP::generator::main::plugin::generateUMLPlugin /]

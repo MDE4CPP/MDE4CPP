@@ -17,9 +17,9 @@
 [**	
  * keywords for attribute 'language' of element 'FunctionBehavior'
 */]
-[query public keyLibrary (any : OclAny) : String = 'LIBRARY'/]	[** indicates a library specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
-[query public keyInclude (any : OclAny) : String = 'INCLUDE'/]	[**	indicates a header include specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
-[query public keyCPP (any : OclAny) : String = 'CPP'/]	[**	indicates a source code specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+[query public keyLibrary(any : OclAny) : String = 'LIBRARY'/]	[** indicates a library specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+[query public keyInclude(any : OclAny) : String = 'INCLUDE'/]	[**	indicates a header include specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
+[query public keyCPP(any : OclAny) : String = 'CPP'/]	[**	indicates a source code specification on corresponding position in attribute 'body' of element 'FunctionBehavior' /] 
 
 [**
  * 	keywords for model names 
@@ -29,6 +29,13 @@
 [** 
  * keywords for source name and keys of CodeGen annoation
 */]
-[query public sourceNameCodeGen (any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public sourceNameCodeGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
 [query public keyIgnoreNamespace (any : OclAny) : String = 'ignoreNamespace' /]	[** indicate, whether a namespace for given element should be generated: value = '1' -> namespace ignored /]
-[query public keySingleton (any : OclAny) : String = 'singleton' /]	[** indicate, if a singleton mechanism should be generated for given element: value = '1' -> singleton generated /]
+[query public keySingleton(any : OclAny) : String = 'singleton' /]	[** indicate, if a singleton mechanism should be generated for given element: value = '1' -> singleton generated /]
+
+[** 
+ * keywords for source name and keys of prepareApplication annoation
+*/]
+[query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
+[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeIncludes'/]	[**	specifiy header to be included for main function /] 
+[query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 

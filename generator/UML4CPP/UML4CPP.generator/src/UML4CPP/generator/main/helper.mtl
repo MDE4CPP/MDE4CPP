@@ -20,21 +20,6 @@
 [import UML4CPP::generator::main::validation::validateModel /]
 
 
-
-[**
- * check if application should be created
-*/]
-[query public prepareApplication(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
-[query public hasMainSourceCode(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
-[query public getMainSourceCode(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
-
-[query public hasMainSourceIncludes(ePackage : Package) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
-[query public getMainSourceIncludes(ePackage : Package) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
-
-[**
- * check and get key value from sourcegen eannotation
-*/]
-
 [**
  * Generate a qualified name 
  * Chain 
@@ -154,11 +139,6 @@ template<class T> class Bag;
 #include "abstractDataTypes/Bag.hpp"
 [/if]
 [/template]
-
-[**
- * Helper for sourcegen annotations
-*/]
-
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]

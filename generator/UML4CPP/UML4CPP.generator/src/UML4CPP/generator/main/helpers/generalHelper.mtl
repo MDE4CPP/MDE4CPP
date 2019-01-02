@@ -41,3 +41,12 @@
 [query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(sourceNameCodeGen(), keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
 [query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]
 
+[**
+ * queries to check values of prepareApplication annotation keys
+*/]
+[query public prepareApplication(aPackage : Package) : Boolean = hasSourceGen(sourceNamePrepareApplication()) /]
+[query public hasMainSourceCode(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
+[query public getMainSourceCode(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
+[query public hasMainIncludes(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
+[query public getMainIncludes(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
+

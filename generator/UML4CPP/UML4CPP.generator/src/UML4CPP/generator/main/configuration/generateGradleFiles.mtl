@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::configurationHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateGradleFiles(aPackage : Package)]
 [aPackage.generateBasicGradleFile()/]

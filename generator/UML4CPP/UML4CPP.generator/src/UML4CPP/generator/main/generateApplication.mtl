@@ -40,8 +40,8 @@
 #include "[aPackage.getPackageName()/]/[anEnumeration.name/].hpp"
 [/for]
 
-[if (hasMainSourceIncludes())]
-[getMainSourceIncludes()/]
+[if (hasMainIncludes())]
+[getMainIncludes()/]
 
 [/if]
 // [protected ('includes')] 
