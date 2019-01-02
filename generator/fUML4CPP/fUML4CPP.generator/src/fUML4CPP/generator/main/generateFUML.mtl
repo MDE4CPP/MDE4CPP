@@ -14,7 +14,6 @@
  */]
 [module generateFUML('http://www.eclipse.org/uml2/5.0.0/UML')]
     
-[import UML4CPP::generator::main::generate /]
 [import fUML4CPP::generator::main::generateBehaviorExecutionHeader /]
 [import fUML4CPP::generator::main::generateBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::generateCallOperationActionExecutionHeader /]
@@ -27,6 +26,7 @@
 [import fUML4CPP::generator::main::generateExecutionProjectFiles /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
+[import UML4CPP::generator::main::generate /]
 [import UML4CPP::generator::main::validation::validateModel /]
  
 [query public hasConfiguredBuildMode(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->notEmpty() /]

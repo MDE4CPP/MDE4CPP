@@ -17,7 +17,6 @@
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 

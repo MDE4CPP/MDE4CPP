@@ -15,7 +15,6 @@
 [module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::generateType /]
 

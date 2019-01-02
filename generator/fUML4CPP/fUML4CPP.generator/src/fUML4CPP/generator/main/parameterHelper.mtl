@@ -16,7 +16,6 @@
  
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]

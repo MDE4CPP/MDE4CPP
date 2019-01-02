@@ -17,7 +17,6 @@
 [import UML4CPP::generator::main::generateParameter /]
 [import UML4CPP::generator::main::generateStereotype /]
 [import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 

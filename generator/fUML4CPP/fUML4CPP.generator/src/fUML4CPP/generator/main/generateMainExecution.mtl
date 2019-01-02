@@ -14,11 +14,11 @@
  */]
 [module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::parameterHelper /]
 
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
