@@ -56,6 +56,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	protected void initialize()
 	{
 		initalizeGeneralEmtls();
+		initializeComponentsEmtls();
 		initializeConfigurationEmtls();
 		initializeFactoryEmtls();
 		initializeHelpersEmtls();
@@ -98,6 +99,11 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	   	 m_emtlFilePathMap.put("generateValueSpecification.emtl", "rsrc:UML4CPP/generator/main/generateValueSpecification.emtl");
 	   	 m_emtlFilePathMap.put("helper.emtl", "rsrc:UML4CPP/generator/main/helper.emtl");
 	   	 m_emtlFilePathMap.put("validateModel.emtl", "rsrc:UML4CPP/generator/main/validation/validateModel.emtl");
+	}
+	
+	private void initializeComponentsEmtls()
+	{
+		m_emtlFilePathMap.put("generateNamedElement.emtl", "rsrc:UML4CPP/generator/main/configuration/generateNamedElement.emtl");
 	}
 	
 	private void initializeConfigurationEmtls()

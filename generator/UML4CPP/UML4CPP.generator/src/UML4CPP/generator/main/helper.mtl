@@ -66,23 +66,7 @@
 
 
 
-[template public generateGetter(anElement : NamedElement,impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];
 
-[/template]
-
-[template public generateGetterImpl(anElement : NamedElement)]
-std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
-{
-	return [anElement.memberName()/];
-}
-
-[/template]
-
-[template public generatePrivatePackageMember(anElement : NamedElement)]
-std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.memberName()/] = nullptr;
-
-[/template]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
