@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::impl::generateImplementationHeader /]
 [import UML4CPP::generator::main::impl::generateImplementationSource /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 
 [**

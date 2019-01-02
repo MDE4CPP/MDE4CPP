@@ -15,6 +15,7 @@
 [module generatePackageImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public baseClass(aPackage : Package) ? (oclIsKindOf(Profile))]

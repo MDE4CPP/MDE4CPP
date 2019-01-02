@@ -27,6 +27,8 @@
 [query public keyUML(any : OclAny) : String = 'UML' /]	[**	original name of UML model /]
 
 [** 
- * keywords for annoation sources and keys
+ * keywords for annotation sources and keys
 */]
-[query public keySourceGen (any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]
+[query public keySourceGen (any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public keyIgnoreNamespace (any : OclAny) : String = 'ignoreNamespace' /]	[** indicate, whether a namespace for given element should be generated: value = '1' -> namespace ignored /]
+[query public keySingleton (any : OclAny) : String = 'singleton' /]	[** indicate, if a singleton mechanism should be generated for given element: value = '1' -> singleton generated /]

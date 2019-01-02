@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public baseInterface(aInterface : Interface) ?(oclIsKindOf(Stereotype))]

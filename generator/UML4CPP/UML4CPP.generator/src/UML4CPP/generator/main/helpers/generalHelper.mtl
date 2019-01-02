@@ -33,3 +33,9 @@
 [query private getSourceGen(aElement : Element) : EAnnotation = eAnnotations->select(source = keySourceGen())->first()/]
 [query private hasKey(aElement : Element, aKey:String) : Boolean = if aElement.hasSourceGen() then aElement.getSourceGen().details->select(key = aKey)->notEmpty() else false endif /]
 [query public valueKey(aElement : Element, aKey:String) : String = if (hasKey(aKey)) then aElement.getSourceGen().details->select(key = aKey)->first().value else '' endif/]
+
+[**
+ * queries to check values of codeGen annotation keys
+*/]
+[query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
+[query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]

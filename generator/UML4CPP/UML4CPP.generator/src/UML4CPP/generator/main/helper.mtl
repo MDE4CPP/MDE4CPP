@@ -159,8 +159,6 @@ template<class T> class Bag;
  * Helper for sourcegen annotations
 */]
 
-[query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey('ignoreNamespace') = '1' /]
-[query public isSingleton(anElement : Element) : Boolean = anElement.valueKey('singleton') = '1' /]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]

@@ -15,6 +15,7 @@
 [module generateUMLPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Plugin');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]

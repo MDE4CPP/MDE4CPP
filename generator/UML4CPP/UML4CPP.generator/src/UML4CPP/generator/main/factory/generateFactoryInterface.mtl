@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Factory');}]
