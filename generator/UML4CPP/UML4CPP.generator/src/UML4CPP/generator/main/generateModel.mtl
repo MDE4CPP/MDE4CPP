@@ -56,7 +56,7 @@ virtual public uml::Class
 [if (element.oclIsUndefined() or element.name.oclIsUndefined())]
 // undefined  [element.eClass().name/] ([element.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(element.eClass().name).concat(' ').concat(element.toString()).registerError()/]
 [else]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
 {
 [/if]
 	class [element.name.toUpperFirst()/];
@@ -87,7 +87,7 @@ virtual public uml::Class
 // undefined interface realization supplier [aNamedElement.toString()/]['class: '.concat(aClass.name).concat(': undefined interface realization supplier: ').concat(aNamedElement.toString()).registerError()/]
 [/for]
 [for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(not oclIsUndefined() and not name.oclIsUndefined()))]
-#include "[aNamedElement.getNearestPackage().ns()/]/[aNamedElement.name.toUpperFirst()/].hpp"
+#include "[aNamedElement.getNearestPackage().myNamespaceName()/]/[aNamedElement.name.toUpperFirst()/].hpp"
 [/for]
 [/for]
 [/if]

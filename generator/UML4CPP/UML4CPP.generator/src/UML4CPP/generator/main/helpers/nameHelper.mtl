@@ -64,6 +64,12 @@
 */]
 [query public sanitize(str : String) : String = str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') /] 
 
+[**
+* query to transform namespace characters
+* - Namespace of UML and Ecore model elements should be spelled with lower characters, namespaces other models will be not changed
+* - This is necessary, because ecore.ecore/ uml.ecore and ecore.uml/uml.uml use different spelling of uml/ecore 
+*/]
+[query public myNamespaceName(aNamespace : Namespace) : String = if (aNamespace.name = keyUML() or aNamespace.name = keyEcore()) then aNamespace.name.toLowerCase() else aNamespace.name endif /]
 
 [**
  *  generate substring of a qualified name, name is made up of parameter type names

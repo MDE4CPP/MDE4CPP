@@ -25,6 +25,7 @@
  * 	keywords for model names 
 */]
 [query public keyUML(any : OclAny) : String = 'UML' /]	[**	original name of UML model /]
+[query public keyEcore(any : OclAny) : String = 'Ecore' /]	[**	original name of ecore model /]
 
 [** 
  * keywords for source name and keys of CodeGen annoation

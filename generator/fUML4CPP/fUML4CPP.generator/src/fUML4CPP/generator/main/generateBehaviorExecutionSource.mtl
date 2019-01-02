@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 
 [query public hasGenerateOwnerVariable(aElement : Element) : Boolean = aElement.valueKey('generateOwnerVariable') = 'true'/]
@@ -49,12 +50,12 @@
 [if (not cOpSet.oclIsUndefined())]
 [if (cOpSet.target.name.startsWith('self'))]
 [if (cOpSet.target.name.startsWith('self.'))]
-#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().myNamespaceName()/]/[cOpSet.target.type.name/].hpp"
 [/if]
-#include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[cOpSet.activity.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [else]
-#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().myNamespaceName()/]/[cOpSet.target.type.name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 [/if]
@@ -62,7 +63,7 @@
 [/if]
 
 [if (anOpaqueBehavior.hasGenerateOwnerVariable())]
-#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [/if]
 
@@ -124,9 +125,9 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->notEmpty())->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 [if (cOpSet.target.name.startsWith('self'))]
-	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.ns()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.activity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
-	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.target.type.namespace.myNamespaceName()/]::[cOpSet.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [/if]
     assert(target != nullptr);
 	[/for]
@@ -139,7 +140,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	
 	//Calling the associated operation.
 [if (target.name.startsWith('self.'))]
-	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
+	std::shared_ptr<[cOpSet.target.type.namespace.myNamespaceName()/]::[cOpSet.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[cOpSet.target.type.namespace.myNamespaceName()/]::[cOpSet.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
 [/if]
 [if (target.name.startsWith('self.'))]
@@ -160,7 +161,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 		[if (anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::setBehavior').oclIsUndefined() and anOpaqueBehavior.getAppliedStereotype('BehaviorProfile::getBehavior').oclIsUndefined())]
 		//Function Behaviour from a Call Behavior Action [anOpaqueBehavior.hasGenerateOwnerVariable()/]
 		[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
-			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.ns()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 		[/if]
 
    		[if (anOpaqueBehavior.language->includes('CPP'))]

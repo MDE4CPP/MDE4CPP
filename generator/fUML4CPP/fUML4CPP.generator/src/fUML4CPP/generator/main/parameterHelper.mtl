@@ -17,8 +17,9 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
+[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 [query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
@@ -76,7 +77,7 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (not supportedTypes())]
-#include "[type.getNearestPackage().ns()/]/[type.name/].hpp"
+#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
 [/template]
 

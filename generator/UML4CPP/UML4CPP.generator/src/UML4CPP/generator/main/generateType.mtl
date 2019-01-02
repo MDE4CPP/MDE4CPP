@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
 [query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural')/]
@@ -103,9 +104,9 @@ std::string
 [/template]
 
 [template public transformType(aType : Type) ? (oclIsKindOf(Enumeration))]
-[if (not aType.getNearestPackage().ignoreNamespace())][aType.namespace.ns()/]::[/if][aType.name.toUpperFirst()/]
+[if (not aType.getNearestPackage().ignoreNamespace())][aType.namespace.myNamespaceName()/]::[/if][aType.name.toUpperFirst()/]
 [/template]
 
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
-[if (aType.name.oclIsUndefined())]undefinedType[else][if (not aType.ignoreNamespace())][aType.namespace.ns()/]::[/if][aType.name.toUpperFirst()/][/if]
+[if (aType.name.oclIsUndefined())]undefinedType[else][if (not aType.ignoreNamespace())][aType.namespace.myNamespaceName()/]::[/if][aType.name.toUpperFirst()/][/if]
 [/template]

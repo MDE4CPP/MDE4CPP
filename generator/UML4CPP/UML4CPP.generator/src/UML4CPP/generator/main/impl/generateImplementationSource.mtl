@@ -43,7 +43,7 @@
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [else]
-#include "[cl.getNearestPackage().ns()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 

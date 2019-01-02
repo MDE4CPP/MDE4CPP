@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 
@@ -38,7 +39,7 @@
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
-#include "[cOpSet.target.type.getNearestPackage().ns()/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
+#include "[cOpSet.target.type.getNearestPackage().myNamespaceName()/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
 #include "[aPackage.getPackageName()/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Object.hpp"
 [/if]
 [/let]
@@ -63,12 +64,12 @@
 
 [if (anCallOperationAction.target.name.startsWith('self'))]
 [if (anCallOperationAction.target.name.startsWith('self.'))]
-#include "[anCallOperationAction.target.type.getNearestPackage().ns()/]/[anCallOperationAction.target.type.name/].hpp"
+#include "[anCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[anCallOperationAction.target.type.name/].hpp"
 [/if]
-#include "[anCallOperationAction.activity.owner.oclAsType(Classifier).getNearestPackage().ns()/]/[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[anCallOperationAction.activity.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [else]
-#include "[anCallOperationAction.target.type.getNearestPackage().ns()/]/[anCallOperationAction.target.type.name.toUpperFirst()/].hpp"
+#include "[anCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[anCallOperationAction.target.type.name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
  
@@ -115,14 +116,14 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/for]
 
 [if (anCallOperationAction.target.name.startsWith('self'))]
-	std::shared_ptr<[anCallOperationAction.activity.owner.oclAsType(Classifier).namespace.ns()/]::[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.activity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 [/if]
 
 [if (target.name.startsWith('self.'))]
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
 	if (target != nullptr && subtarget != nullptr)
 	{

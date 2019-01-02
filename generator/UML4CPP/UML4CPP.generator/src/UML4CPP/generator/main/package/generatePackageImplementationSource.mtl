@@ -82,13 +82,13 @@
 [/for]
 
 [for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.ns()/]/[stereo.name/].hpp"
+#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
 [/for]
 [for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.ns()/]/[stereo.name/].hpp"
+#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
 [/for]
 [for (stereo : Stereotype | aPackage.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.ns()/]/[stereo.name/].hpp"
+#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
 [/for]
 
 

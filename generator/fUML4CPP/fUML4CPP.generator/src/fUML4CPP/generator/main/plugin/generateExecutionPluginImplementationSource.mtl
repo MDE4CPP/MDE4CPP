@@ -40,8 +40,8 @@
 [/if]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
-#include "[act.owner.oclAsType(Classifier).namespace.ns()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
-#include "[act.owner.oclAsType(Classifier).namespace.ns()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
 using namespace [aPackage.name/];
@@ -89,7 +89,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/if]
 
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
-	if (activity == [act.getNearestPackage().ns()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
+	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.packageGetter()/])
 	{
 		[act.generateParameterFromAny(aPackage)/]
 		[act.generateStartActivityExecution(aPackage, true)/]   

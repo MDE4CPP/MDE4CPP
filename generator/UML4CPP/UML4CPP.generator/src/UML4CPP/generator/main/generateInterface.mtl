@@ -54,7 +54,7 @@ virtual public uml::Element
 
 //Forward Declaration for used types
 [for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
 {
 [/if]
 	class [element.name/];
@@ -62,7 +62,7 @@ virtual public uml::Element
 [/for]
 
 [for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
 {
 [/if]
 	class [element.name/];
@@ -70,7 +70,7 @@ virtual public uml::Element
 [/for]
 
 [for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.ns()/]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/]
 {
 [/if]
 	class [element.name/];

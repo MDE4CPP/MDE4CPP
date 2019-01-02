@@ -81,7 +81,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 [if (isSingleton())]
 			friend class [aClass.name.toUpperFirst()/];
 [else]
-			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
+			friend class [aClass.getNearestPackage().myNamespaceName().concat('FactoryImpl').toUpperFirst()/];
 [/if]
 			//constructor
 			[className/]();

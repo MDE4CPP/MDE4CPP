@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::generateType /]
 
 [template public generateClassifierObjectHeader(aClassifier : Classifier, aPackage :Package) {
@@ -31,7 +32,7 @@
 template <class T> 
 class Bag;
 
-namespace [aClassifier.getNearestPackage().ns()/]
+namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 {
 	class [aClassifier.name.toUpperFirst()/];
 }
