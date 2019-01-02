@@ -37,9 +37,6 @@
 
 [query public needMetaModelPackageGetter(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else  anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
-[query public metamodelClassTypeString(aClass : Classifier,aBaseName : String) : String = if aClass.ancestors()->filter(Package)->first().name = aClass.eClass().ePackage.name then aBaseName else aClass.eClass().ePackage.name.concat('::').concat(aBaseName) endif /]
-
-[query public metamodelClassTypeString(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
 
 [**
  * helper for container based creation

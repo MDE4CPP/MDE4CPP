@@ -21,14 +21,15 @@
 
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generatePackageMemberGetter(anElement : NamedElement,impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];
+virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.packageGetter(anElement)/][abstractSuffix(impl)/];
 
 [/template]
 
 [template public generatePackageMemberGetterImpl(anElement : NamedElement)]
-std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
 {
 	return [anElement.memberName()/];
 }
@@ -36,6 +37,6 @@ std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.getNearestPac
 [/template]
 
 [template public generatePackageMember(anElement : NamedElement)]
-std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.memberName()/] = nullptr;
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.memberName()/] = nullptr;
 
 [/template]

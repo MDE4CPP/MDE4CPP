@@ -94,6 +94,12 @@
 [/template]
 
 [**
+ * 
+*/]
+[query public getMetaClassName(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
+
+
+[**
  *  create error for an undefined element (in special for elements, which are valid but have invalid name
 */]
 [template private handleUndefinedElement(anElement : Element)]

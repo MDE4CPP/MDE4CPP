@@ -115,7 +115,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 			[/if][/for][/for]
 
 		protected:
-			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass();
+			virtual std::shared_ptr<uml::Class> getMetaClass();
 
 		public:
 			//*********************************

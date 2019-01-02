@@ -127,7 +127,7 @@
 }
 [/if]
 
-std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass()
+std::shared_ptr<uml::Class> [className/]::getMetaClass()
 {
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.packageGetter(aClass)/];
 }
