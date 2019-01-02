@@ -25,3 +25,8 @@
  * 	keywords for model names 
 */]
 [query public keyUML(any : OclAny) : String = 'UML' /]	[**	original name of UML model /]
+
+[** 
+ * keywords for annoation sources and keys
+*/]
+[query public keySourceGen (any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]
