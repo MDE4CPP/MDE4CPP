@@ -28,8 +28,6 @@
 [query public memberName(anElement : NamedElement) : String = anElement.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
 [query public memberNameUpper(anElement : NamedElement) : String = memberName().toUpperCase() /]
 
-[query public classNumberName(aEClass : Class) : String = aEClass.name.toUpperCase() /]
-
 [query public packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else anElement1.packageGetterHelper(anElement2) endif /]
 [query private packageGetterHelper(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.getNearestPackage().oclIsUndefined()) then anElement1.handlePackageGetterError(anElement2.myName()) else needMetaModelPackageGetter(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
 
@@ -38,8 +36,6 @@
 [query public MetaModelPackageGetter(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
 
 [query public needMetaModelPackageGetter(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else  anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
-
-[query public getClassList(aClass : Classifier) : OrderedSet(ecore::EClass) = OrderedSet(ecore::EClass){aClass.eClass().eAllSuperTypes , aClass.eClass()} /]
 
 [query public metamodelClassTypeString(aClass : Classifier,aBaseName : String) : String = if aClass.ancestors()->filter(Package)->first().name = aClass.eClass().ePackage.name then aBaseName else aClass.eClass().ePackage.name.concat('::').concat(aBaseName) endif /]
 
