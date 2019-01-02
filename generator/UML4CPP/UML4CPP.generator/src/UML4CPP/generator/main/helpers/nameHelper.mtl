@@ -54,6 +54,14 @@
 [query private myName2(anElement : NamedElement) : String = if (qualifiedName.oclIsUndefined()) then handleUndefinedElement() else qualifiedName endif /]
 
 [**
+ * queries to generate getter and setter names
+*/]
+[query public setterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
+[query public getterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
+[query private getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
+
+
+[**
  *  generate substring of a qualified name, name is made up of parameter type names
 */]
 [template private generateParameterTypeList(anOperation : Operation)]

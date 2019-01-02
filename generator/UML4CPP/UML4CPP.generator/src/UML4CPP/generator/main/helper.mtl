@@ -19,10 +19,6 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[**
- * Helper for c++ abstract function sufix
-*/]
-[query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
 
 
 [**
@@ -38,8 +34,6 @@
 [**
  * check and get key value from sourcegen eannotation
 */]
-[query public SetterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
-[query public GetterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
 
 [**
  * Generate a qualified name 

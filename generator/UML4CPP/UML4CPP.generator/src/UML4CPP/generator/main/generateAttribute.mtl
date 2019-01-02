@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly/]
 
@@ -47,11 +48,11 @@ m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPack
 [/template]
 
 [template public generateAttributeGetterDecleration (aProperty : Property, impl : Boolean)]
-virtual [aProperty.generateCppType()/] [aProperty.GetterName()/]() const [abstractSuffix(impl)/];
+virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
 [/template]
 
 [template public generateAttributeSetterDecleration(aProperty : Property, impl : Boolean) ? (aProperty.upper=1 )]
-virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/]; 
+virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/]; 
 [/template]
 
 [***
@@ -62,7 +63,7 @@ virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProper
 [/template]
 
 [template public generateAttributeGetterImplementationCpp(aProperty : Property, aClass : Class)]
-[aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.GetterName()/]() const 
+[aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
 {
 	return m_[aProperty.name/];
 }
@@ -73,7 +74,7 @@ virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProper
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.upper=1 )]
-void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
+void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
 }

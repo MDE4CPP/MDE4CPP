@@ -49,13 +49,13 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [/template]
 
 [template public generateAttributeSetting(prop : Property,aElement : Element, stereo : Stereotype)]
-[if (prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(PrimitiveType) and not(prop.upper = 1))][prop.generateListAttributeSetting(aElement, stereo)/][else]stereo->[prop.SetterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
+[if (prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(PrimitiveType) and not(prop.upper = 1))][prop.generateListAttributeSetting(aElement, stereo)/][else]stereo->[prop.setterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
 [/template]
 
 [template public generateListAttributeSetting(prop : Property,aElement : Element, stereo : Stereotype)]
 [for (any : OclAny | aElement.getValue(stereo, prop.name))]
 [if (any.oclIsKindOf(NamedElement))]
-stereo->[prop.GetterName()/]()->push_back([memberName(any.oclAsType(NamedElement))/]);
+stereo->[prop.getterName()/]()->push_back([memberName(any.oclAsType(NamedElement))/]);
 [/if]
 [/for]
 [/template]
