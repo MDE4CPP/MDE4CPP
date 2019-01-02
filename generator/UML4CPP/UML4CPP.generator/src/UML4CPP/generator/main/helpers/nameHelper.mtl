@@ -67,7 +67,7 @@
 
 [query private myName2(anElement : NamedElement) : String = if (qualifiedName.oclIsUndefined()) then handleUndefinedElement() else qualifiedName endif /]
 
-[template public generateParameterTypeList(anOperation : Operation)]
+[template private generateParameterTypeList(anOperation : Operation)]
 [for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][sParameter.type.name/][/for]
 [/template]
 
