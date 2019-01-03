@@ -14,7 +14,7 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to trigger UML Plugin class generation
+ * module to trigger model plugin generation
  * 
  * The plugin class is used to register the model library in the plugin framework und thus makes the model available for other models on C++ layer without direct linking during compilation.
  * The plugin class is realized as singleton. 
