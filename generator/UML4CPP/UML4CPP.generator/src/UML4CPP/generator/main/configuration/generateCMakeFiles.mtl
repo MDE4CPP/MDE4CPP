@@ -19,7 +19,7 @@
  */]
 [module generateCMakeFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helpers::configurationHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]

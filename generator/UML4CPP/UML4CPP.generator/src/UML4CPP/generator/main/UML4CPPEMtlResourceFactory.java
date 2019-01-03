@@ -125,7 +125,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeHelpersEmtls()
 	{
-	  	 m_emtlFilePathMap.put("configurationHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/configurationHelper.emtl");
+	  	 m_emtlFilePathMap.put("collectionHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/collectionHelper.emtl");
 		 m_emtlFilePathMap.put("generalHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/generalHelper.emtl");
 		 m_emtlFilePathMap.put("keywords.emtl", "rsrc:UML4CPP/generator/main/helpers/keywords.emtl");
 		 m_emtlFilePathMap.put("nameHelper.emtl", "rsrc:UML4CPP/generator/main/helpers/nameHelper.emtl");
