@@ -72,11 +72,6 @@ SET(SOURCE_FILES
 [/if]
 [/for]
 [/if]
-[if (aPackage.includeEcorePackages())]
-	${MDE4CPP_HOME}/application/include/util/util.cpp
-	${MDE4CPP_HOME}/application/include/util/registry.cpp
-	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp
-[/if]
 )
 
 INCLUDE_DIRECTORIES(
@@ -126,7 +121,7 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/template]
 
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.collectIncludingModelNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
 [for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
@@ -150,7 +145,7 @@ ENDIF()
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.collectIncludingModelNames())]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 [for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]

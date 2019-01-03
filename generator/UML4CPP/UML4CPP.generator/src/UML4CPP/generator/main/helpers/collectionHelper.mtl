@@ -11,15 +11,64 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */]
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to provide queries collecting models required by configuration modules to generate projects and build files
+ * 
+ * /]
 [module collectionHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::keywords /]
  
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Dependency).getAppliedStereotypes().getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(),aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage()}->flatten()->reject(oclIsUndefined()) /]
-[query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name = keyUML()) or (aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
-[query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = keyUML())or (name = 'Ecore'))/]
-[query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = keyUML())or (name = 'Ecore')))/]
-[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection'} else OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection'}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name = keyUML()) or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
-[query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.includeEcorePackages()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
+[**
+ * query to collect all related packages, which are used by current model
+ * 
+ * Following packages are included:
+ * - packages of attribute types of classes
+ * - packages of applied stereotypes on class attributes
+ * - packages of parameter types of class operations
+ * - packages of interfaces realized by classes
+ * - packages of applied stereotypes on dependencies
+ * 
+ * Following packages are rejects:
+ * - current package (aPackage)
+ * - undefined packages
+ * - 'Ecore', 'UML' and 'PrimitiveTypes' packages
+ * 
+ * Each package is only include once. Undefined packages are rejected. Also 'aPackage' is rejected. 
+ * 
+ * 
+*/]
+[query private collectModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
+																		aPackage.member->filter(Class).attribute.type.getNearestPackage(),
+																		aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(),
+																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Dependency).getAppliedStereotypes().getNearestPackage()
+																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
+
+[**
+ * checks if a package is a reflection model
+*/]
+[query private isReflectionModel(aPackage : Package) : Boolean = ((aPackage.name = keyUML()) or (aPackage.name = keyEcore()) or (aPackage.name = keyPrimitiveTypes())) /]
+
+[**
+ * collect query for reflection models
+ * 
+ * include basic models and reflections models as well as packages used by given model
+*/]
+[query private collectIncludingModelNamesForNonReflectionModels(aPackage : Package) : Set(String) = OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection'}->addAll(collectModelIncludes()->sortedBy(name).name)->flatten() /]
+
+[**
+ * collect query for reflection models
+*/]
+[query private collectIncludingModelNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name = keyUML()) or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
+
+[**
+ *  query to collect all related packages names, which are used by current model
+ *  
+ *  if current model is a reflection model, query 'collectIncludingModelNamesForReflectionModels' is used
+ *  otherwise 'collectIncludingModelNamesForNonReflectionModels' is used
+*/]
+[query public collectIncludingModelNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then collectIncludingModelNamesForReflectionModels() else collectIncludingModelNamesForNonReflectionModels() endif/]

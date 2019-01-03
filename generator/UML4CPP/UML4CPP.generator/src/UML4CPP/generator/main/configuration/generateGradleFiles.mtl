@@ -43,7 +43,7 @@ task build[packageName.toUpperFirst()/]() {
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 }
@@ -104,7 +104,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 
 	// dependency to model '[packName/]'
 	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
@@ -127,6 +127,6 @@ task clean {
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
-[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.collectIncludingModelNames()) separator (', ') ? (not(packName = aPackage.name))]
 '[packName/]'[/for]
 [/template]
