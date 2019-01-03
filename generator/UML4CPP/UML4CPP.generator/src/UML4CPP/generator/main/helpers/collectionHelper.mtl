@@ -19,7 +19,9 @@
  * /]
 [module collectionHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
  
 [**
  * query to collect all related packages, which are used by current model
@@ -72,3 +74,11 @@
  *  otherwise 'collectIncludingModelNamesForNonReflectionModels' is used
 */]
 [query public collectIncludingModelNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then collectIncludingModelNamesForReflectionModels() else collectIncludingModelNamesForNonReflectionModels() endif/]
+
+[**
+ * query to collect model classes, which are relevant for create functions in model factory
+ * 
+ * This are all classes of the model except abstract classes and classes with active singleton annotation.
+ * The resulting class list is sorted by myQualifiedName.
+*/]
+[query public collectModelClassesForFactory(aPackage : Package) : OrderedSet(Class) = aPackage.ownedMember->selectByKind(Class)->reject(isSingleton() or isAbstract = true)->sortedBy(myQualifiedName()) /]

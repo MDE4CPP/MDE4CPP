@@ -11,6 +11,28 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to trigger model factory generation
+ * 
+ * The factory class is used to create instances of all model classes.
+ * The class is realized as singleton.  
+ * 
+ * The factory provides the following functionality:
+ * - general create function to create a class instance based on class name
+ * - simple create functions for each model class
+ * - complex create functions with the container as parameter: (requires composition)
+ * 	 - created instance is put to the containers attribute
+ *   - container is set to class instance (if bidirectional association)
+ * - getter for model package
+ * 
+ * Following files will be generated:
+ * - interface header file
+ * - interface source file
+ * - implementation header file
+ * - implementation source file
+ * 
  */]
 [module generateFactory('http://www.eclipse.org/uml2/5.0.0/UML')]
 

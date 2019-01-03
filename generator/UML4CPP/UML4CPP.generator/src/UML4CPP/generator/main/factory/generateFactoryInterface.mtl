@@ -11,11 +11,17 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate model factory interface header file
+ * 
  */]
 [module generateFactoryInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateSingleton /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -29,7 +35,7 @@
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) separator ('\n')]
+[for (elements : Class| aPackage.collectModelClassesForFactory()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 	class [aPackage.name.toUpperFirst().concat('Package')/];
@@ -47,7 +53,7 @@
 			//Creator functions
 			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
 
-			[(aPackage.ownedMember->selectByKind(Class))->reject(isSingleton())->sortedBy(name).generateClassCreate(false)/]
+			[aPackage.collectModelClassesForFactory().generateClassCreate(false)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;

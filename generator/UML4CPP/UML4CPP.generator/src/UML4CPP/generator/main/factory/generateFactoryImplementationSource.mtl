@@ -11,12 +11,18 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate model factory implementation source file
+ * 
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -29,7 +35,7 @@
 #include "uml/Class.hpp"
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.ownedMember->filter(Class)->reject(isSingleton())->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.collectModelClassesForFactory())]
 #include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
@@ -40,7 +46,7 @@
 //*********************************
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
 	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
 	[/for]
 }
@@ -80,7 +86,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className)
     return nullptr;
 }
 
-[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+[for (aClass : Class | aPackage.collectModelClassesForFactory())]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/] ()
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
