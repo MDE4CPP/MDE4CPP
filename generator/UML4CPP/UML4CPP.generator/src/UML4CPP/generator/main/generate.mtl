@@ -38,7 +38,7 @@
 
 [if (aPackage.errorExisting())]
 	[aPackage.printErrors()/]
-	[aPackage.closeWithErrorExit(1)/]
+	[closeWithErrorExit(1)/]
 [/if]
 [/template]
 
