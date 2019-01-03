@@ -2,8 +2,15 @@ package fUML4CPP.generator.main;
 
 import UML4CPP.generator.main.UML4CPPEMtlResourceFactory;
 
+/**
+ * factory to create resource path based on URI
+ *
+ */
 public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 		
+	/**
+	 * factory to create resource path based on URI
+	 */
 	public FUML4CPPEMtlResourceFactory()
 	{
 		initialize();
