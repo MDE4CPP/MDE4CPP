@@ -116,18 +116,6 @@ SET(SOURCE_FILES
 INCLUDE_DIRECTORIES(
 	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-	${MDE4CPP_HOME}/application/include/PluginFramework
-	${MDE4CPP_HOME}/application/include/util
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/PrimitivetypesReflection
-	${MDE4CPP_HOME}/application/include/uml
-[if (not aPackage.includeEcorePackages())]
-[for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(myQualifiedName())) separator (',')]
-	${MDE4CPP_HOME}/application/include/[pack.name/]
-[/for]
-	${MDE4CPP_HOME}/application/include/[packageName/]
-[/if]
 # [protected ('includes')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
