@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate model package interface header file
+ * 
  */]
 [module generatePackageInterface('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
@@ -19,22 +24,10 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public baseClass(aPackage : Package) ? (oclIsKindOf(Profile))]
-virtual public uml::Profile
-[/template]
-
-[template public baseClass(aPackage : Package) ? (not oclIsKindOf(Profile))]
-virtual public uml::Package
-[/template]
-
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
-[if (aPackage.oclIsKindOf(Profile))]
-#include "uml/Profile.hpp"
-[else]
-#include "uml/Package.hpp"	
-[/if]
+#include "uml/[aPackage.eClass().name/].hpp"
 
 namespace uml 
 {
@@ -51,7 +44,7 @@ namespace uml
 	The Metamodel Package for the [aPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	class [packageName/] : [aPackage.baseClass()/]
+	class [packageName/] : virtual public uml::[aPackage.eClass().name/]
 	{
 		//protected default construcotr
 		protected:
