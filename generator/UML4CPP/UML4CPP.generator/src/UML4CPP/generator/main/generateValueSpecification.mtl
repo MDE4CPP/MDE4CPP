@@ -14,7 +14,7 @@
  */]
 [module generateValueSpecification('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
 [aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));

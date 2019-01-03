@@ -17,6 +17,7 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
 [memberName(anActivityNode)/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);

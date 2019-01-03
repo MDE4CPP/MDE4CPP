@@ -15,7 +15,7 @@
 [module generateActivity('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateParameter /]
-[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateActivityCreation(anActivity : Activity)]
 [memberName(anActivity)/] = factory->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);

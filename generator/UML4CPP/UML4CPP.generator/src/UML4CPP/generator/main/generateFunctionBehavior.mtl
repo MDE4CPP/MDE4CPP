@@ -15,7 +15,7 @@
 [module generateFunctionBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateParameter /]
-[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
  * The documentation of the template generateFunctionBehaviorCreation.

@@ -94,9 +94,15 @@
 [/template]
 
 [**
- * 
+ * generate meta class name
 */]
 [query public getMetaClassName(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
+
+[**
+ * generate member name based on myQualifiedName
+*/]
+[query public memberName(anElement : NamedElement) : String = anElement.myQualifiedName().sanitize().substituteAll('.', '_').toLowerFirst()/]
+[query public memberNameUpper(anElement : NamedElement) : String = memberName().toUpperCase() /]
 
 
 [**
