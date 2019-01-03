@@ -9,11 +9,21 @@ import org.eclipse.acceleo.model.mtl.resource.EMtlResourceImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 
+/**
+ * factory to create resource path based on URI
+ *
+ */
 public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 
+	/**
+	 * map storing pairs of {emtl file name, rsrc path}
+	 */
 	protected Map<String, String> m_emtlFilePathMap;
 	private Map<URI, Resource> resourceMap = new HashMap<URI, Resource>();
 		
+	/**
+	 * factory to create resource path based on URI
+	 */
 	public UML4CPPEMtlResourceFactory()
 	{
 		m_emtlFilePathMap = new HashMap<String, String>();
@@ -53,6 +63,9 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		 }
 	 }
 	
+	/**
+	 * fill {@code m_etmlFilePathMap} with UML specific emtl file/rsrc path pairs
+	 */
 	protected void initialize()
 	{
 		initalizeGeneralEmtls();
