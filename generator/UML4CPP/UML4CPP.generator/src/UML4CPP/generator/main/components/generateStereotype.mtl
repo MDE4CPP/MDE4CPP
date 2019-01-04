@@ -48,7 +48,11 @@
 {
 	//apply Stereotype	[stereo.name/]
 	[stereo.generateCppType(false)/] stereo([stereo.generateCreateFunction()/]);
-	[for (prop : Property | stereo.allAttributes()) separator ('\n')][if(not aElement.getValue(stereo, prop.name).oclIsUndefined())][prop.generateAttributeSetting(aElement, stereo)/][/if][/for]
+[for (prop : Property | stereo.allAttributes())]
+[if(not aElement.getValue(stereo, prop.name).oclIsUndefined())]
+	[prop.generateAttributeSetting(aElement, stereo)/]
+[/if]
+[/for]
 	[aElement.oclAsType(NamedElement).memberName()/]->applyStereotype(stereo);
 }
 [/for]
@@ -63,10 +67,8 @@
 [if (any.oclIsKindOf(NamedElement))]
 stereo->[prop.getterName()/]()->push_back([memberName(any.oclAsType(NamedElement))/]);
 [/if]
-[/for]
-[else]
-stereo->[prop.setterName()/]([prop.generateValue(aElement,stereo)/]);
-[/if]
+[/for][else]
+stereo->[prop.setterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
 [/template]
 
 [**

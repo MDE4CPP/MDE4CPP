@@ -38,7 +38,6 @@ virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstra
 [if (aProperty.hasSetter())]
 virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
 [/if]
-
 [/template]
 
 [**
