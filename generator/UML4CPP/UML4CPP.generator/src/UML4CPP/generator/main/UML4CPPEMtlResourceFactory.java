@@ -91,7 +91,6 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateMainExecution",
 								"generateModel",
 								"generateOperation",
-								"generatePrimitivetype",
 								"generateSetGet",
 								"generateSingleton",
 								"generateStereotype",
@@ -112,7 +111,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateFunctionBehavior",
 								"generateInstanceSpecification",
 								"generateInterfaceRealization",
-								"generateParameter"
+								"generateParameter",
+								"generatePrimitivetype"
 								};
 		generateFilePathMapData(moduleNames, "components", resourcePathPrefix);
 	}
