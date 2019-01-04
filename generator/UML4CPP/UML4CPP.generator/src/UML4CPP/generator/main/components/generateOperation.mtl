@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Operation artefacts
+ * 
  */]
 [module generateOperation('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -21,14 +26,21 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
- * The documentation of the template generateOperation.
- * @param anEOperation
+ * generate operation declaration
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
 virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for]) [abstractSuffix(impl)/];
 
 [/template]
 
+[**
+ * generate operation implementation
+ * 
+ * body of operation contains one of the following points:
+ * - content of FunctionBehavior -> if first method is FunctionBehavior
+ * - calling an Activity by fUML execution engine -> if first method is Activity
+ * - raise of UnsupportedOperationException -> if no method is defined
+*/]
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
 [sParameter.generateCppType(true)/] [sParameter.name/][/for])
@@ -95,16 +107,13 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 }
 [/template]
 
-[template public parameterNameList(aOperation : Operation)]
-[for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-"[sParameter.name/]"[/for]
-[/template]
-
-[template public parameterTypeList(aOperation : Operation)]
-[for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.type.generatePackageGetterCall(sParameter)/][/for]
-[/template]
-
+[**
+ * generate creation of meta model instance for an Operation element
+ * 
+ * this includes:
+ * - creation of operation
+ * - creation of operation parameter
+*/]
 [template public generateOperationCreation(aOperation : Operation) post(trim())]
 [if (not aOperation.class.oclIsUndefined())]
 [memberName(aOperation)/] = factory->createOperation_in_Class([memberName(aOperation.class)/]);
@@ -114,6 +123,14 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [aOperation.ownedParameter.generateParameterCreation()/]
 [/template]
 
+[**
+ * generate initialization of meta model instance for an aOperation element
+ * 
+ * this includes:
+ * - set operation name
+ * - set methods
+ * - initialize operation parameter
+*/]
 [template public initalizeOperation(aOperation : Operation)]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
 [for (beh : Behavior | aOperation.method) separator ('\n')]
