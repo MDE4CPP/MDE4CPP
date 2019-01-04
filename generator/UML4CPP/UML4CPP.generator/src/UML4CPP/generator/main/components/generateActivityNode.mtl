@@ -11,103 +11,164 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Element ActivityNode artefacts and Pin Artefacts
+ * 
  */]
 [module generateActivityNode('http://www.eclipse.org/uml2/5.0.0/UML')]
-
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[**
+ * generate creation of meta model instance for an ActivtiyNode or derived element
+ * 
+ * this includes:
+ * - creation of ActivityNode or derived element
+ * - creation of derived element specific artefacts by calling template generateActivityNodeSpecial
+*/]
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
-[memberName(anActivityNode)/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
-[memberName(anActivityNode)/]->setName("[anActivityNode.name/]");
+[anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
 [/template]
 
-[template public generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction) )]
+[**
+ * generate creation of meta model instances used by CallBehaviorAction
+ * 
+ * this includes:
+ * - creation of Input pins
+ * - creation of Output pins
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction) )]
 //CallBehaviorAction [anActivityNode.name /]
-[memberName(anActivityNode)/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.oclAsType(NamedElement).memberName()/]);
-[memberName(anActivityNode)/]->setIsSynchronous(true); //imposed by the fUML specification
 [anActivityNode.oclAsType(CallBehaviorAction).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(CallBehaviorAction).output->sortedBy(name).generatePin()/]
 [/template]
 
-[template public generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction) )]
+[**
+ * generate creation of meta model instances used by CallOperationAction
+ * 
+ * this includes:
+ * - creation of Input pins
+ * - creation of Output pins
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction) )]
 //CallOperationAction [anActivityNode.name /]
 [anActivityNode.oclAsType(CallOperationAction).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output->sortedBy(name).generatePin()/]
-[if (anActivityNode.getNearestPackage() = anActivityNode.oclAsType(CallOperationAction).operation.getNearestPackage())]
-[anActivityNode.oclAsType(CallOperationAction).operation.generateOperation()/]
-[/if]
-
 [/template]
 
-[template public generatePin(pin : Pin)]
+[**
+ * generate creation of meta model instance for input and output pins
+*/]
+[template private generatePin(pin : Pin)]
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
 [if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [elseif (pin.oclIsKindOf(InputPin))]
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
 [if (pin.oclIsKindOf(InputPin))]
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [else]
 //TODO: check containment type!
-[memberName(pin)/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
+[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
-[memberName(pin)/]->setName("[pin.name/]");
 
 [/template]
 
-[template public generateOperation(operation : Operation)]
-[memberName(operation)/] = factory->createOperation_in_Class([operation.owner.oclAsType(NamedElement).memberName()/]); //TODO: check if used 
-[memberName(operation)/]->setName("[operation.name/]");
-
-[/template]
-
+[**
+ * generate initialization of meta model instance for an ActivtiyNode or derived element
+ * 
+ * this includes:
+ * - set ActivtiyNode name
+ * - initialization of derived element specific properties
+*/]
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
+[anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 
 [/template]
 
-[template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ActivityParameterNode))]
-[memberName(anActivityNode)/]->setParameter([memberName(anActivityNode.oclAsType(ActivityParameterNode).parameter)/]);
+[**
+ * generate initialization of meta model instance for an ActivityParameterNode element
+ * 
+ * this includes:
+ * - set parameter
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ActivityParameterNode))]
+[anActivityNode.memberName()/]->setParameter([anActivityNode.oclAsType(ActivityParameterNode).parameter.memberName()/]);
 
 [/template]
- 
-[template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction))]
-[memberName(anActivityNode)/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.generatePackageGetterCall()/]);
+
+[**
+ * generate initialization of meta model instance for an CallBehaviorAction element
+ * 
+ * this includes:
+ * - set behavior
+ * - set isSynchronous to 'true'
+ * - initalize input and output pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction))]
+[anActivityNode.memberName()/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.generatePackageGetterCall()/]);
+[anActivityNode.memberName()/]->setIsSynchronous(true); //imposed by the fUML specification
 [anActivityNode.oclAsType(CallBehaviorAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallBehaviorAction).output.initializePin()/]
 
 [/template]
 
-[template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
-[memberName(anActivityNode)/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
+[**
+ * generate initialization of meta model instance for an CallOperationAction element
+ * 
+ * this includes:
+ * - set operation
+ * - initalize input and output pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
+[anActivityNode.memberName()/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
 [anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
 
 [/template]
 
-[template public initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DecisionNode))]
+[**
+ * generate initialization of meta model instance for an DecisionNode element
+ * 
+ * this includes:
+ * - set decisionInput if defined
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DecisionNode))]
 [if (not anActivityNode.oclAsType(DecisionNode).decisionInput.oclIsUndefined())]
-[memberName(anActivityNode)/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
+[anActivityNode.memberName()/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
 [/if]
 
 [/template]
 
-[query public isTargetPin(pin : Pin) : Boolean = if (pin.owner.oclIsKindOf(CallOperationAction)) then pin.owner.oclAsType(CallOperationAction).target = pin else false endif/]
+[**
+ * query to check, if a pin is a target pin of CallOperationAction instance
+*/]
+[query private isTargetPin(pin : Pin) : Boolean = if (pin.owner.oclIsKindOf(CallOperationAction)) then pin.owner.oclAsType(CallOperationAction).target = pin else false endif/]
 
-[template public initializePin(pin : Pin)]
+[**
+ * generate initialization of meta model instance for an Pin element
+ * 
+ * this includes:
+ * - set name
+ * - if pin is a target pin, add to input pin list of CallOperationAction instance
+*/]
+[template private initializePin(pin : Pin)]
+[pin.memberName()/]->setName("[pin.name/]");
 [if (pin.oclIsKindOf(InputPin) and pin.isTargetPin())]
-[memberName(pin.owner.oclAsType(NamedElement))/]->getInput()->push_back([memberName(pin)/]);
+[memberName(pin.owner.oclAsType(NamedElement))/]->getInput()->push_back([pin.memberName()/]);
 [/if]
 [/template]

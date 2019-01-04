@@ -30,7 +30,7 @@
  * - creation of activity parameter
 */]
 [template public generateActivityCreation(anActivity : Activity)]
-[memberName(anActivity)/] = factory->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
+[anActivity.memberName()/] = factory->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
 [anActivity.ownedParameter.generateParameterCreation()/]
 
 [/template]
@@ -44,7 +44,7 @@
 */]
 [template public generateActivityInitialization(anActivity : Activity)]
 // activity [anActivity.name/]
-[memberName(anActivity)/]->setName("[anActivity.name/]");
+[anActivity.memberName()/]->setName("[anActivity.name/]");
 [anActivity.ownedParameter.generateParameterInitialization()/]
 
 [/template]
