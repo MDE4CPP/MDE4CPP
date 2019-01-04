@@ -11,18 +11,31 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Constraint artefacts
+ * 
  */]
 [module generateConstraint('http://www.eclipse.org/uml2/5.0.0/UML')/]
 
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
- 
+
+[**
+ * generate creation and initialiation of meta model instance for an Constraint element
+ * 
+ * this includes:
+ * - create contraint instance and assign to context instance
+ * - set name
+ * - create and initialize OpaqueExpression instance
+*/]
 [template public generateConstraintCreation(aConstraint : Constraint)]
-con = factory->createConstraint_in_Context([memberName(aConstraint.owner.oclAsType(Class))/]);
+con = factory->createConstraint_in_Context([aConstraint.owner.oclAsType(Class).memberName()/]);
 con->setName("[aConstraint.name/]");
-[for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-con->getConstrainedElement()->push_back([elem.appendTypeRes()/]);[/for]
+[for (elem : NamedElement | aConstraint.constrainedElement->filter(NamedElement)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+con->getConstrainedElement()->push_back([elem.memberName()/]);[/for]
 
 oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner([memberName(aConstraint.owner.oclAsType(Class))/]));
 [for (it : String | aConstraint.specification.oclAsType(OpaqueExpression).language) separator ('\n')]
@@ -32,12 +45,4 @@ oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("[it/]
 oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("[it.substituteAll('\n', '').substituteAll('\r','"\\\r\n"') /]")));
 [/for]
 con->setSpecification(oe);
-[/template]
-
-[template public appendTypeRes(elem : Element) ? (oclIsKindOf(Property))]
-[elem.oclAsType(Property).memberName()/]
-[/template]
-
-[template public appendTypeRes(elem : Element) ? (oclIsKindOf(Class))]
-[elem.oclAsType(Class).memberName()/]
 [/template]
