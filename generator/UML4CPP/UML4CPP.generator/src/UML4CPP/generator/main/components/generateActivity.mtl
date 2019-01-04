@@ -11,18 +11,37 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Element Activity artefacts
+ * 
  */]
 [module generateActivity('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateParameter /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[**
+ * generate creation of meta model instance for an Activity element
+ * 
+ * this includes:
+ * - creation of activity
+ * - creation of activity parameter
+*/]
 [template public generateActivityCreation(anActivity : Activity)]
 [memberName(anActivity)/] = factory->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
 [anActivity.ownedParameter.generateParameterCreation()/]
 
 [/template]
 
+[**
+ * generate initialization of meta model instance for an Activity element
+ * 
+ * this includes:
+ * - initialization of created activity
+ * - initialization of created activity parameter
+*/]
 [template public generateActivityInitialization(anActivity : Activity)]
 // activity [anActivity.name/]
 [memberName(anActivity)/]->setName("[anActivity.name/]");
