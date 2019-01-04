@@ -11,8 +11,13 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Interface artefacts
+ * 
  */]
-[module generateInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateInterfaceModelFile('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateProperty /]
@@ -20,26 +25,10 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public baseInterface(aInterface : Interface) ?(oclIsKindOf(Stereotype))]
-virtual public uml::Stereotype
-[/template]
-
-[template public baseInterface(aInterface : Interface) ?(not oclIsKindOf(Stereotype))]
-virtual public uml::Element
-[/template]
-
-[template public generateInterfaceCreation(anInterface : Interface)]
-[memberName(anInterface)/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
-
-[/template]
-
-[template public generateInterfaceInitialization(anInterface : Interface)]
-[memberName(anInterface)/]->setName("[anInterface.name/]");
-[memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
-
-[/template]
-
-[template public generateModel(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
+[**
+ * generate interface model file
+*/]
+[template public generateInterfaceHeaderFile(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
 [file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aInterface)/]
 

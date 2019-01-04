@@ -85,7 +85,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generate", 
 								"generateApplicationFiles",
 								"generateEnumerationFile",
-								"generateInterface",
+								"generateInterfaceModelFile",
 								"generateMainExecution",
 								"generateModel"
 								};
@@ -104,6 +104,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateEnumeration",
 								"generateFunctionBehavior",
 								"generateInstanceSpecification",
+								"generateInterface",
 								"generateInterfaceRealization",
 								"generateOperation",
 								"generateParameter",
