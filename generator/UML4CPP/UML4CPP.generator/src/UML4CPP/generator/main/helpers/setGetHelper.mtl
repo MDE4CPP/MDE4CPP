@@ -11,28 +11,49 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of eSet/ eGet artefacts
+ * 
  */]
-[module generateSetGet('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module setGetHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[**
+ * checks if setter for a StructuralFeature should be generated
+ * 
+ * setter should not exist for:
+ * - feature with upper bound > 1 (realized by list and getter)
+ * - feature is read only
+*/]
 [query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
 
+[**
+ * generate get, set and unset function declaration
+*/]
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
 virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
 virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
 virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
 [/template]
 
+[**
+ * generate maps for storing pairs of property name and function (get, set and unset)
+*/]
 [template public generateGetSetMemeberInit(aClass : Class)]
 std::map<std::string,std::function<Any()>> m_getterMap;
 std::map<std::string,std::function<void(Any)>> m_setterMap;
 std::map<std::string,std::function<void()>> m_unsetterMap;
 [/template]
 
+[**
+ * generate the creation of {property name, function} pairs and their insertion into the corresponding map
+*/]
 [template public generateGetSetInit(aClass : Class)]
 //getter init
 [for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName()))]
@@ -63,11 +84,16 @@ m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifi
 [/for]
 [/template]
 
-
+[**
+ * generate special set function declaration for properties with enumeration type
+*/]
 [template public generateESetFunctionForEnumerationDecl(aProperty : Property)]
-virtual void [aProperty.setterName()/] (std::shared_ptr<uml::EnumerationLiteral> literal); 
+virtual void [aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal); 
 [/template]
 
+[**
+ * generate special set function implementation for properties with enumeration type
+*/]
 [template public generateESetFunctionForEnumerationImpl(aProperty : Property, aClass : Class)]
 void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
 {
@@ -81,7 +107,9 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_pt
 }
 [/template]
 
-
+[**
+ * generate get, set and unset function implementation
+*/]
 [template public generateeGetSetImpl(aClass : Class)]
 Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
 {
