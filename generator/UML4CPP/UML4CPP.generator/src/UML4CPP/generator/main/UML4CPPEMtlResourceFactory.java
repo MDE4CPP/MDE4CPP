@@ -80,8 +80,6 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	private void initalizeGeneralEmtls()
 	{
 	   	 m_emtlFilePathMap.put("generate.emtl", "rsrc:UML4CPP/generator/main/generate.emtl");
-	   	 m_emtlFilePathMap.put("generateActivity.emtl", "rsrc:UML4CPP/generator/main/generateActivity.emtl");
-	   	 m_emtlFilePathMap.put("generateActivityEdge.emtl", "rsrc:UML4CPP/generator/main/generateActivityEdge.emtl");
 	   	 m_emtlFilePathMap.put("generateActivityNode.emtl", "rsrc:UML4CPP/generator/main/generateActivityNode.emtl");
 	   	 m_emtlFilePathMap.put("generateApplication.emtl", "rsrc:UML4CPP/generator/main/generateApplication.emtl");
 	   	 m_emtlFilePathMap.put("generateAttribute.emtl", "rsrc:UML4CPP/generator/main/generateAttribute.emtl");
@@ -116,6 +114,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeComponentsEmtls()
 	{
+		m_emtlFilePathMap.put("generateActivity.emtl", "rsrc:UML4CPP/generator/main/components/generateActivity.emtl");
+	   	m_emtlFilePathMap.put("generateActivityEdge.emtl", "rsrc:UML4CPP/generator/main/components/generateActivityEdge.emtl");
 		m_emtlFilePathMap.put("generateNamedElement.emtl", "rsrc:UML4CPP/generator/main/components/generateNamedElement.emtl");
 	}
 	

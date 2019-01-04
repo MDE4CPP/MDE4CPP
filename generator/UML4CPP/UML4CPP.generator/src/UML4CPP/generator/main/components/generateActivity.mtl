@@ -39,7 +39,7 @@
  * generate initialization of meta model instance for an Activity element
  * 
  * this includes:
- * - initialization of created activity
+ * - set activity name
  * - initialization of created activity parameter
 */]
 [template public generateActivityInitialization(anActivity : Activity)]
