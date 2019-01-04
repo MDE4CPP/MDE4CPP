@@ -14,8 +14,8 @@
  */]
 [module generateModel('http://www.eclipse.org/uml2/5.0.0/UML')]
  
+[import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::generateAttribute /]
-[import UML4CPP::generator::main::generateInterfaceRealization /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::generateType /]
