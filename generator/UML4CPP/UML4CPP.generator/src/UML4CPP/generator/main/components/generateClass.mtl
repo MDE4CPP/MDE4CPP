@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Class artefacts
+ * 
  */]
 [module generateClass('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -19,11 +24,86 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateGetThisPtr(aClass : Class)]
+[** 
+ * get all associations where aClass is memberType
+*/]
+[query private getAssociationsToClass(aClass : Class) : Set(Association) = aClass.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query private isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
+
+[**
+ * template to generate create function declarations
+*/]
+[template public generateClassCreate(aClass : Class,impl : Boolean)]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSuffix(impl)/];
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])[abstractSuffix(impl)/]; 
+[/let]
+[/let]
+[/for]
+
+[/template]
+
+[**
+ * generate static meta data:
+ * - index of class
+ * - feature count
+ * - operation count
+*/]
+[template public generateStaticClassID(aClass : Class)]
+static const int [aClass.name.toUpperCase()/] = [aClass._package.member->asOrderedSet()->indexOf(aClass)/];
+static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
+static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
+
+[/template]
+
+[**
+ * generate creation of meta model instance for an Class element
+ * 
+ * this includes:
+ * - creation of class
+ * - creation of class constraints
+*/]
+[template public generateClassCreation(aClass : Class)]
+[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+[if (aClass.ownedRule->size() > 0)]
+
+//constraints
+[for (aConstraint : Constraint | aClass.ownedRule->sortedBy(name)) separator('\n')]
+[aConstraint.generateConstraintCreation()/]
+[/for][/if]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an Class element
+ * 
+ * this includes:
+ * - set class name
+ * - set isAbstract flag
+ * - create and initialize generalization
+*/]
+[template public generateClassInitialization(aClass : Class)]
+[aClass.memberName()/]->setName("[aClass.name/]");
+[aClass.memberName()/]->setIsAbstract([aClass.isAbstract/]);
+[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
+gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
+gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
+[/for]
+[/template]
+
+[**
+ * generate function declaration for getThisPtr and setThisPtr functions
+*/]
+[template public generateThisPtrFunctionDeclaration(aClass : Class)]
 virtual std::shared_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyGetterName()/]();
 virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
+[**
+ * generate function implementation for getThisPtr and setThisPtr functions
+*/]
 [template public generateGetThisPtrCPP(aClass: Class)]
 std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
 {
@@ -43,49 +123,9 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 }
 [/template]
 
+[**
+ * queries for thisPtrNames
+*/]
 [query public generateGetThisPtrPropertyName(aClass : Class) : String = 'this'.concat(aClass.name.toUpperFirst()).concat('Ptr')/]
 [query public generateGetThisPtrPropertySetterName(aClass : Class) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
 [query public generateGetThisPtrPropertyGetterName(aClass : Class) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
-
-[** get all associations where aClass is memberType */]
-[query private getAssociationsToClass(aClass : Class) : Set(Association) = aClass.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
-[query private isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
-[query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
-
-[template public generateClassCreate(aClass : Class,impl : Boolean)]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSuffix(impl)/];
-[for (anAssociation : Association | aClass.getCompositionsToClass())]
-[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
-[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])[abstractSuffix(impl)/]; 
-[/let]
-[/let]
-[/for]
-
-[/template]
-
-[template public generateStaticClassID(aClass : Class)]
-static const int [aClass.name.toUpperCase()/] = [aClass._package.member->asOrderedSet()->indexOf(aClass)/];
-static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
-static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
-
-[/template]
-
-[template public generateClassCreation(aClass : Class)]
-[memberName(aClass)/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
-[if (aClass.ownedRule->size() > 0)]
-
-//constraints
-[for (aConstraint : Constraint | aClass.ownedRule->sortedBy(name)) separator('\n')]
-[aConstraint.generateConstraintCreation()/]
-[/for][/if]
-[/template]
-
-[template public generateClassInitialization(aClass : Class)]
-[memberName(aClass)/]->setName("[aClass.name/]");
-[memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
-[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
-gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
-gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
-[/for]
-[/template]

@@ -19,9 +19,9 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::generateAttribute /]
-[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]

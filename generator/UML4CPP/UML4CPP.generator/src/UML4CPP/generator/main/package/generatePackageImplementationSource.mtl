@@ -19,6 +19,7 @@
  */]
 [module generatePackageImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
+[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::components::generateActivity /]
 [import UML4CPP::generator::main::components::generateActivityEdge /]
@@ -32,7 +33,6 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateValueSpecification /]
 [import UML4CPP::generator::main::generateAttribute /]
-[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateInterface /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
