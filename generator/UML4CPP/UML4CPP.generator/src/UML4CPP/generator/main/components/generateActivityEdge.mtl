@@ -27,6 +27,7 @@
 */]
 [template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
 [memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.memberName()/]);
+
 [/template]
 
 [**
