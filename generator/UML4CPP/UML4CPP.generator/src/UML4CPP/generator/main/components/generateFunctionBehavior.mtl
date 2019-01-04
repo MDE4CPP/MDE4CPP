@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML FunctionBehavior artefacts
+ * 
  */]
 [module generateFunctionBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -18,19 +23,29 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
- * The documentation of the template generateFunctionBehaviorCreation.
- * @param aFunctionBehavior
- */]
+ * generate creation of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - creation of function behavior
+ * - creation of function behavior parameter
+*/]
 [template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[memberName(aFunctionBehavior)/] = factory->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
+[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
 [/template]
 
+[**
+ * generate initialization of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - set function behavior name
+ * - initialization of function behavior parameter
+*/]
 [template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
-[memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
-[memberName(aFunctionBehavior)/]->setContext([aFunctionBehavior._context.memberName()/]);
+[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
+[aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterInitialization()/]
 [/for]

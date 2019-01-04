@@ -14,14 +14,13 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module for generation of UML Element ActivityEdge artefacts
+ * module for generation of UML ActivityEdge artefacts
  * 
  */]
 [module generateActivityEdge('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-
 
 [**
  * generate creation of meta model instance for an ActivityEdge element

@@ -88,7 +88,6 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	   	 m_emtlFilePathMap.put("generateExecutionPlugin.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPlugin.emtl");
 	   	 m_emtlFilePathMap.put("generateExecutionPluginImplementationHeader.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationHeader.emtl");
 	   	 m_emtlFilePathMap.put("generateExecutionPluginImplementationSource.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationSource.emtl");
-	   	 m_emtlFilePathMap.put("generateFunctionBehavior.emtl", "rsrc:UML4CPP/generator/main/generateFunctionBehavior.emtl");
 	   	 m_emtlFilePathMap.put("generateImplModelSource.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplModelSource.emtl");
 	   	 m_emtlFilePathMap.put("generateImplementation.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplementation.emtl");
 	   	 m_emtlFilePathMap.put("generateImplementationHeader.emtl", "rsrc:UML4CPP/generator/main/impl/generateImplementationHeader.emtl");
@@ -118,6 +117,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		m_emtlFilePathMap.put("generateNamedElement.emtl", "rsrc:UML4CPP/generator/main/components/generateNamedElement.emtl");
 	 	m_emtlFilePathMap.put("generateConstraint.emtl", "rsrc:UML4CPP/generator/main/components/generateConstraint.emtl");
 	   	m_emtlFilePathMap.put("generateEnumeration.emtl", "rsrc:UML4CPP/generator/main/components/generateEnumeration.emtl");
+	   	m_emtlFilePathMap.put("generateFunctionBehavior.emtl", "rsrc:UML4CPP/generator/main/components/generateFunctionBehavior.emtl"); 
 	}
 	
 	private void initializeConfigurationEmtls()
