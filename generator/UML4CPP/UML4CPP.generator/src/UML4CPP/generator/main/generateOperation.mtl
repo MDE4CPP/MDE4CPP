@@ -123,25 +123,3 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [anOwnedParameter.generateParameterInitialization()/]
 [/for]
 [/template]
-
-[template public generateDependencyCreation(aDependency : Dependency)]
-[memberName(aDependency)/] = factory->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
-
-[/template]
-
-[template public generateDependencyInitialization(aDependency : Dependency)]
-[memberName(aDependency)/]->setName("[aDependency.name/]");
-[aDependency.client.generateDependencyClientAdding(aDependency)/]
-[aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
-[aDependency.generateStereotypeApplication()/]
-
-[/template]
-
-[template public generateDependencyClientAdding(aNamedElement : NamedElement, aDependency : Dependency)]
-[memberName(aDependency)/]->getClient()->push_back([memberName(aNamedElement)/]);
-[memberName(aNamedElement)/]->getClientDependency()->push_back([memberName(aDependency)/]);
-[/template]
-
-[template public generateDependencySupplierAdding(aNamedElement : NamedElement, aDependency : Dependency)]
-[memberName(aDependency)/]->getSupplier()->push_back([memberName(aNamedElement)/]);
-[/template]
