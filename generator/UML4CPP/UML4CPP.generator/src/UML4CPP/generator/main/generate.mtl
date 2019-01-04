@@ -17,7 +17,7 @@
 
 [import UML4CPP::generator::main::configuration::generateConfigurationFiles /]
 [import UML4CPP::generator::main::factory::generateFactory /]
-[import UML4CPP::generator::main::generateApplication /]
+[import UML4CPP::generator::main::generateApplicationFiles /]
 [import UML4CPP::generator::main::generateEnumerationFile /]
 [import UML4CPP::generator::main::generateInterface /]
 [import UML4CPP::generator::main::generateModel /]
