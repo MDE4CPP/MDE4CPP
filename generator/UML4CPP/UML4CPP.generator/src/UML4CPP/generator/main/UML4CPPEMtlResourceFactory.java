@@ -186,11 +186,18 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		generateFilePathMapData(moduleNames, "validation", resourcePathPrefix);
 	}
 
-	protected void generateFilePathMapData(String[] fileNameList, String subfolderName, String resourcePathPrefix)
+	/**
+	 * generate pair of {emtl file name, rsrc file path} 
+	 * 
+	 * @param moduleNameList - list of module names
+	 * @param subfolderName - subfolder name
+	 * @param resourcePathPrefix - rsrc prefix until base folder of module files
+	 */
+	protected void generateFilePathMapData(String[] moduleNameList, String subfolderName, String resourcePathPrefix)
 	{
-		for (String fileName : fileNameList) 
+		for (String moduleName : moduleNameList) 
 		{
-			String key = fileName + ".emtl";
+			String key = moduleName + ".emtl";
 			String value = resourcePathPrefix;
 			if (!subfolderName.isEmpty())
 			{
