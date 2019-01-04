@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate class implementation source file
+ * 
  */]
 [module generateImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -23,7 +28,7 @@
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]

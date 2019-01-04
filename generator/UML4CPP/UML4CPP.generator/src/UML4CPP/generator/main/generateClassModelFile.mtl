@@ -62,10 +62,8 @@
 [/if]
 
 // base class includes
-[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
-#include "uml/Class.hpp"
-[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
-#include "uml/Stereotype.hpp"
+[if (aClass.superClass->isEmpty())]
+#include "uml/[aClass.eClass().name/].hpp"
 [else]
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (elements.oclIsUndefined() or elements.name.oclIsUndefined())]

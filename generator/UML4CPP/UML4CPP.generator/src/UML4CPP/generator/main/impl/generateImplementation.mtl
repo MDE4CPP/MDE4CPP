@@ -11,6 +11,16 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to trigger implementation files generation of classes
+ * 
+ * Following files will be generated:
+ * - singleton source file for classes with active singleton annotation
+ * - implementation header file
+ * - implementation source file
+ * 
  */]
 [module generateImplementation('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -19,11 +29,6 @@
 [import UML4CPP::generator::main::impl::generateImplementationSource /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 
-
-[**
- * The documentation of the template generateElement.
- * @param anEClass
- */]
 [template public generateImplementation(aClass : Class)]
 [aClass.generateImplementationHeader()/]
 [aClass.generateImplementationSource()/]
