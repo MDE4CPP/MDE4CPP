@@ -15,8 +15,8 @@
 [module generateOperation('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::generateStereotype /]
-[import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -25,13 +25,13 @@
  * @param anEOperation
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
-virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType()/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for]) [abstractSuffix(impl)/];
+virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for]) [abstractSuffix(impl)/];
 
 [/template]
 
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.generateCppType()/] [sParameter.name/][/for])
+[sParameter.generateCppType(true)/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 [let parameter : Parameter = aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]

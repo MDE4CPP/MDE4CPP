@@ -14,7 +14,7 @@
  */]
 [module generateSetGet('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -50,7 +50,7 @@ m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedN
 [if (aFeature.type.oclIsKindOf(Enumeration))]
 m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
 [else]
-m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>[/if]>());}));
+m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType(false)/][if (aFeature.upper<>1)]>[/if]>());}));
 [/if]
 [/for]
 

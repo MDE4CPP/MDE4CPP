@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Type artefacts
+ * 
  */]
 [module generateType('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -18,9 +23,25 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
+[**
+ * check if type is primitive type
+*/]
 [query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural')/]
+
+[**
+ * check if a property is back reference of composition 
+*/]
 [query public isBackReference(aProperty : Property) : Boolean = (not aProperty.association.oclIsUndefined()) and (not aProperty.owner.oclIsKindOf(Association)) and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite /]
 
+[**
+ * generate the C++ representation of a type for a Property
+ * 
+ * - pointer for types, which are not primitive or enumeration:
+ * 	- shared pointer for all properties except back reference properties
+ *  - weak pointer for back reference pointers
+ * - upper <> 1 -> Bag used  
+ * - error message, if property type is undefined or property type name is undefined
+*/]
 [template public generateCppType(aProperty : Property)]
 [if (not aProperty.type.oclIsUndefined() and aProperty.type.name.oclIsUndefined())]
 ['type of property '.concat(aProperty.qualifiedName).concat(' is invalid (').concat(aProperty.type.toString()).concat(')').registerError() /]
@@ -30,14 +51,13 @@
 [if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>>[/if][/if]
 [/template]
 
-[template public pointertype(aProperty : Property) post(trim())]
-[if(aProperty.isBackReference())]
-std::weak_ptr
-[else]
-std::shared_ptr
-[/if]
-[/template]
-
+[**
+ * generate the C++ representation of a type for an Operation
+ * 
+ * - pointer for types, which are not primitive or enumeration:
+ * - upper <> 1 -> Bag used  
+ * - error message, if Operation type is undefined or Operation type name is undefined
+*/]
 [template public generateCppType(aOperation : Operation)]
 [if (not aOperation.type.oclIsUndefined() and aOperation.type.name.oclIsUndefined())]
 ['type of operation '.concat(aOperation.qualifiedName).concat(' is invalid (').concat(aOperation.type.toString()).concat(')').registerError() /]undefined
@@ -48,10 +68,13 @@ std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [aOperation.type.transformType()/][/if]
 [/template]
 
-[template public generateCppType(aParameter : Parameter)]
-[generateCppType(true)/]
-[/template]
-
+[**
+ * generate the C++ representation of a type for a Parameter
+ * 
+ * - shared pointer for types, which are not primitive or enumeration
+ * - upper <> 1 -> Bag used  
+ * - error message, if Parameter type is undefined or Parameter type name is undefined
+*/]
 [template public generateCppType(aParameter : Parameter, useReference : Boolean)]
 [if (not aParameter.type.oclIsUndefined() and aParameter.type.name.oclIsUndefined())]
 ['type of parameter '.concat(aParameter.qualifiedName).concat(' is invalid (').concat(aParameter.type.toString()).concat(')').registerError() /]undefined
@@ -61,18 +84,28 @@ std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformT
 [if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
 [/template]
 
-[template public generateCppType(aType : Type)]
-[aType.generateCppType(false)/]
-[/template]
-
+[**
+ * generate the C++ representation of a type for a Parameter
+ * 
+ * - shared pointer for types, which are not primitive or enumeration
+ * - upper <> 1 -> Bag used  
+ * - error message, if Parameter type is undefined or Parameter type name is undefined
+*/]
 [template public generateCppType(aType : Type, noShared : Boolean)]
 [if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]>[/if]
 [/template]
 
-[template public generateType(aType : Type)]
-[if (aType.oclIsUndefined())]
-QVariant[else]
-[aType.transformType()/][/if]
+[**
+ * determine if weak pointer or shared pointer should be used:
+ * - shared pointer for all properties except back reference properties
+ * - weak pointer for back reference pointers
+*/]
+[template private pointertype(aProperty : Property) post(trim())]
+[if(aProperty.isBackReference())]
+std::weak_ptr
+[else]
+std::shared_ptr
+[/if]
 [/template]
 
 [**

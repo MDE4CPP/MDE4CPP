@@ -17,7 +17,7 @@
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -105,7 +105,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[par.generateCppType()/] [par.name.toLowerFirst()/] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType()/]>();
+[par.generateCppType(true)/] [par.name.toLowerFirst()/] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
 
 [/for]
 [/template]

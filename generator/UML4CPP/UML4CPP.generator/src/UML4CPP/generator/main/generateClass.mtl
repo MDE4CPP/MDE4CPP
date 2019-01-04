@@ -15,7 +15,7 @@
 [module generateClass('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateConstraint /]
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 

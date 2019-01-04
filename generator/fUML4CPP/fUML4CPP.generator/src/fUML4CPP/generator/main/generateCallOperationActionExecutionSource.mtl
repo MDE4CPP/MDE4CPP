@@ -15,7 +15,7 @@
 [module generateCallOperationActionExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::parameterHelper /]
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 

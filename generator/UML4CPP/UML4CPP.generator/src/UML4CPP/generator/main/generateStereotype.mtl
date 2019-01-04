@@ -14,13 +14,13 @@
  */]
 [module generateStereotype('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateClassCreate(aStereotype : Stereotype,impl : Boolean)]
-virtual [aStereotype.generateCppType()/] create[aStereotype.name/]()[abstractSuffix(impl)/];
+virtual [aStereotype.generateCppType(false)/] create[aStereotype.name/]()[abstractSuffix(impl)/];
 
 [/template]
 
@@ -40,7 +40,7 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 {
 	//apply Stereotype	[stereo.name/]
-	[stereo.generateCppType()/] stereo([stereo.generateCreateFunction()/]);
+	[stereo.generateCppType(false)/] stereo([stereo.generateCreateFunction()/]);
 	[for (prop : Property | stereo.allAttributes()) separator ('\n')][if(not aElement.getValue(stereo, prop.name).oclIsUndefined())][prop.generateAttributeSetting(aElement, stereo)/][/if][/for]
 	[aElement.oclAsType(NamedElement).memberName()/]->applyStereotype(stereo);
 }

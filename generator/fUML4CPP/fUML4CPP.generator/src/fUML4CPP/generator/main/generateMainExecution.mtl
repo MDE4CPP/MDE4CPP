@@ -16,7 +16,7 @@
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -169,9 +169,9 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 [if(par.type.supportedTypes())]
-[par.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
+[par.generateCppType(true)/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-[par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType(true)/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 
 [/for]
