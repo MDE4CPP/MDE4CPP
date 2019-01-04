@@ -11,35 +11,33 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of enumeration file
+ * 
  */]
-[module generateEnum('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateEnumerationFile('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateEnum(anEEnum : Enumeration)]
-[file (anEEnum._package.getPackageName().concat('/').concat(anEEnum.name).concat('.hpp'), false, 'UTF-8')]
-[startGuard(anEEnum)/]
+[**
+ * template for generation of file with delcaration of enumeration class and corresponding literals
+*/]
+[template public generateEnumerationFile(anEnum : Enumeration)]
+[file (anEnum._package.getPackageName().concat('/').concat(anEnum.name).concat('.hpp'), false, 'UTF-8')]
+[anEnum.startGuard()/]
 
-[if (not anEEnum.getNearestPackage().ignoreNamespace())]namespace [anEEnum._package.name/] 
+[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.name/] 
 {
 [/if]
-	enum class [anEEnum.name/] 
+	enum class [anEnum.name/] 
 	{
-[for (lit : EnumerationLiteral | anEEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n')]
-		[lit.name.toUpperCase()/] = [anEEnum.ownedLiteral->indexOf(lit).toString()/][/for]
+[for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n')]
+		[lit.name.toUpperCase()/] = [anEnum.ownedLiteral->indexOf(lit).toString()/][/for]
 	};
-[if (not anEEnum.getNearestPackage().ignoreNamespace())]}[/if]
-[endGuard(anEEnum)/]
+[if (not anEnum.getNearestPackage().ignoreNamespace())]}[/if]
+[anEnum.endGuard()/]
 [/file]
-[/template]
-
-[template public generateEnumerationCreation(aEnum : Enumeration)]
-[aEnum.memberName()/] = factory->createEnumeration_in_Namespace([aEnum.owner.oclAsType(Namespace).memberName()/]); // TODO Package, Owner
-[aEnum.memberName()/]->setName("[aEnum.name/]");
-
-[for (lit : EnumerationLiteral | aEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) ]
-[lit.memberName()/] = factory->createEnumerationLiteral_in_Enumeration([aEnum.memberName()/]);
-[lit.memberName()/]->setName("[lit.name/]");
-[/for]
 [/template]
