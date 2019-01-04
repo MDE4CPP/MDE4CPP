@@ -1,5 +1,4 @@
 [comment encoding = UTF-8 /]
-[module generateNamedElement('http://www.eclipse.org/uml2/5.0.0/UML')]
 [**
  * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
  *
@@ -15,18 +14,26 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module for generation of NamedElement specific artefacts
+ * module for generation of UML Element NamedElement artefacts
  * 
  */]
+[module generateNamedElement('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[**
+ * generate getter function declaration for meta model element
+*/]
 [template public generatePackageMemberGetter(anElement : NamedElement,impl : Boolean)]
 virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.generatePackageGetterCall(anElement)/][abstractSuffix(impl)/];
 
 [/template]
 
+
+[**
+ * generate getter function implementation for meta model element
+*/]
 [template public generatePackageMemberGetterImpl(anElement : NamedElement)]
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.generatePackageGetterCall(anElement)/]
 {
@@ -35,6 +42,9 @@ std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().
 
 [/template]
 
+[**
+ * generate member declaration for meta model element
+*/]
 [template public generatePackageMember(anElement : NamedElement)]
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.memberName()/] = nullptr;
 
