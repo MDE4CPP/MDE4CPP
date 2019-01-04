@@ -357,7 +357,7 @@ void [packageName/]::initializePackageStereotypes()
 
 void [packageName/]::initializePackageValueSpecifications()
 {
-[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->selectByKind(InstanceValue)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
 	[aValueSpecification.generateValueSpecificationInitialization()/]
 [/for]
 }

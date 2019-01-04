@@ -35,10 +35,12 @@
  * - set instance
  * - set value
 */]
-[template public generateValueSpecificationInitialization(aValueSpecification : ValueSpecification)]
-[if (aValueSpecification.oclIsKindOf(InstanceValue))][aValueSpecification.memberName()/]->setInstance([aValueSpecification.oclAsType(InstanceValue).instance.memberName()/]);[/if]
-[if (aValueSpecification.oclIsKindOf(LiteralSpecification))]
-[aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);[/if]
+[template public generateValueSpecificationInitialization(aValueSpecification : ValueSpecification) post (trim())]
+[if (aValueSpecification.oclIsKindOf(InstanceValue))]
+[aValueSpecification.memberName()/]->setInstance([aValueSpecification.oclAsType(InstanceValue).instance.memberName()/]);
+[elseif (aValueSpecification.oclIsKindOf(LiteralSpecification))]
+[aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+[/if]
 [/template]
 
 [**
