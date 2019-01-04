@@ -21,8 +21,8 @@
 
 [import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::components::generateActivity /]
+[import UML4CPP::generator::main::components::generateActivityEdge /]
 [import UML4CPP::generator::main::generateActivityNode /]
-[import UML4CPP::generator::main::generateActivityEdge /]
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::generateEnum /]

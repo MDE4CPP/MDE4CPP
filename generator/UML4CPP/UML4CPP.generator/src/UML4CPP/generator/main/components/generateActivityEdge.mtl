@@ -11,23 +11,42 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Element ActivityEdge artefacts
+ * 
  */]
 [module generateActivityEdge('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
-[memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.oclAsType(NamedElement).memberName()/]);
-[memberName(anActivityEdge)/]->setName("[anActivityEdge.name/]");
 
+[**
+ * generate creation of meta model instance for an ActivityEdge element
+*/]
+[template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
+[memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.memberName()/]);
 [/template]
 
+[**
+ * generate initialization of meta model instance for an Activity element
+ * 
+ * this includes:
+ * - set ActivityEdge name
+ * - set source element
+ * - add edge to outgoing attribute of source element
+ * - set target element
+ * - add edge to incoming attribut of target element
+ * - set guard specification 
+*/]
 [template public initializeEdge(anActivityEdge : ActivityEdge)]
-[memberName(anActivityEdge)/]->setSource([anActivityEdge.source.memberName()/]);
-[anActivityEdge.source.memberName()/]->getOutgoing()->push_back([memberName(anActivityEdge)/]);
-[memberName(anActivityEdge)/]->setTarget([anActivityEdge.target.memberName()/]);
-[anActivityEdge.target.memberName()/]->getIncoming()->push_back([memberName(anActivityEdge)/]);
+[anActivityEdge.memberName()/]->setName("[anActivityEdge.name/]");
+[anActivityEdge.memberName()/]->setSource([anActivityEdge.source.memberName()/]);
+[anActivityEdge.source.memberName()/]->getOutgoing()->push_back([anActivityEdge.memberName()/]);
+[anActivityEdge.memberName()/]->setTarget([anActivityEdge.target.memberName()/]);
+[anActivityEdge.target.memberName()/]->getIncoming()->push_back([anActivityEdge.memberName()/]);
 [if (not anActivityEdge.guard.oclIsUndefined())]
 [anActivityEdge.memberName()/]->setGuard([anActivityEdge.guard.memberName()/]);
 [/if]
