@@ -20,7 +20,7 @@
 [import UML4CPP::generator::main::generateApplicationFiles /]
 [import UML4CPP::generator::main::generateEnumerationFile /]
 [import UML4CPP::generator::main::generateInterfaceModelFile /]
-[import UML4CPP::generator::main::generateModel /]
+[import UML4CPP::generator::main::generateClassModelFile /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::impl::generateImplementation /]
 [import UML4CPP::generator::main::package::generatePackage /]

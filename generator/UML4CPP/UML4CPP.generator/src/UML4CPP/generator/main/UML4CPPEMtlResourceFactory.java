@@ -84,10 +84,10 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	{
 		String[] moduleNames = {"generate", 
 								"generateApplicationFiles",
+								"generateClassModelFile",
 								"generateEnumerationFile",
 								"generateInterfaceModelFile",
-								"generateMainExecution",
-								"generateModel"
+								"generateMainExecution"
 								};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);	   	 
 	}

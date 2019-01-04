@@ -11,8 +11,13 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of class model file
+ * 
  */]
-[module generateModel('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateClassModelFile('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::components::generateOperation /]
@@ -23,15 +28,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
-
-[template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
-virtual public uml::Stereotype
-[/template]
-
-[template public baseClass(aClass : Class) ?(not oclIsKindOf(Stereotype))]
-virtual public uml::Class
-[/template]
+[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
 [file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
@@ -101,7 +98,7 @@ virtual public uml::Class
 namespace [aPackage.name/]
 {
 [/if]
-	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [aClass.generateInterfaceExtensions()/]
+	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::[aClass.eClass().name/] [aClass.generateInterfaceExtensions()/]
 [else][for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for]
 [/if]
