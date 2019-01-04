@@ -19,28 +19,38 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	protected void initialize()
 	{
 		super.initialize();
-		initalizeGeneralEmtls();
+		String resourcePathPrefix = "rsrc:fUML4CPP/generator/main/";
+		initalizeGeneralEmtls(resourcePathPrefix);
+		initalizePluginEmtls(resourcePathPrefix);
 	}
 	
-	private void initalizeGeneralEmtls()
+	private void initalizeGeneralEmtls(String resourcePathPrefix)
+	{		
+		String[] moduleNames = {"generateBehaviorExecutionHeader",
+								"generateBehaviorExecutionSource",
+								"generateCallOperationActionExecutionHeader",
+								"generateCallOperationActionExecutionSource",
+								"generateClassifierObjectHeader",
+								"generateClassifierObjectSource",
+								"generateExecutionBuildFile",
+								"generateExecutionProjectFiles",
+								"generateFUML",
+								"generateMainExecution",
+								"generateOpaqueBehaviorExecution",
+								"parameterHelper"
+		};
+		generateFilePathMapData(moduleNames, "", resourcePathPrefix);
+	}
+	
+	private void initalizePluginEmtls(String resourcePathPrefix)
 	{
-		m_emtlFilePathMap.put("generateBehaviorExecutionHeader.emtl", "rsrc:fUML4CPP/generator/main/generateBehaviorExecutionHeader.emtl");
-		m_emtlFilePathMap.put("generateBehaviorExecutionSource.emtl", "rsrc:fUML4CPP/generator/main/generateBehaviorExecutionSource.emtl");
-     	m_emtlFilePathMap.put("generateCallOperationActionExecutionHeader.emtl", "rsrc:fUML4CPP/generator/main/generateCallOperationActionExecutionHeader.emtl");
-    	m_emtlFilePathMap.put("generateCallOperationActionExecutionSource.emtl", "rsrc:fUML4CPP/generator/main/generateCallOperationActionExecutionSource.emtl");
-       	m_emtlFilePathMap.put("generateClassifierObjectHeader.emtl", "rsrc:fUML4CPP/generator/main/generateClassifierObjectHeader.emtl");
-    	m_emtlFilePathMap.put("generateClassifierObjectSource.emtl", "rsrc:fUML4CPP/generator/main/generateClassifierObjectSource.emtl");
-    	m_emtlFilePathMap.put("generateExecutionBuildFile.emtl", "rsrc:fUML4CPP/generator/main/generateExecutionBuildFile.emtl");
-    	m_emtlFilePathMap.put("generateExecutionPlugin.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPlugin.emtl");
-    	m_emtlFilePathMap.put("generateExecutionPluginImplementationHeader.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationHeader.emtl");
-    	m_emtlFilePathMap.put("generateExecutionPluginImplementationSource.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginImplementationSource.emtl");
-    	m_emtlFilePathMap.put("generateExecutionPluginInterfaceHeader.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginInterfaceHeader.emtl");
-    	m_emtlFilePathMap.put("generateExecutionPluginInterfaceSource.emtl", "rsrc:fUML4CPP/generator/main/plugin/generateExecutionPluginInterfaceSource.emtl");
-       	m_emtlFilePathMap.put("generateExecutionProjectFiles.emtl", "rsrc:fUML4CPP/generator/main/generateExecutionProjectFiles.emtl");
-       	m_emtlFilePathMap.put("generateFUML.emtl", "rsrc:fUML4CPP/generator/main/generateFUML.emtl");
-      	m_emtlFilePathMap.put("generateMainExecution.emtl", "rsrc:fUML4CPP/generator/main/generateMainExecution.emtl");
-      	m_emtlFilePathMap.put("generateOpaqueBehaviorExecution.emtl", "rsrc:fUML4CPP/generator/main/generateOpaqueBehaviorExecution.emtl");
-     	m_emtlFilePathMap.put("parameterHelper.emtl", "rsrc:fUML4CPP/generator/main/parameterHelper.emtl");
+		String[] ModuleNames = {"generateExecutionPlugin",
+								"generateExecutionPluginImplementationHeader",
+								"generateExecutionPluginImplementationSource",
+								"generateExecutionPluginInterfaceHeader",
+								"generateExecutionPluginInterfaceSource"
+								};
+		generateFilePathMapData(ModuleNames, "plugin", resourcePathPrefix);
 	}
 }
 
