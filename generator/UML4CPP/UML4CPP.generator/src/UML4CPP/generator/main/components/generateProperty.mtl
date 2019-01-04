@@ -11,51 +11,62 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Property artefacts
+ * 
  */]
-[module generateAttribute('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateProperty('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly/]
+[**
+ * checks if Property is read only
+*/]
+[query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly and aProperty.upper = 1/]
 
-[template public generateAttributeAccessorsDecl(aProperty : Property, impl : Boolean)]
-[aProperty.generateAttributeGetterDecleration(impl)/]
-[aProperty.generateAttributeSetterDecleration(impl)/]
+[**
+ * generate getter and setter declaration
+ * setter is only generated if hasSetter query returns true
+*/]
+[template public generateAttributeAccessorsDeclaration(aProperty : Property, impl : Boolean)]
+virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
+[if (aProperty.hasSetter())]
+virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
+[/if]
 
 [/template]
 
 [**
- * The documentation of the template generateAttribute.
- * @param aClass
+ * generate attribute member declaration
  */]
 [template public generateAttributeProtectedMember(aProperty : Property)]
 [if (aProperty.isStatic)]static [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
 
 [/template]
 
+[**
+ * generate attribute member initialization for properties without default value and upper <> 1
+ */]
 [template public initAttributeProtectedMember(aProperty : Property)]
 m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 
 [/template]
 
+[**
+ * generate attribute member initialization for properties with InstanceValue as default value
+*/]
 [template public initPropertyFromInstanceValue(instVal : InstanceValue)]
 m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPackageName()/]::[instVal.type._package.getPackageName()/]Factory::eInstance()->create[instVal.type.name.toUpperFirst()/]();
 
 [/template]
 
-[template public generateAttributeGetterDecleration (aProperty : Property, impl : Boolean)]
-virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
-[/template]
-
-[template public generateAttributeSetterDecleration(aProperty : Property, impl : Boolean) ? (aProperty.upper=1 )]
-virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/]; 
-[/template]
-
 [***
- * Section for the Attribute CPP Implementation
+ * generate property getter implementation
 */]
 [template public generateAttributeGetterImplementationCpp(aProperty : Property)]
 [aProperty.generateAttributeGetterImplementationCpp(aProperty.class)/]
@@ -68,18 +79,23 @@ virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProper
 }
 [/template]
 
-[template public generateAttributeSetterImplementationCpp(aProperty : Property ) ? (aProperty.upper=1 )]
+[**
+ * generate property setter implementation
+*/]
+[template public generateAttributeSetterImplementationCpp(aProperty : Property )]
 [aProperty.generateAttributeSetterImplementationCpp(aProperty.class)/]
 [/template]
 
-[template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.upper=1 )]
+[template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.hasSetter())]
 void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
 }
 [/template]
 
-[comment MetaModel Package/]
+[**
+ * generate creation of meta model instance for an Property element
+*/]
 [template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.class.oclIsUndefined())]
 [aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
@@ -88,6 +104,17 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 [/if][/if]
 [/template]
 
+[**
+ * generate initialization of meta model instance for an Property element
+ * 
+ * this includes:
+ * - set property name
+ * - set type
+ * - set lower and upper bound
+ * - set visibility
+ * - set default value
+ * - apply stereotypes
+*/]
 [template public generateAttributeInitialization(aProperty : Property)]
 [aProperty.memberName()/]->setName("[aProperty.name/]");
 [aProperty.memberName()/]->setType([aProperty.type.generatePackageGetterCall(aProperty)/]);
@@ -99,10 +126,16 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 [aProperty.generateStereotypeApplication()/]
 [/template]
 
+[**
+ * add properties of realizing interfaces to class attributes
+*/]
 [template public addInterfaceAttribute(aProperty : Property, aClass : Class)]
 [aClass.memberName()/]->getOwnedAttribute()->push_back([if (aClass.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.generatePackageGetterCall()/][/if]);
 [/template]
 
+[**
+ * generate default values for properties with primitive type or enumeration type
+*/]
 [template public genDefault(aProperty : Property) ? (aProperty.type.name='String' or aProperty.type.name='EString')]
 "[aProperty.default/]" /*defined default string*/
 [/template]

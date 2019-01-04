@@ -16,8 +16,8 @@
 
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
-[import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
@@ -108,9 +108,9 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.ownedAttribute.generateAttributeAccessorsDecl(true)/]
+			[aClass.ownedAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
-			[aAttribute.generateAttributeAccessorsDecl(true)/]
+			[aAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[/if][/for][/for]
 
 		protected:

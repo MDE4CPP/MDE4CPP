@@ -83,8 +83,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	private void initalizeGeneralEmtls(String resourcePathPrefix)
 	{
 		String[] moduleNames = {"generate", 
-								"generateApplication", 
-								"generateAttribute", 
+								"generateApplication",
 								"generateEnumerationFile",
 								"generateInterface",
 								"generateMainExecution",
@@ -108,7 +107,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateInterfaceRealization",
 								"generateOperation",
 								"generateParameter",
-								"generatePrimitivetype",
+								"generatePrimitivetype", 
+								"generateProperty", 
 								"generateStereotype",
 								"generateType",
 	   	 						"generateValueSpecification"

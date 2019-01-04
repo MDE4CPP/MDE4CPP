@@ -19,7 +19,7 @@
  */]
 [module generateConstraint('http://www.eclipse.org/uml2/5.0.0/UML')/]
 
-[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 

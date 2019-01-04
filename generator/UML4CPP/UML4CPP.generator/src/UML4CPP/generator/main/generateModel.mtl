@@ -16,8 +16,8 @@
  
 [import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
-[import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
@@ -119,7 +119,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for
 			//*********************************
 			// Getter Setter
 			//*********************************
-			[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDecl(false)/]
+			[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDeclaration(false)/]
 			
 			//*********************************
 			// Operations
