@@ -92,7 +92,6 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateModel",
 								"generateOperation",
 								"generateSetGet",
-								"generateSingleton",
 								"generateStereotype",
 								"generateType",
 	   	 						"generateValueSpecification"
@@ -143,7 +142,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"collectionHelper",
 								"generalHelper",
 								"keywords",
-								"nameHelper"
+								"nameHelper",
+								"singletonHelper"
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}

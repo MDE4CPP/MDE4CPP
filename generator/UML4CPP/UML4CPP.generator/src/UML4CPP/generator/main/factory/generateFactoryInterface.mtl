@@ -20,10 +20,10 @@
 [module generateFactoryInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateClass /]
-[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Factory');}]
 [file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]

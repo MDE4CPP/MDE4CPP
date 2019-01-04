@@ -11,9 +11,17 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of singleton elements
+ * 
  */]
-[module generateSingleton('http://www.eclipse.org/uml2/5.0.0/UML')/]
+[module singletonHelper('http://www.eclipse.org/uml2/5.0.0/UML')/]
 
+[**
+ * generate singleton declaration with static variable and getter function
+*/]
 [template public generateSingletonDecl(packageName : String)]
 
 private:
@@ -22,6 +30,9 @@ public:
 	static std::shared_ptr<[packageName/]> eInstance();
 [/template]
 
+[**
+ * generate singleton implementation with option to call function init of singleton instance
+*/]
 [template public generateSingletonImpl(packageName : String, callInit : Boolean)]
 std::shared_ptr<[packageName/]> [packageName/]::instance;
 

@@ -17,10 +17,10 @@
 [import UML4CPP::generator::main::components::generateInterfaceRealization /]
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
-[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
 [query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
