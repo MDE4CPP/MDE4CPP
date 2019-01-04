@@ -11,6 +11,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML InstanceSpecification artefacts
+ * 
  */]
 [module generateInstanceSpecification('http://www.eclipse.org/uml2/5.0.0/UML')]
  
@@ -18,37 +23,51 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
-{
-	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([memberName(anInstSpec)/]));
-	slot->setDefiningFeature([memberName(aSlot.definingFeature)/]);
-[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
-	{
-		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
-[if (aValueSpec.oclIsKindOf(LiteralSpecification))]
-		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
-[elseif(aValueSpec.oclIsKindOf(InstanceValue))]
-		literal->setInstance([memberName(aValueSpec.oclAsType(InstanceValue).instance)/]);
-[/if]
-		this->getOwnedElement()->push_back(literal);
-	}
-[/for]
-}
-[/template]
-
+[**
+ * generate creation of meta model instance for an InstanceSpecification element
+*/]
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/] = factory->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
-[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInstSpec)/]);
+[anInstSpec.memberName()/] = factory->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([anInstSpec.memberName()/]);
 [/template]
 
+[**
+ * generate initialization of meta model instance for an InstanceSpecification element
+ * 
+ * this includes:
+ * - set InstanceSpecification name
+ * - set classifier
+ * - create and initialize slots
+*/]
 [template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
+[anInstSpec.memberName()/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
-[memberName(anInstSpec)/]->getClassifier()->push_back([aClassifer.generatePackageGetterCall(anInstSpec)/]);
+[anInstSpec.memberName()/]->getClassifier()->push_back([aClassifer.generatePackageGetterCall(anInstSpec)/]);
 
 [for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
 [aSlot.generateSlotCreation(anInstSpec)/]
 [/for]
 [/for]
 
+[/template]
+
+[**
+ * generate creation and initialization of meta model instance for a Slot element
+*/]
+[template private generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
+{
+	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([anInstSpec.memberName()/]));
+	slot->setDefiningFeature([aSlot.definingFeature.memberName()/]);
+[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
+	{
+		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
+[if (aValueSpec.oclIsKindOf(LiteralSpecification))]
+		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+[elseif(aValueSpec.oclIsKindOf(InstanceValue))]
+		literal->setInstance([aValueSpec.oclAsType(InstanceValue).instance.memberName()/]);
+[/if]
+		this->getOwnedElement()->push_back(literal);
+	}
+[/for]
+}
 [/template]
