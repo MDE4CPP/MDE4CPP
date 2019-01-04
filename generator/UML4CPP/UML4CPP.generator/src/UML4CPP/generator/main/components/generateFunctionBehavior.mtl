@@ -19,7 +19,7 @@
  */]
 [module generateFunctionBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateParameter /]
+[import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
