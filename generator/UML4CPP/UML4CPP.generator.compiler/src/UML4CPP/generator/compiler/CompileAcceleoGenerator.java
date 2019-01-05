@@ -18,6 +18,11 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.acceleo.parser.compiler.AcceleoCompilerHelper;
 
+/**
+ * 
+ *
+ */
+@SuppressWarnings("deprecation")
 public class CompileAcceleoGenerator 
 {
 
@@ -82,6 +87,9 @@ public class CompileAcceleoGenerator
 	}
 	
 	
+	/**
+	 * @throws Exception exception
+	 */
 	public void execute() throws Exception 
 	{
 		registerResourceFactories();
@@ -160,7 +168,7 @@ public class CompileAcceleoGenerator
 	}
 	
 	 /**
-	 * @param args
+	 * @param args {source folder, target folder}
 	 */
 	public static void main(final String[] args) {
         try 
