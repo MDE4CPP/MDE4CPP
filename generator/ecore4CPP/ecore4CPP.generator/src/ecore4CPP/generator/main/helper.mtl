@@ -14,6 +14,7 @@
  */]
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -24,12 +25,12 @@
 [**
  * check if application should be prepared
 */]
-[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
-[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
-[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
+[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->notEmpty() /]
+[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->first().value /]
 
-[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
-[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
+[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->first().value /]
 
 [**
  * namespace generation
@@ -47,8 +48,8 @@
 [**
  * Helper for sourcegen annotations
 */]
-[query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()  /]
-[query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->first() /]
+[query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameCodeGen())->notEmpty()  /]
+[query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameCodeGen())->first() /]
 
 [**
  * check and get key value from sourcegen eannotation
@@ -59,19 +60,19 @@
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
 
-[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey('no_back_reference')) and  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
+[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey(keyNoBackReference())) and  aRef.container or (aRef->closure(eAnnotations->select(source=sourceNameSubset()).references.oclAsType(EReference))->select(container)->size() > 0)  /]
 
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
 
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
 [comment][query public getFirstContainer(aClass : EClass) : EReference =  if getContainsContainerAttribute()->notEmpty() then getContainsContainerAttribute()->first() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getFirstContainer()->flatten() else null endif endif /][/comment]
 
-[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('implOnly') then aModelElement.valueKey('implOnly')='true' else false endif /]
-[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('doNotGenerate') then aModelElement.valueKey('doNotGenerate')='true' else false endif /]
-[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey('implSetterOnly') then aModelElement.valueKey('implSetterOnly')='true' else false endif/]
+[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyImplOnly()) then aModelElement.valueKey(keyImplOnly())='true' else false endif /]
+[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyDoNotGenerate()) then aModelElement.valueKey(keyDoNotGenerate())='true' else false endif /]
+[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey(keyImplSetterOnly()) then aModelElement.valueKey(keyImplSetterOnly())='true' else false endif/]
 
-[query public SetterName(feature : EStructuralFeature) : String = if hasKey('SetterName') then valueKey('SetterName') else 'set'.concat(name.toUpperFirst()) endif/]
-[query public GetterName(feature : EStructuralFeature) : String = if hasKey('GetterName') then valueKey('GetterName') else getterPrefix().concat(name.toUpperFirst()) endif/]
+[query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(name.toUpperFirst()) endif/]
+[query public GetterName(feature : EStructuralFeature) : String = if hasKey(keyGetterName()) then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
 
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
@@ -89,12 +90,12 @@
 [**
  * Subset Union helper queries
 */]
-[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
+[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameSubset())->notEmpty()  /]
+[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameUnion())->notEmpty()  /]
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset() and (isUnion() or subsetIsUnion())/]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
+[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = sourceNameSubset())->asOrderedSet()->first().references /]
 
-[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source=sourceNameSubset()).references->includes(self) /]
 
 [query public findLowerSubset(owner: EClass, thisClass : EClass, ref : EReference) : EReference = let r : EReference = owner.getSubsetsForUnion(ref)->select(aRef : EReference | aRef.eType = thisClass)->asOrderedSet()->first() in if r.oclIsUndefined() then ref else r endif /]
 
@@ -164,11 +165,11 @@
 #endif /* end of include guard: [getGuardName(sufix)/] */
 [/template]
 
-[query public hasDocumentationnAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->notEmpty()  /]
-[query public DocumentationAnnotation(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->first() /]
+[query public hasDocumentationnAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameGenModel())->notEmpty()  /]
+[query public DocumentationAnnotation(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameGenModel())->first() /]
 
-[query public hasDocKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasDocumentationnAnnotation() then aModelElement.DocumentationAnnotation().details->select(key = 'documentation')->notEmpty() else false endif /]
-[query public docDescription(aModelElement : EModelElement) : String = aModelElement.DocumentationAnnotation().details->select(key = 'documentation')->first().value /]
+[query public hasDocKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasDocumentationnAnnotation() then aModelElement.DocumentationAnnotation().details->select(key = keyDocumentation())->notEmpty() else false endif /]
+[query public docDescription(aModelElement : EModelElement) : String = aModelElement.DocumentationAnnotation().details->select(key = keyDocumentation())->first().value /]
 
 [**
  * Add the doxygen documentation for .
@@ -180,7 +181,7 @@
 */
 [/template]
 
-[query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'ignore')->notEmpty()  /]
+[query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
 
 [query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet{aClass.getSubsetedUnionsReference(),aClass.eReferences->select(isUnion())}->flatten()->sortedBy(name) /]
 

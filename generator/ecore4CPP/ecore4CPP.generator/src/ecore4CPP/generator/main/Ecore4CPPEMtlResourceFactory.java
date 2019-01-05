@@ -117,7 +117,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeFactoryEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generateFactory",
+		String[] moduleNames = {"generateMetamodelFactory",
 								"generateFactoryImplementationHeader",
 								"generateFactoryImplementationSource",
 								"generateFactoryInterface",
@@ -128,7 +128,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeHelpersEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {};
+		String[] moduleNames = {"keywords"};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}
 

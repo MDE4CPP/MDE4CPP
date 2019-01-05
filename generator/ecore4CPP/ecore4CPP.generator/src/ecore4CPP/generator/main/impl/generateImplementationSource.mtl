@@ -24,6 +24,7 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateModel /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
 [file (aClass.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
@@ -46,8 +47,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "[getRootPackage().name/]/impl/[aClass.getRootPackage().name.toUpperFirst().concat('PackageImpl')/].hpp"
-[if (aClass.hasKey('includes'))]
-[aClass.valueKey('includes')/]
+[if (aClass.hasKey(keyIncludes()))]
+[aClass.valueKey(keyIncludes())/]
 [/if]
 
 //Forward declaration includes

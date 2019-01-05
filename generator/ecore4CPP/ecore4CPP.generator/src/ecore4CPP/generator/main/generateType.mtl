@@ -15,6 +15,7 @@
 [module generateType( 'http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
@@ -96,7 +97,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 [/if]
 [/template]
 
-[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey('AggregationKind')) then aReference.valueKey('AggregationKind')='shared' else false endif/]
+[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey(keyAggregationKind())) then aReference.valueKey(keyAggregationKind())='shared' else false endif/]
 [query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
 [query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 
