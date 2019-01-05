@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
@@ -37,8 +38,8 @@
 #include "fUML/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 
-[if (anOpaqueBehavior.language->includes('INCLUDE'))]
-[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('INCLUDE')]
+[if (anOpaqueBehavior.language->includes(keyInclude()))]
+[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf(keyInclude())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
 //Included from function behavior "[anOpaqueBehavior.name/]"
 [anOpaqueBehavior._body->asOrderedSet()->at(index)/]
@@ -163,8 +164,8 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 			std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 		[/if]
 
-   		[if (anOpaqueBehavior.language->includes('CPP'))]
-		[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf('CPP') ]
+   		[if (anOpaqueBehavior.language->includes(keyCPP()))]
+		[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf(keyCPP()) ]
 		[if (0 < index and index <= anOpaqueBehavior._body->size())]
 		[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
 		[/if][/let]

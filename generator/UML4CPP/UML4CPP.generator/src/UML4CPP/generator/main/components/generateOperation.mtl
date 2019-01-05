@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
@@ -91,8 +92,8 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
 	// Implemented as Function behaviour [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).name/]
 
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes('CPP'))]
-[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf('CPP') ]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyInclude()))]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf(keyInclude()) ]
 [if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
 [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
 [/if][/let][/if][/if][/if]
