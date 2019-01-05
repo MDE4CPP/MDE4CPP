@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.uml"
-            id="UML4CPP.generator.ui.popupMenus.contribution.IFile">
-         <menu id="org.eclipse.acceleo.module.menu" label="MDE4CPP Generators" path="additionsAcceleo">
-               <groupMarker name="acceleo"/> 
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <menu
+               id="menuMDE4CPP"
+               label="MDE4CPP">
+            <command
+                  commandId="UML4CPP.generator.ui.generateCommand"
+                  label="Generate with UML4CPP"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <test
+                           property="org.eclipse.core.resources.name"
+                           value="*.uml">
+                     </test>
+                  </iterate>
+               </visibleWhen>
+            </command>
          </menu>
-         <action
-               class="UML4CPP.generator.ui.popupMenus.AcceleoGenerateGeneratorAction"
-               enablesFor="+"
-               id="UML4CPP.generator.ui.popupMenus.acceleoGenerateGeneratorAction"
-               icon="icons/default.gif"
-               label="Generate with UML4CPP"
-               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
-      </objectContribution>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="UML4CPP.generator.ui.common.UMLGeneraterCommand"
+            id="UML4CPP.generator.ui.generateCommand"
+            name="Generate with UML4CPP">
+      </command>
    </extension>
 </plugin>
