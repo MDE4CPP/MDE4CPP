@@ -13,20 +13,15 @@ package ecore4CPP.generator.main;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.acceleo.engine.event.IAcceleoTextGenerationListener;
 import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
-import org.eclipse.acceleo.model.mtl.resource.EMtlResourceFactoryImpl;
-import org.eclipse.acceleo.model.mtl.resource.EMtlResourceImpl;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
@@ -427,62 +422,6 @@ public class Generate extends AbstractAcceleoGenerator {
          * To learn more about the registration of Resource Factories, have a look at the Acceleo documentation (Help -> Help Contents). 
          */ 
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new EMtlResourceFactoryImpl()
-        {
-			String patternCD = "../";
-			String emptyString = "";
-			String patternFactory = "generateFactory";
-			String patternPackage = "generatePackage";
-			String patternPlugin = "generateEcorePlugin";
-			String patternImpl = "generateImpl";
-			String rsrcPath = "rsrc:ecore4CPP/generator/main/";
-			String rsrcPathFactory = "rsrc:ecore4CPP/generator/main/factory/";
-			String rsrcPathPackage = "rsrc:ecore4CPP/generator/main/package/";
-			String rsrcPathPlugin = "rsrc:ecore4CPP/generator/main/plugin/";
-			String rsrcPathImpl = "rsrc:ecore4CPP/generator/main/impl/";
-			Map<URI, Resource> resourceMap = new HashMap<URI, Resource>();
-			
-        	public Resource createResource(URI uri)
-        	{
-        		if (resourceMap.containsKey(uri))
-        		{
-        			return resourceMap.get(uri);
-        		}
-        		else
-        		{
-	        		String uriString = uri.path().replace("rsrc%3A", "rsrc:");
-					if (!uriString.startsWith("rsrc"))
-					{
-						if (uriString.startsWith(patternCD))
-						{
-							uriString = uriString.replace(patternCD, emptyString);
-						}
-						if (uriString.startsWith(patternFactory))
-						{
-							uriString = rsrcPathFactory + uriString;
-						}
-						else if (uriString.startsWith(patternPackage))
-						{
-							uriString = rsrcPathPackage + uriString;
-						}
-						else if (uriString.startsWith(patternPlugin))
-						{
-							uriString = rsrcPathPlugin + uriString;
-						}
-						else if (uriString.startsWith(patternImpl))
-						{
-							uriString = rsrcPathImpl + uriString;
-						}
-						else
-						{
-							uriString = rsrcPath + uriString;
-						}
-					}
-	        		EMtlResourceImpl xmiResource = new EMtlResourceImpl(URI.createURI(uriString));
-	        		resourceMap.put(uri, xmiResource);
-	        		return xmiResource;
-        		}
-        	}
-        });
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new Ecore4CPPEMtlResourceFactory());
     }
 }
