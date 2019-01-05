@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Compiler for Acceleo Generator for UML
-Bundle-SymbolicName: fUML4CPP.generator.compile;singleton:=true
+Bundle-SymbolicName: UML4CPP.generator.compile;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: fUML4CPP.generator.Activator
+Bundle-Activator: UML4CPP.generator.Activator
 Bundle-Vendor: Technische Universität Ilmenau
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.acceleo.parser;bundle-version="3.6.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-LazyStart: false
-Export-Package: fUML4CPP.generator.compiler
+Export-Package: UML4CPP.generator.compiler
 Import-Package: org.eclipse.pde.internal.core.bundle,
  org.eclipse.swt.widgets,
  org.eclipse.uml2.uml
