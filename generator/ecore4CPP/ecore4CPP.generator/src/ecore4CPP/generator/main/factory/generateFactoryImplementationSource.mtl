@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 				}
 				[elseif(ref->size()=1)]
 				[ref->first().generateReferenceType()/] castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
-				assert(castedContainer);
+				assert(!castedContainer.expired());
 				return std::shared_ptr<[aClass.generateType()/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
 				[/if]
 			[if(ref->size()>0)]}[/if]

@@ -28,9 +28,6 @@ SET(SOURCE_FILES
 	PrimitiveTypesPackage.cpp
 	impl/PrimitiveTypesPluginImpl.cpp
 	PrimitiveTypesPlugin.cpp
-	${MDE4CPP_HOME}/application/include/util/util.cpp
-	${MDE4CPP_HOME}/application/include/util/registry.cpp
-	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp
 )
 
 INCLUDE_DIRECTORIES(

@@ -28,9 +28,6 @@ SET(SOURCE_FILES
 	EcorePackage.cpp
 	impl/EcorePluginImpl.cpp
 	EcorePlugin.cpp
-	${MDE4CPP_HOME}/application/include/util/util.cpp
-	${MDE4CPP_HOME}/application/include/util/registry.cpp
-	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp
 )
 
 INCLUDE_DIRECTORIES(

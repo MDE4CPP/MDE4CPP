@@ -2078,7 +2078,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="OutputPinActivation" eSuperTypes="#//PinActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ValueSpecificActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TestIdentityActionActivation" eSuperTypes="#//ActionActivation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//ActionActivation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//ActionActivation">
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#x9;context->referent = this.getExecutionContext();&#xA;&#xA;&#x9;OutputPin resultPin = ((ReadSelfAction)(this.node)).result;&#xA;&#x9;&#xA;&#x9;this.putToken(resultPin, context);&#xA;}"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//ActionActivation">
     <eOperations name="destroyObject" ordered="false" lowerBound="1">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>

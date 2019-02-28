@@ -8,7 +8,7 @@
 #define ECORE_METAMODELPACKAGEIMPL_HPP
 
 #include "ecoreReflection/EcorePackage.hpp"
-#include "uml/impl/PackageImpl.hpp"	
+#include "uml/impl/ModelImpl.hpp"
 
 namespace uml
 {
@@ -19,7 +19,7 @@ namespace uml
 
 namespace Ecore
 {
-	class EcorePackageImpl : virtual public uml::PackageImpl ,virtual public EcorePackage
+	class EcorePackageImpl : virtual public uml::ModelImpl, virtual public EcorePackage
 	{
 			friend class EcorePackage;
 			// Constructor

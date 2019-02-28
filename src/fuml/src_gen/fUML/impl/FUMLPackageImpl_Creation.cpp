@@ -1193,6 +1193,7 @@ void FUMLPackageImpl::createReadSelfActionActivationContent(std::shared_ptr<ecor
 	m_readSelfActionActivation_EClass = factory->createEClass_in_EPackage(package, READSELFACTIONACTIVATION_ECLASS);
 	
 	
+	m_readSelfActionActivation_EOperation_doAction = factory->createEOperation_in_EContainingClass(m_readSelfActionActivation_EClass, READSELFACTIONACTIVATION_EOPERATION_DOACTION);
 	
 }
 

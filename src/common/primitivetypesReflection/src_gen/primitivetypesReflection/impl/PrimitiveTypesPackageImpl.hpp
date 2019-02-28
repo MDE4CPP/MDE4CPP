@@ -8,7 +8,7 @@
 #define PRIMITIVETYPES_METAMODELPACKAGEIMPL_HPP
 
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
-#include "uml/impl/PackageImpl.hpp"	
+#include "uml/impl/ModelImpl.hpp"
 
 namespace uml
 {
@@ -17,7 +17,7 @@ namespace uml
 
 namespace PrimitiveTypes
 {
-	class PrimitiveTypesPackageImpl : virtual public uml::PackageImpl ,virtual public PrimitiveTypesPackage
+	class PrimitiveTypesPackageImpl : virtual public uml::ModelImpl, virtual public PrimitiveTypesPackage
 	{
 			friend class PrimitiveTypesPackage;
 			// Constructor

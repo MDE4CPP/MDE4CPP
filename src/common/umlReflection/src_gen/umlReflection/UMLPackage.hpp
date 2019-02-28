@@ -6,7 +6,7 @@
 
 #ifndef UML_METAMODELPACKAGE_HPP
 #define UML_METAMODELPACKAGE_HPP
-#include "uml/Package.hpp"	
+#include "uml/Model.hpp"
 
 namespace uml 
 {
@@ -28,7 +28,7 @@ namespace UML
 	The Metamodel Package for the UML metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	class UMLPackage : virtual public uml::Package
+	class UMLPackage : virtual public uml::Model
 	{
 		//protected default construcotr
 		protected:

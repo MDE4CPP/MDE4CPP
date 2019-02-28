@@ -6,7 +6,7 @@
 
 #ifndef PRIMITIVETYPES_METAMODELPACKAGE_HPP
 #define PRIMITIVETYPES_METAMODELPACKAGE_HPP
-#include "uml/Package.hpp"	
+#include "uml/Model.hpp"
 
 namespace uml 
 {
@@ -19,7 +19,7 @@ namespace PrimitiveTypes
 	The Metamodel Package for the PrimitiveTypes metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	class PrimitiveTypesPackage : virtual public uml::Package
+	class PrimitiveTypesPackage : virtual public uml::Model
 	{
 		//protected default construcotr
 		protected:

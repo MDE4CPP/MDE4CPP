@@ -169,6 +169,21 @@ std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
+void ReadSelfActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
+
+	std::shared_ptr<fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();
+	context->referent = this.getExecutionContext();
+
+	OutputPin resultPin = ((ReadSelfAction)(this.node)).result;
+	
+	this.putToken(resultPin, context);
+}
+	//end of body
+}
 
 //*********************************
 // References

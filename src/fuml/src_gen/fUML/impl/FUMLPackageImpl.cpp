@@ -2359,6 +2359,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadSelfActionActivation_ECla
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReadSelfActionActivation_EOperation_doAction() const
+{
+	return m_readSelfActionActivation_EOperation_doAction;
+}
 
 // End Class ReadSelfActionActivation
 

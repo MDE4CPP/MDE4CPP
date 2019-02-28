@@ -6610,6 +6610,14 @@ void FUMLPackageImpl::initializeReadSelfActionActivationContent()
 	
 	
 	
+	m_readSelfActionActivation_EOperation_doAction->setEType(nullptr);
+	m_readSelfActionActivation_EOperation_doAction->setName("doAction");
+	m_readSelfActionActivation_EOperation_doAction->setLowerBound(0);
+	m_readSelfActionActivation_EOperation_doAction->setUpperBound(1);
+	m_readSelfActionActivation_EOperation_doAction->setUnique(true);
+	m_readSelfActionActivation_EOperation_doAction->setOrdered(true);
+	
+	
 	
 }
 

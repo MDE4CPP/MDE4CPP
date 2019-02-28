@@ -8,7 +8,7 @@
 #define UML_METAMODELPACKAGEIMPL_HPP
 
 #include "umlReflection/UMLPackage.hpp"
-#include "uml/impl/PackageImpl.hpp"	
+#include "uml/impl/ModelImpl.hpp"
 
 namespace uml
 {
@@ -22,7 +22,7 @@ namespace uml
 
 namespace UML
 {
-	class UMLPackageImpl : virtual public uml::PackageImpl ,virtual public UMLPackage
+	class UMLPackageImpl : virtual public uml::ModelImpl, virtual public UMLPackage
 	{
 			friend class UMLPackage;
 			// Constructor
