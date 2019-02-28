@@ -919,10 +919,11 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS = 33;
 			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 49;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 50;
 			
 			
 			static const int DESTROYOBJECTACTIONACTIVATION_EOPERATION_DESTROYOBJECT_VALUE_EBOOLEAN = 3357;
+			static const int DESTROYOBJECTACTIONACTIVATION_EOPERATION_DOACTION = 3359;
 			static const int DESTROYOBJECTACTIONACTIVATION_EOPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK = 3358;
 			
 			//Class and Feature Getter
@@ -931,6 +932,7 @@ namespace fUML
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_doAction() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link() const = 0;
 			
 			// End Class DestroyObjectActionActivation

@@ -1071,6 +1071,10 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActiva
 {
 	return m_destroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean;
 }
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_EOperation_doAction() const
+{
+	return m_destroyObjectActionActivation_EOperation_doAction;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link() const
 {
 	return m_destroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link;

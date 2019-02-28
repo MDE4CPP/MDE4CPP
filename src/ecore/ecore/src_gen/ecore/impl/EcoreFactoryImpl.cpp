@@ -239,8 +239,8 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 			}
 			else
 			{
-				std::weak_ptr<ecore::EObject > castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
-				assert(!castedContainer.expired());
+				std::shared_ptr<ecore::EObject> castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
+				assert(castedContainer);
 				return std::shared_ptr<ecore::EFactory>(this->createEFactory_in_EContainer(castedContainer));
 			}
 		}
@@ -257,8 +257,8 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 			}
 			else
 			{
-				std::weak_ptr<ecore::EObject > castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
-				assert(!castedContainer.expired());
+				std::shared_ptr<ecore::EObject> castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
+				assert(castedContainer);
 				return std::shared_ptr<ecore::EObject>(this->createEObject_in_EContainer(castedContainer));
 			}
 		}
@@ -383,8 +383,8 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 			}
 			else
 			{
-				std::weak_ptr<ecore::EObject > castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
-				assert(!castedContainer.expired());
+				std::shared_ptr<ecore::EObject> castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
+				assert(castedContainer);
 				return std::shared_ptr<ecore::ETypeParameter>(this->createETypeParameter_in_EContainer(castedContainer));
 			}
 		}

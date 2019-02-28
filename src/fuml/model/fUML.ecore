@@ -2089,6 +2089,9 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value=""/>
+    </eAnnotations>
     <eOperations name="destroyObject" ordered="false" lowerBound="1">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>
       <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -2097,6 +2100,11 @@
     <eOperations name="objectIsComposite" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="reference" ordered="false" lowerBound="1" eType="#//Reference"/>
       <eParameters name="link" ordered="false" lowerBound="1" eType="#//Link"/>
+    </eOperations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#xA;&#x9;context->setReferent(this->getExecutionContext());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadSelfAction> node=std::dynamic_pointer_cast&lt;uml::ReadSelfAction> (this->m_node);&#xA;&#xA;&#x9;if(node)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::OutputPin> resultPin = node->getResult();&#xA;&#x9;&#x9;this->putToken(resultPin, context);&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;Unexpected invalid ReeadSelfActionNode&quot;;&#xA;&#x9;}"/>
+      </eAnnotations>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CreateObjectActionActivation" eSuperTypes="#//ActionActivation">

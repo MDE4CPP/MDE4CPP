@@ -3186,6 +3186,14 @@ void FUMLPackageImpl::initializeDestroyObjectActionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_destroyObjectActionActivation_EOperation_doAction->setEType(nullptr);
+	m_destroyObjectActionActivation_EOperation_doAction->setName("doAction");
+	m_destroyObjectActionActivation_EOperation_doAction->setLowerBound(0);
+	m_destroyObjectActionActivation_EOperation_doAction->setUpperBound(1);
+	m_destroyObjectActionActivation_EOperation_doAction->setUnique(true);
+	m_destroyObjectActionActivation_EOperation_doAction->setOrdered(true);
+	
+	
 	m_destroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link->setEType(ecore::EcorePackage::eInstance()->getEBoolean_EDataType());
 	m_destroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link->setName("objectIsComposite");
 	m_destroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link->setLowerBound(1);

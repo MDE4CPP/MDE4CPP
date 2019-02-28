@@ -608,6 +608,7 @@ namespace fUML
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean() const ;
+			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_doAction() const ;
 			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link() const ;
 			
 			// End Class DestroyObjectActionActivation
@@ -1870,6 +1871,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_sendSignalActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_EOperation_doAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_opaqueBehaviorExecution_EOperation_doBody_ParameterValue_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_EOperation_doStructuredActivity = nullptr;

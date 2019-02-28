@@ -158,8 +158,8 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
 				[elseif(ref->size()=1)]
-				[ref->first().generateReferenceType()/] castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
-				assert(!castedContainer.expired());
+				std::shared_ptr<[ref->first().generateReferenceType(false)/]> castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
+				assert(castedContainer);
 				return std::shared_ptr<[aClass.generateType()/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
 				[/if]
 			[if(ref->size()>0)]}[/if]

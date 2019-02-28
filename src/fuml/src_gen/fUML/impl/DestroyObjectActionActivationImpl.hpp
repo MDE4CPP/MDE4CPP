@@ -52,6 +52,10 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual void doAction() ;
+			
+			/*!
+			 */ 
 			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link) ;
 			
 			
