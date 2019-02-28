@@ -2079,9 +2079,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ValueSpecificActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TestIdentityActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/ReadSelfAction.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="doAction">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#x9;context->referent = this.getExecutionContext();&#xA;&#xA;&#x9;OutputPin resultPin = ((ReadSelfAction)(this.node)).result;&#xA;&#x9;&#xA;&#x9;this.putToken(resultPin, context);&#xA;}"/>
+        <details key="body" value="&#x9;// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#xA;&#x9;context->setReferent(this->getExecutionContext());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadSelfAction> node=std::dynamic_pointer_cast&lt;uml::ReadSelfAction> (this->m_node);&#xA;&#xA;&#x9;if(node)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::OutputPin> resultPin = node->getResult();&#xA;&#x9;&#x9;this->putToken(resultPin, context);&#xA;&#x9;}"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
