@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Property.hpp"
+#include "uml/DestroyObjectAction.hpp"
+#include "fUML/Reference.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/FeatureValue.hpp"
 
 
 //Forward declaration includes
@@ -178,38 +183,109 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass()
 //*********************************
 void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If the given value is a reference, then destroy the referenced object, per the given	destroy action attribute values.
+
+	std::shared_ptr<fUML::Reference> reference= std::dynamic_pointer_cast<fUML::Reference> (value);
+	if(reference)
+	{
+		if (isDestroyLinks || isDestroyOwnedObjects)
+		{
+			std::shared_ptr<Bag<fUML::ExtensionalValue> > extensionalValues = this->getExecutionLocus()->getExtensionalValues();
+			for(std::shared_ptr<fUML::ExtensionalValue> extensionalValue : *extensionalValues)
+			{
+				std::shared_ptr<fUML::Link> link = std::dynamic_pointer_cast<fUML::Link> (extensionalValue);
+				if (link)
+				{
+					if (this->valueParticipatesInLink(reference, link))
+					{
+						if (isDestroyLinks | this->objectIsComposite(reference, link))
+						{
+							link->destroy();
+						}
+					}
+				}
+			}
+		}
+		if (isDestroyOwnedObjects)
+		{
+			std::shared_ptr<Bag<fUML::FeatureValue> > objectFeatureValues = reference->retrieveFeatureValues();
+			for(std::shared_ptr<fUML::FeatureValue> featureValue : *objectFeatureValues)
+			{
+				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
+				if(property)
+				{
+					if (property->getAggregation() == uml::AggregationKind::COMPOSITE)
+					{
+						std::shared_ptr<Bag<fUML::Value>> values = featureValue->getValues();
+						for(std::shared_ptr<fUML::Value> ownedValue : *values)
+						{
+							this->destroyObject(ownedValue, isDestroyLinks, isDestroyOwnedObjects);
+
+						}
+					}
+				}
+			}
+		}
+		reference->destroy();
+	}
+	//end of body
 }
 
 void DestroyObjectActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
+		// Get the value on the target input pin.
+	// If the value is not a reference, then the action has no effect. Otherwise, do the following.
+	// If isDestroyLinks is true, destroy all links in which the referent participates.
+	// If isDestroyOwnedObjects is true, destroy all objects owned by the referent via composition links.
+	// Destroy the referent object.
 
-	std::shared_ptr<fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();
-
-	context->setReferent(this->getExecutionContext());
-
-	std::shared_ptr<uml::ReadSelfAction> node=std::dynamic_pointer_cast<uml::ReadSelfAction> (this->m_node);
-
-	if(node)
+	std::shared_ptr<uml::DestroyObjectAction> action = std::dynamic_pointer_cast<uml::DestroyObjectAction>(this->getNode());
+	if(action)
 	{
-		std::shared_ptr<uml::OutputPin> resultPin = node->getResult();
-		this->putToken(resultPin, context);
-	}
-	else
-	{
-		throw "Unexpected invalid ReeadSelfActionNode";
+		action->getTarget();
+		std::shared_ptr<Bag<fUML::Value> > tokens=this->takeTokens(action->getTarget());
+		for(std::shared_ptr<fUML::Value> value : *tokens)
+		{
+			this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
+
+		}
 	}
 	//end of body
 }
 
 bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Test whether the given reference participates in the given link as a composite.
+	std::shared_ptr<Bag<fUML::FeatureValue>> linkFeatureValues = link->getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> featureValue : *linkFeatureValues)
+	{
+		std::shared_ptr<Bag<fUML::Value>> values= featureValue->getValues();
+		for(std::shared_ptr<fUML::Value> value : *values)
+		{
+			value->equals(reference);
+
+			if(!(value->equals(reference)))
+			{
+
+				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
+				if(property)
+				{
+					if (property->getAggregation() == uml::AggregationKind::COMPOSITE)
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+	//end of body
 }
 
 //*********************************
