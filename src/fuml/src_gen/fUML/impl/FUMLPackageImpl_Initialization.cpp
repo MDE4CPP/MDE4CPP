@@ -2833,6 +2833,14 @@ void FUMLPackageImpl::initializeCreateObjectActionActivationContent()
 	
 	
 	
+	m_createObjectActionActivation_EOperation_doAction->setEType(nullptr);
+	m_createObjectActionActivation_EOperation_doAction->setName("doAction");
+	m_createObjectActionActivation_EOperation_doAction->setLowerBound(0);
+	m_createObjectActionActivation_EOperation_doAction->setUpperBound(1);
+	m_createObjectActionActivation_EOperation_doAction->setUnique(true);
+	m_createObjectActionActivation_EOperation_doAction->setOrdered(true);
+	
+	
 	
 }
 

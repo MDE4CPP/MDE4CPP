@@ -188,6 +188,10 @@ void ReadSelfActionActivationImpl::doAction()
 		std::shared_ptr<uml::OutputPin> resultPin = node->getResult();
 		this->putToken(resultPin, context);
 	}
+	else
+	{
+		throw "Unexpected invalid ReeadSelfActionNode";
+	}
 	//end of body
 }
 

@@ -940,6 +940,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateObjectActionActivation_
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCreateObjectActionActivation_EOperation_doAction() const
+{
+	return m_createObjectActionActivation_EOperation_doAction;
+}
 
 // End Class CreateObjectActionActivation
 

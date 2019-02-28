@@ -518,6 +518,7 @@ void FUMLPackageImpl::createCreateObjectActionActivationContent(std::shared_ptr<
 	m_createObjectActionActivation_EClass = factory->createEClass_in_EPackage(package, CREATEOBJECTACTIONACTIVATION_ECLASS);
 	
 	
+	m_createObjectActionActivation_EOperation_doAction = factory->createEOperation_in_EContainingClass(m_createObjectActionActivation_EClass, CREATEOBJECTACTIONACTIVATION_EOPERATION_DOACTION);
 	
 }
 

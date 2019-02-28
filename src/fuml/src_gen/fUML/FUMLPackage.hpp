@@ -798,15 +798,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS = 28;
 			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
+			static const unsigned int CREATEOBJECTACTIONACTIVATION_ECLASS_OPERATION_COUNT = 48;
 			
 			
+			static const int CREATEOBJECTACTIONACTIVATION_EOPERATION_DOACTION = 2857;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCreateObjectActionActivation_EClass() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCreateObjectActionActivation_EOperation_doAction() const = 0;
 			
 			// End Class CreateObjectActionActivation
 

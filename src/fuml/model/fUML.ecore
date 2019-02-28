@@ -2084,7 +2084,7 @@
     </eAnnotations>
     <eOperations name="doAction">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#xA;&#x9;context->setReferent(this->getExecutionContext());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadSelfAction> node=std::dynamic_pointer_cast&lt;uml::ReadSelfAction> (this->m_node);&#xA;&#xA;&#x9;if(node)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::OutputPin> resultPin = node->getResult();&#xA;&#x9;&#x9;this->putToken(resultPin, context);&#xA;&#x9;}"/>
+        <details key="body" value="&#x9;// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#xA;&#x9;context->setReferent(this->getExecutionContext());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadSelfAction> node=std::dynamic_pointer_cast&lt;uml::ReadSelfAction> (this->m_node);&#xA;&#xA;&#x9;if(node)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::OutputPin> resultPin = node->getResult();&#xA;&#x9;&#x9;this->putToken(resultPin, context);&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;Unexpected invalid ReeadSelfActionNode&quot;;&#xA;&#x9;}"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
@@ -2099,7 +2099,16 @@
       <eParameters name="link" ordered="false" lowerBound="1" eType="#//Link"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CreateObjectActionActivation" eSuperTypes="#//ActionActivation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateObjectActionActivation" eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/CreateObjectAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;&#xA;#include &quot;fUML/Locus.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Create an object with the given classifier (which must be a class) as its type, at the same locus as the action activation.&#xA;// Place a reference to the object on the result pin of the action.&#xA;&#xA;std::shared_ptr&lt;uml::CreateObjectAction> action = std::dynamic_pointer_cast&lt;uml::CreateObjectAction>(this->m_node);&#xA;if(action)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#x9;std::shared_ptr&lt;uml::Class> type= std::dynamic_pointer_cast&lt;uml::Class> (action->getClassifier());&#xA;&#x9;if(type)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Object> newObject=this->getExecutionLocus()->instantiate(type);&#xA;&#x9;&#x9;if(newObject)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;reference->setReferent(newObject);&#xA;&#x9;&#x9;&#x9;this->putToken(action->getResult(), reference);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;throw &quot;Can't instantiate object&quot;;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;Unexpected invalid Classifier&quot;;&#xA;&#x9;}&#xA;}&#xA;else&#xA;{&#xA;&#x9;throw &quot;Unexpected invalid CreateObjectAction&quot;;&#xA;}"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClearAssociationActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LinkActionActivation" abstract="true"
       eSuperTypes="#//ActionActivation">

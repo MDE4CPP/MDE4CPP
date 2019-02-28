@@ -25,6 +25,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/CreateObjectAction.hpp"
+#include "uml/Class.hpp"
+#include "fUML/Reference.hpp"
+#include "fUML/Locus.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -169,6 +173,42 @@ std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
+void CreateObjectActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create an object with the given classifier (which must be a class) as its type, at the same locus as the action activation.
+// Place a reference to the object on the result pin of the action.
+
+std::shared_ptr<uml::CreateObjectAction> action = std::dynamic_pointer_cast<uml::CreateObjectAction>(this->m_node);
+if(action)
+{
+	std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
+	std::shared_ptr<uml::Class> type= std::dynamic_pointer_cast<uml::Class> (action->getClassifier());
+	if(type)
+	{
+		std::shared_ptr<fUML::Object> newObject=this->getExecutionLocus()->instantiate(type);
+		if(newObject)
+		{
+			reference->setReferent(newObject);
+			this->putToken(action->getResult(), reference);
+		}
+		else
+		{
+			throw "Can't instantiate object";
+		}
+	}
+	else
+	{
+		throw "Unexpected invalid Classifier";
+	}
+}
+else
+{
+	throw "Unexpected invalid CreateObjectAction";
+}
+	//end of body
+}
 
 //*********************************
 // References

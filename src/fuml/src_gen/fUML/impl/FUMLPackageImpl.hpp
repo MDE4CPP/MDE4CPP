@@ -544,6 +544,7 @@ namespace fUML
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCreateObjectActionActivation_EOperation_doAction() const ;
 			
 			// End Class CreateObjectActionActivation
 
@@ -1869,6 +1870,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_sendSignalActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_EOperation_doAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_EOperation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_opaqueBehaviorExecution_EOperation_doBody_ParameterValue_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_EOperation_doStructuredActivity = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_EOperation_doStructuredActivity = nullptr;
