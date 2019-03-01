@@ -25,8 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "uml/ReadSelfAction.hpp"
-#include "fUML/Reference.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,29 +169,6 @@ std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-void ReadSelfActionActivationImpl::doAction()
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-		// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
-
-	std::shared_ptr<fUML::Reference> context= fUML::FUMLFactory::eInstance()->createReference();
-
-	context->setReferent(this->getExecutionContext());
-
-	std::shared_ptr<uml::ReadSelfAction> node=std::dynamic_pointer_cast<uml::ReadSelfAction> (this->m_node);
-
-	if(node)
-	{
-		std::shared_ptr<uml::OutputPin> resultPin = node->getResult();
-		this->putToken(resultPin, context);
-	}
-	else
-	{
-		throw "Unexpected invalid ReeadSelfActionNode";
-	}
-	//end of body
-}
 
 //*********************************
 // References

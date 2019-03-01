@@ -25,6 +25,14 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/StartObjectBehaviorAction.hpp"
+#include "uml/Class.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/Parameter.hpp"
+#include "fUML/Reference.hpp"
+#include "fUML/ParameterValue.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -169,6 +177,70 @@ std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticC
 //*********************************
 // Operations
 //*********************************
+void StartObjectBehaviorActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Get the value on the object input pin. If it is not a reference, then do nothing.
+	// Start the behavior of the referent object for the classifier given as the type of the object input pin, with parameter values taken from the argument input pins.
+	// If the object input pin has no type, then start the classifier behaviors of all types of the referent object.
+
+	std::shared_ptr<uml::StartObjectBehaviorAction> action = std::dynamic_pointer_cast<uml::StartObjectBehaviorAction>(this->getNode());
+	if(action)
+	{
+		std::shared_ptr<uml::InputPin > object= action->getObject();
+		if(object)
+		{
+			//Todo Check: really only first Element?
+			std::shared_ptr<fUML::Value> valueObject=this->takeTokens(object)->at(0);
+			std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(valueObject);
+			if (reference)
+			{
+				std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> argumentPins = action->getArgument();
+				std::shared_ptr<Bag<fUML::ParameterValue> > inputs(new Bag<fUML::ParameterValue>());
+				//Todo Check TypedElement? - fUML Spec: Class_ type = (Class_)(action.object.typedElement.type);
+				std::shared_ptr<uml::Class> type=std::dynamic_pointer_cast<uml::Class> (object->getType());
+				if (type)
+				{
+					std::shared_ptr<uml::Behavior> behavior=std::dynamic_pointer_cast<uml::Behavior> (object->getType());
+
+					if (!behavior)
+					{
+						behavior = type->getClassifierBehavior();
+					}
+					if (behavior)
+					{
+						std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> parameters = behavior->getOwnedParameter();
+						int pinNumber = 0;
+
+						for(std::shared_ptr<uml::Parameter> parameter: *parameters)
+						{
+							uml::ParameterDirectionKind direction=parameter->getDirection();
+
+							if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
+							{
+								std::shared_ptr<ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
+
+								parameterValue->setParameter(parameter);
+								auto argumentPin=argumentPins->at(pinNumber);
+								std::shared_ptr<Bag<fUML::Value> > valueTokens=this->takeTokens(argumentPin);
+								parameterValue->getValues()->insert(*valueTokens);
+								inputs->add(parameterValue);
+							}
+							pinNumber ++;
+						}
+					}
+					else
+					{
+						throw "Invalid Behavior for StartObjectBehaviorAction";
+					}
+				}
+				reference->startBehavior(type, inputs);
+			}
+		}
+	}
+	//end of body
+}
 
 //*********************************
 // References

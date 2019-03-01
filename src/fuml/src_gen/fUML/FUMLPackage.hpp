@@ -2213,17 +2213,15 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int READSELFACTIONACTIVATION_ECLASS = 89;
 			static const unsigned int READSELFACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int READSELFACTIONACTIVATION_ECLASS_OPERATION_COUNT = 48;
+			static const unsigned int READSELFACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
 			
 			
-			static const int READSELFACTIONACTIVATION_EOPERATION_DOACTION = 8957;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation_EClass() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfActionActivation_EOperation_doAction() const = 0;
 			
 			// End Class ReadSelfActionActivation
 
@@ -2484,15 +2482,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS = 102;
 			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS_OPERATION_COUNT = 47;
+			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS_OPERATION_COUNT = 48;
 			
 			
+			static const int STARTOBJECTBEHAVIORACTIONACTIVATION_EOPERATION_DOACTION = 10257;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorActionActivation_EClass() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorActionActivation_EOperation_doAction() const = 0;
 			
 			// End Class StartObjectBehaviorActionActivation
 

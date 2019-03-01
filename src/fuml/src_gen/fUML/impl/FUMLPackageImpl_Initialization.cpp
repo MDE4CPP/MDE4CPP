@@ -6626,14 +6626,6 @@ void FUMLPackageImpl::initializeReadSelfActionActivationContent()
 	
 	
 	
-	m_readSelfActionActivation_EOperation_doAction->setEType(nullptr);
-	m_readSelfActionActivation_EOperation_doAction->setName("doAction");
-	m_readSelfActionActivation_EOperation_doAction->setLowerBound(0);
-	m_readSelfActionActivation_EOperation_doAction->setUpperBound(1);
-	m_readSelfActionActivation_EOperation_doAction->setUnique(true);
-	m_readSelfActionActivation_EOperation_doAction->setOrdered(true);
-	
-	
 	
 }
 
@@ -7161,6 +7153,14 @@ void FUMLPackageImpl::initializeStartObjectBehaviorActionActivationContent()
 	m_startObjectBehaviorActionActivation_EClass->setAbstract(false);
 	m_startObjectBehaviorActionActivation_EClass->setInterface(false);
 	
+	
+	
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setEType(nullptr);
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setName("doAction");
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setLowerBound(0);
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setUpperBound(1);
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setUnique(true);
+	m_startObjectBehaviorActionActivation_EOperation_doAction->setOrdered(true);
 	
 	
 	

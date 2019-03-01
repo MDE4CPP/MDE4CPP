@@ -1195,7 +1195,6 @@ void FUMLPackageImpl::createReadSelfActionActivationContent(std::shared_ptr<ecor
 	m_readSelfActionActivation_EClass = factory->createEClass_in_EPackage(package, READSELFACTIONACTIVATION_ECLASS);
 	
 	
-	m_readSelfActionActivation_EOperation_doAction = factory->createEOperation_in_EContainingClass(m_readSelfActionActivation_EClass, READSELFACTIONACTIVATION_EOPERATION_DOACTION);
 	
 }
 
@@ -1324,6 +1323,7 @@ void FUMLPackageImpl::createStartObjectBehaviorActionActivationContent(std::shar
 	m_startObjectBehaviorActionActivation_EClass = factory->createEClass_in_EPackage(package, STARTOBJECTBEHAVIORACTIONACTIVATION_ECLASS);
 	
 	
+	m_startObjectBehaviorActionActivation_EOperation_doAction = factory->createEOperation_in_EContainingClass(m_startObjectBehaviorActionActivation_EClass, STARTOBJECTBEHAVIORACTIONACTIVATION_EOPERATION_DOACTION);
 	
 }
 
