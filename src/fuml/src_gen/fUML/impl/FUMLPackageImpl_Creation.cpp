@@ -1315,6 +1315,7 @@ void FUMLPackageImpl::createStartClassifierBehaviorActionActivationContent(std::
 	m_startClassifierBehaviorActionActivation_EClass = factory->createEClass_in_EPackage(package, STARTCLASSIFIERBEHAVIORACTIONACTIVATION_ECLASS);
 	
 	
+	m_startClassifierBehaviorActionActivation_EOperation_doAction = factory->createEOperation_in_EContainingClass(m_startClassifierBehaviorActionActivation_EClass, STARTCLASSIFIERBEHAVIORACTIONACTIVATION_EOPERATION_DOACTION);
 	
 }
 

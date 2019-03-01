@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/StartClassifierBehaviorAction.hpp"
+#include "uml/Class.hpp"
+#include "uml/InputPin.hpp"
+#include "fUML/Reference.hpp"
+#include "fUML/ParameterValue.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -169,6 +174,37 @@ std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionActivationImpl::eSta
 //*********************************
 // Operations
 //*********************************
+void StartClassifierBehaviorActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the value on the object input pin. If it is not a reference, then do nothing.
+// Start the classifier behavior of the referent object for the classifier given as the type of the object input pin.
+// If the object input pin has no type, then start the classifier behaviors of all types of the referent object. [The required behavior in this case is not clear from the spec.]
+
+	std::shared_ptr<uml::StartClassifierBehaviorAction> action = std::dynamic_pointer_cast<uml::StartClassifierBehaviorAction>(this->getNode());
+	if(action)
+	{
+		std::shared_ptr<uml::InputPin > object= action->getObject();
+		if(object)
+		{
+			//Todo Check: really only first Element?
+			std::shared_ptr<fUML::Value> valueObject=this->takeTokens(object)->at(0);
+			std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(valueObject);
+			if (reference)
+			{
+				std::shared_ptr<uml::Class> type=std::dynamic_pointer_cast<uml::Class> (object->getType());
+				if (type)
+				{
+					std::shared_ptr<Bag<fUML::ParameterValue> > parameterValueList(new Bag<fUML::ParameterValue>());
+
+					reference->startBehavior(type, parameterValueList);
+				}
+			}
+		}
+	}
+	//end of body
+}
 
 //*********************************
 // References

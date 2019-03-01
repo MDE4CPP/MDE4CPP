@@ -2595,6 +2595,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStartClassifierBehaviorAction
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStartClassifierBehaviorActionActivation_EOperation_doAction() const
+{
+	return m_startClassifierBehaviorActionActivation_EOperation_doAction;
+}
 
 // End Class StartClassifierBehaviorActionActivation
 

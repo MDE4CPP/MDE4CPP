@@ -106,6 +106,10 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void doAction() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

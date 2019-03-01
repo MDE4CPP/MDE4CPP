@@ -7144,6 +7144,14 @@ void FUMLPackageImpl::initializeStartClassifierBehaviorActionActivationContent()
 	
 	
 	
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setEType(nullptr);
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setName("doAction");
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setLowerBound(0);
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setUpperBound(1);
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setUnique(true);
+	m_startClassifierBehaviorActionActivation_EOperation_doAction->setOrdered(true);
+	
+	
 	
 }
 

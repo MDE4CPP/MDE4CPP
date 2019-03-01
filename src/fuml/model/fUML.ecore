@@ -2164,7 +2164,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="AddStructuralFeatureValueActionActivation"
       eSuperTypes="#//WriteStructuralFeatureActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="StartClassifierBehaviorActionActivation"
-      eSuperTypes="#//ActionActivation"/>
+      eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/StartClassifierBehaviorAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;&#xA;#include &quot;fUML/ParameterValue.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Get the value on the object input pin. If it is not a reference, then do nothing.&#xA;// Start the classifier behavior of the referent object for the classifier given as the type of the object input pin.&#xA;// If the object input pin has no type, then start the classifier behaviors of all types of the referent object. [The required behavior in this case is not clear from the spec.]&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::StartClassifierBehaviorAction> action = std::dynamic_pointer_cast&lt;uml::StartClassifierBehaviorAction>(this->getNode());&#xA;&#x9;if(action)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::InputPin > object= action->getObject();&#xA;&#x9;&#x9;if(object)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;//Todo Check: really only first Element?&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Value> valueObject=this->takeTokens(object)->at(0);&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Reference> reference = std::dynamic_pointer_cast&lt;fUML::Reference>(valueObject);&#xA;&#x9;&#x9;&#x9;if (reference)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Class> type=std::dynamic_pointer_cast&lt;uml::Class> (object->getType());&#xA;&#x9;&#x9;&#x9;&#x9;if (type)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::ParameterValue> > parameterValueList(new Bag&lt;fUML::ParameterValue>());&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;reference->startBehavior(type, parameterValueList);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReduceActionActivation" eSuperTypes="#//ActionActivation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="currentExecution" ordered="false"
         eType="#//Execution"/>
