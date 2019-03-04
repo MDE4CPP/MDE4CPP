@@ -36,29 +36,16 @@
 [/template]
 
 [**
- * generate creation of meta model instances used by CallBehaviorAction
+ * generate creation of meta model instances used by Action
  * 
  * this includes:
  * - creation of Input pins
  * - creation of Output pins
 */]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallBehaviorAction) )]
-//CallBehaviorAction [anActivityNode.name /]
-[anActivityNode.oclAsType(CallBehaviorAction).input->sortedBy(name).generatePin()/]
-[anActivityNode.oclAsType(CallBehaviorAction).output->sortedBy(name).generatePin()/]
-[/template]
-
-[**
- * generate creation of meta model instances used by CallOperationAction
- * 
- * this includes:
- * - creation of Input pins
- * - creation of Output pins
-*/]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction) )]
-//CallOperationAction [anActivityNode.name /]
-[anActivityNode.oclAsType(CallOperationAction).input->sortedBy(name).generatePin()/]
-[anActivityNode.oclAsType(CallOperationAction).output->sortedBy(name).generatePin()/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) )]
+//Action [anActivityNode.name /]
+[anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
+[anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
 [/template]
 
 [**
@@ -67,22 +54,23 @@
 [template private generatePin(pin : Pin)]
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
-[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
-[elseif (pin.oclIsKindOf(InputPin))]
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
+		[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[elseif (pin.oclIsKindOf(InputPin))]
+		[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+		[else]
+			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+		[/if]
+	[elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
+		[if (pin.oclIsKindOf(InputPin))]
+			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+		[else]
+			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+		[/if]
+[elseif (pin.owner.oclIsKindOf(Action))]
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
-[/if]
-[elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
-[if (pin.oclIsKindOf(InputPin))]
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
-[else]
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
-[/if]
-[else]
-//TODO: check containment type!
-[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 
 [/template]

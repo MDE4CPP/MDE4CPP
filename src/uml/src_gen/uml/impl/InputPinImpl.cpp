@@ -36,6 +36,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "uml/Activity.hpp"
 
 #include "uml/ActivityEdge.hpp"
@@ -110,7 +112,11 @@ InputPinImpl::InputPinImpl()
 
 	
 
+	
+
 	//Init references
+	
+
 	
 
 	
@@ -124,6 +130,18 @@ InputPinImpl::~InputPinImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InputPin "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			InputPinImpl::InputPinImpl(std::weak_ptr<uml::Action > par_action)
+			:InputPinImpl()
+			{
+			    m_action = par_action;
+				m_owner = par_action;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -227,6 +245,8 @@ InputPinImpl::InputPinImpl(const InputPinImpl & obj):InputPinImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_activity  = obj.getActivity();
 
 	m_callOperationAction  = obj.getCallOperationAction();
@@ -368,6 +388,13 @@ bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::map <   A
 //*********************************
 // References
 //*********************************
+std::weak_ptr<uml::Action > InputPinImpl::getAction() const
+{
+
+    return m_action;
+}
+
+
 std::weak_ptr<uml::CallOperationAction > InputPinImpl::getCallOperationAction() const
 {
 
@@ -430,6 +457,11 @@ void InputPinImpl::setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr)
 }
 std::shared_ptr<ecore::EObject> InputPinImpl::eContainer() const
 {
+	if(auto wp = m_action.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_activity.lock())
 	{
 		return wp;
@@ -474,6 +506,8 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+			return eAny(getAction()); //11637
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
 			return eAny(getCallOperationAction()); //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
@@ -487,6 +521,8 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+			return getAction().lock() != nullptr; //11637
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
 			return getCallOperationAction().lock() != nullptr; //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:

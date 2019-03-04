@@ -610,6 +610,21 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 
 	try
 	{
+		if ( nodeName.compare("input") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			std::shared_ptr<ecore::EObject> input = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_EREFERENCE_ACTION);
+			if (input != nullptr)
+			{
+				loadHandler->handleChild(input);
+			}
+			return;
+		}
+
 		if ( nodeName.compare("localPostcondition") == 0 )
 		{
   			std::string typeName = loadHandler->getCurrentXSITypeName();
@@ -640,6 +655,21 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::shared_ptr<Subset<uml::Constraint, uml::Element>> list_localPrecondition = this->getLocalPrecondition();
 				list_localPrecondition->push_back(localPrecondition);
 				loadHandler->handleChild(localPrecondition);
+			}
+			return;
+		}
+
+		if ( nodeName.compare("output") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			std::shared_ptr<ecore::EObject> output = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_EREFERENCE_ACTION);
+			if (output != nullptr)
+			{
+				loadHandler->handleChild(output);
 			}
 			return;
 		}
@@ -713,6 +743,24 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addAttribute("isLocallyReentrant", this->getIsLocallyReentrant());
 		}
 
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'input'
+		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> list_input = this->getInput();
+		for (std::shared_ptr<uml::InputPin> input : *list_input) 
+		{
+			saveHandler->addReference(input, "input", input->eClass() != package->getInputPin_EClass());
+		}
+
+		// Save 'output'
+		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> list_output = this->getOutput();
+		for (std::shared_ptr<uml::OutputPin> output : *list_output) 
+		{
+			saveHandler->addReference(output, "output", output->eClass() != package->getOutputPin_EClass());
+		}
 	}
 	catch (std::exception& e)
 	{

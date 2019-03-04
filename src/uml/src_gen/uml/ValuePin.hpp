@@ -42,6 +42,11 @@ namespace uml
 //Forward Declaration for used types
 namespace uml 
 {
+	class Action;
+}
+
+namespace uml 
+{
 	class Activity;
 }
 

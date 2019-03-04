@@ -3417,6 +3417,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getInputPin_EClass() const
 }
 
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_EReference_action() const
+{
+	return m_inputPin_EReference_action;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_EReference_callOperationAction() const
 {
 	return m_inputPin_EReference_callOperationAction;
@@ -5084,6 +5088,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getOutputPin_EClass() const
 }
 
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_EReference_action() const
+{
+	return m_outputPin_EReference_action;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_EReference_callAction() const
 {
 	return m_outputPin_EReference_callAction;

@@ -42,6 +42,11 @@ namespace uml
 //Forward Declaration for used types
 namespace uml 
 {
+	class Action;
+}
+
+namespace uml 
+{
 	class Activity;
 }
 
@@ -172,6 +177,10 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 
+			OutputPin(std::weak_ptr<uml::Action > par_action);
+
+			//Additional constructors for the containments back reference
+
 			OutputPin(std::weak_ptr<uml::Activity > par_activity);
 
 			//Additional constructors for the containments back reference
@@ -217,6 +226,10 @@ namespace uml
 			//*********************************
 			/*!
 			 */
+			virtual std::weak_ptr<uml::Action > getAction() const = 0;
+			
+			/*!
+			 */
 			virtual std::weak_ptr<uml::CallAction > getCallAction() const = 0;
 			
 			/*!
@@ -233,6 +246,9 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<uml::Action > m_action;
 			/*!
 			 */
 			std::weak_ptr<uml::CallAction > m_callAction;

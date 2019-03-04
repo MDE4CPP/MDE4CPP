@@ -9231,7 +9231,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" upperBound="-1"
-        eType="#//InputPin" changeable="false" volatile="true" transient="true" derived="true">
+        eType="#//InputPin" changeable="false" volatile="true" transient="true" derived="true"
+        containment="true" eOpposite="#//InputPin/action">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ordered set of InputPins representing the inputs to the Action.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -9260,7 +9261,8 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" upperBound="-1"
-        eType="#//OutputPin" changeable="false" volatile="true" transient="true" derived="true">
+        eType="#//OutputPin" changeable="false" volatile="true" transient="true" derived="true"
+        containment="true" eOpposite="#//OutputPin/action">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ordered set of OutputPins representing outputs from the Action.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -9578,6 +9580,10 @@
         eOpposite="#//InvocationAction/argument">
       <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
+        changeable="false" transient="true" derived="true" eOpposite="#//Action/input">
+      <eAnnotations source="subsets" references="#//Element/owner"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9655,6 +9661,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="callAction" eType="#//CallAction"
         eOpposite="#//CallAction/result">
       <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
+        changeable="false" transient="true" derived="true" eOpposite="#//Action/output">
+      <eAnnotations source="subsets" references="#//Element/owner"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ConnectableElement #//MultiplicityElement">

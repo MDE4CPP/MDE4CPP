@@ -642,6 +642,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			{
 				switch(referenceID)
 				{
+					//ActionInputPin has action as a containment
+					case  UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Action>(container);
+						return this->createActionInputPin_in_Action(castedContainer);
+					}
 					//ActionInputPin has activity as a containment
 					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					{
@@ -3935,6 +3941,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			{
 				switch(referenceID)
 				{
+					//InputPin has action as a containment
+					case  UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Action>(container);
+						return this->createInputPin_in_Action(castedContainer);
+					}
 					//InputPin has activity as a containment
 					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					{
@@ -5449,6 +5461,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			{
 				switch(referenceID)
 				{
+					//OutputPin has action as a containment
+					case  UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Action>(container);
+						return this->createOutputPin_in_Action(castedContainer);
+					}
 					//OutputPin has activity as a containment
 					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					{
@@ -7976,6 +7994,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 			{
 				switch(referenceID)
 				{
+					//ValuePin has action as a containment
+					case  UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Action>(container);
+						return this->createValuePin_in_Action(castedContainer);
+					}
 					//ValuePin has activity as a containment
 					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					{
@@ -8378,6 +8402,18 @@ std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin() const
 	element->setThisActionInputPinPtr(element);
 	return element;
 }
+std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Action(std::weak_ptr<uml::Action > par_action) const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_action));
+	if(auto wp = par_action.lock())
+	{
+			wp->getInput()->push_back(element);
+	}
+	element->setThisActionInputPinPtr(element);
+	return element;
+	
+}
+
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_activity));
@@ -13004,6 +13040,18 @@ std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin() const
 	element->setThisInputPinPtr(element);
 	return element;
 }
+std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Action(std::weak_ptr<uml::Action > par_action) const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_action));
+	if(auto wp = par_action.lock())
+	{
+			wp->getInput()->push_back(element);
+	}
+	element->setThisInputPinPtr(element);
+	return element;
+	
+}
+
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_activity));
@@ -15188,6 +15236,18 @@ std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin() const
 	element->setThisOutputPinPtr(element);
 	return element;
 }
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Action(std::weak_ptr<uml::Action > par_action) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_action));
+	if(auto wp = par_action.lock())
+	{
+			wp->getOutput()->push_back(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
+
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_activity));
@@ -18698,6 +18758,18 @@ std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin() const
 	element->setThisValuePinPtr(element);
 	return element;
 }
+std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Action(std::weak_ptr<uml::Action > par_action) const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_action));
+	if(auto wp = par_action.lock())
+	{
+			wp->getInput()->push_back(element);
+	}
+	element->setThisValuePinPtr(element);
+	return element;
+	
+}
+
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_activity));

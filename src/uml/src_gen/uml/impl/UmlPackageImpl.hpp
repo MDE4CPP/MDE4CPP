@@ -1817,6 +1817,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EClass> getInputPin_EClass() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_action() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_callOperationAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_invocationAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_structuralFeatureAction() const ;
@@ -2540,6 +2541,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EClass> getOutputPin_EClass() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_EReference_action() const ;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_EReference_callAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_EOperation_incoming_edges_structured_only_EDiagnosticChain_EMap() const ;
@@ -4213,6 +4215,8 @@ namespace uml
 			std::shared_ptr<ecore::EAttribute> m_packageImport_EAttribute_visibility = nullptr;
 			
 			std::shared_ptr<ecore::EReference> m_componentRealization_EReference_abstraction = nullptr;
+			std::shared_ptr<ecore::EReference> m_inputPin_EReference_action = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_EReference_action = nullptr;
 			std::shared_ptr<ecore::EReference> m_interaction_EReference_action = nullptr;
 			std::shared_ptr<ecore::EReference> m_actionExecutionSpecification_EReference_action = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityEdge_EReference_activity = nullptr;

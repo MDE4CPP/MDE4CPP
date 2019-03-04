@@ -1011,7 +1011,7 @@ void UmlPackageImpl::initializeActionContent()
 	m_action_EReference_input->setUnique(true);
 	m_action_EReference_input->setDerived(true);
 	m_action_EReference_input->setOrdered(true);
-	m_action_EReference_input->setContainment(false);
+	m_action_EReference_input->setContainment(true);
 	m_action_EReference_input->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
@@ -1019,7 +1019,7 @@ void UmlPackageImpl::initializeActionContent()
 		{
 			m_action_EReference_input->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_EReference_action();
 		if (otherEnd != nullptr)
 	    {
 	   		m_action_EReference_input->setEOpposite(otherEnd);
@@ -1086,7 +1086,7 @@ void UmlPackageImpl::initializeActionContent()
 	m_action_EReference_output->setUnique(true);
 	m_action_EReference_output->setDerived(true);
 	m_action_EReference_output->setOrdered(true);
-	m_action_EReference_output->setContainment(false);
+	m_action_EReference_output->setContainment(true);
 	m_action_EReference_output->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
@@ -1094,7 +1094,7 @@ void UmlPackageImpl::initializeActionContent()
 		{
 			m_action_EReference_output->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_EReference_action();
 		if (otherEnd != nullptr)
 	    {
 	   		m_action_EReference_output->setEOpposite(otherEnd);
@@ -13992,6 +13992,31 @@ void UmlPackageImpl::initializeInputPinContent()
 	m_inputPin_EClass->setInterface(false);
 	
 	
+	m_inputPin_EReference_action->setName("action");
+	m_inputPin_EReference_action->setEType(getAction_EClass());
+	m_inputPin_EReference_action->setLowerBound(0);
+	m_inputPin_EReference_action->setUpperBound(1);
+	m_inputPin_EReference_action->setTransient(true);
+	m_inputPin_EReference_action->setVolatile(false);
+	m_inputPin_EReference_action->setChangeable(false);
+	m_inputPin_EReference_action->setUnsettable(false);
+	m_inputPin_EReference_action->setUnique(true);
+	m_inputPin_EReference_action->setDerived(true);
+	m_inputPin_EReference_action->setOrdered(true);
+	m_inputPin_EReference_action->setContainment(false);
+	m_inputPin_EReference_action->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_inputPin_EReference_action->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getAction_EReference_input();
+		if (otherEnd != nullptr)
+	    {
+	   		m_inputPin_EReference_action->setEOpposite(otherEnd);
+	    }
+	}
 	m_inputPin_EReference_callOperationAction->setName("callOperationAction");
 	m_inputPin_EReference_callOperationAction->setEType(getCallOperationAction_EClass());
 	m_inputPin_EReference_callOperationAction->setLowerBound(0);
@@ -20976,6 +21001,31 @@ void UmlPackageImpl::initializeOutputPinContent()
 	m_outputPin_EClass->setInterface(false);
 	
 	
+	m_outputPin_EReference_action->setName("action");
+	m_outputPin_EReference_action->setEType(getAction_EClass());
+	m_outputPin_EReference_action->setLowerBound(0);
+	m_outputPin_EReference_action->setUpperBound(1);
+	m_outputPin_EReference_action->setTransient(true);
+	m_outputPin_EReference_action->setVolatile(false);
+	m_outputPin_EReference_action->setChangeable(false);
+	m_outputPin_EReference_action->setUnsettable(false);
+	m_outputPin_EReference_action->setUnique(true);
+	m_outputPin_EReference_action->setDerived(true);
+	m_outputPin_EReference_action->setOrdered(true);
+	m_outputPin_EReference_action->setContainment(false);
+	m_outputPin_EReference_action->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_EReference_action->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getAction_EReference_output();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_EReference_action->setEOpposite(otherEnd);
+	    }
+	}
 	m_outputPin_EReference_callAction->setName("callAction");
 	m_outputPin_EReference_callAction->setEType(getCallAction_EClass());
 	m_outputPin_EReference_callAction->setLowerBound(0);

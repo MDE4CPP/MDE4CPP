@@ -34,6 +34,10 @@ namespace uml
 			virtual void setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr);
 
 			//Additional constructors for the containments back reference
+			InputPinImpl(std::weak_ptr<uml::Action > par_action);
+
+
+			//Additional constructors for the containments back reference
 			InputPinImpl(std::weak_ptr<uml::Activity > par_activity);
 
 
@@ -88,6 +92,10 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::Action > getAction() const ;
+			
 			/*!
 			 */
 			virtual std::weak_ptr<uml::CallOperationAction > getCallOperationAction() const ;

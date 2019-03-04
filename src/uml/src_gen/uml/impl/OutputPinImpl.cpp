@@ -36,6 +36,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "uml/Activity.hpp"
 
 #include "uml/ActivityEdge.hpp"
@@ -102,7 +104,11 @@ OutputPinImpl::OutputPinImpl()
 	//References
 	
 
+	
+
 	//Init references
+	
+
 	
 }
 
@@ -112,6 +118,18 @@ OutputPinImpl::~OutputPinImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OutputPin "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Action > par_action)
+			:OutputPinImpl()
+			{
+			    m_action = par_action;
+				m_owner = par_action;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -193,6 +211,8 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_activity  = obj.getActivity();
 
 	m_callAction  = obj.getCallAction();
@@ -330,6 +350,13 @@ bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+std::weak_ptr<uml::Action > OutputPinImpl::getAction() const
+{
+
+    return m_action;
+}
+
+
 std::weak_ptr<uml::CallAction > OutputPinImpl::getCallAction() const
 {
 
@@ -372,6 +399,11 @@ void OutputPinImpl::setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPt
 }
 std::shared_ptr<ecore::EObject> OutputPinImpl::eContainer() const
 {
+	if(auto wp = m_action.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_activity.lock())
 	{
 		return wp;
@@ -406,6 +438,8 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
+			return eAny(getAction()); //16935
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
 			return eAny(getCallAction()); //16934
 	}
@@ -415,6 +449,8 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
+			return getAction().lock() != nullptr; //16935
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
 			return getCallAction().lock() != nullptr; //16934
 	}

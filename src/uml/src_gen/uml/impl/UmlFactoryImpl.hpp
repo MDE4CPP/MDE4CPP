@@ -339,6 +339,9 @@ namespace uml
 			
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin() const ;
 			//Add containing object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Action(std::weak_ptr<uml::Action > par_action) const ;
+			
+			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const ;
 			
 			//Add containing object
@@ -1538,6 +1541,9 @@ namespace uml
 			
 			virtual std::shared_ptr<InputPin> createInputPin() const ;
 			//Add containing object
+			virtual std::shared_ptr<InputPin> createInputPin_in_Action(std::weak_ptr<uml::Action > par_action) const ;
+			
+			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const ;
 			
 			//Add containing object
@@ -2102,6 +2108,9 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<OutputPin> createOutputPin() const ;
+			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_Action(std::weak_ptr<uml::Action > par_action) const ;
+			
 			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const ;
 			
@@ -3012,6 +3021,9 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ValuePin> createValuePin() const ;
+			//Add containing object
+			virtual std::shared_ptr<ValuePin> createValuePin_in_Action(std::weak_ptr<uml::Action > par_action) const ;
+			
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const ;
 			

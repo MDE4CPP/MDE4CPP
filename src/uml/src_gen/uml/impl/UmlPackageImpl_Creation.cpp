@@ -1709,6 +1709,7 @@ void UmlPackageImpl::createInputPinContent(std::shared_ptr<ecore::EPackage> pack
 {
 	m_inputPin_EClass = factory->createEClass_in_EPackage(package, INPUTPIN_ECLASS);
 	
+	m_inputPin_EReference_action = factory->createEReference_in_EContainingClass(m_inputPin_EClass, INPUTPIN_EREFERENCE_ACTION);
 	m_inputPin_EReference_callOperationAction = factory->createEReference_in_EContainingClass(m_inputPin_EClass, INPUTPIN_EREFERENCE_CALLOPERATIONACTION);
 	m_inputPin_EReference_invocationAction = factory->createEReference_in_EContainingClass(m_inputPin_EClass, INPUTPIN_EREFERENCE_INVOCATIONACTION);
 	m_inputPin_EReference_structuralFeatureAction = factory->createEReference_in_EContainingClass(m_inputPin_EClass, INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION);
@@ -2383,6 +2384,7 @@ void UmlPackageImpl::createOutputPinContent(std::shared_ptr<ecore::EPackage> pac
 {
 	m_outputPin_EClass = factory->createEClass_in_EPackage(package, OUTPUTPIN_ECLASS);
 	
+	m_outputPin_EReference_action = factory->createEReference_in_EContainingClass(m_outputPin_EClass, OUTPUTPIN_EREFERENCE_ACTION);
 	m_outputPin_EReference_callAction = factory->createEReference_in_EContainingClass(m_outputPin_EClass, OUTPUTPIN_EREFERENCE_CALLACTION);
 	
 	m_outputPin_EOperation_incoming_edges_structured_only_EDiagnosticChain_EMap = factory->createEOperation_in_EContainingClass(m_outputPin_EClass, OUTPUTPIN_EOPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP);

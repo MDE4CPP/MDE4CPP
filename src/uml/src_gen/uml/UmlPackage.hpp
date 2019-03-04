@@ -185,14 +185,14 @@ namespace uml
 			// Begin Class ActionInputPin
 			//Class and Feature IDs 
 			static const unsigned int ACTIONINPUTPIN_ECLASS = 6;
-			static const unsigned int ACTIONINPUTPIN_ECLASS_FEATURE_COUNT = 38;
+			static const unsigned int ACTIONINPUTPIN_ECLASS_FEATURE_COUNT = 39;
 			static const unsigned int ACTIONINPUTPIN_ECLASS_OPERATION_COUNT = 83;
 			
-			static const int ACTIONINPUTPIN_EREFERENCE_FROMACTION = 637;
+			static const int ACTIONINPUTPIN_EREFERENCE_FROMACTION = 638;
 			
-			static const int ACTIONINPUTPIN_EOPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 718;
-			static const int ACTIONINPUTPIN_EOPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 720;
-			static const int ACTIONINPUTPIN_EOPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 719;
+			static const int ACTIONINPUTPIN_EOPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 719;
+			static const int ACTIONINPUTPIN_EOPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 721;
+			static const int ACTIONINPUTPIN_EOPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 720;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActionInputPin_EClass() const = 0;
@@ -3003,19 +3003,21 @@ namespace uml
 			// Begin Class InputPin
 			//Class and Feature IDs 
 			static const unsigned int INPUTPIN_ECLASS = 116;
-			static const unsigned int INPUTPIN_ECLASS_FEATURE_COUNT = 37;
+			static const unsigned int INPUTPIN_ECLASS_FEATURE_COUNT = 38;
 			static const unsigned int INPUTPIN_ECLASS_OPERATION_COUNT = 80;
 			
+			static const int INPUTPIN_EREFERENCE_ACTION = 11637;
 			static const int INPUTPIN_EREFERENCE_CALLOPERATIONACTION = 11635;
 			static const int INPUTPIN_EREFERENCE_INVOCATIONACTION = 11636;
 			static const int INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION = 11634;
 			
-			static const int INPUTPIN_EOPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11716;
+			static const int INPUTPIN_EOPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11717;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin_EClass() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_action() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_callOperationAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_invocationAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_EReference_structuralFeatureAction() const = 0;
@@ -4400,17 +4402,19 @@ namespace uml
 			// Begin Class OutputPin
 			//Class and Feature IDs 
 			static const unsigned int OUTPUTPIN_ECLASS = 169;
-			static const unsigned int OUTPUTPIN_ECLASS_FEATURE_COUNT = 35;
+			static const unsigned int OUTPUTPIN_ECLASS_FEATURE_COUNT = 36;
 			static const unsigned int OUTPUTPIN_ECLASS_OPERATION_COUNT = 80;
 			
+			static const int OUTPUTPIN_EREFERENCE_ACTION = 16935;
 			static const int OUTPUTPIN_EREFERENCE_CALLACTION = 16934;
 			
-			static const int OUTPUTPIN_EOPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17014;
+			static const int OUTPUTPIN_EOPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17015;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin_EClass() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_EReference_action() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_EReference_callAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_EOperation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
@@ -6662,13 +6666,13 @@ namespace uml
 			// Begin Class ValuePin
 			//Class and Feature IDs 
 			static const unsigned int VALUEPIN_ECLASS = 249;
-			static const unsigned int VALUEPIN_ECLASS_FEATURE_COUNT = 38;
+			static const unsigned int VALUEPIN_ECLASS_FEATURE_COUNT = 39;
 			static const unsigned int VALUEPIN_ECLASS_OPERATION_COUNT = 82;
 			
-			static const int VALUEPIN_EREFERENCE_VALUE = 24937;
+			static const int VALUEPIN_EREFERENCE_VALUE = 24938;
 			
-			static const int VALUEPIN_EOPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25019;
-			static const int VALUEPIN_EOPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25018;
+			static const int VALUEPIN_EOPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25020;
+			static const int VALUEPIN_EOPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25019;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValuePin_EClass() const = 0;

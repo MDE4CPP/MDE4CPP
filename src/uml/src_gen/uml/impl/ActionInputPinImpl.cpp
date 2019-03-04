@@ -121,6 +121,18 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 //Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::Action > par_action)
+			:ActionInputPinImpl()
+			{
+			    m_action = par_action;
+				m_owner = par_action;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::Activity > par_activity)
 			:ActionInputPinImpl()
 			{
@@ -221,6 +233,8 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_activity  = obj.getActivity();
 
 	m_callOperationAction  = obj.getCallOperationAction();
@@ -424,6 +438,11 @@ void ActionInputPinImpl::setThisActionInputPinPtr(std::weak_ptr<ActionInputPin> 
 }
 std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 {
+	if(auto wp = m_action.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_activity.lock())
 	{
 		return wp;
@@ -469,7 +488,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return eAny(getFromAction()); //637
+			return eAny(getFromAction()); //638
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -478,7 +497,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return getFromAction() != nullptr; //637
+			return getFromAction() != nullptr; //638
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -490,7 +509,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _fromAction = newValue->get<std::shared_ptr<uml::Action>>();
-			setFromAction(_fromAction); //637
+			setFromAction(_fromAction); //638
 			return true;
 		}
 	}

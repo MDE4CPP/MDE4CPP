@@ -36,6 +36,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "uml/Activity.hpp"
 
 #include "uml/ActivityEdge.hpp"
@@ -116,6 +118,18 @@ ValuePinImpl::~ValuePinImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ValuePin "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Action > par_action)
+			:ValuePinImpl()
+			{
+			    m_action = par_action;
+				m_owner = par_action;
+			}
+
+
+
 
 
 //Additional constructor for the containments back reference
@@ -219,6 +233,8 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_activity  = obj.getActivity();
 
 	m_callOperationAction  = obj.getCallOperationAction();
@@ -416,6 +432,11 @@ void ValuePinImpl::setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr)
 }
 std::shared_ptr<ecore::EObject> ValuePinImpl::eContainer() const
 {
+	if(auto wp = m_action.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_activity.lock())
 	{
 		return wp;
@@ -461,7 +482,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return eAny(getValue()); //24937
+			return eAny(getValue()); //24938
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,7 +491,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return getValue() != nullptr; //24937
+			return getValue() != nullptr; //24938
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -482,7 +503,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setValue(_value); //24937
+			setValue(_value); //24938
 			return true;
 		}
 	}

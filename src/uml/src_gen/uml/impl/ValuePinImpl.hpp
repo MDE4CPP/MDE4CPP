@@ -34,6 +34,10 @@ namespace uml
 			virtual void setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr);
 
 			//Additional constructors for the containments back reference
+			ValuePinImpl(std::weak_ptr<uml::Action > par_action);
+
+
+			//Additional constructors for the containments back reference
 			ValuePinImpl(std::weak_ptr<uml::Activity > par_activity);
 
 
