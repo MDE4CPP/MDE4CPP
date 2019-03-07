@@ -1,0 +1,524 @@
+Main function is executing
+[execute] Activity haveDinner...
+[event] Execute activity=haveDinner
+[createNodeActivations] Creating a node activation for Chopstick1...
+[createNodeActivations] Creating a node activation for Chopstick23...
+[createNodeActivations] Creating a node activation for Chopstick3...
+[createNodeActivations] Creating a node activation for ChopstickParameter...
+[createNodeActivations] Creating a node activation for Fork1...
+[createNodeActivations] Creating a node activation for Fork2...
+[createNodeActivations] Creating a node activation for Initial1...
+[createNodeActivations] Creating a node activation for Merge1...
+[createNodeActivations] Creating a node activation for Merge2...
+[createNodeActivations] Creating a node activation for Merge3...
+[createNodeActivations] Creating a node activation for Philosopher1...
+[createNodeActivations] Creating a node activation for Philosopher2...
+[createNodeActivations] Creating a node activation for Philosopher3...
+[createNodeActivations] Creating a node activation for coaPhilosopher1Eats...
+Found3input pin(s).
+Found2output pin(s).
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick21...
+[createNodeActivations] Creating a node activation for target...
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick22...
+[createNodeActivations] Creating a node activation for coaPhilosopher1Thinks...
+Found1input pin(s).
+Found0output pin(s).
+[createNodeActivations] Creating a node activation for target...
+[createNodeActivations] Creating a node activation for coaPhilosopher2Eats...
+Found3input pin(s).
+Found2output pin(s).
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick24...
+[createNodeActivations] Creating a node activation for target...
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick25...
+[createNodeActivations] Creating a node activation for coaPhilosopher2Thinks...
+Found1input pin(s).
+Found0output pin(s).
+[createNodeActivations] Creating a node activation for target...
+[createNodeActivations] Creating a node activation for coaPhilosopher3Eats...
+Found3input pin(s).
+Found2output pin(s).
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick26...
+[createNodeActivations] Creating a node activation for target...
+[createNodeActivations] Creating a node activation for chopstick1...
+[createNodeActivations] Creating a node activation for chopstick27...
+[createNodeActivations] Creating a node activation for coaPhilosopher3Thinks...
+Found1input pin(s).
+Found0output pin(s).
+[createNodeActivations] Creating a node activation for target...
+[createEdgeInstances] Creating an edge instance from Fork2 to Merge1.
+[createEdgeInstances] Creating an edge instance from Fork2 to Merge2.
+[createEdgeInstances] Creating an edge instance from Fork2 to Merge3.
+[createEdgeInstances] Creating an edge instance from Initial1 to Fork2.
+[createEdgeInstances] Creating an edge instance from Merge1 to coaPhilosopher1Thinks.
+[createEdgeInstances] Creating an edge instance from Merge2 to coaPhilosopher2Thinks.
+[createEdgeInstances] Creating an edge instance from Merge3 to coaPhilosopher3Thinks.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher1Eats to Merge1.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher1Thinks to coaPhilosopher1Eats.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher2Eats to Merge2.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher2Thinks to coaPhilosopher2Eats.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher3Eats to Merge3.
+[createEdgeInstances] Creating an edge instance from coaPhilosopher3Thinks to coaPhilosopher3Eats.
+[createEdgeInstances] Creating an edge instance from chopstick1 to Chopstick3.
+[createEdgeInstances] Creating an edge instance from chopstick24 to Chopstick23.
+[createEdgeInstances] Creating an edge instance from chopstick1 to Chopstick1.
+[createEdgeInstances] Creating an edge instance from chopstick22 to Chopstick23.
+[createEdgeInstances] Creating an edge instance from chopstick1 to Chopstick1.
+[createEdgeInstances] Creating an edge instance from chopstick27 to Chopstick3.
+[createEdgeInstances] Creating an edge instance from Chopstick1 to chopstick1.
+[createEdgeInstances] Creating an edge instance from Chopstick1 to chopstick1.
+[createEdgeInstances] Creating an edge instance from Chopstick23 to chopstick21.
+[createEdgeInstances] Creating an edge instance from Chopstick23 to chopstick25.
+[createEdgeInstances] Creating an edge instance from Chopstick3 to chopstick26.
+[createEdgeInstances] Creating an edge instance from Chopstick3 to chopstick1.
+[createEdgeInstances] Creating an edge instance from ChopstickParameter to Fork1.
+[createEdgeInstances] Creating an edge instance from Fork1 to Chopstick1.
+[createEdgeInstances] Creating an edge instance from Fork1 to Chopstick23.
+[createEdgeInstances] Creating an edge instance from Fork1 to Chopstick3.
+[createEdgeInstances] Creating an edge instance from Philosopher1 to target.
+[createEdgeInstances] Creating an edge instance from Philosopher1 to target.
+[createEdgeInstances] Creating an edge instance from Philosopher2 to target.
+[createEdgeInstances] Creating an edge instance from Philosopher2 to target.
+[createEdgeInstances] Creating an edge instance from Philosopher3 to target.
+[run] node = Chopstick1
+[run] node = Chopstick23
+[run] node = Chopstick3
+[run] node = ChopstickParameter
+[run] node = Fork1
+[run] node = Fork2
+[run] node = Initial1
+[run] node = Merge1
+[run] node = Merge2
+[run] node = Merge3
+[run] node = Philosopher1
+[run] node = Philosopher2
+[run] node = Philosopher3
+[run] node = coaPhilosopher1Eats
+[run] node = coaPhilosopher1EatsanonymousFork
+[run] node = chopstick1
+[run] node = chopstick21
+[run] node = target
+[run] node = chopstick1
+[run] node = chopstick22
+[run] node = coaPhilosopher1Thinks
+[run] node = coaPhilosopher1ThinksanonymousFork
+[run] node = target
+[run] node = coaPhilosopher2Eats
+[run] node = coaPhilosopher2EatsanonymousFork
+[run] node = chopstick1
+[run] node = chopstick24
+[run] node = target
+[run] node = chopstick1
+[run] node = chopstick25
+[run] node = coaPhilosopher2Thinks
+[run] node = coaPhilosopher2ThinksanonymousFork
+[run] node = target
+[run] node = coaPhilosopher3Eats
+[run] node = coaPhilosopher3EatsanonymousFork
+[run] node = chopstick1
+[run] node = chopstick26
+[run] node = target
+[run] node = chopstick1
+[run] node = chopstick27
+[run] node = coaPhilosopher3Thinks
+[run] node = coaPhilosopher3ThinksanonymousFork
+[run] node = target
+[run] node = coaPhilosopher1EatsanonymousFork
+[run] node = coaPhilosopher1ThinksanonymousFork
+[run] node = coaPhilosopher2EatsanonymousFork
+[run] node = coaPhilosopher2ThinksanonymousFork
+[run] node = coaPhilosopher3EatsanonymousFork
+[run] node = coaPhilosopher3ThinksanonymousFork
+[run] Checking for enabled nodes...
+[run] Checking node Chopstick1...
+[run] Checking node Chopstick23...
+[run] Checking node Chopstick3...
+[run] Checking node ChopstickParameter...
+[run] Node ChopstickParameter is enabled.
+[run] Checking node Fork1...
+[run] Checking node Fork2...
+[run] Checking node Initial1...
+[run] Node Initial1 is enabled.
+[run] Checking node Merge1...
+[run] Checking node Merge2...
+[run] Checking node Merge3...
+[run] Checking node Philosopher1...
+[run] Node Philosopher1 is enabled.
+[run] Checking node Philosopher2...
+[run] Node Philosopher2 is enabled.
+[run] Checking node Philosopher3...
+[run] Node Philosopher3 is enabled.
+[run] Checking node coaPhilosopher1Eats...
+[run] Checking node chopstick1...
+[run] Checking node chopstick21...
+[run] Checking node target...
+[run] Checking node chopstick1...
+[run] Checking node chopstick22...
+[run] Checking node coaPhilosopher1Thinks...
+[run] Checking node target...
+[run] Checking node coaPhilosopher2Eats...
+[run] Checking node chopstick1...
+[run] Checking node chopstick24...
+[run] Checking node target...
+[run] Checking node chopstick1...
+[run] Checking node chopstick25...
+[run] Checking node coaPhilosopher2Thinks...
+[run] Checking node target...
+[run] Checking node coaPhilosopher3Eats...
+[run] Checking node chopstick1...
+[run] Checking node chopstick26...
+[run] Checking node target...
+[run] Checking node chopstick1...
+[run] Checking node chopstick27...
+[run] Checking node coaPhilosopher3Thinks...
+[run] Checking node target...
+[run] Checking node coaPhilosopher1EatsanonymousFork...
+[run] Node coaPhilosopher1EatsanonymousFork is enabled.
+[run] Checking node coaPhilosopher1ThinksanonymousFork...
+[run] Node coaPhilosopher1ThinksanonymousFork is enabled.
+[run] Checking node coaPhilosopher2EatsanonymousFork...
+[run] Node coaPhilosopher2EatsanonymousFork is enabled.
+[run] Checking node coaPhilosopher2ThinksanonymousFork...
+[run] Node coaPhilosopher2ThinksanonymousFork is enabled.
+[run] Checking node coaPhilosopher3EatsanonymousFork...
+[run] Node coaPhilosopher3EatsanonymousFork is enabled.
+[run] Checking node coaPhilosopher3ThinksanonymousFork...
+[run] Node coaPhilosopher3ThinksanonymousFork is enabled.
+[run] 11 node(s) is/are enabled.
+[run] Sending offer to node ChopstickParameter
+[receiveOffer] node = ChopstickParameter
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Input activity parameter node ChopstickParameter...
+[fire] Parameter has 1 value(s).
+[addToken] node = ChopstickParameter
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to Fork1.
+[receiveOffer] node = Fork1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Fork node Fork1...
+[addToken] node = Fork1
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to Chopstick1.
+[receiveOffer] node = Chopstick1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+Central Buffer Node Activation
+[addToken] node = Chopstick1
+[removeToken] node = ChopstickParameter
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to chopstick1.
+[receiveOffer] node = coaPhilosopher1Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher1Eats is not ready to execute.
+[sendOffers] Sending offer to chopstick1.
+[receiveOffer] node = coaPhilosopher3Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher3Eats is not ready to execute.
+[sendOffers] Sending offer to Chopstick23.
+[receiveOffer] node = Chopstick23
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+Central Buffer Node Activation
+[addToken] node = Chopstick23
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to chopstick21.
+[receiveOffer] node = coaPhilosopher1Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher1Eats is not ready to execute.
+[sendOffers] Sending offer to chopstick25.
+[receiveOffer] node = chopstick25
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Pin chopstick25...
+[addToken] node = chopstick25
+[removeToken] node = Chopstick23
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to Chopstick3.
+[receiveOffer] node = Chopstick3
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+Central Buffer Node Activation
+[addToken] node = Chopstick3
+[removeToken] node = Fork1
+[addToken] Adding token with value = 0x29d93fe8
+[sendOffers] Sending offer to chopstick26.
+[receiveOffer] node = coaPhilosopher3Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher3Eats is not ready to execute.
+[sendOffers] Sending offer to chopstick1.
+[receiveOffer] node = chopstick1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Pin chopstick1...
+[addToken] node = chopstick1
+[removeToken] node = Chopstick3
+[addToken] Adding token with value = 0x29d93fe8
+[run] Sending offer to node Initial1
+[receiveOffer] node = Initial1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[addToken] node = Initial1
+[addToken] Adding token with value = 0
+[sendOffers] Sending offer to Fork2.
+[receiveOffer] node = Fork2
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Fork node Fork2...
+[addToken] node = Fork2
+[addToken] Adding token with value = 0
+[sendOffers] Sending offer to Merge1.
+[receiveOffer] node = Merge1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Control node Merge1...
+[sendOffers] Sending offer to coaPhilosopher1Thinks.
+[receiveOffer] node = coaPhilosopher1Thinks
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher1Thinks is not ready to execute.
+[sendOffers] Sending offer to Merge2.
+[receiveOffer] node = Merge2
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Control node Merge2...
+[sendOffers] Sending offer to coaPhilosopher2Thinks.
+[receiveOffer] node = coaPhilosopher2Thinks
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher2Thinks is not ready to execute.
+[sendOffers] Sending offer to Merge3.
+[receiveOffer] node = Merge3
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Control node Merge3...
+[sendOffers] Sending offer to coaPhilosopher3Thinks.
+[receiveOffer] node = coaPhilosopher3Thinks
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher3Thinks is not ready to execute.
+[run] Sending offer to node Philosopher1
+[receiveOffer] node = Philosopher1
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Input activity parameter node Philosopher1...
+[fire] Parameter has 1 value(s).
+[addToken] node = Philosopher1
+[addToken] Adding token with value = 0x29d940d8
+[sendOffers] Sending offer to target.
+[receiveOffer] node = coaPhilosopher1Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher1Eats is not ready to execute.
+[sendOffers] Sending offer to target.
+[receiveOffer] node = coaPhilosopher1Thinks
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[removeToken] node = Initial1
+[fire] Pin target...
+[addToken] node = target
+[removeToken] node = Philosopher1
+[addToken] Adding token with value = 0x2a017ae0
+[_endIsolation] End isolation.
+Firing 2 token(s)
+[fire] Action coaPhilosopher1Thinks...
+[event] Fire activity=haveDinner action=coaPhilosopher1Thinks
+[execute] Opaque behavior fbThink...
+Printing from fbThink
+__________________________
+Philosopher is thinking
+^^^^^ FB fbThink ends its execution ^^^^^
+[addToken] node = coaPhilosopher1Thinks
+[addToken] Adding token with value = 0
+[receiveOffer] node = coaPhilosopher1ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Fork node coaPhilosopher1ThinksanonymousFork...
+[addToken] node = coaPhilosopher1ThinksanonymousFork
+[addToken] Adding token with value = 0
+[sendOffers] Sending offer to coaPhilosopher1Eats.
+[receiveOffer] node = coaPhilosopher1Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher1Eats is not ready to execute.
+[fire] Checking if coaPhilosopher1Thinks should fire again...
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+[run] Sending offer to node Philosopher2
+[receiveOffer] node = Philosopher2
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Input activity parameter node Philosopher2...
+[fire] Parameter has 1 value(s).
+[addToken] node = Philosopher2
+[addToken] Adding token with value = 0x29d941c8
+[sendOffers] Sending offer to target.
+[receiveOffer] node = coaPhilosopher2Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher2Eats is not ready to execute.
+[sendOffers] Sending offer to target.
+[receiveOffer] node = coaPhilosopher2Thinks
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[fire] Pin target...
+[addToken] node = target
+[removeToken] node = Philosopher2
+[addToken] Adding token with value = 0x2a017720
+[_endIsolation] End isolation.
+Firing 2 token(s)
+[fire] Action coaPhilosopher2Thinks...
+[event] Fire activity=haveDinner action=coaPhilosopher2Thinks
+[execute] Opaque behavior fbThink...
+Printing from fbThink
+__________________________
+Philosopher is thinking
+^^^^^ FB fbThink ends its execution ^^^^^
+[addToken] node = coaPhilosopher2Thinks
+[addToken] Adding token with value = 0
+[receiveOffer] node = coaPhilosopher2ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Fork node coaPhilosopher2ThinksanonymousFork...
+[addToken] node = coaPhilosopher2ThinksanonymousFork
+[addToken] Adding token with value = 0
+[sendOffers] Sending offer to coaPhilosopher2Eats.
+[receiveOffer] node = coaPhilosopher2Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher2Eats is not ready to execute.
+[fire] Checking if coaPhilosopher2Thinks should fire again...
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+[run] Sending offer to node Philosopher3
+[receiveOffer] node = Philosopher3
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Input activity parameter node Philosopher3...
+[fire] Parameter has 1 value(s).
+[addToken] node = Philosopher3
+[addToken] Adding token with value = 0x29d942b8
+[sendOffers] Sending offer to target.
+[receiveOffer] node = coaPhilosopher3Thinks
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[removeToken] node = Fork2
+[fire] Pin target...
+[addToken] node = target
+[removeToken] node = Philosopher3
+[addToken] Adding token with value = 0x2a017f90
+[_endIsolation] End isolation.
+Firing 2 token(s)
+[fire] Action coaPhilosopher3Thinks...
+[event] Fire activity=haveDinner action=coaPhilosopher3Thinks
+[execute] Opaque behavior fbThink...
+Printing from fbThink
+__________________________
+Philosopher is thinking
+^^^^^ FB fbThink ends its execution ^^^^^
+[addToken] node = coaPhilosopher3Thinks
+[addToken] Adding token with value = 0
+[receiveOffer] node = coaPhilosopher3ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 1 token(s)
+[fire] Fork node coaPhilosopher3ThinksanonymousFork...
+[addToken] node = coaPhilosopher3ThinksanonymousFork
+[addToken] Adding token with value = 0
+[sendOffers] Sending offer to coaPhilosopher3Eats.
+[receiveOffer] node = coaPhilosopher3Eats
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+Nodenode = coaPhilosopher3Eats is not ready to execute.
+[fire] Checking if coaPhilosopher3Thinks should fire again...
+[_beginIsolation] Begin isolation.
+[_endIsolation] End isolation.
+[run] Sending offer to node coaPhilosopher1EatsanonymousFork
+[receiveOffer] node = coaPhilosopher1EatsanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher1EatsanonymousFork...
+[run] Sending offer to node coaPhilosopher1ThinksanonymousFork
+[receiveOffer] node = coaPhilosopher1ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher1ThinksanonymousFork...
+[run] Sending offer to node coaPhilosopher2EatsanonymousFork
+[receiveOffer] node = coaPhilosopher2EatsanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher2EatsanonymousFork...
+[run] Sending offer to node coaPhilosopher2ThinksanonymousFork
+[receiveOffer] node = coaPhilosopher2ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher2ThinksanonymousFork...
+[run] Sending offer to node coaPhilosopher3EatsanonymousFork
+[receiveOffer] node = coaPhilosopher3EatsanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher3EatsanonymousFork...
+[run] Sending offer to node coaPhilosopher3ThinksanonymousFork
+[receiveOffer] node = coaPhilosopher3ThinksanonymousFork
+[_beginIsolation] Begin isolation.
+[receiveOffer] Firing.
+[_endIsolation] End isolation.
+Firing 0 token(s)
+[fire] Fork node coaPhilosopher3ThinksanonymousFork...
+[execute] Getting output parameter node activations...
+[execute] Activity haveDinner completed.
+The activity did not return any parameter.

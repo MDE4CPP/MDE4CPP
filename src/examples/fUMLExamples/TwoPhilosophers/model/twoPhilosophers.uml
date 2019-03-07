@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_IKz9kM4AEeiodM2OQof3Cg" name="twoPhilosophers" URI="aaa">
+  <elementImport xmi:id="_-aAVYM4AEeiodM2OQof3Cg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_-aEm0M4AEeiodM2OQof3Cg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_-aFN4M4AEeiodM2OQof3Cg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+  </elementImport>
+  <elementImport xmi:id="_-aFN4c4AEeiodM2OQof3Cg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_-aFN4s4AEeiodM2OQof3Cg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ObDMkM4AEeiodM2OQof3Cg" name="Chopstick"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Uen4kM4AEeiodM2OQof3Cg" name="Philosopher">
+    <ownedAttribute xmi:id="_wfwoEM4AEeiodM2OQof3Cg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_nU5bAM4AEeiodM2OQof3Cg" name="fbThink" specification="_k1gAYM4AEeiodM2OQof3Cg">
+      <language>CPP</language>
+      <body>std::cout &lt;&lt; &quot;Philosopher is thinking&quot; &lt;&lt; std::endl;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IV6k4M4BEeiodM2OQof3Cg" name="fbEat" specification="_DOjpgM4BEeiodM2OQof3Cg">
+      <ownedParameter xmi:id="_Yjvo8M4CEeiodM2OQof3Cg" name="chopstick1" type="_ObDMkM4AEeiodM2OQof3Cg" direction="inout"/>
+      <ownedParameter xmi:id="_Yjvo8c4CEeiodM2OQof3Cg" name="chopstick2" type="_ObDMkM4AEeiodM2OQof3Cg" direction="inout"/>
+      <language>CPP</language>
+      <body>std::cout &lt;&lt; &quot;Philosopher is eating&quot; &lt;&lt; std::endl;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_k1gAYM4AEeiodM2OQof3Cg" name="think" method="_nU5bAM4AEeiodM2OQof3Cg"/>
+    <ownedOperation xmi:id="_DOjpgM4BEeiodM2OQof3Cg" name="eat" method="_IV6k4M4BEeiodM2OQof3Cg">
+      <ownedParameter xmi:id="_NrxPQM4BEeiodM2OQof3Cg" name="chopstick1" type="_ObDMkM4AEeiodM2OQof3Cg" direction="inout"/>
+      <ownedParameter xmi:id="_V-iWsM4BEeiodM2OQof3Cg" name="chopstick2" type="_ObDMkM4AEeiodM2OQof3Cg" direction="inout"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WqyOIM4AEeiodM2OQof3Cg" name="Dinner">
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_aZsI0M4AEeiodM2OQof3Cg" name="haveDinner" node="_hJCVsM4AEeiodM2OQof3Cg _j95NgM4BEeiodM2OQof3Cg _kdXXwM4BEeiodM2OQof3Cg _kzrmAM4BEeiodM2OQof3Cg _zjN8kM4BEeiodM2OQof3Cg _9Qn2AM4BEeiodM2OQof3Cg _D1B-MM4CEeiodM2OQof3Cg _EKAvsM4CEeiodM2OQof3Cg _14cSEM4CEeiodM2OQof3Cg _5tMWEM4CEeiodM2OQof3Cg _EQO3AM4DEeiodM2OQof3Cg _-xdPQM4EEeiodM2OQof3Cg __KEjkM4EEeiodM2OQof3Cg __nZ_0M4EEeiodM2OQof3Cg _pCw4wM4FEeiodM2OQof3Cg _pkEPAM4FEeiodM2OQof3Cg _v9uMoNBeEei3e9DrtJbqqQ _X4TPUNBfEei3e9DrtJbqqQ _Hjt4oNCCEei3e9DrtJbqqQ _eUfrUNCOEei8zLsowetvzg _iJ-IENCOEei8zLsowetvzg _mTh-cNCOEei8zLsowetvzg">
+      <ownedParameter xmi:id="_Th3sgNBdEei3e9DrtJbqqQ" name="Philosopher1" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      <ownedParameter xmi:id="_YQCr0NBdEei3e9DrtJbqqQ" name="Philosopher2" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      <ownedParameter xmi:id="_YgNOwNBdEei3e9DrtJbqqQ" name="Philosopher3" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      <ownedParameter xmi:id="_v9tlkNBeEei3e9DrtJbqqQ" name="ChopstickParameter" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_0C6T0M4CEeiodM2OQof3Cg" target="_r4Au8M4CEeiodM2OQof3Cg" source="_eUfrUNCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_6385AM4CEeiodM2OQof3Cg" target="_5tMWEc4CEeiodM2OQof3Cg" source="_mTh-cNCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_8cWD8M4CEeiodM2OQof3Cg" target="_kdXXwM4BEeiodM2OQof3Cg" source="_Hjt4oNCCEei3e9DrtJbqqQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_8cWrAM4CEeiodM2OQof3Cg" name="Initial1_To_Merge2_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_8cX5IM4CEeiodM2OQof3Cg" name="Initial1_To_Merge2_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_885MQM4CEeiodM2OQof3Cg" target="_j95NgM4BEeiodM2OQof3Cg" source="_Hjt4oNCCEei3e9DrtJbqqQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_885MQc4CEeiodM2OQof3Cg" name="Initial1_To_Merge1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_885zUM4CEeiodM2OQof3Cg" name="Initial1_To_Merge1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_9hYZYM4CEeiodM2OQof3Cg" target="_kzrmAM4BEeiodM2OQof3Cg" source="_Hjt4oNCCEei3e9DrtJbqqQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_9hZAcM4CEeiodM2OQof3Cg" name="Initial1_To_Merge3_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_9hZAcc4CEeiodM2OQof3Cg" name="Initial1_To_Merge3_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_-Gq3wM4CEeiodM2OQof3Cg" target="_5tMWEM4CEeiodM2OQof3Cg" source="_kdXXwM4BEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_-Gq3wc4CEeiodM2OQof3Cg" name="Merge2_To_coaPhilosopher2Thinks_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_-Gre0M4CEeiodM2OQof3Cg" name="Merge2_To_coaPhilosopher2Thinks_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_-gfF8M4CEeiodM2OQof3Cg" target="_zjN8kM4BEeiodM2OQof3Cg" source="_j95NgM4BEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_-gftAM4CEeiodM2OQof3Cg" name="Merge1_To_coaPhilosopher1Thinks_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_-ggUEM4CEeiodM2OQof3Cg" name="Merge1_To_coaPhilosopher1Thinks_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="__OgpkM4CEeiodM2OQof3Cg" target="_14cSEM4CEeiodM2OQof3Cg" source="_kzrmAM4BEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="__Ogpkc4CEeiodM2OQof3Cg" name="Merge3_To_coaPhilosopher3Thinks_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="__OhQoM4CEeiodM2OQof3Cg" name="Merge3_To_coaPhilosopher3Thinks_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_oP-b0M4DEeiodM2OQof3Cg" target="_H5JecM4DEeiodM2OQof3Cg" source="_eUfrUNCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_xots0M4DEeiodM2OQof3Cg" target="_EQO3AM4DEeiodM2OQof3Cg" source="_zjN8kM4BEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_xouT4M4DEeiodM2OQof3Cg" name="coaPhilosopher1Thinks_To_coaPhilosopher1Eats_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_xouT4c4DEeiodM2OQof3Cg" name="coaPhilosopher1Thinks_To_coaPhilosopher1Eats_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_H_LjEM4FEeiodM2OQof3Cg" target="_MV0eEM4DEeiodM2OQof3Cg" source="_-xdPQM4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_JMoNoM4FEeiodM2OQof3Cg" target="_Sn-YoM4DEeiodM2OQof3Cg" source="__KEjkM4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_J16bMM4FEeiodM2OQof3Cg" target="__KEjkM4EEeiodM2OQof3Cg" source="_W3r6UM4DEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_Kr2ksM4FEeiodM2OQof3Cg" target="_-xdPQM4EEeiodM2OQof3Cg" source="_TzwPQM4DEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_1o7IAM4FEeiodM2OQof3Cg" target="_j95NgM4BEeiodM2OQof3Cg" source="_EQO3AM4DEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_1o7vEM4FEeiodM2OQof3Cg" name="coaPhilosopher1Eats_To_Merge1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_1o8WIM4FEeiodM2OQof3Cg" name="coaPhilosopher1Eats_To_Merge1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_4zSLMM4FEeiodM2OQof3Cg" target="_kdXXwM4BEeiodM2OQof3Cg" source="_pCw4wM4FEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_4zSLMc4FEeiodM2OQof3Cg" name="coaPhilosopher2Eats_To_Merge2_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_4zSyQM4FEeiodM2OQof3Cg" name="coaPhilosopher2Eats_To_Merge2_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_5skjoM4FEeiodM2OQof3Cg" target="_kzrmAM4BEeiodM2OQof3Cg" source="_pkEPAM4FEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_5slKsM4FEeiodM2OQof3Cg" name="coaPhilosopher3Eats_To_Merge3_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_5slKsc4FEeiodM2OQof3Cg" name="coaPhilosopher3Eats_To_Merge3_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="__HGSoM4FEeiodM2OQof3Cg" target="_pCw4xc4FEeiodM2OQof3Cg" source="_mTh-cNCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_YlsM4M4GEei3e9DrtJbqqQ" name="" target="_pCw4wc4FEeiodM2OQof3Cg" source="__nZ_0M4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_nuhNMM4GEei3e9DrtJbqqQ" target="__KEjkM4EEeiodM2OQof3Cg" source="_pCw4xM4FEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_rRfksM4GEei3e9DrtJbqqQ" name="" target="_pCw4ws4FEeiodM2OQof3Cg" source="__KEjkM4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_wWfIkM4GEei3e9DrtJbqqQ" name="" target="__nZ_0M4EEeiodM2OQof3Cg" source="_pCw4w84FEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_6RDUQM4GEei3e9DrtJbqqQ" target="_pkEPAc4FEeiodM2OQof3Cg" source="_-xdPQM4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_-r-AYM4GEei3e9DrtJbqqQ" target="_-xdPQM4EEeiodM2OQof3Cg" source="_pkEPA84FEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_KaJewM4HEei3e9DrtJbqqQ" target="__nZ_0M4EEeiodM2OQof3Cg" source="_pkEPBM4FEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_Nn_TwM4HEei3e9DrtJbqqQ" target="_pkEPAs4FEeiodM2OQof3Cg" source="__nZ_0M4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_7ldEwNBeEei3e9DrtJbqqQ" target="__nZ_0M4EEeiodM2OQof3Cg" source="_X4TPUNBfEei3e9DrtJbqqQ"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_8RlyANBeEei3e9DrtJbqqQ" target="_-xdPQM4EEeiodM2OQof3Cg" source="_X4TPUNBfEei3e9DrtJbqqQ"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_9Zbj0NBeEei3e9DrtJbqqQ" target="__KEjkM4EEeiodM2OQof3Cg" source="_X4TPUNBfEei3e9DrtJbqqQ">
+        <name xsi:nil="true"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_eFNdgNBfEei3e9DrtJbqqQ" target="_X4TPUNBfEei3e9DrtJbqqQ" source="_v9uMoNBeEei3e9DrtJbqqQ"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_TapTENBxEei3e9DrtJbqqQ" target="_pkEPAM4FEeiodM2OQof3Cg" source="_14cSEM4CEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Tap6INBxEei3e9DrtJbqqQ" name="coaPhilosopher3Thinks_To_coaPhilosopher3Eats_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_TauLkNBxEei3e9DrtJbqqQ" name="coaPhilosopher3Thinks_To_coaPhilosopher3Eats_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_UkGOcNBxEei3e9DrtJbqqQ" target="_pCw4wM4FEeiodM2OQof3Cg" source="_5tMWEM4CEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_UkGOcdBxEei3e9DrtJbqqQ" name="coaPhilosopher2Thinks_To_coaPhilosopher2Eats_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_UkGOctBxEei3e9DrtJbqqQ" name="coaPhilosopher2Thinks_To_coaPhilosopher2Eats_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_F1IbcNB4Eei3e9DrtJbqqQ" target="_14cSEc4CEeiodM2OQof3Cg" source="_iJ-IENCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Ko6H8NCCEei3e9DrtJbqqQ" target="_Hjt4oNCCEei3e9DrtJbqqQ" source="_hJCVsM4AEeiodM2OQof3Cg">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Ko6H8dCCEei3e9DrtJbqqQ" name="Initial1_To_Fork2_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_Ko6vANCCEei3e9DrtJbqqQ" name="Initial1_To_Fork2_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_Est8sNCKEeiGn8MFZS7zEA" target="_pkEPBc4FEeiodM2OQof3Cg" source="_iJ-IENCOEei8zLsowetvzg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_gEUqMNCOEei8zLsowetvzg" target="_eUfrUNCOEei8zLsowetvzg" source="_9Qn2AM4BEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_lAHOwNCOEei8zLsowetvzg" target="_iJ-IENCOEei8zLsowetvzg" source="_EKAvsM4CEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_pITMINCOEei8zLsowetvzg" target="_mTh-cNCOEei8zLsowetvzg" source="_D1B-MM4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:InitialNode" xmi:id="_hJCVsM4AEeiodM2OQof3Cg" name="Initial1" outgoing="_Ko6H8NCCEei3e9DrtJbqqQ"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_j95NgM4BEeiodM2OQof3Cg" name="Merge1" incoming="_885MQM4CEeiodM2OQof3Cg _1o7IAM4FEeiodM2OQof3Cg" outgoing="_-gfF8M4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_kdXXwM4BEeiodM2OQof3Cg" name="Merge2" incoming="_8cWD8M4CEeiodM2OQof3Cg _4zSLMM4FEeiodM2OQof3Cg" outgoing="_-Gq3wM4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_kzrmAM4BEeiodM2OQof3Cg" name="Merge3" incoming="_9hYZYM4CEeiodM2OQof3Cg _5skjoM4FEeiodM2OQof3Cg" outgoing="__OgpkM4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_zjN8kM4BEeiodM2OQof3Cg" name="coaPhilosopher1Thinks" incoming="_-gfF8M4CEeiodM2OQof3Cg" outgoing="_xots0M4DEeiodM2OQof3Cg" operation="_k1gAYM4AEeiodM2OQof3Cg">
+        <target xmi:id="_r4Au8M4CEeiodM2OQof3Cg" name="target" incoming="_0C6T0M4CEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_9Qn2AM4BEeiodM2OQof3Cg" name="Philosopher1" outgoing="_gEUqMNCOEei8zLsowetvzg" type="_Uen4kM4AEeiodM2OQof3Cg" parameter="_Th3sgNBdEei3e9DrtJbqqQ">
+        <upperBound xmi:type="uml:LiteralInteger" xmi:id="_9QpEIM4BEeiodM2OQof3Cg" name="par1" type="_Uen4kM4AEeiodM2OQof3Cg" value="1"/>
+      </node>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_D1B-MM4CEeiodM2OQof3Cg" name="Philosopher2" outgoing="_pITMINCOEei8zLsowetvzg" type="_Uen4kM4AEeiodM2OQof3Cg" parameter="_YQCr0NBdEei3e9DrtJbqqQ">
+        <upperBound xmi:type="uml:LiteralInteger" xmi:id="_D1B-Mc4CEeiodM2OQof3Cg" name="par2" type="_Uen4kM4AEeiodM2OQof3Cg" value="1"/>
+      </node>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_EKAvsM4CEeiodM2OQof3Cg" name="Philosopher3" outgoing="_lAHOwNCOEei8zLsowetvzg" type="_Uen4kM4AEeiodM2OQof3Cg" parameter="_YgNOwNBdEei3e9DrtJbqqQ">
+        <upperBound xmi:type="uml:LiteralInteger" xmi:id="_EKAvsc4CEeiodM2OQof3Cg" name="par3" type="_Uen4kM4AEeiodM2OQof3Cg" value="1"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_14cSEM4CEeiodM2OQof3Cg" name="coaPhilosopher3Thinks" incoming="__OgpkM4CEeiodM2OQof3Cg" outgoing="_TapTENBxEei3e9DrtJbqqQ" operation="_k1gAYM4AEeiodM2OQof3Cg">
+        <target xmi:id="_14cSEc4CEeiodM2OQof3Cg" name="target" incoming="_F1IbcNB4Eei3e9DrtJbqqQ" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_5tMWEM4CEeiodM2OQof3Cg" name="coaPhilosopher2Thinks" incoming="_-Gq3wM4CEeiodM2OQof3Cg" outgoing="_UkGOcNBxEei3e9DrtJbqqQ" operation="_k1gAYM4AEeiodM2OQof3Cg">
+        <target xmi:id="_5tMWEc4CEeiodM2OQof3Cg" name="target" incoming="_6385AM4CEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_EQO3AM4DEeiodM2OQof3Cg" name="coaPhilosopher1Eats" incoming="_xots0M4DEeiodM2OQof3Cg" outgoing="_1o7IAM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
+        <argument xmi:id="_MV0eEM4DEeiodM2OQof3Cg" name="chopstick1" incoming="_H_LjEM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <argument xmi:id="_Sn-YoM4DEeiodM2OQof3Cg" name="chopstick2" incoming="_JMoNoM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_TzwPQM4DEeiodM2OQof3Cg" name="chopstick1" outgoing="_Kr2ksM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_W3r6UM4DEeiodM2OQof3Cg" name="chopstick2" outgoing="_J16bMM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <target xmi:id="_H5JecM4DEeiodM2OQof3Cg" name="target" incoming="_oP-b0M4DEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:CentralBufferNode" xmi:id="_-xdPQM4EEeiodM2OQof3Cg" name="Chopstick1" incoming="_Kr2ksM4FEeiodM2OQof3Cg _-r-AYM4GEei3e9DrtJbqqQ _8RlyANBeEei3e9DrtJbqqQ" outgoing="_H_LjEM4FEeiodM2OQof3Cg _6RDUQM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:CentralBufferNode" xmi:id="__KEjkM4EEeiodM2OQof3Cg" name="Chopstick2" incoming="_J16bMM4FEeiodM2OQof3Cg _nuhNMM4GEei3e9DrtJbqqQ _9Zbj0NBeEei3e9DrtJbqqQ" outgoing="_JMoNoM4FEeiodM2OQof3Cg _rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:CentralBufferNode" xmi:id="__nZ_0M4EEeiodM2OQof3Cg" name="Chopstick3" incoming="_KaJewM4HEei3e9DrtJbqqQ _7ldEwNBeEei3e9DrtJbqqQ _wWfIkM4GEei3e9DrtJbqqQ" outgoing="_Nn_TwM4HEei3e9DrtJbqqQ _YlsM4M4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_pCw4wM4FEeiodM2OQof3Cg" name="coaPhilosopher2Eats" incoming="_UkGOcNBxEei3e9DrtJbqqQ" outgoing="_4zSLMM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
+        <argument xmi:id="_pCw4wc4FEeiodM2OQof3Cg" name="chopstick1" incoming="_YlsM4M4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <argument xmi:id="_pCw4ws4FEeiodM2OQof3Cg" name="chopstick2" incoming="_rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pCw4w84FEeiodM2OQof3Cg" name="chopstick1" outgoing="_wWfIkM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pCw4xM4FEeiodM2OQof3Cg" name="chopstick2" outgoing="_nuhNMM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <target xmi:id="_pCw4xc4FEeiodM2OQof3Cg" name="target" incoming="__HGSoM4FEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_pkEPAM4FEeiodM2OQof3Cg" name="coaPhilosopher3Eats" incoming="_TapTENBxEei3e9DrtJbqqQ" outgoing="_5skjoM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
+        <argument xmi:id="_pkEPAc4FEeiodM2OQof3Cg" name="chopstick1" incoming="_6RDUQM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <argument xmi:id="_pkEPAs4FEeiodM2OQof3Cg" name="chopstick2" incoming="_Nn_TwM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pkEPA84FEeiodM2OQof3Cg" name="chopstick1" outgoing="_-r-AYM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pkEPBM4FEeiodM2OQof3Cg" name="chopstick2" outgoing="_KaJewM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <target xmi:id="_pkEPBc4FEeiodM2OQof3Cg" name="target" incoming="_Est8sNCKEeiGn8MFZS7zEA" type="_Uen4kM4AEeiodM2OQof3Cg"/>
+      </node>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_v9uMoNBeEei3e9DrtJbqqQ" name="ChopstickParameter" outgoing="_eFNdgNBfEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg" parameter="_v9tlkNBeEei3e9DrtJbqqQ">
+        <upperBound xmi:type="uml:LiteralInteger" xmi:id="_v9wB0NBeEei3e9DrtJbqqQ" value="1"/>
+      </node>
+      <node xmi:type="uml:ForkNode" xmi:id="_X4TPUNBfEei3e9DrtJbqqQ" name="Fork1" incoming="_eFNdgNBfEei3e9DrtJbqqQ" outgoing="_8RlyANBeEei3e9DrtJbqqQ _9Zbj0NBeEei3e9DrtJbqqQ _7ldEwNBeEei3e9DrtJbqqQ"/>
+      <node xmi:type="uml:ForkNode" xmi:id="_Hjt4oNCCEei3e9DrtJbqqQ" name="Fork2" incoming="_Ko6H8NCCEei3e9DrtJbqqQ" outgoing="_8cWD8M4CEeiodM2OQof3Cg _9hYZYM4CEeiodM2OQof3Cg _885MQM4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:ForkNode" xmi:id="_eUfrUNCOEei8zLsowetvzg" name="Fork3" incoming="_gEUqMNCOEei8zLsowetvzg" outgoing="_oP-b0M4DEeiodM2OQof3Cg _0C6T0M4CEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:ForkNode" xmi:id="_iJ-IENCOEei8zLsowetvzg" name="Fork4" incoming="_lAHOwNCOEei8zLsowetvzg" outgoing="_Est8sNCKEeiGn8MFZS7zEA _F1IbcNB4Eei3e9DrtJbqqQ"/>
+      <node xmi:type="uml:ForkNode" xmi:id="_mTh-cNCOEei8zLsowetvzg" name="Fork5" incoming="_pITMINCOEei8zLsowetvzg" outgoing="__HGSoM4FEeiodM2OQof3Cg _6385AM4CEeiodM2OQof3Cg"/>
+    </ownedBehavior>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_KIJasNB2Eei3e9DrtJbqqQ" name="philo" classifier="_Uen4kM4AEeiodM2OQof3Cg"/>
+</uml:Model>
