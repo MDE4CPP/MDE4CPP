@@ -46,6 +46,9 @@
 //Action [anActivityNode.name /]
 [anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
+[if (anActivityNode.oclIsKindOf(CreateObjectAction))]
+	[anActivityNode.oclAsType(CreateObjectAction).generateCreateObjectActionCreation()/]
+[/if]
 [/template]
 
 [**
@@ -72,8 +75,18 @@
 [else]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
-
 [/template]
+
+[**
+ * generate elements for CreateObjectAction
+*/]
+[template private generateCreateObjectActionCreation(anCreateObjectActionNode : CreateObjectAction)]
+//set type of new Objects
+[anCreateObjectActionNode.memberName()/]->setClassifier([anCreateObjectActionNode.classifier.memberName()/]);
+[anCreateObjectActionNode.memberName()/]->setResult([anCreateObjectActionNode.result.memberName()/]);
+[/template]
+
+
 
 [**
  * generate initialization of meta model instance for an ActivtiyNode or derived element
@@ -85,7 +98,6 @@
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
 [anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
-
 [/template]
 
 [**
