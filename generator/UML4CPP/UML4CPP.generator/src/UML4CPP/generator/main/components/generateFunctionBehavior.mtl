@@ -43,10 +43,10 @@
  * - set function behavior name
  * - initialization of function behavior parameter
 */]
-[template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
-[aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
-[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
+[aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
+[aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterInitialization()/]
 [/for]
 [/template]
