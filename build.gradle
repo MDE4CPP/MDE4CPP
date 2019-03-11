@@ -1,5 +1,6 @@
 description 'MDE4CPP root project'
 
+
 task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
@@ -53,11 +54,11 @@ task installationInstruction() {
 		'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
 		'\n'
 
-	/*def files = file("$projectDir").listFiles(new FileFilter() {
+	/*def files = file('$projectDir').listFiles(new FileFilter() {
 		public boolean accept(File pathname) {
-			def extension = ".sh"
+			def extension = '.sh'
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				extension = ".bat"
+				extension = '.bat'
 			}
 
 			return pathname.getName().endsWith(extension);
@@ -71,4 +72,84 @@ task installationInstruction() {
 			println instructionMessage
 		}
 	//}
+}
+
+task checkEnvironment(){
+  group 'Utilities'
+  description 'Check that all required variables and executables are set and can be found'
+  
+  ext.checkPath = { path ->
+  	  if(! new File(path).exists()){
+		return false;
+	  }
+	  return true;
+  }
+  
+  ext.checkVariableExists = { variable_name, should_fail ->
+		println ''
+	  def my_var = System.getenv(variable_name);
+	  if(my_var == null)
+	  {
+		if(should_fail){
+			throw new GradleException(variable_name + ' variable has not been set')
+		}
+		else
+		{
+			println 'Warning: variable not set: ' + variable_name;
+			return;
+		}
+	  }
+	  print variable_name + ': ' + my_var
+    }
+  
+	ext.checkMyVariablePath = { variable_name, should_fail ->
+		checkVariableExists(variable_name, should_fail)
+		if(! checkPath(System.getenv(variable_name))){
+			throw new GradleException('Path for variable ' + variable_name + ' cannot be found.' + System.getenv(variable_name))
+		}
+		println ' (exists)'
+	}
+  
+  doFirst{
+	  println '------------------'  
+	  println 'YOUR PATH VARIABLE'
+	  println '------------------'
+	  
+	  println 'PATH: ' + System.getenv('PATH')
+	  def path_elements = System.getenv('PATH').split(';');
+	 
+	 println '\nAnalyzing all path elements...'
+	 path_elements.each{el ->
+		if(! checkPath(el))
+		{
+			println 'PATH contains an invalid element: ' + el;
+		}
+		else{
+			println '\t' + el + ' (exists)'
+		}
+	  }
+	  
+	  println '\n------------------------------'  
+	  println 'YOUR ENV VARIABLES WITH A PATH'
+	  println '------------------------------'
+
+	  checkMyVariablePath('MDE4CPP_HOME', true)
+	  checkMyVariablePath('MDE4CPP_ECLIPSE_HOME', true)
+
+      checkMyVariablePath('COMPILER_HOME', false)
+	  checkMyVariablePath('CMAKE_HOME', false)
+	  checkMyVariablePath('JAVA_HOME', false)
+	  
+	  println '\n---------------------------------------'  
+	  println 'YOUR ENV VARIABLES WITH A CONFIGURATION'
+	  println '---------------------------------------'	  
+	  checkVariableExists('GRADLE_OPTS', false);
+	  checkVariableExists('ORG_GRADLE_PROJECT_WORKER', false);
+	  checkVariableExists('ORG_GRADLE_PROJECT_RELEASE', false);
+	  checkVariableExists('ORG_GRADLE_PROJECT_DEBUG', false);
+	  checkVariableExists('ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML', false);
+	  checkVariableExists('ORG_GRADLE_PROJECT_ACTIVITY_DEBUG_ON', false);
+	  checkVariableExists('COMPILER_DELIVERY_NAME', false);
+	  checkVariableExists('COMPILER_VERSION', false);
+  }
 }
