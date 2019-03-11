@@ -1,0 +1,92 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
+
+[template public generateModelLocusSource(aPackage : Package) 
+{
+upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
+lowerName : String = aPackage.getPackageName().sanitize().toLowerFirst();
+}]
+
+[file (lowerName.concat('Exec/') + upperName.concat('Locus.cpp'), false, 'UTF-8')]
+#include "impl/[upperName/]LocusImpl.hpp"
+[/file]
+
+[file (lowerName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
+#include "[upperName/]LocusImpl.hpp"
+#include <iostream>
+
+[defineDebugMacro()/]
+
+[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)) separator('\n')]
+	//TODO #include "[lowerName/]/impl/[c.name.toUpperFirst()/]Impl.hpp"
+	//TODO #include "[c.name.toUpperFirst()/]ObjectImpl.hpp"
+	#include "[lowerName/]/[c.name.toUpperFirst()/].hpp"
+	#include "[lowerName/]Exec/[c.name.toUpperFirst()/]Object.hpp"
+[/for]
+
+
+#include "[lowerName/]/[upperName/]Factory.hpp"
+#include "[lowerName/]/[upperName/]Package.hpp"
+#include "ecore/EClass.hpp"
+
+using namespace fUML;
+using namespace [lowerName/];
+
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[upperName/]LocusImpl::[upperName/]LocusImpl()
+{
+}
+
+[upperName/]LocusImpl::~[upperName/]LocusImpl()
+{
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [upperName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
+}
+std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+{
+		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
+		[let className : String = c.name.toUpperFirst()]
+		switch(type->getClassifierID())
+		{
+			case [lowerName/]::[upperName/]Package::[className.sanitize().toUpper()/]:
+			{
+				std::shared_ptr<[lowerName/]::[className/]> element = [lowerName/]::[upperName/]Factory::eInstance()->create[className/]();
+				std::shared_ptr<[lowerName/]::[className/]Object> object(new [lowerName/]::[className/]Object());
+				object->setThis[className/]ObjectPtr(object);
+				object->setUmlValue(std::dynamic_pointer_cast<[lowerName/]::[className/]>(element));
+				object->setLocus(this->getThisLocusPtr());
+				return object;
+			}
+			[/let]
+			[/for]
+			default:
+			{
+				return LocusImpl::instantiate(type);
+			}
+		}
+}
+[/file]
+[/template]

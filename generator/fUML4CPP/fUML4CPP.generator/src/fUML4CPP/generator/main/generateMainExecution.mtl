@@ -29,6 +29,9 @@
 #include <memory>
 #include <vector>
 
+#include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
+#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
+
 [generateMainIncludes()/]
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
 [let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
@@ -148,17 +151,18 @@ int main()
 
 [/template]
 
-[template public generateLocusInitialization(aPackage : Package)]
+[template public generateLocusInitialization(aPackage : Package) {locusName : String = aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus' ;}]
 DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
-std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
+
+
+std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
+locus->setThisLocusPtr(locus);
 
 std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
 executor->setLocus(locus);
 
 std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3_in_Locus(locus));
-//factory->setLocus(locus);
-//locus->setFactory(factory);
 
 locus->setExecutor(executor);
 

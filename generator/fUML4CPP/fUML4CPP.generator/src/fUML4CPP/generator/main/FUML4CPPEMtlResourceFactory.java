@@ -34,6 +34,8 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateClassifierObjectSource",
 								"generateExecutionBuildFile",
 								"generateExecutionProjectFiles",
+								"generateModelLocusHeader",
+								"generateModelLocusSource",
 								"generateFUML",
 								"generateMainExecution",
 								"generateOpaqueBehaviorExecution",

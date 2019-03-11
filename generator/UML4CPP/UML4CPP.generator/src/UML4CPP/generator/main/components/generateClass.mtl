@@ -53,9 +53,23 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
  * - operation count
 */]
 [template public generateStaticClassID(aClass : Class)]
-static const int [aClass.name.toUpperCase()/] = [aClass._package.member->asOrderedSet()->indexOf(aClass)/];
+static const int [aClass.name.toUpperCase()/] = [aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass)/];
 static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
+
+[/template]
+
+
+[**
+ * generate static meta data for all classes in a package:
+ * - index of class
+ * - feature count
+ * - operation count
+*/]
+[template public generateStaticPackageID(aPackage : Package)]
+[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticClassID(c)/]
+[/for]
 
 [/template]
 

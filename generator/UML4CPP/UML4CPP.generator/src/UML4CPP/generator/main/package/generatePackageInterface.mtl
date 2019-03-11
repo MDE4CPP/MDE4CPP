@@ -23,6 +23,10 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
+[import UML4CPP::generator::main::components::generateClass /]
+
+
+[query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -61,6 +65,11 @@ namespace uml
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]
+
+			[if (not isReflectionModel(aPackage))]
+			//Class IDs
+			[generateStaticPackageID(aPackage)/]
+			[/if]
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackage')/]

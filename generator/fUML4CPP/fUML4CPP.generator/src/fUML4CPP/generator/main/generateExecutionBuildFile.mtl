@@ -77,6 +77,8 @@ SET(SOURCE_FILES
 	[packageName.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]
 [else]
+	[aPackage.name.toUpperFirst()/]Locus.cpp
+	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
 	main.cpp
 [/if]
 )
