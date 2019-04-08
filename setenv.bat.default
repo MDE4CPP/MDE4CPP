@@ -51,10 +51,10 @@ SET JAVA_HOME=C:\Program Files\java\jdk1.8.0_162
 REM if you want, set path with minimal set of programs (system paths and MDE4CPP required programs) temporary (only in called cmd and further child processes)
 REM SET PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
 
-IF DEFINED CMAKE_HOME (SET PATH=%CMAKE_HOME%\bin;%PATH%)
-IF DEFINED COMPILER_HOME (SET PATH=%COMPILER_HOME%\bin;%PATH%)
-IF DEFINED JAVA_HOME (SET PATH=%JAVA_HOME%\bin;%PATH%)
-IF DEFINED MDE4CPP_HOME (SET PATH=%MDE4CPP_HOME%\application\bin;%MDE4CPP_HOME%\application\tools;%PATH%)
+IF DEFINED CMAKE_HOME (SET "PATH=%CMAKE_HOME%\bin;%PATH%")
+IF DEFINED COMPILER_HOME (SET "PATH=%COMPILER_HOME%\bin;%PATH%")
+IF DEFINED JAVA_HOME (SET "PATH=%JAVA_HOME%\bin;%PATH%")
+IF DEFINED MDE4CPP_HOME (SET "PATH=%MDE4CPP_HOME%\application\bin;%MDE4CPP_HOME%\application\tools;%PATH%")
 
 REM ##############################################################################
 REM # configure compiler information for include path setting inside cpp eclipse #
