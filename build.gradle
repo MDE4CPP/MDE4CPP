@@ -74,9 +74,40 @@ task installationInstruction() {
 	//}
 }
 
+task setEnvironment(type:Exec){
+	workingDir System.getenv('MDE4CPP_HOME')
+	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+	  //on windows:
+	  commandLine 'cmd', '/c', 'setenv.bat'
+	} else {
+	  //on linux
+	  commandLine '. ./setenv'
+	}
+	doLast {
+	println 'Environment variable have been set.'
+	}
+}
+
+task startEclipse(type:Exec){
+	group 'Utilities'
+	description 'starts the eclipse instance specified in the setenv file'
+	
+	dependsOn 'checkEnvironment'
+	workingDir System.getenv('MDE4CPP_ECLIPSE_HOME')
+
+	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+		//on windows:
+		commandLine 'cmd', '/c', 'start eclipse.exe'
+	} else {
+	  //on linux
+	  commandLine './eclipse'
+	}
+}
+
 task checkEnvironment(){
+  dependsOn 'setEnvironment'
   group 'Utilities'
-  description 'Check that all required variables and executables are set and can be found'
+  description 'Check that all required variables defined in the setenv file are set and can be found'
   
   ext.checkPath = { path ->
   	  if(! new File(path).exists()){
@@ -101,6 +132,43 @@ task checkEnvironment(){
 	  }
 	  print variable_name + ': ' + my_var
     }
+	
+	ext.checkAndPrintPath = { path ->
+	  println ''
+	  path = path.replace('\\', '/')
+	  if(! checkPath(path)){
+		def fg = 33
+		def bg = 40
+		def style = "${(char)27}[$fg;$bg"+"m"
+		println style + path + ' <- Warning! Path not found!'
+		print "${(char)27}[39;49m"
+		return
+	  }
+	  println path + ' (exists)'
+	}
+	
+	ext.checkCompilerIncludes = {
+	  println '\n\n---------------------------'  
+	  println 'YOUR COMPILER INCLUDE PATHS'
+	  println '---------------------------'
+	  println 'you can ignore these if you are not using Eclipse as your C++ IDE'
+	  
+	  checkVariableExists('COMPILER_DELIVERY_NAME', false);
+	  checkVariableExists('COMPILER_VERSION', false);
+	  
+	  def home = System.getenv('COMPILER_HOME');
+	  def delivery = System.getenv('COMPILER_DELIVERY_NAME');
+	  def version = System.getenv('COMPILER_VERSION');	  
+	  
+	  println ''
+	  checkAndPrintPath(home + "/include")
+	  checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++")
+	  checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/backward")
+	  checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/" + delivery)
+	  checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include-fixed")
+	  checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include")
+	  checkAndPrintPath(System.getenv('MDE4CPP_HOME') + "/application/include")
+	}
   
 	ext.checkMyVariablePath = { variable_name, should_fail ->
 		checkVariableExists(variable_name, should_fail)
@@ -151,5 +219,7 @@ task checkEnvironment(){
 	  checkVariableExists('ORG_GRADLE_PROJECT_ACTIVITY_DEBUG_ON', false);
 	  checkVariableExists('COMPILER_DELIVERY_NAME', false);
 	  checkVariableExists('COMPILER_VERSION', false);
+	  
+	  checkCompilerIncludes();
   }
 }
