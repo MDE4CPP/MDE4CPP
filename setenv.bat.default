@@ -56,9 +56,9 @@ IF DEFINED COMPILER_HOME (SET "PATH=%COMPILER_HOME%\bin;%PATH%")
 IF DEFINED JAVA_HOME (SET "PATH=%JAVA_HOME%\bin;%PATH%")
 IF DEFINED MDE4CPP_HOME (SET "PATH=%MDE4CPP_HOME%\application\bin;%MDE4CPP_HOME%\application\tools;%PATH%")
 
-REM ##############################################################################
-REM # configure compiler information for include path setting inside cpp eclipse #
-REM ##############################################################################
+REM ###############################################################################
+REM # configure compiler information for include path setting inside your c++ IDE #
+REM ###############################################################################
 
 REM The generators create eclipse cpp projects files including include path.
 REM Estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
@@ -71,3 +71,7 @@ SET COMPILER_DELIVERY_NAME=x86_64-w64-mingw32
 REM compiler version, only necessary for include path generation for Eclipse Project file
 REM estimated path to compiler includes: ${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include
 SET COMPILER_VERSION=8.1.0
+
+REM Optional: path to your C++ IDE executable
+REM by setting this you may use the startCPPIDE gradle task
+SET CPP_IDE_EXECUTABLE=C:\MyEclipseCPP\eclipse.exe
