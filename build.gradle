@@ -110,19 +110,24 @@ task setEnvironment(type:Exec){
 
 			dependsOn 'checkEnvironment'
 
-			if(System.getenv('CPP_IDE_EXECUTABLE') == null)
-			{
-				throw new GradleException("The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.")
-			}
+			doFirst{
+				if(System.getenv('CPP_IDE_EXECUTABLE') == null)
+				{
+					throw new GradleException("The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.")
+				}
 
-			if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-				//on windows:
-				commandLine 'cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '"')
-				} else {
+				if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) 
+				{
+					//on windows:
+					commandLine 'cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '"')
+				} 
+				else 
+				{
 					//on linux
 					commandLine 'bash ' , System.getenv('CPP_IDE_EXECUTABLE')
 				}
 			}
+		}
 
 
 			task checkEnvironment(){
