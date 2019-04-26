@@ -300,9 +300,6 @@ void [packageName/]::initializePackageClasses()
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]
 	[anProperty.generateAttributeInitialization()/]
 	[/for]
-	[if(not aPackage.isReflectionModel())]
-	[memberName(aClass)/]->setClassifierID([aPackage.name.sanitize().toUpperFirst()/]Package::[aClass.name.sanitize().toUpper()/]);
-	[/if]
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.initalizeOperation()/]
 	[/for]
