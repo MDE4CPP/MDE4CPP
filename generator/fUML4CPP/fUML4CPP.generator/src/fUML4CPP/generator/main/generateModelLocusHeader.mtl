@@ -19,15 +19,15 @@
 
 
 [template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); lowerName : String = aPackage.getPackageName().sanitize().toLowerFirst();}]
-[file (lowerName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
+upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); originalName : String = aPackage.getPackageName();}]
+[file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 
 #include "fUML/Locus.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [lowerName/] 
+namespace [originalName/] 
 {
 	class [upperName/]Locus: virtual public fUML::Locus
 	{
@@ -46,15 +46,15 @@ namespace [lowerName/]
 [endGuard(aPackage,'LocusExecution')/]
 [/file]
 
-[file (lowerName.concat('Exec/impl/') + upperName.concat('LocusImpl.hpp'), false, 'UTF-8')]
+[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusImpl_Execution')/]
 
-#include "../ModelLocus.hpp"
+#include "../[upperName/]Locus.hpp"
 #include "fUML/impl/LocusImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [lowerName/] 
+namespace [originalName/] 
 {
 	class [upperName/]LocusImpl :virtual public fUML::LocusImpl, virtual public [upperName/]Locus
 	{

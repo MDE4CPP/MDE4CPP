@@ -23,33 +23,33 @@
 [template public generateModelLocusSource(aPackage : Package) 
 {
 upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
-lowerName : String = aPackage.getPackageName().sanitize().toLowerFirst();
+originalName : String = aPackage.getPackageName();
 }]
 
-[file (lowerName.concat('Exec/') + upperName.concat('Locus.cpp'), false, 'UTF-8')]
+[file (originalName.concat('Exec/') + upperName.concat('Locus.cpp'), false, 'UTF-8')]
 #include "impl/[upperName/]LocusImpl.hpp"
 [/file]
 
-[file (lowerName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
+[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
 #include "[upperName/]LocusImpl.hpp"
 #include <iostream>
 
 [defineDebugMacro()/]
 
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Class)) separator('\n')]
-	//TODO #include "[lowerName/]/impl/[c.name.toUpperFirst()/]Impl.hpp"
+	//TODO #include "[originalName/]/impl/[c.name.toUpperFirst()/]Impl.hpp"
 	//TODO #include "[c.name.toUpperFirst()/]ObjectImpl.hpp"
-	#include "[lowerName/]/[c.name.toUpperFirst()/].hpp"
-	#include "[lowerName/]Exec/[c.name.toUpperFirst()/]Object.hpp"
+	#include "[originalName/]/[c.name.toUpperFirst()/].hpp"
+	#include "[originalName/]Exec/[c.name.toUpperFirst()/]Object.hpp"
 [/for]
 
 
-#include "[lowerName/]/[upperName/]Factory.hpp"
-#include "[lowerName/]/[upperName/]Package.hpp"
+#include "[originalName/]/[upperName/]Factory.hpp"
+#include "[originalName/]/[upperName/]Package.hpp"
 #include "ecore/EClass.hpp"
 
 using namespace fUML;
-using namespace [lowerName/];
+using namespace [originalName/];
 
 
 //*********************************
@@ -69,14 +69,14 @@ std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr
 {
 		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
 		[let className : String = c.name.toUpperFirst()]
-		switch(type->getClassifierID())
+		switch(type->eClass()->getClassifierID())
 		{
-			case [lowerName/]::[upperName/]Package::[className.sanitize().toUpper()/]:
+			case [originalName/]::[upperName/]Package::[className.sanitize().toUpper()/]:
 			{
-				std::shared_ptr<[lowerName/]::[className/]> element = [lowerName/]::[upperName/]Factory::eInstance()->create[className/]();
-				std::shared_ptr<[lowerName/]::[className/]Object> object(new [lowerName/]::[className/]Object());
+				std::shared_ptr<[originalName/]::[className/]> element = [originalName/]::[upperName/]Factory::eInstance()->create[className/]();
+				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue(std::dynamic_pointer_cast<[lowerName/]::[className/]>(element));
+				object->setUmlValue(std::dynamic_pointer_cast<[originalName/]::[className/]>(element));
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}
