@@ -91,7 +91,6 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
 	element->[generateGetThisPtrPropertySetterName()/](element);
-	element->setClassifierID([aPackage.name.toUpperFirst()/]Package::[aClass.name.sanitize().toUpper()/]);
 	return element;
 }
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
