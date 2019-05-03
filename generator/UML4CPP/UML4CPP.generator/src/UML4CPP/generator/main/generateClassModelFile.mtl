@@ -63,7 +63,7 @@
 
 // base class includes
 [if (aClass.superClass->isEmpty())]
-#include "uml/[aClass.eClass().name/].hpp"
+#include "uml/Element.hpp"
 [else]
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (elements.oclIsUndefined() or elements.name.oclIsUndefined())]
@@ -96,7 +96,7 @@
 namespace [aPackage.name/]
 {
 [/if]
-	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::[aClass.eClass().name/] [aClass.generateInterfaceExtensions()/]
+	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::Element [aClass.generateInterfaceExtensions()/]
 [else][for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for]
 [/if]

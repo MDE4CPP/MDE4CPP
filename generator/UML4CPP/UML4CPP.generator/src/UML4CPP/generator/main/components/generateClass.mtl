@@ -130,7 +130,7 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
 [/for]
 [if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
-	setThisClassPtr([aClass.generateGetThisPtrPropertyName()/]);
+	setThisElementPtr([aClass.generateGetThisPtrPropertyName()/]);
 [elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
 	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
 [/if]
