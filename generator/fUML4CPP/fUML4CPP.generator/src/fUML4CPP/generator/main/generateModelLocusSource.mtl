@@ -47,6 +47,7 @@ originalName : String = aPackage.getPackageName();
 #include "[originalName/]/[upperName/]Factory.hpp"
 #include "[originalName/]/[upperName/]Package.hpp"
 #include "ecore/EClass.hpp"
+#include "uml/Class.hpp"
 
 using namespace fUML;
 using namespace [originalName/];
@@ -67,10 +68,10 @@ using namespace [originalName/];
 }
 std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
-		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
-		[let className : String = c.name.toUpperFirst()]
 		switch(type->eClass()->getClassifierID())
 		{
+		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
+		[let className : String = c.name.toUpperFirst()]
 			case [originalName/]::[upperName/]Package::[className.sanitize().toUpper()/]:
 			{
 				std::shared_ptr<[originalName/]::[className/]> element = [originalName/]::[upperName/]Factory::eInstance()->create[className/]();
