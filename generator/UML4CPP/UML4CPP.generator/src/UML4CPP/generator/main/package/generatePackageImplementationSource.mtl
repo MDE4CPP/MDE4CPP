@@ -185,11 +185,11 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for]
-	[for (aFunctionBehavior : FunctionBehavior | aClass.ownedBehavior->filter(FunctionBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' function behaviors\n'))  separator('\n') after ('\n')]
-	[aFunctionBehavior.generateFunctionBehaviorCreation()/]
+	[for (aFunctionBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[aFunctionBehavior.generateOpaqueBehaviorCreation()/]
 	[/for]
 [/for]
-}
+} 
 
 [comment]Only Dependency[/comment]
 void [packageName/]::createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)

@@ -29,9 +29,9 @@
  * - creation of function behavior
  * - creation of function behavior parameter
 */]
-[template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
-[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
+[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([memberName(aOpaqueBehavior.owner.oclAsType(NamedElement))/]);
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
 [/template]
