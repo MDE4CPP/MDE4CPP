@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -210,14 +208,6 @@ AddVariableValueActionImpl::AddVariableValueActionImpl(const AddVariableValueAct
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -418,9 +408,9 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
-			return eAny(getInsertAt()); //1730
+			return eAny(getInsertAt()); //1729
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1731
+			return eAny(getIsReplaceAll()); //1730
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -429,9 +419,9 @@ bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
-			return getInsertAt() != nullptr; //1730
+			return getInsertAt() != nullptr; //1729
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1731
+			return getIsReplaceAll() != false; //1730
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -443,14 +433,14 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setInsertAt(_insertAt); //1730
+			setInsertAt(_insertAt); //1729
 			return true;
 		}
 		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1731
+			setIsReplaceAll(_isReplaceAll); //1730
 			return true;
 		}
 	}
@@ -564,7 +554,6 @@ void AddVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

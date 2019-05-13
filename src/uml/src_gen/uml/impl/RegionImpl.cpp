@@ -44,8 +44,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -232,14 +230,6 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -507,15 +497,15 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return eAny(getExtendedRegion()); //20719
+			return eAny(getExtendedRegion()); //20718
 		case UmlPackage::REGION_EREFERENCE_STATE:
-			return eAny(getState()); //20720
+			return eAny(getState()); //20719
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return eAny(getStateMachine()); //20721
+			return eAny(getStateMachine()); //20720
 		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return eAny(getSubvertex()); //20723
+			return eAny(getSubvertex()); //20722
 		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return eAny(getTransition()); //20722
+			return eAny(getTransition()); //20721
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -531,15 +521,15 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return getExtendedRegion() != nullptr; //20719
+			return getExtendedRegion() != nullptr; //20718
 		case UmlPackage::REGION_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //20720
+			return getState().lock() != nullptr; //20719
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //20721
+			return getStateMachine().lock() != nullptr; //20720
 		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return getSubvertex() != nullptr; //20723
+			return getSubvertex() != nullptr; //20722
 		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return getTransition() != nullptr; //20722
+			return getTransition() != nullptr; //20721
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -558,21 +548,21 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _extendedRegion = newValue->get<std::shared_ptr<uml::Region>>();
-			setExtendedRegion(_extendedRegion); //20719
+			setExtendedRegion(_extendedRegion); //20718
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //20720
+			setState(_state); //20719
 			return true;
 		}
 		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setStateMachine(_stateMachine); //20721
+			setStateMachine(_stateMachine); //20720
 			return true;
 		}
 	}
@@ -737,7 +727,6 @@ void RegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

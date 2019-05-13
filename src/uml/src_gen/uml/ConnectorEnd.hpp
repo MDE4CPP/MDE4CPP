@@ -49,11 +49,6 @@ namespace uml
 	class ConnectableElement;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -226,14 +224,6 @@ ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectAct
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -447,13 +437,13 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //20328
+			return eAny(getIsReplaceAll()); //20327
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
-			return eAny(getNewClassifier()); //20329
+			return eAny(getNewClassifier()); //20328
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //20330
+			return eAny(getObject()); //20329
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
-			return eAny(getOldClassifier()); //20331
+			return eAny(getOldClassifier()); //20330
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -462,13 +452,13 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //20328
+			return getIsReplaceAll() != false; //20327
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
-			return getNewClassifier() != nullptr; //20329
+			return getNewClassifier() != nullptr; //20328
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //20330
+			return getObject() != nullptr; //20329
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
-			return getOldClassifier() != nullptr; //20331
+			return getOldClassifier() != nullptr; //20330
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -480,14 +470,14 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //20328
+			setIsReplaceAll(_isReplaceAll); //20327
 			return true;
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //20330
+			setObject(_object); //20329
 			return true;
 		}
 	}
@@ -641,7 +631,6 @@ void ReclassifyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

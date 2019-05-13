@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -198,14 +196,6 @@ DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getExpr()!=nullptr)
 	{
 		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
@@ -340,9 +330,9 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DURATION_EREFERENCE_EXPR:
-			return eAny(getExpr()); //7715
+			return eAny(getExpr()); //7714
 		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
-			return eAny(getObservation()); //7716
+			return eAny(getObservation()); //7715
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -351,9 +341,9 @@ bool DurationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DURATION_EREFERENCE_EXPR:
-			return getExpr() != nullptr; //7715
+			return getExpr() != nullptr; //7714
 		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
-			return getObservation() != nullptr; //7716
+			return getObservation() != nullptr; //7715
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -365,7 +355,7 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setExpr(_expr); //7715
+			setExpr(_expr); //7714
 			return true;
 		}
 	}
@@ -487,7 +477,6 @@ void DurationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

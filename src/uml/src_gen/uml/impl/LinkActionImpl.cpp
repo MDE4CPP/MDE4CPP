@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -237,14 +235,6 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::LinkEndData>> _endDataList = obj.getEndData();
 	for(std::shared_ptr<uml::LinkEndData> _endData : *_endDataList)
 	{
@@ -468,9 +458,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return eAny(getEndData()); //13328
+			return eAny(getEndData()); //13327
 		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return eAny(getInputValue()); //13329
+			return eAny(getInputValue()); //13328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -479,9 +469,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return getEndData() != nullptr; //13328
+			return getEndData() != nullptr; //13327
 		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue() != nullptr; //13329
+			return getInputValue() != nullptr; //13328
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -593,7 +583,6 @@ void LinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

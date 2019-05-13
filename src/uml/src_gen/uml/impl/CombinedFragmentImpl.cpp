@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Gate.hpp"
@@ -209,14 +207,6 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):Com
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_cfragmentGate" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
@@ -388,11 +378,11 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
-			return eAny(getCfragmentGate()); //4414
+			return eAny(getCfragmentGate()); //4413
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
-			return eAny(getInteractionOperator()); //4415
+			return eAny(getInteractionOperator()); //4414
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
-			return eAny(getOperand()); //4416
+			return eAny(getOperand()); //4415
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -401,11 +391,11 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
-			return getCfragmentGate() != nullptr; //4414
+			return getCfragmentGate() != nullptr; //4413
 		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
-			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4415
+			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
 		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
-			return getOperand() != nullptr; //4416
+			return getOperand() != nullptr; //4415
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -417,7 +407,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
-			setInteractionOperator(_interactionOperator); //4415
+			setInteractionOperator(_interactionOperator); //4414
 			return true;
 		}
 	}
@@ -585,7 +575,6 @@ void CombinedFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

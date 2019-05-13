@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -236,14 +234,6 @@ OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -466,13 +456,13 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
-			return eAny(getBody()); //16428
+			return eAny(getBody()); //16427
 		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
-			return eAny(getInputValue()); //16429
+			return eAny(getInputValue()); //16428
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16430
+			return eAny(getLanguage()); //16429
 		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
-			return eAny(getOutputValue()); //16431
+			return eAny(getOutputValue()); //16430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -481,13 +471,13 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
-			return !getBody()->empty(); //16428
+			return !getBody()->empty(); //16427
 		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue() != nullptr; //16429
+			return getInputValue() != nullptr; //16428
 		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16430
+			return !getLanguage()->empty(); //16429
 		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16431
+			return getOutputValue() != nullptr; //16430
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -625,7 +615,6 @@ void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

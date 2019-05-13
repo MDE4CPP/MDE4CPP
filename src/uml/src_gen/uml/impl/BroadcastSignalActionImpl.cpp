@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -220,14 +218,6 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalAction
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
@@ -411,7 +401,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
-			return eAny(getSignal()); //2730
+			return eAny(getSignal()); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -420,7 +410,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
-			return getSignal() != nullptr; //2730
+			return getSignal() != nullptr; //2729
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -432,7 +422,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
-			setSignal(_signal); //2730
+			setSignal(_signal); //2729
 			return true;
 		}
 	}
@@ -530,7 +520,6 @@ void BroadcastSignalActionImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

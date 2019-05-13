@@ -39,8 +39,6 @@
 
 #include "uml/Comment.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ParameterableElement.hpp"
@@ -136,14 +134,6 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -287,9 +277,9 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return eAny(getAllowSubstitutable()); //379
+			return eAny(getAllowSubstitutable()); //378
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
-			return eAny(getConstrainingClassifier()); //3710
+			return eAny(getConstrainingClassifier()); //379
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
@@ -298,9 +288,9 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return getAllowSubstitutable() != true; //379
+			return getAllowSubstitutable() != true; //378
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
-			return getConstrainingClassifier() != nullptr; //3710
+			return getConstrainingClassifier() != nullptr; //379
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
@@ -312,7 +302,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _allowSubstitutable = newValue->get<bool>();
-			setAllowSubstitutable(_allowSubstitutable); //379
+			setAllowSubstitutable(_allowSubstitutable); //378
 			return true;
 		}
 	}
@@ -410,7 +400,6 @@ void ClassifierTemplateParameterImpl::save(std::shared_ptr<persistence::interfac
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

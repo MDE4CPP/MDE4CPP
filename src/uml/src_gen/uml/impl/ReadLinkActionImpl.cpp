@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -209,14 +207,6 @@ ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj):ReadLinkA
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::LinkEndData>> _endDataList = obj.getEndData();
 	for(std::shared_ptr<uml::LinkEndData> _endData : *_endDataList)
 	{
@@ -445,7 +435,7 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //19530
+			return eAny(getResult()); //19529
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -454,7 +444,7 @@ bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //19530
+			return getResult() != nullptr; //19529
 	}
 	return LinkActionImpl::internalEIsSet(featureID);
 }
@@ -466,7 +456,7 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //19530
+			setResult(_result); //19529
 			return true;
 		}
 	}
@@ -557,7 +547,6 @@ void ReadLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

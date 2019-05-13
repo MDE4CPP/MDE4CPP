@@ -41,8 +41,6 @@
 
 #include "uml/DirectedRelationship.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/GeneralizationSet.hpp"
@@ -141,14 +139,6 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getGeneral()!=nullptr)
 	{
 		m_general = std::dynamic_pointer_cast<uml::Classifier>(obj.getGeneral()->copy());
@@ -282,13 +272,13 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
-			return eAny(getGeneral()); //1097
+			return eAny(getGeneral()); //1096
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
-			return eAny(getGeneralizationSet()); //1098
+			return eAny(getGeneralizationSet()); //1097
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
-			return eAny(getIsSubstitutable()); //1099
+			return eAny(getIsSubstitutable()); //1098
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
-			return eAny(getSpecific()); //10910
+			return eAny(getSpecific()); //1099
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -297,13 +287,13 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
-			return getGeneral() != nullptr; //1097
+			return getGeneral() != nullptr; //1096
 		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
-			return getGeneralizationSet() != nullptr; //1098
+			return getGeneralizationSet() != nullptr; //1097
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
-			return getIsSubstitutable() != true; //1099
+			return getIsSubstitutable() != true; //1098
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
-			return getSpecific().lock() != nullptr; //10910
+			return getSpecific().lock() != nullptr; //1099
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -315,21 +305,21 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _general = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setGeneral(_general); //1097
+			setGeneral(_general); //1096
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _isSubstitutable = newValue->get<bool>();
-			setIsSubstitutable(_isSubstitutable); //1099
+			setIsSubstitutable(_isSubstitutable); //1098
 			return true;
 		}
 		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _specific = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setSpecific(_specific); //10910
+			setSpecific(_specific); //1099
 			return true;
 		}
 	}
@@ -460,7 +450,6 @@ void GeneralizationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

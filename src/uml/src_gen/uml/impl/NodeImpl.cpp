@@ -60,8 +60,6 @@
 
 #include "uml/DeploymentTarget.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -310,14 +308,6 @@ NodeImpl::NodeImpl(const NodeImpl & obj):NodeImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -645,7 +635,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return eAny(getNestedNode()); //15755
+			return eAny(getNestedNode()); //15754
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
@@ -661,7 +651,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return getNestedNode() != nullptr; //15755
+			return getNestedNode() != nullptr; //15754
 	}
 	bool result = false;
 	result = ClassImpl::internalEIsSet(featureID);
@@ -782,7 +772,6 @@ void NodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

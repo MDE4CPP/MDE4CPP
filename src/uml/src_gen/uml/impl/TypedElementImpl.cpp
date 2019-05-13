@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -135,14 +133,6 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -238,7 +228,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return eAny(getType()); //24510
+			return eAny(getType()); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -247,7 +237,7 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType() != nullptr; //24510
+			return getType() != nullptr; //2459
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -259,7 +249,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
-			setType(_type); //24510
+			setType(_type); //2459
 			return true;
 		}
 	}
@@ -354,7 +344,6 @@ void TypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

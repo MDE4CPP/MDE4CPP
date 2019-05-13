@@ -87,11 +87,6 @@ namespace uml
 
 namespace ecore 
 {
-	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
 }
 

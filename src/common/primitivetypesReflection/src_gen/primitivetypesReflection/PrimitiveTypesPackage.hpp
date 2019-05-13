@@ -45,6 +45,7 @@ namespace PrimitiveTypes
 				static std::shared_ptr<PrimitiveTypesPackage> instance;
 			public:
 				static std::shared_ptr<PrimitiveTypesPackage> eInstance();
+
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGE_HPP */

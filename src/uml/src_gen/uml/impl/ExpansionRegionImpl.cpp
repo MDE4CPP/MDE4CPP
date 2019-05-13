@@ -53,8 +53,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -275,14 +273,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):Expans
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -563,11 +553,11 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return eAny(getInputElement()); //9447
+			return eAny(getInputElement()); //9446
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return eAny(getMode()); //9445
+			return eAny(getMode()); //9444
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return eAny(getOutputElement()); //9446
+			return eAny(getOutputElement()); //9445
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -576,11 +566,11 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return getInputElement() != nullptr; //9447
+			return getInputElement() != nullptr; //9446
 		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //9445
+			return m_mode != ExpansionKind::ITERATIVE;; //9444
 		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //9446
+			return getOutputElement() != nullptr; //9445
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -592,7 +582,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			ExpansionKind _mode = newValue->get<ExpansionKind>();
-			setMode(_mode); //9445
+			setMode(_mode); //9444
 			return true;
 		}
 	}
@@ -735,7 +725,6 @@ void ExpansionRegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -205,14 +203,6 @@ ReadSelfActionImpl::ReadSelfActionImpl(const ReadSelfActionImpl & obj):ReadSelfA
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -409,7 +399,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //19828
+			return eAny(getResult()); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -418,7 +408,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //19828
+			return getResult() != nullptr; //19827
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -430,7 +420,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //19828
+			setResult(_result); //19827
 			return true;
 		}
 	}
@@ -519,7 +509,6 @@ void ReadSelfActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

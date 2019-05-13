@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -231,14 +229,6 @@ CallActionImpl::CallActionImpl(const CallActionImpl & obj):CallActionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
@@ -459,9 +449,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2830
+			return eAny(getIsSynchronous()); //2829
 		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //2831
+			return eAny(getResult()); //2830
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,9 +460,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //2830
+			return getIsSynchronous() != true; //2829
 		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //2831
+			return getResult() != nullptr; //2830
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -484,7 +474,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //2830
+			setIsSynchronous(_isSynchronous); //2829
 			return true;
 		}
 	}
@@ -595,7 +585,6 @@ void CallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -60,8 +60,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -442,14 +440,6 @@ InteractionImpl::InteractionImpl(const InteractionImpl & obj):InteractionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -916,15 +906,15 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return eAny(getAction()); //11968
+			return eAny(getAction()); //11967
 		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return eAny(getFormalGate()); //11969
+			return eAny(getFormalGate()); //11968
 		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return eAny(getFragment()); //11967
+			return eAny(getFragment()); //11966
 		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return eAny(getLifeline()); //11966
+			return eAny(getLifeline()); //11965
 		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //11970
+			return eAny(getMessage()); //11969
 	}
 	Any result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -940,15 +930,15 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return getAction() != nullptr; //11968
+			return getAction() != nullptr; //11967
 		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return getFormalGate() != nullptr; //11969
+			return getFormalGate() != nullptr; //11968
 		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return getFragment() != nullptr; //11967
+			return getFragment() != nullptr; //11966
 		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return getLifeline() != nullptr; //11966
+			return getLifeline() != nullptr; //11965
 		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //11970
+			return getMessage() != nullptr; //11969
 	}
 	bool result = false;
 	result = BehaviorImpl::internalEIsSet(featureID);
@@ -1135,7 +1125,6 @@ void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

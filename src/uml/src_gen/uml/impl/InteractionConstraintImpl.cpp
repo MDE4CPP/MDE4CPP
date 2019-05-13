@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -195,14 +193,6 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMaxint()!=nullptr)
 	{
 		m_maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getMaxint()->copy());
@@ -386,9 +376,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return eAny(getMaxint()); //12016
+			return eAny(getMaxint()); //12015
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return eAny(getMinint()); //12017
+			return eAny(getMinint()); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -397,9 +387,9 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return getMaxint() != nullptr; //12016
+			return getMaxint() != nullptr; //12015
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return getMinint() != nullptr; //12017
+			return getMinint() != nullptr; //12016
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
@@ -411,14 +401,14 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMaxint(_maxint); //12016
+			setMaxint(_maxint); //12015
 			return true;
 		}
 		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMinint(_minint); //12017
+			setMinint(_minint); //12016
 			return true;
 		}
 	}
@@ -521,7 +511,6 @@ void InteractionConstraintImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

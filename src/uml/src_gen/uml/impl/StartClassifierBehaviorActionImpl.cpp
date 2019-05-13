@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -205,14 +203,6 @@ StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const Start
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -397,7 +387,7 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //21828
+			return eAny(getObject()); //21827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -406,7 +396,7 @@ bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //21828
+			return getObject() != nullptr; //21827
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -418,7 +408,7 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //21828
+			setObject(_object); //21827
 			return true;
 		}
 	}
@@ -507,7 +497,6 @@ void StartClassifierBehaviorActionImpl::save(std::shared_ptr<persistence::interf
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

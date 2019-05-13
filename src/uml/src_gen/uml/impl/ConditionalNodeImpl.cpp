@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -288,14 +286,6 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):Condit
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_clause" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
@@ -640,13 +630,13 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return eAny(getClause()); //4945
+			return eAny(getClause()); //4944
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //4946
+			return eAny(getIsAssured()); //4945
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //4947
+			return eAny(getIsDeterminate()); //4946
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return eAny(getResult()); //4948
+			return eAny(getResult()); //4947
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -655,13 +645,13 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return getClause() != nullptr; //4945
+			return getClause() != nullptr; //4944
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //4946
+			return getIsAssured() != false; //4945
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //4947
+			return getIsDeterminate() != false; //4946
 		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return getResult() != nullptr; //4948
+			return getResult() != nullptr; //4947
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -673,14 +663,14 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //4946
+			setIsAssured(_isAssured); //4945
 			return true;
 		}
 		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //4947
+			setIsDeterminate(_isDeterminate); //4946
 			return true;
 		}
 	}
@@ -821,7 +811,6 @@ void ConditionalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

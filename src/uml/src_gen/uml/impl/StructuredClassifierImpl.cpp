@@ -49,8 +49,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -303,14 +301,6 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -606,13 +596,13 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //22839
+			return eAny(getOwnedAttribute()); //22838
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
-			return eAny(getOwnedConnector()); //22840
+			return eAny(getOwnedConnector()); //22839
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
-			return eAny(getPart()); //22841
+			return eAny(getPart()); //22840
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
-			return eAny(getRole()); //22842
+			return eAny(getRole()); //22841
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -621,13 +611,13 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //22839
+			return getOwnedAttribute() != nullptr; //22838
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
-			return getOwnedConnector() != nullptr; //22840
+			return getOwnedConnector() != nullptr; //22839
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
-			return getPart() != nullptr; //22841
+			return getPart() != nullptr; //22840
 		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
-			return getRole() != nullptr; //22842
+			return getRole() != nullptr; //22841
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -740,7 +730,6 @@ void StructuredClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

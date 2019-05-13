@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -220,14 +218,6 @@ SendObjectActionImpl::SendObjectActionImpl(const SendObjectActionImpl & obj):Sen
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
@@ -426,9 +416,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return eAny(getRequest()); //21230
+			return eAny(getRequest()); //21229
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //21231
+			return eAny(getTarget()); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,9 +427,9 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return getRequest() != nullptr; //21230
+			return getRequest() != nullptr; //21229
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //21231
+			return getTarget() != nullptr; //21230
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -451,14 +441,14 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _request = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRequest(_request); //21230
+			setRequest(_request); //21229
 			return true;
 		}
 		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //21231
+			setTarget(_target); //21230
 			return true;
 		}
 	}
@@ -565,7 +555,6 @@ void SendObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -223,14 +221,6 @@ ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj):ObjectNodeImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -430,15 +420,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return eAny(getInState()); //16022
+			return eAny(getInState()); //16021
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //16023
+			return eAny(getIsControlType()); //16022
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //16024
+			return eAny(getOrdering()); //16023
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return eAny(getSelection()); //16025
+			return eAny(getSelection()); //16024
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return eAny(getUpperBound()); //16026
+			return eAny(getUpperBound()); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -454,15 +444,15 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
-			return getInState() != nullptr; //16022
+			return getInState() != nullptr; //16021
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType() != false; //16023
+			return getIsControlType() != false; //16022
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16024
+			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
-			return getSelection() != nullptr; //16025
+			return getSelection() != nullptr; //16024
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
-			return getUpperBound() != nullptr; //16026
+			return getUpperBound() != nullptr; //16025
 	}
 	bool result = false;
 	result = ActivityNodeImpl::internalEIsSet(featureID);
@@ -481,28 +471,28 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isControlType = newValue->get<bool>();
-			setIsControlType(_isControlType); //16023
+			setIsControlType(_isControlType); //16022
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			ObjectNodeOrderingKind _ordering = newValue->get<ObjectNodeOrderingKind>();
-			setOrdering(_ordering); //16024
+			setOrdering(_ordering); //16023
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setSelection(_selection); //16025
+			setSelection(_selection); //16024
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperBound = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setUpperBound(_upperBound); //16026
+			setUpperBound(_upperBound); //16025
 			return true;
 		}
 	}
@@ -686,7 +676,6 @@ void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

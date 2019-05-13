@@ -351,6 +351,7 @@ namespace Ecore
 				static std::shared_ptr<EcorePackage> instance;
 			public:
 				static std::shared_ptr<EcorePackage> eInstance();
+
 	};
 }
 #endif /* end of include guard: ECORE_METAMODELPACKAGE_HPP */

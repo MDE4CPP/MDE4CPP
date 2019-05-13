@@ -86,7 +86,7 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
-}
+} 
 
 void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
 {

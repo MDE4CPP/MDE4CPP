@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +38,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -132,14 +129,6 @@ PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImpor
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getImportedPackage()!=nullptr)
 	{
 		m_importedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getImportedPackage()->copy());
@@ -271,11 +260,11 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
-			return eAny(getImportedPackage()); //1717
+			return eAny(getImportedPackage()); //1716
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return eAny(getImportingNamespace()); //1718
+			return eAny(getImportingNamespace()); //1717
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1719
+			return eAny(getVisibility()); //1718
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,11 +273,11 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
-			return getImportedPackage() != nullptr; //1717
+			return getImportedPackage() != nullptr; //1716
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //1718
+			return getImportingNamespace().lock() != nullptr; //1717
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1719
+			return m_visibility != VisibilityKind::PUBLIC;; //1718
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -300,21 +289,21 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _importedPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setImportedPackage(_importedPackage); //1717
+			setImportedPackage(_importedPackage); //1716
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setImportingNamespace(_importingNamespace); //1718
+			setImportingNamespace(_importingNamespace); //1717
 			return true;
 		}
 		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //1719
+			setVisibility(_visibility); //1718
 			return true;
 		}
 	}
@@ -439,7 +428,6 @@ void PackageImportImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

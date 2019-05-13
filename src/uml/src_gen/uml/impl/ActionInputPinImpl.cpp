@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InputPin.hpp"
@@ -277,14 +275,6 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getFromAction()!=nullptr)
 	{
 		m_fromAction = std::dynamic_pointer_cast<uml::Action>(obj.getFromAction()->copy());
@@ -488,7 +478,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return eAny(getFromAction()); //638
+			return eAny(getFromAction()); //637
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -497,7 +487,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
-			return getFromAction() != nullptr; //638
+			return getFromAction() != nullptr; //637
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -509,7 +499,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _fromAction = newValue->get<std::shared_ptr<uml::Action>>();
-			setFromAction(_fromAction); //638
+			setFromAction(_fromAction); //637
 			return true;
 		}
 	}
@@ -603,7 +593,6 @@ void ActionInputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

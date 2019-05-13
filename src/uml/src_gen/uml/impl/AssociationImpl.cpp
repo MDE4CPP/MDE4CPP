@@ -46,8 +46,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -312,14 +310,6 @@ AssociationImpl::AssociationImpl(const AssociationImpl & obj):AssociationImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -657,15 +647,15 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
-			return eAny(getEndType()); //2140
+			return eAny(getEndType()); //2139
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //2141
+			return eAny(getIsDerived()); //2140
 		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
-			return eAny(getMemberEnd()); //2142
+			return eAny(getMemberEnd()); //2141
 		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
-			return eAny(getNavigableOwnedEnd()); //2144
+			return eAny(getNavigableOwnedEnd()); //2143
 		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
-			return eAny(getOwnedEnd()); //2143
+			return eAny(getOwnedEnd()); //2142
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -681,15 +671,15 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
-			return getEndType() != nullptr; //2140
+			return getEndType() != nullptr; //2139
 		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
-			return getIsDerived() != false; //2141
+			return getIsDerived() != false; //2140
 		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
-			return getMemberEnd() != nullptr; //2142
+			return getMemberEnd() != nullptr; //2141
 		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
-			return getNavigableOwnedEnd() != nullptr; //2144
+			return getNavigableOwnedEnd() != nullptr; //2143
 		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
-			return getOwnedEnd() != nullptr; //2143
+			return getOwnedEnd() != nullptr; //2142
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -708,7 +698,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
-			setIsDerived(_isDerived); //2141
+			setIsDerived(_isDerived); //2140
 			return true;
 		}
 	}
@@ -873,7 +863,6 @@ void AssociationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

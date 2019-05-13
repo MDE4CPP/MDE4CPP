@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -201,14 +199,6 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -386,13 +376,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
-			return eAny(getBehavior()); //16615
+			return eAny(getBehavior()); //16614
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
-			return eAny(getBody()); //16616
+			return eAny(getBody()); //16615
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16617
+			return eAny(getLanguage()); //16616
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16618
+			return eAny(getResult()); //16617
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -401,13 +391,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
-			return getBehavior() != nullptr; //16615
+			return getBehavior() != nullptr; //16614
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
-			return !getBody()->empty(); //16616
+			return !getBody()->empty(); //16615
 		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16617
+			return !getLanguage()->empty(); //16616
 		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16618
+			return getResult() != nullptr; //16617
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -419,7 +409,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setBehavior(_behavior); //16615
+			setBehavior(_behavior); //16614
 			return true;
 		}
 	}
@@ -538,7 +528,6 @@ void OpaqueExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

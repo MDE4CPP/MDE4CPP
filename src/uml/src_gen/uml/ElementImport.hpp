@@ -50,11 +50,6 @@ namespace uml
 	class DirectedRelationship;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

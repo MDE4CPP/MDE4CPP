@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -251,14 +249,6 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -439,9 +429,9 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
-			return eAny(getAction()); //16935
+			return eAny(getAction()); //16934
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
-			return eAny(getCallAction()); //16934
+			return eAny(getCallAction()); //16933
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -450,9 +440,9 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
-			return getAction().lock() != nullptr; //16935
+			return getAction().lock() != nullptr; //16934
 		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
-			return getCallAction().lock() != nullptr; //16934
+			return getCallAction().lock() != nullptr; //16933
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -464,7 +454,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CallAction> _callAction = newValue->get<std::shared_ptr<uml::CallAction>>();
-			setCallAction(_callAction); //16934
+			setCallAction(_callAction); //16933
 			return true;
 		}
 	}
@@ -543,7 +533,6 @@ void OutputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

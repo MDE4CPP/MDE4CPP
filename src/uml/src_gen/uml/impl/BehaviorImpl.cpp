@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -399,14 +397,6 @@ BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj):BehaviorImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -869,23 +859,23 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
-			return eAny(getBehavioredClassifier()); //2361
+			return eAny(getBehavioredClassifier()); //2360
 		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //2354
+			return eAny(getContext()); //2353
 		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
-			return eAny(getIsReentrant()); //2355
+			return eAny(getIsReentrant()); //2354
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETER:
-			return eAny(getOwnedParameter()); //2356
+			return eAny(getOwnedParameter()); //2355
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETERSET:
-			return eAny(getOwnedParameterSet()); //2357
+			return eAny(getOwnedParameterSet()); //2356
 		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
-			return eAny(getPostcondition()); //2358
+			return eAny(getPostcondition()); //2357
 		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
-			return eAny(getPrecondition()); //2359
+			return eAny(getPrecondition()); //2358
 		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
-			return eAny(getRedefinedBehavior()); //2360
+			return eAny(getRedefinedBehavior()); //2359
 		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //2353
+			return eAny(getSpecification()); //2352
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -894,23 +884,23 @@ bool BehaviorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier().lock() != nullptr; //2361
+			return getBehavioredClassifier().lock() != nullptr; //2360
 		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
-			return getContext() != nullptr; //2354
+			return getContext() != nullptr; //2353
 		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
-			return getIsReentrant() != true; //2355
+			return getIsReentrant() != true; //2354
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2356
+			return getOwnedParameter() != nullptr; //2355
 		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //2357
+			return getOwnedParameterSet() != nullptr; //2356
 		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
-			return getPostcondition() != nullptr; //2358
+			return getPostcondition() != nullptr; //2357
 		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
-			return getPrecondition() != nullptr; //2359
+			return getPrecondition() != nullptr; //2358
 		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior() != nullptr; //2360
+			return getRedefinedBehavior() != nullptr; //2359
 		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //2353
+			return getSpecification() != nullptr; //2352
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -922,28 +912,28 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
-			setBehavioredClassifier(_behavioredClassifier); //2361
+			setBehavioredClassifier(_behavioredClassifier); //2360
 			return true;
 		}
 		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::BehavioredClassifier> _context = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
-			setContext(_context); //2354
+			setContext(_context); //2353
 			return true;
 		}
 		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
 		{
 			// BOOST CAST
 			bool _isReentrant = newValue->get<bool>();
-			setIsReentrant(_isReentrant); //2355
+			setIsReentrant(_isReentrant); //2354
 			return true;
 		}
 		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::BehavioralFeature> _specification = newValue->get<std::shared_ptr<uml::BehavioralFeature>>();
-			setSpecification(_specification); //2353
+			setSpecification(_specification); //2352
 			return true;
 		}
 	}
@@ -1192,7 +1182,6 @@ void BehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -213,14 +211,6 @@ TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getFirst()!=nullptr)
 	{
 		m_first = std::dynamic_pointer_cast<uml::InputPin>(obj.getFirst()->copy());
@@ -453,11 +443,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
-			return eAny(getFirst()); //23528
+			return eAny(getFirst()); //23527
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //23529
+			return eAny(getResult()); //23528
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
-			return eAny(getSecond()); //23530
+			return eAny(getSecond()); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -466,11 +456,11 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
-			return getFirst() != nullptr; //23528
+			return getFirst() != nullptr; //23527
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //23529
+			return getResult() != nullptr; //23528
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
-			return getSecond() != nullptr; //23530
+			return getSecond() != nullptr; //23529
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -482,21 +472,21 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _first = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setFirst(_first); //23528
+			setFirst(_first); //23527
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //23529
+			setResult(_result); //23528
 			return true;
 		}
 		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _second = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setSecond(_second); //23530
+			setSecond(_second); //23529
 			return true;
 		}
 	}
@@ -617,7 +607,6 @@ void TestIdentityActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

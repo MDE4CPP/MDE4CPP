@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,8 +34,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -105,14 +102,6 @@ ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -212,11 +201,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return eAny(getContent()); //1114
+			return eAny(getContent()); //1113
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //1115
+			return eAny(getFormat()); //1114
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //1116
+			return eAny(getLocation()); //1115
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -225,11 +214,11 @@ bool ImageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return getContent() != ""; //1114
+			return getContent() != ""; //1113
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return getFormat() != ""; //1115
+			return getFormat() != ""; //1114
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return getLocation() != ""; //1116
+			return getLocation() != ""; //1115
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -241,21 +230,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
-			setContent(_content); //1114
+			setContent(_content); //1113
 			return true;
 		}
 		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //1115
+			setFormat(_format); //1114
 			return true;
 		}
 		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //1116
+			setLocation(_location); //1115
 			return true;
 		}
 	}
@@ -346,7 +335,6 @@ void ImageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -227,14 +225,6 @@ UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj):Unm
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -474,11 +464,11 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //24628
+			return eAny(getObject()); //24627
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //24629
+			return eAny(getResult()); //24628
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
-			return eAny(getUnmarshallType()); //24630
+			return eAny(getUnmarshallType()); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -487,11 +477,11 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //24628
+			return getObject() != nullptr; //24627
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //24629
+			return getResult() != nullptr; //24628
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
-			return getUnmarshallType() != nullptr; //24630
+			return getUnmarshallType() != nullptr; //24629
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -503,14 +493,14 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //24628
+			setObject(_object); //24627
 			return true;
 		}
 		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _unmarshallType = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setUnmarshallType(_unmarshallType); //24630
+			setUnmarshallType(_unmarshallType); //24629
 			return true;
 		}
 	}
@@ -649,7 +639,6 @@ void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

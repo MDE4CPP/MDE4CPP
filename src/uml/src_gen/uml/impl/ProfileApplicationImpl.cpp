@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -38,8 +37,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "ecore/ENamedElement.hpp"
 
@@ -143,14 +140,6 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_appliedProfile" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
@@ -282,11 +271,11 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
-			return eAny(getAppliedProfile()); //1847
+			return eAny(getAppliedProfile()); //1846
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
-			return eAny(getApplyingPackage()); //1849
+			return eAny(getApplyingPackage()); //1848
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
-			return eAny(getIsStrict()); //1848
+			return eAny(getIsStrict()); //1847
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,11 +284,11 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
-			return getAppliedProfile() != nullptr; //1847
+			return getAppliedProfile() != nullptr; //1846
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
-			return getApplyingPackage().lock() != nullptr; //1849
+			return getApplyingPackage().lock() != nullptr; //1848
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
-			return getIsStrict() != false; //1848
+			return getIsStrict() != false; //1847
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -311,21 +300,21 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Profile> _appliedProfile = newValue->get<std::shared_ptr<uml::Profile>>();
-			setAppliedProfile(_appliedProfile); //1847
+			setAppliedProfile(_appliedProfile); //1846
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _applyingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setApplyingPackage(_applyingPackage); //1849
+			setApplyingPackage(_applyingPackage); //1848
 			return true;
 		}
 		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = newValue->get<bool>();
-			setIsStrict(_isStrict); //1848
+			setIsStrict(_isStrict); //1847
 			return true;
 		}
 	}
@@ -435,7 +424,6 @@ void ProfileApplicationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

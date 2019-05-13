@@ -41,8 +41,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -163,14 +161,6 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -274,7 +264,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return eAny(getEnd()); //5013
+			return eAny(getEnd()); //5012
 	}
 	Any result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
@@ -290,7 +280,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return getEnd() != nullptr; //5013
+			return getEnd() != nullptr; //5012
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);
@@ -369,7 +359,6 @@ void ConnectableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

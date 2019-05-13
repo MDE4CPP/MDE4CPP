@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -165,14 +163,6 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_condition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -297,9 +287,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
-			return eAny(getCondition()); //17710
+			return eAny(getCondition()); //1779
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //17711
+			return eAny(getParameter()); //17710
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -308,9 +298,9 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
-			return getCondition() != nullptr; //17710
+			return getCondition() != nullptr; //1779
 		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //17711
+			return getParameter() != nullptr; //17710
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -431,7 +421,6 @@ void ParameterSetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

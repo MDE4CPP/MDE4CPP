@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -213,14 +211,6 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationAct
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -415,9 +405,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
-			return eAny(getAssociation()); //3928
+			return eAny(getAssociation()); //3927
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //3929
+			return eAny(getObject()); //3928
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,9 +416,9 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
-			return getAssociation() != nullptr; //3928
+			return getAssociation() != nullptr; //3927
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //3929
+			return getObject() != nullptr; //3928
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -440,14 +430,14 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
-			setAssociation(_association); //3928
+			setAssociation(_association); //3927
 			return true;
 		}
 		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //3929
+			setObject(_object); //3928
 			return true;
 		}
 	}
@@ -569,7 +559,6 @@ void ClearAssociationActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

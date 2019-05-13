@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -173,14 +171,6 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -328,11 +318,11 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return eAny(getContainer()); //25410
+			return eAny(getContainer()); //2549
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return eAny(getIncoming()); //25411
+			return eAny(getIncoming()); //25410
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return eAny(getOutgoing()); //25412
+			return eAny(getOutgoing()); //25411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -341,11 +331,11 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
-			return getContainer().lock() != nullptr; //25410
+			return getContainer().lock() != nullptr; //2549
 		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
-			return getIncoming() != nullptr; //25411
+			return getIncoming() != nullptr; //25410
 		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
-			return getOutgoing() != nullptr; //25412
+			return getOutgoing() != nullptr; //25411
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -357,7 +347,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
-			setContainer(_container); //25410
+			setContainer(_container); //2549
 			return true;
 		}
 	}
@@ -425,7 +415,6 @@ void VertexImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

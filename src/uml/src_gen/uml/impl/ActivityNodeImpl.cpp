@@ -53,8 +53,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -270,14 +268,6 @@ ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj):ActivityNodeImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -464,21 +454,21 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-			return eAny(getActivity()); //1213
+			return eAny(getActivity()); //1212
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
-			return eAny(getInGroup()); //1214
+			return eAny(getInGroup()); //1213
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
-			return eAny(getInInterruptibleRegion()); //1215
+			return eAny(getInInterruptibleRegion()); //1214
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
-			return eAny(getInPartition()); //1220
+			return eAny(getInPartition()); //1219
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-			return eAny(getInStructuredNode()); //1216
+			return eAny(getInStructuredNode()); //1215
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
-			return eAny(getIncoming()); //1217
+			return eAny(getIncoming()); //1216
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
-			return eAny(getOutgoing()); //1218
+			return eAny(getOutgoing()); //1217
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
-			return eAny(getRedefinedNode()); //1219
+			return eAny(getRedefinedNode()); //1218
 	}
 	Any result;
 	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
@@ -494,21 +484,21 @@ bool ActivityNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-			return getActivity().lock() != nullptr; //1213
+			return getActivity().lock() != nullptr; //1212
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
-			return getInGroup() != nullptr; //1214
+			return getInGroup() != nullptr; //1213
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
-			return getInInterruptibleRegion() != nullptr; //1215
+			return getInInterruptibleRegion() != nullptr; //1214
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
-			return getInPartition() != nullptr; //1220
+			return getInPartition() != nullptr; //1219
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode().lock() != nullptr; //1216
+			return getInStructuredNode().lock() != nullptr; //1215
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
-			return getIncoming() != nullptr; //1217
+			return getIncoming() != nullptr; //1216
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
-			return getOutgoing() != nullptr; //1218
+			return getOutgoing() != nullptr; //1217
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
-			return getRedefinedNode() != nullptr; //1219
+			return getRedefinedNode() != nullptr; //1218
 	}
 	bool result = false;
 	result = ActivityContentImpl::internalEIsSet(featureID);
@@ -527,14 +517,14 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivity(_activity); //1213
+			setActivity(_activity); //1212
 			return true;
 		}
 		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setInStructuredNode(_inStructuredNode); //1216
+			setInStructuredNode(_inStructuredNode); //1215
 			return true;
 		}
 	}
@@ -744,7 +734,6 @@ void ActivityNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExecutionSpecification.hpp"
@@ -180,14 +178,6 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -305,7 +295,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
-			return eAny(getExecution()); //9016
+			return eAny(getExecution()); //9015
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -314,7 +304,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
-			return getExecution() != nullptr; //9016
+			return getExecution() != nullptr; //9015
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
@@ -326,7 +316,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutionSpecification> _execution = newValue->get<std::shared_ptr<uml::ExecutionSpecification>>();
-			setExecution(_execution); //9016
+			setExecution(_execution); //9015
 			return true;
 		}
 	}
@@ -417,7 +407,6 @@ void ExecutionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::int
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

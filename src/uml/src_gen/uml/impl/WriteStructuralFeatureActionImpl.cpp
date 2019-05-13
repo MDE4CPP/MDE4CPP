@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -213,14 +211,6 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteSt
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -447,9 +437,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //25730
+			return eAny(getResult()); //25729
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //25731
+			return eAny(getValue()); //25730
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -458,9 +448,9 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //25730
+			return getResult() != nullptr; //25729
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //25731
+			return getValue() != nullptr; //25730
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -472,14 +462,14 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //25730
+			setResult(_result); //25729
 			return true;
 		}
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //25731
+			setValue(_value); //25730
 			return true;
 		}
 	}
@@ -586,7 +576,6 @@ void WriteStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

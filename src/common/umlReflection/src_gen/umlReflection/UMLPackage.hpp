@@ -3302,6 +3302,7 @@ namespace UML
 				static std::shared_ptr<UMLPackage> instance;
 			public:
 				static std::shared_ptr<UMLPackage> eInstance();
+
 	};
 }
 #endif /* end of include guard: UML_METAMODELPACKAGE_HPP */

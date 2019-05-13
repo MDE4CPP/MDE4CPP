@@ -66,8 +66,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -450,14 +448,6 @@ ActivityImpl::ActivityImpl(const ActivityImpl & obj):ActivityImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
@@ -983,25 +973,25 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return eAny(getEdge()); //763
+			return eAny(getEdge()); //762
 		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return eAny(getGroup()); //766
+			return eAny(getGroup()); //765
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //768
+			return eAny(getIsReadOnly()); //767
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return eAny(getIsSingleExecution()); //769
+			return eAny(getIsSingleExecution()); //768
 		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return eAny(getNode()); //764
+			return eAny(getNode()); //763
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return eAny(getOwnedGroup()); //762
+			return eAny(getOwnedGroup()); //761
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return eAny(getOwnedNode()); //767
+			return eAny(getOwnedNode()); //766
 		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return eAny(getPartition()); //770
+			return eAny(getPartition()); //769
 		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return eAny(getStructuredNode()); //771
+			return eAny(getStructuredNode()); //770
 		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //765
+			return eAny(getVariable()); //764
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -1010,25 +1000,25 @@ bool ActivityImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //763
+			return getEdge() != nullptr; //762
 		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return getGroup() != nullptr; //766
+			return getGroup() != nullptr; //765
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //768
+			return getIsReadOnly() != false; //767
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return getIsSingleExecution() != false; //769
+			return getIsSingleExecution() != false; //768
 		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return getNode() != nullptr; //764
+			return getNode() != nullptr; //763
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return getOwnedGroup() != nullptr; //762
+			return getOwnedGroup() != nullptr; //761
 		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return getOwnedNode() != nullptr; //767
+			return getOwnedNode() != nullptr; //766
 		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return getPartition() != nullptr; //770
+			return getPartition() != nullptr; //769
 		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return getStructuredNode() != nullptr; //771
+			return getStructuredNode() != nullptr; //770
 		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //765
+			return getVariable() != nullptr; //764
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -1040,14 +1030,14 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //768
+			setIsReadOnly(_isReadOnly); //767
 			return true;
 		}
 		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
 		{
 			// BOOST CAST
 			bool _isSingleExecution = newValue->get<bool>();
-			setIsSingleExecution(_isSingleExecution); //769
+			setIsSingleExecution(_isSingleExecution); //768
 			return true;
 		}
 	}
@@ -1297,7 +1287,6 @@ void ActivityImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

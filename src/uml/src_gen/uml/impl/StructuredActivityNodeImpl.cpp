@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -335,14 +333,6 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityN
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -714,17 +704,17 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
-			return eAny(getEdge()); //22739
+			return eAny(getEdge()); //22738
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
-			return eAny(getMustIsolate()); //22740
+			return eAny(getMustIsolate()); //22739
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
-			return eAny(getNode()); //22744
+			return eAny(getNode()); //22743
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
-			return eAny(getStructuredNodeInput()); //22741
+			return eAny(getStructuredNodeInput()); //22740
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
-			return eAny(getStructuredNodeOutput()); //22742
+			return eAny(getStructuredNodeOutput()); //22741
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //22743
+			return eAny(getVariable()); //22742
 	}
 	Any result;
 	result = ActionImpl::eGet(featureID, resolve, coreType);
@@ -745,17 +735,17 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //22739
+			return getEdge() != nullptr; //22738
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
-			return getMustIsolate() != false; //22740
+			return getMustIsolate() != false; //22739
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
-			return getNode() != nullptr; //22744
+			return getNode() != nullptr; //22743
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput() != nullptr; //22741
+			return getStructuredNodeInput() != nullptr; //22740
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput() != nullptr; //22742
+			return getStructuredNodeOutput() != nullptr; //22741
 		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //22743
+			return getVariable() != nullptr; //22742
 	}
 	bool result = false;
 	result = ActionImpl::internalEIsSet(featureID);
@@ -779,7 +769,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _mustIsolate = newValue->get<bool>();
-			setMustIsolate(_mustIsolate); //22740
+			setMustIsolate(_mustIsolate); //22739
 			return true;
 		}
 	}
@@ -970,7 +960,6 @@ void StructuredActivityNodeImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

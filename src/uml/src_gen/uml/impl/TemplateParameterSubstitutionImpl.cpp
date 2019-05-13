@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -36,8 +35,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -139,14 +136,6 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getOwnedActual()!=nullptr)
 	{
 		m_ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedActual()->copy());
@@ -278,13 +267,13 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_ACTUAL:
-			return eAny(getActual()); //2324
+			return eAny(getActual()); //2323
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
-			return eAny(getFormal()); //2325
+			return eAny(getFormal()); //2324
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
-			return eAny(getOwnedActual()); //2326
+			return eAny(getOwnedActual()); //2325
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
-			return eAny(getTemplateBinding()); //2327
+			return eAny(getTemplateBinding()); //2326
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -293,13 +282,13 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_ACTUAL:
-			return getActual() != nullptr; //2324
+			return getActual() != nullptr; //2323
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
-			return getFormal() != nullptr; //2325
+			return getFormal() != nullptr; //2324
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
-			return getOwnedActual() != nullptr; //2326
+			return getOwnedActual() != nullptr; //2325
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
-			return getTemplateBinding().lock() != nullptr; //2327
+			return getTemplateBinding().lock() != nullptr; //2326
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -311,28 +300,28 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _actual = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setActual(_actual); //2324
+			setActual(_actual); //2323
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_FORMAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _formal = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setFormal(_formal); //2325
+			setFormal(_formal); //2324
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_OWNEDACTUAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedActual = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setOwnedActual(_ownedActual); //2326
+			setOwnedActual(_ownedActual); //2325
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateBinding> _templateBinding = newValue->get<std::shared_ptr<uml::TemplateBinding>>();
-			setTemplateBinding(_templateBinding); //2327
+			setTemplateBinding(_templateBinding); //2326
 			return true;
 		}
 	}
@@ -475,7 +464,6 @@ void TemplateParameterSubstitutionImpl::save(std::shared_ptr<persistence::interf
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -48,8 +48,6 @@
 
 #include "uml/DeploymentTarget.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -214,14 +212,6 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -395,11 +385,11 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //11715
+			return eAny(getClassifier()); //11714
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return eAny(getSlot()); //11716
+			return eAny(getSlot()); //11715
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //11717
+			return eAny(getSpecification()); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -420,11 +410,11 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //11715
+			return getClassifier() != nullptr; //11714
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return getSlot() != nullptr; //11716
+			return getSlot() != nullptr; //11715
 		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //11717
+			return getSpecification() != nullptr; //11716
 	}
 	bool result = false;
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
@@ -448,7 +438,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //11717
+			setSpecification(_specification); //11716
 			return true;
 		}
 	}
@@ -602,7 +592,6 @@ void InstanceSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

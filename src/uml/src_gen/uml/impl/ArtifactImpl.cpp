@@ -49,8 +49,6 @@
 
 #include "uml/DeployedArtifact.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -314,14 +312,6 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -653,15 +643,15 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
-			return eAny(getFileName()); //2039
+			return eAny(getFileName()); //2038
 		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
-			return eAny(getManifestation()); //2040
+			return eAny(getManifestation()); //2039
 		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
-			return eAny(getNestedArtifact()); //2041
+			return eAny(getNestedArtifact()); //2040
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //2042
+			return eAny(getOwnedAttribute()); //2041
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //2043
+			return eAny(getOwnedOperation()); //2042
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -677,15 +667,15 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
-			return getFileName() != ""; //2039
+			return getFileName() != ""; //2038
 		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
-			return getManifestation() != nullptr; //2040
+			return getManifestation() != nullptr; //2039
 		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
-			return getNestedArtifact() != nullptr; //2041
+			return getNestedArtifact() != nullptr; //2040
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //2042
+			return getOwnedAttribute() != nullptr; //2041
 		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //2043
+			return getOwnedOperation() != nullptr; //2042
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -704,7 +694,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //2039
+			setFileName(_fileName); //2038
 			return true;
 		}
 	}
@@ -878,7 +868,6 @@ void ArtifactImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

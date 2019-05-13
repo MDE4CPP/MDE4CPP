@@ -52,8 +52,6 @@
 
 #include "uml/Deployment.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Interface.hpp"
@@ -341,14 +339,6 @@ PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
@@ -619,19 +609,19 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
-			return eAny(getIsBehavior()); //18145
+			return eAny(getIsBehavior()); //18144
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
-			return eAny(getIsConjugated()); //18146
+			return eAny(getIsConjugated()); //18145
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
-			return eAny(getIsService()); //18147
+			return eAny(getIsService()); //18146
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
-			return eAny(getProtocol()); //18148
+			return eAny(getProtocol()); //18147
 		case UmlPackage::PORT_EREFERENCE_PROVIDED:
-			return eAny(getProvided()); //18149
+			return eAny(getProvided()); //18148
 		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
-			return eAny(getRedefinedPort()); //18150
+			return eAny(getRedefinedPort()); //18149
 		case UmlPackage::PORT_EREFERENCE_REQUIRED:
-			return eAny(getRequired()); //18151
+			return eAny(getRequired()); //18150
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
@@ -640,19 +630,19 @@ bool PortImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
-			return getIsBehavior() != false; //18145
+			return getIsBehavior() != false; //18144
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
-			return getIsConjugated() != false; //18146
+			return getIsConjugated() != false; //18145
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
-			return getIsService() != true; //18147
+			return getIsService() != true; //18146
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
-			return getProtocol() != nullptr; //18148
+			return getProtocol() != nullptr; //18147
 		case UmlPackage::PORT_EREFERENCE_PROVIDED:
-			return getProvided() != nullptr; //18149
+			return getProvided() != nullptr; //18148
 		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
-			return getRedefinedPort() != nullptr; //18150
+			return getRedefinedPort() != nullptr; //18149
 		case UmlPackage::PORT_EREFERENCE_REQUIRED:
-			return getRequired() != nullptr; //18151
+			return getRequired() != nullptr; //18150
 	}
 	return PropertyImpl::internalEIsSet(featureID);
 }
@@ -664,28 +654,28 @@ bool PortImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isBehavior = newValue->get<bool>();
-			setIsBehavior(_isBehavior); //18145
+			setIsBehavior(_isBehavior); //18144
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
 		{
 			// BOOST CAST
 			bool _isConjugated = newValue->get<bool>();
-			setIsConjugated(_isConjugated); //18146
+			setIsConjugated(_isConjugated); //18145
 			return true;
 		}
 		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
 		{
 			// BOOST CAST
 			bool _isService = newValue->get<bool>();
-			setIsService(_isService); //18147
+			setIsService(_isService); //18146
 			return true;
 		}
 		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setProtocol(_protocol); //18148
+			setProtocol(_protocol); //18147
 			return true;
 		}
 	}
@@ -833,7 +823,6 @@ void PortImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

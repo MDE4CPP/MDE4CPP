@@ -48,8 +48,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -289,14 +287,6 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -584,11 +574,11 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
-			return eAny(getClassifierBehavior()); //2639
+			return eAny(getClassifierBehavior()); //2638
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
-			return eAny(getInterfaceRealization()); //2640
+			return eAny(getInterfaceRealization()); //2639
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
-			return eAny(getOwnedBehavior()); //2641
+			return eAny(getOwnedBehavior()); //2640
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -597,11 +587,11 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior() != nullptr; //2639
+			return getClassifierBehavior() != nullptr; //2638
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
-			return getInterfaceRealization() != nullptr; //2640
+			return getInterfaceRealization() != nullptr; //2639
 		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
-			return getOwnedBehavior() != nullptr; //2641
+			return getOwnedBehavior() != nullptr; //2640
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -613,7 +603,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _classifierBehavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setClassifierBehavior(_classifierBehavior); //2639
+			setClassifierBehavior(_classifierBehavior); //2638
 			return true;
 		}
 	}
@@ -751,7 +741,6 @@ void BehavioredClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

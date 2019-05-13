@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
 
 #include "uml/Element.hpp"
@@ -303,14 +301,6 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -724,9 +714,9 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return eAny(getIcon()); //22353
+			return eAny(getIcon()); //22352
 		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return eAny(getProfile()); //22354
+			return eAny(getProfile()); //22353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -735,9 +725,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return getIcon() != nullptr; //22353
+			return getIcon() != nullptr; //22352
 		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return getProfile() != nullptr; //22354
+			return getProfile() != nullptr; //22353
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -840,7 +830,6 @@ void StereotypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

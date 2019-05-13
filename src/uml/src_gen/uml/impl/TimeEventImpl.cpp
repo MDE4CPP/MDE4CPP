@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Event.hpp"
@@ -169,14 +167,6 @@ TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj):TimeEventImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -308,9 +298,9 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
-			return eAny(getIsRelative()); //23713
+			return eAny(getIsRelative()); //23712
 		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
-			return eAny(getWhen()); //23714
+			return eAny(getWhen()); //23713
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,9 +309,9 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
-			return getIsRelative() != false; //23713
+			return getIsRelative() != false; //23712
 		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
-			return getWhen() != nullptr; //23714
+			return getWhen() != nullptr; //23713
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
@@ -333,14 +323,14 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRelative = newValue->get<bool>();
-			setIsRelative(_isRelative); //23713
+			setIsRelative(_isRelative); //23712
 			return true;
 		}
 		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TimeExpression> _when = newValue->get<std::shared_ptr<uml::TimeExpression>>();
-			setWhen(_when); //23714
+			setWhen(_when); //23713
 			return true;
 		}
 	}
@@ -446,7 +436,6 @@ void TimeEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

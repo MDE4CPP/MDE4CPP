@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Generalization.hpp"
@@ -185,14 +183,6 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -339,13 +329,13 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return eAny(getGeneralization()); //11016
+			return eAny(getGeneralization()); //11015
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //11013
+			return eAny(getIsCovering()); //11012
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //11014
+			return eAny(getIsDisjoint()); //11013
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return eAny(getPowertype()); //11015
+			return eAny(getPowertype()); //11014
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -354,13 +344,13 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return getGeneralization() != nullptr; //11016
+			return getGeneralization() != nullptr; //11015
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return getIsCovering() != false; //11013
+			return getIsCovering() != false; //11012
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint() != false; //11014
+			return getIsDisjoint() != false; //11013
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return getPowertype() != nullptr; //11015
+			return getPowertype() != nullptr; //11014
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -372,21 +362,21 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCovering = newValue->get<bool>();
-			setIsCovering(_isCovering); //11013
+			setIsCovering(_isCovering); //11012
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = newValue->get<bool>();
-			setIsDisjoint(_isDisjoint); //11014
+			setIsDisjoint(_isDisjoint); //11013
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _powertype = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setPowertype(_powertype); //11015
+			setPowertype(_powertype); //11014
 			return true;
 		}
 	}
@@ -515,7 +505,6 @@ void GeneralizationSetImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

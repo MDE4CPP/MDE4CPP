@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -161,14 +159,6 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -306,11 +296,11 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return eAny(getIsLeaf()); //20410
+			return eAny(getIsLeaf()); //2049
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return eAny(getRedefinedElement()); //20411
+			return eAny(getRedefinedElement()); //20410
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return eAny(getRedefinitionContext()); //20412
+			return eAny(getRedefinitionContext()); //20411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,11 +309,11 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf() != false; //20410
+			return getIsLeaf() != false; //2049
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement() != nullptr; //20411
+			return getRedefinedElement() != nullptr; //20410
 		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext() != nullptr; //20412
+			return getRedefinitionContext() != nullptr; //20411
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -335,7 +325,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
-			setIsLeaf(_isLeaf); //20410
+			setIsLeaf(_isLeaf); //2049
 			return true;
 		}
 	}
@@ -410,7 +400,6 @@ void RedefinableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

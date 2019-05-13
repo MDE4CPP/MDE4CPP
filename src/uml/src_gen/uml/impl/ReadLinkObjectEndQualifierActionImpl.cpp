@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -217,14 +215,6 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -478,11 +468,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //19728
+			return eAny(getObject()); //19727
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //19729
+			return eAny(getQualifier()); //19728
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //19730
+			return eAny(getResult()); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -491,11 +481,11 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //19728
+			return getObject() != nullptr; //19727
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //19729
+			return getQualifier() != nullptr; //19728
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //19730
+			return getResult() != nullptr; //19729
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -507,21 +497,21 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //19728
+			setObject(_object); //19727
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
-			setQualifier(_qualifier); //19729
+			setQualifier(_qualifier); //19728
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //19730
+			setResult(_result); //19729
 			return true;
 		}
 	}
@@ -659,7 +649,6 @@ void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::int
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -50,8 +50,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -245,14 +243,6 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -483,19 +473,19 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
-			return eAny(getEdge()); //1421
+			return eAny(getEdge()); //1420
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
-			return eAny(getIsDimension()); //1415
+			return eAny(getIsDimension()); //1414
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
-			return eAny(getIsExternal()); //1416
+			return eAny(getIsExternal()); //1415
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
-			return eAny(getNode()); //1417
+			return eAny(getNode()); //1416
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
-			return eAny(getRepresents()); //1418
+			return eAny(getRepresents()); //1417
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
-			return eAny(getSubpartition()); //1419
+			return eAny(getSubpartition()); //1418
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
-			return eAny(getSuperPartition()); //1420
+			return eAny(getSuperPartition()); //1419
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -504,19 +494,19 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //1421
+			return getEdge() != nullptr; //1420
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
-			return getIsDimension() != false; //1415
+			return getIsDimension() != false; //1414
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
-			return getIsExternal() != false; //1416
+			return getIsExternal() != false; //1415
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
-			return getNode() != nullptr; //1417
+			return getNode() != nullptr; //1416
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
-			return getRepresents() != nullptr; //1418
+			return getRepresents() != nullptr; //1417
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
-			return getSubpartition() != nullptr; //1419
+			return getSubpartition() != nullptr; //1418
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
-			return getSuperPartition().lock() != nullptr; //1420
+			return getSuperPartition().lock() != nullptr; //1419
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -528,28 +518,28 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDimension = newValue->get<bool>();
-			setIsDimension(_isDimension); //1415
+			setIsDimension(_isDimension); //1414
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
 			bool _isExternal = newValue->get<bool>();
-			setIsExternal(_isExternal); //1416
+			setIsExternal(_isExternal); //1415
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Element> _represents = newValue->get<std::shared_ptr<uml::Element>>();
-			setRepresents(_represents); //1418
+			setRepresents(_represents); //1417
 			return true;
 		}
 		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityPartition> _superPartition = newValue->get<std::shared_ptr<uml::ActivityPartition>>();
-			setSuperPartition(_superPartition); //1420
+			setSuperPartition(_superPartition); //1419
 			return true;
 		}
 	}
@@ -736,7 +726,6 @@ void ActivityPartitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

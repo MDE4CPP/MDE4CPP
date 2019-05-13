@@ -46,8 +46,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -250,14 +248,6 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):Inform
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -497,7 +487,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return eAny(getRepresented()); //11439
+			return eAny(getRepresented()); //11438
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -506,7 +496,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return getRepresented() != nullptr; //11439
+			return getRepresented() != nullptr; //11438
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -610,7 +600,6 @@ void InformationItemImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -52,8 +52,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -261,14 +259,6 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getGuard()->copy());
@@ -497,25 +487,25 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
-			return eAny(getActivity()); //913
+			return eAny(getActivity()); //912
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
-			return eAny(getGuard()); //914
+			return eAny(getGuard()); //913
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
-			return eAny(getInGroup()); //922
+			return eAny(getInGroup()); //921
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
-			return eAny(getInPartition()); //915
+			return eAny(getInPartition()); //914
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
-			return eAny(getInStructuredNode()); //917
+			return eAny(getInStructuredNode()); //916
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
-			return eAny(getInterrupts()); //916
+			return eAny(getInterrupts()); //915
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
-			return eAny(getRedefinedEdge()); //920
+			return eAny(getRedefinedEdge()); //919
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
-			return eAny(getSource()); //919
+			return eAny(getSource()); //918
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
-			return eAny(getTarget()); //918
+			return eAny(getTarget()); //917
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
-			return eAny(getWeight()); //921
+			return eAny(getWeight()); //920
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -524,25 +514,25 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
-			return getActivity().lock() != nullptr; //913
+			return getActivity().lock() != nullptr; //912
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
-			return getGuard() != nullptr; //914
+			return getGuard() != nullptr; //913
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
-			return getInGroup() != nullptr; //922
+			return getInGroup() != nullptr; //921
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
-			return getInPartition() != nullptr; //915
+			return getInPartition() != nullptr; //914
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
-			return getInStructuredNode().lock() != nullptr; //917
+			return getInStructuredNode().lock() != nullptr; //916
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
-			return getInterrupts() != nullptr; //916
+			return getInterrupts() != nullptr; //915
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
-			return getRedefinedEdge() != nullptr; //920
+			return getRedefinedEdge() != nullptr; //919
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //919
+			return getSource() != nullptr; //918
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //918
+			return getTarget() != nullptr; //917
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
-			return getWeight() != nullptr; //921
+			return getWeight() != nullptr; //920
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -554,49 +544,49 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivity(_activity); //913
+			setActivity(_activity); //912
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _guard = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setGuard(_guard); //914
+			setGuard(_guard); //913
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setInStructuredNode(_inStructuredNode); //917
+			setInStructuredNode(_inStructuredNode); //916
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = newValue->get<std::shared_ptr<uml::InterruptibleActivityRegion>>();
-			setInterrupts(_interrupts); //916
+			setInterrupts(_interrupts); //915
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _source = newValue->get<std::shared_ptr<uml::ActivityNode>>();
-			setSource(_source); //919
+			setSource(_source); //918
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _target = newValue->get<std::shared_ptr<uml::ActivityNode>>();
-			setTarget(_target); //918
+			setTarget(_target); //917
 			return true;
 		}
 		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _weight = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setWeight(_weight); //921
+			setWeight(_weight); //920
 			return true;
 		}
 	}
@@ -833,7 +823,6 @@ void ActivityEdgeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

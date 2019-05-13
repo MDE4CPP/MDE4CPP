@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -193,14 +191,6 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -325,9 +315,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return eAny(getMax()); //12815
+			return eAny(getMax()); //12814
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return eAny(getMin()); //12816
+			return eAny(getMin()); //12815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -336,9 +326,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return getMax() != nullptr; //12815
+			return getMax() != nullptr; //12814
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return getMin() != nullptr; //12816
+			return getMin() != nullptr; //12815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -350,14 +340,14 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMax(_max); //12815
+			setMax(_max); //12814
 			return true;
 		}
 		case UmlPackage::INTERVAL_EREFERENCE_MIN:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMin(_min); //12816
+			setMin(_min); //12815
 			return true;
 		}
 	}
@@ -469,7 +459,6 @@ void IntervalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -52,8 +52,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -333,14 +331,6 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_bodyCondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -744,31 +734,31 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
-			return eAny(getBodyCondition()); //16731
+			return eAny(getBodyCondition()); //16730
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
-			return eAny(getClass()); //16732
+			return eAny(getClass()); //16731
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
-			return eAny(getDatatype()); //16733
+			return eAny(getDatatype()); //16732
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
-			return eAny(getInterface()); //16734
+			return eAny(getInterface()); //16733
 		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //16735
+			return eAny(getIsOrdered()); //16734
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
-			return eAny(getIsQuery()); //16736
+			return eAny(getIsQuery()); //16735
 		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //16737
+			return eAny(getIsUnique()); //16736
 		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
-			return eAny(getLower()); //16738
+			return eAny(getLower()); //16737
 		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
-			return eAny(getPostcondition()); //16739
+			return eAny(getPostcondition()); //16738
 		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
-			return eAny(getPrecondition()); //16740
+			return eAny(getPrecondition()); //16739
 		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
-			return eAny(getRedefinedOperation()); //16741
+			return eAny(getRedefinedOperation()); //16740
 		case UmlPackage::OPERATION_EREFERENCE_TYPE:
-			return eAny(getType()); //16742
+			return eAny(getType()); //16741
 		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
-			return eAny(getUpper()); //16743
+			return eAny(getUpper()); //16742
 	}
 	Any result;
 	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -789,31 +779,31 @@ bool OperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
-			return getBodyCondition() != nullptr; //16731
+			return getBodyCondition() != nullptr; //16730
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
-			return getClass().lock() != nullptr; //16732
+			return getClass().lock() != nullptr; //16731
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
-			return getDatatype().lock() != nullptr; //16733
+			return getDatatype().lock() != nullptr; //16732
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
-			return getInterface().lock() != nullptr; //16734
+			return getInterface().lock() != nullptr; //16733
 		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //16735
+			return getIsOrdered() != false; //16734
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
-			return getIsQuery() != false; //16736
+			return getIsQuery() != false; //16735
 		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //16737
+			return getIsUnique() != true; //16736
 		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
-			return getLower() != 1; //16738
+			return getLower() != 1; //16737
 		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
-			return getPostcondition() != nullptr; //16739
+			return getPostcondition() != nullptr; //16738
 		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
-			return getPrecondition() != nullptr; //16740
+			return getPrecondition() != nullptr; //16739
 		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
-			return getRedefinedOperation() != nullptr; //16741
+			return getRedefinedOperation() != nullptr; //16740
 		case UmlPackage::OPERATION_EREFERENCE_TYPE:
-			return getType() != nullptr; //16742
+			return getType() != nullptr; //16741
 		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
-			return getUpper() != 1; //16743
+			return getUpper() != 1; //16742
 	}
 	bool result = false;
 	result = BehavioralFeatureImpl::internalEIsSet(featureID);
@@ -837,35 +827,35 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _bodyCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setBodyCondition(_bodyCondition); //16731
+			setBodyCondition(_bodyCondition); //16730
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_CLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
-			setClass(_class); //16732
+			setClass(_class); //16731
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
-			setDatatype(_datatype); //16733
+			setDatatype(_datatype); //16732
 			return true;
 		}
 		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
-			setInterface(_interface); //16734
+			setInterface(_interface); //16733
 			return true;
 		}
 		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
 		{
 			// BOOST CAST
 			bool _isQuery = newValue->get<bool>();
-			setIsQuery(_isQuery); //16736
+			setIsQuery(_isQuery); //16735
 			return true;
 		}
 	}
@@ -1087,7 +1077,6 @@ void OperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

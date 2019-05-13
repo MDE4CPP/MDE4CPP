@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -229,14 +227,6 @@ ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -454,11 +444,11 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return eAny(getReplyToCall()); //21128
+			return eAny(getReplyToCall()); //21127
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return eAny(getReplyValue()); //21129
+			return eAny(getReplyValue()); //21128
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //21130
+			return eAny(getReturnInformation()); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -467,11 +457,11 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return getReplyToCall() != nullptr; //21128
+			return getReplyToCall() != nullptr; //21127
 		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return getReplyValue() != nullptr; //21129
+			return getReplyValue() != nullptr; //21128
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //21130
+			return getReturnInformation() != nullptr; //21129
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -483,14 +473,14 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
-			setReplyToCall(_replyToCall); //21128
+			setReplyToCall(_replyToCall); //21127
 			return true;
 		}
 		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setReturnInformation(_returnInformation); //21130
+			setReturnInformation(_returnInformation); //21129
 			return true;
 		}
 	}
@@ -629,7 +619,6 @@ void ReplyActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

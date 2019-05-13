@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -336,14 +334,6 @@ ComponentImpl::ComponentImpl(const ComponentImpl & obj):ComponentImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -746,15 +736,15 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
-			return eAny(getIsIndirectlyInstantiated()); //4753
+			return eAny(getIsIndirectlyInstantiated()); //4752
 		case UmlPackage::COMPONENT_EREFERENCE_PACKAGEDELEMENT:
-			return eAny(getPackagedElement()); //4754
+			return eAny(getPackagedElement()); //4753
 		case UmlPackage::COMPONENT_EREFERENCE_PROVIDED:
-			return eAny(getProvided()); //4755
+			return eAny(getProvided()); //4754
 		case UmlPackage::COMPONENT_EREFERENCE_REALIZATION:
-			return eAny(getRealization()); //4756
+			return eAny(getRealization()); //4755
 		case UmlPackage::COMPONENT_EREFERENCE_REQUIRED:
-			return eAny(getRequired()); //4757
+			return eAny(getRequired()); //4756
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -763,15 +753,15 @@ bool ComponentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
-			return getIsIndirectlyInstantiated() != true; //4753
+			return getIsIndirectlyInstantiated() != true; //4752
 		case UmlPackage::COMPONENT_EREFERENCE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //4754
+			return getPackagedElement() != nullptr; //4753
 		case UmlPackage::COMPONENT_EREFERENCE_PROVIDED:
-			return getProvided() != nullptr; //4755
+			return getProvided() != nullptr; //4754
 		case UmlPackage::COMPONENT_EREFERENCE_REALIZATION:
-			return getRealization() != nullptr; //4756
+			return getRealization() != nullptr; //4755
 		case UmlPackage::COMPONENT_EREFERENCE_REQUIRED:
-			return getRequired() != nullptr; //4757
+			return getRequired() != nullptr; //4756
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -783,7 +773,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isIndirectlyInstantiated = newValue->get<bool>();
-			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4753
+			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4752
 			return true;
 		}
 	}
@@ -918,7 +908,6 @@ void ComponentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

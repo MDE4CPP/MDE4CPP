@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +38,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -134,14 +131,6 @@ ElementImportImpl::ElementImportImpl(const ElementImportImpl & obj):ElementImpor
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getImportedElement()!=nullptr)
 	{
 		m_importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(obj.getImportedElement()->copy());
@@ -295,13 +284,13 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
-			return eAny(getAlias()); //827
+			return eAny(getAlias()); //826
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
-			return eAny(getImportedElement()); //828
+			return eAny(getImportedElement()); //827
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return eAny(getImportingNamespace()); //829
+			return eAny(getImportingNamespace()); //828
 		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //8210
+			return eAny(getVisibility()); //829
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -310,13 +299,13 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
-			return getAlias() != ""; //827
+			return getAlias() != ""; //826
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
-			return getImportedElement() != nullptr; //828
+			return getImportedElement() != nullptr; //827
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //829
+			return getImportingNamespace().lock() != nullptr; //828
 		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //8210
+			return m_visibility != VisibilityKind::PUBLIC;; //829
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -328,28 +317,28 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _alias = newValue->get<std::string>();
-			setAlias(_alias); //827
+			setAlias(_alias); //826
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PackageableElement> _importedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
-			setImportedElement(_importedElement); //828
+			setImportedElement(_importedElement); //827
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setImportingNamespace(_importingNamespace); //829
+			setImportingNamespace(_importingNamespace); //828
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //8210
+			setVisibility(_visibility); //829
 			return true;
 		}
 	}
@@ -483,7 +472,6 @@ void ElementImportImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

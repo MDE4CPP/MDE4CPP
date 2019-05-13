@@ -58,8 +58,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -289,14 +287,6 @@ InputPinImpl::InputPinImpl(const InputPinImpl & obj):InputPinImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -507,13 +497,13 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
-			return eAny(getAction()); //11637
+			return eAny(getAction()); //11636
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return eAny(getCallOperationAction()); //11635
+			return eAny(getCallOperationAction()); //11634
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return eAny(getInvocationAction()); //11636
+			return eAny(getInvocationAction()); //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return eAny(getStructuralFeatureAction()); //11634
+			return eAny(getStructuralFeatureAction()); //11633
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -522,13 +512,13 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
-			return getAction().lock() != nullptr; //11637
+			return getAction().lock() != nullptr; //11636
 		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
-			return getCallOperationAction().lock() != nullptr; //11635
+			return getCallOperationAction().lock() != nullptr; //11634
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
-			return getInvocationAction().lock() != nullptr; //11636
+			return getInvocationAction().lock() != nullptr; //11635
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction().lock() != nullptr; //11634
+			return getStructuralFeatureAction().lock() != nullptr; //11633
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -540,21 +530,21 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = newValue->get<std::shared_ptr<uml::CallOperationAction>>();
-			setCallOperationAction(_callOperationAction); //11635
+			setCallOperationAction(_callOperationAction); //11634
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InvocationAction> _invocationAction = newValue->get<std::shared_ptr<uml::InvocationAction>>();
-			setInvocationAction(_invocationAction); //11636
+			setInvocationAction(_invocationAction); //11635
 			return true;
 		}
 		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = newValue->get<std::shared_ptr<uml::StructuralFeatureAction>>();
-			setStructuralFeatureAction(_structuralFeatureAction); //11634
+			setStructuralFeatureAction(_structuralFeatureAction); //11633
 			return true;
 		}
 	}
@@ -657,7 +647,6 @@ void InputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

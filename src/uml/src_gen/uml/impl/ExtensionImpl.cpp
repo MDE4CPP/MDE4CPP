@@ -50,8 +50,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -259,14 +257,6 @@ ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj):ExtensionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -568,9 +558,9 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //9745
+			return eAny(getIsRequired()); //9744
 		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return eAny(getMetaclass()); //9746
+			return eAny(getMetaclass()); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -579,9 +569,9 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //9745
+			return getIsRequired() != false; //9744
 		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return getMetaclass() != nullptr; //9746
+			return getMetaclass() != nullptr; //9745
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
@@ -653,7 +643,6 @@ void ExtensionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/InteractionFragment.hpp"
@@ -139,14 +137,6 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -265,7 +255,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //14810
+			return eAny(getMessage()); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,7 +264,7 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //14810
+			return getMessage() != nullptr; //1489
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -286,7 +276,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
-			setMessage(_message); //14810
+			setMessage(_message); //1489
 			return true;
 		}
 	}
@@ -373,7 +363,6 @@ void MessageEndImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -211,14 +209,6 @@ ValueSpecificationActionImpl::ValueSpecificationActionImpl(const ValueSpecificat
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -422,9 +412,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //25128
+			return eAny(getResult()); //25127
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //25129
+			return eAny(getValue()); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -433,9 +423,9 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //25128
+			return getResult() != nullptr; //25127
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //25129
+			return getValue() != nullptr; //25128
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -447,14 +437,14 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //25128
+			setResult(_result); //25127
 			return true;
 		}
 		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setValue(_value); //25129
+			setValue(_value); //25128
 			return true;
 		}
 	}
@@ -560,7 +550,6 @@ void ValueSpecificationActionImpl::save(std::shared_ptr<persistence::interfaces:
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -30,7 +30,6 @@
 #include "fUML/AddStructuralFeatureValueActionActivation.hpp"
 #include "fUML/CallBehaviorActionActivation.hpp"
 #include "fUML/CallOperationActionActivation.hpp"
-#include "fUML/CentralBufferNodeActivation.hpp"
 #include "fUML/ClearAssociationActionActivation.hpp"
 #include "fUML/CreateLinkActionActivation.hpp"
 #include "fUML/ClearStructuralFeatureActionActivation.hpp"
@@ -338,11 +337,6 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyLinkActionActivation());
                 break;
             }
-	     case uml::UmlPackage::CENTRALBUFFERNODE_ECLASS:
-            {
-		visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCentralBufferNodeActivation());
-		break;
-	     }
             default:{
                 //L3 provides an error message
             }

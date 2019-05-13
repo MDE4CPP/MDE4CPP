@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -38,8 +37,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/ConnectableElement.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -129,14 +126,6 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
@@ -272,11 +261,11 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
-			return eAny(getDefiningEnd()); //5410
+			return eAny(getDefiningEnd()); //549
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
-			return eAny(getPartWithPort()); //5411
+			return eAny(getPartWithPort()); //5410
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
-			return eAny(getRole()); //5412
+			return eAny(getRole()); //5411
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,11 +274,11 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
-			return getDefiningEnd() != nullptr; //5410
+			return getDefiningEnd() != nullptr; //549
 		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
-			return getPartWithPort() != nullptr; //5411
+			return getPartWithPort() != nullptr; //5410
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
-			return getRole() != nullptr; //5412
+			return getRole() != nullptr; //5411
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
@@ -301,14 +290,14 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _partWithPort = newValue->get<std::shared_ptr<uml::Property>>();
-			setPartWithPort(_partWithPort); //5411
+			setPartWithPort(_partWithPort); //5410
 			return true;
 		}
 		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _role = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
-			setRole(_role); //5412
+			setRole(_role); //5411
 			return true;
 		}
 	}
@@ -414,7 +403,6 @@ void ConnectorEndImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

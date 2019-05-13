@@ -50,8 +50,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Feature.hpp"
@@ -200,14 +198,6 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ConnectorEnd>> _endList = obj.getEnd();
 	for(std::shared_ptr<uml::ConnectorEnd> _end : *_endList)
 	{
@@ -374,15 +364,15 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
-			return eAny(getContract()); //5315
+			return eAny(getContract()); //5314
 		case UmlPackage::CONNECTOR_EREFERENCE_END:
-			return eAny(getEnd()); //5316
+			return eAny(getEnd()); //5315
 		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
-			return eAny(getKind()); //5317
+			return eAny(getKind()); //5316
 		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
-			return eAny(getRedefinedConnector()); //5318
+			return eAny(getRedefinedConnector()); //5317
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
-			return eAny(getType()); //5319
+			return eAny(getType()); //5318
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -391,15 +381,15 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
-			return getContract() != nullptr; //5315
+			return getContract() != nullptr; //5314
 		case UmlPackage::CONNECTOR_EREFERENCE_END:
-			return getEnd() != nullptr; //5316
+			return getEnd() != nullptr; //5315
 		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //5317
+			return m_kind != ConnectorKind::ASSEMBLY;; //5316
 		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector() != nullptr; //5318
+			return getRedefinedConnector() != nullptr; //5317
 		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
-			return getType() != nullptr; //5319
+			return getType() != nullptr; //5318
 	}
 	return FeatureImpl::internalEIsSet(featureID);
 }
@@ -411,7 +401,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
-			setType(_type); //5319
+			setType(_type); //5318
 			return true;
 		}
 	}
@@ -571,7 +561,6 @@ void ConnectorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

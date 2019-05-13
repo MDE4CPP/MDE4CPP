@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExecutionSpecification.hpp"
@@ -181,14 +179,6 @@ ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionE
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -311,7 +301,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
-			return eAny(getAction()); //516
+			return eAny(getAction()); //515
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -320,7 +310,7 @@ bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
-			return getAction() != nullptr; //516
+			return getAction() != nullptr; //515
 	}
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
@@ -332,7 +322,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _action = newValue->get<std::shared_ptr<uml::Action>>();
-			setAction(_action); //516
+			setAction(_action); //515
 			return true;
 		}
 	}
@@ -423,7 +413,6 @@ void ActionExecutionSpecificationImpl::save(std::shared_ptr<persistence::interfa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

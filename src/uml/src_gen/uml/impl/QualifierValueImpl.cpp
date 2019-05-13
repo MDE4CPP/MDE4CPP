@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -36,8 +35,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -115,14 +112,6 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):Qualifier
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -229,9 +218,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //1914
+			return eAny(getQualifier()); //1913
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
-			return eAny(getValue()); //1915
+			return eAny(getValue()); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -240,9 +229,9 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //1914
+			return getQualifier() != nullptr; //1913
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
-			return getValue() != nullptr; //1915
+			return getValue() != nullptr; //1914
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -254,14 +243,14 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
-			setQualifier(_qualifier); //1914
+			setQualifier(_qualifier); //1913
 			return true;
 		}
 		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //1915
+			setValue(_value); //1914
 			return true;
 		}
 	}
@@ -365,7 +354,6 @@ void QualifierValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

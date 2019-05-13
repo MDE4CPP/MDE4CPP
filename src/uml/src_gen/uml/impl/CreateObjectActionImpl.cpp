@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -211,14 +209,6 @@ CreateObjectActionImpl::CreateObjectActionImpl(const CreateObjectActionImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -425,9 +415,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //6328
+			return eAny(getClassifier()); //6327
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //6329
+			return eAny(getResult()); //6328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,9 +426,9 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //6328
+			return getClassifier() != nullptr; //6327
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //6329
+			return getResult() != nullptr; //6328
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -450,14 +440,14 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setClassifier(_classifier); //6328
+			setClassifier(_classifier); //6327
 			return true;
 		}
 		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //6329
+			setResult(_result); //6328
 			return true;
 		}
 	}
@@ -579,7 +569,6 @@ void CreateObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

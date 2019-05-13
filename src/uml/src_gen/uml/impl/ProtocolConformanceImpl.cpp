@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -38,8 +37,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -128,14 +125,6 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getGeneralMachine()!=nullptr)
 	{
 		m_generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(obj.getGeneralMachine()->copy());
@@ -253,9 +242,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
-			return eAny(getGeneralMachine()); //1867
+			return eAny(getGeneralMachine()); //1866
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
-			return eAny(getSpecificMachine()); //1868
+			return eAny(getSpecificMachine()); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -264,9 +253,9 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
-			return getGeneralMachine() != nullptr; //1867
+			return getGeneralMachine() != nullptr; //1866
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
-			return getSpecificMachine().lock() != nullptr; //1868
+			return getSpecificMachine().lock() != nullptr; //1867
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -278,14 +267,14 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setGeneralMachine(_generalMachine); //1867
+			setGeneralMachine(_generalMachine); //1866
 			return true;
 		}
 		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setSpecificMachine(_specificMachine); //1868
+			setSpecificMachine(_specificMachine); //1867
 			return true;
 		}
 	}
@@ -386,7 +375,6 @@ void ProtocolConformanceImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

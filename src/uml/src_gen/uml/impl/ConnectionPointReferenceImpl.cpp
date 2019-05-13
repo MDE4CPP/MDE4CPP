@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -194,14 +192,6 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -336,11 +326,11 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
-			return eAny(getEntry()); //5213
+			return eAny(getEntry()); //5212
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
-			return eAny(getExit()); //5214
+			return eAny(getExit()); //5213
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
-			return eAny(getState()); //5215
+			return eAny(getState()); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,11 +339,11 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
-			return getEntry() != nullptr; //5213
+			return getEntry() != nullptr; //5212
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
-			return getExit() != nullptr; //5214
+			return getExit() != nullptr; //5213
 		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //5215
+			return getState().lock() != nullptr; //5214
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -365,7 +355,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //5215
+			setState(_state); //5214
 			return true;
 		}
 	}
@@ -489,7 +479,6 @@ void ConnectionPointReferenceImpl::save(std::shared_ptr<persistence::interfaces:
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

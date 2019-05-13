@@ -48,8 +48,6 @@
 
 #include "uml/DirectedRelationship.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Message.hpp"
@@ -261,14 +259,6 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):Inform
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::NamedElement>> _informationSourceList = obj.getInformationSource();
 	for(std::shared_ptr<uml::NamedElement> _informationSource : *_informationSourceList)
 	{
@@ -463,19 +453,19 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
-			return eAny(getConveyed()); //11316
+			return eAny(getConveyed()); //11315
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
-			return eAny(getInformationSource()); //11317
+			return eAny(getInformationSource()); //11316
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
-			return eAny(getInformationTarget()); //11318
+			return eAny(getInformationTarget()); //11317
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
-			return eAny(getRealization()); //11319
+			return eAny(getRealization()); //11318
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
-			return eAny(getRealizingActivityEdge()); //11320
+			return eAny(getRealizingActivityEdge()); //11319
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
-			return eAny(getRealizingConnector()); //11321
+			return eAny(getRealizingConnector()); //11320
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
-			return eAny(getRealizingMessage()); //11322
+			return eAny(getRealizingMessage()); //11321
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -491,19 +481,19 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_CONVEYED:
-			return getConveyed() != nullptr; //11316
+			return getConveyed() != nullptr; //11315
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONSOURCE:
-			return getInformationSource() != nullptr; //11317
+			return getInformationSource() != nullptr; //11316
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_INFORMATIONTARGET:
-			return getInformationTarget() != nullptr; //11318
+			return getInformationTarget() != nullptr; //11317
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZATION:
-			return getRealization() != nullptr; //11319
+			return getRealization() != nullptr; //11318
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGACTIVITYEDGE:
-			return getRealizingActivityEdge() != nullptr; //11320
+			return getRealizingActivityEdge() != nullptr; //11319
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGCONNECTOR:
-			return getRealizingConnector() != nullptr; //11321
+			return getRealizingConnector() != nullptr; //11320
 		case UmlPackage::INFORMATIONFLOW_EREFERENCE_REALIZINGMESSAGE:
-			return getRealizingMessage() != nullptr; //11322
+			return getRealizingMessage() != nullptr; //11321
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -745,7 +735,6 @@ void InformationFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

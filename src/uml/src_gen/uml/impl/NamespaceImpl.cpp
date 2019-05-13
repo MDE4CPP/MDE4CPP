@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -232,14 +230,6 @@ NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -499,17 +489,17 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return eAny(getElementImport()); //15611
+			return eAny(getElementImport()); //15610
 		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return eAny(getImportedMember()); //15614
+			return eAny(getImportedMember()); //15613
 		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return eAny(getMember()); //15615
+			return eAny(getMember()); //15614
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return eAny(getOwnedMember()); //15613
+			return eAny(getOwnedMember()); //15612
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return eAny(getOwnedRule()); //15610
+			return eAny(getOwnedRule()); //1569
 		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return eAny(getPackageImport()); //15612
+			return eAny(getPackageImport()); //15611
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -518,17 +508,17 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
-			return getElementImport() != nullptr; //15611
+			return getElementImport() != nullptr; //15610
 		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
-			return getImportedMember() != nullptr; //15614
+			return getImportedMember() != nullptr; //15613
 		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
-			return getMember() != nullptr; //15615
+			return getMember() != nullptr; //15614
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
-			return getOwnedMember() != nullptr; //15613
+			return getOwnedMember() != nullptr; //15612
 		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
-			return getOwnedRule() != nullptr; //15610
+			return getOwnedRule() != nullptr; //1569
 		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
-			return getPackageImport() != nullptr; //15612
+			return getPackageImport() != nullptr; //15611
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -662,7 +652,6 @@ void NamespaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

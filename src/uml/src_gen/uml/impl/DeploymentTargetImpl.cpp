@@ -41,8 +41,6 @@
 
 #include "uml/Deployment.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -165,14 +163,6 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -284,9 +274,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
-			return eAny(getDeployedElement()); //7110
+			return eAny(getDeployedElement()); //719
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
-			return eAny(getDeployment()); //7111
+			return eAny(getDeployment()); //7110
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,9 +285,9 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //7110
+			return getDeployedElement() != nullptr; //719
 		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
-			return getDeployment() != nullptr; //7111
+			return getDeployment() != nullptr; //7110
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -381,7 +371,6 @@ void DeploymentTargetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

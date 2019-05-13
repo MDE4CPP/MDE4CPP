@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Gate.hpp"
@@ -190,14 +188,6 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragm
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_cfragmentGate" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -331,7 +321,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //5617
+			return eAny(getMessage()); //5616
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -340,7 +330,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //5617
+			return getMessage() != nullptr; //5616
 	}
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }
@@ -438,7 +428,6 @@ void ConsiderIgnoreFragmentImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

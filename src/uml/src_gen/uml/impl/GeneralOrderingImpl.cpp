@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -142,14 +140,6 @@ GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):Genera
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -260,9 +250,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
-			return eAny(getAfter()); //10810
+			return eAny(getAfter()); //1089
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
-			return eAny(getBefore()); //10811
+			return eAny(getBefore()); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -271,9 +261,9 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
-			return getAfter() != nullptr; //10810
+			return getAfter() != nullptr; //1089
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
-			return getBefore() != nullptr; //10811
+			return getBefore() != nullptr; //10810
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -285,14 +275,14 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _after = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
-			setAfter(_after); //10810
+			setAfter(_after); //1089
 			return true;
 		}
 		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _before = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
-			setBefore(_before); //10811
+			setBefore(_before); //10810
 			return true;
 		}
 	}
@@ -398,7 +388,6 @@ void GeneralOrderingImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

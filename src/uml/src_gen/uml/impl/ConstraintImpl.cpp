@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -202,14 +200,6 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -366,11 +356,11 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return eAny(getConstrainedElement()); //5713
+			return eAny(getConstrainedElement()); //5712
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //5714
+			return eAny(getContext()); //5713
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //5715
+			return eAny(getSpecification()); //5714
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -379,11 +369,11 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return getConstrainedElement() != nullptr; //5713
+			return getConstrainedElement() != nullptr; //5712
 		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return getContext().lock() != nullptr; //5714
+			return getContext().lock() != nullptr; //5713
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //5715
+			return getSpecification() != nullptr; //5714
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -395,14 +385,14 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setContext(_context); //5714
+			setContext(_context); //5713
 			return true;
 		}
 		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //5715
+			setSpecification(_specification); //5714
 			return true;
 		}
 	}
@@ -533,7 +523,6 @@ void ConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

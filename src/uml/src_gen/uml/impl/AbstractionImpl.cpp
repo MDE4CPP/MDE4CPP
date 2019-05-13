@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -177,14 +175,6 @@ AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj):AbstractionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getMapping()!=nullptr)
 	{
@@ -323,7 +313,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return eAny(getMapping()); //118
+			return eAny(getMapping()); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,7 +322,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return getMapping() != nullptr; //118
+			return getMapping() != nullptr; //117
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -344,7 +334,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
-			setMapping(_mapping); //118
+			setMapping(_mapping); //117
 			return true;
 		}
 	}
@@ -431,7 +421,6 @@ void AbstractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

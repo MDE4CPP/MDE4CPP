@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Expression.hpp"
@@ -225,14 +223,6 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -409,9 +399,9 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
-			return eAny(getOwningExpression()); //22419
+			return eAny(getOwningExpression()); //22418
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
-			return eAny(getSubExpression()); //22420
+			return eAny(getSubExpression()); //22419
 	}
 	Any result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);
@@ -427,9 +417,9 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
-			return getOwningExpression().lock() != nullptr; //22419
+			return getOwningExpression().lock() != nullptr; //22418
 		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
-			return getSubExpression() != nullptr; //22420
+			return getSubExpression() != nullptr; //22419
 	}
 	bool result = false;
 	result = ExpressionImpl::internalEIsSet(featureID);
@@ -448,7 +438,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _owningExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
-			setOwningExpression(_owningExpression); //22419
+			setOwningExpression(_owningExpression); //22418
 			return true;
 		}
 	}
@@ -560,7 +550,6 @@ void StringExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

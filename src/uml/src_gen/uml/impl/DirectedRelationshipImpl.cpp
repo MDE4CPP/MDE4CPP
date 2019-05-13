@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -36,8 +35,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -136,14 +133,6 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -231,9 +220,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return eAny(getSource()); //765
+			return eAny(getSource()); //764
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return eAny(getTarget()); //766
+			return eAny(getTarget()); //765
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -242,9 +231,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //765
+			return getSource() != nullptr; //764
 		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //766
+			return getTarget() != nullptr; //765
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }
@@ -303,7 +292,6 @@ void DirectedRelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

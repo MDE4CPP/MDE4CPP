@@ -100,11 +100,6 @@ namespace uml
 	class DeploymentTarget;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

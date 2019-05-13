@@ -40,8 +40,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -193,14 +191,6 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -387,11 +377,11 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
-			return eAny(getKind()); //18914
+			return eAny(getKind()); //18913
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
-			return eAny(getState()); //18913
+			return eAny(getState()); //18912
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
-			return eAny(getStateMachine()); //18915
+			return eAny(getStateMachine()); //18914
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,11 +390,11 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
-			return m_kind != PseudostateKind::INITIAL;; //18914
+			return m_kind != PseudostateKind::INITIAL;; //18913
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //18913
+			return getState().lock() != nullptr; //18912
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //18915
+			return getStateMachine().lock() != nullptr; //18914
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -416,21 +406,21 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			PseudostateKind _kind = newValue->get<PseudostateKind>();
-			setKind(_kind); //18914
+			setKind(_kind); //18913
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //18913
+			setState(_state); //18912
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setStateMachine(_stateMachine); //18915
+			setStateMachine(_stateMachine); //18914
 			return true;
 		}
 	}
@@ -572,7 +562,6 @@ void PseudostateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

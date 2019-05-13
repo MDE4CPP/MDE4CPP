@@ -41,8 +41,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/NamedElement.hpp"
@@ -150,14 +148,6 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -408,17 +398,17 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return eAny(getClientDependency()); //1554
+			return eAny(getClientDependency()); //1553
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return eAny(getName()); //1555
+			return eAny(getName()); //1554
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return eAny(getNameExpression()); //1556
+			return eAny(getNameExpression()); //1555
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return eAny(getNamespace()); //1557
+			return eAny(getNamespace()); //1556
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return eAny(getQualifiedName()); //1558
+			return eAny(getQualifiedName()); //1557
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1559
+			return eAny(getVisibility()); //1558
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -427,17 +417,17 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
-			return getClientDependency() != nullptr; //1554
+			return getClientDependency() != nullptr; //1553
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName() != ""; //1555
+			return getName() != ""; //1554
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
-			return getNameExpression() != nullptr; //1556
+			return getNameExpression() != nullptr; //1555
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-			return getNamespace().lock() != nullptr; //1557
+			return getNamespace().lock() != nullptr; //1556
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName() != ""; //1558
+			return getQualifiedName() != ""; //1557
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1559
+			return m_visibility != VisibilityKind::PUBLIC;; //1558
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -449,21 +439,21 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //1555
+			setName(_name); //1554
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
-			setNameExpression(_nameExpression); //1556
+			setNameExpression(_nameExpression); //1555
 			return true;
 		}
 		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //1559
+			setVisibility(_visibility); //1558
 			return true;
 		}
 	}
@@ -586,7 +576,6 @@ void NamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

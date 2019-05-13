@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -157,14 +155,6 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):Extension
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -274,7 +264,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return eAny(getUseCase()); //9913
+			return eAny(getUseCase()); //9912
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,7 +273,7 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return getUseCase().lock() != nullptr; //9913
+			return getUseCase().lock() != nullptr; //9912
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -295,7 +285,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setUseCase(_useCase); //9913
+			setUseCase(_useCase); //9912
 			return true;
 		}
 	}
@@ -365,7 +355,6 @@ void ExtensionPointImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

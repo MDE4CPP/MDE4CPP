@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -332,14 +330,6 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -755,23 +745,23 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
-			return eAny(getBodyOutput()); //14445
+			return eAny(getBodyOutput()); //14444
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
-			return eAny(getBodyPart()); //14446
+			return eAny(getBodyPart()); //14445
 		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
-			return eAny(getDecider()); //14447
+			return eAny(getDecider()); //14446
 		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
-			return eAny(getIsTestedFirst()); //14448
+			return eAny(getIsTestedFirst()); //14447
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
-			return eAny(getLoopVariable()); //14449
+			return eAny(getLoopVariable()); //14448
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
-			return eAny(getLoopVariableInput()); //14450
+			return eAny(getLoopVariableInput()); //14449
 		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
-			return eAny(getResult()); //14451
+			return eAny(getResult()); //14450
 		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
-			return eAny(getSetupPart()); //14452
+			return eAny(getSetupPart()); //14451
 		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
-			return eAny(getTest()); //14453
+			return eAny(getTest()); //14452
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -780,23 +770,23 @@ bool LoopNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //14445
+			return getBodyOutput() != nullptr; //14444
 		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
-			return getBodyPart() != nullptr; //14446
+			return getBodyPart() != nullptr; //14445
 		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
-			return getDecider() != nullptr; //14447
+			return getDecider() != nullptr; //14446
 		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
-			return getIsTestedFirst() != false; //14448
+			return getIsTestedFirst() != false; //14447
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
-			return getLoopVariable() != nullptr; //14449
+			return getLoopVariable() != nullptr; //14448
 		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
-			return getLoopVariableInput() != nullptr; //14450
+			return getLoopVariableInput() != nullptr; //14449
 		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
-			return getResult() != nullptr; //14451
+			return getResult() != nullptr; //14450
 		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
-			return getSetupPart() != nullptr; //14452
+			return getSetupPart() != nullptr; //14451
 		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
-			return getTest() != nullptr; //14453
+			return getTest() != nullptr; //14452
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -808,14 +798,14 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setDecider(_decider); //14447
+			setDecider(_decider); //14446
 			return true;
 		}
 		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
 		{
 			// BOOST CAST
 			bool _isTestedFirst = newValue->get<bool>();
-			setIsTestedFirst(_isTestedFirst); //14448
+			setIsTestedFirst(_isTestedFirst); //14447
 			return true;
 		}
 	}
@@ -1069,7 +1059,6 @@ void LoopNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

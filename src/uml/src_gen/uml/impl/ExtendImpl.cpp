@@ -44,8 +44,6 @@
 
 #include "uml/DirectedRelationship.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExtensionPoint.hpp"
@@ -181,14 +179,6 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_condition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getExtendedCase()!=nullptr)
 	{
@@ -347,13 +337,13 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
-			return eAny(getCondition()); //9613
+			return eAny(getCondition()); //9612
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
-			return eAny(getExtendedCase()); //9614
+			return eAny(getExtendedCase()); //9613
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
-			return eAny(getExtension()); //9616
+			return eAny(getExtension()); //9615
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
-			return eAny(getExtensionLocation()); //9615
+			return eAny(getExtensionLocation()); //9614
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -369,13 +359,13 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
-			return getCondition() != nullptr; //9613
+			return getCondition() != nullptr; //9612
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
-			return getExtendedCase() != nullptr; //9614
+			return getExtendedCase() != nullptr; //9613
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
-			return getExtension().lock() != nullptr; //9616
+			return getExtension().lock() != nullptr; //9615
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
-			return getExtensionLocation() != nullptr; //9615
+			return getExtensionLocation() != nullptr; //9614
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -394,21 +384,21 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _condition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setCondition(_condition); //9613
+			setCondition(_condition); //9612
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extendedCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setExtendedCase(_extendedCase); //9614
+			setExtendedCase(_extendedCase); //9613
 			return true;
 		}
 		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extension = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setExtension(_extension); //9616
+			setExtension(_extension); //9615
 			return true;
 		}
 	}
@@ -567,7 +557,6 @@ void ExtendImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

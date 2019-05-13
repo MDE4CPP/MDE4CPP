@@ -42,11 +42,6 @@ namespace uml
 	class Comment;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

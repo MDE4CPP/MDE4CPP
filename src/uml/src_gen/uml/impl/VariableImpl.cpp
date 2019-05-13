@@ -47,8 +47,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/MultiplicityElement.hpp"
@@ -204,14 +202,6 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
@@ -356,9 +346,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return eAny(getActivityScope()); //25220
+			return eAny(getActivityScope()); //25219
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return eAny(getScope()); //25221
+			return eAny(getScope()); //25220
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -374,9 +364,9 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //25220
+			return getActivityScope().lock() != nullptr; //25219
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return getScope().lock() != nullptr; //25221
+			return getScope().lock() != nullptr; //25220
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -395,14 +385,14 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activityScope = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivityScope(_activityScope); //25220
+			setActivityScope(_activityScope); //25219
 			return true;
 		}
 		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _scope = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setScope(_scope); //25221
+			setScope(_scope); //25220
 			return true;
 		}
 	}
@@ -498,7 +488,6 @@ void VariableImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

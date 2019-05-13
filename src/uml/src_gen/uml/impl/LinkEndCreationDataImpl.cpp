@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -36,8 +35,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -118,14 +115,6 @@ LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -227,9 +216,9 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
-			return eAny(getInsertAt()); //1347
+			return eAny(getInsertAt()); //1346
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1348
+			return eAny(getIsReplaceAll()); //1347
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -238,9 +227,9 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
-			return getInsertAt() != nullptr; //1347
+			return getInsertAt() != nullptr; //1346
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1348
+			return getIsReplaceAll() != false; //1347
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -252,14 +241,14 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setInsertAt(_insertAt); //1347
+			setInsertAt(_insertAt); //1346
 			return true;
 		}
 		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1348
+			setIsReplaceAll(_isReplaceAll); //1347
 			return true;
 		}
 	}
@@ -355,7 +344,6 @@ void LinkEndCreationDataImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

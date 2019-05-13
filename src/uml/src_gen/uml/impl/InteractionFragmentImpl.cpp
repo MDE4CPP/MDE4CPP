@@ -39,8 +39,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/GeneralOrdering.hpp"
@@ -197,14 +195,6 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -353,13 +343,13 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return eAny(getCovered()); //12110
+			return eAny(getCovered()); //1219
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return eAny(getEnclosingInteraction()); //12112
+			return eAny(getEnclosingInteraction()); //12111
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return eAny(getEnclosingOperand()); //12111
+			return eAny(getEnclosingOperand()); //12110
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return eAny(getGeneralOrdering()); //12113
+			return eAny(getGeneralOrdering()); //12112
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -368,13 +358,13 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered() != nullptr; //12110
+			return getCovered() != nullptr; //1219
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction().lock() != nullptr; //12112
+			return getEnclosingInteraction().lock() != nullptr; //12111
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand().lock() != nullptr; //12111
+			return getEnclosingOperand().lock() != nullptr; //12110
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering() != nullptr; //12113
+			return getGeneralOrdering() != nullptr; //12112
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -386,14 +376,14 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setEnclosingInteraction(_enclosingInteraction); //12112
+			setEnclosingInteraction(_enclosingInteraction); //12111
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
-			setEnclosingOperand(_enclosingOperand); //12111
+			setEnclosingOperand(_enclosingOperand); //12110
 			return true;
 		}
 	}
@@ -533,7 +523,6 @@ void InteractionFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

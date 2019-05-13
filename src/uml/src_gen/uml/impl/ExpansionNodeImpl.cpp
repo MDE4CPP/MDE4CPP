@@ -54,8 +54,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExpansionRegion.hpp"
@@ -221,14 +219,6 @@ ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNod
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -388,9 +378,9 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
-			return eAny(getRegionAsInput()); //9327
+			return eAny(getRegionAsInput()); //9326
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
-			return eAny(getRegionAsOutput()); //9328
+			return eAny(getRegionAsOutput()); //9327
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -399,9 +389,9 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
-			return getRegionAsInput() != nullptr; //9327
+			return getRegionAsInput() != nullptr; //9326
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
-			return getRegionAsOutput() != nullptr; //9328
+			return getRegionAsOutput() != nullptr; //9327
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -413,14 +403,14 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
-			setRegionAsInput(_regionAsInput); //9327
+			setRegionAsInput(_regionAsInput); //9326
 			return true;
 		}
 		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
-			setRegionAsOutput(_regionAsOutput); //9328
+			setRegionAsOutput(_regionAsOutput); //9327
 			return true;
 		}
 	}
@@ -534,7 +524,6 @@ void ExpansionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

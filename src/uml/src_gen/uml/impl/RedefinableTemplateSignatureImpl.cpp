@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Namespace.hpp"
@@ -205,14 +203,6 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_classifier" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignatureList = obj.getExtendedSignature();
 	for(std::shared_ptr<uml::RedefinableTemplateSignature> _extendedSignature : *_extendedSignatureList)
 	{
@@ -372,11 +362,11 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //20518
+			return eAny(getClassifier()); //20517
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
-			return eAny(getExtendedSignature()); //20516
+			return eAny(getExtendedSignature()); //20515
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
-			return eAny(getInheritedParameter()); //20517
+			return eAny(getInheritedParameter()); //20516
 	}
 	Any result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -392,11 +382,11 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //20518
+			return getClassifier() != nullptr; //20517
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
-			return getExtendedSignature() != nullptr; //20516
+			return getExtendedSignature() != nullptr; //20515
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
-			return getInheritedParameter() != nullptr; //20517
+			return getInheritedParameter() != nullptr; //20516
 	}
 	bool result = false;
 	result = RedefinableElementImpl::internalEIsSet(featureID);
@@ -510,7 +500,6 @@ void RedefinableTemplateSignatureImpl::save(std::shared_ptr<persistence::interfa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

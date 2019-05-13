@@ -42,8 +42,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/Interaction.hpp"
@@ -182,14 +180,6 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -362,15 +352,15 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
-			return eAny(getCoveredBy()); //13214
+			return eAny(getCoveredBy()); //13213
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
-			return eAny(getDecomposedAs()); //13210
+			return eAny(getDecomposedAs()); //1329
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
-			return eAny(getInteraction()); //13211
+			return eAny(getInteraction()); //13210
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
-			return eAny(getRepresents()); //13212
+			return eAny(getRepresents()); //13211
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
-			return eAny(getSelector()); //13213
+			return eAny(getSelector()); //13212
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -379,15 +369,15 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
-			return getCoveredBy() != nullptr; //13214
+			return getCoveredBy() != nullptr; //13213
 		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
-			return getDecomposedAs() != nullptr; //13210
+			return getDecomposedAs() != nullptr; //1329
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
-			return getInteraction().lock() != nullptr; //13211
+			return getInteraction().lock() != nullptr; //13210
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
-			return getRepresents() != nullptr; //13212
+			return getRepresents() != nullptr; //13211
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
-			return getSelector() != nullptr; //13213
+			return getSelector() != nullptr; //13212
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -399,28 +389,28 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = newValue->get<std::shared_ptr<uml::PartDecomposition>>();
-			setDecomposedAs(_decomposedAs); //13210
+			setDecomposedAs(_decomposedAs); //1329
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setInteraction(_interaction); //13211
+			setInteraction(_interaction); //13210
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _represents = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
-			setRepresents(_represents); //13212
+			setRepresents(_represents); //13211
 			return true;
 		}
 		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _selector = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSelector(_selector); //13213
+			setSelector(_selector); //13212
 			return true;
 		}
 	}
@@ -586,7 +576,6 @@ void LifelineImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +38,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -149,14 +146,6 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -307,11 +296,11 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
-			return eAny(getBoundElement()); //2309
+			return eAny(getBoundElement()); //2308
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
-			return eAny(getParameterSubstitution()); //2307
+			return eAny(getParameterSubstitution()); //2306
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
-			return eAny(getSignature()); //2308
+			return eAny(getSignature()); //2307
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -320,11 +309,11 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
-			return getBoundElement().lock() != nullptr; //2309
+			return getBoundElement().lock() != nullptr; //2308
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
-			return getParameterSubstitution() != nullptr; //2307
+			return getParameterSubstitution() != nullptr; //2306
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
-			return getSignature() != nullptr; //2308
+			return getSignature() != nullptr; //2307
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -336,14 +325,14 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _boundElement = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
-			setBoundElement(_boundElement); //2309
+			setBoundElement(_boundElement); //2308
 			return true;
 		}
 		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
-			setSignature(_signature); //2308
+			setSignature(_signature); //2307
 			return true;
 		}
 	}
@@ -469,7 +458,6 @@ void TemplateBindingImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

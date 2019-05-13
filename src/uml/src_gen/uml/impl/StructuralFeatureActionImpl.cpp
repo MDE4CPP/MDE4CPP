@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -213,14 +211,6 @@ StructuralFeatureActionImpl::StructuralFeatureActionImpl(const StructuralFeature
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -433,9 +423,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATUREACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //22628
+			return eAny(getObject()); //22627
 		case UmlPackage::STRUCTURALFEATUREACTION_EREFERENCE_STRUCTURALFEATURE:
-			return eAny(getStructuralFeature()); //22629
+			return eAny(getStructuralFeature()); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,9 +434,9 @@ bool StructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATUREACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //22628
+			return getObject() != nullptr; //22627
 		case UmlPackage::STRUCTURALFEATUREACTION_EREFERENCE_STRUCTURALFEATURE:
-			return getStructuralFeature() != nullptr; //22629
+			return getStructuralFeature() != nullptr; //22628
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -458,14 +448,14 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //22628
+			setObject(_object); //22627
 			return true;
 		}
 		case UmlPackage::STRUCTURALFEATUREACTION_EREFERENCE_STRUCTURALFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _structuralFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
-			setStructuralFeature(_structuralFeature); //22629
+			setStructuralFeature(_structuralFeature); //22628
 			return true;
 		}
 	}
@@ -586,7 +576,6 @@ void StructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfaces::
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

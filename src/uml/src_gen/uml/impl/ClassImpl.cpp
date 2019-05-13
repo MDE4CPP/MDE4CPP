@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -343,14 +341,6 @@ ClassImpl::ClassImpl(const ClassImpl & obj):ClassImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -748,17 +738,17 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return eAny(getExtension()); //3548
+			return eAny(getExtension()); //3547
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //3549
+			return eAny(getIsActive()); //3548
 		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return eAny(getNestedClassifier()); //3550
+			return eAny(getNestedClassifier()); //3549
 		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //3547
+			return eAny(getOwnedOperation()); //3546
 		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return eAny(getOwnedReception()); //3551
+			return eAny(getOwnedReception()); //3550
 		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return eAny(getSuperClass()); //3552
+			return eAny(getSuperClass()); //3551
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -774,17 +764,17 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return getExtension() != nullptr; //3548
+			return getExtension() != nullptr; //3547
 		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return getIsActive() != false; //3549
+			return getIsActive() != false; //3548
 		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //3550
+			return getNestedClassifier() != nullptr; //3549
 		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //3547
+			return getOwnedOperation() != nullptr; //3546
 		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //3551
+			return getOwnedReception() != nullptr; //3550
 		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return getSuperClass() != nullptr; //3552
+			return getSuperClass() != nullptr; //3551
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -803,7 +793,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
-			setIsActive(_isActive); //3549
+			setIsActive(_isActive); //3548
 			return true;
 		}
 	}
@@ -986,7 +976,6 @@ void ClassImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -225,14 +223,6 @@ CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl &
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
@@ -434,9 +424,9 @@ Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_OPERATION:
-			return eAny(getOperation()); //3232
+			return eAny(getOperation()); //3231
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //3233
+			return eAny(getTarget()); //3232
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,9 +435,9 @@ bool CallOperationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_OPERATION:
-			return getOperation() != nullptr; //3232
+			return getOperation() != nullptr; //3231
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //3233
+			return getTarget() != nullptr; //3232
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -459,14 +449,14 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Operation> _operation = newValue->get<std::shared_ptr<uml::Operation>>();
-			setOperation(_operation); //3232
+			setOperation(_operation); //3231
 			return true;
 		}
 		case UmlPackage::CALLOPERATIONACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //3233
+			setTarget(_target); //3232
 			return true;
 		}
 	}
@@ -591,7 +581,6 @@ void CallOperationActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

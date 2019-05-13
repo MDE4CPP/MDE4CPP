@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,8 +34,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -144,14 +141,6 @@ SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -272,11 +261,11 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
-			return eAny(getDefiningFeature()); //2174
+			return eAny(getDefiningFeature()); //2173
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
-			return eAny(getOwningInstance()); //2176
+			return eAny(getOwningInstance()); //2175
 		case UmlPackage::SLOT_EREFERENCE_VALUE:
-			return eAny(getValue()); //2175
+			return eAny(getValue()); //2174
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,11 +274,11 @@ bool SlotImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
-			return getDefiningFeature() != nullptr; //2174
+			return getDefiningFeature() != nullptr; //2173
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
-			return getOwningInstance().lock() != nullptr; //2176
+			return getOwningInstance().lock() != nullptr; //2175
 		case UmlPackage::SLOT_EREFERENCE_VALUE:
-			return getValue() != nullptr; //2175
+			return getValue() != nullptr; //2174
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -301,14 +290,14 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
-			setDefiningFeature(_definingFeature); //2174
+			setDefiningFeature(_definingFeature); //2173
 			return true;
 		}
 		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
-			setOwningInstance(_owningInstance); //2176
+			setOwningInstance(_owningInstance); //2175
 			return true;
 		}
 	}
@@ -431,7 +420,6 @@ void SlotImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

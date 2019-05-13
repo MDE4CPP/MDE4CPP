@@ -46,8 +46,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -219,14 +217,6 @@ BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -454,17 +444,17 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
-			return eAny(getConcurrency()); //2521
+			return eAny(getConcurrency()); //2520
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
-			return eAny(getIsAbstract()); //2522
+			return eAny(getIsAbstract()); //2521
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_METHOD:
-			return eAny(getMethod()); //2523
+			return eAny(getMethod()); //2522
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETER:
-			return eAny(getOwnedParameter()); //2524
+			return eAny(getOwnedParameter()); //2523
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETERSET:
-			return eAny(getOwnedParameterSet()); //2525
+			return eAny(getOwnedParameterSet()); //2524
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_RAISEDEXCEPTION:
-			return eAny(getRaisedException()); //2526
+			return eAny(getRaisedException()); //2525
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -480,17 +470,17 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
-			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2521
+			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2520
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
-			return getIsAbstract() != false; //2522
+			return getIsAbstract() != false; //2521
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_METHOD:
-			return getMethod() != nullptr; //2523
+			return getMethod() != nullptr; //2522
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2524
+			return getOwnedParameter() != nullptr; //2523
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //2525
+			return getOwnedParameterSet() != nullptr; //2524
 		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_RAISEDEXCEPTION:
-			return getRaisedException() != nullptr; //2526
+			return getRaisedException() != nullptr; //2525
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -509,14 +499,14 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			CallConcurrencyKind _concurrency = newValue->get<CallConcurrencyKind>();
-			setConcurrency(_concurrency); //2521
+			setConcurrency(_concurrency); //2520
 			return true;
 		}
 		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
 			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //2522
+			setIsAbstract(_isAbstract); //2521
 			return true;
 		}
 	}
@@ -714,7 +704,6 @@ void BehavioralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

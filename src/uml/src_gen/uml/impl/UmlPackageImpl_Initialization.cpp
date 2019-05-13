@@ -128,7 +128,6 @@ void UmlPackageImpl::initializePackageContents()
 	m_durationConstraint_EClass->getESuperTypes()->push_back(getIntervalConstraint_EClass());
 	m_durationInterval_EClass->getESuperTypes()->push_back(getInterval_EClass());
 	m_durationObservation_EClass->getESuperTypes()->push_back(getObservation_EClass());
-	m_element_EClass->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEModelElement_EClass());
 	m_element_EClass->getESuperTypes()->push_back(getObject_EClass());
 	m_elementImport_EClass->getESuperTypes()->push_back(getDirectedRelationship_EClass());
 	m_encapsulatedClassifier_EClass->getESuperTypes()->push_back(getStructuredClassifier_EClass());

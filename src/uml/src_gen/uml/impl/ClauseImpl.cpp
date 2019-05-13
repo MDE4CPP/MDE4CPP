@@ -39,8 +39,6 @@
 
 #include "uml/Comment.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExecutableNode.hpp"
@@ -161,14 +159,6 @@ ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -300,17 +290,17 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_BODY:
-			return eAny(getBody()); //384
+			return eAny(getBody()); //383
 		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
-			return eAny(getBodyOutput()); //385
+			return eAny(getBodyOutput()); //384
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
-			return eAny(getDecider()); //386
+			return eAny(getDecider()); //385
 		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
-			return eAny(getPredecessorClause()); //387
+			return eAny(getPredecessorClause()); //386
 		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
-			return eAny(getSuccessorClause()); //388
+			return eAny(getSuccessorClause()); //387
 		case UmlPackage::CLAUSE_EREFERENCE_TEST:
-			return eAny(getTest()); //389
+			return eAny(getTest()); //388
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,17 +309,17 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_EREFERENCE_BODY:
-			return getBody() != nullptr; //384
+			return getBody() != nullptr; //383
 		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //385
+			return getBodyOutput() != nullptr; //384
 		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
-			return getDecider() != nullptr; //386
+			return getDecider() != nullptr; //385
 		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
-			return getPredecessorClause() != nullptr; //387
+			return getPredecessorClause() != nullptr; //386
 		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
-			return getSuccessorClause() != nullptr; //388
+			return getSuccessorClause() != nullptr; //387
 		case UmlPackage::CLAUSE_EREFERENCE_TEST:
-			return getTest() != nullptr; //389
+			return getTest() != nullptr; //388
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -341,7 +331,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setDecider(_decider); //386
+			setDecider(_decider); //385
 			return true;
 		}
 	}
@@ -531,7 +521,6 @@ void ClauseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

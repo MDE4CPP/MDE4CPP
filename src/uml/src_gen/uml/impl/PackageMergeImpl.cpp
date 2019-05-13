@@ -18,7 +18,6 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -38,8 +37,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -128,14 +125,6 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMergedPackage()!=nullptr)
 	{
 		m_mergedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getMergedPackage()->copy());
@@ -253,9 +242,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
-			return eAny(getMergedPackage()); //1727
+			return eAny(getMergedPackage()); //1726
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
-			return eAny(getReceivingPackage()); //1728
+			return eAny(getReceivingPackage()); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -264,9 +253,9 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
-			return getMergedPackage() != nullptr; //1727
+			return getMergedPackage() != nullptr; //1726
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
-			return getReceivingPackage().lock() != nullptr; //1728
+			return getReceivingPackage().lock() != nullptr; //1727
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -278,14 +267,14 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _mergedPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setMergedPackage(_mergedPackage); //1727
+			setMergedPackage(_mergedPackage); //1726
 			return true;
 		}
 		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _receivingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setReceivingPackage(_receivingPackage); //1728
+			setReceivingPackage(_receivingPackage); //1727
 			return true;
 		}
 	}
@@ -386,7 +375,6 @@ void PackageMergeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

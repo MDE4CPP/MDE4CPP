@@ -46,8 +46,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -199,14 +197,6 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getEffect()!=nullptr)
 	{
 		m_effect = std::dynamic_pointer_cast<uml::Behavior>(obj.getEffect()->copy());
@@ -438,11 +428,11 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
-			return eAny(getPostCondition()); //18827
+			return eAny(getPostCondition()); //18826
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
-			return eAny(getPreCondition()); //18828
+			return eAny(getPreCondition()); //18827
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
-			return eAny(getReferred()); //18829
+			return eAny(getReferred()); //18828
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
 }
@@ -451,11 +441,11 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
-			return getPostCondition() != nullptr; //18827
+			return getPostCondition() != nullptr; //18826
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
-			return getPreCondition() != nullptr; //18828
+			return getPreCondition() != nullptr; //18827
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
-			return getReferred() != nullptr; //18829
+			return getReferred() != nullptr; //18828
 	}
 	return TransitionImpl::internalEIsSet(featureID);
 }
@@ -467,14 +457,14 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _postCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setPostCondition(_postCondition); //18827
+			setPostCondition(_postCondition); //18826
 			return true;
 		}
 		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _preCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setPreCondition(_preCondition); //18828
+			setPreCondition(_preCondition); //18827
 			return true;
 		}
 	}
@@ -585,7 +575,6 @@ void ProtocolTransitionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

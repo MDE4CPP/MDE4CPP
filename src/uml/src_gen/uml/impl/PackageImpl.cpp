@@ -44,8 +44,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "ecore/EObject.hpp"
 
 #include "uml/Element.hpp"
@@ -320,14 +318,6 @@ PackageImpl::PackageImpl(const PackageImpl & obj):PackageImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -788,21 +778,21 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
-			return eAny(getURI()); //17021
+			return eAny(getURI()); //17020
 		case UmlPackage::PACKAGE_EREFERENCE_NESTEDPACKAGE:
-			return eAny(getNestedPackage()); //17022
+			return eAny(getNestedPackage()); //17021
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-			return eAny(getNestingPackage()); //17023
+			return eAny(getNestingPackage()); //17022
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDSTEREOTYPE:
-			return eAny(getOwnedStereotype()); //17024
+			return eAny(getOwnedStereotype()); //17023
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDTYPE:
-			return eAny(getOwnedType()); //17025
+			return eAny(getOwnedType()); //17024
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEMERGE:
-			return eAny(getPackageMerge()); //17026
+			return eAny(getPackageMerge()); //17025
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEDELEMENT:
-			return eAny(getPackagedElement()); //17027
+			return eAny(getPackagedElement()); //17026
 		case UmlPackage::PACKAGE_EREFERENCE_PROFILEAPPLICATION:
-			return eAny(getProfileApplication()); //17028
+			return eAny(getProfileApplication()); //17027
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -823,21 +813,21 @@ bool PackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_EATTRIBUTE_URI:
-			return getURI() != ""; //17021
+			return getURI() != ""; //17020
 		case UmlPackage::PACKAGE_EREFERENCE_NESTEDPACKAGE:
-			return getNestedPackage() != nullptr; //17022
+			return getNestedPackage() != nullptr; //17021
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-			return getNestingPackage().lock() != nullptr; //17023
+			return getNestingPackage().lock() != nullptr; //17022
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype() != nullptr; //17024
+			return getOwnedStereotype() != nullptr; //17023
 		case UmlPackage::PACKAGE_EREFERENCE_OWNEDTYPE:
-			return getOwnedType() != nullptr; //17025
+			return getOwnedType() != nullptr; //17024
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEMERGE:
-			return getPackageMerge() != nullptr; //17026
+			return getPackageMerge() != nullptr; //17025
 		case UmlPackage::PACKAGE_EREFERENCE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //17027
+			return getPackagedElement() != nullptr; //17026
 		case UmlPackage::PACKAGE_EREFERENCE_PROFILEAPPLICATION:
-			return getProfileApplication() != nullptr; //17028
+			return getProfileApplication() != nullptr; //17027
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -861,14 +851,14 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _URI = newValue->get<std::string>();
-			setURI(_URI); //17021
+			setURI(_URI); //17020
 			return true;
 		}
 		case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _nestingPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setNestingPackage(_nestingPackage); //17023
+			setNestingPackage(_nestingPackage); //17022
 			return true;
 		}
 	}
@@ -1094,7 +1084,6 @@ void PackageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

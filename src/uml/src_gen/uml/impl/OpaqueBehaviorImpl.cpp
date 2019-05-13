@@ -57,8 +57,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ElementImport.hpp"
@@ -311,14 +309,6 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj):OpaqueBeh
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -669,9 +659,9 @@ Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
-			return eAny(getBody()); //16562
+			return eAny(getBody()); //16561
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16563
+			return eAny(getLanguage()); //16562
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -680,9 +670,9 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
-			return !getBody()->empty(); //16562
+			return !getBody()->empty(); //16561
 		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16563
+			return !getLanguage()->empty(); //16562
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -786,7 +776,6 @@ void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

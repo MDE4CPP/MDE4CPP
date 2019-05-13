@@ -56,8 +56,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -208,14 +206,6 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -419,11 +409,11 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return eAny(getIsDestroyLinks()); //7328
+			return eAny(getIsDestroyLinks()); //7327
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return eAny(getIsDestroyOwnedObjects()); //7329
+			return eAny(getIsDestroyOwnedObjects()); //7328
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //7330
+			return eAny(getTarget()); //7329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -432,11 +422,11 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks() != false; //7328
+			return getIsDestroyLinks() != false; //7327
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects() != false; //7329
+			return getIsDestroyOwnedObjects() != false; //7328
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //7330
+			return getTarget() != nullptr; //7329
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -448,21 +438,21 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
-			setIsDestroyLinks(_isDestroyLinks); //7328
+			setIsDestroyLinks(_isDestroyLinks); //7327
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
-			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7329
+			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7328
 			return true;
 		}
 		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //7330
+			setTarget(_target); //7329
 			return true;
 		}
 	}
@@ -581,7 +571,6 @@ void DestroyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -57,8 +57,6 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
-
 #include "uml/Element.hpp"
 
 #include "uml/ExceptionHandler.hpp"
@@ -272,14 +270,6 @@ ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -509,17 +499,17 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //422
+			return eAny(getContext()); //421
 		case UmlPackage::ACTION_EREFERENCE_INPUT:
-			return eAny(getInput()); //423
+			return eAny(getInput()); //422
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
-			return eAny(getIsLocallyReentrant()); //424
+			return eAny(getIsLocallyReentrant()); //423
 		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
-			return eAny(getLocalPostcondition()); //425
+			return eAny(getLocalPostcondition()); //424
 		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
-			return eAny(getLocalPrecondition()); //426
+			return eAny(getLocalPrecondition()); //425
 		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
-			return eAny(getOutput()); //427
+			return eAny(getOutput()); //426
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -528,17 +518,17 @@ bool ActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
-			return getContext() != nullptr; //422
+			return getContext() != nullptr; //421
 		case UmlPackage::ACTION_EREFERENCE_INPUT:
-			return getInput() != nullptr; //423
+			return getInput() != nullptr; //422
 		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
-			return getIsLocallyReentrant() != false; //424
+			return getIsLocallyReentrant() != false; //423
 		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
-			return getLocalPostcondition() != nullptr; //425
+			return getLocalPostcondition() != nullptr; //424
 		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
-			return getLocalPrecondition() != nullptr; //426
+			return getLocalPrecondition() != nullptr; //425
 		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
-			return getOutput() != nullptr; //427
+			return getOutput() != nullptr; //426
 	}
 	return ExecutableNodeImpl::internalEIsSet(featureID);
 }
@@ -550,7 +540,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = newValue->get<bool>();
-			setIsLocallyReentrant(_isLocallyReentrant); //424
+			setIsLocallyReentrant(_isLocallyReentrant); //423
 			return true;
 		}
 	}
@@ -706,7 +696,6 @@ void ActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
