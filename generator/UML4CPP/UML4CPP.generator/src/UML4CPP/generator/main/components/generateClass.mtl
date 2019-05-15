@@ -35,17 +35,16 @@
  * template to generate create function declarations
 */]
 [template public generateClassCreate(aClass : Class,impl : Boolean)]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSuffix(impl)/];
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]() const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])[abstractSuffix(impl)/]; 
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/]) const [abstractSuffix(impl)/] ; 
 [/let]
 [/let]
 [/for]
 
 [/template]
-
 [**
  * generate static meta data:
  * - index of class
@@ -53,9 +52,9 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
  * - operation count
 */]
 [template public generateStaticClassID(aClass : Class)]
-static const int [aClass.name.toUpperCase()/] = [aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass)/];
-static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
-static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
+static const unsigned int [aClass.name.toUpperCase()/] = [aClass.getStaticClassIDName()/];
+static const unsigned int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
+static const unsigned int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 
 [/template]
 
