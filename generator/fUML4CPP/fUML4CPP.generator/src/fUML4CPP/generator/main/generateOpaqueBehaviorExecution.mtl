@@ -46,11 +46,11 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 
 [/template]
 
-[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'fb'.concat(aCOA.myName())/]
+[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob'.concat(aCOA.myName())/]
 
 [template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createFunctionBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
+std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
 [aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->push_back([aCallOperationAction.getFBPackageElement()/]);
 

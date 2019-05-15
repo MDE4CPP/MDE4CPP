@@ -36,6 +36,13 @@
 [/for]
 [/template]
 
+[template public generateOpaqueBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
+[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
+[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterCreation()/]
+[/for]
+[/template]
+
 [**
  * generate initialization of meta model instance for an FunctionBehavior element
  * 

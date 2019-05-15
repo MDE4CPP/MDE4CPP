@@ -48,7 +48,7 @@
 								aPackage.allOwnedElements()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
 								aPackage.allOwnedElements()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(FunctionBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass()
 							}->flatten()->sortedBy(name)/]
@@ -185,8 +185,8 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for]
-	[for (aFunctionBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
-	[aFunctionBehavior.generateOpaqueBehaviorCreation()/]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[aOpaqueBehavior.generateOpaqueBehaviorCreation()/]
 	[/for]
 [/for]
 } 
@@ -303,8 +303,8 @@ void [packageName/]::initializePackageClasses()
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.initalizeOperation()/]
 	[/for]
-	[for (aopaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
-	[aopaqueBehavior.generateOpaqueBehaviorInitialization()/]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[aOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
 	[/for]
 	[for (aAttribute : Property | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()).supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]

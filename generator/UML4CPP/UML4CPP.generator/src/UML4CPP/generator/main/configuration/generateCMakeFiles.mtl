@@ -65,7 +65,7 @@ SET(SOURCE_FILES
 [if (not packOnly)]
 	impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
 	[aPackage.name.toUpperFirst()/]Factory.cpp
-[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
 	impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [if (aClass.isSingleton())]
 	[aClass.name.toUpperFirst()/].cpp
