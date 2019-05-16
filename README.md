@@ -39,7 +39,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   * `gradlew projects` ... package overview is available
   * `gradlew help` ... gradle help
   * `gradlew <task name>` ... run task <task name>
-Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +h application/tools/gradlew`
+Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +x application/tools/gradlew`
 
 6. List of top level tasks (group MDE4CPP):
   * `buildAll` ... create executables of all generators and build all base models
