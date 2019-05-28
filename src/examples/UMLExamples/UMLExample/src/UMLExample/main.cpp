@@ -50,10 +50,10 @@ int main()
 
     std::shared_ptr<uml::Model> p = factory->createModel();
     p->setName("Model");
-//
+
     std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
     c->setName("Class1");
-//
+
     //use a string to create a class
     std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
@@ -62,12 +62,12 @@ int main()
     //use a Package::MetaClass-ID to create a class
     std::shared_ptr<ecore::EObject> a = factory->create(uml::UmlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class4");
+    c->setName("Class43");
 
     //use a MetaClass to create a class
-    std::shared_ptr<ecore::EObject> a = factory->create(c->getMetaClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    std::shared_ptr<ecore::EObject> a = factory->create(c->eClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class3");
+    c->setName("Class4");
     c->setPackage(p);
 
     //use a UmkPackage MetaClass to create a class
