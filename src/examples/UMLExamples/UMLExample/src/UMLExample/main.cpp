@@ -54,12 +54,27 @@ int main()
     std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
     c->setName("Class1");
 //
-    //use Metamodel to create a Class
-    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass_EClass()->getName(), p, package->TYPE_EREFERENCE_PACKAGE);
-//
+    //use a string to create a class
+    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
+
+    //use a Package::MetaClass-ID to create a class
+    std::shared_ptr<ecore::EObject> a = factory->create(uml::UmlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class4");
+
+    //use a MetaClass to create a class
+    std::shared_ptr<ecore::EObject> a = factory->create(c->getMetaClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class3");
     c->setPackage(p);
+
+    //use a UmkPackage MetaClass to create a class
+    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass_Class(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class5");
+    //
 
     //create an operation
     std::shared_ptr<uml::Operation> o = factory->createOperation_in_Class(c);
@@ -78,7 +93,7 @@ int main()
     for(std::shared_ptr<uml::PackageableElement>it : *elements)
     {
         // optional type check using UML Metamodel
-        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass_EClass();
+        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass_Class();
         if(it->eClass() == uc->eClass())
         {
             cout << it->getName() << " is a Class"<< endl;
