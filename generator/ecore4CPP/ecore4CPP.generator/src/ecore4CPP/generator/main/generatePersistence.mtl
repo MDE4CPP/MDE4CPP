@@ -132,6 +132,10 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 			// this attribute is a 'int'
 			int value;
 			std::istringstream ( iter->second ) >> value;
+ 		  [elseif ((generateType(aAttribute.eType) = 'unlimitedNatural'))]
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
 		  [elseif ((generateType(aAttribute.eType) = 'long'))]
 			// this attribute is a 'long'
 			long value;
