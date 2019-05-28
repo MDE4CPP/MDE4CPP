@@ -30,14 +30,14 @@
  * - creation of function behavior parameter
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
-[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([memberName(aOpaqueBehavior.owner.oclAsType(NamedElement))/]);
+[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
 [/template]
 
-[template public generateOpaqueBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
+[template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
+[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([aFunctionBehavior.owner.oclAsType(NamedElement).memberName()/]);
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
@@ -54,6 +54,21 @@
 [aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
 [aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterInitialization()/]
+[/for]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - set function behavior name
+ * - initialization of function behavior parameter
+*/]
+[template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
+[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
+[aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
+[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterInitialization()/]
 [/for]
 [/template]
